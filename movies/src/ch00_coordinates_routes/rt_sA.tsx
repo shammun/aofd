@@ -171,7 +171,7 @@ const S02: React.FC = () => {
           <path d={opath(O, Array.from({ length: 25 }, (_, i) => [(BREST[0] * i) / 24, BREST[1]] as LL))} fill="none" stroke={C.gold} strokeWidth={5} opacity={fin(f, tPhi)} />
           <path d={opath(O, Array.from({ length: 13 }, (_, i) => [0, (BREST[1] * i) / 12] as LL))} fill="none" stroke={C.gold} strokeWidth={5} opacity={fin(f, tPhi + 20)} />
           <line x1={c0[0]} y1={c0[1]} x2={br[0]} y2={br[1]} stroke={C.key} strokeWidth={4} strokeDasharray="10 7" opacity={fin(f, tA)} />
-          <Arrow p={c0} q={add(c0, [br[0] - c0[0], br[1] - c0[1]], 0.62)} color={C.first} w={8} head={28} o={fin(f, tR) * dimTo(3)} />
+          <Arrow p={c0} q={add(c0, [br[0] - c0[0], br[1] - c0[1]], 0.62)} color={C.ink} w={8} head={28} o={fin(f, tR) * dimTo(3)} />
           <circle cx={br[0]} cy={br[1]} r={9} fill={C.gold} stroke={C.bg} strokeWidth={3} />
           <circle cx={c0[0]} cy={c0[1]} r={7} fill={C.key} opacity={fin(f, tA)} />
           {/* S4: one degree north (teal step on the meridian, ×10); S5: one degree east, shrinking as the dot moves north */}

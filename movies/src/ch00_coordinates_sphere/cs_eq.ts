@@ -13,7 +13,7 @@ export const EQ_S16 = String.raw`a\cos\varphi`;
 export const EQ_S17 = String.raw`x=a\cos\varphi\cos\lambda,\qquad y=a\cos\varphi\sin\lambda`;
 export const EQ_S18 = String.raw`x=a\cos\varphi\cos\lambda,\quad y=a\cos\varphi\sin\lambda,\quad z=a\sin\varphi`;
 export const EQ_S19 = String.raw`x=a\cos\varphi\cos\lambda,\quad y=a\cos\varphi\sin\lambda,\quad z=a\sin\varphi`;
-export const EQ_S20 = String.raw`U=\frac{2\pi\,a\cos\varphi}{T}=\Omega\,a\cos\varphi,\qquad \Omega=\frac{2\pi}{T}`;
+export const EQ_S20 = String.raw`U=\dfrac{2\pi\,a\cos\varphi}{T}=\Omega\,a\cos\varphi,\qquad \Omega=\dfrac{2\pi}{T}`;
 export const EQ_S21 = String.raw`U=\Omega\,a\cos\varphi`;
 export const EQ_S22 = String.raw`\Delta y=a\,\Delta\varphi`;
 export const EQ_S24 = String.raw`\Delta x=a\cos\varphi\,\Delta\lambda`;
@@ -23,6 +23,6 @@ export const EQ_S28 = String.raw`\Delta A\approx a^2\cos\varphi\,\Delta\varphi\,
 export const EQ_S29 = String.raw`\text{strip}\approx2\pi a\cos\varphi\times a\,\Delta\varphi=2\pi a^2\cos\varphi\,\Delta\varphi`;
 export const EQ_S30 = String.raw`\cos\varphi\,\Delta\varphi\approx\Delta(\sin\varphi)`;
 export const EQ_S31 = String.raw`\int_0^{\varphi}\cos\varphi'\,d\varphi'=\sin\varphi,\qquad A_{0\to\varphi}=2\pi a^2\sin\varphi`;
-export const EQ_S32 = String.raw`\frac{2\pi a^2\sin\varphi}{2\pi a^2}=\sin\varphi`;
+export const EQ_S32 = String.raw`\dfrac{2\pi a^2\sin\varphi}{2\pi a^2}=\sin\varphi`;
 export const EQ_S33 = String.raw`2\pi a\times a\sin\varphi=2\pi a^2\sin\varphi`;
-export const EQ_S34 = String.raw`\overline{T}=\frac{\sum_j\cos\varphi_j\,T_j}{\sum_j\cos\varphi_j}`;
+export const EQ_S34 = String.raw`\overline{T}=\dfrac{\sum_j\cos\varphi_j\,T_j}{\sum_j\cos\varphi_j}`;

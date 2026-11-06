@@ -81,9 +81,9 @@ const S13: React.FC = () => {
         <Keyword f={f} text="frozen: no change at all" at={[XC, 820]} appear={t14} out={t15 - 18} s={T.floor} />
         <Keyword f={f} text="< 0 deepening · > 0 filling" at={[XC, 820]} appear={t15} s={T.floor} c={C.second} />
       </Svg>
-      <TeX s={String.raw`\frac{\partial p}{\partial t}\Big|_{x\ \text{fixed}}`} x={XC} y={440} size={52} c={C.local} o={fin(f, t7)} />
+      <TeX s={String.raw`\dfrac{\partial p}{\partial t}\Big|_{x\ \text{fixed}}`} x={XC} y={440} size={52} c={C.local} o={fin(f, t7)} />
       <Layered parts={parts} x={XC} y={612} size={56} layers={[{ t: [0], o: fin(f, AT(k, 10, "x prime")) }, { t: [1], o: fin(f, t11) }]} />
-      <TeX s={String.raw`\frac{\partial p}{\partial\tau}\Big|_{x'\ \text{fixed}}`} x={XC} y={716} size={52} c={C.second} o={fin(f, t13)} />
+      <TeX s={String.raw`\dfrac{\partial p}{\partial\tau}\Big|_{x'\ \text{fixed}}`} x={XC} y={716} size={52} c={C.second} o={fin(f, t13)} />
       <SourceBelow text={SRC_PLY} pic={P13} w={920} name="s13 src" />
     </Scene>
   );
@@ -106,8 +106,8 @@ const S14: React.FC = () => {
   const p0 = P(0, pProf(-sh)), tg0: Pt = [p0[0] - 70, p0[1] + 70 * ps], tg1: Pt = [p0[0] + 70, p0[1] - 70 * ps];
   const xmin = prS[prP.indexOf(Math.min(...prP))] + sh;           // the low, riding with the pattern
   const rp = P(xmin, pProf(xmin - sh));
-  const parts = [{ t: String.raw`\frac{\partial p}{\partial t}`, u: { w: String.raw`\text{barometer}`, c: C.local } }, { t: "=" },
-    { t: String.raw`\frac{\partial p}{\partial\tau}`, u: { w: String.raw`\text{storm changing}`, c: C.second } }, { t: String.raw`-\mathbf U\cdot\nabla p`, u: { w: String.raw`\text{sliding past}`, c: C.first } }];
+  const parts = [{ t: String.raw`\dfrac{\partial p}{\partial t}`, u: { w: String.raw`\text{barometer}`, c: C.local } }, { t: "=" },
+    { t: String.raw`\dfrac{\partial p}{\partial\tau}`, u: { w: String.raw`\text{storm changing}`, c: C.second } }, { t: String.raw`-\mathbf U\cdot\nabla p`, u: { w: String.raw`\text{sliding past}`, c: C.first } }];
   if (parts.map((p) => p.t).join("").replace(/\s/g, "") !== EQ_S14.replace(/\s/g, "")) throw new Error("s14 parts drift from EQ_S14");
   return (
     <Scene>
@@ -123,18 +123,20 @@ const S14: React.FC = () => {
         <Arrow p={[rp[0] + 30, rp[1] - 90]} q={[rp[0] + 150, rp[1] - 90]} color={C.second} w={8} head={28} o={fin(f, t3)} />
         <Keyword f={f} text="how are the two rates linked?" at={[XC, 120]} appear={0} out={t3 - 18} s={T.floor} />
         <Keyword f={f} text="1. the rider: a traveller at U" at={[XC, 120]} appear={t3} out={t5 - 18} s={T.floor} c={C.second} />
-        <Keyword f={f} text="3. move it across the =" at={[XC, 425]} appear={t8} s={T.floor} c={C.gold} />
+        <Keyword f={f} text="3. move it across the =" at={[XC, 425]} appear={t8} out={t16 - 18} s={T.floor} c={C.gold} />
         <Keyword f={f} text="speed × slope along U" at={[XC, 715]} appear={t13} out={t16 - 18} s={T.floor} c={C.first} />
         <Keyword f={f} text="what to keep" at={[XC, 715]} appear={t16} c={C.gold} />
         <SkipChip f={f} k={k} to={keepTime("s14_tau_derive")} />
         <CurvedLink f={f} from={[XC + 520, 290]} to={[XC + 560, 455]} start={t8 + 10} end={t10} bend={-80} />
       </Svg>
-      <CalcStack f={f} x={XC} y={150} size={52} maxLines={2} o={1} rows={[
-        { rhs: String.raw`\frac{dp}{dt}=\frac{\partial p}{\partial t}+\mathbf U\cdot\nabla p`, at: AT(k, 5, "With the dot product"), h: 120 },
-        { rhs: String.raw`\frac{\partial p}{\partial\tau}=\frac{\partial p}{\partial t}+\mathbf U\cdot\nabla p`, at: AT(k, 7, "So partial p by partial tau"), h: 120 },
+      {/* Part 1 lessons B4: the derivation rows leave at the keep line; the keep picture is the barometer, the sliding pattern and the
+          labelled equation (barometer = storm changing − sliding past) */}
+      <CalcStack f={f} x={XC} y={150} size={52} maxLines={2} o={fout(f, t16 - 12)} rows={[
+        { rhs: String.raw`\dfrac{dp}{dt}=\dfrac{\partial p}{\partial t}+\mathbf U\cdot\nabla p`, at: AT(k, 5, "With the dot product"), h: 120 },
+        { rhs: String.raw`\dfrac{\partial p}{\partial\tau}=\dfrac{\partial p}{\partial t}+\mathbf U\cdot\nabla p`, at: AT(k, 7, "So partial p by partial tau"), h: 120 },
       ]} />
       <Layered parts={parts} x={XC} y={560} size={72} layers={[{ t: "all", o: fin(f, t9) }, { t: [], u: [0], o: fin(f, t11) }, { t: [], u: [2], o: fin(f, t12) }, { t: [], u: [3], o: fin(f, t15) }]} />
-      <TeX s={String.raw`\frac{\cancel{\text{km}}}{\text{h}}\times\frac{\text{hPa}}{\cancel{\text{km}}}=\frac{\text{hPa}}{\text{h}}`} x={XC} y={800} size={48} o={win(f, t14, t16 - 18)} />
+      <TeX s={String.raw`\dfrac{\cancel{\text{km}}}{\text{h}}\times\dfrac{\text{hPa}}{\cancel{\text{km}}}=\dfrac{\text{hPa}}{\text{h}}`} x={XC} y={800} size={48} o={win(f, t14, t16 - 18)} />
     </Scene>
   );
 };
@@ -185,12 +187,12 @@ const S15: React.FC = () => {
       <TeX s={String.raw`\nabla p`} x={gTip[0] - 10} y={gTip[1] - 34} size={44} c={C.local} ax={1} o={fin(f, t4)} halo />
       <TeX s={String.raw`\mathbf U`} x={uTip[0] + 14} y={uTip[1] + 30} size={44} c={C.second} o={fin(f, t4)} halo />
       <CalcStack f={f} x={XC} y={300} size={44} maxLines={3} rows={[
-        { rhs: String.raw`\frac{\partial p}{\partial t}\approx\frac{956.5-964.1}{2\ \text{h}}\approx-3.8\ \text{hPa/h}`, at: AT(k, 2, "about minus three point eight"), h: 110 },
+        { rhs: String.raw`\dfrac{\partial p}{\partial t}\approx\dfrac{956.5-964.1}{2\ \text{h}}\approx-3.8\ \text{hPa/h}`, at: AT(k, 2, "about minus three point eight"), h: 110 },
         { rhs: String.raw`|\nabla p|\approx0.062\ \text{hPa/km},\ \text{towards }63^\circ`, at: t4, c: C.local },
         { rhs: String.raw`\text{along }71^\circ:\ 0.062\times\cos8^\circ\approx0.061`, at: AT(k, 4, "zero point zero six one"), c: C.local, cont: true },
         { rhs: String.raw`|\mathbf U|\approx14.58\ \text{m/s}\times3.6\approx52.5\ \text{km/h}`, at: AT(k, 5, "fifty two and a half") },
         { rhs: String.raw`\mathbf U\cdot\nabla p\approx52.5\times0.061\approx3.2\ \text{hPa/h}`, at: AT(k, 6, "fifty two and a half times") },
-        { rhs: String.raw`\frac{\partial p}{\partial\tau}\approx-3.8+3.2=-0.6\ \text{hPa/h}`, at: AT(k, 8, "minus three point eight plus"), h: 110, c: C.second },
+        { rhs: String.raw`\dfrac{\partial p}{\partial\tau}\approx-3.8+3.2=-0.6\ \text{hPa/h}`, at: AT(k, 8, "minus three point eight plus"), h: 110, c: C.second },
       ]} />
       <SourceBelow text={SRC_PLY} pic={{ x: 80, y: 40, w: 920, h: 772 }} w={920} name="s15 src" />
     </Scene>
@@ -231,7 +233,7 @@ const S16: React.FC = () => {
         <Keyword f={f} text="later: reading maps over time" at={[XC, 730]} appear={t6} s={T.floor} />
       </Svg>
       <TeX s={EQ_S16} x={XC} y={180} size={56} o={fin(f, 6)} />
-      <TeX s={String.raw`\frac{954.0-954.9}{2\ \text{h}}\approx-0.5\ \text{hPa/h}`} x={XC} y={515} size={48} o={fin(f, AT(k, 4, "fell from"))} />
+      <TeX s={String.raw`\dfrac{954.0-954.9}{2\ \text{h}}\approx-0.5\ \text{hPa/h}`} x={XC} y={515} size={48} o={fin(f, AT(k, 4, "fell from"))} />
       <SourceBelow text="Data: ERA5 (Copernicus C3S) · 2 Nov 2023 · Plymouth and the tracked centre" pic={{ x: 80, y: 40, w: 920, h: 720 }} w={920} name="s16 src" />
     </Scene>
   );
@@ -241,7 +243,8 @@ const S16: React.FC = () => {
 const RB: MapBox = boxAt(50.3, -4.0, 8.0, 160, 140, 760, 560);
 const S17: React.FC = () => {
   const f = useCurrentFrame(), k = K("s17_recap");
-  const n = 10, beat = (j: number) => (j < n - 1 ? win(f, SS(k, j), SS(k, j + 1) - 18, 10) : fin(f, SS(k, j)));
+  // Part 1 lessons D3: each beat at full strength until ITS sentence ends; the next enters 8 frames after its sentence starts
+  const n = 10, beat = (j: number) => (j < n - 1 ? win(f, SS(k, j) + (j ? 8 : 0), SE(k, j), 10) : fin(f, SS(k, j) + 8));
   const O: Pt = [520, 430];
   const sRel = CI.pts.N.s as number[], gRel = CI.pts.N.g as number[];
   const pic = (j: number) => {
@@ -269,7 +272,7 @@ const S17: React.FC = () => {
     </g>;
   };
   const txt: [number, string, string?][] = [[1, "accelerations unchanged", "same 9.8 m/s², same forces"], [2, "acceleration = local + advection"], [3, "pieces differ, the sum doesn't", "−4.0 + 5.4 = 0 + 1.4"],
-    [4, "Ciarán: ≈ 15 m/s, east-north-east"], [5, "storm-relative wind: v′ = v − U"], [6, "average spin ≈ 14 m/s, both frames"],
+    [4, "Ciarán: ≈ 15 m/s, east-north-east"], [5, "storm-relative wind"], [6, "average spin ≈ 14 m/s, both frames"],
     [7, "a fixed barometer's rate =", "storm changing − sliding past"], [8, "Plymouth: −3.8 = −0.6 − 3.2 hPa/h", "mostly the storm arriving"], [9, "Part 6: great circles, rhumb lines"]];
   return (
     <Scene>
@@ -286,7 +289,9 @@ const S17: React.FC = () => {
         {txt.map(([j, a, b]) => <g key={j} opacity={beat(j)}><Lbl x={XC} y={360} t={a} c={C.key} s={T.floor} />{b ? <Lbl x={XC} y={440} t={b} c={C.gold} s={T.floor} /> : null}</g>)}
       </Svg>
       <TeX s={String.raw`x=x'+U\,t,\qquad u=u'+U`} x={XC} y={360} size={56} o={beat(0)} />
-      <TeX s={String.raw`\frac{Du}{Dt}=\frac{\partial u}{\partial t}+\mathbf v\cdot\nabla u`} x={XC} y={480} size={52} o={beat(2)} />
+      {/* Part 1 lessons C1: the recap's v′ = v − U set in KaTeX (was a sans label) */}
+      <TeX s={String.raw`\mathbf v'=\mathbf v-\mathbf U`} x={XC} y={440} size={T.floor + 4} c={C.gold} o={beat(5)} />
+      <TeX s={String.raw`\dfrac{Du}{Dt}=\dfrac{\partial u}{\partial t}+\mathbf v\cdot\nabla u`} x={XC} y={480} size={52} o={beat(2)} />
     </Scene>
   );
 };
@@ -298,9 +303,10 @@ const S18: React.FC = () => {
   const thumb = (x: number, i: number) => (
     <g key={i} opacity={0.75}>
       <rect x={x - 150} y={70} width={300} height={170} rx={16} fill="#18213a" stroke={C.grid} strokeWidth={3} />
-      {i === 0 ? <><line x1={x - 130} y1={200} x2={x + 130} y2={200} stroke={C.local} strokeWidth={3} /><rect x={x - 90} y={150} width={150} height={44} rx={8} fill="#3a4766" stroke={C.local} strokeWidth={3} />
-        <line x1={x - 130} y1={222} x2={x + 130} y2={222} stroke={C.local} strokeWidth={3} /><line x1={x - 90} y1={110} x2={x + 60} y2={110} stroke={C.second} strokeWidth={3} /></> : null}
-      {i === 1 ? <><Arrow p={[x - 90, 210]} q={[x + 40, 130]} color={C.first} w={5} head={18} /><Arrow p={[x + 40, 130]} q={[x - 60, 100]} color={C.second} w={5} head={18} dash="10 6" />
+      {/* Part 1 lessons B5: icons >= 20 px inside the box (y 70-240, x ± 150): the rails were 18 px from the bottom and 20 from the sides */}
+      {i === 0 ? <><line x1={x - 124} y1={196} x2={x + 124} y2={196} stroke={C.local} strokeWidth={3} /><rect x={x - 90} y={146} width={150} height={44} rx={8} fill="#3a4766" stroke={C.local} strokeWidth={3} />
+        <line x1={x - 124} y1={214} x2={x + 124} y2={214} stroke={C.local} strokeWidth={3} /><line x1={x - 90} y1={110} x2={x + 60} y2={110} stroke={C.second} strokeWidth={3} /></> : null}
+      {i === 1 ? <><Arrow p={[x - 90, 210]} q={[x + 40, 130]} color={C.local} w={5} head={18} /><Arrow p={[x + 40, 130]} q={[x - 60, 100]} color={C.second} w={5} head={18} dash="10 6" />
         <Arrow p={[x - 90, 210]} q={[x - 62, 106]} color={C.key} w={5} head={18} /></> : null}
       {i === 2 ? <><circle cx={x - 20} cy={155} r={60} fill="none" stroke={C.first} strokeWidth={4} /><circle cx={x - 20} cy={155} r={6} fill={C.gold} />
         <Arrow p={[x - 20, 155]} q={[x + 110, 115]} color={C.second} w={5} head={18} /></> : null}

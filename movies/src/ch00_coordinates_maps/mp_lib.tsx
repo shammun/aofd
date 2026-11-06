@@ -132,9 +132,25 @@ export const Layered: React.FC<{ parts: Part[]; layers: Layer[]; x: number; y: n
   return <HLayered {...p} />;
 };
 const sideStr = (s: CalcRow["rhs"]): string => (typeof s === "string" ? s : "raw" in s ? s.raw[0].s : plainOf(s.parts));
+// Part 1 lessons C2 (2026-11-05): every fraction is a \dfrac (display size, >= 44 px). A row whose TeX has a \dfrac and no explicit
+// `h` is ~2.4x its type size tall, not the house 1.42x (Part 2's K6 found fraction rows printed over the next row). The regex tests the
+// literal backslash (`\\` in a JS regex; checklist C4). Static guard: the stack's lowest visible line must end above the caption band.
+const FRAC_ROW = /\\dfrac/;
+const rowTex = (r: CalcRow) => `${r.lhs ? sideStr(r.lhs) : ""}${sideStr(r.rhs)}`;
+const withFracH = (rows: CalcRow[], size: number): CalcRow[] => rows.map((r) => (r.h !== undefined || !FRAC_ROW.test(rowTex(r)) ? r : { ...r, h: (r.size ?? size) * 2.4 }));
+const stackBottomGuard = (rows: CalcRow[], y: number, size: number, maxLines: number) => {
+  const H: number[] = [];
+  rows.forEach((r, i) => { const h = r.h ?? (r.size ?? size) * 1.42; if (i === 0 || !r.cont) H.push(h); else H[H.length - 1] += h; });
+  for (let j = 0; j < H.length; j++) {
+    const bottom = y + H.slice(Math.max(0, j - maxLines + 1), j + 1).reduce((s, h) => s + h, 0);
+    if (bottom > 878) throw new Error(`CalcStack at y ${y}: line ${j} ("${rowTex(rows.filter((r, i) => i === 0 || !r.cont)[j]).slice(0, 40)}") ends at y ${Math.round(bottom)} (caption band from 880)`);
+  }
+};
 export const CalcStack: React.FC<React.ComponentProps<typeof HCalcStack>> = (p) => {
   p.rows.forEach((r) => guard(sideStr(r.rhs), p.x, texW(sideStr(r.rhs), r.size ?? p.size ?? 68)));
-  return <HCalcStack {...p} />;
+  const rows = withFracH(p.rows, p.size ?? 68);
+  stackBottomGuard(rows, p.y, p.size ?? 68, p.maxLines ?? 3);
+  return <HCalcStack {...p} rows={rows} />;
 };
 export const Lbl: React.FC<React.ComponentProps<typeof HLbl>> = (p) => {
   const s = p.s ?? 54, w = textW(p.t, s), a = p.a ?? "start";

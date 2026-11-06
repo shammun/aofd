@@ -40,6 +40,9 @@ REVOICE: dict[str, dict[int, tuple[str, str]]] = {
     # coordinator decision (464.6 everywhere): the recap's equator speed
     "s35_recap": {8: ("The ground is carried east at capital Omega, times the radius, times cosine phi: about four hundred and sixty five metres per second at the equator.",
                       "The ground is carried east at capital Omega, times the radius, times cosine phi: about four hundred and sixty four point six metres per second at the equator.")},
+    # Part 1 lessons E1 (2026-11-05): the skip lead-in names weather, climate science and mapping
+    "s27_area_patch": {4: ("They're for anyone who wants every step, and not needed for the intuition, so feel free to skip ahead to the time on screen.",
+                           "They're for anyone who wants every step, and not needed for the intuition of weather, climate science or mapping, so feel free to skip ahead to the time on screen.")},
 }
 # text already in script.md / storyboard.yaml (an earlier partial edit) that is not the dry run's
 EXTRA_TEXT = {"s21_ground_speeds": [("Twenty three hours and fifty six minutes and four seconds is eighty six thousand one hundred and sixty four seconds.",

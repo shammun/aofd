@@ -5,7 +5,7 @@
 import React from "react";
 import { C, T } from "../house/kit/type";
 import { Pt, RightTick } from "../house/kit/draw";
-import { ArcHead, Arrow, D2R, Lbl, TopV, SliceV, add, arcD, sang, svNorth, svP, svUp, tvDir, tvEast, tvP } from "./fr_lib";
+import { ArcHead, Arrow, D2R, H, Lbl, Svg, TeX, TopV, SliceV, add, arcD, sang, svNorth, svP, svUp, tvDir, tvEast, tvP } from "./fr_lib";
 
 /** the top view: the parallel (gold circle), the centre (the axis seen end-on), faint x̂ (down) and ŷ (right), the place at λ */
 export const TopViewBase: React.FC<{ V: TopV; o?: number; axes?: number; circle?: number; centre?: number }> = ({ V, o = 1, axes = 0.6, circle = 1, centre = 1 }) =>
@@ -84,6 +84,39 @@ export const MiniTripod: React.FC<{ at: Pt; U: number; o?: number; w?: number; h
     <circle cx={at[0]} cy={at[1]} r={9} fill={C.gold} stroke={C.bg} strokeWidth={3} />
   </g>
 );
+/** Part 1 lessons B4 (2026-11-05): the keep-line picture of s22 and s25 (its own picture, not the optional block's grid or equations).
+ * Side view of the Earth's surface (an arc, schematic): one parcel's three arrows at three places as it moves east; up (k̂, teal) always
+ * points away from the centre, east (î, orange) along the surface, north (ĵ) out of the screen (⊙, Part 1 lessons B7). `wind`: the same
+ * push-free wind (ink, one fixed screen direction) at each place, whose east number changes as î turns (s25). Place OUTSIDE <Svg>. */
+export const TurnPic: React.FC<{ o: number; wind?: boolean; c?: Pt; R?: number }> = ({ o, wind = false, c = [540, 1300], R = 800 }) => {
+  if (o <= 0) return null;
+  const at = (a: number, r = R): Pt => [c[0] + r * Math.cos(a * D2R), c[1] - r * Math.sin(a * D2R)];
+  const A = [114, 90, 66], L = 110;
+  const surf = Array.from({ length: 41 }, (_, i) => at(124 - (68 * i) / 40));
+  const mv = Array.from({ length: 31 }, (_, i) => at(112 - (44 * i) / 30, R - 70));
+  return <>
+    <Svg o={o}>
+      <path d={`M ${surf.map((p) => `${p[0].toFixed(1)} ${p[1].toFixed(1)}`).join(" L ")}`} fill="none" stroke={C.local} strokeWidth={5} />
+      <path d={`M ${mv.map((p) => `${p[0].toFixed(1)} ${p[1].toFixed(1)}`).join(" L ")}`} fill="none" stroke={C.gold} strokeWidth={5} strokeDasharray="14 10" />
+      <Arrow p={mv[28]} q={mv[30]} color={C.gold} w={5} head={22} />
+      {A.map((a) => { const p = at(a), up: Pt = [Math.cos(a * D2R), -Math.sin(a * D2R)], east: Pt = [Math.sin(a * D2R), Math.cos(a * D2R)];
+        return <g key={a}>
+          <Arrow p={p} q={add(p, east, L)} color={C.second} w={7} head={26} />
+          <Arrow p={p} q={add(p, up, L)} color={C.first} w={7} head={26} />
+          {wind ? <Arrow p={p} q={add(p, [0.94, -0.34], 0.95 * L)} color={C.ink} w={6} head={24} dash="12 8" /> : null}
+          <circle cx={p[0]} cy={p[1]} r={15} fill={C.bg} stroke={C.second} strokeWidth={4} />
+          <circle cx={p[0]} cy={p[1]} r={5} fill={C.second} />
+        </g>; })}
+      <Lbl x={at(90, R - 70)[0]} y={at(90, R - 70)[1] + 50} t="moving east" c={C.gold} s={T.floor} a="middle" />
+      {wind ? <Lbl x={at(66)[0] + 30} y={at(66)[1] + 70} t="same wind, no push" c={C.key} s={T.floor} /> : null}
+    </Svg>
+    <TeX s={H.k} x={add(at(90), [0, -1], L + 30)[0]} y={add(at(90), [0, -1], L + 30)[1]} size={50} c={C.first} ax={0.5} o={o} halo />
+    <TeX s={H.i} x={add(at(90), [1, 0], L + 40)[0]} y={at(90)[1]} size={50} c={C.second} ax={0.5} o={o} halo />
+    <TeX s={String.raw`\hat{\mathbf j}\ \odot\ \text{(out of the screen)}`} x={at(114)[0] - 30} y={at(114)[1] + 120} size={44} c={C.second} o={o} halo />
+    <TeX s={wind ? String.raw`\text{the east number changes}\Rightarrow\text{metric terms}` : String.raw`\text{they turn at}\approx\dfrac{\text{speed}}{a}`} x={c[0]} y={820}
+      size={46} c={C.key} ax={0.5} o={o} />
+  </>;
+};
 export const MiniTick: React.FC<{ at: Pt; a: Pt; b: Pt; o?: number; s?: number }> = ({ at, a, b, o = 1, s = 26 }) => {
   const n = (v: Pt): Pt => { const L = Math.hypot(v[0], v[1]) || 1; return [v[0] / L, v[1] / L]; };
   return <RightTick at={at} u1={n(a)} u2={n(b)} s={s} o={o} c={C.key} />;

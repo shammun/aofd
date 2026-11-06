@@ -220,10 +220,11 @@ def main() -> int:
     row("DM11", "78.738 × 111.195 = 8755.3 (the per-degree check with exact factors)", np.degrees(sig) * A_KM * deg, 8755.3, 0.05)
     row("DM11", "screen: 78.74 × 0.01745 = 1.3740 ≈ 1.374 (exact π/180: 1.3743); 78.74 × 111.2 = 8755.9 ≈ 8756", [78.74 * 0.01745, 78.74 * deg, 78.74 * 111.2],
         [1.3740, 1.3743, 8755.9], 6e-4 * np.array([1, 1, 200]))
-    flag("DM11", "s10", "σ ≈ 78.74 × 0.01745 ≈ 1.3742 rad (screen and voice)", "1.3742", "78.74 × 0.01745 = 1.3740; 78.74 × π/180 = 1.3743; σ = 1.37424 rad",
-         "the rounded factor 0.01745 gives 1.3740; '1.3742' is the exact σ. Screen keeps '≈ 1.3742' as voiced (rounding of the factor, not of σ)")
-    flag("DM11", "s10", "78.74 × 111.2 km ≈ 8755 km (screen and voice)", "8755", "78.74 × 111.2 = 8755.9 (→ 8756); 78.738 × 111.195 = 8755.3",
-         "with the rounded 111.2 the product rounds to 8756; with the exact per-degree length 111.195 it is 8755.3. 'about … eight thousand seven hundred and fifty five' kept")
+    # Part 1 lessons A6 (2026-11-05): the two old flags are now screen rows that agree with their own arithmetic (re-voiced s10 S2, S5)
+    row("DM11", "s10 S2: σ ≈ 78.738° × π/180 = 1.37424 ≈ 1.3742 rad (the row names the exact angle; 78.74 is its rounding)",
+        [78.738 * np.pi / 180, np.degrees(sig)], [1.3742, 78.738], [5e-5, 5e-4])
+    row("DM11", "s10 S5: quick check 78.74 × 111.2 = 8755.9 ≈ 8756 km, 'the same to within the rounding' as 8755", [78.74 * 111.2, abs(78.74 * 111.2 - 8755)],
+        [8756, 0.9], [0.5, 0.5])
 
     # ================================================================ s11 the route's shape
     brg0 = float(call(GS + "initial_bearing", "s11", "initial bearing London → LA (Snyder 5-4b)", lat1=LONDON[0], lon1=LONDON[1], lat2=LA[0], lon2=LA[1]))

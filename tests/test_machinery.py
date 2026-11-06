@@ -243,3 +243,58 @@ def test_k6_overlap_tuned_rules():
         fr = set(K.k6_frames(tm))
         b = round(json.loads(tm.read_text(encoding="utf-8"))["scenes"][5]["start"] * 30)
         assert {b - 5, b, b + 5} <= fr
+
+
+def test_movie_symbol_lint_rules(tmp_path):
+    """tools/movie_symbol_lint.py (Part 1 lessons C1, C2, C4): maths in plain-text labels, small fractions, single-backslash
+    TeX in regex literals; comments, TeX props, timing phrases, CHECK tables and SI unit exponents are not flagged."""
+    import movie_symbol_lint as M
+
+    def rules(src: str, strict: bool = False) -> list[str]:
+        return sorted(f.rule for f in M.lint_source(src, "t.tsx", strict=strict) if not f.ok)
+
+    # C1: plain-text labels (props, keyword text, JSX children, drawn const arrays)
+    assert rules('const A = () => <Svg><Lbl x={1} y={2} t="u_θ = 38.0" /></Svg>;') == ["C1-greek", "C1-script"]
+    assert rules('const A = () => <Keyword f={f} text="without the θ̂ formula" at={[1, 2]} appear={0} />;') == ["C1-combining", "C1-greek"]
+    assert rules("const A = () => <svg><text x={1}>x′ axis</text></svg>;") == ["C1-prime"]
+    assert rules('const A = () => <Lbl t="v² is speed squared" />;') == ["C1-unicode-script"]
+    assert rules('const A = () => <Lbl t="f ≈ 10⁻⁴ s⁻¹" />;') == ["C1-unicode-script"]
+    assert rules('const A = () => <Lbl t={c ? "r̂ out" : "fine"} />;') == ["C1-combining"]
+    assert rules('const txt: [number, string][] = [[1, "v′ = v − U"]];\nconst A = () => <g>{txt.map(([j, a]) => <Lbl t={a} />)}</g>;') == ["C1-prime"]
+    # not flagged: English apostrophes, SI unit exponents, arc minutes, comments, TeX props, timing phrases, ids, CHECK tables
+    assert rules('const A = () => <Lbl t="Earth\'s spin: 9.8 m/s², 513 km², 1′ × 60, 26°30′" />;') == []
+    assert rules('// Lbl t="u_r"\nconst A = () => <g>{/* θ̂ and x′ */}<TeX s={String.raw`\\hat{\\boldsymbol\\theta}_r\'`} x={1} y={2} /></g>;') == []
+    assert rules('const A = () => <Lbl t="x" o={fin(f, AT(k, 3, "u_r is"))} />; const k = K("s08_r_hat");') == []
+    assert rules('const CHECK_A: [string, number][] = [["u_r x", 1]];\nCHECK_A.forEach(([n, v]) => n);') == []
+    assert rules('const A = () => <CalcStack rows={[{ lhs: "u_\\\\theta", rhs: "=-(-10.1)(0.707)", at: 3 }]} />;') == []
+    # C2: \tfrac always; \frac only where KaTeX draws it small (the house TeX is \displaystyle), every \frac with --strict
+    assert rules('const A = () => <TeX s={String.raw`\\tfrac34`} />;') == ["C2-frac"]
+    assert rules('const A = () => <TeX s={String.raw`x=\\frac{3}{5}`} />;') == []
+    assert rules('const A = () => <TeX s={String.raw`x=\\frac{3}{5}`} />;', strict=True) == ["C2-frac"]
+    assert rules('const A = () => <TeX s={String.raw`e^{\\frac12}+\\dfrac{\\frac{a}{b}}{c}`} />;') == ["C2-frac", "C2-frac"]
+    assert rules('const A = () => <TeX s={String.raw`\\begin{pmatrix}\\frac12\\end{pmatrix}+\\dfrac{1}{2}`} />;') == ["C2-frac"]
+    assert rules('const A = () => <Lbl t={"half: $\\\\frac12$"} />;') == ["C2-frac"]        # $…$ label maths is \textstyle
+    assert rules('const A = () => <Lbl t="half: $\\frac12$, u_r" />;') == ["C1-script", "C2-frac"]   # JSX strings have no escapes
+    # C4: TeX commands in regex literals and RegExp sources need a doubled backslash
+    assert rules("const FRAC = /\\frac/; const B = /\\mathbf/;") == ["C4-regex", "C4-regex"]
+    assert rules("const FRAC = /\\\\d?frac/; const W = /\\bfoo\\s+\\d/; const R = new RegExp(\"\\\\\\\\frac\");") == []
+    assert rules('const R = new RegExp("\\\\frac");') == ["C4-regex"]
+    # explicit exemption with a reason, and the CLI exit codes
+    assert rules('const A = () => <Lbl t="x′" />; // lint-ok: axis name drawn as on the ruler') == []
+    bad = tmp_path / "bad.tsx"
+    bad.write_text('export const A = () => <Lbl t="u_r = −13" />;\n', encoding="utf-8")
+    good = tmp_path / "good.tsx"
+    good.write_text("export const A = () => <TeX s={String.raw`u_r=-13`} />;\n", encoding="utf-8")
+    assert M.main([str(bad)]) == 1 and M.main([str(good)]) == 0
+
+
+@pytest.mark.parametrize("part", ["sphere", "frames", "moving", "routes", "maps"])
+def test_movie_symbol_lint_coordinates_parts_clean(part):
+    """Coordinates Parts 3-7 carry the Part 1 lessons C1/C2/C4: their sources lint clean, --strict included (every \\dfrac)."""
+    import movie_symbol_lint as M
+
+    d = ROOT / "movies" / "src" / f"ch00_coordinates_{part}"
+    if not d.exists():
+        pytest.skip(f"{d} missing")
+    bad = [f for f in M.lint_paths([d], strict=True) if not f.ok]
+    assert not bad, "\n".join(f"{f.file}:{f.line}: {f.rule}: {f.detail}" for f in bad)

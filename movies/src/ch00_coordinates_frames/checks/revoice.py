@@ -37,6 +37,9 @@ REVOICE: dict[str, dict[int, tuple[str, str]]] = {
     # D4 (option b, with a's 2-dp rows): the across part is -31.5 everywhere (the shown products give -31.54)
     "s14_along_across": {9: ("A check: nine point four squared, plus thirty one point six squared, is about one thousand and eighty seven, and its square root is thirty three, the full wind.",
                              "A check: nine point four squared, plus thirty one point five squared, is about one thousand and eighty, and its square root is about thirty three, the full wind.")},
+    # Part 1 lessons E1 (2026-11-05): the skip lead-in says the steps are not needed for weather, climate or maps
+    's23_whole_vector': {3: ("They're for anyone who wants every step, and you can skip ahead to the time on screen without losing the weather story.",
+                        "They're for anyone who wants every step, and you don't need them for the intuition of weather, climate or maps, so skip ahead to the time on screen if you like.")},
 }
 EXTRA_TEXT: dict = {}
 

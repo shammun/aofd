@@ -131,74 +131,74 @@
    "scene": "s04_velocities_add"
   },
   {
-   "time": "3:53",
-   "t_s": 233.45,
+   "time": "3:58",
+   "t_s": 238.679,
    "title": "Every step: accelerations stay the same",
    "scene": "s05_accel_same"
   },
   {
-   "time": "5:40",
-   "t_s": 340.075,
+   "time": "5:45",
+   "t_s": 345.304,
    "title": "An air parcel's acceleration in two frames",
    "scene": "s06_parcel_accel"
   },
   {
-   "time": "7:08",
-   "t_s": 428.875,
+   "time": "7:14",
+   "t_s": 434.104,
    "title": "A sliding gust pattern, in numbers",
    "scene": "s07_sliding_pattern"
   },
   {
-   "time": "9:25",
-   "t_s": 565.123,
+   "time": "9:30",
+   "t_s": 570.352,
    "title": "Storm Ciarán",
    "scene": "s08_ciaran"
   },
   {
-   "time": "10:29",
-   "t_s": 629.373,
+   "time": "10:34",
+   "t_s": 634.602,
    "title": "Why the winds were lopsided",
    "scene": "s09_lopsided"
   },
   {
-   "time": "11:16",
-   "t_s": 676.923,
+   "time": "11:22",
+   "t_s": 682.152,
    "title": "Storm-relative winds",
    "scene": "s10_storm_relative"
   },
   {
-   "time": "13:36",
-   "t_s": 816.098,
+   "time": "13:41",
+   "t_s": 821.327,
    "title": "What does not change",
    "scene": "s12_invariant"
   },
   {
-   "time": "14:48",
-   "t_s": 888.598,
+   "time": "14:53",
+   "t_s": 893.827,
    "title": "What a fixed barometer sees",
    "scene": "s13_tau"
   },
   {
-   "time": "16:25",
-   "t_s": 985.723,
+   "time": "16:30",
+   "t_s": 990.952,
    "title": "Every step: linking the barometer and the rider",
    "scene": "s14_tau_derive"
   },
   {
-   "time": "18:12",
-   "t_s": 1092.498,
+   "time": "18:21",
+   "t_s": 1101.607,
    "title": "Plymouth, in numbers",
    "scene": "s15_plymouth"
   },
   {
-   "time": "20:26",
-   "t_s": 1226.048,
+   "time": "20:35",
+   "t_s": 1235.157,
    "title": "Recap",
    "scene": "s17_recap"
   },
   {
-   "time": "21:36",
-   "t_s": 1296.648,
+   "time": "21:45",
+   "t_s": 1305.757,
    "title": "End",
    "scene": "s18_end"
   }
@@ -209,17 +209,17 @@
    "chip_scene": "s04_velocities_add",
    "chip_sentence": 2,
    "chip_at_s": 163.95,
-   "skip_to": "5:28",
-   "skip_to_s": 328.0,
+   "skip_to": "5:33",
+   "skip_to_s": 333.229,
    "keep_line": "If you skipped, here's what to keep: in a frame moving steadily in a straight line, speeds change by the frame's own speed, but accelerations, and so forces, stay the same."
   },
   {
    "block": "B",
    "chip_scene": "s14_tau_derive",
    "chip_sentence": 2,
-   "chip_at_s": 990.773,
-   "skip_to": "18:03",
-   "skip_to_s": 1083.723,
+   "chip_at_s": 996.002,
+   "skip_to": "18:12",
+   "skip_to_s": 1092.832,
    "keep_line": "If you skipped, here's what to keep: what the barometer sees is the storm changing, minus the pattern sliding past."
   }
  ],

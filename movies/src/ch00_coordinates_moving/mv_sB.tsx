@@ -164,7 +164,7 @@ const Inset: React.FC<{ f: number; O: Pt; g: number[]; s: number[]; tG: number; 
   return (
     <g>
       <circle cx={O[0]} cy={O[1]} r={9} fill={C.gold} stroke={C.bg} strokeWidth={3} opacity={fin(f, tG)} />
-      <AnimatedWindArrow from={O} to={gt} speed={Math.hypot(g[0], g[1])} f={f} c={C.first} px={8} head={28} o={fin(f, tG)} />
+      <AnimatedWindArrow from={O} to={gt} speed={Math.hypot(g[0], g[1])} f={f} c={C.local} px={8} head={28} o={fin(f, tG)} />{/* Part 1 lessons D1: the full (ground) wind is never teal; slate as in s01 */}
       <Arrow p={gt} q={ut} color={C.second} w={8} head={28} dash="14 10" o={fin(f, tU)} />
       <Arrow p={O} q={[O[0] + sv[0], O[1] + sv[1]]} color={C.key} w={9} head={30} o={fin(f, tV)} />
     </g>
@@ -196,6 +196,8 @@ const S10: React.FC = () => {
         <Inset f={f} O={OS} g={PTS.S.g} s={PTS.S.s} tG={sG} tU={sU} tV={sV} />
         <CurvedLink f={f} from={[pN[0] + 12, pN[1] - 8]} to={[ON[0] - 14, ON[1] - 8]} start={t8 + 6} bend={60} />
         <CurvedLink f={f} from={[pS[0] + 12, pS[1] + 6]} to={[OS[0] - 14, OS[1] + 4]} start={t5 + 6} bend={-30} />
+        {/* Part 1 lessons B1: the insets say what they magnify (the map's arrows at 6 px per m/s, the insets at 9) */}
+        <Lbl x={640} y={820} t="insets: 1.5× larger" c={C.muted} s={T.floor} b={false} o={fin(f, t5 + 6)} />
         <SpeedBar x={XC} y={100} />
         <Keyword f={f} text="riding with the storm's centre" at={[XC, 240]} appear={0} out={t1 - 18} s={T.floor} />
         <Keyword f={f} text="storm-relative wind" at={[XC, 240]} appear={t1} c={C.gold} />
@@ -203,10 +205,10 @@ const S10: React.FC = () => {
         <Keyword f={f} text="rider: the north is windier" at={[XC, 790]} appear={t11} s={T.floor} c={C.gold} />
       </Svg>
       {/* tip labels of the insets (KaTeX, house hats/bold) */}
-      <TeX s={H_V} x={ON[0] + gN[0] + 22} y={ON[1] + gN[1] + 8} size={46} c={C.first} o={fin(f, nG)} halo />
+      <TeX s={H_V} x={ON[0] + gN[0] + 22} y={ON[1] + gN[1] + 8} size={46} c={C.local} o={fin(f, nG)} halo />
       <TeX s={String.raw`-\mathbf U`} x={ON[0] + gN[0] + mU[0] / 2 + 6} y={ON[1] + gN[1] + mU[1] / 2 + 40} size={46} c={C.second} ax={0.5} o={fin(f, nU)} halo />
       <TeX s={String.raw`\mathbf v'`} x={ON[0] + sN[0] - 18} y={ON[1] + sN[1] + 10} size={46} c={C.key} ax={1} o={fin(f, nV)} halo />
-      <TeX s={H_V} x={OS[0] + gS[0] + 22} y={OS[1] + gS[1] - 4} size={46} c={C.first} o={fin(f, sG)} halo />
+      <TeX s={H_V} x={OS[0] + gS[0] + 22} y={OS[1] + gS[1] - 4} size={46} c={C.local} o={fin(f, sG)} halo />
       <TeX s={String.raw`-\mathbf U`} x={OS[0] + gS[0] + mU[0] / 2 + 10} y={OS[1] + gS[1] + mU[1] / 2 + 44} size={46} c={C.second} ax={0.5} o={fin(f, sU)} halo />
       <TeX s={String.raw`\mathbf v'`} x={OS[0] + sS[0] - 22} y={OS[1] + sS[1] + 8} size={46} c={C.key} ax={1} o={fin(f, sV)} halo />
       <Layered parts={parts} x={XC} y={330} size={58} layers={[{ t: [0], o: fin(f, t2) }, { t: [1], o: fin(f, t3) }]} />
@@ -295,7 +297,7 @@ const RingPic: React.FC<{ f: number; c: Pt; R: number; storm: boolean; o?: numbe
     <circle cx={c[0]} cy={c[1]} r={9} fill={C.gold} />
     {Array.from({ length: 24 }, (_, i) => i * 3).map((i) => { const a = RG.az[i] * D2R, p0: Pt = [c[0] + R * Math.cos(a), c[1] - R * Math.sin(a)];
       const u = RG.u[i] - (storm ? U[0] : 0), v = RG.v[i] - (storm ? U[1] : 0);
-      return <AnimatedWindArrow key={i} from={p0} to={[p0[0] + u * 4, p0[1] - v * 4]} speed={Math.hypot(u, v)} f={f} c={C.first} px={5} head={18} />; })}
+      return <AnimatedWindArrow key={i} from={p0} to={[p0[0] + u * 4, p0[1] - v * 4]} speed={Math.hypot(u, v)} f={f} c={storm ? C.key : C.local} px={5} head={18} />; })}{/* Part 1 lessons D1: full winds never teal */}
   </g>;
 };
 const RPIC = { x: 100, y: 60, w: 880, h: 660 };

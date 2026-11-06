@@ -82,7 +82,7 @@ conventions:
     from above the North Pole'
   map polar components: i = theta-hat, j = -r-hat; u_theta = u, u_r = -v
   vortex ratio: rms(u_r) / mean(u_theta) on a 2000-km ring (said "typically" for the rms)
-colour_contract: great circle gold; rhumb line slate; London's r-hat teal, Los Angeles' r-hat orange; sigma arc gold; true lengths teal; map-drawn lengths
+colour_contract: great circle gold; rhumb line slate; London's r-hat ink (Part 1 lessons D1, never teal), Los Angeles' r-hat orange; sigma arc gold; true lengths teal; map-drawn lengths
   teal with a gold stretch bracket; unit vectors orange (i, j, r-hat, theta-hat); in/out (radial) rose with a '-' glyph for in; round (tangential) teal;
   height field sequential perceptual (cmocean deep reversed), anomaly diverging blue-white-red centred on 0; wind trails warm white; gold for pointers,
   links, 'same' ticks.
@@ -658,7 +658,7 @@ scenes:
     distances aren''t stretched at all. So a small circle near Brest is drawn as an oval, one and a half times wider than it is tall, and near the poles,
     shapes are squashed flat.'
   on_screen_eq:
-    latex: k=\frac{2\pi a}{2\pi a\cos\varphi}=\frac{1}{\cos\varphi}
+    latex: k=\dfrac{2\pi a}{2\pi a\cos\varphi}=\dfrac{1}{\cos\varphi}
     vallis_eq: 'none in Vallis: plate carrée scale along the parallel (Snyder 1987 eq. 12-3 with φ1 = 0); from δx = a cos ϑ δλ (text before (2.27))'
     page_png: chapters/pages/ch02/p081.png
   calc_rows:
@@ -743,11 +743,11 @@ scenes:
     Together with the northward slope, it makes the gradient on the sphere. We''ll build it step by step in the next movie in this series: The gradient.
     Weather models also use a curvilinear coordinate in the vertical, pressure instead of height, which has its own movie too: Pressure as a vertical coordinate.'
   on_screen_eq:
-    latex: \nabla T=\mathbf i\,\frac{1}{a\cos\varphi}\frac{\partial T}{\partial\lambda}+\mathbf j\,\frac{1}{a}\frac{\partial T}{\partial\varphi}
+    latex: \nabla T=\mathbf i\,\dfrac{1}{a\cos\varphi}\dfrac{\partial T}{\partial\lambda}+\mathbf j\,\dfrac{1}{a}\dfrac{\partial T}{\partial\varphi}
     vallis_eq: (2.31), horizontal part, r = a, scalar φ -> T (ϑ shown as φ, latitude)
     page_png: chapters/pages/ch02/p081.png
   calc_rows:
-  - \frac{1\ ^\circ\text{C}}{73.8\ \text{km}}\approx 1.4\ ^\circ\text{C per }100\ \text{km}
+  - \dfrac{1\ ^\circ\text{C}}{73.8\ \text{km}}\approx 1.4\ ^\circ\text{C per }100\ \text{km}
   physics_source:
     fn: fluidpy.geo.sphere.gradient; fluidpy.geo.sphere.arc_lengths
     params:
@@ -902,12 +902,12 @@ scenes:
     radius times d phi, divided by cosine phi. This says how fast the map''s height grows as we go north: slowly near the equator, and faster and faster
     towards the pole.'
   on_screen_eq:
-    latex: dy=\frac{a\,d\varphi}{\cos\varphi}
+    latex: dy=\dfrac{a\,d\varphi}{\cos\varphi}
     vallis_eq: 'none in Vallis: Mercator differential (Snyder 1987 eq. 7-2 differentiated); built from δy = a δϑ (text before (2.27))'
     page_png: chapters/pages/ch02/p081.png
   calc_rows:
   - \Delta y_{\text{globe}}=a\,\Delta\varphi
-  - \Delta y_{\text{Mercator}}=\frac{a\,\Delta\varphi}{\cos\varphi}
+  - \Delta y_{\text{Mercator}}=\dfrac{a\,\Delta\varphi}{\cos\varphi}
   - '\text{Brest: }111.2\times1.506\approx167.4\ \text{km}'
   - '60^\circ\text{N: }111.2\times2=222.4\ \text{km}'
   physics_source:
@@ -984,7 +984,7 @@ scenes:
     really did it this way: in fifteen ninety nine, the English mathematician Edward Wright published a table made by adding up such steps, one minute of
     latitude at a time.'
   on_screen_eq:
-    latex: y\approx a\sum\frac{\Delta\varphi}{\cos\varphi_{\text{mid}}}
+    latex: y\approx a\sum\dfrac{\Delta\varphi}{\cos\varphi_{\text{mid}}}
     vallis_eq: 'none in Vallis: Wright''s meridional parts (sum of secants), the midpoint rule of the integral of a sec φ (Snyder 1987 §7)'
     page_png: null
   calc_rows:
@@ -1067,7 +1067,7 @@ scenes:
     So on a Mercator map, Brest sits zero point nine six eight times the Earth''s radius above the equator, about six thousand one hundred and sixty seven
     kilometres. [beat] On the flat square map, it was five thousand three hundred and eighty two.'
   on_screen_eq:
-    latex: y=a\,\ln\tan\!\left(\frac{\pi}{4}+\frac{\varphi}{2}\right)
+    latex: y=a\,\ln\tan\!\left(\dfrac{\pi}{4}+\dfrac{\varphi}{2}\right)
     vallis_eq: 'none in Vallis: Mercator ordinate (Snyder 1987 eq. 7-2); fluidpy.geo.sphere.isometric_latitude, fluidpy.geo.mapproj.forward(''mercator'')'
     page_png: null
   calc_rows:
@@ -1147,12 +1147,12 @@ scenes:
     eighty five degrees, y is already three point one three times the Earth''s radius, about nineteen thousand nine hundred and fifty kilometres. [beat]
     That''s why Mercator maps are always cut off before the poles, usually somewhere past eighty degrees.'
   on_screen_eq:
-    latex: \frac{y(61^\circ)-y(59^\circ)}{2^\circ\ \text{in rad}}\approx\frac{a}{\cos 60^\circ}
+    latex: \dfrac{y(61^\circ)-y(59^\circ)}{2^\circ\ \text{in rad}}\approx\dfrac{a}{\cos 60^\circ}
     vallis_eq: 'none in Vallis: centred difference (derivatives movie #4); dy/dφ = a sec φ (Snyder 1987 eq. 7-2)'
     page_png: null
   calc_rows:
   - y(61^\circ)/a\approx1.3524,\quad y(59^\circ)/a\approx1.2826
-  - \frac{0.0698}{0.0349}\approx2.00
+  - \dfrac{0.0698}{0.0349}\approx2.00
   - \tan 45^\circ=1,\ \ \ln1=0\ \Rightarrow\ y=0
   - 85^\circ:\ y\approx3.13\,a\approx19\,950\ \text{km}
   physics_source:
@@ -1232,11 +1232,11 @@ scenes:
     circle keeps changing its bearing, so on this map it comes out curved, bulging towards the pole. The two routes swap looks: on the globe, the great
     circle looks straight and the rhumb line curves, and on Mercator''s map it''s the other way round.'
   on_screen_eq:
-    latex: \frac{\text{west step}}{\text{south step}}=\tan(258.5^\circ-180^\circ)\approx4.9
+    latex: \dfrac{\text{west step}}{\text{south step}}=\tan(258.5^\circ-180^\circ)\approx4.9
     vallis_eq: 'none in Vallis: loxodrome (Snyder 1987 §7, tan α = Δλ/Δψ); fluidpy.geo.sphere.rhumb_line'
     page_png: null
   calc_rows:
-  - \frac{4.9\,k}{1\,k}=4.9
+  - \dfrac{4.9\,k}{1\,k}=4.9
   physics_source:
     fn: fluidpy.geo.sphere.rhumb_line; fluidpy.geo.mapproj.forward('mercator'); fluidpy.geo.mapproj.scale_factors('mercator')
     params:
@@ -1308,7 +1308,7 @@ scenes:
     Thirty point four divided by two point one seven is about fourteen, so Africa is about fourteen times bigger. [beat] The Mercator map is great for directions
     and shapes, and poor for comparing sizes.'
   on_screen_eq:
-    latex: \text{area stretch}=k\times k=\frac{1}{\cos^2\varphi}
+    latex: \text{area stretch}=k\times k=\dfrac{1}{\cos^2\varphi}
     vallis_eq: 'none in Vallis: Mercator areal scale h k = sec² φ (Snyder 1987 eq. 7-3); fluidpy.geo.mapproj.scale_factors'
     page_png: null
   calc_rows:
@@ -1873,7 +1873,7 @@ scenes:
     page_png: null
   calc_rows:
   - \sqrt{500^2+1000^2}\approx1118\ \text{km}
-  - \hat{\mathbf r}=\left(\tfrac{500}{1118},\ \tfrac{1000}{1118}\right)\approx(0.447,\ 0.894)
+  - \hat{\mathbf r}=\left(\dfrac{500}{1118},\ \dfrac{1000}{1118}\right)\approx(0.447,\ 0.894)
   - u_r=(-10)(0.447)+(0)(0.894)\approx-4.5
   - u_\theta=(-10)(-0.894)+(0)(0.447)\approx8.9
   physics_source:
@@ -1946,7 +1946,7 @@ scenes:
     south into the places where people live. That story has its own movies later in this series: Waves on the jet, and The polar vortex.'
   on_screen_eq: null
   calc_rows:
-  - \frac{\text{in/out (rms)}}{\text{round (mean)}}:\ \ 1.9\ \text{about the pole},\quad 0.4\ \text{about the centre}
+  - \dfrac{\text{in/out (rms)}}{\text{round (mean)}}:\ \ 1.9\ \text{about the pole},\quad 0.4\ \text{about the centre}
   physics_source:
     fn: fluidpy.diag.cyclone.storm_centre (10 hPa heights); fluidpy.diag.cyclone.storm_relative_wind (NCEP 10 hPa u, v; centre = pole vs centre)
     params:
@@ -2012,13 +2012,13 @@ scenes:
     is round, north is in, and the polar vortex is mostly spin about its own centre. Next in this series, we''ll measure how fast the temperature changes
     across a map: the gradient.'
   on_screen_eq:
-    latex: y=a\,\ln\tan\!\left(\frac{\pi}{4}+\frac{\varphi}{2}\right)
+    latex: y=a\,\ln\tan\!\left(\dfrac{\pi}{4}+\dfrac{\varphi}{2}\right)
     vallis_eq: none in Vallis (Mercator, Snyder 1987 eq. 7-2); repeated from s10
     page_png: null
   calc_rows:
   - x=a\,\lambda,\quad y=a\,\varphi
-  - k=\frac{1}{\cos\varphi}
-  - \text{area stretch}=\frac{1}{\cos^2\varphi}
+  - k=\dfrac{1}{\cos\varphi}
+  - \text{area stretch}=\dfrac{1}{\cos^2\varphi}
   - u_\theta=u,\qquad u_r=-v
   physics_source: null
   exaggeration:

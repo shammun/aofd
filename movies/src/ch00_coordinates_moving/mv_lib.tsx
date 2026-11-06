@@ -86,7 +86,7 @@ export const H = {
 
 // ---------------------------------------------------------------- KaTeX width guard (text ends before x 1842)
 /** a rough, slightly generous width of a KaTeX string at effective size s (letters ≈ 0.55 em, binary operators with their
- * spaces ≈ 1.15 em, \frac = the wider of its two parts, \text{…} per character, hats free); used only as a layout guard */
+ * spaces ≈ 1.15 em, \dfrac = the wider of its two parts, \text{…} per character, hats free); used only as a layout guard */
 export const texW = (src: string, s: number): number => {
   let i = 0;
   const str = src.replace(/\\displaystyle|\\left|\\right|\\Big|\\big/g, "");
@@ -141,10 +141,26 @@ export const Layered: React.FC<{ parts: Part[]; layers: Layer[]; x: number; y: n
   return <HLayered {...p} />;
 };
 const sideStr = (s: CalcRow["rhs"]): string => (typeof s === "string" ? s : "raw" in s ? s.raw[0].s : plainOf(s.parts));
+// Part 1 lessons C2 (2026-11-05): every fraction is a \dfrac (display size, >= 44 px). A row whose TeX has a \dfrac and no explicit
+// `h` is ~2.4x its type size tall, not the house 1.42x (Part 2's K6 found fraction rows printed over the next row). The regex tests the
+// literal backslash (`\\` in a JS regex; checklist C4). Static guard: the stack's lowest visible line must end above the caption band.
+const FRAC_ROW = /\\dfrac/;
+const rowTex = (r: CalcRow) => `${r.lhs ? sideStr(r.lhs) : ""}${sideStr(r.rhs)}`;
+const withFracH = (rows: CalcRow[], size: number): CalcRow[] => rows.map((r) => (r.h !== undefined || !FRAC_ROW.test(rowTex(r)) ? r : { ...r, h: (r.size ?? size) * 2.4 }));
+const stackBottomGuard = (rows: CalcRow[], y: number, size: number, maxLines: number) => {
+  const H: number[] = [];
+  rows.forEach((r, i) => { const h = r.h ?? (r.size ?? size) * 1.42; if (i === 0 || !r.cont) H.push(h); else H[H.length - 1] += h; });
+  for (let j = 0; j < H.length; j++) {
+    const bottom = y + H.slice(Math.max(0, j - maxLines + 1), j + 1).reduce((s, h) => s + h, 0);
+    if (bottom > 878) throw new Error(`CalcStack at y ${y}: line ${j} ("${rowTex(rows.filter((r, i) => i === 0 || !r.cont)[j]).slice(0, 40)}") ends at y ${Math.round(bottom)} (caption band from 880)`);
+  }
+};
 /** house CalcStack with the right-edge guard (row rhs starts at x) */
 export const CalcStack: React.FC<React.ComponentProps<typeof HCalcStack>> = (p) => {
   p.rows.forEach((r) => guard(sideStr(r.rhs), p.x, texW(sideStr(r.rhs), r.size ?? p.size ?? 68)));
-  return <HCalcStack {...p} />;
+  const rows = withFracH(p.rows, p.size ?? 68);
+  stackBottomGuard(rows, p.y, p.size ?? 68, p.maxLines ?? 3);
+  return <HCalcStack {...p} rows={rows} />;
 };
 /** the house SVG label with the right-edge guard */
 export const Lbl: React.FC<React.ComponentProps<typeof HLbl>> = (p) => {
@@ -340,14 +356,15 @@ export const SkipChip: React.FC<{ f: number; k: number; to: string }> = ({ f, k,
   const j = sc[k].sentences.findIndex((s) => s.text.includes("skip ahead"));
   if (j < 0) throw new Error(`${sc[k].id}: no "skip ahead" sentence`);
   const a = AT(k, j, "skip ahead"), b = Math.max(a + 180, SE(k, j));
-  const lines = ["every step, for those who want it", "not needed for weather,", "climate or GIS", `skip to ${to}`];
+  // Part 1 lessons E1: Part 1's chip words, "every step · optional" / "skip to mm:ss" ("not needed for …" is spoken in the lead-in)
+  const lines = ["every step · optional", `skip to ${to}`];
   lines.forEach((t) => guard(t, 1100, textW(t, T.floor)));
   const o = ramp(f, a, a + 10) * (1 - ramp(f, b, b + 10));
   if (o <= 0) return null;
   return (
     <g opacity={o}>
-      <rect x={1076} y={628} width={760} height={232} rx={22} fill="#1f2a44" stroke={C.gold} strokeWidth={3} />
-      {lines.map((t, i) => <Lbl key={i} x={1100} y={672 + i * 50} t={t} c={i === 3 ? C.gold : C.key} s={T.floor} />)}
+      <rect x={1076} y={740} width={760} height={116} rx={22} fill="#1f2a44" stroke={C.gold} strokeWidth={3} />
+      {lines.map((t, i) => <Lbl key={i} x={1100} y={774 + i * 52} t={t} c={i === 1 ? C.gold : C.key} s={T.floor} />)}
     </g>
   );
 };

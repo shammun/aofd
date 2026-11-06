@@ -15,6 +15,7 @@ import {
   AT, Arrow, BREST, BandTint, CalcStack, ColourBar, D, D2R, Earth, GB, GFULL, IMGS, K, KHULNA, KeepLine, Keyword, LEN, LUT_T, LYB, Layered, Lbl, SE, SING, SRC_G, SS,
   Scene, SideCallout, SkipChip, Svg, TeX, Thermo, VIOLET, XC, XZ, arcD, chipSpan, clamp, cutAt, discOf, fin, fout, gdot, gseg, globeG, keepGone, keepTime, ll, merPath, mix,
   parPath, plab, poly, prog, rep, spinPath, splitVis, win,
+  RAD, Magnify, KeepPic,
 } from "./cs_lib";
 import { EQ_S18, EQ_S27, EQ_S28, EQ_S29, EQ_S30, EQ_S31, EQ_S32, EQ_S33, EQ_S34 } from "./cs_eq";
 
@@ -276,8 +277,8 @@ const S30: React.FC = () => {
         <path d={arcD(O, R, 0, 90, 90)} fill="none" stroke={C.grid} strokeWidth={4} />
         <line x1={O[0] - 20} y1={O[1]} x2={O[0] + R + 140} y2={O[1]} stroke={C.muted} strokeWidth={3} />
         <line x1={O[0]} y1={O[1] + 20} x2={O[0]} y2={O[1] - R - 30} stroke={C.muted} strokeWidth={3} />
-        <Arrow p={O} q={at(a0)} color={C.first} w={8} head={30} o={fin(f, tChk)} />
-        <Arrow p={O} q={at(a1)} color={C.first} w={8} head={30} o={fin(f, tChk)} />
+        <Arrow p={O} q={at(a0)} color={RAD} w={8} head={30} o={fin(f, tChk)} />
+        <Arrow p={O} q={at(a1)} color={RAD} w={8} head={30} o={fin(f, tChk)} />
         <line x1={O[0]} y1={O[1]} x2={at(25)[0]} y2={at(25)[1]} stroke={C.local} strokeWidth={3} strokeDasharray="10 8" opacity={fin(f, tMid)} />
         <path d={arcD(O, R, a0, a1)} fill="none" stroke={C.gold} strokeWidth={12} opacity={fin(f, tStep)} />
         <line x1={at(a0)[0]} y1={y20} x2={xb} y2={y20} stroke={C.second} strokeWidth={3} strokeDasharray="8 8" opacity={fin(f, tStep)} />
@@ -341,8 +342,9 @@ const S31: React.FC = () => {
         <Keyword f={f} text="stack the strips" at={[XC, 620]} appear={0} out={tAdd - 20} />
         <Keyword f={f} text="steps add up: top − bottom" at={[XC, 620]} appear={tAdd} out={tBand - 20} s={T.floor + 4} />
         <Keyword f={f} text="integration" at={[XC, 820]} appear={tName} out={tPrime - 20} />
-        <Lbl x={XC} y={830} t="φ′: the latitude of each strip" c={C.key} s={T.floor} o={fin(f, tPrime)} />
       </Svg>
+      {/* Part 1 lessons C1: φ′ set in KaTeX (a prime in the sans label is not maths) */}
+      <TeX s={String.raw`\varphi'\text{: the latitude of each strip}`} x={XC} y={830} size={T.floor} c={C.key} o={fin(f, tPrime)} />
       <TeX s={eqs[1]} x={XC} y={630} size={T.eq} c={C.ink} o={fin(f, tBand) * fout(f, SS(k, 7) - 12)} />
       <CalcStack f={f} x={XC} y={600} size={44} maxLines={4} rows={[
         { lhs: "", rhs: String.raw`\sin10^\circ\approx0.174,\ \ \sin20^\circ\approx0.342`, at: SS(k, 7), out: SS(k, 8) - 8, c: C.muted },
@@ -400,8 +402,8 @@ const S32: React.FC = () => {
         { lhs: "", rhs: String.raw`=510\times10^{6}\ \text{km}^2`, at: AT(k, 4, "about five hundred") - 20, cont: true },
       ]} />
       <TeX s={EQ_S32} x={XC} y={460} size={T.eq} c={C.ink} o={fin(f, tShare)} />
-      <TeX s={String.raw`\sin30^\circ=\tfrac12`} x={XC} y={635} size={60} c={C.ink} o={win(f, tHalf, tBrest - 22)} />
-      <TeX s={String.raw`\sin48.4^\circ\approx0.7478\approx\tfrac34`} x={XC} y={740} size={60} c={C.second} o={fin(f, AT(k, 10, "zero point seven four"))} />
+      <TeX s={String.raw`\sin30^\circ=\dfrac12`} x={XC} y={635} size={60} c={C.ink} o={win(f, tHalf, tBrest - 22)} />
+      <TeX s={String.raw`\sin48.4^\circ\approx0.7478\approx\dfrac34`} x={XC} y={740} size={60} c={C.second} o={fin(f, AT(k, 10, "zero point seven four"))} />
       {void [tSouth]}
     </Scene>
   );
@@ -511,12 +513,14 @@ const S34: React.FC = () => {
       <TeX s={String.raw`16.3-7.1=9.2\ ^\circ\text{C}\ \text{too cold}`} x={XC} y={760} size={50} c={C.neg} o={fin(f, AT(k, 14, "more than nine")) * oMap} />
       <CalcStack f={f} x={XC} y={250} size={50} maxLines={3} o={fout(f, tReal - 10)} rows={[
         { lhs: "", rhs: String.raw`\text{plain: }(30+0)\div2=15\ ^\circ\text{C}`, at: tPlain },
-        { lhs: "", rhs: String.raw`\text{weights: }\cos0^\circ=1,\ \cos60^\circ=\tfrac12`, at: tHalf + 20 },
-        { lhs: "", rhs: String.raw`\text{weighted: }(30\times1+0\times\tfrac12)`, at: tW + 30, size: 46 },
+        { lhs: "", rhs: String.raw`\text{weights: }\cos0^\circ=1,\ \cos60^\circ=\dfrac12`, at: tHalf + 20 },
+        { lhs: "", rhs: String.raw`\text{weighted: }(30\times1+0\times\dfrac12)`, at: tW + 30, size: 46 },
         { lhs: "", rhs: String.raw`\div1.5=20\ ^\circ\text{C}`, at: tW + 60, size: 46, cont: true },
       ]} />
       <TeX s={EQ_S34} x={XC} y={620} size={T.eq} c={C.ink} o={fin(f, tWhy) * fout(f, tReal - 10)} />
       <KeepLine f={f} k={k} lines={["boxes shrink by cos φ ·", "half the Earth within", "30° of the equator"]} />
+      {/* Part 1 lessons B4: the keep line's own picture, in the empty picture zone (the band 30° S-30° N, narrower boxes near the pole) */}
+      <KeepPic kind="band" c={[470, 450]} R={300} o={fin(f, 4, 10) * fout(f, SE(k, 1), 10)} />
       {void [g0, t20, LYB, KHULNA, SING]}
     </Scene>
   );
@@ -531,10 +535,10 @@ const Mini: React.FC<{ i: number; o: number }> = ({ i, o }) => {
   const half = `${arcD(c, R, -90, 90, 60)}Z`;
   return (
     <g opacity={o}>
-      {i === 0 ? <><circle cx={c[0]} cy={c[1]} r={R} fill="#1d2a44" stroke={C.muted} strokeWidth={4} /><Arrow p={c} q={p(40)} color={C.first} /><circle cx={c[0]} cy={c[1]} r={10} fill={C.gold} /></> : null}
-      {i === 1 ? <><path d={half} fill="#4a3d36" stroke={C.muted} strokeWidth={4} /><Arrow p={c} q={p(48.4)} color={C.first} /><Lbl x={p(48.4, 140)[0] - 30} y={p(48.4, 140)[1] - 20} t="a" c={C.first} s={T.key} a="end" /></> : null}
+      {i === 0 ? <><circle cx={c[0]} cy={c[1]} r={R} fill="#1d2a44" stroke={C.muted} strokeWidth={4} /><Arrow p={c} q={p(40)} color={RAD} /><circle cx={c[0]} cy={c[1]} r={10} fill={C.gold} /></> : null}
+      {i === 1 ? <><path d={half} fill="#4a3d36" stroke={C.muted} strokeWidth={4} /><Arrow p={c} q={p(48.4)} color={RAD} /><Lbl x={p(48.4, 140)[0] - 30} y={p(48.4, 140)[1] - 20} t="a" c={RAD} s={T.key} a="end" /></> : null}
       {i === 2 || i === 3 ? <><path d={half} fill="#4a3d36" stroke={C.muted} strokeWidth={4} /><line x1={c[0]} y1={c[1]} x2={c[0] + R} y2={c[1]} stroke={C.local} strokeWidth={4} />
-        <line x1={c[0]} y1={c[1] + R} x2={c[0]} y2={c[1] - R} stroke={C.local} strokeWidth={4} /><Arrow p={c} q={p(48.4)} color={C.first} />
+        <line x1={c[0]} y1={c[1] + R} x2={c[0]} y2={c[1] - R} stroke={C.local} strokeWidth={4} /><Arrow p={c} q={p(48.4)} color={RAD} />
         <path d={`M${c[0]} ${c[1]}${arcD(c, 120, 0, 48.4).replace("M", "L")}Z`} fill={C.gold} fillOpacity={i === 2 ? 0.35 : 0.12} stroke={C.gold} strokeWidth={5} />
         {i === 3 ? <path d={`M${c[0]} ${c[1]}${arcD(c, 100, 48.4, 90).replace("M", "L")}Z`} fill={C.local} fillOpacity={0.35} stroke={C.local} strokeWidth={5} /> : null}</> : null}
       {i === 4 || i === 5 ? <><circle cx={c[0]} cy={c[1]} r={R} fill="#1d2a44" stroke={C.muted} strokeWidth={4} />
@@ -543,7 +547,7 @@ const Mini: React.FC<{ i: number; o: number }> = ({ i, o }) => {
       {i === 6 ? <><circle cx={c[0]} cy={c[1]} r={R} fill="#4a3d36" stroke={C.muted} strokeWidth={4} /><line x1={c[0]} y1={c[1]} x2={p(0)[0]} y2={p(0)[1]} stroke={C.gold} strokeWidth={6} />
         <line x1={c[0]} y1={c[1]} x2={p(40)[0]} y2={p(40)[1]} stroke={C.key} strokeWidth={5} /><path d={arcD(c, 140, 0, 40)} fill="none" stroke={C.second} strokeWidth={8} /></> : null}
       {i === 7 ? <><path d={`M${c[0] - 200} ${c[1] + 150}L${c[0] + 120} ${c[1] + 150}L${c[0] + 120} ${c[1] - 210}Z`} fill={C.ink} fillOpacity={0.08} stroke="none" />
-        <Arrow p={[c[0] - 200, c[1] + 150]} q={[c[0] + 120, c[1] - 210]} color={C.first} />
+        <Arrow p={[c[0] - 200, c[1] + 150]} q={[c[0] + 120, c[1] - 210]} color={RAD} />
         <line x1={c[0] - 200} y1={c[1] + 150} x2={c[0] + 120} y2={c[1] + 150} stroke={C.second} strokeWidth={8} /><line x1={c[0] + 120} y1={c[1] + 150} x2={c[0] + 120} y2={c[1] - 210} stroke={C.second} strokeWidth={8} /></> : null}
       {i === 8 ? <><circle cx={c[0]} cy={c[1]} r={R} fill="#1d2a44" stroke={C.muted} strokeWidth={4} /><ellipse cx={c[0]} cy={c[1]} rx={R} ry={50} fill="none" stroke={C.second} strokeWidth={4} />
         <Arrow p={[c[0] - 60, c[1] + 50]} q={[c[0] + 200, c[1] + 48]} color={C.first} /></> : null}
@@ -561,7 +565,9 @@ const Mini: React.FC<{ i: number; o: number }> = ({ i, o }) => {
 const S35: React.FC = () => {
   const f = useCurrentFrame(), k = K("s35_recap");
   const n = 14;
-  const a = (j: number) => SS(k, j), b = (j: number) => (j + 1 < n ? SS(k, j + 1) - 20 : LEN(k) + 20);
+  // Part 1 lessons D3: each beat at full strength until ITS sentence ends (it used to start fading 10 frames early: the gaps are
+  // 10-11 frames); the next beat comes in 8 frames after its sentence starts, so the 10-frame fade-out + 8-frame swap gap still fit
+  const a = (j: number) => SS(k, j) + (j ? 8 : 0), b = (j: number) => (j + 1 < n ? SE(k, j) : LEN(k) + 20);
   const kw: [number, string, string | null][] = [
     [0, "distance + two angles", null], [1, "", String.raw`a\approx6400\ \text{km}`], [2, "latitude φ", null], [3, "", String.raw`\text{colatitude}=90^\circ-\varphi`],
     [4, "parallel: round the axis", null], [5, "meridian: round the centre", null], [6, "longitude λ: east +", null],
@@ -586,10 +592,11 @@ const S36: React.FC = () => {
   const thumb = (x: number, i: number) => (
     <g key={i} opacity={0.75}>
       <rect x={x - 150} y={70} width={300} height={170} rx={16} fill="#18213a" stroke={C.grid} strokeWidth={3} />
-      {i === 0 ? <><path d={`M${x - 20} 225 A 70 70 0 0 1 ${x - 20} 85 Z`} fill="#4a3d36" stroke={C.muted} strokeWidth={3} /><line x1={x - 20} y1={155} x2={x + 40} y2={155} stroke={C.local} strokeWidth={3} />
-        <Arrow p={[x - 20, 155]} q={[x + 26, 103]} color={C.first} w={5} head={16} halo={false} /></> : null}
-      {i === 1 ? <><circle cx={x} cy={155} r={70} fill="none" stroke={C.muted} strokeWidth={3} />{[-40, 0, 40].map((q) => <ellipse key={q} cx={x} cy={155 + q} rx={70 * Math.cos(Math.asin(q / 70))} ry={10} fill="none" stroke={C.second} strokeWidth={2} />)}
-        {[25, 50].map((q) => <ellipse key={q} cx={x} cy={155} rx={q} ry={70} fill="none" stroke={C.local} strokeWidth={2} />)}</> : null}
+      {/* Part 1 lessons B5: every icon >= 20 px inside its box (box y 70-240): the half disc and the globe now r 60-62 (were 70: 15 px) */}
+      {i === 0 ? <><path d={`M${x - 20} 215 A 60 60 0 0 1 ${x - 20} 95 Z`} fill="#4a3d36" stroke={C.muted} strokeWidth={3} /><line x1={x - 20} y1={155} x2={x + 40} y2={155} stroke={C.local} strokeWidth={3} />
+        <Arrow p={[x - 20, 155]} q={[x + 22, 111]} color={RAD} w={5} head={16} halo={false} /></> : null}
+      {i === 1 ? <><circle cx={x} cy={155} r={62} fill="none" stroke={C.muted} strokeWidth={3} />{[-36, 0, 36].map((q) => <ellipse key={q} cx={x} cy={155 + q} rx={62 * Math.cos(Math.asin(q / 62))} ry={9} fill="none" stroke={C.second} strokeWidth={2} />)}
+        {[22, 44].map((q) => <ellipse key={q} cx={x} cy={155} rx={q} ry={62} fill="none" stroke={C.local} strokeWidth={2} />)}</> : null}
       {i === 2 ? <><path d={`M${x - 90} 215 L${x + 60} 215 L${x + 60} 100 Z`} fill={C.ink} fillOpacity={0.1} stroke={C.second} strokeWidth={4} /></> : null}
       {i === 3 ? <path d={`M${x - 90} 210 L${x + 50} 210 L${x + 90} 110 L${x - 50} 110 Z`} fill={C.gold} fillOpacity={0.4} stroke={C.gold} strokeWidth={4} /> : null}
     </g>

@@ -29,6 +29,12 @@ REVOICE: dict[str, dict[int, tuple[str, str]]] = {
         5: ("Relative to you, the air at that place moves east at thirteen and a half minus ten: three and a half metres per second, or twelve point seven kilometres per hour.",
             "Relative to you, the air at that place moves east at thirteen point five four minus ten: three point five four metres per second, or twelve point seven kilometres per hour."),
     },
+    # Part 1 lessons E1 (2026-11-05): the skip lead-in says the steps are not needed for weather, climate or maps
+    's04_velocities_add': {2: ('If not, skip ahead to the time on screen.',
+                          "If not, skip ahead to the time on screen: you don't need them for the intuition of weather, climate or maps.")},
+    # Part 1 lessons E1 (2026-11-05): the skip lead-in says the steps are not needed for weather, climate or maps
+    's14_tau_derive': {2: ("They're for anyone who wants every step, so skip ahead to the time on screen if you'd rather go straight to the numbers.",
+                      "They're for anyone who wants every step and aren't needed for the intuition of weather, climate or maps, so skip ahead to the time on screen if you'd rather go straight to the numbers.")},
 }
 EXTRA_TEXT: dict = {}
 

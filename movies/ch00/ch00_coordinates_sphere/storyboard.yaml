@@ -20,7 +20,7 @@ concepts:
 - latitude-longitude grid boxes of reanalysis data (ERA5 0.25 deg) and their true sizes
 - area element dA = a^2 cos phi dphi dlambda; band area 2 pi a^2 sin phi by adding strips (integration, owned here); Archimedes' cylinder
 - cos-latitude weighting of global means (fluidpy.diag.climatology.global_mean)
-target_duration_s: 2900.003
+target_duration_s: 2902.4641
 fps: 30
 size:
 - 1920
@@ -58,7 +58,7 @@ audio:
 dry_run:
   tool: tools/tts.py
   run: G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_sphere/dryrun3
-  audio_s: 2900.003
+  audio_s: 2902.4641
   cues: 711
   sentences: 445
   words: 6984
@@ -75,7 +75,7 @@ conventions:
   rotation_sense: east = anticlockwise as seen from above the North Pole (said in s11)
   area_symbol: 'spoken ''d capital A'' (G2P: ''d A'' reads ''dee uh'')'
 colour_contract: latitude phi gold arc and wedge; colatitude slate wedge; longitude lambda orange arc; the Earth's centre gold dot, the spin axis
-  slate; the position arrow and the radius a teal; axes x, y, z and the legs of the triangles orange (the measured parts); parallels orange rings,
+  slate; the position arrow and the radius a ink (Part 1 lessons D1, never teal); axes x, y, z and the legs of the triangles orange (the measured parts); parallels orange rings,
   meridians slate (the prime meridian gold); Omega violet (rotation family, teaching-style §1l); ground-speed arrows teal with moving dashes;
   area tiles gold; negative numbers rose with a '-' glyph; links, 'same' ticks and pointers gold.
 places:
@@ -212,16 +212,16 @@ chapter_marks:
   mmss: '34:57.2'
   title: areas, step by step
   scene: s27_area_patch
-- t: 2572.0219
-  mmss: '42:52.0'
+- t: 2574.483
+  mmss: '42:54.5'
   title: Archimedes
   scene: s33_archimedes
-- t: 2652.5969
-  mmss: '44:12.6'
+- t: 2655.058
+  mmss: '44:15.1'
   title: global averages
   scene: s34_global_mean
-- t: 2758.0469
-  mmss: '45:58.0'
+- t: 2760.508
+  mmss: '46:00.5'
   title: to sum up
   scene: s35_recap
 skip_blocks:
@@ -264,8 +264,8 @@ skip_blocks:
   chip_sentence: 5
   chip_t: 2117.9219
   skip_to_scene: s34_global_mean
-  skip_to_t: 2652.5969
-  skip_to_mmss: '44:12.6'
+  skip_to_t: 2655.058
+  skip_to_mmss: '44:15.1'
   keep_sentence: 'If you skipped, here''s what to keep. Grid boxes shrink towards the poles by cosine phi, so the tropics are huge and the polar
     caps are small: half of the whole Earth lies between thirty degrees south and thirty degrees north. Here''s where this matters for climate.'
   takeaway_keyword: boxes shrink by cos φ · half the Earth within 30° of the equator
@@ -832,7 +832,7 @@ scenes:
     and the bottom leg ''opposite'' (a gold swap arrow between the two role tags). S16-S17: rows ''sin(90° − φ) = cos φ'', ''cos(90° − φ) = sin
     φ''. S18: CalcStack ''sin 41.6° ≈ 0.6639 = cos 48.4°''. S19: keyword ''books with colatitude: cos ↔ sin''. SKIP CHIP (user rule 2026-11-05;
     the one allowed chip): on AT(4,''skip ahead'') a small rounded chip, top-right of the column (x 1500-1840, y 60-150, 44 px, warm white on
-    a 20 % gold fill, no border): ''every step: optional'' / ''not needed for the intuition'' / ''skip to {mm:ss}'' (mm:ss = the landing sentence''s
+    a 20 % gold fill, no border): ''every step · optional'' / ''skip to {mm:ss}'' (mm:ss = the landing sentence''s
     start in the final timing.json, filled by the builder); it stays 8 s, fades over 0.5 s, never over the picture.'
   voiceover: Why does it matter which angle a book uses? Because sine and cosine swap places. The next minute and a half shows exactly why, for
     anyone who likes to see every step. You don't need it for the intuition of weather, climate science or mapping, so feel free to skip ahead
@@ -1340,8 +1340,7 @@ scenes:
     AT(8,''forty eight point four degrees'') gold arc and ''φ = 48.4°'' inside the wedge; AT(9,''drop a line'') dashed slate line from Brest down
     to the equator line; AT(10,''right angle'') right-angle tick; AT(11,''right triangle'') the triangle fills 10 % white in both views, keyword
     ''right triangle''. SKIP CHIP (user rule 2026-11-05; the one allowed chip): on AT(3,''skip ahead'') a small rounded chip, top-right of the
-    column (x 1500-1840, y 60-150, 44 px, warm white on a 20 % gold fill, no border): ''every step: optional'' / ''not needed for the intuition''
-    / ''skip to {mm:ss}'' (mm:ss = the landing sentence''s start in the final timing.json, filled by the builder); it stays 8 s, fades over 0.5
+    column (x 1500-1840, y 60-150, 44 px, warm white on a 20 % gold fill, no border): ''every step · optional'' / ''skip to {mm:ss}'' (mm:ss = the landing sentence''s start in the final timing.json, filled by the builder); it stays 8 s, fades over 0.5
     s, never over the picture.'
   voiceover: 'The next few minutes build Brest''s position, and then the speed of the spinning ground, one step at a time. They''re here for anyone
     who wants every step, and you don''t need them for the intuition of weather, climate science or mapping. So if it feels like a lot, skip ahead
@@ -1430,7 +1429,7 @@ scenes:
   calc_rows:
   - a=6371\ \text{km},\quad \sin48.4^\circ\approx0.7478
   - z=6371\ \text{km}\times0.7478\approx4764\ \text{km}
-  - 6400\times\tfrac34=4800
+  - 6400\times\dfrac34=4800
   physics_source:
     fn: fluidpy.geo.sphere.unit_vector x EARTH_RADIUS (z part)
     params:
@@ -1515,7 +1514,7 @@ scenes:
   calc_rows:
   - \cos48.4^\circ\approx0.6639
   - a\cos\varphi=6371\ \text{km}\times0.6639\approx4230\ \text{km}
-  - 6400\times\tfrac23\approx4270
+  - 6400\times\dfrac23\approx4270
   physics_source:
     fn: fluidpy.geo.sphere.parallel_points (radius a cos phi); unit_vector
     params:
@@ -1893,7 +1892,7 @@ scenes:
     So capital U equals capital Omega, times the Earth''s radius, times cosine phi. [beat] It''s Part 2''s rule for a ring again: the speed is the radius
     times the turning rate.'
   on_screen_eq:
-    latex: U=\frac{2\pi\,a\cos\varphi}{T}=\Omega\,a\cos\varphi,\qquad \Omega=\frac{2\pi}{T}
+    latex: U=\dfrac{2\pi\,a\cos\varphi}{T}=\Omega\,a\cos\varphi,\qquad \Omega=\dfrac{2\pi}{T}
     vallis_eq: 'our step: the speed of a point on its parallel; cf. Vallis (2.36) Ω = Ω(j cos ϑ + k sin ϑ) (p. 62) for the vector Ω; |Ω × r| =
       Ω a cos ϑ (cross product movie)'
     page_png: chapters/pages/ch02/p082.png
@@ -2109,7 +2108,7 @@ scenes:
     underbraces ''Earth''s radius'', ''change in latitude (rad)''. S8-S10: CalcStack ''1° = π/180 ≈ 0.01745 rad'', ''Δy = 6371 km × 0.01745 ≈
     111.2 km'', easy ''6400 × 0.0175 = 112''. S11: the step slides from 10 to 80 deg N along the rim with a constant ''111.2 km'' tag and a gold
     ''same'' tick. SKIP CHIP (user rule 2026-11-05; the one allowed chip): on AT(2,''skip ahead'') a small rounded chip, top-right of the column
-    (x 1500-1840, y 60-150, 44 px, warm white on a 20 % gold fill, no border): ''every step: optional'' / ''not needed for the intuition'' / ''skip
+    (x 1500-1840, y 60-150, 44 px, warm white on a 20 % gold fill, no border): ''every step · optional'' / ''skip
     to {mm:ss}'' (mm:ss = the landing sentence''s start in the final timing.json, filled by the builder); it stays 8 s, fades over 0.5 s, never
     over the picture.'
   voiceover: 'Now let''s measure distances on the ground, step by step. If you''d rather keep to the big picture, skip ahead to the time on screen:
@@ -2497,7 +2496,7 @@ scenes:
 - id: s27_area_patch
   t:
   - 2097.1719
-  - 2204.4469
+  - 2206.908
   sentence_times:
   - - 2097.1719
     - 2099.7469
@@ -2508,33 +2507,33 @@ scenes:
   - - 2110.0969
     - 2117.5719
   - - 2117.9219
-    - 2125.7469
-  - - 2126.0969
-    - 2131.3469
-  - - 2131.6969
-    - 2136.2719
-  - - 2136.6219
-    - 2142.6719
-  - - 2143.0219
-    - 2148.8969
-  - - 2149.2469
-    - 2154.3969
-  - - 2154.7469
-    - 2158.8219
-  - - 2159.1719
-    - 2164.1219
-  - - 2164.4719
-    - 2171.9469
-  - - 2172.2969
-    - 2177.2219
-  - - 2177.5719
-    - 2184.8969
-  - - 2185.2469
-    - 2191.8469
-  - - 2192.1969
-    - 2200.4219
-  - - 2200.7719
-    - 2203.6469
+    - 2128.208
+  - - 2128.558
+    - 2133.808
+  - - 2134.158
+    - 2138.733
+  - - 2139.083
+    - 2145.133
+  - - 2145.483
+    - 2151.358
+  - - 2151.708
+    - 2156.858
+  - - 2157.208
+    - 2161.283
+  - - 2161.633
+    - 2166.583
+  - - 2166.933
+    - 2174.408
+  - - 2174.758
+    - 2179.683
+  - - 2180.033
+    - 2187.358
+  - - 2187.708
+    - 2194.308
+  - - 2194.658
+    - 2202.883
+  - - 2203.233
+    - 2206.108
   beat: 'derivation D30: dA = a^2 cos phi dphi dlambda (U-CO-058; Should 7)'
   visual: 'Globe zoomed to a patch at Brest (zoom-reveal), between two meridians and two parallels 5 deg apart (x20 an ERA5 box so it reads);
     the patch gold, slightly curved. S4: its north-south side tagged ''a Δφ'' (orange); S5: its east-west side ''a cos φ Δλ'' (orange), each a
@@ -2543,11 +2542,11 @@ scenes:
     Δφ)'' -> ''ΔA ≈ a² cos φ Δφ Δλ''. S11-S12: the tile shrinks, Δ morphs to d (gold): ''dA = a² cos φ dφ dλ'' (96 px), cos φ highlighted. S13:
     keyword ''Δ: small step · d: tiny step''. S14: ''angles in radians''. Ends with the zoom out. SKIP CHIP (user rule 2026-11-05; the one allowed
     chip): on AT(5,''skip ahead'') a small rounded chip, top-right of the column (x 1500-1840, y 60-150, 44 px, warm white on a 20 % gold fill,
-    no border): ''every step: optional'' / ''not needed for the intuition'' / ''skip to {mm:ss}'' (mm:ss = the landing sentence''s start in the
+    no border): ''every step · optional'' / ''skip to {mm:ss}'' (mm:ss = the landing sentence''s start in the
     final timing.json, filled by the builder); it stays 8 s, fades over 0.5 s, never over the picture.'
   voiceover: Distances give us areas. Why do we care? Because to average anything over the Earth, like the temperature, we need to know how much
     area each grid box covers. The next few minutes build the area of a small patch, and then of whole bands round the Earth, one step at a time.
-    They're for anyone who wants every step, and not needed for the intuition, so feel free to skip ahead to the time on screen. Take a small
+    They're for anyone who wants every step, and not needed for the intuition of weather, climate science or mapping, so feel free to skip ahead to the time on screen. Take a small
     patch of the surface, between two meridians and two parallels. Its north-south side is the Earth's radius times delta phi. Its east-west side
     is the Earth's radius times cosine phi times delta lambda. The two sides meet at a right angle, because meridians cross parallels at right
     angles. And when the patch is small, it's almost flat, so it's almost a rectangle. The area of a rectangle is its width times its height.
@@ -2618,29 +2617,29 @@ scenes:
     Opening keyword from frame 0 (Should 18).'
 - id: s28_box_areas
   t:
-  - 2204.4469
-  - 2284.3469
+  - 2206.908
+  - 2286.808
   sentence_times:
-  - - 2204.4469
-    - 2208.1719
-  - - 2208.5219
-    - 2213.9719
-  - - 2214.3219
-    - 2222.5719
-  - - 2224.0719
-    - 2236.6969
-  - - 2238.1969
-    - 2241.7719
-  - - 2242.1219
-    - 2251.2469
-  - - 2252.7469
-    - 2258.7219
-  - - 2260.2219
-    - 2266.9219
-  - - 2268.4219
-    - 2274.1469
-  - - 2274.4969
-    - 2282.8469
+  - - 2206.908
+    - 2210.633
+  - - 2210.983
+    - 2216.433
+  - - 2216.783
+    - 2225.033
+  - - 2226.533
+    - 2239.158
+  - - 2240.658
+    - 2244.233
+  - - 2244.583
+    - 2253.708
+  - - 2255.208
+    - 2261.183
+  - - 2262.683
+    - 2269.383
+  - - 2270.883
+    - 2276.608
+  - - 2276.958
+    - 2285.308
   beat: 'worked numbers: ERA5 box areas 773, 712, 513, 158 km^2; the exact curved patch'
   visual: 'Left: four 3-D tiles (flat, to scale with each other) in a row like the s26 boxes, each with x and y edge tags (27.8 × 27.8, 27.8 ×
     25.6, 27.8 × 18.5, 27.8 × 5.7 km) and its place name below; right: CalcStack. S1: ''0.25° ≈ 0.00436 rad''. S2: ''a² = 6371² ≈ 40.6 million
@@ -2689,29 +2688,29 @@ scenes:
     builder checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s29_strip_round
   t:
-  - 2284.3469
-  - 2343.6719
+  - 2286.808
+  - 2346.133
   sentence_times:
-  - - 2284.3469
-    - 2286.3469
-  - - 2286.6969
-    - 2293.1969
-  - - 2293.5469
-    - 2294.9719
-  - - 2295.3219
-    - 2303.8219
-  - - 2304.1719
-    - 2307.1219
-  - - 2307.4719
-    - 2315.6969
-  - - 2316.0469
-    - 2320.6719
-  - - 2321.0219
-    - 2329.9719
-  - - 2330.3219
-    - 2335.2219
-  - - 2335.5719
-    - 2342.8719
+  - - 2286.808
+    - 2288.808
+  - - 2289.158
+    - 2295.658
+  - - 2296.008
+    - 2297.433
+  - - 2297.783
+    - 2306.283
+  - - 2306.633
+    - 2309.583
+  - - 2309.933
+    - 2318.158
+  - - 2318.508
+    - 2323.133
+  - - 2323.483
+    - 2332.433
+  - - 2332.783
+    - 2337.683
+  - - 2338.033
+    - 2345.333
   beat: 'derivation D31 (1)-(2): a strip all round the Earth (U-CO-059)'
   visual: 'Globe at a 20 deg N view. S1-S3: column keyword ''area between 0° and φ?''; the band 0-30 N tints teal. S4: a thin gold strip all round
     between phi and phi + Δphi (drawn 5 deg wide at 25 N). S5 on AT(5,''Cut it and unroll it''): the strip cuts at one meridian and unrolls into
@@ -2770,33 +2769,33 @@ scenes:
     Opening keyword from frame 0 (Should 18).'
 - id: s30_slope_of_sine
   t:
-  - 2343.6719
-  - 2418.2469
+  - 2346.133
+  - 2420.708
   sentence_times:
-  - - 2343.6719
-    - 2346.9719
-  - - 2347.3219
-    - 2349.9719
-  - - 2350.3219
-    - 2356.8219
-  - - 2357.1719
-    - 2363.1469
-  - - 2363.4969
-    - 2365.9969
-  - - 2366.3469
-    - 2371.7219
-  - - 2372.0719
-    - 2376.6469
-  - - 2376.9969
-    - 2383.5469
-  - - 2383.8969
-    - 2394.0469
-  - - 2395.5469
-    - 2403.6469
-  - - 2403.9969
-    - 2407.2969
-  - - 2408.7969
-    - 2417.4469
+  - - 2346.133
+    - 2349.433
+  - - 2349.783
+    - 2352.433
+  - - 2352.783
+    - 2359.283
+  - - 2359.633
+    - 2365.608
+  - - 2365.958
+    - 2368.458
+  - - 2368.808
+    - 2374.183
+  - - 2374.533
+    - 2379.108
+  - - 2379.458
+    - 2386.008
+  - - 2386.358
+    - 2396.508
+  - - 2398.008
+    - 2406.108
+  - - 2406.458
+    - 2409.758
+  - - 2411.258
+    - 2419.908
   beat: 'derivation D31 (3)-(4): the slope of sine from Part 2 turns cos phi dphi into Delta(sin phi)'
   visual: 'Left: Part 2''s unit-circle picture (reused module): the arrow at angle phi, a small step Δphi, the tip rising by Δ(sin φ) (orange)
     ≈ cos φ Δφ; right: CalcStack. S3-S4: ''cos φ Δφ ≈ Δ(sin φ)''. S5-S8: the check with a 20-30 deg strip: ''Δφ = 10° ≈ 0.1745 rad'', ''cos 25°
@@ -2856,35 +2855,35 @@ scenes:
     builder checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s31_adding_strips
   t:
-  - 2418.2469
-  - 2499.1469
+  - 2420.708
+  - 2501.608
   sentence_times:
-  - - 2418.2469
-    - 2423.2219
-  - - 2423.5719
-    - 2428.6469
-  - - 2428.9969
-    - 2434.7219
-  - - 2435.0719
-    - 2438.0719
-  - - 2438.4219
-    - 2441.9469
-  - - 2442.2969
-    - 2450.0719
-  - - 2451.5719
-    - 2456.2969
-  - - 2456.6469
-    - 2464.7219
-  - - 2466.2219
-    - 2471.7719
-  - - 2473.2719
-    - 2477.8969
-  - - 2478.2469
-    - 2483.4719
-  - - 2483.8219
-    - 2490.9969
-  - - 2491.3469
-    - 2498.3469
+  - - 2420.708
+    - 2425.683
+  - - 2426.033
+    - 2431.108
+  - - 2431.458
+    - 2437.183
+  - - 2437.533
+    - 2440.533
+  - - 2440.883
+    - 2444.408
+  - - 2444.758
+    - 2452.533
+  - - 2454.033
+    - 2458.758
+  - - 2459.108
+    - 2467.183
+  - - 2468.683
+    - 2474.233
+  - - 2475.733
+    - 2480.358
+  - - 2480.708
+    - 2485.933
+  - - 2486.283
+    - 2493.458
+  - - 2493.808
+    - 2500.808
   beat: 'derivation D31 (5)-(6): the staircase sum; integration named'
   visual: 'Left: three ten-degree strips on the globe (0-10, 10-20, 20-30 N), each lighting in turn; right: a staircase graph (x latitude 0-90
     deg, y sin φ 0-1, 52-px ticks) with the sine curve and three steps (gold risers 0.174, 0.168, 0.158) appearing with their strips on the same
@@ -2960,33 +2959,33 @@ scenes:
     its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s32_band_fraction
   t:
-  - 2499.1469
-  - 2572.0219
+  - 2501.608
+  - 2574.483
   sentence_times:
-  - - 2499.1469
-    - 2501.2969
-  - - 2501.6469
-    - 2504.1719
-  - - 2504.5219
-    - 2511.9969
-  - - 2512.3469
-    - 2517.0719
-  - - 2518.5719
-    - 2526.6969
-  - - 2528.1969
-    - 2534.6719
-  - - 2535.0219
-    - 2537.9469
-  - - 2538.2969
-    - 2544.0969
-  - - 2545.5969
-    - 2547.8719
-  - - 2548.2219
-    - 2554.0219
-  - - 2555.5219
-    - 2564.9969
-  - - 2566.4969
-    - 2571.2219
+  - - 2501.608
+    - 2503.758
+  - - 2504.108
+    - 2506.633
+  - - 2506.983
+    - 2514.458
+  - - 2514.808
+    - 2519.533
+  - - 2521.033
+    - 2529.158
+  - - 2530.658
+    - 2537.133
+  - - 2537.483
+    - 2540.408
+  - - 2540.758
+    - 2546.558
+  - - 2548.058
+    - 2550.333
+  - - 2550.683
+    - 2556.483
+  - - 2557.983
+    - 2567.458
+  - - 2568.958
+    - 2573.683
   beat: 'derivation D31 (7)-(8): checks and the share sin phi; half the Earth within 30 deg of the equator'
   visual: 'Globe (whole, unzoomed). S1-S3: the band fills from the equator to the pole (teal), ''sin 90° = 1'', CalcStack ''2π a² ≈ 255 million
     km²''. S4: the southern hemisphere fills too: ''4π a² ≈ 510 million km²''. S5: ''share = sin φ''. S6-S7: the band 0-30 N teal, the rest of
@@ -3000,14 +2999,14 @@ scenes:
     thirty degrees north. [beat] At Brest''s latitude, sine phi is zero point seven four seven eight, so about three quarters of the northern
     hemisphere lies south of Brest. [beat] The tropics and subtropics are huge, and the polar caps are small.'
   on_screen_eq:
-    latex: \frac{2\pi a^2\sin\varphi}{2\pi a^2}=\sin\varphi
+    latex: \dfrac{2\pi a^2\sin\varphi}{2\pi a^2}=\sin\varphi
     vallis_eq: 'none: arithmetic or a definition (no book equation)'
     page_png: null
   calc_rows:
   - 2\pi a^2\approx255\times10^{6}\ \text{km}^2
   - 4\pi a^2\approx510\times10^{6}\ \text{km}^2
-  - \sin30^\circ=\tfrac12
-  - \sin48.4^\circ\approx0.7478\approx\tfrac34
+  - \sin30^\circ=\dfrac12
+  - \sin48.4^\circ\approx0.7478\approx\dfrac34
   physics_source:
     fn: fluidpy.geo.sphere.band_area, band_fraction
     params:
@@ -3043,35 +3042,35 @@ scenes:
     Opening keyword from frame 0 (Should 18).'
 - id: s33_archimedes
   t:
-  - 2572.0219
-  - 2652.5969
+  - 2574.483
+  - 2655.058
   sentence_times:
-  - - 2572.0219
-    - 2578.3469
-  - - 2578.6969
-    - 2586.6219
-  - - 2586.9719
-    - 2595.9469
-  - - 2596.2969
-    - 2601.9469
-  - - 2602.2969
-    - 2606.4969
-  - - 2606.8469
-    - 2610.3969
-  - - 2610.7469
-    - 2616.6469
-  - - 2616.9969
-    - 2624.7469
-  - - 2626.2469
-    - 2627.9969
-  - - 2628.3469
-    - 2635.4219
-  - - 2635.7719
-    - 2643.1219
-  - - 2643.4719
-    - 2646.2219
-  - - 2646.5719
-    - 2651.7969
+  - - 2574.483
+    - 2580.808
+  - - 2581.158
+    - 2589.083
+  - - 2589.433
+    - 2598.408
+  - - 2598.758
+    - 2604.408
+  - - 2604.758
+    - 2608.958
+  - - 2609.308
+    - 2612.858
+  - - 2613.208
+    - 2619.108
+  - - 2619.458
+    - 2627.208
+  - - 2628.708
+    - 2630.458
+  - - 2630.808
+    - 2637.883
+  - - 2638.233
+    - 2645.583
+  - - 2645.933
+    - 2648.683
+  - - 2649.033
+    - 2654.258
   beat: 'intuition: Archimedes'' cylinder (equal heights, equal areas)'
   visual: 'Globe inside a snug translucent cylinder (radius a, slate wireframe, 3-D, the camera orbiting slowly from outside at 15 deg elevation).
     S3: the band 0-phi (phi = 48.4) on the globe teal; horizontal arrows push it out onto the cylinder, where a matching teal band appears. S4:
@@ -3116,41 +3115,41 @@ scenes:
     checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s34_global_mean
   t:
-  - 2652.5969
-  - 2758.0469
+  - 2655.058
+  - 2760.508
   sentence_times:
-  - - 2652.5969
-    - 2655.2719
-  - - 2655.6219
-    - 2668.2719
-  - - 2668.6219
-    - 2671.2219
-  - - 2671.5719
-    - 2676.7469
-  - - 2677.0969
-    - 2680.8219
-  - - 2681.1719
-    - 2685.8219
-  - - 2686.1719
-    - 2689.0469
-  - - 2689.3969
-    - 2697.4469
-  - - 2697.7969
-    - 2705.5969
-  - - 2705.9469
-    - 2707.9969
-  - - 2709.4969
-    - 2714.6219
-  - - 2714.9719
-    - 2725.4719
-  - - 2725.8219
-    - 2731.7469
-  - - 2733.2469
-    - 2737.7719
-  - - 2739.2719
-    - 2752.0219
-  - - 2752.3719
-    - 2757.2469
+  - - 2655.058
+    - 2657.733
+  - - 2658.083
+    - 2670.733
+  - - 2671.083
+    - 2673.683
+  - - 2674.033
+    - 2679.208
+  - - 2679.558
+    - 2683.283
+  - - 2683.633
+    - 2688.283
+  - - 2688.633
+    - 2691.508
+  - - 2691.858
+    - 2699.908
+  - - 2700.258
+    - 2708.058
+  - - 2708.408
+    - 2710.458
+  - - 2711.958
+    - 2717.083
+  - - 2717.433
+    - 2727.933
+  - - 2728.283
+    - 2734.208
+  - - 2735.708
+    - 2740.233
+  - - 2741.733
+    - 2754.483
+  - - 2754.833
+    - 2759.708
   beat: 'application: the cos phi weighting of a global mean (toy, then ERA5 September 2026: 7.1 vs 16.3 C)'
   visual: 'S1-S6 (toy): two 3-D tiles from s28, the equator one (area 1) and the 60 N one (area 1/2), each with a thermometer icon ''30 °C'' and
     ''0 °C''; CalcStack ''plain: (30 + 0) ÷ 2 = 15'', ''weights: cos 0° = 1, cos 60° = 1/2'', ''weighted: (30 × 1 + 0 × 1/2) ÷ 1.5 = 20 °C''.
@@ -3172,12 +3171,12 @@ scenes:
     [beat] The plain average is more than nine degrees too cold, because the many thin boxes near the poles, over the cold Arctic and the frozen
     Antarctic, count as much as the big tropical ones. This cosine weighting is how global average temperatures are worked out.'
   on_screen_eq:
-    latex: \overline{T}=\frac{\sum_j\cos\varphi_j\,T_j}{\sum_j\cos\varphi_j}
+    latex: \overline{T}=\dfrac{\sum_j\cos\varphi_j\,T_j}{\sum_j\cos\varphi_j}
     vallis_eq: 'our step: weights from dA = a² cos ϑ dϑ dλ (Vallis §2.2.2); fluidpy.diag.climatology.global_mean'
     page_png: chapters/pages/ch02/p081.png
   calc_rows:
   - '\text{plain: }(30+0)\div2=15\ ^\circ\text{C}'
-  - '\text{weighted: }(30\times1+0\times\tfrac12)\div1.5=20\ ^\circ\text{C}'
+  - '\text{weighted: }(30\times1+0\times\dfrac12)\div1.5=20\ ^\circ\text{C}'
   physics_source:
     fn: fluidpy.diag.climatology.global_mean (cos-latitude weights); plain mean with numpy
     params:
@@ -3201,37 +3200,37 @@ scenes:
     from frame 0 (Should 18).'
 - id: s35_recap
   t:
-  - 2758.0469
-  - 2877.103
+  - 2760.508
+  - 2879.5641
   sentence_times:
-  - - 2758.0469
-    - 2766.6969
-  - - 2767.0469
-    - 2774.8469
-  - - 2775.1969
-    - 2780.9469
-  - - 2781.2969
-    - 2788.5719
-  - - 2788.9219
-    - 2793.9219
-  - - 2794.2719
-    - 2799.2719
-  - - 2799.6219
-    - 2807.3719
-  - - 2807.7219
-    - 2821.5219
-  - - 2821.8719
-    - 2833.028
-  - - 2833.378
-    - 2840.803
-  - - 2841.153
-    - 2848.403
-  - - 2848.753
-    - 2855.528
-  - - 2855.878
-    - 2867.903
-  - - 2868.253
-    - 2876.303
+  - - 2760.508
+    - 2769.158
+  - - 2769.508
+    - 2777.308
+  - - 2777.658
+    - 2783.408
+  - - 2783.758
+    - 2791.033
+  - - 2791.383
+    - 2796.383
+  - - 2796.733
+    - 2801.733
+  - - 2802.083
+    - 2809.833
+  - - 2810.183
+    - 2823.983
+  - - 2824.333
+    - 2835.4891
+  - - 2835.8391
+    - 2843.2641
+  - - 2843.6141
+    - 2850.8641
+  - - 2851.2141
+    - 2857.9891
+  - - 2858.3391
+    - 2870.3641
+  - - 2870.7141
+    - 2878.7641
   beat: recap ('To sum up'); the last sentence is the teaser to Part 4 (split plan §2g)
   visual: 'One beat per sentence, mini pictures reused (no headings): the globe with the centre and r; the sliced face with ''a ≈ 6400 km''; the
     phi wedge; the colatitude wedge with ''sin ↔ cos''; a parallel disc and a meridian; the lambda wedge from Greenwich; the two-view triangles
@@ -3269,15 +3268,15 @@ scenes:
     18).'
 - id: s36_end
   t:
-  - 2877.103
-  - 2900.003
+  - 2879.5641
+  - 2902.4641
   sentence_times:
-  - - 2877.103
-    - 2883.303
-  - - 2883.653
-    - 2891.703
-  - - 2892.053
-    - 2899.703
+  - - 2879.5641
+    - 2885.7641
+  - - 2886.1141
+    - 2894.1641
+  - - 2894.5141
+    - 2902.1641
   beat: series end card (maths ending, HOUSE_STYLE §3, word for word; decision 2)
   visual: 'END CARD (house EndCard): four faint topic thumbnails along the top (the sliced globe with phi, the graticule, the two-view triangle,
     the dA tile); keyword lines ''a series of maths tutorials'' (68 px) and ''atmospheric science · meteorology · fluid dynamics'' (54 px); notebook

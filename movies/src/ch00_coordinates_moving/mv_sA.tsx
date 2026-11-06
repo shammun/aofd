@@ -164,7 +164,7 @@ const S02: React.FC = () => {
           <path d={`M ${O[0] - 300} ${O[1] + 180} Q ${O[0] - 40} ${O[1] + 60} ${O[0] + 90} ${O[1] - 210}`} fill="none" stroke={C.key} strokeWidth={4} />
           <Arrow p={O} q={[O[0] + xp[0] * 200, O[1] + xp[1] * 200]} color={C.second} w={8} head={30} />
           <Arrow p={O} q={[O[0] + yp[0] * 200, O[1] + yp[1] * 200]} color={C.second} w={8} head={30} />
-          <AnimatedWindArrow from={O} to={[O[0] + wv[0], O[1] + wv[1]]} speed={12} f={f} c={C.first} px={9} head={34} />
+          <AnimatedWindArrow from={O} to={[O[0] + wv[0], O[1] + wv[1]]} speed={12} f={f} c={C.ink} px={9} head={34} />{/* Part 1 lessons D1: the full wind is ink */}
           <line x1={O[0]} y1={O[1]} x2={O[0] + xp[0] * al} y2={O[1] + xp[1] * al} stroke={C.first} strokeWidth={18} opacity={0.45} />
         </g>
         <g opacity={oTurn}>
@@ -187,7 +187,7 @@ const S02: React.FC = () => {
       </Svg>
       <TeX s={String.raw`\mathbf v=u\,\hat{\mathbf i}+v\,\hat{\mathbf j}+w\,\hat{\mathbf k}`} x={XC} y={150} size={60} o={win(f, t1, t4 - 18)} />
       <TeX s={String.raw`\text{along}=\mathbf v\cdot\hat{\mathbf x}'`} x={XC} y={230} size={52} c={C.first} o={win(f, AT(k, 2, "dot products"), t4 - 18)} />
-      <TeX s={String.raw`\frac{dT}{dt}=\frac{\partial T}{\partial t}+\text{speed}\times\text{slope}`} x={XC} y={420} size={52} o={fin(f, AT(k, 4, "the change at a fixed place"))} />
+      <TeX s={String.raw`\dfrac{dT}{dt}=\dfrac{\partial T}{\partial t}+\text{speed}\times\text{slope}`} x={XC} y={420} size={52} o={fin(f, AT(k, 4, "the change at a fixed place"))} />
       <TeX s={EQ_S02} x={XC} y={600} size={64} o={fin(f, AT(k, 5, "capital D by D t"))} />
     </Scene>
   );
@@ -231,8 +231,9 @@ const S03: React.FC = () => {
         <Keyword f={f} text="the simplest moving frame" at={[XC, 120]} appear={0} out={t1 - 18} s={T.floor} />
         <Keyword f={f} text="why do the speeds add?" at={[XC, 400]} appear={t4} out={t6 - 18} s={T.floor} />
         <Keyword f={f} text="x: from the station" at={[XC, 400]} appear={t6} s={T.floor} c={C.local} />
-        <Keyword f={f} text="x′: from the back of the train" at={[XC, 470]} appear={t7} s={T.floor} c={C.second} />
       </Svg>
+      {/* Part 1 lessons C1: x′ set in KaTeX (a prime in the sans keyword is not maths) */}
+      <TeX s={String.raw`x'\text{: from the back of the train}`} x={XC} y={470} size={T.floor} c={C.second} o={fin(f, t7)} />
       <TeX s={String.raw`U\,t`} x={(STATION + xb) / 2} y={668} size={48} c={C.gold} ax={0.5} o={fin(f, t9)} />
       <TeX s={String.raw`x'`} x={(xb + wx) / 2} y={668} size={48} c={C.first} ax={0.5} o={fin(f, AT(k, 10, "plus your distance"))} />
       <TeX s="x" x={(STATION + wx) / 2} y={748} size={48} c={C.key} ax={0.5} o={fin(f, AT(k, 10, "x equals"))} />
@@ -282,7 +283,7 @@ const S04: React.FC = () => {
       <TeX s={String.raw`\Delta x`} x={(w1 + w2) / 2} y={745} size={46} c={C.key} ax={0.5} o={fin(f, t5)} />
       <CalcStack f={f} x={XC} y={190} size={52} maxLines={3} rows={[
         { rhs: String.raw`\Delta x=\Delta x'+U\,\Delta t`, at: AT(k, 5, "delta x equals") },
-        { rhs: String.raw`\frac{\Delta x}{\Delta t}=\frac{\Delta x'}{\Delta t}+U\ \Rightarrow\ u=u'+U`, at: t6, h: 130 },
+        { rhs: String.raw`\dfrac{\Delta x}{\Delta t}=\dfrac{\Delta x'}{\Delta t}+U\ \Rightarrow\ u=u'+U`, at: t6, h: 130 },
         { rhs: String.raw`1.5+20=21.5\ \text{m/s}`, at: AT(k, 10, "twenty one and a half") },
       ]} />
       <TeX s={String.raw`\Delta x/\Delta t=u`} x={XC} y={440} size={48} c={C.local} o={win(f, SS(k, 7), t9 - 18)} />
@@ -298,8 +299,8 @@ const S05: React.FC = () => {
   const f = useCurrentFrame(), k = K("s05_accel_same");
   const t1 = SS(k, 1), t3 = SS(k, 3), t4 = SS(k, 4), t5 = SS(k, 5), t6 = SS(k, 6), t8 = SS(k, 8), t9 = SS(k, 9), t10 = SS(k, 10), t11 = SS(k, 11), t12 = SS(k, 12), t13 = SS(k, 13), t14 = SS(k, 14);
   const parts = [
-    { t: String.raw`\frac{du}{dt}=` }, { t: String.raw`\frac{dU}{dt}`, x: C.neg, u: { w: String.raw`=0,\ U\ \text{steady}`, c: C.gold } }, { t: String.raw`+\frac{du'}{dt}` },
-    { t: String.raw`=\frac{du'}{dt}`, c: C.gold },
+    { t: String.raw`\dfrac{du}{dt}=` }, { t: String.raw`\dfrac{dU}{dt}`, x: C.neg, u: { w: String.raw`=0,\ U\ \text{steady}`, c: C.gold } }, { t: String.raw`+\dfrac{du'}{dt}` },
+    { t: String.raw`=\dfrac{du'}{dt}`, c: C.gold },
   ];
   if (parts.map((p) => p.t).join("").replace(/\s/g, "") !== EQ_S05.replace(/\s/g, "")) throw new Error("s05 parts drift from EQ_S05");
   const drop = lin(f, t12 + 20, t12 + 110);
@@ -333,13 +334,17 @@ const S05: React.FC = () => {
         <Lbl x={XC} y={770} t="speeds: shift by the frame's speed" c={C.key} s={T.floor} o={fin(f, AT(k, 14, "speeds change"))} />
         <Lbl x={XC} y={835} t="accelerations, forces: the same" c={C.key} s={T.floor} o={fin(f, AT(k, 14, "but accelerations"))} />
       </Svg>
-      <CalcStack f={f} x={XC} y={150} size={52} maxLines={3} rows={[
+      {/* Part 1 lessons B4: the keep line's own picture: the derivation rows leave; the speeds in the two frames (they differ by U) come
+          back over the walker and the person beside the track, while the two falling balls keep the same 9.8 m/s² arrow */}
+      <TeX s={String.raw`u'=1.5\ \text{m/s}`} x={350} y={WALK_Y - 140} size={T.floor} c={C.first} ax={0.5} o={fin(f, AT(k, 14, "speeds change"))} halo />
+      <TeX s={String.raw`u=20+1.5=21.5\ \text{m/s}`} x={980} y={TY + 140} size={T.floor} c={C.local} ax={1} o={fin(f, AT(k, 14, "speeds change"))} halo />
+      <CalcStack f={f} x={XC} y={150} size={52} maxLines={3} o={fout(f, t14 - 12)} rows={[
         { rhs: String.raw`u=U+u'`, at: AT(k, 3, "u equals") },
         { rhs: String.raw`u+\Delta u=(U+\Delta U)+(u'+\Delta u')`, at: t4 + 40, size: 48 },
         { rhs: String.raw`\Rightarrow\ \Delta u=\Delta U+\Delta u'`, at: t5 },
-        { rhs: String.raw`\frac{\Delta u}{\Delta t}=\frac{\Delta U}{\Delta t}+\frac{\Delta u'}{\Delta t}`, at: t6, h: 120 },
+        { rhs: String.raw`\dfrac{\Delta u}{\Delta t}=\dfrac{\Delta U}{\Delta t}+\dfrac{\Delta u'}{\Delta t}`, at: t6, h: 120 },
       ]} />
-      <Layered parts={parts} x={XC} y={545} size={64} layers={[{ t: [0, 1, 2], o: fin(f, t8) }, { t: [], x: [1], u: [1], o: fin(f, AT(k, 9, "is zero")) },
+      <Layered parts={parts} x={XC} y={545} size={64} o={fout(f, t14 - 12)} layers={[{ t: [0, 1, 2], o: fin(f, t8) }, { t: [], x: [1], u: [1], o: fin(f, AT(k, 9, "is zero")) },
         { t: [3], o: fin(f, AT(k, 10, "So d u by d t equals")) }]} />
       <TeX s={String.raw`+0.5\ \text{m/s in 1 s}`} x={XC} y={690} size={52} c={C.gold} o={win(f, AT(k, 11, "in the same second"), t12 - 18)} />
     </Scene>
@@ -363,12 +368,12 @@ const S06: React.FC = () => {
   const F6 = [[0, 1, 2, 3], [4, 5, 6, 7], [0, 1, 5, 4], [1, 2, 6, 5], [2, 3, 7, 6], [3, 0, 4, 7]];
   const pc = pr.p([px, 0, 1.2]);
   const lhs = [
-    { t: String.raw`\frac{\partial\mathbf v}{\partial t}`, u: { w: String.raw`\text{local}`, c: C.local } }, { t: String.raw`+(\mathbf v\cdot\nabla)\mathbf v`, u: { w: String.raw`\text{advection}`, c: C.first } },
-    { t: "=" }, { t: String.raw`\frac{\partial\mathbf v'}{\partial t'}`, u: { w: String.raw`\text{local}`, c: C.local } }, { t: String.raw`+(\mathbf v'\cdot\nabla')\mathbf v'`, u: { w: String.raw`\text{advection}`, c: C.first } },
+    { t: String.raw`\dfrac{\partial\mathbf v}{\partial t}`, u: { w: String.raw`\text{local}`, c: C.local } }, { t: String.raw`+(\mathbf v\cdot\nabla)\mathbf v`, u: { w: String.raw`\text{advection}`, c: C.first } },
+    { t: "=" }, { t: String.raw`\dfrac{\partial\mathbf v'}{\partial t'}`, u: { w: String.raw`\text{local}`, c: C.local } }, { t: String.raw`+(\mathbf v'\cdot\nabla')\mathbf v'`, u: { w: String.raw`\text{advection}`, c: C.first } },
   ];
   if (lhs.map((p) => p.t).join("").replace(/\s/g, "") !== EQ_S06.replace(/\s/g, "")) throw new Error("s06 parts drift from EQ_S06");
   const dT = [
-    { t: String.raw`\frac{DT}{Dt}=` }, { t: String.raw`\frac{\partial T}{\partial t}`, u: { w: String.raw`\text{one fixed place}`, c: C.local } }, { t: String.raw`+\mathbf v\cdot\nabla T`, u: { w: String.raw`\text{advection}`, c: C.first } },
+    { t: String.raw`\dfrac{DT}{Dt}=` }, { t: String.raw`\dfrac{\partial T}{\partial t}`, u: { w: String.raw`\text{one fixed place}`, c: C.local } }, { t: String.raw`+\mathbf v\cdot\nabla T`, u: { w: String.raw`\text{advection}`, c: C.first } },
   ];
   if (dT.map((p) => p.t).join("").replace(/\s/g, "") !== EQ_S02.replace(/\s/g, "")) throw new Error("s06 parts drift from EQ_S02");
   return (
@@ -398,7 +403,7 @@ const S06: React.FC = () => {
         <Keyword f={f} text="let's see it with numbers" at={[XC, 230]} appear={t14} s={T.floor} />
       </Svg>
       <Layered parts={dT} x={XC} y={150} size={64} layers={[{ t: "all", o: win(f, t2, t9 - 18) }, { t: [], u: [1], o: win(f, t3, t9 - 18) }, { t: [], u: [2], o: win(f, t4, t9 - 18) }]} />
-      <TeX s={String.raw`\frac{Du}{Dt}=\frac{\partial u}{\partial t}+\mathbf v\cdot\nabla u`} x={XC} y={460} size={60} o={win(f, t6, t9 - 18)} />
+      <TeX s={String.raw`\dfrac{Du}{Dt}=\dfrac{\partial u}{\partial t}+\mathbf v\cdot\nabla u`} x={XC} y={460} size={60} o={win(f, t6, t9 - 18)} />
       <Layered parts={lhs} x={960} y={740} size={64} ax={0.5} layers={[{ t: "all", o: fin(f, t9) }, { t: [], u: [0, 1, 3, 4], o: fin(f, t13) }]} />
     </Scene>
   );
@@ -477,14 +482,14 @@ const S07: React.FC = () => {
         { rhs: String.raw`x=25\ \text{km}:\ \ 10+5\sin45^\circ`, at: t2 + 25 },
         { rhs: String.raw`=10+3.54=13.54\ \text{m/s}`, at: AT(k, 2, "thirteen point five four"), cont: true },
         { rhs: String.raw`\text{slope of }\sin(kx)\text{ is }k\cos(kx)`, at: AT(k, 2, "getting stronger"), c: C.muted },
-        { rhs: String.raw`5\times\tfrac{2\pi}{200}\times\cos45^\circ`, at: AT(k, 2, "getting stronger") + 25 },
-        { rhs: String.raw`\approx0.111\ \tfrac{\text{m/s}}{\text{km}}`, at: AT(k, 2, "zero point one one one"), cont: true },
+        { rhs: String.raw`5\times\dfrac{2\pi}{200}\times\cos45^\circ`, at: AT(k, 2, "getting stronger") + 25 },
+        { rhs: String.raw`\approx0.111\ \dfrac{\text{m/s}}{\text{km}}`, at: AT(k, 2, "zero point one one one"), cont: true },
       ]} />
       <CalcStack f={f} x={XC} y={270} size={44} maxLines={2} o={fout(f, t13 - 18)} rows={[
         { rhs: String.raw`u'=13.54-10=3.54\ \text{m/s}`, at: AT(k, 5, "thirteen point five four minus ten") },
         { rhs: String.raw`3.54\times3.6\approx12.7\ \text{km/h}`, at: AT(k, 5, "twelve point seven"), cont: true },
         { rhs: String.raw`\text{adv.}=12.7\times0.111\approx+1.4`, at: AT(k, 6, "so the advection is") },
-        { rhs: String.raw`\tfrac{\text{km}}{\text{h}}\times\tfrac{\text{m/s}}{\text{km}}=\tfrac{\text{m/s}}{\text{h}}`, at: AT(k, 6, "so the advection is") + 30, c: C.muted, cont: true },
+        { rhs: String.raw`\dfrac{\text{km}}{\text{h}}\times\dfrac{\text{m/s}}{\text{km}}=\dfrac{\text{m/s}}{\text{h}}`, at: AT(k, 6, "so the advection is") + 30, c: C.muted, cont: true },
         { rhs: String.raw`U=10\ \text{m/s}`, at: AT(k, 9, "thirty six kilometres per hour") - 20 },
         { rhs: String.raw`10\times3.6=36\ \text{km/h}`, at: AT(k, 9, "thirty six kilometres per hour"), cont: true },
         { rhs: String.raw`\text{local}=-36\times0.111\approx-4.0`, at: AT(k, 10, "minus thirty six") },

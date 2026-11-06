@@ -12,7 +12,7 @@ import { Notebook } from "../house/kit/icons";
 import { GProj, GlobeCam, globePath } from "./kit_rt/globe";
 import {
   AT, Arrow, BREST, CalcStack, Compass, D, D2R, Disc, GB, GC, Globe, H, K, Keyword, LAX, LEN, LIS, LON, LL, Lbl, Magnifier, MercMap, OrthoGlobe, PlaneIcon, RH, RHP, RO,
-  Route, SE, SLATE, SRC_G, SS, Scene, SideCallout, Svg, TableIcon, TeX, XC, add, along, arcD, clamp, dP, discOf, fin, flatPath, fout, gdot, globeG, mercBox, mercY,
+  Route, SE, SLATE, sang, SRC_G, SS, Scene, SideCallout, Svg, TableIcon, TeX, XC, add, along, arcD, clamp, dP, discOf, fin, flatPath, fout, gdot, globeG, mercBox, mercY,
   mix, opath, ortho, plab, poly, prog, scaleDisc, textW, win,
 } from "./rt_lib";
 import { CAM_ROUTE } from "./rt_sA";
@@ -59,7 +59,7 @@ const S11: React.FC = () => {
     <Scene>
       <Globe cam={cam} grat={0.16} meshO={1 - 0.5 * see}
         over={(Gg) => { const c0 = Gg.pw([0, 0, 0]), P = along(Gg, GC, fly); return <>
-          <line x1={c0[0]} y1={c0[1]} x2={pL[0]} y2={pL[1]} stroke={C.first} strokeWidth={4} opacity={see} />
+          <line x1={c0[0]} y1={c0[1]} x2={pL[0]} y2={pL[1]} stroke={C.ink} strokeWidth={4} opacity={see} />
           <line x1={c0[0]} y1={c0[1]} x2={pA[0]} y2={pA[1]} stroke={C.second} strokeWidth={4} opacity={see} />
           <circle cx={c0[0]} cy={c0[1]} r={8} fill={C.key} opacity={see} />
           <Route G={Gg} pts={GC} c={C.gold} w={8} />
@@ -76,6 +76,9 @@ const S11: React.FC = () => {
       <GSrc />
       <Svg>
         {(() => { const c0 = G.pw([0, 0, 0]); return <g data-lc-maplabel="1" opacity={win(f, tKeep + 20, tWhere - 34)}>
+          {/* Part 1 lessons B2: the angle at the centre is drawn as an arc between the two position lines, not only labelled */}
+          {(() => { let a0 = sang([pL[0] - c0[0], pL[1] - c0[1]]), a1 = sang([pA[0] - c0[0], pA[1] - c0[1]]); if (a1 - a0 > 180) a1 -= 360; if (a0 - a1 > 180) a1 += 360;
+            return <path d={arcD(c0, 64, a0, a1)} fill="none" stroke={C.gold} strokeWidth={5} />; })()}
           <Lbl x={c0[0] - 20} y={c0[1] + 44} t="≈ 79°" c={C.gold} s={T.floor} a="end" />
           <Lbl x={G.p(GC[90][0], GC[90][1])[0]} y={G.p(GC[90][0], GC[90][1])[1] - 40} t="≈ 8755 km" c={C.gold} s={T.floor} a="middle" /></g>; })()}
         <Compass c={[pL[0] + 90, pL[1] + 120]} r={58} brg={RO.brg0} o={fin(f, tB0) * fout(f, tWhy)} label={false} />
@@ -179,8 +182,9 @@ const S12: React.FC = () => {
         { rhs: String.raw`\psi_{\text{LA}}=\ln\tan62.025^\circ=0.6327`, at: tSame + 55, cont: true, h: 58 },
         { rhs: String.raw`\Delta\psi=0.6327-1.0523=-0.4196`, at: SS(k, 2), h: 58 },
         { rhs: String.raw`\Delta\lambda=-118.11^\circ=-2.0614\ \text{rad}`, at: SS(k, 2) + 20, cont: true, h: 58 },
-        { rhs: String.raw`\tan\alpha=2.0614\div0.4196\approx4.913`, at: SS(k, 2) + 45, h: 58 },
-        { rhs: String.raw`\alpha\approx78.49^\circ\text{ west of south}`, at: SS(k, 2) + 65, cont: true, h: 58 },
+        // Part 1 lessons C3: α is kept for the axis turn (Parts 1, 4); a bearing-triangle angle is β, as in s11 and Part 5
+        { rhs: String.raw`\tan\beta=2.0614\div0.4196\approx4.913`, at: SS(k, 2) + 45, h: 58 },
+        { rhs: String.raw`\beta\approx78.49^\circ\text{ west of south}`, at: SS(k, 2) + 65, cont: true, h: 58 },
         { rhs: String.raw`180^\circ+78.49^\circ\approx258.5^\circ`, at: tB, c: SLATE, cont: true, h: 58 },
         { rhs: String.raw`\Delta\varphi=-17.46^\circ=-0.30473\ \text{rad}`, at: SS(k, 3), c: C.muted, h: 58 },
         { rhs: String.raw`s=6371\times0.30473\div\cos78.49^\circ`, at: SS(k, 3) + 25, h: 58 },
@@ -343,7 +347,7 @@ const S15: React.FC = () => {
   const f = useCurrentFrame(), k = K("s15_end");
   const t2 = SS(k, 2), tOther = AT(k, 2, "and the notebooks");
   const thumb = (x: number, i: number) => {
-    const O = ortho(45, -55, [x, 155], 70);
+    const O = ortho(45, -55, [x, 155], 62);   // Part 1 lessons B5: r 62 keeps the globe 23 px inside its box (was 70: 15 px)
     return (
       <g key={i} opacity={0.75}>
         <rect x={x - 150} y={70} width={300} height={170} rx={16} fill="#18213a" stroke={C.grid} strokeWidth={3} />

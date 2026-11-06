@@ -55,6 +55,7 @@ export const poly = (pts: Pt[]) => pts.map((p, i) => `${i ? "L" : "M"}${p[0].toF
 export const nf = (v: number, d = 1, plus = false) => `${v < 0 ? "−" : plus && v > 0 ? "+" : ""}${Math.abs(v).toFixed(d)}`;
 export const D2R = Math.PI / 180;
 export const VIOLET = "#8e6fd8";          // Ω (rotation family, storyboard colour contract)
+export const RAD = C.ink;                 // the radius a and the position arrow (Part 1 lessons D1: ink, never teal; teal = round/tangential)
 export const XC = 1100;                   // left edge of the maths column
 export const XZ = 1190;                   // text column on the darkened panel of a zoomed globe
 
@@ -131,10 +132,26 @@ export const Layered: React.FC<{ parts: Part[]; layers: Layer[]; x: number; y: n
   return <HLayered {...p} />;
 };
 const sideStr = (s: CalcRow["rhs"]): string => (typeof s === "string" ? s : "raw" in s ? s.raw[0].s : plainOf(s.parts));
+// Part 1 lessons C2 (2026-11-05): every fraction is a \dfrac (display size, >= 44 px). A row whose TeX has a \dfrac and no explicit
+// `h` is ~2.4x its type size tall, not the house 1.42x (Part 2's K6 found fraction rows printed over the next row). The regex tests the
+// literal backslash (`\\` in a JS regex; checklist C4). Static guard: the stack's lowest visible line must end above the caption band.
+const FRAC_ROW = /\\dfrac/;
+const rowTex = (r: CalcRow) => `${r.lhs ? sideStr(r.lhs) : ""}${sideStr(r.rhs)}`;
+const withFracH = (rows: CalcRow[], size: number): CalcRow[] => rows.map((r) => (r.h !== undefined || !FRAC_ROW.test(rowTex(r)) ? r : { ...r, h: (r.size ?? size) * 2.4 }));
+const stackBottomGuard = (rows: CalcRow[], y: number, size: number, maxLines: number) => {
+  const H: number[] = [];
+  rows.forEach((r, i) => { const h = r.h ?? (r.size ?? size) * 1.42; if (i === 0 || !r.cont) H.push(h); else H[H.length - 1] += h; });
+  for (let j = 0; j < H.length; j++) {
+    const bottom = y + H.slice(Math.max(0, j - maxLines + 1), j + 1).reduce((s, h) => s + h, 0);
+    if (bottom > 878) throw new Error(`CalcStack at y ${y}: line ${j} ("${rowTex(rows.filter((r, i) => i === 0 || !r.cont)[j]).slice(0, 40)}") ends at y ${Math.round(bottom)} (caption band from 880)`);
+  }
+};
 /** house CalcStack with the right-edge guard (row rhs starts at x) */
 export const CalcStack: React.FC<React.ComponentProps<typeof HCalcStack>> = (p) => {
   p.rows.forEach((r) => guard(sideStr(r.rhs), p.x, texW(sideStr(r.rhs), r.size ?? p.size ?? 68)));
-  return <HCalcStack {...p} />;
+  const rows = withFracH(p.rows, p.size ?? 68);
+  stackBottomGuard(rows, p.y, p.size ?? 68, p.maxLines ?? 3);
+  return <HCalcStack {...p} rows={rows} />;
 };
 /** the house SVG label with the right-edge guard */
 export const Lbl: React.FC<React.ComponentProps<typeof HLbl>> = (p) => {
@@ -338,7 +355,8 @@ export const keepTime = (id: string) => {
   const t = Math.floor(q.start), m = Math.floor(t / 60), ss = t % 60;
   return `${m}:${ss < 10 ? "0" : ""}${ss}`;
 };
-const CHIP_LINES = (to: string) => ["every step: optional", "not needed for the intuition", `skip to ${to}`];
+// Part 1 lessons E1: the chip reads "every step · optional / skip to mm:ss" (Part 1's words; "not needed …" is spoken in the lead-in)
+const CHIP_LINES = (to: string) => ["every step · optional", `skip to ${to}`];
 const CHIP_S = T.floor, CHIP_LH = 52, CHIP_PAD = 18;
 /** the chip's lifetime [appear, gone] (8 s from the words "skip ahead", 0.5-s fade) and its box */
 export const chipSpan = (k: number): [number, number] => {
@@ -349,7 +367,7 @@ export const chipSpan = (k: number): [number, number] => {
 };
 export const chipBox = (to: string) => {
   const w = Math.max(...CHIP_LINES(to).map((t) => textW(t, CHIP_S))) + 2 * CHIP_PAD;
-  return { x: 1836 - w, y: 54, w, h: 3 * CHIP_LH + 2 * CHIP_PAD - 8 };
+  return { x: 1836 - w, y: 54, w, h: CHIP_LINES(to).length * CHIP_LH + 2 * CHIP_PAD - 8 };
 };
 /** The skip chip (the user's one explicit exception to "no boxes"): top-right of the column, 44 px warm white on a 20 % gold fill,
  * no border, three lines, on the words "skip ahead" for 8 s, 0.5-s fade. Never over the picture (the column only). */
@@ -387,6 +405,106 @@ export const KeepLine: React.FC<{ f: number; k: number; lines: string[]; last?: 
 };
 /** the frame at which the keep line has gone (for the next text in the top slot: keep the 8-frame swap gap) */
 export const keepGone = (k: number, last = 1) => SE(k, last) + 10;
+
+/** Part 1 lessons B4 (2026-11-05): the "If you skipped, here's what to keep" line shows its OWN picture (the key idea), not what is left
+ * of the optional block. Schematic, illustrative; Brest's latitude 48.4° from data. c = the centre (Earth's centre for the slices), R = px.
+ *  swap  (s09): one meridian triangle: φ at the centre, 90° − φ at Brest's end; next and opposite swap, sin φ = cos(90° − φ).
+ *  slice (s21): the same slice: height a sin φ, distance from the axis a cos φ, Brest carried east (out of the screen, ⊙) at Ω a cos φ.
+ *  steps (s25): a globe: one degree north (gold) is the same everywhere; one degree east (orange) shrinks with cos φ.
+ *  band  (s34): a globe: the band 30° S - 30° N is half the area; the same box in degrees is narrower towards the pole. */
+export const KeepPic: React.FC<{ kind: "swap" | "slice" | "steps" | "band"; c: Pt; R: number; o: number }> = ({ kind, c, R, o }) => {
+  if (o <= 0) return null;
+  const ph = BREST[0] * D2R, Bt: Pt = [c[0] + R * Math.cos(ph), c[1] - R * Math.sin(ph)], F: Pt = [Bt[0], c[1]];
+  const slice = kind === "swap" || kind === "slice";
+  if (slice) {
+    const top: Pt = [c[0], c[1] - 1.18 * R];
+    return <>
+      <Svg o={o}>
+        <line x1={c[0]} y1={c[1] + 10} x2={top[0]} y2={top[1]} stroke={C.local} strokeWidth={4} strokeDasharray="12 8" />
+        <line x1={c[0] - 10} y1={c[1]} x2={c[0] + 1.22 * R} y2={c[1]} stroke={C.local} strokeWidth={4} />
+        <Lbl x={c[0] + 1.22 * R} y={c[1] + 40} t="equator" c={C.muted} s={T.floor} a="end" b={false} />
+        <Lbl x={top[0] + 18} y={top[1] + 10} t="axis" c={C.muted} s={T.floor} b={false} />
+        {kind === "swap" ? <>
+          <line x1={c[0]} y1={c[1]} x2={F[0]} y2={F[1]} stroke={C.second} strokeWidth={7} />
+          <line x1={F[0]} y1={F[1]} x2={Bt[0]} y2={Bt[1]} stroke={C.second} strokeWidth={7} strokeDasharray="14 8" />
+          <path d={arcD(c, 0.5 * R, BREST[0], 90)} fill="none" stroke={C.local} strokeWidth={6} />
+        </> : <>
+          <line x1={F[0]} y1={F[1]} x2={Bt[0]} y2={Bt[1]} stroke={C.second} strokeWidth={7} strokeDasharray="14 8" />
+          <line x1={c[0]} y1={Bt[1]} x2={Bt[0]} y2={Bt[1]} stroke={C.second} strokeWidth={7} strokeDasharray="14 8" />
+          <path d={`M ${c[0] - 46} ${top[1] + 40} A 46 13 0 1 0 ${c[0] + 46} ${top[1] + 40}`} fill="none" stroke={VIOLET} strokeWidth={5} />
+          <Arrow p={[c[0] + 40, top[1] + 46]} q={[c[0] + 48, top[1] + 38]} color={VIOLET} w={5} head={18} halo={false} />
+        </>}
+        <path d={arcD(c, 0.3 * R, 0, BREST[0])} fill="none" stroke={C.gold} strokeWidth={7} />
+        <Arrow p={c} q={Bt} color={RAD} w={7} head={26} />
+        <circle cx={c[0]} cy={c[1]} r={9} fill={C.gold} stroke={C.bg} strokeWidth={3} />
+        {kind === "slice" ? <g>
+          {/* east at Brest is out of the screen on this slice: ⊙ (Part 1 lessons B7), never an up-arrow */}
+          <circle cx={Bt[0]} cy={Bt[1]} r={17} fill={C.bg} stroke={C.first} strokeWidth={5} />
+          <circle cx={Bt[0]} cy={Bt[1]} r={5} fill={C.first} />
+          <Lbl x={Bt[0] + 30} y={Bt[1] - 60} t="east:" c={C.first} s={T.floor} />
+          <Lbl x={Bt[0] + 30} y={Bt[1] - 14} t="out of the screen" c={C.first} s={T.floor} />
+        </g> : null}
+      </Svg>
+      <TeX s={String.raw`\varphi`} x={c[0] + 0.42 * R * Math.cos(ph / 2)} y={c[1] - 0.42 * R * Math.sin(ph / 2)} size={50} c={C.gold} ax={0.5} o={o} halo />
+      <TeX s="a" x={(c[0] + Bt[0]) / 2 - 26} y={(c[1] + Bt[1]) / 2 - 16} size={50} c={RAD} ax={1} o={o} halo />
+      {kind === "swap" ? <>
+        <TeX s={String.raw`90^\circ-\varphi`} x={c[0] + 14} y={c[1] - 0.7 * R * Math.sin(72 * D2R)} size={44} c={C.local} o={o} halo />
+        <TeX s={String.raw`\sin\varphi`} x={Bt[0] + 18} y={(Bt[1] + F[1]) / 2 + 30} size={50} c={C.second} o={o} halo />
+        <TeX s={String.raw`\cos\varphi`} x={(c[0] + F[0]) / 2} y={c[1] + 50} size={50} c={C.second} ax={0.5} o={o} halo />
+        <TeX s={String.raw`\sin\varphi=\cos(90^\circ-\varphi)`} x={c[0]} y={c[1] - 1.18 * R - 70} size={50} c={C.key} o={o} />
+      </> : <>
+        <TeX s={String.raw`a\sin\varphi`} x={Bt[0] + 18} y={(Bt[1] + F[1]) / 2 + 40} size={50} c={C.second} o={o} halo />
+        <TeX s={String.raw`a\cos\varphi`} x={(c[0] + Bt[0]) / 2} y={Bt[1] - 40} size={50} c={C.second} ax={0.5} o={o} halo />
+        <TeX s={String.raw`\Omega\,a\cos\varphi`} x={Bt[0] + 30} y={Bt[1] + 40} size={50} c={C.first} o={o} halo />
+        <TeX s={String.raw`\Omega`} x={c[0] + 60} y={top[1] + 66} size={46} c={VIOLET} o={o} halo />
+      </>}
+    </>;
+  }
+  // globe pictures (orthographic-like, tilted 20°): a parallel at latitude L is an ellipse
+  const ry = 0.2, par = (L: number) => ({ y: c[1] - R * Math.sin(L * D2R) * Math.cos(20 * D2R), rx: R * Math.cos(L * D2R), ry: R * ry * Math.cos(L * D2R) });
+  const front = (L: number, lo: number): Pt => { const p = par(L); return [c[0] + p.rx * Math.sin(lo * D2R), p.y + p.ry * Math.cos(lo * D2R)]; };
+  const run = (L: number, a: number, b: number) => poly(Array.from({ length: 21 }, (_, i) => front(L, a + ((b - a) * i) / 20)));
+  const id = `keepband${Math.round(c[0])}`;
+  return (
+    <Svg o={o}>
+      <defs><clipPath id={id}><circle cx={c[0]} cy={c[1]} r={R} /></clipPath></defs>
+      {kind === "band" ? <rect x={c[0] - R} y={par(30).y} width={2 * R} height={par(-30).y - par(30).y} fill={C.gold} fillOpacity={0.3} clipPath={`url(#${id})`} /> : null}
+      <circle cx={c[0]} cy={c[1]} r={R} fill="none" stroke={C.muted} strokeWidth={4} />
+      {[0, ...(kind === "band" ? [30, -30, 70] : [BREST[0]])].map((L) => { const p = par(L);
+        return <ellipse key={L} cx={c[0]} cy={p.y} rx={p.rx} ry={p.ry} fill="none" stroke={L === 0 ? C.local : C.second} strokeWidth={3} opacity={0.8} />; })}
+      {kind === "steps" ? <>
+        <path d={run(0, -12, 12)} fill="none" stroke={C.second} strokeWidth={12} />
+        <path d={run(BREST[0], -12, 12)} fill="none" stroke={C.second} strokeWidth={12} />
+        <line x1={front(0, 0)[0] - 0.62 * R} y1={front(0, 0)[1]} x2={front(0, 0)[0] - 0.62 * R} y2={front(0, 0)[1] - 0.34 * R} stroke={C.gold} strokeWidth={12} />
+        <Lbl x={front(0, 0)[0] - 0.62 * R - 18} y={front(0, 0)[1] - 0.17 * R} t="north" c={C.gold} s={T.floor} a="end" />
+        <Lbl x={front(0, 14)[0] + 16} y={front(0, 14)[1] + 30} t="east" c={C.second} s={T.floor} />
+        <Lbl x={front(BREST[0], 14)[0] + 16} y={front(BREST[0], 14)[1] + 30} t="east × cos φ" c={C.second} s={T.floor} />
+      </> : <>
+        <rect x={c[0] - 0.12 * R} y={par(0).y + par(0).ry - 0.1 * R} width={0.24 * R} height={0.1 * R} fill={C.gold} stroke={C.gold} strokeWidth={3} />
+        <rect x={c[0] - 0.12 * R * Math.cos(70 * D2R)} y={par(70).y + par(70).ry - 0.1 * R * 0.6} width={0.24 * R * Math.cos(70 * D2R)} height={0.1 * R * 0.6} fill={C.gold} stroke={C.gold} strokeWidth={3} />
+        <Lbl x={c[0] + R + 20} y={par(30).y} t="30° N" c={C.key} s={T.floor} />
+        <Lbl x={c[0] + R + 20} y={par(-30).y} t="30° S" c={C.key} s={T.floor} />
+        <Lbl x={c[0] + R + 20} y={(par(30).y + par(-30).y) / 2} t="half the area" c={C.gold} s={T.floor} />
+      </>}
+    </Svg>
+  );
+};
+
+/** Part 1 lessons B1 (2026-11-05): a magnified inset shows what it magnifies. A gold ring round the source on the wide view, a dashed gold
+ * leader from that ring to the inset's rim, and the label "magnified · drawn N× larger" above the inset (muted, 44 px). Place in <Svg>. */
+export const Magnify: React.FC<{ src: Pt; srcR?: number; at: Pt; r: number; label: string; o: number; lx?: number; ly?: number; a?: "start" | "middle" | "end" }> = ({
+  src, srcR = 28, at, r, label, o, lx, ly, a = "middle" }) => {
+  if (o <= 0) return null;
+  const dx = at[0] - src[0], dy = at[1] - src[1], n = Math.hypot(dx, dy) || 1, u: Pt = [dx / n, dy / n];
+  const p: Pt = [src[0] + u[0] * (srcR + 4), src[1] + u[1] * (srcR + 4)], q: Pt = [at[0] - u[0] * (r + 6), at[1] - u[1] * (r + 6)];
+  return (
+    <g opacity={o} data-lc-own="magnify">
+      <circle cx={src[0]} cy={src[1]} r={srcR} fill="none" stroke={C.gold} strokeWidth={4} />
+      <line x1={p[0]} y1={p[1]} x2={q[0]} y2={q[1]} stroke={C.gold} strokeWidth={3} strokeDasharray="10 8" />
+      <Lbl x={lx ?? at[0]} y={ly ?? at[1] - r - 40} t={label} c={C.muted} s={T.floor} a={a} b={false} />
+    </g>
+  );
+};
 
 // ---------------------------------------------------------------- colour bar (beside the picture, in the text column)
 export const ColourBar: React.FC<{ x: number; y: number; w: number; lut: string[]; ticks: { v: number; t: string }[]; lo: number; hi: number; unit?: string; o?: number;

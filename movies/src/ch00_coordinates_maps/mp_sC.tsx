@@ -311,7 +311,8 @@ const S20: React.FC = () => {
     <Scene>
       <Svg>
         <circle cx={C20[0]} cy={C20[1]} r={R20} fill="none" stroke={C.first} strokeWidth={3} opacity={0.6} />
-        {arrows.map((A, i) => <AnimatedWindArrow key={i} from={A.q} to={[A.q[0] + A.tg[0] * 70, A.q[1] + A.tg[1] * 70]} speed={WH.U} f={f} c={C.first} px={7} head={26} o={fin(f, t2) * fout(f, t7, 20) + 0.35 * fin(f, t7)} />)}
+        {/* Part 1 lessons D1: the full winds are ink (teal = the round part u_θ, rose = the in/out part u_r) */}
+        {arrows.map((A, i) => <AnimatedWindArrow key={i} from={A.q} to={[A.q[0] + A.tg[0] * 70, A.q[1] + A.tg[1] * 70]} speed={WH.U} f={f} c={C.ink} px={7} head={26} o={fin(f, t2) * fout(f, t7, 20) + 0.35 * fin(f, t7)} />)}
         <circle cx={C20[0]} cy={C20[1]} r={9} fill={C.key} />
         <line x1={C20[0]} y1={C20[1]} x2={C20[0] + R20} y2={C20[1]} stroke={C.muted} strokeWidth={3} strokeDasharray="10 8" opacity={win(f, t2, t5)} />
         <Lbl x={C20[0] + R20 / 2} y={C20[1] + 32} t="1000 km" c={C.muted} s={T.floor} a="middle" o={win(f, AT(k, 2, "a thousand"), t5)} />
@@ -327,7 +328,7 @@ const S20: React.FC = () => {
         </g>
         {/* the moved origin: P, its wind, the legs, r̂ and θ̂, the two shadows */}
         <circle cx={P[0]} cy={P[1]} r={11} fill={C.key} stroke={C.bg} strokeWidth={3} opacity={fin(f, t6)} />
-        <Arrow p={P} q={[P[0] + u[0] * W, P[1]]} color={C.first} w={10} head={36} o={fin(f, t7)} />
+        <Arrow p={P} q={[P[0] + u[0] * W, P[1]]} color={C.ink} w={10} head={36} o={fin(f, t7)} />{/* Part 1 lessons D1: the full wind is ink */}
         <g opacity={fin(f, t8) * fout(f, t15, 20)}>
           <line x1={O[0]} y1={O[1]} x2={P[0]} y2={O[1]} stroke={C.second} strokeWidth={5} strokeDasharray="12 8" />
           <line x1={P[0]} y1={O[1]} x2={P[0]} y2={P[1]} stroke={C.second} strokeWidth={5} strokeDasharray="12 8" />
@@ -345,7 +346,7 @@ const S20: React.FC = () => {
         <Keyword f={f} text="a flat example first" at={[XC, 110]} s={T.floor} appear={t1} out={t2 - 18} />
         <Keyword f={f} text="a ring of air: 10 m/s round" at={[XC, 110]} s={T.floor} appear={t2} out={t3 - 18} />
         <Keyword f={f} text="round 10 · in/out 0" at={[XC, 400]} appear={AT(k, 4, "The tangential wind is ten")} out={t5 - 18} />
-        <Lbl x={XC} y={720} t="u = −10, v = 0" c={C.first} s={T.calc} o={fin(f, AT(k, 7, "u is minus ten")) * fout(f, t15 - 18)} />
+        <Lbl x={XC} y={720} t="u = −10, v = 0" c={C.ink} s={T.calc} o={fin(f, AT(k, 7, "u is minus ten")) * fout(f, t15 - 18)} />
         <Keyword f={f} text="looks like inflow …" at={[XC, 800]} s={T.floor} appear={t12} out={t15 - 18} c={C.neg} />
         <Keyword f={f} text="same air, split differently" at={[XC, 720]} appear={t15} />
         <Keyword f={f} text="from the origin, not the air" at={[XC, 800]} s={T.floor} appear={t16} c={C.gold} />
@@ -358,7 +359,7 @@ const S20: React.FC = () => {
       <TeX s={H.th} x={P[0] + th[0] * 150} y={P[1] + th[1] * 150 - 10} size={52} c={C.second} ax={0.5} o={fin(f, t13)} />
       <CalcStack f={f} x={XC} y={310} size={54} maxLines={3} o={fout(f, t15 - 10, 12)} rows={[
         { rhs: String.raw`\sqrt{500^2+1000^2}\approx1118\ \text{km}`, at: AT(k, 9, "about one thousand") },
-        { rhs: String.raw`\hat{\mathbf r}=\left(\tfrac{500}{1118},\ \tfrac{1000}{1118}\right)`, at: AT(k, 10, "each divided"), h: 96 },
+        { rhs: String.raw`\hat{\mathbf r}=\left(\dfrac{500}{1118},\ \dfrac{1000}{1118}\right)`, at: AT(k, 10, "each divided"), h: 96 },
         { rhs: String.raw`\approx(0.447,\ 0.894)`, at: AT(k, 10, "zero point four"), cont: true },
         { rhs: String.raw`u_r=(-10)(0.447)+(0)(0.894)`, at: AT(k, 11, "minus ten times"), c: C.neg, size: 48 },
         { rhs: String.raw`\approx-4.5`, at: AT(k, 11, "about minus four"), c: C.neg, cont: true },
@@ -481,9 +482,9 @@ const S22: React.FC = () => {
         <Keyword f={f} text="next: The gradient" at={[300, 790]} appear={AT(k, 7, "the gradient")} c={C.gold} />
       </Svg>
       <TeX s={String.raw`x=a\,\lambda,\quad y=a\,\varphi`} x={XC} y={200} size={58} o={io(1)} />
-      <TeX s={String.raw`k=\frac{1}{\cos\varphi}`} x={XC + 480} y={200} size={58} o={io(1)} />
+      <TeX s={String.raw`k=\dfrac{1}{\cos\varphi}`} x={XC + 480} y={200} size={58} o={io(1)} />
       <TeX s={EQ_S22} x={XC} y={500} size={60} o={io(4)} />
-      <TeX s={String.raw`\text{area stretch}=\frac{1}{\cos^2\varphi}`} x={XC} y={640} size={56} o={io(5)} />
+      <TeX s={String.raw`\text{area stretch}=\dfrac{1}{\cos^2\varphi}`} x={XC} y={640} size={56} o={io(5)} />
       <TeX s={String.raw`u_\theta=u,\qquad u_r=-v`} x={XC} y={738} size={52} c={C.gold} o={io(6)} />
       <SourceBelow text="coast: Natural Earth" pic={{ x: 120, y: 120, w: 840, h: 640 }} w={840} o={Math.max(b(1), b(3), b(5), b(6))} name="s22 src" />
     </Scene>
@@ -497,16 +498,17 @@ const S23: React.FC = () => {
   const thumb = (x: number, i: number) => (
     <g key={i} opacity={0.75}>
       <rect x={x - 150} y={70} width={300} height={170} rx={16} fill="#18213a" stroke={C.grid} strokeWidth={3} />
-      {i === 0 ? <><circle cx={x} cy={155} r={70} fill="none" stroke={C.local} strokeWidth={3} /><path d={`M ${x - 60} 170 Q ${x} 90 ${x + 55} 140`} fill="none" stroke={C.gold} strokeWidth={5} /></> : null}
-      {i === 1 ? <><rect x={x - 90} y={90} width={180} height={130} fill="none" stroke={C.local} strokeWidth={3} />
-        {[-60, -20, 20, 60].map((d) => <line key={d} x1={x + d} y1={90} x2={x + d} y2={220} stroke={C.local} strokeWidth={2} />)}
+      {/* Part 1 lessons B5: every icon >= 20 px inside its box (y 70-240): the circles were r 70-75 (10-15 px), the map 18 px */}
+      {i === 0 ? <><circle cx={x} cy={155} r={62} fill="none" stroke={C.local} strokeWidth={3} /><path d={`M ${x - 52} 168 Q ${x} 98 ${x + 48} 140`} fill="none" stroke={C.gold} strokeWidth={5} /></> : null}
+      {i === 1 ? <><rect x={x - 90} y={94} width={180} height={122} fill="none" stroke={C.local} strokeWidth={3} />
+        {[-60, -20, 20, 60].map((d) => <line key={d} x1={x + d} y1={94} x2={x + d} y2={216} stroke={C.local} strokeWidth={2} />)}
         {[110, 135, 170, 205].map((y) => <line key={y} x1={x - 90} y1={y} x2={x + 90} y2={y} stroke={C.local} strokeWidth={2} />)}
         <line x1={x - 80} y1={130} x2={x + 80} y2={190} stroke={C.local} strokeWidth={5} /></> : null}
-      {i === 2 ? <>{[25, 50, 75].map((r) => <circle key={r} cx={x} cy={155} r={r} fill="none" stroke={C.local} strokeWidth={3} />)}
-        {[0, 1, 2, 3, 4, 5].map((j) => <line key={j} x1={x} y1={155} x2={x + 75 * Math.cos((j * Math.PI) / 3)} y2={155 - 75 * Math.sin((j * Math.PI) / 3)} stroke={C.local} strokeWidth={2} />)}
+      {i === 2 ? <>{[20, 40, 60].map((r) => <circle key={r} cx={x} cy={155} r={r} fill="none" stroke={C.local} strokeWidth={3} />)}
+        {[0, 1, 2, 3, 4, 5].map((j) => <line key={j} x1={x} y1={155} x2={x + 60 * Math.cos((j * Math.PI) / 3)} y2={155 - 60 * Math.sin((j * Math.PI) / 3)} stroke={C.local} strokeWidth={2} />)}
         <path d={`M ${x + 50} 155 A 50 50 0 0 0 ${x} 105`} fill="none" stroke={C.gold} strokeWidth={5} /></> : null}
       {i === 3 ? <><Arrow p={[x - 90, 190]} q={[x + 80, 120]} color={C.second} w={7} head={26} />
-        {[-50, 0, 50].map((d) => <path key={d} d={`M ${x + d - 20} 90 Q ${x + d + 10} 155 ${x + d - 20} 225`} fill="none" stroke={C.local} strokeWidth={3} />)}</> : null}
+        {[-50, 0, 50].map((d) => <path key={d} d={`M ${x + d - 20} 96 Q ${x + d + 10} 155 ${x + d - 20} 214`} fill="none" stroke={C.local} strokeWidth={3} />)}</> : null}
     </g>
   );
   const rel = ["vectors and index notation", "dot product", "cross product", "derivatives and Taylor series", "gradient", "contour maps", "curl", "material derivative", "Coriolis", "reading weather maps"];

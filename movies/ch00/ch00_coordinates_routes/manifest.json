@@ -114,26 +114,26 @@
    "scene": "s08_position_arrows"
   },
   {
-   "time": "11:52",
-   "t_s": 712.425,
+   "time": "11:55",
+   "t_s": 715.35,
    "title": "Where the route goes",
    "scene": "s11_route_shape"
   },
   {
-   "time": "12:54",
-   "t_s": 774.675,
+   "time": "12:57",
+   "t_s": 777.6,
    "title": "The rhumb line",
    "scene": "s12_rhumb"
   },
   {
-   "time": "13:57",
-   "t_s": 837.75,
+   "time": "14:00",
+   "t_s": 840.675,
    "title": "Why sailors liked the rhumb line",
    "scene": "s13_why_rhumb"
   },
   {
-   "time": "15:23",
-   "t_s": 923.05,
+   "time": "15:25",
+   "t_s": 925.975,
    "title": "To sum up",
    "scene": "s14_recap"
   }
@@ -150,8 +150,8 @@
    "chip_sentence": 2,
    "chip_at_s": 433.1,
    "skip_to_scene": "s11_route_shape",
-   "skip_to": "11:52",
-   "skip_to_s": 712.425,
+   "skip_to": "11:55",
+   "skip_to_s": 715.35,
    "keep_line": "If you skipped, here's what to keep."
   }
  ],
@@ -678,6 +678,40 @@
     8755.9
    ],
    "tol": "[0.0006 0.0006 0.12  ]",
+   "pass": true
+  },
+  {
+   "id": "DM11",
+   "name": "s10 S2: σ ≈ 78.738° × π/180 = 1.37424 ≈ 1.3742 rad (the row names the exact angle; 78.74 is its rounding)",
+   "value": [
+    1.374237,
+    78.738376
+   ],
+   "ref": [
+    1.3742,
+    78.738
+   ],
+   "tol": [
+    5e-05,
+    0.0005
+   ],
+   "pass": true
+  },
+  {
+   "id": "DM11",
+   "name": "s10 S5: quick check 78.74 × 111.2 = 8755.9 ≈ 8756 km, 'the same to within the rounding' as 8755",
+   "value": [
+    8755.888,
+    0.888
+   ],
+   "ref": [
+    8756.0,
+    0.9
+   ],
+   "tol": [
+    0.5,
+    0.5
+   ],
    "pass": true
   },
   {
@@ -1246,24 +1280,7 @@
    "pass": true
   }
  ],
- "flags": [
-  {
-   "id": "DM11",
-   "scene": "s10",
-   "what": "σ ≈ 78.74 × 0.01745 ≈ 1.3742 rad (screen and voice)",
-   "screen_or_voice": "1.3742",
-   "hand_check": "78.74 × 0.01745 = 1.3740; 78.74 × π/180 = 1.3743; σ = 1.37424 rad",
-   "note": "the rounded factor 0.01745 gives 1.3740; '1.3742' is the exact σ. Screen keeps '≈ 1.3742' as voiced (rounding of the factor, not of σ)"
-  },
-  {
-   "id": "DM11",
-   "scene": "s10",
-   "what": "78.74 × 111.2 km ≈ 8755 km (screen and voice)",
-   "screen_or_voice": "8755",
-   "hand_check": "78.74 × 111.2 = 8755.9 (→ 8756); 78.738 × 111.195 = 8755.3",
-   "note": "with the rounded 111.2 the product rounds to 8756; with the exact per-degree length 111.195 it is 8755.3. 'about … eight thousand seven hundred and fifty five' kept"
-  }
- ],
+ "flags": [],
  "physics": [
   {
    "fn": "fluidpy.geo.sphere.arc_lengths",

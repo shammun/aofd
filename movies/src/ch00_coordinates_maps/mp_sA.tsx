@@ -285,7 +285,7 @@ const S04: React.FC = () => {
       <Layered parts={eqParts} x={XC} y={230} size={76} layers={[{ t: [0], o: fin(f, t9) }, { t: [1, 2], o: fin(f, t13 + 40) }]} />
       <CalcStack f={f} x={XC + 110} y={300} size={56} maxLines={2} o={fout(f, t19 + 50, 14)} rows={[
         { lhs: String.raw`\varphi,\ \lambda`, rhs: String.raw`=48.4^\circ,\ \ -4.5^\circ`, at: AT(k, 14, "forty eight") },
-        { lhs: String.raw`\times\tfrac{\pi}{180}`, rhs: String.raw`=0.8447,\ \ -0.0785`, at: AT(k, 15, "zero point") },
+        { lhs: String.raw`\times\dfrac{\pi}{180}`, rhs: String.raw`=0.8447,\ \ -0.0785`, at: AT(k, 15, "zero point") },
         { lhs: String.raw`x`, rhs: String.raw`=6371\times(-0.0785)`, at: t16, c: C.second },
         { rhs: String.raw`\approx-500\ \text{km}`, at: AT(k, 16, "about minus"), c: C.second, cont: true },
         { lhs: String.raw`y`, rhs: String.raw`=6371\times0.8447`, at: t17, c: C.first },
@@ -320,8 +320,8 @@ const S05: React.FC = () => {
   const v = mixPV(V4, VZ5, z);
   const lons = Array.from({ length: 121 }, (_, i) => -180 + 3 * i);
   const pRight = mapPt(v, "pc", BREST[0], 180), band = (la: number) => mapPt(v, "pc", la, 170);
-  const [eqA] = cutAt(EQ_S05, String.raw`=\frac{1}{\cos\varphi}`);
-  const struck = String.raw`k=\frac{\textcolor{#d9667f}{\cancel{\textcolor{#e8ecf4}{2\pi a}}}}{\textcolor{#d9667f}{\cancel{\textcolor{#e8ecf4}{2\pi a}}}\cos\varphi}=\frac{1}{\cos\varphi}`;
+  const [eqA] = cutAt(EQ_S05, String.raw`=\dfrac{1}{\cos\varphi}`);
+  const struck = String.raw`k=\dfrac{\textcolor{#d9667f}{\cancel{\textcolor{#e8ecf4}{2\pi a}}}}{\textcolor{#d9667f}{\cancel{\textcolor{#e8ecf4}{2\pi a}}}\cos\varphi}=\dfrac{1}{\cos\varphi}`;
   if (struck.replace(/\\textcolor\{#[0-9a-f]+\}|\\cancel/g, "").replace(/[{}]/g, "") !== EQ_S05.replace(/[{}]/g, "")) throw new Error("s05 struck form drifts from EQ_S05");
   const radO = win(f, t3, t8, 12);
   const G5 = globeG(CAM4, G4), ax5 = G5.pw([0, Math.sin(BREST[0] * D2R), 0]), bp5 = G5.p(BREST[0], BREST[1]);
@@ -394,10 +394,10 @@ const S06: React.FC = () => {
   const band = (la: number) => mapPt(V6, "pc", la, 175);
   const cb = D.brest_crop.box as number[];
   const ia = P6(cb[1], cb[2]), ib = P6(cb[0], cb[3]);
-  const [l1, l2] = [String.raw`\nabla T=\mathbf i\,\frac{1}{a\cos\varphi}\frac{\partial T}{\partial\lambda}`, String.raw`+\mathbf j\,\frac{1}{a}\frac{\partial T}{\partial\varphi}`];
+  const [l1, l2] = [String.raw`\nabla T=\mathbf i\,\dfrac{1}{a\cos\varphi}\dfrac{\partial T}{\partial\lambda}`, String.raw`+\mathbf j\,\dfrac{1}{a}\dfrac{\partial T}{\partial\varphi}`];
   if ((l1 + l2) !== EQ_S06) throw new Error("s06 lines drift from EQ_S06");
-  const p1: Part[] = [{ t: String.raw`\nabla T=\mathbf i\,` }, { t: String.raw`\frac{1}{a\cos\varphi}`, u: { w: String.raw`\text{scale factor of }\lambda`, c: C.gold } }, { t: String.raw`\frac{\partial T}{\partial\lambda}` }];
-  const p2: Part[] = [{ t: String.raw`+\mathbf j\,` }, { t: String.raw`\frac{1}{a}`, u: { w: String.raw`\text{scale factor of }\varphi`, c: C.gold } }, { t: String.raw`\frac{\partial T}{\partial\varphi}` }];
+  const p1: Part[] = [{ t: String.raw`\nabla T=\mathbf i\,` }, { t: String.raw`\dfrac{1}{a\cos\varphi}`, u: { w: String.raw`\text{scale factor of }\lambda`, c: C.gold } }, { t: String.raw`\dfrac{\partial T}{\partial\lambda}` }];
+  const p2: Part[] = [{ t: String.raw`+\mathbf j\,` }, { t: String.raw`\dfrac{1}{a}`, u: { w: String.raw`\text{scale factor of }\varphi`, c: C.gold } }, { t: String.raw`\dfrac{\partial T}{\partial\varphi}` }];
   return (
     <Scene>
       <ProjMap id="s06m" v={V6} name="pc" img={IMGS.pc} coast={0.5} o={o1}>
@@ -439,7 +439,7 @@ const S06: React.FC = () => {
         <Lbl x={XC} y={822} t="coordinate" c={C.key} s={T.key} o={fin(f, tPr + 8)} italic />
       </Svg>
       <TeX s={String.raw`x=a\,\lambda,\ \ y=a\,\varphi`} x={XC} y={200} size={60} o={win(f, t1, t3 + 20)} />
-      <TeX s={String.raw`\frac{1\ ^\circ\text{C}}{73.8\ \text{km}}\approx 1.4\ ^\circ\text{C per }100\ \text{km}`} x={XC} y={250} size={52} o={fin(f, t7)} />
+      <TeX s={String.raw`\dfrac{1\ ^\circ\text{C}}{73.8\ \text{km}}\approx 1.4\ ^\circ\text{C per }100\ \text{km}`} x={XC} y={250} size={52} o={fin(f, t7)} />
       <Layered parts={p1} x={XC} y={400} size={66} layers={[{ t: "all", o: fin(f, t8) }, { t: [], u: [1], o: fin(f, AT(k, 8, "one over the Earth")) }]} />
       <Layered parts={p2} x={XC} y={575} size={66} layers={[{ t: "all", o: fin(f, t9) }, { t: [], u: [1], o: fin(f, t9 + 20) }]} />
       <SourceBelow text={SRC_BM} pic={mapBox(V6, "pc")} w={880} o={o1} name="s06 src a" />

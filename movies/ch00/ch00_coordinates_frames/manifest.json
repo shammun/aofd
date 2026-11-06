@@ -204,26 +204,26 @@
    "scene": "s23_whole_vector"
   },
   {
-   "time": "34:55",
-   "t_s": 2095.787,
+   "time": "34:58",
+   "t_s": 2098.26,
    "title": "What metric terms mean",
    "scene": "s26_glider"
   },
   {
-   "time": "36:19",
-   "t_s": 2179.862,
+   "time": "36:22",
+   "t_s": 2182.334,
    "title": "How big they are",
    "scene": "s27_metric_size"
   },
   {
-   "time": "37:41",
-   "t_s": 2261.887,
+   "time": "37:44",
+   "t_s": 2264.36,
    "title": "Recap",
    "scene": "s28_recap"
   },
   {
-   "time": "38:59",
-   "t_s": 2339.187,
+   "time": "39:01",
+   "t_s": 2341.66,
    "title": "End",
    "scene": "s29_end"
   }
@@ -252,8 +252,8 @@
    "chip_scene": "s23_whole_vector",
    "chip_sentence": 3,
    "chip_at_s": 1860.387,
-   "skip_to": "34:42",
-   "skip_to_s": 2082.912,
+   "skip_to": "34:45",
+   "skip_to_s": 2085.385,
    "keep_line": "If you skipped, here's what to keep: because the arrows turn, the wind's numbers can change even when nothing pushes the air, and the extra terms that say so are called metric terms."
   }
  ],

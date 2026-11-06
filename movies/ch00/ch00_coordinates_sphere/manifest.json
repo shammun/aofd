@@ -164,20 +164,20 @@
    "scene": "s27_area_patch"
   },
   {
-   "time": "42:52",
-   "t_s": 2572.022,
+   "time": "42:54",
+   "t_s": 2574.483,
    "title": "Archimedes",
    "scene": "s33_archimedes"
   },
   {
-   "time": "44:12",
-   "t_s": 2652.597,
+   "time": "44:15",
+   "t_s": 2655.058,
    "title": "global averages",
    "scene": "s34_global_mean"
   },
   {
-   "time": "45:58",
-   "t_s": 2758.047,
+   "time": "46:00",
+   "t_s": 2760.508,
    "title": "to sum up",
    "scene": "s35_recap"
   }
@@ -218,8 +218,8 @@
    "chip_scene": "s27_area_patch",
    "chip_sentence": 4,
    "chip_at_s": 2117.922,
-   "skip_to": "44:12",
-   "skip_to_s": 2652.597,
+   "skip_to": "44:15",
+   "skip_to_s": 2655.058,
    "keep_scene": "s34_global_mean",
    "keep_line": "If you skipped, here's what to keep. Grid boxes shrink towards the poles by cosine phi, so the tropics are huge and the polar caps are small: half of the whole Earth lies between thirty degrees south and thirty degrees north."
   }
@@ -237,7 +237,7 @@
  },
  "render_assets": {},
  "data_files": {
-  "cs.json": "9a75ed0271b1f360e22636fb8a888132e2a1c9e18236f43fa5b8588353ec1cc4",
+  "cs.json": "cd799d59bf617aa4250fa33adce3e17d7255a14b8d7686deac9d035dce256abb",
   "img/panel_brest.jpg": "8f6d9495c0c2eece67ebc5d8717b3123672feda59ee4809f73817b92c996fb32",
   "img/panel_khulna.jpg": "0b247a68d0ab9830607ee0c25a8eff15dd1703998229e96e018b69d0a0e9e159",
   "img/panel_lyb.jpg": "1e650089f0c04494cacf04eadaa93f2cc922ad4b10750f852f350229ea89d7b0",

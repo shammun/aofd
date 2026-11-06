@@ -8,7 +8,10 @@ every sentence time against the storyboard's `sentence_times` (to 1 ms), the sce
 (with "[beat]" removed), the beat count, and the end against `target_duration_s`. The file is marked provisional: the final
 TTS (heavy phase) replaces it.
 
-usage: .venv/Scripts/python.exe movies/src/ch00_coordinates_routes/checks/make_timing.py
+Part 1 lessons pass (2026-11-05): re-voiced sentences (checks/revoice.py REVOICE) get ESTIMATED clip lengths and shift what follows;
+`--sync` writes the estimated times into the storyboard first.
+
+usage: .venv/Scripts/python.exe movies/src/ch00_coordinates_routes/checks/make_timing.py [--sync]
 """
 from __future__ import annotations
 
@@ -20,6 +23,9 @@ from pathlib import Path
 
 import yaml
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import revoice  # noqa: E402
+
 ROOT = Path(__file__).resolve().parents[4]
 OUT = ROOT / "movies" / "ch00" / "ch00_coordinates_routes"
 SRC = Path("G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_routes/dryrun2_spliced/timing.json")
@@ -27,8 +33,12 @@ FPS = 30
 
 
 def main() -> int:
-    sb = yaml.safe_load((OUT / "storyboard.yaml").read_text(encoding="utf-8"))
     tm = json.loads(SRC.read_text(encoding="utf-8"))
+    shift = revoice.apply(tm)
+    if "--sync" in sys.argv:
+        end = tm["scenes"][-1]["end"]
+        revoice.sync(OUT / "storyboard.yaml", tm, target=end, audio_s=end)
+    sb = yaml.safe_load((OUT / "storyboard.yaml").read_text(encoding="utf-8"))
     bad = 0
     if [s["id"] for s in tm["scenes"]] != [s["id"] for s in sb["scenes"]]:
         print("FAIL scene ids differ between the dry run and the storyboard")
@@ -63,6 +73,9 @@ def main() -> int:
     out["total_frames"] = int(math.ceil(round(total * FPS, 6)))
     out["cues_dry_run"] = tm.get("cues")
     out["splice"] = tm.get("splice")
+    if tm.get("estimated_sentences"):
+        out["estimated_sentences"] = tm["estimated_sentences"]
+        out["provisional"] += f"; {len(tm['estimated_sentences'])} re-voiced sentences ESTIMATED (checks/revoice.py, shift {shift:+.3f} s)"
     (OUT / "timing.json").write_text(json.dumps(out, indent=1, ensure_ascii=False), encoding="utf-8")
     n = sum(len(s["sentences"]) for s in out["scenes"])
     nb = sum(1 for s in out["scenes"] for q in s["sentences"] if q.get("beat"))

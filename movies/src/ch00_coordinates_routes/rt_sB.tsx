@@ -23,7 +23,7 @@ const CHECK_B: [string, number, number, number][] = [
   ["r11", RO.r1[0], 0.622, 5e-4], ["r12", RO.r1[1], -0.001, 5e-4], ["r13", RO.r1[2], 0.783, 5e-4], ["r21", RO.r2[0], -0.392, 5e-4], ["r22", RO.r2[1], -0.730, 5e-4],
   ["r23", RO.r2[2], 0.560, 5e-4], ["c1", RO.cs1[0], 0.622, 5e-4], ["sl1", RO.cs1[2], -0.0023, 5e-5], ["s1", RO.cs1[3], 0.783, 5e-4], ["c2", RO.cs2[0], 0.829, 5e-4],
   ["cl2", RO.cs2[1], -0.473, 5e-4], ["sl2", RO.cs2[2], -0.881, 5e-4], ["s2", RO.cs2[3], 0.560, 5e-4], ["dot", RO.dot, 0.195, 5e-4], ["sig", RO.sig_deg, 78.7, 0.05],
-  ["sig2", RO.sig_deg, 78.74, 0.005], ["rad", RO.sig_rad, 1.3742, 5e-5], ["d", RO.d_km, 8755, 0.5], ["deg", D.scale.dy, 111.2, 0.05], ["h", RO.d_km / 900, 9.7, 0.05],
+  ["sig2", RO.sig_deg, 78.74, 0.005], ["rad", RO.sig_rad, 1.3742, 5e-5], ["d", RO.d_km, 8755, 0.5], ["quick", 78.74 * 111.2, 8756, 0.5], ["sig exact", 78.738 * Math.PI / 180, 1.3742, 5e-5], ["deg", D.scale.dy, 111.2, 0.05], ["h", RO.d_km / 900, 9.7, 0.05],
   ["tick", D.scale.dy * 10, 1112, 0.5], ["lon", LON[0], 51.5, 0.011], ["la", LAX[0], 34, 0.051], ["law", -LAX[1], 118, 0.241],
 ];
 CHECK_B.forEach(([n, v, r, tol]) => { if (!(Math.abs(v - r) <= tol)) throw new Error(`CHECK ${n}: data ${v} vs screen ${r}`); });
@@ -138,7 +138,7 @@ const S07: React.FC = () => {
         <Lbl x={XC} y={190} t="Part 1:" c={C.muted} s={T.floor} o={fin(f, tRule)} />
         <Keyword f={f} text="know σ → know the distance" at={[XC, 830]} s={T.floor} appear={tKnow} />
       </Svg>
-      <TeX s={H.r1} x={tipAt(V, V.a1)[0]} y={tipAt(V, V.a1)[1]} size={54} c={C.first} ax={0.5} o={fin(f, tA1)} halo />
+      <TeX s={H.r1} x={tipAt(V, V.a1)[0]} y={tipAt(V, V.a1)[1]} size={54} c={C.ink} ax={0.5} o={fin(f, tA1)} halo />
       <TeX s={H.r2} x={tipAt(V, V.a2)[0]} y={tipAt(V, V.a2)[1]} size={54} c={C.second} ax={0.5} o={fin(f, tA2)} halo />
       <TeX s={String.raw`\sigma`} x={dP(V, m, V.R * 0.42)[0]} y={dP(V, m, V.R * 0.42)[1]} size={60} c={C.gold} ax={0.5} o={fin(f, tSig)} halo />
       <TeX s={String.raw`d`} x={dP(V, m, V.R + 46)[0]} y={dP(V, m, V.R + 46)[1]} size={60} c={C.gold} ax={0.5} o={fin(f, tArc)} halo />
@@ -167,7 +167,8 @@ const S08: React.FC = () => {
     tP3 = AT(k, 9, "zero point seven eight three"), tLA = SS(k, 10), tC2 = SS(k, 11), tQ1 = AT(k, 12, "about minus"), tQ2 = AT(k, 13, "about minus"), tQ3 = AT(k, 14, "is zero point five");
   const [v1, v2] = cutAt(EQ_S08, String.raw`,\qquad `);
   const p1 = pieces(v1, ["0.622,", String.raw`\ -0.001,`, String.raw`\ 0.783)`]), p2 = pieces(v2, ["-0.392,", String.raw`\ -0.730,`, String.raw`\ 0.560)`]);
-  const parts1: Part[] = p1.map((t, i) => ({ t, c: i ? C.ink : C.first })), parts2: Part[] = p2.map((t, i) => ({ t, c: i ? C.ink : C.second }));
+  // Part 1 lessons D1: London's position arrow r̂₁ is ink (was teal; teal = the round/tangential part)
+  const parts1: Part[] = p1.map((t) => ({ t, c: C.ink })), parts2: Part[] = p2.map((t, i) => ({ t, c: i ? C.ink : C.second }));
   const L = (ts: number[], parts: Part[]) => [{ t: [0], o: 1 }, ...ts.map((a, i) => ({ t: [i + 1], o: fin(f, a) }))].map((x) => ({ ...x, t: x.t as number[] })) ;
   const r2f = pieces(EQ_S02, [String.raw`\ \cos\varphi\sin`]);
   const o1 = ax3(RO.r1), o2 = ax3(RO.r2);
@@ -181,13 +182,13 @@ const S08: React.FC = () => {
           <Arrow p={AX} q={ax3([1.15, 0, 0])} color={C.muted} w={5} head={20} />
           <Arrow p={AX} q={ax3([0, 1.1, 0])} color={C.muted} w={5} head={20} />
           <Arrow p={AX} q={ax3([0, 0, 1.15])} color={C.muted} w={5} head={20} />
-          <Arrow p={AX} q={o1} color={C.first} w={8} head={28} o={fin(f, tP3)} />
+          <Arrow p={AX} q={o1} color={C.ink} w={8} head={28} o={fin(f, tP3)} />
           <Arrow p={AX} q={o2} color={C.second} w={8} head={28} o={fin(f, tQ3)} />
         </g>
         <Keyword f={f} text="σ, step by step" at={[XC, 250]} appear={0} out={tR - 18} />
         <SkipChip f={f} k={k} to={skipTo("s11_route_shape")} />
       </Svg>
-      <TeX s={H.r1} x={tipAt(D8, D8.a1, 34)[0]} y={tipAt(D8, D8.a1, 34)[1]} size={48} c={C.first} ax={0.5} halo />
+      <TeX s={H.r1} x={tipAt(D8, D8.a1, 34)[0]} y={tipAt(D8, D8.a1, 34)[1]} size={48} c={C.ink} ax={0.5} halo />
       <TeX s={H.r2} x={tipAt(D8, D8.a2, 34)[0]} y={tipAt(D8, D8.a2, 34)[1]} size={48} c={C.second} ax={0.5} halo />
       <TeX s={String.raw`\hat{\mathbf x}`} x={ax3([1.3, 0, 0])[0]} y={ax3([1.3, 0, 0])[1]} size={46} c={C.muted} ax={0.5} o={fin(f, tF)} />
       <TeX s={String.raw`\hat{\mathbf y}`} x={ax3([0, 1.25, 0])[0]} y={ax3([0, 1.25, 0])[1]} size={46} c={C.muted} ax={0.5} o={fin(f, tF)} />
@@ -198,7 +199,7 @@ const S08: React.FC = () => {
       <TeX s={String.raw`\hat{\mathbf r}_1:\ \text{London},\quad \hat{\mathbf r}_2:\ \text{Los Angeles}`} x={XC} y={250} size={46} o={fin(f, tR)} />
       <TeX s={r2f[0]} x={XC} y={335} size={46} o={fin(f, tF)} />
       <TeX s={r2f[1]} x={XC + 110} y={395} size={46} o={fin(f, tF)} />
-      <TeX s={String.raw`\text{London: }\varphi=51.51^\circ,\ \lambda=-0.13^\circ`} x={XC} y={495} size={46} c={C.first} o={win(f, tLon, outL)} />
+      <TeX s={String.raw`\text{London: }\varphi=51.51^\circ,\ \lambda=-0.13^\circ`} x={XC} y={495} size={46} c={C.ink} o={win(f, tLon, outL)} />
       <CalcStack f={f} x={1230} y={575} size={44} maxLines={2} o={fout(f, outL)} rows={[
         { lhs: String.raw`\text{1st}`, rhs: String.raw`=\cos 51.51^\circ\times\cos(-0.13^\circ)`, at: tC1 },
         { rhs: String.raw`=0.622\times1.000\approx0.622`, at: tP1, cont: true },
@@ -250,14 +251,14 @@ const S09: React.FC = () => {
         <CurvedLink f={f} from={[1086, 815]} to={[sigP[0] + 20, sigP[1] + 10]} start={tInv + 40} bend={-80} />
         <OptionalTag f={f} from={-20} />
       </Svg>
-      <TeX s={H.r1} x={tipAt(V, V.a1)[0]} y={tipAt(V, V.a1)[1]} size={54} c={C.first} ax={0.5} halo />
+      <TeX s={H.r1} x={tipAt(V, V.a1)[0]} y={tipAt(V, V.a1)[1]} size={54} c={C.ink} ax={0.5} halo />
       <TeX s={H.r2} x={tipAt(V, V.a2)[0]} y={tipAt(V, V.a2)[1]} size={54} c={C.second} ax={0.5} halo />
       <TeX s={String.raw`\sigma`} x={sigP[0]} y={sigP[1]} size={56} c={C.gold} ax={0.5} o={fin(f, tInv)} halo />
       <TeX s={String.raw`|\hat{\mathbf r}_1|=|\hat{\mathbf r}_2|=1`} x={430} y={690} size={52} ax={0.5} o={fin(f, tLen)} />
       <TeX s={String.raw`\text{shadow}=\cos\sigma`} x={430} y={780} size={48} c={C.second} ax={0.5} o={fin(f, tSh)} />
       <TeX s={String.raw`\mathbf a\cdot\mathbf b=|\mathbf a|\,|\mathbf b|\cos(\text{angle})`} x={XC} y={165} size={48} o={win(f, tRule, tLen - 18)} />
       <TeX s={EQ_S09} x={XC} y={165} size={58} c={C.gold} o={fin(f, tLen)} />
-      <TeX s={H.r1} x={XC + 10} y={y1} size={54} c={C.first} />
+      <TeX s={H.r1} x={XC + 10} y={y1} size={54} c={C.ink} />
       <TeX s={H.r2} x={XC + 10} y={y2} size={54} c={C.second} />
       {[0.622, -0.001, 0.783].map((v, i) => <TeX key={`a${i}`} s={v.toFixed(3)} x={xs[i]} y={y1} size={52} ax={0.5} />)}
       {[-0.392, -0.730, 0.560].map((v, i) => <TeX key={`b${i}`} s={v.toFixed(3)} x={xs[i]} y={y2} size={52} ax={0.5} />)}
@@ -278,8 +279,8 @@ const S09: React.FC = () => {
 const D10 = scaleDisc(DISC, [430, 400], 250);
 const S10: React.FC = () => {
   const f = useCurrentFrame(), k = K("s10_distance");
-  const tRad = SS(k, 1), tSig = AT(k, 2, "seventy eight point seven four times"), tSigE = AT(k, 2, "about one point"), tD = SS(k, 3), tDv = AT(k, 4, "eight thousand"),
-    tQ = AT(k, 5, "the quick way"), tQv = AT(k, 5, "is again about"), tCr = AT(k, 6, "nine hundred kilometres per hour"), tH = AT(k, 6, "nearly ten hours");
+  const tRad = SS(k, 1), tSig = AT(k, 2, "seventy eight point seven three eight"), tSigE = AT(k, 2, "about one point"), tD = SS(k, 3), tDv = AT(k, 4, "eight thousand"),
+    tQ = AT(k, 5, "the quick way"), tQv = AT(k, 5, "is about eight thousand"), tQr = AT(k, 5, "the same to within"), tCr = AT(k, 6, "nine hundred kilometres per hour"), tH = AT(k, 6, "nearly ten hours");
   const V = D10, m = mid(V);
   const e = pieces(EQ_S10, [String.raw`\approx 6371`, String.raw`\approx 8755`]);
   const ticks = Array.from({ length: 7 }, (_, i) => V.a1 + SGN * 10 * (i + 1));
@@ -302,14 +303,17 @@ const S10: React.FC = () => {
       <TeX s={String.raw`\sigma`} x={dP(V, m, V.R * 0.42)[0]} y={dP(V, m, V.R * 0.42)[1]} size={56} c={C.gold} ax={0.5} halo />
       <TeX s={String.raw`\approx9.7\ \text{h}`} x={760} y={760} size={52} o={fin(f, tH)} />
       <CalcStack f={f} x={1230} y={175} size={46} maxLines={3} rows={[
-        { lhs: String.raw`1^\circ`, rhs: String.raw`=\frac{\pi}{180}\ \text{rad}\approx0.01745\ \text{rad}`, at: tRad, h: 92 },
-        { lhs: String.raw`\sigma`, rhs: String.raw`\approx78.74\times0.01745`, at: tSig },
+        { lhs: String.raw`1^\circ`, rhs: String.raw`=\dfrac{\pi}{180}\ \text{rad}\approx0.01745\ \text{rad}`, at: tRad, h: 92 },
+        // Part 1 lessons A6: the row says which exact angle it uses (78.74 x 0.01745 would give 1.3740, not 1.3742)
+        { lhs: String.raw`\sigma`, rhs: String.raw`\approx78.738^\circ\times\dfrac{\pi}{180}`, at: tSig },
         { rhs: String.raw`\approx1.3742\ \text{rad}`, at: tSigE, cont: true },
       ]} />
       <Layered parts={[{ t: e[0] }, { t: e[1] }]} layers={[{ t: [0], o: 1 }, { t: [1], o: fin(f, AT(k, 3, "six thousand")) }]} x={XC} y={500} size={50} o={fin(f, tD)} />
       <TeX s={e[2]} x={XC + 120} y={570} size={54} c={C.gold} o={fin(f, tDv)} />
-      <TeX s={String.raw`78.74\times111.2\ \text{km}\approx8755\ \text{km}`} x={XC} y={670} size={44} o={fin(f, tQv)} />
-      <TeX s={String.raw`8755\ \text{km}\div900\ \text{km/h}\approx9.7\ \text{h}`} x={XC} y={770} size={44} o={fin(f, tH)} />
+      {/* Part 1 lessons A6: the quick check said as it is: 78.74 x 111.2 = 8755.9, so 8756, the same to within the rounding */}
+      <TeX s={String.raw`78.74\times111.2\ \text{km}\approx8756\ \text{km}`} x={XC} y={670} size={44} o={fin(f, tQv)} />
+      <TeX s={String.raw`\approx8755\ \text{(rounding)}`} x={XC + 40} y={724} size={44} c={C.muted} o={fin(f, tQr)} />
+      <TeX s={String.raw`8755\ \text{km}\div900\ \text{km/h}\approx9.7\ \text{h}`} x={XC} y={790} size={44} o={fin(f, tH)} />
     </Scene>
   );
 };

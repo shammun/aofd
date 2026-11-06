@@ -15,7 +15,7 @@ concepts:
 - 'the air parcel''s acceleration: local change + advection; each piece frame-dependent, the sum not'
 - storm-relative wind v' = v - U; ring means unchanged by a uniform shift (Storm Ciaran)
 - 'change of variables to a moving frame: tau, dp/dt = dp/dtau - U.grad p (Kundu (B.2.2)); a fixed barometer at Plymouth'
-target_duration_s: 1319.5477
+target_duration_s: 1328.657
 fps: 30
 size:
 - 1920
@@ -65,7 +65,7 @@ dry_run:
     splice3: 'G:\Geophysical Fluid Dynamics\aofd-data\scratch\movies\ch00_coordinates_frames\splice3 (the split: new titles, hooks, recaps, Part 5 opening)'
   method: every sentence clip length comes from one of the three runs (scene field measured.timing_source); times recomputed with the tools/tts.py gap rules (lead
     0.3, sentence 0.35, beat 1.5, scene 0.8, tail 0.3); the method reproduces dryrun1's total exactly
-  audio_s: 1319.5477
+  audio_s: 1328.657
   with_hold_s: 1321.075
   speech_s: 1198.28
   sentences: 193
@@ -84,7 +84,7 @@ conventions:
   rotation sense: every clockwise/anticlockwise carries 'as seen from above' (and the hemisphere for storms)
   tau: the rider's clock, tau = t, with x' = x - U t held fixed (Kundu's xi written x')
   wind arrow: bold v = (u, v, w) (Vallis); Part 1's 'bold u' renamed once in s03; Galilean scenes use u, U, u' along the track and bold v, bold U, bold v' for winds
-colour_contract: unit arrows orange (i, j, R, x', y', z) except up k-hat teal (as build 1); winds teal with moving dashes; storm motion U orange; rider/storm-relative
+colour_contract: unit arrows orange (i, j, R, x', y', z) except up k-hat teal (as build 1); full winds ink or slate with moving dashes (Part 1 lessons D1, never teal; teal = the round/along part); storm motion U orange; rider/storm-relative
   result warm white; negative parts rose with hatch and '-' glyph; fixed observers (barometer, anemometer, station) slate; gravity brown; Coriolis violet; metric
   terms orange; gold for pointers, links, angle arcs, 'same' ticks, speed/radius braces
 data_block:
@@ -158,22 +158,22 @@ skip_guidance:
     chip_at: '2:43'
     skip_to_scene: s05_accel_same
     skip_to_sentence: 15
-    skip_to_s: 328.0
-    skip_to: '5:28'
-    chip_text: every step, for those who want it · not needed for weather, climate or GIS · skip to 5:28
+    skip_to_s: 333.2293
+    skip_to: '5:33'
+    chip_text: every step · optional · skip to 5:33
     takeaway: 'If you skipped, here''s what to keep: in a frame moving steadily in a straight line, speeds change by the frame''s own speed, but accelerations, and
       so forces, stay the same.'
   - block: B
     what: linking the barometer and the rider (D44)
     chip_scene: s14_tau_derive
     chip_sentence: 3
-    chip_at_s: 990.7727
-    chip_at: '16:30'
+    chip_at_s: 996.002
+    chip_at: '16:35'
     skip_to_scene: s14_tau_derive
     skip_to_sentence: 17
-    skip_to_s: 1083.7227
-    skip_to: '18:03'
-    chip_text: every step, for those who want it · not needed for weather, climate or GIS · skip to 18:03
+    skip_to_s: 1092.832
+    skip_to: '18:12'
+    chip_text: every step · optional · skip to 18:12
     takeaway: 'If you skipped, here''s what to keep: what the barometer sees is the storm changing, minus the pattern sliding past.'
 scenes:
 - id: s00_title
@@ -297,7 +297,7 @@ scenes:
     plus the traveller''s speed times the slope. When the traveller is an air parcel, a small volume of air moving with the wind, we write that rate as capital D
     by D t. Today, the frame itself moves.'
   on_screen_eq:
-    latex: \frac{DT}{Dt}=\frac{\partial T}{\partial t}+\mathbf v\cdot\nabla T
+    latex: \dfrac{DT}{Dt}=\dfrac{\partial T}{\partial t}+\mathbf v\cdot\nabla T
     vallis_eq: 'none: recap of the derivatives movie (material derivative; cf. Vallis (1.10) family, not shown)'
     page_png: null
   calc_rows:
@@ -403,40 +403,39 @@ scenes:
 - id: s04_velocities_add
   t:
   - 154.175
-  - 233.45
+  - 238.6793
   sentence_times:
   - - 154.175
     - 160.675
   - - 161.025
     - 163.6
   - - 163.95
-    - 167.15
-  - - 167.5
-    - 170.525
-  - - 170.875
-    - 180.85
-  - - 181.2
-    - 187.2
-  - - 188.7
-    - 191.625
-  - - 191.975
-    - 197.225
-  - - 197.575
-    - 203.175
-  - - 203.525
-    - 206.7
-  - - 208.2
-    - 212.875
-  - - 214.375
-    - 224.525
-  - - 224.875
-    - 232.65
+    - 172.3793
+  - - 172.7293
+    - 175.7543
+  - - 176.1043
+    - 186.0793
+  - - 186.4293
+    - 192.4293
+  - - 193.9293
+    - 196.8543
+  - - 197.2043
+    - 202.4543
+  - - 202.8043
+    - 208.4043
+  - - 208.7543
+    - 211.9293
+  - - 213.4293
+    - 218.1043
+  - - 219.6043
+    - 229.7543
+  - - 230.1043
+    - 237.8793
   beat: 'derivation: u = u'' + U from the positions; Galilean transformation named'
   visual: 'The rulers from s03 frozen at one moment, then a short time Δt later (ghost of the first moment in slate): the three brackets grow by ''Δx′'' (teal), ''U
     Δt'' (gold) and ''Δx'' (warm white). Column CalcStack: Δx = Δx′ + U Δt; ÷ Δt; u = u′ + U; ''1.5 + 20 = 21.5''. Keyword ''Galilean transformation'' (54 px) on
     S6; ''bold v = bold U + bold v′'' (84 px) on S7.'
-  voiceover: 'Next come two short derivations: why speeds add, and why accelerations don''t change. They''re for those who like every step. If not, skip ahead to
-    the time on screen. Now let''s get the speeds from the positions. In a short time, delta t, your place on the train changes by delta x prime, and the back of
+  voiceover: 'Next come two short derivations: why speeds add, and why accelerations don''t change. They''re for those who like every step. If not, skip ahead to the time on screen: you don''t need them for the intuition of weather, climate or maps. Now let''s get the speeds from the positions. In a short time, delta t, your place on the train changes by delta x prime, and the back of
     the train moves on by capital U delta t. So, step one: delta x equals delta x prime, plus capital U delta t. [beat] Step two: divide by delta t. Delta x over
     delta t is the speed seen from the ground, small u. Delta x prime over delta t is the speed seen on the train, u prime. So u equals u prime plus capital U. [beat]
     With our numbers, one and a half plus twenty is twenty one and a half. [beat] Switching between two frames like this, moving at a steady velocity without turning,
@@ -447,7 +446,7 @@ scenes:
     page_png: ../Fluid Dynamics/chapters/pages/ch03/p101.png
   calc_rows:
   - \Delta x=\Delta x'+U\,\Delta t
-  - \frac{\Delta x}{\Delta t}=\frac{\Delta x'}{\Delta t}+U\ \Rightarrow\ u=u'+U
+  - \dfrac{\Delta x}{\Delta t}=\dfrac{\Delta x'}{\Delta t}+U\ \Rightarrow\ u=u'+U
   - 1.5+20=21.5\ \text{m/s}
   physics_source:
     fn: fluidpy.core.kinematics.galilean_transform
@@ -489,7 +488,7 @@ scenes:
     frame 0 (Should 18).'
   skip_chip:
     'on': S3 (AT(k, 'skip ahead'))
-    text: every step, for those who want it · not needed for weather, climate or GIS · skip to 5:28
+    text: every step · optional · skip to 5:28
     look: small warm-white keyword chip at the top of the column (54 px, gold outline), fades after 6 s; timestamp re-filled after the final TTS
   measured:
     seconds: 79.275
@@ -499,39 +498,39 @@ scenes:
     timing_source: splice2
 - id: s05_accel_same
   t:
-  - 233.45
-  - 340.075
+  - 238.6793
+  - 345.3043
   sentence_times:
-  - - 233.45
-    - 235.6
-  - - 235.95
-    - 238.45
-  - - 238.8
-    - 242.425
-  - - 242.775
-    - 247.65
-  - - 248.0
-    - 254.1
-  - - 254.45
-    - 262.4
-  - - 263.9
-    - 266.875
-  - - 267.225
-    - 271.85
-  - - 272.2
-    - 278.85
-  - - 280.35
-    - 286.575
-  - - 286.925
-    - 294.55
-  - - 296.05
-    - 307.45
-  - - 308.95
-    - 319.225
-  - - 319.575
-    - 327.65
-  - - 328.0
-    - 339.275
+  - - 238.6793
+    - 240.8293
+  - - 241.1793
+    - 243.6793
+  - - 244.0293
+    - 247.6543
+  - - 248.0043
+    - 252.8793
+  - - 253.2293
+    - 259.3293
+  - - 259.6793
+    - 267.6293
+  - - 269.1293
+    - 272.1043
+  - - 272.4543
+    - 277.0793
+  - - 277.4293
+    - 284.0793
+  - - 285.5793
+    - 291.8043
+  - - 292.1543
+    - 299.7793
+  - - 301.2793
+    - 312.6793
+  - - 314.1793
+    - 324.4543
+  - - 324.8043
+    - 332.8793
+  - - 333.2293
+    - 344.5043
   beat: 'derivation D41: du/dt = dU/dt + du''/dt; dU/dt = 0; the falling ball'
   visual: 'Column builds D41 one row per step (Layered TeX): u = U + u′; Δu = ΔU + Δu′ (''change of a sum'' brace); ÷ Δt; the limit (Δt -> 0, ''derivatives movie''
     faint); d U/dt struck with ''= 0, U steady''; result ''du/dt = du′/dt'' (gold). Picture zone: the walker''s speed readout ''1.5 -> 2.0'' on the train and ''21.5
@@ -547,12 +546,12 @@ scenes:
     the same forces explain the motion in both frames. If you skipped, here''s what to keep: in a frame moving steadily in a straight line, speeds change by the frame''s
     own speed, but accelerations, and so forces, stay the same.'
   on_screen_eq:
-    latex: \frac{du}{dt}=\frac{dU}{dt}+\frac{du'}{dt}=\frac{du'}{dt}
+    latex: \dfrac{du}{dt}=\dfrac{dU}{dt}+\dfrac{du'}{dt}=\dfrac{du'}{dt}
     vallis_eq: none in Vallis; Kundu §3.3 (steady U) before (3.9)
     page_png: ../Fluid Dynamics/chapters/pages/ch03/p101.png
   calc_rows:
   - u+\Delta u=(U+\Delta U)+(u'+\Delta u')\ \Rightarrow\ \Delta u=\Delta U+\Delta u'
-  - \frac{\Delta u}{\Delta t}=\frac{\Delta U}{\Delta t}+\frac{\Delta u'}{\Delta t}
+  - \dfrac{\Delta u}{\Delta t}=\dfrac{\Delta U}{\Delta t}+\dfrac{\Delta u'}{\Delta t}
   - 1.5\to2.0\ \ \text{and}\ \ 21.5\to22.0:\ \ +0.5\ \text{m/s in 1 s}
   physics_source:
     fn: fluidpy.core.kinematics.galilean_transform; fluidpy.core.kinematics.acceleration
@@ -576,15 +575,15 @@ scenes:
       - the change of a sum is the sum of the changes
       - each speed's change
     - - divide by Δt
-      - \frac{\Delta u}{\Delta t}=\frac{\Delta U}{\Delta t}+\frac{\Delta u'}{\Delta t}
+      - \dfrac{\Delta u}{\Delta t}=\dfrac{\Delta U}{\Delta t}+\dfrac{\Delta u'}{\Delta t}
       - dividing both sides by the same number
       - average accelerations
     - - shrink Δt
-      - \frac{du}{dt}=\frac{dU}{dt}+\frac{du'}{dt}
+      - \dfrac{du}{dt}=\dfrac{dU}{dt}+\dfrac{du'}{dt}
       - the limit (derivatives movie)
       - accelerations add
     - - steady train
-      - \frac{dU}{dt}=0\Rightarrow\frac{du}{dt}=\frac{du'}{dt}
+      - \dfrac{dU}{dt}=0\Rightarrow\dfrac{du}{dt}=\dfrac{du'}{dt}
       - U never changes
       - same acceleration, same forces (Newton)
     step_format: '[what we did, the new line, why we can do this, in words]'
@@ -612,39 +611,39 @@ scenes:
     timing_source: splice2
 - id: s06_parcel_accel
   t:
-  - 340.075
-  - 428.875
+  - 345.3043
+  - 434.1043
   sentence_times:
-  - - 340.075
-    - 346.325
-  - - 346.675
-    - 352.375
-  - - 352.725
-    - 360.825
-  - - 361.175
-    - 364.7
-  - - 365.05
-    - 371.55
-  - - 371.9
-    - 379.45
-  - - 379.8
-    - 386.625
-  - - 386.975
-    - 390.0
-  - - 391.5
-    - 397.725
-  - - 398.075
-    - 401.7
-  - - 402.05
-    - 407.4
-  - - 407.75
-    - 417.275
-  - - 417.625
-    - 422.425
-  - - 422.775
-    - 425.625
-  - - 425.975
-    - 428.075
+  - - 345.3043
+    - 351.5543
+  - - 351.9043
+    - 357.6043
+  - - 357.9543
+    - 366.0543
+  - - 366.4043
+    - 369.9293
+  - - 370.2793
+    - 376.7793
+  - - 377.1293
+    - 384.6793
+  - - 385.0293
+    - 391.8543
+  - - 392.2043
+    - 395.2293
+  - - 396.7293
+    - 402.9543
+  - - 403.3043
+    - 406.9293
+  - - 407.2793
+    - 412.6293
+  - - 412.9793
+    - 422.5043
+  - - 422.8543
+    - 427.6543
+  - - 428.0043
+    - 430.8543
+  - - 431.2043
+    - 433.3043
   beat: 'derivation D42 (1)-(3): the air parcel''s acceleration = local change + advection; the frame equation explained'
   visual: 'Column: the derivatives movie''s line DT/Dt = ∂T/∂t + v·∇T (68 px, faint ''derivatives movie''), with underbraces ''one fixed place'' (slate) and ''advection''
     (teal); a gold swap arrow ''T -> u'' turns it into Du/Dt = ∂u/∂t + v·∇u; ''same for v, w''. Then the frame equation (84 px) with braces: left ''ground observer''
@@ -660,12 +659,12 @@ scenes:
     U, with primes on everything. They''re equal, because the acceleration is the same in both frames. But each piece on its own can be different. Let''s see that
     with numbers.'
   on_screen_eq:
-    latex: \frac{\partial\mathbf v}{\partial t}+(\mathbf v\cdot\nabla)\mathbf v=\frac{\partial\mathbf v'}{\partial t'}+(\mathbf v'\cdot\nabla')\mathbf v'
+    latex: \dfrac{\partial\mathbf v}{\partial t}+(\mathbf v\cdot\nabla)\mathbf v=\dfrac{\partial\mathbf v'}{\partial t'}+(\mathbf v'\cdot\nabla')\mathbf v'
     vallis_eq: none in Vallis; Kundu (3.9) (written with bold v for the wind, as in this movie)
     page_png: ../Fluid Dynamics/chapters/pages/ch03/p101.png
   calc_rows:
-  - \frac{DT}{Dt}=\frac{\partial T}{\partial t}+\mathbf v\cdot\nabla T
-  - \frac{Du}{Dt}=\frac{\partial u}{\partial t}+\mathbf v\cdot\nabla u
+  - \dfrac{DT}{Dt}=\dfrac{\partial T}{\partial t}+\mathbf v\cdot\nabla T
+  - \dfrac{Du}{Dt}=\dfrac{\partial u}{\partial t}+\mathbf v\cdot\nabla u
   physics_source:
     fn: fluidpy.core.kinematics.acceleration; fluidpy.core.kinematics.galilean_transform; fluidpy.geo.calculus.chain_rule_rate
     params:
@@ -681,15 +680,15 @@ scenes:
     goal: the acceleration of an air parcel, and why both frames agree
     steps:
     - - start from the parcel's thermometer
-      - \frac{DT}{Dt}=\frac{\partial T}{\partial t}+\mathbf v\cdot\nabla T
+      - \dfrac{DT}{Dt}=\dfrac{\partial T}{\partial t}+\mathbf v\cdot\nabla T
       - derivatives movie (traveller's chain rule with the wind as the speed)
       - local change + advection
     - - u is just another carried number
-      - \frac{Du}{Dt}=\frac{\partial u}{\partial t}+\mathbf v\cdot\nabla u
+      - \dfrac{Du}{Dt}=\dfrac{\partial u}{\partial t}+\mathbf v\cdot\nabla u
       - the chain rule holds for any quantity the parcel carries
       - the parcel's eastward acceleration
     - - all three parts
-      - \frac{\partial\mathbf v}{\partial t}+(\mathbf v\cdot\nabla)\mathbf v
+      - \dfrac{\partial\mathbf v}{\partial t}+(\mathbf v\cdot\nabla)\mathbf v
       - (v·∇) applied to each part
       - the parcel's acceleration
     - - two frames
@@ -716,43 +715,43 @@ scenes:
     timing_source: dryrun1
 - id: s07_sliding_pattern
   t:
-  - 428.875
-  - 565.1227
+  - 434.1043
+  - 570.352
   sentence_times:
-  - - 428.875
-    - 436.6
-  - - 436.95
-    - 442.975
-  - - 443.325
-    - 455.7434
-  - - 457.2434
-    - 462.3184
-  - - 462.6684
-    - 467.2184
-  - - 467.5684
-    - 478.8227
-  - - 479.1727
-    - 489.6977
-  - - 490.0477
-    - 494.3477
-  - - 495.8477
-    - 501.6727
-  - - 502.0227
-    - 508.6727
-  - - 509.0227
-    - 519.4227
-  - - 520.9227
-    - 528.3227
-  - - 529.8227
-    - 537.5477
-  - - 539.0477
-    - 545.7727
-  - - 546.1227
-    - 550.1977
-  - - 550.5477
-    - 559.2977
-  - - 559.6477
-    - 564.3227
+  - - 434.1043
+    - 441.8293
+  - - 442.1793
+    - 448.2043
+  - - 448.5543
+    - 460.9727
+  - - 462.4727
+    - 467.5477
+  - - 467.8977
+    - 472.4477
+  - - 472.7977
+    - 484.052
+  - - 484.402
+    - 494.927
+  - - 495.277
+    - 499.577
+  - - 501.077
+    - 506.902
+  - - 507.252
+    - 513.902
+  - - 514.252
+    - 524.652
+  - - 526.152
+    - 533.552
+  - - 535.052
+    - 542.777
+  - - 544.277
+    - 551.002
+  - - 551.352
+    - 555.427
+  - - 555.777
+    - 564.527
+  - - 564.877
+    - 569.552
   beat: 'derivation D42 (4)-(6): a sliding pattern: each piece differs, the sum agrees (-4.0 + 5.4 = 1.4 = 0 + 1.4)'
   visual: 'Picture zone: a 1-D wind profile (teal curve, wind speed vs east distance, 0-400 km, ticks at 52 px) sliding right at 10 m/s, its shape unchanged; the
     chosen place marked by a fixed anemometer icon (slate) and a rider icon (orange) sharing the spot at this moment; a gold tangent on the curve ''0.111 m/s per
@@ -773,12 +772,12 @@ scenes:
     frame that turns, like the spinning Earth, adds the Coriolis and centrifugal effects, as we saw in the cross product movies. We''ll build all of this
     fully in a later movie: The material derivative.'
   on_screen_eq:
-    latex: \frac{\partial u}{\partial t}+u\,\frac{\partial u}{\partial x}=\frac{\partial u'}{\partial t'}+u'\,\frac{\partial u'}{\partial x'}
+    latex: \dfrac{\partial u}{\partial t}+u\,\dfrac{\partial u}{\partial x}=\dfrac{\partial u'}{\partial t'}+u'\,\dfrac{\partial u'}{\partial x'}
     vallis_eq: none in Vallis; Kundu (3.9), one-dimensional form
     page_png: ../Fluid Dynamics/chapters/pages/ch03/p101.png
   calc_rows:
-  - '\text{rider: }0+12.7\ \tfrac{\text{km}}{\text{h}}\times0.111\ \tfrac{\text{m/s}}{\text{km}}\approx+1.4\ \tfrac{\text{m/s}}{\text{h}}'
-  - '\text{ground: }-36\times0.111+48.7\times0.111\approx-4.0+5.4=+1.4\ \tfrac{\text{m/s}}{\text{h}}'
+  - '\text{rider: }0+12.7\ \dfrac{\text{km}}{\text{h}}\times0.111\ \dfrac{\text{m/s}}{\text{km}}\approx+1.4\ \dfrac{\text{m/s}}{\text{h}}'
+  - '\text{ground: }-36\times0.111+48.7\times0.111\approx-4.0+5.4=+1.4\ \dfrac{\text{m/s}}{\text{h}}'
   physics_source:
     fn: fluidpy.core.kinematics.acceleration; fluidpy.core.kinematics.galilean_transform
     params:
@@ -838,25 +837,25 @@ scenes:
     timing_source: dryrun1
 - id: s08_ciaran
   t:
-  - 565.1227
-  - 629.3727
+  - 570.352
+  - 634.602
   sentence_times:
-  - - 565.1227
-    - 567.3227
-  - - 567.6727
-    - 574.7227
-  - - 575.0727
-    - 583.6477
-  - - 583.9977
-    - 593.1477
-  - - 594.6477
-    - 606.5477
-  - - 608.0477
-    - 616.5477
-  - - 616.8977
-    - 623.5977
-  - - 625.0977
-    - 628.5727
+  - - 570.352
+    - 572.552
+  - - 572.902
+    - 579.952
+  - - 580.302
+    - 588.877
+  - - 589.227
+    - 598.377
+  - - 599.877
+    - 611.777
+  - - 613.277
+    - 621.777
+  - - 622.127
+    - 628.827
+  - - 630.327
+    - 633.802
   beat: 'application: Storm Ciaran, tracked by continuity; U = 14.6 m/s towards 71°'
   visual: 'Real map (LCC, 44-58 N, 15 W-5 E) of ERA5 10-m wind speed (perceptual LUT 0-30 m/s, colour bar beside the map in the column) and isobars every 4 hPa, 1-2
     Nov 2023, animated hourly 21 -> 06 UTC while S2-S3 speak, with the tracked centre (gold dots, one per hour) and the house clock glyph; ''Cornwall'' label on S3;
@@ -902,23 +901,23 @@ scenes:
     timing_source: dryrun1
 - id: s09_lopsided
   t:
-  - 629.3727
-  - 676.9227
+  - 634.602
+  - 682.152
   sentence_times:
-  - - 629.3727
-    - 635.3977
-  - - 635.7477
-    - 641.8477
-  - - 642.1977
-    - 652.0227
-  - - 653.5227
-    - 655.5727
-  - - 655.9227
-    - 661.4477
-  - - 661.7977
-    - 668.8227
-  - - 669.1727
-    - 676.1227
+  - - 634.602
+    - 640.627
+  - - 640.977
+    - 647.077
+  - - 647.427
+    - 657.252
+  - - 658.752
+    - 660.802
+  - - 661.152
+    - 666.677
+  - - 667.027
+    - 674.052
+  - - 674.402
+    - 681.352
   beat: 'application: ground-relative round winds, south ≈ 18, north ≈ 7 (why lopsided)'
   visual: 'Map frozen at 03 UTC; the 200-km ring (teal), the south and north sectors (±45° about the right/left of the track) highlighted as bands; readouts ''≈ 18
     m/s'' (south) and ''≈ 7 m/s'' (north) in the column, north row above south row (Must 13), each with a gold link to its band leaving from the readout''s left edge
@@ -958,33 +957,33 @@ scenes:
     timing_source: dryrun1
 - id: s10_storm_relative
   t:
-  - 676.9227
-  - 756.9477
+  - 682.152
+  - 762.177
   sentence_times:
-  - - 676.9227
-    - 683.6477
-  - - 683.9977
-    - 686.6727
-  - - 687.0227
-    - 694.3477
-  - - 694.6977
-    - 699.3977
-  - - 700.8977
-    - 706.7727
-  - - 707.1227
-    - 710.3977
-  - - 710.7477
-    - 715.9477
-  - - 716.2977
-    - 728.5477
-  - - 730.0477
-    - 733.4227
-  - - 733.7727
-    - 739.3227
-  - - 739.6727
-    - 750.6727
-  - - 752.1727
-    - 756.1477
+  - - 682.152
+    - 688.877
+  - - 689.227
+    - 691.902
+  - - 692.252
+    - 699.577
+  - - 699.927
+    - 704.627
+  - - 706.127
+    - 712.002
+  - - 712.352
+    - 715.627
+  - - 715.977
+    - 721.177
+  - - 721.527
+    - 733.777
+  - - 735.277
+    - 738.652
+  - - 739.002
+    - 744.552
+  - - 744.902
+    - 755.902
+  - - 757.402
+    - 761.377
   beat: 'derivation D43: v'' = v − U; arrow subtraction at two points with numbers'
   visual: 'Two insets beside the frozen map (picture zone split top/bottom: north point above, south point below, Must 13), each with: the ground wind (teal), the
     storm velocity U (orange), −U drawn tip-to-tail from the ground arrow''s tip (orange dashed), and the result v′ (warm white) closing the triangle; a component
@@ -1062,25 +1061,25 @@ scenes:
     timing_source: dryrun1
 - id: s11_round_parts
   t:
-  - 756.9477
-  - 816.0977
+  - 762.177
+  - 821.327
   sentence_times:
-  - - 756.9477
-    - 761.3227
-  - - 761.6727
-    - 770.6227
-  - - 770.9727
-    - 776.0727
-  - - 777.5727
-    - 783.6477
-  - - 783.9977
-    - 789.2477
-  - - 790.7477
-    - 797.0977
-  - - 797.4477
-    - 805.3477
-  - - 805.6977
-    - 815.2977
+  - - 762.177
+    - 766.552
+  - - 766.902
+    - 775.852
+  - - 776.202
+    - 781.302
+  - - 782.802
+    - 788.877
+  - - 789.227
+    - 794.477
+  - - 795.977
+    - 802.327
+  - - 802.677
+    - 810.577
+  - - 810.927
+    - 820.527
   beat: 'D43 (4): the round parts per side, ground vs rider (18 -> 5, 7 -> 20); pointer U13'
   visual: 'A three-row grid (house s19d pattern) in the column: rows ''ground'', ''storm''s motion'', ''rider'' × columns ''north side'' (top) and ''south side'':
     6.9 | 18.2; −13.0 | +13.2; 19.9 | 5.0 (m/s, the motion row orange, signs with ''−'' glyphs and rose for negative). Picture zone: the ring with sector bands; the
@@ -1123,31 +1122,31 @@ scenes:
     timing_source: dryrun1
 - id: s12_invariant
   t:
-  - 816.0977
-  - 888.5977
+  - 821.327
+  - 893.827
   sentence_times:
-  - - 816.0977
-    - 818.8227
-  - - 819.1727
-    - 823.2477
-  - - 823.5977
-    - 834.5227
-  - - 836.0227
-    - 841.1227
-  - - 842.6227
-    - 844.6227
-  - - 844.9727
-    - 856.2727
-  - - 856.6227
-    - 859.9477
-  - - 860.2977
-    - 867.9477
-  - - 869.4477
-    - 874.6227
-  - - 874.9727
-    - 879.1227
-  - - 879.4727
-    - 887.7977
+  - - 821.327
+    - 824.052
+  - - 824.402
+    - 828.477
+  - - 828.827
+    - 839.752
+  - - 841.252
+    - 846.352
+  - - 847.852
+    - 849.852
+  - - 850.202
+    - 861.502
+  - - 861.852
+    - 865.177
+  - - 865.527
+    - 873.177
+  - - 874.677
+    - 879.852
+  - - 880.202
+    - 884.352
+  - - 884.702
+    - 893.027
   beat: 'intuition: ring averages unchanged (14.1 vs 13.8; −6.0 vs −5.9); the uniform-wind picture; Brest gust 84 kt (build-1 s44, kept)'
   visual: 'Two rings side by side (ground left, rider right) at 03 UTC with their arrows; under each ring the ring-mean round ''≈ 14 m/s'' and ring-mean inflow ''≈
     −6 m/s'' (rose, ''−'' glyph) on S2-S3, gold ''same'' links between the pairs. S5: a uniform arrow field (orange) on a circle, its round parts plus on one side
@@ -1189,41 +1188,41 @@ scenes:
     timing_source: dryrun1
 - id: s13_tau
   t:
-  - 888.5977
-  - 985.7227
+  - 893.827
+  - 990.952
   sentence_times:
-  - - 888.5977
-    - 893.0977
-  - - 893.4477
-    - 896.6727
-  - - 897.0227
-    - 902.5727
-  - - 902.9227
-    - 911.1977
-  - - 911.5477
-    - 917.4727
-  - - 917.8227
-    - 921.1227
-  - - 921.4727
-    - 924.3227
-  - - 924.6727
-    - 931.4977
-  - - 931.8477
-    - 935.1977
-  - - 936.6977
-    - 941.9227
-  - - 942.2727
-    - 950.6977
-  - - 951.0477
-    - 954.9727
-  - - 955.3227
-    - 962.1227
-  - - 962.4727
-    - 970.2727
-  - - 971.7727
-    - 976.4977
-  - - 976.8477
-    - 984.9227
+  - - 893.827
+    - 898.327
+  - - 898.677
+    - 901.902
+  - - 902.252
+    - 907.802
+  - - 908.152
+    - 916.427
+  - - 916.777
+    - 922.702
+  - - 923.052
+    - 926.352
+  - - 926.702
+    - 929.552
+  - - 929.902
+    - 936.727
+  - - 937.077
+    - 940.427
+  - - 941.927
+    - 947.152
+  - - 947.502
+    - 955.927
+  - - 956.277
+    - 960.202
+  - - 960.552
+    - 967.352
+  - - 967.702
+    - 975.502
+  - - 977.002
+    - 981.727
+  - - 982.077
+    - 990.152
   beat: 'building block D44 (1): two observers; tau defined; what ∂p/∂τ means'
   visual: 'Map (as s08, isobars only + msl shading with colour bar 950-1010 hPa beside it) at 23 UTC -> 01 UTC: a frozen-pattern ghost (slate, the 23 UTC isobars
     slid along U by 1 h and 2 h) beside the real field (warm white); a fixed barometer icon (PoleThermometer style, slate) at ''Plymouth'', labelled within 1 s of
@@ -1242,7 +1241,7 @@ scenes:
     vallis_eq: none in Vallis; Kundu (B.2.1) change of variables ξ = x − Ut, τ = t (ξ written x′ here, as on the train)
     page_png: _private/Kundu_AppendixB_Mathematical_Tools.pdf page 5 (printed 861)
   calc_rows:
-  - \frac{\partial p}{\partial t}\Big|_{x\ \text{fixed}}\qquad\text{vs}\qquad \frac{\partial p}{\partial\tau}\Big|_{x'\ \text{fixed}}
+  - \dfrac{\partial p}{\partial t}\Big|_{x\ \text{fixed}}\qquad\text{vs}\qquad \dfrac{\partial p}{\partial\tau}\Big|_{x'\ \text{fixed}}
   physics_source:
     fn: fluidpy.geo.sphere.destination_point (frozen ghost slid along U); fluidpy.diag.cyclone.translation_velocity
     params:
@@ -1278,50 +1277,49 @@ scenes:
     timing_source: dryrun1
 - id: s14_tau_derive
   t:
-  - 985.7227
-  - 1092.4977
+  - 990.952
+  - 1101.607
   sentence_times:
-  - - 985.7227
-    - 987.8727
-  - - 988.2227
-    - 990.4227
-  - - 990.7727
-    - 998.0477
-  - - 998.3977
-    - 1003.1727
-  - - 1003.5227
-    - 1013.6227
-  - - 1013.9727
-    - 1020.8477
-  - - 1022.3477
-    - 1027.4977
-  - - 1027.8477
-    - 1035.7477
-  - - 1037.2477
-    - 1042.1227
-  - - 1042.4727
-    - 1050.1977
-  - - 1051.6977
-    - 1053.8727
-  - - 1054.2227
-    - 1057.2227
-  - - 1057.5727
-    - 1061.0477
-  - - 1061.3977
-    - 1069.9227
-  - - 1070.2727
-    - 1076.7477
-  - - 1077.0977
-    - 1082.2227
-  - - 1083.7227
-    - 1091.6977
+  - - 990.952
+    - 993.102
+  - - 993.452
+    - 995.652
+  - - 996.002
+    - 1007.157
+  - - 1007.507
+    - 1012.282
+  - - 1012.632
+    - 1022.732
+  - - 1023.082
+    - 1029.957
+  - - 1031.457
+    - 1036.607
+  - - 1036.957
+    - 1044.857
+  - - 1046.357
+    - 1051.232
+  - - 1051.582
+    - 1059.307
+  - - 1060.807
+    - 1062.982
+  - - 1063.332
+    - 1066.332
+  - - 1066.682
+    - 1070.157
+  - - 1070.507
+    - 1079.032
+  - - 1079.382
+    - 1085.857
+  - - 1086.207
+    - 1091.332
+  - - 1092.832
+    - 1100.807
   beat: 'derivation D44 (2)-(4): the traveller''s chain rule -> ∂p/∂t = ∂p/∂τ − U·∇p; every term read'
   visual: 'Column builds D44 one row per step: the derivatives movie''s traveller line (68 px, faint), the rider''s version, the move across the ''='' (a gold arrow
     carrying U·∇p to the other side, its sign flipping on arrival), the result (96 px) with underbraces ''barometer'' (slate), ''storm changing'' (orange), ''pattern
     sliding past'' (teal); then a units row ''km/h × hPa/km = hPa/h'' with ''km'' struck. Picture zone: a 1-D pressure profile (slate curve, hPa vs distance along
     U) sliding right; the barometer''s spot marked; a gold tangent ''slope''.'
-  voiceover: 'How are the two rates linked? The next three steps show it. They''re for anyone who wants every step, so skip ahead to the time on screen if you''d
-    rather go straight to the numbers. Step one: the rider is a traveller, moving at bold capital U. In the derivatives movie, we found the rate a traveller feels:
+  voiceover: 'How are the two rates linked? The next three steps show it. They''re for anyone who wants every step and aren''t needed for the intuition of weather, climate or maps, so skip ahead to the time on screen if you''d rather go straight to the numbers. Step one: the rider is a traveller, moving at bold capital U. In the derivatives movie, we found the rate a traveller feels:
     the change at a fixed place, plus the traveller''s speed times the slope, in each direction. With the dot product, that''s partial p by partial t, plus bold capital
     U dot grad p. [beat] Step two: for this traveller, that rate is partial p by partial tau. So partial p by partial tau equals partial p by partial t, plus bold
     capital U dot grad p. [beat] Step three: move bold capital U dot grad p to the other side. Partial p by partial t equals partial p by partial tau, minus bold
@@ -1330,12 +1328,12 @@ scenes:
     hectopascals per hour. With its minus sign, it''s the change caused by the pattern sliding past. [beat] If you skipped, here''s what to keep: what the barometer
     sees is the storm changing, minus the pattern sliding past.'
   on_screen_eq:
-    latex: \frac{\partial p}{\partial t}=\frac{\partial p}{\partial\tau}-\mathbf U\cdot\nabla p
+    latex: \dfrac{\partial p}{\partial t}=\dfrac{\partial p}{\partial\tau}-\mathbf U\cdot\nabla p
     vallis_eq: none in Vallis; Kundu (B.2.2) ∂/∂t = −U ∂/∂ξ − V ∂/∂ψ − W ∂/∂ζ + ∂/∂τ (W = 0, vector form), Example B.2
     page_png: _private/Kundu_AppendixB_Mathematical_Tools.pdf page 5 (printed 861)
   calc_rows:
-  - \frac{\partial p}{\partial\tau}=\frac{\partial p}{\partial t}+\mathbf U\cdot\nabla p
-  - \frac{\text{km}}{\text{h}}\times\frac{\text{hPa}}{\text{km}}=\frac{\text{hPa}}{\text{h}}
+  - \dfrac{\partial p}{\partial\tau}=\dfrac{\partial p}{\partial t}+\mathbf U\cdot\nabla p
+  - \dfrac{\text{km}}{\text{h}}\times\dfrac{\text{hPa}}{\text{km}}=\dfrac{\text{hPa}}{\text{h}}
   physics_source:
     fn: fluidpy.geo.calculus.chain_rule_rate
     params: {}
@@ -1347,15 +1345,15 @@ scenes:
     goal: link the barometer's rate to the storm's own change
     steps:
     - - traveller's rate
-      - \frac{dp}{dt}=\frac{\partial p}{\partial t}+\mathbf U\cdot\nabla p
+      - \dfrac{dp}{dt}=\dfrac{\partial p}{\partial t}+\mathbf U\cdot\nabla p
       - 'derivatives movie: chain rule for a traveller moving at U'
       - change at a place + speed × slope
     - - the rider is that traveller
-      - \frac{\partial p}{\partial\tau}=\frac{\partial p}{\partial t}+\mathbf U\cdot\nabla p
+      - \dfrac{\partial p}{\partial\tau}=\dfrac{\partial p}{\partial t}+\mathbf U\cdot\nabla p
       - holding x′ fixed = moving at U
       - the rider's rate
     - - move a term
-      - \frac{\partial p}{\partial t}=\frac{\partial p}{\partial\tau}-\mathbf U\cdot\nabla p
+      - \dfrac{\partial p}{\partial t}=\dfrac{\partial p}{\partial\tau}-\mathbf U\cdot\nabla p
       - subtract U·∇p from both sides
       - the barometer's rate
     - - read the terms
@@ -1377,7 +1375,7 @@ scenes:
     frame 0 (Should 18).'
   skip_chip:
     'on': S3 (AT(k, 'skip ahead'))
-    text: every step, for those who want it · not needed for weather, climate or GIS · skip to 18:02
+    text: every step · optional · skip to 18:02
     look: small warm-white keyword chip at the top of the column (54 px, gold outline), fades after 6 s; timestamp re-filled after the final TTS
   skip_takeaway:
     'on': S17
@@ -1391,27 +1389,27 @@ scenes:
     timing_source: splice2
 - id: s15_plymouth
   t:
-  - 1092.4977
-  - 1174.4477
+  - 1101.607
+  - 1183.557
   sentence_times:
-  - - 1092.4977
-    - 1095.6477
-  - - 1095.9977
-    - 1106.3227
-  - - 1106.6727
-    - 1120.1477
-  - - 1121.6477
-    - 1127.3977
-  - - 1127.7477
-    - 1135.5727
-  - - 1137.0727
-    - 1144.1227
-  - - 1144.4727
-    - 1154.7227
-  - - 1156.2227
-    - 1165.2977
-  - - 1165.6477
-    - 1172.9477
+  - - 1101.607
+    - 1104.757
+  - - 1105.107
+    - 1115.432
+  - - 1115.782
+    - 1129.257
+  - - 1130.757
+    - 1136.507
+  - - 1136.857
+    - 1144.682
+  - - 1146.182
+    - 1153.232
+  - - 1153.582
+    - 1163.832
+  - - 1165.332
+    - 1174.407
+  - - 1174.757
+    - 1182.057
   beat: 'application D44 (5): Plymouth numbers: −3.8, slope 0.061 hPa/km, U·∇p = 3.2, ∂p/∂τ = −0.6'
   visual: 'Map at 00 UTC (as s13) with Plymouth''s barometer, the tracked centre (''954.5 hPa'', gold), the distance bracket ''≈ 123 km'' and the pressure-gradient
     arrow at Plymouth (slate) next to the motion arrow U (orange), the small angle between them drawn. A TimeGraph inset under the map: Plymouth''s pressure 23-01
@@ -1426,9 +1424,9 @@ scenes:
     t plus bold capital U dot grad p. That''s minus three point eight plus three point two: about minus zero point six hectopascals per hour. [beat]'
   on_screen_eq: null
   calc_rows:
-  - \frac{\partial p}{\partial t}\approx\frac{956.5-964.1}{2\ \text{h}}\approx-3.8\ \text{hPa/h}
-  - \mathbf U\cdot\nabla p\approx52.5\ \tfrac{\text{km}}{\text{h}}\times0.061\ \tfrac{\text{hPa}}{\text{km}}\approx3.2\ \text{hPa/h}
-  - \frac{\partial p}{\partial\tau}\approx-3.8+3.2=-0.6\ \text{hPa/h}
+  - \dfrac{\partial p}{\partial t}\approx\dfrac{956.5-964.1}{2\ \text{h}}\approx-3.8\ \text{hPa/h}
+  - \mathbf U\cdot\nabla p\approx52.5\ \dfrac{\text{km}}{\text{h}}\times0.061\ \dfrac{\text{hPa}}{\text{km}}\approx3.2\ \text{hPa/h}
+  - \dfrac{\partial p}{\partial\tau}\approx-3.8+3.2=-0.6\ \text{hPa/h}
   physics_source:
     fn: fluidpy.geo.sphere.gradient (msl at 00 UTC 2 Nov); centred time difference; fluidpy.diag.cyclone.translation_velocity
     params:
@@ -1488,23 +1486,23 @@ scenes:
     timing_source: dryrun1
 - id: s16_meaning
   t:
-  - 1174.4477
-  - 1226.0477
+  - 1183.557
+  - 1235.157
   sentence_times:
-  - - 1174.4477
-    - 1184.3477
-  - - 1185.8477
-    - 1189.7977
-  - - 1190.1477
-    - 1193.1477
-  - - 1193.4977
-    - 1195.1477
-  - - 1195.4977
-    - 1211.1227
-  - - 1212.6227
-    - 1217.3727
-  - - 1217.7227
-    - 1225.2477
+  - - 1183.557
+    - 1193.457
+  - - 1194.957
+    - 1198.907
+  - - 1199.257
+    - 1202.257
+  - - 1202.607
+    - 1204.257
+  - - 1204.607
+    - 1220.232
+  - - 1221.732
+    - 1226.482
+  - - 1226.832
+    - 1234.357
   beat: 'meaning: −3.8 = −0.6 − 3.2 (Balance bars, Must 14 redesign); the centre check; pointers'
   visual: 'Picture zone (full height, x 80-1000): house Balance bars on a zero line, wide spacing: ''−3.8'' total (slate), ''−0.6 storm changing'' (orange), ''−3.2
     pattern sliding past'' (teal), each value label placed BESIDE its bar (to the right, x >= bar end + 24 px), never on or over a bar; the unit ''hPa per hour''
@@ -1520,7 +1518,7 @@ scenes:
     vallis_eq: 'none: the Plymouth numbers in ∂p/∂t = ∂p/∂τ − U·∇p'
     page_png: null
   calc_rows:
-  - \frac{954.0-954.9}{2\ \text{h}}\approx-0.5\ \text{hPa/h}
+  - \dfrac{954.0-954.9}{2\ \text{h}}\approx-0.5\ \text{hPa/h}
   physics_source:
     fn: fluidpy.diag.cyclone.track_by_continuity (msl_min at 23, 00, 01 UTC); fluidpy.geo.sphere.gradient
     params:
@@ -1550,29 +1548,29 @@ scenes:
     timing_source: dryrun1
 - id: s17_recap
   t:
-  - 1226.0477
-  - 1296.6477
+  - 1235.157
+  - 1305.757
   sentence_times:
-  - - 1226.0477
-    - 1237.8977
-  - - 1238.2477
-    - 1244.8977
-  - - 1245.2477
-    - 1250.4727
-  - - 1250.8227
-    - 1254.8727
-  - - 1255.2227
-    - 1260.3477
-  - - 1260.6977
-    - 1268.7727
-  - - 1269.1227
-    - 1276.2727
-  - - 1276.6227
-    - 1282.3977
-  - - 1282.7477
-    - 1289.3977
-  - - 1289.7477
-    - 1295.8477
+  - - 1235.157
+    - 1247.007
+  - - 1247.357
+    - 1254.007
+  - - 1254.357
+    - 1259.582
+  - - 1259.932
+    - 1263.982
+  - - 1264.332
+    - 1269.457
+  - - 1269.807
+    - 1277.882
+  - - 1278.232
+    - 1285.382
+  - - 1285.732
+    - 1291.507
+  - - 1291.857
+    - 1298.507
+  - - 1298.857
+    - 1304.957
   beat: recap ('To sum up'); last sentence the teaser to Part 6, Routes
   visual: 'One beat per sentence, mini pictures reused (no headings): the train with ''x = x′ + U t'', ''u = u′ + U''; the falling ball ''same 9.8''; the three-row
     grid ''−4.0 + 5.4 = 0 + 1.4''; Ciaran with U ''≈ 15 m/s''; the arrow subtraction triangle; the two rings ''≈ 14''; the Plymouth bars ''−3.8 = −0.6 − 3.2''; a
@@ -1606,15 +1604,15 @@ scenes:
     timing_source: splice3
 - id: s18_end
   t:
-  - 1296.6477
-  - 1319.5477
+  - 1305.757
+  - 1328.657
   sentence_times:
-  - - 1296.6477
-    - 1302.8477
-  - - 1303.1977
-    - 1311.2477
-  - - 1311.5977
-    - 1319.2477
+  - - 1305.757
+    - 1311.957
+  - - 1312.307
+    - 1320.357
+  - - 1320.707
+    - 1328.357
   beat: 'series end card (maths ending, HOUSE_STYLE §3, word for word; decision: maths end card)'
   visual: 'END CARD (house EndCard): four faint topic thumbnails along the top (the train with two rulers, the arrow-subtraction triangle, Ciaran''s ring
     with U, the Plymouth barometer); keyword lines ''a series of maths tutorials'' (68 px) and ''atmospheric science · meteorology · fluid dynamics'' (54 px); notebook icon ''coordinates

@@ -3258,1177 +3258,1179 @@
      "end_frame": 63527
     },
     {
-     "text": "They're for anyone who wants every step, and not needed for the intuition, so feel free to skip ahead to the time on screen.",
+     "text": "They're for anyone who wants every step, and not needed for the intuition of weather, climate science or mapping, so feel free to skip ahead to the time on screen.",
      "audio_text": null,
      "start": 2117.9219,
-     "end": 2125.7469,
-     "dur": 7.825,
+     "end": 2128.208,
+     "dur": 10.2861,
      "start_frame": 63538,
-     "end_frame": 63772
+     "end_frame": 63846,
+     "estimated": true
     },
     {
      "text": "Take a small patch of the surface, between two meridians and two parallels.",
      "audio_text": null,
-     "start": 2126.0969,
-     "end": 2131.3469,
+     "start": 2128.558,
+     "end": 2133.808,
      "dur": 5.25,
-     "start_frame": 63783,
-     "end_frame": 63940
+     "start_frame": 63857,
+     "end_frame": 64014
     },
     {
      "text": "Its north-south side is the Earth's radius times delta phi.",
      "audio_text": null,
-     "start": 2131.6969,
-     "end": 2136.2719,
+     "start": 2134.158,
+     "end": 2138.733,
      "dur": 4.575,
-     "start_frame": 63951,
-     "end_frame": 64088
+     "start_frame": 64025,
+     "end_frame": 64162
     },
     {
      "text": "Its east-west side is the Earth's radius times cosine phi times delta lambda.",
      "audio_text": null,
-     "start": 2136.6219,
-     "end": 2142.6719,
+     "start": 2139.083,
+     "end": 2145.133,
      "dur": 6.05,
-     "start_frame": 64099,
-     "end_frame": 64280
+     "start_frame": 64172,
+     "end_frame": 64354
     },
     {
      "text": "The two sides meet at a right angle, because meridians cross parallels at right angles.",
      "audio_text": null,
-     "start": 2143.0219,
-     "end": 2148.8969,
+     "start": 2145.483,
+     "end": 2151.358,
      "dur": 5.875,
-     "start_frame": 64291,
-     "end_frame": 64467
+     "start_frame": 64364,
+     "end_frame": 64541
     },
     {
      "text": "And when the patch is small, it's almost flat, so it's almost a rectangle.",
      "audio_text": null,
-     "start": 2149.2469,
-     "end": 2154.3969,
+     "start": 2151.708,
+     "end": 2156.858,
      "dur": 5.15,
-     "start_frame": 64477,
-     "end_frame": 64632
+     "start_frame": 64551,
+     "end_frame": 64706
     },
     {
      "text": "The area of a rectangle is its width times its height.",
      "audio_text": null,
-     "start": 2154.7469,
-     "end": 2158.8219,
+     "start": 2157.208,
+     "end": 2161.283,
      "dur": 4.075,
-     "start_frame": 64642,
-     "end_frame": 64765
+     "start_frame": 64716,
+     "end_frame": 64838
     },
     {
      "text": "So the patch's area is about the east-west side times the north-south side.",
      "audio_text": null,
-     "start": 2159.1719,
-     "end": 2164.1219,
+     "start": 2161.633,
+     "end": 2166.583,
      "dur": 4.95,
-     "start_frame": 64775,
-     "end_frame": 64924
+     "start_frame": 64849,
+     "end_frame": 64997
     },
     {
      "text": "Collecting the pieces, that's the radius squared, times cosine phi, times delta phi, times delta lambda.",
      "audio_text": null,
-     "start": 2164.4719,
-     "end": 2171.9469,
+     "start": 2166.933,
+     "end": 2174.408,
      "dur": 7.475,
-     "start_frame": 64934,
-     "end_frame": 65158
+     "start_frame": 65008,
+     "end_frame": 65232
     },
     {
      "text": "As the patch shrinks, the bending of the surface matters less and less.",
      "audio_text": null,
-     "start": 2172.2969,
-     "end": 2177.2219,
+     "start": 2174.758,
+     "end": 2179.683,
      "dur": 4.925,
-     "start_frame": 65169,
-     "end_frame": 65317
+     "start_frame": 65243,
+     "end_frame": 65390
     },
     {
      "text": "In the limit, we write the tiny area as d capital A, and the tiny steps as d phi and d lambda.",
      "audio_text": null,
-     "start": 2177.5719,
-     "end": 2184.8969,
+     "start": 2180.033,
+     "end": 2187.358,
      "dur": 7.325,
-     "start_frame": 65327,
-     "end_frame": 65547
+     "start_frame": 65401,
+     "end_frame": 65621
     },
     {
      "text": "So d capital A equals the radius squared, times cosine phi, d phi, d lambda.",
      "audio_text": null,
-     "start": 2185.2469,
-     "end": 2191.8469,
+     "start": 2187.708,
+     "end": 2194.308,
      "dur": 6.6,
-     "start_frame": 65557,
-     "end_frame": 65755
+     "start_frame": 65631,
+     "end_frame": 65829
     },
     {
      "text": "From here on, delta means a small step, and a small d means a step so tiny that the approximation becomes exact.",
      "audio_text": null,
-     "start": 2192.1969,
-     "end": 2200.4219,
+     "start": 2194.658,
+     "end": 2202.883,
      "dur": 8.225,
-     "start_frame": 65766,
-     "end_frame": 66013
+     "start_frame": 65840,
+     "end_frame": 66086
     },
     {
      "text": "And the angles are always in radians.",
      "audio_text": null,
-     "start": 2200.7719,
-     "end": 2203.6469,
+     "start": 2203.233,
+     "end": 2206.108,
      "dur": 2.875,
-     "start_frame": 66023,
-     "end_frame": 66109
+     "start_frame": 66097,
+     "end_frame": 66183
     }
    ],
-   "end": 2204.4469,
+   "end": 2206.908,
    "start_frame": 62915,
-   "end_frame": 66133
+   "end_frame": 66207
   },
   {
    "id": "s28_box_areas",
-   "start": 2204.4469,
+   "start": 2206.908,
    "sentences": [
     {
      "text": "Let's work out the area of one ERA5 box.",
      "audio_text": "Let's work out the area of one [ERA5](/ˌiˌɑɹˈA fˈIv/) box.",
-     "start": 2204.4469,
-     "end": 2208.1719,
+     "start": 2206.908,
+     "end": 2210.633,
      "dur": 3.725,
-     "start_frame": 66133,
-     "end_frame": 66245
+     "start_frame": 66207,
+     "end_frame": 66319
     },
     {
      "text": "A quarter of a degree is zero point zero zero four three six radians.",
      "audio_text": null,
-     "start": 2208.5219,
-     "end": 2213.9719,
+     "start": 2210.983,
+     "end": 2216.433,
      "dur": 5.45,
-     "start_frame": 66256,
-     "end_frame": 66419
+     "start_frame": 66329,
+     "end_frame": 66493
     },
     {
      "text": "The radius squared is six thousand three hundred and seventy one squared, about forty point six million square kilometres.",
      "audio_text": null,
-     "start": 2214.3219,
-     "end": 2222.5719,
+     "start": 2216.783,
+     "end": 2225.033,
      "dur": 8.25,
-     "start_frame": 66430,
-     "end_frame": 66677,
+     "start_frame": 66503,
+     "end_frame": 66751,
      "beat": true
     },
     {
      "text": "Times zero point zero zero four three six, and times zero point zero zero four three six again, that's about seven hundred and seventy three square kilometres, for a box on the equator.",
      "audio_text": null,
-     "start": 2224.0719,
-     "end": 2236.6969,
+     "start": 2226.533,
+     "end": 2239.158,
      "dur": 12.625,
-     "start_frame": 66722,
-     "end_frame": 67101,
+     "start_frame": 66796,
+     "end_frame": 67175,
      "beat": true
     },
     {
      "text": "Every other box is that, times cosine phi.",
      "audio_text": null,
-     "start": 2238.1969,
-     "end": 2241.7719,
+     "start": 2240.658,
+     "end": 2244.233,
      "dur": 3.575,
-     "start_frame": 67146,
-     "end_frame": 67253
+     "start_frame": 67220,
+     "end_frame": 67327
     },
     {
      "text": "At Khulna, seven hundred and seventy three times zero point nine two one nine is about seven hundred and twelve square kilometres.",
      "audio_text": null,
-     "start": 2242.1219,
-     "end": 2251.2469,
+     "start": 2244.583,
+     "end": 2253.708,
      "dur": 9.125,
-     "start_frame": 67264,
-     "end_frame": 67537,
+     "start_frame": 67337,
+     "end_frame": 67611,
      "beat": true
     },
     {
      "text": "At Brest, times zero point six six three nine, it's about five hundred and thirteen.",
      "audio_text": null,
-     "start": 2252.7469,
-     "end": 2258.7219,
+     "start": 2255.208,
+     "end": 2261.183,
      "dur": 5.975,
-     "start_frame": 67582,
-     "end_frame": 67762,
+     "start_frame": 67656,
+     "end_frame": 67835,
      "beat": true
     },
     {
      "text": "At Longyearbyen, times zero point two zero four five, it's only about a hundred and fifty eight.",
      "audio_text": null,
-     "start": 2260.2219,
-     "end": 2266.9219,
+     "start": 2262.683,
+     "end": 2269.383,
      "dur": 6.7,
-     "start_frame": 67807,
-     "end_frame": 68008,
+     "start_frame": 67880,
+     "end_frame": 68081,
      "beat": true
     },
     {
      "text": "As a check, a computer can work out the exact area of the curved patch at Brest.",
      "audio_text": null,
-     "start": 2268.4219,
-     "end": 2274.1469,
+     "start": 2270.883,
+     "end": 2276.608,
      "dur": 5.725,
-     "start_frame": 68053,
-     "end_frame": 68224
+     "start_frame": 68126,
+     "end_frame": 68298
     },
     {
      "text": "It's also about five hundred and thirteen point one square kilometres, so the flat rectangle is a very good approximation.",
      "audio_text": null,
-     "start": 2274.4969,
-     "end": 2282.8469,
+     "start": 2276.958,
+     "end": 2285.308,
      "dur": 8.35,
-     "start_frame": 68235,
-     "end_frame": 68485,
+     "start_frame": 68309,
+     "end_frame": 68559,
      "beat": true
     }
    ],
-   "end": 2284.3469,
-   "start_frame": 66133,
-   "end_frame": 68530
+   "end": 2286.808,
+   "start_frame": 66207,
+   "end_frame": 68604
   },
   {
    "id": "s29_strip_round",
-   "start": 2284.3469,
+   "start": 2286.808,
    "sentences": [
     {
      "text": "Now a bigger question.",
      "audio_text": null,
-     "start": 2284.3469,
-     "end": 2286.3469,
+     "start": 2286.808,
+     "end": 2288.808,
      "dur": 2.0,
-     "start_frame": 68530,
-     "end_frame": 68590
+     "start_frame": 68604,
+     "end_frame": 68664
     },
     {
      "text": "How much of the Earth's surface lies between the equator and some latitude, say thirty degrees north?",
      "audio_text": null,
-     "start": 2286.6969,
-     "end": 2293.1969,
+     "start": 2289.158,
+     "end": 2295.658,
      "dur": 6.5,
-     "start_frame": 68601,
-     "end_frame": 68796
+     "start_frame": 68675,
+     "end_frame": 68870
     },
     {
      "text": "Why care?",
      "audio_text": null,
-     "start": 2293.5469,
-     "end": 2294.9719,
+     "start": 2296.008,
+     "end": 2297.433,
      "dur": 1.425,
-     "start_frame": 68806,
-     "end_frame": 68849
+     "start_frame": 68880,
+     "end_frame": 68923
     },
     {
      "text": "Because that's how much of the planet is tropical and subtropical, and it tells us how much each part of the world counts in a global average.",
      "audio_text": null,
-     "start": 2295.3219,
-     "end": 2303.8219,
+     "start": 2297.783,
+     "end": 2306.283,
      "dur": 8.5,
-     "start_frame": 68860,
-     "end_frame": 69115
+     "start_frame": 68933,
+     "end_frame": 69188
     },
     {
      "text": "Let's build that area from thin strips.",
      "audio_text": null,
-     "start": 2304.1719,
-     "end": 2307.1219,
+     "start": 2306.633,
+     "end": 2309.583,
      "dur": 2.95,
-     "start_frame": 69125,
-     "end_frame": 69214
+     "start_frame": 69199,
+     "end_frame": 69287
     },
     {
      "text": "Take one strip that goes all the way round the Earth, between latitude phi and a little further north, phi plus delta phi.",
      "audio_text": null,
-     "start": 2307.4719,
-     "end": 2315.6969,
+     "start": 2309.933,
+     "end": 2318.158,
      "dur": 8.225,
-     "start_frame": 69224,
-     "end_frame": 69471
+     "start_frame": 69298,
+     "end_frame": 69545
     },
     {
      "text": "Cut it and unroll it, and it's almost a long, thin rectangle.",
      "audio_text": null,
-     "start": 2316.0469,
-     "end": 2320.6719,
+     "start": 2318.508,
+     "end": 2323.133,
      "dur": 4.625,
-     "start_frame": 69481,
-     "end_frame": 69620
+     "start_frame": 69555,
+     "end_frame": 69694
     },
     {
      "text": "Its length is the length of the parallel: two pi times its radius, which is two pi, times the Earth's radius, times cosine phi.",
      "audio_text": null,
-     "start": 2321.0219,
-     "end": 2329.9719,
+     "start": 2323.483,
+     "end": 2332.433,
      "dur": 8.95,
-     "start_frame": 69631,
-     "end_frame": 69899
+     "start_frame": 69704,
+     "end_frame": 69973
     },
     {
      "text": "Its width is the step north: the Earth's radius times delta phi.",
      "audio_text": null,
-     "start": 2330.3219,
-     "end": 2335.2219,
+     "start": 2332.783,
+     "end": 2337.683,
      "dur": 4.9,
-     "start_frame": 69910,
-     "end_frame": 70057
+     "start_frame": 69983,
+     "end_frame": 70130
     },
     {
      "text": "So the strip's area is about two pi, times the radius squared, times cosine phi, times delta phi.",
      "audio_text": null,
-     "start": 2335.5719,
-     "end": 2342.8719,
+     "start": 2338.033,
+     "end": 2345.333,
      "dur": 7.3,
-     "start_frame": 70067,
-     "end_frame": 70286
+     "start_frame": 70141,
+     "end_frame": 70360
     }
    ],
-   "end": 2343.6719,
-   "start_frame": 68530,
-   "end_frame": 70310
+   "end": 2346.133,
+   "start_frame": 68604,
+   "end_frame": 70384
   },
   {
    "id": "s30_slope_of_sine",
-   "start": 2343.6719,
+   "start": 2346.133,
    "sentences": [
     {
      "text": "Adding up lots of cosines like this looks hard.",
      "audio_text": null,
-     "start": 2343.6719,
-     "end": 2346.9719,
+     "start": 2346.133,
+     "end": 2349.433,
      "dur": 3.3,
-     "start_frame": 70310,
-     "end_frame": 70409
+     "start_frame": 70384,
+     "end_frame": 70483
     },
     {
      "text": "But Part 2 gave us a shortcut.",
      "audio_text": null,
-     "start": 2347.3219,
-     "end": 2349.9719,
+     "start": 2349.783,
+     "end": 2352.433,
      "dur": 2.65,
-     "start_frame": 70420,
-     "end_frame": 70499
+     "start_frame": 70493,
+     "end_frame": 70573
     },
     {
      "text": "When an angle grows by a small step, its sine grows by about its cosine times that step.",
      "audio_text": null,
-     "start": 2350.3219,
-     "end": 2356.8219,
+     "start": 2352.783,
+     "end": 2359.283,
      "dur": 6.5,
-     "start_frame": 70510,
-     "end_frame": 70705
+     "start_frame": 70583,
+     "end_frame": 70778
     },
     {
      "text": "So cosine phi times delta phi is just how much sine phi grows across the strip.",
      "audio_text": null,
-     "start": 2357.1719,
-     "end": 2363.1469,
+     "start": 2359.633,
+     "end": 2365.608,
      "dur": 5.975,
-     "start_frame": 70715,
-     "end_frame": 70894
+     "start_frame": 70789,
+     "end_frame": 70968
     },
     {
      "text": "We call that delta sine phi.",
      "audio_text": null,
-     "start": 2363.4969,
-     "end": 2365.9969,
+     "start": 2365.958,
+     "end": 2368.458,
      "dur": 2.5,
-     "start_frame": 70905,
-     "end_frame": 70980
+     "start_frame": 70979,
+     "end_frame": 71054
     },
     {
      "text": "Let's check it with a strip ten degrees wide, from twenty to thirty degrees north.",
      "audio_text": null,
-     "start": 2366.3469,
-     "end": 2371.7219,
+     "start": 2368.808,
+     "end": 2374.183,
      "dur": 5.375,
-     "start_frame": 70990,
-     "end_frame": 71152
+     "start_frame": 71064,
+     "end_frame": 71225
     },
     {
      "text": "Ten degrees is zero point one seven four five radians.",
      "audio_text": null,
-     "start": 2372.0719,
-     "end": 2376.6469,
+     "start": 2374.533,
+     "end": 2379.108,
      "dur": 4.575,
-     "start_frame": 71162,
-     "end_frame": 71299
+     "start_frame": 71236,
+     "end_frame": 71373
     },
     {
      "text": "Cosine phi at the middle of the strip, at twenty five degrees, is zero point nine zero six.",
      "audio_text": null,
-     "start": 2376.9969,
-     "end": 2383.5469,
+     "start": 2379.458,
+     "end": 2386.008,
      "dur": 6.55,
-     "start_frame": 71310,
-     "end_frame": 71506
+     "start_frame": 71384,
+     "end_frame": 71580
     },
     {
      "text": "So cosine phi times delta phi is zero point nine zero six times zero point one seven four five, about zero point one five eight.",
      "audio_text": null,
-     "start": 2383.8969,
-     "end": 2394.0469,
+     "start": 2386.358,
+     "end": 2396.508,
      "dur": 10.15,
-     "start_frame": 71517,
-     "end_frame": 71821,
+     "start_frame": 71591,
+     "end_frame": 71895,
      "beat": true
     },
     {
      "text": "And sine phi grows from zero point three four two, at twenty degrees, to zero point five, at thirty degrees.",
      "audio_text": null,
-     "start": 2395.5469,
-     "end": 2403.6469,
+     "start": 2398.008,
+     "end": 2406.108,
      "dur": 8.1,
-     "start_frame": 71866,
-     "end_frame": 72109
+     "start_frame": 71940,
+     "end_frame": 72183
     },
     {
      "text": "That's a step of zero point one five eight too.",
      "audio_text": null,
-     "start": 2403.9969,
-     "end": 2407.2969,
+     "start": 2406.458,
+     "end": 2409.758,
      "dur": 3.3,
-     "start_frame": 72120,
-     "end_frame": 72219,
+     "start_frame": 72194,
+     "end_frame": 72293,
      "beat": true
     },
     {
      "text": "So the strip's area is two pi, times the radius squared, times delta sine phi: the change in sine phi across the strip.",
      "audio_text": null,
-     "start": 2408.7969,
-     "end": 2417.4469,
+     "start": 2411.258,
+     "end": 2419.908,
      "dur": 8.65,
-     "start_frame": 72264,
-     "end_frame": 72523
+     "start_frame": 72338,
+     "end_frame": 72597
     }
    ],
-   "end": 2418.2469,
-   "start_frame": 70310,
-   "end_frame": 72547
+   "end": 2420.708,
+   "start_frame": 70384,
+   "end_frame": 72621
   },
   {
    "id": "s31_adding_strips",
-   "start": 2418.2469,
+   "start": 2420.708,
    "sentences": [
     {
      "text": "Now stack the strips, from the equator all the way up to latitude phi.",
      "audio_text": null,
-     "start": 2418.2469,
-     "end": 2423.2219,
+     "start": 2420.708,
+     "end": 2425.683,
      "dur": 4.975,
-     "start_frame": 72547,
-     "end_frame": 72697
+     "start_frame": 72621,
+     "end_frame": 72770
     },
     {
      "text": "Each strip adds its own step in sine phi, like the steps of a staircase.",
      "audio_text": null,
-     "start": 2423.5719,
-     "end": 2428.6469,
+     "start": 2426.033,
+     "end": 2431.108,
      "dur": 5.075,
-     "start_frame": 72707,
-     "end_frame": 72859
+     "start_frame": 72781,
+     "end_frame": 72933
     },
     {
      "text": "And all the steps of a staircase add up to the height of the top, minus the height of the bottom.",
      "audio_text": null,
-     "start": 2428.9969,
-     "end": 2434.7219,
+     "start": 2431.458,
+     "end": 2437.183,
      "dur": 5.725,
-     "start_frame": 72870,
-     "end_frame": 73042
+     "start_frame": 72944,
+     "end_frame": 73115
     },
     {
      "text": "At the equator, sine phi is zero.",
      "audio_text": null,
-     "start": 2435.0719,
-     "end": 2438.0719,
+     "start": 2437.533,
+     "end": 2440.533,
      "dur": 3.0,
-     "start_frame": 73052,
-     "end_frame": 73142
+     "start_frame": 73126,
+     "end_frame": 73216
     },
     {
      "text": "So all the steps together add up to just sine phi.",
      "audio_text": null,
-     "start": 2438.4219,
-     "end": 2441.9469,
+     "start": 2440.883,
+     "end": 2444.408,
      "dur": 3.525,
-     "start_frame": 73153,
-     "end_frame": 73258
+     "start_frame": 73226,
+     "end_frame": 73332
     },
     {
      "text": "That means the area between the equator and latitude phi is two pi, times the radius squared, times sine phi.",
      "audio_text": null,
-     "start": 2442.2969,
-     "end": 2450.0719,
+     "start": 2444.758,
+     "end": 2452.533,
      "dur": 7.775,
-     "start_frame": 73269,
-     "end_frame": 73502,
+     "start_frame": 73343,
+     "end_frame": 73576,
      "beat": true
     },
     {
      "text": "Let's check with ten degree strips, from the equator to thirty degrees.",
      "audio_text": null,
-     "start": 2451.5719,
-     "end": 2456.2969,
+     "start": 2454.033,
+     "end": 2458.758,
      "dur": 4.725,
-     "start_frame": 73547,
-     "end_frame": 73689
+     "start_frame": 73621,
+     "end_frame": 73763
     },
     {
      "text": "Their steps in sine phi are zero point one seven four, zero point one six eight, and zero point one five eight.",
      "audio_text": null,
-     "start": 2456.6469,
-     "end": 2464.7219,
+     "start": 2459.108,
+     "end": 2467.183,
      "dur": 8.075,
-     "start_frame": 73699,
-     "end_frame": 73942,
+     "start_frame": 73773,
+     "end_frame": 74015,
      "beat": true
     },
     {
      "text": "They add up to zero point five, which is exactly the sine of thirty degrees.",
      "audio_text": null,
-     "start": 2466.2219,
-     "end": 2471.7719,
+     "start": 2468.683,
+     "end": 2474.233,
      "dur": 5.55,
-     "start_frame": 73987,
-     "end_frame": 74153,
+     "start_frame": 74060,
+     "end_frame": 74227,
      "beat": true
     },
     {
      "text": "This adding up of thinner and thinner strips has a name: integration.",
      "audio_text": null,
-     "start": 2473.2719,
-     "end": 2477.8969,
+     "start": 2475.733,
+     "end": 2480.358,
      "dur": 4.625,
-     "start_frame": 74198,
-     "end_frame": 74337
+     "start_frame": 74272,
+     "end_frame": 74411
     },
     {
      "text": "We write it with a tall S, for sum, and a small d for the tiny steps.",
      "audio_text": null,
-     "start": 2478.2469,
-     "end": 2483.4719,
+     "start": 2480.708,
+     "end": 2485.933,
      "dur": 5.225,
-     "start_frame": 74347,
-     "end_frame": 74504
+     "start_frame": 74421,
+     "end_frame": 74578
     },
     {
      "text": "Inside, we call the latitude of each strip phi prime, so it isn't mixed up with the top latitude, phi.",
      "audio_text": null,
-     "start": 2483.8219,
-     "end": 2490.9969,
+     "start": 2486.283,
+     "end": 2493.458,
      "dur": 7.175,
-     "start_frame": 74515,
-     "end_frame": 74730
+     "start_frame": 74588,
+     "end_frame": 74804
     },
     {
      "text": "So the integral of cosine phi prime, d phi prime, from zero up to phi, equals sine phi.",
      "audio_text": null,
-     "start": 2491.3469,
-     "end": 2498.3469,
+     "start": 2493.808,
+     "end": 2500.808,
      "dur": 7.0,
-     "start_frame": 74740,
-     "end_frame": 74950
+     "start_frame": 74814,
+     "end_frame": 75024
     }
    ],
-   "end": 2499.1469,
-   "start_frame": 72547,
-   "end_frame": 74974
+   "end": 2501.608,
+   "start_frame": 72621,
+   "end_frame": 75048
   },
   {
    "id": "s32_band_fraction",
-   "start": 2499.1469,
+   "start": 2501.608,
    "sentences": [
     {
      "text": "Let's check the formula.",
      "audio_text": null,
-     "start": 2499.1469,
-     "end": 2501.2969,
+     "start": 2501.608,
+     "end": 2503.758,
      "dur": 2.15,
-     "start_frame": 74974,
-     "end_frame": 75039
+     "start_frame": 75048,
+     "end_frame": 75113
     },
     {
      "text": "Go all the way up to the North Pole.",
      "audio_text": null,
-     "start": 2501.6469,
-     "end": 2504.1719,
+     "start": 2504.108,
+     "end": 2506.633,
      "dur": 2.525,
-     "start_frame": 75049,
-     "end_frame": 75125
+     "start_frame": 75123,
+     "end_frame": 75199
     },
     {
      "text": "The sine of ninety degrees is one, so the northern hemisphere has an area of two pi times the radius squared.",
      "audio_text": null,
-     "start": 2504.5219,
-     "end": 2511.9969,
+     "start": 2506.983,
+     "end": 2514.458,
      "dur": 7.475,
-     "start_frame": 75136,
-     "end_frame": 75360
+     "start_frame": 75209,
+     "end_frame": 75434
     },
     {
      "text": "That's about two hundred and fifty five million square kilometres.",
      "audio_text": null,
-     "start": 2512.3469,
-     "end": 2517.0719,
+     "start": 2514.808,
+     "end": 2519.533,
      "dur": 4.725,
-     "start_frame": 75370,
-     "end_frame": 75512,
+     "start_frame": 75444,
+     "end_frame": 75586,
      "beat": true
     },
     {
      "text": "The whole Earth is twice that, four pi times the radius squared: about five hundred and ten million square kilometres.",
      "audio_text": null,
-     "start": 2518.5719,
-     "end": 2526.6969,
+     "start": 2521.033,
+     "end": 2529.158,
      "dur": 8.125,
-     "start_frame": 75557,
-     "end_frame": 75801,
+     "start_frame": 75631,
+     "end_frame": 75875,
      "beat": true
     },
     {
      "text": "So the share of the northern hemisphere between the equator and latitude phi is simply sine phi.",
      "audio_text": null,
-     "start": 2528.1969,
-     "end": 2534.6719,
+     "start": 2530.658,
+     "end": 2537.133,
      "dur": 6.475,
-     "start_frame": 75846,
-     "end_frame": 76040
+     "start_frame": 75920,
+     "end_frame": 76114
     },
     {
      "text": "The sine of thirty degrees is one half.",
      "audio_text": null,
-     "start": 2535.0219,
-     "end": 2537.9469,
+     "start": 2537.483,
+     "end": 2540.408,
      "dur": 2.925,
-     "start_frame": 76051,
-     "end_frame": 76138
+     "start_frame": 76124,
+     "end_frame": 76212
     },
     {
      "text": "So half of the northern hemisphere lies between the equator and thirty degrees north.",
      "audio_text": null,
-     "start": 2538.2969,
-     "end": 2544.0969,
+     "start": 2540.758,
+     "end": 2546.558,
      "dur": 5.8,
-     "start_frame": 76149,
-     "end_frame": 76323,
+     "start_frame": 76223,
+     "end_frame": 76397,
      "beat": true
     },
     {
      "text": "The same goes for the south.",
      "audio_text": null,
-     "start": 2545.5969,
-     "end": 2547.8719,
+     "start": 2548.058,
+     "end": 2550.333,
      "dur": 2.275,
-     "start_frame": 76368,
-     "end_frame": 76436
+     "start_frame": 76442,
+     "end_frame": 76510
     },
     {
      "text": "So half of the whole Earth lies between thirty degrees south and thirty degrees north.",
      "audio_text": null,
-     "start": 2548.2219,
-     "end": 2554.0219,
+     "start": 2550.683,
+     "end": 2556.483,
      "dur": 5.8,
-     "start_frame": 76447,
-     "end_frame": 76621,
+     "start_frame": 76520,
+     "end_frame": 76694,
      "beat": true
     },
     {
      "text": "At Brest's latitude, sine phi is zero point seven four seven eight, so about three quarters of the northern hemisphere lies south of Brest.",
      "audio_text": null,
-     "start": 2555.5219,
-     "end": 2564.9969,
+     "start": 2557.983,
+     "end": 2567.458,
      "dur": 9.475,
-     "start_frame": 76666,
-     "end_frame": 76950,
+     "start_frame": 76739,
+     "end_frame": 77024,
      "beat": true
     },
     {
      "text": "The tropics and subtropics are huge, and the polar caps are small.",
      "audio_text": null,
-     "start": 2566.4969,
-     "end": 2571.2219,
+     "start": 2568.958,
+     "end": 2573.683,
      "dur": 4.725,
-     "start_frame": 76995,
-     "end_frame": 77137
+     "start_frame": 77069,
+     "end_frame": 77210
     }
    ],
-   "end": 2572.0219,
-   "start_frame": 74974,
-   "end_frame": 77161
+   "end": 2574.483,
+   "start_frame": 75048,
+   "end_frame": 77234
   },
   {
    "id": "s33_archimedes",
-   "start": 2572.0219,
+   "start": 2574.483,
    "sentences": [
     {
      "text": "There's a lovely picture of this result, found by Archimedes more than two thousand years ago.",
      "audio_text": null,
-     "start": 2572.0219,
-     "end": 2578.3469,
+     "start": 2574.483,
+     "end": 2580.808,
      "dur": 6.325,
-     "start_frame": 77161,
-     "end_frame": 77350
+     "start_frame": 77234,
+     "end_frame": 77424
     },
     {
      "text": "Wrap the Earth in a cylinder that just touches it all round the equator, so the cylinder has the same radius as the Earth.",
      "audio_text": null,
-     "start": 2578.6969,
-     "end": 2586.6219,
+     "start": 2581.158,
+     "end": 2589.083,
      "dur": 7.925,
-     "start_frame": 77361,
-     "end_frame": 77599
+     "start_frame": 77435,
+     "end_frame": 77672
     },
     {
      "text": "Now take our band, from the equator up to latitude phi, and push it straight out sideways, away from the axis, onto the cylinder.",
      "audio_text": null,
-     "start": 2586.9719,
-     "end": 2595.9469,
+     "start": 2589.433,
+     "end": 2598.408,
      "dur": 8.975,
-     "start_frame": 77609,
-     "end_frame": 77878
+     "start_frame": 77683,
+     "end_frame": 77952
     },
     {
      "text": "On the cylinder, it covers a band whose height is the Earth's radius times sine phi.",
      "audio_text": null,
-     "start": 2596.2969,
-     "end": 2601.9469,
+     "start": 2598.758,
+     "end": 2604.408,
      "dur": 5.65,
-     "start_frame": 77889,
-     "end_frame": 78058
+     "start_frame": 77963,
+     "end_frame": 78132
     },
     {
      "text": "That's z, the height above the equator plane, from earlier.",
      "audio_text": null,
-     "start": 2602.2969,
-     "end": 2606.4969,
+     "start": 2604.758,
+     "end": 2608.958,
      "dur": 4.2,
-     "start_frame": 78069,
-     "end_frame": 78195
+     "start_frame": 78143,
+     "end_frame": 78269
     },
     {
      "text": "A cylinder band is a rectangle rolled up.",
      "audio_text": null,
-     "start": 2606.8469,
-     "end": 2610.3969,
+     "start": 2609.308,
+     "end": 2612.858,
      "dur": 3.55,
-     "start_frame": 78205,
-     "end_frame": 78312
+     "start_frame": 78279,
+     "end_frame": 78386
     },
     {
      "text": "Its length is two pi times the radius, and its height is the radius times sine phi.",
      "audio_text": null,
-     "start": 2610.7469,
-     "end": 2616.6469,
+     "start": 2613.208,
+     "end": 2619.108,
      "dur": 5.9,
-     "start_frame": 78322,
-     "end_frame": 78499
+     "start_frame": 78396,
+     "end_frame": 78573
     },
     {
      "text": "So its area is two pi, times the radius squared, times sine phi: exactly the same as the Earth's band.",
      "audio_text": null,
-     "start": 2616.9969,
-     "end": 2624.7469,
+     "start": 2619.458,
+     "end": 2627.208,
      "dur": 7.75,
-     "start_frame": 78510,
-     "end_frame": 78742,
+     "start_frame": 78584,
+     "end_frame": 78816,
      "beat": true
     },
     {
      "text": "Why do they match?",
      "audio_text": null,
-     "start": 2626.2469,
-     "end": 2627.9969,
+     "start": 2628.708,
+     "end": 2630.458,
      "dur": 1.75,
-     "start_frame": 78787,
-     "end_frame": 78840
+     "start_frame": 78861,
+     "end_frame": 78914
     },
     {
      "text": "Near the pole, a strip on the Earth is shorter round than on the cylinder, by a factor of cosine phi.",
      "audio_text": null,
-     "start": 2628.3469,
-     "end": 2635.4219,
+     "start": 2630.808,
+     "end": 2637.883,
      "dur": 7.075,
-     "start_frame": 78850,
-     "end_frame": 79063
+     "start_frame": 78924,
+     "end_frame": 79136
     },
     {
      "text": "But the Earth's surface there is steep, so the strip is wider along the surface than its height, by the same factor.",
      "audio_text": null,
-     "start": 2635.7719,
-     "end": 2643.1219,
+     "start": 2638.233,
+     "end": 2645.583,
      "dur": 7.35,
-     "start_frame": 79073,
-     "end_frame": 79294
+     "start_frame": 79147,
+     "end_frame": 79367
     },
     {
      "text": "The two effects cancel exactly.",
      "audio_text": null,
-     "start": 2643.4719,
-     "end": 2646.2219,
+     "start": 2645.933,
+     "end": 2648.683,
      "dur": 2.75,
-     "start_frame": 79304,
-     "end_frame": 79387
+     "start_frame": 79378,
+     "end_frame": 79460
     },
     {
      "text": "So slices of the Earth of equal height have equal areas, wherever they are.",
      "audio_text": null,
-     "start": 2646.5719,
-     "end": 2651.7969,
+     "start": 2649.033,
+     "end": 2654.258,
      "dur": 5.225,
-     "start_frame": 79397,
-     "end_frame": 79554
+     "start_frame": 79471,
+     "end_frame": 79628
     }
    ],
-   "end": 2652.5969,
-   "start_frame": 77161,
-   "end_frame": 79578
+   "end": 2655.058,
+   "start_frame": 77234,
+   "end_frame": 79652
   },
   {
    "id": "s34_global_mean",
-   "start": 2652.5969,
+   "start": 2655.058,
    "sentences": [
     {
      "text": "If you skipped, here's what to keep.",
      "audio_text": null,
-     "start": 2652.5969,
-     "end": 2655.2719,
+     "start": 2655.058,
+     "end": 2657.733,
      "dur": 2.675,
-     "start_frame": 79578,
-     "end_frame": 79658
+     "start_frame": 79652,
+     "end_frame": 79732
     },
     {
      "text": "Grid boxes shrink towards the poles by cosine phi, so the tropics are huge and the polar caps are small: half of the whole Earth lies between thirty degrees south and thirty degrees north.",
      "audio_text": null,
-     "start": 2655.6219,
-     "end": 2668.2719,
+     "start": 2658.083,
+     "end": 2670.733,
      "dur": 12.65,
-     "start_frame": 79669,
-     "end_frame": 80048
+     "start_frame": 79742,
+     "end_frame": 80122
     },
     {
      "text": "Here's where this matters for climate.",
      "audio_text": null,
-     "start": 2668.6219,
-     "end": 2671.2219,
+     "start": 2671.083,
+     "end": 2673.683,
      "dur": 2.6,
-     "start_frame": 80059,
-     "end_frame": 80137
+     "start_frame": 80132,
+     "end_frame": 80210
     },
     {
      "text": "Imagine a planet with just two grid boxes, the same size in degrees.",
      "audio_text": null,
-     "start": 2671.5719,
-     "end": 2676.7469,
+     "start": 2674.033,
+     "end": 2679.208,
      "dur": 5.175,
-     "start_frame": 80147,
-     "end_frame": 80302
+     "start_frame": 80221,
+     "end_frame": 80376
     },
     {
      "text": "One is on the equator, at thirty degrees Celsius.",
      "audio_text": null,
-     "start": 2677.0969,
-     "end": 2680.8219,
+     "start": 2679.558,
+     "end": 2683.283,
      "dur": 3.725,
-     "start_frame": 80313,
-     "end_frame": 80425
+     "start_frame": 80387,
+     "end_frame": 80498
     },
     {
      "text": "The other is at sixty degrees north, at zero degrees Celsius.",
      "audio_text": null,
-     "start": 2681.1719,
-     "end": 2685.8219,
+     "start": 2683.633,
+     "end": 2688.283,
      "dur": 4.65,
-     "start_frame": 80435,
-     "end_frame": 80575
+     "start_frame": 80509,
+     "end_frame": 80648
     },
     {
      "text": "A plain average says fifteen degrees.",
      "audio_text": null,
-     "start": 2686.1719,
-     "end": 2689.0469,
+     "start": 2688.633,
+     "end": 2691.508,
      "dur": 2.875,
-     "start_frame": 80585,
-     "end_frame": 80671
+     "start_frame": 80659,
+     "end_frame": 80745
     },
     {
      "text": "But the box at sixty degrees covers only cosine sixty degrees, which is one half of the area of the equator box.",
      "audio_text": null,
-     "start": 2689.3969,
-     "end": 2697.4469,
+     "start": 2691.858,
+     "end": 2699.908,
      "dur": 8.05,
-     "start_frame": 80682,
-     "end_frame": 80923
+     "start_frame": 80756,
+     "end_frame": 80997
     },
     {
      "text": "So the area-weighted average is thirty times one, plus zero times one half, all divided by one and a half.",
      "audio_text": null,
-     "start": 2697.7969,
-     "end": 2705.5969,
+     "start": 2700.258,
+     "end": 2708.058,
      "dur": 7.8,
-     "start_frame": 80934,
-     "end_frame": 81168
+     "start_frame": 81008,
+     "end_frame": 81242
     },
     {
      "text": "That's twenty degrees.",
      "audio_text": null,
-     "start": 2705.9469,
-     "end": 2707.9969,
+     "start": 2708.408,
+     "end": 2710.458,
      "dur": 2.05,
-     "start_frame": 81178,
-     "end_frame": 81240,
+     "start_frame": 81252,
+     "end_frame": 81314,
      "beat": true
     },
     {
      "text": "That's why a global average gives each latitude a weight of cosine phi.",
      "audio_text": null,
-     "start": 2709.4969,
-     "end": 2714.6219,
+     "start": 2711.958,
+     "end": 2717.083,
      "dur": 5.125,
-     "start_frame": 81285,
-     "end_frame": 81439
+     "start_frame": 81359,
+     "end_frame": 81512
     },
     {
      "text": "Now let's do it with real data: ERA5's air temperature two metres above the ground, averaged over September twenty twenty six, on a one degree grid.",
      "audio_text": "Now let's do it with real data: [ERA5](/ˌiˌɑɹˈA fˈIv/)'s air temperature two metres above the ground, averaged over September twenty twenty six, on a one degree grid.",
-     "start": 2714.9719,
-     "end": 2725.4719,
+     "start": 2717.433,
+     "end": 2727.933,
      "dur": 10.5,
-     "start_frame": 81449,
-     "end_frame": 81764
+     "start_frame": 81523,
+     "end_frame": 81838
     },
     {
      "text": "A plain average of all the grid boxes gives about seven point one degrees Celsius.",
      "audio_text": null,
-     "start": 2725.8219,
-     "end": 2731.7469,
+     "start": 2728.283,
+     "end": 2734.208,
      "dur": 5.925,
-     "start_frame": 81775,
-     "end_frame": 81952,
+     "start_frame": 81848,
+     "end_frame": 82026,
      "beat": true
     },
     {
      "text": "Weighted by cosine phi, it's about sixteen point three degrees.",
      "audio_text": null,
-     "start": 2733.2469,
-     "end": 2737.7719,
+     "start": 2735.708,
+     "end": 2740.233,
      "dur": 4.525,
-     "start_frame": 81997,
-     "end_frame": 82133,
+     "start_frame": 82071,
+     "end_frame": 82207,
      "beat": true
     },
     {
      "text": "The plain average is more than nine degrees too cold, because the many thin boxes near the poles, over the cold Arctic and the frozen Antarctic, count as much as the big tropical ones.",
      "audio_text": null,
-     "start": 2739.2719,
-     "end": 2752.0219,
+     "start": 2741.733,
+     "end": 2754.483,
      "dur": 12.75,
-     "start_frame": 82178,
-     "end_frame": 82561
+     "start_frame": 82252,
+     "end_frame": 82634
     },
     {
      "text": "This cosine weighting is how global average temperatures are worked out.",
      "audio_text": null,
-     "start": 2752.3719,
-     "end": 2757.2469,
+     "start": 2754.833,
+     "end": 2759.708,
      "dur": 4.875,
-     "start_frame": 82571,
-     "end_frame": 82717
+     "start_frame": 82645,
+     "end_frame": 82791
     }
    ],
-   "end": 2758.0469,
-   "start_frame": 79578,
-   "end_frame": 82741
+   "end": 2760.508,
+   "start_frame": 79652,
+   "end_frame": 82815
   },
   {
    "id": "s35_recap",
-   "start": 2758.0469,
+   "start": 2760.508,
    "sentences": [
     {
      "text": "To sum up, a point on or around the Earth is pinned down by spherical coordinates: its distance from the centre, and two angles.",
      "audio_text": null,
-     "start": 2758.0469,
-     "end": 2766.6969,
+     "start": 2760.508,
+     "end": 2769.158,
      "dur": 8.65,
-     "start_frame": 82741,
-     "end_frame": 83001
+     "start_frame": 82815,
+     "end_frame": 83075
     },
     {
      "text": "On the ground, that distance is the Earth's radius, about six thousand four hundred kilometres, which we call a.",
      "audio_text": null,
-     "start": 2767.0469,
-     "end": 2774.8469,
+     "start": 2769.508,
+     "end": 2777.308,
      "dur": 7.8,
-     "start_frame": 83011,
-     "end_frame": 83245
+     "start_frame": 83085,
+     "end_frame": 83319
     },
     {
      "text": "Latitude, phi, is the angle up from the equator plane, measured at the centre.",
      "audio_text": null,
-     "start": 2775.1969,
-     "end": 2780.9469,
+     "start": 2777.658,
+     "end": 2783.408,
      "dur": 5.75,
-     "start_frame": 83256,
-     "end_frame": 83428
+     "start_frame": 83330,
+     "end_frame": 83502
     },
     {
      "text": "The colatitude is ninety degrees minus phi, measured down from the pole, and it swaps sine and cosine.",
      "audio_text": null,
-     "start": 2781.2969,
-     "end": 2788.5719,
+     "start": 2783.758,
+     "end": 2791.033,
      "dur": 7.275,
-     "start_frame": 83439,
-     "end_frame": 83657
+     "start_frame": 83513,
+     "end_frame": 83731
     },
     {
      "text": "A parallel is a circle of constant latitude, round the Earth's axis.",
      "audio_text": null,
-     "start": 2788.9219,
-     "end": 2793.9219,
+     "start": 2791.383,
+     "end": 2796.383,
      "dur": 5.0,
-     "start_frame": 83668,
-     "end_frame": 83818
+     "start_frame": 83741,
+     "end_frame": 83891
     },
     {
      "text": "A meridian is a half circle from pole to pole, round the Earth's centre.",
      "audio_text": null,
-     "start": 2794.2719,
-     "end": 2799.2719,
+     "start": 2796.733,
+     "end": 2801.733,
      "dur": 5.0,
-     "start_frame": 83828,
-     "end_frame": 83978
+     "start_frame": 83902,
+     "end_frame": 84052
     },
     {
      "text": "Longitude, lambda, is the angle round the axis, from the prime meridian through Greenwich, positive to the east.",
      "audio_text": null,
-     "start": 2799.6219,
-     "end": 2807.3719,
+     "start": 2802.083,
+     "end": 2809.833,
      "dur": 7.75,
-     "start_frame": 83989,
-     "end_frame": 84221
+     "start_frame": 84062,
+     "end_frame": 84295
     },
     {
      "text": "Two slices give the position arrow: x is the radius times cosine phi times cosine lambda, y is the radius times cosine phi times sine lambda, and z is the radius times sine phi.",
      "audio_text": null,
-     "start": 2807.7219,
-     "end": 2821.5219,
+     "start": 2810.183,
+     "end": 2823.983,
      "dur": 13.8,
-     "start_frame": 84232,
-     "end_frame": 84646
+     "start_frame": 84305,
+     "end_frame": 84719
     },
     {
      "text": "The ground is carried east at capital Omega, times the radius, times cosine phi: about four hundred and sixty four point six metres per second at the equator.",
      "audio_text": null,
-     "start": 2821.8719,
-     "end": 2833.028,
+     "start": 2824.333,
+     "end": 2835.4891,
      "dur": 11.1561,
-     "start_frame": 84656,
-     "end_frame": 84991,
+     "start_frame": 84730,
+     "end_frame": 85065,
      "estimated": true
     },
     {
      "text": "A step north is the radius times delta phi, about a hundred and eleven kilometres per degree, everywhere.",
      "audio_text": null,
-     "start": 2833.378,
-     "end": 2840.803,
+     "start": 2835.8391,
+     "end": 2843.2641,
      "dur": 7.425,
-     "start_frame": 85001,
-     "end_frame": 85224
+     "start_frame": 85075,
+     "end_frame": 85298
     },
     {
      "text": "A step east is the radius, times cosine phi, times delta lambda, and it shrinks towards the poles.",
      "audio_text": null,
-     "start": 2841.153,
-     "end": 2848.403,
+     "start": 2843.6141,
+     "end": 2850.8641,
      "dur": 7.25,
-     "start_frame": 85235,
-     "end_frame": 85452
+     "start_frame": 85308,
+     "end_frame": 85526
     },
     {
      "text": "So a small patch has an area of the radius squared, times cosine phi, d phi, d lambda.",
      "audio_text": null,
-     "start": 2848.753,
-     "end": 2855.528,
+     "start": 2851.2141,
+     "end": 2857.9891,
      "dur": 6.775,
-     "start_frame": 85463,
-     "end_frame": 85666
+     "start_frame": 85536,
+     "end_frame": 85740
     },
     {
      "text": "Adding up strips shows that the band from the equator to latitude phi holds a share sine phi of its hemisphere, which is why global averages weight each latitude by cosine phi.",
      "audio_text": null,
-     "start": 2855.878,
-     "end": 2867.903,
+     "start": 2858.3391,
+     "end": 2870.3641,
      "dur": 12.025,
-     "start_frame": 85676,
-     "end_frame": 86037
+     "start_frame": 85750,
+     "end_frame": 86111
     },
     {
      "text": "In Part 4, we'll stand at a weather station, and see how its own east, north and up arrows turn as the air moves.",
      "audio_text": null,
-     "start": 2868.253,
-     "end": 2876.303,
+     "start": 2870.7141,
+     "end": 2878.7641,
      "dur": 8.05,
-     "start_frame": 86048,
-     "end_frame": 86289
+     "start_frame": 86121,
+     "end_frame": 86363
     }
    ],
-   "end": 2877.103,
-   "start_frame": 82741,
-   "end_frame": 86313
+   "end": 2879.5641,
+   "start_frame": 82815,
+   "end_frame": 86387
   },
   {
    "id": "s36_end",
-   "start": 2877.103,
+   "start": 2879.5641,
    "sentences": [
     {
      "text": "This video is one of a series of related maths tutorials, so watch out for the others.",
      "audio_text": null,
-     "start": 2877.103,
-     "end": 2883.303,
+     "start": 2879.5641,
+     "end": 2885.7641,
      "dur": 6.2,
-     "start_frame": 86313,
-     "end_frame": 86499
+     "start_frame": 86387,
+     "end_frame": 86573
     },
     {
      "text": "They're made for students of atmospheric science, meteorology and fluid dynamics, and anyone else who needs these ideas.",
      "audio_text": null,
-     "start": 2883.653,
-     "end": 2891.703,
+     "start": 2886.1141,
+     "end": 2894.1641,
      "dur": 8.05,
-     "start_frame": 86510,
-     "end_frame": 86751
+     "start_frame": 86583,
+     "end_frame": 86825
     },
     {
      "text": "The notebook for coordinates, and the notebooks for the other maths concepts, are on the website that goes with this video.",
      "audio_text": null,
-     "start": 2892.053,
-     "end": 2899.703,
+     "start": 2894.5141,
+     "end": 2902.1641,
      "dur": 7.65,
-     "start_frame": 86762,
-     "end_frame": 86991
+     "start_frame": 86835,
+     "end_frame": 87065
     }
    ],
-   "end": 2900.003,
-   "start_frame": 86313,
-   "end_frame": 87000
+   "end": 2902.4641,
+   "start_frame": 86387,
+   "end_frame": 87074
   }
  ],
- "total_s": 2900.003,
- "total_frames": 87001,
+ "total_s": 2902.4641,
+ "total_frames": 87074,
  "cues": 711,
  "warnings": [],
- "provisional": "copied from the measured dry run 3 (G:/.../ch00_coordinates_sphere/dryrun3) by checks/make_timing.py; 6 re-voiced sentences ESTIMATED (calc & sync audit #5c, checks/revoice.py; shift +3.953 s); the final TTS replaces it",
+ "provisional": "copied from the measured dry run 3 (G:/.../ch00_coordinates_sphere/dryrun3) by checks/make_timing.py; 7 re-voiced sentences ESTIMATED (calc & sync audit #5c, checks/revoice.py; shift +6.414 s); the final TTS replaces it",
  "estimated_sentences": [
   "s20_spin_rate S6",
   "s21_ground_speeds S4",
   "s21_ground_speeds S5",
   "s21_ground_speeds S7",
   "s26_grid_boxes S13",
-  "s35_recap S8"
+  "s35_recap S8",
+  "s27_area_patch S4"
  ]
 }

@@ -17,6 +17,7 @@ import {
   AT, Arrow, BREST, Balloon, BandTint, CalcStack, Chevron, D, D2R, Earth, GB, GFULL, Grat, K, KHULNA, KeepLine, Keyword, LEN, LYB, Layered, Lbl, SE, SING, SRC_G,
   SS, Scene, SideCallout, SkipChip, Svg, TeX, XC, XZ, add, arcD, chipSpan, clamp, cutAt, discOf, e2g, eastAt, facing, fin, fout, gdot, globeG, gseg, keepGone,
   keepTime, ll, merPath, splitVis, mix, parPath, plab, poly, prog, rep, spinPath, win, faceArc, faceFlat, lin,
+  RAD, Magnify, KeepPic,
 } from "./cs_lib";
 import { FItem, FLAT_C, FLAT_R, FACE_B, LON0, MerFlatBase, PHI, TwoView, camFace, merCut, ptOf } from "./cs_two";
 import { EQ_S04, EQ_S05, EQ_S07, EQ_S08, EQ_S11 } from "./cs_eq";
@@ -66,7 +67,7 @@ const S00: React.FC = () => {
         over={(G) => <>
           {slide > 0.5 ? <circle cx={c0[0]} cy={c0[1]} r={9} fill={C.gold} opacity={fin(f, 88, 8)} /> : null}
           <Arrow p={c0} q={[mix(c0[0], G.pw(fpt(BU, BV))[0], prog(f, tArrow, tArrow + 24)), mix(c0[1], G.pw(fpt(BU, BV))[1], prog(f, tArrow, tArrow + 24))]}
-            color={C.first} w={7} head={24} o={fin(f, tArrow, 6)} />
+            color={RAD} w={7} head={24} o={fin(f, tArrow, 6)} />
           <path d={`M${c0[0]} ${c0[1]}${poly(Array.from({ length: 25 }, (_, i) => G.pw(fpt(0.42 * Math.cos(CB * wedge * i / 24), 0.42 * Math.sin(CB * wedge * i / 24))))).replace("M", "L")}Z`}
             fill={C.gold} fillOpacity={0.25} stroke={C.gold} strokeWidth={4} opacity={fin(f, tWedge, 8)} />
           <line x1={c0[0]} y1={c0[1]} x2={G.pw(fpt(1, 0))[0]} y2={G.pw(fpt(1, 0))[1]} stroke={C.local} strokeWidth={3} opacity={fin(f, tWedge - 10, 8)} />
@@ -155,11 +156,11 @@ const MiniPolar: React.FC<{ f: number; o: number; balloon: number }> = ({ f, o, 
       <Arrow p={[RC[0] - 330, RC[1]]} q={[RC[0] + 340, RC[1]]} color={C.muted} w={4} head={20} halo={false} />
       <Lbl x={RC[0] + 330} y={RC[1] + 40} t="east" c={C.muted} s={T.floor} a="end" />
       <g opacity={balloon}>
-        <line x1={RC[0]} y1={RC[1]} x2={q[0]} y2={q[1]} stroke={C.first} strokeWidth={8} strokeLinecap="round" />
+        <line x1={RC[0]} y1={RC[1]} x2={q[0]} y2={q[1]} stroke={RAD} strokeWidth={8} strokeLinecap="round" />
         <path d={arcD(RC, 90, 0, 53.13)} fill="none" stroke={C.local} strokeWidth={6} />
         <Chevron at={[RC[0] + 90 * Math.cos(th), RC[1] - 90 * Math.sin(th)]} dir={[-Math.sin(th), -Math.cos(th)]} c={C.local} />
         <Balloon p={q} s={1.1} />
-        <Lbl x={RC[0] + 0.5 * (q[0] - RC[0]) - 40} y={RC[1] + 0.5 * (q[1] - RC[1]) - 10} t="r" c={C.first} s={T.key} a="end" />
+        <Lbl x={RC[0] + 0.5 * (q[0] - RC[0]) - 40} y={RC[1] + 0.5 * (q[1] - RC[1]) - 10} t="r" c={RAD} s={T.key} a="end" />
         <Lbl x={RC[0] + 130} y={RC[1] - 46} t="θ" c={C.local} s={T.key} />
       </g>
       {void f}
@@ -185,28 +186,28 @@ const S02: React.FC = () => {
           <path d={`M${RC[0] - 200} ${RC[1] + 120}L${tri[0] - 200} ${RC[1] + 120}L${tri[0] - 200} ${tri[1] + 120}Z`} fill={C.ink} fillOpacity={0.08} stroke="none" />
           <line x1={RC[0] - 200} y1={RC[1] + 120} x2={tri[0] - 200} y2={RC[1] + 120} stroke={C.second} strokeWidth={8} />
           <line x1={tri[0] - 200} y1={RC[1] + 120} x2={tri[0] - 200} y2={tri[1] + 120} stroke={C.second} strokeWidth={8} />
-          <Arrow p={[RC[0] - 200, RC[1] + 120]} q={[tri[0] - 200, tri[1] + 120]} color={C.first} />
+          <Arrow p={[RC[0] - 200, RC[1] + 120]} q={[tri[0] - 200, tri[1] + 120]} color={RAD} />
           <Lbl x={RC[0] - 50} y={RC[1] + 175} t="3" c={C.second} s={T.key} a="middle" />
           <Lbl x={tri[0] - 170} y={RC[1]} t="4" c={C.second} s={T.key} />
-          <Lbl x={RC[0] - 80} y={RC[1] - 40} t="5" c={C.first} s={T.key} a="end" />
+          <Lbl x={RC[0] - 80} y={RC[1] - 40} t="5" c={RAD} s={T.key} a="end" />
         </g>
         {/* S3: s = r θ */}
         <g opacity={pic(s(3), s(4))}>
           <circle cx={RC[0]} cy={RC[1]} r={R} fill="none" stroke={C.grid} strokeWidth={3} />
-          <line x1={RC[0]} y1={RC[1]} x2={RC[0] + R} y2={RC[1]} stroke={C.first} strokeWidth={6} />
-          <line x1={RC[0]} y1={RC[1]} x2={RC[0] + R * Math.cos(1)} y2={RC[1] - R * Math.sin(1)} stroke={C.first} strokeWidth={6} />
+          <line x1={RC[0]} y1={RC[1]} x2={RC[0] + R} y2={RC[1]} stroke={RAD} strokeWidth={6} />
+          <line x1={RC[0]} y1={RC[1]} x2={RC[0] + R * Math.cos(1)} y2={RC[1] - R * Math.sin(1)} stroke={RAD} strokeWidth={6} />
           <path d={arcD(RC, R, 0, 57.3)} fill="none" stroke={C.second} strokeWidth={14} strokeOpacity={0.8} />
           <path d={arcD(RC, 70, 0, 57.3)} fill="none" stroke={C.local} strokeWidth={5} />
           <Lbl x={RC[0] + 92} y={RC[1] - 40} t="θ" c={C.local} s={T.key} />
           <Lbl x={RC[0] + R * Math.cos(0.5) + 30} y={RC[1] - R * Math.sin(0.5) - 20} t="s" c={C.second} s={T.key} />
-          <Lbl x={RC[0] + R / 2} y={RC[1] + 40} t="r" c={C.first} s={T.key} a="middle" />
+          <Lbl x={RC[0] + R / 2} y={RC[1] + 40} t="r" c={RAD} s={T.key} a="middle" />
         </g>
         {/* S4-S5: the slope of sine (Part 2) */}
         <g opacity={pic(s(4), s(6))}>
           <circle cx={RC[0]} cy={RC[1]} r={R} fill="none" stroke={C.grid} strokeWidth={3} />
           <line x1={RC[0] - R - 20} y1={RC[1]} x2={RC[0] + R + 20} y2={RC[1]} stroke={C.muted} strokeWidth={3} />
-          <Arrow p={RC} q={[RC[0] + R * Math.cos(0.6), RC[1] - R * Math.sin(0.6)]} color={C.first} w={8} head={30} />
-          <Arrow p={RC} q={[RC[0] + R * Math.cos(0.6 + 0.25 * prog(f, s(5), s(5) + 40)), RC[1] - R * Math.sin(0.6 + 0.25 * prog(f, s(5), s(5) + 40))]} color={C.first} w={5} head={22} o={0.55 * fin(f, s(5))} />
+          <Arrow p={RC} q={[RC[0] + R * Math.cos(0.6), RC[1] - R * Math.sin(0.6)]} color={RAD} w={8} head={30} />
+          <Arrow p={RC} q={[RC[0] + R * Math.cos(0.6 + 0.25 * prog(f, s(5), s(5) + 40)), RC[1] - R * Math.sin(0.6 + 0.25 * prog(f, s(5), s(5) + 40))]} color={RAD} w={5} head={22} o={0.55 * fin(f, s(5))} />
           <line x1={RC[0] + R * Math.cos(0.85) + 40} y1={RC[1] - R * Math.sin(0.6)} x2={RC[0] + R * Math.cos(0.85) + 40} y2={RC[1] - R * Math.sin(0.85)}
             stroke={C.second} strokeWidth={10} opacity={fin(f, s(5) + 40)} />
           <path d={arcD(RC, 80, 0, 34.4)} fill="none" stroke={C.local} strokeWidth={5} />
@@ -227,9 +228,9 @@ const S02: React.FC = () => {
           <line x1={RC[0] - 230} y1={RC[1] - 180} x2={RC[0] - 230} y2={RC[1] + 180} stroke={C.local} strokeWidth={4} />
           <line x1={RC[0] + 230} y1={RC[1] - 180} x2={RC[0] + 230} y2={RC[1] + 180} stroke={C.local} strokeWidth={4} />
           <line x1={RC[0]} y1={RC[1] + 240} x2={RC[0]} y2={RC[1] - 260} stroke={C.gold} strokeWidth={4} strokeDasharray="14 10" />
-          <Arrow p={[RC[0], RC[1] + 180]} q={[RC[0] + 200 * Math.cos(0.5), RC[1] + 180 - 52 * Math.sin(0.5)]} color={C.first} w={7} head={26} />
+          <Arrow p={[RC[0], RC[1] + 180]} q={[RC[0] + 200 * Math.cos(0.5), RC[1] + 180 - 52 * Math.sin(0.5)]} color={RAD} w={7} head={26} />
           <Arrow p={[RC[0] + 200 * Math.cos(0.5), RC[1] + 180 - 52 * Math.sin(0.5)]} q={[RC[0] + 200 * Math.cos(0.5), RC[1] - 40]} color={C.second} w={7} head={26} />
-          <Lbl x={RC[0] + 70} y={RC[1] + 215} t="r" c={C.first} s={T.key} />
+          <Lbl x={RC[0] + 70} y={RC[1] + 215} t="r" c={RAD} s={T.key} />
           <Lbl x={RC[0] + 200 * Math.cos(0.5) + 26} y={RC[1] + 60} t="z" c={C.second} s={T.key} />
         </g>
       </Svg>
@@ -275,11 +276,11 @@ const S03: React.FC = () => {
           return <>
             <circle cx={c0[0]} cy={c0[1]} r={11} fill={C.gold} stroke={C.bg} strokeWidth={3} opacity={fin(f, tC)} />
             {[pB, pBal, pUnder].map((q, i) => <g key={i} opacity={fin(f, t4 + i * 20)}>
-              {gseg(G, [0, 0, 0], q, C.first, i === 0 ? 7 : 4, i === 0 ? 1 : 0.6)}
+              {gseg(G, [0, 0, 0], q, RAD, i === 0 ? 7 : 4, i === 0 ? 1 : 0.6)}
               <circle cx={G.pw(q)[0]} cy={G.pw(q)[1]} r={10} fill={i === 0 ? C.gold : C.key} stroke={C.bg} strokeWidth={3} />
             </g>)}
             <Balloon p={[G.pw(pBal)[0], G.pw(pBal)[1] - 8]} s={0.8} o={fin(f, t4 + 20)} />
-            <Lbl x={(c0[0] + G.pw(pB)[0]) / 2 - 24} y={(c0[1] + G.pw(pB)[1]) / 2 - 10} t="r" c={C.first} s={T.key} a="end" o={fin(f, tR)} />
+            <Lbl x={(c0[0] + G.pw(pB)[0]) / 2 - 24} y={(c0[1] + G.pw(pB)[1]) / 2 - 10} t="r" c={RAD} s={T.key} a="end" o={fin(f, tR)} />
             <g opacity={fin(f, tAng)}>
               <path d={poly(Array.from({ length: 21 }, (_, i) => G.pw(ll(BREST[0] * i / 20, BREST[1], 0.32))))} fill="none" stroke={C.local} strokeWidth={5} />
               <path d={poly(Array.from({ length: 21 }, (_, i) => G.pw(ll(0, BREST[1] * i / 20, 0.32))))} fill="none" stroke={C.local} strokeWidth={5} />
@@ -324,7 +325,7 @@ const S04: React.FC = () => {
             {[0.55, 0.19].map((rr) => <path key={rr} d={faceArc(P, 0, 0, rr, -90, 270, 90)} fill="none" stroke="#7a6658" strokeWidth={2} strokeDasharray="6 8" />)}
             <line x1={P(0, -1.25)[0]} y1={P(0, -1.25)[1]} x2={P(0, 1.25)[0]} y2={P(0, 1.25)[1]} stroke={C.local} strokeWidth={4} />
             <circle cx={c0[0]} cy={c0[1]} r={11 + 5 * pulse(f, tFace + 20, 24)} fill={C.gold} stroke={C.bg} strokeWidth={3} />
-            <Arrow p={c0} q={[mix(c0[0], pb[0], prog(f, tArrow, tArrow + 30)), mix(c0[1], pb[1], prog(f, tArrow, tArrow + 30))]} color={C.first} o={fin(f, tArrow, 6)} />
+            <Arrow p={c0} q={[mix(c0[0], pb[0], prog(f, tArrow, tArrow + 30)), mix(c0[1], pb[1], prog(f, tArrow, tArrow + 30))]} color={RAD} o={fin(f, tArrow, 6)} />
             <circle cx={pb[0]} cy={pb[1]} r={10} fill={C.gold} stroke={C.bg} strokeWidth={3} />
             {plab(Gg, 90, 0, "North Pole", 1, 22, -10, "start", false, 1.25)}
             {plab(Gg, -90, 0, "South Pole", 1, 22, 10, "start", false, 1.25)}
@@ -333,8 +334,8 @@ const S04: React.FC = () => {
       <GSrc />
       <Svg>
         <g data-lc-maplabel="1"><Lbl x={pb[0] + 22} y={pb[1] - 28} t="Brest" c={C.key} s={T.floor} o={fin(f, tBrest)} /></g>
-        <Lbl x={mid[0] - 28} y={mid[1] - 18} t="r" c={C.first} s={T.key} a="end" o={fin(f, tR) * (1 - isA)} />
-        <Lbl x={mid[0] - 28} y={mid[1] - 18} t="a" c={C.first} s={T.key} a="end" o={isA} />
+        <Lbl x={mid[0] - 28} y={mid[1] - 18} t="r" c={RAD} s={T.key} a="end" o={fin(f, tR) * (1 - isA)} />
+        <Lbl x={mid[0] - 28} y={mid[1] - 18} t="a" c={RAD} s={T.key} a="end" o={isA} />
         <Balloon p={balP} s={0.9} o={fin(f, tBal)} />
         <Keyword f={f} text="slice" at={[XC, 150]} appear={0} out={tRad - 30} />
         <Keyword f={f} text="Earth's radius" at={[XC, 150]} appear={tRad} />
@@ -372,8 +373,8 @@ const S05: React.FC = () => {
           <line x1={c0[0]} y1={c0[1]} x2={P(1, 0)[0]} y2={P(1, 0)[1]} stroke={C.local} strokeWidth={5} opacity={fin(f, tEq)} strokeDasharray={undefined} />
           <path d={`M${c0[0]} ${c0[1]}${faceArc(P, 0, 0, 0.62, 0, PHI * prog(f, tAng, tAng + 25)).replace("M", "L")}Z`} fill={C.gold} fillOpacity={0.16} stroke="none" opacity={fin(f, tAng)} />
           <path d={faceArc(P, 0, 0, 0.62, 0, PHI * prog(f, tAng, tAng + 25))} fill="none" stroke={C.gold} strokeWidth={8} opacity={fin(f, tAng)} />
-          <Arrow p={c0} q={gh} color={C.first} w={6} head={26} o={0.6 * ghostO} />
-          <Arrow p={c0} q={pb} color={C.first} />
+          <Arrow p={c0} q={gh} color={RAD} w={6} head={26} o={0.6 * ghostO} />
+          <Arrow p={c0} q={pb} color={RAD} />
           <circle cx={c0[0]} cy={c0[1]} r={11} fill={C.gold} stroke={C.bg} strokeWidth={3} />
           <circle cx={pb[0]} cy={pb[1]} r={10} fill={C.gold} stroke={C.bg} strokeWidth={3} />
         </>} />
@@ -432,7 +433,7 @@ const S06: React.FC = () => {
             {back.map((s, i) => (s.length > 1 ? <path key={`b${i}`} d={poly(s)} fill="none" stroke={C.second} strokeWidth={4} strokeOpacity={0.35 * (1 - fin(f, t5))} strokeDasharray="8 8" /> : null))}
             {front.map((s, i) => (s.length > 1 ? <path key={`f${i}`} d={poly(s)} fill="none" stroke={C.second} strokeWidth={5 + 3 * fin(f, tPar)} /> : null))}
             {f >= tSweep && f < t5 + 10 ? <g opacity={fout(f, t5)}>
-              {gseg(Gg, [0, 0, 0], pNow, C.first, 6)}
+              {gseg(Gg, [0, 0, 0], pNow, RAD, 6)}
               <path d={poly(Array.from({ length: 13 }, (_, i) => Gg.pw(ll(PHI * i / 12, lonNow, 0.3))))} fill="none" stroke={C.gold} strokeWidth={5} />
               {gseg(Gg, [0, 0, 0], ll(0, lonNow, 0.42), C.local, 3, 0.8, "8 8")}
             </g> : null}
@@ -483,7 +484,7 @@ const S07: React.FC = () => {
           </g>
           <path d={`M${P(0.12, 0)[0]} ${P(0.12, 0)[1]}L${P(0.12, 0.12)[0]} ${P(0.12, 0.12)[1]}L${P(0, 0.12)[0]} ${P(0, 0.12)[1]}`} fill="none" stroke={C.ink} strokeWidth={4} opacity={fin(f, tFill)} />
           <line x1={P(-BU, BV)[0]} y1={P(-BU, BV)[1]} x2={pb[0]} y2={pb[1]} stroke={C.second} strokeWidth={6} strokeDasharray="14 8" opacity={win(f, tCircle, LEN(k) + 20)} />
-          <Arrow p={c0} q={pb} color={C.first} />
+          <Arrow p={c0} q={pb} color={RAD} />
           <circle cx={c0[0]} cy={c0[1]} r={11} fill={C.gold} stroke={C.bg} strokeWidth={3} />
           <circle cx={pb[0]} cy={pb[1]} r={10} fill={C.gold} stroke={C.bg} strokeWidth={3} />
         </>} />
@@ -522,8 +523,8 @@ const S08: React.FC = () => {
     { k: "dot", p: [0, 0], c: C.gold, at: 0, same: false },
     { k: "seg", a: [0, -1.1], b: [0, 1.15], c: C.local, w: 4, at: 0, same: false },
     { k: "seg", a: [0, 0], b: [1, 0], c: C.local, w: 4, at: 0, same: false },
-    { k: "arrow", a: [0, 0], b, c: C.first, at: 0, same: false },
-    { k: "lbl", p: [b[0] / 2, b[1] / 2], t: "length 1", c: C.first, dx: -24, dy: -26, a: "end", at: tShrink + 30 },
+    { k: "arrow", a: [0, 0], b, c: RAD, at: 0, same: false },
+    { k: "lbl", p: [b[0] / 2, b[1] / 2], t: "length 1", c: RAD, dx: -24, dy: -26, a: "end", at: tShrink + 30 },
     { k: "seg", a: b, b: ft, c: C.local, w: 5, dash: "12 8", at: tDrop },
     { k: "tick", p: ft, d1: [-1, 0], d2: [0, 1], s: 0.08, at: tDrop + 20 },
     { k: "fill", pts: [[0, 0], ft, b], c: C.ink, fo: 0.1, at: tRT },
@@ -620,6 +621,8 @@ const S09: React.FC = () => {
         <Keyword f={f} text="centre vs axis" at={[XC, 540]} appear={tPar} />
       </Svg>
       <KeepLine f={f} k={k} lines={["colatitude from the pole:", "sin ↔ cos"]} />
+      {/* Part 1 lessons B4: the keep line's own picture (one triangle: φ at the centre, 90° − φ from the axis, sin φ = cos(90° − φ)) */}
+      <KeepPic kind="swap" c={[1150, 760]} R={330} o={fin(f, 4, 10) * fout(f, SE(k, 1), 10)} />
       {void keepGone}
     </Scene>
   );
@@ -721,8 +724,9 @@ const S11: React.FC = () => {
           <line x1={IC[0]} y1={IC[1]} x2={IC[0] + IR} y2={IC[1]} stroke={C.gold} strokeWidth={6} />
           <line x1={IC[0]} y1={IC[1]} x2={IC[0] + IR * Math.cos(27 * D2R)} y2={IC[1] + IR * Math.sin(27 * D2R)} stroke={C.key} strokeWidth={5} />
           <path d={`M${IC[0]} ${IC[1]}${arcD(IC, IR * 0.8, 0, -27).replace("M", "L")}Z`} fill={C.second} fillOpacity={0.25} stroke={C.second} strokeWidth={5} />
-          <Lbl x={IC[0] - 30} y={IC[1] - IR + 10} t="× 6" c={C.muted} s={T.floor} a="end" />
         </g>
+        {/* Part 1 lessons B1: the inset shows what it magnifies (ring on the λ arc at the centre, leader, "magnified 6×") */}
+        <Magnify src={ang(LON0 / 2, 0.7)} at={IC} r={IR + 14} label="magnified 6×" ly={IC[1] + IR + 50} o={win(f, tLon + 20, t360 - 10)} />
       </Svg>
       <TeX s={String.raw`\lambda`} x={IC[0] + IR * 0.95} y={IC[1] + 30} size={T.key} c={C.second} ax={0} o={win(f, tLam, t360 - 10)} halo />
       <TeX s={part} x={XC} y={290} size={T.eq} c={C.ink} o={fin(f, tB)} />

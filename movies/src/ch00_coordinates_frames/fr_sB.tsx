@@ -118,7 +118,7 @@ const S11: React.FC = () => {
         { lhs: String.raw`1^\circ`, rhs: String.raw`=0.01745\ \text{rad}`, at: SS(k, 9), c: C.muted },
         { lhs: String.raw`\Delta\varphi`, rhs: String.raw`=0.823\times0.01745=0.01436`, at: AT(k, 9, "zero point zero one four three six radians") },
         { lhs: String.raw`\Delta y`, rhs: String.raw`=6371\times0.01436\approx91.5\ \text{km}`, at: tNorth },
-        { lhs: String.raw`\varphi_{\text{mid}}`, rhs: String.raw`=\tfrac{26.10+26.92}{2}=26.51^\circ`, at: AT(k, 11, "middle latitude"), h: 80 },
+        { lhs: String.raw`\varphi_{\text{mid}}`, rhs: String.raw`=\dfrac{26.10+26.92}{2}=26.51^\circ`, at: AT(k, 11, "middle latitude"), h: 80 },
         { lhs: "", rhs: String.raw`\approx26.5^\circ`, at: AT(k, 11, "twenty six and a half"), cont: true },
         { lhs: String.raw`\cos\varphi`, rhs: String.raw`=\cos26.5^\circ=0.895`, at: AT(k, 11, "zero point eight nine five") },
         { lhs: String.raw`\Delta\lambda`, rhs: String.raw`=-0.553\times0.01745`, at: AT(k, 12, "minus zero point zero zero") - 20 },
@@ -178,7 +178,7 @@ const S12: React.FC = () => {
         <Lbl x={XC} y={730} t="on the round Earth: 329° too" c={C.muted} s={T.floor} o={fin(f, tSph)} />
         <Keyword f={f} text="across arrow: out to sea" at={[XC, 800]} s={T.floor} appear={tWhy} />
       </Svg>
-      <TeX s={String.raw`\tan\beta=\frac{\text{opposite}}{\text{next to}}`} x={XC} y={120} size={50} o={fin(f, tTan)} />
+      <TeX s={String.raw`\tan\beta=\dfrac{\text{opposite}}{\text{next to}}`} x={XC} y={120} size={50} o={fin(f, tTan)} />
       <TeX s={eq[0]} x={XC} y={255} size={50} o={fin(f, AT(k, 4, "zero point six"))} />
       <TeX s={String.raw`\beta\approx31^\circ`} x={XC + 520} y={255} size={50} o={fin(f, t31)} />
       <TeX s={eq[1]} x={XC} y={530} size={54} o={fin(f, AT(k, 8, "three hundred and sixty"))} />
@@ -256,7 +256,7 @@ const S14: React.FC = () => {
         <Band p={p0} q={ac} color={C.neg} o={0.75 * fin(f, tAc3)} />
         <Arrow p={p0} q={add(p0, XP, U)} color={C.second} w={8} head={30} o={fin(f, tAl)} />
         <Arrow p={p0} q={add(p0, YP, U)} color={C.second} w={8} head={30} o={fin(f, tAc)} />
-        <AnimatedWindArrow from={p0} to={add(p0, w)} speed={IAN.sp} f={f} c={C.first} px={10} head={36} />
+        <AnimatedWindArrow from={p0} to={add(p0, w)} speed={IAN.sp} f={f} c={C.ink} px={10} head={36} />{/* Part 1 lessons D1: the full wind is ink */}
         <Arrow p={add(p0, YP, -40)} q={add(p0, YP, -170)} color="#7cc4ff" w={10} head={36} o={win(f, tPush, tLater)} />
         <Place p={p0} t="Fort Myers Beach" o={fin(f, AT(k, 1, "Fort Myers Beach"))} dx={-30} dy={50} a="end" />
         {(() => { const e = P(IAN.eye[0], IAN.eye[1]); return <circle cx={e[0]} cy={e[1]} r={10} fill="none" stroke={C.gold} strokeWidth={5} />; })()}
@@ -327,12 +327,12 @@ const S15: React.FC = () => {
       </Svg>
       <CalcStack f={f} x={1420} y={220} size={50} rows={[
         { lhs: String.raw`250\ \text{m/s}\times3600\ \text{s}`, rhs: String.raw`=900\ \text{km}`, at: tHr },
-        { lhs: String.raw`\frac{900\ \text{km}}{74\ \text{km per degree}}`, rhs: String.raw`\approx12^\circ`, at: tDeg, h: 110 },
+        { lhs: String.raw`\dfrac{900\ \text{km}}{74\ \text{km per degree}}`, rhs: String.raw`\approx12^\circ`, at: tDeg, h: 110 },
       ]} />
       <TeX s={String.raw`\text{like }\hat{\boldsymbol\theta}\text{ round a circle}`} x={XC} y={500} size={50} c={C.key} o={win(f, tTh, tN - 20)} />
       <TeX s={String.raw`111\ \text{km north}\ \Rightarrow\ \hat{\mathbf k}\ \text{tilts }1^\circ`} x={XC} y={500} size={50} o={win(f, tTilt, tD - 20)} />
       <TeX s={String.raw`\hat{\mathbf i},\ \hat{\mathbf j},\ \hat{\mathbf k}\ \text{keep changing}`} x={XC} y={590} size={50} o={win(f, tKeep, tD - 20)} />
-      <TeX s={String.raw`\frac{D\hat{\mathbf i}}{Dt},\quad \frac{D\hat{\mathbf j}}{Dt},\quad \frac{D\hat{\mathbf k}}{Dt}`} x={XC} y={620} size={60} o={fin(f, tD)} />
+      <TeX s={String.raw`\dfrac{D\hat{\mathbf i}}{Dt},\quad \dfrac{D\hat{\mathbf j}}{Dt},\quad \dfrac{D\hat{\mathbf k}}{Dt}`} x={XC} y={620} size={60} o={fin(f, tD)} />
       {void tN}
     </Scene>
   );
@@ -372,10 +372,10 @@ const S16: React.FC = () => {
       </Svg>
       <TeX s={eq[0]} x={XC} y={130} size={58} o={fin(f, tWrote)} />
       <TeX s={eq[1]} x={XC + 330} y={130} size={58} o={fin(f, AT(k, 6, "d theta hat"))} />
-      <TeX s={String.raw`\frac{d\theta}{dt}=\frac{v}{r}`} x={XC} y={300} size={58} o={fin(f, tV)} />
-      <TeX s={String.raw`\frac{d\hat{\boldsymbol\theta}}{dt}=-\hat{\mathbf r}\,\frac{v}{r}`} x={XC} y={450} size={58} o={fin(f, tCh)} />
-      <TeX s={String.raw`\frac{d\hat{\mathbf r}}{dt}=\hat{\boldsymbol\theta}\,\frac{v}{r}`} x={XC + 380} y={450} size={58} o={fin(f, tR)} />
-      <TeX s={String.raw`\text{circle}\ \to\ \hat{\mathbf r},\ \hat{\boldsymbol\theta}\ \to\ \frac{\text{speed}}{\text{radius}}`} x={XC} y={620} size={50} o={fin(f, tFind)} />
+      <TeX s={String.raw`\dfrac{d\theta}{dt}=\dfrac{v}{r}`} x={XC} y={300} size={58} o={fin(f, tV)} />
+      <TeX s={String.raw`\dfrac{d\hat{\boldsymbol\theta}}{dt}=-\hat{\mathbf r}\,\dfrac{v}{r}`} x={XC} y={450} size={58} o={fin(f, tCh)} />
+      <TeX s={String.raw`\dfrac{d\hat{\mathbf r}}{dt}=\hat{\boldsymbol\theta}\,\dfrac{v}{r}`} x={XC + 380} y={450} size={58} o={fin(f, tR)} />
+      <TeX s={String.raw`\text{circle}\ \to\ \hat{\mathbf r},\ \hat{\boldsymbol\theta}\ \to\ \dfrac{\text{speed}}{\text{radius}}`} x={XC} y={620} size={50} o={fin(f, tFind)} />
       {void [tCirc, chipEnd]}
     </Scene>
   );
@@ -423,7 +423,7 @@ const S18: React.FC = () => {
   const tCirc = SS(k, 1), tRoles = SS(k, 2), tS1 = SS(k, 3), tRate = SS(k, 5), tS2 = SS(k, 6), tDi = SS(k, 7), tS3 = SS(k, 8), tEq = SS(k, 9), tWords = SS(k, 10);
   const lam = -20 + 15 * prog(f, tS1, tS1 + 60);
   const A = topArrows(TV2, lam, 160);
-  const parts = pieces(EQ_S18, [String.raw`=\frac{d\hat{\mathbf i}}{d\lambda}`, String.raw`=-\hat{\mathbf R}`]);
+  const parts = pieces(EQ_S18, [String.raw`=\dfrac{d\hat{\mathbf i}}{d\lambda}`, String.raw`=-\hat{\mathbf R}`]);
   return (
     <Scene>
       <Svg>
@@ -447,8 +447,8 @@ const S18: React.FC = () => {
         <Keyword f={f} text="east swings in towards the axis" at={[XC, 800]} s={T.floor} appear={tWords} />
       </Svg>
       <TeX s={String.raw`\hat{\mathbf R}\ \text{plays}\ \hat{\mathbf r},\quad \hat{\mathbf i}\ \text{plays}\ \hat{\boldsymbol\theta},\quad \lambda\ \text{plays}\ \theta`} x={XC} y={130} size={44} o={fin(f, tRoles)} />
-      <TeX s={String.raw`\frac{D\lambda}{Dt}=\frac{u}{a\cos\varphi}`} x={XC + 160} y={290} size={56} o={fin(f, tRate)} />
-      <TeX s={String.raw`\frac{d\hat{\mathbf i}}{d\lambda}=-\hat{\mathbf R}`} x={XC + 160} y={440} size={56} o={fin(f, tDi)} />
+      <TeX s={String.raw`\dfrac{D\lambda}{Dt}=\dfrac{u}{a\cos\varphi}`} x={XC + 160} y={290} size={56} o={fin(f, tRate)} />
+      <TeX s={String.raw`\dfrac{d\hat{\mathbf i}}{d\lambda}=-\hat{\mathbf R}`} x={XC + 160} y={440} size={56} o={fin(f, tDi)} />
       <TeX s={parts[0]} x={XC + 160} y={585} size={50} o={fin(f, tEq)} />
       <TeX s={f < tEq + 30 ? parts[1] : parts[1] + parts[2]} x={XC + 160} y={705} size={50} o={fin(f, tEq + 15)} />
     </Scene>
@@ -504,7 +504,7 @@ const S19: React.FC = () => {
       <TeX s={String.raw`\hat{\mathbf R}=\cos\varphi\,\hat{\mathbf k}-\sin\varphi\,\hat{\mathbf j}`} x={XC} y={690} size={54} c={C.key} o={win(f, tR, tS6 - 20)} />
       <TeX s={EQ_S19} x={XC} y={370} size={54} o={fin(f, tEq)} />
       <CalcStack f={f} x={XC} y={600} size={44} maxLines={3} rows={[
-        { lhs: "", rhs: String.raw`\frac{u}{a\cos\varphi}=\frac{10}{4\,230\,000}`, at: AT(k, 15, "divide ten"), h: 96 },
+        { lhs: "", rhs: String.raw`\dfrac{u}{a\cos\varphi}=\dfrac{10}{4\,230\,000}`, at: AT(k, 15, "divide ten"), h: 96 },
         { lhs: "", rhs: String.raw`\approx2.36\times10^{-6}\approx2.4\times10^{-6}\ \text{rad/s}`, at: t24 },
         { lhs: "", rhs: String.raw`2.36\times10^{-6}\times86\,400\approx0.204\ \text{rad}`, at: t12 },
         { lhs: "", rhs: String.raw`0.204\times57.3^\circ\approx11.7^\circ\approx12^\circ`, at: t12 + 40, c: C.gold },

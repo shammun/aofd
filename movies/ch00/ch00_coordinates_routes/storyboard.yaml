@@ -19,7 +19,7 @@ concepts:
 - 'great circles: the plane through both places and the centre; sigma = the angle at the centre; d = a sigma; cos sigma = r1-hat . r2-hat'
 - 'great-circle route shape: initial bearing, vertex latitude, arrival bearing'
 - 'rhumb lines: constant bearing, length, why navigators used them (steering, short trips, straight on Mercator, legs)'
-target_duration_s: 1017.375
+target_duration_s: 1020.3003
 fps: 30
 size:
 - 1920
@@ -55,7 +55,7 @@ audio:
 dry_run:
   tool: tools/tts.py
   run: G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_routes/dryrun2_spliced
-  audio_s: 1017.375
+  audio_s: 1020.3003
   with_end_hold_s: 1019.875
   cues: 255
   sentences: 140
@@ -74,7 +74,7 @@ conventions:
     from above the North Pole'
   map polar components: i = theta-hat, j = -r-hat; u_theta = u, u_r = -v
   vortex ratio: rms(u_r) / mean(u_theta) on a 2000-km ring (said "typically" for the rms)
-colour_contract: great circle gold; rhumb line slate; London's r-hat teal, Los Angeles' r-hat orange; sigma arc gold; true lengths teal; map-drawn lengths
+colour_contract: great circle gold; rhumb line slate; London's r-hat ink (Part 1 lessons D1, never teal), Los Angeles' r-hat orange; sigma arc gold; true lengths teal; map-drawn lengths
   teal with a gold stretch bracket; unit vectors orange (i, j, r-hat, theta-hat); in/out (radial) rose with a '-' glyph for in; round (tangential) teal;
   height field sequential perceptual (cmocean deep reversed), anomaly diverging blue-white-red centred on 0; wind trails warm white; gold for pointers,
   links, 'same' ticks.
@@ -173,8 +173,8 @@ maths_skip:
     - s10_distance
     chip_on: AT(1, 'skip ahead') in s08_position_arrows
     skip_to_scene: s11_route_shape
-    skip_to_t: 712.42
-    skip_to_mmss: '11:52 (provisional: dry run; refill after the final TTS)'
+    skip_to_t: 715.3453
+    skip_to_mmss: '11:55 (provisional: dry run; refill after the final TTS)'
     keep_line: S1 of s11_route_shape
 chapter_marks:
 - t: 0.3
@@ -201,20 +201,20 @@ chapter_marks:
   mmss: '6:58'
   title: 'Every step: working out sigma (optional maths)'
   scene: s08_position_arrows
-- t: 712.42
-  mmss: '11:52'
+- t: 715.3453
+  mmss: '11:55'
   title: Where the route goes
   scene: s11_route_shape
-- t: 774.67
-  mmss: '12:54'
+- t: 777.5953
+  mmss: '12:57'
   title: The rhumb line
   scene: s12_rhumb
-- t: 837.75
-  mmss: '13:57'
+- t: 840.6753
+  mmss: '14:00'
   title: Why sailors liked the rhumb line
   scene: s13_why_rhumb
-- t: 923.05
-  mmss: '15:23'
+- t: 925.9753
+  mmss: '15:26'
   title: To sum up
   scene: s14_recap
 scenes:
@@ -876,38 +876,39 @@ scenes:
 - id: s10_distance
   t:
   - 647.725
-  - 712.425
+  - 715.3503
   sentence_times:
   - - 647.725
     - 650.65
   - - 651.0
     - 658.075
   - - 658.425
-    - 670.45
-  - - 671.95
-    - 681.975
-  - - 682.325
-    - 687.075
-  - - 688.575
-    - 700.925
-  - - 702.425
-    - 711.625
+    - 671.7698
+  - - 673.2698
+    - 683.2948
+  - - 683.6448
+    - 688.3948
+  - - 689.8948
+    - 703.8503
+  - - 705.3503
+    - 714.5503
   beat: 'D45 (7): sigma in radians, d = a sigma = 8755 km, and the per-degree check'
   visual: 'Left: the face-on disc with σ and the gold arc; AT(1, ''in radians'') a small ruler shows 1° = π/180 rad. Column: CalcStack rows on their words.
     AT(''Earth''s radius times sigma'') the gold arc''s label becomes ''≈ 8755 km'' with a gold link from the row. AT(6, ''the quick way'') the arc''s 10°
     ticks brighten (each ''≈ 1112 km''). AT(7, ''nine hundred kilometres per hour'') a small plane glyph and clock ''≈ 9.7 h''.'
   voiceover: 'The arc rule needs sigma in radians. One degree is pi over a hundred and eighty radians, about zero point zero one seven four five. So seventy
-    eight point seven four degrees is seventy eight point seven four times zero point zero one seven four five, about one point three seven four two radians.
-    [beat] Now the distance is the Earth''s radius times sigma: six thousand three hundred and seventy one kilometres times one point three seven four two.
-    That''s about eight thousand seven hundred and fifty five kilometres. [beat] Let''s check it the quick way: seventy eight point seven four degrees,
-    times a hundred and eleven point two kilometres per degree, is again about eight thousand seven hundred and fifty five kilometres. [beat] At a cruising
-    speed of about nine hundred kilometres per hour, that''s nearly ten hours in the air, before any help or hindrance from the winds.'
+    eight point seven four degrees, or more exactly seventy eight point seven three eight, times pi over a hundred and eighty, is about one point three seven
+    four two radians. [beat] Now the distance is the Earth''s radius times sigma: six thousand three hundred and seventy one kilometres times one point three
+    seven four two. That''s about eight thousand seven hundred and fifty five kilometres. [beat] Let''s check it the quick way: seventy eight point seven
+    four degrees, times a hundred and eleven point two kilometres per degree, is about eight thousand seven hundred and fifty six kilometres, the same to
+    within the rounding. [beat] At a cruising speed of about nine hundred kilometres per hour, that''s nearly ten hours in the air, before any help or hindrance
+    from the winds.'
   on_screen_eq:
     latex: d=a\,\sigma\approx 6371\times1.3742\approx 8755\ \text{km}
     vallis_eq: 'none in Vallis: arc rule; fluidpy.geo.sphere.great_circle_distance'
     page_png: null
   calc_rows:
-  - 1^\circ=\frac{\pi}{180}\ \text{rad}\approx0.01745\ \text{rad}
+  - 1^\circ=\dfrac{\pi}{180}\ \text{rad}\approx0.01745\ \text{rad}
   - \sigma\approx78.74\times0.01745\approx1.3742\ \text{rad}
   - 78.74\times111.2\ \text{km}\approx8755\ \text{km}
   - 8755\ \text{km}\div900\ \text{km/h}\approx9.7\ \text{h}
@@ -936,27 +937,27 @@ scenes:
   layout: CalcStack x >= 1100 (Must 8); '≈ 8755 km' on the arc is a short label at a spot.
 - id: s11_route_shape
   t:
-  - 712.425
-  - 774.675
+  - 715.3503
+  - 777.6003
   sentence_times:
-  - - 712.425
-    - 715.1
-  - - 715.45
-    - 727.925
-  - - 728.275
-    - 730.25
-  - - 730.6
-    - 735.75
-  - - 736.1
-    - 743.2
-  - - 743.55
-    - 751.425
-  - - 751.775
-    - 761.275
-  - - 762.775
-    - 768.125
-  - - 768.475
-    - 773.875
+  - - 715.3503
+    - 718.0253
+  - - 718.3753
+    - 730.8503
+  - - 731.2003
+    - 733.1753
+  - - 733.5253
+    - 738.6753
+  - - 739.0253
+    - 746.1253
+  - - 746.4753
+    - 754.3503
+  - - 754.7003
+    - 764.2003
+  - - 765.7003
+    - 771.0503
+  - - 771.4003
+    - 776.8003
   beat: the route leaves NW (312 deg), tops out at 62.4 N near SW Greenland, arrives SW (214 deg)
   visual: 'Back to the globe (camera continuity from s07), the gold route drawn; a plane glyph flies it (time compressed). AT(4, ''west-south-west'') a
     dashed slate arrow from London towards Los Angeles as it looks on a flat map, in a small Mercator inset in the column. AT(5, ''three hundred and twelve
@@ -1000,25 +1001,25 @@ scenes:
   layout: Source line below the globe; compass roses beside their cities, never on the column text; Los Angeles label inside the frame.
 - id: s12_rhumb
   t:
-  - 774.675
-  - 837.75
+  - 777.6003
+  - 840.6753
   sentence_times:
-  - - 774.675
-    - 777.925
-  - - 778.275
-    - 786.7
-  - - 787.05
-    - 796.1
-  - - 796.45
-    - 804.325
-  - - 805.825
-    - 807.85
-  - - 808.2
-    - 820.325
-  - - 821.825
-    - 829.975
-  - - 831.475
-    - 836.95
+  - - 777.6003
+    - 780.8503
+  - - 781.2003
+    - 789.6253
+  - - 789.9753
+    - 799.0253
+  - - 799.3753
+    - 807.2503
+  - - 808.7503
+    - 810.7753
+  - - 811.1253
+    - 823.2503
+  - - 824.7503
+    - 832.9003
+  - - 834.4003
+    - 839.8753
   beat: 'D47: the rhumb line, 258.5 deg, 9733 km, 11 % longer'
   visual: 'Same globe; AT(2, ''rhumb line'') the slate rhumb line draws beside the gold great circle, with identical small gold angle marks where it crosses
     five meridians (the same angle at every meridian; no numbers on the globe). AT(3, ''two hundred and fifty eight and a half'') compass rose at London
@@ -1061,35 +1062,35 @@ scenes:
   layout: Globe left, CalcStack right from x 1100; inset below the CalcStack with its own gap.
 - id: s13_why_rhumb
   t:
-  - 837.75
-  - 923.05
+  - 840.6753
+  - 925.9753
   sentence_times:
-  - - 837.75
-    - 840.75
-  - - 841.1
-    - 843.025
-  - - 843.375
-    - 845.225
-  - - 845.575
-    - 853.2
-  - - 853.55
-    - 862.8
-  - - 863.15
-    - 873.075
-  - - 873.425
-    - 878.85
-  - - 879.2
-    - 888.625
-  - - 890.125
-    - 892.35
-  - - 892.7
-    - 898.325
-  - - 898.675
-    - 904.5
-  - - 904.85
-    - 916.325
-  - - 916.675
-    - 922.25
+  - - 840.6753
+    - 843.6753
+  - - 844.0253
+    - 845.9503
+  - - 846.3003
+    - 848.1503
+  - - 848.5003
+    - 856.1253
+  - - 856.4753
+    - 865.7253
+  - - 866.0753
+    - 876.0003
+  - - 876.3503
+    - 881.7753
+  - - 882.1253
+    - 891.5503
+  - - 893.0503
+    - 895.2753
+  - - 895.6253
+    - 901.2503
+  - - 901.6003
+    - 907.4253
+  - - 907.7753
+    - 919.2503
+  - - 919.6003
+    - 925.1753
   beat: 'D47: why some prefer the rhumb line (three reasons: steering, short trips, a ruler on Mercator)'
   visual: 'Three beats, one per reason, the globe staying left. Reason 1 AT(3, ''steering''): two compass dials in the column: the rhumb dial fixed at 258.5°
     (slate), the great-circle dial sweeping 312° -> 214° while the plane glyph flies the gold route (heading from DM12, same strip as s12). AT(6, ''a lot
@@ -1136,25 +1137,25 @@ scenes:
   layout: One reason at a time in the column; earlier reason keywords dim to 60 %; the Mercator chart has its source line below it.
 - id: s14_recap
   t:
-  - 923.05
-  - 994.475
+  - 925.9753
+  - 997.4003
   sentence_times:
-  - - 923.05
-    - 933.0
-  - - 933.35
-    - 941.525
-  - - 941.875
-    - 948.1
-  - - 948.45
-    - 958.1
-  - - 958.45
-    - 967.825
-  - - 968.175
-    - 976.3
-  - - 976.65
-    - 983.7
-  - - 984.05
-    - 993.675
+  - - 925.9753
+    - 935.9253
+  - - 936.2753
+    - 944.4503
+  - - 944.8003
+    - 951.0253
+  - - 951.3753
+    - 961.0253
+  - - 961.3753
+    - 970.7503
+  - - 971.1003
+    - 979.2253
+  - - 979.5753
+    - 986.6253
+  - - 986.9753
+    - 996.6003
   beat: recap ('To sum up'); last sentence the teaser to Part 7
   visual: 'One beat per sentence, mini pictures reused (no headings): the three curvilinear pictures; the scale-factor table (θ: r, φ: a, λ: a cos φ); the
     globe with the slicing sheet; the face-on disc ''d = a σ'' with ''cos σ = r̂₁ · r̂₂''; ''78.7°'', ''≈ 8755 km''; the compass strip 312° -> 214°; the
@@ -1190,15 +1191,15 @@ scenes:
   layout: One mini picture per sentence, previous ones dimmed; no headings.
 - id: s15_end
   t:
-  - 994.475
-  - 1017.375
+  - 997.4003
+  - 1020.3003
   sentence_times:
-  - - 994.475
-    - 1000.675
-  - - 1001.025
-    - 1009.075
-  - - 1009.425
-    - 1017.075
+  - - 997.4003
+    - 1003.6003
+  - - 1003.9503
+    - 1012.0003
+  - - 1012.3503
+    - 1020.0003
   beat: series end card (maths-tutorial ending, word for word; decision 2)
   visual: 'House end card (HOUSE_STYLE §3): four faint topic thumbnails along the top (globe with a great circle, compass dial, rhumb line, Mercator map);
     keyword lines ''a series of maths tutorials'' (68 px) and ''atmospheric science · meteorology · fluid dynamics'' (54 px); a notebook icon with ''coordinates

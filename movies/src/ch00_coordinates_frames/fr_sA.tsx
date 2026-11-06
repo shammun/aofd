@@ -15,7 +15,7 @@ import { V3 } from "./kit_fr/cam";
 import {
   AT, ArcHead, Arrow, BREST, BROWN, CalcStack, D, D2R, GB, GFULL, GeoMap, Globe, H, KHULNA, Keyword, K, LEN, Lbl, SE, SING, SS, Scene, SideCallout, SkipChip,
   Svg, TRAPPES, TeX, Tripod, TripodTips, XC, add, arcD, boxAt, clamp, discOf, e2g, facing, fin, fout, garrow, gdot, globeG, gseg, keepTime, linesPath, ll, mix,
-  pieces, plab, poly, prog, sang, svNorth, svP, svUp, tvDir, tvEast, tvP, win, TopV, SliceV, GeoImg, IMGS, chipSpan,
+  pieces, plab, poly, prog, sang, svNorth, svP, svUp, tvDir, tvEast, tvP, win, TopV, SliceV, GeoImg, IMGS, chipSpan, SpeedBar,
 } from "./fr_lib";
 import { AngleArc, SliceBase, TopViewBase, sliceArrows, topArrows, turned } from "./fr_dia";
 import { EQ_S02, EQ_S03, EQ_S04, EQ_S05, EQ_S06, EQ_S08 } from "./fr_eq";
@@ -104,7 +104,8 @@ const S00: React.FC = () => {
             <path d={linesPath(P, CO.lines)} fill="none" stroke={C.key} strokeOpacity={0.85} strokeWidth={2.2} />
             <Arrow p={p0} q={add(p0, xp, U)} color={C.second} w={7} head={26} />
             <Arrow p={p0} q={add(p0, yp, U)} color={C.second} w={7} head={26} />
-            <AnimatedWindArrow from={p0} to={add(p0, w)} speed={IAN.sp} f={f} c={C.first} px={8} head={26} />
+            {/* Part 1 lessons D1: the full wind is ink, never teal (teal = a round/along part) */}
+            <AnimatedWindArrow from={p0} to={add(p0, w)} speed={IAN.sp} f={f} c={C.ink} px={8} head={26} />
             <line x1={p0[0]} y1={p0[1]} x2={p0[0] + xp[0] * IAN.along * s} y2={p0[1] + xp[1] * IAN.along * s} stroke={C.first} strokeWidth={16} opacity={0.6 * split} />
             <line x1={p0[0]} y1={p0[1]} x2={p0[0] + yp[0] * IAN.across * s} y2={p0[1] + yp[1] * IAN.across * s} stroke={C.neg} strokeWidth={16} opacity={0.6 * split} strokeDasharray="12 8" />
             <circle cx={p0[0]} cy={p0[1]} r={9} fill={C.gold} stroke={C.bg} strokeWidth={3} />
@@ -113,6 +114,8 @@ const S00: React.FC = () => {
       </GeoMap>
       <SourceBelow text="Image: NASA Blue Marble Next Generation" pic={TB} w={690} o={oA} name="s00 src a" />
       <SourceBelow text="Data: HRRR (NOAA) · Natural Earth · 28 Sep 2022" pic={TB} w={690} o={oB} name="s00 src b" />
+      {/* Part 1 lessons D2: the title's wind-speed map has its colour bar too (Part 1 review 1, Must 3) */}
+      <Svg><SpeedBar x={TB.x} y={740} w={300} o={oB} /></Svg>
     </Scene>
   );
 };
@@ -444,11 +447,20 @@ const S07: React.FC = () => {
     const q = (v: number[], s: number): V3 => [b[0] + v[0] * s, b[1] + v[1] * s, b[2] + v[2] * s];
     return { i: G.pw(q([Math.cos(lo), 0, -Math.sin(lo)], L)), j: G.pw(q([-Math.sin(la) * Math.sin(lo), Math.cos(la), -Math.sin(la) * Math.cos(lo)], L)), k: G.pw(q(b, L * 1.15)) }; })();
   const u = (q: Pt): Pt => { const dx = q[0] - t.b[0], dy = q[1] - t.b[1], n = Math.hypot(dx, dy) || 1; return [dx / n, dy / n]; };
+  // Part 1 lessons B4: at the keep line the zoomed Brest check (rows, right-angle ticks) gives way to the keep line's own picture:
+  // the whole globe, a tripod at several places, each up arrow continuing the dashed line from the Earth's centre
+  const kO = fin(f, tKeep, 15), zO = 1 - kO;
+  const KEEP_CAM: GlobeCam = { lat: 28, lon: 12, dist: 3.4 };
+  const KEEP_P: [number, number][] = [[BREST[0], BREST[1]], [2, 18], [56, 42], [22, -24], [-25, 25]];
   return (
     <Scene>
-      <Globe cam={ZOOM_BREST} box={GFULL} coast={0.6} over={(Gg) => <Tripod G={Gg} la={BREST[0]} lo={BREST[1]} L={L} w={9} head={34} />} />
-      <TripodTips G={G} la={BREST[0]} lo={BREST[1]} L={L} size={58} />
-      <Svg>
+      <Globe cam={ZOOM_BREST} box={GFULL} coast={0.6} o={zO} over={(Gg) => <Tripod G={Gg} la={BREST[0]} lo={BREST[1]} L={L} w={9} head={34} />} />
+      <TripodTips G={G} la={BREST[0]} lo={BREST[1]} L={L} size={58} o={zO} />
+      {kO > 0 ? <Globe cam={KEEP_CAM} o={kO} grat={0.22} coast={0.45} over={(Gg) => <>
+        {KEEP_P.map(([la, lo], i) => Gg.vis(la, lo) ? <g key={i}>{gseg(Gg, [0, 0, 0], ll(la, lo), C.local, 3, 0.85, "10 8")}<Tripod G={Gg} la={la} lo={lo} L={0.2} w={7} head={26} /></g> : null)}
+        <circle cx={Gg.pw([0, 0, 0])[0]} cy={Gg.pw([0, 0, 0])[1]} r={10} fill={C.gold} stroke={C.bg} strokeWidth={3} />
+      </>} /> : null}
+      <Svg o={zO}>
         <RightTick at={t.b} u1={u(tp.i)} u2={u(tp.j)} s={30} o={fin(f, tRA)} c={C.key} />
         <RightTick at={t.b} u1={u(tp.j)} u2={u(tp.k)} s={30} o={fin(f, SS(k, 5))} c={C.key} />
         <RightTick at={t.b} u1={u(tp.i)} u2={u(tp.k)} s={30} o={fin(f, SS(k, 5) + 10)} c={C.key} />
@@ -460,7 +472,7 @@ const S07: React.FC = () => {
         <Keyword f={f} text="right-handed at Brest" at={[XZ, 700]} s={T.floor} appear={tRH} out={tKeep - 20} />
         <Keyword f={f} text="what to keep" at={[XZ, 700]} appear={tKeep} c={C.gold} />
       </Svg>
-      <CalcStack f={f} x={1270} y={150} size={44} maxLines={3} rows={[
+      <CalcStack f={f} x={1270} y={150} size={44} maxLines={3} o={fout(f, tKeep - 12)} rows={[
         { lhs: String.raw`|\hat{\mathbf i}|^2`, rhs: String.raw`=0.078^2+0.997^2\approx1`, at: AT(k, 1, "zero point zero seven eight") },
         { lhs: String.raw`\hat{\mathbf i}\cdot\hat{\mathbf j}`, rhs: String.raw`=0.078\times(-0.745)`, at: AT(k, 2, "zero point zero seven eight") },
         { rhs: String.raw`+0.997\times0.059+0`, at: AT(k, 2, "plus zero point nine"), cont: true },
@@ -474,8 +486,8 @@ const S07: React.FC = () => {
         { rhs: String.raw`\ \ \ \ -0.997\times(-0.745))`, at: tCr + 30, cont: true },
         { rhs: String.raw`\approx(0.662,\ -0.052,\ 0.748)`, at: AT(k, 6, "gives zero point six"), cont: true },
       ]} />
-      <TeX s={String.raw`=\hat{\mathbf k}`} x={1270} y={610} size={56} c={C.first} o={fin(f, tK)} />
-      <Svg><Lbl x={XZ} y={610} t="so" c={C.muted} s={T.floor} o={fin(f, tK)} /></Svg>
+      <TeX s={String.raw`=\hat{\mathbf k}`} x={1270} y={610} size={56} c={C.first} o={fin(f, tK) * fout(f, tKeep - 12)} />
+      <Svg><Lbl x={XZ} y={610} t="so" c={C.muted} s={T.floor} o={fin(f, tK) * fout(f, tKeep - 12)} /></Svg>
       <Svg>
         <Lbl x={XZ} y={775} t="each place: its own arrows" c={C.key} s={T.floor} o={fin(f, tKeep + 20)} />
         <Lbl x={XZ} y={830} t="up: away from the centre" c={C.key} s={T.floor} o={fin(f, tKeep + 30)} />
@@ -532,7 +544,7 @@ const S08: React.FC = () => {
       </Svg>
       <TeX s={String.raw`2.01^\circ-(-4.49^\circ)=6.50^\circ`} x={XZ} y={190} size={44} c={C.muted} o={win(f, AT(k, 2, "four hundred"), SS(k, 4) - 22)} />
       <TeX s={String.raw`6.50\times73.8\ \text{km}\approx480\ \text{km}`} x={XZ} y={250} size={44} c={C.muted} o={win(f, AT(k, 2, "four hundred") + 25, SS(k, 4) - 22)} />
-      <TeX s={String.raw`\frac{480}{6371}\approx0.075\ \text{rad}\approx4.3^\circ`} x={XZ} y={300} size={50} o={fin(f, tArc)} />
+      <TeX s={String.raw`\dfrac{480}{6371}\approx0.075\ \text{rad}\approx4.3^\circ`} x={XZ} y={300} size={50} o={fin(f, tArc)} />
       <TeX s={EQ_S08} x={XZ} y={430} size={52} o={fin(f, tDot)} />
       <TeX s={String.raw`\hat{\mathbf k}_S=(-0.239,\ 0.971,\ 0.024)`} x={XZ} y={515} size={44} o={fin(f, tKs)} />
       <TeX s={String.raw`\hat{\mathbf k}_B\cdot\hat{\mathbf k}_S=0.662\times(-0.239)`} x={XZ} y={600} size={44} o={fin(f, tMul)} />

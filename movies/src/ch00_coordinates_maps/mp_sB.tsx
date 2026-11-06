@@ -61,6 +61,8 @@ const S08: React.FC = () => {
       <Svg>
         <Slice />
         <path d={poly(arcPts(phi, phi + dph * prog(f, t3 + 10, t3 + 40), R8))} fill="none" stroke={C.first} strokeWidth={12} opacity={stepO} />
+        {/* Part 1 lessons B1: the small step is drawn magnified, and says so */}
+        <Lbl x={slicePt(phi + dph)[0] + 30} y={slicePt(phi + dph)[1] - 26} t="drawn 6° long" c={C.muted} s={T.floor} b={false} o={fin(f, t3 + 40)} />
         <circle cx={pB[0]} cy={pB[1]} r={10} fill={C.gold} stroke={C.bg} strokeWidth={3} opacity={stepO} />
         <line x1={C8[0]} y1={C8[1]} x2={pB[0]} y2={pB[1]} stroke={C.local} strokeWidth={3} opacity={stepO} />
         {pat(590, 73.8 * u, 111.2 * u, C.first, fin(f, t4), "globe", 745)}
@@ -79,7 +81,7 @@ const S08: React.FC = () => {
       <TeX s={String.raw`\varphi`} x={C8[0] + 90} y={C8[1] - 40} size={54} c={C.local} o={stepO} />
       <CalcStack f={f} x={XC + 210} y={200} size={56} maxLines={3} o={fout(f, t13 - 10, 12)} rows={[
         { lhs: String.raw`\Delta y_{\text{globe}}`, rhs: String.raw`=a\,\Delta\varphi`, at: AT(k, 4, "true length") },
-        { lhs: String.raw`\Delta y_{\text{Mercator}}`, rhs: String.raw`=\frac{a\,\Delta\varphi}{\cos\varphi}`, at: t7 + 30, h: 120 },
+        { lhs: String.raw`\Delta y_{\text{Mercator}}`, rhs: String.raw`=\dfrac{a\,\Delta\varphi}{\cos\varphi}`, at: t7 + 30, h: 120 },
         { lhs: String.raw`1^\circ\ \text{north}`, rhs: String.raw`=111.2\ \text{km}`, at: AT(k, 9, "a hundred") },
         { lhs: String.raw`\text{Brest}`, rhs: String.raw`=111.19\times1.5059`, at: AT(k, 10, "times one point"), c: C.gold },
         { rhs: String.raw`\approx167.4\ \text{km}`, at: AT(k, 10, "about a hundred"), c: C.gold, cont: true },
@@ -163,7 +165,7 @@ const S09: React.FC = () => {
       <TeX s={EQ_S09} x={XC} y={192} size={62} o={fin(f, t1) * fout(f, t14 - 20, 12)} />
       <TeX s={String.raw`\Delta\varphi=10^\circ=0.1745\ \text{rad}`} x={XC} y={300} size={56} o={win(f, t3, t6 - 10)} />
       <TeX s={String.raw`0.1745\times1.004\approx0.175`} x={XC} y={300} size={56} o={win(f, t6 + 8, t12 - 18)} />
-      <TeX s={String.raw`\times\tfrac{1}{\cos\varphi}`} x={LX + 30} y={ladY(1.9)} size={54} c={C.gold} o={fin(f, t12 + 10)} />
+      <TeX s={String.raw`\times\dfrac{1}{\cos\varphi}`} x={LX + 30} y={ladY(1.9)} size={54} c={C.gold} o={fin(f, t12 + 10)} />
     </Scene>
   );
 };
@@ -209,7 +211,7 @@ const S10: React.FC = () => {
       <TeX s={String.raw`\ln 1=0`} x={XC} y={460} size={68} o={win(f, t4, t6 - 18)} />
       <TeX s={String.raw`\ln e=1`} x={XC + 330} y={460} size={68} o={win(f, t5, t6 - 18)} />
       <TeX s={EQ_S10} x={XC} y={200} size={66} o={fin(f, t6)} />
-      <TeX s={String.raw`\frac{\pi}{4}\ \text{rad}=45^\circ`} x={XC} y={345} size={56} c={C.gold} o={win(f, t7, t8 - 20)} />
+      <TeX s={String.raw`\dfrac{\pi}{4}\ \text{rad}=45^\circ`} x={XC} y={345} size={56} c={C.gold} o={win(f, t7, t8 - 20)} />
       <CalcStack f={f} x={XC + 10} y={400} size={54} maxLines={3} rows={[
         { rhs: String.raw`45^\circ+30^\circ=75^\circ`, at: t9 },
         { rhs: String.raw`\tan 75^\circ\approx3.732`, at: t10 },
@@ -281,11 +283,11 @@ const S11: React.FC = () => {
       <TeX s={String.raw`0.0698`} x={zx(61) + 46} y={(zy(SL.y59) + zy(SL.y61)) / 2} size={46} c={C.first} o={zO * fin(f, t5)} />
       <TeX s={String.raw`0.0349\ \text{rad}`} x={(zx(59) + zx(61)) / 2} y={zy(SL.y59) + 58} size={46} c={C.second} ax={0.5} o={zO * fin(f, t5)} />
       <TeX s={String.raw`3.13\,a`} x={gx(85) - 20} y={gy(SL.y85) + 10} size={52} c={C.gold} ax={1} o={gO * fin(f, t13)} />
-      <TeX s={String.raw`\text{slope}=\frac{1}{\cos\varphi}`} x={XC} y={270} size={60} c={C.key} o={win(f, t1, t3 - 10)} />
+      <TeX s={String.raw`\text{slope}=\dfrac{1}{\cos\varphi}`} x={XC} y={270} size={60} c={C.key} o={win(f, t1, t3 - 10)} />
       <CalcStack f={f} x={XC + 10} y={250} size={56} maxLines={3} o={fout(f, t14 - 10, 12)} rows={[
         { rhs: String.raw`y(61^\circ)/a\approx1.3524`, at: AT(k, 3, "one point three") },
         { rhs: String.raw`y(59^\circ)/a\approx1.2826`, at: AT(k, 4, "one point two") },
-        { rhs: String.raw`\frac{0.0698}{0.0349}\approx2.00`, at: AT(k, 6, "about two"), h: 120 },
+        { rhs: String.raw`\dfrac{0.0698}{0.0349}\approx2.00`, at: AT(k, 6, "about two"), h: 120 },
         { rhs: String.raw`\tan 45^\circ=1,\ \ \ln1=0\ \Rightarrow\ y=0`, at: t10 + 30, size: 48 },
         { rhs: String.raw`85^\circ:\ y\approx3.131\,a`, at: AT(k, 13, "three point one three"), c: C.gold },
         { rhs: String.raw`3.131\times6371\approx19\,950\ \text{km}`, at: AT(k, 13, "about nineteen"), c: C.gold, cont: true },
@@ -346,6 +348,8 @@ const S12: React.FC = () => {
           <path d={poly(Array.from({ length: 40 }, (_, i) => { const a = (90 - (D.routes.brg * i) / 39) * D2R; return [TI[0] + 60 * Math.cos(a), TI[1] - 60 * Math.sin(a)] as Pt; }))} fill="none" stroke={C.gold} strokeWidth={4} />
           <Lbl x={TI[0] - D.rh.slant * ws / 2} y={TI[1] - 30} t="west 4.9" c={C.second} s={T.floor} a="middle" />
           <Lbl x={TI[0] - D.rh.slant * ws - 14} y={TI[1] + ws / 2 + 60} t="south 1" c={C.first} s={T.floor} a="start" />
+          {/* Part 1 lessons B1: the zoom box says what it is (the gold ring on the globe and the gold link show where it comes from) */}
+          <Lbl x={90} y={842} t="magnified" c={C.muted} s={T.floor} b={false} />
         </g>
         <g opacity={win(f, t9, t14, 14)}>
           {tri([780, 600], 0.62 * D.rh.k40)}
@@ -361,10 +365,10 @@ const S12: React.FC = () => {
         <Keyword f={f} text="great circle: curved here" at={[XC, 700]} s={T.floor} appear={t13} out={t14 - 18} />
         <Keyword f={f} text="globe ↔ map: they swap looks" at={[XC, 620]} appear={t14} />
       </Svg>
-      <TeX s={String.raw`\text{each strip}\times\frac{1}{\cos\varphi}`} x={XC} y={250} size={60} c={C.key} o={win(f, t1, t2 - 18)} />
+      <TeX s={String.raw`\text{each strip}\times\dfrac{1}{\cos\varphi}`} x={XC} y={250} size={60} c={C.key} o={win(f, t1, t2 - 18)} />
       <TeX s={eq12[0]} x={XC} y={250} size={56} o={win(f, t7, t12 - 18)} />
       <TeX s={"=" + eq12[1]} x={XC} y={360} size={56} o={win(f, t7 + 10, t12 - 18)} />
-      <TeX s={String.raw`\frac{4.9\,k}{1\,k}=4.9`} x={XC} y={480} size={64} c={C.gold} o={win(f, t10, t12 - 18)} />
+      <TeX s={String.raw`\dfrac{4.9\,k}{1\,k}=4.9`} x={XC} y={480} size={64} c={C.gold} o={win(f, t10, t12 - 18)} />
       <CalcStack f={f} x={XC} y={560} size={44} maxLines={4} o={fout(f, t8 - 12)} rows={[
         { rhs: String.raw`\text{check: }y=a\ln\tan(45^\circ+\varphi/2)`, at: t7, c: C.muted },
         { rhs: String.raw`\text{London }1.0523\,a,\ \ \text{LA }0.6327\,a`, at: t7 + 30 },
@@ -389,7 +393,7 @@ const S13: React.FC = () => {
   const lift = prog(f, t9, t9 + 40);
   const out = (L: number[], c: string, o: number) => <path d={llD(V13, "mc", L, undefined, 0, 85, true)} fill={c} fillOpacity={0.3} stroke={c} strokeWidth={4} opacity={o} />;
   const trueD = (L: number[], c: Pt, s: number) => poly(Array.from({ length: L.length / 2 }, (_, i) => [c[0] + L[2 * i] * s, c[1] - L[2 * i + 1] * s] as Pt)) + "Z";
-  const ps: Part[] = [{ t: String.raw`\text{area stretch}=k\times k` }, { t: String.raw`=\frac{1}{\cos^2\varphi}` }];
+  const ps: Part[] = [{ t: String.raw`\text{area stretch}=k\times k` }, { t: String.raw`=\dfrac{1}{\cos^2\varphi}` }];
   if ((ps[0].t + ps[1].t) !== EQ_S13) throw new Error("s13 parts drift from EQ_S13");
   return (
     <Scene>

@@ -16,6 +16,7 @@ import {
   AT, Arrow, BREST, CalcStack, Chevron, D, D2R, Earth, GB, GFULL, H, K, KHULNA, KeepLine, Keyword, LEN, LYB, Layered, Lbl, PlaneIcon, SE, SING, SRC_G, SS,
   Scene, SideCallout, SkipChip, Svg, TV3, TeX, VIOLET, XC, XZ, arcD, chipSpan, clamp, cutAt, discOf, e2g, eastAt, facePt, facing, faceArc, fin, fout, gdot, globeG,
   gseg, keepGone, keepTime, latFace, ll, merFace, merPath, mix, parPath, plab, poly, prog, splitVis, win, eqFace, Face, faceFlat, face3, spinPath,
+  RAD, Magnify, KeepPic,
 } from "./cs_lib";
 import { CAM_TOP, DiscFlatBase, FItem, FLAT_C, FLAT_R, LON0, MerFlatBase, PHI, TOP_C, TOP_R, TwoView, camFace, merCut, ptOf } from "./cs_two";
 import { EQ_S13, EQ_S15, EQ_S16, EQ_S17, EQ_S18, EQ_S19, EQ_S20, EQ_S21, EQ_S22, EQ_S24, EQ_S25 } from "./cs_eq";
@@ -110,8 +111,8 @@ const sideItems = (t: { c: number; ax: number; eq: number; ar: number; phi: numb
   { k: "lbl", p: [0, 1.0], t: "North Pole", c: C.key, dx: 26, dy: -40, dx3: -26, a3: "end", at: t.ax + 6, same: false },
   { k: "seg", a: [0, 0], b: [1, 0], c: C.local, w: 4, at: t.eq },
   { k: "lbl", p: [0.55, 0], t: "equator plane", c: C.muted, dy: 40, a: "middle", dy3: 40, a3: "middle", at: t.eq + 6, same: false, out: t.drop - 20 },
-  { k: "arrow", a: [0, 0], b: [BU, BV], c: C.first, at: t.ar },
-  { k: "tex", p: [BU / 2, BV / 2], t: "a", c: C.first, size: 54, dx: -30, dy: -26, at: t.ar + 6, same: false },
+  { k: "arrow", a: [0, 0], b: [BU, BV], c: RAD, at: t.ar },
+  { k: "tex", p: [BU / 2, BV / 2], t: "a", c: RAD, size: 54, dx: -30, dy: -26, at: t.ar + 6, same: false },
   { k: "wedge", r: 0.34, a0: 0, a1: PHI, c: C.gold, fo: 0.2, at: t.phi },
   { k: "arc", r: 0.34, a0: 0, a1: PHI, c: C.gold, w: 6, at: t.phi, same: false },
   { k: "tex", p: [0.22 * Math.cos(CB / 2), 0.22 * Math.sin(CB / 2)], t: String.raw`\varphi`, c: C.gold, size: 48, at: t.phi + 4, same: false },
@@ -161,7 +162,7 @@ const S15: React.FC = () => {
     { k: "lbl", p: [BU, BV / 2], t: "opposite φ", c: C.gold, dx: 20, dy: 0, at: tOpp, out: tRes - 20, only: "2" },
     { k: "tex", p: [BU, BV / 2], t: String.raw`z\approx4764\ \text{km}`, c: C.second, size: 48, dx: 22, ax: 0, dx3: 22, ax3: 0, at: tRes },
     { k: "arrow", a: [BU + 0.06, BV * 0.55], b: [BU + 0.06, BV * 0.95], c: C.gold, w: 5, head: 22, at: tPole },
-    { k: "arrow", a: [0, 0], b: [Math.cos(30 * D2R), -Math.sin(30 * D2R)], c: C.first, w: 6, head: 24, o: 0.6, at: tSouth },
+    { k: "arrow", a: [0, 0], b: [Math.cos(30 * D2R), -Math.sin(30 * D2R)], c: RAD, w: 6, head: 24, o: 0.6, at: tSouth },
     { k: "band", a: [Math.cos(30 * D2R), 0], b: [Math.cos(30 * D2R), -Math.sin(30 * D2R)], c: C.neg, w: 12, at: tSouth + 15, same: false },
     { k: "lbl", p: [Math.cos(30 * D2R), -0.25], t: "−  z < 0", c: C.neg, dx: 22, at: tSouth + 25, same: false },
   ];
@@ -178,14 +179,14 @@ const S15: React.FC = () => {
         <Lbl x={XC} y={660} t="opposite = long × sin" c={C.key} s={T.floor} o={win(f, tRule, tEq - 15)} />
         <CurvedLink f={f} from={[XC - 10, 640]} to={ptOf(P2, [BU * 0.45, BV * 0.45])} start={tA + 10} end={tSin + 30} bend={-40} />
       </Svg>
-      <Layered parts={[{ t: "z=" }, { t: "a", c: C.first, u: { w: String.raw`\text{Earth's radius}`, c: C.gold } }, { t: String.raw`\sin\varphi`, u: { w: String.raw`\text{sine of the latitude}`, c: C.gold } }]}
+      <Layered parts={[{ t: "z=" }, { t: "a", c: RAD, u: { w: String.raw`\text{Earth's radius}`, c: C.gold } }, { t: String.raw`\sin\varphi`, u: { w: String.raw`\text{sine of the latitude}`, c: C.gold } }]}
         x={XC} y={680} size={T.eq} layers={[{ t: "all", o: fin(f, tEq) * fout(f, tNum - 15) }, { t: [], u: [1, 2], o: fin(f, tEq + 20) * fout(f, tNum - 15) }]} />
       <TeX s={EQ_S15} x={KX3} y={330} size={T.calc} c={C.ink} o={fin(f, tNum)} />
       <CalcStack f={f} x={XC + 60} y={600} size={52} maxLines={2} rows={[
         { lhs: "a", rhs: String.raw`=6371\ \text{km}`, at: tA },
         { lhs: "", rhs: String.raw`\sin48.4^\circ\approx0.7478`, at: tSin, cont: true },
         { lhs: "z", rhs: String.raw`=6371\ \text{km}\times0.7478\approx4764\ \text{km}`, at: tRes - 30, size: 46 },
-        { lhs: "", rhs: String.raw`6400\times\tfrac34=4800`, at: tEasy, c: C.muted },
+        { lhs: "", rhs: String.raw`6400\times\dfrac34=4800`, at: tEasy, c: C.muted },
       ]} />
       {void tSin}
     </Scene>
@@ -232,7 +233,7 @@ const S16: React.FC = () => {
         { lhs: String.raw`\cos48.4^\circ`, rhs: String.raw`\approx0.6639`, at: tCos },
         { lhs: String.raw`a\cos\varphi`, rhs: String.raw`=6371\ \text{km}\times0.6639`, at: tRes - 30 },
         { lhs: "", rhs: String.raw`\approx4230\ \text{km}`, at: tRes, cont: true },
-        { lhs: "", rhs: String.raw`6400\times\tfrac23\approx4270`, at: tEasy, c: C.muted, out: tBoth - 15 },
+        { lhs: "", rhs: String.raw`6400\times\dfrac23\approx4270`, at: tEasy, c: C.muted, out: tBoth - 15 },
       ]} />
     </Scene>
   );
@@ -252,8 +253,8 @@ const S17: React.FC = () => {
     { k: "tex", p: [1.2, 0], t: "x", c: C.second, size: 54, dx: 10, dy: 40, at: 0, same: false },
     { k: "tex", p: [0, 1.2], t: "y", c: C.second, size: 54, dx: 34, at: 0, same: false },
     { k: "dot", p: [fu, fv], c: C.key, r: 9, at: tFoot },
-    { k: "seg", a: [0, 0], b: [fu, fv], c: C.first, w: 8, at: tLeg },
-    { k: "lbl", p: [fu * 0.55, fv * 0.55], t: "4230 km", c: C.first, dy: -40, a: "middle", dy3: -40, a3: "middle", at: tLeg + 10, same: false, out: tParts - 15 },
+    { k: "seg", a: [0, 0], b: [fu, fv], c: RAD, w: 8, at: tLeg },
+    { k: "lbl", p: [fu * 0.55, fv * 0.55], t: "4230 km", c: RAD, dy: -40, a: "middle", dy3: -40, a3: "middle", at: tLeg + 10, same: false, out: tParts - 15 },
     { k: "arc", r: 0.45, a0: 0, a1: BREST[1], c: C.second, w: 7, at: tLam },
     { k: "seg", a: [0, 0], b: [fu, 0], c: C.second, w: 6, dash: "14 8", at: tParts },
     { k: "seg", a: [fu, 0], b: [fu, fv], c: C.second, w: 6, dash: "14 8", at: tParts + 15, same: false },
@@ -263,7 +264,7 @@ const S17: React.FC = () => {
   const G = globeG(CAM_TOP, TV3);
   const pB = G.pw(ll(BREST[0], BREST[1])), pF = G.pw(facePt(eqFace, fu, fv));
   const eqs = cutAt(EQ_S17, String.raw`,\qquad `);
-  const IC: Pt = [1600, 560], IR = 120;
+  const IC: Pt = [1640, 420], IR = 120;   // Part 1 lessons B1: inset moved up, clear of the x, y lines at y 650 (they overlapped it)
   return (
     <Scene>
       <TwoView f={f} cam={CAM_TOP} cut={{ kind: "lat", lat0: 0, lift: 0, capO: 0.2 }} face={eqFace} flatC={TOP_C} flatR={TOP_R} items={items}
@@ -278,9 +279,12 @@ const S17: React.FC = () => {
         <g opacity={win(f, tLam + 15, tNum - 10)}>
           <circle cx={IC[0]} cy={IC[1]} r={IR + 12} fill={C.bg} stroke={C.grid} strokeWidth={3} />
           <line x1={IC[0]} y1={IC[1]} x2={IC[0] + IR} y2={IC[1]} stroke={C.second} strokeWidth={5} />
-          <line x1={IC[0]} y1={IC[1]} x2={IC[0] + IR * Math.cos(27 * D2R)} y2={IC[1] + IR * Math.sin(27 * D2R)} stroke={C.first} strokeWidth={5} />
+          <line x1={IC[0]} y1={IC[1]} x2={IC[0] + IR * Math.cos(27 * D2R)} y2={IC[1] + IR * Math.sin(27 * D2R)} stroke={RAD} strokeWidth={5} />
           <path d={arcD(IC, IR * 0.75, 0, -27)} fill="none" stroke={C.second} strokeWidth={6} />
-          <Lbl x={IC[0] - IR + 10} y={IC[1] - IR + 30} t="× 6" c={C.muted} s={T.floor} />
+        </g>
+        {/* Part 1 lessons B1: ring on the small λ arc of the flat top view, leader, "magnified 6×" */}
+        <g opacity={win(f, tLam + 15, tNum - 10)}>
+          <Magnify src={ptOf(faceFlat(TOP_C, TOP_R), [0.45 * Math.cos(BREST[1] * D2R / 2), 0.45 * Math.sin(BREST[1] * D2R / 2)])} srcR={24} at={IC} r={IR + 12} label="magnified 6×" ly={IC[1] - IR - 46} o={1} />
         </g>
         <Keyword f={f} text="Part 1: polar" at={[XC, 640]} appear={tPolar} out={tParts - 20} />
       </Svg>
@@ -288,7 +292,8 @@ const S17: React.FC = () => {
       <TeX s={String.raw`r\to a\cos\varphi,\quad \theta\to\lambda`} x={XC} y={730} size={60} c={C.ink} o={win(f, tPolar + 15, tParts - 15)} />
       <TeX s={eqs[0]} x={XC} y={650} size={60} c={C.ink} o={win(f, tParts, tCx - 15)} />
       <TeX s={eqs[1]} x={XC} y={740} size={60} c={C.ink} o={win(f, AT(k, 7, "and the y part"), tCx - 15)} />
-      <CalcStack f={f} x={XC + 100} y={600} size={48} maxLines={2} rows={[
+      {/* Part 1 lessons (stack bottom guard): at y 600 the last row (≈ −332 km) sat at y ≈ 906, in the caption band; 528 ends at 868 */}
+      <CalcStack f={f} x={XC + 100} y={528} size={48} maxLines={2} rows={[
         { lhs: String.raw`\cos(-4.5^\circ)`, rhs: String.raw`\approx0.9969`, at: tCx },
         { lhs: "x", rhs: String.raw`=4230\times0.9969\approx4217\ \text{km}`, at: tX - 30, cont: true },
         { lhs: String.raw`\sin(-4.5^\circ)`, rhs: String.raw`\approx-0.0785`, at: tSy },
@@ -322,7 +327,7 @@ const S18: React.FC = () => {
           {gseg(Gg, [0, 0, 0], [ex[0] * 1.3, ex[1] * 1.3, ex[2] * 1.3], C.second, 3, 0.7, "8 8")}
           {gseg(Gg, [0, 0, 0], [ey[0] * 1.3, ey[1] * 1.3, ey[2] * 1.3], C.second, 3, 0.7, "8 8")}
           {gseg(Gg, [0, 0, 0], [ez[0] * 1.3, ez[1] * 1.3, ez[2] * 1.3], C.second, 3, 0.7, "8 8")}
-          <Arrow p={c0} q={sB} color={C.first} o={tealO} />
+          <Arrow p={c0} q={sB} color={RAD} o={tealO} />
           <g opacity={fin(f, t1)}>
             <line x1={c0[0]} y1={c0[1]} x2={sX[0]} y2={sX[1]} stroke={C.second} strokeWidth={6} strokeDasharray="14 8" />
             <line x1={sX[0]} y1={sX[1]} x2={sXY[0]} y2={sXY[1]} stroke={C.second} strokeWidth={6} strokeDasharray="14 8" opacity={fin(f, t2)} />
@@ -384,7 +389,7 @@ const S19: React.FC = () => {
     { k: "dot", p: [0, 0], c: C.gold, at: 0, same: false }, { k: "seg", a: [0, -1.1], b: [0, 1.18], c: C.local, w: 4, at: 0, same: false },
     { k: "seg", a: [0, 0], b: [1, 0], c: C.local, w: 4, at: 0, same: false },
     { k: "seg", a: [0, 0], b: [BU, BV], c: C.muted, w: 3, dash: "8 8", at: tSide, same: false }, { k: "seg", a: [BU, BV], b: [BU, 0], c: C.muted, w: 3, dash: "8 8", at: tSide, same: false },
-    { k: "arrow", a: [0, 0], b: [KU, KV], c: C.first, at: tSide },
+    { k: "arrow", a: [0, 0], b: [KU, KV], c: RAD, at: tSide },
     { k: "wedge", r: 0.4, a0: 0, a1: KH.ll[0], c: C.gold, fo: 0.2, at: tSide + 20, same: false },
     { k: "seg", a: [KU, KV], b: [KU, 0], c: C.local, w: 5, dash: "12 8", at: tSide + 30, same: false },
     { k: "tick", p: [KU, 0], d1: [-1, 0], d2: [0, 1], s: 0.07, at: tSide + 30, same: false },
@@ -399,7 +404,7 @@ const S19: React.FC = () => {
     { k: "arrow", a: [0, 0], b: [1.2, 0], c: C.second, w: 5, head: 24, at: 0, same: false }, { k: "arrow", a: [0, 0], b: [0, 1.2], c: C.second, w: 5, head: 24, at: 0, same: false },
     { k: "tex", p: [1.2, 0], t: "x", c: C.second, size: 54, dx: 10, dy: 40, at: 0, same: false }, { k: "tex", p: [0, 1.2], t: "y", c: C.second, size: 54, dx: 34, at: 0, same: false },
     { k: "dot", p: [fu, fv], c: C.key, r: 9, at: tTop + 10 },
-    { k: "seg", a: [0, 0], b: [fu, fv], c: C.first, w: 8, at: tTop + 20, same: false },
+    { k: "seg", a: [0, 0], b: [fu, fv], c: RAD, w: 8, at: tTop + 20, same: false },
     { k: "arc", r: 0.4, a0: 0, a1: KH.ll[1], c: C.second, w: 6, at: tTop + 30, same: false },
     { k: "lbl", p: [fu, 0], t: "x ≈ 41 km", c: C.second, dx: 18, dy: 40, dx3: 18, dy3: 40, at: tX },
     { k: "lbl", p: [fu, fv / 2], t: "y ≈ 5873 km", c: C.second, dx: 24, dx3: 24, at: tY },
@@ -427,7 +432,7 @@ const S19: React.FC = () => {
         flatBase={(P) => <MerFlatBase P={P} />} /> : null}
       {oC > 0 ? <TwoView f={f} cam={CAM_TOP} cut={{ kind: "lat", lat0: 0, lift: 0, capO: 0.2 }} face={eqFace} flatC={TOP_C} flatR={TOP_R} items={topK} o3={oC} flatO={oC}
         flatBase={(P) => <DiscFlatBase P={P} />}
-        extra3={() => <g opacity={fin(f, tAlong)}><Arrow p={c0t} q={pK} color={C.first} /><circle cx={pK[0]} cy={pK[1]} r={10} fill={C.gold} stroke={C.bg} strokeWidth={3} /></g>} /> : null}
+        extra3={() => <g opacity={fin(f, tAlong)}><Arrow p={c0t} q={pK} color={RAD} /><circle cx={pK[0]} cy={pK[1]} r={10} fill={C.gold} stroke={C.bg} strokeWidth={3} /></g>} /> : null}
       <Svg>
         <Keyword f={f} text="another city" at={[XZ, 170]} appear={0} out={tLL - 20} o={oA} />
         <Keyword f={f} text="22.8° N, 89.6° E" at={[XZ, 280]} appear={tLL} out={tSide - 24} />
@@ -515,7 +520,7 @@ const S20: React.FC = () => {
       ]} />
       <TeX s={String.raw`\text{distance}=2\pi\,a\cos\varphi`} x={XC} y={450} size={60} c={C.ink} o={fin(f, tDist2) * fout(f, tRes - 22)} />
       <TeX s={String.raw`\text{speed}=\text{distance}\div T`} x={XC} y={540} size={60} c={C.ink} o={fin(f, tSpeed) * fout(f, tRes - 22)} />
-      <TeX s={String.raw`U=\textcolor{${VIOLET}}{\frac{2\pi}{T}}\,a\cos\varphi`} x={XC} y={650} size={T.calc} c={C.ink} o={fin(f, tU) * fout(f, tRes - 22)} glow={pulse(f, tPull, 30)} />
+      <TeX s={String.raw`U=\textcolor{${VIOLET}}{\dfrac{2\pi}{T}}\,a\cos\varphi`} x={XC} y={650} size={T.calc} c={C.ink} o={fin(f, tU) * fout(f, tRes - 22)} glow={pulse(f, tPull, 30)} />
       <TeX s={A[1]} x={XC} y={800} size={60} c={VIOLET} o={win(f, tOm, tRing - 22)} />
       <TeX s={A1[0]} x={XC} y={450} size={T.eq} c={C.ink} o={fin(f, tRes)} />
       <TeX s={String.raw`=\Omega${A1[1]}`} x={XC + 40} y={630} size={96} c={C.ink} o={fin(f, tRes + 15)} />
@@ -581,6 +586,8 @@ const S21: React.FC = () => {
         { lhs: "", rhs: String.raw`464.6\times0.2045\approx95\ \text{m/s}`, at: tL2 },
       ]} />
       <KeepLine f={f} k={k} last={2} lines={["height a sin φ ·", "from the axis a cos φ ·", "ground east at Ω a cos φ"]} />
+      {/* Part 1 lessons B4: the keep line's own picture (the slice: a sin φ, a cos φ, east ⊙ at Ω a cos φ) */}
+      <KeepPic kind="slice" c={[1150, 790]} R={310} o={fin(f, 4, 10) * fout(f, SE(k, 2), 10)} />
       {void [tNum, tOm, tCP]}
     </Scene>
   );
@@ -598,8 +605,8 @@ const S22: React.FC = () => {
     { k: "dot", p: [0, 0], c: C.gold, at: 0, same: false },
     { k: "seg", a: [0, -1.1], b: [0, 1.15], c: C.local, w: 3, at: 0, same: false },
     { k: "arc", r: 1, a0: -90, a1: 90, c: C.second, w: 8, at: tMer },
-    { k: "seg", a: [0, 0], b: step(60), c: C.first, w: 6, at: tRad },
-    { k: "tex", p: [0.5 * Math.cos(60 * D2R), 0.5 * Math.sin(60 * D2R)], t: "a", c: C.first, size: 54, dx: -30, dy: -20, at: tRad + 6, same: false },
+    { k: "seg", a: [0, 0], b: step(60), c: RAD, w: 6, at: tRad },
+    { k: "tex", p: [0.5 * Math.cos(60 * D2R), 0.5 * Math.sin(60 * D2R)], t: "a", c: RAD, size: 54, dx: -30, dy: -20, at: tRad + 6, same: false },
     { k: "seg", a: [0, 0], b: step(s0), c: C.key, w: 4, at: tWalk },
     { k: "seg", a: [0, 0], b: step(s1), c: C.key, w: 4, at: tWalk, same: false },
     { k: "arc", r: 0.32, a0: s0, a1: s1, c: C.gold, w: 7, at: tWalk + 20, same: false },
@@ -622,7 +629,7 @@ const S22: React.FC = () => {
         <Keyword f={f} text="same everywhere" at={[KX3, 380]} appear={tSame} s={48} />
       </Svg>
       <TeX s={String.raw`s=r\,\theta`} x={XC} y={660} size={60} c={C.ink} o={win(f, tRule, tEq - 15)} />
-      <Layered parts={[{ t: String.raw`\Delta y=` }, { t: "a", c: C.first, u: { w: String.raw`\text{Earth's radius}`, c: C.gold } },
+      <Layered parts={[{ t: String.raw`\Delta y=` }, { t: "a", c: RAD, u: { w: String.raw`\text{Earth's radius}`, c: C.gold } },
         { t: String.raw`\,\Delta\varphi`, u: { w: String.raw`\text{change in latitude (rad)}`, c: C.gold } }]} x={XC} y={680} size={T.eq}
         layers={[{ t: "all", o: fin(f, tEq) * fout(f, tTurn - 15) }, { t: [], u: [1, 2], o: fin(f, tEq + 25) * fout(f, tTurn - 15) }]} />
       <TeX s={EQ_S22} x={KX3} y={460} size={T.eq} c={C.ink} o={fin(f, tTurn)} />
@@ -660,7 +667,10 @@ const S23: React.FC = () => {
         <g opacity={win(f, tMin + 10, tSouth - 15)}>
           <circle cx={IC[0]} cy={IC[1]} r={IR + 12} fill={C.bg} stroke={C.grid} strokeWidth={3} />
           <path d={arcD([IC[0] - 300, IC[1] + 60], 400, 2, 22)} fill="none" stroke={C.second} strokeWidth={14} />
-          <Lbl x={IC[0] - 40} y={IC[1] - IR + 30} t="1′ × 60" c={C.muted} s={T.floor} a="middle" />
+        </g>
+        {/* Part 1 lessons B1: ring on the meridian at Brest (flat view), leader, label */}
+        <g opacity={win(f, tMin + 10, tSouth - 15)}>
+          <Magnify src={ptOf(P2, [1.025 * BU, 1.025 * BV])} srcR={24} at={IC} r={IR + 12} label="1′ magnified 60×" ly={IC[1] - IR - 46} o={1} />
         </g>
         <SideCallout f={f} lines={["5382 km along the curve"]} at={[XC + 4, 800]} appear={tCurve} target={ptOf(P2, [1.03 * Math.cos(CB / 2), 1.03 * Math.sin(CB / 2)])} bend={-40} s={T.floor + 2} />
         <SideCallout f={f} lines={["4764 km straight"]} at={[KX3 + 4, 330]} appear={tStraight} target={ptOf(P2, [BU + 0.03, BV * 0.55])} bend={30} s={T.floor + 2} />
@@ -687,8 +697,8 @@ const S24: React.FC = () => {
   const items: FItem[] = [
     { k: "dot", p: [0, 0], c: C.local, at: 0, same: false },
     { k: "arc", r: rr, a0: 0, a1: 360, c: C.second, w: 6, at: tRound },
-    { k: "seg", a: [0, 0], b: pt(0), c: C.first, w: 6, at: tRad },
-    { k: "lbl", p: pt(0, rr / 2), t: "4230 km", c: C.first, dy: 40, a: "middle", only: "2", at: tRad + 10, same: false },
+    { k: "seg", a: [0, 0], b: pt(0), c: RAD, w: 6, at: tRad },
+    { k: "lbl", p: pt(0, rr / 2), t: "4230 km", c: RAD, dy: 40, a: "middle", only: "2", at: tRad + 10, same: false },
     { k: "seg", a: [0, 0], b: pt(s0), c: C.key, w: 4, at: tWalk },
     { k: "seg", a: [0, 0], b: pt(s1), c: C.key, w: 4, at: tWalk, same: false },
     { k: "arc", r: rr * 0.42, a0: s0, a1: s1, c: C.gold, w: 7, at: tWalk + 20, same: false },
@@ -706,7 +716,7 @@ const S24: React.FC = () => {
       <TwoView f={f} cam={cam} cut={{ kind: "lat", lat0: PHI, lift, capO }} face={F} flatC={fC} flatR={200 / rr} items={items} flatO={fin(f, tSlice, 15)}
         flatBase={(P) => <path d={`${faceArc(P, 0, 0, rr, 0, 360, 120)}Z`} fill="#4a3d36" fillOpacity={0.55} stroke={C.muted} strokeWidth={4} />}
         extra3={() => <g opacity={win(f, SS(k, 4) + 30, tWalk + 200)}>
-          <line x1={cE[0]} y1={cE[1]} x2={pB[0]} y2={pB[1]} stroke={C.first} strokeWidth={4} strokeDasharray="10 8" opacity={0.6} />
+          <line x1={cE[0]} y1={cE[1]} x2={pB[0]} y2={pB[1]} stroke={RAD} strokeWidth={4} strokeDasharray="10 8" opacity={0.6} />
           <circle cx={cE[0]} cy={cE[1]} r={9} fill={C.gold} stroke={C.bg} strokeWidth={3} />
           <line x1={pC[0]} y1={pC[1]} x2={cE[0]} y2={cE[1]} stroke={C.local} strokeWidth={3} strokeDasharray="8 8" />
         </g>} />
@@ -726,7 +736,7 @@ const S24: React.FC = () => {
         x={XC} y={620} size={T.eq} layers={[{ t: "all", o: fin(f, tEq) * fout(f, tTwo - 15) }, { t: [], u: [1], o: fin(f, tEq + 25) * fout(f, tTwo - 15) }]} />
       <TeX s={EQ_S24} x={XC} y={610} size={60} c={C.ink} o={fin(f, tTwo)} />
       <TeX s={String.raw`\Delta x=4230\ \text{km}\times0.01745\approx73.8\ \text{km}`} x={XC} y={790} size={44} c={C.ink} o={win(f, tNum - 20, tTwo - 22)} />
-      <TeX s={String.raw`\cos48.4^\circ\approx\tfrac23`} x={1560} y={760} size={46} c={C.ink} o={fin(f, tTwo + 20)} />
+      <TeX s={String.raw`\cos48.4^\circ\approx\dfrac23`} x={1560} y={760} size={46} c={C.ink} o={fin(f, tTwo + 20)} />
       {void [tPar, tRule, facePt, face3]}
     </Scene>
   );
@@ -753,7 +763,7 @@ const S25: React.FC = () => {
             const ring = Array.from({ length: 97 }, (_, i) => Gg.pw(ll(p.la, (360 * i) / 96, 1.001)));
             return <g key={p.n} opacity={o}>
               <path d={`${poly(ring)}Z`} fill={C.second} fillOpacity={0.1 + 0.12 * fin(f, p.at)} stroke={C.second} strokeWidth={3} />
-              {gseg(Gg, [0, s, 0], ll(p.la, p.lo, 1.001), C.first, 4, fin(f, p.at))}
+              {gseg(Gg, [0, s, 0], ll(p.la, p.lo, 1.001), RAD, 4, fin(f, p.at))}
               <path d={poly(Array.from({ length: 11 }, (_, i) => Gg.pw(ll(p.la, p.lo + 0.5 * i, 1.004))))} fill="none" stroke={C.gold} strokeWidth={10} opacity={fin(f, p.at)} />
             </g>; })}
           {Array.from({ length: 12 }, (_, i) => <path key={i} d={merPath(Gg, -180 + 30 * i)} fill="none" stroke={C.second} strokeWidth={i % 2 ? 4 : 2} opacity={0.8 * fin(f, tLike)} />)}
@@ -763,7 +773,7 @@ const S25: React.FC = () => {
       <Svg>
         {P4.map((p, i) => { const y = Y0 + i * DY, o = fin(f, p.at), w = p.d * KPX * prog(f, p.at, p.at + 25);
           return <g key={p.n}>
-            <Lbl x={X0 - 18} y={y} t={p.n} c={C.key} s={T.floor} a="end" o={0.5 + 0.5 * o} />
+            <Lbl x={X0 - 18} y={y} t={p.n} c={C.key} s={T.floor} a="end" o={(0.5 + 0.5 * o) * fin(f, g0)} />{/* after the keep picture (Part 1 lessons B4) */}
             <rect x={X0} y={y - 16} width={Math.max(0, w)} height={32} fill={C.gold} opacity={o} rx={4} />
             <Lbl x={X0 + 8} y={y + 44} t={`${p.d.toFixed(1)} km`} c={C.gold} s={T.floor} o={fin(f, p.at + 20)} />
           </g>; })}
@@ -778,6 +788,8 @@ const S25: React.FC = () => {
       <TeX s={eqs[1]} x={1600} y={240} size={50} c={C.muted} o={fin(f, Math.max(tEach, g0 + 8))} />
       {P4.map((p, i) => <TeX key={p.n} s={p.row} x={XC} y={730} size={52} c={C.ink} o={win(f, p.at + 10, (P4[i + 1]?.at ?? tP) - 10)} />)}
       <KeepLine f={f} k={k} lines={["1° north ≈ 111 km ·", "1° east = 111 km × cos φ"]} />
+      {/* Part 1 lessons B4: the keep line's own picture (a degree north is the same everywhere; a degree east shrinks with cos φ) */}
+      <KeepPic kind="steps" c={[1440, 580]} R={220} o={fin(f, 4, 10) * fout(f, SE(k, 1), 10)} />
       {void [tCmp]}
     </Scene>
   );

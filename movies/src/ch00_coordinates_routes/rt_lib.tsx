@@ -136,11 +136,27 @@ export const Layered: React.FC<{ parts: Part[]; layers: Layer[]; x: number; y: n
   return <HLayered {...p} />;
 };
 const sideStr = (s: CalcRow["rhs"]): string => (typeof s === "string" ? s : "raw" in s ? s.raw[0].s : plainOf(s.parts));
+// Part 1 lessons C2 (2026-11-05): every fraction is a \dfrac (display size, >= 44 px). A row whose TeX has a \dfrac and no explicit
+// `h` is ~2.4x its type size tall, not the house 1.42x (Part 2's K6 found fraction rows printed over the next row). The regex tests the
+// literal backslash (`\\` in a JS regex; checklist C4). Static guard: the stack's lowest visible line must end above the caption band.
+const FRAC_ROW = /\\dfrac/;
+const rowTex = (r: CalcRow) => `${r.lhs ? sideStr(r.lhs) : ""}${sideStr(r.rhs)}`;
+const withFracH = (rows: CalcRow[], size: number): CalcRow[] => rows.map((r) => (r.h !== undefined || !FRAC_ROW.test(rowTex(r)) ? r : { ...r, h: (r.size ?? size) * 2.4 }));
+const stackBottomGuard = (rows: CalcRow[], y: number, size: number, maxLines: number) => {
+  const H: number[] = [];
+  rows.forEach((r, i) => { const h = r.h ?? (r.size ?? size) * 1.42; if (i === 0 || !r.cont) H.push(h); else H[H.length - 1] += h; });
+  for (let j = 0; j < H.length; j++) {
+    const bottom = y + H.slice(Math.max(0, j - maxLines + 1), j + 1).reduce((s, h) => s + h, 0);
+    if (bottom > 878) throw new Error(`CalcStack at y ${y}: line ${j} ("${rowTex(rows.filter((r, i) => i === 0 || !r.cont)[j]).slice(0, 40)}") ends at y ${Math.round(bottom)} (caption band from 880)`);
+  }
+};
 /** house CalcStack with the right-edge guard (row rhs starts at x) */
 export const CalcStack: React.FC<React.ComponentProps<typeof HCalcStack>> = (p) => {
   p.rows.forEach((r) => guard(sideStr(r.rhs), p.x, texW(sideStr(r.rhs), r.size ?? p.size ?? 68)));
   p.rows.forEach((r) => { if (r.lhs) { const ls = sideStr(r.lhs), w = texW(ls, r.size ?? p.size ?? 68); guard(ls, p.x - w - 14, w); } });
-  return <HCalcStack {...p} />;
+  const rows = withFracH(p.rows, p.size ?? 68);
+  stackBottomGuard(rows, p.y, p.size ?? 68, p.maxLines ?? 3);
+  return <HCalcStack {...p} rows={rows} />;
 };
 /** the house SVG label with the edge guard */
 export const Lbl: React.FC<React.ComponentProps<typeof HLbl>> = (p) => {
@@ -328,7 +344,7 @@ export const arcD = (c: Pt, r: number, a0: number, a1: number, n = 48) => {
   for (let i = 0; i <= n; i++) { const a = (a0 + ((a1 - a0) * i) / n) * D2R; pts.push([c[0] + r * Math.cos(a), c[1] - r * Math.sin(a)]); }
   return poly(pts);
 };
-/** the face-on disc: rim (gold), centre dot, r̂₁ (teal) and r̂₂ (orange) to the rim; σ arc and the route arc optional */
+/** the face-on disc: rim (gold), centre dot, r̂₁ (ink, Part 1 lessons D1) and r̂₂ (orange) to the rim; σ arc and the route arc optional */
 export const Disc: React.FC<{ V: DiscV; o?: number; a1o?: number; a2o?: number; sig?: number; route?: number; rim?: number; fill?: number; sw?: number }> = ({
   V, o = 1, a1o = 1, a2o = 1, sig = 0, route = 0, rim = 1, fill = 0.12, sw = 1 }) => {
   if (o <= 0) return null;
@@ -337,7 +353,7 @@ export const Disc: React.FC<{ V: DiscV; o?: number; a1o?: number; a2o?: number; 
     <g opacity={o}>
       <circle cx={V.c[0]} cy={V.c[1]} r={V.R} fill={C.key} fillOpacity={fill} stroke={C.gold} strokeWidth={4 * sw} strokeOpacity={rim} />
       {route > 0 ? <path d={arcD(V.c, V.R, V.a1, V.a1 + da * clamp(route, 0, 1))} fill="none" stroke={C.gold} strokeWidth={12 * sw} strokeLinecap="round" /> : null}
-      {a1o > 0 ? <Arrow p={V.c} q={dP(V, V.a1)} color={C.first} w={10 * sw} head={40 * sw} o={a1o} /> : null}
+      {a1o > 0 ? <Arrow p={V.c} q={dP(V, V.a1)} color={C.ink} w={10 * sw} head={40 * sw} o={a1o} /> : null}
       {a2o > 0 ? <Arrow p={V.c} q={dP(V, V.a2)} color={C.second} w={10 * sw} head={40 * sw} o={a2o} /> : null}
       {sig > 0 ? <path d={arcD(V.c, V.R * 0.3, V.a1, V.a1 + da * clamp(sig, 0, 1))} fill="none" stroke={C.gold} strokeWidth={6 * sw} /> : null}
       <circle cx={V.c[0]} cy={V.c[1]} r={9 * sw} fill={C.key} stroke={C.bg} strokeWidth={3} />
