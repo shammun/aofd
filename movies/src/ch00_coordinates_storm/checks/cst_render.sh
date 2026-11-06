@@ -21,5 +21,5 @@ cp "$S/sound/narration_music_cst.wav" "$S/bundle/public/" || exit 1
 cp "$S/build1_1080.mp4" "$O/1080.mp4"; cp "$M/en.vtt" "$M/en.srt" "$O/"
 (cd movies && npx remotion still "$S/bundle" Ch00CoordinatesStorm "$O/poster.jpg" --frame=200 --gl=angle)
 "$PY" tools/movie_qa.py "$O/1080.mp4" --storyboard "$M/storyboard.yaml" --composition movies/src/ch00_coordinates_storm/cs_eq.ts \
-  --overlap "$S/stills/$K6TAG" --hard-mb 160 --budget-mb 160 --duration-window 120,3600 2>&1 | tee "$S/qa.log" | tail -30
+  --overlap "$S/stills/$K6TAG" --captions "$M/en.vtt" --manifest "$M/manifest.json" --sound-cues "$S/sound/sound_captions.json" --hard-mb 160 --budget-mb 160 --duration-window 120,3600 2>&1 | tee "$S/qa.log" | tail -30
 "$PY" tools/disk_guard.py --report | tail -2
