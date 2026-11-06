@@ -1050,7 +1050,13 @@ def main() -> int:
     say.update({"a_min": -11, "a_max": 6})
     # MODIS Terra 18 May (GIBS): the pinhole eye
     import fluidpy.data.gibs as GB
-    mp = GB.fetch_wms("MODIS_Terra_CorrectedReflectance_TrueColor", "2020-05-18", (12.0, 19.0), (83.0, 90.0), width=1400, tag="ch00co_amphan")
+    # #5b review 1 M8 (2026-11-06): the old box (12-19 N) ended 1.4° south of the eye, so the 600-km crop (eye ± 2.7°) ran past the
+    # image's bottom edge: the slice was cut at row 1400 while crop_true still said 10.69 N, and the picture was stretched 1.32× in
+    # latitude (the real eye drawn ≈ 126 px below the ring). The box now reaches 9 N (the crop fits; asserted below), lossless PNG
+    # (the contrast stretch amplified the JPEG blocks).
+    MOD_S, MOD_N = 9.0, 19.0
+    mp = GB.fetch_wms("MODIS_Terra_CorrectedReflectance_TrueColor", "2020-05-18", (MOD_S, MOD_N), (83.0, 90.0), width=1400, tag="ch00co_amphan_b",
+                      fmt="image/png", expected_bytes=9_000_000)
     inputs.append(Path(mp))
     mim = np.asarray(Image.open(mp).convert("RGB")).astype(float)
     mh, mw = mim.shape[:2]
@@ -1061,7 +1067,7 @@ def main() -> int:
     ringm = uniform_filter(Lm, 15) * 225 - uniform_filter(Lm, 7) * 49
     ringm /= (225 - 49)
     contrast = ringm - Lm
-    mlat = 19.0 - (np.arange(mh) + 0.5) / mh * 7.0
+    mlat = MOD_N - (np.arange(mh) + 0.5) / mh * (MOD_N - MOD_S)
     mlon = 83.0 + (np.arange(mw) + 0.5) / mw * 7.0
     MLO, MLA = np.meshgrid(mlon, mlat)
     dkm_ = np.hypot((MLA - ib18[0]) * 111.2, (MLO - ib18[1]) * 111.2 * np.cos(ib18[0] * D2R))
@@ -1070,14 +1076,32 @@ def main() -> int:
     eye = (float(MLA[ei, ej]), float(MLO[ei, ej]))
     row("DS20", "MODIS pinhole eye (darkest spot against its 15-px surround) within 30 km of IBTrACS 06 UTC 18 May (13.4 N, 86.2 E)",
         [gcd(eye, ib18) / 1e3, ib18[0], ib18[1]], [0, 13.4, 86.2], [30, 0.05, 0.05])
+    # M8 CHECK: the eye is the darkest pixel (σ = 2 px smoothed luminance) within 40 km of itself, to 5 px
+    L2m = gaussian_filter(mim.mean(-1), 2.0)
+    dke = np.hypot((MLA - eye[0]) * 111.2, (MLO - eye[1]) * 111.2 * np.cos(eye[0] * D2R))
+    di_, dj_ = np.unravel_index(np.argmin(np.where(dke < 40, L2m, 1e9)), L2m.shape)
+    row("DS20", "MODIS eye within 5 px of the darkest pixel (σ = 2 px luminance) within 40 km (#5b review 1 M8)", [float(np.hypot(di_ - ei, dj_ - ej))], [0], [5.0])
     hw_ = 300.0 / 111.2
     crop = (eye[0] - hw_, eye[0] + hw_, eye[1] - hw_ / np.cos(eye[0] * D2R), eye[1] + hw_ / np.cos(eye[0] * D2R))
-    ci0, ci1 = int((19.0 - crop[1]) / 7 * mh), int((19.0 - crop[0]) / 7 * mh)
+    ci0, ci1 = int((MOD_N - crop[1]) / (MOD_N - MOD_S) * mh), int((MOD_N - crop[0]) / (MOD_N - MOD_S) * mh)
     cj0, cj1 = int((crop[2] - 83.0) / 7 * mw), int((crop[3] - 83.0) / 7 * mw)
-    mc = Image.fromarray(mim[ci0:ci1, cj0:cj1].astype(np.uint8))
+    truth("DS20", f"MODIS crop rows {ci0}-{ci1} / cols {cj0}-{cj1} inside the {mh} × {mw} image (no clipped, stretched crop; #5b review 1 M8)",
+          0 <= ci0 < ci1 <= mh and 0 <= cj0 < cj1 <= mw, [ci0, ci1, cj0, cj1])
+    if not (0 <= ci0 < ci1 <= mh and 0 <= cj0 < cj1 <= mw):
+        raise SystemExit("MODIS crop runs past the image: widen the GIBS box")
+    sub_ = mim[ci0:ci1, cj0:cj1]
+    # contrast enhanced (said on the source line), one linear stretch for all three channels: luminance p10 … p99.9 of the crop
+    # → 30 … 255, γ 2.0 (the cloud shield is near-white; the stretch shows its texture and the dark pinhole)
+    mlo_, mhi_ = np.percentile(sub_.mean(-1), [10, 99.9])
+    sub_ = 30 + 225 * np.clip((sub_ - mlo_) / (mhi_ - mlo_), 0, 1) ** 2.0
+    ce_ = (ei - ci0, ej - cj0)
+    truth("DS20", "after the stretch the eye (7-px disc) is darker than its 15-30 px annulus by ≥ 40 grey levels",
+          float(sub_.mean(-1)[ce_[0] - 3:ce_[0] + 4, ce_[1] - 3:ce_[1] + 4].mean()) < float(np.concatenate([sub_.mean(-1)[ce_[0] - 30:ce_[0] + 31, ce_[1] + 15:ce_[1] + 31].ravel(),
+                                                                                                              sub_.mean(-1)[ce_[0] - 30:ce_[0] + 31, ce_[1] - 30:ce_[1] - 14].ravel()]).mean()) - 40)
+    mc = Image.fromarray(sub_.astype(np.uint8))
     mc = mc.resize((1200, int(round(1200 * mc.height / mc.width))), Image.LANCZOS)
     mc.save(IMG / "modis_amphan.jpg", quality=92)
-    crop_true = (19.0 - ci1 / mh * 7, 19.0 - ci0 / mh * 7, 83.0 + cj0 / mw * 7, 83.0 + cj1 / mw * 7)
+    crop_true = (MOD_N - ci1 / mh * (MOD_N - MOD_S), MOD_N - ci0 / mh * (MOD_N - MOD_S), 83.0 + cj0 / mw * 7, 83.0 + cj1 / mw * 7)
     borders = [p for _, ps in B1.shp_parts(F_NEB) for p in ps]
     inputs.append(F_NEB)
     V["amphan"] = {"c": list(acen), "msl": float(ac.msl_min) / 100, "radii10": [50, 100, 200, 300], "vt10": B1.r6(avt, 2), "vr10": B1.r6(avr, 2),
@@ -1087,7 +1111,7 @@ def main() -> int:
                    "places": {k: list(v) for k, v in PLACES_BD.items()}, "close": close,
                    "coast": B1.box_lines(coast, (5.0, 30.0, 75.0, 100.0), nd=2, step=2), "borders": B1.box_lines(borders, (5.0, 30.0, 75.0, 100.0), nd=2, step=2),
                    "coast_map": B1.box_lines(coast, (17.0, 25.0, 84.5, 92.5), nd=3), "borders_map": B1.box_lines(borders, (17.0, 25.0, 84.5, 92.5), nd=3),
-                   "modis": {"crop": list(crop_true), "eye": list(eye), "ib18": list(ib18)},
+                   "modis": {"crop": list(crop_true), "eye": list(eye), "ib18": list(ib18), "stretch": {"lum_lo": float(mlo_), "lum_hi": float(mhi_), "out": [30, 255], "gamma": 2.0}},
                    "sec": {"radii": arad, "levels": ERA5_LEVELS, "z_km": B1.r6(azm, 3), "vr": B1.r6(AVR, 2), "vt": B1.r6(AVT, 2),
                            "min": [float(AVR[im_, jm_]), arad[jm_], float(azm[im_])], "max": [float(AVR[iM_, jM_]), arad[jM_], float(azm[iM_])], "box": [0, 300, 0, 16]}}
 
@@ -1348,7 +1372,7 @@ def main() -> int:
                             "panel": "r 0-100 km × z 0-14 km, cmocean dense 0 … +4 m/s, ≤ 0 drawn as 0; eye 0-22 km grey 'no echoes'",
                             "time_offset": "≈ 8 h before the HRRR 18 UTC winds (source line only)"}},
             "amphan": {"era5": "ARCO 2020-05-20T06, sfc + 10 pl; centre = ERA5 msl minimum", "rings_km": [50, 100, 200, 300], "section_radii_km": arad,
-                       "section_mask": "a ring with any point where p_level > msl", "ibtracs_sid": AMPHAN_SID, "modis": "GIBS MODIS Terra 2020-05-18 (1400 px, 12-19 N, 83-90 E)"},
+                       "section_mask": "a ring with any point where p_level > msl", "ibtracs_sid": AMPHAN_SID, "modis": "GIBS MODIS Terra 2020-05-18 (PNG 1400 × 2000 px, 9-19 N, 83-90 E); crop 600 km about the eye, contrast enhanced (lum p10-p99.9 → 30-255, γ 2)"},
             "flood_v3": {**FLOOD, "nargis": NARGIS},
             "time_compression": {"s01/s09": "one 75-min lap in ≈ 8-10 s", "s15": "streak families illustrative", "s18-s19": "tangential dashes animate one analysis hour"},
             "exaggerations": ["s03-s07 small turns drawn at 20°", "s04 slivers ×20", "s14 5° turn drawn at 15°", "s15-s16 vertical ×4", "s18-s19 vertical ×15",

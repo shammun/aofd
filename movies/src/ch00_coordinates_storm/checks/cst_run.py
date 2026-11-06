@@ -102,7 +102,7 @@ def main() -> int:
                 continue
             ff = out / f"frames_{i}.txt"
             ff.write_text(",".join(map(str, ch)))
-            procs.append(subprocess.Popen(["node", str(tool), str(bdir), str(S / "public"), str(out), str(ff), "--port", str(5600 + 30 * i), "--scale", "0.5", "--force"],
+            procs.append(subprocess.Popen(["node", str(tool), str(bdir), str(S / "public"), str(out), str(ff), "--port", str(int(os.environ.get("K6PORT", "5600")) + 30 * i), "--scale", "0.5", "--force"],
                                           cwd=MOVIES, stdout=open(out / f"log_{i}.txt", "w"), stderr=subprocess.STDOUT))
         for p in procs:
             p.wait()

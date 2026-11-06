@@ -89,7 +89,7 @@ const S00: React.FC = () => {
 // ================================================================ s01 hook
 const S01: React.FC = () => {
   const f = useCurrentFrame(), k = K("s01_hook");
-  const O: Pt = [520, 430], R = 280;
+  const O: Pt = [520, 400], R = 250;              // #5b r1 S2: smaller and higher, clear of the series icon row (y 752)
   const a = 20 + (360 * f) / 240;                 // one lap in 8 s (75 min compressed)
   const p = polar(O, R, a), u = unitV(a + 90), er = unitV(a);
   const tAcc = AT(k, 1, "accelerating"), tGuess = SS(k, 2), tTC = AT(k, 3, "tropical cyclone"), tNames = SS(k, 4), tSix = AT(k, 5, "seven parts"),
@@ -106,7 +106,7 @@ const S01: React.FC = () => {
           <circle cx={O[0]} cy={O[1]} r={R} fill="none" stroke={C.local} strokeWidth={5} />
           <circle cx={O[0]} cy={O[1]} r={34} fill="#22304a" stroke={C.local} strokeWidth={3} />
           <DashArrow f={f} p={p} q={[p[0] + u[0] * 150, p[1] + u[1] * 150]} />
-          <Arrow p={p} q={[p[0] + er[0] * 110, p[1] + er[1] * 110]} color={C.second} w={8} head={30} o={fin(f, tTurn)} />
+          <Arrow p={p} q={[p[0] + er[0] * 90, p[1] + er[1] * 90]} color={C.second} w={8} head={30} o={fin(f, tTurn)} />
           <Parcel p={p} />
           <g transform="translate(860 120)">
             <path d="M -70 30 A 70 70 0 0 1 70 30" fill="none" stroke={C.ink} strokeWidth={5} />
@@ -137,7 +137,7 @@ const S01: React.FC = () => {
         <Keyword f={f} text="winds in 3-D · storm surge" at={[MX, 520]} s={T.floor} appear={tIan + 30} />
         <Keyword f={f} text="another ocean · floods" at={[MX, 620]} s={T.floor} appear={tAmp + 30} />
         <g opacity={win(f, tSix, tTwo - 20)}>
-          {thumbs.map((t, i) => { const x = 140 + i * 240, y = 700;
+          {thumbs.map((t, i) => { const x = 140 + i * 240, y = 752;
             return <g key={t} opacity={i === 1 ? 1 : 0.35}>
               <circle cx={x + 60} cy={y + 60} r={54} fill="none" stroke={i === 1 ? C.gold : C.local} strokeWidth={4} />
               {/* Part 1 lessons B5: every icon ≥ 20 px inside its ring (r 54 about x+60, y+60): all points within 33 px of the centre */}
@@ -152,7 +152,7 @@ const S01: React.FC = () => {
             </g>; })}
         </g>
       </Svg>
-      <SourceBelow text="Map: Natural Earth · storm positions: IBTrACS v04r01 (NOAA NCEI)" pic={{ x: W.x, y: W.y, w: W.w, h: W.h + 140 }} w={900} o={oWorld * fin(f, tIan)} name="s01 src" />
+      <SourceBelow text="Map: Natural Earth · storm positions: IBTrACS v04r01 (NOAA NCEI)" pic={{ x: W.x, y: W.y, w: W.w, h: W.h + 140 }} w={900} o={oWorld} name="s01 src" />{/* #5b r1 M7(c): the map's source line from its first frame */}
     </Scene>
   );
 };
@@ -160,7 +160,7 @@ const S01: React.FC = () => {
 // ================================================================ s02 Part 1 in a minute
 const S02: React.FC = () => {
   const f = useCurrentFrame(), k = K("s02_part1_recap");
-  const O: Pt = [330, 600], u = 80;                // the Part 1 grid: 1 km = 80 px
+  const O: Pt = [330, 660], u = 80;                // the Part 1 grid: 1 km = 80 px; #5b r1 S1: 60 px lower (the turning arc and r̂ reached y 10-50)
   const tR = SS(k, 1), tArc = SS(k, 2), tUnit = SS(k, 3), tRh = SS(k, 4), tTh = SS(k, 5), tPart = SS(k, 6), tIan = SS(k, 7), tTurn = SS(k, 8);
   const thB = TH + 40 * prog(f, tTurn, tTurn + 120);
   const B = polar(O, 5 * u, thB);
@@ -175,7 +175,8 @@ const S02: React.FC = () => {
   return (
     <Scene>
       <Svg>
-        <g opacity={Math.max(oGrid, oG2)}>
+        <clipPath id="s02grid"><rect x={0} y={40} width={1080} height={820} /></clipPath>
+        <g opacity={Math.max(oGrid, oG2)} clipPath="url(#s02grid)">
           {[1, 2, 3, 4, 5, 6].map((r) => <circle key={r} cx={O[0]} cy={O[1]} r={r * u} fill="none" stroke={C.grid} strokeWidth={2} />)}
           {Array.from({ length: 12 }, (_, i) => i * 30).map((a) => <line key={a} x1={O[0]} y1={O[1]} x2={polar(O, 6.3 * u, a)[0]} y2={polar(O, 6.3 * u, a)[1]} stroke={C.grid} strokeWidth={2} />)}
           <line x1={O[0]} y1={O[1]} x2={B[0]} y2={B[1]} stroke={C.ink} strokeWidth={6} opacity={fin(f, tR)} />
@@ -199,7 +200,9 @@ const S02: React.FC = () => {
       <TeX s={String.raw`u_r=\mathbf u\cdot\hat{\mathbf r},\qquad u_\theta=\mathbf u\cdot\hat{\boldsymbol\theta}`} x={MX} y={570} size={60} o={win(f, tPart, tIan - 20)} />
       <Svg o={oIan}>
         <rect x={IB.x} y={IB.y} width={IB.w} height={IB.h} fill="#1d2a44" stroke={C.grid} strokeWidth={3} />
-        <path d={linesPath(P, D.coast_ian)} fill="none" stroke={C.key} strokeWidth={2.5} opacity={0.8} />
+        {/* #5b r1 S1: the coastline clipped to the panel (it ran up to the frame top and to the right) */}
+        <clipPath id="s02ian"><rect x={IB.x} y={IB.y} width={IB.w} height={IB.h} /></clipPath>
+        <path d={linesPath(P, D.coast_ian)} fill="none" stroke={C.key} strokeWidth={2.5} opacity={0.8} clipPath="url(#s02ian)" />
         <circle cx={c0[0]} cy={c0[1]} r={rr} fill="none" stroke={C.local} strokeWidth={4} />
         <circle cx={c0[0]} cy={c0[1]} r={8} fill={C.local} />
         {[0, 18, 36, 54].map((i) => { const az = RING.az[i] * D2R, p0: Pt = [c0[0] + rr * Math.cos(az), c0[1] - rr * Math.sin(az)], s = 4.2;
@@ -244,10 +247,11 @@ const S03: React.FC = () => {
         <Lbl x={T0[0] + 26} y={T0[1] - 36} t="(cos θ, sin θ)" c={C.key} s={T.floor} o={win(f, tTip, tSlide)} />
         <Wedge c={UC} r={110} a0={TH} a1={TH + turnDeg} o={fin(f, tDel)} />
         {/* K6 round 1: the "0.1 rad ≈ 6°" label (anchor end) lay across the turned r̂ arrow at 59°: it now moves to 76°, left of both arrows */}
-        <Lbl x={polar(UC, 150, TH + DRAW_TURN / 2 + (76 - TH - DRAW_TURN / 2) * ez)[0]} y={polar(UC, 150, TH + DRAW_TURN / 2 + (76 - TH - DRAW_TURN / 2) * ez)[1]} t={ez > 0.5 ? "0.1 rad ≈ 6°" : "Δθ"} c={C.gold}
-          s={ez > 0.5 ? T.floor : T.key} a={ez > 0.5 ? "end" : "middle"} o={fin(f, tDel)} />
+        {/* #5b r1 S3: "Δθ" sat on the turned r̂ arrow: it starts right of the old arrow (40°), clear of both */}
+        <Lbl x={polar(UC, 150, ez > 0.5 ? 76 : 40)[0]} y={polar(UC, 150, ez > 0.5 ? 76 : 40)[1]} t={ez > 0.5 ? "0.1 rad ≈ 6°" : "Δθ"} c={C.gold}
+          s={ez > 0.5 ? T.floor : T.key} a={ez > 0.5 ? "end" : "start"} o={fin(f, tDel)} />
         <path d={arcD(UC, UR, TH, a1)} fill="none" stroke={C.second} strokeWidth={12} opacity={fin(f, tSlide)} />
-        <Lbl x={mid[0] + 18} y={mid[1] - 18} t={f < tEx ? "length Δθ" : "≈ 0.1"} c={C.second} s={T.floor} o={fin(f, tOne)} />
+        <Lbl x={mid[0] - 10} y={mid[1] - 62} t={f < tEx ? "length Δθ" : "≈ 0.1"} c={C.second} s={T.floor} o={win(f, tOne, tSo - 10)} />{/* #5b r1 S3: above the gold leader's head (it sat under it) */}
         <RTick p={T0} u1={unitV(TH + 180)} u2={unitV(TH + 90)} o={fin(f, tRA)} c={C.ink} />
         <Arrow p={T0} q={[T0[0] + unitV(TH + 90)[0] * 170, T0[1] + unitV(TH + 90)[1] * 170]} color={C.second} w={8} head={32} o={fin(f, tTh)} />
         <Keyword f={f} text="how does $\hat{\mathbf r}$ change?" at={[MX, 120]} s={T.key} appear={0} out={tDel - 20} />
@@ -289,18 +293,20 @@ const S04: React.FC = () => {
     <Scene>
       <Svg>
         <UnitCircle c={UC} R={UR} />
-        <Arrow p={UC} q={T0} color={C.second} w={10} head={40} o={oDiag} />
+        <Arrow p={UC} q={T0} color={C.second} w={10} head={40} o={oDiag * (1 - 0.5 * fin(f, tMove))} />{/* #5b r1 S4: the old arrow dims, as in s03 / s05 */}
         <line x1={UC[0]} y1={UC[1]} x2={foot0[0]} y2={foot0[1]} stroke={C.second} strokeWidth={20} opacity={0.5 * win(f, tParts, tDiv)} />
         <line x1={foot0[0]} y1={foot0[1]} x2={T0[0]} y2={T0[1]} stroke={C.first} strokeWidth={20} opacity={0.5 * win(f, tParts, tDiv)} />
         <Lbl x={(UC[0] + foot0[0]) / 2} y={UC[1] + 46} t="cos θ" c={C.second} s={T.floor} a="middle" o={win(f, tParts, tDiv)} />
         <Lbl x={foot0[0] - 22} y={UC[1] - 50} t="sin θ" c={C.first} s={T.floor} a="end" o={win(f, tParts, tDiv)} />{/* K6 r0: was on the circle */}
-        <Arrow p={UC} q={T1} color={C.second} w={8} head={32} o={fin(f, tMove) * 0.7} />
+        <Arrow p={UC} q={T1} color={C.second} w={10} head={40} o={fin(f, tMove)} />{/* #5b r1 S4: the turned arrow at full strength */}
         <line x1={foot1[0]} y1={UC[1] - 6} x2={foot0[0]} y2={UC[1] - 6} stroke={C.neg} strokeWidth={18} opacity={win(f, tEast, tDiv + 60)} />
         <line x1={T1[0] + 14} y1={T1[1]} x2={T1[0] + 14} y2={T0[1]} stroke={C.first} strokeWidth={18} opacity={win(f, tNorth, tDiv + 60)} />
         <Lbl x={T1[0] - 40} y={T1[1] - 42} t="≈ −sin θ Δθ" c={C.neg} s={T.floor} a="end" o={win(f, tEast, tDiv + 60)} />
         <Lbl x={T1[0] + 40} y={T1[1] - 42} t="≈ cos θ Δθ" c={C.first} s={T.floor} o={win(f, tNorth, tDiv + 60)} />{/* K6 r0: was across the circle */}
         <Arrow p={T0} q={[T0[0] - 110, T0[1]]} color={C.neg} w={7} head={28} o={win(f, tMinus, tCheck)} />
         <Lbl x={UC[0]} y={UC[1] + UR + 70} t="turn drawn large (20°)" c={C.muted} s={T.floor} a="middle" o={win(f, tEast, tDiv + 60)} />{/* fix 0 B16 */}
+        {/* #5b r1 S5: where cos θ = 3/5 and sin θ = 4/5 come from (Part 1's balloon) */}
+        <Lbl x={UC[0]} y={UC[1] + UR + 70} t="balloon: 3 km E, 4 km N, 5 km away" c={C.local} s={T.floor} a="middle" o={win(f, tCheck, tWorks - 12)} />
         <Keyword f={f} text="how fast do cos and sin change?" at={[MX, 120]} s={T.floor} appear={0} out={tSlope - 20} />
         <Keyword f={f} text="slope = change ÷ change" at={[MX, 120]} s={T.key} appear={tSlope} out={tDiv - 20} />
         <Keyword f={f} text="east part shrinks" at={[MX, 120]} s={T.key} appear={tMinus} out={tCheck - 20} />
@@ -333,12 +339,14 @@ const S04: React.FC = () => {
       {/* fix 0 B6: the check's inputs and each step on its own sentence (3-4-5 balloon, the turned angle, the looked-up values) */}
       {/* K6 round 1: every row ran to x 1960-1997; each is split at its comma / arrow, the second part on its spoken words; the rows
           leave on "So the rule works" for the slope graphs */}
-      <CalcStack f={f} x={MX} y={210} size={46} maxLines={4} o={fout(f, tWorks - 12)} rows={[
+      {/* #5b r1 S5: the degree conversion and the sum written out; 3 lines visible (with the extra row the 4th line reached y 866) */}
+      <CalcStack f={f} x={MX} y={210} size={46} maxLines={3} o={fout(f, tWorks - 12)} rows={[
         // Part 1 lessons C2: \dfrac (was \tfrac, a small inline fraction)
         { rhs: String.raw`\theta=53.13^\circ:\ \cos\theta=\dfrac{3}{5}=0.6,`, at: tCheck },
         { rhs: String.raw`\sin\theta=\dfrac{4}{5}=0.8`, at: AT(k, 10, "the sine is"), cont: true },
-        { rhs: String.raw`\Delta\theta=0.01\ \mathrm{rad}=0.57^\circ`, at: tTurn, c: C.gold },
-        { rhs: String.raw`\Rightarrow\ \theta+\Delta\theta=53.70^\circ`, at: AT(k, 11, "to fifty three point seven"), c: C.gold, cont: true },
+        { rhs: String.raw`\Delta\theta=0.01\ \mathrm{rad}`, at: tTurn, c: C.gold },
+        { rhs: String.raw`0.01\times57.3^\circ\approx0.57^\circ`, at: AT(k, 11, "about half"), c: C.gold, cont: true },
+        { rhs: String.raw`\theta+\Delta\theta=53.13^\circ+0.57^\circ=53.70^\circ`, at: AT(k, 11, "to fifty three point seven"), c: C.gold, cont: true },
         { rhs: String.raw`\cos53.70^\circ=0.592`, at: tCd },
         { rhs: String.raw`0.592-0.600=-0.008`, at: AT(k, 12, "a change of"), cont: true },
         { rhs: String.raw`\dfrac{-0.008}{0.01}=-0.8=-\sin\theta`, at: tCr },
@@ -385,9 +393,11 @@ const S05: React.FC = () => {
         // K6 round 1: the chord row ended at x 1847: split after the chord length
         { rhs: String.raw`|\Delta\hat{\mathbf r}|=${CI.chord01.toFixed(5)}`, at: tAbout + 20 },
         { rhs: String.raw`\text{vs arc }0.1\ \ (\Delta\theta=0.1)`, at: tAbout + 35, cont: true },
-        { rhs: String.raw`\dfrac{\Delta\hat{\mathbf r}}{\Delta\theta}\approx\hat{\boldsymbol\theta}\ \ \xrightarrow{\ \Delta\theta\to0\ }\ \ \dfrac{d\hat{\mathbf r}}{d\theta}=\hat{\boldsymbol\theta}`, at: tDiv },
+        // #5b r1 S6: the limit on its own full-size row (the \xrightarrow label was ≈ 30 px)
+        { rhs: String.raw`\dfrac{\Delta\hat{\mathbf r}}{\Delta\theta}\approx\hat{\boldsymbol\theta}`, at: tDiv },
+        { rhs: String.raw`\text{as }\Delta\theta\to0:\ \ \dfrac{d\hat{\mathbf r}}{d\theta}=\hat{\boldsymbol\theta}`, at: AT(k, 4, "and let it shrink"), cont: true },
       ]} />
-      <Svg><Lbl x={MX} y={630} t="straight ≈ curved (small turn)" c={C.muted} s={T.floor} o={win(f, tAbout + 30, tWrite - 10)} /></Svg>
+      <Svg><Lbl x={MX} y={630} t="straight ≈ curved (small turn)" c={C.muted} s={T.floor} o={win(f, tAbout + 30, tDiv - 10)} />{/* #5b r1 S6: gone before the limit row reaches y 630 */}</Svg>
       {/* fix 0 B17 (c): the middle line, slope by slope */}
       <TeX s={String.raw`\dfrac{d}{d\theta}(\cos\theta,\ \sin\theta)=\Big(\dfrac{d\cos\theta}{d\theta},\ \dfrac{d\sin\theta}{d\theta}\Big)`} x={MX} y={600} size={46} o={fin(f, tSl)} />
       <TeX s={String.raw`=(-\sin\theta,\ \cos\theta)=\hat{\boldsymbol\theta}`} x={MX + 40} y={690} size={52} o={fin(f, AT(k, 12, "which is theta hat"))} />
@@ -415,10 +425,11 @@ const S06: React.FC = () => {
         <Arrow p={UC} q={R0} color={C.second} w={10} head={40} />
         <Lbl x={R0[0] + 20} y={R0[1] - 30} t="$\hat{\mathbf r}$" c={C.second} s={T.key} />
         <Arrow p={UC} q={Q0} color={C.second} w={10} head={40} o={fin(f, t1b)} dash={f < t2 ? "18 12" : undefined} />
-        <Lbl x={Q0[0] - 20} y={Q0[1] - 34} t="$\hat{\boldsymbol\theta}$" c={C.second} s={T.key} a="end" o={fin(f, t1b)} />
+        <Lbl x={Q0[0] + 16} y={Q0[1] + 64} t="$\hat{\boldsymbol\theta}$" c={C.second} s={T.key} o={fin(f, t1b)} />{/* #5b r1 S3: inside the circle, under its arrow (it sat on the gold arc, under "Δθ") */}
         <circle cx={UC[0]} cy={UC[1]} r={18} fill="none" stroke={C.gold} strokeWidth={5} opacity={win(f, t1b, t2)} />
-        <path d={arcD(UC, UR + 30, TH + turn, TH + 90 + turn)} fill="none" stroke={C.gold} strokeWidth={5} opacity={win(f, t2, t4)} />
-        <Lbl x={tip(TH + 45, UR + 80)[0]} y={tip(TH + 45, UR + 80)[1]} t="quarter turn ahead" c={C.gold} s={T.floor} a="middle" o={win(f, t2, t3)} />
+        {/* #5b r1 S7: the quarter-turn arc and its label on the words (S9), not on "Step two" */}
+        <path d={arcD(UC, UR + 30, TH + turn, TH + 90 + turn)} fill="none" stroke={C.gold} strokeWidth={5} opacity={win(f, AT(k, 9, "quarter turn"), t4)} />
+        <Lbl x={tip(TH + 45, UR + 80)[0]} y={tip(TH + 45, UR + 80)[1]} t="quarter turn ahead" c={C.gold} s={T.floor} a="middle" o={win(f, AT(k, 9, "quarter turn"), t3)} />
         <Wedge c={UC} r={100} a0={TH} a1={TH + turn} o={win(f, t3b, t4)} />
         <Wedge c={UC} r={100} a0={TH + 90} a1={TH + 90 + turn} o={win(f, t3b, t4)} />
         <path d={arcD(UC, UR, TH + 90, TH + 90 + turn)} fill="none" stroke={C.second} strokeWidth={12} opacity={win(f, t3b, t4b)} />
@@ -428,7 +439,8 @@ const S06: React.FC = () => {
         {/* K6 round 1: was across the circle and the −r̂ arrow; now right of −r̂, inside the circle */}
         <Lbl x={UC[0] - 30} y={UC[1] + 125} t="same direction" c={C.gold} s={T.floor} o={fin(f, tExact + 40)} />
         <RTick p={Qa} u1={unitV(TH + 270)} u2={unitV(TH + 180)} o={win(f, t4b, t5 + 30)} />
-        <Lbl x={slideEnd[0] - 10} y={slideEnd[1] + 50} t="$\hat{\boldsymbol\theta}$ turned 90°" c={C.neg} s={T.floor} a="end" o={win(f, t4b, tMin)} />
+        {/* #5b r1 M5: end-anchored at x 164 it ran off the left edge ("rned 90°"): start-anchored inside the circle, below the slide arrow */}
+        <Lbl x={UC[0] - 300} y={UC[1] + 52} t="$\hat{\boldsymbol\theta}$ turned 90°" c={C.neg} s={T.floor} o={win(f, t4b, tMin)} />
         <Arrow p={UC} q={mr} color={C.neg} w={10} head={40} o={fin(f, tExact)} />
         <Lbl x={mr[0] - 10} y={mr[1] + 50} t="$-\hat{\mathbf r}$" c={C.neg} s={T.key} a="end" o={fin(f, tExact)} />
         <Lbl x={UC[0]} y={UC[1] + UR + 70} t={`step ${step}`} c={C.muted} s={T.floor} a="middle" o={fin(f, t1) * fout(f, tSmall - 10)} />
@@ -480,7 +492,7 @@ const S07: React.FC = () => {
         {angs.map((a, i) => { const b = lift(i), u = unitV(a + 90);
           return <Arrow key={i} p={b} q={[b[0] + u[0] * L, b[1] + u[1] * L]} color={C.second} w={8} head={30} o={fin(f, i === 0 ? tEast : i === 1 ? tLean : tLean + 20)} />; })}
         <Lbl x={pts[0][0] + 24} y={pts[0][1] - 90} t="north" c={C.key} s={T.floor} o={win(f, tEast, tSlide)} />
-        <Lbl x={pts[1][0] - 20} y={pts[1][1] - 170} t="leans west" c={C.key} s={T.floor} a="end" o={win(f, tLean, tSlide)} />
+        <Lbl x={pts[1][0] + 24} y={pts[1][1] - 80} t="leans west" c={C.key} s={T.floor} o={win(f, tLean, tSlide)} />{/* #5b r1 S3: right of its arrow (it sat on the 53° arrow) */}
         <path d={poly3(tipsI)} fill="none" stroke={C.gold} strokeWidth={5} opacity={fin(f, tSwing)} />
         <Arrow p={tipsI[0]} q={tipsI[1]} color={C.neg} w={6} head={22} o={fin(f, tSwing)} />
         <Arrow p={tipsI[1]} q={tipsI[2]} color={C.neg} w={6} head={22} o={fin(f, tSwing)} />
@@ -496,20 +508,28 @@ const S07: React.FC = () => {
       </Svg>
       {/* heavy-phase K6 r0: size 56 ran the second row past the 1842 edge; fraction rows get their real height */}
       {/* fix 0 B9: the inputs, the subtraction and r̂ written out (left-aligned so the long rows fit inside 1842) */}
-      <CalcStack f={f} x={MX} y={210} size={44} maxLines={4} o={oCalc * fout(f, tRule - 6)} rows={[
+      <CalcStack f={f} x={MX} y={210} size={44} maxLines={4} o={oCalc * fout(f, tComp - 6)} rows={[
         { rhs: String.raw`\hat{\boldsymbol\theta}(53.13^\circ)=(-0.8,\ 0.6)`, at: tAt },
         { rhs: String.raw`\hat{\boldsymbol\theta}(53.70^\circ)=(-\sin53.70^\circ,\ \cos53.70^\circ)`, at: tAfter },
         { rhs: String.raw`=(-0.806,\ 0.592)`, at: AT(k, 11, "minus zero point eight zero six"), cont: true },
         // K6 round 1: this row ran to x 2300: the subtraction on two lines (components aligned), the result under it
         { rhs: String.raw`\Delta\hat{\boldsymbol\theta}=\big(-0.806-(-0.800),`, at: tChg },
-        { rhs: String.raw`\phantom{\Delta\hat{\boldsymbol\theta}=\big(}0.592-0.600\big)`, at: tChg + 15, cont: true },
-        { rhs: String.raw`\phantom{\Delta\hat{\boldsymbol\theta}}=(-0.006,\ -0.008)`, at: AT(k, 12, "minus zero point zero zero eight"), cont: true },
+        { rhs: String.raw`\phantom{\Delta\hat{\boldsymbol\theta}=\big(}0.592-0.600\big)`, at: tChg + 10, cont: true },
+        // #5b r1 M4 (A2): the sign step on its own line, tagged below the stack
+        { rhs: String.raw`=\big(-0.806+0.800,\ 0.592-0.600\big)`, at: tChg + 22, cont: true },
+        { rhs: String.raw`\phantom{\Delta\hat{\boldsymbol\theta}}=(-0.006,\ -0.008)`, at: Math.max(tChg + 40, AT(k, 12, "minus zero point zero zero six")), cont: true },
         { rhs: String.raw`\dfrac{(-0.006,\ -0.008)}{0.01}=(-0.6,\ -0.8)`, at: tDiv },
         { rhs: String.raw`\hat{\mathbf r}=(0.6,\ 0.8)\ \Rightarrow\ (-0.6,\ -0.8)=-\hat{\mathbf r}`, at: tRh, glow: pulse(f, tRh, 20) },
-        { rhs: String.raw`\dfrac{d\hat{\boldsymbol\theta}}{d\theta}=(-\cos\theta,\ -\sin\theta)`, at: tSl },
+      ]} />
+      {/* #5b r1 S5 (A1): the part-by-part check in its own stack, with the middle line (slope by slope, as in s05) */}
+      <CalcStack f={f} x={MX} y={210} size={44} maxLines={3} o={fin(f, tComp) * fout(f, tRule - 6)} rows={[
+        { rhs: String.raw`\dfrac{d\hat{\boldsymbol\theta}}{d\theta}=\dfrac{d}{d\theta}(-\sin\theta,\ \cos\theta)`, at: tSl, h: 128 },
+        { rhs: String.raw`=\Big(\dfrac{d(-\sin\theta)}{d\theta},\ \dfrac{d\cos\theta}{d\theta}\Big)`, at: tSl + 20, cont: true, h: 128 },
+        { rhs: String.raw`=(-\cos\theta,\ -\sin\theta)`, at: AT(k, 16, "is minus cosine theta"), cont: true },
         { rhs: String.raw`=-\hat{\mathbf r}`, at: SS(k, 17), cont: true },
       ]} />
       <Svg><Lbl x={MX} y={720} t="same numbers as the slope check" c={C.muted} s={T.floor} o={win(f, tAfter + 20, tChg - 10)} />
+        <Lbl x={MX} y={720} t="minus a minus is a plus" c={C.local} s={T.floor} o={win(f, tChg + 22, tDiv - 10)} />
         </Svg>
       <TeX s={EQ_S07} x={MX} y={330} size={64} o={fin(f, tRule)} />
     </Scene>
@@ -530,11 +550,16 @@ const S08: React.FC = () => {
   // fix 0 B5: the change drawn 200 px per m/s (≈ 3× the grid's 70) ABOVE the grid (y 180-400), linked to the grid's gold arrow
   const ZO: Pt = [660, 400], Z = 200;
   const zp = (v: Pt): Pt => [ZO[0] + v[0] * Z, ZO[1] - v[1] * Z];
-  const hv = PR.halv as number[][];
+  // #5b r1 M3(c): the halvings as exact products (pieces 1, 2 ∝ Δt, piece 3 ∝ Δt²: 0.1 × 0.25² = 0.00625); the data rows (rounded to
+  // 4 decimals) must agree to 1e-4
+  const hv = [1, 0.5, 0.25].map((dt) => [dt, dt, 0.1 * dt * dt]);
+  (PR.halv as number[][]).forEach((r, i) => r.forEach((v, j) => { if (Math.abs(v - hv[i][j]) > 1e-3) throw new Error(`CHECK halv ${i},${j}: ${v} vs ${hv[i][j]}`); }));
   const oChange = fin(f, tWhere), oHalf = fin(f, tHalf);
   const d1 = PR.d1 as number[];
   const pm: Pt = [(p0[0] + p1[0]) / 2, (p0[1] + p1[1]) / 2];
-  const n3 = (v: number) => (v >= 0.99 ? "1" : v >= 0.1 ? `${Math.round(v * 100) / 100}` : v.toFixed(3).replace(/0+$/, ""));
+  // #5b r1 M3(c): the exact halvings (0.00625, not 0.006: 0.00625 / 0.25 = 0.025 as spoken)
+  const n3 = (v: number) => (v >= 0.99 ? "1" : v >= 0.1 ? `${Math.round(v * 100) / 100}` : v.toFixed(5).replace(/0+$/, ""));
+  const tBoth = AT(k, 5, "both the number"), oKeep = fin(f, tRule);
   return (
     <Scene>
       <Svg>
@@ -546,18 +571,21 @@ const S08: React.FC = () => {
           <path d={arcD([520, 450], 240, 135, 210)} fill="none" stroke={C.gold} strokeWidth={5} /><ArcHead c={[520, 450]} r={240} a={210} dir={1} col={C.gold} />
         </g>
         {/* fix 0 B3: the grid gives way to the halving bars (it sat under them) */}
-        <g opacity={fin(f, tEasy) * fout(f, tHalf - 10)}>
+        {/* #5b r1 M1 (halves): the grid, the unit arrow (1, 0) and the ink arrow (10, 0) come in with the tool (S3), "×10" on the
+            question (S5), both pulse on "both the number and the arrow change" */}
+        <g opacity={fin(f, tTool) * fout(f, tHalf - 10)}>
           {Array.from({ length: 13 }, (_, i) => <line key={`v${i}`} x1={P(i, 0)[0]} y1={P(0, -1)[1]} x2={P(i, 0)[0]} y2={P(0, 3)[1]} stroke={C.grid} strokeWidth={1.5} />)}
           {[-1, 0, 1, 2, 3].map((j) => <line key={`h${j}`} x1={P(0, j)[0]} y1={P(0, j)[1]} x2={P(12, j)[0]} y2={P(0, j)[1]} stroke={C.grid} strokeWidth={1.5} />)}
-          <Arrow p={O} q={p0} color={C.ink} w={10} head={36} o={fin(f, tProd) * (f > tNow ? 0.4 : 1)} />
-          <Arrow p={O} q={[O[0] + 1 * U, O[1]]} color={C.second} w={8} head={28} o={win(f, tTake, tNow)} />
+          <Arrow p={O} q={p0} color={C.ink} w={10 + 4 * pulse(f, tBoth, 24)} head={36} o={f > tNow ? 0.4 : 1} />
+          <Arrow p={O} q={[O[0] + 1 * U, O[1]]} color={C.second} w={8 + 4 * pulse(f, tBoth, 24)} head={28} o={fout(f, tNow)} />
+          <Lbl x={P(5.5, 0)[0]} y={O[1] + 46} t="×10" c={C.gold} s={T.floor} a="middle" o={win(f, tQ, tNow)} />
           {/* fix 0 B4: the turned unit arrow d̂_new = (cos 0.1, sin 0.1), drawn on S10 */}
           <Arrow p={O} q={P(d1[0], d1[1])} color={C.second} w={8} head={28} o={win(f, tTurn, tNow + 30)} />
           <Arrow p={O} q={p1} color={C.ink} w={10} head={36} o={fin(f, tNow)} />
           <Wedge c={O} r={170} a0={0} a1={0.1 / D2R} o={fin(f, tTurn)} />
           <Lbl x={O[0] + 230} y={O[1] - 84} t="0.1 rad" c={C.gold} s={T.floor} o={fin(f, tTurn)} />{/* K6 r0: was on the turned arrow */}
           <Arrow p={p0} q={p1} color={C.gold} w={6} head={22} o={fin(f, tChg)} />
-          <Lbl x={P(0, 0)[0]} y={P(0, -1)[1] + 50} t="1 m/s per square" c={C.muted} s={T.floor} o={fin(f, tEasy)} />
+          <Lbl x={P(0, 0)[0]} y={P(0, -1)[1] + 50} t="1 m/s per square" c={C.muted} s={T.floor} o={fin(f, tTool)} />
         </g>
         <g opacity={oChange * fout(f, tHalf - 10)}>
           {/* fix 0 B5: a dashed gold leader from the grid's change arrow to its enlarged copy; scale stated; each piece tagged on its words */}
@@ -573,15 +601,22 @@ const S08: React.FC = () => {
           <Lbl x={zp([PR.dP[0] / 2, PR.dP[1] / 2])[0] - 26} y={zp([PR.dP[0] / 2, PR.dP[1] / 2])[1] + 10} t="sum (0.945, 1.1)" c={C.gold} s={T.floor} a="end" o={fin(f, tAdd)} />
         </g>
         <g opacity={oHalf * fout(f, tRule - 10)}>
-          {/* fix 0 B3: each bar has its number; groups 300 px apart so the numbers fit */}
-          {[0, 1, 2].map((i) => { const x = 100 + i * 305, y0 = 700;
+          {/* fix 0 B3: each bar has its number. #5b r1 M2: bars 110 px apart, groups 330 px apart, and the rose (third) number ABOVE its
+              bar ("0.025" at 44 px is ≈ 110 px wide: the numbers ran together at 100 px) */}
+          {[0, 1, 2].map((i) => { const x = 70 + i * 330, y0 = 700;
             return <g key={i} opacity={fin(f, [tHalf, AT(k, 21, "the first two"), AT(k, 21, "the third one")][i])}>
               {[0, 1, 2].map((j) => { const h = Math.max(4, (hv[i][j] / (j === 2 ? 0.1 : 1)) * 120);
-                return <g key={j}><rect x={x + j * 100} y={y0 - h} width={52} height={h} fill={[C.local, C.second, C.neg][j]} opacity={0.85} />
-                  <Lbl x={x + j * 100 + 26} y={y0 + 38} t={n3(hv[i][j])} c={[C.local, C.second, C.neg][j]} s={T.floor} a="middle" /></g>; })}
-              <Lbl x={x + 126} y={y0 + 104} t={`Δt = ${["1", "0.5", "0.25"][i]} s`} c={C.muted} s={T.floor} a="middle" />
+                return <g key={j}><rect x={x + j * 110} y={y0 - h} width={44} height={h} fill={[C.local, C.second, C.neg][j]} opacity={0.85} />
+                  <Lbl x={x + j * 110 + 22} y={j === 2 ? y0 - h - 32 : y0 + 38} t={n3(hv[i][j])} c={[C.local, C.second, C.neg][j]} s={T.floor} a="middle" /></g>; })}
+              <Lbl x={x + 132} y={y0 + 104} t={`Δt = ${["1", "0.5", "0.25"][i]} s`} c={C.muted} s={T.floor} a="middle" />
             </g>; })}
           <Lbl x={100} y={392} t="third bar drawn 10× taller" c={C.muted} s={T.floor} />
+        </g>
+        {/* #5b r1 M1 (halves, second span): the two pieces that survive stay on the left to the end, in the colours of their lines */}
+        <g opacity={oKeep}>
+          <Arrow p={[200, 640]} q={[480, 640]} color={C.local} w={10} head={36} />
+          <Arrow p={[480, 640]} q={[480 - 0.05 * 280, 640 - 280]} color={C.second} w={10} head={36} />
+          <Lbl x={140} y={250} t="what stays: two pieces (per second)" c={C.muted} s={T.floor} />
         </g>
         <Keyword f={f} text="what to keep: $\hat{\mathbf r}$ → $\hat{\boldsymbol\theta}$, $\hat{\boldsymbol\theta}$ → $-\hat{\mathbf r}$" at={[MX, 120]} s={T.floor} appear={0} out={tTool - 20} />
         <Keyword f={f} text="the product rule" at={[MX, 120]} s={T.key} appear={tTool} out={tKey - 20} />
@@ -592,7 +627,6 @@ const S08: React.FC = () => {
         <Lbl x={MX} y={210} t="v = 10 m/s · $\hat{\mathbf d}$ = (1, 0), length 1" c={C.key} s={T.floor} o={win(f, tTake, tKey - 20)} />
         <Lbl x={MX} y={270} t="→ 11 m/s" c={C.key} s={T.floor} o={win(f, tLater, tKey - 20)} />
         <Lbl x={MX + 230} y={270} t="· $\hat{\mathbf d}$ turns 0.1 rad" c={C.key} s={T.floor} o={win(f, tTurn, tKey - 20)} />
-        <Lbl x={MX} y={640} t="first two stay ≈ 1" c={C.muted} s={T.floor} o={win(f, tDivDt + 20, tRule - 20)} />
       </Svg>
       {/* fix 0 B4: every toy number with its origin, one row per sentence (left-aligned, so the long rows fit) */}
       <CalcStack f={f} x={MX} y={320} size={44} maxLines={4} o={fout(f, tKey - 8)} rows={[
@@ -607,19 +641,30 @@ const S08: React.FC = () => {
         { rhs: String.raw`\phantom{\Delta\hat{\mathbf d}}=(-0.005,\ 0.1)`, at: AT(k, 16, "a change of"), cont: true },
         { rhs: String.raw`10\,(-0.005,\ 0.1)=(-0.05,\ 1)`, at: AT(k, 16, "ten times that"), c: C.second },
         { rhs: String.raw`1\,(-0.005,\ 0.1)=(-0.005,\ 0.1)`, at: tP3, c: C.neg },
-        { rhs: String.raw`\text{sum}=(0.945,\ 1.1)`, at: tAdd, glow: pulse(f, tAdd + 20, 20) },
+        // #5b r1 M3(a): the addition written out, component by component
+        { rhs: String.raw`(1,\ 0)+(-0.05,\ 1)+(-0.005,\ 0.1)`, at: tAdd },
+        { rhs: String.raw`=(1-0.05-0.005,\ \ 0+1+0.1)`, at: AT(k, 18, "and we get"), cont: true },
+        { rhs: String.raw`=(0.945,\ 1.1)`, at: AT(k, 18, "zero point nine four five"), cont: true, glow: pulse(f, AT(k, 18, "zero point nine four five") + 20, 20) },
       ]} />
       {/* fix 0 B3: the halving in numbers, then the division by the time step (the step that makes piece 3 vanish) */}
       <CalcStack f={f} x={MX} y={300} size={44} maxLines={4} o={fout(f, tRule - 10)} rows={[
         { rhs: String.raw`\Delta t=1:\ \ 1,\ \ 1,\ \ 0.1`, at: tHalf },
         { rhs: String.raw`\Delta t=0.5:\ \ 0.5,\ \ 0.5,\ \ 0.025`, at: AT(k, 21, "the first two") },
-        { rhs: String.raw`\Delta t=0.25:\ \ 0.25,\ \ 0.25,\ \ 0.006`, at: AT(k, 21, "the third one") },
-        { rhs: String.raw`\div\Delta t:\ \ 0.1\to0.05\to0.025\to0`, at: AT(k, 22, "but the third"), c: C.neg },
+        { rhs: String.raw`\Delta t=0.25:\ \ 0.25,\ \ 0.25,\ \ 0.00625`, at: AT(k, 21, "the third one") },
+        // #5b r1 M3(b): each division by the time step on screen while it is spoken
+        { rhs: String.raw`\dfrac{1}{1}=1,\ \ \dfrac{0.5}{0.5}=1,\ \ \dfrac{0.25}{0.25}=1`, at: AT(k, 22, "the first two stay") },
+        { rhs: String.raw`\dfrac{0.1}{1}=0.1,\ \ \dfrac{0.025}{0.5}=0.05,`, at: AT(k, 22, "but the third"), c: C.neg },
+        { rhs: String.raw`\dfrac{0.00625}{0.25}=0.025`, at: AT(k, 22, "to zero point zero two five"), c: C.neg, cont: true },
+        { rhs: String.raw`\text{third}\div\Delta t:\ 0.1\to0.05\to0.025\to0`, at: AT(k, 22, "so as the time step"), c: C.neg },
       ]} />
       <TeX s={EQ_S08} x={MX} y={460} size={64} o={fin(f, tRule)} />
+      {/* #5b r1 M1: the two surviving pieces' tags as full-size maths (TeX, not a 44-px label with small inline fractions) */}
+      <TeX s={String.raw`\dfrac{dv}{dt}\,\hat{\mathbf d}=(1,\ 0)`} x={340} y={725} size={48} c={C.local} ax={0.5} o={oKeep} />
+      <TeX s={String.raw`v\,\dfrac{d\hat{\mathbf d}}{dt}=(-0.05,\ 1)`} x={510} y={480} size={48} c={C.second} o={oKeep} />
       <Svg>
-        <Lbl x={MX} y={600} t="number's rate × arrow" c={C.gold} s={T.floor} o={fin(f, tSay)} />
-        <Lbl x={MX} y={670} t="+ number × arrow's rate" c={C.gold} s={T.floor} o={fin(f, tSay + 20)} />
+        {/* #5b r1 M1: in the colours of the two surviving pieces drawn on the left */}
+        <Lbl x={MX} y={600} t="number's rate × arrow" c={C.local} s={T.floor} o={fin(f, tSay)} />
+        <Lbl x={MX} y={670} t="+ number × arrow's rate" c={C.second} s={T.floor} o={fin(f, tSay + 20)} />
       </Svg>
     </Scene>
   );

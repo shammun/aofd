@@ -124,7 +124,7 @@
    ],
    "section_mask": "a ring with any point where p_level > msl",
    "ibtracs_sid": "2020136N10088",
-   "modis": "GIBS MODIS Terra 2020-05-18 (1400 px, 12-19 N, 83-90 E)"
+   "modis": "GIBS MODIS Terra 2020-05-18 (PNG 1400 × 2000 px, 9-19 N, 83-90 E); crop 600 km about the eye, contrast enhanced (lum p10-p99.9 → 30-255, γ 2)"
   },
   "flood_v3": {
    "status": "DECIDED v3 (user 2026-11-05): flight = Amphan, swipe = Nargis 2008",
@@ -293,7 +293,7 @@
   "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\ERA5-ARCO\\era5_amphan_sfc_msl-u10-v10_2020-05-20T06_2020-05-20T06_1h.nc": "79ddaa6c8b1f4dcbd6c1ae574a380b6ca3008d1e12b5be4a642360e995800de2",
   "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\ERA5-ARCO\\era5_amphan_pl_u-v-w-z_1000-975-925-850-700-500-300-200-150-125_2020-05-20T06_2020-05-20T06_1h.nc": "834a949027d8839cc4bd3f966663260ab112d8ed0a060ca32b0eb59c7a17ea3c",
   "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\IBTrACS-v04r01\\IBTrACS.NI.v04r01.nc": "5831ac1a03dbc74172f08e4eb8294327a00d49249d0a4a012ab0e2f4cdf2f272",
-  "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\NASA-GIBS\\gibs_ch00co_amphan_MODIS_Terra_CorrectedReflectance_TrueColor_2020-05-18.jpg": "c96e9f80a87df5baccad292ed49d52ec9ef4231932282acb07511c7becb5f5aa",
+  "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\NASA-GIBS\\gibs_ch00co_amphan_b_MODIS_Terra_CorrectedReflectance_TrueColor_2020-05-18.png": "5b0a4a7247d2d08fb6625b9e9f07c4c03ea74e436b53a37710946378d773eeb0",
   "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\NE-10m-admin\\ne_10m_admin_0_boundary_lines_land.zip": "16ead035f539c8b6c23650c5845d86ad3556553e7456bdf9b4730210f26aacbe",
   "data/derived/ch00/coops_ian_surge_20220927_20220930.nc": "c4f015cfb8aa28f95a51beb26d66886d91108d1bbbc045c5be988336192ff548",
   "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\ETOPO2022-60s\\etopo2022_60s_swflorida_24.5-27.5N_-84.5--81.5E.nc": "7d2c8ba5224348b0785cce677be4b9fd017acd42ab83c6221ff90aa9e3a911ea",
@@ -309,7 +309,7 @@
   "cst_goes_eye.jpg": "7c365ab70a682f5efc3c3fc2c95069628a7d895ab159045377e255df7dd85d79",
   "cst_hrrr_s17.png": "aa9048928abf801898a1ac57a58a04355e689d6bf7871515a6eb2d72ec2e6016",
   "cst_ian_speed_20.png": "552ffa5931fc55243feb1b5717c94a0743857fa048da87482ac9a2ec01e47d02",
-  "cst_modis_amphan.jpg": "acc1b91c10cf3f192f1d08eb0c25edd6f72334251834a0500e6834481eac808b",
+  "cst_modis_amphan.jpg": "a3d6cfce156dbee8158d46baa902b00aed29fda1a7bea0aa9da97db061ebd790",
   "cst_nargis_storm.jpg": "3ff7716c3c9dca7a6e6a88718079969d27440daedc4c004afc267ae5b3c9004c",
   "cst_radar_ktbw.png": "b99f189328e9e0b64dc5b60a048972510446ab8af6027b6fbf6e54f9824dce95",
   "cst_sec_amphan.png": "c47ebbb8cf95c1ee5bc78b2d2d9de993fa83015888139a831302a0872ae592db",
@@ -324,13 +324,13 @@
   "cst_ur_925.png": "34d6f5fa262cfb012b83f00114fe546f04ce66cd50ceae87b8ba8094a559978a"
  },
  "data_files": {
-  "cs.json": "b995a1f8e683c1a2e0b9d28336de9e4ce6f7046ca6b2b12299752ae4db22c3b5",
+  "cs.json": "0ab38b557bfa471933fa8e00c8b523ded78ed2aebf1768c0e473adde7f5ae6b8",
   "img/amphan_speed.png": "385d78f2531adc3f4f59feb7c047f82ff74a297866d9ee49e21b44480e8ca856",
   "img/bay_patch.png": "568a40ed1507fc15e3bca6591ecf07287b8b8db43de38dc01d0a682ac580480e",
   "img/goes_eye.jpg": "7c365ab70a682f5efc3c3fc2c95069628a7d895ab159045377e255df7dd85d79",
   "img/hrrr_s17.png": "aa9048928abf801898a1ac57a58a04355e689d6bf7871515a6eb2d72ec2e6016",
   "img/ian_speed_20.png": "552ffa5931fc55243feb1b5717c94a0743857fa048da87482ac9a2ec01e47d02",
-  "img/modis_amphan.jpg": "acc1b91c10cf3f192f1d08eb0c25edd6f72334251834a0500e6834481eac808b",
+  "img/modis_amphan.jpg": "a3d6cfce156dbee8158d46baa902b00aed29fda1a7bea0aa9da97db061ebd790",
   "img/nargis_storm.jpg": "3ff7716c3c9dca7a6e6a88718079969d27440daedc4c004afc267ae5b3c9004c",
   "img/radar_ktbw.png": "b99f189328e9e0b64dc5b60a048972510446ab8af6027b6fbf6e54f9824dce95",
   "img/sec_amphan.png": "c47ebbb8cf95c1ee5bc78b2d2d9de993fa83015888139a831302a0872ae592db",
@@ -345,13 +345,13 @@
   "img/ur_925.png": "34d6f5fa262cfb012b83f00114fe546f04ce66cd50ceae87b8ba8094a559978a"
  },
  "data_sizes_bytes": {
-  "cs.json": 276982,
+  "cs.json": 277053,
   "img/amphan_speed.png": 26371,
   "img/bay_patch.png": 2181893,
   "img/goes_eye.jpg": 148883,
   "img/hrrr_s17.png": 101669,
   "img/ian_speed_20.png": 106524,
-  "img/modis_amphan.jpg": 83437,
+  "img/modis_amphan.jpg": 287917,
   "img/nargis_storm.jpg": 355710,
   "img/radar_ktbw.png": 268614,
   "img/sec_amphan.png": 37501,
@@ -1986,7 +1986,7 @@
    "id": "DS20",
    "name": "MODIS pinhole eye (darkest spot against its 15-px surround) within 30 km of IBTrACS 06 UTC 18 May (13.4 N, 86.2 E)",
    "value": [
-    8.497662,
+    8.606182,
     13.4,
     86.2
    ],
@@ -2000,6 +2000,44 @@
     0.05,
     0.05
    ],
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS20",
+   "name": "MODIS eye within 5 px of the darkest pixel (σ = 2 px luminance) within 40 km (#5b review 1 M8)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    0.0
+   ],
+   "tol": [
+    5.0
+   ],
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS20",
+   "name": "MODIS crop rows 583-1663 / cols 69-1179 inside the 2000 × 1400 image (no clipped, stretched crop; #5b review 1 M8)",
+   "value": [
+    583,
+    1663,
+    69,
+    1179
+   ],
+   "ref": true,
+   "tol": 0,
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS20",
+   "name": "after the stretch the eye (7-px disc) is darker than its 15-30 px annulus by ≥ 40 grey levels",
+   "value": true,
+   "ref": true,
+   "tol": 0,
    "pass": true,
    "kind": "check"
   },
@@ -2594,12 +2632,12 @@
    "data": "data/cs.json",
    "eq": "s = a σ (metres)",
    "params": {
-    "lat1": 13.3875,
+    "lat1": 13.3825,
     "lon1": 86.1225,
     "lat2": 13.4,
     "lon2": 86.2
    },
-   "sha256": "2a2414a49b479b8880348d6bdb2449c11fc6f20522b65aad4c6723adee244080"
+   "sha256": "e91e2f5d20b32e087fe1c0643c52c6d2225152e39ca58ccde466f1a0ef59e607"
   },
   {
    "fn": "fluidpy.geo.sphere.initial_bearing",

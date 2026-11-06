@@ -90,7 +90,7 @@ export const SRC = {
   goes: "Image: NOAA GOES-16 ABI mesoscale · 28 Sep 2022, 18:01 UTC · contrast enhanced",
   radar: "Data: NOAA NEXRAD radar KTBW (Tampa Bay) · 28 Sep 2022, 18:02 UTC · lowest scan",
   ibtAmp: "Data: IBTrACS v04r01 (NOAA NCEI) · Cyclone Amphan, 16-21 May 2020 · NASA Blue Marble · Natural Earth",
-  modis: "Image: NASA Worldview (MODIS Terra) · 18 May 2020 · Cyclone Amphan",
+  modis: "Image: NASA Worldview (MODIS Terra) · 18 May 2020 · Cyclone Amphan · contrast enhanced",
   era5: "Data: ERA5 (Copernicus C3S) · 20 May 2020, 06 UTC · Cyclone Amphan",
   flight: "Data: NASA Blue Marble · MODIS NBAR · NOAA ETOPO · IBTrACS v04r01 (NOAA NCEI) · Cyclone Amphan, May 2020",
   nargis: "Images: NASA MODIS (Terra) via Google Earth Engine · bands 7-2-1 · Cyclone Nargis, 21 Apr and 5 May 2008",

@@ -6,7 +6,7 @@ import React, { useLayoutEffect, useMemo } from "react";
 import { useThree } from "@react-three/fiber";
 import { AbsoluteFill, useCurrentFrame } from "remotion";
 import * as THREE from "three";
-import { C, T } from "../house/kit/type";
+import { C, FONT, T } from "../house/kit/type";
 import { Pt, pulse } from "../house/kit/draw";
 import { TeX } from "../house/kit/tex";
 import { CalcStack } from "./cs_lib";  // K6 r0: fraction rows get their real height
@@ -37,6 +37,8 @@ const CHECK_B: [string, number, number, number][] = [
   // measured rising air (DS29-DS30): the screen strings below
   ["w peak", WV.tdr.peak[0], 3.3, 0.05], ["w peak z", WV.tdr.peak[1], 8.5, 0], ["w peak r", WV.tdr.peak[2], 45, 0], ["w tower", WV.tdr.point_max[0], 11.6, 0.1],
   ["w p999", WV.tdr.p999, 8.9, 0.1], ["w cont", WV.cont.mean_18_26, 1.0, 0.1], ["w cont r", WV.cont.slanted[0][2], 18, 0], ["eye", WV.tdr.eye_km, 20, 0],
+  // #5b r1 M10: the spin row's inputs (Ω from f = 2Ω sin φ at the ring's latitude; φ printed to 0.1°; the sum with one rounding)
+  ["Omega", RING.f / (2 * Math.sin(D.ian_c[0] * D2R)), 7.29e-5, 5e-8], ["phi", D.ian_c[0], 26.5, 0.05], ["fv", RING.f * RING.v, 0.0023, 5e-5], ["push (shown values)", Number(nf(RING.acc, 3)) + Number(nf(RING.f * RING.v, 4)), 0.050, 5e-4],
   ["dt h", WV.tdr.dt_h, 7.6, 0.05], ["say w", SAY.w_ring, 3, 0], ["say tower", SAY.w_tower, 10, 0], ["say cont", SAY.w_cont, 1, 0],
 ];
 CHECK_B.forEach(([n, v, r, tol]) => { if (!(Math.abs(v - r) <= tol)) throw new Error(`CHECK ${n}: data ${v} vs screen ${r}`); });
@@ -67,10 +69,11 @@ const S09: React.FC = () => {
   const f = useCurrentFrame(), k = K("s09_dtheta_dt");
   const tV = SS(k, 1), tV35 = SS(k, 2), tGrow = SS(k, 3), tDt = SS(k, 6), tArc = SS(k, 7), tAng = SS(k, 8), tDiv = SS(k, 9), tRate = SS(k, 10), tNum = SS(k, 11),
     tN1 = SS(k, 12), tCancel = SS(k, 13), tDeg = SS(k, 14), tLap = SS(k, 15), tLap2 = SS(k, 16);
-  const a = lapA(f), p = polar(RC, RR, a);
   const a0 = 30, aW = 30;                                     // the short time Δt drawn as a 30° step
   const P0 = polar(RC, RR, a0), P1 = polar(RC, RR, a0 + aW);
   const lapFrac = clamp((f - tLap) / (LEN(k) - tLap), 0, 1);
+  // #5b r1 M6: from "one full lap" on, the parcel makes exactly one lap while the clock runs 0 → 75 min (it ran 1.3 laps before)
+  const a = f < tLap ? lapA(f) : lapA(tLap) + 360 * lapFrac, p = polar(RC, RR, a);
   return (
     <Scene>
       <Svg>
@@ -184,14 +187,16 @@ const S11: React.FC = () => {
       <TeX s={String.raw`\mathbf v=\cancel{\dfrac{dr}{dt}\,\hat{\mathbf r}}+r\,\dfrac{d\hat{\mathbf r}}{dt}`} x={MX} y={330} size={56} o={win(f, tZero, tChain - 20)} />
       <TeX s={String.raw`\dfrac{d\hat{\mathbf r}}{dt}=\dfrac{d\hat{\mathbf r}}{d\theta}\,\dfrac{d\theta}{dt}=\hat{\boldsymbol\theta}\,\dfrac{v}{r}`} x={MX} y={330} size={60} o={win(f, tCR, tMul - 20) * (f < tSo ? 0.85 : 1)} />
       {/* fix 0 B20: e1 on "Now multiply by r", "= v θ̂" only when S9 says it (EQ_S11 = e1 + "=v θ̂") */}
-      <CalcStack f={f} x={MX + 60} y={280} size={46} maxLines={3} o={fout(f, tYes - 14)} rows={[
+      {/* #5b r1 S6: 52 px (was 46: the fraction parts rendered ≈ 40 px) and the two r's struck on "The two r's cancel" */}
+      <CalcStack f={f} x={MX + 60} y={250} size={52} maxLines={3} o={fout(f, tYes - 14)} rows={[
         // K6 round 2: the regex was /^\mathbf v/ (\m = "m", no backslash), so nothing was cut and the row read "v v = r …"
         { lhs: String.raw`\mathbf v`, rhs: e1.replace(/^\\mathbf v/, ""), at: tMul },
-        { rhs: EQ_S11.slice(e1.length), at: tCancel, cont: true },
+        { rhs: String.raw`=\cancel{r}\,\hat{\boldsymbol\theta}\,\dfrac{v}{\cancel{r}}`, at: tCancel, cont: true },
+        { rhs: EQ_S11.slice(e1.length), at: tCancel + 30, cont: true },
       ]} />
       <TeX s={String.raw`\mathbf v=v\,\hat{\boldsymbol\theta}`} x={MX} y={360} size={96} o={win(f, tYes, tIan - 20)} glow={pulse(f, tCancel + 20, 20)} />
       <TeX s={String.raw`\mathbf v=34.8\ \hat{\boldsymbol\theta}\ \mathrm{m/s}`} x={MX} y={360} size={T.calc} o={fin(f, tIan)} />
-      <Svg><Lbl x={MX} y={540} t="the two r's cancel" c={C.gold} s={T.floor} o={win(f, tCancel, tIan - 20)} /></Svg>
+      <Svg><Lbl x={MX} y={700} t="the two r's cancel" c={C.gold} s={T.floor} o={win(f, tCancel, tIan - 20)} /></Svg>
     </Scene>
   );
 };
@@ -204,13 +209,15 @@ const S12: React.FC = () => {
   const a = lapA(f, 50, 300), p = polar(RC, RR, a), u = unitV(a + 90), er = unitV(a);
   // the s06 mini picture (θ̂'s tip swinging to −r̂) recalled at the left bottom
   const mC: Pt = [900, 715], mR = 70;                      // fix 0: up, so the −r̂ tag stays above the caption band
+  const [EQ12a, EQ12b] = cutAt(EQ_S12, "=v");               // #5b r1 S6: "a = d/dt(v θ̂)" / "= v dθ̂/dθ dθ/dt = −(v²/r) r̂"
   return (
     <Scene>
       <Svg>
         <RingBase />
         <DashArrow f={f} p={p} q={[p[0] + u[0] * 150, p[1] + u[1] * 150]} />
         <Arrow p={p} q={[p[0] - er[0] * 120, p[1] - er[1] * 120]} color={C.neg} w={10} head={40} o={fin(f, tMinus)} />
-        <Lbl x={p[0] - er[0] * 160} y={p[1] - er[1] * 160} t="−" c={C.neg} s={T.calc} a="middle" o={fin(f, tMinus)} />
+        {/* #5b r1 S8: a lone "−" read as a dash: the arrow is named in TeX */}
+        <Lbl x={p[0] - er[0] * 175} y={p[1] - er[1] * 175} t="$-\hat{\mathbf r}$" c={C.neg} s={T.key} a="middle" o={fin(f, tMinus)} />
         <Parcel p={p} />
         <g opacity={win(f, tRem, tSo + 30)}>
           <circle cx={mC[0]} cy={mC[1]} r={mR} fill="none" stroke={C.local} strokeWidth={3} />
@@ -242,9 +249,11 @@ const S12: React.FC = () => {
         { rhs: String.raw`=-\dfrac{v\cdot v}{r}\,\hat{\mathbf r}=-\dfrac{v^2}{r}\,\hat{\mathbf r}`, at: tRes, cont: true, h: 140 },
       ]} />
       {/* the whole derivation in one line, as a summary under the result (EQ_S12) */}
-      <TeX s={EQ_S12} x={MX} y={700} size={44} o={fin(f, tCentri)} />
+      {/* #5b r1 S6: the summary at 52 px on two lines (one 44-px line rendered its fractions at ≈ 36-40 px) */}
+      <TeX s={EQ12a} x={MX} y={665} size={52} o={fin(f, tCentri)} />
+      <TeX s={"=v" + EQ12b} x={MX + 60} y={795} size={52} o={fin(f, tCentri + 10)} />
       <TeX s={String.raw`\mathbf a=-\dfrac{v^2}{r}\,\hat{\mathbf r}`} x={MX} y={300} size={96} o={fin(f, tMinus)} glow={pulse(f, tRes + 20, 20)} />
-      <TeX s={String.raw`\dfrac{\mathrm{m^2/s^2}}{\mathrm m}=\mathrm{m/s^2}`} x={MX} y={520} size={T.calc} o={fin(f, tU2)} />
+      <TeX s={String.raw`\dfrac{\mathrm{m^2/s^2}}{\mathrm m}=\mathrm{m/s^2}`} x={MX} y={505} size={T.calc} o={fin(f, tU2)} />
     </Scene>
   );
 };
@@ -285,16 +294,17 @@ const S13: React.FC = () => {
       <CalcStack f={f} x={MX + 230} y={220} size={50} maxLines={3} o={fout(f, tAll - 12)} rows={[
         { lhs: String.raw`34.8^2`, rhs: String.raw`\approx1211`, at: tSq },
         { lhs: String.raw`\dfrac{1211}{25\,000}`, rhs: String.raw`\approx0.048\ \mathrm{m/s^2}`, at: tDiv, h: 130 },   // K6 round 2: 116-118 px of ink at 50 px (superscripts)
-        { lhs: String.raw`\dfrac{35^2}{25\,000}`, rhs: String.raw`\approx0.049`, at: tEasy, c: C.local, h: 130 },
+        { lhs: String.raw`\dfrac{35^2}{25\,000}`, rhs: String.raw`=\dfrac{1225}{25\,000}\approx0.049`, at: tEasy, c: C.local, h: 130 },   // #5b r1 S5: 35² = 1225 shown
         { lhs: String.raw`\dfrac{9.81}{0.048}`, rhs: String.raw`\approx200`, at: tG, h: 130 },
       ]} />
       <TeX s={EQ_S13} x={MX} y={250} size={60} o={win(f, tAll, LEN(k) + 20)} />
       {/* fix 0 B22: the car's conversions, one row at a time */}
       {/* K6 round 1: "=" column 1390 → 1300 (the first row ran to x 1879) */}
-      <CalcStack f={f} x={MX + 200} y={350} size={46} maxLines={3} rows={[
-        { lhs: String.raw`100\ \mathrm{km/h}`, rhs: String.raw`=\dfrac{100\,000\ \mathrm m}{3600\ \mathrm s}\approx27.8\ \mathrm{m/s}`, at: tCar },
-        { lhs: String.raw`\dfrac{27.8\ \mathrm{m/s}}{0.048\ \mathrm{m/s^2}}`, rhs: String.raw`\approx580\ \mathrm s`, at: tCar + 45 },
-        { lhs: String.raw`\dfrac{580\ \mathrm s}{60}`, rhs: String.raw`\approx9.7\ \mathrm{min}\approx10\ \mathrm{min}`, at: tCar + 90 },
+      {/* #5b r1 S9: the rows 128 px apart (the "0.048 m/s²" denominator touched "580 s" below it); the column starts 5 px higher */}
+      <CalcStack f={f} x={MX + 200} y={345} size={46} maxLines={3} rows={[
+        { lhs: String.raw`100\ \mathrm{km/h}`, rhs: String.raw`=\dfrac{100\,000\ \mathrm m}{3600\ \mathrm s}\approx27.8\ \mathrm{m/s}`, at: tCar, h: 128 },
+        { lhs: String.raw`\dfrac{27.8\ \mathrm{m/s}}{0.048\ \mathrm{m/s^2}}`, rhs: String.raw`\approx580\ \mathrm s`, at: tCar + 45, h: 128 },
+        { lhs: String.raw`\dfrac{580\ \mathrm s}{60}`, rhs: String.raw`\approx9.7\ \mathrm{min}\approx10\ \mathrm{min}`, at: tCar + 90, h: 128 },
       ]} />
     </Scene>
   );
@@ -337,6 +347,11 @@ const S14: React.FC = () => {
           {/* fix 0 B1 (physics): in this northern-hemisphere cyclone the air goes round anticlockwise (seen from above); the Coriolis
               push is to the RIGHT of the motion, i.e. OUTWARD (a = −f ẑ × v θ̂ = +f v r̂). True length 170/20 ≈ 8.5 px: drawn 6× longer */}
           <Arrow p={polar(RC, RR, 120)} q={polar(RC, RR + (170 / 20) * 6, 120)} color="#8e6fd8" w={7} head={22} o={fin(f, tEarth)} />
+        </g>
+        {/* #5b r1 S11: the parcel (and its velocity) stays on the ring from S13, while the voice says something must push it inward */}
+        <g opacity={fin(f, tOnly)}>
+          <DashArrow f={f} p={polar(RC, RR, 120)} q={[polar(RC, RR, 120)[0] + unitV(210)[0] * 130, polar(RC, RR, 120)[1] + unitV(210)[1] * 130]} />
+          <Arrow p={polar(RC, RR, 120)} q={polar(RC, RR - 150, 120)} color={C.key} w={7} head={26} dash="12 9" o={win(f, tPush, tP - 6)} />
           <Parcel p={polar(RC, RR, 120)} />
         </g>
         <Keyword f={f} text="steady speed, yet accelerating?" at={[MX, 120]} s={T.floor} appear={0} out={tSD - 20} />
@@ -346,31 +361,35 @@ const S14: React.FC = () => {
         <Keyword f={f} text="more: Wind on weather charts" at={[MX, 120]} s={T.floor} appear={tM1} out={tM2 - 20} />
         <Keyword f={f} text="more: Circular motion" at={[MX, 120]} s={T.floor} appear={tM2} />
         <Lbl x={MX} y={220} t={`both ${nf(RING.v, 1)} m/s long`} c={C.first} s={T.floor} o={win(f, tLen, tOnly - 20)} />
-        <Lbl x={MX} y={220} t="something pushes inward" c={C.key} s={T.floor} o={win(f, tPush, tM1 - 20)} />
-        {/* fix 0 B1: the two pushes keyed by colour beside the picture (the ring leaves no room for labels at the parcel) */}
-        <Lbl x={MX} y={300} t="pressure force: inward" c={C.second} s={T.floor} o={win(f, tP, tM1 - 20)} />
-        <Lbl x={MX} y={360} t="Earth's spin: ≈ 1/20, outward" c="#b49cf0" s={T.floor} o={win(f, tEarth, tM1 - 20)} />
-        <Lbl x={MX} y={420} t="(violet arrow drawn 6× longer)" c={C.muted} s={T.floor} o={win(f, tEarth, tM1 - 20)} />
+        <Lbl x={MX} y={220} t="something pushes inward" c={C.key} s={T.floor} o={win(f, tPush, tP - 22)} />
+        {/* fix 0 B1: the two pushes keyed by colour beside the picture (the ring leaves no room for labels at the parcel).
+            #5b r1 S12 / M10: the key 80 px higher; the spin push named as seen on the turning Earth; Ω and φ named for the f row */}
+        <Lbl x={MX} y={220} t="pressure force: inward" c={C.second} s={T.floor} o={win(f, tP, tM1 - 20)} />
+        <Lbl x={MX} y={280} t="Earth's spin: ≈ 1/20, outward" c="#b49cf0" s={T.floor} o={win(f, tEarth, tM1 - 20)} />
+        <Lbl x={MX} y={335} t="(as seen on the turning Earth)" c="#b49cf0" s={T.floor} b={false} o={win(f, tEarth, tM1 - 20)} />
+        <Lbl x={MX} y={390} t="$\Omega$: Earth's spin · $\varphi$: latitude" c={C.local} s={T.floor} o={win(f, AT(k, 16, "pushes the other way"), tM1 - 20)} />
+        <Lbl x={RC[0]} y={790} t="(violet arrow drawn 6× longer)" c={C.muted} s={T.floor} a="middle" o={win(f, tEarth, tM1 - 20)} />
         {/* K6 round 1: under the ring (the balance rows now reach y 840 in the text column) */}
-        <Lbl x={RC[0]} y={830} t="worked out: Coriolis movie" c={C.muted} s={T.floor} a="middle" o={win(f, AT(k, 16, "a little stronger"), tM1 - 20)} />
+        <Lbl x={RC[0]} y={845} t="why: Coriolis movie" c={C.muted} s={T.floor} a="middle" o={win(f, AT(k, 16, "a little stronger"), tM1 - 20)} />
       </Svg>
       <CalcStack f={f} x={MX + 20} y={262} size={56} maxLines={3} o={fout(f, tOnly - 6)} rows={[
         { rhs: String.raw`\Delta\theta=0.00139\times60`, at: tMin, size: 50 },
         { rhs: String.raw`\approx0.084\ \mathrm{rad}`, at: AT(k, 4, "zero point zero eight four"), size: 50, cont: true },
         { rhs: String.raw`0.084\times57.3\approx4.8^\circ\approx5^\circ`, at: AT(k, 4, "five degrees"), size: 50, cont: true },
-        { rhs: String.raw`34.8\times0.084\approx2.9\ \mathrm{m/s}`, at: tArc },
+        // #5b r1 S10: the arc rule once (EQ_S14 in the stack; the separate 44-px copy under it is gone)
+        { rhs: cutAt(EQ_S14, "=34.8")[0], at: tArc, size: 50 },
+        { rhs: "=34.8" + cutAt(EQ_S14, "=34.8")[1], at: AT(k, 11, "thirty four point eight times"), size: 50, cont: true },
         { rhs: String.raw`\dfrac{2.9\ \mathrm{m/s}}{60\ \mathrm s}\approx0.048\ \mathrm{m/s^2}`, at: tDiv, glow: pulse(f, tDiv + 30, 20) },
       ]} />
-      <TeX s={EQ_S14} x={MX} y={745} size={44} o={win(f, tArc + 30, tOnly - 20)} />
       {/* fix 0 B1: the balance in numbers on S16 (f v = 6.51e-5 × 34.8 ≈ 0.0023 m/s², ratio 21 from data/cs.json) */}
-      {/* K6 round 1: the spin row ran to x 1877 and the pressure row to x 1971: "(inward)/(outward)" → "(in)/(out)" (the colour key above
-          says inward / outward in full), the pressure sum split at its result; the column starts 10 px higher */}
-      <CalcStack f={f} x={MX} y={470} size={46} maxLines={4} o={fout(f, tM1 - 10)} rows={[
-        { rhs: String.raw`\text{turning: }${nf(RING.acc, 3)}\ \mathrm{m/s^2}\ \text{(in)}`, at: AT(k, 16, "pushes the other way") },
-        { rhs: String.raw`\text{Earth's spin: }\approx${nf(RING.f * RING.v, 4)}\ \mathrm{m/s^2}\ \text{(out)}`, at: AT(k, 16, "a little outward") },
-        { rhs: String.raw`\dfrac{${nf(RING.acc, 3)}}{${nf(RING.f * RING.v, 4)}}\approx${Math.round(RING.fratio)}`, at: AT(k, 16, "twenty times weaker") },
-        { rhs: String.raw`\text{pressure push}\approx0.048+0.002`, at: AT(k, 16, "a little stronger") },
-        { rhs: String.raw`=0.050\ \mathrm{m/s^2}`, at: AT(k, 16, "a little stronger") + 20, cont: true },
+      {/* #5b r1 M10 (A1, A6): the inputs of 0.0023 on screen (f = 2Ω sin φ with Ω and Ian's latitude), and one rounding in the sum */}
+      <CalcStack f={f} x={MX} y={440} size={44} maxLines={4} o={fout(f, tM1 - 10)} rows={[
+        { rhs: String.raw`f\,v=2\Omega\sin\varphi\cdot v`, at: AT(k, 16, "pushes the other way") },
+        { rhs: String.raw`=2\times7.29\times10^{-5}\times\sin${nf(D.ian_c[0], 1)}^\circ\times${nf(RING.v, 1)}`, at: AT(k, 16, "pushes the other way") + 22, cont: true },
+        { rhs: String.raw`\approx${nf(RING.f * RING.v, 4)}\ \mathrm{m/s^2}\ \text{(out)}`, at: AT(k, 16, "a little outward"), cont: true },
+        { rhs: String.raw`\dfrac{${nf(RING.acc, 3)}\ \text{(turning)}}{${nf(RING.f * RING.v, 4)}}\approx${Math.round(RING.fratio)}`, at: AT(k, 16, "twenty times weaker") },
+        { rhs: String.raw`\text{pressure push}\approx${nf(RING.acc, 3)}+${nf(RING.f * RING.v, 4)}`, at: AT(k, 16, "a little stronger") },
+        { rhs: String.raw`\approx${(Number(nf(RING.acc, 3)) + Number(nf(RING.f * RING.v, 4))).toFixed(3)}\ \mathrm{m/s^2}`, at: AT(k, 16, "a little stronger") + 20, cont: true },
       ]} />
       <Svg><Lbl x={MX} y={832} t="same as $v^2/r$" c={C.gold} s={T.floor} o={win(f, tDiv + 20, tOnly - 20)} /></Svg>
     </Scene>
@@ -588,7 +607,7 @@ const StackBody: React.FC<{ f: number; lit: (i: number) => number; ringO: number
   const pth: V3[] = [[2.7 * ua[0], 2.7 * ua[1], zs[0] + 0.02], [rUp0 * ua[0], rUp0 * ua[1], zs[0] + 0.02], [rUp1 * ua[0], rUp1 * ua[1], top - 0.02], [2.7 * ua[0], 2.7 * ua[1], top - 0.02]];
   return (
     <group>
-      <LayerStack3D layers={f < 3 ? [] : layers} foot={{ x0: -H, x1: H, y0: -H, y1: H }} sep={1} reveal={reveal}
+      <LayerStack3D layers={f < 3 ? [] : layers} foot={{ x0: -H, x1: H, y0: -H, y1: H }} sep={1} reveal={reveal} mask={{ name: "stack", clipX: 1068, clipY: 788 }}
         lines={zs.map((z) => ({ pts: ringPts(1, z + 0.01), color: C.first, px: 3, o: 0.9 * ringO }))} />
       {[[-H, -H], [H, -H], [H, H], [-H, H]].map(([x, y], i) => <HRod3D key={`e${i}`} a={[x, y, 0]} b={[x, y, top + 0.05]} px={2} color={C.muted} o={0.6} />)}
       <HArrow3D from={[-H, -H, 0]} to={[-H, -H, 16 * ZX + 0.2]} color={C.second} px={5} head={22} />
@@ -631,9 +650,10 @@ const S18: React.FC = () => {
             <line x1={1196} y1={y} x2={q[0] + 8} y2={q[1]} stroke={C.gold} strokeWidth={3} opacity={0.8} /></g>; })}
         <Keyword f={f} text="layer by layer" at={[1210, 120]} s={T.key} appear={0} out={tLev - 20} />
         <Keyword f={f} text="pressure levels" at={[1210, 120]} s={T.key} appear={tLev} out={tCol - 20} />
-        <Lbl x={1210} y={410} t="square ≈ 500 km" c={C.local} s={T.floor} o={win(f, tSq, tCol - 20)} />
-        <Lbl x={1210} y={480} t="975 hPa: under the sea" c={C.local} s={T.floor} o={win(f, tNo, tRest - 20)} />
-        <URBar x={1210} y={400} w={420} o={fin(f, tCol) * fout(f, LEN(k) + 20)} />{/* K6 r0: its title sat on the 200-hPa tag */}
+        {/* #5b r1 M7(a): the colour bar from the first frame, with the coloured layers; the two notes move under it, one after the other */}
+        <Lbl x={1210} y={640} t="square ≈ 500 km" c={C.local} s={T.floor} o={win(f, tSq, tNo - 20)} />
+        <Lbl x={1210} y={640} t="975 hPa: under the sea" c={C.local} s={T.floor} o={win(f, tNo, tRest - 20)} />
+        <URBar x={1210} y={400} w={420} o={fin(f, 6) * fout(f, LEN(k) + 20)} />{/* K6 r0: its title sat on the 200-hPa tag */}
         <Keyword f={f} text="rose −: in · blue +: out" at={[1210, 120]} s={T.floor} appear={tRose} out={tPale - 20} />
         <Keyword f={f} text="dark line: zero" at={[1210, 120]} s={T.floor} appear={tPale} out={tTall - 20} />
         <Keyword f={f} text="heights drawn ×15" at={[1210, 120]} s={T.floor} appear={tTall} />
@@ -673,8 +693,9 @@ const S19: React.FC = () => {
       <GlobeFrame id="s19k" zoom={1} right={1} name="s19 stack" />
       <Svg>
         <Keyword f={f} text="read on the 100-km ring" at={[1210, 120]} s={T.floor} appear={0} out={tSo - 20} />
+        {/* #5b r1 M7(b): the colour bar stays through the swing round and the close look */}
+        <URBar x={1210} y={250} w={400} title={false} />
         <g opacity={colO}>
-          <URBar x={1210} y={250} w={400} title={false} />
           <SideCallout f={f} lines={`14 km: ≈ +${(Math.round(vr[4] * 2) / 2).toFixed(1)} m/s`} at={[1210, 440]} appear={tTop} target={ringR[4]} s={T.floor} c="#8db5e2" bend={20} />
           <SideCallout f={f} lines={`12 km: ≈ +${Math.round(vr[3])}`} at={[1210, 520]} appear={t6} target={ringR[3]} s={T.floor} c="#8db5e2" bend={20} />
           <SideCallout f={f} lines={`6 km: ≈ +${Math.round(vr[2])}`} at={[1210, 600]} appear={t6 + 20} target={ringR[2]} s={T.floor} c="#8db5e2" bend={10} />
@@ -688,7 +709,9 @@ const S19: React.FC = () => {
       {/* K6 r0: the two credits cross-faded on top of each other and sat in the caption band: one after the other, 30 px higher */}
       <SourceBelow text={SRC.hrrrPl} pic={{ x: 80, y: 40, w: 1000, h: 760 }} w={1400} o={fout(f, tSo + 16, 12)} name="s19 src" />
       {/* K6 round 1: during the swing round and the close look the stack reaches below y 810: the credit steps aside meanwhile */}
-      <SourceBelow text={SRC.hrrrPlTdr} pic={{ x: 80, y: 40, w: 1000, h: 760 }} w={1740} o={fin(f, tSo + 30, 12) * (1 - win(f, tOrbit - 12, tLook + 140, 12))} name="s19 src w" />
+      {/* #5b r1 M7(b): the credit stays through the swing round and the close look: below y 830 the K1 frame is solid background, and the
+          stack's K6 mask is now clipped to the sharp region (x ≤ 1068, y ≤ 788), as the house frame defines it */}
+      <SourceBelow text={SRC.hrrrPlTdr} pic={{ x: 80, y: 40, w: 1000, h: 760 }} w={1740} o={fin(f, tSo + 30, 12)} name="s19 src w" />
     </Scene>
   );
 };
@@ -726,7 +749,9 @@ const S20: React.FC = () => {
     tWeak = SS(k, 11), tMust = SS(k, 12), tSide = SS(k, 13), tLid = SS(k, 14), tRadar = SS(k, 15), tThree = AT(k, 15, "about three metres"),
     tTower = AT(k, 15, "single towers"), tEw = SS(k, 16), tIUO = SS(k, 17), tMore = SS(k, 18);
   const oSec = fin(f, tSlice);
-  const ringE = 1 - prog(f, tAvg, tAvg + 70);
+  const ringE = 1 - prog(f, tDep, tDep + 70);                 // #5b r1 S13: shrinks on S2 ("going all the way round removes theta")
+  const RB = { x: 230, y: 60, w: 500, h: 500 }, ringPx = (100 / (2 * STK.half_km)) * RB.w;   // the 925-hPa layer square, the 100-km ring
+  const oRing = fout(f, tSlice - 6) * fin(f, 0, 10);
   // the radar: the axes zoom from r 0-200 / z 0-16 km to the radar panel's r 0-100 / z 0-14 km, then the w panel cross-fades in
   const zp = prog(f, tRadar, tRadar + 40), xf = prog(f, tRadar + 20, tRadar + 50);
   const rMax = mix(200, 100, zp), zMax = mix(16, 14, zp);
@@ -742,12 +767,17 @@ const S20: React.FC = () => {
   return (
     <Scene>
       <Svg>
-        <g opacity={fout(f, tSlice - 6) * fin(f, 0, 10)}>
-          <ellipse cx={580} cy={420} rx={360 * ringE + 6} ry={110 * ringE + 6} fill="none" stroke={C.first} strokeWidth={5} />
-          {Array.from({ length: 12 }, (_, i) => { const a = (i * 2 * Math.PI) / 12; return <circle key={i} cx={580 + 360 * ringE * Math.cos(a)} cy={420 + 110 * ringE * Math.sin(a)} r={7} fill={C.first} />; })}
-          <circle cx={580} cy={420} r={14} fill={C.gold} opacity={fin(f, tDep)} />
-          <Lbl x={580} y={600} t="one ring → one point (r, z)" c={C.key} s={T.floor} a="middle" o={fin(f, tDep)} />
+        {/* #5b r1 S13: the 72 samples of the formula on the 925-hPa layer (its colour bar and source line below), shrinking to one
+            point on "going all the way round removes theta" */}
+        <g opacity={oRing}>
+          <image href={IMG("cst_ur_925.png")} x={RB.x} y={RB.y} width={RB.w} height={RB.h} preserveAspectRatio="none" opacity={1 - 0.6 * fin(f, tDep + 60)} />
+          <rect x={RB.x} y={RB.y} width={RB.w} height={RB.h} fill="none" stroke={C.grid} strokeWidth={3} />
+          <circle cx={RB.x + RB.w / 2} cy={RB.y + RB.h / 2} r={ringPx * ringE + 4} fill="none" stroke={C.first} strokeWidth={4} />
+          {Array.from({ length: 72 }, (_, i) => { const a = (i * 2 * Math.PI) / 72; return <circle key={i} cx={RB.x + RB.w / 2 + ringPx * ringE * Math.cos(a)} cy={RB.y + RB.h / 2 + ringPx * ringE * Math.sin(a)} r={4.5} fill={C.key} stroke={C.bg} strokeWidth={1.5} />; })}
+          <circle cx={RB.x + RB.w / 2} cy={RB.y + RB.h / 2} r={14} fill={C.gold} opacity={fin(f, tDep + 60)} />
+          <URBar x={RB.x + 40} y={RB.y + RB.h + 70} w={360} o={fin(f, 14, 8)} />{/* K6 r4: in after the cross-fade from the s19 stack */}
         </g>
+        <Lbl x={MX} y={700} t="one ring → one point (r, z)" c={C.key} s={T.floor} o={win(f, tDep + 60, tSlice - 6) * fin(f, 0, 10)} />
       </Svg>
       {/* K6 round 1: the section pictures sit in an overflow-hidden <div> of the section box (the GeoMap pattern): during the radar
           zoom the HRRR picture grows past the box, and the nested-svg crop was not seen by the box probe (text-img on the colour bar
@@ -773,7 +803,10 @@ const S20: React.FC = () => {
           {/* K6 round 2: during the radar zoom the line labels ride out of the section box: each fades as it nears the box edge */}
           {vlab.map((L, i) => { const q = P(L.r, L.z);
             const inB = Math.min(q[0] - 30 - SB.x, SB.x + SB.w - 30 - q[0], q[1] - 18 - SB.y, SB.y + SB.h - 18 - q[1]);
-            return <Lbl key={i} x={q[0]} y={q[1]} t={`${L.level}`} c="#1a1a24" s={T.floor} a="middle" o={fin(f, tLines + 10) * oH * clamp(inB / 8, 0, 1)} />; })}
+            // #5b r1 S14: dark text on a PALE halo (the dark halo read as smudges at 640 px)
+            const oL = fin(f, tLines + 10) * oH * clamp(inB / 8, 0, 1);
+            return oL <= 0 ? null : <text key={i} x={q[0]} y={q[1]} fill="#1a1a24" fontSize={T.floor} fontFamily={FONT} fontWeight={650} textAnchor="middle"
+              dominantBaseline="central" stroke="#f1ece0" strokeWidth={0.2 * T.floor} strokeLinejoin="round" paintOrder="stroke" opacity={oL}>{`${L.level}`}</text>; })}
           <rect x={SB.x} y={SB.y} width={SB.w} height={SB.h} fill="none" stroke={C.grid} strokeWidth={3} />
           {[0, 50, 100, 150, 200].map((r) => <Lbl key={`ra${r}`} x={P(r, 0)[0]} y={SB.y + SB.h + 34} t={`${r}`} c={C.muted} s={T.floor} a="middle" b={false} o={oAxA} />)}
           {[0, 25, 50, 75, 100].map((r) => <Lbl key={`rb${r}`} x={P(r, 0)[0]} y={SB.y + SB.h + 34} t={`${r}`} c={C.muted} s={T.floor} a="middle" b={false} o={oAxB} />)}
@@ -802,6 +835,9 @@ const S20: React.FC = () => {
           <FlowArrow f={f} a={P(leanR(11) + 6, 12.6)} b={P(96, 12.6)} w={7} o={xf * fin(f, tIUO + 10)} />
         </g>
         <Keyword f={f} text="average round each ring" at={[MX, 120]} s={T.key} appear={0} out={tSlice - 20} />
+        {/* #5b r1 S13: the new notation named */}
+        <Lbl x={MX} y={470} t="$\Sigma$: add up the 72 values" c={C.local} s={T.floor} o={win(f, tAvg + 30, tSlice + 40)} />
+        <Lbl x={MX} y={530} t="$\overline{u_r}$: the ring average" c={C.local} s={T.floor} o={win(f, tAvg + 50, tSlice + 40)} />
         <Keyword f={f} text="radius-height section" at={[MX, 120]} s={T.key} appear={tName} out={tMust - 20} />
         <URBar x={MX} y={250} w={420} o={fin(f, tCol) * oH} />
         <ColourBar x={MX} y={250} w={420} lut={LUT_W} lo={0} hi={WV.tdr.lim} unit="m/s" title="rising air (radar)" o={xf}
@@ -814,7 +850,6 @@ const S20: React.FC = () => {
         <Keyword f={f} text="a quick check" at={[MX, 120]} s={T.key} c={C.gold} appear={tMust} out={tLid - 20} />
         <Keyword f={f} text={`inflow ⇒ rise ≈ ${SAY.w_cont} m/s`} at={[MX, 120]} s={T.key} c={C.gold} appear={tLid} out={tRadar - 20} />
         {/* K6 round 1: under the (now taller) box rows */}
-        <Lbl x={MX} y={786} t="r = 30 km, h = 1 km, 16 m/s in" c={C.key} s={T.floor} o={win(f, tSide, tRadar - 20)} />
         <Keyword f={f} text="measured: aircraft radar" at={[MX, 120]} s={T.key} appear={tRadar} out={tIUO - 20} />
         <SideCallout f={f} lines={`≈ ${nf(pk[0], 1)} m/s, ${nf(pk[1], 1)} km up`} at={[MX, 440]} appear={tThree} out={tIUO - 20} target={[pkP[0] + 16, pkP[1]]} s={T.floor} c={C.gold} />
         <Lbl x={MX} y={520} t={`single towers ≈ 10-${Math.round(WV.tdr.point_max[0])} m/s`} c={C.key} s={T.floor} o={win(f, tTower, tIUO - 20)} />
@@ -826,14 +861,24 @@ const S20: React.FC = () => {
       <TeX s={EQ_S20} x={MX} y={330} size={50} o={win(f, tAvg, tSlice + 40)} />
       {/* fix 0 B13: the box continuity, one row per sentence (in = up: 2πr h|u_r| = πr² w) */}
       {/* K6 round 1: the w row ran to x 1854: the formula, then the numbers on "two times one thousand"; the column 15 px higher */}
-      <CalcStack f={f} x={MX} y={405} size={46} maxLines={3} o={fout(f, tRadar - 10)} rows={[
+      {/* K6 r4: two stacks, one after the other (a sliding stack ran its old rows up into the colour bar) */}
+      <CalcStack f={f} x={MX} y={405} size={46} maxLines={4} o={fout(f, AT(k, 14, "All of it has to leave") + 16)} rows={[
         { rhs: String.raw`\text{in through the side: }2\pi r\,h\,|u_r|`, at: tSide + 30 },
+        // #5b r1 S15: the inputs in metres, on their words
+        { rhs: String.raw`r=30\ \mathrm{km}=30\,000\ \mathrm m`, at: AT(k, 13, "thirty kilometres"), cont: true, size: 44 },
+        { rhs: String.raw`h=1\ \mathrm{km}=1000\ \mathrm m,\ \ |u_r|\approx${SAY.w_box.ur}\ \mathrm{m/s}`, at: AT(k, 13, "one kilometre deep"), cont: true, size: 44 },
         { rhs: String.raw`\text{up through the lid: }\pi r^2\,w`, at: tLid },
-        { rhs: String.raw`w=\dfrac{2h\,|u_r|}{r}`, at: AT(k, 14, "so it rises more slowly") },
+      ]} />
+      <CalcStack f={f} x={MX} y={405} size={46} maxLines={4} o={fout(f, tRadar - 10)} rows={[
+        // #5b r1 S15: one move per step: in = out, divide by πr², cancel π and one r, then the numbers
+        { rhs: String.raw`2\pi r\,h\,|u_r|=\pi r^2\,w`, at: AT(k, 14, "All of it has to leave") + 30 },
+        { rhs: String.raw`w=\dfrac{2\cancel{\pi}\cancel{r}\,h\,|u_r|}{\cancel{\pi}\,r^{\cancel{2}}}`, at: AT(k, 14, "which is a much bigger area") },
+        { rhs: String.raw`\phantom{w}=\dfrac{2h\,|u_r|}{r}`, at: AT(k, 14, "so it rises more slowly"), cont: true },
         { rhs: String.raw`\phantom{w}=\dfrac{2\times1000\times${SAY.w_box.ur}}{30\,000}\approx${SAY.w_cont}\ \mathrm{m/s}`, at: AT(k, 14, "two times one thousand"), cont: true },
       ]} />
       {/* K6 round 1: one credit after the other (they cross-faded on top of each other for 30 frames) */}
-      <SourceBelow text={SRC.hrrrSec} pic={{ x: SB.x - 70, y: SB.y, w: SB.w + 70, h: SB.h + 110 }} w={1400} o={oSec * fout(f, tRadar + 16, 10)} name="s20 src" />
+      <SourceBelow text={SRC.hrrrPl} pic={{ x: RB.x, y: RB.y, w: RB.w, h: RB.h + 200 }} w={1300} o={oRing} name="s20 src ring" />
+      <SourceBelow text={SRC.hrrrSec + " · dark corner, bottom left: no data (below the sea surface)"} pic={{ x: SB.x - 70, y: SB.y, w: SB.w + 70, h: SB.h + 110 }} w={1400} o={oSec * fout(f, tRadar + 16, 10)} name="s20 src" />
       <SourceBelow text={SRC.tdr} pic={{ x: SB.x - 70, y: SB.y, w: SB.w + 70, h: SB.h + 110 }} w={1720} o={fin(f, tRadar + 28, 12)} name="s20 src w" />
     </Scene>
   );

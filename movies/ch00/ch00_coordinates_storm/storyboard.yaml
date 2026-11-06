@@ -1255,7 +1255,7 @@ scenes:
     eight zero zero to zero point eight zero six, a change of zero point zero zero six. Divided by zero point zero one, that''s zero point six: the cosine.
     [beat] So the rule works. These two slopes will come back again and again in this series.'
   on_screen_eq:
-    latex: \frac{d}{d\theta}\cos\theta=-\sin\theta,\qquad \frac{d}{d\theta}\sin\theta=\cos\theta
+    latex: \dfrac{d}{d\theta}\cos\theta=-\sin\theta,\qquad \dfrac{d}{d\theta}\sin\theta=\cos\theta
     vallis_eq: none in Vallis (standard calculus; derived on screen from the unit circle, D12)
     page_png: null
   physics_source:
@@ -1351,7 +1351,7 @@ scenes:
     check it one part at a time. The slopes of cosine theta and sine theta are minus sine theta and cosine theta. Together, that''s minus sine
     theta, cosine theta, which is theta hat. [beat] So both routes agree. In words: when theta grows, r hat swings towards theta hat.'
   on_screen_eq:
-    latex: \frac{d\hat{\mathbf r}}{d\theta}=\hat{\boldsymbol\theta}
+    latex: \dfrac{d\hat{\mathbf r}}{d\theta}=\hat{\boldsymbol\theta}
     vallis_eq: 'none in Vallis; Kundu App. B §B.5 (cylindrical coordinates, printed p. 865, page image read 2026-11-05): e_R = e_x cos φ + e_y
       sin φ, e_φ = −e_x sin φ + e_y cos φ, ∂e_R/∂φ = e_φ, ∂e_φ/∂φ = −e_R; Kundu''s (R, φ, z) = our (r, θ, z)'
     page_png: _private/Kundu_AppendixB_Mathematical_Tools.pdf page 9 (printed p. 865)
@@ -1470,7 +1470,7 @@ scenes:
     for a small turn, theta hat changes by about minus r hat times delta theta. And its rate of change with theta, d theta hat by d theta, is
     minus r hat.'
   on_screen_eq:
-    latex: \frac{d\hat{\boldsymbol\theta}}{d\theta}=-\hat{\mathbf r}
+    latex: \dfrac{d\hat{\boldsymbol\theta}}{d\theta}=-\hat{\mathbf r}
     vallis_eq: 'none in Vallis; Kundu App. B §B.5 (cylindrical coordinates, printed p. 865, page image read 2026-11-05): e_R = e_x cos φ + e_y
       sin φ, e_φ = −e_x sin φ + e_y cos φ, ∂e_R/∂φ = e_φ, ∂e_φ/∂φ = −e_R; Kundu''s (R, φ, z) = our (r, θ, z)'
     page_png: _private/Kundu_AppendixB_Mathematical_Tools.pdf page 9 (printed p. 865)
@@ -1588,7 +1588,7 @@ scenes:
     theta. Together, that''s minus cosine theta, minus sine theta: minus r hat again. [beat] So here''s the whole rule in words: turn the angle,
     and each arrow swings towards the other one. R hat swings towards theta hat, and theta hat swings towards minus r hat.'
   on_screen_eq:
-    latex: \frac{d\hat{\mathbf r}}{d\theta}=\hat{\boldsymbol\theta},\qquad \frac{d\hat{\boldsymbol\theta}}{d\theta}=-\hat{\mathbf r}
+    latex: \dfrac{d\hat{\mathbf r}}{d\theta}=\hat{\boldsymbol\theta},\qquad \dfrac{d\hat{\boldsymbol\theta}}{d\theta}=-\hat{\mathbf r}
     vallis_eq: 'none in Vallis; Kundu App. B §B.5 (cylindrical coordinates, printed p. 865, page image read 2026-11-05): e_R = e_x cos φ + e_y
       sin φ, e_φ = −e_x sin φ + e_y cos φ, ∂e_R/∂φ = e_φ, ∂e_φ/∂φ = −e_R; Kundu''s (R, φ, z) = our (r, θ, z)'
     page_png: _private/Kundu_AppendixB_Mathematical_Tools.pdf page 9 (printed p. 865)
@@ -1720,7 +1720,7 @@ scenes:
     from zero point one to zero point zero five to zero point zero two five, so as the time step shrinks, the third piece vanishes. What''s left is the product
     rule. The rate of change of a number times an arrow is the number''s rate times the arrow, plus the number times the arrow''s rate. [beat]'
   on_screen_eq:
-    latex: \frac{d}{dt}\big(v\,\hat{\mathbf d}\big)=\frac{dv}{dt}\,\hat{\mathbf d}+v\,\frac{d\hat{\mathbf d}}{dt}
+    latex: \dfrac{d}{dt}\big(v\,\hat{\mathbf d}\big)=\dfrac{dv}{dt}\,\hat{\mathbf d}+v\,\dfrac{d\hat{\mathbf d}}{dt}
     vallis_eq: none in Vallis (standard calculus; derived on screen with numbers, D15)
     page_png: null
   physics_source:
@@ -1835,7 +1835,7 @@ scenes:
     eight degrees every second, or about five degrees every minute. [beat] So one full lap, two pi radians, takes two pi divided by zero point
     zero zero one three nine. That''s about four thousand five hundred seconds, or about seventy five minutes. [beat]'
   on_screen_eq:
-    latex: \frac{d\theta}{dt}=\frac{v}{r}
+    latex: \dfrac{d\theta}{dt}=\dfrac{v}{r}
     vallis_eq: none in Vallis (derived on screen from s = r theta, D16)
     page_png: null
   physics_source:
@@ -1927,7 +1927,7 @@ scenes:
     hat. For Ian''s parcel, that''s twenty five kilometres times r hat. Velocity is the rate of change of this arrow. It''s a number, r, times
     an arrow, r hat, so we use the product rule. The rate of change of r times r hat is d r by d t times r hat, plus r times d r hat by d t. [beat]'
   on_screen_eq:
-    latex: \frac{d}{dt}\big(r\,\hat{\mathbf r}\big)=\frac{dr}{dt}\,\hat{\mathbf r}+r\,\frac{d\hat{\mathbf r}}{dt}
+    latex: \dfrac{d}{dt}\big(r\,\hat{\mathbf r}\big)=\dfrac{dr}{dt}\,\hat{\mathbf r}+r\,\dfrac{d\hat{\mathbf r}}{dt}
     vallis_eq: 'none in Vallis; Kundu App. B §B.5 (cylindrical coordinates, printed p. 865, page image read 2026-11-05): e_R = e_x cos φ + e_y
       sin φ, e_φ = −e_x sin φ + e_y cos φ, ∂e_R/∂φ = e_φ, ∂e_φ/∂φ = −e_R; Kundu''s (R, φ, z) = our (r, θ, z) (position x = R e_R + z e_z)'
     page_png: _private/Kundu_AppendixB_Mathematical_Tools.pdf page 9 (printed p. 865)
@@ -2012,7 +2012,7 @@ scenes:
     theta hat. [beat] So yes: v theta hat is the parcel''s velocity. Its size is the speed v, and its direction is theta hat, along the ring.
     For Ian''s parcel, that''s thirty four point eight metres per second, along the ring, anticlockwise as seen from above.'
   on_screen_eq:
-    latex: \mathbf v=r\,\frac{d\hat{\mathbf r}}{d\theta}\,\frac{d\theta}{dt}=r\,\hat{\boldsymbol\theta}\,\frac{v}{r}=v\,\hat{\boldsymbol\theta}
+    latex: \mathbf v=r\,\dfrac{d\hat{\mathbf r}}{d\theta}\,\dfrac{d\theta}{dt}=r\,\hat{\boldsymbol\theta}\,\dfrac{v}{r}=v\,\hat{\boldsymbol\theta}
     vallis_eq: derived on screen (our steps, D17) from Kundu App. B §B.5 ∂e_R/∂φ = e_φ and the chain rule
     page_png: _private/Kundu_AppendixB_Mathematical_Tools.pdf page 9 (printed p. 865)
   physics_source:
@@ -2106,7 +2106,7 @@ scenes:
     Let''s check the units. V squared is in metres squared per second squared. Dividing by r, in metres, leaves metres per second squared, which
     are the units of an acceleration. [beat]'
   on_screen_eq:
-    latex: \mathbf a=\frac{d}{dt}\big(v\,\hat{\boldsymbol\theta}\big)=v\,\frac{d\hat{\boldsymbol\theta}}{d\theta}\,\frac{d\theta}{dt}=-\frac{v^2}{r}\,\hat{\mathbf
+    latex: \mathbf a=\dfrac{d}{dt}\big(v\,\hat{\boldsymbol\theta}\big)=v\,\dfrac{d\hat{\boldsymbol\theta}}{d\theta}\,\dfrac{d\theta}{dt}=-\dfrac{v^2}{r}\,\hat{\mathbf
       r}
     vallis_eq: derived on screen (our steps, D18) from Kundu App. B §B.5 ∂e_φ/∂φ = −e_R, the product rule and the chain rule
     page_png: _private/Kundu_AppendixB_Mathematical_Tools.pdf page 9 (printed p. 865)
@@ -2203,7 +2203,7 @@ scenes:
     take about ten minutes to reach a hundred kilometres per hour. [beat] Here, instead of making the parcel faster, all of it goes into turning
     the parcel round the eye.'
   on_screen_eq:
-    latex: \frac{v^2}{r}=\frac{34.8^2}{25\,000}\approx0.048\ \mathrm{m/s^2}
+    latex: \dfrac{v^2}{r}=\dfrac{34.8^2}{25\,000}\approx0.048\ \mathrm{m/s^2}
     vallis_eq: 'none: arithmetic or a definition (no book equation)'
     page_png: null
   physics_source:
@@ -2812,7 +2812,7 @@ scenes:
     single towers near ten. [beat] It rises in the eyewall, close to the eye. In, up and out: that''s a tropical cyclone''s overturning circulation, and cylindrical
     coordinates show it in one picture. How a tropical cyclone keeps this engine running has its own movie later in this series: How tropical cyclones form.'
   on_screen_eq:
-    latex: \overline{u_r}(r,z)=\frac{1}{72}\sum_{k=1}^{72}u_r(r,\theta_k,z)
+    latex: \overline{u_r}(r,z)=\dfrac{1}{72}\sum_{k=1}^{72}u_r(r,\theta_k,z)
     vallis_eq: 'none: arithmetic or a definition (no book equation) (the ring average of Part 1, at every r and z)'
     page_png: null
   physics_source:
@@ -3038,7 +3038,7 @@ scenes:
     zero point three, so Amphan''s inflow angle is about seventeen degrees, close to Ian''s twenty one. [beat] Two storms, in two different oceans, both spiral
     in at a similar angle.'
   on_screen_eq:
-    latex: \frac{6.0}{20.1}\approx0.30\ \Rightarrow\ \arctan0.30\approx16.6^\circ\approx17^\circ
+    latex: \dfrac{6.0}{20.1}\approx0.299\ \Rightarrow\ \arctan0.299\approx16.6^\circ\approx17^\circ
     vallis_eq: 'none: arithmetic or a definition (no book equation)'
     page_png: null
   physics_source:
@@ -3176,7 +3176,7 @@ scenes:
     and north arrows, the same acceleration hides inside changes of both parts. The third is meaning. The three parts, in, round and up, are exactly
     what we want to know: how fast the storm draws air in, how fast it spins, and where the air rises.'
   on_screen_eq:
-    latex: \mathbf a=-\frac{v^2}{r}\,\hat{\mathbf r}
+    latex: \mathbf a=-\dfrac{v^2}{r}\,\hat{\mathbf r}
     vallis_eq: derived in s12 (D18)
     page_png: _private/Kundu_AppendixB_Mathematical_Tools.pdf page 9 (printed p. 865)
   physics_source:
