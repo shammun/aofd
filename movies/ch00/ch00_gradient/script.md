@@ -29,7 +29,7 @@ Svalbard, GFS. See data_needs.md §E.
 Lines starting with ">" are notes and are not spoken.
 
 ## s00_title
-In this video, we'll learn the gradient the easy way, and see how meteorology uses it to find which way the air is pushed, and why the wind blows hardest where the isobars crowd together.
+In this video, we'll learn the gradient, and see how meteorology uses it to find which way the air is pushed, and why the wind blows hardest where the isobars crowd together.
 
 > 35 words · 1 sentences · 0 beats · 0.300–13.175 s (12.9 s; speech 12.1 s) · 0:00.30–0:13.18 (measured, dry run v2, shifted).
 > Beat: opening title (HOUSE_STYLE §3).

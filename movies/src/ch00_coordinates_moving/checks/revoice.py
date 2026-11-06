@@ -22,6 +22,9 @@ import yaml
 FPS = 30
 
 REVOICE: dict[str, dict[int, tuple[str, str]]] = {
+    # House style 2026-11-06 (user): never say 'the easy way'; the title promise pulses on the concept words instead
+    "s00_title": {0: ("In this video, we'll learn moving frames the easy way, and see how meteorology uses them to understand a moving storm's winds, and what a barometer sees as the storm passes.",
+                    "In this video, we'll learn moving frames, and see how meteorology uses them to understand a moving storm's winds, and what a barometer sees as the storm passes.")},
     # E2 (optional narration taken): the true values 13.54 and 3.54 (3.54 x 3.6 = 12.7 and 13.54 x 3.6 = 48.7 then agree with the voice)
     "s07_sliding_pattern": {
         2: ("Take one moment, at a place where the wind is thirteen and a half metres per second, and is getting stronger towards the east by zero point one one one metres per second for every kilometre.",

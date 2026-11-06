@@ -106,7 +106,7 @@ per degree east at Brest**, **Longyearbyen 78.22° N**; Part 4 i, j, k (recap); 
 **How it was measured:** the full script in one `tools/tts.py` run; then the opening recap (s02) was shortened to stay under 60 s, re-measured alone with `tools/tts.py`, and spliced in (every later scene shifted by the measured difference; `timing.json → splice`). The final TTS re-runs the whole script.
 
 ## s00_title
-In this video, we'll learn about routes across our round Earth the easy way, and see how meteorology and aviation use them to plan the shortest flights.
+In this video, we'll learn about routes across our round Earth, and see how meteorology and aviation use them to plan the shortest flights.
 
 > 27 words · 1 sentences · 0 beats · 0.300–10.850 s (10.5 s; speech 9.8 s) · 0:00.30–0:10.85 (measured, dry run 2026-11-05).
 

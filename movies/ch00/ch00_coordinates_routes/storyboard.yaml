@@ -19,7 +19,7 @@ concepts:
 - 'great circles: the plane through both places and the centre; sigma = the angle at the centre; d = a sigma; cos sigma = r1-hat . r2-hat'
 - 'great-circle route shape: initial bearing, vertex latitude, arrival bearing'
 - 'rhumb lines: constant bearing, length, why navigators used them (steering, short trips, straight on Mercator, legs)'
-target_duration_s: 1020.3003
+target_duration_s: 1019.4664
 fps: 30
 size:
 - 1920
@@ -55,7 +55,7 @@ audio:
 dry_run:
   tool: tools/tts.py
   run: G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_routes/dryrun2_spliced
-  audio_s: 1020.3003
+  audio_s: 1019.4664
   with_end_hold_s: 1019.875
   cues: 255
   sentences: 140
@@ -173,67 +173,66 @@ maths_skip:
     - s10_distance
     chip_on: AT(1, 'skip ahead') in s08_position_arrows
     skip_to_scene: s11_route_shape
-    skip_to_t: 715.3453
-    skip_to_mmss: '11:55 (provisional: dry run; refill after the final TTS)'
+    skip_to_t: 714.5114
+    skip_to_mmss: '11:54 (provisional: dry run; refill after the final TTS)'
     keep_line: S1 of s11_route_shape
 chapter_marks:
 - t: 0.3
   mmss: 0:00
   title: 'Routes: the question'
   scene: s00_title
-- t: 34.62
-  mmss: 0:34
+- t: 33.7861
+  mmss: 0:33
   title: What we use from Parts 1, 3, 4 and 5
   scene: s02_part5_recap
-- t: 90.92
-  mmss: '1:30'
+- t: 90.0861
+  mmss: '1:29'
   title: Curvilinear coordinates and scale factors
   scene: s03_curvilinear
-- t: 245.32
-  mmss: '4:05'
+- t: 244.4861
+  mmss: '4:04'
   title: 'The shortest way: great circles'
   scene: s05_shortest_way
-- t: 355.95
-  mmss: '5:55'
+- t: 355.1161
+  mmss: '5:54'
   title: The angle sigma and d = a sigma
   scene: s07_sigma
-- t: 418.88
-  mmss: '6:58'
+- t: 418.0461
+  mmss: '6:57'
   title: 'Every step: working out sigma (optional maths)'
   scene: s08_position_arrows
-- t: 715.3453
-  mmss: '11:55'
+- t: 714.5114
+  mmss: '11:54'
   title: Where the route goes
   scene: s11_route_shape
-- t: 777.5953
-  mmss: '12:57'
+- t: 776.7614
+  mmss: '12:56'
   title: The rhumb line
   scene: s12_rhumb
-- t: 840.6753
-  mmss: '14:00'
+- t: 839.8414
+  mmss: '13:59'
   title: Why sailors liked the rhumb line
   scene: s13_why_rhumb
-- t: 925.9753
-  mmss: '15:26'
+- t: 925.1414
+  mmss: '15:25'
   title: To sum up
   scene: s14_recap
 scenes:
 - id: s00_title
   t:
   - 0.3
-  - 10.85
+  - 10.0161
   sentence_times:
   - - 0.3
-    - 10.05
+    - 9.2161
   beat: opening title (HOUSE_STYLE §3)
   visual: 'TITLE FRAME (house/kit/title.tsx). Left x 100-1075: RiseText ''Coordinates · Part 6'' (line 1, TitleGradient teal -> gold, weight 800; letters
-    rise 24 px over 8 frames, 2-frame stagger), then ''Routes'' (line 2, warm white, 96 px, pulses x1.06 on AT(1, ''the easy way'')), then the subtitle
+    rise 24 px over 8 frames, 2-frame stagger), then ''Routes'' (line 2, warm white, 96 px, pulses x1.06 on AT(1, ''routes'')), then the subtitle
     ''great circles and rhumb lines'' (68 px, ''great circles'' gold, ''rhumb lines'' slate), all >= 50 px clear of the animation. Right x 1130-1840, y
     180-636: Part A (frame 0 -> AT(1, ''meteorology and aviation'')): a BMNG globe turns; the London-Los Angeles great circle draws in gold through the
     slicing sheet. Part B (12-frame cross-fade on AT(1, ''shortest flights'')): a plane glyph flies the gold arc while a slate rhumb line draws beside it,
     with two compass dials (one sweeping, one fixed). Source line ''Image: NASA Blue Marble NG'' below the right column (y <= 860). Poster = frame 200.'
-  voiceover: In this video, we'll learn about routes across our round Earth the easy way, and see how meteorology and aviation use them to plan the shortest
-    flights.
+  voiceover: In this video, we'll learn about routes across our round Earth, and see how meteorology and aviation use them to plan the shortest flights.
   on_screen_eq: null
   physics_source:
     fn: fluidpy.geo.sphere.great_circle_points; fluidpy.geo.sphere.rhumb_line; fluidpy.geo.sphere.initial_bearing
@@ -258,17 +257,17 @@ scenes:
   layout: Title frame; the globe and panels stay inside x 1130-1840; source line below them, never on them.
 - id: s01_hook
   t:
-  - 10.85
-  - 34.625
+  - 10.0161
+  - 33.7911
   sentence_times:
-  - - 10.85
-    - 18.6
-  - - 18.95
-    - 22.325
-  - - 22.675
-    - 27.975
-  - - 28.325
-    - 33.825
+  - - 10.0161
+    - 17.7661
+  - - 18.1161
+    - 21.4911
+  - - 21.8411
+    - 27.1411
+  - - 27.4911
+    - 32.9911
   beat: hook question
   visual: 'Full width from frame 0. Left x 80-1000: the BMNG globe (>= 760 px across, unzoomed, no edge fade) turned so that London and Los Angeles are
     both in view, labels ''London'' and ''Los Angeles'' (54 px) right of and below their dots, fully inside the canvas (Must 7, U-CO-065). Right x 1060-1840:
@@ -305,25 +304,25 @@ scenes:
     Los Angeles label right of and below its dot, >= 40 px inside the canvas edge.'
 - id: s02_part5_recap
   t:
-  - 34.625
-  - 90.925
+  - 33.7911
+  - 90.0911
   sentence_times:
-  - - 34.625
-    - 37.625
-  - - 37.975
-    - 47.4
-  - - 47.75
-    - 60.325
-  - - 60.675
-    - 68.425
-  - - 68.775
-    - 73.7
-  - - 74.05
-    - 78.175
-  - - 78.525
-    - 84.675
-  - - 85.025
-    - 90.625
+  - - 33.7911
+    - 36.7911
+  - - 37.1411
+    - 46.5661
+  - - 46.9161
+    - 59.4911
+  - - 59.8411
+    - 67.5911
+  - - 67.9411
+    - 72.8661
+  - - 73.2161
+    - 77.3411
+  - - 77.6911
+    - 83.8411
+  - - 84.1911
+    - 89.7911
   beat: recap of Parts 1, 3 and 4 (<= 60 s), only the tools this part uses
   visual: 'One beat per sentence, mini pictures (code-drawn, no headings): AT(2, ''polar coordinates'') the Part 1 polar grid with the arc ''s = r θ'' highlighted
     (gold arc, ''r'' and ''θ'' tags); AT(3, ''latitude, phi'') a small globe with Brest''s φ and λ arcs; AT(3, ''the letter a'') the radius drawn from the
@@ -378,25 +377,25 @@ scenes:
   layout: Pictures left, keywords and the KaTeX rows right; one item per sentence, the previous one dimmed to 60 %.
 - id: s03_curvilinear
   t:
-  - 90.925
-  - 145.675
+  - 90.0911
+  - 144.8411
   sentence_times:
-  - - 90.925
-    - 102.65
-  - - 103.0
-    - 108.825
-  - - 109.175
-    - 111.3
-  - - 111.65
-    - 119.25
-  - - 119.6
-    - 129.5
-  - - 129.85
-    - 134.4
-  - - 134.75
-    - 140.375
-  - - 140.725
-    - 144.875
+  - - 90.0911
+    - 101.8161
+  - - 102.1661
+    - 107.9911
+  - - 108.3411
+    - 110.4661
+  - - 110.8161
+    - 118.4161
+  - - 118.7661
+    - 128.6661
+  - - 129.0161
+    - 133.5661
+  - - 133.9161
+    - 139.5411
+  - - 139.8911
+    - 144.0411
   beat: 'building block: curvilinear coordinates (the three shared features)'
   visual: 'Three pictures across the top from frame 0 (centred at y 300, x1.15, Should 8): a radar''s polar grid, the Part 2 hurricane cylinder, a globe
     graticule. AT(2, ''curvilinear coordinates'') keyword ''curvilinear'' (54 px) below. AT(4, ''coordinate lines are curves'') the rings, the cylinder''s
@@ -437,37 +436,37 @@ scenes:
   layout: Should 8 kept (no empty bottom half); keywords below the pictures with >= 40 px gap; nothing over the pictures.
 - id: s04_scale_factors
   t:
-  - 145.675
-  - 245.325
+  - 144.8411
+  - 244.4911
   sentence_times:
-  - - 145.675
-    - 150.15
-  - - 150.5
-    - 158.55
-  - - 158.9
-    - 162.975
-  - - 163.325
-    - 169.525
-  - - 169.875
-    - 172.825
-  - - 173.175
-    - 182.675
-  - - 183.025
-    - 191.275
-  - - 191.625
-    - 197.2
-  - - 197.55
-    - 202.325
-  - - 202.675
-    - 207.45
-  - - 207.8
-    - 219.925
-  - - 221.425
-    - 226.675
-  - - 227.025
-    - 236.45
-  - - 237.95
-    - 244.525
+  - - 144.8411
+    - 149.3161
+  - - 149.6661
+    - 157.7161
+  - - 158.0661
+    - 162.1411
+  - - 162.4911
+    - 168.6911
+  - - 169.0411
+    - 171.9911
+  - - 172.3411
+    - 181.8411
+  - - 182.1911
+    - 190.4411
+  - - 190.7911
+    - 196.3661
+  - - 196.7161
+    - 201.4911
+  - - 201.8411
+    - 206.6161
+  - - 206.9661
+    - 219.0911
+  - - 220.5911
+    - 225.8411
+  - - 226.1911
+    - 235.6161
+  - - 237.1161
+    - 243.6911
   beat: 'building block: scale factor = metres walked per unit of the coordinate (D53)'
   visual: 'Left x 80-1000 from frame 0: Part 1''s ring of radius r with a small turn Δθ, the arc drawn teal and tagged ''r Δθ''. AT(4, ''scale factor'')
     keyword ''scale factor = metres per unit''. AT(6, ''stepping north'') the picture cross-fades to a small globe sliced along Brest''s meridian: the north
@@ -513,25 +512,25 @@ scenes:
   layout: CalcStack x >= 1100 (Must 8 rule), <= 3 rows visible, older rows at 60 %; links never cross the rows.
 - id: s05_shortest_way
   t:
-  - 245.325
-  - 296.6
+  - 244.4911
+  - 295.7661
   sentence_times:
-  - - 245.325
-    - 252.875
-  - - 253.225
-    - 258.275
-  - - 258.625
-    - 262.95
-  - - 263.3
-    - 268.75
-  - - 269.1
-    - 273.0
-  - - 273.35
-    - 278.875
-  - - 279.225
-    - 286.05
-  - - 286.4
-    - 295.8
+  - - 244.4911
+    - 252.0411
+  - - 252.3911
+    - 257.4411
+  - - 257.7911
+    - 262.1161
+  - - 262.4661
+    - 267.9161
+  - - 268.2661
+    - 272.1661
+  - - 272.5161
+    - 278.0411
+  - - 278.3911
+    - 285.2161
+  - - 285.5661
+    - 294.9661
   beat: 'goal first: the shortest route, and what a great circle is'
   visual: 'Left from frame 0: the BMNG globe (unzoomed, >= 760 px). AT(2, ''fuel'') two keywords ''distance · fuel · time'' in the column. AT(3, ''straight
     line'') a small flat sheet with a ruler line beside the globe (right column, upper). AT(5, ''great circle'') a gold circle draws round the globe through
@@ -564,29 +563,29 @@ scenes:
   layout: Globe left, keywords right; no text on the globe except the short tag at the slate stub.
 - id: s06_great_circle
   t:
-  - 296.6
-  - 355.95
+  - 295.7661
+  - 355.1161
   sentence_times:
-  - - 296.6
-    - 300.7
-  - - 301.05
-    - 306.525
-  - - 306.875
-    - 312.725
-  - - 313.075
-    - 321.1
-  - - 321.45
-    - 328.175
-  - - 328.525
-    - 336.55
-  - - 336.9
-    - 338.9
-  - - 339.25
-    - 343.55
-  - - 343.9
-    - 349.35
-  - - 349.7
-    - 355.15
+  - - 295.7661
+    - 299.8661
+  - - 300.2161
+    - 305.6911
+  - - 306.0411
+    - 311.8911
+  - - 312.2411
+    - 320.2661
+  - - 320.6161
+    - 327.3411
+  - - 327.6911
+    - 335.7161
+  - - 336.0661
+    - 338.0661
+  - - 338.4161
+    - 342.7161
+  - - 343.0661
+    - 348.5161
+  - - 348.8661
+    - 354.3161
   beat: 'D45 (1)-(3), D46: the slicing sheet through both cities and the centre; why the great circle is shortest'
   visual: Globe from frame 0, turning so that London is centred and labelled within 1 s of AT(1, 'London'); on AT(1, 'Los Angeles') the camera eases (<=
     90 °/s) until both cities and the whole route are centred; 'Los Angeles' right of and below its dot, fully inside the frame (U-CO-065, Must 7). AT(4,
@@ -634,31 +633,31 @@ scenes:
   layout: 'GlobeFrame whole globe, no edge fade; source ''Image: NASA Blue Marble NG'' below the globe; no text on the globe except the city labels.'
 - id: s07_sigma
   t:
-  - 355.95
-  - 418.875
+  - 355.1161
+  - 418.0411
   sentence_times:
-  - - 355.95
-    - 357.925
-  - - 358.275
-    - 362.425
-  - - 362.775
-    - 369.55
-  - - 369.9
-    - 375.1
-  - - 375.45
-    - 380.425
-  - - 380.775
-    - 385.15
-  - - 385.5
-    - 393.85
-  - - 394.2
-    - 399.975
-  - - 401.475
-    - 403.425
-  - - 403.775
-    - 414.5
-  - - 414.85
-    - 418.075
+  - - 355.1161
+    - 357.0911
+  - - 357.4411
+    - 361.5911
+  - - 361.9411
+    - 368.7161
+  - - 369.0661
+    - 374.2661
+  - - 374.6161
+    - 379.5911
+  - - 379.9411
+    - 384.3161
+  - - 384.6661
+    - 393.0161
+  - - 393.3661
+    - 399.1411
+  - - 400.6411
+    - 402.5911
+  - - 402.9411
+    - 413.6661
+  - - 414.0161
+    - 417.2411
   beat: 'D45 (1)-(3): what sigma is, and why d = a sigma (the arc rule on the slice)'
   visual: 'The camera turns (eased, <= 60 °/s) until it looks straight at the slicing disc: the globe fades to a faint outline and the disc becomes a flat
     circle of radius a (gold rim, ''a'' tag on a radius). AT(4, ''one arrow from the centre'') teal arrow to London; AT(4, ''another one'') orange arrow
@@ -702,39 +701,39 @@ scenes:
   layout: The disc fills x 80-1000; the column holds the inset and equations from x 1100; links never cross the arc labels.
 - id: s08_position_arrows
   t:
-  - 418.875
-  - 559.475
+  - 418.0411
+  - 558.6411
   sentence_times:
-  - - 418.875
-    - 423.7
-  - - 424.05
-    - 432.75
-  - - 433.1
-    - 439.175
-  - - 439.525
-    - 447.875
-  - - 448.225
-    - 454.925
-  - - 455.275
-    - 465.675
-  - - 466.025
-    - 477.3
-  - - 477.65
-    - 480.975
-  - - 482.475
-    - 496.0
-  - - 497.5
-    - 504.0
-  - - 505.5
-    - 517.925
-  - - 518.275
-    - 529.475
-  - - 529.825
-    - 538.925
-  - - 540.425
-    - 549.275
-  - - 550.775
-    - 557.975
+  - - 418.0411
+    - 422.8661
+  - - 423.2161
+    - 431.9161
+  - - 432.2661
+    - 438.3411
+  - - 438.6911
+    - 447.0411
+  - - 447.3911
+    - 454.0911
+  - - 454.4411
+    - 464.8411
+  - - 465.1911
+    - 476.4661
+  - - 476.8161
+    - 480.1411
+  - - 481.6411
+    - 495.1661
+  - - 496.6661
+    - 503.1661
+  - - 504.6661
+    - 517.0911
+  - - 517.4411
+    - 528.6411
+  - - 528.9911
+    - 538.0911
+  - - 539.5911
+    - 548.4411
+  - - 549.9411
+    - 557.1411
   beat: 'D45 (4)-(5): the two unit position arrows written out with every input'
   visual: 'Left: the face-on disc stays, small, at the top left with r̂₁ (teal) and r̂₂ (orange). Main area: two rows of three columns, London (teal) then
     Los Angeles (orange). Each row starts with its inputs ''φ = 51.51°, λ = −0.13°'' / ''φ = 34.05°, λ = −118.24°'' (68 px), then the three parts appear
@@ -795,35 +794,35 @@ scenes:
   layout: CalcStack <= 3 live rows per city, older rows dimmed to 60 % and then folded into the vector; nothing over the disc.
 - id: s09_cos_sigma
   t:
-  - 559.475
-  - 647.725
+  - 558.6411
+  - 646.8911
   sentence_times:
-  - - 559.475
-    - 563.1
-  - - 563.45
-    - 570.425
-  - - 570.775
-    - 576.725
-  - - 577.075
-    - 582.5
-  - - 582.85
-    - 587.25
-  - - 587.6
-    - 594.725
-  - - 596.225
-    - 604.8
-  - - 606.3
-    - 613.25
-  - - 614.75
-    - 618.325
-  - - 618.675
-    - 622.65
-  - - 624.15
-    - 628.225
-  - - 628.575
-    - 633.95
-  - - 635.45
-    - 646.925
+  - - 558.6411
+    - 562.2661
+  - - 562.6161
+    - 569.5911
+  - - 569.9411
+    - 575.8911
+  - - 576.2411
+    - 581.6661
+  - - 582.0161
+    - 586.4161
+  - - 586.7661
+    - 593.8911
+  - - 595.3911
+    - 603.9661
+  - - 605.4661
+    - 612.4161
+  - - 613.9161
+    - 617.4911
+  - - 617.8411
+    - 621.8161
+  - - 623.3161
+    - 627.3911
+  - - 627.7411
+    - 633.1161
+  - - 634.6161
+    - 646.0911
   beat: 'D45 (6): cos sigma = r1 . r2 = 0.195, sigma = 78.7 deg'
   visual: 'Column from frame 0: the two vectors from s09 one above the other, matching parts aligned. AT(2, ''product of their lengths'') the dot-product
     movie''s shadow picture (small, left): r̂₂''s shadow on r̂₁ as a 20-px band, ''|r̂₁| = |r̂₂| = 1''. AT(5, ''multiply the matching parts'') three gold
@@ -875,23 +874,23 @@ scenes:
   layout: Calculations x >= 1100; the disc picture left; no link crosses a row.
 - id: s10_distance
   t:
-  - 647.725
-  - 715.3503
+  - 646.8911
+  - 714.5164
   sentence_times:
-  - - 647.725
-    - 650.65
-  - - 651.0
-    - 658.075
-  - - 658.425
-    - 671.7698
-  - - 673.2698
-    - 683.2948
-  - - 683.6448
-    - 688.3948
-  - - 689.8948
-    - 703.8503
-  - - 705.3503
-    - 714.5503
+  - - 646.8911
+    - 649.8161
+  - - 650.1661
+    - 657.2411
+  - - 657.5911
+    - 670.9359
+  - - 672.4359
+    - 682.4609
+  - - 682.8109
+    - 687.5609
+  - - 689.0609
+    - 703.0164
+  - - 704.5164
+    - 713.7164
   beat: 'D45 (7): sigma in radians, d = a sigma = 8755 km, and the per-degree check'
   visual: 'Left: the face-on disc with σ and the gold arc; AT(1, ''in radians'') a small ruler shows 1° = π/180 rad. Column: CalcStack rows on their words.
     AT(''Earth''s radius times sigma'') the gold arc''s label becomes ''≈ 8755 km'' with a gold link from the row. AT(6, ''the quick way'') the arc''s 10°
@@ -937,27 +936,27 @@ scenes:
   layout: CalcStack x >= 1100 (Must 8); '≈ 8755 km' on the arc is a short label at a spot.
 - id: s11_route_shape
   t:
-  - 715.3503
-  - 777.6003
+  - 714.5164
+  - 776.7664
   sentence_times:
-  - - 715.3503
-    - 718.0253
-  - - 718.3753
-    - 730.8503
-  - - 731.2003
-    - 733.1753
-  - - 733.5253
-    - 738.6753
-  - - 739.0253
-    - 746.1253
-  - - 746.4753
-    - 754.3503
-  - - 754.7003
-    - 764.2003
-  - - 765.7003
-    - 771.0503
-  - - 771.4003
-    - 776.8003
+  - - 714.5164
+    - 717.1914
+  - - 717.5414
+    - 730.0164
+  - - 730.3664
+    - 732.3414
+  - - 732.6914
+    - 737.8414
+  - - 738.1914
+    - 745.2914
+  - - 745.6414
+    - 753.5164
+  - - 753.8664
+    - 763.3664
+  - - 764.8664
+    - 770.2164
+  - - 770.5664
+    - 775.9664
   beat: the route leaves NW (312 deg), tops out at 62.4 N near SW Greenland, arrives SW (214 deg)
   visual: 'Back to the globe (camera continuity from s07), the gold route drawn; a plane glyph flies it (time compressed). AT(4, ''west-south-west'') a
     dashed slate arrow from London towards Los Angeles as it looks on a flat map, in a small Mercator inset in the column. AT(5, ''three hundred and twelve
@@ -1001,25 +1000,25 @@ scenes:
   layout: Source line below the globe; compass roses beside their cities, never on the column text; Los Angeles label inside the frame.
 - id: s12_rhumb
   t:
-  - 777.6003
-  - 840.6753
+  - 776.7664
+  - 839.8414
   sentence_times:
-  - - 777.6003
-    - 780.8503
-  - - 781.2003
-    - 789.6253
-  - - 789.9753
-    - 799.0253
-  - - 799.3753
-    - 807.2503
-  - - 808.7503
-    - 810.7753
-  - - 811.1253
-    - 823.2503
-  - - 824.7503
-    - 832.9003
-  - - 834.4003
-    - 839.8753
+  - - 776.7664
+    - 780.0164
+  - - 780.3664
+    - 788.7914
+  - - 789.1414
+    - 798.1914
+  - - 798.5414
+    - 806.4164
+  - - 807.9164
+    - 809.9414
+  - - 810.2914
+    - 822.4164
+  - - 823.9164
+    - 832.0664
+  - - 833.5664
+    - 839.0414
   beat: 'D47: the rhumb line, 258.5 deg, 9733 km, 11 % longer'
   visual: 'Same globe; AT(2, ''rhumb line'') the slate rhumb line draws beside the gold great circle, with identical small gold angle marks where it crosses
     five meridians (the same angle at every meridian; no numbers on the globe). AT(3, ''two hundred and fifty eight and a half'') compass rose at London
@@ -1062,35 +1061,35 @@ scenes:
   layout: Globe left, CalcStack right from x 1100; inset below the CalcStack with its own gap.
 - id: s13_why_rhumb
   t:
-  - 840.6753
-  - 925.9753
+  - 839.8414
+  - 925.1414
   sentence_times:
-  - - 840.6753
-    - 843.6753
-  - - 844.0253
-    - 845.9503
-  - - 846.3003
-    - 848.1503
-  - - 848.5003
-    - 856.1253
-  - - 856.4753
-    - 865.7253
-  - - 866.0753
-    - 876.0003
-  - - 876.3503
-    - 881.7753
-  - - 882.1253
-    - 891.5503
-  - - 893.0503
-    - 895.2753
-  - - 895.6253
-    - 901.2503
-  - - 901.6003
-    - 907.4253
-  - - 907.7753
-    - 919.2503
-  - - 919.6003
-    - 925.1753
+  - - 839.8414
+    - 842.8414
+  - - 843.1914
+    - 845.1164
+  - - 845.4664
+    - 847.3164
+  - - 847.6664
+    - 855.2914
+  - - 855.6414
+    - 864.8914
+  - - 865.2414
+    - 875.1664
+  - - 875.5164
+    - 880.9414
+  - - 881.2914
+    - 890.7164
+  - - 892.2164
+    - 894.4414
+  - - 894.7914
+    - 900.4164
+  - - 900.7664
+    - 906.5914
+  - - 906.9414
+    - 918.4164
+  - - 918.7664
+    - 924.3414
   beat: 'D47: why some prefer the rhumb line (three reasons: steering, short trips, a ruler on Mercator)'
   visual: 'Three beats, one per reason, the globe staying left. Reason 1 AT(3, ''steering''): two compass dials in the column: the rhumb dial fixed at 258.5°
     (slate), the great-circle dial sweeping 312° -> 214° while the plane glyph flies the gold route (heading from DM12, same strip as s12). AT(6, ''a lot
@@ -1137,25 +1136,25 @@ scenes:
   layout: One reason at a time in the column; earlier reason keywords dim to 60 %; the Mercator chart has its source line below it.
 - id: s14_recap
   t:
-  - 925.9753
-  - 997.4003
+  - 925.1414
+  - 996.5664
   sentence_times:
-  - - 925.9753
-    - 935.9253
-  - - 936.2753
-    - 944.4503
-  - - 944.8003
-    - 951.0253
-  - - 951.3753
-    - 961.0253
-  - - 961.3753
-    - 970.7503
-  - - 971.1003
-    - 979.2253
-  - - 979.5753
-    - 986.6253
-  - - 986.9753
-    - 996.6003
+  - - 925.1414
+    - 935.0914
+  - - 935.4414
+    - 943.6164
+  - - 943.9664
+    - 950.1914
+  - - 950.5414
+    - 960.1914
+  - - 960.5414
+    - 969.9164
+  - - 970.2664
+    - 978.3914
+  - - 978.7414
+    - 985.7914
+  - - 986.1414
+    - 995.7664
   beat: recap ('To sum up'); last sentence the teaser to Part 7
   visual: 'One beat per sentence, mini pictures reused (no headings): the three curvilinear pictures; the scale-factor table (θ: r, φ: a, λ: a cos φ); the
     globe with the slicing sheet; the face-on disc ''d = a σ'' with ''cos σ = r̂₁ · r̂₂''; ''78.7°'', ''≈ 8755 km''; the compass strip 312° -> 214°; the
@@ -1191,15 +1190,15 @@ scenes:
   layout: One mini picture per sentence, previous ones dimmed; no headings.
 - id: s15_end
   t:
-  - 997.4003
-  - 1020.3003
+  - 996.5664
+  - 1019.4664
   sentence_times:
-  - - 997.4003
-    - 1003.6003
-  - - 1003.9503
-    - 1012.0003
-  - - 1012.3503
-    - 1020.0003
+  - - 996.5664
+    - 1002.7664
+  - - 1003.1164
+    - 1011.1664
+  - - 1011.5164
+    - 1019.1664
   beat: series end card (maths-tutorial ending, word for word; decision 2)
   visual: 'House end card (HOUSE_STYLE §3): four faint topic thumbnails along the top (globe with a great circle, compass dial, rhumb line, Mercator map);
     keyword lines ''a series of maths tutorials'' (68 px) and ''atmospheric science · meteorology · fluid dynamics'' (54 px); a notebook icon with ''coordinates

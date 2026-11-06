@@ -141,7 +141,7 @@ Longyearbyen, Svalbard, Barents, stereographic, Greenwich, "l n" ("ell en").
 **How it was measured:** the full script in one `tools/tts.py` run; then the opening recap (s02) was shortened to stay under 60 s, re-measured alone with `tools/tts.py`, and spliced in (every later scene shifted by the measured difference; `timing.json → splice`). The final TTS re-runs the whole script.
 
 ## s00_title
-In this video, we'll learn map projections the easy way, and see how meteorology uses them to draw weather maps, and to read the winds from above the pole.
+In this video, we'll learn map projections, and see how meteorology uses them to draw weather maps, and to read the winds from above the pole.
 
 > 29 words · 1 sentences · 0 beats · 0.300–11.550 s (11.2 s; speech 10.4 s) · 0:00.30–0:11.55 (measured, dry run 2026-11-05).
 

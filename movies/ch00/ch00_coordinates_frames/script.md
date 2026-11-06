@@ -101,7 +101,7 @@ below uses `###` headings so that `tools/tts.py` does not read it as a scene.
 **Measured**: 30 scenes, 346 sentences, 5709 words, 68 beats; narration 2360.975 s + 2.5-s hold = 2363.475 s (39:23.47); speech alone 2150.2 s = 159.3 wpm while speaking, **145.1 wpm overall** (limit 150). Clip lengths from three `tools/tts.py` runs on G: (`G:\Geophysical Fluid Dynamics\aofd-data\scratch\movies\ch00_coordinates_frames\dryrun1`, `splice2`, `splice3`; each scene's source is in the storyboard), times recomputed with the tts.py gap rules (the method reproduces the full run exactly); no warnings in any run. The caption cue count comes with the final TTS.
 
 ## s00_title
-In this video, we'll learn local frames, and how they turn, the easy way, and see how meteorology uses them to measure the winds on a coast and over the round Earth.
+In this video, we'll learn local frames and how they turn, and see how meteorology uses them to measure the winds on a coast and over the round Earth.
 
 > 32 words · 1 sentences · 0 beats · 0.300–12.200 s (11.9 s; speech 11.1 s) · 0:00.30–0:12.20 (measured, splice3).
 

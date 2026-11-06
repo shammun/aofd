@@ -21,6 +21,9 @@ import yaml
 FPS = 30
 
 REVOICE: dict[str, dict[int, tuple[str, str]]] = {
+    # House style 2026-11-06 (user): never say 'the easy way'; the title promise pulses on the concept words instead
+    "s00_title": {0: ("In this video, we'll learn about routes across our round Earth the easy way, and see how meteorology and aviation use them to plan the shortest flights.",
+                    "In this video, we'll learn about routes across our round Earth, and see how meteorology and aviation use them to plan the shortest flights.")},
     # Part 1 lessons A6 (2026-11-05): one rounding everywhere. The row said 78.74 x 0.01745 ~ 1.3742, but that product is 1.3740; the
     # exact angle 78.738 deg times pi/180 gives 1.37424. The voice now says which exact angle is used (as Part 1's 53.2301 deg row).
     "s10_distance": {

@@ -166,14 +166,14 @@ scenes:
     - 12.375
   beat: opening title (HOUSE_STYLE §3)
   visual: 'TITLE FRAME (house/kit/title.tsx). Left x 100-1075: RiseText ''The'' / ''gradient'' (150 px, 800, TitleGradient teal -> gold); ''made easy''
-    (96 px, warm white) pulses x1.06 on AT(1,''the easy way''); ''and how meteorology uses it'' (68 px, ''meteorology'' teal). Right x 1130-1840, y 180-636
+    (96 px, warm white) pulses x1.06 on AT(1,''the gradient''); ''and how meteorology uses it'' (68 px, ''meteorology'' teal). Right x 1130-1840, y 180-636
     (>= 50 px clear of the subtitle). Part A (frame 0 -> AT(1,''meteorology'')): a three.js hillside (the s03 plane h = 30x + 40y m/km bent into a smooth
     Gaussian hill) with contour rings; one orange grad-h arrow at a gold point swings to the steepest direction and grows to length 50 as a small sweep
     dial (climb vs direction) fills beside it. Part B (12-frame cross-fade on ''meteorology''): Storm Ciaran ERA5 msl 03 UTC 2 Nov 2023 over Brittany, isobars
     every 4 hPa (warm white), orange grad-p arrows (towards high) flip into light-orange hollow-head pressure-gradient-force arrows pointing to the low
     on AT(1,''which way the air is pushed''), then teal wind streaklines thicken where the isobars crowd on AT(1,''isobars crowd together''). Poster = frame
     200.'
-  voiceover: In this video, we'll learn the gradient the easy way, and see how meteorology uses it to find which way the air is pushed, and why the wind
+  voiceover: In this video, we'll learn the gradient, and see how meteorology uses it to find which way the air is pushed, and why the wind
     blows hardest where the isobars crowd together.
   on_screen_eq: null
   physics_source:

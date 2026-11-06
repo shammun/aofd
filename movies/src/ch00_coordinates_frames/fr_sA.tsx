@@ -64,7 +64,7 @@ const SV: SliceV = sliceFrom3D();
 const TB = { x: 1150, y: 150, w: 690, h: 480 };
 const S00: React.FC = () => {
   const f = useCurrentFrame(), k = K("s00_title");
-  const tMet = AT(k, 0, "meteorology"), tEasy = AT(k, 0, "the easy way");
+  const tMet = AT(k, 0, "meteorology"), tEasy = AT(k, 0, "local frames");
   const pz = 1 + 0.06 * pulse(f, tEasy, 14);
   const oA = fout(f, tMet, 12), oB = fin(f, tMet, 12);
   const cam = globePath([{ f: 0, lat: 30, lon: 50, dist: 3.0 }, { f: 400, lat: 32, lon: 44, dist: 3.0 }], f);

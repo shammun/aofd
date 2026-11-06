@@ -22,6 +22,9 @@ import yaml
 FPS = 30
 
 REVOICE: dict[str, dict[int, tuple[str, str]]] = {
+    # House style 2026-11-06 (user): never say 'the easy way'; the title promise pulses on the concept words instead
+    "s00_title": {0: ("In this video, we'll learn map projections the easy way, and see how meteorology uses them to draw weather maps, and to read the winds from above the pole.",
+                    "In this video, we'll learn map projections, and see how meteorology uses them to draw weather maps, and to read the winds from above the pole.")},
     # G2: 48.4 deg = 0.8447 rad (not 0.8446), -4.5 deg = -0.0785 rad (not -0.0784); y = 6371 x 0.8447 = 5382 km, as Part 3 says (coordinator: 5382 everywhere)
     "s04_plate_carree": {
         15: ("In radians, that's zero point eight four four six, and minus zero point zero seven eight four.",

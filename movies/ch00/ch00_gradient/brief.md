@@ -38,7 +38,7 @@ mass, advection (recalled), fixed thermometer, material derivative (named), sea 
 Gulf Stream, sea-surface temperature.
 
 ## The promise (s00)
-"In this video, we'll learn the gradient the easy way, and see how meteorology uses it to find which way the air is pushed,
+"In this video, we'll learn the gradient, and see how meteorology uses it to find which way the air is pushed,
 and why the wind blows hardest where the isobars crowd together."
 Title 'The' / 'gradient' / 'made easy' / 'and how meteorology uses it' (application word in teal).
 

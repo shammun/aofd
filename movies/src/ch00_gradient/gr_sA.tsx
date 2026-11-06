@@ -55,7 +55,7 @@ const RB = { x: 1130, y: 160, w: 710, h: 480 };
 const titleH = (x: number, y: number) => TT.H * Math.exp(-(x * x + y * y) / (2 * TT.sigma * TT.sigma));
 const S00: React.FC = () => {
   const f = useCurrentFrame(), k = K("s00_title");
-  const tMet = AT(k, 0, "meteorology"), tEasy = AT(k, 0, "the easy way"), tPush = AT(k, 0, "which way the air is pushed"), tCrowd = AT(k, 0, "isobars crowd together");
+  const tMet = AT(k, 0, "meteorology"), tEasy = AT(k, 0, "the gradient"), tPush = AT(k, 0, "which way the air is pushed"), tCrowd = AT(k, 0, "isobars crowd together");
   const oA = fin(f, 6, 10) * fout(f, tMet, 12), oB = fin(f, tMet, 12);
   const st = hOrbitCam({ ...hOrbitPath([{ f: 0, az: 228, el: 36, dist: 15, target: [0, 0, 0.35] }, { f: LEN(k), az: 246, el: 38, dist: 15, target: [0, 0, 0.35] }], f), fov: 30 }, [RB.w / 2, RB.h / 2 + 30]);
   const pr = hProjector(st, RB.w, RB.h, RB.x, RB.y);

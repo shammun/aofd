@@ -15,7 +15,7 @@ concepts:
 - 'the air parcel''s acceleration: local change + advection; each piece frame-dependent, the sum not'
 - storm-relative wind v' = v - U; ring means unchanged by a uniform shift (Storm Ciaran)
 - 'change of variables to a moving frame: tau, dp/dt = dp/dtau - U.grad p (Kundu (B.2.2)); a fixed barometer at Plymouth'
-target_duration_s: 1328.657
+target_duration_s: 1327.744
 fps: 30
 size:
 - 1920
@@ -65,7 +65,7 @@ dry_run:
     splice3: 'G:\Geophysical Fluid Dynamics\aofd-data\scratch\movies\ch00_coordinates_frames\splice3 (the split: new titles, hooks, recaps, Part 5 opening)'
   method: every sentence clip length comes from one of the three runs (scene field measured.timing_source); times recomputed with the tools/tts.py gap rules (lead
     0.3, sentence 0.35, beat 1.5, scene 0.8, tail 0.3); the method reproduces dryrun1's total exactly
-  audio_s: 1328.657
+  audio_s: 1327.744
   with_hold_s: 1321.075
   speech_s: 1198.28
   sentences: 193
@@ -154,43 +154,43 @@ skip_guidance:
     what: speeds add, accelerations stay (D40-D41)
     chip_scene: s04_velocities_add
     chip_sentence: 3
-    chip_at_s: 163.95
-    chip_at: '2:43'
+    chip_at_s: 163.037
+    chip_at: '2:42'
     skip_to_scene: s05_accel_same
     skip_to_sentence: 15
-    skip_to_s: 333.2293
-    skip_to: '5:33'
-    chip_text: every step · optional · skip to 5:33
+    skip_to_s: 332.3163
+    skip_to: '5:32'
+    chip_text: every step · optional · skip to 5:32
     takeaway: 'If you skipped, here''s what to keep: in a frame moving steadily in a straight line, speeds change by the frame''s own speed, but accelerations, and
       so forces, stay the same.'
   - block: B
     what: linking the barometer and the rider (D44)
     chip_scene: s14_tau_derive
     chip_sentence: 3
-    chip_at_s: 996.002
-    chip_at: '16:35'
+    chip_at_s: 995.089
+    chip_at: '16:34'
     skip_to_scene: s14_tau_derive
     skip_to_sentence: 17
-    skip_to_s: 1092.832
-    skip_to: '18:12'
-    chip_text: every step · optional · skip to 18:12
+    skip_to_s: 1091.919
+    skip_to: '18:11'
+    chip_text: every step · optional · skip to 18:11
     takeaway: 'If you skipped, here''s what to keep: what the barometer sees is the storm changing, minus the pattern sliding past.'
 scenes:
 - id: s00_title
   t:
   - 0.3
-  - 13.25
+  - 12.337
   sentence_times:
   - - 0.3
-    - 12.45
+    - 11.537
   beat: opening title (HOUSE_STYLE §3)
   visual: 'TITLE FRAME (house/kit/title.tsx). Left x 100-1075: line 1 ''Coordinates · Part 5'' (RiseText, 150 px, weight 800, TitleGradient teal -> gold; letters
-    rise 24 px over 8 frames, 2-frame stagger); line 2 ''Moving frames'' (96 px, warm white) pulsing x1.06 on AT(1,''the easy way''); subtitle ''storm-relative winds''
+    rise 24 px over 8 frames, 2-frame stagger); line 2 ''Moving frames'' (96 px, warm white) pulsing x1.06 on AT(1, ''moving frames''); subtitle ''storm-relative winds''
     (68 px, teal), >= 50 px clear of the animation. Right x 1130-1840, y 180-636: Part A (frame 0 -> AT(1,''meteorology'')): the train with the walker and two sliding
     rulers; Part B (12-frame cross-fade on ''meteorology''): Ciaran''s isobars sliding ENE over the Channel with the 200-km ring, a gold storm-motion arrow and a
     barometer icon at Plymouth whose needle falls; source line below the column (y <= 860). Poster = frame 200.'
-  voiceover: In this video, we'll learn moving frames the easy way, and see how meteorology uses them to understand a moving storm's winds, and what a barometer sees
-    as the storm passes.
+  voiceover: In this video, we'll learn moving frames, and see how meteorology uses them to understand a moving storm's winds, and what a barometer sees as
+    the storm passes.
   on_screen_eq: null
   calc_rows: []
   physics_source:
@@ -221,19 +221,19 @@ scenes:
     timing_source: splice3
 - id: s01_hook
   t:
-  - 13.25
-  - 37.825
+  - 12.337
+  - 36.912
   sentence_times:
-  - - 13.25
-    - 18.05
-  - - 18.4
-    - 23.475
-  - - 23.825
-    - 27.25
-  - - 27.6
-    - 32.225
-  - - 32.575
-    - 37.025
+  - - 12.337
+    - 17.137
+  - - 17.487
+    - 22.562
+  - - 22.912
+    - 26.337
+  - - 26.687
+    - 31.312
+  - - 31.662
+    - 36.112
   beat: hook question
   visual: 'Picture zone: Ciaran''s 03 UTC map (as s08) with the ring; a rider icon (orange) glides with the centre while a person icon (slate) stands on the Cornish
     shore; both get a small wind arrow at the same spot, of different lengths, with a question mark between them. Column: keywords ''riding along'' / ''standing still''
@@ -270,23 +270,23 @@ scenes:
     timing_source: splice3
 - id: s02_part4_recap
   t:
-  - 37.825
-  - 87.625
+  - 36.912
+  - 86.712
   sentence_times:
-  - - 37.825
-    - 46.15
-  - - 46.5
-    - 53.0
-  - - 53.35
-    - 59.825
-  - - 60.175
-    - 65.8
-  - - 66.15
-    - 75.2
-  - - 75.55
-    - 83.95
-  - - 84.3
-    - 86.825
+  - - 36.912
+    - 45.237
+  - - 45.587
+    - 52.087
+  - - 52.437
+    - 58.912
+  - - 59.262
+    - 64.887
+  - - 65.237
+    - 74.287
+  - - 74.637
+    - 83.037
+  - - 83.387
+    - 85.912
   beat: recap of Part 4 (<= 60 s) and of the traveller's rate from the derivatives movie
   visual: 'Reuse Part 4 minis one per sentence: Brest''s tripod with ''v = u i + v j + w k''; the coast frame with x̂′, ŷ′ and ''along = v·x̂′''; the parcel on a
     parallel with its tripod turning; then the derivatives movie''s traveller line ''dT/dt = ∂T/∂t + speed × slope'' and ''DT/Dt = ∂T/∂t + v·∇T'' (68 px, column).
@@ -329,33 +329,33 @@ scenes:
     timing_source: splice3
 - id: s03_train
   t:
-  - 87.625
-  - 154.175
+  - 86.712
+  - 153.262
   sentence_times:
-  - - 87.625
-    - 90.775
-  - - 91.125
-    - 97.425
-  - - 97.775
-    - 101.725
-  - - 102.075
-    - 109.5
-  - - 111.0
-    - 112.975
-  - - 113.325
-    - 116.225
-  - - 116.575
-    - 121.125
-  - - 121.475
-    - 125.25
-  - - 125.6
-    - 132.875
-  - - 133.225
-    - 138.95
-  - - 140.45
-    - 148.775
-  - - 149.125
-    - 153.375
+  - - 86.712
+    - 89.862
+  - - 90.212
+    - 96.512
+  - - 96.862
+    - 100.812
+  - - 101.162
+    - 108.587
+  - - 110.087
+    - 112.062
+  - - 112.412
+    - 115.312
+  - - 115.662
+    - 120.212
+  - - 120.562
+    - 124.337
+  - - 124.687
+    - 131.962
+  - - 132.312
+    - 138.037
+  - - 139.537
+    - 147.862
+  - - 148.212
+    - 152.462
   beat: 'building block: a frame that moves (the train); x = x'' + U t derived'
   visual: 'Code-drawn train on a straight track across the picture zone at 20 m/s (slate), a walker glyph at 1.5 m/s (teal arrow ''u′ = 1.5''), an observer beside
     the track (station icon). Train arrow ''U = 20'' (orange). S3: CalcStack ''20 + 1.5 = 21.5 m/s'' in the column (x >= 1100, Must 12). S5-S8: two rulers: the ground
@@ -402,35 +402,35 @@ scenes:
     timing_source: splice3
 - id: s04_velocities_add
   t:
-  - 154.175
-  - 238.6793
+  - 153.262
+  - 237.7663
   sentence_times:
-  - - 154.175
-    - 160.675
-  - - 161.025
-    - 163.6
-  - - 163.95
-    - 172.3793
-  - - 172.7293
-    - 175.7543
-  - - 176.1043
-    - 186.0793
-  - - 186.4293
-    - 192.4293
-  - - 193.9293
-    - 196.8543
-  - - 197.2043
-    - 202.4543
-  - - 202.8043
-    - 208.4043
-  - - 208.7543
-    - 211.9293
-  - - 213.4293
-    - 218.1043
-  - - 219.6043
-    - 229.7543
-  - - 230.1043
-    - 237.8793
+  - - 153.262
+    - 159.762
+  - - 160.112
+    - 162.687
+  - - 163.037
+    - 171.4663
+  - - 171.8163
+    - 174.8413
+  - - 175.1913
+    - 185.1663
+  - - 185.5163
+    - 191.5163
+  - - 193.0163
+    - 195.9413
+  - - 196.2913
+    - 201.5413
+  - - 201.8913
+    - 207.4913
+  - - 207.8413
+    - 211.0163
+  - - 212.5163
+    - 217.1913
+  - - 218.6913
+    - 228.8413
+  - - 229.1913
+    - 236.9663
   beat: 'derivation: u = u'' + U from the positions; Galilean transformation named'
   visual: 'The rulers from s03 frozen at one moment, then a short time Δt later (ghost of the first moment in slate): the three brackets grow by ''Δx′'' (teal), ''U
     Δt'' (gold) and ''Δx'' (warm white). Column CalcStack: Δx = Δx′ + U Δt; ÷ Δt; u = u′ + U; ''1.5 + 20 = 21.5''. Keyword ''Galilean transformation'' (54 px) on
@@ -498,39 +498,39 @@ scenes:
     timing_source: splice2
 - id: s05_accel_same
   t:
-  - 238.6793
-  - 345.3043
+  - 237.7663
+  - 344.3913
   sentence_times:
-  - - 238.6793
-    - 240.8293
-  - - 241.1793
-    - 243.6793
-  - - 244.0293
-    - 247.6543
-  - - 248.0043
-    - 252.8793
-  - - 253.2293
-    - 259.3293
-  - - 259.6793
-    - 267.6293
-  - - 269.1293
-    - 272.1043
-  - - 272.4543
-    - 277.0793
-  - - 277.4293
-    - 284.0793
-  - - 285.5793
-    - 291.8043
-  - - 292.1543
-    - 299.7793
-  - - 301.2793
-    - 312.6793
-  - - 314.1793
-    - 324.4543
-  - - 324.8043
-    - 332.8793
-  - - 333.2293
-    - 344.5043
+  - - 237.7663
+    - 239.9163
+  - - 240.2663
+    - 242.7663
+  - - 243.1163
+    - 246.7413
+  - - 247.0913
+    - 251.9663
+  - - 252.3163
+    - 258.4163
+  - - 258.7663
+    - 266.7163
+  - - 268.2163
+    - 271.1913
+  - - 271.5413
+    - 276.1663
+  - - 276.5163
+    - 283.1663
+  - - 284.6663
+    - 290.8913
+  - - 291.2413
+    - 298.8663
+  - - 300.3663
+    - 311.7663
+  - - 313.2663
+    - 323.5413
+  - - 323.8913
+    - 331.9663
+  - - 332.3163
+    - 343.5913
   beat: 'derivation D41: du/dt = dU/dt + du''/dt; dU/dt = 0; the falling ball'
   visual: 'Column builds D41 one row per step (Layered TeX): u = U + u′; Δu = ΔU + Δu′ (''change of a sum'' brace); ÷ Δt; the limit (Δt -> 0, ''derivatives movie''
     faint); d U/dt struck with ''= 0, U steady''; result ''du/dt = du′/dt'' (gold). Picture zone: the walker''s speed readout ''1.5 -> 2.0'' on the train and ''21.5
@@ -611,39 +611,39 @@ scenes:
     timing_source: splice2
 - id: s06_parcel_accel
   t:
-  - 345.3043
-  - 434.1043
+  - 344.3913
+  - 433.1913
   sentence_times:
-  - - 345.3043
-    - 351.5543
-  - - 351.9043
-    - 357.6043
-  - - 357.9543
-    - 366.0543
-  - - 366.4043
-    - 369.9293
-  - - 370.2793
-    - 376.7793
-  - - 377.1293
-    - 384.6793
-  - - 385.0293
-    - 391.8543
-  - - 392.2043
-    - 395.2293
-  - - 396.7293
-    - 402.9543
-  - - 403.3043
-    - 406.9293
-  - - 407.2793
-    - 412.6293
-  - - 412.9793
-    - 422.5043
-  - - 422.8543
-    - 427.6543
-  - - 428.0043
-    - 430.8543
-  - - 431.2043
-    - 433.3043
+  - - 344.3913
+    - 350.6413
+  - - 350.9913
+    - 356.6913
+  - - 357.0413
+    - 365.1413
+  - - 365.4913
+    - 369.0163
+  - - 369.3663
+    - 375.8663
+  - - 376.2163
+    - 383.7663
+  - - 384.1163
+    - 390.9413
+  - - 391.2913
+    - 394.3163
+  - - 395.8163
+    - 402.0413
+  - - 402.3913
+    - 406.0163
+  - - 406.3663
+    - 411.7163
+  - - 412.0663
+    - 421.5913
+  - - 421.9413
+    - 426.7413
+  - - 427.0913
+    - 429.9413
+  - - 430.2913
+    - 432.3913
   beat: 'derivation D42 (1)-(3): the air parcel''s acceleration = local change + advection; the frame equation explained'
   visual: 'Column: the derivatives movie''s line DT/Dt = ∂T/∂t + v·∇T (68 px, faint ''derivatives movie''), with underbraces ''one fixed place'' (slate) and ''advection''
     (teal); a gold swap arrow ''T -> u'' turns it into Du/Dt = ∂u/∂t + v·∇u; ''same for v, w''. Then the frame equation (84 px) with braces: left ''ground observer''
@@ -715,43 +715,43 @@ scenes:
     timing_source: dryrun1
 - id: s07_sliding_pattern
   t:
-  - 434.1043
-  - 570.352
+  - 433.1913
+  - 569.439
   sentence_times:
-  - - 434.1043
-    - 441.8293
-  - - 442.1793
-    - 448.2043
-  - - 448.5543
-    - 460.9727
-  - - 462.4727
-    - 467.5477
-  - - 467.8977
-    - 472.4477
-  - - 472.7977
-    - 484.052
-  - - 484.402
-    - 494.927
-  - - 495.277
-    - 499.577
-  - - 501.077
-    - 506.902
-  - - 507.252
-    - 513.902
-  - - 514.252
-    - 524.652
-  - - 526.152
-    - 533.552
-  - - 535.052
-    - 542.777
-  - - 544.277
-    - 551.002
-  - - 551.352
-    - 555.427
-  - - 555.777
-    - 564.527
-  - - 564.877
-    - 569.552
+  - - 433.1913
+    - 440.9163
+  - - 441.2663
+    - 447.2913
+  - - 447.6413
+    - 460.0597
+  - - 461.5597
+    - 466.6347
+  - - 466.9847
+    - 471.5347
+  - - 471.8847
+    - 483.139
+  - - 483.489
+    - 494.014
+  - - 494.364
+    - 498.664
+  - - 500.164
+    - 505.989
+  - - 506.339
+    - 512.989
+  - - 513.339
+    - 523.739
+  - - 525.239
+    - 532.639
+  - - 534.139
+    - 541.864
+  - - 543.364
+    - 550.089
+  - - 550.439
+    - 554.514
+  - - 554.864
+    - 563.614
+  - - 563.964
+    - 568.639
   beat: 'derivation D42 (4)-(6): a sliding pattern: each piece differs, the sum agrees (-4.0 + 5.4 = 1.4 = 0 + 1.4)'
   visual: 'Picture zone: a 1-D wind profile (teal curve, wind speed vs east distance, 0-400 km, ticks at 52 px) sliding right at 10 m/s, its shape unchanged; the
     chosen place marked by a fixed anemometer icon (slate) and a rider icon (orange) sharing the spot at this moment; a gold tangent on the curve ''0.111 m/s per
@@ -837,25 +837,25 @@ scenes:
     timing_source: dryrun1
 - id: s08_ciaran
   t:
-  - 570.352
-  - 634.602
+  - 569.439
+  - 633.689
   sentence_times:
-  - - 570.352
-    - 572.552
-  - - 572.902
-    - 579.952
-  - - 580.302
-    - 588.877
-  - - 589.227
-    - 598.377
-  - - 599.877
-    - 611.777
-  - - 613.277
-    - 621.777
-  - - 622.127
-    - 628.827
-  - - 630.327
-    - 633.802
+  - - 569.439
+    - 571.639
+  - - 571.989
+    - 579.039
+  - - 579.389
+    - 587.964
+  - - 588.314
+    - 597.464
+  - - 598.964
+    - 610.864
+  - - 612.364
+    - 620.864
+  - - 621.214
+    - 627.914
+  - - 629.414
+    - 632.889
   beat: 'application: Storm Ciaran, tracked by continuity; U = 14.6 m/s towards 71°'
   visual: 'Real map (LCC, 44-58 N, 15 W-5 E) of ERA5 10-m wind speed (perceptual LUT 0-30 m/s, colour bar beside the map in the column) and isobars every 4 hPa, 1-2
     Nov 2023, animated hourly 21 -> 06 UTC while S2-S3 speak, with the tracked centre (gold dots, one per hour) and the house clock glyph; ''Cornwall'' label on S3;
@@ -901,23 +901,23 @@ scenes:
     timing_source: dryrun1
 - id: s09_lopsided
   t:
-  - 634.602
-  - 682.152
+  - 633.689
+  - 681.239
   sentence_times:
-  - - 634.602
-    - 640.627
-  - - 640.977
-    - 647.077
-  - - 647.427
-    - 657.252
-  - - 658.752
-    - 660.802
-  - - 661.152
-    - 666.677
-  - - 667.027
-    - 674.052
-  - - 674.402
-    - 681.352
+  - - 633.689
+    - 639.714
+  - - 640.064
+    - 646.164
+  - - 646.514
+    - 656.339
+  - - 657.839
+    - 659.889
+  - - 660.239
+    - 665.764
+  - - 666.114
+    - 673.139
+  - - 673.489
+    - 680.439
   beat: 'application: ground-relative round winds, south ≈ 18, north ≈ 7 (why lopsided)'
   visual: 'Map frozen at 03 UTC; the 200-km ring (teal), the south and north sectors (±45° about the right/left of the track) highlighted as bands; readouts ''≈ 18
     m/s'' (south) and ''≈ 7 m/s'' (north) in the column, north row above south row (Must 13), each with a gold link to its band leaving from the readout''s left edge
@@ -957,33 +957,33 @@ scenes:
     timing_source: dryrun1
 - id: s10_storm_relative
   t:
-  - 682.152
-  - 762.177
+  - 681.239
+  - 761.264
   sentence_times:
-  - - 682.152
-    - 688.877
-  - - 689.227
-    - 691.902
-  - - 692.252
-    - 699.577
-  - - 699.927
-    - 704.627
-  - - 706.127
-    - 712.002
-  - - 712.352
-    - 715.627
-  - - 715.977
-    - 721.177
-  - - 721.527
-    - 733.777
-  - - 735.277
-    - 738.652
-  - - 739.002
-    - 744.552
-  - - 744.902
-    - 755.902
-  - - 757.402
-    - 761.377
+  - - 681.239
+    - 687.964
+  - - 688.314
+    - 690.989
+  - - 691.339
+    - 698.664
+  - - 699.014
+    - 703.714
+  - - 705.214
+    - 711.089
+  - - 711.439
+    - 714.714
+  - - 715.064
+    - 720.264
+  - - 720.614
+    - 732.864
+  - - 734.364
+    - 737.739
+  - - 738.089
+    - 743.639
+  - - 743.989
+    - 754.989
+  - - 756.489
+    - 760.464
   beat: 'derivation D43: v'' = v − U; arrow subtraction at two points with numbers'
   visual: 'Two insets beside the frozen map (picture zone split top/bottom: north point above, south point below, Must 13), each with: the ground wind (teal), the
     storm velocity U (orange), −U drawn tip-to-tail from the ground arrow''s tip (orange dashed), and the result v′ (warm white) closing the triangle; a component
@@ -1061,25 +1061,25 @@ scenes:
     timing_source: dryrun1
 - id: s11_round_parts
   t:
-  - 762.177
-  - 821.327
+  - 761.264
+  - 820.414
   sentence_times:
-  - - 762.177
-    - 766.552
-  - - 766.902
-    - 775.852
-  - - 776.202
-    - 781.302
-  - - 782.802
-    - 788.877
-  - - 789.227
-    - 794.477
-  - - 795.977
-    - 802.327
-  - - 802.677
-    - 810.577
-  - - 810.927
-    - 820.527
+  - - 761.264
+    - 765.639
+  - - 765.989
+    - 774.939
+  - - 775.289
+    - 780.389
+  - - 781.889
+    - 787.964
+  - - 788.314
+    - 793.564
+  - - 795.064
+    - 801.414
+  - - 801.764
+    - 809.664
+  - - 810.014
+    - 819.614
   beat: 'D43 (4): the round parts per side, ground vs rider (18 -> 5, 7 -> 20); pointer U13'
   visual: 'A three-row grid (house s19d pattern) in the column: rows ''ground'', ''storm''s motion'', ''rider'' × columns ''north side'' (top) and ''south side'':
     6.9 | 18.2; −13.0 | +13.2; 19.9 | 5.0 (m/s, the motion row orange, signs with ''−'' glyphs and rose for negative). Picture zone: the ring with sector bands; the
@@ -1122,31 +1122,31 @@ scenes:
     timing_source: dryrun1
 - id: s12_invariant
   t:
-  - 821.327
-  - 893.827
+  - 820.414
+  - 892.914
   sentence_times:
-  - - 821.327
-    - 824.052
-  - - 824.402
-    - 828.477
-  - - 828.827
-    - 839.752
-  - - 841.252
-    - 846.352
-  - - 847.852
-    - 849.852
-  - - 850.202
-    - 861.502
-  - - 861.852
-    - 865.177
-  - - 865.527
-    - 873.177
-  - - 874.677
-    - 879.852
-  - - 880.202
-    - 884.352
-  - - 884.702
-    - 893.027
+  - - 820.414
+    - 823.139
+  - - 823.489
+    - 827.564
+  - - 827.914
+    - 838.839
+  - - 840.339
+    - 845.439
+  - - 846.939
+    - 848.939
+  - - 849.289
+    - 860.589
+  - - 860.939
+    - 864.264
+  - - 864.614
+    - 872.264
+  - - 873.764
+    - 878.939
+  - - 879.289
+    - 883.439
+  - - 883.789
+    - 892.114
   beat: 'intuition: ring averages unchanged (14.1 vs 13.8; −6.0 vs −5.9); the uniform-wind picture; Brest gust 84 kt (build-1 s44, kept)'
   visual: 'Two rings side by side (ground left, rider right) at 03 UTC with their arrows; under each ring the ring-mean round ''≈ 14 m/s'' and ring-mean inflow ''≈
     −6 m/s'' (rose, ''−'' glyph) on S2-S3, gold ''same'' links between the pairs. S5: a uniform arrow field (orange) on a circle, its round parts plus on one side
@@ -1188,41 +1188,41 @@ scenes:
     timing_source: dryrun1
 - id: s13_tau
   t:
-  - 893.827
-  - 990.952
+  - 892.914
+  - 990.039
   sentence_times:
-  - - 893.827
-    - 898.327
-  - - 898.677
-    - 901.902
-  - - 902.252
-    - 907.802
-  - - 908.152
-    - 916.427
-  - - 916.777
-    - 922.702
-  - - 923.052
-    - 926.352
-  - - 926.702
-    - 929.552
-  - - 929.902
-    - 936.727
-  - - 937.077
-    - 940.427
-  - - 941.927
-    - 947.152
-  - - 947.502
-    - 955.927
-  - - 956.277
-    - 960.202
-  - - 960.552
-    - 967.352
-  - - 967.702
-    - 975.502
-  - - 977.002
-    - 981.727
-  - - 982.077
-    - 990.152
+  - - 892.914
+    - 897.414
+  - - 897.764
+    - 900.989
+  - - 901.339
+    - 906.889
+  - - 907.239
+    - 915.514
+  - - 915.864
+    - 921.789
+  - - 922.139
+    - 925.439
+  - - 925.789
+    - 928.639
+  - - 928.989
+    - 935.814
+  - - 936.164
+    - 939.514
+  - - 941.014
+    - 946.239
+  - - 946.589
+    - 955.014
+  - - 955.364
+    - 959.289
+  - - 959.639
+    - 966.439
+  - - 966.789
+    - 974.589
+  - - 976.089
+    - 980.814
+  - - 981.164
+    - 989.239
   beat: 'building block D44 (1): two observers; tau defined; what ∂p/∂τ means'
   visual: 'Map (as s08, isobars only + msl shading with colour bar 950-1010 hPa beside it) at 23 UTC -> 01 UTC: a frozen-pattern ghost (slate, the 23 UTC isobars
     slid along U by 1 h and 2 h) beside the real field (warm white); a fixed barometer icon (PoleThermometer style, slate) at ''Plymouth'', labelled within 1 s of
@@ -1277,43 +1277,43 @@ scenes:
     timing_source: dryrun1
 - id: s14_tau_derive
   t:
-  - 990.952
-  - 1101.607
+  - 990.039
+  - 1100.694
   sentence_times:
-  - - 990.952
-    - 993.102
-  - - 993.452
-    - 995.652
-  - - 996.002
-    - 1007.157
-  - - 1007.507
-    - 1012.282
-  - - 1012.632
-    - 1022.732
-  - - 1023.082
-    - 1029.957
-  - - 1031.457
-    - 1036.607
-  - - 1036.957
-    - 1044.857
-  - - 1046.357
-    - 1051.232
-  - - 1051.582
-    - 1059.307
-  - - 1060.807
-    - 1062.982
-  - - 1063.332
-    - 1066.332
-  - - 1066.682
-    - 1070.157
-  - - 1070.507
-    - 1079.032
-  - - 1079.382
-    - 1085.857
-  - - 1086.207
-    - 1091.332
-  - - 1092.832
-    - 1100.807
+  - - 990.039
+    - 992.189
+  - - 992.539
+    - 994.739
+  - - 995.089
+    - 1006.244
+  - - 1006.594
+    - 1011.369
+  - - 1011.719
+    - 1021.819
+  - - 1022.169
+    - 1029.044
+  - - 1030.544
+    - 1035.694
+  - - 1036.044
+    - 1043.944
+  - - 1045.444
+    - 1050.319
+  - - 1050.669
+    - 1058.394
+  - - 1059.894
+    - 1062.069
+  - - 1062.419
+    - 1065.419
+  - - 1065.769
+    - 1069.244
+  - - 1069.594
+    - 1078.119
+  - - 1078.469
+    - 1084.944
+  - - 1085.294
+    - 1090.419
+  - - 1091.919
+    - 1099.894
   beat: 'derivation D44 (2)-(4): the traveller''s chain rule -> ∂p/∂t = ∂p/∂τ − U·∇p; every term read'
   visual: 'Column builds D44 one row per step: the derivatives movie''s traveller line (68 px, faint), the rider''s version, the move across the ''='' (a gold arrow
     carrying U·∇p to the other side, its sign flipping on arrival), the result (96 px) with underbraces ''barometer'' (slate), ''storm changing'' (orange), ''pattern
@@ -1389,27 +1389,27 @@ scenes:
     timing_source: splice2
 - id: s15_plymouth
   t:
-  - 1101.607
-  - 1183.557
+  - 1100.694
+  - 1182.644
   sentence_times:
-  - - 1101.607
-    - 1104.757
-  - - 1105.107
-    - 1115.432
-  - - 1115.782
-    - 1129.257
-  - - 1130.757
-    - 1136.507
-  - - 1136.857
-    - 1144.682
-  - - 1146.182
-    - 1153.232
-  - - 1153.582
-    - 1163.832
-  - - 1165.332
-    - 1174.407
-  - - 1174.757
-    - 1182.057
+  - - 1100.694
+    - 1103.844
+  - - 1104.194
+    - 1114.519
+  - - 1114.869
+    - 1128.344
+  - - 1129.844
+    - 1135.594
+  - - 1135.944
+    - 1143.769
+  - - 1145.269
+    - 1152.319
+  - - 1152.669
+    - 1162.919
+  - - 1164.419
+    - 1173.494
+  - - 1173.844
+    - 1181.144
   beat: 'application D44 (5): Plymouth numbers: −3.8, slope 0.061 hPa/km, U·∇p = 3.2, ∂p/∂τ = −0.6'
   visual: 'Map at 00 UTC (as s13) with Plymouth''s barometer, the tracked centre (''954.5 hPa'', gold), the distance bracket ''≈ 123 km'' and the pressure-gradient
     arrow at Plymouth (slate) next to the motion arrow U (orange), the small angle between them drawn. A TimeGraph inset under the map: Plymouth''s pressure 23-01
@@ -1486,23 +1486,23 @@ scenes:
     timing_source: dryrun1
 - id: s16_meaning
   t:
-  - 1183.557
-  - 1235.157
+  - 1182.644
+  - 1234.244
   sentence_times:
-  - - 1183.557
-    - 1193.457
-  - - 1194.957
-    - 1198.907
-  - - 1199.257
-    - 1202.257
-  - - 1202.607
-    - 1204.257
-  - - 1204.607
-    - 1220.232
-  - - 1221.732
-    - 1226.482
-  - - 1226.832
-    - 1234.357
+  - - 1182.644
+    - 1192.544
+  - - 1194.044
+    - 1197.994
+  - - 1198.344
+    - 1201.344
+  - - 1201.694
+    - 1203.344
+  - - 1203.694
+    - 1219.319
+  - - 1220.819
+    - 1225.569
+  - - 1225.919
+    - 1233.444
   beat: 'meaning: −3.8 = −0.6 − 3.2 (Balance bars, Must 14 redesign); the centre check; pointers'
   visual: 'Picture zone (full height, x 80-1000): house Balance bars on a zero line, wide spacing: ''−3.8'' total (slate), ''−0.6 storm changing'' (orange), ''−3.2
     pattern sliding past'' (teal), each value label placed BESIDE its bar (to the right, x >= bar end + 24 px), never on or over a bar; the unit ''hPa per hour''
@@ -1548,29 +1548,29 @@ scenes:
     timing_source: dryrun1
 - id: s17_recap
   t:
-  - 1235.157
-  - 1305.757
+  - 1234.244
+  - 1304.844
   sentence_times:
-  - - 1235.157
-    - 1247.007
-  - - 1247.357
-    - 1254.007
-  - - 1254.357
-    - 1259.582
-  - - 1259.932
-    - 1263.982
-  - - 1264.332
-    - 1269.457
-  - - 1269.807
-    - 1277.882
-  - - 1278.232
-    - 1285.382
-  - - 1285.732
-    - 1291.507
-  - - 1291.857
-    - 1298.507
-  - - 1298.857
-    - 1304.957
+  - - 1234.244
+    - 1246.094
+  - - 1246.444
+    - 1253.094
+  - - 1253.444
+    - 1258.669
+  - - 1259.019
+    - 1263.069
+  - - 1263.419
+    - 1268.544
+  - - 1268.894
+    - 1276.969
+  - - 1277.319
+    - 1284.469
+  - - 1284.819
+    - 1290.594
+  - - 1290.944
+    - 1297.594
+  - - 1297.944
+    - 1304.044
   beat: recap ('To sum up'); last sentence the teaser to Part 6, Routes
   visual: 'One beat per sentence, mini pictures reused (no headings): the train with ''x = x′ + U t'', ''u = u′ + U''; the falling ball ''same 9.8''; the three-row
     grid ''−4.0 + 5.4 = 0 + 1.4''; Ciaran with U ''≈ 15 m/s''; the arrow subtraction triangle; the two rings ''≈ 14''; the Plymouth bars ''−3.8 = −0.6 − 3.2''; a
@@ -1604,15 +1604,15 @@ scenes:
     timing_source: splice3
 - id: s18_end
   t:
-  - 1305.757
-  - 1328.657
+  - 1304.844
+  - 1327.744
   sentence_times:
-  - - 1305.757
-    - 1311.957
-  - - 1312.307
-    - 1320.357
-  - - 1320.707
-    - 1328.357
+  - - 1304.844
+    - 1311.044
+  - - 1311.394
+    - 1319.444
+  - - 1319.794
+    - 1327.444
   beat: 'series end card (maths ending, HOUSE_STYLE §3, word for word; decision: maths end card)'
   visual: 'END CARD (house EndCard): four faint topic thumbnails along the top (the train with two rulers, the arrow-subtraction triangle, Ciaran''s ring
     with U, the Plymouth barometer); keyword lines ''a series of maths tutorials'' (68 px) and ''atmospheric science · meteorology · fluid dynamics'' (54 px); notebook icon ''coordinates

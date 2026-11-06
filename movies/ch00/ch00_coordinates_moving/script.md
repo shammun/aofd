@@ -81,7 +81,7 @@ below uses `###` headings so that `tools/tts.py` does not read it as a scene.
 **Measured**: 19 scenes, 193 sentences, 3151 words, 39 beats; narration 1318.575 s + 2.5-s hold = 1321.075 s (22:01.07); speech alone 1198.3 s = 157.8 wpm while speaking, **143.4 wpm overall** (limit 150). Clip lengths from three `tools/tts.py` runs on G: (`G:\Geophysical Fluid Dynamics\aofd-data\scratch\movies\ch00_coordinates_frames\dryrun1`, `splice2`, `splice3`; each scene's source is in the storyboard), times recomputed with the tts.py gap rules (the method reproduces the full run exactly); no warnings in any run. The caption cue count comes with the final TTS.
 
 ## s00_title
-In this video, we'll learn moving frames the easy way, and see how meteorology uses them to understand a moving storm's winds, and what a barometer sees as the storm passes.
+In this video, we'll learn moving frames, and see how meteorology uses them to understand a moving storm's winds, and what a barometer sees as the storm passes.
 
 > 31 words · 1 sentences · 0 beats · 0.300–13.250 s (12.9 s; speech 12.2 s) · 0:00.30–0:13.25 (measured, splice3).
 

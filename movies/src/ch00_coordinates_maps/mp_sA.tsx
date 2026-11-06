@@ -34,7 +34,7 @@ const SRC_IMG = "Image: NASA Blue Marble NG";
 const TB = { x: 1130, y: 170, w: 710, h: 470 };
 const S00: React.FC = () => {
   const f = useCurrentFrame(), k = K("s00_title");
-  const tEasy = AT(k, 0, "the easy way"), tPole = AT(k, 0, "above the pole");
+  const tEasy = AT(k, 0, "map projections"), tPole = AT(k, 0, "above the pole");
   const pz = 1 + 0.06 * pulse(f, tEasy, 14);
   const oA = fout(f, tPole, 12), oB = fin(f, tPole, 12);
   const s = prog(f, 40, 100) + prog(f, 110, 160) + prog(f, 175, 235);

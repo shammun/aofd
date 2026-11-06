@@ -22,6 +22,9 @@ import yaml
 FPS = 30
 
 REVOICE: dict[str, dict[int, tuple[str, str]]] = {
+    # House style 2026-11-06 (user): never say 'the easy way'; the title promise pulses on the concept words instead
+    "s00_title": {0: ("In this video, we'll learn local frames, and how they turn, the easy way, and see how meteorology uses them to measure the winds on a coast and over the round Earth.",
+                    "In this video, we'll learn local frames and how they turn, and see how meteorology uses them to measure the winds on a coast and over the round Earth.")},
     # D1: Part 2 says seventy nine (data 79.36 km)
     "s09_khulna": {3: ("In May twenty twenty, the centre of Cyclone Amphan passed about seventy eight kilometres west of Khulna, and the sea flooded the coast to its south.",
                        "In May twenty twenty, the centre of Cyclone Amphan passed about seventy nine kilometres west of Khulna, and the sea flooded the coast to its south.")},

@@ -42,7 +42,7 @@ const lab = (la: number, lo: number, t: string) => ({ la, lo, t });
 const TA = { x: 1180, y: 170, w: 600, h: 470 }, TBb = { x: 1130, y: 170, w: 470, h: 470 };
 const S00: React.FC = () => {
   const f = useCurrentFrame(), k = K("s00_title");
-  const tApp = AT(k, 0, "meteorology and aviation"), tEasy = AT(k, 0, "the easy way"), tFl = AT(k, 0, "shortest flights");
+  const tApp = AT(k, 0, "meteorology and aviation"), tEasy = AT(k, 0, "routes"), tFl = AT(k, 0, "shortest flights");
   const pz = 1 + 0.06 * pulse(f, tEasy, 14);
   const oA = fout(f, tApp, 12), oB = fin(f, tApp, 12);
   const camA = globePath([{ f: 0, lat: 46, lon: -40, dist: 3.4 }, { f: 330, lat: 50, lon: -58, dist: 3.4 }], f);
