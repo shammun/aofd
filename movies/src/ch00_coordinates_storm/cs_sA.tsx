@@ -191,8 +191,8 @@ const S02: React.FC = () => {
           </g>
           <line x1={O[0]} y1={O[1]} x2={B[0]} y2={B[1]} stroke={C.ink} strokeWidth={6} opacity={fin(f, tR)} />
           <path d={arcD(O, 90, 0, thB)} fill="none" stroke={C.local} strokeWidth={6} opacity={fin(f, tR)} />
-          <Lbl x={mix(O[0], B[0], 0.5) - 30} y={mix(O[1], B[1], 0.5) - 20} t="r" c={C.ink} s={T.key} a="end" o={fin(f, tR)} />
-          <Lbl x={polar(O, 125, thB / 2)[0] + 10} y={polar(O, 125, thB / 2)[1]} t="θ" c={C.local} s={T.key} o={fin(f, tR)} />
+          <Lbl x={mix(O[0], B[0], 0.5) - 30} y={mix(O[1], B[1], 0.5) - 20} t="$r$" c={C.ink} s={T.key} a="end" o={fin(f, tR)} />
+          <Lbl x={polar(O, 125, thB / 2)[0] + 10} y={polar(O, 125, thB / 2)[1]} t="$\theta$" c={C.local} s={T.key} o={fin(f, tR)} />
           <path d={arcD(O, 3 * u, 0, 60)} fill="none" stroke={C.gold} strokeWidth={10} opacity={win(f, tArc, tUnit)} />
           <circle cx={B[0]} cy={B[1]} r={13} fill={C.key} stroke={C.bg} strokeWidth={4} />
           <Arrow p={B} q={[B[0] + er[0] * 150, B[1] + er[1] * 150]} color={C.second} w={10} head={36} o={fin(f, tRh)} />
@@ -217,19 +217,23 @@ const S02: React.FC = () => {
         <circle cx={c0[0]} cy={c0[1]} r={8} fill={C.local} />
         {/* #5b r2 S3: "twenty five kilometres out" drawn: the radius (ink) and its length, on those words */}
         <line x1={c0[0]} y1={c0[1]} x2={c0[0] - rr * Math.SQRT1_2} y2={c0[1] + rr * Math.SQRT1_2} stroke={C.ink} strokeWidth={4} opacity={fin(f, AT(k, 7, "twenty five"))} />
-        <Lbl x={c0[0]} y={c0[1] - 62} t={`$r$ = ${RING.r_km} km`} c={C.ink} s={T.floor} a="middle" o={fin(f, AT(k, 7, "twenty five"))} />
         {[0, 18, 36, 54].map((i) => { const az = RING.az[i] * D2R, p0: Pt = [c0[0] + rr * Math.cos(az), c0[1] - rr * Math.sin(az)], s = 4.2;
           return <g key={i}>
             <DashArrow f={f} p={p0} q={[p0[0] - Math.sin(az) * RING.v * s, p0[1] - Math.cos(az) * RING.v * s]} w={8} head={28} />
             <DashArrow f={f} p={p0} q={[p0[0] + Math.cos(az) * RING.vr * s, p0[1] - Math.sin(az) * RING.vr * s]} c={C.neg} w={8} head={28} />
           </g>; })}
+        {/* #5b r3 S1: the radius length as a side callout on its words, BELOW the two wind callouts (its link then crosses neither of theirs); the right half was empty 136.0-142.5 s */}
+        <SideCallout f={f} lines={`$r$ = ${RING.r_km} km`} at={[MX, 530]} appear={AT(k, 7, "twenty five")} out={tHold}
+          target={[c0[0] - rr * Math.SQRT1_2 * 0.7 + 14, c0[1] + rr * Math.SQRT1_2 * 0.7 - 14]} c={C.ink} />
         <SideCallout f={f} lines={`≈ ${SAY.vt} m/s round`} at={[MX, 300]} appear={AT(k, 7, "thirty five")} out={tHold} target={[c0[0] + rr + 6, c0[1] - 140]} c={C.first} />
         <SideCallout f={f} lines={`≈ ${Math.abs(SAY.vr)} m/s in  (−)`} at={[MX, 420]} appear={AT(k, 7, "in at about")} out={tHold} target={[c0[0] + rr - 40, c0[1] + 30]} c={C.neg} />
       </Svg>
-      <TeX s={String.raw`\overline{u_\theta}\approx35\ \mathrm{m/s},\qquad \overline{u_r}\approx-13\ \mathrm{m/s}`} x={MX} y={580} size={50} o={oIan * fin(f, AT(k, 7, "thirteen"))} />
+      <TeX s={String.raw`\overline{u_\theta}\approx35\ \mathrm{m/s},\qquad \overline{u_r}\approx-13\ \mathrm{m/s}`} x={MX} y={640} size={50} o={oIan * fin(f, AT(k, 7, "thirteen"))} />
       <SourceBelow text={SRC.hrrr18} pic={IB} w={760} o={oIan} name="s02 src" />
       <Svg>
         <Keyword f={f} text="Part 1: polar coordinates" at={[MX, 120]} s={T.key} appear={0} out={tR + 60} />
+        {/* #5b r3 S1: the storm named on the first word of S7, so the right half is never empty while the panel builds */}
+        <Keyword f={f} text="Hurricane Ian · 28 Sep 2022" at={[MX, 120]} s={T.key} appear={tIan} out={tHold} />
         {/* #5b r2 S2 (1h): r, θ and the viewpoint written on S1 (they were only spoken) */}
         <Lbl x={MX} y={220} t="$r$: distance from the origin" c={C.local} s={T.floor} o={win(f, tR + 10, tArc - 10)} />
         <Lbl x={MX} y={285} t="$\theta$: angle from east," c={C.local} s={T.floor} o={win(f, AT(k, 1, "theta"), tArc - 10)} />
@@ -261,18 +265,18 @@ const S03: React.FC = () => {
         <Arrow p={UC} q={T0} color={C.second} w={10} head={40} o={fin(f, tRh) * (f > tSlide ? 0.45 : 1)} />
         <Arrow p={UC} q={T1} color={C.second} w={10} head={40} o={fin(f, tSlide)} />
         <circle cx={T0[0]} cy={T0[1]} r={11} fill={C.gold} opacity={fin(f, tTip)} />
-        <Lbl x={T0[0] + 26} y={T0[1] - 36} t="(cos θ, sin θ)" c={C.key} s={T.floor} o={win(f, tTip, tSlide)} />
+        <Lbl x={T0[0] + 26} y={T0[1] - 36} t="$(\cos\theta,\ \sin\theta)$" c={C.key} s={T.floor} o={win(f, tTip, tSlide)} />
         <Wedge c={UC} r={110} a0={TH} a1={TH + turnDeg} o={fin(f, tDel)} />
         {/* K6 round 1: the "0.1 rad ≈ 6°" label (anchor end) lay across the turned r̂ arrow at 59°: it now moves to 76°, left of both arrows */}
         {/* #5b r1 S3: "Δθ" sat on the turned r̂ arrow: it starts right of the old arrow (40°), clear of both */}
-        <Lbl x={polar(UC, 150, ez > 0.5 ? 76 : 40)[0]} y={polar(UC, 150, ez > 0.5 ? 76 : 40)[1]} t={ez > 0.5 ? "0.1 rad ≈ 6°" : "Δθ"} c={C.gold}
+        <Lbl x={polar(UC, 150, ez > 0.5 ? 76 : 40)[0]} y={polar(UC, 150, ez > 0.5 ? 76 : 40)[1]} t={ez > 0.5 ? "0.1 rad ≈ 6°" : String.raw`$\Delta\theta$`} c={C.gold}
           s={ez > 0.5 ? T.floor : T.key} a={ez > 0.5 ? "end" : "start"} o={fin(f, tDel)} />
         <path d={arcD(UC, UR, TH, a1)} fill="none" stroke={C.second} strokeWidth={12} opacity={fin(f, tSlide)} />
-        <Lbl x={mid[0] - 10} y={mid[1] - 62} t={f < tEx ? "length Δθ" : "≈ 0.1"} c={C.second} s={T.floor} o={win(f, tOne, tSo - 10)} />{/* #5b r1 S3: above the gold leader's head (it sat under it) */}
+        <Lbl x={mid[0] - 10} y={mid[1] - 62} t={f < tEx ? String.raw`length $\Delta\theta$` : "≈ 0.1"} c={C.second} s={T.floor} o={win(f, tOne, tSo - 10)} />{/* #5b r1 S3: above the gold leader's head (it sat under it) */}
         <RTick p={T0} u1={unitV(TH + 180)} u2={unitV(TH + 90)} o={fin(f, tRA)} c={C.ink} />
         <Arrow p={T0} q={[T0[0] + unitV(TH + 90)[0] * 170, T0[1] + unitV(TH + 90)[1] * 170]} color={C.second} w={8} head={32} o={fin(f, tTh)} />
         <Keyword f={f} text="how does $\hat{\mathbf r}$ change?" at={[MX, 120]} s={T.key} appear={0} out={tDel - 20} />
-        <Keyword f={f} text="Δθ: a small change in θ" at={[MX, 120]} s={T.key} appear={tDel + 2} out={tWhich - 20} />
+        <Keyword f={f} text="$\Delta\theta$: a small change in $\theta$" at={[MX, 120]} s={T.key} appear={tDel + 2} out={tWhich - 20} />
         <Keyword f={f} text="which way?" at={[MX, 120]} s={T.key} appear={tWhich} out={tSo - 20} />
         <Keyword f={f} text="along $\hat{\boldsymbol\theta}$" at={[MX, 120]} s={T.key} appear={tSo} targets={[[T0[0] + unitV(TH + 90)[0] * 170, T0[1] + unitV(TH + 90)[1] * 170]]} />
         <SkipChip f={f} k={k} to={keepTime("s08_product_rule")} />
@@ -313,13 +317,13 @@ const S04: React.FC = () => {
         <Arrow p={UC} q={T0} color={C.second} w={10} head={40} o={oDiag * (1 - 0.5 * fin(f, tMove))} />{/* #5b r1 S4: the old arrow dims, as in s03 / s05 */}
         <line x1={UC[0]} y1={UC[1]} x2={foot0[0]} y2={foot0[1]} stroke={C.second} strokeWidth={20} opacity={0.5 * win(f, tParts, tDiv)} />
         <line x1={foot0[0]} y1={foot0[1]} x2={T0[0]} y2={T0[1]} stroke={C.first} strokeWidth={20} opacity={0.5 * win(f, tParts, tDiv)} />
-        <Lbl x={(UC[0] + foot0[0]) / 2} y={UC[1] + 46} t="cos θ" c={C.second} s={T.floor} a="middle" o={win(f, tParts, tDiv)} />
-        <Lbl x={foot0[0] - 22} y={UC[1] - 50} t="sin θ" c={C.first} s={T.floor} a="end" o={win(f, tParts, tDiv)} />{/* K6 r0: was on the circle */}
+        <Lbl x={(UC[0] + foot0[0]) / 2} y={UC[1] + 46} t="$\cos\theta$" c={C.second} s={T.floor} a="middle" o={win(f, tParts, tDiv)} />
+        <Lbl x={foot0[0] - 22} y={UC[1] - 50} t="$\sin\theta$" c={C.first} s={T.floor} a="end" o={win(f, tParts, tDiv)} />{/* K6 r0: was on the circle */}
         <Arrow p={UC} q={T1} color={C.second} w={10} head={40} o={fin(f, tMove)} />{/* #5b r1 S4: the turned arrow at full strength */}
         <line x1={foot1[0]} y1={UC[1] - 6} x2={foot0[0]} y2={UC[1] - 6} stroke={C.neg} strokeWidth={18} opacity={win(f, tEast, tDiv + 60)} />
         <line x1={T1[0] + 14} y1={T1[1]} x2={T1[0] + 14} y2={T0[1]} stroke={C.first} strokeWidth={18} opacity={win(f, tNorth, tDiv + 60)} />
-        <Lbl x={T1[0] - 40} y={T1[1] - 42} t="≈ −sin θ Δθ" c={C.neg} s={T.floor} a="end" o={win(f, tEast, tDiv + 60)} />
-        <Lbl x={T1[0] + 40} y={T1[1] - 42} t="≈ cos θ Δθ" c={C.first} s={T.floor} o={win(f, tNorth, tDiv + 60)} />{/* K6 r0: was across the circle */}
+        <Lbl x={T1[0] - 40} y={T1[1] - 42} t="$\approx-\sin\theta\,\Delta\theta$" c={C.neg} s={T.floor} a="end" o={win(f, tEast, tDiv + 60)} />
+        <Lbl x={T1[0] + 40} y={T1[1] - 42} t="$\approx\cos\theta\,\Delta\theta$" c={C.first} s={T.floor} o={win(f, tNorth, tDiv + 60)} />{/* K6 r0: was across the circle */}
         <Arrow p={T0} q={[T0[0] - 110, T0[1]]} color={C.neg} w={7} head={28} o={win(f, tMinus, tCheck)} />
         <Lbl x={UC[0]} y={UC[1] + UR + 70} t="turn drawn large (20°)" c={C.muted} s={T.floor} a="middle" o={win(f, tEast, tDiv + 60)} />{/* fix 0 B16 */}
         {/* #5b r1 S5: where cos θ = 3/5 and sin θ = 4/5 come from (Part 1's balloon) */}
@@ -333,11 +337,11 @@ const S04: React.FC = () => {
           <Axes A={G1} xt={[90, 270]} yt={[-1, 0, 1]} xf={(v) => `${v}°`} />
           <Curve A={G1} xs={xs} ys={xs.map((d) => Math.cos(d * D2R))} c={C.second} />
           <line x1={cosT[0][0]} y1={cosT[0][1]} x2={cosT[1][0]} y2={cosT[1][1]} stroke={C.gold} strokeWidth={5} />
-          <Lbl x={G1.x + G1.w / 2} y={G1.y - 64} t="cos θ: slope −0.8" c={C.second} s={T.floor} a="middle" />
+          <Lbl x={G1.x + G1.w / 2} y={G1.y - 64} t="$\cos\theta$: slope −0.8" c={C.second} s={T.floor} a="middle" />
           <Axes A={G2} xt={[90, 270]} yt={[-1, 0, 1]} xf={(v) => `${v}°`} />
           <Curve A={G2} xs={xs} ys={xs.map((d) => Math.sin(d * D2R))} c={C.first} dash="14 10" />
           <line x1={sinT[0][0]} y1={sinT[0][1]} x2={sinT[1][0]} y2={sinT[1][1]} stroke={C.gold} strokeWidth={5} />
-          <Lbl x={G2.x + G2.w / 2} y={G2.y - 64} t="sin θ: slope 0.6" c={C.first} s={T.floor} a="middle" />
+          <Lbl x={G2.x + G2.w / 2} y={G2.y - 64} t="$\sin\theta$: slope 0.6" c={C.first} s={T.floor} a="middle" />
         </g>
       </Svg>
       {/* fix 0 B7: the move written in components (S3), the two Δ rows kept until S7, the division on S6 */}
@@ -350,7 +354,7 @@ const S04: React.FC = () => {
         { rhs: String.raw`\dfrac{\Delta(\cos\theta)}{\Delta\theta}\approx-\sin\theta`, at: tDiv },
         { rhs: String.raw`\dfrac{\Delta(\sin\theta)}{\Delta\theta}\approx\cos\theta`, at: tDiv + 20 },
       ]} />
-      <Svg><Lbl x={MX} y={650} t="Δθ → 0: ≈ becomes =" c={C.muted} s={T.floor} o={win(f, tDiv + 30, tCos - 10)} /></Svg>
+      <Svg><Lbl x={MX} y={650} t="$\Delta\theta\to0$: ≈ becomes =" c={C.muted} s={T.floor} o={win(f, tDiv + 30, tCos - 10)} /></Svg>
       <TeX s={eq1} x={MX} y={260} size={T.eq} o={win(f, tCos, tCheck - 20)} />
       <TeX s={eq2} x={MX} y={480} size={T.eq} o={win(f, tSin, tCheck - 20)} />{/* K6 r0: was 8 px into eq1 */}
       {/* fix 0 B6: the check's inputs and each step on its own sentence (3-4-5 balloon, the turned angle, the looked-up values) */}
@@ -450,7 +454,7 @@ const S06: React.FC = () => {
         <Wedge c={UC} r={100} a0={TH} a1={TH + turn} o={win(f, t3b, t4)} />
         <Wedge c={UC} r={100} a0={TH + 90} a1={TH + 90 + turn} o={win(f, t3b, t4)} />
         <path d={arcD(UC, UR, TH + 90, TH + 90 + turn)} fill="none" stroke={C.second} strokeWidth={12} opacity={win(f, t3b, t4b)} />
-        <Lbl x={tip(TH + 100, UR + 100)[0] + 24} y={tip(TH + 100, UR + 100)[1]} t="Δθ" c={C.second} s={T.key} a="end" o={win(f, t3b, t4)} />
+        <Lbl x={tip(TH + 100, UR + 100)[0] + 24} y={tip(TH + 100, UR + 100)[1]} t="$\Delta\theta$" c={C.second} s={T.key} a="end" o={win(f, t3b, t4)} />
         <Arrow p={[mix(Qa[0], UC[0], toM), mix(Qa[1], UC[1], toM)]} q={[mix(slideEnd[0], UC[0] + unitV(TH + 180)[0] * 150, toM), mix(slideEnd[1], UC[1] + unitV(TH + 180)[1] * 150, toM)]}
           color={C.neg} w={8} head={30} o={fin(f, t4b) * (f > tExact + 40 ? 0.6 : 1)} />
         {/* K6 round 1: was across the circle and the −r̂ arrow; now right of −r̂, inside the circle */}
@@ -625,7 +629,7 @@ const S08: React.FC = () => {
               {[0, 1, 2].map((j) => { const h = Math.max(4, (hv[i][j] / (j === 2 ? 0.1 : 1)) * 120);
                 return <g key={j}><rect x={x + j * 110} y={y0 - h} width={44} height={h} fill={[C.local, C.second, C.neg][j]} opacity={0.85} />
                   <Lbl x={x + j * 110 + 22} y={j === 2 ? y0 - h - 32 : y0 + 38} t={n3(hv[i][j])} c={[C.local, C.second, C.neg][j]} s={T.floor} a="middle" /></g>; })}
-              <Lbl x={x + 132} y={y0 + 104} t={`Δt = ${["1", "0.5", "0.25"][i]} s`} c={C.muted} s={T.floor} a="middle" />
+              <Lbl x={x + 132} y={y0 + 104} t={String.raw`$\Delta t$ = ${["1", "0.5", "0.25"][i]} s`} c={C.muted} s={T.floor} a="middle" />
             </g>; })}
           <Lbl x={100} y={392} t="third bar drawn 10× taller" c={C.muted} s={T.floor} />
         </g>

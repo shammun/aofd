@@ -50,7 +50,7 @@ Transitions are spoken bridges, never cards:
 ### The opening title (s00, about 10 s; `movies/src/house/kit/title.tsx`)
 **Left column, x 100–1075:**
 - **Title:** `RiseText` at **150 px, weight 800**, filled with `TitleGradient` (teal `C.first` to gold `C.gold`). Letters rise 24 px and fade in over 8 frames with a 2-frame stagger; two lines ("The dot" / "product").
-- **Promise:** "made easy" at **96 px**, warm white `C.key`. It pulses (×1.06) when the voice says "the easy way".
+- **Promise:** "made easy" at **96 px**, warm white `C.key`. It pulses (×1.06) when the voice says the concept's name (never voice "the easy way").
 - **Subtitle:** "and how meteorology uses it" at **68 px**, warm white, with the application word in teal.
   - Change the application word per movie: meteorology, oceanography, the climate…
 
@@ -60,7 +60,18 @@ Transitions are spoken bridges, never cards:
 - Keep the subtitle at least 50 px clear of the animation.
 
 **One spoken sentence** in this pattern:
-> "In this video, we'll learn the <concept> the easy way, and see how <field> uses it to <the application in plain words>."
+> "In this video, we'll learn the <concept>, and see how <field> uses it to <the application in plain words>."
+
+**Never say "the easy way"** (user, 2026-11-06: it sounds unnatural). The on-screen promise pulses on the concept's name instead.
+
+**Spoken wording rules (user, 2026-11-06, all movies):**
+- No numbered spoken steps ("Step one … Step two …"). Let a step-by-step explanation flow: "First, …", "Next, …", "Now …", "So …". On-screen step labels are fine.
+- Never voice private reassurances or replies to the user's own questions ("assume nothing", "we never mix the two centres"). Say only what a first-time viewer needs.
+- Every number used in a calculation is named on screen and in the voice before it is used (e.g. "Δθ = 0.01, a small turn in radians"), with the formula it plugs into.
+- Every case study shown in a picture is introduced first: a globe, where it is, the track, the dates, then the zoom. Never show an event the voice has not introduced.
+- Every contour line, shape or colour on a chart is said and labelled: what quantity, what value, what unit.
+- Satellite pictures: show natural (true) colour first; when false colour is used, say why and what each colour means.
+- **No maker credit on source lines** (user, 2026-11-06): never write "drawn/plotted/processed by the author" or similar; the source line names only the data, its date and plain-words notes.
 
 Then the hook scene follows with a 10-frame cross-fade. The poster is the title frame (frame ≈ 200).
 

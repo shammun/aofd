@@ -311,7 +311,7 @@ const S25: React.FC = () => {
   const mini = { x: 470, y: 170, w: 420, h: 260 };
   const ring = (c: Pt, r: number) => <circle cx={c[0]} cy={c[1]} r={r} fill="none" stroke={C.local} strokeWidth={4} />;
   const xs = Array.from({ length: 73 }, (_, i) => i * 5);
-  const G: Ax = { x: 560, y: 470, w: 330, h: 130, xr: [0, 360], yr: [-50, 50] };
+  const G: Ax = { x: 600, y: 470, w: 290, h: 130, xr: [0, 360], yr: [-50, 50] };
   return (
     <Scene>
       <Svg>
@@ -677,7 +677,7 @@ const S30: React.FC = () => {
           <g key={t} opacity={fin(f, tKey + 12 * i)}><rect x={MX + 40 + (i % 2) * 360} y={640 + Math.floor(i / 2) * 70} width={44} height={44} fill={c} stroke={C.muted} strokeWidth={2} />
             <Lbl x={MX + 100 + (i % 2) * 360} y={662 + Math.floor(i / 2) * 70} t={t} c={C.key} s={T.floor} /></g>)}
       </Svg>
-      <SourceBelow text={SRC.nargis} pic={PB} w={1000} name="s30 src" />
+      <SourceBelow text={SRC.nargis} pic={{ x: PB.x, y: mix(PB.y, hy, sp), w: PB.w, h: mix(PB.h, hh, sp) }} w={1000} name="s30 src" />{/* #5b r3 C4: under the half panels while split */}
     </Scene>
   );
 };
@@ -736,7 +736,7 @@ const S31: React.FC = () => {
         <Keyword f={f} text="product rule: both change" at={[MX, 120]} s={T.key} appear={kIn(3)} out={kOut(3)} />
         <Keyword f={f} text="$v/r\ \cdot\ v\,\hat{\boldsymbol\theta}\ \cdot\ -(v^2/r)\,\hat{\mathbf r}$" at={[MX, 120]} s={T.key} appear={kIn(4)} out={kOut(4)} />
         <Keyword f={f} text="0.048 $\mathrm{m/s^2}$ ≈ g/200" at={[MX, 120]} s={T.key} appear={kIn(5)} out={kOut(5)} />
-        <Keyword f={f} text="(r, θ, z): in, up and out" at={[MX, 120]} s={T.key} appear={kIn(6)} out={kOut(6)} />
+        <Keyword f={f} text="$(r,\ \theta,\ z)$: in, up and out" at={[MX, 120]} s={T.key} appear={kIn(6)} out={kOut(6)} />
         <Keyword f={f} text="onshore wind → storm surge" at={[MX, 120]} s={T.key} appear={kIn(7)} out={kOut(7)} />
         <Keyword f={f} text="gauges · floods from space" at={[MX, 120]} s={T.key} appear={kIn(8)} out={kOut(8)} />
         <Keyword f={f} text="Part 3: the Earth" at={[MX, 120]} s={T.key} appear={kIn(9)} />
