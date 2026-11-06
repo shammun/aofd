@@ -15,7 +15,7 @@ import { C, FONT, T } from "../house/kit/type";
 import { Arrow, Lbl as HLbl, Pt, Svg, clamp, textW } from "../house/kit/draw";
 import { Keyword as HKeyword } from "../house/kit/notes";
 import { CurvedLink } from "../house/kit/extras";
-import { CalcRow, CalcStack as HCalcStack, Layered as HLayered, Part, Layer, TeX as HTeX, plainOf } from "../house/kit/tex";
+import { CalcRow, CalcStack as HCalcStack, Layered as HLayered, Part, Layer, TeX as HTeX, plainOf, texHtml, KX } from "../house/kit/tex";
 import { GlobeCam, GProj, coastPath, globeCam, globeProj, useTex, ll, llPath } from "./kit_cs/globe";
 import { View3D } from "./kit_cs/three3d";
 import { V3 } from "./kit_cs/cam";
@@ -153,17 +153,54 @@ export const CalcStack: React.FC<React.ComponentProps<typeof HCalcStack>> = (p) 
   stackBottomGuard(rows, p.y, p.size ?? 68, p.maxLines ?? 3);
   return <HCalcStack {...p} rows={rows} />;
 };
-/** the house SVG label with the right-edge guard */
-export const Lbl: React.FC<React.ComponentProps<typeof HLbl>> = (p) => {
-  const s = p.s ?? 54, w = textW(p.t, s), a = p.a ?? "start";
-  guard(p.t, a === "start" ? p.x : a === "end" ? p.x - w : p.x - w / 2, w * 0.97);
-  return <HLbl {...p} />;
+// ---------------------------------------------------------------- maths inside labels (fix loop 1, review 1 S13 / calc audit S6)
+// A label's maths goes in $…$ and is drawn by KaTeX (the sans font drew φ, λ, Ω, ×, cos as plain text); the words stay in the house
+// sans font. Ported from Part 2 (src/ch00_coordinates_storm/cs_lib.tsx): an HTML label in a foreignObject with the same font, size,
+// weight, colour, anchor and dark halo as the SVG label, so it can stay inside any <Svg> group. tools/movie_symbol_lint.py --strict
+// (rule C5) flags maths left outside the dollars.
+const segs = (t: string) => t.split("$");
+/** width of a label with $…$ maths: sans words + KaTeX segments */
+export const mixW = (t: string, s: number) => segs(t).reduce((w, q, i) => w + (i % 2 ? texW(q, s) * 0.95 : textW(q, s)), 0);
+const MathLbl: React.FC<{ x: number; y: number; t: string; c?: string; s?: number; a?: "start" | "middle" | "end"; o?: number; b?: boolean }> = (
+  { x, y, t, c = C.ink, s = 54, a = "start", o = 1, b = true }) => {
+  if (s < 44) throw new Error(`label "${t}" below 44 px`);
+  if (o <= 0) return null;
+  const tx = a === "start" ? 0 : a === "middle" ? -50 : -100, hw = Math.max(2, 0.07 * s);
+  const halo = [[1, 0], [-1, 0], [0, 1], [0, -1], [0.7, 0.7], [-0.7, 0.7], [0.7, -0.7], [-0.7, -0.7]].map(([u, v]) => `${u * hw}px ${v * hw}px 0 ${C.bg}`).join(",");
+  return (
+    <foreignObject x={0} y={0} width={1920} height={1080} opacity={o} style={{ overflow: "visible", pointerEvents: "none" }}>
+      <div style={{ position: "relative", width: 1920, height: 1080 }}>
+        <div style={{ position: "absolute", left: x, top: y, transform: `translate(${tx}%, -50%)`, whiteSpace: "nowrap", fontFamily: FONT, fontSize: s,
+          fontWeight: b ? 650 : 500, color: c, lineHeight: 1.15, textShadow: halo }}>
+          {segs(t).map((q, i) => (i % 2 ? <span key={i} style={{ fontSize: s / KX }} dangerouslySetInnerHTML={{ __html: texHtml(String.raw`\textstyle ` + q) }} />
+            : <span key={i} style={{ whiteSpace: "pre" }}>{q}</span>))}
+        </div>
+      </div>
+    </foreignObject>
+  );
 };
-/** the house Keyword with the right-edge guard */
+/** the house SVG label with the right-edge guard; $…$ parts are KaTeX */
+export const Lbl: React.FC<React.ComponentProps<typeof HLbl>> = (p) => {
+  const s = p.s ?? 54, m = p.t.includes("$"), w = m ? mixW(p.t, s) : textW(p.t, s), a = p.a ?? "start";
+  guard(p.t, a === "start" ? p.x : a === "end" ? p.x - w : p.x - w / 2, w * 0.97);
+  return m ? <MathLbl {...p} /> : <HLbl {...p} />;
+};
+/** the house Keyword with the right-edge guard; with $…$ maths: the same rise / fade, gold target links as CurvedLinks */
 export const Keyword: React.FC<React.ComponentProps<typeof HKeyword>> = (p) => {
-  const s = p.s ?? 54, w = textW(p.text, s), a = p.a ?? "start";
-  guard(p.text, a === "start" ? p.at[0] : a === "end" ? p.at[0] - w : p.at[0] - w / 2, w * 0.97);
-  return <HKeyword {...p} />;
+  const s = p.s ?? 54, m = p.text.includes("$"), w = m ? mixW(p.text, s) : textW(p.text, s), a = p.a ?? "start";
+  const x0 = a === "start" ? p.at[0] : a === "end" ? p.at[0] - w : p.at[0] - w / 2;
+  guard(p.text, x0, w * 0.97);
+  if (!m) return <HKeyword {...p} />;
+  const { f, text, at, c = C.key, appear, out, o = 1, targets = [] } = p;
+  const oT = ramp(f, appear, appear + 8) * (out !== undefined ? 1 - ramp(f, out, out + 10) : 1) * o;
+  if (oT <= 0) return null;
+  const rise = 12 * (1 - ramp(f, appear, appear + 8));
+  return (
+    <g opacity={oT}>
+      {targets.map((tg, kk) => <CurvedLink key={kk} f={f} from={[tg[0] < x0 ? x0 - 12 : x0 + w + 12, at[1]]} to={tg} start={appear + 8 + 4 * kk} bend={40} />)}
+      <MathLbl x={at[0]} y={at[1] + rise} t={text} c={c} s={s} a={a} />
+    </g>
+  );
 };
 /** split a TeX constant at a separator that must exist (the pieces stay derived from the verbatim storyboard string) */
 export const cutAt = (s: string, at: string): string[] => { if (!s.includes(at)) throw new Error(`cutAt: ${at} not in ${s}`); return s.split(at); };
@@ -341,7 +378,7 @@ export const Chevron: React.FC<{ at: Pt; dir: Pt; c: string; o?: number; s?: num
 export const SideCallout: React.FC<{ f: number; lines: string[] | string; at: Pt; appear: number; out?: number; target: Pt | null; s?: number; c?: string;
   bend?: number; ctl?: Pt }> = ({ f, lines, at, appear, out, target, s = 54, c = C.key, bend = 30, ctl }) => {
   const LL = Array.isArray(lines) ? lines : [lines];
-  LL.forEach((t) => guard(t, at[0], textW(t, s) * 0.97));
+  LL.forEach((t) => guard(t, at[0], mixW(t, s) * 0.97));
   const op = ramp(f, appear, appear + 8) * (out !== undefined ? 1 - ramp(f, out, out + 10) : 1);
   if (op <= 0) return null;
   return (
@@ -397,7 +434,7 @@ export const KeepLine: React.FC<{ f: number; k: number; lines: string[]; last?: 
   const a = 0, b = SE(k, last);
   const o = ramp(f, a, a + 8) * (1 - ramp(f, b, b + 10));
   if (o <= 0) return null;
-  const wl = textW(lines[lines.length - 1], T.key);
+  const wl = mixW(lines[lines.length - 1], T.key);
   const yl = y + (lines.length - 1) * 68 + 36;
   return (
     <Svg>
@@ -485,7 +522,7 @@ export const KeepPic: React.FC<{ kind: "swap" | "slice" | "steps" | "band"; c: P
         <Lbl x={c[0] - R - 16} y={front(0, 0)[1] - 0.17 * R} t="north" c={C.gold} s={T.floor} a="end" />
         <Lbl x={front(0, 14)[0] + 16} y={front(0, 14)[1] + 30} t="east" c={C.second} s={T.floor} />
         <Lbl x={c[0] + R + 16} y={front(BREST[0], 14)[1] + 6} t="east" c={C.second} s={T.floor} />
-        <Lbl x={c[0] + R + 16} y={front(BREST[0], 14)[1] + 58} t="× cos φ" c={C.second} s={T.floor} />
+        <Lbl x={c[0] + R + 16} y={front(BREST[0], 14)[1] + 58} t="$\times\cos\varphi$" c={C.second} s={T.floor} />
       </> : <>
         <rect x={c[0] - 0.12 * R} y={par(0).y + par(0).ry - 0.1 * R} width={0.24 * R} height={0.1 * R} fill={C.gold} stroke={C.gold} strokeWidth={3} />
         <rect x={c[0] - 0.12 * R * Math.cos(70 * D2R)} y={par(70).y + par(70).ry - 0.1 * R * 0.6} width={0.24 * R * Math.cos(70 * D2R)} height={0.1 * R * 0.6} fill={C.gold} stroke={C.gold} strokeWidth={3} />
@@ -515,14 +552,16 @@ export const Magnify: React.FC<{ src: Pt; srcR?: number; at: Pt; r: number; labe
 
 // ---------------------------------------------------------------- colour bar (beside the picture, in the text column)
 export const ColourBar: React.FC<{ x: number; y: number; w: number; lut: string[]; ticks: { v: number; t: string }[]; lo: number; hi: number; unit?: string; o?: number;
-  title?: string }> = ({ x, y, w, lut, ticks, lo, hi, unit, o = 1, title }) =>
+  title?: string; lowArrow?: boolean; tickS?: number }> = ({ x, y, w, lut, ticks, lo, hi, unit, o = 1, title, lowArrow = false, tickS = 48 }) =>
   o <= 0 ? null : (
     <g opacity={o} data-k6-cbar="1">
       {title ? <Lbl x={x} y={y - 34} t={title} c={C.muted} s={44} b={false} /> : null}
       {Array.from({ length: 60 }, (_, i) => <rect key={i} x={x + (i * w) / 60} y={y} width={w / 60 + 0.8} height={24} fill={lutCss(lut, (i + 0.5) / 60)} />)}
       <rect x={x} y={y} width={w} height={24} fill="none" stroke={C.muted} strokeWidth={2} />
-      {ticks.map((tk) => <Lbl key={tk.t} x={x + ((tk.v - lo) / (hi - lo)) * w} y={y + 56} t={tk.t} c={C.muted} s={48} a="middle" b={false} />)}
-      {unit ? <Lbl x={x + w + 18} y={y + 12} t={unit} c={C.muted} s={48} b={false} /> : null}
+      {/* fix loop 1 (review 1 S7): an end arrow in the lowest colour when values below `lo` are clipped */}
+      {lowArrow ? <path d={`M${x - 2} ${y - 2}L${x - 26} ${y + 12}L${x - 2} ${y + 26}Z`} fill={lutCss(lut, 0)} stroke={C.muted} strokeWidth={2} /> : null}
+      {ticks.map((tk) => <Lbl key={tk.t} x={x + ((tk.v - lo) / (hi - lo)) * w} y={y + 30 + tickS / 2} t={tk.t} c={C.muted} s={tickS} a="middle" b={false} />)}
+      {unit ? <Lbl x={x + w + 18} y={y + 12} t={unit} c={C.muted} s={tickS} b={false} /> : null}
     </g>
   );
 

@@ -310,6 +310,36 @@ def test_movie_symbol_lint_plain_primes():
     assert rules("const A = () => <g><TeX s=\"x'\" x={1} y={2} /><RulerTeX a={30} tex={[\"x'\", \"y'\"]} /></g>; // x′ here") == []
 
 
+def test_movie_symbol_lint_c5_maths_text():
+    """C5 (#5c fix loop 1, 2026-11-06): with maths_text (the CLI --strict) a Greek letter, ×/÷/√, sin/cos/tan, a lone x/y/z/r or a
+    one-letter label, or a fraction slash in the sans part of a label is flagged; $…$ maths, unit slashes and English are not;
+    the Python API default (maths_text=False) keeps the old results for the other movies."""
+    import movie_symbol_lint as M
+
+    def rules(src: str, mt: bool = True) -> list[str]:
+        return sorted({f.rule for f in M.lint_source(src, "t.tsx", strict=True, maths_text=mt) if not f.ok})
+
+    assert rules('const A = () => <Keyword f={f} text="latitude φ" at={[1, 2]} appear={0} />;') == ["C5-greek"]
+    assert rules('const A = () => <Lbl t="every other box: × cos φ" />;') == ["C5-func", "C5-greek", "C5-op"]
+    assert rules('const A = () => <Keyword f={f} text="distance r" at={[1, 2]} appear={0} />;') == ["C5-var"]
+    assert rules('const A = () => <Lbl t="a" />;') == ["C5-var"]
+    assert rules('const A = () => <KeepLine f={f} k={k} lines={["wider: × 1/cos φ"]} />;') == ["C5-frac", "C5-func", "C5-greek", "C5-op"]
+    assert rules('const A = () => <Lbl t="width depends on $\\cos\\varphi$, 900 km/h, 464 m/s, Earth\'s axis" />;') == []
+    assert rules('const A = () => <Lbl t="latitude φ" />;', mt=False) == []
+    assert M.main(["--strict", "--no-c5", str(ROOT / "movies" / "src" / "ch00_coordinates_frames")]) in (0, 1)
+
+
+def test_movie_symbol_lint_sphere_c5_clean():
+    """#5c fix loop 1: ch00_coordinates_sphere has no sans-font maths (C5 clean)."""
+    import movie_symbol_lint as M
+
+    d = ROOT / "movies" / "src" / "ch00_coordinates_sphere"
+    if not d.exists():
+        pytest.skip(f"{d} missing")
+    bad = [f for f in M.lint_paths([d], strict=True, maths_text=True) if not f.ok]
+    assert not bad, "\n".join(f"{f.file}:{f.line}: {f.rule}: {f.detail}" for f in bad)
+
+
 @pytest.mark.parametrize("part", ["flat", "sphere", "frames", "moving", "routes", "maps"])
 def test_movie_symbol_lint_coordinates_parts_clean(part):
     """Coordinates Part 1 and Parts 3-7 carry the Part 1 lessons C1/C2/C4: their sources lint clean, --strict included (every \\dfrac)."""

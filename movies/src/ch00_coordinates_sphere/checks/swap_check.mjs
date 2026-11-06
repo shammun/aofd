@@ -170,7 +170,9 @@ for (const id of IDS) {
         E.txt = tex.slice(0, 40); E.ok++; vis.push({ E, box: [x - ax * w, y - ay * h, x - ax * w + w, y - ay * h + h] }); continue; }
       let txt = run(E.t, scope), nl = 1; if (E.kind === "Callout" || E.kind === "SideCallout") { const L = run(E.lines, scope); if (Array.isArray(L)) { txt = L.reduce((p, q) => (q.length > p.length ? q : p), ""); nl = L.length; } else txt = L; }
       txt = String(txt ?? "");
-      const w = textW(txt, sz), x0 = an === "start" ? x : an === "end" ? x - w : x - w / 2;
+      // fix loop 1: a label with $…$ maths is sans words + KaTeX segments (cs_lib mixW)
+      const w = txt.includes("$") ? txt.split("$").reduce((s, q, i) => s + (i % 2 ? texW(q, sz) * 0.95 : textW(q, sz)), 0) : textW(txt, sz);
+      const x0 = an === "start" ? x : an === "end" ? x - w : x - w / 2;
       E.txt = txt; E.ok++;
       vis.push({ E, box: [x0, y - 0.45 * sz, x0 + w, y + 0.45 * sz + (nl - 1) * 1.25 * sz] });
     }

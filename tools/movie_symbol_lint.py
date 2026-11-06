@@ -24,6 +24,15 @@ Coordinates Part 1. The checks are:
   `/\\mathbf/` matches "mathbf" without the backslash, so the test silently never fires (the CalcStack bug in Part 2).
   Strings passed to `RegExp(...)` are checked the same way.
 
+* **C5 maths in the sans font (`--strict`, fix loop 1 of ch00_coordinates_sphere, 2026-11-06).** The C1 rules only catch a
+  symbol with a modifier, so "latitude φ", "× cos φ", "distance r" or "Σ" in a `<Keyword text=…>` / `<Lbl t=…>` / `KeepLine
+  lines=[…]` / `SideCallout lines=[…]` string passed silently while the frames showed sans-font maths. C5 flags, in the plain
+  part of a render string (outside `$…$`): any Greek letter (C5-greek); the operators `×`, `÷`, `√` (C5-op); the function
+  names sin, cos, tan (C5-func); a lone maths letter x, y, z or r, or a label that is just one Latin letter (C5-var); a fraction
+  slash between digits or before a function ("1/2", "1/cos") (C5-frac). Unit slashes (m/s, km/h, rad/s) are not fractions. Write
+  the maths as `$…$` (the Lbl/Keyword maths segments) or as a TeX string. Off in the Python API unless `maths_text=True`, on with
+  the CLI `--strict` (`--no-c5` gives the old `--strict`); Parts other than the sphere are reported for information.
+
 The parser is a small JS/TSX scanner. It strips comments (`//`, `/* */`, `{/* */}`), tracks strings, template literals,
 regex literals and JSX (tags, attributes, text children), and gives every string its context:
 the JSX attribute, the object key, the enclosing call, and whether it is a `String.raw` tag.
@@ -99,6 +108,12 @@ RX_PRIME = re.compile(rf"(?:[^\W\d_]|[{COMB}]|[{SUPSUB}])[′″‴]|(?<![{LETTE
 RX_UNICODE_SS = re.compile(rf"[{LETTER}0-9′)\]][{SUPSUB}]+")
 RX_GREEK_MOD = re.compile(rf"[{GREEK}](?:[{COMB}]|[{SUPSUB}]|[′']|\s?[\^_])"
                           rf"|[\^_]\s?[{{]?[{GREEK}]")   # a Greek letter with a modifier, or as a sub/superscript (u_θ)
+# C5 (maths in the sans font)
+RX_C5_GREEK = re.compile(f"[{GREEK}]")
+RX_C5_OP = re.compile(r"[×÷√]")
+RX_C5_FUNC = re.compile(r"(?<![A-Za-z])(?:sin|cos|tan)(?![A-Za-z])")
+RX_C5_VAR = re.compile(r"(?<![\w'’$.\-])[xyzr](?![\w'’])|^\s*[A-Za-z]\s*$")
+RX_C5_FRAC = re.compile(r"(?<=\d)\s?/\s?(?=\d)|/\s?(?:sin|cos|tan)(?![A-Za-z])")
 LINT_OK = re.compile(r"lint-ok:\s*(.{8,})")
 
 VALID_RX_ESC = set("bBdDsSwWnrtvfcxuPpk0")
@@ -524,6 +539,17 @@ def plain_text_findings(text: str) -> list[tuple[str, str]]:
     return hits
 
 
+def maths_text_findings(text: str) -> list[tuple[str, str]]:
+    """C5: maths drawn in the sans font (plain part of a render string)."""
+    hits: list[tuple[str, str]] = []
+    for rule, rx, what in (("C5-greek", RX_C5_GREEK, "Greek letter"), ("C5-op", RX_C5_OP, "maths operator"),
+                           ("C5-func", RX_C5_FUNC, "function name"), ("C5-var", RX_C5_VAR, "maths letter"),
+                           ("C5-frac", RX_C5_FRAC, "fraction slash")):
+        if m := rx.search(text):
+            hits.append((rule, f"'{m.group(0).strip() or text.strip()}': {what} in the sans font (write it as $…$ / TeX)"))
+    return hits
+
+
 def _regex_tex_findings(pattern: str) -> list[str]:
     bad = []
     for m in re.finditer(r"(\\+)([A-Za-z]{2,})", pattern):
@@ -625,7 +651,7 @@ def frac_findings(body: str, display: bool = True, strict: bool = False) -> list
     return out
 
 
-def lint_source(src: str, fname: str = "<src>", strict: bool = False) -> list[Finding]:
+def lint_source(src: str, fname: str = "<src>", strict: bool = False, maths_text: bool = False) -> list[Finding]:
     sc = scan(src)
     lines = src.splitlines()
     # const NAME = "..." used later as a text prop value (text={NAME} / t={NAME} / lines={[NAME]})
@@ -666,6 +692,9 @@ def lint_source(src: str, fname: str = "<src>", strict: bool = False) -> list[Fi
             plain, maths = split_dollar(txt)
             for rule, det in plain_text_findings(plain):
                 found.append(Finding(fname, s.line, rule, val[:90], det))
+            if maths_text:
+                for rule, det in maths_text_findings(plain):
+                    found.append(Finding(fname, s.line, rule, val[:90], det))
             for seg in maths:   # $…$ maths inside a label: KaTeX in \textstyle (Part 2's Lbl/Keyword), so every \frac is inline
                 for name, why in frac_findings(seg, display=False, strict=strict):
                     found.append(Finding(fname, s.line, "C2-frac", val[:90], f"\\{name} {why} ($…$ label maths is \\textstyle): use \\dfrac"))
@@ -674,7 +703,7 @@ def lint_source(src: str, fname: str = "<src>", strict: bool = False) -> list[Fi
     return found
 
 
-def lint_paths(paths: list[Path], strict: bool = False) -> list[Finding]:
+def lint_paths(paths: list[Path], strict: bool = False, maths_text: bool = False) -> list[Finding]:
     files: list[Path] = []
     for p in paths:
         if p.is_dir():
@@ -684,7 +713,7 @@ def lint_paths(paths: list[Path], strict: bool = False) -> list[Finding]:
             files.append(p)
     out: list[Finding] = []
     for f in files:
-        out += lint_source(f.read_text(encoding="utf-8"), str(f), strict=strict)
+        out += lint_source(f.read_text(encoding="utf-8"), str(f), strict=strict, maths_text=maths_text)
     return out
 
 
@@ -694,12 +723,13 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--show-ok", action="store_true", help="also list findings exempted by a `lint-ok:` comment")
     ap.add_argument("--json", action="store_true", help="print findings as JSON")
     ap.add_argument("--strict", action="store_true", help="C2: flag every frac, even the display-level ones the house draws full size")
+    ap.add_argument("--no-c5", action="store_true", help="with --strict: skip C5 (maths in the sans font), i.e. the --strict of before 2026-11-06")
     a = ap.parse_args(argv)
     missing = [p for p in a.paths if not p.exists()]
     if missing:
         print(f"no such path: {', '.join(map(str, missing))}", file=sys.stderr)
         return 2
-    fs = lint_paths(a.paths, strict=a.strict)
+    fs = lint_paths(a.paths, strict=a.strict, maths_text=a.strict and not a.no_c5)
     bad = [f for f in fs if not f.ok]
     oks = [f for f in fs if f.ok]
     if a.json:
