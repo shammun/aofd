@@ -38,6 +38,10 @@ BANNED += [
      "robotic hook formula; use an easy-going lead-in naming this movie's pieces ('Now let's dive into …') (user 2026-11-07)"),
     (re.compile(rf"\b{_NUM}\s+{_OP}\s+{_NUM}{_RES}", re.I),
      "voiced arithmetic: show it on screen, say what is combined + the result (house rule 2026-11-07)"),
+    (re.compile(rf"\b{_NUM}\s+squared(\s+(is|equals|gives)|,?\s+(plus|and)\s+{_NUM}\s+squared)", re.I),
+     "voiced squares: say 'we square each component, add them and take the square root' + the result (house rule 2026-11-07)"),
+    (re.compile(rf"\bsquare root of\s+{_NUM}{_RES}", re.I),
+     "voiced square root of a plain number: show it, say the result (house rule 2026-11-07)"),
     (re.compile(r"\bminus times (a )?minus\b|\bnegative times (a )?negative\b", re.I),
      "voiced sign rule: leave it on screen (house rule 2026-11-07)"),
 ]

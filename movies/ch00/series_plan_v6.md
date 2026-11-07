@@ -1,5 +1,8 @@
 # Chapter 0 movie series: plan v6 — 2026-11-05 (movie-director): #5 split into five parts
 
+> **Narration house rules for EVERY movie in this plan (user 2026-11-07):** show the arithmetic, voice the meaning (sums, products, squares, roots, sign rules stay on screen; the voice says which components/data are used, where they come from, what is done, and the result); natural openings ("see how they're used to …", "Now let's dive into …"); no opening recaps; no "easy". Enforced by tools/script_wording_lint.py (0 findings before TTS). See movies/HOUSE_STYLE.md.
+
+
 > **User rule (2026-11-07): no movie opens with a recap.** Every movie starts with what it is about. Earlier material is recalled only where it is used: the equation on screen, "derived in <movie>", one sentence, then on. The former "Recap (≤ N min)" items below list what to recall at those points.
 
 **Status.** v6 = v5 (adopted 2026-11-04) with one change asked by the user on 2026-11-05
