@@ -70,5 +70,5 @@ The C5 maths-font sweep and the storyboard-text reconciliation are dropped for 5
 ## C. Where this overrides `continuity_plan.md`
 
 1. **No wind form added to 5a s20** (plan §7, 5a item 4). The user says 5a's notation is already right and needs no change. 5b recalls 5a's x′, y′ lines and applies them to (u, v), with "along" and "across" said and tagged (not "u prime" alone).
-2. **Opening recaps in 5c–5g are not deleted** (plan §3). The user objected to *adding* a "so far" recap to every part, and called most parts "very good". Their existing short recap scenes stay, trimmed only where they repeat what the part says anyway. 5b's opening is rewritten per R10. The point-of-use recalls (R16) are added in every part.
+2. **Opening recaps are removed in 5c–5g** (user, 2026-11-07: "audience will completely lose their interest … don't do these recalling at the start"). The `s02_partK_recap` scenes are cut, as `continuity_plan.md` §3 proposed. Each fact they carried is recalled at its point of use (R16). Each part starts with what it is about. 5b's opening is the one exception: 1–2 sentences per R10, not a minute-long recap.
 3. **5a's existing worked points** (s24, three points by hand) are kept and made clearer per R7/R8. They are not replaced.
