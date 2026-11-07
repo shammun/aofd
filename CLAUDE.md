@@ -123,7 +123,7 @@ pin, data accounts, and **free space on C: and G:**.
     (`.githooks/pre-push`). **Never read the Kundu site's files with intent to edit: the AOFD session changes only
     `fluidpy/`, `tests/`, `pyproject.toml`, `CHANGELOG.md` in `../Fluid Dynamics`** (hooks enforce it).
 11. **Data and disk** (PLANNING §15.2, §15.4). Every download goes through `fluidpy.data.fetch()` →
-    `tools/disk_guard.py`: G: floor 50 GB free and project data cap 150 GB, C: floor 40 GB. If G: is missing, stop
+    `tools/disk_guard.py`: G: floor 50 GB free and project data cap 250 GB (user 2026-11-07), C: floor 40 GB. If G: is missing, stop
     (never fall back to C:). Download subsets, reduce at once, evict only registry-tracked re-downloadable raw files whose
     derived product exists (logged in `logs/evictions.log`). **Report free space on C: and G: before and after every
     download, render, install and phase.** Credentials stay in `%USERPROFILE%` and Windows Credential Manager (service

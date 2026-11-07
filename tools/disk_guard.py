@@ -3,7 +3,7 @@
 Rules (from ``book.yaml -> data.guard``):
 
 * **G:** (the data root, ``G:/Geophysical Fluid Dynamics/aofd-data``) keeps a floor of **50 GB free**, and everything
-  the project keeps under the data root stays below a cap of **150 GB**.
+  the project keeps under the data root stays below a cap of **250 GB** (raised from 150 by the user, 2026-11-07).
 * **C:** (environments, Node/Remotion, Playwright, the repo) keeps a floor of **40 GB free**.
 * If the data root's drive is missing (unplugged external drive), the guard **stops** with a clear message. It never
   falls back to C:.
@@ -40,7 +40,7 @@ ROOT = Path(__file__).resolve().parents[1]
 GB = 1024 ** 3
 
 DEFAULTS = {"root": "G:/Geophysical Fluid Dynamics/aofd-data", "root_env": "AOFD_DATA_ROOT",
-            "guard": {"G": {"floor_gb": 50, "project_cap_gb": 150}, "C": {"floor_gb": 40}}}
+            "guard": {"G": {"floor_gb": 50, "project_cap_gb": 250}, "C": {"floor_gb": 40}}}
 
 
 class DiskGuardError(RuntimeError):

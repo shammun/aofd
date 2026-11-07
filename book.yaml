@@ -59,7 +59,7 @@ data:
   guard:
     G:
       floor_gb: 50
-      project_cap_gb: 150
+      project_cap_gb: 250   # raised from 150 by the user 2026-11-07
     C:
       floor_gb: 40
   derived_in_repo:
