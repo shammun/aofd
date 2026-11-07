@@ -178,6 +178,7 @@ datasets:
     redistributable: yes
     redownloadable: true
     raw_files: [raw/ERA5-ARCO/era5_ian_2022_u10-v10-msl_2022-09-26T00_2022-09-29T23_1h.nc]
+    raw_files_removed: [raw/ERA5-ARCO/era5_test_ian_u10-v10-msl_2022-09-28T18_2022-09-28T18_1h.nc]  # 2026-10-25 19:20 route smoke test (one hour, 91,634 B), deleted; nothing derived (provenance audit 2026-11-07)
     derived_on_root: [derived/ch00/era5_ian_2022.nc]
     derived_in_repo: [movies/ch00/ch00_cross_product_why/data/real/ian_2022.bin, movies/ch00/ch00_cross_product_why/data/real/ian_2022.json]
     used_by: [movie ch00_cross_product_why scene 10 (NH hurricane, anticlockwise seen from above)]
@@ -355,6 +356,7 @@ datasets:
     redistributable: yes
     redownloadable: true
     raw_files: [raw/HRRR-zarr/hrrr_ian_2022_20220928T12_mslma.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T12_psfc.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T12_u10.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T12_v10.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T13_mslma.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T13_psfc.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T13_u10.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T13_v10.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T14_mslma.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T14_psfc.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T14_u10.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T14_v10.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T15_mslma.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T15_psfc.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T15_u10.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T15_v10.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T16_mslma.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T16_psfc.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T16_u10.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T16_v10.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T17_mslma.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T17_psfc.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T17_u10.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T17_v10.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T18_mslma.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T18_psfc.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T18_u10.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T18_v10.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T19_mslma.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T19_psfc.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T19_u10.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T19_v10.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T20_mslma.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T20_psfc.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T20_u10.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T20_v10.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T21_mslma.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T21_psfc.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T21_u10.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T21_v10.nc]
+    raw_files_removed: [raw/HRRR-zarr/hrrr_test_20220928T18_mslma.nc, raw/HRRR-zarr/hrrr_test_20220928T18_psfc.nc, raw/HRRR-zarr/hrrr_test_20220928T18_u10.nc, raw/HRRR-zarr/hrrr_test_20220928T18_v10.nc]  # 2026-10-25 23:51-23:54 route smoke test of the same store (18 UTC, 4 fields), 230,398 B in downloads.log, deleted after the test; nothing derived from them (provenance audit 2026-11-07)
     derived_on_root: [derived/ch00/hrrr_ian_2022.nc]
     derived_in_repo: [movies/ch00/ch00_cross_product_why/data/real/ian_hrrr_2022.bin, movies/ch00/ch00_cross_product_why/data/real/ian_hrrr_2022.json]
     used_by: [movie ch00_cross_product_why scene 10 (Ian near landfall at 3 km, eye and eyewall)]
@@ -406,6 +408,7 @@ datasets:
     redistributable: yes
     redownloadable: true
     raw_files: [raw/NASA-GIBS/gibs_idai_VIIRS_SNPP_CorrectedReflectance_TrueColor_2019-03-13.jpg, raw/NASA-GIBS/gibs_idai_VIIRS_SNPP_CorrectedReflectance_TrueColor_2019-03-14.jpg]
+    raw_files_removed: [raw/NASA-GIBS/gibs_idai_MODIS_Terra_CorrectedReflectance_TrueColor_2019-03-13.jpg, raw/NASA-GIBS/gibs_idai_MODIS_Terra_CorrectedReflectance_TrueColor_2019-03-14.jpg, raw/NASA-GIBS/gibs_idai_MODIS_Aqua_CorrectedReflectance_TrueColor_2019-03-13.jpg, raw/NASA-GIBS/gibs_idai_MODIS_Aqua_CorrectedReflectance_TrueColor_2019-03-14.jpg]  # 2026-10-26 00:00-00:01 MODIS Terra/Aqua tries (swath gaps across the box, see route), 3,674,724 B, deleted; nothing derived (provenance audit 2026-11-07)
     derived_on_root: [derived/ch00/idai_viirs_truecolour_2019-03-13.jpg, derived/ch00/idai_viirs_truecolour_2019-03-14.jpg]
     derived_in_repo: [movies/ch00/ch00_cross_product_why/data/real/idai_viirs_truecolour_2019-03-13.jpg, movies/ch00/ch00_cross_product_why/data/real/idai_viirs_truecolour_2019-03-14.jpg]
     used_by: [movie ch00_cross_product_why scene 10 (real image of Idai)]
@@ -645,7 +648,19 @@ datasets:
     fetch_date: "2026-10-27"
     redistributable: yes
     redownloadable: true
-    raw_files: [raw/NASA-GIBS/gibs_global_VIIRS_NOAA20_CorrectedReflectance_TrueColor_2023-11-02_0.05deg_t00.jpg]
+    raw_files: [raw/NASA-GIBS/gibs_global_VIIRS_NOAA20_CorrectedReflectance_TrueColor_2023-11-02_0.05deg_t00.jpg, raw/NASA-GIBS/gibs_global_VIIRS_NOAA20_CorrectedReflectance_TrueColor_2023-11-02_0.05deg_t01.jpg, raw/NASA-GIBS/gibs_global_VIIRS_NOAA20_CorrectedReflectance_TrueColor_2023-11-02_0.05deg_t10.jpg, raw/NASA-GIBS/gibs_global_VIIRS_NOAA20_CorrectedReflectance_TrueColor_2023-11-02_0.05deg_t11.jpg, raw/NASA-GIBS/gibs_global_VIIRS_NOAA21_CorrectedReflectance_TrueColor_2023-11-02_0.05deg_t00.jpg, raw/NASA-GIBS/gibs_global_VIIRS_NOAA21_CorrectedReflectance_TrueColor_2023-11-02_0.05deg_t01.jpg, raw/NASA-GIBS/gibs_global_VIIRS_NOAA21_CorrectedReflectance_TrueColor_2023-11-02_0.05deg_t10.jpg, raw/NASA-GIBS/gibs_global_VIIRS_NOAA21_CorrectedReflectance_TrueColor_2023-11-02_0.05deg_t11.jpg, raw/NASA-GIBS/gibs_global_MODIS_Aqua_CorrectedReflectance_TrueColor_2023-11-02_0.05deg_t00.jpg, raw/NASA-GIBS/gibs_global_MODIS_Aqua_CorrectedReflectance_TrueColor_2023-11-02_0.05deg_t01.jpg, raw/NASA-GIBS/gibs_global_MODIS_Aqua_CorrectedReflectance_TrueColor_2023-11-02_0.05deg_t10.jpg, raw/NASA-GIBS/gibs_global_MODIS_Aqua_CorrectedReflectance_TrueColor_2023-11-02_0.05deg_t11.jpg]
+    raw_sizes_bytes:  # provenance audit 2026-11-07: tiles named in raw_note, now listed (sizes on disk; sha256 in logs/downloads.log)
+      gibs_global_VIIRS_NOAA20_CorrectedReflectance_TrueColor_2023-11-02_0.05deg_t01.jpg: 1332125
+      gibs_global_VIIRS_NOAA20_CorrectedReflectance_TrueColor_2023-11-02_0.05deg_t10.jpg: 1581938
+      gibs_global_VIIRS_NOAA20_CorrectedReflectance_TrueColor_2023-11-02_0.05deg_t11.jpg: 1431381
+      gibs_global_VIIRS_NOAA21_CorrectedReflectance_TrueColor_2023-11-02_0.05deg_t00.jpg: 1466805
+      gibs_global_VIIRS_NOAA21_CorrectedReflectance_TrueColor_2023-11-02_0.05deg_t01.jpg: 1328938
+      gibs_global_VIIRS_NOAA21_CorrectedReflectance_TrueColor_2023-11-02_0.05deg_t10.jpg: 1578293
+      gibs_global_VIIRS_NOAA21_CorrectedReflectance_TrueColor_2023-11-02_0.05deg_t11.jpg: 1442080
+      gibs_global_MODIS_Aqua_CorrectedReflectance_TrueColor_2023-11-02_0.05deg_t00.jpg: 1536073
+      gibs_global_MODIS_Aqua_CorrectedReflectance_TrueColor_2023-11-02_0.05deg_t01.jpg: 1385786
+      gibs_global_MODIS_Aqua_CorrectedReflectance_TrueColor_2023-11-02_0.05deg_t10.jpg: 1514221
+      gibs_global_MODIS_Aqua_CorrectedReflectance_TrueColor_2023-11-02_0.05deg_t11.jpg: 1401988
     raw_note: 12 tiles gibs_global_<layer>_2023-11-02_0.05deg_t{00,01,10,11}.jpg (3 layers); evictable
     derived_on_root: [derived/ch00/gibs_truecolour_global_2023-11-02_0p05.jpg]
     derived_in_repo: [data/derived/ch00/gibs_truecolour_global_2023-11-02_0p05.jpg, data/derived/ch00/gibs_truecolour_global_2023-11-02_0p05.json]
@@ -669,7 +684,22 @@ datasets:
     fetch_date: "2026-10-27"
     redistributable: yes
     redownloadable: true
-    raw_files: [raw/NASA-GIBS/gibs_global_VIIRS_NOAA20_CorrectedReflectance_TrueColor_2026-10-26_0.05deg_t00.jpg]
+    raw_files: [raw/NASA-GIBS/gibs_global_VIIRS_NOAA20_CorrectedReflectance_TrueColor_2026-10-26_0.05deg_t00.jpg, raw/NASA-GIBS/gibs_probe_VIIRS_NOAA20_CorrectedReflectance_TrueColor_2026-10-26_0.1deg_t00.jpg, raw/NASA-GIBS/gibs_probe_VIIRS_NOAA21_CorrectedReflectance_TrueColor_2026-10-26_0.1deg_t00.jpg, raw/NASA-GIBS/gibs_probe_MODIS_Aqua_CorrectedReflectance_TrueColor_2026-10-26_0.1deg_t00.jpg, raw/NASA-GIBS/gibs_global_VIIRS_NOAA20_CorrectedReflectance_TrueColor_2026-10-26_0.05deg_t01.jpg, raw/NASA-GIBS/gibs_global_VIIRS_NOAA20_CorrectedReflectance_TrueColor_2026-10-26_0.05deg_t10.jpg, raw/NASA-GIBS/gibs_global_VIIRS_NOAA20_CorrectedReflectance_TrueColor_2026-10-26_0.05deg_t11.jpg, raw/NASA-GIBS/gibs_global_VIIRS_NOAA21_CorrectedReflectance_TrueColor_2026-10-26_0.05deg_t00.jpg, raw/NASA-GIBS/gibs_global_VIIRS_NOAA21_CorrectedReflectance_TrueColor_2026-10-26_0.05deg_t01.jpg, raw/NASA-GIBS/gibs_global_VIIRS_NOAA21_CorrectedReflectance_TrueColor_2026-10-26_0.05deg_t10.jpg, raw/NASA-GIBS/gibs_global_VIIRS_NOAA21_CorrectedReflectance_TrueColor_2026-10-26_0.05deg_t11.jpg, raw/NASA-GIBS/gibs_global_MODIS_Aqua_CorrectedReflectance_TrueColor_2026-10-26_0.05deg_t00.jpg, raw/NASA-GIBS/gibs_global_MODIS_Aqua_CorrectedReflectance_TrueColor_2026-10-26_0.05deg_t01.jpg, raw/NASA-GIBS/gibs_global_MODIS_Aqua_CorrectedReflectance_TrueColor_2026-10-26_0.05deg_t10.jpg, raw/NASA-GIBS/gibs_global_MODIS_Aqua_CorrectedReflectance_TrueColor_2026-10-26_0.05deg_t11.jpg]
+    raw_sizes_bytes:  # provenance audit 2026-11-07: tiles named in raw_note, now listed (sizes on disk; sha256 in logs/downloads.log)
+      gibs_probe_VIIRS_NOAA20_CorrectedReflectance_TrueColor_2026-10-26_0.1deg_t00.jpg: 1590516
+      gibs_probe_VIIRS_NOAA21_CorrectedReflectance_TrueColor_2026-10-26_0.1deg_t00.jpg: 1590942
+      gibs_probe_MODIS_Aqua_CorrectedReflectance_TrueColor_2026-10-26_0.1deg_t00.jpg: 1599821
+      gibs_global_VIIRS_NOAA20_CorrectedReflectance_TrueColor_2026-10-26_0.05deg_t01.jpg: 1319012
+      gibs_global_VIIRS_NOAA20_CorrectedReflectance_TrueColor_2026-10-26_0.05deg_t10.jpg: 1469703
+      gibs_global_VIIRS_NOAA20_CorrectedReflectance_TrueColor_2026-10-26_0.05deg_t11.jpg: 1395006
+      gibs_global_VIIRS_NOAA21_CorrectedReflectance_TrueColor_2026-10-26_0.05deg_t00.jpg: 1504602
+      gibs_global_VIIRS_NOAA21_CorrectedReflectance_TrueColor_2026-10-26_0.05deg_t01.jpg: 1314083
+      gibs_global_VIIRS_NOAA21_CorrectedReflectance_TrueColor_2026-10-26_0.05deg_t10.jpg: 1457043
+      gibs_global_VIIRS_NOAA21_CorrectedReflectance_TrueColor_2026-10-26_0.05deg_t11.jpg: 1392537
+      gibs_global_MODIS_Aqua_CorrectedReflectance_TrueColor_2026-10-26_0.05deg_t00.jpg: 1553607
+      gibs_global_MODIS_Aqua_CorrectedReflectance_TrueColor_2026-10-26_0.05deg_t01.jpg: 1401110
+      gibs_global_MODIS_Aqua_CorrectedReflectance_TrueColor_2026-10-26_0.05deg_t10.jpg: 1430354
+      gibs_global_MODIS_Aqua_CorrectedReflectance_TrueColor_2026-10-26_0.05deg_t11.jpg: 1364113
     raw_note: 12 tiles + 3 probe images (gibs_probe_*_2026-10-26_0.1deg_t00.jpg); evictable
     derived_on_root: [derived/ch00/gibs_truecolour_global_2026-10-26_0p05.jpg]
     derived_in_repo: [data/derived/ch00/gibs_truecolour_global_2026-10-26_0p05.jpg, data/derived/ch00/gibs_truecolour_global_2026-10-26_0p05.json]
@@ -718,7 +748,20 @@ datasets:
     fetch_date: "2026-10-27"
     redistributable: yes
     redownloadable: true
-    raw_files: [raw/NASA-GIBS/gibs_cumulus_france_MODIS_Aqua_CorrectedReflectance_TrueColor_2024-06-24_0.0025deg_t00.jpg, raw/NASA-GIBS/gibs_cumulus_france_MODIS_Terra_CorrectedReflectance_TrueColor_2024-06-24_0.0025deg_t00.jpg]
+    raw_files: [raw/NASA-GIBS/gibs_cumulus_france_MODIS_Aqua_CorrectedReflectance_TrueColor_2024-06-24_0.0025deg_t00.jpg, raw/NASA-GIBS/gibs_cumulus_france_MODIS_Terra_CorrectedReflectance_TrueColor_2024-06-24_0.0025deg_t00.jpg, raw/NASA-GIBS/gibs_cu_probe_SEUS_MODIS_Aqua_CorrectedReflectance_TrueColor_2023-06-20_0.01deg_t00.jpg, raw/NASA-GIBS/gibs_cu_probe_FRA_MODIS_Aqua_CorrectedReflectance_TrueColor_2023-06-20_0.01deg_t00.jpg, raw/NASA-GIBS/gibs_cu_probe_SEUS_MODIS_Aqua_CorrectedReflectance_TrueColor_2023-07-11_0.01deg_t00.jpg, raw/NASA-GIBS/gibs_cu_probe_FRA_MODIS_Aqua_CorrectedReflectance_TrueColor_2023-07-11_0.01deg_t00.jpg, raw/NASA-GIBS/gibs_cu_probe_SEUS_MODIS_Aqua_CorrectedReflectance_TrueColor_2023-08-08_0.01deg_t00.jpg, raw/NASA-GIBS/gibs_cu_probe_FRA_MODIS_Aqua_CorrectedReflectance_TrueColor_2023-08-08_0.01deg_t00.jpg, raw/NASA-GIBS/gibs_cu_probe_SEUS_MODIS_Aqua_CorrectedReflectance_TrueColor_2024-06-24_0.01deg_t00.jpg, raw/NASA-GIBS/gibs_cu_probe_FRA_MODIS_Aqua_CorrectedReflectance_TrueColor_2024-06-24_0.01deg_t00.jpg, raw/NASA-GIBS/gibs_cu_probe_SEUS_MODIS_Aqua_CorrectedReflectance_TrueColor_2024-07-16_0.01deg_t00.jpg, raw/NASA-GIBS/gibs_cu_probe_FRA_MODIS_Aqua_CorrectedReflectance_TrueColor_2024-07-16_0.01deg_t00.jpg, raw/NASA-GIBS/gibs_cu_probe_SEUS_MODIS_Aqua_CorrectedReflectance_TrueColor_2024-08-06_0.01deg_t00.jpg, raw/NASA-GIBS/gibs_cu_probe_FRA_MODIS_Aqua_CorrectedReflectance_TrueColor_2024-08-06_0.01deg_t00.jpg]
+    raw_sizes_bytes:  # provenance audit 2026-11-07: the 12 contact-sheet probes of raw_note, now listed
+      gibs_cu_probe_SEUS_MODIS_Aqua_CorrectedReflectance_TrueColor_2023-06-20_0.01deg_t00.jpg: 123732
+      gibs_cu_probe_FRA_MODIS_Aqua_CorrectedReflectance_TrueColor_2023-06-20_0.01deg_t00.jpg: 33967
+      gibs_cu_probe_SEUS_MODIS_Aqua_CorrectedReflectance_TrueColor_2023-07-11_0.01deg_t00.jpg: 115628
+      gibs_cu_probe_FRA_MODIS_Aqua_CorrectedReflectance_TrueColor_2023-07-11_0.01deg_t00.jpg: 67255
+      gibs_cu_probe_SEUS_MODIS_Aqua_CorrectedReflectance_TrueColor_2023-08-08_0.01deg_t00.jpg: 57216
+      gibs_cu_probe_FRA_MODIS_Aqua_CorrectedReflectance_TrueColor_2023-08-08_0.01deg_t00.jpg: 54667
+      gibs_cu_probe_SEUS_MODIS_Aqua_CorrectedReflectance_TrueColor_2024-06-24_0.01deg_t00.jpg: 95478
+      gibs_cu_probe_FRA_MODIS_Aqua_CorrectedReflectance_TrueColor_2024-06-24_0.01deg_t00.jpg: 103625
+      gibs_cu_probe_SEUS_MODIS_Aqua_CorrectedReflectance_TrueColor_2024-07-16_0.01deg_t00.jpg: 107212
+      gibs_cu_probe_FRA_MODIS_Aqua_CorrectedReflectance_TrueColor_2024-07-16_0.01deg_t00.jpg: 73658
+      gibs_cu_probe_SEUS_MODIS_Aqua_CorrectedReflectance_TrueColor_2024-08-06_0.01deg_t00.jpg: 132665
+      gibs_cu_probe_FRA_MODIS_Aqua_CorrectedReflectance_TrueColor_2024-08-06_0.01deg_t00.jpg: 80384
     raw_note: 12 contact-sheet probes gibs_cu_probe_*_0.01deg_t00.jpg (evictable)
     derived_on_root: [derived/ch00/cumulus_france_2024-06-24_modis_aqua_250m.jpg, derived/ch00/cumulus_france_2024-06-24_modis_terra_250m.jpg]
     derived_in_repo: [data/derived/ch00/cumulus_france_2024-06-24_modis_aqua_250m.jpg, data/derived/ch00/cumulus_france_2024-06-24_modis_aqua_250m.json, data/derived/ch00/cumulus_france_2024-06-24_modis_terra_250m.jpg, data/derived/ch00/cumulus_france_2024-06-24_modis_terra_250m.json]
@@ -1014,7 +1057,8 @@ datasets:
     fetch_date: "2026-10-27"
     redistributable: yes
     redownloadable: true
-    raw_files: [raw/GEE/goes19_d9_C02-C08-C13_2026-10-27T1800_0.04deg.npz, raw/GEE/goes19_d9_C02_2026-10-27T1800_0.02deg.npz, raw/GEE/goes19_d9_loop_C02-C13_2026-10-27T18_2026-10-27T23_0.04deg.npz]
+    raw_files: [raw/GEE/goes19_d9_C02-C08-C13_2026-10-27T1800_0.04deg.npz, raw/GEE/goes19_d9_C02_2026-10-27T1800_0.02deg.npz, raw/GEE/goes19_d9_loop_C02-C13_2026-10-27T18_2026-10-27T23_0.04deg.npz, raw/GEE/goes19_d9_loop_C02-C13_2026-10-28T00_2026-10-28T05_0.04deg.npz]
+    raw_files_extension_note: "goes19_d9_loop_C02-C13_2026-10-28T00_2026-10-28T05_0.04deg.npz (18,840,759 B, 55.9 s, 2026-10-28 02:11, sha256 c4c73c6fc00e2169da40248aa38fdbca4d6e13249ed125e0691f21df2ff00fa3): the second loop transfer (hourly scans 00-05 UTC 28 Oct, ingested late in EE); fluidpy.data.movie_rwm.goes_products merges every goes19_d9_loop_*.npz by scan, but the committed rwm_goes19_loop.json/PNGs cover 18-23 UTC 27 Oct only (the products were not rebuilt after this transfer); listed by the provenance audit 2026-11-07"
     derived_in_repo: [data/derived/ch00/rwm_goes19_2026-10-27T1800.json, data/derived/ch00/rwm_goes19_2026-10-27T1800_C02.png, data/derived/ch00/rwm_goes19_2026-10-27T1800_C08.png, data/derived/ch00/rwm_goes19_2026-10-27T1800_C13.png, data/derived/ch00/rwm_goes19_loop.json, "data/derived/ch00/rwm_goes19_loop_2026-10-27T{18..23}_{C02,C13}.png (12 files)"]
     derived_note: "8-bit grey PNG, k=0 missing, value = lo + (k-1)(hi-lo)/254: C02 0..1 (step 0.0039), C08 180..280 K (0.39 K), C13 180..320 K (0.55 K)"
     checks: "C13 200.2-305.5 K (p1 225.7, p99 296.4) - inside 180-320 K; C08 197.7-252.0 K (RM34 asks 200-260: min 2.3 K below); dry tongue: 22.8 % of pixels within 800 km SW of the 982 low have C08 > 245 K (max 251.7 K); scan start 18:00:20 UTC (within 10 min); RM44 IR part: along the 982 low's main cold front (hi-res, from 43.0N 42.0W) the coldest C13 within +-0.12 deg is < 240 K at 56 % of 97 points (median 233.5 K) - just below the 60 % CHECK; band 2 at 23 UTC is dark (night)"
@@ -1052,6 +1096,7 @@ datasets:
     redistributable: yes
     redownloadable: false  # Himawari / GOES-East GIBS layers roll off after ~6-10 weeks; MODIS band 31 is permanent
     raw_files: [raw/NASA-GIBS/wmts_d10_MODIS_Aqua_Brightness_Temp_Band31_Day_2023-11-02_L5.zip, raw/NASA-GIBS/wmts_d11_Himawari_AHI_Band13_Clean_Infrared_2026-10-27T0000Z_L4.zip, raw/NASA-GIBS/wmts_d13ir_GOES-East_ABI_Band13_Clean_Infrared_2026-10-27T1800Z_L5.zip, raw/NASA-GIBS/wmts_d13vis_GOES-East_ABI_Band2_Red_Visible_1km_2026-10-27T1800Z_L5.zip, raw/NASA-GIBS/colormap_v1.3_Clean_Longwave_Infrared_Window_Band.xml, raw/NASA-GIBS/colormap_v1.3_MODIS_Brightness_Temp_Band31.xml, raw/NASA-GIBS/WMTSCapabilities_epsg4326_best_20261027.xml]
+    raw_files_removed: [raw/NASA-GIBS/gibs_d11w_Himawari_AHI_Band13_Clean_Infrared_2026-10-27T00000Z.png, raw/NASA-GIBS/gibs_d11e_Himawari_AHI_Band13_Clean_Infrared_2026-10-27T00000Z.png, raw/NASA-GIBS/gibs_d13_GOES-East_ABI_Band13_Clean_Infrared_2026-10-27T18000Z.png, raw/NASA-GIBS/gibs_d13_GOES-East_ABI_Band2_Red_Visible_1km_2026-10-27T18000Z.png]  # the superseded WMS GetMap PNGs of raw_note (22,316,430 B, 2026-10-27 19:20-19:23), no longer on disk (provenance audit 2026-11-07)
     raw_note: "superseded/evictable: the four WMS gibs_d11*/gibs_d13* PNGs (22.3 MB) and raw/NASA-GIBS/wmts/GOES-East_ABI_Band13_Clean_Infrared/ (54 loose tiles, 12 MB, duplicates of the d13ir zip from an aborted first run)"
     derived_on_root: [derived/ch00/rwm_gibs_goeseast_b13_bt_2026-10-27T1800.png, derived/ch00/rwm_gibs_goeseast_b13_bt_2026-10-27T1800.json]
     derived_in_repo: [data/derived/ch00/rwm_himawari9_b13_bt_2026-10-27T0000.png, data/derived/ch00/rwm_himawari9_b13_bt_2026-10-27T0000.json, data/derived/ch00/rwm_modis_aqua_b31_bt_2023-11-02.png, data/derived/ch00/rwm_modis_aqua_b31_bt_2023-11-02.json]
@@ -1285,7 +1330,19 @@ datasets:
     fetch_date: "2026-10-28"
     redistributable: yes
     redownloadable: true
-    raw_files: [raw/NASA-GIBS/gibs_global_VIIRS_NOAA20_CorrectedReflectance_TrueColor_2023-11-01_0.05deg_t00.jpg]
+    raw_files: [raw/NASA-GIBS/gibs_global_VIIRS_NOAA20_CorrectedReflectance_TrueColor_2023-11-01_0.05deg_t00.jpg, raw/NASA-GIBS/gibs_global_VIIRS_NOAA20_CorrectedReflectance_TrueColor_2023-11-01_0.05deg_t01.jpg, raw/NASA-GIBS/gibs_global_VIIRS_NOAA20_CorrectedReflectance_TrueColor_2023-11-01_0.05deg_t10.jpg, raw/NASA-GIBS/gibs_global_VIIRS_NOAA20_CorrectedReflectance_TrueColor_2023-11-01_0.05deg_t11.jpg, raw/NASA-GIBS/gibs_global_VIIRS_NOAA21_CorrectedReflectance_TrueColor_2023-11-01_0.05deg_t00.jpg, raw/NASA-GIBS/gibs_global_VIIRS_NOAA21_CorrectedReflectance_TrueColor_2023-11-01_0.05deg_t01.jpg, raw/NASA-GIBS/gibs_global_VIIRS_NOAA21_CorrectedReflectance_TrueColor_2023-11-01_0.05deg_t10.jpg, raw/NASA-GIBS/gibs_global_VIIRS_NOAA21_CorrectedReflectance_TrueColor_2023-11-01_0.05deg_t11.jpg, raw/NASA-GIBS/gibs_global_MODIS_Aqua_CorrectedReflectance_TrueColor_2023-11-01_0.05deg_t00.jpg, raw/NASA-GIBS/gibs_global_MODIS_Aqua_CorrectedReflectance_TrueColor_2023-11-01_0.05deg_t01.jpg, raw/NASA-GIBS/gibs_global_MODIS_Aqua_CorrectedReflectance_TrueColor_2023-11-01_0.05deg_t10.jpg, raw/NASA-GIBS/gibs_global_MODIS_Aqua_CorrectedReflectance_TrueColor_2023-11-01_0.05deg_t11.jpg]
+    raw_sizes_bytes:  # provenance audit 2026-11-07: tiles named in raw_note, now listed (sizes on disk; sha256 in logs/downloads.log)
+      gibs_global_VIIRS_NOAA20_CorrectedReflectance_TrueColor_2023-11-01_0.05deg_t01.jpg: 1338054
+      gibs_global_VIIRS_NOAA20_CorrectedReflectance_TrueColor_2023-11-01_0.05deg_t10.jpg: 1526642
+      gibs_global_VIIRS_NOAA20_CorrectedReflectance_TrueColor_2023-11-01_0.05deg_t11.jpg: 1404441
+      gibs_global_VIIRS_NOAA21_CorrectedReflectance_TrueColor_2023-11-01_0.05deg_t00.jpg: 1480835
+      gibs_global_VIIRS_NOAA21_CorrectedReflectance_TrueColor_2023-11-01_0.05deg_t01.jpg: 1339772
+      gibs_global_VIIRS_NOAA21_CorrectedReflectance_TrueColor_2023-11-01_0.05deg_t10.jpg: 1535660
+      gibs_global_VIIRS_NOAA21_CorrectedReflectance_TrueColor_2023-11-01_0.05deg_t11.jpg: 1409806
+      gibs_global_MODIS_Aqua_CorrectedReflectance_TrueColor_2023-11-01_0.05deg_t00.jpg: 1540567
+      gibs_global_MODIS_Aqua_CorrectedReflectance_TrueColor_2023-11-01_0.05deg_t01.jpg: 1401984
+      gibs_global_MODIS_Aqua_CorrectedReflectance_TrueColor_2023-11-01_0.05deg_t10.jpg: 1468511
+      gibs_global_MODIS_Aqua_CorrectedReflectance_TrueColor_2023-11-01_0.05deg_t11.jpg: 1333942
     raw_note: 12 tiles gibs_global_<layer>_2023-11-01_0.05deg_t{00,01,10,11}.jpg (3 layers, 17.3 MB); evictable
     derived_on_root: [derived/ch00/gibs_truecolour_global_2023-11-01_0p05.jpg]
     derived_in_repo: [data/derived/ch00/gibs_truecolour_global_2023-11-01_0p05.jpg, data/derived/ch00/gibs_truecolour_global_2023-11-01_0p05.json]
@@ -2326,5 +2383,639 @@ datasets:
     redistributable: yes
     redownloadable: true
     raw_files: [raw/GEE/ch00_coordinates_research_*.png, raw/GEE/ch00_coordinates_research_*.request.json]
+    raw_files_enumerated: [raw/GEE/ch00_coordinates_research_ian_s2_before.png, raw/GEE/ch00_coordinates_research_ian_s2_before_water.png, raw/GEE/ch00_coordinates_research_ian_s2_after.png, raw/GEE/ch00_coordinates_research_ian_s2_after_water.png, raw/GEE/ch00_coordinates_research_ian_s1_before.png, raw/GEE/ch00_coordinates_research_ian_s1_after.png, raw/GEE/ch00_coordinates_research_ian_s1_before_water.png, raw/GEE/ch00_coordinates_research_ian_s1_after_water.png, raw/GEE/ch00_coordinates_research_amphan_s1_before.png, raw/GEE/ch00_coordinates_research_amphan_s1_after.png, raw/GEE/ch00_coordinates_research_amphan_s1_before_water.png, raw/GEE/ch00_coordinates_research_amphan_s1_after_water.png, raw/GEE/ch00_coordinates_research_aila_l5_before.png, raw/GEE/ch00_coordinates_research_aila_l5_before_water.png, raw/GEE/ch00_coordinates_research_aila_l5_after.png, raw/GEE/ch00_coordinates_research_aila_l5_after_water.png, raw/GEE/ch00_coordinates_research_fmb_naip_2021.png, raw/GEE/ch00_coordinates_research_imerg_ian.png, raw/GEE/ch00_coordinates_research_imerg_amphan.png]  # the glob above, file by file (provenance audit 2026-11-07); each has a .request.json sidecar
+    raw_sizes_bytes:
+      ch00_coordinates_research_ian_s2_before.png: 3998265
+      ch00_coordinates_research_ian_s2_before_water.png: 3932246
+      ch00_coordinates_research_ian_s2_after.png: 5397585
+      ch00_coordinates_research_ian_s2_after_water.png: 5315422
+      ch00_coordinates_research_ian_s1_before.png: 912500
+      ch00_coordinates_research_ian_s1_after.png: 1460072
+      ch00_coordinates_research_ian_s1_before_water.png: 1437593
+      ch00_coordinates_research_ian_s1_after_water.png: 2152605
+      ch00_coordinates_research_amphan_s1_before.png: 2278258
+      ch00_coordinates_research_amphan_s1_after.png: 1879402
+      ch00_coordinates_research_amphan_s1_before_water.png: 2701854
+      ch00_coordinates_research_amphan_s1_after_water.png: 3073188
+      ch00_coordinates_research_aila_l5_before.png: 4017485
+      ch00_coordinates_research_aila_l5_before_water.png: 4061526
+      ch00_coordinates_research_aila_l5_after.png: 4023470
+      ch00_coordinates_research_aila_l5_after_water.png: 4104230
+      ch00_coordinates_research_fmb_naip_2021.png: 4072462
+      ch00_coordinates_research_imerg_ian.png: 103332
+      ch00_coordinates_research_imerg_amphan.png: 120416
     note: "research renders only (reports/data/ch00_coordinates_research.md); the movie uses GEE-S1-amphan2020 and GEE-MODIS-flood-v3"
     used_by: [research for movie ch00_coordinates_storm s29-s34 (choice of flood pairs)]
+  HRD-TDR:
+    catalogue: "NOAA AOML HRD"
+    title: "NOAA P-3 tail Doppler radar (TDR) Level-2 analysis, Hurricane Ian mission 20220928H1, analysis 220928H1_1023 (09:49-12:47 UTC, centre 10:23 UTC 28 Sep 2022, origin 25.79N 82.86W), storm-centred 3-D winds incl. w; plus the vertical-incidence file and the TC-RADAR README"
+    url: "ftp://ftp.aoml.noaa.gov/pub/hrd/data/radar/level2/2022/ian/20220928H1/220928H1_1023_xy.nc.gz"
+    raw_url: "ftp://ftp.aoml.noaa.gov/pub/hrd/data/radar/level3/TC_RADAR_README.pdf"
+    route: "anonymous FTP (the https://www.aoml.noaa.gov/ftp tree redirects to a placeholder since 2026-11; re-checked 2026-11-07) through fluidpy.data.fetch(ftp://..., retrieve=<ftplib RETR>, expected_bytes from FTP SIZE) and the disk guard; research VM/_scripts/get_tdr.py, then movies/data/build_ch00_coordinates_storm.py tdr_retriever (cache hit)"
+    fetcher: "fluidpy.data.fetch with an ftplib retrieve callable (movies/data/build_ch00_coordinates_storm.py::tdr_retriever)"
+    login: "none"
+    licence: "NOAA AOML/HRD research data: free to download; HRD requests that users notify the HRD radar team lead of the project (TC-RADAR README section 6) and acknowledge NOAA/AOML/HRD; no explicit redistribution grant, so the original files are treated as not redistributable (derived ring means and pictures with the credit are fine)"
+    licence_url: "https://www.aoml.noaa.gov/hrd/data_sub/radar.html"
+    citation: "Gamache, J. F., 1995: Evaluation of a fully three-dimensional variational Doppler analysis technique. 27th Conf. on Radar Meteorology, AMS, 422-423; Reasor, P. D., M. D. Eastin and J. F. Gamache, 2009: Rapidly intensifying Hurricane Guillermo (1997). Mon. Wea. Rev., 137, 603-631; Fischer, M. S., R. F. Rogers, P. D. Reasor and J. F. Gamache, 2022: An analysis of tropical cyclone vortex and convective characteristics in relation to storm intensity using a novel airborne Doppler radar database. Mon. Wea. Rev., 150, 2255-2278, doi:10.1175/MWR-D-21-0223.1"
+    attribution: "Vertical wind: NOAA P-3 hurricane-hunter tail Doppler radar, 28 Sep 2022 about 10 UTC - NOAA AOML Hurricane Research Division"
+    size_bytes: 9419618
+    raw_sizes_bytes:
+      220928H1_1023_xy.nc.gz: 8266017
+      220928H1_1023_vert_inbound.nc.gz: 108128
+      TC_RADAR_README.pdf: 1045473
+    sha256_files:
+      220928H1_1023_xy.nc.gz: a36e853f9939b8675be6c8f13e6dbd2bfeedabcd5bf3932c33be3c2c32639a3d
+      220928H1_1023_vert_inbound.nc.gz: 063ffc83b61811db9ec38426e998dc21acff73593e3b3452ec4de122123e3aea
+      TC_RADAR_README.pdf: 895c723c2243f2a1640f87bd2a8840a6c6cba0048d5b0e55d26c8256cf340862
+    variables: "{W, U, V, RADIAL_WIND, TANGENTIAL_WIND, WIND_SPEED: [m s-1] storm-relative; REFLECTIVITY [dBZ]; VORT [s-1]}; fill <= -900"
+    coordinates: "dims (x, y, level, time) - transposed order, plot with .transpose('level','y','x'); x, y -249..249 km every 2 km about the HRD storm centre; level 0-18 km every 0.5 km; storm motion 4.46 m/s N, 1.2 m/s E removed; fall speed removed in the synthesis"
+    subset: "one analysis (whole file); Level-3 TC-RADAR merged files (6-11 GB) not fetched"
+    fetch_date: "2026-11-05"
+    redistributable: false
+    redownloadable: true
+    raw_files: ["raw/HRD-TDR/220928H1_1023_xy.nc.gz", "raw/HRD-TDR/220928H1_1023_vert_inbound.nc.gz", "raw/HRD-TDR/TC_RADAR_README.pdf"]
+    derived_scratch: ["scratch/movies/ch00_coordinates/research/vertical_motion/tdr_rz.nc (48,667 B ring means of w, kept on G: until the HRD notification)", "scratch/movies/ch00_coordinates_storm/build1/vm/tdr_220928H1_1023_xy.nc (decompressed working copy, never redistributed)"]
+    derived_in_repo: ["movies/ch00/ch00_coordinates_storm/data/img/tdr_w.png", "movies/ch00/ch00_coordinates_storm/data/cs.json (TDR ring-mean w, DS29)"]
+    derived_note: "no derived_on_root, so the guard never evicts the raw file; the derived picture and numbers carry the HRD credit"
+    checks: "DS29: peak ring-mean w (>= 70 % ring cover, r 15-80 km) 3.3 m/s at 8-9.5 km, r about 45 km; slanted ring max at 2/5/8/11 km = 0.35/1.51/3.33/2.35 m/s; strongest single updraught 11.6 m/s at 13 km (99.9th percentile 8.9); no data in the clear eye inside about 22 km"
+    used_by: ["movie ch00_coordinates_storm s19-s20 (measured rising air, DS29-DS30)", "research reports/data/ch00_coordinates_vertical_motion.md"]
+    todo_user: "send the courtesy note to the HRD radar team lead (address in raw/HRD-TDR/TC_RADAR_README.pdf section 6) before the movie is published"
+  HRRR-aws:
+    catalogue: "HRRR"
+    title: "NOAA HRRR CONUS 3 km pressure-level GRIB2 (wrfprs, 37 levels 1000-100 hPa), all valid 2022-09-28 18 UTC (Hurricane Ian): 18z f00 analysis, 17z f01 and 16z f02 forecasts, plus the f01 .idx"
+    url: "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20220928/conus/hrrr.t18z.wrfprsf00.grib2"
+    raw_url: "https://registry.opendata.aws/noaa-hrrr-pds/"
+    route: "anonymous HTTPS whole files from the NODD bucket noaa-hrrr-bdp-pds through fluidpy.data.fetch (no byte-range door yet); reduced at once message by message with eccodes to the Ian box (24.5-28.5N 84.5-80.5W, all 37 levels, u v w omega T q HGT)"
+    fetcher: "fluidpy.data.fetch; reduction movies/data/build_ch00_coordinates_storm.py::hrrr_grib_box (f00) and research vertical_motion/_scripts (f00, f01, f02)"
+    login: "none"
+    licence: "NOAA data via NODD: open to the public and can be used as desired; attribute NOAA for unaltered data; do not present modified data as original NOAA data or imply NOAA endorsement"
+    licence_url: "https://registry.opendata.aws/noaa-hrrr-pds/"
+    citation: "Dowell, D. C., et al., 2022: The High-Resolution Rapid Refresh (HRRR): An hourly updating convection-allowing forecast model. Part I. Wea. Forecasting, 37, 1371-1395, doi:10.1175/WAF-D-21-0151.1"
+    attribution: "NOAA HRRR (public domain), NOAA Open Data Dissemination on AWS; derived (box subset, rotated to earth-relative winds)"
+    size_bytes: 1208147632
+    raw_sizes_bytes:
+      hrrr.t17z.wrfprsf01.grib2.idx: 38091
+      hrrr.t17z.wrfprsf01.grib2: 408288101
+      hrrr.t18z.wrfprsf00.grib2: 389287328
+      hrrr.t16z.wrfprsf02.grib2: 410534112
+    sha256_files:
+      hrrr.t17z.wrfprsf01.grib2.idx: 1aa74389f706282cc87554ea3596d73c5c50abe6eab2935b5e6ac1cb382b58c3
+      hrrr.t17z.wrfprsf01.grib2: 9ec6aebc796ffbb1e68ff18335298bbdeda7bf2eae61aa5d396e814df2561fc9
+      hrrr.t18z.wrfprsf00.grib2: c5053ba5abf200e7b3da9d6366ea0f31dae98efbf79cd264a2b65c6f31e4560c
+      hrrr.t16z.wrfprsf02.grib2: 1dd0c22bd5e1be1bfc338306dfe21c4f3a6e4ba57ad6384f2d16e74f63d45b98
+    variables: "{UGRD, VGRD: grid-relative wind [m s-1] (rotate with fluidpy.data.hrrr.earth_relative); VVEL: omega [Pa s-1], < 0 rising; DZDT [m s-1]; TMP [K]; SPFH [kg kg-1]; HGT [gpm]}"
+    coordinates: "Lambert conformal 1799 x 1059 (lat_0 = lat_1 = lat_2 = 38.5, lon_0 = -97.5); pressure levels below the sea (HGT < 0) dropped in the reduction"
+    subset: "three whole files (one valid time); the box product keeps 37 levels over 24.5-28.5N 84.5-80.5W"
+    fetch_date: "2026-11-05"
+    redistributable: true
+    redownloadable: true
+    raw_files: ["raw/HRRR-aws/hrrr.t17z.wrfprsf01.grib2.idx", "raw/HRRR-aws/hrrr.t17z.wrfprsf01.grib2", "raw/HRRR-aws/hrrr.t18z.wrfprsf00.grib2", "raw/HRRR-aws/hrrr.t16z.wrfprsf02.grib2"]
+    derived_scratch: ["scratch/movies/ch00_coordinates_storm/build1/vm/hrrr_prs_18z_f00.nc (9,868,419 B, f00 box, used by the build)", "scratch/movies/ch00_coordinates/research/vertical_motion/hrrr_prs_{18z_f00,17z_f01,16z_f02}.nc (research boxes, 10-11 MB each)"]
+    derived_in_repo: ["movies/ch00/ch00_coordinates_storm/data/cs.json (continuity w from the f00 inflow, DS30)"]
+    derived_note: "no derived_on_root (the box products sit on G: scratch), so the guard does not evict these 1.2 GB; f01/f02 and the .idx are research only and may be deleted by hand (re-downloadable)"
+    checks: "f00 omega in -0.095..+0.097 Pa/s over the box, 1-6 distinct values per level inside 100 km (HRRR hour-0 has no w; same as the HRRR-zarr anl store); f01 850-hPa w max +2.60 m/s; continuity from the f00 inflow implies about 1 m/s ring-mean ascent at r 18-26 km"
+    used_by: ["movie ch00_coordinates_storm s20 (continuity cross-check DS30, f00 only)", "research reports/data/ch00_coordinates_vertical_motion.md (f00, f01, f02)"]
+  NEXRAD-L2:
+    catalogue: "NEXRAD"
+    title: "NOAA NEXRAD WSR-88D Level-II volume scan, KTBW (Tampa Bay), 2022-09-28 18:01:48 UTC, Hurricane Ian's eye and eyewall (23 tilts)"
+    url: "https://unidata-nexrad-level2.s3.amazonaws.com/2022/09/28/KTBW/KTBW20220928_180148_V06"
+    raw_url: "https://registry.opendata.aws/noaa-nexrad/"
+    route: "anonymous HTTPS from the NODD bucket unidata-nexrad-level2 (the old noaa-nexrad-level2 bucket denies listing) through fluidpy.data.fetch; read with metpy.io.Level2File"
+    fetcher: "fluidpy.data.fetch + metpy.io.Level2File (proposed fluidpy.data.nexrad); movies/data/build_ch00_coordinates_storm.py (s17)"
+    login: "none"
+    licence: "NOAA data via NODD: open to the public and can be used as desired; attribute NOAA for unaltered data; do not present modified data as original NOAA data or imply NOAA endorsement"
+    licence_url: "https://registry.opendata.aws/noaa-nexrad/"
+    citation: "NOAA National Weather Service Radar Operations Center, 1991: NOAA Next Generation Radar (NEXRAD) Level 2 Base Data. NOAA NCEI, doi:10.7289/V5W9574V; NEXRAD on AWS was accessed on 2026-11-05 from https://registry.opendata.aws/noaa-nexrad"
+    attribution: "NOAA NEXRAD Level-II radar KTBW (public domain), NOAA Open Data Dissemination on AWS"
+    size_bytes: 19364983
+    sha256: "c6f8b6a27b22aa07eb79ffd89b1730e9f11a3d77f3fb95ff651315a823d2f67b"
+    variables: "{REF: reflectivity [dBZ]; VEL: radial velocity [m s-1]; SW, ZDR, PHI, RHO}; 0.5 deg lowest tilt used"
+    coordinates: "polar (azimuth [deg], range [km]) from the radar 27.7N 82.4W; gates mapped to lat/lon with fluidpy.diag.radar.beam_ground_range (4/3 Earth) and fluidpy.geo.sphere.destination_point"
+    subset: "one volume (whole file)"
+    fetch_date: "2026-11-05"
+    redistributable: true
+    redownloadable: true
+    raw_files: ["raw/NEXRAD-L2/KTBW20220928_180148_V06"]
+    derived_in_repo: ["movies/ch00/ch00_coordinates_storm/data/img/radar_ktbw.png", "movies/ch00/ch00_coordinates_storm/data/cs.json (radar eye)"]
+    checks: "DS15: eyewall-circle fit (>= 35 dBZ) centre 26.552N 82.278W, eyewall radius 29.7 km, beam about 2.3 km up; IBTrACS 18 UTC fix 12.6 km away; HRRR MSLP minimum 16 km SW"
+    used_by: ["movie ch00_coordinates_storm s17 (radar eye, DS15)", "movie ch00_coordinates_flat (radar-eye position constant RADAR_EYE, no file read)", "research reports/data/ch00_coordinates_research.md section 1c"]
+  NOAA-ERI:
+    catalogue: "NOAA NGS ERI"
+    title: "NOAA National Geodetic Survey Emergency Response Imagery, Hurricane Ian, flight 2022-09-30 'b' RGB, two GeoTIFF tiles over Fort Myers Beach / Estero Island (C0815700w262700n and C0815745w262745n, about 25 cm)"
+    url: "https://noaa-eri-pds.s3.amazonaws.com/2022_Hurricane_Ian/20220930b_RGB/20220930bC0815745w262745n.tif"
+    raw_url: "https://noaa-eri-pds.s3.amazonaws.com/2022_Hurricane_Ian/20220930b_RGB/20220930bC0815700w262700n.tif"
+    route: "anonymous HTTPS from the NODD bucket noaa-eri-pds through fluidpy.data.fetch (whole tiles; Content-Length known)"
+    fetcher: "fluidpy.data.fetch (G: research scripts: scratch/movies/ch00_coordinates/research/_scripts/fmb_aerial_pair.py for C0815700w262700n; research/flood_v2/_scripts/ian_fetch.py for C0815745w262745n)"
+    login: "none"
+    licence: "NOAA data via NODD: open to the public and can be used as desired; attribute NOAA for unaltered data; do not present modified data as original NOAA data or imply NOAA endorsement"
+    licence_url: "https://registry.opendata.aws/noaa-eri/"
+    citation: "NOAA National Geodetic Survey, Remote Sensing Division: Emergency Response Imagery, Hurricane Ian 2022. NOAA Emergency Response Imagery was accessed on 2026-11-05 from https://registry.opendata.aws/noaa-eri"
+    attribution: "NOAA NGS Emergency Response Imagery (public domain)"
+    size_bytes: 202212848
+    raw_sizes_bytes:
+      20220930bC0815700w262700n.tif: 70086745
+      20220930bC0815745w262745n.tif: 132126103
+    sha256_files:
+      20220930bC0815700w262700n.tif: 30cad73c55fd9230864073b031572f28479653a0a3375835830e8ad5e30bb13e
+      20220930bC0815745w262745n.tif: 4df9ae9de5fb774c0cbba63d904f41037a9a7aa2dcd34459c7f7fc109f051d4f
+    variables: "{RGB: 8-bit true colour, about 25 cm pixels}"
+    coordinates: "GeoTIFF, geographic tile named by its NW corner (C0815745w262745n = 81.5745W 26.2745N in deg-min-sec digits); pair with GEE-flood-v2-ian2022 NAIP 2021 on the same footprint"
+    subset: "two tiles of the 30 Sep 2022 flight"
+    fetch_date: "2026-11-05"
+    redistributable: true
+    redownloadable: true
+    raw_files: ["raw/NOAA-ERI/20220930bC0815700w262700n.tif", "raw/NOAA-ERI/20220930bC0815745w262745n.tif"]
+    derived_scratch: ["scratch/movies/ch00_coordinates/research/before_after/ (fmb_aerial_* v1 pair, tile C0815700w262700n)", "scratch/movies/ch00_coordinates/research/flood_v2/clips/ian_aerial_swipe_mid.png (v2 pair, tile C0815745w262745n, rows 650-1860 of 2160)"]
+    derived_note: "research only; no movie or repo product uses these tiles yet (Ian aerial slider proposed, not adopted)"
+    used_by: ["research reports/data/ch00_coordinates_research.md section 4 and reports/data/ch00_coordinates_flood_visuals.md section 3 (Ian before/after aerial slider candidate)"]
+  USGS-STN:
+    catalogue: "USGS STN"
+    title: "USGS Short-Term Network (STN) Flood Event Viewer web services: event list (Events.json) - FAILED fetch, no data kept"
+    url: "https://stn.wim.usgs.gov/STNServices/Events.json"
+    raw_url: "https://stn.wim.usgs.gov/FEV"
+    route: "anonymous HTTPS through fluidpy.data.fetch on 2026-11-05 00:53:58; the endpoint answered with the web app's HTML page (8,464 B) instead of JSON, so the file was deleted the same day; high-water marks for Ian were NOT obtained"
+    fetcher: "fluidpy.data.fetch (ad hoc research call on 2026-11-05; no kept script in research/_scripts names Events.json)"
+    login: "none"
+    licence: "USGS-authored data: U.S. public domain; USGS asks for credit ('Credit: U.S. Geological Survey'); STN data may be provisional"
+    licence_url: "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+    citation: "U.S. Geological Survey, Short-Term Network (STN) database and Flood Event Viewer, https://stn.wim.usgs.gov/FEV"
+    attribution: "Credit: U.S. Geological Survey"
+    size_bytes: 0
+    sha256_log_html: "29c665198540d946b4bb5814490481cbb43d5d87f39328792c9e5768b5e84c29"
+    subset: "none kept"
+    fetch_date: "2026-11-05"
+    redistributable: true
+    redownloadable: false
+    raw_files: []
+    raw_files_removed: ["raw/USGS-STN/Events.json"]
+    used_by: ["none (the Fort Myers Beach surge height in the movie comes from the NHC Tropical Cyclone Report, see reports/data/NOAA-COOPS.md)"]
+  ERA5-CDS-ian2022-z:
+    catalogue: "ERA5-CDS"
+    title: "ERA5 geopotential on 18 pressure levels (1000-100 hPa), Hurricane Ian, 2022-09-28 18 UTC, 20-32N 90-75W, 0.25 deg (layer heights for the cylindrical stack)"
+    url: "https://cds.climate.copernicus.eu/datasets/reanalysis-era5-pressure-levels"
+    route: "CDS API through fluidpy.data.fetch(retrieve=...) (fluidpy.data.cds.retrieve), server-side area [32, -90, 20, -75], 18 levels, one hour; 106,698 B in 42.4 s transfer (887 s with the CDS queue), final ERA5"
+    fetcher: "fluidpy.data.cds.retrieve; product fluidpy.data.stack.stack_product"
+    login: "CDS (free account; token in %USERPROFILE%/.cdsapirc, never in the repo)"
+    licence: "CC-BY 4.0 (Copernicus licence); attribution required"
+    licence_url: "https://cds.climate.copernicus.eu/licences/cc-by"
+    citation: "Hersbach, H., et al., 2020: The ERA5 global reanalysis. Q. J. R. Meteorol. Soc., 146, 1999-2049, doi:10.1002/qj.3803; ERA5 hourly data on pressure levels from 1940 to present, C3S CDS, doi:10.24381/cds.bd0915c6"
+    attribution: "Contains modified Copernicus Climate Change Service information 2026. Neither the European Commission nor ECMWF is responsible for any use that may be made of the Copernicus information or data it contains."
+    size_bytes: 106698
+    sha256: "2bd66393e7a73f184cf463033036dfe0b27cd7260cc272e2766f50e4889c6ecd"
+    sha256_derived:
+      era5_ian_2022-09-28T18_z18.nc: 214daef5e1a44dfe03e2daa1387eb03200d3bc0bfe6cb2900eb2e8bbc9798b0a
+    variables: "{z: geopotential [m2 s-2]; derived zg = z / 9.80665 [m]}"
+    coordinates: "CDS lat N->S; derived lat S->N, level bottom -> top, same 49 x 61 grid as the ERA5-ARCO-ian2022-pl u/v product (verified identical)"
+    subset: "2022-09-28T18, levels 1000, 975, 950, 925, 900, 850, 800, 700, 600, 500, 400, 300, 250, 200, 175, 150, 125, 100 hPa, area [32, -90, 20, -75]"
+    fetch_date: "2026-10-29"
+    redistributable: true
+    redownloadable: true
+    raw_files: ["raw/ERA5-CDS-ian2022-z/era5_ian_pl_z_18lev_2022-09-28T18.nc"]
+    derived_on_root: ["derived/ch00/era5_ian_2022-09-28T18_z18.nc"]
+    derived_in_repo: ["data/derived/ch00/era5_ian_2022-09-28T18_z18.nc"]
+    checks: "zg at the ERA5 centre 26.454N 82.391W: 1000 hPa -171 m (below sea level, extrapolated under the 979.6 hPa low), 975 hPa 49 m, 850 hPa 1254 m, 500 hPa 5680 m, 200 hPa 12,422 m, 100 hPa 16,647 m"
+    note: "split out of ERA5-ARCO-ian2022-pl (raw_files_extension / extension_2026-10-29) so that the downloads.log key has its own entry (provenance audit 2026-11-07); report reports/data/ERA5-ARCO-ian2022-pl.md section 'Stack check and heights extension'"
+    used_by: ["movie ch00_coordinates s14 K5 Ian cylindrical stack (layer heights; retrofit 5b)"]
+  GOES16-ABI-M1-ian2022:
+    catalogue: "GOES"
+    title: "GOES-16 ABI L2 CMIPM mesoscale sector M1 (1-min), 2022-09-28 18:01:25 UTC, bands 1, 2 (0.5 km), 3 and 13 - Hurricane Ian near landfall"
+    url: "https://noaa-goes16.s3.amazonaws.com/ABI-L2-CMIPM/2022/271/18/OR_ABI-L2-CMIPM1-M6C02_G16_s20222711801253_e20222711801310_c20222711801369.nc"
+    raw_url: "https://registry.opendata.aws/noaa-goes/"
+    route: "anonymous HTTPS from the NODD bucket noaa-goes16 through fluidpy.data.fetch; reprojected with fluidpy.data.goes.to_latlon, true colour from C01-C03 and a contrast stretch, cropped round the radar eye"
+    fetcher: "fluidpy.data.fetch + fluidpy.data.goes.to_latlon; movies/data/build_ch00_coordinates_storm.py (s15-s16)"
+    login: "none"
+    licence: "NOAA data, US Government work, public domain (NODD; attribute NOAA, do not present modified data as original)"
+    licence_url: "https://registry.opendata.aws/noaa-goes/"
+    citation: "GOES-R Calibration Working Group and GOES-R Series Program, 2017: NOAA GOES-R Series ABI Level 2+ Cloud and Moisture Imagery Products. NOAA NCEI, doi:10.7289/V5736P36"
+    attribution: "NOAA GOES-16 ABI L2 CMIPM (public domain), true colour and contrast stretch by our code"
+    size_bytes: 8283446
+    raw_sizes_bytes:
+      OR_ABI-L2-CMIPM1-M6C01_G16_s20222711801253_e20222711801310_c20222711801367.nc: 1164962
+      OR_ABI-L2-CMIPM1-M6C02_G16_s20222711801253_e20222711801310_c20222711801369.nc: 5496246
+      OR_ABI-L2-CMIPM1-M6C03_G16_s20222711801253_e20222711801310_c20222711801378.nc: 1228982
+      OR_ABI-L2-CMIPM1-M6C13_G16_s20222711801253_e20222711801322_c20222711801390.nc: 393256
+    sha256_files:
+      OR_ABI-L2-CMIPM1-M6C01_G16_s20222711801253_e20222711801310_c20222711801367.nc: 20d67d6a0a5f2dcc17eacfd14a8934f9018f39622734502ae0f2003e7d0e26eb
+      OR_ABI-L2-CMIPM1-M6C02_G16_s20222711801253_e20222711801310_c20222711801369.nc: fe964383fb4bf362319e5b9ec72a4c8d10cbcd253299f6635f8d5f55d1b9ad3e
+      OR_ABI-L2-CMIPM1-M6C03_G16_s20222711801253_e20222711801310_c20222711801378.nc: ac6da5a354d80e9ab47854295452279b6f1ad6d072dc5dc91fef40e29a603199
+      OR_ABI-L2-CMIPM1-M6C13_G16_s20222711801253_e20222711801322_c20222711801390.nc: 866b0316db524fcf0259a837caa0f813f89d87129d4ba9e7fb36f53f191a805a
+    variables: "{CMI C01-C03: reflectance factor; CMI C13: brightness temperature [K]}"
+    coordinates: "GOES fixed grid x/y scan angles [rad]; mesoscale sector about 1000 x 1000 km"
+    subset: "one 1-min scan, four bands (C13 research only: eye centroid check)"
+    fetch_date: "2026-11-05"
+    redistributable: true
+    redownloadable: true
+    raw_files: ["raw/GOES16-ABI/OR_ABI-L2-CMIPM1-M6C01_G16_s20222711801253_e20222711801310_c20222711801367.nc", "raw/GOES16-ABI/OR_ABI-L2-CMIPM1-M6C02_G16_s20222711801253_e20222711801310_c20222711801369.nc", "raw/GOES16-ABI/OR_ABI-L2-CMIPM1-M6C03_G16_s20222711801253_e20222711801310_c20222711801378.nc", "raw/GOES16-ABI/OR_ABI-L2-CMIPM1-M6C13_G16_s20222711801253_e20222711801322_c20222711801390.nc"]
+    derived_in_repo: ["movies/ch00/ch00_coordinates_storm/data/img/goes_eye.jpg"]
+    derived_scratch: ["scratch/movies/ch00_coordinates/research/ian_goes_meso.npz"]
+    checks: "DS13: eye pixels darker than the eyewall ring; C13 > 270 K eye centroid 26.597N 82.445W (cloud-top parallax about 9 km NW), 17 km from the radar eye"
+    used_by: ["movie ch00_coordinates_storm s15-s16 (satellite plate round the radar eye, DS13)", "research reports/data/ch00_coordinates_research.md section 2"]
+  HRRR-zarr-prs-ian2022:
+    catalogue: "HRRR"
+    title: "NOAA HRRR 3 km hour-0 analysis on pressure levels (prs store), Hurricane Ian 2022-09-28 18 UTC: UGRD, VGRD, VVEL, HGT at 975, 925, 850, 700, 500, 300, 200, 150, 125 hPa over 24.5-28.5N 84.5-80.5W, plus UGRD, VGRD at 925, 850, 500, 200, 150 hPa on a wider +-250 km square"
+    url: "s3://hrrrzarr/prs/20220928/20220928_18z_anl.zarr"
+    raw_url: "https://registry.opendata.aws/noaa-hrrr-pds/"
+    route: "anonymous HRRR-zarr archive (University of Utah), one fetch per level and variable: fluidpy.data.fetch(HRRR_PRS, key='HRRR-zarr', subset={'group': '<lv>mb/<var>/<lv>mb', 'isel': window}); research ian_hrrr_prs.py, then movies/data/build_ch00_coordinates_storm.py (cache hits + the 10 wider-window files); about 75 s each, mostly remote metadata"
+    fetcher: "fluidpy.data.fetch (proposed fluidpy.data.hrrr.fetch_fields(store='prs'))"
+    login: "none"
+    licence: "NOAA data via NODD: open to the public and can be used as desired; attribute NOAA for unaltered data; do not present modified data as original NOAA data or imply NOAA endorsement"
+    licence_url: "https://registry.opendata.aws/noaa-hrrr-pds/"
+    citation: "Dowell, D. C., et al., 2022: The High-Resolution Rapid Refresh (HRRR). Part I. Wea. Forecasting, 37, 1371-1395, doi:10.1175/WAF-D-21-0151.1; Gowan, T. A., et al., 2022: Using cloud computing to analyze model output archived in Zarr format. J. Atmos. Oceanic Technol., 39, 449-462, doi:10.1175/JTECH-D-21-0106.1"
+    attribution: "Derived from NOAA HRRR analyses (University of Utah HRRR-zarr archive); not original NOAA data"
+    size_bytes: 1342462
+    raw_sizes_bytes:
+      hrrr_prs_ian_20220928T18_975mb_UGRD.nc: 35596
+      hrrr_prs_ian_20220928T18_975mb_VGRD.nc: 35799
+      hrrr_prs_ian_20220928T18_975mb_VVEL.nc: 12934
+      hrrr_prs_ian_20220928T18_975mb_HGT.nc: 29862
+      hrrr_prs_ian_20220928T18_925mb_UGRD.nc: 35885
+      hrrr_prs_ian_20220928T18_925mb_VGRD.nc: 36841
+      hrrr_prs_ian_20220928T18_925mb_VVEL.nc: 12316
+      hrrr_prs_ian_20220928T18_925mb_HGT.nc: 23292
+      hrrr_prs_ian_20220928T18_850mb_UGRD.nc: 35967
+      hrrr_prs_ian_20220928T18_850mb_VGRD.nc: 36946
+      hrrr_prs_ian_20220928T18_850mb_VVEL.nc: 12507
+      hrrr_prs_ian_20220928T18_850mb_HGT.nc: 19679
+      hrrr_prs_ian_20220928T18_700mb_UGRD.nc: 35319
+      hrrr_prs_ian_20220928T18_700mb_VGRD.nc: 35886
+      hrrr_prs_ian_20220928T18_700mb_VVEL.nc: 10760
+      hrrr_prs_ian_20220928T18_700mb_HGT.nc: 17012
+      hrrr_prs_ian_20220928T18_500mb_UGRD.nc: 34029
+      hrrr_prs_ian_20220928T18_500mb_VGRD.nc: 35205
+      hrrr_prs_ian_20220928T18_500mb_VVEL.nc: 12387
+      hrrr_prs_ian_20220928T18_500mb_HGT.nc: 15175
+      hrrr_prs_ian_20220928T18_300mb_UGRD.nc: 33779
+      hrrr_prs_ian_20220928T18_300mb_VGRD.nc: 33541
+      hrrr_prs_ian_20220928T18_300mb_VVEL.nc: 9390
+      hrrr_prs_ian_20220928T18_300mb_HGT.nc: 13193
+      hrrr_prs_ian_20220928T18_200mb_UGRD.nc: 32540
+      hrrr_prs_ian_20220928T18_200mb_VGRD.nc: 32102
+      hrrr_prs_ian_20220928T18_200mb_VVEL.nc: 9391
+      hrrr_prs_ian_20220928T18_200mb_HGT.nc: 12670
+      hrrr_prs_ian_20220928T18_150mb_UGRD.nc: 32686
+      hrrr_prs_ian_20220928T18_150mb_VGRD.nc: 32360
+      hrrr_prs_ian_20220928T18_150mb_VVEL.nc: 9391
+      hrrr_prs_ian_20220928T18_150mb_HGT.nc: 12664
+      hrrr_prs_ian_20220928T18_125mb_UGRD.nc: 32718
+      hrrr_prs_ian_20220928T18_125mb_VGRD.nc: 30954
+      hrrr_prs_ian_20220928T18_125mb_VVEL.nc: 9391
+      hrrr_prs_ian_20220928T18_125mb_HGT.nc: 12661
+      hrrr_prs_ian500_20220928T18_925mb_UGRD.nc: 48469
+      hrrr_prs_ian500_20220928T18_925mb_VGRD.nc: 50058
+      hrrr_prs_ian500_20220928T18_850mb_UGRD.nc: 48644
+      hrrr_prs_ian500_20220928T18_850mb_VGRD.nc: 49826
+      hrrr_prs_ian500_20220928T18_500mb_UGRD.nc: 46296
+      hrrr_prs_ian500_20220928T18_500mb_VGRD.nc: 48163
+      hrrr_prs_ian500_20220928T18_200mb_UGRD.nc: 46134
+      hrrr_prs_ian500_20220928T18_200mb_VGRD.nc: 42949
+      hrrr_prs_ian500_20220928T18_150mb_UGRD.nc: 45317
+      hrrr_prs_ian500_20220928T18_150mb_VGRD.nc: 43778
+    variables: "{UGRD, VGRD: grid-relative wind [m s-1] (rotated with fluidpy.data.hrrr.earth_relative); VVEL: omega [Pa s-1] (hour 0: near-constant residue, no usable w); HGT [gpm]}"
+    coordinates: "Lambert conformal x/y [m] (as HRRR-zarr-ian2022); window 172 x 158 points round 26.5N 82.5W; 975 hPa extrapolated below ground near the core (masked p > p_sfc)"
+    subset: "36 files (9 levels x 4 variables, research window) + 10 files (5 levels x 2 variables, +-250 km stack window)"
+    fetch_date: "2026-11-05"
+    redistributable: true
+    redownloadable: true
+    raw_files: ["raw/HRRR-zarr/hrrr_prs_ian_20220928T18_975mb_UGRD.nc", "raw/HRRR-zarr/hrrr_prs_ian_20220928T18_975mb_VGRD.nc", "raw/HRRR-zarr/hrrr_prs_ian_20220928T18_975mb_VVEL.nc", "raw/HRRR-zarr/hrrr_prs_ian_20220928T18_975mb_HGT.nc", "raw/HRRR-zarr/hrrr_prs_ian_20220928T18_925mb_UGRD.nc", "raw/HRRR-zarr/hrrr_prs_ian_20220928T18_925mb_VGRD.nc", "raw/HRRR-zarr/hrrr_prs_ian_20220928T18_925mb_VVEL.nc", "raw/HRRR-zarr/hrrr_prs_ian_20220928T18_925mb_HGT.nc", "raw/HRRR-zarr/hrrr_prs_ian_20220928T18_850mb_UGRD.nc", "raw/HRRR-zarr/hrrr_prs_ian_20220928T18_850mb_VGRD.nc", "raw/HRRR-zarr/hrrr_prs_ian_20220928T18_850mb_VVEL.nc", "raw/HRRR-zarr/hrrr_prs_ian_20220928T18_850mb_HGT.nc", "raw/HRRR-zarr/hrrr_prs_ian_20220928T18_700mb_UGRD.nc", "raw/HRRR-zarr/hrrr_prs_ian_20220928T18_700mb_VGRD.nc", "raw/HRRR-zarr/hrrr_prs_ian_20220928T18_700mb_VVEL.nc", "raw/HRRR-zarr/hrrr_prs_ian_20220928T18_700mb_HGT.nc", "raw/HRRR-zarr/hrrr_prs_ian_20220928T18_500mb_UGRD.nc", "raw/HRRR-zarr/hrrr_prs_ian_20220928T18_500mb_VGRD.nc", "raw/HRRR-zarr/hrrr_prs_ian_20220928T18_500mb_VVEL.nc", "raw/HRRR-zarr/hrrr_prs_ian_20220928T18_500mb_HGT.nc", "raw/HRRR-zarr/hrrr_prs_ian_20220928T18_300mb_UGRD.nc", "raw/HRRR-zarr/hrrr_prs_ian_20220928T18_300mb_VGRD.nc", "raw/HRRR-zarr/hrrr_prs_ian_20220928T18_300mb_VVEL.nc", "raw/HRRR-zarr/hrrr_prs_ian_20220928T18_300mb_HGT.nc", "raw/HRRR-zarr/hrrr_prs_ian_20220928T18_200mb_UGRD.nc", "raw/HRRR-zarr/hrrr_prs_ian_20220928T18_200mb_VGRD.nc", "raw/HRRR-zarr/hrrr_prs_ian_20220928T18_200mb_VVEL.nc", "raw/HRRR-zarr/hrrr_prs_ian_20220928T18_200mb_HGT.nc", "raw/HRRR-zarr/hrrr_prs_ian_20220928T18_150mb_UGRD.nc", "raw/HRRR-zarr/hrrr_prs_ian_20220928T18_150mb_VGRD.nc", "raw/HRRR-zarr/hrrr_prs_ian_20220928T18_150mb_VVEL.nc", "raw/HRRR-zarr/hrrr_prs_ian_20220928T18_150mb_HGT.nc", "raw/HRRR-zarr/hrrr_prs_ian_20220928T18_125mb_UGRD.nc", "raw/HRRR-zarr/hrrr_prs_ian_20220928T18_125mb_VGRD.nc", "raw/HRRR-zarr/hrrr_prs_ian_20220928T18_125mb_VVEL.nc", "raw/HRRR-zarr/hrrr_prs_ian_20220928T18_125mb_HGT.nc", "raw/HRRR-zarr/hrrr_prs_ian500_20220928T18_925mb_UGRD.nc", "raw/HRRR-zarr/hrrr_prs_ian500_20220928T18_925mb_VGRD.nc", "raw/HRRR-zarr/hrrr_prs_ian500_20220928T18_850mb_UGRD.nc", "raw/HRRR-zarr/hrrr_prs_ian500_20220928T18_850mb_VGRD.nc", "raw/HRRR-zarr/hrrr_prs_ian500_20220928T18_500mb_UGRD.nc", "raw/HRRR-zarr/hrrr_prs_ian500_20220928T18_500mb_VGRD.nc", "raw/HRRR-zarr/hrrr_prs_ian500_20220928T18_200mb_UGRD.nc", "raw/HRRR-zarr/hrrr_prs_ian500_20220928T18_200mb_VGRD.nc", "raw/HRRR-zarr/hrrr_prs_ian500_20220928T18_150mb_UGRD.nc", "raw/HRRR-zarr/hrrr_prs_ian500_20220928T18_150mb_VGRD.nc"]
+    derived_scratch: ["scratch/movies/ch00_coordinates/research/ian_hrrr_prs_18z.nc", "scratch/movies/ch00_coordinates/research/ian_hrrr_layers.npz"]
+    derived_in_repo: ["movies/ch00/ch00_coordinates_storm/data/img/ur_925.png", "movies/ch00/ch00_coordinates_storm/data/img/ur_850.png", "movies/ch00/ch00_coordinates_storm/data/img/ur_500.png", "movies/ch00/ch00_coordinates_storm/data/img/ur_200.png", "movies/ch00/ch00_coordinates_storm/data/img/ur_150.png", "movies/ch00/ch00_coordinates_storm/data/img/sec_ian.png", "movies/ch00/ch00_coordinates_storm/data/cs.json"]
+    checks: "max ring-mean v_t 56.8 m/s at r = 30 km (850 hPa); min ring-mean v_r about -16 m/s below about 1.5 km at r 20-80 km; outflow above about 12 km (research section 1d)"
+    used_by: ["movie ch00_coordinates_storm s18-s20 (layer stack and radius-height section, DS16-DS18)", "research reports/data/ch00_coordinates_research.md section 1d and ch00_coordinates_vertical_motion.md"]
+  ERA5-ARCO-sidr2007:
+    catalogue: "ARCO"
+    title: "ERA5 0.25 deg, Cyclone Sidr 2007-11-15 12 UTC (Bangladesh landfall day): msl, u10, v10 and u, v, w, z on 10 levels (1000-125 hPa) - Bay of Bengal storm comparison"
+    url: "gs://gcp-public-data-arco-era5/ar/full_37-1h-0p25deg-chunk-1.zarr-v3"
+    route: "ARCO-ERA5 zarr, anonymous gcsfs, lazy selection through fluidpy.data.era5_arco.fetch_box -> fluidpy.data.fetch (research 2026-11-05; network transfer = whole 37-level chunks)"
+    fetcher: "fluidpy.data.era5_arco.fetch_box"
+    login: "none"
+    licence: "Copernicus licence / CC-BY 4.0 (ERA5 on the C3S CDS); attribution required"
+    licence_url: "https://cds.climate.copernicus.eu/licences/cc-by"
+    citation: "Hersbach, H., et al., 2020: The ERA5 global reanalysis. Q. J. R. Meteorol. Soc., 146, 1999-2049, doi:10.1002/qj.3803; ARCO-ERA5: Carver, R. W., and A. Merose, 2023, 22nd Conf. on AI for Env. Science, AMS, 4A.1"
+    attribution: "Contains modified Copernicus Climate Change Service information 2026. Neither the European Commission nor ECMWF is responsible for any use that may be made of the Copernicus information or data it contains."
+    size_bytes: 428566
+    raw_sizes_bytes:
+      era5_sidr_sfc_msl-u10-v10_2007-11-15T12_2007-11-15T12_1h.nc: 48438
+      era5_sidr_pl_u-v-w-z_1000-975-925-850-700-500-300-200-150-125_2007-11-15T12_2007-11-15T12_1h.nc: 380128
+    sha256_files:
+      era5_sidr_sfc_msl-u10-v10_2007-11-15T12_2007-11-15T12_1h.nc: b0356f7198fdeff7ca3042a0a8559884c5f73883b461a612744fb715644a14dd
+      era5_sidr_pl_u-v-w-z_1000-975-925-850-700-500-300-200-150-125_2007-11-15T12_2007-11-15T12_1h.nc: 0ed34bd36a17947cb567244b26c7818f2a6215ce5b1264323056ffbc68206f09
+    variables: "{msl [Pa], u10, v10 [m s-1], u, v [m s-1], w: omega [Pa s-1], z [m2 s-2]}"
+    coordinates: "store lat N->S, lon 0..359.75"
+    subset: "2007-11-15T12, levels 1000, 975, 925, 850, 700, 500, 300, 200, 150, 125 hPa, Bay of Bengal box"
+    fetch_date: "2026-11-05"
+    redistributable: true
+    redownloadable: true
+    raw_files: ["raw/ERA5-ARCO/era5_sidr_sfc_msl-u10-v10_2007-11-15T12_2007-11-15T12_1h.nc", "raw/ERA5-ARCO/era5_sidr_pl_u-v-w-z_1000-975-925-850-700-500-300-200-150-125_2007-11-15T12_2007-11-15T12_1h.nc"]
+    derived_scratch: ["scratch/movies/ch00_coordinates/research/bob_era5_sidr.nc"]
+    checks: "ERA5 min MSLP 989.7 hPa vs best track 926-944 hPa (far too weak; Sidr not chosen)"
+    used_by: ["research reports/data/ch00_coordinates_research.md section 3 (choice of Bay of Bengal storm: Amphan chosen)"]
+  ERA5-ARCO-ian2022-research:
+    catalogue: "ARCO"
+    title: "ERA5 0.25 deg, Hurricane Ian 2022-09-28 18 UTC: msl, u10, v10 and u, v, w, z on 10 levels (1000-125 hPa) - research comparison with HRRR (2026-11-05)"
+    url: "gs://gcp-public-data-arco-era5/ar/full_37-1h-0p25deg-chunk-1.zarr-v3"
+    route: "ARCO-ERA5 zarr, anonymous gcsfs, lazy selection through fluidpy.data.era5_arco.fetch_box -> fluidpy.data.fetch (research 2026-11-05)"
+    fetcher: "fluidpy.data.era5_arco.fetch_box"
+    login: "none"
+    licence: "Copernicus licence / CC-BY 4.0 (ERA5 on the C3S CDS); attribution required"
+    licence_url: "https://cds.climate.copernicus.eu/licences/cc-by"
+    citation: "Hersbach, H., et al., 2020: The ERA5 global reanalysis. Q. J. R. Meteorol. Soc., 146, 1999-2049, doi:10.1002/qj.3803; ARCO-ERA5: Carver, R. W., and A. Merose, 2023, 22nd Conf. on AI for Env. Science, AMS, 4A.1"
+    attribution: "Contains modified Copernicus Climate Change Service information 2026. Neither the European Commission nor ECMWF is responsible for any use that may be made of the Copernicus information or data it contains."
+    size_bytes: 283595
+    raw_sizes_bytes:
+      era5_ian_sfc_msl-u10-v10_2022-09-28T18_2022-09-28T18_1h.nc: 37740
+      era5_ian_pl_u-v-w-z_1000-975-925-850-700-500-300-200-150-125_2022-09-28T18_2022-09-28T18_1h.nc: 245855
+    sha256_files:
+      era5_ian_sfc_msl-u10-v10_2022-09-28T18_2022-09-28T18_1h.nc: 55ef3529da4ae50b890d8702c7f15a4dde1092e595b904a8f04c1a34dbce9f47
+      era5_ian_pl_u-v-w-z_1000-975-925-850-700-500-300-200-150-125_2022-09-28T18_2022-09-28T18_1h.nc: c62414bf906cfba99de4e9684e07629a34ed2e160d62274098c368d682f50b5c
+    variables: "{msl [Pa], u10, v10 [m s-1], u, v [m s-1], w: omega [Pa s-1], z [m2 s-2]}"
+    coordinates: "store lat N->S, lon 0..359.75"
+    subset: "2022-09-28T18, levels 1000, 975, 925, 850, 700, 500, 300, 200, 150, 125 hPa (differs from ERA5-ARCO-ian2022-pl: 10 levels with z, research box)"
+    fetch_date: "2026-11-05"
+    redistributable: true
+    redownloadable: true
+    raw_files: ["raw/ERA5-ARCO/era5_ian_sfc_msl-u10-v10_2022-09-28T18_2022-09-28T18_1h.nc", "raw/ERA5-ARCO/era5_ian_pl_u-v-w-z_1000-975-925-850-700-500-300-200-150-125_2022-09-28T18_2022-09-28T18_1h.nc"]
+    derived_scratch: ["scratch/movies/ch00_coordinates/research/bob_era5_ian.nc"]
+    checks: "ERA5 Ian: max ring-mean v_t 33.9 m/s at r = 75 km, min MSLP 979.6 hPa vs best track 938 hPa; ring-mean w 0.28-0.45 m/s (too coarse for an eyewall)"
+    used_by: ["research reports/data/ch00_coordinates_research.md section 1d and ch00_coordinates_vertical_motion.md section 2 (ERA5 vs HRRR vs TDR)"]
+  ERA5-ARCO-brest-20231101-d2m:
+    catalogue: "ARCO"
+    title: "ERA5 hourly 2 m dew point and temperature near Brest, 2023-11-01T00 to 2023-11-02T23 UTC, 48-49N 5-4W (5 x 5 points, 0.25 deg) - ARCO cross-check of the CDS time series"
+    url: "gs://gcp-public-data-arco-era5/ar/full_37-1h-0p25deg-chunk-1.zarr-v3"
+    route: "ARCO-ERA5 zarr, anonymous gcsfs, lazy selection through fluidpy.data.era5_arco.fetch_box -> fluidpy.data.fetch (2026-10-27)"
+    fetcher: "fluidpy.data.era5_arco.fetch_box; product written by fluidpy.data.reduce (float32, zlib, provenance attrs)"
+    login: "none"
+    licence: "Copernicus licence / CC-BY 4.0 (ERA5 on the C3S CDS); attribution required"
+    licence_url: "https://cds.climate.copernicus.eu/datasets/reanalysis-era5-single-levels"
+    citation: "Hersbach, H., et al., 2020: The ERA5 global reanalysis. Q. J. R. Meteorol. Soc., 146, 1999-2049, doi:10.1002/qj.3803; ERA5 hourly data on single levels, C3S CDS, doi:10.24381/cds.adbb2d47; via ARCO-ERA5 (Carver and Merose 2023)"
+    attribution: "Contains modified Copernicus Climate Change Service information 2026. Neither the European Commission nor ECMWF is responsible for any use that may be made of the Copernicus information or data it contains."
+    size_bytes: 21748
+    sha256_raw_subsets:
+      era5_brest_d2m-t2m_2023-11-01T00_2023-11-02T23_1h.nc: 1901c40467e4da63b9f952ef6193d80112c9eea2b7e12633cdf1edf4b1753f5b
+    sha256_derived:
+      era5_brest_2023-11-01_02_d2m_t2m_1h.nc: 272da5ec20ec70f9f7389c7f8621e721880f2b63e85f517e8d77c9a84259d64e
+    variables: "{d2m: 2 m dew point [K], t2m: 2 m temperature [K]}"
+    coordinates: "derived lat S->N 48.0..49.0, lon -5.0..-4.0 (wrapped from 355..356 E), time hourly UTC (48)"
+    subset: "2023-11-01T00..2023-11-02T23, 5 x 5 points"
+    fetch_date: "2026-10-27"
+    redistributable: true
+    redownloadable: true
+    raw_files: ["raw/ERA5-ARCO/era5_brest_d2m-t2m_2023-11-01T00_2023-11-02T23_1h.nc"]
+    derived_on_root: ["derived/ch00/era5_brest_2023-11-01_02_d2m_t2m_1h.nc"]
+    derived_note: "26,353 B on G: only (not copied to the repo; the repo carries the CDS point series era5_brest_2023-11-01_02_t2m_d2m_msl_1h.nc of ERA5-CDS-timeseries); the raw file is also listed under ERA5-CDS-ciaran2023-850 (cross-check route, raw_note there); registered by the provenance audit 2026-11-07"
+    used_by: ["cross-check of ERA5-CDS-timeseries (Brest 1-2 Nov 2023, movie ch00_weather_basics); no movie reads it directly"]
+  NASA-GIBS-ch00co-storms:
+    catalogue: "GIBS"
+    title: "NASA GIBS MODIS Terra/Aqua Corrected Reflectance true colour, research stills of Cyclone Sidr (2007-11-15), Cyclone Aila (2009-05-25) and Hurricane Ian (2022-09-28)"
+    url: "https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi"
+    route: "WMS GetMap (anonymous) through fluidpy.data.gibs.fetch_wms and the disk guard (research 2026-11-05)"
+    fetcher: "fluidpy.data.gibs.fetch_wms"
+    login: "none"
+    licence: "NASA EOSDIS: NASA-led mission data CC0, no use restrictions; credit NASA; no endorsement implied"
+    licence_url: "https://www.earthdata.nasa.gov/engage/open-data-services-software-policies/data-use-guidance"
+    citation: "NASA EOSDIS GIBS / Worldview, layers MODIS_Terra_CorrectedReflectance_TrueColor and MODIS_Aqua_CorrectedReflectance_TrueColor (NASA LANCE)"
+    attribution: "Imagery from the NASA Worldview application (https://worldview.earthdata.nasa.gov), part of the NASA Earth Science Data and Information System (ESDIS)"
+    size_bytes: 515826
+    raw_sizes_bytes:
+      gibs_ch00co_sidr_MODIS_Terra_CorrectedReflectance_TrueColor_2007-11-15.jpg: 138941
+      gibs_ch00co_sidr_MODIS_Aqua_CorrectedReflectance_TrueColor_2007-11-15.jpg: 116115
+      gibs_ch00co_aila_MODIS_Terra_CorrectedReflectance_TrueColor_2009-05-25.jpg: 69356
+      gibs_ch00co_aila_MODIS_Aqua_CorrectedReflectance_TrueColor_2009-05-25.jpg: 54785
+      gibs_ch00co_ian_MODIS_Aqua_CorrectedReflectance_TrueColor_2022-09-28.jpg: 136629
+    variables: "{rgb: 8-bit sRGB}"
+    coordinates: "EPSG:4326, row 0 = north"
+    subset: "five research stills"
+    fetch_date: "2026-11-05"
+    redistributable: true
+    redownloadable: true
+    raw_files: ["raw/NASA-GIBS/gibs_ch00co_sidr_MODIS_Terra_CorrectedReflectance_TrueColor_2007-11-15.jpg", "raw/NASA-GIBS/gibs_ch00co_sidr_MODIS_Aqua_CorrectedReflectance_TrueColor_2007-11-15.jpg", "raw/NASA-GIBS/gibs_ch00co_aila_MODIS_Terra_CorrectedReflectance_TrueColor_2009-05-25.jpg", "raw/NASA-GIBS/gibs_ch00co_aila_MODIS_Aqua_CorrectedReflectance_TrueColor_2009-05-25.jpg", "raw/NASA-GIBS/gibs_ch00co_ian_MODIS_Aqua_CorrectedReflectance_TrueColor_2022-09-28.jpg"]
+    derived_scratch: ["scratch/movies/ch00_coordinates/research/bob_gibs_sheet.png", "scratch/movies/ch00_coordinates/research/bob_eye_zoom.png"]
+    used_by: ["research reports/data/ch00_coordinates_research.md section 3 (Sidr clear eye 15 Nov; Aila none) - not in a movie"]
+  NASA-GIBS-normandy-2024-06-24:
+    catalogue: "GIBS"
+    title: "NASA GIBS MODIS Aqua Corrected Reflectance true colour, Normandy, 24 June 2024 (sea-breeze cumulus line inland of the Channel coast)"
+    url: "https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi"
+    route: "WMS GetMap (anonymous) through fluidpy.data.gibs.fetch_wms and the disk guard (2026-11-04, movie #6 D5 extension)"
+    fetcher: "fluidpy.data.gibs.fetch_wms"
+    login: "none"
+    licence: "NASA EOSDIS: NASA-led mission data CC0, no use restrictions; credit NASA; no endorsement implied"
+    licence_url: "https://www.earthdata.nasa.gov/engage/open-data-services-software-policies/data-use-guidance"
+    citation: "NASA EOSDIS GIBS / Worldview, layer MODIS_Aqua_CorrectedReflectance_TrueColor (NASA LANCE)"
+    attribution: "Imagery from the NASA Worldview application (https://worldview.earthdata.nasa.gov), part of the NASA Earth Science Data and Information System (ESDIS)"
+    size_bytes: 113221
+    sha256: "b2bf92e12f7779c67244ac18dbf379a6b064f58ce572dfca3d2f8dfb55e63ad3"
+    variables: "{rgb: 8-bit sRGB}"
+    coordinates: "EPSG:4326, row 0 = north"
+    subset: "one image, 2024-06-24"
+    fetch_date: "2026-11-04"
+    redistributable: true
+    redownloadable: true
+    raw_files: ["raw/NASA-GIBS/gibs_normandy_seabreeze_MODIS_Aqua_CorrectedReflectance_TrueColor_2024-06-24.jpg"]
+    derived_in_repo: ["movies/ch00/ch00_gradient/data/img/sb_modis.jpg (re-encoded JPEG, quality 90)"]
+    used_by: ["movie ch00_gradient s35 (sea breeze, D5; with ERA5-ARCO-seabreeze-20240624)"]
+  ETOPO2022-60s-alps:
+    catalogue: "NOAA NCEI"
+    title: "ETOPO 2022 60-arc-second surface elevation, subset 43-49N 4-17E (the Alps)"
+    url: "https://www.ncei.noaa.gov/products/etopo-global-relief-model"
+    raw_url: "https://www.ngdc.noaa.gov/thredds/dodsC/global/ETOPO2022/60s/60s_surface_elev_netcdf/ETOPO_2022_v1_60s_N90W180_surface.nc"
+    login: "none"
+    licence: "US Government work, public domain"
+    licence_url: "https://www.ncei.noaa.gov/products/etopo-global-relief-model"
+    citation: "NOAA National Centers for Environmental Information, 2022: ETOPO 2022 15 Arc-Second Global Relief Model. doi:10.25921/fd45-gt74"
+    attribution: "ETOPO 2022, NOAA NCEI (public domain)"
+    route: "OPeNDAP subset (pydap) via fluidpy.data.fetch, map-toolkit capability tests 2026-10-27 11:39; reused by two movies and two maptools recipes"
+    fetcher: "fluidpy.data.fetch (fluidpy.data.etopo)"
+    size_bytes: 851400
+    sha256: "49f86a094b3b328cfad7eaaa5030b36c975d8137d01a61e53e85f9ccc0a07ecc"
+    variables: "{z: surface elevation [m] (EGM2008 heights; < 0 = sea floor)}"
+    coordinates: "lat S->N, lon -180..180, 1/60 deg cell centres"
+    subset: "43-49N 4-17E"
+    fetch_date: "2026-10-27"
+    redistributable: true
+    redownloadable: true
+    raw_files: ["raw/ETOPO2022-60s/etopo2022_60s_alps_43-49N_4-17E.nc"]
+    derived_in_repo: ["movies/ch00/ch00_gradient/data/img/alps_slope.png (slope magnitude, DG13)", "movies/ch00/ch00_coordinates/data/co.json (key alps: relief profile along 46.5N, 5-16E, s27)"]
+    used_by: ["movie ch00_gradient s16 (Alps slope map, DG13; section B with ETOPO2022-15s-montblanc)", "movie ch00_coordinates s27 (build 1 archive: Alps profile under the 1000-500 hPa standard heights, DC26)", "tools/maptools/recipes/alps_heightmap.yaml, alps_relief.yaml"]
+  ETOPO2022-60s-swflorida:
+    catalogue: "NOAA NCEI"
+    title: "ETOPO 2022 60-arc-second surface elevation, subset 24.5-27.5N 84.5-81.5W (south-west Florida shelf, Hurricane Ian landfall)"
+    url: "https://www.ncei.noaa.gov/products/etopo-global-relief-model"
+    raw_url: "https://www.ngdc.noaa.gov/thredds/dodsC/global/ETOPO2022/60s/60s_surface_elev_netcdf/ETOPO_2022_v1_60s_N90W180_surface.nc"
+    login: "none"
+    licence: "US Government work, public domain"
+    licence_url: "https://www.ncei.noaa.gov/products/etopo-global-relief-model"
+    citation: "NOAA National Centers for Environmental Information, 2022: ETOPO 2022 15 Arc-Second Global Relief Model. doi:10.25921/fd45-gt74"
+    attribution: "ETOPO 2022, NOAA NCEI (public domain)"
+    route: "OPeNDAP subset (pydap) via fluidpy.data.fetch, movies/data/build_ch00_coordinates_storm.py (2026-11-05)"
+    fetcher: "fluidpy.data.fetch (subset {'vars': ['z'], 'sel': {'lat': slice(24.5, 27.5), 'lon': slice(-84.5, -81.5)}})"
+    size_bytes: 88853
+    sha256: "7d2c8ba5224348b0785cce677be4b9fd017acd42ab83c6221ff90aa9e3a911ea"
+    variables: "{z: surface elevation [m]; < 0 = sea floor}"
+    coordinates: "lat S->N, lon -180..180 (the file name's '-84.5--81.5E' means 84.5-81.5 W)"
+    subset: "24.5-27.5N 84.5-81.5W"
+    fetch_date: "2026-11-05"
+    redistributable: true
+    redownloadable: true
+    raw_files: ["raw/ETOPO2022-60s/etopo2022_60s_swflorida_24.5-27.5N_-84.5--81.5E.nc"]
+    derived_in_repo: ["movies/ch00/ch00_coordinates_storm/data/cs.json (shelf profile WSW of Fort Myers Beach, s27)"]
+    checks: "DS25: shelf WSW (247.5 deg) of Fort Myers Beach shallower than 20 m for >= 20 km, 50 m only beyond 80 km"
+    used_by: ["movie ch00_coordinates_storm s27 (the wide shallow shelf and the surge, DS25)"]
+  ETOPO2022-60s-captests:
+    catalogue: "NOAA NCEI"
+    title: "ETOPO 2022 60-arc-second surface elevation, map-toolkit capability-test subsets (2026-10-27): global at 10 arc-minutes, Paris basin 47.5-50N 0.5-4.5E, NW Europe 40-58N 12W-12E"
+    url: "https://www.ncei.noaa.gov/products/etopo-global-relief-model"
+    raw_url: "https://www.ngdc.noaa.gov/thredds/dodsC/global/ETOPO2022/60s/60s_surface_elev_netcdf/ETOPO_2022_v1_60s_N90W180_surface.nc"
+    login: "none"
+    licence: "US Government work, public domain"
+    licence_url: "https://www.ncei.noaa.gov/products/etopo-global-relief-model"
+    citation: "NOAA National Centers for Environmental Information, 2022: ETOPO 2022 15 Arc-Second Global Relief Model. doi:10.25921/fd45-gt74"
+    attribution: "ETOPO 2022, NOAA NCEI (public domain)"
+    route: "OPeNDAP subsets (pydap) via fluidpy.data.fetch during the map-toolkit capability tests (research/movie_maps_toolkit.md); the global file is a 10' stride of the 60\" grid"
+    fetcher: "fluidpy.data.fetch (fluidpy.data.etopo)"
+    size_bytes: 10379877
+    raw_sizes_bytes:
+      etopo2022_10min_global.nc: 5820510
+      etopo2022_60s_paris_47.5-50N_0.5-4.5E.nc: 136600
+      etopo2022_60s_nweurope_40-58N_-12-12E.nc: 4422767
+    sha256_files:
+      etopo2022_10min_global.nc: 635875a034f457ce79f535600891ed11186695f0e3162d14952059b0a245cff0
+      etopo2022_60s_paris_47.5-50N_0.5-4.5E.nc: c469d63de892da820d596ae4c963f0e8344d547de976a2d733684c817298aafa
+      etopo2022_60s_nweurope_40-58N_-12-12E.nc: fb2e6b9069eeeae90e8259feb9bea894e60904adf51feb576af7a5a8bec1cd13
+    variables: "{z: surface elevation [m]}"
+    coordinates: "lat S->N, lon -180..180"
+    subset: "three boxes (see title)"
+    fetch_date: "2026-10-27"
+    redistributable: true
+    redownloadable: true
+    raw_files: ["raw/ETOPO2022-60s/etopo2022_10min_global.nc", "raw/ETOPO2022-60s/etopo2022_60s_paris_47.5-50N_0.5-4.5E.nc", "raw/ETOPO2022-60s/etopo2022_60s_nweurope_40-58N_-12-12E.nc"]
+    used_by: ["map-toolkit capability tests only (no movie or figure reads them as of 2026-11-07)"]
+  GEE-flood-v2-amphan2020:
+    catalogue: "GEE"
+    title: "Flood research v2 arrays, Cyclone Amphan 2020 (Kolkata-Khulna region 87.6-90.8E 21.45-23.35N, and the close box 88.8-89.92E 22.12-22.75N): MODIS daily MOD/MYD09 7-2-1 (9, 16, 18, 23, 29 May, 3 Jun), MOD09A1 8-day (8, 24 May, 1 Jun), MODIS clear-pixel median composites before/after, Sentinel-1 VV orbit 150 (16, 22, 28 May) + JRC GSW, Sentinel-2 SR (14, 16 May, 3 Jun) and Landsat 8 SR (8, 24 May) on the close box"
+    url: "ee://ch00_flood_v2/"
+    route: "Google Earth Engine computePixels (NPY) through fluidpy.data.fetch(ee://..., retrieve=...) and the disk guard; research scratch/movies/ch00_coordinates/research/flood_v2/_scripts/amphan_fetch.py, amphan_close.py; one .request.json sidecar per array (asset, dates, bands, bounds_WSEN, size, licence, credit)"
+    fetcher: "research/flood_v2/_scripts/geefetch.py (pixels / pixels_bundle: ee.data.computePixels -> fluidpy.data.fetch(ee://ch00_flood_v2/<name>, retrieve=...)); copy in the repo, original on G: scratch/movies/ch00_coordinates/research/flood_v2/_scripts/"
+    login: "Earth Engine (the user's project; credentials outside the repo)"
+    licence: "per array (see request.json): NASA MODIS open data; Copernicus Sentinel data terms (free, attribution); USGS Landsat public domain; JRC GSW v1.4 CC-BY 4.0"
+    licence_url: "https://lpdaac.usgs.gov/data/data-citation-and-policies/"
+    citation: "Vermote, E., Wolfe, R. (2021): MODIS Surface Reflectance V061, NASA LP DAAC, doi:10.5067/MODIS/MOD09GQ.061, doi:10.5067/MODIS/MOD09GA.061, doi:10.5067/MODIS/MOD09A1.061; Copernicus Sentinel-1 GRD and Sentinel-2 L2A (ESA); Landsat 8 C2 L2 (USGS); Pekel, J.-F., et al. (2016) Nature 540, 418-422, doi:10.1038/nature20584"
+    attribution: "NASA MODIS (LP DAAC); Contains modified Copernicus Sentinel data 2020; Landsat 8 image courtesy of the U.S. Geological Survey; EC JRC / Google Global Surface Water v1.4; processed in Google Earth Engine"
+    size_bytes: 347781362
+    raw_sizes_bytes:
+      ch00_flood_v2/modis_wide_MOD_2020-05-16.npy: 13158576
+      ch00_flood_v2/modis_wide_MOD_2020-05-09.npy: 13158576
+      ch00_flood_v2/modis_wide_MYD_2020-05-18.npy: 13158576
+      ch00_flood_v2/close_s2.npz: 94188700
+      ch00_flood_v2/modis_wide_MOD_2020-05-23.npy: 13158576
+      ch00_flood_v2/modis_wide_MYD_2020-05-29.npy: 13158576
+      ch00_flood_v2/modis_wide_MOD_2020-06-03.npy: 13158576
+      ch00_flood_v2/mod8_wide_2020-05-08.npy: 13158576
+      ch00_flood_v2/mod8_wide_2020-05-24.npy: 13158576
+      ch00_flood_v2/mod8_wide_2020-06-01.npy: 13158576
+      ch00_flood_v2/close_l8.npz: 62792474
+      ch00_flood_v2/modcomp_wide.npz: 26317476
+      ch00_flood_v2/wide_s1_jrc.npz: 46055528
+    sha256_files:
+      ch00_flood_v2/modis_wide_MOD_2020-05-16.npy: 88c565984e43ea52c26f750db4d96dd37d2654401e6cce71d8be9ba4fffe9aeb
+      ch00_flood_v2/modis_wide_MOD_2020-05-09.npy: 7c90b91baf7765c36947eace04a2e620d907e42641e6be3d458f2a166b50bd49
+      ch00_flood_v2/modis_wide_MYD_2020-05-18.npy: 897d0da56c3f60d7d8df42fcd114ef2505607f51223314ac93b10ef9d628c274
+      ch00_flood_v2/close_s2.npz: 4367e5453256e529689c1429349db53443f5b0c9910d79098defa59d74dc65ec
+      ch00_flood_v2/modis_wide_MOD_2020-05-23.npy: 8439b064de424be84b34c2a4fe0858e6db14014fecd93c3771884708ea29fed5
+      ch00_flood_v2/modis_wide_MYD_2020-05-29.npy: d3edaecbd865632c479585a5359ef6b95beb4d91cba8b9bb5399e00b280ca047
+      ch00_flood_v2/modis_wide_MOD_2020-06-03.npy: 5ecf9714dd7e03fdda6912d063f4f7d1a02f83df702aa359dc0ca3eabe7523a5
+      ch00_flood_v2/mod8_wide_2020-05-08.npy: 1ffad0a750add68d43262b23e08a9238fbc38843542949092463379c42729b1c
+      ch00_flood_v2/mod8_wide_2020-05-24.npy: 3be5469d395207cd71af621366f5ede8f2d8b9400f9d8f4acab8eb6f009f1b27
+      ch00_flood_v2/mod8_wide_2020-06-01.npy: 0e67f05734efd1789507f3775a090ae07d90778bcd35a678abecaf35f61ffa44
+      ch00_flood_v2/close_l8.npz: 512129936829cbb72549da0874731520d284fe3213752b29c3e3319429246c8f
+      ch00_flood_v2/modcomp_wide.npz: 8e9958deb6773812623bfc24e67e8816a81ce0470ddde1a3be0582ffd6a88138
+      ch00_flood_v2/wide_s1_jrc.npz: bcd0dc866053b672e30401d2f9152e3c83d727255d0bb1ca90399ec793682fa4
+    variables: "{MODIS: reflectance x 1e4 + state QA; S1: sigma0 VV [dB]; S2/L8: reflectance (scale per request.json) + cloud probability / QA_PIXEL; JRC: occurrence [%], seasonality [months]}"
+    coordinates: "EPSG:4326 grids from request.json bounds_WSEN and size, row 0 = north"
+    subset: "research arrays not used by a movie (the movie uses GEE-S1-amphan2020 close_s1/close_jrc and GEE-MODIS-flood-v3)"
+    fetch_date: "2026-11-05"
+    redistributable: true
+    redownloadable: true
+    raw_files: ["raw/GEE/ch00_flood_v2/modis_wide_MOD_2020-05-16.npy", "raw/GEE/ch00_flood_v2/modis_wide_MOD_2020-05-09.npy", "raw/GEE/ch00_flood_v2/modis_wide_MYD_2020-05-18.npy", "raw/GEE/ch00_flood_v2/close_s2.npz", "raw/GEE/ch00_flood_v2/modis_wide_MOD_2020-05-23.npy", "raw/GEE/ch00_flood_v2/modis_wide_MYD_2020-05-29.npy", "raw/GEE/ch00_flood_v2/modis_wide_MOD_2020-06-03.npy", "raw/GEE/ch00_flood_v2/mod8_wide_2020-05-08.npy", "raw/GEE/ch00_flood_v2/mod8_wide_2020-05-24.npy", "raw/GEE/ch00_flood_v2/mod8_wide_2020-06-01.npy", "raw/GEE/ch00_flood_v2/close_l8.npz", "raw/GEE/ch00_flood_v2/modcomp_wide.npz", "raw/GEE/ch00_flood_v2/wide_s1_jrc.npz", "raw/GEE/ch00_flood_v2/modis_wide_MOD_2020-05-16.request.json", "raw/GEE/ch00_flood_v2/modis_wide_MOD_2020-05-09.request.json", "raw/GEE/ch00_flood_v2/modis_wide_MYD_2020-05-18.request.json", "raw/GEE/ch00_flood_v2/close_s2.request.json", "raw/GEE/ch00_flood_v2/modis_wide_MOD_2020-05-23.request.json", "raw/GEE/ch00_flood_v2/modis_wide_MYD_2020-05-29.request.json", "raw/GEE/ch00_flood_v2/modis_wide_MOD_2020-06-03.request.json", "raw/GEE/ch00_flood_v2/mod8_wide_2020-05-08.request.json", "raw/GEE/ch00_flood_v2/mod8_wide_2020-05-24.request.json", "raw/GEE/ch00_flood_v2/mod8_wide_2020-06-01.request.json", "raw/GEE/ch00_flood_v2/close_l8.request.json", "raw/GEE/ch00_flood_v2/modcomp_wide.request.json", "raw/GEE/ch00_flood_v2/wide_s1_jrc.request.json"]
+    used_by: ["research reports/data/ch00_coordinates_flood_visuals.md (regional swipe and close-up candidates)"]
+  GEE-flood-v2-ian2022:
+    catalogue: "GEE"
+    title: "Flood research v2 arrays, Hurricane Ian 2022: Sentinel-2 SR 25 and 30 Sep 2022 (82.2-81.8W 26.36-26.56N), NAIP Dec 2021 overview of Estero Island and NAIP on the NOAA ERI tile 20220930bC0815745w262745n footprint (the 'before' of the aerial pair)"
+    url: "ee://ch00_flood_v2/"
+    route: "Google Earth Engine computePixels (NPY) through fluidpy.data.fetch(ee://..., retrieve=...) and the disk guard; research flood_v2/_scripts/ian_fetch.py; .request.json sidecars"
+    fetcher: "research/flood_v2/_scripts/geefetch.py (pixels / pixels_bundle: ee.data.computePixels -> fluidpy.data.fetch(ee://ch00_flood_v2/<name>, retrieve=...)); copy in the repo, original on G: scratch/movies/ch00_coordinates/research/flood_v2/_scripts/"
+    login: "Earth Engine (the user's project; credentials outside the repo)"
+    licence: "Copernicus Sentinel data terms (free, attribution); USDA NAIP public domain"
+    licence_url: "https://sentinels.copernicus.eu/documents/247904/690755/Sentinel_Data_Legal_Notice"
+    citation: "Copernicus Sentinel-2 L2A (ESA); USDA Farm Service Agency, National Agriculture Imagery Program (NAIP) 2021"
+    attribution: "Contains modified Copernicus Sentinel data 2022, processed in Google Earth Engine; USDA Farm Service Agency NAIP (public domain), via Google Earth Engine"
+    size_bytes: 75246966
+    raw_sizes_bytes:
+      ch00_flood_v2/ian_naip_overview.npz: 3618326
+      ch00_flood_v2/ian_s2.npz: 57631514
+      ch00_flood_v2/ian_naip_20220930bC0815745w262745n.npz: 13997126
+    sha256_files:
+      ch00_flood_v2/ian_naip_overview.npz: a93683f90fbec3e60dd6d10f693757b8689797f82adf249e606f35402b991f26
+      ch00_flood_v2/ian_s2.npz: 4073b8de8a908ba1458d02d50860d378872acd443a448c96bab627f016ebc8a1
+      ch00_flood_v2/ian_naip_20220930bC0815745w262745n.npz: de753468f69e03db571d071ecb869dd3fbadce1c18dfc7a4cb10f3ce9a431982
+    variables: "{S2: B12, B8A, B4, B3, B2, B11 x 1e4 + cloud probability [%]; NAIP: R, G, B, N 8-bit}"
+    coordinates: "EPSG:4326 grids from request.json bounds_WSEN and size, row 0 = north"
+    subset: "research arrays; pairs with NOAA-ERI (after)"
+    fetch_date: "2026-11-05"
+    redistributable: true
+    redownloadable: true
+    raw_files: ["raw/GEE/ch00_flood_v2/ian_naip_overview.npz", "raw/GEE/ch00_flood_v2/ian_s2.npz", "raw/GEE/ch00_flood_v2/ian_naip_20220930bC0815745w262745n.npz", "raw/GEE/ch00_flood_v2/ian_naip_overview.request.json", "raw/GEE/ch00_flood_v2/ian_s2.request.json", "raw/GEE/ch00_flood_v2/ian_naip_20220930bC0815745w262745n.request.json"]
+    used_by: ["research reports/data/ch00_coordinates_flood_visuals.md section 3 (Ian aerial and S2 SWIR pairs) - not in a movie"]
+  GEE-flight-patch-bay2020:
+    catalogue: "GEE"
+    title: "Bay of Bengal flight patch 84-94E 15-25N (1400 x 1490): MODIS MCD43A4 NBAR median 1-8 Feb 2020 (bands 1, 4, 3 as R, G, B) and NOAA ETOPO1 bedrock relief on the same grid"
+    url: "ee://ch00_flood_v2/zoom_base"
+    route: "Google Earth Engine computePixels bundle through fluidpy.data.fetch(ee://ch00_flood_v2/zoom_base, retrieve=...) (research flood_v2/_scripts/amphan_close.py zoom_base via geefetch.pixels_bundle; zoom_prep.py only reads it); the movie builder reads the cache hit only (gee_cached('zoom_base', 'npz'))"
+    fetcher: "research/flood_v2/_scripts/geefetch.py (pixels / pixels_bundle: ee.data.computePixels -> fluidpy.data.fetch(ee://ch00_flood_v2/<name>, retrieve=...)); copy in the repo, original on G: scratch/movies/ch00_coordinates/research/flood_v2/_scripts/"
+    login: "Earth Engine (the user's project; credentials outside the repo)"
+    licence: "NASA MODIS MCD43A4 v061 open data; NOAA NCEI ETOPO1 public domain"
+    licence_url: "https://lpdaac.usgs.gov/data/data-citation-and-policies/"
+    citation: "Schaaf, C., Wang, Z. (2021): MODIS/Terra+Aqua BRDF/Albedo Nadir BRDF Adjusted Ref Daily L3 Global 500m V061, NASA LP DAAC, doi:10.5067/MODIS/MCD43A4.061; Amante, C., and B. W. Eakins, 2009: ETOPO1 1 Arc-Minute Global Relief Model. NOAA Tech. Memo. NESDIS NGDC-24, doi:10.7289/V5C8276M"
+    attribution: "NASA MODIS MCD43A4 v061 (NASA open data); NOAA NCEI ETOPO1 (public domain); processed in Google Earth Engine"
+    size_bytes: 16688634
+    sha256: "1586cfe598e0700a7622e392bf8b0b8df0868a86c096f47cd278b200a94fb8ea"
+    variables: "{nbar: reflectance x 1e4 (bands 1, 4, 3); etopo1: bedrock elevation [m]}"
+    coordinates: "EPSG:4326, bounds_WSEN [84, 15, 94, 25], 1400 x 1490, row 0 = north"
+    subset: "one bundle"
+    fetch_date: "2026-11-05"
+    redistributable: true
+    redownloadable: true
+    raw_files: ["raw/GEE/ch00_flood_v2/zoom_base.npz", "raw/GEE/ch00_flood_v2/zoom_base.request.json"]
+    derived_in_repo: ["movies/ch00/ch00_coordinates_storm/data/img/bay_patch.png"]
+    checks: "shelf along 89.0E (ETOPO1): under 20 m for about 33 km, 200 m at 92 km from the coast (flood_visuals report section 2)"
+    used_by: ["movie ch00_coordinates_storm s29 (flight to the Sundarbans, Bay patch)"]
+  GEE-flood-v3-events-research:
+    catalogue: "GEE"
+    title: "Flood research v3 candidate pairs not adopted: MODIS v061 MxD09GQ/GA before/after for Harvey 2017 (Houston), Florence 2018 (North Carolina), Ian 2022 (Fort Myers), Nargis 2008 April pre-storm days, and Sentinel-2 L1C 10/25 Mar 2019 for Idai (Beira)"
+    url: "ee://ch00_flood_v2/"
+    route: "Google Earth Engine computePixels bundles through fluidpy.data.fetch(ee://..., retrieve=...) and the disk guard; research scratch/movies/ch00_coordinates/research/flood_v3/_scripts/fetch_pairs.py with spec_*.json; .request.json sidecars"
+    fetcher: "research/flood_v2/_scripts/geefetch.py (pixels / pixels_bundle: ee.data.computePixels -> fluidpy.data.fetch(ee://ch00_flood_v2/<name>, retrieve=...)); copy in the repo, original on G: scratch/movies/ch00_coordinates/research/flood_v2/_scripts/"
+    login: "Earth Engine (the user's project; credentials outside the repo)"
+    licence: "NASA MODIS open data (LP DAAC); Copernicus Sentinel data terms (free, attribution) for the Idai S2 pair"
+    licence_url: "https://lpdaac.usgs.gov/data/data-citation-and-policies/"
+    citation: "Vermote, E., Wolfe, R. (2021): MODIS Surface Reflectance V061, NASA LP DAAC, doi:10.5067/MODIS/MOD09GQ.061, doi:10.5067/MODIS/MOD09GA.061; Copernicus Sentinel-2 L1C (ESA)"
+    attribution: "NASA MODIS (LP DAAC) via Google Earth Engine; Contains modified Copernicus Sentinel data 2019, processed in Google Earth Engine"
+    size_bytes: 175700658
+    raw_sizes_bytes:
+      ch00_flood_v2/v3_harvey2017.npz: 46234398
+      ch00_flood_v2/v3_ian2022.npz: 35632398
+      ch00_flood_v2/v3_nargis_apr.npz: 36941598
+      ch00_flood_v2/v3_idai_s2.npz: 27994266
+      ch00_flood_v2/v3_florence2018.npz: 28897998
+    sha256_files:
+      ch00_flood_v2/v3_harvey2017.npz: 9b290a844fb24c34356711baef481d203fb7f18a5c2a86ca05fdcf6e9d1331f3
+      ch00_flood_v2/v3_ian2022.npz: 6c546d6982658d31a61e7e206d7f00da00ba5c57e3159dea06c50b351b38d2f3
+      ch00_flood_v2/v3_nargis_apr.npz: 9a74948639b7b99e35c158baffcafa3c9be21a98baaec62ff93917b0eee5a65e
+      ch00_flood_v2/v3_idai_s2.npz: 8e4a823800d10cdd5be15ac012b95f6cf3bac5a74b83609ff5b6c4d32e7a3835
+      ch00_flood_v2/v3_florence2018.npz: c87e8adb32ec4830fd4c9f3c42e0e876c32dce756cfa34b8f5ae8b0c75f03ae3
+    variables: "{MODIS: reflectance x 1e4 (b1, b2, b3, b4, b7), state_1km QA; S2: B12, B8A, B4 TOA x 1e4}"
+    coordinates: "EPSG:4326 grids from request.json bounds_WSEN and size, row 0 = north"
+    subset: "five events (the adopted Nargis 2008 and Idai 2019 MODIS pairs are GEE-MODIS-flood-v3)"
+    fetch_date: "2026-11-05"
+    redistributable: true
+    redownloadable: true
+    raw_files: ["raw/GEE/ch00_flood_v2/v3_harvey2017.npz", "raw/GEE/ch00_flood_v2/v3_ian2022.npz", "raw/GEE/ch00_flood_v2/v3_nargis_apr.npz", "raw/GEE/ch00_flood_v2/v3_idai_s2.npz", "raw/GEE/ch00_flood_v2/v3_florence2018.npz", "raw/GEE/ch00_flood_v2/v3_harvey2017.request.json", "raw/GEE/ch00_flood_v2/v3_ian2022.request.json", "raw/GEE/ch00_flood_v2/v3_nargis_apr.request.json", "raw/GEE/ch00_flood_v2/v3_idai_s2.request.json", "raw/GEE/ch00_flood_v2/v3_florence2018.request.json"]
+    used_by: ["research flood v3 (event survey for movie ch00_coordinates_storm s31-s34) - not in a movie"]
