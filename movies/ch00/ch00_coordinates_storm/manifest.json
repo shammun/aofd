@@ -124,7 +124,8 @@
    ],
    "section_mask": "a ring with any point where p_level > msl",
    "ibtracs_sid": "2020136N10088",
-   "modis": "GIBS MODIS Terra 2020-05-18 (PNG 1400 × 2000 px, 9-19 N, 83-90 E); crop 600 km about the eye, contrast enhanced (lum p10-p99.9 → 30-255, γ 2)"
+   "modis": "GIBS MODIS Terra 2020-05-18 (PNG 1400 × 2000 px, 9-19 N, 83-90 E); crop 600 km about the eye, contrast enhanced (lum p10-p99.9 → 30-255, γ 2)",
+   "nargis_storm": "notes2: GIBS MODIS Aqua 2008-05-02 true colour, contrast enhanced (all channels 120-252 → 0-255, γ 1.6)"
   },
   "flood_v3": {
    "status": "DECIDED v3 (user 2026-11-05): flight = Amphan, swipe = Nargis 2008",
@@ -212,7 +213,8 @@
      "2020-05-22T23:55"
     ],
     "grey": "VV −24 … 0 dB",
-    "new_water": "VV < −18 dB after, not before, drop ≥ 3 dB, not JRC seasonality ≥ 10 months, blobs ≥ 9 px (8-connected): 124.9 km² (UN-SPIDER practice, adapted)"
+    "new_water": "VV < −18 dB after, not before, drop ≥ 3 dB, not JRC seasonality ≥ 10 months, blobs ≥ 9 px (8-connected): 124.9 km² (UN-SPIDER practice, adapted)",
+    "count": "notes2: 34675 new-water pixels × 0.0036026 km² (pixel side 60.02 m); img/amphan_s1_new.png = the counted pixels (cyan, display only)"
    },
    "nargis_ibtracs": "NI 2008117N11090; WMO = IMD 3-min",
    "idai_ibtracs": "SI 2019063S18038; WMO = RSMC La Réunion 10-min",
@@ -346,6 +348,7 @@
   "cst_amphan_clouds_22.jpg": "112ee4bca11fadc655bf7206c832f0df4e84d27946652902e0225c0bd1652b7b",
   "cst_amphan_s1_after.jpg": "cc0a1e3aae3f2b08b056e6f730895b24e6fcd84848bbf3e98bf73578692c1dc8",
   "cst_amphan_s1_before.jpg": "7aa174d63498eb2a06e64a8ac026cfe88d7cdf0a46fc550ccd614110d9abf003",
+  "cst_amphan_s1_new.png": "58307d4e40ef1d564f57c622da196c9f32aa0e570afd28348670b570c7856997",
   "cst_amphan_speed.png": "385d78f2531adc3f4f59feb7c047f82ff74a297866d9ee49e21b44480e8ca856",
   "cst_bay_patch.png": "568a40ed1507fc15e3bca6591ecf07287b8b8db43de38dc01d0a682ac580480e",
   "cst_bmng.jpg": "4c6723e79dc7c1bdb8c193cdf8f946b10b9407bc9fd1164cdf5e75d0aa79ad3b",
@@ -358,7 +361,7 @@
   "cst_idai_tc_before.jpg": "f690c4ab276920f4ef8e19fec9bfc08b8b03df6e0557971f21e3fda8c63cb11d",
   "cst_idai_viirs.jpg": "93ed23d070a3220ab9bc5a77254450310bab1858553f758bda17c77301d5d5fb",
   "cst_modis_amphan.jpg": "a3d6cfce156dbee8158d46baa902b00aed29fda1a7bea0aa9da97db061ebd790",
-  "cst_nargis_storm.jpg": "3ff7716c3c9dca7a6e6a88718079969d27440daedc4c004afc267ae5b3c9004c",
+  "cst_nargis_storm.jpg": "a72baa096d4d5ef4f15418e6cb0046f844c179f533fdc1becc558055506c30a9",
   "cst_nargis_tc_after.jpg": "dea436122718c132917ba56eb3924b576ed00fb1db078043ec747d9a7426fde1",
   "cst_nargis_tc_before.jpg": "a27d36ed1d33355bc4b04ee0e52cb9d4fee3ba706c16cdbcd3bba62ff3188156",
   "cst_radar_ktbw.png": "b99f189328e9e0b64dc5b60a048972510446ab8af6027b6fbf6e54f9824dce95",
@@ -374,11 +377,12 @@
   "cst_ur_925.png": "34d6f5fa262cfb012b83f00114fe546f04ce66cd50ceae87b8ba8094a559978a"
  },
  "data_files": {
-  "cs.json": "631a2b6192aca449f16983cfacf7cea38b9e7a92816b8fb0c28b6581cc527895",
+  "cs.json": "cc12ef92cbf937f2c5fdffb367a595633ecab7bff077f7ccc8cabe9cf1cd9000",
   "img/amphan_clouds_21.jpg": "ffc02bd6210c4169c83a36e046b66e783552da29a696444ee98e147d91cac7fc",
   "img/amphan_clouds_22.jpg": "112ee4bca11fadc655bf7206c832f0df4e84d27946652902e0225c0bd1652b7b",
   "img/amphan_s1_after.jpg": "cc0a1e3aae3f2b08b056e6f730895b24e6fcd84848bbf3e98bf73578692c1dc8",
   "img/amphan_s1_before.jpg": "7aa174d63498eb2a06e64a8ac026cfe88d7cdf0a46fc550ccd614110d9abf003",
+  "img/amphan_s1_new.png": "58307d4e40ef1d564f57c622da196c9f32aa0e570afd28348670b570c7856997",
   "img/amphan_speed.png": "385d78f2531adc3f4f59feb7c047f82ff74a297866d9ee49e21b44480e8ca856",
   "img/bay_patch.png": "568a40ed1507fc15e3bca6591ecf07287b8b8db43de38dc01d0a682ac580480e",
   "img/goes_eye.jpg": "7c365ab70a682f5efc3c3fc2c95069628a7d895ab159045377e255df7dd85d79",
@@ -390,7 +394,7 @@
   "img/idai_tc_before.jpg": "f690c4ab276920f4ef8e19fec9bfc08b8b03df6e0557971f21e3fda8c63cb11d",
   "img/idai_viirs.jpg": "93ed23d070a3220ab9bc5a77254450310bab1858553f758bda17c77301d5d5fb",
   "img/modis_amphan.jpg": "a3d6cfce156dbee8158d46baa902b00aed29fda1a7bea0aa9da97db061ebd790",
-  "img/nargis_storm.jpg": "3ff7716c3c9dca7a6e6a88718079969d27440daedc4c004afc267ae5b3c9004c",
+  "img/nargis_storm.jpg": "a72baa096d4d5ef4f15418e6cb0046f844c179f533fdc1becc558055506c30a9",
   "img/nargis_tc_after.jpg": "dea436122718c132917ba56eb3924b576ed00fb1db078043ec747d9a7426fde1",
   "img/nargis_tc_before.jpg": "a27d36ed1d33355bc4b04ee0e52cb9d4fee3ba706c16cdbcd3bba62ff3188156",
   "img/radar_ktbw.png": "b99f189328e9e0b64dc5b60a048972510446ab8af6027b6fbf6e54f9824dce95",
@@ -406,11 +410,12 @@
   "img/ur_925.png": "34d6f5fa262cfb012b83f00114fe546f04ce66cd50ceae87b8ba8094a559978a"
  },
  "data_sizes_bytes": {
-  "cs.json": 324581,
+  "cs.json": 324671,
   "img/amphan_clouds_21.jpg": 33118,
   "img/amphan_clouds_22.jpg": 66447,
   "img/amphan_s1_after.jpg": 1197775,
   "img/amphan_s1_before.jpg": 1158087,
+  "img/amphan_s1_new.png": 41158,
   "img/amphan_speed.png": 26371,
   "img/bay_patch.png": 2181893,
   "img/goes_eye.jpg": 148883,
@@ -422,7 +427,7 @@
   "img/idai_tc_before.jpg": 203898,
   "img/idai_viirs.jpg": 972738,
   "img/modis_amphan.jpg": 287917,
-  "img/nargis_storm.jpg": 355710,
+  "img/nargis_storm.jpg": 439124,
   "img/nargis_tc_after.jpg": 256613,
   "img/nargis_tc_before.jpg": 241068,
   "img/radar_ktbw.png": 268614,
@@ -2805,6 +2810,33 @@
     13.0
    ],
    "tol": 0,
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS38",
+   "name": "Sentinel-1 new water = pixel count × pixel area: 34675 px × 0.0036026 km² = 124.92 km²; pixel side 60.02 m ('sixty metres'); 60 × 60 = 3600 m² = 0.0036 km²; said 34 700 × 0.0036 = 124.92 ≈ 125 km²",
+   "value": [
+    124.920769,
+    60.02181,
+    0.0036,
+    25.0,
+    124.92
+   ],
+   "ref": [
+    124.92,
+    60.0,
+    0.0036,
+    0.0,
+    125.0
+   ],
+   "tol": [
+    0.05,
+    0.5,
+    1e-12,
+    50,
+    0.5
+   ],
    "pass": true,
    "kind": "check"
   }
@@ -12746,5 +12778,6 @@
    },
    "output_sha256": "9927a7779dcc860df89aa05e93d4832594060741aa7f04076037dfb56098bb4a"
   }
- ]
+ ],
+ "notes2_patch": "2026-11-06: build_ch00_coordinates_storm.py --notes2-patch (same functions as the full build)"
 }

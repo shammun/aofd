@@ -132,6 +132,59 @@ def gee_cached(name: str, ext: str = "npy") -> Path:
                  retrieve=_refuse, quiet=True)
 
 
+def s1_new_water(vb_: np.ndarray, va_: np.ndarray, jrc_seasonality: np.ndarray, sbox: list[float]) -> dict:
+    """Amphan's new water in the Sentinel-1 pair (s30; UN-SPIDER practice, adapted): VV < −18 dB after and not before, a drop of
+    ≥ 3 dB, not permanent water (JRC seasonality ≥ 10 months), blobs ≥ 9 px (8-connected). Shared by the full build and the
+    notes-2 patch (notes2 S5: the pixel count and the pixel area are shown and said; the counted pixels are marked on the picture).
+
+    Parameters: vb_, va_ VV [dB] before / after (NaN = no data); jrc_seasonality [months]; sbox [W, S, E, N] [degrees].
+    Returns {mask (bool array), n_px, km2_px [km²], px_m [m], new_km2 [km²], valid (bool array)}."""
+    from scipy import ndimage as NDI
+    s1w = vb_.shape[1]
+    px_km = (sbox[2] - sbox[0]) * 111.32 * np.cos(np.deg2rad(0.5 * (sbox[1] + sbox[3]))) / s1w
+    km2_px = px_km ** 2
+    valid = np.isfinite(vb_) & np.isfinite(va_)
+    wb_s, wa_s = (vb_ < -18.0) & valid, (va_ < -18.0) & valid
+    new_raw = wa_s & ~wb_s & ((va_ - vb_) <= -3.0) & ~(jrc_seasonality >= 10)
+    lab_, nlab_ = NDI.label(new_raw, structure=np.ones((3, 3)))
+    sizes_ = NDI.sum(new_raw, lab_, index=np.arange(1, nlab_ + 1))
+    new_s1 = np.isin(lab_, 1 + np.where(sizes_ >= 9)[0])
+    n_px = int(new_s1.sum())
+    return {"mask": new_s1, "n_px": n_px, "km2_px": float(km2_px), "px_m": float(px_km * 1000), "new_km2": float(n_px * km2_px), "valid": valid}
+
+
+S1_SAY = {"s1_npx": 34700, "s1_px_m": 60, "s1_px_km2": 0.0036}   # notes2 S5: as said and shown (rounded)
+
+
+def s1_fields(NW: dict) -> dict:
+    """the cs.json fields of the new-water count (notes2 S5)"""
+    return {"n_new_px": NW["n_px"], "px_m": NW["px_m"]}
+
+
+def s1_rows(row, NW: dict) -> None:
+    """DS38 (notes2 S5): the inputs of the 125 km², as shown and said: ≈ 34 700 pixels × (60 m × 60 m = 0.0036 km²) ≈ 125 km²"""
+    row("DS38", f"Sentinel-1 new water = pixel count × pixel area: {NW['n_px']} px × {NW['km2_px']:.7f} km² = {NW['new_km2']:.2f} km²; pixel side "
+        f"{NW['px_m']:.2f} m ('sixty metres'); 60 × 60 = 3600 m² = 0.0036 km²; said 34 700 × 0.0036 = 124.92 ≈ 125 km²",
+        [NW["n_px"] * NW["km2_px"], NW["px_m"], 60 * 60 / 1e6, abs(NW["n_px"] - S1_SAY["s1_npx"]), S1_SAY["s1_npx"] * S1_SAY["s1_px_km2"]],
+        [124.92, 60.0, 0.0036, 0, 125.0], [0.05, 0.5, 1e-12, 50, 0.5])
+
+
+def s1_mask_png(mask: np.ndarray, path: Path) -> None:
+    """notes2 S5: the counted new-water pixels as a cyan RGBA overlay at the radar picture's own grid (one picture pixel = one radar
+    pixel; transparent elsewhere). Display aid only: the count is mask.sum()."""
+    rgb = np.zeros(mask.shape + (3,), np.uint8)
+    rgb[...] = (0, 229, 255)
+    png_rgba(rgb, np.where(mask, 255, 0).astype(np.uint8), path)
+
+
+def storm_stretch(rgb: np.ndarray, lo: float = 120.0, hi: float = 252.0, gamma: float = 1.6) -> np.ndarray:
+    """notes2 S6: contrast enhancement of the GIBS MODIS Aqua true-colour picture of Nargis (2 May 2008), whose cloud tops are
+    nearly uniform white: one linear stretch lo…hi → 0…1 on all three channels, then γ (the eye and the spiral bands show;
+    the source line says 'contrast enhanced', as the GOES and MODIS Amphan pictures)."""
+    x = np.clip((rgb.astype(np.float32) - lo) / (hi - lo), 0, 1) ** gamma
+    return (x * 255 + 0.5).astype(np.uint8)
+
+
 def tdr_retriever(path: str):
     """the FTP retrieve callable for fetch() (research vertical_motion/_scripts/get_tdr.py)"""
     def run(out: Path) -> None:
@@ -312,10 +365,70 @@ def draw_lines(img: np.ndarray, lines_px: list[np.ndarray], rgb, w: int) -> np.n
     return np.asarray(im)
 
 
+def notes2_patch(publics: list[Path]) -> int:
+    """notes-2 fast path (2026-11-06, the full build takes ≈ 1 h): the same functions as the full build (s1_new_water, s1_mask_png,
+    s1_fields, s1_rows, storm_stretch) on the same cached inputs; asserts that the recomputed new-water area equals the one in
+    cs.json, then adds amphan_s1.n_new_px / px_m and say.s1_npx / s1_px_m / s1_px_km2, writes img/amphan_s1_new.png and the
+    contrast-enhanced img/nargis_storm.jpg, appends the DS38 rows and refreshes the manifest's data / asset hashes and sizes."""
+    from PIL import Image
+    import fluidpy.data.gibs as GB2
+    V = json.loads((DATA / "cs.json").read_text(encoding="utf-8"))
+    M = json.loads((OUT / "manifest.json").read_text(encoding="utf-8"))
+    rows: list[dict] = []
+
+    def row(wid, name, val, ref, tol):
+        v, r = np.asarray(val, dtype=float), np.asarray(ref, dtype=float)
+        ok = bool(np.all(np.abs(v - r) <= np.asarray(tol)))
+        rows.append({"id": wid, "name": name, "value": B1.r6(np.ravel(v)[:12]), "ref": B1.r6(np.ravel(r)[:12]), "tol": tol, "pass": ok, "kind": "check"})
+    SBOX = V["amphan_s1"]["box_wsen"]
+    S1 = np.load(gee_cached("close_s1", "npz"))
+    JR = np.load(gee_cached("close_jrc", "npz"))["jrc"]
+    vb_ = S1["s1_o150_2020-05-16"]["VV"].astype(np.float32)
+    va_ = S1["s1_o150_2020-05-22"]["VV"].astype(np.float32)
+    vb_[vb_ == 0], va_[va_ == 0] = np.nan, np.nan
+    NW = s1_new_water(vb_, va_, JR["seasonality"], SBOX)
+    if abs(NW["new_km2"] - V["amphan_s1"]["new_km2"]) > 1e-9 or abs(NW["km2_px"] - V["amphan_s1"]["km2_px"]) > 1e-15:
+        print(f"notes2 patch: recomputed new water {NW['new_km2']} km² != cs.json {V['amphan_s1']['new_km2']} — stop")
+        return 1
+    s1_rows(row, NW)
+    if not all(r["pass"] for r in rows):
+        print("notes2 patch: DS38 FAILED", rows)
+        return 1
+    s1_mask_png(NW["mask"], IMG / "amphan_s1_new.png")
+    gst = GB2.fetch_wms("MODIS_Aqua_CorrectedReflectance_TrueColor", "2008-05-02", (12.6, 19.6), (89.5, 100.5), width=1920, tag="nargis_storm")
+    Image.fromarray(storm_stretch(np.asarray(Image.open(gst).convert("RGB")))).save(IMG / "nargis_storm.jpg", quality=92)
+    V["amphan_s1"].update(s1_fields(NW))
+    V["say"].update(S1_SAY)
+    blob = json.dumps(V, separators=(",", ":"), ensure_ascii=False, allow_nan=False).encode("utf-8")
+    (DATA / "cs.json").write_bytes(blob)
+    imgs = sorted(list(IMG.glob("*.png")) + list(IMG.glob("*.jpg")))
+    data_hashes = {"cs.json": hashlib.sha256(blob).hexdigest(), **{f"img/{p.name}": B1.sha_file(p) for p in imgs}}
+    render = M.get("render_assets", {})
+    for pub in publics:
+        pub.mkdir(parents=True, exist_ok=True)
+        for pimg in imgs:
+            (pub / f"cst_{pimg.name}").write_bytes(pimg.read_bytes())
+        render = {pp_.name: B1.sha_file(pp_) for pp_ in sorted(pub.glob("cst_*"))}
+    M["data_files"], M["render_assets"] = data_hashes, render
+    M["data_sizes_bytes"] = {k: (DATA / k).stat().st_size for k in data_hashes}
+    M["checks"] = [r for r in M["checks"] if r["id"] != "DS38"] + rows
+    M["parameters"]["flood_u1"]["amphan_s1"]["count"] = (f"notes2: {NW['n_px']} new-water pixels × {NW['km2_px']:.7f} km² (pixel side {NW['px_m']:.2f} m); "
+                                                         "img/amphan_s1_new.png = the counted pixels (cyan, display only)")
+    M["parameters"]["amphan"]["nargis_storm"] = "notes2: GIBS MODIS Aqua 2008-05-02 true colour, contrast enhanced (all channels 120-252 → 0-255, γ 1.6)"
+    M["notes2_patch"] = "2026-11-06: build_ch00_coordinates_storm.py --notes2-patch (same functions as the full build)"
+    (OUT / "manifest.json").write_text(json.dumps(M, indent=1, ensure_ascii=False, default=str), encoding="utf-8")
+    print(f"notes2 patch: {NW['n_px']} px × {NW['km2_px']:.7f} km² = {NW['new_km2']:.3f} km²; px {NW['px_m']:.2f} m; DS38 pass; {len(imgs)} images; public {len(publics)}")
+    return 0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--public", type=Path, nargs="*", default=[], help="render public dir(s) for the cst_* assets (prefix cst_: Part 3 owns cs_)")
+    ap.add_argument("--notes2-patch", action="store_true", help="notes-2 fast path: add the S1 pixel count + mask and the contrast-enhanced "
+                    "Nargis picture to the existing cs.json / img / manifest (the full build makes the same products)")
     a = ap.parse_args()
+    if a.notes2_patch:
+        return notes2_patch(a.public)
     from PIL import Image
     from scipy.interpolate import griddata
     from scipy.ndimage import zoom as ndzoom
@@ -1286,7 +1399,7 @@ def main() -> int:
     import fluidpy.data.gibs as GB2
     gst = GB2.fetch_wms("MODIS_Aqua_CorrectedReflectance_TrueColor", "2008-05-02", (12.6, 19.6), (89.5, 100.5), width=1920, tag="nargis_storm")
     inputs.append(Path(gst))
-    Image.open(gst).convert("RGB").save(IMG / "nargis_storm.jpg", quality=92)
+    Image.fromarray(storm_stretch(np.asarray(Image.open(gst).convert("RGB")))).save(IMG / "nargis_storm.jpg", quality=92)   # notes2 S6: contrast enhanced
     ntrack = [[t, nt["lat"][i_], nt["lon"][i_], nt["wmo_wind_kt"][i_]] for i_, t in enumerate(ntt) if "2008-04-28" <= t[:10] <= "2008-05-03"]
     say.update({"shelf_km": 33, "n_before_d": 11, "n_after_h": 66})
     V["flood"] = {**FLOOD, **{"nargis": {**NARGIS, "track": ntrack, "landfall_fix": [nt["lat"][nl[0]], nt["lon"][nl[0]], ntt[nl[0]]], "storm_img_box": [12.6, 19.6, 89.5, 100.5],
@@ -1476,15 +1589,10 @@ def main() -> int:
     vb_ = S1["s1_o150_2020-05-16"]["VV"].astype(np.float32)
     va_ = S1["s1_o150_2020-05-22"]["VV"].astype(np.float32)
     vb_[vb_ == 0], va_[va_ == 0] = np.nan, np.nan
-    s1w = vb_.shape[1]
-    km2_px = ((SBOX[2] - SBOX[0]) * 111.32 * np.cos(np.deg2rad(0.5 * (SBOX[1] + SBOX[3]))) / s1w) ** 2
-    valid = np.isfinite(vb_) & np.isfinite(va_)
-    wb_s, wa_s = (vb_ < -18.0) & valid, (va_ < -18.0) & valid
-    new_raw = wa_s & ~wb_s & ((va_ - vb_) <= -3.0) & ~(JR["seasonality"] >= 10)
-    lab_, nlab_ = NDI.label(new_raw, structure=np.ones((3, 3)))
-    sizes_ = NDI.sum(new_raw, lab_, index=np.arange(1, nlab_ + 1))
-    new_s1 = np.isin(lab_, 1 + np.where(sizes_ >= 9)[0])
-    new_km2 = float(new_s1.sum() * km2_px)
+    NW = s1_new_water(vb_, va_, JR["seasonality"], SBOX)
+    km2_px, valid, new_s1, new_km2 = NW["km2_px"], NW["valid"], NW["mask"], NW["new_km2"]
+    s1_mask_png(new_s1, IMG / "amphan_s1_new.png")
+    s1_rows(row, NW)
     row("DS36", "Sentinel-1 (orbit 150, VV) 16 → 22 May 2020, 88.80-89.92 E, 22.12-22.75 N: new water (VV < −18 dB after, not before, drop ≥ 3 dB, not permanent water "
         "(JRC seasonality ≥ 10 months), blobs ≥ 9 px) = 124.9 km² ('about a hundred and twenty five'); √125 = 11.18 ('a square eleven kilometres on each side')",
         [new_km2, np.sqrt(125), 11 * 11], [124.9, 11.18, 121], [0.1, 0.005, 0])
@@ -1495,8 +1603,8 @@ def main() -> int:
         [(np.datetime64("2020-05-22T23:55") - np.datetime64("2020-05-20T09:00")) / np.timedelta64(1, "h") / 24], [2.6], [0.05])
     V["amphan_s1"] = {"box_wsen": SBOX, "new_km2": new_km2, "km2_px": float(km2_px), "valid_km2": float(valid.sum() * km2_px), "stretch_db": [-24, 0], "threshold_db": -18,
                       "times_utc": ["2020-05-16T23:55", "2020-05-22T23:55"], "orbit": 150, "cloudy": cloudy, "coast": B1.box_lines(coast, (21.9, 22.95, 88.6, 90.1), nd=3),
-                      "places": [["Satkhira", PLACES_BD["Satkhira"][0], PLACES_BD["Satkhira"][1]]]}
-    say.update({"s1_km2": 125, "s1_side": 11})
+                      "places": [["Satkhira", PLACES_BD["Satkhira"][0], PLACES_BD["Satkhira"][1]]], **s1_fields(NW)}
+    say.update({"s1_km2": 125, "s1_side": 11, **S1_SAY})
 
     # ---- s24: what the dark lines and the empty corners of the two radius-height sections are (user notes item 7)
     from skimage.measure import find_contours as fc_

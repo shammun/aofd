@@ -16,8 +16,8 @@ const LZ = [0.35, 1.25, 2.15, 3.05, 3.95], TOP = LZ[4], TGT: V3 = [0, 0, 1.95];
 const KEYS18 = (tFive: number, tCol: number, len: number): OrbitKey[] => [
   { f: 0, az: -100, el: 16, dist: 16.5, target: TGT },
   { f: tFive, az: -86, el: 18, dist: 16.5, target: TGT },
-  { f: tFive + 150, az: -68, el: 24, dist: 13.5, target: TGT },
-  { f: tCol, az: -40, el: 26, dist: 13.5, target: TGT },
+  { f: tFive + 150, az: -68, el: 24, dist: 15.5, target: TGT },
+  { f: tCol, az: -40, el: 26, dist: 15.5, target: TGT },
   { f: tCol + 150, az: -30, el: 22, dist: 18, target: TGT },
   { f: len + 10, az: -86, el: 22, dist: 18, target: TGT, linear: true },
 ];
@@ -46,20 +46,23 @@ corners.push([-H, -H, TOP + 0.9]);
 const run = (name: string, keys: OrbitKey[], len: number, phases: [string, number, number, boolean][]) => {
   let ok = true;
   for (const [ph, a, b, close] of phases) {
-    let sx0 = 1e9, sx1 = -1e9, sy0 = 1e9, sy1 = -1e9, minIn = 9, tagOff = 0;
+    let sx0 = 1e9, sx1 = -1e9, sy0 = 1e9, sy1 = -1e9, minIn = 9, tagOff = 0, tipX = 1e9, tipY = 1e9, topY = 1e9;
     for (let f = a; f < Math.min(b, len); f++) {
       const st = orbitCam({ ...orbitPath(keys, f), fov: 32 }, STACK_PP);
       const pr = projector(st, 1920, 1080, 0, 0);
       for (const v of corners) { const q = pr.p(v); sx0 = Math.min(sx0, q[0]); sx1 = Math.max(sx1, q[0]); sy0 = Math.min(sy0, q[1]); sy1 = Math.max(sy1, q[1]); }
       const nIn = LZ.filter((z) => { const q = pr.p([0, 0, z]); return q[0] >= 40 && q[0] <= 1068 && q[1] >= 40 && q[1] <= 800; }).length;
       minIn = Math.min(minIn, nIn);
+      // notes2 M1: the height arrow's tip (its "height" label sits beside it) and the top layer's corners stay >= 40 px inside the frame
+      const tp = pr.p([-H, -H, TOP + 0.9]); tipX = Math.min(tipX, tp[0]); tipY = Math.min(tipY, tp[1]);
+      for (const [x, y] of [[-H, -H], [H, -H], [H, H], [-H, H]]) topY = Math.min(topY, pr.p([x, y, TOP])[1]);
       tagOff += LZ.filter((z) => { const q = pr.p([H, -H, z]); return !(q[0] >= 0 && q[0] <= 1920 && q[1] >= 0 && q[1] <= 1080); }).length;
     }
     const info = ph.endsWith("(kept)");   // the s19 close look the user liked (≤ 6 s, among the layers by design): reported, not gated
-    const good = info || (close ? minIn >= 4 && tagOff === 0 : sx0 >= 40 && sx1 <= 1068 && sy0 >= 40 && sy1 <= 800);
+    const good = info || (close ? minIn >= 4 && tagOff === 0 && tipX >= 40 && tipY >= 40 && topY >= 40 : sx0 >= 40 && sx1 <= 1068 && sy0 >= 40 && sy1 <= 800);
     ok = ok && good;
     console.log(`${good ? "ok  " : "FAIL"} ${name} ${ph} (f ${a}-${b}${close ? ", close" : ""}): stack x ${sx0.toFixed(0)}..${sx1.toFixed(0)}, y ${sy0.toFixed(0)}..${sy1.toFixed(0)}; ` +
-      `layer centres in frame ≥ ${minIn}/5; tag anchors off screen ${tagOff}`);
+      `layer centres in frame ≥ ${minIn}/5; tag anchors off screen ${tagOff}; height tip min x ${tipX.toFixed(0)} y ${tipY.toFixed(0)}; top layer min y ${topY.toFixed(0)}`);
   }
   return ok;
 };

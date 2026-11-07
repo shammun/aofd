@@ -639,7 +639,8 @@ type Place3 = [string, number, number];
  * colourings may cross-fade (`mixB` 0 = the first pair, 1 = the second). Place names step aside while the line passes (K6 round 1 lesson). */
 const SwipeFrame: React.FC<{ f: number; PB: { x: number; y: number; w: number; h: number }; box: number[]; sx: number; pairs: [string, string][]; mixB?: number;
   tags: [string, string]; places: Place3[]; labelSide?: Record<string, [number, number, "start" | "end"]>; km: number; oLine?: number; oTags?: number; o?: number;
-  oPlaces?: number; children?: React.ReactNode }> = ({ f, PB, box, sx, pairs, mixB = 0, tags, places, labelSide = {}, km, oLine = 1, oTags, o = 1, oPlaces = 1, children }) => {
+  oPlaces?: number; tagBL?: boolean; children?: React.ReactNode }> = ({ f, PB, box, sx, pairs, mixB = 0, tags, places, labelSide = {}, km, oLine = 1, oTags, o = 1, oPlaces = 1,
+  tagBL = false, children }) => {
   if (o <= 0) return null;
   const B: MapBox = { lat0: box[1], lat1: box[3], lon0: box[0], lon1: box[2], ...PB };
   const P = mapP(B);
@@ -667,7 +668,9 @@ const SwipeFrame: React.FC<{ f: number; PB: { x: number; y: number; w: number; h
           o={nearO(PB.x + PB.w - 40 - kmPx / 2 - tw(`${km} km`) / 2, PB.x + PB.w - 40 - kmPx / 2 + tw(`${km} km`) / 2)} />
         <g opacity={nearO(PB.x + 40, PB.x + 110)}><Arrow p={[PB.x + 50, PB.y + 120]} q={[PB.x + 50, PB.y + 40]} color={C.key} w={5} head={20} /></g>
         <Lbl x={PB.x + 80} y={PB.y + 70} t="N" c={C.key} s={T.floor} o={nearO(PB.x + 80, PB.x + 80 + tw("N"))} />{/* lint-ok: N = north on the compass arrow */}
-        <Lbl x={PB.x + 130} y={PB.y + 48} t={tags[0]} c={C.key} s={T.floor} o={(oTags ?? oLine) * oBef * nearO(PB.x + 130, PB.x + 130 + tw(tags[0]))} />
+        {/* notes 2 S4: `tagBL` puts the "before" tag at the bottom left (s30: Satkhira's dot sat on it at the top) */}
+        <Lbl x={tagBL ? PB.x + 30 : PB.x + 130} y={tagBL ? PB.y + PB.h - 36 : PB.y + 48} t={tags[0]} c={C.key} s={T.floor}
+          o={(oTags ?? oLine) * oBef * nearO(tagBL ? PB.x + 30 : PB.x + 130, (tagBL ? PB.x + 30 : PB.x + 130) + tw(tags[0]))} />
         <Lbl x={PB.x + PB.w - 20} y={PB.y + 48} t={tags[1]} c={C.key} s={T.floor} a="end" o={(oTags ?? oLine) * oAft * nearO(PB.x + PB.w - 20 - tw(tags[1]), PB.x + PB.w - 20)} />
         {children}
       </Svg>
@@ -690,17 +693,27 @@ const CHECK_U1: [string, number, number, number][] = [
   ["n kt", D.nargis.lf_kt, 90, 0], ["n kmh", D.nargis.lf_kt * 1.852, D.say.n_kmh, 0.5], ["n ms", D.say.n_kmh / 3.6, D.say.n_ms, 0.5],
   ["i kt", D.idai.lf_kt, 85, 0], ["i kmh", D.idai.lf_kt * 1.852, D.say.i_kmh, 0.5], ["i ms", D.say.i_kmh / 3.6, D.say.i_ms, 0.5],
   ["amphan first ring", D.amphan.sec.zero.r_first, 25, 0.5], ["dtheta deg", 0.01 / D2R, 0.57, 0.005],
+  // notes 2 S5: ≈ 34 700 pixels × (60 m × 60 m = 3600 m² = 0.0036 km²) ≈ 125 km² (DS38)
+  ["s1 npx", D.amphan_s1.n_new_px, 34700, 50], ["say npx", SAY.s1_npx, 34700, 0], ["s1 px m", D.amphan_s1.px_m, 60, 0.5], ["px area", 60 * 60 / 1e6, SAY.s1_px_km2, 1e-12],
+  ["npx x area", D.amphan_s1.n_new_px * D.amphan_s1.km2_px, D.amphan_s1.new_km2, 1e-6], ["said product", 34700 * SAY.s1_px_km2, 125, 0.5],
 ];
 CHECK_U1.forEach(([n, v, r, tol]) => { if (!(Math.abs(v - r) <= tol)) throw new Error(`CHECK ${n}: data ${v} vs screen ${r}`); });
 const S30: React.FC = () => {
   const f = useCurrentFrame(), k = K("s30_amphan_radar");
-  const tCloud = SS(k, 1), tSmall = SS(k, 2), tRadar = SS(k, 3), tSend = SS(k, 4), tMirror = SS(k, 5), tHere = SS(k, 6), tSweep = SS(k, 7), tKm2 = SS(k, 8), tSq = SS(k, 9);
+  // notes 2 S5: S8 "We count the pixels …", S9 the pixel area, S10 the product, S11 the square (was S9)
+  const tCloud = SS(k, 1), tSmall = SS(k, 2), tRadar = SS(k, 3), tSend = SS(k, 4), tMirror = SS(k, 5), tHere = SS(k, 6), tSweep = SS(k, 7), tKm2 = SS(k, 8),
+    tProd = SS(k, 10), tSq = SS(k, 11);
+  const tCyan = AT(k, 8, "marked here in cyan"), tN = AT(k, 8, "thirty four thousand");
   const box = AS1.box_wsen as number[];
   const asp = ((box[2] - box[0]) * Math.cos(((box[1] + box[3]) / 2) * D2R)) / (box[3] - box[1]);
   const PB = { x: 80, y: 70, w: 1000, h: Math.round(1000 / asp) };
   const half = { w: 490, h: Math.round(490 / asp) };
   const oCl = fout(f, tRadar - 6, 14), oSch = win(f, tRadar, tHere - 14, 14), oPair = fin(f, tHere + 2, 14);
-  const sx = swipeX(f, AT(k, 7, "line moves"));
+  // notes 2 S5: after the house sweep (right → left → right → middle) the line glides on to the LEFT edge, so the whole "after" picture shows
+  // under the cyan count mask
+  const tSw = AT(k, 7, "line moves"), tAll = Math.max(tSw + SWIPE_LEN + 24, tCyan);
+  const sx = f < tAll ? swipeX(f, tSw) : 0.5 * (1 - prog(f, tAll, tAll + 50));
+  const xl = PB.x + sx * PB.w;
   const kmPx = PB.w / ((box[2] - box[0]) * 111.32 * Math.cos(((box[1] + box[3]) / 2) * D2R));
   const side = Math.sqrt(125) * kmPx;
   const sqAt: Pt = [PB.x + 70, PB.y + PB.h - 60 - side];
@@ -723,11 +736,11 @@ const S30: React.FC = () => {
       <SourceBelow text="Images: NASA Worldview (MODIS Terra), natural colour · 21 and 22 May 2020" pic={{ x: 80, y: 260, w: 1000, h: half.h + 80 }} w={1000} o={oCl} name="s30 src clouds" />
       {/* S3-S5: how radar sees: a code-drawn satellite, microwave pulses, rough land returns some (bright), calm water reflects them away (dark) */}
       <Svg o={oSch}>
-        <g transform={`translate(${sat[0]} ${sat[1]})`}>
+        <g transform={`translate(${sat[0]} ${sat[1]})`} opacity={fin(f, AT(k, 4, "Sentinel-1"))}>
           <rect x={-40} y={-24} width={80} height={48} rx={6} fill="#33415f" stroke={C.ink} strokeWidth={3} />
           <rect x={-150} y={-14} width={96} height={28} fill="#2c5a9e" stroke={C.ink} strokeWidth={2} /><rect x={54} y={-14} width={96} height={28} fill="#2c5a9e" stroke={C.ink} strokeWidth={2} />
         </g>
-        <Lbl x={sat[0]} y={sat[1] - 62} t="Sentinel-1" c={C.key} s={T.floor} a="middle" />
+        <Lbl x={sat[0]} y={sat[1] - 62} t="Sentinel-1" c={C.key} s={T.floor} a="middle" o={fin(f, AT(k, 4, "Sentinel-1"))} />{/* notes 2 C6: on its name */}
         <rect x={120} y={640} width={420} height={60} fill="#5b6b3a" /><rect x={560} y={640} width={420} height={60} fill="#1c2f6e" />
         <Lbl x={330} y={740} t="land: rough" c={C.key} s={T.floor} a="middle" /><Lbl x={770} y={740} t="calm water: a mirror" c={C.key} s={T.floor} a="middle" />
         {[0, 1, 2].map((i) => { const ph = ((f - tSend) / 40 - i / 3 + 3) % 1; const o = f < tSend ? 0 : 1 - ph;
@@ -739,8 +752,11 @@ const S30: React.FC = () => {
       </Svg>
       {/* S6-S9: the radar pair */}
       <SwipeFrame f={f} PB={PB} box={box} sx={sx} pairs={[["cst_amphan_s1_before.jpg", "cst_amphan_s1_after.jpg"]]} tags={["before · 16 May", "after · 22 May"]}
-        places={AS1.places as Place3[]} labelSide={{ Satkhira: [16, 84, "start"] }} km={25} oLine={fin(f, AT(k, 7, "line moves") - 8, 8)} oTags={fin(f, AT(k, 6, "sixteenth")) * fout(f, LEN(k) - 14)}
-        o={oPair}>
+        places={AS1.places as Place3[]} labelSide={{ Satkhira: [20, 4, "start"] }} km={25} oLine={fin(f, tSw - 8, 8) * fout(f, tAll + 50, 10)}
+        oTags={fin(f, AT(k, 6, "sixteenth")) * fout(f, LEN(k) - 14)} o={oPair} tagBL>
+        {/* notes 2 S5: the counted new-water pixels (DS38), on the "after" side of the line */}
+        <clipPath id="s30new"><rect x={xl} y={PB.y} width={Math.max(0, PB.x + PB.w - xl)} height={PB.h} /></clipPath>
+        <image href={IMG("cst_amphan_s1_new.png")} x={PB.x} y={PB.y} width={PB.w} height={PB.h} preserveAspectRatio="none" clipPath="url(#s30new)" opacity={fin(f, tCyan, 15)} />
         <g opacity={fin(f, tSq)}>
           <rect x={sqAt[0]} y={sqAt[1]} width={side} height={side} fill="none" stroke={C.gold} strokeWidth={5} />
           <g data-lc-maplabel="1"><Lbl x={sqAt[0] + side + 14} y={sqAt[1] + side / 2} t="11 km" c={C.gold} s={T.floor} /></g>
@@ -756,7 +772,10 @@ const S30: React.FC = () => {
         <Keyword f={f} text="Satkhira · the Sundarbans" at={[MX + 40, 120]} s={T.floor} appear={tHere} out={tKm2 - 20} />
         <Lbl x={MX + 40} y={200} t="16 May: before Amphan" c={C.key} s={T.floor} o={win(f, AT(k, 6, "sixteenth"), tKm2 - 20)} />
         <Lbl x={MX + 40} y={260} t="22 May: 2.5 days after landfall" c={C.key} s={T.floor} o={win(f, AT(k, 6, "twenty second"), tKm2 - 20)} />
-        <Keyword f={f} text={`new water ≈ ${SAY.s1_km2} km²`} at={[MX + 40, 120]} s={T.key} c={C.gold} appear={tKm2} />
+        <Keyword f={f} text="count the new dark pixels" at={[MX + 40, 120]} s={T.floor} appear={tKm2} out={AT(k, 10, "a hundred and twenty five") - 20} />
+        <Keyword f={f} text={`new water ≈ ${SAY.s1_km2} km²`} at={[MX + 40, 120]} s={T.key} c={C.gold} appear={AT(k, 10, "a hundred and twenty five")} />
+        <g opacity={fin(f, tCyan)}><rect x={MX + 40} y={758} width={44} height={44} fill="#00e5ff" stroke={C.muted} strokeWidth={2} />
+          <Lbl x={MX + 100} y={780} t="cyan: new water, counted" c={C.key} s={T.floor} /></g>
         {/* the key: grey = radar echo strength; dark = water */}
         <g opacity={oPair}>
           <ColourBar x={MX + 40} y={540} w={420} lut={greyLut} lo={-24} hi={0} unit="dB" title="radar echo strength" ticks={[{ v: -24, t: "−24" }, { v: -12, t: "−12" }, { v: 0, t: "0" }]} />
@@ -764,9 +783,13 @@ const S30: React.FC = () => {
           <Lbl x={MX + 40} y={720} t="bright = land, trees, towns" c={C.key} s={T.floor} />
         </g>
       </Svg>
-      <TeX s={String.raw`\text{new water}=${AS1.new_km2.toFixed(1)}\ \mathrm{km}^2\approx${SAY.s1_km2}\ \mathrm{km}^2`} x={MX + 40} y={225} size={44} c={C.gold} o={fin(f, tKm2 + 10)} />
-      <TeX s={String.raw`\sqrt{125}\approx${Math.sqrt(125).toFixed(1)}\ \mathrm{km}`} x={MX + 40} y={305} size={46} c={C.gold} o={fin(f, AT(k, 9, "eleven"))} />
-      <TeX s={String.raw`11\times11=121\approx125\ \mathrm{km}^2`} x={MX + 40} y={385} size={44} c={C.gold} o={fin(f, AT(k, 9, "eleven") + 20)} />
+      {/* notes 2 S5: the inputs of the 125 km² (pixel count × pixel area), each on its words; on S11 the square's rows replace the pixel rows */}
+      <TeX s={String.raw`\approx34\,700\ \text{pixels}`} x={MX + 40} y={210} size={44} o={win(f, tN, tSq - 10)} />
+      <TeX s={String.raw`1\ \text{pixel}:\ ${SAY.s1_px_m}\ \mathrm m\times${SAY.s1_px_m}\ \mathrm m=3600\ \mathrm m^2`} x={MX + 40} y={280} size={44} o={win(f, AT(k, 9, "sixty metres"), tSq - 10)} />
+      <TeX s={String.raw`=${SAY.s1_px_km2}\ \mathrm{km}^2`} x={MX + 190} y={350} size={44} o={win(f, AT(k, 9, "zero point"), tSq - 10)} />
+      <TeX s={String.raw`34\,700\times${SAY.s1_px_km2}\approx${SAY.s1_km2}\ \mathrm{km}^2`} x={MX + 40} y={420} size={44} c={C.gold} o={fin(f, tProd)} />
+      <TeX s={String.raw`\sqrt{125}\approx${Math.sqrt(125).toFixed(1)}\ \mathrm{km}`} x={MX + 40} y={210} size={46} c={C.gold} o={fin(f, AT(k, 11, "eleven"))} />
+      <TeX s={String.raw`11\times11=121\approx125\ \mathrm{km}^2`} x={MX + 40} y={290} size={44} c={C.gold} o={fin(f, AT(k, 11, "eleven") + 20)} />
       <SourceBelow text="Data: ESA Copernicus Sentinel-1 radar · 16 and 22 May 2020" pic={PB} w={1000} o={oPair} name="s30 src s1" />
     </Scene>
   );
@@ -780,13 +803,15 @@ const dayOf = (t: string) => `${Number(t.slice(8, 10))} ${MON[Number(t.slice(5, 
 const NTR = (NG.track as [string, number, number, number | null][]);
 const S31: React.FC = () => {
   const f = useCurrentFrame(), k = K("s31_nargis_intro");
-  const tGo = SS(k, 1), tRiver = SS(k, 2), tDelta = SS(k, 3), tForm = SS(k, 4), tPath = SS(k, 5), tLand = SS(k, 6), tCross = SS(k, 7), tPic = SS(k, 8), tFlood = SS(k, 9),
-    tZoom = SS(k, 10);
+  // notes 2 S2: S7 (× 1.852 → km/h) and S8 (why ÷ 3.6 → m/s) are new; later sentences +2
+  const tGo = SS(k, 1), tRiver = SS(k, 2), tDelta = SS(k, 3), tForm = SS(k, 4), tPath = SS(k, 5), tLand = SS(k, 6), tCross = SS(k, 9), tPic = SS(k, 10), tFlood = SS(k, 11),
+    tZoom = SS(k, 12);
   const crop = NAR.crop_wsen as number[], sb = NG.storm_box as number[];
   // the flat frame of s32 (its first frame is the natural-colour 'before' picture in this box)
   const PB = { x: 80, y: 60, w: 1000, h: Math.round((1000 * (crop[3] - crop[1])) / ((crop[2] - crop[0]) * Math.cos(16.4 * D2R))) };
   const Bd: MapBox = { lat0: crop[1], lat1: crop[3], lon0: crop[0], lon1: crop[2], ...PB };
-  const Bs: MapBox = boxAt(16.1, 94.6, 4.2, PB.x, PB.y, PB.w, PB.h);
+  // notes 2 S6: wider (6.0° of latitude, was 4.2°) so the spiral bands round the eye show; the picture is contrast enhanced (builder storm_stretch)
+  const Bs: MapBox = boxAt(16.0, 94.6, 6.0, PB.x, PB.y, PB.w, PB.h);
   // user notes item 9 (stills look_u1): the delta's geography and the storm picture are shown FLAT (a draped patch on the blurred globe read
   // as a pale rectangle); the globe carries the trip to Myanmar and the track; S10 zooms the flat storm map into the delta box (= s32 frame 0)
   const oDelta = win(f, tRiver + 24, tForm - 4, 20), oStorm = fin(f, tPic, 20), oEnd = prog(f, tZoom + 10, tZoom + 85);
@@ -846,12 +871,13 @@ const S31: React.FC = () => {
         <path d={linesPath(P, NG.coast)} fill="none" stroke={C.gold} strokeWidth={2.5} opacity={0.9 * (1 - oEnd)} />
         <path d={poly(ntr.filter((q) => q[1] > 91).map((q) => P(q[0], q[1])))} fill="none" stroke={C.gold} strokeWidth={4} strokeDasharray="10 8" opacity={0.8 * (1 - oEnd)} />
       </>} over={(P) => <>
-        <circle cx={P(eye[0], eye[1])[0]} cy={P(eye[0], eye[1])[1]} r={30} fill="none" stroke={C.gold} strokeWidth={5} opacity={win(f, AT(k, 8, "eye"), tZoom + 10)} />
-        <g data-lc-maplabel="1"><Lbl x={P(eye[0], eye[1])[0]} y={P(eye[0], eye[1])[1] + 64} t="eye" c={C.gold} s={T.floor} a="middle" o={win(f, AT(k, 8, "eye"), tZoom + 10)} /></g>
-        <g data-lc-maplabel="1"><Lbl x={P(16.62, 95.3)[0]} y={P(16.62, 95.3)[1]} t="Irrawaddy delta" c={C.key} s={T.floor} a="middle" o={win(f, tPic + 20, tZoom + 10)} /></g>
+        <circle cx={P(eye[0], eye[1])[0]} cy={P(eye[0], eye[1])[1]} r={30} fill="none" stroke={C.gold} strokeWidth={5} opacity={win(f, AT(k, 10, "eye"), tZoom + 10)} />
+        <g data-lc-maplabel="1"><Lbl x={P(eye[0], eye[1])[0]} y={P(eye[0], eye[1])[1] + 64} t="eye" c={C.gold} s={T.floor} a="middle" o={win(f, AT(k, 10, "eye"), tZoom + 10)} /></g>
+        {/* notes 2 C8: north of the dashed track (it ran through the label) */}
+        <g data-lc-maplabel="1"><Lbl x={P(17.0, 95.3)[0]} y={P(17.0, 95.3)[1]} t="Irrawaddy delta" c={C.key} s={T.floor} a="middle" o={win(f, tPic + 20, tZoom + 10)} /></g>
       </>} />
       <Svg>
-        <Keyword f={f} text="Cyclone Nargis · May 2008" at={[1210, 120]} s={T.floor} appear={0} out={tRiver - 20} />
+        <Keyword f={f} text="Cyclone Nargis · May 2008" at={[1210, 120]} s={T.floor} appear={AT(k, 0, "Cyclone Nargis") - 6} out={tRiver - 20} />{/* notes 2 C2: on its words */}
         <Keyword f={f} text="Irrawaddy (Ayeyarwady)" at={[1210, 120]} s={T.floor} appear={tRiver} out={tForm - 20} />
         <Lbl x={1210} y={210} t="many channels to the sea" c={C.key} s={T.floor} o={win(f, AT(k, 2, "fans out"), tForm - 20)} />
         {/* DS32: 90 % of the delta's land ≤ 5 m above the sea (ETOPO 2022); said as "most of it only a few metres above the sea" */}
@@ -864,15 +890,17 @@ const S31: React.FC = () => {
         <Lbl x={1210} y={340} t="landfall: 2 May 2008" c={C.key} s={T.floor} o={win(f, tLand, tPic - 20)} />
         <Lbl x={1210} y={680} t="→ across the delta, to Yangon" c={C.key} s={T.floor} o={win(f, tCross, tPic - 20)} />
         <Keyword f={f} text="2 May · hours before landfall" at={[1210, 120]} s={T.floor} appear={tPic} out={tFlood - 20} />
-        <Lbl x={1210} y={210} t="the eye: just off the coast" c={C.gold} s={T.floor} o={win(f, AT(k, 8, "eye"), tFlood - 20)} />
+        <Lbl x={1210} y={210} t="the eye: just off the coast" c={C.gold} s={T.floor} o={win(f, AT(k, 10, "eye"), tFlood - 20)} />
         <Keyword f={f} text="surge, rain: floods inland" at={[1210, 120]} s={T.floor} appear={tFlood} out={tZoom - 20} />
         <Keyword f={f} text="zoom in: the delta" at={[1210, 120]} s={T.floor} c={C.gold} appear={tZoom} />
       </Svg>
       {/* the official intensity at landfall, every step shown (IMD, 3-minute average) */}
+      {/* notes 2 S2: every step said (S6 the knots, S7 × 1.852, S8 why ÷ 3.6) and drawn in the normal text colour (was slate) */}
       <CalcStack f={f} x={1210} y={420} size={44} maxLines={4} o={fout(f, tPic - 10)} rows={[
-        { rhs: String.raw`\text{official (3-min): }${NG.lf_kt}\ \mathrm{kt}`, at: AT(k, 6, "ninety knots"), c: C.local },
-        { rhs: String.raw`${NG.lf_kt}\times1.852\approx${SAY.n_kmh}\ \mathrm{km/h}`, at: AT(k, 6, "ninety knots") + 18, c: C.local },
-        { rhs: String.raw`${SAY.n_kmh}\div3.6\approx${SAY.n_ms}\ \mathrm{m/s}`, at: AT(k, 6, "forty six"), c: C.local },
+        { rhs: String.raw`\text{official (3-min): }${NG.lf_kt}\ \mathrm{kt}`, at: AT(k, 6, "ninety knots") },
+        { rhs: String.raw`${NG.lf_kt}\times1.852\approx${SAY.n_kmh}\ \mathrm{km/h}`, at: AT(k, 7, "one point eight five two") },
+        { rhs: String.raw`1\ \mathrm{km/h}=1000\ \mathrm m\ \text{in}\ 3600\ \mathrm s`, at: AT(k, 8, "a thousand metres") },
+        { rhs: String.raw`${SAY.n_kmh}\div3.6\approx${SAY.n_ms}\ \mathrm{m/s}`, at: AT(k, 8, "divide by three point six") },
       ]} />
       <SourceBelow text="Data: IBTrACS v04r01 (NOAA NCEI) · Cyclone Nargis, 25 Apr-3 May 2008 · NASA Blue Marble · Natural Earth" pic={{ x: 80, y: 40, w: 1000, h: 755 }} w={1740}
         o={1 - oFlat} name="s31 src g" />
@@ -895,7 +923,12 @@ const S32: React.FC = () => {
   const tG1 = AT(k, 3, "line glides");
   const spl = prog(f, tL, tL + 24) * (1 - prog(f, tG1 - 42, tG1 - 8));
   const hw = 480, hh = Math.round((hw * PB.h) / PB.w), hy = PB.y + Math.round((PB.h - hh) / 2);
-  const mixB = prog(f, tSame, tSame + 30);
+  // notes 2 M3: the natural sweep runs to its middle stop; on S5 ("So flood mappers use false colour") the natural pair dims and is titled
+  // "next: false colour"; right after the middle stop it cross-fades to the false-colour pair (line held in the middle), so the band rows (S6)
+  // and the colour key (S7) stand beside the false-colour picture; S10 "Here are the same two days" starts the second sweep as before
+  const tX = Math.max(tG1 + 12 + SWIPE_LEN + 12, tFalse + 20);
+  const mixB = prog(f, tX, tX + 30);
+  const dimN = 0.45 * win(f, tFalse, tX + 30, 12);
   const sx = swipe2(f, tG1 + 12, tSame, tG2 + 12);
   const oSplit = clamp(spl * 3, 0, 1);
   const kr = NG.key_rgb as Record<string, number[]>;
@@ -903,7 +936,9 @@ const S32: React.FC = () => {
   return (
     <Scene>
       <SwipeFrame f={f} PB={PB} box={box} sx={sx} pairs={pairs} mixB={mixB} tags={[`before · ${NAR.BEFORE}`, `after · ${NAR.AFTER}`]} places={NAR.places as Place3[]}
-        labelSide={{ Yangon: [-16, -30, "end"] }} km={50} oLine={fin(f, tG1 - 8, 8)} o={1 - oSplit} oPlaces={clamp(1 - 2 * oSplit, 0, 1)} />
+        labelSide={{ Yangon: [-16, -30, "end"] }} km={50} oLine={fin(f, tG1 - 8, 8)} o={1 - oSplit} oPlaces={clamp(1 - 2 * oSplit, 0, 1)}>
+        <rect x={PB.x} y={PB.y} width={PB.w} height={PB.h} fill={C.bg} opacity={dimN} />{/* notes 2 M3: the natural pair dims while the next colouring is announced */}
+      </SwipeFrame>
       {/* the two half panels (natural colour) while the dates are said */}
       <Svg o={oSplit}>
         <image href={IMG("cst_nargis_tc_before.jpg")} x={PB.x} y={hy} width={hw} height={hh} preserveAspectRatio="none" />
@@ -922,11 +957,15 @@ const S32: React.FC = () => {
         <Keyword f={f} text="look for the flood" at={[MX + 40, 120]} s={T.key} appear={tLook} out={tBrown - 20} />
         <Keyword f={f} text="hard to see: both brown" at={[MX + 40, 120]} s={T.key} appear={tBrown} out={tFalse - 20} />
         <g opacity={fout(f, tFalse - 10)}><Swatches f={f} x={MX + 40} y={210} t0={AT(k, 4, "muddy")} dt={20} items={[["muddy water", "#8a7a55"], ["wet soil", "#6f6446"]]} /></g>
-        <Keyword f={f} text="false colour: bands 7-2-1" at={[MX + 40, 120]} s={T.key} c={C.gold} appear={tFalse} out={tLeft - 20} />
-        {[["shortwave infrared → red", "#e06a5a"], ["near infrared → green", "#6fcf6a"], ["red light → blue", "#6a8fe0"]].map(([t, c], i) =>
-          <Lbl key={t} x={MX + 40} y={220 + i * 60} t={t} c={c} s={T.floor} o={win(f, tBands + 15 * i, tLeft - 20)} />)}
+        <Keyword f={f} text="next: false colour" at={[MX + 40, 120]} s={T.key} c={C.gold} appear={tFalse} out={tX - 8} />
+        <Keyword f={f} text="false colour: bands 7-2-1" at={[MX + 40, 120]} s={T.key} c={C.gold} appear={tX + 10} out={tLeft - 20} />
+        {/* the band rows on their words (S6) */}
+        {[["shortwave infrared → red", "#e06a5a", Math.max(tX + 10, AT(k, 6, "shortwave infrared"))], ["near infrared → green", "#6fcf6a", Math.max(tX + 25, AT(k, 6, "paint them red"))],
+          ["red light → blue", "#6a8fe0", Math.max(tX + 40, AT(k, 6, "ordinary red light"))]].map(([t, c, t0], i) =>
+          <Lbl key={t as string} x={MX + 40} y={220 + i * 60} t={t as string} c={c as string} s={T.floor} o={win(f, t0 as number, tLeft - 20)} />)}
+        {/* the colour key only once the false-colour picture is up (S7) */}
         <g opacity={fout(f, tLeft - 20)}>
-          <Swatches f={f} x={MX + 40} y={420} t0={tKey} items={[["plants", rgbHex(kr.plants)], ["dry fields", rgbHex(kr["dry fields"])], ["clouds", rgbHex(kr.clouds)], ["water", rgbHex(kr.water)]]} />
+          <Swatches f={f} x={MX + 40} y={420} t0={Math.max(tKey, tX + 30)} items={[["plants", rgbHex(kr.plants)], ["dry fields", rgbHex(kr["dry fields"])], ["clouds", rgbHex(kr.clouds)], ["water", rgbHex(kr.water)]]} />
         </g>
         <Lbl x={MX + 40} y={620} t="water soaks up infrared: dark" c={C.key} s={T.floor} o={win(f, tSoak, tLeft - 20)} />
         <Lbl x={MX + 40} y={690} t="the same two days" c={C.gold} s={T.floor} o={win(f, tSame, tPin - 20)} />
@@ -945,7 +984,8 @@ const ID = D.idai;
 const ITR = (ID.track as [string, number, number, number | null][]);
 const S33: React.FC = () => {
   const f = useCurrentFrame(), k = K("s33_idai_intro");
-  const tYear = SS(k, 1), tCw = SS(k, 2), tPic = SS(k, 3), tLand = SS(k, 4), tBeira = SS(k, 5), tZoom = SS(k, 6);
+  // notes 2 S2: S5 (× 1.852) and S6 (÷ 3.6) are new; later sentences +2
+  const tYear = SS(k, 1), tCw = SS(k, 2), tPic = SS(k, 3), tLand = SS(k, 4), tBeira = SS(k, 7), tZoom = SS(k, 8);
   const crop = ID.crop_wsen as number[], vb = ID.viirs_box as number[];
   const keys = [
     { f: 0, lat: 0, lon: 70, dist: G_DIST0, pp: G_PP0 },
@@ -993,7 +1033,7 @@ const S33: React.FC = () => {
             <Place key={nm as string} p={p(la as number, lo as number)} t={nm as string} r={0} dx={0} dy={0} a="middle"
               o={fin(f, t0 as number) * (cam.dist > 1.5 ? 1 : 0) * fout(f, tBeira)} />)}
           {(ID.places as Place3[]).filter((q) => q[0] !== "Dondo").map(([nm, la, lo]) => <Place key={nm} p={p(la, lo)} t={nm} r={9} dx={nm === "Beira" ? 18 : -18} dy={nm === "Beira" ? -46 : 46}
-            a={nm === "Beira" ? "start" : "end"} o={fin(f, AT(k, 5, nm)) * (near ? 1 : 0) * fout(f, tZoom + 20)} />)}
+            a={nm === "Beira" ? "start" : "end"} o={fin(f, AT(k, 7, nm)) * (near ? 1 : 0) * fout(f, tZoom + 20)} />)}
         </g>;
       }} />
       <GlobeFrame id="s33k" bottomAt={790} zoom={zoom} right={zoom} disc={{ c: G_PP0, r: G_DISC_R }} o={1 - oEndFlat} />
@@ -1018,10 +1058,11 @@ const S33: React.FC = () => {
         <Keyword f={f} text="low, flat land: two rivers" at={[1210, 120]} s={T.floor} appear={tBeira} out={tZoom - 20} />
         <Keyword f={f} text="zoom in: Beira" at={[1210, 120]} s={T.floor} c={C.gold} appear={tZoom} />
       </Svg>
+      {/* notes 2 S2: every step said (S4 the knots, S5 × 1.852, S6 ÷ 3.6) and drawn in the normal text colour (was slate) */}
       <CalcStack f={f} x={1210} y={300} size={44} maxLines={4} o={fout(f, tBeira - 10)} rows={[
-        { rhs: String.raw`\text{official (10-min): }${ID.lf_kt}\ \mathrm{kt}`, at: AT(k, 4, "eighty five knots"), c: C.local },
-        { rhs: String.raw`${ID.lf_kt}\times1.852\approx${SAY.i_kmh}\ \mathrm{km/h}`, at: AT(k, 4, "eighty five knots") + 18, c: C.local },
-        { rhs: String.raw`${SAY.i_kmh}\div3.6\approx${SAY.i_ms}\ \mathrm{m/s}`, at: AT(k, 4, "forty four"), c: C.local },
+        { rhs: String.raw`\text{official (10-min): }${ID.lf_kt}\ \mathrm{kt}`, at: AT(k, 4, "eighty five knots") },
+        { rhs: String.raw`${ID.lf_kt}\times1.852\approx${SAY.i_kmh}\ \mathrm{km/h}`, at: AT(k, 5, "one point eight five two") },
+        { rhs: String.raw`${SAY.i_kmh}\div3.6\approx${SAY.i_ms}\ \mathrm{m/s}`, at: AT(k, 6, "three point six") },
       ]} />
       <SourceBelow text={f < tPic ? "Data: IBTrACS v04r01 (NOAA NCEI) · Cyclone Idai, 9-16 Mar 2019 · NASA Blue Marble · Natural Earth"
         : f < tZoom ? "Image: NASA Worldview (VIIRS, Suomi NPP) · 14 Mar 2019 · IBTrACS v04r01 (NOAA NCEI) · NASA Blue Marble · Natural Earth"
@@ -1039,8 +1080,10 @@ const S34: React.FC = () => {
   const PB = { x: 80, y: 50, w: 0, h: 720 };
   PB.w = Math.round((PB.h * (box[2] - box[0]) * Math.cos(19.8 * D2R)) / (box[3] - box[1]));
   const mixB = prog(f, tSame, tSame + 30);
-  const tG1 = AT(k, 0, "on the eleventh");
-  const sx = swipe2(f, tG1, tSame, tWater);
+  // notes 2 S3: the natural sweep starts on the scene's first words, so it reaches its middle stop (and holds ≈ 1.4 s) before S2 "Now the same
+  // two days in false colour" (was: still gliding back at S2, no middle stop)
+  const tG1 = Math.min(AT(k, 0, "on the eleventh"), SS(k, 0) + 15);
+  const sx = swipe2(f, tG1, Math.max(tSame, tG1 + SWIPE_LEN + 20), tWater);
   const kr = NG.key_rgb as Record<string, number[]>;
   return (
     <Scene>

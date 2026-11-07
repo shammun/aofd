@@ -472,6 +472,18 @@ const S06: React.FC = () => {
         <Arrow p={UC} q={mr} color={C.neg} w={10} head={40} o={fin(f, tExact)} />
         <Lbl x={mr[0] - 10} y={mr[1] + 50} t="$-\hat{\mathbf r}$" c={C.neg} s={T.key} a="end" o={fin(f, tExact)} />
         <Keyword f={f} text="how does $\hat{\boldsymbol\theta}$ change?" at={[MX, 120]} s={T.key} appear={0} out={t5 - 20} />
+        {/* notes 2 S7: the right half carried only the question for ≈ 60 s: one keyword line per sentence, on its words, gone before the
+            S14 calculation (CalcStack at y 230); "s = 1 × Δθ" (S10, TeX at y 300) keeps its slot */}
+        <Lbl x={MX} y={220} t="$\hat{\boldsymbol\theta}$: length 1, from the origin" c={C.key} s={T.floor} o={win(f, t1, t3 - 22)} />
+        <Lbl x={MX} y={290} t="tip on the same unit circle" c={C.key} s={T.floor} o={win(f, SS(k, 5), t3 - 22)} />
+        <Lbl x={MX} y={360} t="$\hat{\boldsymbol\theta}=\hat{\mathbf r}$ turned 90°" c={C.key} s={T.floor} o={win(f, t2, t3 - 22)} />
+        <Lbl x={MX} y={220} t="turn $\theta$ by $\Delta\theta$" c={C.key} s={T.floor} o={win(f, t3, t4 - 22)} />
+        <Lbl x={MX} y={420} t="both arrows turn by $\Delta\theta$" c={C.key} s={T.floor} o={win(f, SS(k, 9), t4 - 22)} />
+        <Lbl x={MX} y={490} t="tip slides $\Delta\theta$ along the circle" c={C.key} s={T.floor} o={win(f, SS(k, 10), t4 - 22)} />
+        <Lbl x={MX} y={220} t="which way does it slide?" c={C.key} s={T.floor} o={win(f, t4, t5 - 20)} />
+        <Lbl x={MX} y={420} t="a sliding tip moves along" c={C.key} s={T.floor} o={win(f, t4b, t5 - 20)} />
+        <Lbl x={MX} y={480} t="its own arrow, turned 90°" c={C.key} s={T.floor} o={win(f, t4b, t5 - 20)} />
+        <Lbl x={MX} y={560} t="so: along $\hat{\boldsymbol\theta}$ turned 90°" c={C.gold} s={T.floor} o={win(f, SS(k, 13), t5 - 20)} />
         <Keyword f={f} text="swap, minus on the first" at={[MX, 120]} s={T.floor} appear={t5} out={tSmall - 20} />
         <Keyword f={f} text="$\hat{\boldsymbol\theta}$ swings towards $-\hat{\mathbf r}$" at={[MX, 120]} s={T.key} appear={tSmall} />
       </Svg>

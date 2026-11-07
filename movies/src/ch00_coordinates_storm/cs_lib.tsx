@@ -76,7 +76,9 @@ export const ASSET_NAMES = ["cst_goes_eye.jpg", "cst_radar_ktbw.png", "cst_hrrr_
   "cst_swipe_before.jpg", "cst_swipe_after.jpg", "cst_nargis_storm.jpg", "cst_bmng.jpg", "cst_tdr_w.png",
   // user notes 2026-11-06: natural colour (Nargis, Idai), the Idai pair, the VIIRS picture of Idai, Amphan's cloud pictures and radar pair
   "cst_nargis_tc_before.jpg", "cst_nargis_tc_after.jpg", "cst_idai_tc_before.jpg", "cst_idai_tc_after.jpg", "cst_idai_721_before.jpg", "cst_idai_721_after.jpg",
-  "cst_idai_viirs.jpg", "cst_amphan_clouds_21.jpg", "cst_amphan_clouds_22.jpg", "cst_amphan_s1_before.jpg", "cst_amphan_s1_after.jpg"] as const;
+  "cst_idai_viirs.jpg", "cst_amphan_clouds_21.jpg", "cst_amphan_clouds_22.jpg", "cst_amphan_s1_before.jpg", "cst_amphan_s1_after.jpg",
+  // notes 2 (S5): the counted new-water pixels (cyan, transparent elsewhere)
+  "cst_amphan_s1_new.png"] as const;
 export const IMG = (n: (typeof ASSET_NAMES)[number]) => staticFile(n);
 export const LUT_UR = D.luts.ur as string[], LUT_SPEED = D.luts.speed as string[], LUT_DBZ = D.luts.dbz as string[], LUT_DEPTH = D.luts.depth as string[];
 export const LUT_W = D.w.tdr.lut as string[];

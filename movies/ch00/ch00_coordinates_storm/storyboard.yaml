@@ -27,7 +27,7 @@ concepts:
 - the wind onshore at a coast (numbers in Part 4); storm surge and its sign flip; tide gauges as the record of Ian's surge
 - 'floods seen from space: Amphan by radar (Sentinel-1, through cloud), Nargis 2008 and Idai 2019 in natural colour then false colour 7-2-1 (why flood mappers
   use it)'
-target_duration_s: 2880.85
+target_duration_s: 2930.55
 fps: 30
 size:
 - 1920
@@ -85,1151 +85,192 @@ dry_run:
 build_1:
   tts:
     tool: tools/tts.py
-    run: G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_storm/u1/tts
+    run: G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_storm/n2/tts
     voice: af_bella
     speed: 1.0
-    audio_s: 2878.35
-    total_frames: 86351
-    cues: 700
+    audio_s: 2928.05
+    total_frames: 87842
+    cues: 711
     warnings: []
-    sentences: 440
-    words: 6876
+    sentences: 446
+    words: 6999
     render_s: null
     self_check:
-      expected_s: 2878.35
-      audio_s: 2878.35
+      expected_s: 2928.05
+      audio_s: 2928.05
       diff_ms: 0.0
       len_ok: true
       cues_ok: true
-      spliced_u1:
-        method: sentence matching against the fix-0 narration; new clips BS.1770-4 loudness-matched to the nearest re-used clips + look-ahead limiter (-1.5
-          dBTP)
-        corr_resynth: 0.9945
-        reused: 376
-        new: 64
+      spliced_n2:
+        method: sentence matching against the u1 (notes1) narration; new clips BS.1770-4 loudness-matched to the nearest re-used clips + look-ahead limiter
+          (-1.5 dBTP)
+        corr_resynth: 0.9953
+        reused: 437
+        new: 9
         dropped:
-        - 's00_title S0: In this video, we''ll learn how turning arrows and cylinders work the easy way, and see how meteorology uses them to look inside
-          a tropical cyclone: its spin, its winds in three dimensions, and its storm surge.'
-        - 's01_hook S9: Cyclone Amphan, which hit India and Bangladesh in twenty twenty, shows that the same picture fits a storm in another ocean, and
-          it shows us the floods a storm leaves behind.'
-        - 's06_dtheta_dtheta S2: Let''s take this slowly, one step at a time, and assume nothing.'
-        - 's06_dtheta_dtheta S3: Step one.'
-        - 's06_dtheta_dtheta S4: Theta hat is also an arrow of length one.'
-        - 's06_dtheta_dtheta S7: Step two.'
-        - 's06_dtheta_dtheta S8: Theta hat is always r hat turned by ninety degrees.'
-        - 's06_dtheta_dtheta S10: Step three.'
-        - 's06_dtheta_dtheta S14: Step four.'
-        - 's06_dtheta_dtheta S18: Step five.'
-        - 's06_dtheta_dtheta S19: Let''s turn theta hat with Part 1''s rule: swap the two numbers, and put a minus on the first.'
-        - 's07_toward_centre S13: Divided by zero point zero one, that''s minus zero point six, minus zero point eight.'
-        - 's07_toward_centre S14: And r hat is zero point six, zero point eight, so that''s minus r hat.'
-        - 's09_dtheta_dt S11: The derivatives movie didn''t show this one, so let''s put in the numbers.'
-        - 's17_ian_check S11: And we never mix the two centres in one picture.'
-        - 's18_ian_stack S12: We drew the layers much farther apart than they really are, so that we can see between them.'
-        - 's28_ian_record S1: Here''s an honest answer: nothing.'
-        - 's30_flood_swipe S0: Satellites caught a cyclone''s flood most clearly for Cyclone Nargis, in the same Bay of Bengal, in May two thousand and
-          eight.'
-        - 's30_flood_swipe S1: Here''s a before and after picture from NASA''s MODIS instrument.'
-        - 's30_flood_swipe S2: It''s in false colour.'
-        - 's30_flood_swipe S4: In these colours, plants look bright green, bare ground looks brown, clouds look white, and water looks dark blue or black.'
-        - 's30_flood_swipe S8: As the line glides across, dark water spreads over land that was green before.'
-        - 's31_recap S8: Tide gauges measured Ian''s, and satellites can map the floods a surge leaves behind.'
+        - 's30_amphan_radar S8: The radar finds about a hundred and twenty five square kilometres of new water in this picture.'
+        - 's31_nargis_intro S6: On the second of May, it came ashore at the delta''s south-western corner, with winds of about ninety knots, about forty
+          six metres per second, averaged over three minutes.'
+        - 's33_idai_intro S4: It reached the coast near the city of Beira around midnight, between the fourteenth and the fifteenth, with winds of about
+          eighty five knots, about forty four metres per second, averaged over ten minutes.'
         replaced:
-        - scene: s00_title
-          sentence: 0
-          text: 'In this video, we''ll learn how turning arrows and cylinders work, and see how meteorology uses them to look inside a tropical cyclone:
-            its spin, its winds in three dimensions, and its storm surge.'
-          audio_text: null
-          neighbours_lufs:
-          - -16.07
-          - -16.25
-          target_lufs: -16.16
-          raw_lufs: -24.24
-          gain_db: 8.62
-          limiter_gr_db: -4.32
-          final_lufs: -16.19
-          true_peak_dbtp: -1.92
-          dur_s: 13.525
-          beat: false
-        - scene: s01_hook
-          sentence: 9
-          text: Cyclone Amphan, which hit India and Bangladesh in twenty twenty, shows that the same picture fits a storm in another ocean.
-          audio_text: null
-          neighbours_lufs:
-          - -15.96
-          - -16.33
-          - -16.1
-          - -16.55
-          target_lufs: -16.23
-          raw_lufs: -24.59
-          gain_db: 8.73
-          limiter_gr_db: -4.43
-          final_lufs: -16.24
-          true_peak_dbtp: -1.86
-          dur_s: 8.475
-          beat: false
-        - scene: s01_hook
-          sentence: 10
-          text: At the end, Amphan and two more cyclones, Nargis in Myanmar and Idai in Mozambique, show us the floods that storms leave behind.
-          audio_text: At the end, Amphan and two more cyclones, Nargis in Myanmar and Ee-dye in Mozambique, show us the floods that storms leave behind.
-          neighbours_lufs:
-          - -15.96
-          - -16.33
-          - -16.1
-          - -16.55
-          target_lufs: -16.23
-          raw_lufs: -24.45
-          gain_db: 8.77
-          limiter_gr_db: -5.08
-          final_lufs: -16.29
-          true_peak_dbtp: -1.81
-          dur_s: 9.45
-          beat: false
-        - scene: s06_dtheta_dtheta
-          sentence: 2
-          text: Let's take this slowly, one step at a time.
-          audio_text: null
-          neighbours_lufs:
-          - -17.36
-          - -15.98
-          - -15.83
-          - -16.44
-          target_lufs: -16.36
-          raw_lufs: -24.47
-          gain_db: 9.35
-          limiter_gr_db: -4.37
-          final_lufs: -16.47
-          true_peak_dbtp: -1.8
-          dur_s: 3.3
-          beat: false
-        - scene: s06_dtheta_dtheta
-          sentence: 3
-          text: First, theta hat is also an arrow of length one.
-          audio_text: null
-          neighbours_lufs:
-          - -17.36
-          - -15.98
-          - -15.83
-          - -16.44
-          target_lufs: -16.36
-          raw_lufs: -25.83
-          gain_db: 10.27
-          limiter_gr_db: -4.2
-          final_lufs: -16.42
-          true_peak_dbtp: -1.67
-          dur_s: 3.85
-          beat: false
-        - scene: s06_dtheta_dtheta
-          sentence: 6
-          text: Next, remember that theta hat is always r hat turned by ninety degrees.
-          audio_text: null
-          neighbours_lufs:
-          - -16.44
-          - -15.83
-          - -16.39
-          - -16.54
-          target_lufs: -16.29
-          raw_lufs: -24.96
-          gain_db: 10.02
-          limiter_gr_db: -5.83
-          final_lufs: -16.36
-          true_peak_dbtp: -1.83
-          dur_s: 5.575
-          beat: false
-        - scene: s06_dtheta_dtheta
-          sentence: 14
-          text: 'To find that direction, let''s turn theta hat with Part 1''s rule: swap the two numbers, and put a minus on the first.'
-          audio_text: null
-          neighbours_lufs:
-          - -16.48
-          - -15.6
-          - -16.58
-          - -16.71
-          target_lufs: -16.32
-          raw_lufs: -24.68
-          gain_db: 8.67
-          limiter_gr_db: -3.35
-          final_lufs: -16.32
-          true_peak_dbtp: -2.02
-          dur_s: 7.775
-          beat: false
-        - scene: s07_toward_centre
-          sentence: 10
-          text: The rate of change of theta hat is its small change, divided by the small turn that caused it.
-          audio_text: null
-          neighbours_lufs:
-          - -16.36
-          - -15.91
-          - -16.28
-          - -16.36
-          target_lufs: -16.22
-          raw_lufs: -24.63
-          gain_db: 9.23
-          limiter_gr_db: -6.23
-          final_lufs: -16.26
-          true_peak_dbtp: -1.96
-          dur_s: 6.55
-          beat: false
-        - scene: s07_toward_centre
-          sentence: 11
-          text: For the small turn, let's take delta theta equal to zero point zero one radians, which is about half a degree.
-          audio_text: null
-          neighbours_lufs:
-          - -16.36
-          - -15.91
-          - -16.28
-          - -16.36
-          target_lufs: -16.22
-          raw_lufs: -24.79
-          gain_db: 8.87
-          limiter_gr_db: -2.1
-          final_lufs: -16.24
-          true_peak_dbtp: -1.84
-          dur_s: 7.775
-          beat: false
-        - scene: s07_toward_centre
-          sentence: 15
-          text: Now divide each number by delta theta, zero point zero one, and we get minus zero point six, minus zero point eight.
-          audio_text: null
-          neighbours_lufs:
-          - -16.9
-          - -16.36
-          - -17.14
-          - -16.56
-          target_lufs: -16.73
-          raw_lufs: -24.49
-          gain_db: 8.06
-          limiter_gr_db: -4.35
-          final_lufs: -16.74
-          true_peak_dbtp: -1.87
-          dur_s: 8.75
-          beat: true
-        - scene: s07_toward_centre
-          sentence: 16
-          text: Now put it next to r hat, which is zero point six, zero point eight.
-          audio_text: null
-          neighbours_lufs:
-          - -16.9
-          - -16.36
-          - -17.14
-          - -16.56
-          target_lufs: -16.73
-          raw_lufs: -24.91
-          gain_db: 8.46
-          limiter_gr_db: -3.0
-          final_lufs: -16.73
-          true_peak_dbtp: -1.87
-          dur_s: 5.2
-          beat: false
-        - scene: s07_toward_centre
-          sentence: 17
-          text: Every number has the same size, but the opposite sign, so the answer is minus r hat.
-          audio_text: null
-          neighbours_lufs:
-          - -16.9
-          - -16.36
-          - -17.14
-          - -16.56
-          target_lufs: -16.73
-          raw_lufs: -24.69
-          gain_db: 8.5
-          limiter_gr_db: -5.65
-          final_lufs: -16.74
-          true_peak_dbtp: -1.82
-          dur_s: 6.575
-          beat: true
-        - scene: s09_dtheta_dt
-          sentence: 11
-          text: Now let's put in the numbers.
-          audio_text: null
-          neighbours_lufs:
-          - -16.72
-          - -15.73
-          - -16.24
-          - -16.28
-          target_lufs: -16.23
-          raw_lufs: -25.98
-          gain_db: 9.91
-          limiter_gr_db: -1.02
-          final_lufs: -16.23
-          true_peak_dbtp: -1.82
-          dur_s: 2.325
-          beat: false
-        - scene: s18_ian_stack
-          sentence: 12
-          text: We drew the layers evenly spaced, and much farther apart than they really are, so that we can read each one.
-          audio_text: null
-          neighbours_lufs:
-          - -16.67
-          - -15.73
-          - -15.95
-          - -16.17
-          target_lufs: -16.12
-          raw_lufs: -24.37
-          gain_db: 8.75
-          limiter_gr_db: -4.83
-          final_lufs: -16.13
-          true_peak_dbtp: -1.96
-          dur_s: 6.85
-          beat: false
-        - scene: s24_amphan_curtain
-          sentence: 4
-          text: 'The thin dark lines on both pictures mark where the ring-average radial wind is exactly zero metres per second: the border between air
-            flowing in and air flowing out.'
-          audio_text: null
-          neighbours_lufs:
-          - -16.36
-          - -15.76
-          - -16.37
-          - -15.44
-          target_lufs: -15.97
-          raw_lufs: -24.74
-          gain_db: 9.26
-          limiter_gr_db: -5.09
-          final_lufs: -16.06
-          true_peak_dbtp: -1.53
-          dur_s: 11.925
-          beat: false
-        - scene: s24_amphan_curtain
-          sentence: 5
-          text: In the middle of the storm, the air hardly moves in or out, so this border wanders, and it wraps round small, weak pockets.
-          audio_text: null
-          neighbours_lufs:
-          - -16.36
-          - -15.76
-          - -16.37
-          - -15.44
-          target_lufs: -15.97
-          raw_lufs: -24.33
-          gain_db: 8.81
-          limiter_gr_db: -4.32
-          final_lufs: -16.12
-          true_peak_dbtp: -1.53
-          dur_s: 8.525
-          beat: false
-        - scene: s24_amphan_curtain
-          sentence: 6
-          text: Those pockets differ between the two storms and the two data sets, so the lines don't match, but the big pattern does.
-          audio_text: null
-          neighbours_lufs:
-          - -16.36
-          - -15.76
-          - -16.37
-          - -15.44
-          target_lufs: -15.97
-          raw_lufs: -24.67
-          gain_db: 9.14
-          limiter_gr_db: -2.89
-          final_lufs: -15.99
-          true_peak_dbtp: -1.89
-          dur_s: 7.925
-          beat: false
-        - scene: s24_amphan_curtain
-          sentence: 7
-          text: Where a picture has no colour at all, there's no data.
-          audio_text: null
-          neighbours_lufs:
-          - -16.36
-          - -15.76
-          - -16.37
-          - -15.44
-          target_lufs: -15.97
-          raw_lufs: -24.95
-          gain_db: 9.54
-          limiter_gr_db: -2.48
-          final_lufs: -15.98
-          true_peak_dbtp: -1.82
-          dur_s: 3.75
-          beat: false
-        - scene: s24_amphan_curtain
-          sentence: 8
-          text: Close to the centre, the lowest levels lie below the sea surface, and along the top, we're above the highest level.
-          audio_text: null
-          neighbours_lufs:
-          - -16.36
-          - -15.76
-          - -16.37
-          - -15.44
-          target_lufs: -15.97
-          raw_lufs: -24.42
-          gain_db: 9.2
-          limiter_gr_db: -5.48
-          final_lufs: -16.02
-          true_peak_dbtp: -1.8
-          dur_s: 7.775
-          beat: false
-        - scene: s24_amphan_curtain
-          sentence: 9
-          text: Amphan's picture also starts twenty five kilometres out, at its first ring.
-          audio_text: null
-          neighbours_lufs:
-          - -16.36
-          - -15.76
-          - -16.37
-          - -15.44
-          target_lufs: -15.97
-          raw_lufs: -24.76
-          gain_db: 9.63
-          limiter_gr_db: -4.16
-          final_lufs: -16.01
-          true_peak_dbtp: -1.85
-          dur_s: 5.375
-          beat: false
-        - scene: s28_ian_record
-          sentence: 1
-          text: Nothing at all.
-          audio_text: null
-          neighbours_lufs:
-          - -17.37
-          - -16.43
-          - -16.62
-          - -16.36
-          target_lufs: -16.67
-          raw_lufs: -23.9
-          gain_db: 7.22
-          limiter_gr_db: 0.0
-          final_lufs: -16.67
-          true_peak_dbtp: -2.78
-          dur_s: 1.725
-          beat: false
         - scene: s30_amphan_radar
-          sentence: 0
-          text: So what did satellites see of Amphan's flood?
+          sentence: 8
+          text: 'We count the pixels that turned dark, marked here in cyan: about thirty four thousand seven hundred of them.'
           audio_text: null
           neighbours_lufs:
-          - -15.71
-          - -16.47
-          - -16.0
-          - -17.22
-          target_lufs: -16.31
-          raw_lufs: -25.89
-          gain_db: 10.1
-          limiter_gr_db: -2.69
+          - -16.37
+          - -16.32
+          - -16.37
+          - -16.34
+          target_lufs: -16.35
+          raw_lufs: -24.39
+          gain_db: 8.55
+          limiter_gr_db: -6.31
           final_lufs: -16.36
           true_peak_dbtp: -1.99
-          dur_s: 3.175
+          dur_s: 7.425
           beat: false
         - scene: s30_amphan_radar
-          sentence: 1
-          text: For days after landfall, thick clouds covered the ground, so ordinary pictures from space can't show it.
+          sentence: 9
+          text: Each pixel is a square sixty metres on each side, so it covers three thousand six hundred square metres, or zero point zero zero three six
+            square kilometres.
           audio_text: null
           neighbours_lufs:
-          - -15.71
-          - -16.47
-          - -16.0
-          - -17.22
-          target_lufs: -16.31
-          raw_lufs: -24.54
-          gain_db: 8.6
-          limiter_gr_db: -4.26
-          final_lufs: -16.33
-          true_peak_dbtp: -1.94
-          dur_s: 7.375
-          beat: false
-        - scene: s30_amphan_radar
-          sentence: 2
-          text: And the flooded patches are small, so the coarse pixels of those pictures, two hundred and fifty metres wide, blur them into the land around
-            them.
-          audio_text: null
-          neighbours_lufs:
-          - -15.71
-          - -16.47
-          - -16.0
-          - -17.22
-          target_lufs: -16.31
-          raw_lufs: -24.36
-          gain_db: 8.38
-          limiter_gr_db: -3.97
-          final_lufs: -16.32
-          true_peak_dbtp: -1.96
-          dur_s: 9.3
-          beat: false
-        - scene: s30_amphan_radar
-          sentence: 3
-          text: But radar sees through clouds.
-          audio_text: null
-          neighbours_lufs:
-          - -15.71
-          - -16.47
-          - -16.0
-          - -17.22
-          target_lufs: -16.31
-          raw_lufs: -26.45
-          gain_db: 11.42
-          limiter_gr_db: -4.19
-          final_lufs: -16.48
-          true_peak_dbtp: -1.95
-          dur_s: 2.45
-          beat: false
-        - scene: s30_amphan_radar
-          sentence: 4
-          text: The Sentinel-1 radar satellite sends out microwaves and measures how much of them bounces back.
-          audio_text: null
-          neighbours_lufs:
-          - -15.71
-          - -16.47
-          - -16.0
-          - -17.22
-          target_lufs: -16.31
-          raw_lufs: -24.79
-          gain_db: 8.85
-          limiter_gr_db: -2.77
-          final_lufs: -16.33
-          true_peak_dbtp: -2.0
-          dur_s: 6.875
-          beat: false
-        - scene: s30_amphan_radar
-          sentence: 5
-          text: Calm water reflects the microwaves away, like a mirror, so in a radar picture, water looks dark.
-          audio_text: null
-          neighbours_lufs:
-          - -15.71
-          - -16.47
-          - -16.0
-          - -17.22
-          target_lufs: -16.31
-          raw_lufs: -24.49
-          gain_db: 8.36
-          limiter_gr_db: -3.29
-          final_lufs: -16.31
-          true_peak_dbtp: -2.02
-          dur_s: 7.075
-          beat: false
-        - scene: s30_amphan_radar
-          sentence: 6
-          text: Here's the coast near Satkhira and the Sundarbans on the sixteenth of May, before Amphan, and on the twenty second, two and a half days
-            after landfall.
-          audio_text: null
-          neighbours_lufs:
-          - -15.71
-          - -16.47
-          - -16.0
-          - -17.22
-          target_lufs: -16.31
-          raw_lufs: -24.16
-          gain_db: 8.23
+          - -16.37
+          - -16.32
+          - -16.37
+          - -16.34
+          target_lufs: -16.35
+          raw_lufs: -24.44
+          gain_db: 8.59
           limiter_gr_db: -3.8
-          final_lufs: -16.32
-          true_peak_dbtp: -1.89
-          dur_s: 9.825
-          beat: true
-        - scene: s30_amphan_radar
-          sentence: 7
-          text: As the line moves across, new dark patches appear where the fields were dry before.
-          audio_text: null
-          neighbours_lufs:
-          - -15.71
-          - -16.47
-          - -16.0
-          - -17.22
-          target_lufs: -16.31
-          raw_lufs: -24.76
-          gain_db: 9.22
-          limiter_gr_db: -3.91
           final_lufs: -16.37
-          true_peak_dbtp: -1.92
-          dur_s: 5.775
+          true_peak_dbtp: -2.04
+          dur_s: 10.9
           beat: false
         - scene: s30_amphan_radar
-          sentence: 8
-          text: The radar finds about a hundred and twenty five square kilometres of new water in this picture.
+          sentence: 10
+          text: Thirty four thousand seven hundred times zero point zero zero three six is about a hundred and twenty five square kilometres of new water.
           audio_text: null
           neighbours_lufs:
-          - -15.71
-          - -16.47
-          - -16.0
-          - -17.22
-          target_lufs: -16.31
-          raw_lufs: -25.21
-          gain_db: 9.2
-          limiter_gr_db: -2.44
-          final_lufs: -16.32
-          true_peak_dbtp: -1.73
-          dur_s: 6.225
+          - -16.37
+          - -16.32
+          - -16.37
+          - -16.34
+          target_lufs: -16.35
+          raw_lufs: -25.16
+          gain_db: 9.28
+          limiter_gr_db: -5.88
+          final_lufs: -16.36
+          true_peak_dbtp: -1.87
+          dur_s: 9.75
           beat: true
-        - scene: s30_amphan_radar
-          sentence: 9
-          text: That's about the size of a square eleven kilometres on each side.
-          audio_text: null
-          neighbours_lufs:
-          - -15.71
-          - -16.47
-          - -16.0
-          - -17.22
-          target_lufs: -16.31
-          raw_lufs: -26.09
-          gain_db: 10.7
-          limiter_gr_db: -5.28
-          final_lufs: -16.37
-          true_peak_dbtp: -1.78
-          dur_s: 4.325
-          beat: true
-        - scene: s31_nargis_intro
-          sentence: 0
-          text: The clearest flood pictures from space of any cyclone in the Bay of Bengal come from Cyclone Nargis, in May two thousand and eight.
-          audio_text: null
-          neighbours_lufs:
-          - -15.71
-          - -16.47
-          - -16.0
-          - -17.22
-          target_lufs: -16.31
-          raw_lufs: -24.72
-          gain_db: 9.07
-          limiter_gr_db: -3.79
-          final_lufs: -16.34
-          true_peak_dbtp: -1.89
-          dur_s: 8.5
-          beat: false
-        - scene: s31_nargis_intro
-          sentence: 1
-          text: Let's go to Myanmar, on the eastern side of the Bay.
-          audio_text: null
-          neighbours_lufs:
-          - -15.71
-          - -16.47
-          - -16.0
-          - -17.22
-          target_lufs: -16.31
-          raw_lufs: -24.46
-          gain_db: 8.78
-          limiter_gr_db: -3.33
-          final_lufs: -16.35
-          true_peak_dbtp: -1.94
-          dur_s: 3.95
-          beat: false
-        - scene: s31_nargis_intro
-          sentence: 2
-          text: Here, the Irrawaddy River, which Myanmar calls the Ayeyarwady, fans out into many channels before it reaches the sea.
-          audio_text: Here, the Irrawaddy River, which Myanmar calls the Eye-yar-wah-dee, fans out into many channels before it reaches the sea.
-          neighbours_lufs:
-          - -15.71
-          - -16.47
-          - -16.0
-          - -17.22
-          target_lufs: -16.31
-          raw_lufs: -24.32
-          gain_db: 8.18
-          limiter_gr_db: -4.35
-          final_lufs: -16.32
-          true_peak_dbtp: -1.9
-          dur_s: 8.2
-          beat: false
-        - scene: s31_nargis_intro
-          sentence: 3
-          text: 'This is the Irrawaddy delta: a huge, flat plain of rice fields, most of it only a few metres above the sea.'
-          audio_text: null
-          neighbours_lufs:
-          - -15.71
-          - -16.47
-          - -16.0
-          - -17.22
-          target_lufs: -16.31
-          raw_lufs: -24.37
-          gain_db: 8.52
-          limiter_gr_db: -6.52
-          final_lufs: -16.33
-          true_peak_dbtp: -1.93
-          dur_s: 7.8
-          beat: false
-        - scene: s31_nargis_intro
-          sentence: 4
-          text: Nargis formed in the south of the Bay in late April.
-          audio_text: null
-          neighbours_lufs:
-          - -15.71
-          - -16.47
-          - -16.0
-          - -17.22
-          target_lufs: -16.31
-          raw_lufs: -24.92
-          gain_db: 8.9
-          limiter_gr_db: -1.97
-          final_lufs: -16.32
-          true_peak_dbtp: -2.1
-          dur_s: 3.85
-          beat: false
-        - scene: s31_nargis_intro
-          sentence: 5
-          text: It moved west, then north, then turned east, straight towards the delta.
-          audio_text: null
-          neighbours_lufs:
-          - -15.71
-          - -16.47
-          - -16.0
-          - -17.22
-          target_lufs: -16.31
-          raw_lufs: -24.5
-          gain_db: 8.72
-          limiter_gr_db: -3.17
-          final_lufs: -16.42
-          true_peak_dbtp: -1.53
-          dur_s: 5.225
-          beat: false
         - scene: s31_nargis_intro
           sentence: 6
-          text: On the second of May, it came ashore at the delta's south-western corner, with winds of about ninety knots, about forty six metres per second,
-            averaged over three minutes.
+          text: On the second of May, it came ashore at the delta's south-western corner, with winds of about ninety knots, averaged over three minutes.
           audio_text: null
           neighbours_lufs:
-          - -15.71
-          - -16.47
-          - -16.0
-          - -17.22
-          target_lufs: -16.31
-          raw_lufs: -24.51
-          gain_db: 8.68
-          limiter_gr_db: -4.57
-          final_lufs: -16.33
-          true_peak_dbtp: -1.88
-          dur_s: 11.25
-          beat: true
-        - scene: s31_nargis_intro
-          sentence: 7
-          text: Then it crossed the whole delta, eastward, towards Yangon, the country's largest city.
-          audio_text: null
-          neighbours_lufs:
-          - -15.71
-          - -16.47
-          - -16.0
-          - -17.22
-          target_lufs: -16.31
-          raw_lufs: -24.26
-          gain_db: 8.13
-          limiter_gr_db: -2.69
-          final_lufs: -16.32
-          true_peak_dbtp: -1.82
-          dur_s: 6.05
-          beat: false
-        - scene: s31_nargis_intro
-          sentence: 8
-          text: Here's Nargis that day, seen by a NASA satellite a few hours before landfall, with its eye just off the coast.
-          audio_text: null
-          neighbours_lufs:
-          - -15.71
-          - -16.47
-          - -16.0
-          - -17.22
-          target_lufs: -16.31
-          raw_lufs: -24.71
-          gain_db: 8.62
-          limiter_gr_db: -4.08
-          final_lufs: -16.31
-          true_peak_dbtp: -1.88
-          dur_s: 7.675
-          beat: false
-        - scene: s31_nargis_intro
-          sentence: 9
-          text: Its storm surge and heavy rain flooded the low delta, far inland.
-          audio_text: null
-          neighbours_lufs:
-          - -15.71
-          - -16.47
-          - -16.0
-          - -17.22
-          target_lufs: -16.31
-          raw_lufs: -25.17
-          gain_db: 9.14
-          limiter_gr_db: -3.22
-          final_lufs: -16.32
-          true_peak_dbtp: -1.99
-          dur_s: 4.95
-          beat: false
-        - scene: s31_nargis_intro
-          sentence: 10
-          text: Let's zoom in, to see the delta before and after the storm.
-          audio_text: null
-          neighbours_lufs:
-          - -15.71
-          - -16.47
-          - -16.0
-          - -17.22
-          target_lufs: -16.31
-          raw_lufs: -25.07
-          gain_db: 9.24
-          limiter_gr_db: -3.77
-          final_lufs: -16.34
-          true_peak_dbtp: -1.67
-          dur_s: 4.3
-          beat: false
-        - scene: s32_nargis_swipe
-          sentence: 0
-          text: First, here's the delta in natural colour, the way our eyes would see it from space.
-          audio_text: null
-          neighbours_lufs:
-          - -15.71
-          - -16.47
-          - -16.0
-          - -17.22
-          target_lufs: -16.31
-          raw_lufs: -24.94
-          gain_db: 9.45
-          limiter_gr_db: -3.91
-          final_lufs: -16.38
-          true_peak_dbtp: -1.84
-          dur_s: 5.75
-          beat: false
-        - scene: s32_nargis_swipe
-          sentence: 3
-          text: As the line glides across, look for the flood.
-          audio_text: null
-          neighbours_lufs:
-          - -17.22
-          - -16.0
-          - -15.6
-          - -16.57
-          target_lufs: -16.31
-          raw_lufs: -24.96
-          gain_db: 9.05
-          limiter_gr_db: -2.4
-          final_lufs: -16.32
-          true_peak_dbtp: -1.91
-          dur_s: 3.425
-          beat: false
-        - scene: s32_nargis_swipe
-          sentence: 4
-          text: 'In natural colour, it''s hard to see: muddy floodwater and wet soil both look brown.'
-          audio_text: null
-          neighbours_lufs:
-          - -17.22
-          - -16.0
-          - -15.6
-          - -16.57
-          target_lufs: -16.31
-          raw_lufs: -24.38
-          gain_db: 8.76
-          limiter_gr_db: -2.53
+          - -16.42
+          - -16.32
+          - -16.32
+          - -16.31
+          target_lufs: -16.34
+          raw_lufs: -24.67
+          gain_db: 8.72
+          limiter_gr_db: -4.75
           final_lufs: -16.36
-          true_peak_dbtp: -1.93
-          dur_s: 6.05
+          true_peak_dbtp: -1.82
+          dur_s: 8.9
           beat: false
-        - scene: s32_nargis_swipe
-          sentence: 5
-          text: So flood mappers use false colour.
-          audio_text: null
-          neighbours_lufs:
-          - -17.22
-          - -16.0
-          - -15.6
-          - -16.57
-          target_lufs: -16.31
-          raw_lufs: -25.9
-          gain_db: 10.21
-          limiter_gr_db: -3.39
-          final_lufs: -16.33
-          true_peak_dbtp: -2.03
-          dur_s: 2.775
-          beat: false
-        - scene: s32_nargis_swipe
+        - scene: s31_nargis_intro
           sentence: 7
-          text: In these colours, plants look bright green, dry fields and bare ground look pink, clouds look white, and water looks dark blue or black.
+          text: A knot is one point eight five two kilometres per hour, so ninety knots is about a hundred and sixty seven kilometres per hour.
           audio_text: null
           neighbours_lufs:
-          - -15.6
-          - -17.22
-          - -16.57
-          - -16.49
-          target_lufs: -16.43
-          raw_lufs: -24.17
-          gain_db: 8.26
-          limiter_gr_db: -4.58
-          final_lufs: -16.8
-          true_peak_dbtp: -1.53
-          dur_s: 9.425
+          - -16.42
+          - -16.32
+          - -16.32
+          - -16.31
+          target_lufs: -16.34
+          raw_lufs: -24.58
+          gain_db: 8.6
+          limiter_gr_db: -4.4
+          final_lufs: -16.35
+          true_peak_dbtp: -1.88
+          dur_s: 8.65
           beat: false
-        - scene: s32_nargis_swipe
+        - scene: s31_nargis_intro
           sentence: 8
-          text: Water soaks up both kinds of infrared light, so it stays dark, even when it's muddy.
+          text: A kilometre per hour is a thousand metres in three thousand six hundred seconds, so we divide by three point six, and get about forty six
+            metres per second.
           audio_text: null
           neighbours_lufs:
-          - -15.6
-          - -17.22
-          - -16.57
-          - -16.49
-          target_lufs: -16.43
-          raw_lufs: -24.57
-          gain_db: 8.22
-          limiter_gr_db: -1.41
-          final_lufs: -16.43
-          true_peak_dbtp: -2.09
-          dur_s: 6.05
-          beat: false
-        - scene: s32_nargis_swipe
-          sentence: 10
-          text: Here are the same two days in false colour.
-          audio_text: null
-          neighbours_lufs:
-          - -16.57
-          - -15.6
-          - -16.49
-          - -15.93
-          target_lufs: -16.13
-          raw_lufs: -25.5
-          gain_db: 10.08
-          limiter_gr_db: -2.6
-          final_lufs: -16.21
-          true_peak_dbtp: -1.83
-          dur_s: 3.0
-          beat: false
-        - scene: s32_nargis_swipe
-          sentence: 11
-          text: As the line glides across, dark water spreads over land that was pink and green before.
-          audio_text: null
-          neighbours_lufs:
-          - -16.57
-          - -15.6
-          - -16.49
-          - -15.93
-          target_lufs: -16.13
-          raw_lufs: -25.15
-          gain_db: 9.46
-          limiter_gr_db: -3.4
-          final_lufs: -16.14
-          true_peak_dbtp: -1.92
-          dur_s: 6.3
+          - -16.42
+          - -16.32
+          - -16.32
+          - -16.31
+          target_lufs: -16.34
+          raw_lufs: -24.53
+          gain_db: 8.67
+          limiter_gr_db: -3.39
+          final_lufs: -16.36
+          true_peak_dbtp: -1.79
+          dur_s: 10.675
           beat: true
-        - scene: s33_idai_intro
-          sentence: 0
-          text: Our last flood is on the other side of the Indian Ocean, south of the equator.
-          audio_text: null
-          neighbours_lufs:
-          - -15.93
-          - -16.49
-          - -15.49
-          - -15.78
-          target_lufs: -15.91
-          raw_lufs: -25.14
-          gain_db: 9.8
-          limiter_gr_db: -3.87
-          final_lufs: -16.05
-          true_peak_dbtp: -1.99
-          dur_s: 5.25
-          beat: false
-        - scene: s33_idai_intro
-          sentence: 1
-          text: In March twenty nineteen, Cyclone Idai grew strong in the Mozambique Channel, between Madagascar and Mozambique.
-          audio_text: In March twenty nineteen, Cyclone Ee-dye grew strong in the Mozambique Channel, between Madagascar and Mozambique.
-          neighbours_lufs:
-          - -15.93
-          - -16.49
-          - -15.49
-          - -15.78
-          target_lufs: -15.91
-          raw_lufs: -24.62
-          gain_db: 9.09
-          limiter_gr_db: -4.35
-          final_lufs: -15.92
-          true_peak_dbtp: -1.61
-          dur_s: 7.9
-          beat: false
-        - scene: s33_idai_intro
-          sentence: 2
-          text: South of the equator, a tropical cyclone turns clockwise as seen from above, the opposite way to the storms we've seen so far.
-          audio_text: null
-          neighbours_lufs:
-          - -15.93
-          - -16.49
-          - -15.49
-          - -15.78
-          target_lufs: -15.91
-          raw_lufs: -24.72
-          gain_db: 9.41
-          limiter_gr_db: -7.82
-          final_lufs: -15.92
-          true_peak_dbtp: -1.96
-          dur_s: 8.7
-          beat: false
-        - scene: s33_idai_intro
-          sentence: 3
-          text: Here's Idai on the fourteenth of March, the day it came ashore, seen by a NASA satellite.
-          audio_text: Here's Ee-dye on the fourteenth of March, the day it came ashore, seen by a NASA satellite.
-          neighbours_lufs:
-          - -15.93
-          - -16.49
-          - -15.49
-          - -15.78
-          target_lufs: -15.91
-          raw_lufs: -24.85
-          gain_db: 9.54
-          limiter_gr_db: -4.62
-          final_lufs: -15.93
-          true_peak_dbtp: -1.73
-          dur_s: 6.15
-          beat: false
         - scene: s33_idai_intro
           sentence: 4
           text: It reached the coast near the city of Beira around midnight, between the fourteenth and the fifteenth, with winds of about eighty five knots,
-            about forty four metres per second, averaged over ten minutes.
+            averaged over ten minutes.
           audio_text: It reached the coast near the city of Bay-ra around midnight, between the fourteenth and the fifteenth, with winds of about eighty
-            five knots, about forty four metres per second, averaged over ten minutes.
+            five knots, averaged over ten minutes.
           neighbours_lufs:
           - -15.93
-          - -16.49
-          - -15.49
-          - -15.78
-          target_lufs: -15.91
-          raw_lufs: -24.43
-          gain_db: 9.03
-          limiter_gr_db: -6.54
-          final_lufs: -15.93
-          true_peak_dbtp: -1.71
-          dur_s: 12.825
-          beat: true
+          - -15.92
+          - -15.97
+          - -15.92
+          target_lufs: -15.93
+          raw_lufs: -24.71
+          gain_db: 9.21
+          limiter_gr_db: -6.39
+          final_lufs: -16.36
+          true_peak_dbtp: -1.53
+          dur_s: 10.425
+          beat: false
         - scene: s33_idai_intro
           sentence: 5
-          text: Beira and the town of Buzi sit on low, flat land where two big rivers reach the sea.
-          audio_text: Bay-ra and the town of Boo-zee sit on low, flat land where two big rivers reach the sea.
+          text: Times one point eight five two, that's about a hundred and fifty seven kilometres per hour.
+          audio_text: null
           neighbours_lufs:
           - -15.93
-          - -16.49
-          - -15.49
-          - -15.78
-          target_lufs: -15.91
-          raw_lufs: -24.88
-          gain_db: 9.7
-          limiter_gr_db: -4.74
-          final_lufs: -15.97
-          true_peak_dbtp: -1.96
-          dur_s: 6.45
+          - -15.92
+          - -15.97
+          - -15.92
+          target_lufs: -15.93
+          raw_lufs: -25.19
+          gain_db: 9.55
+          limiter_gr_db: -3.28
+          final_lufs: -16.25
+          true_peak_dbtp: -1.53
+          dur_s: 6.275
           beat: false
         - scene: s33_idai_intro
           sentence: 6
-          text: Let's zoom in.
+          text: Divided by three point six, it's about forty four metres per second.
           audio_text: null
           neighbours_lufs:
           - -15.93
-          - -16.49
-          - -15.49
-          - -15.78
-          target_lufs: -15.91
-          raw_lufs: -24.22
-          gain_db: 8.74
-          limiter_gr_db: -2.06
-          final_lufs: -15.92
-          true_peak_dbtp: -2.05
-          dur_s: 1.75
-          beat: false
-        - scene: s34_idai_swipe
-          sentence: 0
-          text: Here's the land round Beira in natural colour, on the eleventh of March, three and a half days before landfall, and on the twenty fifth,
-            about ten days after.
-          audio_text: Here's the land round Bay-ra in natural colour, on the eleventh of March, three and a half days before landfall, and on the twenty
-            fifth, about ten days after.
-          neighbours_lufs:
-          - -15.93
-          - -16.49
-          - -15.49
-          - -15.78
-          target_lufs: -15.91
-          raw_lufs: -24.32
-          gain_db: 8.85
-          limiter_gr_db: -5.25
-          final_lufs: -15.93
-          true_peak_dbtp: -1.59
-          dur_s: 10.5
+          - -15.92
+          - -15.97
+          - -15.92
+          target_lufs: -15.93
+          raw_lufs: -24.81
+          gain_db: 9.99
+          limiter_gr_db: -5.45
+          final_lufs: -16.0
+          true_peak_dbtp: -1.99
+          dur_s: 4.9
           beat: true
-        - scene: s34_idai_swipe
-          sentence: 1
-          text: Again, the flood is hard to see in natural colour.
-          audio_text: null
-          neighbours_lufs:
-          - -15.93
-          - -16.49
-          - -15.49
-          - -15.78
-          target_lufs: -15.91
-          raw_lufs: -25.65
-          gain_db: 10.64
-          limiter_gr_db: -5.43
-          final_lufs: -15.99
-          true_peak_dbtp: -1.86
-          dur_s: 3.85
-          beat: false
-        - scene: s34_idai_swipe
-          sentence: 2
-          text: Now the same two days in false colour.
-          audio_text: null
-          neighbours_lufs:
-          - -15.93
-          - -16.49
-          - -15.49
-          - -15.78
-          target_lufs: -15.91
-          raw_lufs: -25.59
-          gain_db: 10.58
-          limiter_gr_db: -4.8
-          final_lufs: -15.96
-          true_peak_dbtp: -1.76
-          dur_s: 2.9
-          beat: false
-        - scene: s34_idai_swipe
-          sentence: 3
-          text: Dark blue water covers wide plains along the rivers round Beira, where there were green fields before.
-          audio_text: Dark blue water covers wide plains along the rivers round Bay-ra, where there were green fields before.
-          neighbours_lufs:
-          - -15.93
-          - -16.49
-          - -15.49
-          - -15.78
-          target_lufs: -15.91
-          raw_lufs: -25.1
-          gain_db: 9.81
-          limiter_gr_db: -3.73
-          final_lufs: -15.93
-          true_peak_dbtp: -1.88
-          dur_s: 7.025
-          beat: true
-        - scene: s34_idai_swipe
-          sentence: 4
-          text: On the left, the white blobs are clouds.
-          audio_text: null
-          neighbours_lufs:
-          - -15.93
-          - -16.49
-          - -15.49
-          - -15.78
-          target_lufs: -15.91
-          raw_lufs: -25.09
-          gain_db: 9.88
-          limiter_gr_db: -2.57
-          final_lufs: -16.03
-          true_peak_dbtp: -2.05
-          dur_s: 2.925
-          beat: false
-        - scene: s35_recap
-          sentence: 8
-          text: Tide gauges measured Ian's surge.
-          audio_text: null
-          neighbours_lufs:
-          - -16.72
-          - -15.93
-          - -16.09
-          - -16.65
-          target_lufs: -16.33
-          raw_lufs: -26.28
-          gain_db: 10.86
-          limiter_gr_db: -4.44
-          final_lufs: -16.36
-          true_peak_dbtp: -1.97
-          dur_s: 2.6
-          beat: false
-        - scene: s35_recap
-          sentence: 9
-          text: Radar saw Amphan's flood through the clouds, and false colour showed the floods after Nargis and Idai.
-          audio_text: Radar saw Amphan's flood through the clouds, and false colour showed the floods after Nargis and Ee-dye.
-          neighbours_lufs:
-          - -16.72
-          - -15.93
-          - -16.09
-          - -16.65
-          target_lufs: -16.33
-          raw_lufs: -25.29
-          gain_db: 9.73
-          limiter_gr_db: -5.25
-          final_lufs: -16.37
-          true_peak_dbtp: -1.68
-          dur_s: 6.8
-          beat: false
 conventions:
   polar angle: theta from east, anticlockwise as seen from above; compass bearing from north, clockwise as seen from above; wind direction = 'from'
   spoken symbols: '''r hat'', ''theta hat'', ''delta theta'', ''d r hat by d theta'', ''d theta by d t'', ''v squared over r'', ''u sub r'', ''u sub theta'',
@@ -1678,20 +719,20 @@ chapter_marks:
   t_s: 2447.425
   scene: s30_amphan_radar
   name: Amphan's flood, seen by radar
-- t: '41:56'
-  t_s: 2516.775
+- t: '42:19'
+  t_s: 2539.325
   scene: s31_nargis_intro
   name: Cyclone Nargis
-- t: '43:13'
-  t_s: 2593.975
+- t: '43:54'
+  t_s: 2634.2
   scene: s32_nargis_swipe
   name: 'Nargis: natural and false colour'
-- t: '44:40'
-  t_s: 2680.225
+- t: '45:20'
+  t_s: 2720.45
   scene: s33_idai_intro
   name: Cyclone Idai
-- t: '46:10'
-  t_s: 2770.15
+- t: '46:59'
+  t_s: 2819.85
   scene: s35_recap
   name: to sum up
 scenes:
@@ -4250,7 +3291,7 @@ scenes:
 - id: s30_amphan_radar
   t:
   - 2447.425
-  - 2516.775
+  - 2539.325
   sentence_times:
   - - 2447.425
     - 2450.6
@@ -4269,9 +3310,13 @@ scenes:
   - - 2497.1
     - 2502.875
   - - 2503.225
-    - 2509.45
-  - - 2510.95
-    - 2515.275
+    - 2510.65
+  - - 2511.0
+    - 2521.9
+  - - 2522.25
+    - 2532.0
+  - - 2533.5
+    - 2537.825
   beat: 'Amphan''s flood: why no ordinary before/after (cloud for days, small flooded patches at 250 m), then the Sentinel-1 radar pair'
   visual: 'S0-S2: two MODIS Terra natural-colour pictures of the radar box (88.80-89.92 E, 22.12-22.75 N), 21 and 22 May 2020, side by side with their dates
     (cloud over the coast), Natural Earth coast in white; S2 a 250-m pixel grid zoom note. S3-S5: a code-drawn satellite sends microwave pulses; over rough
@@ -4279,13 +3324,15 @@ scenes:
     grey, one stretch) in one frame with ''before · 16 May'' / ''after · 22 May'' tags, Satkhira and ''Sundarbans (forest)'' labelled, coast lines; S7 the
     gold swipe line right → left → right → middle (slow full sweeps). S8: ''≈ 125 km² of new water''; S9: a gold square drawn to scale (11.2 km a side)
     with √125 ≈ 11.2 km. Source line under the picture.'
-  voiceover: So what did satellites see of Amphan's flood? For days after landfall, thick clouds covered the ground, so ordinary pictures from space can't
+  voiceover: 'So what did satellites see of Amphan''s flood? For days after landfall, thick clouds covered the ground, so ordinary pictures from space can''t
     show it. And the flooded patches are small, so the coarse pixels of those pictures, two hundred and fifty metres wide, blur them into the land around
     them. But radar sees through clouds. The Sentinel-1 radar satellite sends out microwaves and measures how much of them bounces back. Calm water reflects
-    the microwaves away, like a mirror, so in a radar picture, water looks dark. Here's the coast near Satkhira and the Sundarbans on the sixteenth of May,
+    the microwaves away, like a mirror, so in a radar picture, water looks dark. Here''s the coast near Satkhira and the Sundarbans on the sixteenth of May,
     before Amphan, and on the twenty second, two and a half days after landfall. [beat] As the line moves across, new dark patches appear where the fields
-    were dry before. The radar finds about a hundred and twenty five square kilometres of new water in this picture. [beat] That's about the size of a square
-    eleven kilometres on each side. [beat]
+    were dry before. We count the pixels that turned dark, marked here in cyan: about thirty four thousand seven hundred of them. Each pixel is a square sixty
+    metres on each side, so it covers three thousand six hundred square metres, or zero point zero zero three six square kilometres. Thirty four thousand
+    seven hundred times zero point zero zero three six is about a hundred and twenty five square kilometres of new water. [beat] That''s about the size of
+    a square eleven kilometres on each side. [beat]'
   on_screen_eq: null
   physics_source:
     fn: fluidpy.data.fetch(ee://ch00_flood_v2/close_s1, close_jrc) cache hits; fluidpy.data.gibs.fetch_wms (MODIS Terra 21, 22 May 2020)
@@ -4314,31 +3361,35 @@ scenes:
   layout: Picture zone x 80-1080; keys and numbers in the column; source line under the picture.
 - id: s31_nargis_intro
   t:
-  - 2516.775
-  - 2593.975
+  - 2539.325
+  - 2634.2
   sentence_times:
-  - - 2516.775
-    - 2525.275
-  - - 2525.625
-    - 2529.575
-  - - 2529.925
-    - 2538.125
-  - - 2538.475
-    - 2546.275
-  - - 2546.625
-    - 2550.475
-  - - 2550.825
-    - 2556.05
-  - - 2556.4
-    - 2567.65
-  - - 2569.15
-    - 2575.2
-  - - 2575.55
-    - 2583.225
-  - - 2583.575
-    - 2588.525
-  - - 2588.875
-    - 2593.175
+  - - 2539.325
+    - 2547.825
+  - - 2548.175
+    - 2552.125
+  - - 2552.475
+    - 2560.675
+  - - 2561.025
+    - 2568.825
+  - - 2569.175
+    - 2573.025
+  - - 2573.375
+    - 2578.6
+  - - 2578.95
+    - 2587.85
+  - - 2588.2
+    - 2596.85
+  - - 2597.2
+    - 2607.875
+  - - 2609.375
+    - 2615.425
+  - - 2615.775
+    - 2623.45
+  - - 2623.8
+    - 2628.75
+  - - 2629.1
+    - 2633.4
   beat: 'Cyclone Nargis as a case study: globe → Myanmar, the Irrawaddy delta, the track and dates, the eye, the zoom into the delta'
   visual: 'House globe (s21 look): from the Bay of Bengal view the globe turns east to Myanmar (S1), country names; S2-S3 zoom to the delta with the MODIS
     natural-colour picture of 21 Apr draped on it (the channels), labels Yangon, Pathein, ''Irrawaddy delta''; keyword ''mostly ≤ 5 m above the sea''. S4-S7:
@@ -4346,13 +3397,15 @@ scenes:
     m/s rows; the track crosses the delta past Yangon. S8: the MODIS Aqua picture of 2 May draped on the globe, gold ring on the eye. S9-S10: zoom into
     the delta box (94.15-96.45 E, 15.7-17.1 N), the draped natural-colour picture fills the frame (= s32''s first frame). §5b edge fades; source line below
     the globe.'
-  voiceover: 'The clearest flood pictures from space of any cyclone in the Bay of Bengal come from Cyclone Nargis, in May two thousand and eight. Let''s
-    go to Myanmar, on the eastern side of the Bay. Here, the Irrawaddy River, which Myanmar calls the Ayeyarwady, fans out into many channels before it
-    reaches the sea. This is the Irrawaddy delta: a huge, flat plain of rice fields, most of it only a few metres above the sea. Nargis formed in the south
-    of the Bay in late April. It moved west, then north, then turned east, straight towards the delta. On the second of May, it came ashore at the delta''s
-    south-western corner, with winds of about ninety knots, about forty six metres per second, averaged over three minutes. [beat] Then it crossed the whole
-    delta, eastward, towards Yangon, the country''s largest city. Here''s Nargis that day, seen by a NASA satellite a few hours before landfall, with its
-    eye just off the coast. Its storm surge and heavy rain flooded the low delta, far inland. Let''s zoom in, to see the delta before and after the storm.'
+  voiceover: 'The clearest flood pictures from space of any cyclone in the Bay of Bengal come from Cyclone Nargis, in May two thousand and eight. Let''s go
+    to Myanmar, on the eastern side of the Bay. Here, the Irrawaddy River, which Myanmar calls the Ayeyarwady, fans out into many channels before it reaches
+    the sea. This is the Irrawaddy delta: a huge, flat plain of rice fields, most of it only a few metres above the sea. Nargis formed in the south of the
+    Bay in late April. It moved west, then north, then turned east, straight towards the delta. On the second of May, it came ashore at the delta''s south-western
+    corner, with winds of about ninety knots, averaged over three minutes. A knot is one point eight five two kilometres per hour, so ninety knots is about
+    a hundred and sixty seven kilometres per hour. A kilometre per hour is a thousand metres in three thousand six hundred seconds, so we divide by three
+    point six, and get about forty six metres per second. [beat] Then it crossed the whole delta, eastward, towards Yangon, the country''s largest city. Here''s
+    Nargis that day, seen by a NASA satellite a few hours before landfall, with its eye just off the coast. Its storm surge and heavy rain flooded the low
+    delta, far inland. Let''s zoom in, to see the delta before and after the storm.'
   on_screen_eq: null
   physics_source:
     fn: fluidpy.data.ibtracs.storm_table (NI, 2008117N11090); fluidpy.geo.sphere.great_circle_distance; fluidpy.data.gibs.fetch_wms; fluidpy.data.fetch
@@ -4376,37 +3429,37 @@ scenes:
   layout: Globe left (zoom-reveal), keywords on the faded rim / column; source line below the globe.
 - id: s32_nargis_swipe
   t:
-  - 2593.975
-  - 2680.225
+  - 2634.2
+  - 2720.45
   sentence_times:
-  - - 2593.975
-    - 2599.725
-  - - 2600.075
-    - 2605.375
-  - - 2605.725
-    - 2609.75
-  - - 2611.25
-    - 2614.675
-  - - 2615.025
-    - 2621.075
-  - - 2621.425
-    - 2624.2
-  - - 2624.55
-    - 2635.325
-  - - 2635.675
-    - 2645.1
-  - - 2645.45
-    - 2651.5
-  - - 2651.85
-    - 2654.3
-  - - 2654.65
-    - 2657.65
-  - - 2658.0
-    - 2664.3
-  - - 2665.8
-    - 2673.275
-  - - 2673.625
-    - 2679.425
+  - - 2634.2
+    - 2639.95
+  - - 2640.3
+    - 2645.6
+  - - 2645.95
+    - 2649.975
+  - - 2651.475
+    - 2654.9
+  - - 2655.25
+    - 2661.3
+  - - 2661.65
+    - 2664.425
+  - - 2664.775
+    - 2675.55
+  - - 2675.9
+    - 2685.325
+  - - 2685.675
+    - 2691.725
+  - - 2692.075
+    - 2694.525
+  - - 2694.875
+    - 2697.875
+  - - 2698.225
+    - 2704.525
+  - - 2706.025
+    - 2713.5
+  - - 2713.85
+    - 2719.65
   beat: 'ONE plain false-colour before/after swipe (captests A5 look), no overlay: Cyclone Nargis 2008 (flood_visuals v3 DECIDED by the user 2026-11-05);
     pointer F32'
   visual: 'Swipe as captests/A5_before_after/swipe_offline_capture.mp4: a wide false-colour pair in one frame, the gold vertical line GLIDING across at
@@ -4458,23 +3511,27 @@ scenes:
   layout: Legend and colour key under the image beside the source line; nothing on the image but place dots, names and pointers.
 - id: s33_idai_intro
   t:
-  - 2680.225
-  - 2733.3
+  - 2720.45
+  - 2783.0
   sentence_times:
-  - - 2680.225
-    - 2685.475
-  - - 2685.825
-    - 2693.725
-  - - 2694.075
-    - 2702.775
-  - - 2703.125
-    - 2709.275
-  - - 2709.625
-    - 2722.45
-  - - 2723.95
-    - 2730.4
-  - - 2730.75
-    - 2732.5
+  - - 2720.45
+    - 2725.7
+  - - 2726.05
+    - 2733.95
+  - - 2734.3
+    - 2743.0
+  - - 2743.35
+    - 2749.5
+  - - 2749.85
+    - 2760.275
+  - - 2760.625
+    - 2766.9
+  - - 2767.25
+    - 2772.15
+  - - 2773.65
+    - 2780.1
+  - - 2780.45
+    - 2782.2
   beat: 'Cyclone Idai, shorter: globe → Mozambique Channel, south of the equator (clockwise), the VIIRS picture, landfall near Beira, the zoom'
   visual: House globe turns from the Bay of Bengal across the Indian Ocean to the Mozambique Channel (S0-S1), labels Madagascar, Mozambique; the IBTrACS
     track 9-16 Mar draws on; S2 a gold clockwise arc round the storm with 'clockwise (seen from above)' beside an anticlockwise mini for the northern storms;
@@ -4483,8 +3540,9 @@ scenes:
   voiceover: Our last flood is on the other side of the Indian Ocean, south of the equator. In March twenty nineteen, Cyclone Idai grew strong in the Mozambique
     Channel, between Madagascar and Mozambique. South of the equator, a tropical cyclone turns clockwise as seen from above, the opposite way to the storms
     we've seen so far. Here's Idai on the fourteenth of March, the day it came ashore, seen by a NASA satellite. It reached the coast near the city of Beira
-    around midnight, between the fourteenth and the fifteenth, with winds of about eighty five knots, about forty four metres per second, averaged over
-    ten minutes. [beat] Beira and the town of Buzi sit on low, flat land where two big rivers reach the sea. Let's zoom in.
+    around midnight, between the fourteenth and the fifteenth, with winds of about eighty five knots, averaged over ten minutes. Times one point eight five
+    two, that's about a hundred and fifty seven kilometres per hour. Divided by three point six, it's about forty four metres per second. [beat] Beira and
+    the town of Buzi sit on low, flat land where two big rivers reach the sea. Let's zoom in.
   on_screen_eq: null
   physics_source:
     fn: fluidpy.data.ibtracs.storm_table (SI, 2019063S18038); fluidpy.data.gibs.fetch_wms (VIIRS 14 Mar 2019, cache hit)
@@ -4506,21 +3564,21 @@ scenes:
   layout: Globe left (zoom-reveal), keywords in the column; source line below the globe.
 - id: s34_idai_swipe
   t:
-  - 2733.3
-  - 2770.15
+  - 2783.0
+  - 2819.85
   sentence_times:
-  - - 2733.3
-    - 2743.8
-  - - 2745.3
-    - 2749.15
-  - - 2749.5
-    - 2752.4
-  - - 2752.75
-    - 2759.775
-  - - 2761.275
-    - 2764.2
-  - - 2764.55
-    - 2769.35
+  - - 2783.0
+    - 2793.5
+  - - 2795.0
+    - 2798.85
+  - - 2799.2
+    - 2802.1
+  - - 2802.45
+    - 2809.475
+  - - 2810.975
+    - 2813.9
+  - - 2814.25
+    - 2819.05
   beat: 'The Idai before/after: natural colour, then false colour 7-2-1 (the key from s32)'
   visual: 'One frame 33.80-34.95 E, 20.20-19.35 S: MODIS Aqua 11 Mar | Terra 25 Mar 2019; S0 natural-colour swipe right → left → right → middle with date
     tags; Beira (label left-above its dot), Buzi (label left-below), Dondo; scale bar 25 km, north arrow; S2 cross-fade to 7-2-1, the same swipe; S3 ''dark
@@ -4555,31 +3613,31 @@ scenes:
   layout: Picture zone x 80-1080; key in the column; source line under the picture.
 - id: s35_recap
   t:
-  - 2770.15
-  - 2855.45
+  - 2819.85
+  - 2905.15
   sentence_times:
-  - - 2770.15
-    - 2780.05
-  - - 2780.4
-    - 2785.675
-  - - 2786.025
-    - 2795.525
-  - - 2795.875
-    - 2801.05
-  - - 2801.4
-    - 2814.475
-  - - 2814.825
-    - 2823.525
-  - - 2823.875
-    - 2834.425
-  - - 2834.775
-    - 2838.575
-  - - 2838.925
-    - 2841.525
-  - - 2841.875
-    - 2848.675
-  - - 2849.025
-    - 2854.65
+  - - 2819.85
+    - 2829.75
+  - - 2830.1
+    - 2835.375
+  - - 2835.725
+    - 2845.225
+  - - 2845.575
+    - 2850.75
+  - - 2851.1
+    - 2864.175
+  - - 2864.525
+    - 2873.225
+  - - 2873.575
+    - 2884.125
+  - - 2884.475
+    - 2888.275
+  - - 2888.625
+    - 2891.225
+  - - 2891.575
+    - 2898.375
+  - - 2898.725
+    - 2904.35
   beat: recap ('To sum up'); last sentence the teaser to Part 3
   visual: 'One beat per sentence, mini pictures reused (no headings): the unit circle with Δθ along θ̂; the two slope graphs; the two turning rules with
     gold swing arrows; the three product-rule pieces; the ring with v/r, v θ̂ and the inward arrow; ''0.048 m/s² ≈ g/200''; the cylinder with u_r, u_θ,
@@ -4610,15 +3668,15 @@ scenes:
   layout: Mini pictures one per sentence; small source lines under the data minis. No headings.
 - id: s36_end
   t:
-  - 2855.45
-  - 2878.35
+  - 2905.15
+  - 2928.05
   sentence_times:
-  - - 2855.45
-    - 2861.65
-  - - 2862.0
-    - 2870.05
-  - - 2870.4
-    - 2878.05
+  - - 2905.15
+    - 2911.35
+  - - 2911.7
+    - 2919.75
+  - - 2920.1
+    - 2927.75
   beat: 'series end card (maths ending, word for word; decision: maths end card)'
   visual: 'END CARD (house EndCard): four faint topic thumbnails along the top (unit circle with r-hat and theta-hat, a storm cylinder, a radius-height
     section, a coast with turned axes); keyword lines ''a series of maths tutorials'' (68 px) and ''atmospheric science · meteorology · fluid dynamics''
@@ -4655,3 +3713,18 @@ user_notes_2026_11_06:
     12: s00 'the easy way' removed (pulse on the concept words); s01 and s35 name the three flood events in order
   flood_order: 'Ian''s surge (gauges) → Amphan (flight, then radar: same storm, continues straight from its landfall zoom) → Nargis (same Bay; the clearest
     flood, so it teaches natural vs false colour) → Idai (shorter, re-uses the colour lesson; other hemisphere: clockwise)'
+notes2_2026_11_06:
+  source: 'reports/ch00_movies.md ''## #5b ch00_coordinates_storm — notes1, verification review'' (3 Must, 7 Should, 8 Cosmetic)'
+  M1: 's18: the close oblique camera pulled back (dist 13.5 -> 15.5); the ''height'' label sits right of the arrow tip, >= 40 px inside the frame'
+  M2: 's19: the u_r colour bar fades out for the close side look (the layers run under it) and back in after'
+  M3: 's32: on ''So flood mappers use false colour'' the natural pair dims (''next: false colour''); it cross-fades to the false-colour pair when its sweep
+    stops in the middle; band rows on their words; swatches only once the false-colour picture is up; ''the same two days'' on its sentence'
+  S1: 's19: the radar''s up arrows, ''up: measured by radar'' and the radar source line removed (the radar is introduced in s20)'
+  S2: 's31 / s33: the knots -> km/h -> m/s steps are said (1.852, 3.6, why 3.6) and drawn in the key colour'
+  S3: 's34: the natural-colour sweep starts on the scene''s first words and stops in the middle before ''Now the same two days'''
+  S4: 's30: Satkhira''s label beside its dot; the ''before'' date tag at the bottom left'
+  S5: 's30: the counted new-water pixels marked in cyan on the after picture; ≈ 34 700 pixels × (60 m × 60 m = 0.0036 km²) ≈ 125 km² shown and said (DS38)'
+  S6: 's31: the Nargis picture of 2 May contrast enhanced and shown wider (the eye and the spiral bands show)'
+  S7: 's06: keywords in the maths zone on their sentences (length 1, tip on the circle, θ̂ = r̂ turned 90°, both turn by Δθ, the slide rule)'
+  C2: 's31: ''Cyclone Nargis · May 2008'' on its words'
+  C6: 's30: the Sentinel-1 satellite drawing on its name'

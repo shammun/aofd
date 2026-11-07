@@ -662,8 +662,8 @@ const S18: React.FC = () => {
   const keys: OrbitKey[] = [
     { f: 0, az: -100, el: 16, dist: 16.5, target: STACK_TGT },
     { f: tFive, az: -86, el: 18, dist: 16.5, target: STACK_TGT },
-    { f: tFive + 150, az: -68, el: 24, dist: 13.5, target: STACK_TGT },
-    { f: tCol, az: -40, el: 26, dist: 13.5, target: STACK_TGT },
+    { f: tFive + 150, az: -68, el: 24, dist: 15.5, target: STACK_TGT },   // notes 2 M1: 13.5 → 15.5 (the height arrow and the top layer stay ≥ 40 px inside)
+    { f: tCol, az: -40, el: 26, dist: 15.5, target: STACK_TGT },
     { f: tCol + 150, az: -30, el: 22, dist: 18, target: STACK_TGT },
     { f: LEN(k) + 10, az: -86, el: 22, dist: 18, target: STACK_TGT, linear: true },
   ];
@@ -682,7 +682,8 @@ const S18: React.FC = () => {
       </HView3D>
       <GlobeFrame id="s18k" zoom={1} right={1} name="s18 stack" />
       <Svg>
-        <g data-lc-maplabel="1"><Lbl x={upTip[0] - 12} y={upTip[1] - 16} t="height" c={C.second} s={T.floor} a="end" b={false} o={fin(f, tHt)} /></g>
+        {/* notes 2 M1: the close camera clipped the end-anchored label above the tip ("nt"): now right of the tip, pinned ≥ 40 px inside the frame */}
+        <g data-lc-maplabel="1"><Lbl x={Math.max(40, upTip[0] + 22)} y={Math.max(70, upTip[1] + 30)} t="height" c={C.second} s={T.floor} b={false} o={fin(f, tHt)} /></g>
         {tags.map((t, i) => { const q = tagAt(i), y = tagY[i];
           return <g key={t} opacity={fin(f, tTag[i])}><Lbl x={1210} y={y} t={t} c={C.key} s={T.floor} />
             <line x1={1196} y1={y} x2={q[0] + 8} y2={q[1]} stroke={C.gold} strokeWidth={3} opacity={0.8} /></g>; })}
@@ -728,13 +729,15 @@ const S19: React.FC = () => {
   return (
     <Scene>
       <HView3D st={st} x={0} y={0} w={1920} h={1080}>
-        <StackBody f={f} lit={lit} ringO={fin(f, 6)} dashO={1} path={prog(f, tSo, tSo + 60)} wO={fin(f, tSo + 30, 20)} />
+        {/* notes 2 S1: the radar's up arrows wait for s20, where the radar is introduced (wO 0) */}
+        <StackBody f={f} lit={lit} ringO={fin(f, 6)} dashO={1} path={prog(f, tSo, tSo + 60)} wO={0} />
       </HView3D>
       <GlobeFrame id="s19k" zoom={1} right={1} name="s19 stack" />
       <Svg>
         <Keyword f={f} text="read on the 100-km ring" at={[1210, 120]} s={T.floor} appear={0} out={tSo - 20} />
         {/* #5b r1 M7(b): the colour bar stays through the swing round and the close look */}
-        <URBar x={1210} y={250} w={400} title={false} />
+        {/* notes 2 M2: the layers run under the bar in the close side look: the bar steps out for it and comes back after */}
+        <URBar x={1210} y={250} w={400} title={false} o={1 - win(f, tLook + 10, tLook + 45 + 40 + 30, 12)} />
         <g opacity={colO}>
           <SideCallout f={f} lines={`14 km: ≈ +${(Math.round(vr[4] * 2) / 2).toFixed(1)} m/s`} at={[1210, 440]} appear={tTop} target={ringR[4]} s={T.floor} c="#8db5e2" bend={20} />
           <SideCallout f={f} lines={`12 km: ≈ +${Math.round(vr[3])}`} at={[1210, 520]} appear={t6} target={ringR[3]} s={T.floor} c="#8db5e2" bend={20} />
@@ -743,15 +746,13 @@ const S19: React.FC = () => {
           <SideCallout f={f} lines={`0.7 km: ≈ ${nf(vr[0], 1)} m/s`} at={[1210, 760]} appear={tAvg} target={ringR[0]} s={T.floor} c={C.neg} bend={-20} />
         </g>
         <Lbl x={1210} y={120} t="in → up → out" c={C.gold} s={T.key} o={fin(f, tSo) * fout(f, tOrbit - 20)} />
-        <Lbl x={1210} y={190} t="up: measured by radar" c={C.gold} s={T.floor} o={win(f, tSo + 30, tOrbit - 20)} />
         <Keyword f={f} text="swing round" at={[1210, 120]} s={T.key} appear={tOrbit} out={tLook - 20} />
       </Svg>
       {/* K6 r0: the two credits cross-faded on top of each other and sat in the caption band: one after the other, 30 px higher */}
-      <SourceBelow text={SRC.hrrrPl} pic={{ x: 80, y: 40, w: 1000, h: 760 }} w={1400} o={fout(f, tSo + 16, 12)} name="s19 src" />
+      <SourceBelow text={SRC.hrrrPl} pic={{ x: 80, y: 40, w: 1000, h: 760 }} w={1400} name="s19 src" />{/* notes 2 S1: the HRRR line stays (no radar line in s19) */}
       {/* K6 round 1: during the swing round and the close look the stack reaches below y 810: the credit steps aside meanwhile */}
       {/* #5b r1 M7(b): the credit stays through the swing round and the close look: below y 830 the K1 frame is solid background, and the
           stack's K6 mask is now clipped to the sharp region (x ≤ 1068, y ≤ 788), as the house frame defines it */}
-      <SourceBelow text={SRC.hrrrPlTdr} pic={{ x: 80, y: 40, w: 1000, h: 760 }} w={1740} o={fin(f, tSo + 30, 12)} name="s19 src w" />
     </Scene>
   );
 };
