@@ -21,7 +21,7 @@ def squash(s: str) -> str:
 eqs = [s["on_screen_eq"]["latex"] for s in sb["scenes"] if isinstance(s.get("on_screen_eq"), dict) and s["on_screen_eq"].get("latex")]
 missing = [e for e in eqs if squash(e) not in squash(eqsrc)]
 names = re.findall(r"export const (EQ_\w+)", eqsrc)
-scenes = "".join((SRC / f).read_text(encoding="utf-8") for f in ("cs_sA.tsx", "cs_sB.tsx", "cs_sC.tsx"))
+scenes = "".join((SRC / f).read_text(encoding="utf-8") for f in ("cs_sA.tsx", "cs_sB.tsx", "cs_sC.tsx", "cs_sD.tsx"))
 unused = [n for n in names if not re.search(rf"\b{n}\b", scenes)]
 print(f"{len(eqs)} storyboard equations; missing in cs_eq.ts: {missing or 'none'}; {len(names)} constants, unused by scenes: {unused or 'none'}")
 sys.exit(1 if missing or unused else 0)

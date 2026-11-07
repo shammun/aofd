@@ -6,6 +6,7 @@ import { CST_FRAMES, CUT, FPS, LEN, XF, sc } from "./cs_lib";
 import { SCENES_A } from "./cs_sA";
 import { SCENES_B } from "./cs_sB";
 import { SCENES_C } from "./cs_sC";
+import { SCENES_D } from "./cs_sD";
 
 /**
  * Chapter-0 movie #5b "Coordinates, Part 2 — Inside a tropical cyclone: turning arrows and cylindrical coordinates"
@@ -20,7 +21,7 @@ export const CST_FPS = FPS;
 export { CST_FRAMES };
 
 /** scene id → component (the static checks read this table) */
-const BYID: Record<string, React.FC> = { ...SCENES_A, ...SCENES_B, ...SCENES_C };
+const BYID: Record<string, React.FC> = { ...SCENES_A, ...SCENES_B, ...SCENES_C, ...SCENES_D };
 const missing = sc.map((s) => s.id).filter((id) => !BYID[id]);
 if (missing.length) throw new Error(`no component for scene(s) ${missing.join(", ")}`);
 if (Object.keys(BYID).length !== sc.length) throw new Error(`${Object.keys(BYID).length} scene components but ${sc.length} scenes in timing.json`);

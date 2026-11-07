@@ -27,7 +27,8 @@ S = Path("G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinate
 TIMING = MOVIES / "ch00/ch00_coordinates_storm/timing.json"
 COMP, FPS, HOLD, CHUNK = "Ch00CoordinatesStorm", 30, 75, 4000
 DENSE = {"s00_title", "s01_hook", "s03_tip_on_circle", "s06_dtheta_dtheta", "s14_steady_but_turning", "s15_cylinder", "s18_ian_stack", "s19_ian_layers_lit", "s20_ian_curtain",
-         "s21_amphan_intro", "s24_amphan_curtain", "s29_flood_flight", "s30_amphan_radar", "s31_nargis_intro", "s32_nargis_swipe", "s33_idai_intro", "s34_idai_swipe", "s35_recap"}   # moves, turns, orbits, zooms, flights, swipes, swaps: every 0.5 s
+         "s21_amphan_intro", "s24_amphan_curtain", "s26_coast_axes", "s29_stp_calc", "s32_flood_flight", "s34_amphan_radar", "s35_nargis_intro", "s37_nargis_swipe",
+         "s38_idai_intro", "s40_idai_swipe", "s41_recap"}   # remake 2026-11-07: ids renumbered   # moves, turns, orbits, zooms, flights, swipes, swaps: every 0.5 s
 sys.path.insert(0, str(ROOT / "tools"))
 
 

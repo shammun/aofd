@@ -14,7 +14,7 @@ const FPS = 30, HOLD = 75;
 const sc = tm.scenes, IDS = sc.map((s) => s.id);
 const CUT = sc.map((s, i) => (i === 0 ? 0 : Math.round(s.start * FPS)));
 const END = [...CUT.slice(1), tm.total_frames + HOLD];
-const files = ["cs_sA.tsx", "cs_sB.tsx", "cs_sC.tsx"].map((f) => path.join(SRC, f));
+const files = ["cs_sA.tsx", "cs_sB.tsx", "cs_sC.tsx", "cs_sD.tsx"].map((f) => path.join(SRC, f));
 let n = 0, bad = 0;
 const seen = new Set();
 for (const file of files) {

@@ -5,7 +5,7 @@
  "builder": "movies/data/build_ch00_coordinates_storm.py",
  "fluidpy": {
   "repo": "../Fluid Dynamics",
-  "commit": "8cab62ebf6f6fb3ab1979fdbf5d404c2c77400b2",
+  "commit": "1823b5f34b8951a56202762a02d9027567bcda0f",
   "dirty_tracked": true,
   "coords_py_sha256": "3497d372316d1dd7fc3277a74e794eec3b8997dcb85525d1ea2d5d450111c2d2",
   "kinematics_py_sha256": "dfd7e1abea38775a2469a329fd9724232a87c53fb3f01e765d5acffe5fa6b1ea",
@@ -19,7 +19,8 @@
   "era5_arco_py_sha256": "98b60a7d6ec93546b84ea0773cbd2856e9ff747f976a32c3572a29e7e4631062",
   "gibs_py_sha256": "5a550d90038f6f861715988fd9d05d0189da1e73912d014699de255263f9a5a4",
   "ibtracs_py_sha256": "8f9ca6410e72ccc4b3f48bc7404a5e66df1740f3e8dabeb8159d58866a4bd52f",
-  "data_init_py_sha256": "6404651cf30775c6e8634af39700e1b41f8e05cbc630642d696a228bef746939"
+  "data_init_py_sha256": "6404651cf30775c6e8634af39700e1b41f8e05cbc630642d696a228bef746939",
+  "movie_shore_py_sha256": "9fe2985900b9e02663cf80a1ff7f52c2c0a9c8493d852d5200f806e4461495e0"
  },
  "equations_note": "provenance only (QA/reviewer); the movie draws no equation labels or numbers (HOUSE_STYLE §5)",
  "equations": {
@@ -245,7 +246,43 @@
    "s18 layers on a 500-km local tangent-plane square (true local shape, one centre for all levels; vortex tilt ignored, research §1d)",
    "s20 max outflow marker at the data's 125 km (storyboard text: 150 km)"
   ],
-  "data_report": "reports/data/ch00_coordinates_research.md (2026-11-05) §1b-§1d, §3 applied"
+  "data_report": "reports/data/ch00_coordinates_research.md (2026-11-05) §1b-§1d, §3 applied",
+  "shore_1107": {
+   "note": "remake 2026-11-07 (master plan R13/R14/R14b): Part 1's turned axes applied to the wind; ŷ′ chosen to point out to sea; across < 0 = onto the land",
+   "ian": "HRRR analysis 2022-09-28 20 UTC (cs.json coast.uF/uS); FMB coast Naples→Englewood, StP coast St Pete Beach→Tarpon Springs (NE 10 m); km legs on a local flat map (Part 3 shows the rule); Ian centre 941 hPa at the 19:05 UTC landfall (IBTrACS USA)",
+   "events": {
+    "amphan": {
+     "era5": "era5_amphan_u10-v10-msl_2020-05-20T09_2020-05-20T15_1h.nc @ 2020-05-20T09:00",
+     "best_track_pressure": {
+      "time": "2020-05-20 09:00",
+      "agency": "IMD (RSMC New Delhi), 3-min",
+      "hpa": 960.0,
+      "kt": 90.0
+     }
+    },
+    "nargis": {
+     "era5": "era5_nargis_u10-v10-msl_2008-05-01T12_2008-05-03T00_1h.nc @ 2008-05-02T11:00",
+     "best_track_pressure": {
+      "time": "2008-05-02 12:00",
+      "agency": "IMD (RSMC New Delhi), 3-min",
+      "hpa": 962.0,
+      "kt": 90.0
+     }
+    },
+    "idai": {
+     "era5": "era5_idai_2019_u10-v10-msl_2019-03-11T00_2019-03-15T23_1h.nc @ 2019-03-14T19:00",
+     "best_track_pressure": {
+      "time": "2019-03-14 18:00",
+      "agency": "RSMC La Réunion, 10-min",
+      "hpa": 955.0,
+      "kt": 82.0
+     }
+    }
+   },
+   "shown_arithmetic": "inputs rounded as shown (u, v 0.1 m/s; α 1°; cos/sin 3 d.p.); each product to 0.1; results = sums of the shown terms (≤ 0.15 m/s from the library value)",
+   "honesty": "ERA5 0.25° is smooth and too weak in the cores (0.55-0.66 of the regional best-track wind): used for direction and sign only, said in the narration",
+   "derived_product": "G:\\Geophysical Fluid Dynamics\\aofd-data\\derived\\ch00\\coord_storm_shore_winds.json (fluidpy.data.movie_shore.shore_winds_product; identical along/across, DS40/DS41/DS44)"
+  }
  },
  "credits": [
   "NOAA HRRR analyses (public domain) via the University of Utah HRRR-zarr archive.",
@@ -256,13 +293,14 @@
   "IBTrACS v04r01 (NOAA NCEI). NOAA CO-OPS tide gauges (public domain). NHC TCR AL092022 (cited).",
   "ETOPO 2022 and ETOPO1 (NOAA NCEI). MODIS MOD09/MYD09 and MCD43A4 (NASA LP DAAC) via Google Earth Engine.",
   "Blue Marble: Next Generation, NASA Earth Observatory. Made with Natural Earth.",
-  "Vertical wind: NOAA P-3 tail Doppler radar (Level 2, mission 20220928H1) — NOAA AOML Hurricane Research Division; Gamache 1995 / Reasor et al. 2009 (synthesis); Fischer, Rogers, Reasor and Gamache 2022, Mon. Wea. Rev. 150, 2255-2278, doi:10.1175/MWR-D-21-0223.1. Original files not redistributed; courtesy note to the HRD radar lead before publishing (user).",
+  "Vertical wind: NOAA P-3 tail Doppler radar (Level 2, mission 20220928H1) — NOAA AOML Hurricane Research Division; Gamache 1995 / Reasor et al. 2009 (synthesis); Fischer, Reasor, Rogers and Gamache 2022, Mon. Wea. Rev. 150, 2255–2278, doi:10.1175/MWR-D-21-0223.1. Original files not redistributed; courtesy note to the HRD radar lead before publishing (user).",
   "Music: tools/sound (procedural synthesis, our own code, CC0-1.0).",
   "Contains modified Copernicus Sentinel data 2020 (Sentinel-1 GRD, ESA), processed in Google Earth Engine (s30, user notes 2026-11-06).",
   "NASA Worldview / GIBS VIIRS (Suomi NPP) and MODIS (Terra, Aqua) corrected reflectance (NASA open data) (s30, s31, s33).",
   "MODIS MOD09/MYD09 v061 surface reflectance (NASA LP DAAC) via Google Earth Engine: Nargis 2008 and Idai 2019 pairs (s32, s34).",
   "JRC Global Surface Water v1.4 (EC JRC / Google), seasonality: permanent water left out of the Sentinel-1 new-water count (s30).",
-  "ETOPO 2022 60 arc-second (NOAA NCEI): the Irrawaddy delta heights (s31)."
+  "ETOPO 2022 60 arc-second (NOAA NCEI): the Irrawaddy delta heights (s31).",
+  "ERA5 hourly 10-m wind and sea-level pressure (Amphan 20 May 2020 09 UTC, Nargis 2 May 2008 11 UTC, Idai 14 Mar 2019 19 UTC): Contains modified Copernicus Climate Change Service information 2026 (ARCO-ERA5; Hersbach et al. 2020)."
  ],
  "js_selftest": "none — every number is read from data/cs.json (TSX CHECK rows re-assert the screen strings)",
  "inputs_sha256": {
@@ -350,6 +388,7 @@
   "cst_amphan_s1_before.jpg": "7aa174d63498eb2a06e64a8ac026cfe88d7cdf0a46fc550ccd614110d9abf003",
   "cst_amphan_s1_new.png": "58307d4e40ef1d564f57c622da196c9f32aa0e570afd28348670b570c7856997",
   "cst_amphan_speed.png": "385d78f2531adc3f4f59feb7c047f82ff74a297866d9ee49e21b44480e8ca856",
+  "cst_amphan_wind.png": "30dc9cec228cad8db3e21fc5124d82c00b62aaf133ae27d862cb52dab17e87dc",
   "cst_bay_patch.png": "568a40ed1507fc15e3bca6591ecf07287b8b8db43de38dc01d0a682ac580480e",
   "cst_bmng.jpg": "4c6723e79dc7c1bdb8c193cdf8f946b10b9407bc9fd1164cdf5e75d0aa79ad3b",
   "cst_goes_eye.jpg": "7c365ab70a682f5efc3c3fc2c95069628a7d895ab159045377e255df7dd85d79",
@@ -360,10 +399,12 @@
   "cst_idai_tc_after.jpg": "f4697bb3499da75ff6c938a6c850cc48b14f5ba8860aeb7ea150bc91285a761c",
   "cst_idai_tc_before.jpg": "f690c4ab276920f4ef8e19fec9bfc08b8b03df6e0557971f21e3fda8c63cb11d",
   "cst_idai_viirs.jpg": "93ed23d070a3220ab9bc5a77254450310bab1858553f758bda17c77301d5d5fb",
+  "cst_idai_wind.png": "9094cc06ba5d3a50100014402688f7f1dfdcd58d5d8a43690ec67c0572a96a99",
   "cst_modis_amphan.jpg": "a3d6cfce156dbee8158d46baa902b00aed29fda1a7bea0aa9da97db061ebd790",
   "cst_nargis_storm.jpg": "a72baa096d4d5ef4f15418e6cb0046f844c179f533fdc1becc558055506c30a9",
   "cst_nargis_tc_after.jpg": "dea436122718c132917ba56eb3924b576ed00fb1db078043ec747d9a7426fde1",
   "cst_nargis_tc_before.jpg": "a27d36ed1d33355bc4b04ee0e52cb9d4fee3ba706c16cdbcd3bba62ff3188156",
+  "cst_nargis_wind.png": "a68e800ac4f7090656e40ef6c2deba2ba81331b41cf672f524215914a2a58e01",
   "cst_radar_ktbw.png": "b99f189328e9e0b64dc5b60a048972510446ab8af6027b6fbf6e54f9824dce95",
   "cst_sec_amphan.png": "c47ebbb8cf95c1ee5bc78b2d2d9de993fa83015888139a831302a0872ae592db",
   "cst_sec_ian.png": "05a3ae7f4dcb86e79130aef09dbc70ea11697c454fc2dac6af9a5ed8a5ee587e",
@@ -377,13 +418,14 @@
   "cst_ur_925.png": "34d6f5fa262cfb012b83f00114fe546f04ce66cd50ceae87b8ba8094a559978a"
  },
  "data_files": {
-  "cs.json": "cc12ef92cbf937f2c5fdffb367a595633ecab7bff077f7ccc8cabe9cf1cd9000",
+  "cs.json": "c7176847189ce3ede0f0bc0e4b4b158485a374e63c6796243c592daadf72bb28",
   "img/amphan_clouds_21.jpg": "ffc02bd6210c4169c83a36e046b66e783552da29a696444ee98e147d91cac7fc",
   "img/amphan_clouds_22.jpg": "112ee4bca11fadc655bf7206c832f0df4e84d27946652902e0225c0bd1652b7b",
   "img/amphan_s1_after.jpg": "cc0a1e3aae3f2b08b056e6f730895b24e6fcd84848bbf3e98bf73578692c1dc8",
   "img/amphan_s1_before.jpg": "7aa174d63498eb2a06e64a8ac026cfe88d7cdf0a46fc550ccd614110d9abf003",
   "img/amphan_s1_new.png": "58307d4e40ef1d564f57c622da196c9f32aa0e570afd28348670b570c7856997",
   "img/amphan_speed.png": "385d78f2531adc3f4f59feb7c047f82ff74a297866d9ee49e21b44480e8ca856",
+  "img/amphan_wind.png": "30dc9cec228cad8db3e21fc5124d82c00b62aaf133ae27d862cb52dab17e87dc",
   "img/bay_patch.png": "568a40ed1507fc15e3bca6591ecf07287b8b8db43de38dc01d0a682ac580480e",
   "img/goes_eye.jpg": "7c365ab70a682f5efc3c3fc2c95069628a7d895ab159045377e255df7dd85d79",
   "img/hrrr_s17.png": "aa9048928abf801898a1ac57a58a04355e689d6bf7871515a6eb2d72ec2e6016",
@@ -393,10 +435,12 @@
   "img/idai_tc_after.jpg": "f4697bb3499da75ff6c938a6c850cc48b14f5ba8860aeb7ea150bc91285a761c",
   "img/idai_tc_before.jpg": "f690c4ab276920f4ef8e19fec9bfc08b8b03df6e0557971f21e3fda8c63cb11d",
   "img/idai_viirs.jpg": "93ed23d070a3220ab9bc5a77254450310bab1858553f758bda17c77301d5d5fb",
+  "img/idai_wind.png": "9094cc06ba5d3a50100014402688f7f1dfdcd58d5d8a43690ec67c0572a96a99",
   "img/modis_amphan.jpg": "a3d6cfce156dbee8158d46baa902b00aed29fda1a7bea0aa9da97db061ebd790",
   "img/nargis_storm.jpg": "a72baa096d4d5ef4f15418e6cb0046f844c179f533fdc1becc558055506c30a9",
   "img/nargis_tc_after.jpg": "dea436122718c132917ba56eb3924b576ed00fb1db078043ec747d9a7426fde1",
   "img/nargis_tc_before.jpg": "a27d36ed1d33355bc4b04ee0e52cb9d4fee3ba706c16cdbcd3bba62ff3188156",
+  "img/nargis_wind.png": "a68e800ac4f7090656e40ef6c2deba2ba81331b41cf672f524215914a2a58e01",
   "img/radar_ktbw.png": "b99f189328e9e0b64dc5b60a048972510446ab8af6027b6fbf6e54f9824dce95",
   "img/sec_amphan.png": "c47ebbb8cf95c1ee5bc78b2d2d9de993fa83015888139a831302a0872ae592db",
   "img/sec_ian.png": "05a3ae7f4dcb86e79130aef09dbc70ea11697c454fc2dac6af9a5ed8a5ee587e",
@@ -410,13 +454,14 @@
   "img/ur_925.png": "34d6f5fa262cfb012b83f00114fe546f04ce66cd50ceae87b8ba8094a559978a"
  },
  "data_sizes_bytes": {
-  "cs.json": 324671,
+  "cs.json": 370256,
   "img/amphan_clouds_21.jpg": 33118,
   "img/amphan_clouds_22.jpg": 66447,
   "img/amphan_s1_after.jpg": 1197775,
   "img/amphan_s1_before.jpg": 1158087,
   "img/amphan_s1_new.png": 41158,
   "img/amphan_speed.png": 26371,
+  "img/amphan_wind.png": 10669,
   "img/bay_patch.png": 2181893,
   "img/goes_eye.jpg": 148883,
   "img/hrrr_s17.png": 101669,
@@ -426,10 +471,12 @@
   "img/idai_tc_after.jpg": 142894,
   "img/idai_tc_before.jpg": 203898,
   "img/idai_viirs.jpg": 972738,
+  "img/idai_wind.png": 9335,
   "img/modis_amphan.jpg": 287917,
   "img/nargis_storm.jpg": 439124,
   "img/nargis_tc_after.jpg": 256613,
   "img/nargis_tc_before.jpg": 241068,
+  "img/nargis_wind.png": 10080,
   "img/radar_ktbw.png": 268614,
   "img/sec_amphan.png": 37501,
   "img/sec_ian.png": 46285,
@@ -2839,6 +2886,486 @@
    ],
    "pass": true,
    "kind": "check"
+  },
+  {
+   "id": "DS40",
+   "name": "fmb: library along/across = derived product (coord_storm_shore_winds.json)",
+   "value": [
+    9.363355,
+    -31.571621
+   ],
+   "ref": [
+    9.363355,
+    -31.571621
+   ],
+   "tol": 1e-09,
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS40",
+   "name": "fmb: shown sums = library within 0.15 m/s (rounding of the shown inputs)",
+   "value": [
+    9.4,
+    -31.5
+   ],
+   "ref": [
+    9.363355,
+    -31.571621
+   ],
+   "tol": 0.15,
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS40",
+   "name": "fmb: shown α = 90 − shown bearing (mod 360), α = library α to 0.5°",
+   "value": [
+    121.0,
+    121.0
+   ],
+   "ref": [
+    121.0,
+    121.017653
+   ],
+   "tol": [
+    0,
+    0.5
+   ],
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS41",
+   "name": "stp: library along/across = derived product (coord_storm_shore_winds.json)",
+   "value": [
+    -14.641627,
+    12.107251
+   ],
+   "ref": [
+    -14.641627,
+    12.107251
+   ],
+   "tol": 1e-09,
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS41",
+   "name": "stp: shown sums = library within 0.15 m/s (rounding of the shown inputs)",
+   "value": [
+    -14.7,
+    12.1
+   ],
+   "ref": [
+    -14.641627,
+    12.107251
+   ],
+   "tol": 0.15,
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS41",
+   "name": "stp: shown α = 90 − shown bearing (mod 360), α = library α to 0.5°",
+   "value": [
+    97.0,
+    97.0
+   ],
+   "ref": [
+    97.0,
+    96.939023
+   ],
+   "tol": [
+    0,
+    0.5
+   ],
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS40",
+   "name": "fmb shown numbers (plan B2/B3): legs 91.5 N / 55.0 W, tan 0.601, 31°, 329°, α 121°, cos −0.515, sin 0.857, along 9.4, across −31.5",
+   "value": [
+    91.5,
+    55.0,
+    0.601,
+    31.0,
+    329.0,
+    121.0,
+    -0.515,
+    0.857,
+    9.4,
+    -31.5
+   ],
+   "ref": [
+    91.5,
+    55.0,
+    0.601,
+    31.0,
+    329.0,
+    121.0,
+    -0.515,
+    0.857,
+    9.4,
+    -31.5
+   ],
+   "tol": 1e-09,
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS40",
+   "name": "fmb: the check √(along² + across²) of the shown values ≈ the speed 32.9 (≈ 33)",
+   "value": [
+    32.9
+   ],
+   "ref": [
+    32.9
+   ],
+   "tol": 0.1,
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS41",
+   "name": "stp shown: legs 55.7 N / 6.8 W, 7°, 353°, α 97°, cos −0.122, sin 0.993, across +12.1 (out to sea), along −14.7",
+   "value": [
+    55.7,
+    6.8,
+    7.0,
+    353.0,
+    97.0,
+    -0.122,
+    0.993,
+    12.1,
+    -14.7
+   ],
+   "ref": [
+    55.7,
+    6.8,
+    7.0,
+    353.0,
+    97.0,
+    -0.122,
+    0.993,
+    12.1,
+    -14.7
+   ],
+   "tol": 1e-09,
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS42",
+   "name": "ŷ′ points to the sea at both Florida stations (Natural Earth 1:50m land)",
+   "value": [
+    1.0,
+    1.0
+   ],
+   "ref": [
+    1.0,
+    1.0
+   ],
+   "tol": 0,
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS42",
+   "name": "km map: Englewood sits (−55.0, +91.5) km from Naples",
+   "value": [
+    -55.03,
+    91.51
+   ],
+   "ref": [
+    -55.0,
+    91.5
+   ],
+   "tol": 0.06,
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS43",
+   "name": "Ian landfall 941 hPa → 72 hPa below 1013 → ≈ 72 cm (exact 71.6)",
+   "value": [
+    72.0,
+    72.0
+   ],
+   "ref": [
+    72.0,
+    72.0
+   ],
+   "tol": 0,
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS44",
+   "name": "amphan: library across = derived product; shown sum within 0.15",
+   "value": [
+    -22.320448,
+    -22.4
+   ],
+   "ref": [
+    -22.320448,
+    -22.320448
+   ],
+   "tol": [
+    1e-09,
+    0.15
+   ],
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS44",
+   "name": "amphan: shown α = 90 − shown bearing (mod 360) = library α to 0.5°; across < 0 (onto the land); ŷ′ seaward",
+   "value": [
+    193.0,
+    193.0,
+    1.0,
+    1.0
+   ],
+   "ref": [
+    193.0,
+    193.267512,
+    1.0,
+    1.0
+   ],
+   "tol": [
+    0,
+    0.5,
+    0,
+    0
+   ],
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS45",
+   "name": "amphan: ERA5 centre in the map box; arrows cover it; speed ≤ 30 m/s colour range",
+   "value": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "ref": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tol": 0,
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS46",
+   "name": "amphan: inverse barometer 960 hPa → 53 cm (rule) ; ERA5 / best-track wind ratio",
+   "value": [
+    53.0,
+    0.59
+   ],
+   "ref": [
+    53.0,
+    0.59
+   ],
+   "tol": [
+    0,
+    0.005
+   ],
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS44",
+   "name": "nargis: library across = derived product; shown sum within 0.15",
+   "value": [
+    -17.72952,
+    -17.8
+   ],
+   "ref": [
+    -17.72952,
+    -17.72952
+   ],
+   "tol": [
+    1e-09,
+    0.15
+   ],
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS44",
+   "name": "nargis: shown α = 90 − shown bearing (mod 360) = library α to 0.5°; across < 0 (onto the land); ŷ′ seaward",
+   "value": [
+    171.0,
+    171.0,
+    1.0,
+    1.0
+   ],
+   "ref": [
+    171.0,
+    171.172404,
+    1.0,
+    1.0
+   ],
+   "tol": [
+    0,
+    0.5,
+    0,
+    0
+   ],
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS45",
+   "name": "nargis: ERA5 centre in the map box; arrows cover it; speed ≤ 30 m/s colour range",
+   "value": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "ref": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tol": 0,
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS46",
+   "name": "nargis: inverse barometer 962 hPa → 51 cm (rule) ; ERA5 / best-track wind ratio",
+   "value": [
+    51.0,
+    0.55
+   ],
+   "ref": [
+    51.0,
+    0.55
+   ],
+   "tol": [
+    0,
+    0.005
+   ],
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS44",
+   "name": "idai: library across = derived product; shown sum within 0.15",
+   "value": [
+    -21.069135,
+    -21.0
+   ],
+   "ref": [
+    -21.069135,
+    -21.069135
+   ],
+   "tol": [
+    1e-09,
+    0.15
+   ],
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS44",
+   "name": "idai: shown α = 90 − shown bearing (mod 360) = library α to 0.5°; across < 0 (onto the land); ŷ′ seaward",
+   "value": [
+    214.0,
+    214.0,
+    1.0,
+    1.0
+   ],
+   "ref": [
+    214.0,
+    214.453458,
+    1.0,
+    1.0
+   ],
+   "tol": [
+    0,
+    0.5,
+    0,
+    0
+   ],
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS45",
+   "name": "idai: ERA5 centre in the map box; arrows cover it; speed ≤ 30 m/s colour range",
+   "value": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "ref": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tol": 0,
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS46",
+   "name": "idai: inverse barometer 955 hPa → 58 cm (rule) ; ERA5 / best-track wind ratio",
+   "value": [
+    58.0,
+    0.66
+   ],
+   "ref": [
+    58.0,
+    0.66
+   ],
+   "tol": [
+    0,
+    0.005
+   ],
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS47",
+   "name": "event shown numbers: legs, β, bearing, α, cos, sin, across (Amphan / Nargis / Idai)",
+   "value": [
+    -92.9,
+    -21.9,
+    13.0,
+    257.0,
+    193.0,
+    -22.4,
+    -69.5,
+    10.8,
+    9.0,
+    279.0,
+    171.0,
+    -17.8
+   ],
+   "ref": [
+    -92.9,
+    -21.9,
+    13.0,
+    257.0,
+    193.0,
+    -22.4,
+    -69.5,
+    10.8,
+    9.0,
+    279.0,
+    171.0,
+    -17.8
+   ],
+   "tol": 1e-09,
+   "pass": true,
+   "kind": "check"
   }
  ],
  "flags": [
@@ -3203,6 +3730,311 @@
     "lon2": 93.6
    },
    "sha256": "ae0aebfd67f4c5a199d073cdcb90adcc3a2d5e0616a5210a094af83e1296b947"
+  },
+  {
+   "fn": "fluidpy.data.movie_shore.coast_axes",
+   "scene": "s27-s28",
+   "data": "data/cs.json",
+   "eq": "km legs dy = a dφ, dx = a cos φ dλ; bearing = atan2(dx, dy); α = 90° − bearing",
+   "params": {
+    "p_from": [
+     26.099,
+     -81.801
+    ],
+    "p_to": [
+     26.922,
+     -82.354
+    ]
+   },
+   "sha256": "2447a1a3ee1a2d0cc4fefaa23cd58953935fbb9949c34828e0f10ed3415d0f19"
+  },
+  {
+   "fn": "fluidpy.data.movie_shore.shore_components",
+   "scene": "s27-s28",
+   "data": "data/cs.json",
+   "eq": "along = u cos α + v sin α, across = −u sin α + v cos α",
+   "params": {
+    "u": 22.232192993164062,
+    "v": 24.293399810791016,
+    "bearing": 328.982346697935
+   },
+   "sha256": "1af5f4190e11126318a94326547bfa78f698dab5272560776ae3c016dee06a6f"
+  },
+  {
+   "fn": "fluidpy.data.movie_shore.coast_axes",
+   "scene": "s29",
+   "data": "data/cs.json",
+   "eq": "km legs dy = a dφ, dx = a cos φ dλ; bearing = atan2(dx, dy); α = 90° − bearing",
+   "params": {
+    "p_from": [
+     27.66,
+     -82.719
+    ],
+    "p_to": [
+     28.161,
+     -82.788
+    ]
+   },
+   "sha256": "e069032a05c270ee7741b12a4cb0c3e7af8eae58774afe8b889402b10649d950"
+  },
+  {
+   "fn": "fluidpy.data.movie_shore.shore_components",
+   "scene": "s29",
+   "data": "data/cs.json",
+   "eq": "along = u cos α + v sin α, across = −u sin α + v cos α",
+   "params": {
+    "u": -10.24967098236084,
+    "v": -15.99709415435791,
+    "bearing": 353.0609767363311
+   },
+   "sha256": "94b2af554e431da4408155582430837be4747478fddae2d75818d6804207d6ee"
+  },
+  {
+   "fn": "fluidpy.data.movie_shore.seaward_check",
+   "scene": "s27",
+   "data": "data/cs.json",
+   "eq": "ŷ′ points to the sea (20 km along ŷ′ is sea, along −ŷ′ land)",
+   "params": {
+    "lat": 26.45,
+    "lon": -81.95,
+    "yp": [
+     -0.8570085725415726,
+     -0.5153021507720068
+    ]
+   },
+   "sha256": "28d407e2caf25b586d14a2daa40c5343108af7348b362fd8649f92a073c43546"
+  },
+  {
+   "fn": "fluidpy.data.movie_shore.seaward_check",
+   "scene": "s29",
+   "data": "data/cs.json",
+   "eq": "ŷ′ points to the sea",
+   "params": {
+    "lat": 27.76,
+    "lon": -82.83,
+    "yp": [
+     -0.9926752883465156,
+     -0.12081296249228426
+    ]
+   },
+   "sha256": "145bfa2b384d2b19ba24603cb2deb7532d4e3025afbebd8b9406ceadf08ca0a7"
+  },
+  {
+   "fn": "fluidpy.data.movie_shore.inverse_barometer",
+   "scene": "s30",
+   "data": "data/cs.json",
+   "eq": "Δη = (1013 hPa − p)/(ρ g) ≈ 1 cm per hPa",
+   "params": {
+    "p_hpa": 941.0
+   },
+   "sha256": "4d72eabea6fe1fdb3a70cf2bab61b8869bb1136f9a3ef00cf6741f77ef73bf1d"
+  },
+  {
+   "fn": "fluidpy.data.movie_shore.coast_axes",
+   "scene": "amphan",
+   "data": "data/cs.json",
+   "eq": "coast legs, bearing, α",
+   "params": {
+    "p_from": [
+     21.765,
+     89.69
+    ],
+    "p_to": [
+     21.568,
+     88.791
+    ]
+   },
+   "sha256": "f626ada6379b0317f55c2a512b6b12135481a10234cbbe154f4a3ae7f1017c6f"
+  },
+  {
+   "fn": "fluidpy.data.movie_shore.era5_event",
+   "scene": "amphan",
+   "data": "data/cs.json",
+   "eq": "hourly along/across at the nearest sea grid point",
+   "params": {
+    "raw": "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\ERA5-ARCO\\era5_amphan_u10-v10-msl_2020-05-20T09_2020-05-20T15_1h.nc",
+    "coast_pt": [
+     21.644,
+     89.229
+    ],
+    "axes": {
+     "from": [
+      21.765,
+      89.69
+     ],
+     "to": [
+      21.568,
+      88.791
+     ],
+     "dy_km": -21.90540054897798,
+     "dx_km": -92.90162543446515,
+     "leg_km": 95.4492461027159,
+     "tan_beta": 4.24103751158294,
+     "bearing": 256.7324877766264,
+     "bearing_gc": 256.89871678600935,
+     "alpha": 193.26751222337361,
+     "xp": [
+      -0.9733091588223842,
+      -0.22949788964707915
+     ],
+     "yp": [
+      0.22949788964707915,
+      -0.9733091588223842
+     ]
+    },
+    "times": [
+     "2020-05-20T09:00"
+    ]
+   },
+   "sha256": "a7c7194eae3dfe52e923063852d1d95e3ec173209b793be4bbc3e87ece0c4087"
+  },
+  {
+   "fn": "fluidpy.data.movie_shore.inverse_barometer",
+   "scene": "amphan",
+   "data": "data/cs.json",
+   "eq": "Δη ≈ 1 cm per hPa",
+   "params": {
+    "p_hpa": 960.0
+   },
+   "sha256": "69e465fde2c0d0b4a54f20628a6488f8c2051001484056ec7ec66d2004e076d0"
+  },
+  {
+   "fn": "fluidpy.data.movie_shore.coast_axes",
+   "scene": "nargis",
+   "data": "data/cs.json",
+   "eq": "coast legs, bearing, α",
+   "params": {
+    "p_from": [
+     15.715,
+     95.374
+    ],
+    "p_to": [
+     15.812,
+     94.725
+    ]
+   },
+   "sha256": "4cb15ab8c6dc6e72ecd283068dc48915719be54e462f0dcc4e65fa26b1a7624a"
+  },
+  {
+   "fn": "fluidpy.data.movie_shore.era5_event",
+   "scene": "nargis",
+   "data": "data/cs.json",
+   "eq": "hourly along/across at the nearest sea grid point",
+   "params": {
+    "raw": "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\ERA5-ARCO\\era5_nargis_u10-v10-msl_2008-05-01T12_2008-05-03T00_1h.nc",
+    "coast_pt": [
+     15.778,
+     95.174
+    ],
+    "axes": {
+     "from": [
+      15.715,
+      95.374
+     ],
+     "to": [
+      15.812,
+      94.725
+     ],
+     "dy_km": 10.785907884522146,
+     "dx_km": -69.451453089091,
+     "leg_km": 70.28399636531495,
+     "tan_beta": 6.439091992316597,
+     "bearing": 278.8275960015883,
+     "bearing_gc": 278.9156589808774,
+     "alpha": 171.1724039984117,
+     "xp": [
+      -0.9881545825610621,
+      0.15346178991388376
+     ],
+     "yp": [
+      -0.15346178991388376,
+      -0.9881545825610621
+     ]
+    },
+    "times": [
+     "2008-05-02T11:00"
+    ]
+   },
+   "sha256": "3435680a30d53d83a69d5ee95ae29b697cd979613eaeb2412cd6f486e5d23d81"
+  },
+  {
+   "fn": "fluidpy.data.movie_shore.inverse_barometer",
+   "scene": "nargis",
+   "data": "data/cs.json",
+   "eq": "Δη ≈ 1 cm per hPa",
+   "params": {
+    "p_hpa": 962.0
+   },
+   "sha256": "fdf4775efac088b44fa49cdbf473bb7820cf76a161035a14b3017810791524c2"
+  },
+  {
+   "fn": "fluidpy.data.movie_shore.coast_axes",
+   "scene": "idai",
+   "data": "data/cs.json",
+   "eq": "coast legs, bearing, α",
+   "params": {
+    "p_from": [
+     -19.521,
+     35.34
+    ],
+    "p_to": [
+     -19.844,
+     34.84
+    ]
+   },
+   "sha256": "6124dbeab9ce925300d95484fc5ead64561f7f603edb5f145f02dc60df582b5b"
+  },
+  {
+   "fn": "fluidpy.data.movie_shore.era5_event",
+   "scene": "idai",
+   "data": "data/cs.json",
+   "eq": "hourly along/across at the nearest sea grid point",
+   "params": {
+    "raw": "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\ERA5-ARCO\\era5_idai_2019_u10-v10-msl_2019-03-11T00_2019-03-15T23_1h.nc",
+    "coast_pt": [
+     -19.829,
+     34.935
+    ],
+    "axes": {
+     "from": [
+      -19.521,
+      35.34
+     ],
+     "to": [
+      -19.844,
+      34.84
+     ],
+     "dy_km": -35.91596130619252,
+     "dx_km": -52.34909595115011,
+     "leg_km": 63.48530635864207,
+     "tan_beta": 1.4575440569406182,
+     "bearing": 235.54654229439728,
+     "bearing_gc": 235.46254458187462,
+     "alpha": 214.45345770560272,
+     "xp": [
+      -0.8245860176750012,
+      -0.5657365990060061
+     ],
+     "yp": [
+      0.5657365990060061,
+      -0.8245860176750012
+     ]
+    },
+    "times": [
+     "2019-03-14T19:00"
+    ]
+   },
+   "sha256": "32bb4c095b8a5a283f4e9003e43f2b7da61c0114f7946cb1d821743ccbf7b85a"
+  },
+  {
+   "fn": "fluidpy.data.movie_shore.inverse_barometer",
+   "scene": "idai",
+   "data": "data/cs.json",
+   "eq": "Δη ≈ 1 cm per hPa",
+   "params": {
+    "p_hpa": 955.0
+   },
+   "sha256": "0c96f79d89628b791165bba565b2d3cab7778b0999524e289cf7e39e1c9c88cf"
   }
  ],
  "physics_recorded": [],
@@ -12779,5 +13611,6 @@
    "output_sha256": "9927a7779dcc860df89aa05e93d4832594060741aa7f04076037dfb56098bb4a"
   }
  ],
- "notes2_patch": "2026-11-06: build_ch00_coordinates_storm.py --notes2-patch (same functions as the full build)"
+ "notes2_patch": "2026-11-06: build_ch00_coordinates_storm.py --notes2-patch (same functions as the full build)",
+ "remake1107_patch": "2026-11-07: build_ch00_coordinates_storm.py --remake1107-patch (fluidpy.data.movie_shore; DS40-DS47)"
 }

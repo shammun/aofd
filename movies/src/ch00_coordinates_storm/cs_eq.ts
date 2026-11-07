@@ -18,5 +18,14 @@ export const EQ_S16 = String.raw`\mathbf u=u_r\,\hat{\mathbf r}+u_\theta\,\hat{\
 export const EQ_S20 = String.raw`\overline{u_r}(r,z)=\dfrac{1}{72}\sum_{k=1}^{72}u_r(r,\theta_k,z)`;
 export const EQ_S23 = String.raw`\dfrac{6.0}{20.1}\approx0.299\ \Rightarrow\ \arctan0.299\approx16.6^\circ\approx17^\circ`;
 export const EQ_S25 = String.raw`\mathbf a=-\dfrac{v^2}{r}\,\hat{\mathbf r}`;
+// remake 2026-11-07 (R10-R16): Part 1's equations recalled at their point of use, exactly as Part 1 writes them (cf_eq.ts EQ_S14,
+// EQ_S17, EQ_S18, EQ_S05, EQ_S06), and their wind form for the coast (along / across tags, not primes alone)
+export const EQ_URUT = String.raw`u_r=u\cos\theta+v\sin\theta,\qquad u_\theta=-u\sin\theta+v\cos\theta`;
+export const EQ_S09R = String.raw`\overline{u_\theta}=\dfrac{1}{72}\sum_{k=1}^{72}u_{\theta,k}\approx34.8\ \mathrm{m/s}`;
+export const EQ_S15C = String.raw`x=r\cos\theta,\ y=r\sin\theta,\ z=z`;
+export const EQ_S26 = String.raw`x'=x\cos\alpha+y\sin\alpha,\qquad y'=-x\sin\alpha+y\cos\alpha`;
+export const EQ_S26M = String.raw`\begin{pmatrix}x'\\ y'\end{pmatrix}=\begin{pmatrix}\cos\alpha & \sin\alpha\\ -\sin\alpha & \cos\alpha\end{pmatrix}\begin{pmatrix}x\\ y\end{pmatrix}`;
+export const EQ_S26W = String.raw`\text{along}=u\cos\alpha+v\sin\alpha,\qquad \text{across}=-u\sin\alpha+v\cos\alpha`;
+export const EQ_S27 = String.raw`\text{bearing}=90^\circ-\theta`;
 /** split a constant at a separator that must exist (each half is drawn on its own line) */
 export const cutAt = (s: string, at: string): [string, string] => { const i = s.indexOf(at); if (i < 0) throw new Error(`cutAt: ${at} not in ${s}`); return [s.slice(0, i), s.slice(i + at.length)]; };

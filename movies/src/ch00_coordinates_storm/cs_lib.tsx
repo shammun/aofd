@@ -16,7 +16,7 @@ import { FONT } from "../house/kit/type";
 import { CurvedLink } from "../house/kit/extras";
 import { Drape, GProj, GlobeCam, GlobeMesh, Graticule, coastPath, globeCam, globeProj, useTex } from "./kit_cs/globe";
 import { View3D } from "./kit_cs/three3d";
-import { CalcStack as HouseCalcStack, KX, texHtml } from "../house/kit/tex";
+import { CalcStack as HouseCalcStack, KX, TeX as TeXR, texHtml } from "../house/kit/tex";
 
 export const FPS = 30;
 type Snt = { text: string; start: number; end: number };
@@ -407,3 +407,23 @@ export const CalcStack: typeof HouseCalcStack = (p) => (
   <HouseCalcStack {...p} rows={p.rows.map((r) => (r.h !== undefined || !FRAC.test(`${typeof r.lhs === "string" ? r.lhs : ""}${typeof r.rhs === "string" ? r.rhs : ""}`)
     ? r : { ...r, h: (r.size ?? p.size ?? 68) * 2.4 }))} />
 );
+
+// ---------------------------------------------------------------- recalls of earlier parts (remake 2026-11-07, HOUSE_STYLE §3 series parts, R16)
+/** An earlier part's result at its point of use: the equation (house TeX, left edge at x, centre at y) and, under it, the gold keyword
+ * "derived in Part K: <name>". Place OUTSIDE an <Svg> (it draws its own). */
+export const Recall: React.FC<{ f: number; tex: string; name: string; x: number; y: number; appear: number; out?: number; size?: number; c?: string; part?: number;
+  gap?: number }> = ({ f, tex, name, x, y, appear, out, size = 54, c = C.ink, part = 1, gap }) => {
+  const o = ramp(f, appear, appear + 10) * (out !== undefined ? 1 - ramp(f, out, out + 10) : 1);
+  if (o <= 0) return null;
+  const lab = `derived in Part ${part}: ${name}`;
+  const two = x + textW(lab, T.floor) > 1842;            // too wide for one line: "derived in Part K:" / name
+  if (two && x + textW(name, T.floor) > 1842) throw new Error(`Recall "${name}" ends past 1842`);
+  const dy = gap ?? (FRAC.test(tex) ? size * 1.25 : size * 0.85) + 18;
+  return (
+    <>
+      <TeXR s={tex} x={x} y={y} size={size} c={c} o={o} />
+      <Svg o={o}><g data-lc-own="recall">{two ? <><Lbl x={x} y={y + dy} t={`derived in Part ${part}:`} c={C.gold} s={T.floor} />
+        <Lbl x={x} y={y + dy + 52} t={name} c={C.gold} s={T.floor} /></> : <Lbl x={x} y={y + dy} t={lab} c={C.gold} s={T.floor} />}</g></Svg>
+    </>
+  );
+};

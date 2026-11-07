@@ -9,10 +9,10 @@ import { TeX } from "../house/kit/tex";
 import { CalcStack } from "./cs_lib";  // K6 r0: fraction rows get their real height
 import { Keyword } from "./cs_lib";   // Part 1 lessons C1: maths in $…$
 import { CurvedLink } from "../house/kit/extras";
-import { RiseText, TitleGradient } from "../house/kit/title";
+import { SeriesTitle } from "./kit_cs/SeriesTitle";
 import { SourceBelow } from "../house/kit/frame";
 import {
-  AT, ArcHead, Arrow, Axes, Ax, Curve, D, D2R, DashArrow, IMG, K, LEN, Lbl, Parcel, RING, RTick, SAY, SE, SRC, SS, Scene, SideCallout, SkipChip, Svg,
+  AT, ArcHead, Arrow, Axes, Ax, Curve, D, D2R, DashArrow, IMG, K, LEN, Lbl, Parcel, RING, RTick, Recall, SAY, SE, SRC, SS, Scene, SideCallout, SkipChip, Svg,
   URBar, UnitCircle, Wedge, arcD, axP, fin, fout, keepTime, mix, polar, prog, win, GeoImg, mapP, boxAt, linesPath, nf,
 } from "./cs_lib";
 import { EQ_S02, EQ_S03, EQ_S04, EQ_S05, EQ_S06, EQ_S07, EQ_S08, cutAt } from "./cs_eq";
@@ -39,8 +39,7 @@ const unitV = (a: number): Pt => [Math.cos(a * D2R), -Math.sin(a * D2R)];
 // ================================================================ s00 title
 const S00: React.FC = () => {
   const f = useCurrentFrame(), k = K("s00_title");
-  const tMet = AT(k, 0, "meteorology"), tEasy = AT(k, 0, "turning arrows and cylinders");   // user notes 2026-11-06 item 12: the pulse on the concept words
-  const pz = 1 + 0.06 * pulse(f, tEasy, 14);
+  const tMet = AT(k, 0, "meteorology"), tEasy = AT(k, 0, "cylindrical coordinates");   // user notes 2026-11-06 item 12: the pulse on the concept words
   // Part A: a parcel gliding round a ring (one lap ≈ 4 s, time compressed), its velocity v θ̂ turning; faint copies every 0.5 s;
   // the inward acceleration (rose) grows at the parcel
   const O: Pt = [1485, 400], R = 170;
@@ -53,16 +52,8 @@ const S00: React.FC = () => {
   return (
     <Scene fadeIn={false}>
       <Svg>
-        <defs><TitleGradient id="ttl" x1={100} x2={1000} /></defs>
-        <RiseText f={f} t="Coordinates · Part 2" x={104} y={92} s={64} at={2} fill={C.key} />
-        <RiseText f={f} t="Inside a" x={100} y={228} s={128} at={6} fill="url(#ttl)" />
-        <RiseText f={f} t="tropical" x={100} y={360} s={128} at={12} fill="url(#ttl)" />
-        <RiseText f={f} t="cyclone" x={100} y={492} s={128} at={18} fill="url(#ttl)" />
-        <g transform={`translate(104 598) scale(${pz}) translate(-104 -598)`}>
-          <RiseText f={f} t="made easy" x={104} y={598} s={68} at={24} fill={C.key} />
-        </g>
-        <RiseText f={f} t="turning arrows and" x={106} y={700} s={68} at={32} fill={C.key} />
-        <RiseText f={f} t="cylindrical coordinates" x={106} y={785} s={68} at={38} fill={C.key} colors={(i) => (i < 11 ? C.first : undefined)} />
+        {/* remake 2026-11-07 (R1/R2): the series title layout (kit_cs/SeriesTitle = Part 1's), no "made easy"; "Coordinates" pulses on its word */}
+        <SeriesTitle f={f} concept="Coordinates" part="Part 2 · Inside a tropical cyclone" sub={["turning arrows and", "cylindrical coordinates"]} pulseAt={tEasy} />
         <g opacity={oA * fin(f, 4, 10)}>
           <circle cx={O[0]} cy={O[1]} r={R} fill="none" stroke={C.local} strokeWidth={4} />
           <circle cx={O[0]} cy={O[1]} r={10} fill={C.local} />
@@ -86,71 +77,49 @@ const S00: React.FC = () => {
   );
 };
 
-// ================================================================ s01 hook
+// ================================================================ s01 hook (remake 2026-11-07: no recap scene; S6-S7 say what Part 1 gave and what Part 2 adds)
 const S01: React.FC = () => {
   const f = useCurrentFrame(), k = K("s01_hook");
   const O: Pt = [520, 400], R = 250;              // #5b r1 S2: smaller and higher, clear of the series icon row (y 752)
   const a = 20 + (360 * f) / 240;                 // one lap in 8 s (75 min compressed)
   const p = polar(O, R, a), u = unitV(a + 90), er = unitV(a);
   const tAcc = AT(k, 1, "accelerating"), tGuess = SS(k, 2), tTC = AT(k, 3, "tropical cyclone"), tNames = SS(k, 4), tSix = AT(k, 5, "seven parts"),
-    tTurn = SS(k, 6), tTwo = SS(k, 7), tIan = SS(k, 8), tAmp = SS(k, 9), tFlood = SS(k, 10);   // user notes item 12: S10 names the three flood events
-  const oRing = fout(f, tTwo - 10, 14), oWorld = fin(f, tTwo, 14);
-  const W = { lat0: -30, lat1: 60, lon0: -100, lon1: 100, x: 90, y: 150, w: 900, h: 405 };   // to 30 S: Idai (19.8 S) inside
-  const P = mapP(W);
-  const world = D.world as number[][];
+    tP1 = SS(k, 6), tP2 = SS(k, 7);
   const thumbs = ["grid", "storm", "globe", "enu", "route", "map", "frames"];
   return (
     <Scene>
       <Svg>
-        <g opacity={oRing}>
-          <circle cx={O[0]} cy={O[1]} r={R} fill="none" stroke={C.local} strokeWidth={5} />
-          <circle cx={O[0]} cy={O[1]} r={34} fill="#22304a" stroke={C.local} strokeWidth={3} />
-          <DashArrow f={f} p={p} q={[p[0] + u[0] * 150, p[1] + u[1] * 150]} />
-          <Arrow p={p} q={[p[0] + er[0] * 90, p[1] + er[1] * 90]} color={C.second} w={8} head={30} o={fin(f, tTurn)} />
-          <Parcel p={p} />
-          <g transform="translate(860 120)">
-            <path d="M -70 30 A 70 70 0 0 1 70 30" fill="none" stroke={C.ink} strokeWidth={5} />
-            <line x1={0} y1={30} x2={-38} y2={-28} stroke={C.first} strokeWidth={6} strokeLinecap="round" />
-            <circle cx={0} cy={30} r={7} fill={C.ink} />
-          </g>
-          <Lbl x={860} y={190} t={`${SAY.vt} m/s`} c={C.first} s={T.floor} a="middle" />
+        <circle cx={O[0]} cy={O[1]} r={R} fill="none" stroke={C.local} strokeWidth={5} />
+        <circle cx={O[0]} cy={O[1]} r={34} fill="#22304a" stroke={C.local} strokeWidth={3} />
+        <DashArrow f={f} p={p} q={[p[0] + u[0] * 150, p[1] + u[1] * 150]} />
+        <Arrow p={p} q={[p[0] + er[0] * 110, p[1] + er[1] * 110]} color={C.second} w={8} head={30} o={fin(f, AT(k, 6, "r hat"))} />
+        <Arrow p={p} q={[p[0] + u[0] * 110, p[1] + u[1] * 110]} color={C.second} w={8} head={30} o={fin(f, AT(k, 6, "theta hat"))} />
+        <Parcel p={p} />
+        <Lbl x={p[0] + er[0] * 150} y={p[1] + er[1] * 150 + 16} t="$\hat{\mathbf r}$" c={C.second} s={T.key} a="middle" o={fin(f, AT(k, 6, "r hat"))} />
+        <Lbl x={p[0] + u[0] * 200} y={p[1] + u[1] * 200 + 16} t="$\hat{\boldsymbol\theta}$" c={C.second} s={T.key} a="middle" o={fin(f, AT(k, 6, "theta hat"))} />
+        <g transform="translate(860 120)" opacity={fout(f, tP1 - 10)}>
+          <path d="M -70 30 A 70 70 0 0 1 70 30" fill="none" stroke={C.ink} strokeWidth={5} />
+          <line x1={0} y1={30} x2={-38} y2={-28} stroke={C.first} strokeWidth={6} strokeLinecap="round" />
+          <circle cx={0} cy={30} r={7} fill={C.ink} />
         </g>
-        <g opacity={oWorld}>
-          {/* heavy-phase K6 r0: the coastlines ran far outside the map box (no clip) */}
-          <clipPath id="s01world"><rect x={W.x} y={W.y} width={W.w} height={W.h} /></clipPath>
-          <rect x={W.x} y={W.y} width={W.w} height={W.h} fill="#1d2a44" stroke={C.grid} strokeWidth={3} />
-          <path d={linesPath(P, world)} fill="none" stroke={C.local} strokeWidth={2} clipPath="url(#s01world)" />
-          <circle cx={P(26.5, -82.3)[0]} cy={P(26.5, -82.3)[1]} r={13} fill={C.gold} stroke={C.bg} strokeWidth={4} opacity={fin(f, tIan)} />
-          <circle cx={P(20.7, 87.8)[0]} cy={P(20.7, 87.8)[1]} r={13} fill={C.gold} stroke={C.bg} strokeWidth={4} opacity={fin(f, tAmp)} />
-          {/* user notes 2026-11-06 item 12: the two more flood storms, on their words (landfall points, IBTrACS) */}
-          <circle cx={P(16.0, 94.3)[0]} cy={P(16.0, 94.3)[1]} r={11} fill={C.first} stroke={C.bg} strokeWidth={4} opacity={fin(f, AT(k, 10, "Nargis"))} />
-          <circle cx={P(-19.8, 34.9)[0]} cy={P(-19.8, 34.9)[1]} r={11} fill={C.first} stroke={C.bg} strokeWidth={4} opacity={fin(f, AT(k, 10, "Idai"))} />
-          <g data-lc-maplabel="1"><Lbl x={P(16.0, 94.3)[0] - 20} y={P(16.0, 94.3)[1] + 36} t="Nargis" c={C.key} s={T.floor} a="end" o={fin(f, AT(k, 10, "Nargis"))} /></g>
-          <g data-lc-maplabel="1"><Lbl x={P(-19.8, 34.9)[0] + 22} y={P(-19.8, 34.9)[1]} t="Idai" c={C.key} s={T.floor} o={fin(f, AT(k, 10, "Idai"))} /></g>
-          {/* heavy-phase K6 r0: Ian's label ran off the left edge, Amphan's into the keyword column: anchored to the box ends */}
-          <Lbl x={W.x} y={W.y + W.h + 50} t="Hurricane Ian · 2022" c={C.key} s={T.floor} o={fin(f, tIan)} />
-          <Lbl x={W.x + W.w} y={W.y + W.h + 110} t="Cyclone Amphan · 2020" c={C.key} s={T.floor} a="end" o={fin(f, tAmp)} />
-        </g>
+        <Lbl x={860} y={190} t={`${SAY.vt} m/s`} c={C.first} s={T.floor} a="middle" o={fout(f, tP1 - 10)} />
         <Keyword f={f} text="air parcel · steady speed" at={[MX, 120]} s={T.key} appear={0} out={tTC - 20} />
         <Keyword f={f} text="accelerating?" at={[MX, 210]} s={T.key} appear={tAcc} out={tTC - 20} />
         <Lbl x={MX + 450} y={210} t="?" c={C.gold} s={T.hero} o={win(f, tAcc + 10, tTC - 20)} />
         <Keyword f={f} text="your guess: yes · no" at={[MX, 300]} s={T.key} appear={tGuess} out={tTC - 20} />
-        <Keyword f={f} text="tropical cyclone" at={[MX, 120]} s={T.key} appear={tTC} out={tTwo - 20} />
-        <Lbl x={MX} y={215} t="hurricane: near America" c={C.key} s={T.floor} o={win(f, tNames, tTwo - 20)} />
-        <Lbl x={MX} y={280} t="cyclone: near India, Bangladesh" c={C.key} s={T.floor} o={win(f, tNames + 20, tTwo - 20)} />
-        <Lbl x={MX} y={350} t="= one kind of storm" c={C.gold} s={T.floor} o={win(f, AT(k, 4, "same kind"), tTwo - 20)} />
-        {/* #5b r2 S1: a keyword for S6 ("how the arrows change") and for S7 ("two real storms, each with its own job") */}
-        <Keyword f={f} text="Part 2: how $\hat{\mathbf r}$, $\hat{\boldsymbol\theta}$ change" at={[MX, 440]} s={T.key} appear={tTurn} out={tTwo - 20} />
-        <Keyword f={f} text="two real storms" at={[MX, 120]} s={T.key} appear={tTwo} />
-        <Lbl x={MX} y={205} t="each with its own job" c={C.key} s={T.floor} o={fin(f, tTwo + 20)} />
-        <Keyword f={f} text="winds in 3-D · storm surge" at={[MX, 520]} s={T.floor} appear={tIan + 30} />
-        <Keyword f={f} text="another ocean" at={[MX, 620]} s={T.floor} appear={tAmp + 30} />
-        <Keyword f={f} text="floods: Amphan · Nargis · Idai" at={[MX, 720]} s={T.floor} c={C.first} appear={tFlood} />
-        <g opacity={win(f, tSix, tTwo - 20)}>
+        <Keyword f={f} text="tropical cyclone" at={[MX, 120]} s={T.key} appear={tTC} out={tP1 - 20} />
+        <Lbl x={MX} y={215} t="hurricane: near America" c={C.key} s={T.floor} o={win(f, tNames, tP1 - 20)} />
+        <Lbl x={MX} y={280} t="cyclone: near India, Bangladesh" c={C.key} s={T.floor} o={win(f, tNames + 20, tP1 - 20)} />
+        <Lbl x={MX} y={350} t="= one kind of storm" c={C.gold} s={T.floor} o={win(f, AT(k, 4, "same kind"), tP1 - 20)} />
+        <Keyword f={f} text="Part 1: polar coordinates, $\hat{\mathbf r}$, $\hat{\boldsymbol\theta}$" at={[MX, 120]} s={T.floor} appear={tP1} />
+        <Keyword f={f} text="Part 2:" at={[MX, 240]} s={T.key} c={C.gold} appear={tP2} />
+        <Lbl x={MX} y={320} t="how fast $\hat{\mathbf r}$, $\hat{\boldsymbol\theta}$ turn" c={C.key} s={T.floor} o={fin(f, AT(k, 7, "how fast"))} />
+        <Lbl x={MX} y={390} t="+ height: cylindrical coordinates" c={C.key} s={T.floor} o={fin(f, AT(k, 7, "add a height"))} />
+        <Lbl x={MX} y={460} t="turned axes: wind pushes the sea" c={C.key} s={T.floor} o={fin(f, AT(k, 7, "turned axes"))} />
+        <g opacity={fin(f, tSix)}>
           {thumbs.map((t, i) => { const x = 140 + i * 240, y = 752;
             return <g key={t} opacity={i === 1 ? 1 : 0.35}>
               <circle cx={x + 60} cy={y + 60} r={54} fill="none" stroke={i === 1 ? C.gold : C.local} strokeWidth={4} />
-              {/* Part 1 lessons B5: every icon ≥ 20 px inside its ring (r 54 about x+60, y+60): all points within 33 px of the centre */}
               {i === 0 ? [0, 1, 2].map((q) => <line key={q} x1={x + 38 + q * 22} y1={y + 36} x2={x + 38 + q * 22} y2={y + 84} stroke={C.second} strokeWidth={3} />) : null}
               {i === 1 ? <><ellipse cx={x + 60} cy={y + 44} rx={28} ry={8} fill="none" stroke={C.key} strokeWidth={3} /><ellipse cx={x + 60} cy={y + 78} rx={28} ry={8} fill="none" stroke={C.key} strokeWidth={3} />
                 <line x1={x + 32} y1={y + 44} x2={x + 32} y2={y + 78} stroke={C.key} strokeWidth={3} /><line x1={x + 88} y1={y + 44} x2={x + 88} y2={y + 78} stroke={C.key} strokeWidth={3} /></> : null}
@@ -161,91 +130,6 @@ const S01: React.FC = () => {
               {i === 6 ? <><line x1={x + 46} y1={y + 80} x2={x + 86} y2={y + 58} stroke={C.second} strokeWidth={4} /><line x1={x + 46} y1={y + 80} x2={x + 36} y2={y + 44} stroke={C.second} strokeWidth={4} /></> : null}
             </g>; })}
         </g>
-      </Svg>
-      <SourceBelow text="Map: Natural Earth · storm positions: IBTrACS v04r01 (NOAA NCEI)" pic={{ x: W.x, y: W.y, w: W.w, h: W.h + 140 }} w={900} o={oWorld} name="s01 src" />{/* #5b r1 M7(c): the map's source line from its first frame */}
-    </Scene>
-  );
-};
-
-// ================================================================ s02 Part 1 in a minute
-const S02: React.FC = () => {
-  const f = useCurrentFrame(), k = K("s02_part1_recap");
-  const O: Pt = [330, 660], u = 80;                // the Part 1 grid: 1 km = 80 px; #5b r1 S1: 60 px lower (the turning arc and r̂ reached y 10-50)
-  const tR = SS(k, 1), tArc = SS(k, 2), tUnit = SS(k, 3), tRh = SS(k, 4), tTh = SS(k, 5), tPart = SS(k, 6), tIan = SS(k, 7), tTurn = SS(k, 8);
-  const tHold = tTurn + 30;                       // #5b r2 S3: the Ian panel holds 1 s into S8 (its 13 m/s label came on the last word)
-  const thB = TH + 40 * prog(f, tHold + 10, tHold + 130);
-  const B = polar(O, 5 * u, thB);
-  const er = unitV(thB), et = unitV(thB + 90);
-  const [e1, e2] = cutAt(EQ_S02, String.raw`,\qquad `);
-  const oGrid = fout(f, tIan - 12, 12), oIan = win(f, tIan, tHold, 12), oG2 = fin(f, tHold + 10, 12);
-  const IB = { x: 140, y: 120, w: 720, h: 640 };
-  const MB = boxAt(D.ian_c[0], D.ian_c[1], 0.9, IB.x, IB.y, IB.w, IB.h);
-  const P = mapP(MB);
-  const c0 = P(D.ian_c[0], D.ian_c[1]);
-  const rr = (RING.r_km / 111.2 / 0.9) * IB.h;
-  return (
-    <Scene>
-      <Svg>
-        <clipPath id="s02grid"><rect x={0} y={40} width={1080} height={820} /></clipPath>
-        <g opacity={Math.max(oGrid, oG2)} clipPath="url(#s02grid)">
-          {[1, 2, 3, 4, 5, 6].map((r) => <circle key={r} cx={O[0]} cy={O[1]} r={r * u} fill="none" stroke={C.grid} strokeWidth={2} />)}
-          {Array.from({ length: 12 }, (_, i) => i * 30).map((a) => <line key={a} x1={O[0]} y1={O[1]} x2={polar(O, 6.3 * u, a)[0]} y2={polar(O, 6.3 * u, a)[1]} stroke={C.grid} strokeWidth={2} />)}
-          {/* #5b r2 cosmetic: on S0 ("we met polar coordinates") the grid itself is the picture: brighter, dimming to the usual grid on S1 */}
-          <g opacity={0.55 * (1 - prog(f, tR, tR + 30))}>
-            {[1, 2, 3, 4, 5, 6].map((r) => <circle key={r} cx={O[0]} cy={O[1]} r={r * u} fill="none" stroke={C.local} strokeWidth={2.5} />)}
-            {Array.from({ length: 12 }, (_, i) => i * 30).map((a) => <line key={a} x1={O[0]} y1={O[1]} x2={polar(O, 6.3 * u, a)[0]} y2={polar(O, 6.3 * u, a)[1]} stroke={C.local} strokeWidth={2.5} />)}
-          </g>
-          <line x1={O[0]} y1={O[1]} x2={B[0]} y2={B[1]} stroke={C.ink} strokeWidth={6} opacity={fin(f, tR)} />
-          <path d={arcD(O, 90, 0, thB)} fill="none" stroke={C.local} strokeWidth={6} opacity={fin(f, tR)} />
-          <Lbl x={mix(O[0], B[0], 0.5) - 30} y={mix(O[1], B[1], 0.5) - 20} t="$r$" c={C.ink} s={T.key} a="end" o={fin(f, tR)} />
-          <Lbl x={polar(O, 125, thB / 2)[0] + 10} y={polar(O, 125, thB / 2)[1]} t="$\theta$" c={C.local} s={T.key} o={fin(f, tR)} />
-          <path d={arcD(O, 3 * u, 0, 60)} fill="none" stroke={C.gold} strokeWidth={10} opacity={win(f, tArc, tUnit)} />
-          <circle cx={B[0]} cy={B[1]} r={13} fill={C.key} stroke={C.bg} strokeWidth={4} />
-          <Arrow p={B} q={[B[0] + er[0] * 150, B[1] + er[1] * 150]} color={C.second} w={10} head={36} o={fin(f, tRh)} />
-          <Arrow p={B} q={[B[0] + et[0] * 150, B[1] + et[1] * 150]} color={C.second} w={10} head={36} o={fin(f, tTh)} />
-          <path d={arcD(B, 60, thB, thB + 90)} fill="none" stroke={C.gold} strokeWidth={5} opacity={win(f, tTh, tPart)} />
-          <Band p={B} q={[B[0] + er[0] * 110, B[1] + er[1] * 110]} color={C.neg} o={0.5 * win(f, tPart, tIan)} />
-          <Band p={B} q={[B[0] + et[0] * 120, B[1] + et[1] * 120]} color={C.first} o={0.5 * win(f, tPart, tIan)} />
-          <path d={arcD(B, 190, thB, thB + 90)} fill="none" stroke={C.gold} strokeWidth={5} opacity={oG2} />
-          <ArcHead c={B} r={190} a={thB + 90} dir={1} col={C.gold} o={oG2} />
-        </g>
-      </Svg>
-      <TeX s={String.raw`s=r\,\theta`} x={MX} y={430} size={T.calc} o={win(f, tArc, tIan - 20)} />
-      <TeX s={e1} x={MX} y={170} size={T.calc} c={C.second} o={win(f, tRh, tIan - 20)} />
-      <TeX s={e2} x={MX} y={290} size={T.calc} c={C.second} o={win(f, tTh, tIan - 20)} />
-      <TeX s={String.raw`u_r=\mathbf u\cdot\hat{\mathbf r},\qquad u_\theta=\mathbf u\cdot\hat{\boldsymbol\theta}`} x={MX} y={570} size={60} o={win(f, tPart, tIan - 20)} />
-      <Svg o={oIan}>
-        <rect x={IB.x} y={IB.y} width={IB.w} height={IB.h} fill="#1d2a44" stroke={C.grid} strokeWidth={3} />
-        {/* #5b r1 S1: the coastline clipped to the panel (it ran up to the frame top and to the right) */}
-        <clipPath id="s02ian"><rect x={IB.x} y={IB.y} width={IB.w} height={IB.h} /></clipPath>
-        <path d={linesPath(P, D.coast_ian)} fill="none" stroke={C.key} strokeWidth={2.5} opacity={0.8} clipPath="url(#s02ian)" />
-        <circle cx={c0[0]} cy={c0[1]} r={rr} fill="none" stroke={C.local} strokeWidth={4} />
-        <circle cx={c0[0]} cy={c0[1]} r={8} fill={C.local} />
-        {/* #5b r2 S3: "twenty five kilometres out" drawn: the radius (ink) and its length, on those words */}
-        <line x1={c0[0]} y1={c0[1]} x2={c0[0] - rr * Math.SQRT1_2} y2={c0[1] + rr * Math.SQRT1_2} stroke={C.ink} strokeWidth={4} opacity={fin(f, AT(k, 7, "twenty five"))} />
-        {[0, 18, 36, 54].map((i) => { const az = RING.az[i] * D2R, p0: Pt = [c0[0] + rr * Math.cos(az), c0[1] - rr * Math.sin(az)], s = 4.2;
-          return <g key={i}>
-            <DashArrow f={f} p={p0} q={[p0[0] - Math.sin(az) * RING.v * s, p0[1] - Math.cos(az) * RING.v * s]} w={8} head={28} />
-            <DashArrow f={f} p={p0} q={[p0[0] + Math.cos(az) * RING.vr * s, p0[1] - Math.sin(az) * RING.vr * s]} c={C.neg} w={8} head={28} />
-          </g>; })}
-        {/* #5b r3 S1: the radius length as a side callout on its words, BELOW the two wind callouts (its link then crosses neither of theirs); the right half was empty 136.0-142.5 s */}
-        <SideCallout f={f} lines={`$r$ = ${RING.r_km} km`} at={[MX, 530]} appear={AT(k, 7, "twenty five")} out={tHold}
-          target={[c0[0] - rr * Math.SQRT1_2 * 0.7 + 14, c0[1] + rr * Math.SQRT1_2 * 0.7 - 14]} c={C.ink} />
-        <SideCallout f={f} lines={`≈ ${SAY.vt} m/s round`} at={[MX, 300]} appear={AT(k, 7, "thirty five")} out={tHold} target={[c0[0] + rr + 6, c0[1] - 140]} c={C.first} />
-        <SideCallout f={f} lines={`≈ ${Math.abs(SAY.vr)} m/s in  (−)`} at={[MX, 420]} appear={AT(k, 7, "in at about")} out={tHold} target={[c0[0] + rr - 40, c0[1] + 30]} c={C.neg} />
-      </Svg>
-      <TeX s={String.raw`\overline{u_\theta}\approx35\ \mathrm{m/s},\qquad \overline{u_r}\approx-13\ \mathrm{m/s}`} x={MX} y={640} size={50} o={oIan * fin(f, AT(k, 7, "thirteen"))} />
-      <SourceBelow text={SRC.hrrr18} pic={IB} w={760} o={oIan} name="s02 src" />
-      <Svg>
-        <Keyword f={f} text="Part 1: polar coordinates" at={[MX, 120]} s={T.key} appear={0} out={tR + 60} />
-        {/* #5b r3 S1: the storm named on the first word of S7, so the right half is never empty while the panel builds */}
-        <Keyword f={f} text="Hurricane Ian · 28 Sep 2022" at={[MX, 120]} s={T.key} appear={tIan} out={tHold} />
-        {/* #5b r2 S2 (1h): r, θ and the viewpoint written on S1 (they were only spoken) */}
-        <Lbl x={MX} y={220} t="$r$: distance from the origin" c={C.local} s={T.floor} o={win(f, tR + 10, tArc - 10)} />
-        <Lbl x={MX} y={285} t="$\theta$: angle from east," c={C.local} s={T.floor} o={win(f, AT(k, 1, "theta"), tArc - 10)} />
-        <Lbl x={MX} y={345} t="anticlockwise (seen from above)" c={C.local} s={T.floor} o={win(f, AT(k, 1, "anticlockwise"), tArc - 10)} />
-        <Keyword f={f} text="$\hat{\mathbf r}$, $\hat{\boldsymbol\theta}$ turn as we go round" at={[MX, 300]} s={T.key} appear={tHold + 18} />
-        <Keyword f={f} text="how fast?" at={[MX, 420]} s={T.key} appear={SS(k, 9)} />
       </Svg>
     </Scene>
   );
@@ -294,6 +178,10 @@ const S03: React.FC = () => {
         { rhs: String.raw`s=1\times0.1=0.1`, at: AT(k, 15, "slides the tip"), size: 48 },
       ]} o={fout(f, tSo - 10)} />
       <TeX s={EQ_S03} x={MX} y={420} size={48} o={fin(f, tSo)} />
+      {/* remake 2026-11-07 (R16; the recap scene s02 is cut): Part 1's results at their point of use */}
+      <Recall f={f} tex={String.raw`\hat{\mathbf r}=(\cos\theta,\ \sin\theta)`} name="polar unit vectors" x={MX} y={600} appear={tTip} out={tArc - 10} c={C.second} />
+      <Svg><Lbl x={MX} y={640} t="derived in Part 1: arc length" c={C.gold} s={T.floor} o={win(f, tArc, tEx - 10)} /></Svg>
+      <Recall f={f} tex={String.raw`\hat{\boldsymbol\theta}=(-\sin\theta,\ \cos\theta)`} name="polar unit vectors" x={MX} y={690} appear={tTh} c={C.second} />
       <Svg><CurvedLink f={f} from={[MX - 14, 260]} to={[mid[0] + 10, mid[1]]} start={tOne + 8} end={tSo - 8} bend={60} /></Svg>
     </Scene>
   );
@@ -497,6 +385,8 @@ const S06: React.FC = () => {
       {/* fix 0 B18: the arc rule restated on S13 */}
       <TeX s={String.raw`s=1\times\Delta\theta=\Delta\theta`} x={MX} y={300} size={56} o={win(f, SS(k, 10), t4b - 10)} />
       <TeX s={EQ_S06} x={MX} y={480} size={96} o={fin(f, tRate)} />
+      {/* remake 2026-11-07 (R16): Part 1's quarter-turn rule where it is used (S14) */}
+      <Recall f={f} tex={String.raw`(p,\ q)\ \longrightarrow\ (-q,\ p)`} name="quarter turn" x={MX} y={650} appear={t5} out={tSmall - 20} />
     </Scene>
   );
 };
@@ -726,7 +616,7 @@ const S08: React.FC = () => {
 };
 
 export const SCENES_A: Record<string, React.FC> = {
-  s00_title: S00, s01_hook: S01, s02_part1_recap: S02, s03_tip_on_circle: S03, s04_slopes_sin_cos: S04, s05_dr_dtheta: S05, s06_dtheta_dtheta: S06,
+  s00_title: S00, s01_hook: S01, s03_tip_on_circle: S03, s04_slopes_sin_cos: S04, s05_dr_dtheta: S05, s06_dtheta_dtheta: S06,
   s07_toward_centre: S07, s08_product_rule: S08,
 };
 void [EQ_S02, nf, GeoImg, SE, RING];

@@ -16,7 +16,7 @@ const arg = (k, d) => { const i = process.argv.indexOf(k); return i > 0 ? proces
 const TSX = "(three scene files)";
 const TIM = arg("--timing", path.join(ROOT, "movies/ch00/ch00_coordinates_storm/timing.json"));
 const GAP = Number(arg("--gap", "8"));
-const src = ["cs_sA.tsx", "cs_sB.tsx", "cs_sC.tsx"].map((f) => fs.readFileSync(path.join(ROOT, "movies/src/ch00_coordinates_storm", f), "utf8")).join("\n");
+const src = ["cs_sA.tsx", "cs_sB.tsx", "cs_sC.tsx", "cs_sD.tsx"].map((f) => fs.readFileSync(path.join(ROOT, "movies/src/ch00_coordinates_storm", f), "utf8")).join("\n");
 const tm = JSON.parse(fs.readFileSync(TIM, "utf8"));
 const FPS = 30, HOLD = 75;
 const sc = tm.scenes, IDS = sc.map((s) => s.id);
@@ -61,7 +61,7 @@ const evalIn = (scope, e) => { try { return Function("scope", `with (scope) { re
 // ---------- components ----------
 const byid = {}; for (const m of src.matchAll(/export const SCENES_[ABC]: Record<string, React\.FC> = \{([\s\S]*?)\};/g)) for (const p of splitTop(m[1])) { const [a, b] = p.split(":").map((x) => x.trim()); byid[a] = b; }
 // ---------- ch00_coordinates adaptation (build 1): three scene files, BYID = SCENES_A/B/C, module constants and helpers ----------
-const CO_FILES = ["cs_sA.tsx", "cs_sB.tsx", "cs_sC.tsx"].map((f) => path.join(ROOT, "movies/src/ch00_coordinates_storm", f));
+const CO_FILES = ["cs_sA.tsx", "cs_sB.tsx", "cs_sC.tsx", "cs_sD.tsx"].map((f) => path.join(ROOT, "movies/src/ch00_coordinates_storm", f));
 const CO_D = JSON.parse(fs.readFileSync(path.join(ROOT, "movies/ch00/ch00_coordinates_storm/data/cs.json"), "utf8"));
 const easeC = (t) => { const x = Math.max(0, Math.min(1, t)); return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
 const CO_HELP = { D: CO_D, D2R: Math.PI / 180, mix: (a, b, t) => a + (b - a) * t, ease: easeC, prog: (f, a, b) => easeC((f - a) / Math.max(1, b - a)),

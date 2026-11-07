@@ -4,6 +4,7 @@
 // MODIS 7-2-1), the recap and the end card. Every number on screen is asserted against data/cs.json below.
 import React from "react";
 import { AbsoluteFill, Img, useCurrentFrame } from "remotion";
+import { ramp } from "../house";
 import { C, FONT, T } from "../house/kit/type";
 import { Pt, pulse, textW } from "../house/kit/draw";
 import { TeX } from "../house/kit/tex";
@@ -14,7 +15,7 @@ import { AnimatedWindArrow } from "../house/kit/wind";
 import { Notebook } from "../house/kit/icons";
 import { globePath, llPath, useTex } from "./kit_cs/globe";
 import {
-  AMP, ASSET_NAMES, AT, ArcHead, Arrow, SE, Ax, Proj, lerpBox, Axes, CST, ColourBar, Cross, Curve, D, D2R, FLD, Globe, GeoImg, GeoMap, IMG, K, LEN, LUT_DEPTH, LUT_UR, Lbl, MapBox, NAR, Place, RING, SAY, SEC, SRC, SS,
+  AMP, ASSET_NAMES, AT, ArcHead, Arrow, HOLD, SE, Ax, Proj, lerpBox, Axes, CST, ColourBar, Cross, Curve, D, D2R, FLD, Globe, GeoImg, GeoMap, IMG, K, LEN, LUT_DEPTH, LUT_UR, Lbl, MapBox, NAR, Place, RING, SAY, SEC, SRC, SS,
   SSP, STK, Scene, SideCallout, SpeedBar, Svg, URBar, arcD, axP, boxAt, clamp, fin, fout, linesPath, lutCss, mapP, mix, nf, poly, polar, prog, win,
 } from "./cs_lib";
 import { InUpOut, SecAxes, secP } from "./cs_sB";
@@ -43,8 +44,9 @@ const G_DISC_R = Math.ceil(540 / Math.tan(17.5 * D2R) / Math.sqrt(G_DIST0 * G_DI
 // ================================================================ s21 the Bay of Bengal, Cyclone Amphan (globe tour, zoom back out)
 const S21: React.FC = () => {
   const f = useCurrentFrame(), k = K("s21_amphan_intro");
-  const tBay = AT(k, 0, "Bay of Bengal"), tRem = SS(k, 1), tMay = SS(k, 2), t18 = AT(k, 3, "eighteenth"), t20 = SS(k, 4), tKol = SS(k, 5), tSat = AT(k, 5, "Satkhira"),
-    tKhu = AT(k, 5, "Khulna"), tDis = SS(k, 6);
+  // remake 2026-11-07 (fact-check rows 1-2): S3-S6 the IMD wind class, 1999, not a damage scale, Sidr / Aila; S8-S9 the split Kolkata line
+  const tBay = AT(k, 0, "Bay of Bengal"), tRem = SS(k, 1), tMay = SS(k, 2), t18 = AT(k, 3, "eighteenth"), t99 = SS(k, 4), tWind = SS(k, 5), tSidr = SS(k, 6),
+    t20 = SS(k, 7), tKol = SS(k, 8), tSat = AT(k, 9, "Satkhira"), tKhu = AT(k, 9, "Khulna"), tDis = SS(k, 10);
   const keys = [
     { f: 0, lat: 18, lon: 60, dist: G_DIST0, pp: G_PP0 },
     { f: tBay - 10, lat: 18, lon: 60, dist: G_DIST0, pp: G_PP0 },
@@ -92,8 +94,13 @@ const S21: React.FC = () => {
         <Keyword f={f} text="storm 2: Cyclone Amphan" at={[1210, 120]} s={T.floor} appear={0} out={t18 - 20} />
         <Lbl x={1210} y={210} t="cyclone = tropical cyclone" c={C.key} s={T.floor} o={win(f, tRem, t18 - 20)} />
         <Lbl x={1210} y={280} t="May 2020" c={C.key} s={T.floor} o={win(f, tMay, t18 - 20)} />
-        <Keyword f={f} text="super cyclonic storm" at={[1210, 120]} s={T.key} appear={t18} out={t20 - 20} />
-        <Lbl x={1210} y={210} t="18 May · the strongest class" c={C.key} s={T.floor} o={win(f, t18 + 20, t20 - 20)} />{/* #5b r1 S19: the unspoken "130 kt (IMD)" dropped */}
+        <Keyword f={f} text="IMD's top wind class:" at={[1210, 120]} s={T.floor} appear={t18} out={t20 - 20} />
+        <Lbl x={1210} y={190} t="super cyclonic storm" c={C.key} s={T.key} o={win(f, t18 + 10, t20 - 20)} />
+        <Lbl x={1210} y={270} t="18 May" c={C.key} s={T.floor} o={win(f, t18 + 20, t20 - 20)} />
+        <Lbl x={1210} y={340} t="first since 1999 in the Bay" c={C.key} s={T.floor} o={win(f, t99, t20 - 20)} />
+        <Lbl x={1210} y={410} t="a wind class, not harm" c={C.gold} s={T.floor} o={win(f, tWind, t20 - 20)} />
+        <Lbl x={1210} y={500} t="Sidr 2007 · Aila 2009:" c={C.key} s={T.floor} o={win(f, tSidr, t20 - 20)} />
+        <Lbl x={1210} y={560} t="weaker, but very harmful" c={C.key} s={T.floor} o={win(f, tSidr + 20, t20 - 20)} />
         <Keyword f={f} text="ashore: 20 May" at={[1210, 120]} s={T.key} appear={t20} out={LEN(k) - 14} />
         <Lbl x={1210} y={300} t={`closest to Kolkata ≈ ${Math.round(AMP.close.Kolkata.km)} km`} c={C.key} s={T.floor} o={win(f, tKol, LEN(k) - 14)} />
         <Lbl x={1210} y={370} t={`Satkhira ≈ ${Math.round(AMP.close.Satkhira.km)} km W`} c={C.key} s={T.floor} o={win(f, tSat, LEN(k) - 14)} />
@@ -207,7 +214,8 @@ const S23: React.FC = () => {
         <Lbl x={MX} y={540} t="anticlockwise, like Ian" c={C.key} s={T.floor} o={win(f, tACW, tOff - 10)} />
         <Lbl x={MX} y={600} t="both: northern hemisphere" c={C.key} s={T.floor} o={win(f, tACW + 20, tOff - 10)} />
         <Lbl x={MX} y={734} t="ERA5's storm: much too weak" c={C.local} s={T.floor} o={win(f, AT(k, 9, "so the reanalysis"), tShape - 20)} />{/* K6 round 1: under the taller rows */}
-        <Keyword f={f} text="but the shape is right" at={[MX, 120]} s={T.key} appear={tShape} out={tTwo - 20} />
+        <Keyword f={f} text="but the shape is right" at={[MX, 120]} s={T.key} appear={tShape} out={tTan - 20} />
+        <Keyword f={f} text="derived in Part 1: inflow angle" at={[MX, 120]} s={T.floor} c={C.gold} appear={tTan + 4} out={tTwo - 20} />{/* remake 2026-11-07 (R16) */}
         {/* K6 round 1: the two angle lines ran to x 1897: each is split at "⇒" (the arctan on the line under its fraction), the storm
             labels move up, and "a similar spiral angle" takes the keyword place on its sentence */}
         <g opacity={fin(f, tTan)}>
@@ -391,51 +399,6 @@ const CoastBody: React.FC<{ P: (la: number, lo: number) => Pt; f: number }> = ({
   {(CST.arrows as number[][]).map(([la, lo, u, v], i) => { const q = P(la, lo), s2 = 2.0;
     return <AnimatedWindArrow key={i} from={q} to={[q[0] + u * s2, q[1] - v * s2]} speed={Math.hypot(u, v)} f={f} c={C.ink} px={4} head={16} o={0.8} />; })}
 </>;
-const S26: React.FC = () => {
-  const f = useCurrentFrame(), k = K("s26_onshore");
-  const tNot = SS(k, 1), tAlong = SS(k, 2), tWind = SS(k, 3), tCoast = SS(k, 4), tP4 = SS(k, 5);
-  const B = coastMap(28.4, 60, 760);
-  const Bx: MapBox = { ...B, x: 520 - B.w / 2 };
-  const P = mapP(Bx), fm = P(CST.fmb[0], CST.fmb[1]), u = CST.uF as number[];
-  const s = 4.5;
-  const sq2 = Math.round(Number(nf(u[0], 1).replace("−", "-")) ** 2) + Math.round(Number(nf(u[1], 1).replace("−", "-")) ** 2);
-  if (Math.abs(Math.sqrt(sq2) - CST.spF) > 0.1) throw new Error(`CHECK s26 speed: √${sq2} vs ${CST.spF}`);
-  const n1 = P(CST.naples[0], CST.naples[1]), n2 = P(CST.englewood[0], CST.englewood[1]);
-  return (
-    <Scene>
-      <GeoMap id="s26m" B={Bx}>{(Pp) => <CoastBody P={Pp} f={f} />}</GeoMap>
-      <Svg>
-        <Place p={fm} t="Fort Myers Beach" dx={-20} dy={-44} a="end" o={fin(f, tWind)} />{/* #5b r1 S17: up-left of the dot (the SW wind arrow came through it below-left; right of it ran off the map) */}
-        <AnimatedWindArrow from={[fm[0] - u[0] * s, fm[1] + u[1] * s]} to={fm} speed={CST.spF} f={f} c={C.ink} px={10} head={36} o={fin(f, tWind)} />
-        <line x1={n1[0]} y1={n1[1]} x2={n2[0]} y2={n2[1]} stroke={C.second} strokeWidth={5} opacity={fin(f, tCoast)} />
-        <g opacity={win(f, tAlong, tWind - 20)}>
-          <Arrow p={fm} q={[fm[0] + (n2[0] - n1[0]) * 0.35, fm[1] + (n2[1] - n1[1]) * 0.35]} color={C.second} w={8} head={28} />
-          <Arrow p={fm} q={[fm[0] + 110, fm[1] - 70]} color={C.second} w={8} head={28} />
-        </g>
-        <Keyword f={f} text="back to the coast" at={[MX, 120]} s={T.key} appear={0} out={tAlong - 20} />
-        <Keyword f={f} text="along the shore · across the shore" at={[MX, 120]} s={T.floor} appear={tAlong} out={tWind - 20} />
-        <Keyword f={f} text={`≈ ${Math.round(CST.spF)} m/s from the SW`} at={[MX, 120]} s={T.key} appear={tWind} out={tP4 - 20} />
-        <Lbl x={MX} y={210} t="20 UTC · ≈ 1 h after landfall" c={C.key} s={T.floor} o={win(f, tWind, tP4 - 20)} />
-        <Lbl x={MX} y={290} t="coast runs NNW" c={C.second} s={T.floor} o={win(f, tCoast, tP4 - 20)} />
-        <Lbl x={MX} y={360} t="almost straight onto the land" c={C.key} s={T.floor} o={win(f, tCoast + 30, tP4 - 20)} />
-        <Keyword f={f} text="Part 4: how much, exactly" at={[MX, 120]} s={T.key} c={C.local} appear={tP4} />
-        <SpeedBar x={MX} y={745} w={360} hi={50} />{/* #5b r1 S17: 25 px lower, clear of the line above */}
-        <Lbl x={MX} y={610} t="towards the NE = from the SW" c={C.muted} s={T.floor} o={win(f, AT(k, 3, "from the s") , tP4 - 20)} />
-      </Svg>
-      {/* fix 0 B25a: the 33 m/s from its two components */}
-      <CalcStack f={f} x={MX} y={410} size={44} maxLines={3} o={fout(f, tP4 - 10)} rows={[
-        // K6 round 1: both rows ran past 1842 (to 1909 / 1894): the components as one (u, v) pair, the length's result on its own line
-        // K6 round 2: still 6 px past 1842: the directions as E / N on the numbers (as NNW / SW / NE elsewhere on this screen)
-        { rhs: String.raw`(u,\ v)=(${nf(u[0], 1)}\ \text{E},\ ${nf(u[1], 1)}\ \text{N})\ \mathrm{m/s}`, at: tWind + 20 },
-        { rhs: String.raw`\sqrt{${nf(u[0], 1)}^2+${nf(u[1], 1)}^2}=\sqrt{${Math.round(Number(nf(u[0], 1).replace("−", "-")) ** 2)}+${Math.round(Number(nf(u[1], 1).replace("−", "-")) ** 2)}}`, at: AT(k, 3, "thirty three") },
-        // #5b r1 M9: the squares of the SHOWN values (22.2² = 492.8 ≈ 493, not 494 from the unrounded 22.23), their sum, the root
-        { rhs: String.raw`=\sqrt{${sq2}}\approx${(Math.sqrt(sq2)).toFixed(1)}\ \mathrm{m/s}`, at: AT(k, 3, "thirty three") + 15, cont: true },
-      ]} />
-      <SourceBelow text={SRC.hrrr20} pic={Bx} w={1400} name="s26 src" />
-    </Scene>
-  );
-};
-
 const GA = (x: number, y: number, w: number, h: number): Ax => ({ x, y, w, h, xr: [0, 36], yr: [-2.2, 2.6] });
 const Gauges: React.FC<{ A: Ax; f: number; tF: number; tS: number; land?: boolean; labels?: boolean }> = ({ A, f, tF, tS, land = true, labels = true }) => {
   const G1 = CST.gauges["8725520"], G2 = CST.gauges["8726520"];
@@ -463,104 +426,9 @@ const Gauges: React.FC<{ A: Ax; f: number; tF: number; tS: number; land?: boolea
     </g>
   );
 };
-const S27: React.FC = () => {
-  const f = useCurrentFrame(), k = K("s27_surge");
-  const tSurge = AT(k, 1, "storm surge"), tWind = SS(k, 2), tCm = SS(k, 3), tNHC = SS(k, 4), tFM = SS(k, 5), tNorth = SS(k, 6), tOut = SS(k, 7), tStP = SS(k, 8), tFlip = SS(k, 9),
-    tEk = SS(k, 10), tMore = SS(k, 11);
-  const tIanC = AT(k, 3, "Ian's centre");   // #5b r2 S8: the shelf chart leaves before the 1013 / 938 tag comes in under the 75-hPa row
-  const B = coastMap(28.4, 60, 760);
-  const Bx: MapBox = { ...B, x: 340 - B.w / 2 + 120 };
-  const P = mapP(Bx), fm = P(CST.fmb[0], CST.fmb[1]), sp = P(CST.stp[0], CST.stp[1]);
-  const uF = CST.uF as number[], uS = CST.uS as number[], s = 4.5;
-  // K6 r0 / fix 0: below the rows; K6 round 1: 30 px lower (the feet rows now take two lines)
-  const sh = CST.shelf, SA: Ax = { x: 1110, y: 545, w: 640, h: 150, xr: [0, 150], yr: [-80, 10] };   // #5b r1 S18: 75 px lower, room for the 1-cm-per-hPa rows
-  const rise = prog(f, tSurge, tSurge + 90) * fout(f, tNorth - 10);
-  const GAx = GA(1010, 530, 680, 230);   // K6 r0: "29 Sep 00" ran past 1842; K6 round 1: wider, the date ticks overlapped each other
-  return (
-    <Scene>
-      <GeoMap id="s27m" B={Bx}>{(Pp) => <CoastBody P={Pp} f={f} />}</GeoMap>
-      <Svg>
-        <Place p={fm} t="Fort Myers Beach" dx={-20} dy={-44} a="end" />
-        {/* K6 round 1: anchored at its end the name ran out of the map's left edge; centred above the marker it stays inside */}
-        <Place p={sp} t="Saint Petersburg" dx={0} dy={-40} a="middle" o={fin(f, tNorth)} />
-        <AnimatedWindArrow from={[fm[0] - uF[0] * s, fm[1] + uF[1] * s]} to={fm} speed={CST.spF} f={f} c={C.ink} px={10} head={36} />
-        <AnimatedWindArrow from={sp} to={[sp[0] + uS[0] * s, sp[1] - uS[1] * s]} speed={Math.hypot(uS[0], uS[1])} f={f} c={C.ink} px={10} head={36} o={fin(f, tOut)} />
-        <g opacity={win(f, tWind, tIanC - 20)}>
-          <Axes A={SA} xt={[0, 50, 100, 150]} yt={[-80, -40, 0]} xl="km from Fort Myers Beach (WSW)" yl="sea floor (m)" xf={(v) => `${v}`} />
-          <Curve A={SA} xs={sh.km} ys={sh.z} c="#8a6f4e" w={6} />
-          <rect x={SA.x} y={axP(SA)(0, 0)[1] - 30 * rise} width={SA.w} height={30 * rise + 2} fill="#7cc4ff" opacity={0.35} />
-        </g>
-        <Keyword f={f} text="onto the land" at={[MX, 120]} s={T.key} appear={0} out={tSurge - 20} />
-        <Keyword f={f} text="storm surge" at={[MX, 120]} s={T.key} appear={tSurge} out={tNHC - 20} />
-        <Lbl x={MX} y={210} t="wide, shallow shelf" c={C.key} s={T.floor} o={win(f, tWind, tNHC - 20)} />
-        <Lbl x={MX} y={270} t="≈ 1 cm per hPa" c={C.local} s={T.floor} o={win(f, tCm, tNHC - 20)} />
-        <Lbl x={MX} y={645} t="75 cm: small next to 3-4.5 m" c={C.muted} s={T.floor} o={win(f, tNHC + 40, tFM - 10)} />{/* #5b r2 S8: under the 1013 / 938 tag */}
-        {/* #5b r2 S8: both pressures named */}
-        <Lbl x={MX} y={528} t="1013 hPa: normal at sea level" c={C.local} s={T.floor} o={win(f, tIanC, tFM - 10)} />
-        <Lbl x={MX} y={583} t="938 hPa: Ian's centre (official)" c={C.local} s={T.floor} o={win(f, tIanC + 12, tFM - 10)} />{/* #5b r1 S18: under its input row */}
-        <Lbl x={MX} y={312} t="4.57 m ≈ 4.5 m (nearest half metre)" c={C.muted} s={T.floor} o={win(f, tNHC + 30, tFM - 10)} />
-        <Keyword f={f} text="official: 3-4.5 m above ground" at={[MX, 120]} s={T.floor} c={C.local} appear={tNHC} out={tNorth - 20} />{/* #5b r2 S8: no "NHC" (named in full on the source line) */}
-        <g opacity={fin(f, tFM)}><Gauges A={GAx} f={f} tF={tFM} tS={tStP} land={false} labels={false} /></g>
-        <Lbl x={MX} y={230} t={`Fort Myers (upriver) ≈ +${CST.gauges["8725520"].ext.toFixed(1)} m`} c={C.second} s={T.floor} o={win(f, tFM + 30, tEk - 20)} />{/* lint-ok: m is the unit metre */}
-        <Keyword f={f} text={`≈ ${Math.round(CST.d_fs)} km north: Tampa Bay`} at={[MX, 120]} s={T.floor} appear={tNorth} out={tFlip - 20} />
-        <Lbl x={MX} y={300} t="wind blows out to sea" c={C.key} s={T.floor} o={win(f, tOut, tEk - 20)} />
-        <Lbl x={MX} y={370} t={`Saint Petersburg ≈ ${nf(CST.gauges["8726520"].ext, 1)} m`} c="#8db5e2" s={T.floor} o={win(f, tStP + 30, tEk - 20)} />{/* lint-ok: m is the unit metre */}
-        <Keyword f={f} text="the surge flips" at={[MX, 120]} s={T.key} c={C.gold} appear={tFlip} out={tEk - 20} />
-        <Keyword f={f} text="more: Friction and Ekman layers" at={[MX, 120]} s={T.floor} appear={tEk} out={tMore - 20} />
-        <Keyword f={f} text="more: Storm surge" at={[MX, 120]} s={T.floor} appear={tMore} />
-        <SpeedBar x={770} y={90} w={180} hi={50} />{/* #5b r1 (as S16): its "m/s" ended 10 px before the keyword */}
-      </Svg>
-      {/* fix 0 B25b: Ian's number for the inverted barometer; B25c: the feet-to-metres factor */}
-      <TeX s={String.raw`1013-${(D.s17 as { best: number }).best}=75\ \mathrm{hPa}\ \Rightarrow\ \approx75\ \mathrm{cm}`} x={MX} y={465} size={46} c={C.local} o={win(f, AT(k, 3, "Ian's centre"), tFM - 10)} />
-      {/* #5b r1 S18: where "1 cm per hPa" comes from: 1 hPa = 100 Pa of pressure holds up 100 / (ρ g) metres of sea water */}
-      <TeX s={String.raw`\dfrac{100\ \mathrm{Pa}}{1025\ \mathrm{kg/m^3}\times9.81\ \mathrm{m/s^2}}\approx0.01\ \mathrm m`} x={MX} y={365} size={44} c={C.local} o={win(f, AT(k, 3, "for every hectopascal"), tNHC - 20)} />
-      {/* K6 round 1: the feet → metres row ran to x 1943: ten and fifteen feet on two lines. #5b r1 S18: with units; 4.57, as the data */}
-      <TeX s={String.raw`10\ \mathrm{ft}\times0.3048\ \mathrm{m/ft}\approx3.0\ \mathrm m`} x={MX} y={195} size={46} c={C.local} o={win(f, tNHC + 10, tFM - 10)} />
-      <TeX s={String.raw`15\ \mathrm{ft}\times0.3048\ \mathrm{m/ft}\approx4.57\ \mathrm m`} x={MX} y={252} size={46} c={C.local} o={win(f, tNHC + 25, tFM - 10)} />
-      <SourceBelow text={SRC.surge.replace("NHC report", "NHC (US National Hurricane Center) report")} pic={Bx} w={1640} name="s27 src" />{/* #5b r2 S8 */}
-    </Scene>
-  );
-};
-
-// ================================================================ s28 Ian: no satellite saw the surge; the gauges are its record
-const S28: React.FC = () => {
-  const f = useCurrentFrame(), k = K("s28_ian_record");
-  const tNo = SS(k, 1), tGauge = SS(k, 3), tLines = SS(k, 4), tMeas = SS(k, 5);
-  // K6 round 1 (relayout): chart 160-760 with two-line end labels right of it (to x ≈ 1200); the notes at x 1120 above the map (y ≤ 278);
-  // the map 1500-1820 × 300-720 with Fort Myers named inside it and Saint Petersburg left of it (a leader to its dot); the colour bar
-  // under the map. Before: the end labels ran over the map, the notes and the colour bar; the map's names straddled its edge.
-  const A = GA(160, 300, 600, 400);
-  const LB = coastMap(28.4, 300, 420);
-  const Lx: MapBox = { ...LB, x: 1500 };
-  const P = mapP(Lx), fm = P(CST.gauges["8725520"].lat, CST.gauges["8725520"].lon), sp = P(CST.gauges["8726520"].lat, CST.gauges["8726520"].lon);
-  const spL: Pt = [Lx.x - 16, sp[1] + 44];                   // the Saint Petersburg name: right end, outside the map
-  return (
-    <Scene>
-      <Svg>
-        <Gauges A={A} f={f} tF={tLines} tS={AT(k, 4, "drops")} />
-        <Keyword f={f} text="what did satellites see?" at={[220, 100]} s={T.key} appear={0} out={tNo - 20} />
-        <Keyword f={f} text="no satellite saw the surge itself" at={[220, 100]} s={T.key} appear={tNo} />
-        <Keyword f={f} text="the surge, measured" at={[220, 180]} s={T.key} c={C.gold} appear={tMeas} />
-        <Lbl x={1120} y={150} t="tide gauges, every 6 min" c={C.key} s={T.floor} o={fin(f, tGauge)} />
-        {/* #5b r2 S9: no "NHC" and no "datum": the beach report measured height above the ground, the gauges height above the tide */}
-        <Lbl x={1120} y={210} t="Fort Myers Beach: 3-4.5 m" c={C.local} s={T.floor} o={fin(f, tLines)} />
-        <Lbl x={1120} y={260} t="above the ground, not the tide" c={C.local} s={T.floor} o={fin(f, tLines)} />
-        <SpeedBar x={1500} y={790} w={230} hi={50} />
-      </Svg>
-      <GeoMap id="s28m" B={Lx}>{(Pp) => <CoastBody P={Pp} f={f} />}</GeoMap>
-      <Svg>
-        <Place p={fm} t="Fort Myers" dx={-30} dy={-40} a="middle" />
-        <Place p={sp} t="Saint Petersburg" r={11} dx={spL[0] - sp[0]} dy={spL[1] - sp[1]} a="end" />{/* fix 0 B25d: as the voice and the chart say */}
-        <line x1={spL[0] + 6} y1={spL[1] - 8} x2={sp[0] - 12} y2={sp[1] + 6} stroke={C.key} strokeWidth={2.5} opacity={0.8} />
-      </Svg>
-      <SourceBelow text={SRC.surge} pic={{ x: 160, y: 300, w: 640, h: 520 }} w={1400} name="s28 src" />
-    </Scene>
-  );
-};
-
 // ================================================================ s29 the flight to Amphan's shelf and landfall (flood_visuals §v3: Amphan keeps the flight)
 const S29: React.FC = () => {
-  const f = useCurrentFrame(), k = K("s29_flood_flight");
+  const f = useCurrentFrame(), k = K("s32_flood_flight");
   const tFly = SS(k, 1), tBlue = SS(k, 2), tLines = SS(k, 3), tDeep = AT(k, 3, "two hundred"), tShelf = SS(k, 4), tPile = SS(k, 5), tTrack = SS(k, 6), t20 = AT(k, 6, "twentieth");
   const keys = [
     { f: 0, lat: 18, lon: 60, dist: G_DIST0, pp: G_PP0 },
@@ -699,7 +567,7 @@ const CHECK_U1: [string, number, number, number][] = [
 ];
 CHECK_U1.forEach(([n, v, r, tol]) => { if (!(Math.abs(v - r) <= tol)) throw new Error(`CHECK ${n}: data ${v} vs screen ${r}`); });
 const S30: React.FC = () => {
-  const f = useCurrentFrame(), k = K("s30_amphan_radar");
+  const f = useCurrentFrame(), k = K("s34_amphan_radar");
   // notes 2 S5: S8 "We count the pixels …", S9 the pixel area, S10 the product, S11 the square (was S9)
   const tCloud = SS(k, 1), tSmall = SS(k, 2), tRadar = SS(k, 3), tSend = SS(k, 4), tMirror = SS(k, 5), tHere = SS(k, 6), tSweep = SS(k, 7), tKm2 = SS(k, 8),
     tProd = SS(k, 10), tSq = SS(k, 11);
@@ -802,7 +670,7 @@ const MON = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct
 const dayOf = (t: string) => `${Number(t.slice(8, 10))} ${MON[Number(t.slice(5, 7)) - 1]} ${t.slice(0, 4)}, ${t.slice(11, 13)} UTC`;
 const NTR = (NG.track as [string, number, number, number | null][]);
 const S31: React.FC = () => {
-  const f = useCurrentFrame(), k = K("s31_nargis_intro");
+  const f = useCurrentFrame(), k = K("s35_nargis_intro");
   // notes 2 S2: S7 (× 1.852 → km/h) and S8 (why ÷ 3.6 → m/s) are new; later sentences +2
   const tGo = SS(k, 1), tRiver = SS(k, 2), tDelta = SS(k, 3), tForm = SS(k, 4), tPath = SS(k, 5), tLand = SS(k, 6), tCross = SS(k, 9), tPic = SS(k, 10), tFlood = SS(k, 11),
     tZoom = SS(k, 12);
@@ -913,7 +781,7 @@ const S31: React.FC = () => {
 
 // ================================================================ s32 the Nargis before/after: natural colour first, then false colour 7-2-1 (user notes item 8)
 const S32: React.FC = () => {
-  const f = useCurrentFrame(), k = K("s32_nargis_swipe");
+  const f = useCurrentFrame(), k = K("s37_nargis_swipe");
   const tL = SS(k, 1), tR = SS(k, 2), tLook = SS(k, 3), tBrown = SS(k, 4), tFalse = SS(k, 5), tBands = SS(k, 6), tKey = SS(k, 7), tSoak = SS(k, 8), tSpot = SS(k, 9),
     tSame = SS(k, 10), tG2 = AT(k, 11, "line glides"), tPin = SS(k, 12), tLeft = SS(k, 13);
   const box = NAR.crop_wsen as number[];
@@ -983,7 +851,7 @@ const S32: React.FC = () => {
 const ID = D.idai;
 const ITR = (ID.track as [string, number, number, number | null][]);
 const S33: React.FC = () => {
-  const f = useCurrentFrame(), k = K("s33_idai_intro");
+  const f = useCurrentFrame(), k = K("s38_idai_intro");
   // notes 2 S2: S5 (× 1.852) and S6 (÷ 3.6) are new; later sentences +2
   const tYear = SS(k, 1), tCw = SS(k, 2), tPic = SS(k, 3), tLand = SS(k, 4), tBeira = SS(k, 7), tZoom = SS(k, 8);
   const crop = ID.crop_wsen as number[], vb = ID.viirs_box as number[];
@@ -1073,7 +941,7 @@ const S33: React.FC = () => {
 
 // ================================================================ s34 the Idai before/after: natural colour, then false colour 7-2-1
 const S34: React.FC = () => {
-  const f = useCurrentFrame(), k = K("s34_idai_swipe");
+  const f = useCurrentFrame(), k = K("s40_idai_swipe");
   const tAgain = SS(k, 1), tSame = SS(k, 2), tWater = SS(k, 3), tCloud = SS(k, 4), tMore = SS(k, 5);
   const box = ID.crop_wsen as number[];
   // the Idai box is taller than wide (0.85° × 1.15° at 19.8 S): fixed height 720 px, width from the true local shape
@@ -1112,11 +980,11 @@ const S34: React.FC = () => {
 
 // ================================================================ s35 recap (one beat per sentence, mini pictures)
 const S35: React.FC = () => {
-  const f = useCurrentFrame(), k = K("s35_recap");
+  const f = useCurrentFrame(), k = K("s41_recap");
   const t = (j: number) => SS(k, j);
   // #5b r1 S23 (D3): each recap keyword at full strength to the END of its sentence; the next one starts 18 frames after that
   const kIn = (j: number) => (j === 0 ? 0 : Math.max(t(j), SE(k, j - 1) + 18)), kOut = (j: number) => SE(k, j);
-  const beat = (j: number, o2 = 1) => win(f, t(j), j < 10 ? t(j + 1) - 8 : LEN(k) + 20) * o2;
+  const beat = (j: number, o2 = 1) => win(f, t(j), j < 13 ? t(j + 1) - 8 : LEN(k) + 20) * o2;
   const c: Pt = [520, 450];
   return (
     <Scene>
@@ -1150,17 +1018,36 @@ const S35: React.FC = () => {
           <image href={IMG("cst_sec_amphan.png")} x={560} y={200} width={400} height={300} preserveAspectRatio="none" />
           <URBar x={300} y={560} w={420} title={false} />
         </g>
-        <g opacity={beat(7) + beat(8)}>
-          <Gauges A={GA(200, 250, 720, 380)} f={f} tF={t(7)} tS={t(7) + 20} land={false} labels={false} />
+        {/* remake 2026-11-07 (R3): the coast block's numbers in the recap: turned axes (S7), the two stations and their gauges (S8-S9),
+            the three events' across-shore winds (S10), the floods (S11), Part 3 (S12-S13) */}
+        <g opacity={beat(7)}>
+          <line x1={180} y1={640} x2={860} y2={260} stroke={C.key} strokeWidth={5} />
+          <Arrow p={[520, 450]} q={[520 + 0.87 * 200, 450 - 0.49 * 200]} color={C.second} w={9} head={32} />
+          <Arrow p={[520, 450]} q={[520 - 0.49 * 200, 450 - 0.87 * 200]} color={C.second} w={9} head={32} />
+          <Lbl x={760} y={250} t="along" c={C.local} s={T.floor} />
+          <Lbl x={420} y={250} t="across" c={C.first} s={T.floor} a="end" />
+          <Lbl x={300} y={300} t="sea" c="#8db5e2" s={T.key} />
+          <Lbl x={720} y={600} t="land" c="#c9b48a" s={T.key} />
+        </g>
+        <g opacity={beat(8) + beat(9)}>
+          <Gauges A={GA(200, 250, 720, 380)} f={f} tF={t(8)} tS={t(9)} land={false} labels={false} />
+        </g>
+        <g opacity={beat(10)}>
+          {(["amphan", "nargis", "idai"] as const).map((n, i) => { const v = (D.shore[n].shown.across as number), y = 230 + i * 190;
+            return <g key={n}><Lbl x={140} y={y} t={["Amphan · 2020", "Nargis · 2008", "Idai · 2019"][i]} c={C.key} s={T.key} />
+              <rect x={880} y={y - 30} width={70} height={130} fill="#6b5a3e" />
+              <Arrow p={[870 - 13 * Math.abs(v), y + 70]} q={[870, y + 70]} color={C.neg} w={10} head={32} />
+              <Lbl x={560} y={y + 10} t={`across ${nf(v, 1)} m/s`} c={C.neg} s={T.floor} /></g>; })}
+          <Lbl x={915} y={170} t="land" c="#c9b48a" s={T.floor} a="middle" />
         </g>
         {/* user notes 2026-11-06 item 12: the three flood events, in the order the movie showed them */}
-        <g opacity={beat(9)}>
+        <g opacity={beat(11)}>
           {[["cst_amphan_s1_after.jpg", "Amphan · radar"], ["cst_swipe_after.jpg", "Nargis · 7-2-1"], ["cst_idai_721_after.jpg", "Idai · 7-2-1"]].map(([h, t], i) => <g key={t}>
             <image href={IMG(h as "cst_swipe_after.jpg")} x={110} y={150 + i * 205} width={300} height={170} preserveAspectRatio="xMidYMid slice" />
             <rect x={110} y={150 + i * 205} width={300} height={170} fill="none" stroke={C.grid} strokeWidth={3} />
             <Lbl x={440} y={235 + i * 205} t={t} c={C.key} s={T.floor} /></g>)}
         </g>
-        <g opacity={beat(10)}>
+        <g opacity={beat(12) + beat(13)}>
           <circle cx={c[0]} cy={c[1]} r={250} fill="#21406e" stroke={C.local} strokeWidth={4} />
           <ellipse cx={c[0]} cy={c[1]} rx={250} ry={70} fill="none" stroke={C.local} strokeWidth={2} />
           <ellipse cx={c[0]} cy={c[1]} rx={90} ry={250} fill="none" stroke={C.local} strokeWidth={2} />
@@ -1172,25 +1059,31 @@ const S35: React.FC = () => {
         <Keyword f={f} text="$v/r\ \cdot\ v\,\hat{\boldsymbol\theta}\ \cdot\ -(v^2/r)\,\hat{\mathbf r}$" at={[MX, 120]} s={T.key} appear={kIn(4)} out={kOut(4)} />
         <Keyword f={f} text="0.048 $\mathrm{m/s^2}$ ≈ g/200" at={[MX, 120]} s={T.key} appear={kIn(5)} out={kOut(5)} />
         <Keyword f={f} text="$(r,\ \theta,\ z)$: in, up and out" at={[MX, 120]} s={T.key} appear={kIn(6)} out={kOut(6)} />
-        <Keyword f={f} text="onshore wind → storm surge" at={[MX, 120]} s={T.key} appear={kIn(7)} out={kOut(7)} />
-        <Keyword f={f} text="tide gauges: Ian's surge" at={[MX, 120]} s={T.key} appear={kIn(8)} out={kOut(8)} />
-        <Keyword f={f} text="floods from space" at={[MX, 120]} s={T.key} appear={kIn(9)} out={kOut(9)} />
-        <Keyword f={f} text="Part 3: the Earth" at={[MX, 120]} s={T.key} appear={kIn(10)} />
+        <Keyword f={f} text="turned axes: along · across" at={[MX, 120]} s={T.key} appear={kIn(7)} out={kOut(7)} />
+        <Keyword f={f} text={`Fort Myers Beach: ${nf(D.shore.fmb.shown.across, 1)} m/s`} at={[MX, 120]} s={T.floor} c={C.neg} appear={kIn(8)} out={kOut(8)} />
+        <Lbl x={MX} y={200} t={`gauge: ≈ +${CST.gauges["8725520"].ext.toFixed(1)} m`} c={C.second} s={T.floor} o={win(f, kIn(8) + 10, kOut(8))} />{/* lint-ok: m is the unit metre */}
+        <Keyword f={f} text={`Saint Petersburg: ${nf(D.shore.stp.shown.across, 1, true)} m/s`} at={[MX, 120]} s={T.floor} c={C.first} appear={kIn(9)} out={kOut(9)} />
+        <Lbl x={MX} y={200} t={`gauge: ≈ ${nf(CST.gauges["8726520"].ext, 1)} m`} c="#8db5e2" s={T.floor} o={win(f, kIn(9) + 10, kOut(9))} />{/* lint-ok: m is the unit metre */}
+        <Keyword f={f} text="onto the land before each flood" at={[MX, 120]} s={T.floor} appear={kIn(10)} out={kOut(10)} />
+        <Keyword f={f} text="floods from space" at={[MX, 120]} s={T.key} appear={kIn(11)} out={kOut(11)} />
+        <Keyword f={f} text="Part 3: the Earth" at={[MX, 120]} s={T.key} appear={kIn(12)} />
+        <Lbl x={MX} y={210} t="latitude, longitude → km" c={C.key} s={T.floor} o={fin(f, kIn(13))} />
       </Svg>
       <TeX s={String.raw`\Delta\theta\ \text{along}\ \hat{\boldsymbol\theta}`} x={MX} y={300} size={T.calc} o={beat(0)} />
       <TeX s={String.raw`\dfrac{d\hat{\mathbf r}}{d\theta}=\hat{\boldsymbol\theta},\qquad \dfrac{d\hat{\boldsymbol\theta}}{d\theta}=-\hat{\mathbf r}`} x={MX} y={320} size={48} o={beat(2)} />
       <TeX s={String.raw`\mathbf a=-\dfrac{v^2}{r}\,\hat{\mathbf r}`} x={MX} y={330} size={T.eq} o={beat(4) + beat(5)} />
       {/* K6 round 1: the picture box now includes the colour bar's "− in / + out" (the credit sat on them) */}
       <SourceBelow text="Data: NOAA HRRR · ERA5 (Copernicus C3S)" pic={{ x: 120, y: 200, w: 840, h: 510 }} w={840} o={beat(6)} name="s31 src 1" />
-      <SourceBelow text="Data: NOAA CO-OPS gauges · 27-29 Sep 2022" pic={{ x: 120, y: 250, w: 840, h: 480 }} w={840} o={beat(7) + beat(8)} name="s31 src 2" />
-      <SourceBelow text="Data: ESA Copernicus Sentinel-1 · NASA MODIS via Google Earth Engine" pic={{ x: 110, y: 150, w: 840, h: 580 }} w={840} o={beat(9)} name="s35 src 3" />
+      <SourceBelow text="Data: NOAA CO-OPS gauges · 27-29 Sep 2022" pic={{ x: 120, y: 250, w: 840, h: 480 }} w={840} o={beat(8) + beat(9)} name="s31 src 2" />
+      <SourceBelow text="Data: ERA5 (Copernicus C3S) · 10-m wind at landfall" pic={{ x: 120, y: 160, w: 840, h: 600 }} w={840} o={beat(10)} name="s41 src era5" />
+      <SourceBelow text="Data: ESA Copernicus Sentinel-1 · NASA MODIS via Google Earth Engine" pic={{ x: 110, y: 150, w: 840, h: 580 }} w={840} o={beat(11)} name="s35 src 3" />
     </Scene>
   );
 };
 
 // ================================================================ s36 the series end card (maths ending, word for word)
 const S36: React.FC = () => {
-  const f = useCurrentFrame(), k = K("s36_end");
+  const f = useCurrentFrame(), k = K("s42_end");
   const t2 = SS(k, 2), tOther = AT(k, 2, "and the notebooks");
   const thumb = (x: number, i: number) => (
     <g key={i} opacity={0.75}>
@@ -1213,7 +1106,7 @@ const S36: React.FC = () => {
   rel.forEach((s2, i) => { if (COLX[Math.floor(i / 5)] + textW(s2, T.floor) > (COLX[Math.floor(i / 5) + 1] ?? 1840) - 10) throw new Error(`end card: "${s2}" too wide`); });
   return (
     <Scene>
-      <Svg>
+      <Svg o={1 - ramp(f, LEN(k) - HOLD, LEN(k) - 4)}>
         <g opacity={fin(f, 6)}>{[420, 760, 1100, 1440].map((x, i) => thumb(x, i))}</g>
         <Lbl x={960} y={315} t="a series of maths tutorials" c={C.key} s={T.calc} a="middle" o={fin(f, 10)} />
         <Lbl x={960} y={395} t="atmospheric science · meteorology · fluid dynamics" c={C.key} s={T.key} a="middle" o={fin(f, AT(k, 1, "atmospheric science"))} />
@@ -1231,9 +1124,9 @@ const S36: React.FC = () => {
 };
 
 export const SCENES_C: Record<string, React.FC> = {
-  s21_amphan_intro: S21, s22_amphan_eye: S22, s23_amphan_ring: S23, s24_amphan_curtain: S24, s25_why_cylindrical: S25, s26_onshore: S26, s27_surge: S27,
-  s28_ian_record: S28, s29_flood_flight: S29, s30_amphan_radar: S30, s31_nargis_intro: S31, s32_nargis_swipe: S32, s33_idai_intro: S33, s34_idai_swipe: S34,
-  s35_recap: S35, s36_end: S36,
+  s21_amphan_intro: S21, s22_amphan_eye: S22, s23_amphan_ring: S23, s24_amphan_curtain: S24, s25_why_cylindrical: S25, 
+  s32_flood_flight: S29, s34_amphan_radar: S30, s35_nargis_intro: S31, s37_nargis_swipe: S32, s38_idai_intro: S33, s40_idai_swipe: S34,
+  s41_recap: S35, s42_end: S36,
 };
 void [ColourBar, mix, poly, STK, SEC, Cross];
 

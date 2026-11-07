@@ -421,12 +421,201 @@ def notes2_patch(publics: list[Path]) -> int:
     return 0
 
 
+# ------------------------------------------------------------------------------------------------ remake 2026-11-07 (master plan R13/R14/R14b)
+# The coast block (Part 1's turned axes applied to the wind) and one across-shore calculation per flood event. Inputs: the HRRR 20 UTC
+# winds already in cs.json (Ian), ERA5 hourly files on G: (Amphan 09 UTC, Nargis 11 UTC, Idai 19 UTC; registry ERA5-ARCO-amphan2020,
+# -nargis2008, -idai2019), IBTrACS rows (pressure), Natural Earth 10 m coast. Every number on screen is computed here from the SHOWN
+# (rounded) inputs, so the on-screen arithmetic is exact as written, and asserted against the library value (fluidpy.data.movie_shore).
+STP_COAST = ((27.660, -82.719), (28.161, -82.788))      # St Pete Beach -> Tarpon Springs (Pinellas Gulf coast; data report, measured on NE 10 m)
+EV = {  # event: ERA5 file, hour, coastal point, coast points (along axis from -> to), map box (lat0, lat1, lon0, lon1), best-track pressure row
+    "amphan": {"raw": RAWD / "ERA5-ARCO" / "era5_amphan_u10-v10-msl_2020-05-20T09_2020-05-20T15_1h.nc", "time": "2020-05-20T09:00",
+               "pt": (21.644, 89.229), "A": (21.765, 89.690), "B": (21.568, 88.791), "box": (20.0, 23.5, 87.0, 91.0),
+               "bt": {"time": "2020-05-20 09:00", "agency": "IMD (RSMC New Delhi), 3-min", "hpa": 960.0, "kt": 90.0}},
+    "nargis": {"raw": RAWD / "ERA5-ARCO" / "era5_nargis_u10-v10-msl_2008-05-01T12_2008-05-03T00_1h.nc", "time": "2008-05-02T11:00",
+               "pt": (15.778, 95.174), "A": (15.715, 95.374), "B": (15.812, 94.725), "box": (14.5, 17.6, 93.0, 97.0),
+               "bt": {"time": "2008-05-02 12:00", "agency": "IMD (RSMC New Delhi), 3-min", "hpa": 962.0, "kt": 90.0}},
+    "idai": {"raw": RAWD / "ERA5-ARCO" / "era5_idai_2019_u10-v10-msl_2019-03-11T00_2019-03-15T23_1h.nc", "time": "2019-03-14T19:00",
+             "pt": (-19.829, 34.935), "A": (-19.521, 35.340), "B": (-19.844, 34.840), "box": (-21.4, -18.2, 33.6, 37.0),
+             "bt": {"time": "2019-03-14 18:00", "agency": "RSMC La Réunion, 10-min", "hpa": 955.0, "kt": 82.0}},
+}
+F_SHORE = Path("G:/Geophysical Fluid Dynamics/aofd-data/derived/ch00/coord_storm_shore_winds.json")
+
+
+def shown_calc(ax: dict, u: float, v: float, legs_nd: int = 1) -> dict:
+    """The on-screen arithmetic of the coast block: inputs rounded as shown (u, v to 0.1 m/s; α to 1°; cos, sin to 3 decimals; legs to
+    0.1 km), each product rounded to 0.1, results = the sums of the shown terms (so every written line adds up exactly)."""
+    r1 = lambda x: float(np.round(x, 1))  # noqa: E731
+    dy, dx = round(ax["dy_km"], legs_nd), round(ax["dx_km"], legs_nd)
+    a_r = int(round(ax["alpha"])) % 360
+    b_r = int(round(ax["bearing"])) % 360
+    c, s = round(float(np.cos(np.deg2rad(a_r))), 3), round(float(np.sin(np.deg2rad(a_r))), 3)
+    uu, vv = r1(u), r1(v)
+    al1, al2 = r1(uu * c), r1(vv * s)
+    ac1, ac2 = r1(-uu * s), r1(vv * c)
+    al, ac = r1(al1 + al2), r1(ac1 + ac2)
+    big, small = (abs(dy), abs(dx)) if abs(dy) >= abs(dx) else (abs(dx), abs(dy))
+    tan_ = round(small / big, 3)
+    beta = int(round(float(np.rad2deg(np.arctan(small / big)))))
+    sq = round(al * al + ac * ac)
+    return {"dy": dy, "dx": dx, "tan": tan_, "beta": beta, "bearing": b_r, "alpha": a_r, "alpha_raw": (90 - b_r), "cos": c, "sin": s, "u": uu, "v": vv,
+            "al_terms": [al1, al2], "along": al, "ac_terms": [ac1, ac2], "across": ac, "sq": sq, "root": round(float(np.sqrt(sq)), 1),
+            "speed": r1(float(np.hypot(u, v)))}
+
+
+def remake1107_patch(publics: list[Path]) -> int:
+    """remake 2026-11-07 fast path: add cs.json → shore (Ian FMB/StP + Amphan/Nargis/Idai) from fluidpy.data.movie_shore on the same
+    inputs as the derived product, the ERA5 speed maps + arrows for the three event wind maps, the DS40-DS47 CHECK rows, the parity
+    entries, and the manifest's credit fixes (author order, ERA5 credit lines)."""
+    import fluidpy.data.movie_shore as MS
+    from fluidpy.data.era5_arco import open_box, storm_centre
+    from scipy.ndimage import zoom as ndzoom
+    V = json.loads((DATA / "cs.json").read_text(encoding="utf-8"))
+    M = json.loads((OUT / "manifest.json").read_text(encoding="utf-8"))
+    P = json.loads(F_SHORE.read_text(encoding="utf-8"))["events"]
+    rows: list[dict] = []
+    ents: list[dict] = []
+
+    def row(wid, name, val, ref, tol):
+        v, r = np.asarray(val, dtype=float), np.asarray(ref, dtype=float)
+        ok = bool(np.all(np.abs(v - r) <= np.asarray(tol)))
+        rows.append({"id": wid, "name": name, "value": B1.r6(np.ravel(v)[:12]), "ref": B1.r6(np.ravel(r)[:12]), "tol": tol, "pass": ok, "kind": "check"})
+
+    def call(fn, scene, eq, **params):
+        out = getattr(MS, fn)(**params)
+        ents.append({"fn": "fluidpy.data.movie_shore." + fn, "scene": scene, "data": "data/cs.json", "eq": eq,
+                     "params": {k: (list(v) if isinstance(v, tuple) else v) for k, v in params.items()}, "sha256": B1.parity_hash(out)})
+        return out
+
+    coast = [p for _, ps in B1.shp_parts(B1.F_NE10C) for p in ps]
+    SH: dict = {}
+    # ---- Ian: Fort Myers Beach (Naples -> Englewood) and St. Petersburg (Pinellas Gulf coast), HRRR 20 UTC
+    C0 = V["coast"]
+    for key, (A, B), uv, sc in (("fmb", (NAPLES, ENGLEWOOD), C0["uF"], "s27-s28"), ("stp", STP_COAST, C0["uS"], "s29")):
+        ax = call("coast_axes", sc, "km legs dy = a dφ, dx = a cos φ dλ; bearing = atan2(dx, dy); α = 90° − bearing", p_from=list(A), p_to=list(B))
+        w = call("shore_components", sc, "along = u cos α + v sin α, across = −u sin α + v cos α", u=float(uv[0]), v=float(uv[1]), bearing=ax["bearing"])
+        S = shown_calc(ax, uv[0], uv[1])
+        pj = P["ian"]["stations"]["fort_myers_beach" if key == "fmb" else "st_petersburg"]["wind"]
+        SH[key] = {"A": list(A), "B": list(B), "axes": ax, "wind": w, "shown": S}
+        row("DS40" if key == "fmb" else "DS41", f"{key}: library along/across = derived product (coord_storm_shore_winds.json)", [w["along"], w["across"]], [pj["along"], pj["across"]], 1e-9)
+        row("DS40" if key == "fmb" else "DS41", f"{key}: shown sums = library within 0.15 m/s (rounding of the shown inputs)", [S["along"], S["across"]], [w["along"], w["across"]], 0.15)
+        row("DS40" if key == "fmb" else "DS41", f"{key}: shown α = 90 − shown bearing (mod 360), α = library α to 0.5°", [S["alpha"], S["alpha"]], [(90 - S["bearing"]) % 360, ax["alpha"]], [0, 0.5])
+    S = SH["fmb"]["shown"]
+    row("DS40", "fmb shown numbers (plan B2/B3): legs 91.5 N / 55.0 W, tan 0.601, 31°, 329°, α 121°, cos −0.515, sin 0.857, along 9.4, across −31.5",
+        [S["dy"], -S["dx"], S["tan"], S["beta"], S["bearing"], S["alpha"], S["cos"], S["sin"], S["along"], S["across"]],
+        [91.5, 55.0, 0.601, 31, 329, 121, -0.515, 0.857, 9.4, -31.5], 1e-9)
+    row("DS40", "fmb: the check √(along² + across²) of the shown values ≈ the speed 32.9 (≈ 33)", [S["root"]], [S["speed"]], 0.1)
+    S = SH["stp"]["shown"]
+    row("DS41", "stp shown: legs 55.7 N / 6.8 W, 7°, 353°, α 97°, cos −0.122, sin 0.993, across +12.1 (out to sea), along −14.7",
+        [S["dy"], -S["dx"], S["beta"], S["bearing"], S["alpha"], S["cos"], S["sin"], S["across"], S["along"]], [55.7, 6.8, 7, 353, 97, -0.122, 0.993, 12.1, -14.7], 1e-9)
+    SH["fmb"]["seaward"] = call("seaward_check", "s27", "ŷ′ points to the sea (20 km along ŷ′ is sea, along −ŷ′ land)", lat=26.45, lon=-81.95, yp=SH["fmb"]["axes"]["yp"])
+    SH["stp"]["seaward"] = call("seaward_check", "s29", "ŷ′ points to the sea", lat=27.76, lon=-82.83, yp=SH["stp"]["axes"]["yp"])
+    row("DS42", "ŷ′ points to the sea at both Florida stations (Natural Earth 1:50m land)", [SH["fmb"]["seaward"]["sea_side_is_sea"], SH["stp"]["seaward"]["sea_side_is_sea"]], [1, 1], 0)
+    # local flat km map of the Florida coast (origin Naples): x = a cos φ̄ Δλ, y = a Δφ (the same rule as the library's legs)
+    lat_m = 0.5 * (NAPLES[0] + ENGLEWOOD[0])
+    km = lambda p: [round(float(np.deg2rad(p[1] - NAPLES[1]) * 6371.0 * np.cos(np.deg2rad(lat_m))), 2), round(float(np.deg2rad(p[0] - NAPLES[0]) * 6371.0), 2)]  # noqa: E731
+    SH["kmmap"] = {"origin": list(NAPLES), "lat_mean": lat_m, "englewood": km(ENGLEWOOD), "fmb": km(FMB), "note": "local flat km map (Part 3 shows the rule)"}
+    row("DS42", "km map: Englewood sits (−55.0, +91.5) km from Naples", SH["kmmap"]["englewood"], [-55.0, 91.5], 0.06)
+    # Ian's centre at landfall (IBTrACS USA 19:05 UTC): 941 hPa -> 72 cm
+    bt = [r_ for r_ in P["ian"]["best_track_landfall"] if r_["time"].startswith("2022-09-28 19:05")][0]
+    ib = call("inverse_barometer", "s30", "Δη = (1013 hPa − p)/(ρ g) ≈ 1 cm per hPa", p_hpa=bt["usa_pres_hpa"])
+    SH["ian_ib"] = {"time": bt["time"], "hpa": bt["usa_pres_hpa"], "deficit": ib["deficit_hpa"], "cm_rule": ib["rise_cm_rule"], "cm_exact": ib["rise_cm_exact"],
+                    "src": "IBTrACS v04r01 (USA agency = NHC), landfall 19:05 UTC 28 Sep 2022"}
+    row("DS43", "Ian landfall 941 hPa → 72 hPa below 1013 → ≈ 72 cm (exact 71.6)", [ib["deficit_hpa"], round(ib["rise_cm_exact"])], [72, 72], 0)
+    # ---- the three flood events (ERA5)
+    for nm, E in EV.items():
+        ax = call("coast_axes", nm, "coast legs, bearing, α", p_from=list(E["A"]), p_to=list(E["B"]))
+        ev = call("era5_event", nm, "hourly along/across at the nearest sea grid point", raw=str(E["raw"]), coast_pt=list(E["pt"]), axes=ax, times=[E["time"]])
+        h = ev["hours"][0]
+        S = shown_calc(ax, h["u"], h["v"])
+        ib = call("inverse_barometer", nm, "Δη ≈ 1 cm per hPa", p_hpa=E["bt"]["hpa"])
+        pj = P[nm]["chosen"]
+        row("DS44", f"{nm}: library across = derived product; shown sum within 0.15", [h["across"], S["across"]], [pj["across"], h["across"]], [1e-9, 0.15])
+        row("DS44", f"{nm}: shown α = 90 − shown bearing (mod 360) = library α to 0.5°; across < 0 (onto the land); ŷ′ seaward",
+            [S["alpha"], S["alpha"], float(S["across"] < 0), float(P[nm]["seaward"]["sea_side_is_sea"])], [(90 - S["bearing"]) % 360, ax["alpha"], 1, 1], [0, 0.5, 0, 0])
+        ratio = P[nm]["era5_vs_best_track"]["era5_fraction_of_regional_best"]
+        # the wind map: ERA5 10-m speed at the chosen hour over the map box (×8 bilinear, pixels only) + arrows every 0.5°
+        ds = open_box(E["raw"]).sel(time=np.datetime64(E["time"]))
+        la, lo = ds.lat.values, ds.lon.values
+        b = E["box"]
+        mi = np.where((la >= b[0] - 1e-6) & (la <= b[1] + 1e-6))[0]
+        mj = np.where((lo >= b[2] - 1e-6) & (lo <= b[3] + 1e-6))[0]
+        U, Vv = ds.u10.values[np.ix_(mi, mj)], ds.v10.values[np.ix_(mi, mj)]
+        sp = np.hypot(U, Vv)
+        fine = ndzoom(sp[::-1], 8, order=1)
+        png_rgba(colour(fine, B1.lut_rgb(SPEED_LUT), 0, 30), None, IMG / f"{nm}_wind.png")
+        step = max(1, int(round(0.5 / abs(la[1] - la[0]))))
+        arrows = [[float(la[mi][j]), float(lo[mj][i]), round(float(U[j, i]), 2), round(float(Vv[j, i]), 2)]
+                  for j in range(0, len(mi), step) for i in range(0, len(mj), step)]
+        cl, co, pm = storm_centre(ds.msl.values[None], la, lo)
+        half = 0.125
+        SH[nm] = {"time": E["time"], "pt": list(E["pt"]), "A": list(E["A"]), "B": list(E["B"]), "axes": ax, "grid": ev["grid_point"], "hour": h, "shown": S,
+                  "ib": {"hpa": E["bt"]["hpa"], "deficit": ib["deficit_hpa"], "cm_rule": ib["rise_cm_rule"], "cm_exact": ib["rise_cm_exact"], **E["bt"]},
+                  "ratio": ratio, "box": list(b), "img_box": [float(la[mi].min() - half), float(la[mi].max() + half), float(lo[mj].min() - half), float(lo[mj].max() + half)],
+                  "arrows": arrows, "centre": [float(cl[0]), float(co[0])], "pmin": float(pm[0]) / 100.0,
+                  "coast": B1.box_lines(coast, (b[0] - 0.1, b[1] + 0.1, b[2] - 0.1, b[3] + 0.1), nd=3)}
+        row("DS45", f"{nm}: ERA5 centre in the map box; arrows cover it; speed ≤ 30 m/s colour range", [float(b[0] <= cl[0] <= b[1] or nm == "amphan"), len(arrows) >= 30, float(np.nanmax(sp) <= 32)], [1, 1, 1], 0)
+        row("DS46", f"{nm}: inverse barometer {E['bt']['hpa']:.0f} hPa → {ib['deficit_hpa']:.0f} cm (rule) ; ERA5 / best-track wind ratio", [ib["deficit_hpa"], round(ratio, 2)],
+            [{"amphan": 53, "nargis": 51, "idai": 58}[nm], {"amphan": 0.59, "nargis": 0.55, "idai": 0.66}[nm]], [0, 0.005])
+    S_ = {k: SH[k]["shown"] for k in ("amphan", "nargis", "idai")}
+    row("DS47", "event shown numbers: legs, β, bearing, α, cos, sin, across (Amphan / Nargis / Idai)",
+        [S_["amphan"]["dx"], S_["amphan"]["dy"], S_["amphan"]["beta"], S_["amphan"]["bearing"], S_["amphan"]["alpha"], S_["amphan"]["across"],
+         S_["nargis"]["dx"], S_["nargis"]["dy"], S_["nargis"]["beta"], S_["nargis"]["bearing"], S_["nargis"]["alpha"], S_["nargis"]["across"],
+         S_["idai"]["dx"], S_["idai"]["dy"], S_["idai"]["beta"], S_["idai"]["bearing"], S_["idai"]["alpha"], S_["idai"]["across"]],
+        [-92.9, -21.9, 13, 257, 193, -22.4, -69.5, 10.8, 9, 279, 171, -17.8, -52.3, -35.9, 34, 236, 214, -21.0], 1e-9)
+    for r_ in rows:
+        print(f"  {'PASS' if r_['pass'] else 'FAIL'}  {r_['id']:5s} {r_['name']}  -> {r_['value']}")
+    if not all(r_["pass"] for r_ in rows):
+        print("remake1107 patch: CHECK FAILED — nothing written")
+        return 1
+    V["shore"] = json.loads(json.dumps(SH, default=float))
+    blob = json.dumps(V, separators=(",", ":"), ensure_ascii=False, allow_nan=False).encode("utf-8")
+    (DATA / "cs.json").write_bytes(blob)
+    imgs = sorted(list(IMG.glob("*.png")) + list(IMG.glob("*.jpg")))
+    data_hashes = {"cs.json": hashlib.sha256(blob).hexdigest(), **{f"img/{p.name}": B1.sha_file(p) for p in imgs}}
+    render = M.get("render_assets", {})
+    for pub in publics:
+        pub.mkdir(parents=True, exist_ok=True)
+        for pimg in imgs:
+            (pub / f"cst_{pimg.name}").write_bytes(pimg.read_bytes())
+        render = {pp_.name: B1.sha_file(pp_) for pp_ in sorted(pub.glob("cst_*"))}
+    M["data_files"], M["render_assets"] = data_hashes, render
+    M["data_sizes_bytes"] = {k: (DATA / k).stat().st_size for k in data_hashes}
+    M["checks"] = [r_ for r_ in M["checks"] if r_["id"] not in {"DS40", "DS41", "DS42", "DS43", "DS44", "DS45", "DS46", "DS47"}] + rows
+    M["physics"] = [e for e in M.get("physics", []) if not e["fn"].startswith("fluidpy.data.movie_shore.")] + ents
+    M["fluidpy"].update(B1.git_sha(FLUID, {"movie_shore_py": "fluidpy/data/movie_shore.py"}))
+    M["parameters"]["shore_1107"] = {
+        "note": "remake 2026-11-07 (master plan R13/R14/R14b): Part 1's turned axes applied to the wind; ŷ′ chosen to point out to sea; across < 0 = onto the land",
+        "ian": "HRRR analysis 2022-09-28 20 UTC (cs.json coast.uF/uS); FMB coast Naples→Englewood, StP coast St Pete Beach→Tarpon Springs (NE 10 m); "
+               "km legs on a local flat map (Part 3 shows the rule); Ian centre 941 hPa at the 19:05 UTC landfall (IBTrACS USA)",
+        "events": {k: {"era5": f"{EV[k]['raw'].name} @ {EV[k]['time']}", "best_track_pressure": EV[k]["bt"]} for k in EV},
+        "shown_arithmetic": "inputs rounded as shown (u, v 0.1 m/s; α 1°; cos/sin 3 d.p.); each product to 0.1; results = sums of the shown terms (≤ 0.15 m/s from the library value)",
+        "honesty": "ERA5 0.25° is smooth and too weak in the cores (0.55-0.66 of the regional best-track wind): used for direction and sign only, said in the narration",
+        "derived_product": f"{F_SHORE} (fluidpy.data.movie_shore.shore_winds_product; identical along/across, DS40/DS41/DS44)"}
+    cr = M["credits"]
+    M["credits"] = [c_.replace("Fischer, Rogers, Reasor and Gamache 2022, Mon. Wea. Rev. 150, 2255-2278", "Fischer, Reasor, Rogers and Gamache 2022, Mon. Wea. Rev. 150, 2255–2278")
+                    for c_ in cr]
+    era = ("ERA5 hourly 10-m wind and sea-level pressure (Amphan 20 May 2020 09 UTC, Nargis 2 May 2008 11 UTC, Idai 14 Mar 2019 19 UTC): "
+           "Contains modified Copernicus Climate Change Service information 2026 (ARCO-ERA5; Hersbach et al. 2020).")
+    if era not in M["credits"]:
+        M["credits"].append(era)
+    M["remake1107_patch"] = "2026-11-07: build_ch00_coordinates_storm.py --remake1107-patch (fluidpy.data.movie_shore; DS40-DS47)"
+    (OUT / "manifest.json").write_text(json.dumps(M, indent=1, ensure_ascii=False, default=str), encoding="utf-8")
+    print(f"remake1107 patch: shore block written ({len(rows)} rows pass), {len(ents)} parity entries, {len(imgs)} images, public {len(publics)}")
+    for k in ("fmb", "stp", "amphan", "nargis", "idai"):
+        print(k, json.dumps(SH[k]["shown"]))
+    return 0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--public", type=Path, nargs="*", default=[], help="render public dir(s) for the cst_* assets (prefix cst_: Part 3 owns cs_)")
     ap.add_argument("--notes2-patch", action="store_true", help="notes-2 fast path: add the S1 pixel count + mask and the contrast-enhanced "
                     "Nargis picture to the existing cs.json / img / manifest (the full build makes the same products)")
+    ap.add_argument("--remake1107-patch", action="store_true", help="remake 2026-11-07 fast path: the coast block and the three event "
+                    "wind calculations (cs.json → shore, img/*_wind.png, DS40-DS47, credit fixes)")
     a = ap.parse_args()
+    if a.remake1107_patch:
+        return remake1107_patch(a.public)
     if a.notes2_patch:
         return notes2_patch(a.public)
     from PIL import Image

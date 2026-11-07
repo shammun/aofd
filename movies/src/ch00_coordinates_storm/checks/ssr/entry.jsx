@@ -4,6 +4,7 @@ import * as THREE from "three";
 import { SCENES_A } from "../../cs_sA";
 import { SCENES_B } from "../../cs_sB";
 import { SCENES_C } from "../../cs_sC";
+import { SCENES_D } from "../../cs_sD";
 import { sc, CUT, LEN, FPS } from "../../cs_lib";
 /** THREE-tag guard (--3d only): every tag inside an <r3root> (a ThreeCanvas tree, see stubs/three-canvas.js) must be an R3F
  * intrinsic, i.e. a THREE class in camelCase (mesh, group, meshBasicMaterial …) or `primitive`. Anything else (an SVG <g>, a
@@ -28,7 +29,7 @@ const badR3 = (html) => {
 /** Server-render every scene at many frames (no WebGL, no browser): any exception in a scene body (a missing datum, a TeX error,
  * a text below the 44-px floor, a source line that would sit in the caption band, a drifting equation constant) fails here. */
 export const runAll = (step) => {
-  const BY = { ...SCENES_A, ...SCENES_B, ...SCENES_C };
+  const BY = { ...SCENES_A, ...SCENES_B, ...SCENES_C, ...SCENES_D };
   let n = 0; const errs = []; let nan = 0; let r3 = 0;
   sc.forEach((s, k) => {
     const S = BY[s.id]; const len = LEN(k);

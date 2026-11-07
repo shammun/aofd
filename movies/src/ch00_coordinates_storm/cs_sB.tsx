@@ -19,9 +19,9 @@ import { LayerStack3D, StackLayer } from "../house/kit/stack3d";
 import { useTex } from "./kit_cs/globe";
 import {
   AT, ArcHead, Arrow, ColourBar, Cross, D, D2R, DashArrow, GeoImg, GeoMap, IMG, K, LEN, LUT_DBZ, LUT_W, Lbl, Parcel, RING, RTick, SAY, SEC, SRC, SS, STK, Scene, WV,
-  SideCallout, SpeedBar, Svg, URBar, Wedge, arcD, boxAt, clamp, fin, fout, linesPath, mix, nf, polar, poly, prog, win,
+  SideCallout, SpeedBar, Svg, URBar, Wedge, arcD, boxAt, clamp, fin, fout, linesPath, mix, nf, polar, poly, prog, win, Recall,
 } from "./cs_lib";
-import { EQ_S09, EQ_S10, EQ_S11, EQ_S12, EQ_S13, EQ_S14, EQ_S15, EQ_S16, EQ_S20, cutAt } from "./cs_eq";
+import { EQ_S09, EQ_S09R, EQ_URUT, EQ_S15C, EQ_S10, EQ_S11, EQ_S12, EQ_S13, EQ_S14, EQ_S15, EQ_S16, EQ_S20, cutAt } from "./cs_eq";
 
 const S17D = D.s17, GO = D.goes;
 // ---------------------------------------------------------------- numbers on screen = the data (the render fails otherwise)
@@ -75,8 +75,14 @@ const ClockG: React.FC<{ x: number; y: number; t: string; frac: number; o?: numb
 // ================================================================ s09 dθ/dt = v/r (D16)
 const S09: React.FC = () => {
   const f = useCurrentFrame(), k = K("s09_dtheta_dt");
-  const tV = SS(k, 1), tV35 = SS(k, 2), tGrow = SS(k, 3), tDt = SS(k, 6), tArc = SS(k, 7), tAng = SS(k, 8), tDiv = SS(k, 9), tRate = SS(k, 10), tNum = SS(k, 11),
-    tN1 = SS(k, 12), tCancel = SS(k, 13), tDeg = SS(k, 14), tLap = SS(k, 15), tLap2 = SS(k, 16);
+  // remake 2026-11-07 (R12): S1-S7 recall Part 1's u_r / u_θ split, one worked point and the 72-point ring average; the old S1-S2
+  // became S7 ("call that speed v"); old S3… are now S8…
+  const tQ = SS(k, 1), tP1 = SS(k, 2), tF = SS(k, 3), tEx = SS(k, 4), tExR = SS(k, 5), tAvg = SS(k, 6), tV = SS(k, 7);
+  const tV35 = tAvg, tGrow = SS(k, 8), tDt = SS(k, 11), tArc = SS(k, 12), tAng = SS(k, 13), tDiv = SS(k, 14), tRate = SS(k, 15), tNum = SS(k, 16),
+    tN1 = SS(k, 17), tCancel = SS(k, 18), tDeg = SS(k, 19), tLap = SS(k, 20), tLap2 = SS(k, 21);
+  const [u1, u2] = cutAt(EQ_URUT, String.raw`,\qquad `);
+  const oRec = fout(f, tGrow - 10);
+  const Pb = polar(RC, RR, 53.13), er = unitV(53.13), et = unitV(143.13);
   const a0 = 30, aW = 30;                                     // the short time Δt drawn as a 30° step
   const P0 = polar(RC, RR, a0), P1 = polar(RC, RR, a0 + aW);
   const lapFrac = clamp((f - tLap) / (LEN(k) - tLap), 0, 1);
@@ -98,12 +104,34 @@ const S09: React.FC = () => {
           <Lbl x={mix(RC[0], P0[0], 0.55)} y={mix(RC[1], P0[1], 0.55) + 46} t="$r$" c={C.ink} s={T.key} o={fin(f, tArc)} />
         </g>
         <ClockG x={140} y={120} t={f < tLap ? "$t$" : `$t$ = ${Math.round(lapFrac * 75)} min`} frac={f < tLap ? (f / 300) % 1 : lapFrac} />
-        <Keyword f={f} text="how fast does $\theta$ grow?" at={[MX, 120]} s={T.key} appear={0} out={tNum - 20} />
-        <Keyword f={f} text={`v ≈ ${SAY.vt} m/s on this ring`} at={[MX, 220]} s={T.floor} appear={tV35} out={tDt - 20} />
+        <Keyword f={f} text="Ian's ring: 25 km out" at={[MX, 120]} s={T.key} appear={0} out={tQ - 20} />
+        <Keyword f={f} text="measured in Part 1" at={[MX, 120]} s={T.floor} appear={tQ} out={tGrow - 20} />
+        <Keyword f={f} text="how fast does $\theta$ grow?" at={[MX, 120]} s={T.key} appear={tGrow} out={tNum - 20} />
+        <Keyword f={f} text={`$v$ ≈ ${nf(RING.v, 1)} m/s: speed round the ring`} at={[MX, 690]} s={T.floor} appear={tV} out={tDt - 20} />
+        {/* the worked point of Part 1 (S4-S5): the balloon's point at θ ≈ 53°, the east wind (10, 0) and its two parts */}
+        <g opacity={win(f, tEx, tAvg - 10)}>
+          <circle cx={Pb[0]} cy={Pb[1]} r={12} fill={C.key} />
+          <Arrow p={Pb} q={[Pb[0] + 200, Pb[1]]} color={C.ink} w={9} head={32} />
+          <Lbl x={Pb[0] + 100} y={Pb[1] - 46} t="10 m/s east" c={C.ink} s={T.floor} />
+          <Arrow p={Pb} q={[Pb[0] + er[0] * 120, Pb[1] + er[1] * 120]} color={C.neg} w={9} head={30} o={fin(f, tExR)} />
+          <Arrow p={Pb} q={[Pb[0] - et[0] * 160, Pb[1] - et[1] * 160]} color={C.first} w={9} head={30} o={fin(f, tExR)} />
+          <Lbl x={Pb[0] + er[0] * 130 + 10} y={Pb[1] + er[1] * 130 - 10} t="$u_r=6$" c={C.neg} s={T.floor} o={fin(f, tExR)} />
+          <Lbl x={Pb[0] - et[0] * 170 + 10} y={Pb[1] - et[1] * 170 + 40} t="$u_\theta=-8$" c={C.first} s={T.floor} o={fin(f, tExR)} />
+        </g>
         <Keyword f={f} text="the numbers" at={[MX, 120]} s={T.key} appear={tNum} out={tLap - 20} />
         <Keyword f={f} text="one full lap" at={[MX, 120]} s={T.key} appear={tLap} />
         <CurvedLink f={f} from={[MX - 14, 300]} to={polar(RC, RR + 20, a0 + aW / 2)} start={tDt + 10} end={tAng} bend={60} />
       </Svg>
+      {/* remake 2026-11-07 (R12): Part 1's split, a worked point and the ring average, recalled where v is taken */}
+      <TeX s={u1} x={MX} y={260} size={50} o={win(f, tF, tGrow - 10)} />
+      <Recall f={f} tex={u2} name="radial and tangential wind" x={MX} y={330} appear={AT(k, 3, "and u sub theta")} out={tGrow - 10} />
+      <CalcStack f={f} x={MX} y={500} size={44} maxLines={4} o={oRec * fout(f, tAvg - 10)} rows={[
+        { rhs: String.raw`u=10,\ v=0`, at: AT(k, 4, "so u is ten") },
+        { rhs: String.raw`\cos\theta=0.6,\ \sin\theta=0.8`, at: AT(k, 4, "where cosine theta"), cont: true },
+        { rhs: String.raw`u_r=10\times0.6+0\times0.8=6`, at: tExR },
+        { rhs: String.raw`u_\theta=-10\times0.8+0\times0.6=-8`, at: AT(k, 5, "and u sub theta") },
+      ]} />
+      <TeX s={EQ_S09R} x={MX} y={560} size={50} o={win(f, tAvg + 8, tGrow - 10)} />
       {/* fix 0 B10: the arc rule written (S7) and the division by Δt shown (S9), one row per sentence */}
       <CalcStack f={f} x={MX + 330} y={250} size={56} maxLines={3} o={fout(f, tNum - 6)} rows={[
         { lhs: String.raw`\Delta s`, rhs: String.raw`=v\,\Delta t`, at: tDt },
@@ -120,11 +148,11 @@ const S09: React.FC = () => {
         // K6 round 1: ran to x 2024: r and v on two lines
         { rhs: String.raw`r=25\ \mathrm{km}=25\,000\ \mathrm m`, at: tN1, size: 46 },
         { rhs: String.raw`v=34.8\ \mathrm{m/s}\ (\approx35)`, at: tN1 + 15, size: 46, cont: true },
-        { rhs: String.raw`\dfrac{34.8\ \mathrm{m/s}}{25\,000\ \mathrm{m}}\approx0.00139\ \mathrm{rad/s}`, at: AT(k, 12, "divided by") },
+        { rhs: String.raw`\dfrac{34.8\ \mathrm{m/s}}{25\,000\ \mathrm{m}}\approx0.00139\ \mathrm{rad/s}`, at: AT(k, 17, "divided by") },
         { rhs: String.raw`1\ \mathrm{rad}=\dfrac{180^\circ}{\pi}\approx57.3^\circ`, at: tDeg },
-        { rhs: String.raw`0.00139\times57.3\approx0.08^\circ/\mathrm{s}`, at: AT(k, 14, "zero point zero eight") },
-        { rhs: String.raw`0.08\times60\approx4.8\approx5^\circ/\mathrm{min}`, at: AT(k, 14, "five degrees") },
-        { rhs: String.raw`\dfrac{2\pi}{0.00139}=\dfrac{6.283}{0.00139}`, at: AT(k, 15, "divided by") },
+        { rhs: String.raw`0.00139\times57.3\approx0.08^\circ/\mathrm{s}`, at: AT(k, 19, "zero point zero eight") },
+        { rhs: String.raw`0.08\times60\approx4.8\approx5^\circ/\mathrm{min}`, at: AT(k, 19, "five degrees") },
+        { rhs: String.raw`\dfrac{2\pi}{0.00139}=\dfrac{6.283}{0.00139}`, at: AT(k, 20, "divided by") },
         { rhs: String.raw`\approx4500\ \mathrm s,\qquad \dfrac{4500}{60}=75\ \mathrm{min}`, at: tLap2 },
       ]} />
       <Svg><Lbl x={MX} y={720} t="metres cancel: rad/s left" c={C.local} s={T.floor} o={win(f, tCancel, tLap - 20)} /></Svg>
@@ -439,18 +467,19 @@ const camS15 = (f: number, tTilt: number, len: number): OrbitKey[] => [{ f: 0, a
 // ================================================================ s15 a tall storm: cylindrical coordinates (GOES-16 plate)
 const S15: React.FC = () => {
   const f = useCurrentFrame(), k = K("s15_cylinder");
-  const tTall = SS(k, 1), tIn = SS(k, 2), tEw = AT(k, 3, "eyewall"), tOut = SS(k, 4), tIan = SS(k, 5), tHole = SS(k, 6), tZ = AT(k, 7, "the height, z"), tCyl = SS(k, 8), tWhy = SS(k, 9);
+  const tTall = SS(k, 1), tIn = SS(k, 2), tEw = AT(k, 3, "eyewall"), tOut = SS(k, 4), tIan = SS(k, 5), tHole = SS(k, 6), tPol = SS(k, 7), tZ = AT(k, 8, "the height z"), tCyl = SS(k, 9), tNo = SS(k, 10), tWhy = SS(k, 11);   // remake 2026-11-07 (R11)
   const keys = camS15(f, tIan + 20, LEN(k));
   const st = hOrbitCam({ ...hOrbitPath(keys, f), fov: 30 }, [520, 420]);
   const pr = hProjector(st, 1040, 820, 20, 20);
   const ph = (f / 30) * 0.5;
-  const oIn = fin(f, tIn), oUp = fin(f, AT(k, 3, "rises")), oOut = fin(f, tOut), oCyl = fin(f, tCyl), oZ = fin(f, tZ);
+  const oFl = fout(f, tPol - 10), oIn = fin(f, tIn) * oFl, oUp = fin(f, AT(k, 3, "rises")) * oFl, oOut = fin(f, tOut) * oFl, oCyl = fin(f, tWhy), oZ = fin(f, tZ);
+  const oPol = fin(f, tPol), lift = prog(f, tCyl + 10, tCyl + 80), FT: V3 = [4.2 * Math.cos(0.7), 4.2 * Math.sin(0.7), 0], PT: V3 = [FT[0], FT[1], 3.6];
   const ewR = (S17D.r_fit ?? 30) / 10;
   const ewT = circ(ewR, 0.02).map((v) => pr.p(v)).reduce((a, b) => (b[0] > a[0] ? b : a));
   return (
     <Scene>
       <HView3D st={st} x={20} y={20} w={1040} h={820}>
-        <TexQuad href={IMG("cst_goes_eye.jpg")} x0={-6} x1={6} y0={-6} y1={6} o={1} />
+        <TexQuad href={IMG("cst_goes_eye.jpg")} x0={-6} x1={6} y0={-6} y1={6} o={1 - 0.55 * fin(f, tPol, 20)} />
         {circ(ewR, 0.03).slice(1).map((q, i) => <HRod3D key={`ew${i}`} a={circ(ewR, 0.03)[i]} b={q} px={9} color={C.gold} o={win(f, tEw, tIan) + fin(f, tHole)} />)}
         {[0, 1, 2, 3, 4, 5].map((i) => { const a = (i * Math.PI) / 3 + ph; const p: V3 = [5.2 * Math.cos(a), 5.2 * Math.sin(a), 0.1];
           const q: V3 = [3.4 * Math.cos(a + 0.6), 3.4 * Math.sin(a + 0.6), 0.1];
@@ -460,6 +489,14 @@ const S15: React.FC = () => {
         {[0, 1, 2, 3, 4, 5].map((i) => { const a = (i * Math.PI) / 3 + 0.2 - ph * 0.5; const p: V3 = [3.2 * Math.cos(a), 3.2 * Math.sin(a), 5.2];
           const q: V3 = [5.4 * Math.cos(a - 0.4), 5.4 * Math.sin(a - 0.4), 5.2];
           return <group key={`out${i}`}><HArrow3D from={p} to={q} color="#8db5e2" px={8} head={26} o={oOut} /><Bead3D f={f} a={p} b={q} speed={10} o={oOut} /></group>; })}
+        {/* remake 2026-11-07 (R11): the flat polar grid (r, θ) on the sea, lifted to heights z (polar + height = cylindrical) */}
+        {[1, 2, 3, 4, 5].flatMap((r) => [0, 2, 4].map((zl) => { const z = 0.05 + zl * lift, ring = circ(r, z);
+          return ring.slice(1).map((q, i) => <HRod3D key={`p${r}_${zl}_${i}`} a={ring[i]} b={q} px={zl ? 2 : 3} color={C.local} o={oPol * (zl ? 0.6 * fin(f, tCyl) : 0.9)} />); }))}
+        {Array.from({ length: 12 }, (_, i) => { const a = (i * Math.PI) / 6;
+          return <HRod3D key={`ray${i}`} a={[0, 0, 0.05]} b={[5 * Math.cos(a), 5 * Math.sin(a), 0.05]} px={2} color={C.local} o={0.8 * oPol} />; })}
+        <HRod3D a={[0, 0, 0.06]} b={FT} px={6} color={C.ink} o={fin(f, AT(k, 7, "the distance r"))} />
+        <HRod3D a={FT} b={PT} px={6} color={C.second} o={oZ} />
+        <HBall3D at={PT} px={16} color={C.key} o={oZ} />
         <HArrow3D from={[0, 0, 0]} to={[0, 0, 7.4]} color={C.second} px={8} head={30} o={oZ} />
         {circ(CYL_R, 0).slice(1).map((q, i) => <HRod3D key={`b${i}`} a={circ(CYL_R, 0)[i]} b={q} px={6} color={C.key} o={0.95 * oCyl} />)}
         {circ(CYL_R, CYL_H).slice(1).map((q, i) => <HRod3D key={`t${i}`} a={circ(CYL_R, CYL_H)[i]} b={q} px={6} color={C.key} o={0.95 * oCyl} />)}
@@ -472,12 +509,17 @@ const S15: React.FC = () => {
         <Lbl x={MX + 20} y={230} t="in near the sea" c={C.neg} s={T.floor} o={win(f, tIn, tIan - 20)} />
         <Lbl x={MX + 20} y={300} t="up in the eyewall" c={C.local} s={T.floor} o={win(f, AT(k, 3, "rises"), tIan - 20)} />
         <Lbl x={MX + 20} y={370} t="out at 12-15 km" c="#8db5e2" s={T.floor} o={win(f, tOut, tIan - 20)} />
-        <SideCallout f={f} lines="eyewall" at={[MX + 20, 120]} s={T.key} appear={tEw} out={tZ - 20} target={ewT} c={C.gold} bend={-30} />
+        <SideCallout f={f} lines="eyewall" at={[MX + 20, 120]} s={T.key} appear={tEw} out={tPol - 20} target={ewT} c={C.gold} bend={-30} />
         <Keyword f={f} text="cylindrical coordinates" at={[MX + 20, 120]} s={T.key} appear={tCyl} />
-        <Lbl x={MX + 20} y={560} t="heights drawn $\times4$" c={C.muted} s={T.floor} o={fin(f, tZ)} />
-        <Lbl x={MX + 20} y={640} t="$r$ = 30 km: a cylinder" c={C.key} s={T.floor} o={fin(f, tWhy)} />
+        <Keyword f={f} text="polar: two numbers $(r,\ \theta)$" at={[MX + 20, 120]} s={T.key} appear={tPol} out={tCyl - 20} />
+        <Lbl x={pr.p(FT)[0] + 18} y={pr.p(FT)[1] + 40} t="$r,\ \theta$" c={C.ink} s={T.floor} o={fin(f, AT(k, 7, "the distance r")) * fout(f, tWhy)} />
+        <Lbl x={pr.p(PT)[0] + 22} y={pr.p(PT)[1]} t="$(r,\ \theta,\ z)$" c={C.key} s={T.floor} o={fin(f, tCyl) * fout(f, tWhy)} />
+        <Keyword f={f} text="polar + height = cylindrical" at={[MX + 20, 210]} s={T.floor} c={C.gold} appear={tCyl + 20} />
+        <Lbl x={MX + 20} y={770} t="heights drawn $\times4$" c={C.muted} s={T.floor} o={fin(f, tZ)} />
+        <Lbl x={MX + 20} y={690} t="$r$ = 30 km: a cylinder" c={C.key} s={T.floor} o={fin(f, tWhy)} />
       </Svg>
       <TeX s={EQ_S15} x={MX + 20} y={300} size={T.eq} o={fin(f, tCyl + 10)} />
+      <Recall f={f} tex={EQ_S15C} name="polar coordinates" x={MX + 20} y={410} size={46} appear={AT(k, 10, "so x is still")} />
       <SourceBelow text={SRC.goes} pic={{ x: 20, y: 20, w: 1040, h: 800 }} w={1400} name="s15 src" />
     </Scene>
   );
@@ -523,6 +565,9 @@ const S16: React.FC = () => {
         <Keyword f={f} text="works in 3-D too" at={[MX + 20, 120]} s={T.key} appear={tAll} />
       </Svg>
       <TeX s={EQ_S16} x={MX + 20} y={380} size={56} o={fin(f, tEq)} />
+      {/* remake 2026-11-07 (R12): the two horizontal parts as Part 1 computed them */}
+      <TeX s={cutAt(EQ_URUT, String.raw`,\qquad `)[0]} x={MX + 20} y={520} size={46} o={win(f, tUr, tZh - 10)} />
+      <Recall f={f} tex={cutAt(EQ_URUT, String.raw`,\qquad `)[1]} name="radial and tangential wind" x={MX + 20} y={580} size={46} appear={tUt} out={tZh - 10} />
       <SourceBelow text={SRC.goes} pic={{ x: 20, y: 20, w: 1040, h: 800 }} w={1400} name="s16 src" />
     </Scene>
   );
@@ -880,6 +925,7 @@ const S20: React.FC = () => {
         {/* #5b r2 N-M1: the formula and its names leave by tSlice, so the section's colour bar can come in WITH the section */}
         <Lbl x={MX} y={470} t="$\Sigma$: add up the 72 values" c={C.local} s={T.floor} o={win(f, tAvg + 30, tSlice - 10)} />
         <Lbl x={MX} y={530} t="$\overline{u_r}$: the ring average" c={C.local} s={T.floor} o={win(f, tAvg + 50, tSlice - 10)} />
+        <Lbl x={MX} y={600} t="derived in Part 1: ring average" c={C.gold} s={T.floor} o={win(f, tAvg + 20, tSlice - 10)} />{/* remake 2026-11-07 (R12) */}
         <Keyword f={f} text="radius-height section" at={[MX, 120]} s={T.key} appear={tName} out={tMust - 20} />
         {/* #5b r2 N-M1 (D2): the bar comes in with the section picture (it waited for S5, 11.5 s of colours without a bar) */}
         <URBar x={MX} y={250} w={420} o={fin(f, tSlice) * oH} />
