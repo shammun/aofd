@@ -65,7 +65,7 @@ Transitions are spoken bridges, never cards:
 **Never say "the easy way"** (user, 2026-11-06: it sounds unnatural), and never write "easy" in the title.
 
 **Series parts (user, 2026-11-06).** In a multi-part series:
-- Do NOT open every part with a "so far / this time" recap (user, 2026-11-06: that would be annoying).
+- **No movie opens with a recap** (user, 2026-11-06/07: "audience will completely lose their interest … make viewers impatient"). Every movie starts with what it is about. The one exception the user asked for is a sentence or two at the start of Coordinates Part 2 on what Part 1 covered and what Part 2 adds.
 - When a part uses a result derived in an earlier part, show the equation on screen at that moment, say "we derived this in Part K" (keyword "derived in Part K: <name>"), and move on to the implications. Never use an earlier result silently; never re-derive it at length.
 - Each part ends smoothly: a recap of what this part did, then one or two sentences on what the next part covers and why (a teaser that links to it), then the house ending. No abrupt cut, no new idea in the last minute, music and picture fade out together.
 - Every application (e.g. storm surge, floods) is preceded on screen by the equation that links it to the maths (e.g. along/across-shore wind by rotated axes) and a worked calculation with the real data; the reasoning ("onshore wind piles water against the coast") is said before the evidence is shown.

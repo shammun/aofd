@@ -1,5 +1,7 @@
 # Chapter 0 movie series: plan v6 — 2026-11-05 (movie-director): #5 split into five parts
 
+> **User rule (2026-11-07): no movie opens with a recap.** Every movie starts with what it is about. Earlier material is recalled only where it is used: the equation on screen, "derived in <movie>", one sentence, then on. The former "Recap (≤ N min)" items below list what to recall at those points.
+
 **Status.** v6 = v5 (adopted 2026-11-04) with one change asked by the user on 2026-11-05
 (`reports/ch00_coordinates_user_feedback.md`): **#5 *Coordinates* is split into five consecutive parts, #5a–#5e**, after
 the build-1 feedback, and **#6 *The gradient* is paused** until the five parts are done, then revised so that ∇T on the
@@ -177,7 +179,7 @@ this movie adds) · **terms absorbed** (§4 numbers) · **drops** · length · p
 stated. "≤ 3 min recap" is a cap, not a target.
 
 ### U01 (pos 16) · Where pressure differences come from: the PGF (recap), thermal lows and highs, lee troughs
-- **Recap (≤ 3 min):** the box derivation of −(1/ρ)∇p and its size, 1 hPa per 100 km → ≈ 8 × 10⁻⁴ m s⁻², Ciarán's push
+- **Recall at point of use (NOT an opening recap; user 2026-11-07):** the box derivation of −(1/ρ)∇p and its size, 1 hPa per 100 km → ≈ 8 × 10⁻⁴ m s⁻², Ciarán's push
   (#6 s24–s29); the formula on the spinning Earth (#3 s39–s41); the sea breeze as a PGF wind (#6 s35). No re-derivation.
 - **New:** where pressure differences come from. Heating: a warm column expands, so surface pressure falls under it,
   which makes **thermal (heat) lows** and **thermal highs** (cold continental highs). Real cases: the summer heat lows over
@@ -191,7 +193,7 @@ stated. "≤ 3 min recap" is a cap, not a target.
 - **Length:** 20–25 → **12–15 min**. **Prereqs:** #3, #6, 0.3, M01.
 
 ### M03 (pos 17) · Wind on weather charts: Buys Ballot, gradient, cyclostrophic and friction winds, scales, wind barbs
-- **Recap (≤ 3 min):** #3 s23–s46 derive −2Ω × u and f = 2Ω sin φ, give the hemisphere rule (right in the NH, left in the
+- **Recall at point of use (NOT an opening recap; user 2026-11-07):** #3 s23–s46 derive −2Ω × u and f = 2Ω sin φ, give the hemisphere rule (right in the NH, left in the
   SH), the size of the push and the inertial period, show inertial loops, trades and westerlies, derive the geostrophic
   wind and test it on Ciarán (about 15 % sub-geostrophic round the tight low; friction turns the surface wind toward
   the low). Recap only.
@@ -216,7 +218,7 @@ stated. "≤ 3 min recap" is a cap, not a target.
 - **Terms absorbed:** b17. **Length:** 30–40 → **31–41 min**. **Prereqs:** unchanged (#4, #6, 0.3, M01, M03, M07).
 
 ### M16 (pos 22) · The climate machine (+ night cooling, seasons, aerosols)
-- **Recap (≤ 2 min):** σT⁴, the 255-K emission temperature, the Planck response 3.8 W m⁻² K⁻¹, CO₂ forcing and the
+- **Recall at point of use (NOT an opening recap; user 2026-11-07):** σT⁴, the 255-K emission temperature, the Planck response 3.8 W m⁻² K⁻¹, CO₂ forcing and the
   water-vapour feedback (#4 s42–s43); sunlight on tilted ground as a flux (0.1b s20c, which says "the climate machine
   video builds on exactly this"); differential heating by latitude (0.3 s51).
 - **New:** v4 night cooling and the surface energy budget, plus **seasons from the axial tilt** (0.3 shows the equinox
@@ -225,7 +227,7 @@ stated. "≤ 3 min recap" is a cap, not a target.
 - **Terms absorbed:** b14 (aerosols), b16 (seasons). **Length:** 30–40 → **33–43 min**. **Prereqs:** #4, 0.3, 0.1b.
 
 ### U03 (pos 23) · Temperature with height: real soundings, the standard atmosphere and inversions
-- **Recap (≤ 2 min):** the cooling of rising air, ≈ 6.5 K/km on average and the tropopause by latitude (0.3 s23–s25); the
+- **Recall at point of use (NOT an opening recap; user 2026-11-07):** the cooling of rising air, ≈ 6.5 K/km on average and the tropopause by latitude (0.3 s23–s25); the
   lapse rate named, with its sign flip (#4 s09, s09b); the Singapore sounding and its tropopause (#6 s17). The sign
   convention Γ = −dT/dz is recapped in one line, not re-taught.
 - **New:** the environmental lapse rate on real soundings and how far real days depart from the ICAO standard atmosphere;
@@ -233,7 +235,7 @@ stated. "≤ 3 min recap" is a cap, not a target.
 - **Length:** 25–30 → **15–20 min**. **Prereqs:** 0.3, #4, M07, M16.
 
 ### M13 (pos 25) · Water in the air: mixing ratio, wet-bulb, dew-point depression, LCL, CAPE/CIN
-- **Recap (≤ 2 min):** specific humidity q, e ≈ 1.61 q p, saturation, RH, dew point and the cloud base computed from them
+- **Recall at point of use (NOT an opening recap; user 2026-11-07):** specific humidity q, e ≈ 1.61 q p, saturation, RH, dew point and the cloud base computed from them
   (0.3 s27–s31); Clausius–Clapeyron, 7 % more vapour per kelvin and latent heat (#4 s39–s41).
 - **New:** mixing ratio; the **wet-bulb temperature**; **dew-point depression** (T − Td, the forecaster's "spread") by name;
   the **LCL named** as 0.3's cloud base and found from the spread (about 125 m per kelvin of spread); CAPE and CIN.
@@ -246,7 +248,7 @@ stated. "≤ 3 min recap" is a cap, not a target.
 - **Terms absorbed:** b7. **Length:** 25–30 → **28–33 min**. **Prereqs:** unchanged (M12, M13, U02).
 
 ### U07 (pos 31) · The boundary layer and the day–night cycle (+ visibility, mist, haze, fog; gusts vs mean wind)
-- **Recap (≤ 1 min):** the sea breeze (#6 s35); U07 adds the land breeze, mountain and valley winds, föhn and the LLJ.
+- **Recall at point of use (NOT an opening recap; user 2026-11-07):** the sea breeze (#6 s35); U07 adds the land breeze, mountain and valley winds, föhn and the LLJ.
 - **New (added to v4):** **visibility** (what it is, metres and statute miles, how sensors measure it); **mist vs fog**
   (visibility above or below 1 km), **haze** (dry particles, recap of M16) and smoke. **Gusts vs the mean wind**: a mean
   over minutes (10 min for WMO reports, 2 min in US METARs) against a 3-s peak, worked on ISD hourly reports (the
@@ -254,7 +256,7 @@ stated. "≤ 3 min recap" is a cap, not a target.
 - **Terms absorbed:** b8, b15. **Length:** 30–35 → **34–39 min**. **Prereqs:** #6, M03, M12, M13, M16, U03.
 
 ### M04 (pos 32) · Air masses and fronts (+ veering and backing at a front)
-- **Recap (≤ 2 min):** air masses mP/mT/cP/cT, cold and warm fronts, their slopes, the front stack, the two front symbols
+- **Recall at point of use (NOT an opening recap; user 2026-11-07):** air masses mP/mT/cP/cT, cold and warm fronts, their slopes, the front stack, the two front symbols
   and the warm sector (0.3); warm advection at a warm front (1a, +3.7 K/h at Brest).
 - **New:** occluded and stationary fronts, squall lines and drylines, the frontal weather sequence, the front clues; and
   **veering and backing**: veering is a clockwise change of wind direction (seen from above), backing anticlockwise, in
@@ -264,7 +266,7 @@ stated. "≤ 3 min recap" is a cap, not a target.
 - **Length:** 25–30 → **20–25 min**. **Prereqs:** unchanged (0.3, M01, M03, M12).
 
 ### U08 (pos 33) · The jet stream: a first look (+ veering and backing with height, streamlines)
-- **Recap (≤ 2 min):** the jet above the strongest temperature gradient and the thermal wind named (#6 s36); the 1a
+- **Recall at point of use (NOT an opening recap; user 2026-11-07):** the jet above the strongest temperature gradient and the thermal wind named (#6 s36); the 1a
   hodograph (850/500 hPa) where the wind turned clockwise with height over warm air (1a s12g).
 - **New (added to v4):** the 1a picture **named**: in the NH, wind veering with height means warm advection and backing
   with height means cold advection (the SH is the other way round), from the thermal wind in words. **Streamlines**:
@@ -273,14 +275,14 @@ stated. "≤ 3 min recap" is a cap, not a target.
 - **Terms absorbed:** b9 (with height), b11. **Length:** 25–30 → **28–33 min**. **Prereqs:** 1a, M03, M04, M08, M09, U02.
 
 ### U13 (pos 38) · Severe storms (hodograph recap)
-- **Recap (≤ 2 min):** the hodograph, wind shear and storm-relative wind (1a s12g and s12i). The hodograph is no longer
+- **Recall at point of use (NOT an opening recap; user 2026-11-07):** the hodograph, wind shear and storm-relative wind (1a s12g and s12i). The hodograph is no longer
   "explained from zero".
 - **New:** storm-relative helicity in words, why shear organises storms, supercells, tornadoes, large hail, downbursts and
   derechos (v4).
 - **Length:** 30–35 → **28–33 min**. **Prereqs:** 1a, U12, U08, M03.
 
 ### U15 (pos 40) · How tropical cyclones form, and how their strength is classed
-- **Recap (≤ 2 min):** hurricane, eye, Ian (NH) vs Idai (SH) spin sense (#3 s35–s38); Ian's tangential and radial winds and
+- **Recall at point of use (NOT an opening recap; user 2026-11-07):** hurricane, eye, Ian (NH) vs Idai (SH) spin sense (#3 s35–s38); Ian's tangential and radial winds and
   the 19° inflow angle (#5a s19–s23) and the centripetal acceleration and 3-D winds (#5b s08–s19); f ≠ 0 off the equator (#3, M03).
 - **New (added to v4):** **intensity classes** and the **maximum sustained wind** (its averaging time: 1 min for NHC, 3 min for IMD,
   10 min for WMO, which ties back to U07's gusts): tropical depression → tropical storm → hurricane / typhoon /
