@@ -51,6 +51,8 @@ def main() -> int:
     ea = earlier_alive()
     if ea:
         reasons.append(f"Parts 1-4 first: {len(ea)} queue/run process(es) alive, e.g. {ea[0]}")
+    if (SM / "RENDER2.lock").exists():
+        reasons.append("a full render holds RENDER2.lock (renders first, 2026-11-07)")
     if mode == "voice":
         if HEAVY.exists():
             o = owner(HEAVY)

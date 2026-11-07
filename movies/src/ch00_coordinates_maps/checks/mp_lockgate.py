@@ -42,10 +42,10 @@ def main() -> int:
         return 1
     oh = owner(H)
     if mode == "voice":
-        heavy_ok = not H.exists()  # 2026-11-07: the VOICE phase includes a mix (~11.5 GB): no overlap with any HEAVY job
+        heavy_ok = not H.exists() and not (M_ / "RENDER2.lock").exists()  # + no parallel render; 2026-11-07: the VOICE phase includes a mix (~11.5 GB): no overlap with any HEAVY job
         return 0 if heavy_ok and free_gb() >= 14 else 1
     if mode == "heavy":
-        return 0 if not H.exists() and not V.exists() else 1
+        return 0 if not H.exists() and not V.exists() and not (M_ / "RENDER2.lock").exists() else 1  # 2026-11-07: renders first
     raise SystemExit(f"mode {mode}?")
 
 
