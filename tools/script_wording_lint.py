@@ -23,6 +23,20 @@ BANNED = [
     (re.compile(r"\bmade easy\b", re.I), "no 'made easy' anywhere, voice or title (user 2026-11-06)"),
 ]
 
+# House rule (user 2026-11-07): simple arithmetic stays on screen but is NOT voiced. The voice says what is combined
+# and where each number comes from, then the result ("adding the two parts gives 10 and 0"), never "3.6 plus 6.4 is 10".
+_W = (r"(?:zero|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|"
+      r"seventeen|eighteen|nineteen|twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety|hundred|thousand|point)")
+_NUM = rf"(?:minus\s+)?(?:\d[\d.,]*|{_W}(?:[\s-]+(?:and\s+)?{_W})*)"
+_OP = r"(?:plus|minus|times|multiplied\s+by|divided\s+by)"
+_RES = r"(?:,?\s*(?:equals|is|are|gives|makes|comes\s+to|that's|which\s+is|about|roughly|so|=))"
+BANNED += [
+    (re.compile(rf"\b{_NUM}\s+{_OP}\s+{_NUM}{_RES}", re.I),
+     "voiced arithmetic: show it on screen, say what is combined + the result (house rule 2026-11-07)"),
+    (re.compile(r"\bminus times (a )?minus\b|\bnegative times (a )?negative\b", re.I),
+     "voiced sign rule: leave it on screen (house rule 2026-11-07)"),
+]
+
 
 def spoken_lines(path: Path) -> list[tuple[int, str]]:
     """Return (line number, text) for narration lines: after the README, not notes or headings."""

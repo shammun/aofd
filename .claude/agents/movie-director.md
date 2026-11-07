@@ -50,3 +50,6 @@ word count, estimated seconds). `tools/hooks/post_write.py` validates the storyb
 Reply with each movie's slug, title, duration estimate, word count, scene list (one line each), physics sources, and
 new lexicon words.
 Do not return while a run is in progress; report real numbers.
+
+## House rule: show the arithmetic, voice the meaning (user 2026-11-07)
+Every calculation is shown in full on screen, but simple arithmetic is NOT read aloud: no "3.6 plus 6.4 equals 10", no "minus times minus is plus", no term-by-term products or sums of plain numbers. The voice says what is being combined and where each number comes from ("we multiply the wind's first component by cos θ and its second component by sin θ, then add them"), then gives the result ("which gives 10 for the first part and 0 for the second"). `tools/script_wording_lint.py` flags voiced arithmetic; it must report 0 findings before TTS. See movies/HOUSE_STYLE.md (calculations).
