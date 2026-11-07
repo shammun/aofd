@@ -9274,3 +9274,86 @@ A 10-fps pixel tracker followed the gold swipe line from 40:34 to 40:51. The cap
 - The end card follows the house style (maths ending), with no URL and no book name.
 
 ### Verdict: FIX (#5c build 1 review 1: 6 Must, 14 Should, 6 cosmetic)
+
+## #5b ch00_coordinates_storm — notes1, verification review
+2026-11-06 · fresh eyes · movie `G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_storm/build1/build1_1080.mp4` (notes1 render of commit 0f9cf08, the user's 12 notes from prompt_b.docx) · frames only
+
+| movie | duration | size | qa gates | physics | equations | legibility | pacing | captions | access | badges | verdict |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| ch00_coordinates_storm (#5b) notes1 | 48:00.87 (2880.87 s) | 155.36 MB | 15/15 PASS | PASS (Idai clockwise SH, Ian/Amphan/Nargis anticlockwise NH; s07 numbers check) | PASS (KaTeX, maths font) | FIX (clipped "height" label s18; colour bar over layers s19) | FIX (s32 false-colour key beside the natural-colour picture for 33 s; s19 radar label 2 min early) | PASS (701 cues = script) | PASS | n/a (retired) | **FIX** |
+
+**Method.** 138 full frames at the cue times of s00, s06, s07, s17–s19, s24, s29–s34 (from `en.vtt`), plus 1-fps strips through the s32 and s34 swipes and extra frames at 27:05–27:25, 28:53–29:09 and 35:37–35:52. Everything is in `reports/movies/ch00_coordinates_storm/notes1_review/` (`t*.jpg` full frames, `tiles/` 2×2 sheets and swipe strips, `c*.jpg` crops at 640-px scale). Sources: `user_notes_2026-11-06.md`, storyboard `user_notes_2026_11_06`, `script.md`, `en.vtt`, `timing.json`, `qa.json`, HOUSE_STYLE §3.
+
+### The user's notes, one by one
+| # | note | verdict | evidence (timestamps) |
+|---|---|---|---|
+| 1 | s06 no "assume nothing" | **fixed** | 07:52.5 cue: "Let's take this slowly, one step at a time." The phrase is not in `en.vtt` or the s06 script text. |
+| 2 | s06 no spoken or shown step numbers | **fixed** | The voice says "First, …" (07:56) and "Next, …" (08:09). HOUSE_STYLE §3 allows these words. There is no "Step one…five". The frames at 07:58–09:37 show no step labels, only "how does θ̂ change?", "swap, minus on the first" and "θ̂ swings towards −r̂". |
+| 3 | s07 Δθ = 0.01 rad named, formula, each subtraction, the quotient, −r̂ = −(cos θ, sin θ) | **fixed** | 10:30: dθ̂/dθ ≈ [θ̂(θ+Δθ) − θ̂(θ)]/Δθ. 10:38: "Δθ = 0.01 rad ≈ 0.57° (a small turn)". 10:45–10:52: θ̂(53.13°) = (−0.8, 0.6) and 53.13° + 0.57° = 53.70°. 11:00: θ̂(53.70°) = (−0.806, 0.592) and Δθ̂ = (−0.806 − (−0.8), 0.592 − 0.6) = (−0.006, −0.008), with "minus a minus is a plus". 11:07–11:12: ÷ 0.01 = (−0.6, −0.8). 11:25: r̂ = (0.6, 0.8) and −r̂ = −(cos θ, sin θ) = −(0.6, 0.8) = (−0.6, −0.8), marked "← the same". Checked: sin 53.70° = 0.806 and cos 53.70° = 0.592. Each row appears on its words. |
+| 4 | s17 radar source line, exact | **fixed** | 25:30 and 25:45 read "Data: NOAA NEXRAD weather radar, Tampa Bay (KTBW) · 28 Sep 2022, 18:02 UTC" / "(lowest beam, tilted 0.5° above the ground)", word for word. No source line in the movie names a maker. |
+| 5 | no private lines | **fixed** | 26:26 "So here's our rule." with "where the eye is: radar, satellite" / "winds: model, own centre". There is no "never mix the two centres". s28 says "Nothing at all." with no "honest answer". s05 and s09 no longer mention what "the derivatives movie didn't show". |
+| 6 | s18–s19 HRRR stack tall, evenly spaced, close angled readable camera, swing kept | **fixed, with 2 Must** | 27:00–27:50: an oblique close camera, with 5 evenly spaced layers spanning y ≈ 60–800 and labels "925 hPa ≈ 0.7 km" … "150 hPa ≈ 14 km" on their words (27:30 onwards). The "spread out evenly" keyword appears at 28:10. The ring readout follows at 28:15–28:55, the swing at 29:00 and the close side look at 29:02–29:08. **But** the axis label is clipped (M1) and the colour bar overlaps the layers (M2). |
+| 7 | s24 dark shapes labelled on their words | **fixed** | 35:05 (cue 35:03): "dark line: u_r = 0 m/s · in \| out border", with "0" tags on the contours. 35:20: "it wraps weak pockets", with dashed circles. 35:35 (cue 35:32.5): "no colour: no data". 35:41.5 (cue 35:41.0): dashed outlines on the below-sea-surface boxes and along the top, "below the sea surface · above the top level". 35:46: "Amphan: starts 25 km out", with the 0–25 km strip outlined. |
+| 8 | s32 Nargis natural colour first, reason, then 7-2-1 with key | **fixed in order, but Must M3** | 43:16: natural colour, "as our eyes would see it". 43:20–43:26: the before/after panels pulse on their words. 43:31–43:41: the natural swipe. 43:41: "hard to see: both brown" with muddy water / wet soil swatches. 43:44–44:03: band mapping and the colour key. 44:15: the false-colour pair. |
+| 9 | s31 Nargis case study: globe → location / track / dates → zoom → pictures; 90 kt → km/h → m/s | **fixed** (Should S2, S6) | 41:58: globe, "Cyclone Nargis · May 2008". 42:08: Bay of Bengal, Myanmar, delta box. 42:12–42:26: delta picture with "many channels", "a low, flat plain". 42:28–42:52: IBTrACS track drawn with a running date (25 Apr 21 UTC → 3 May 21 UTC), "west → north → east", "landfall: 2 May 2008". 42:45: "official (3-min): 90 kt · 90 × 1.852 ≈ 167 km/h · 167 ÷ 3.6 ≈ 46 m/s", checked. 42:52: "→ across the delta, to Yangon". 42:58–43:03: MODIS Aqua, 2 May, with "eye" circled on its words. 43:11: "zoom in: the delta". |
+| 10 | s33–s34 Idai before/after with intro | **fixed** (Should S3) | 44:42: globe with the equator, "south of the equator". 44:48: Mozambique Channel and track. 44:57: "clockwise (seen from above)", with north (anticlockwise) and south (clockwise) icons and a clockwise ring on the storm. The physics is right. 45:06: VIIRS, 14 Mar. 45:11: "landfall near Beira · night of 14-15 March". 45:20: 85 kt × 1.852 ≈ 157 km/h ÷ 3.6 ≈ 44 m/s, checked. 45:29: Beira and Buzi are labelled apart. 45:32: zoom. 45:35–46:10: natural colour, then false colour, with the key, "dark blue: floodwater" and "white blobs: clouds" (46:02, cue 46:01.3). |
+| 11 | s30 Amphan: why no optical pair, Sentinel-1 pair with colour bar and key, 125 km² and √125 | **fixed** (Should S4, S5) | 40:49: MODIS 21 and 22 May thumbnails, all cloud, with "gold line: the coast, under the cloud". 40:56: "clouds for days". 41:05: "small patches, 250-m pixels". 41:10–41:25: radar diagram ("microwaves out, echo back", "land: rough · echo back: bright", "calm water: a mirror · bounces away: dark"). 41:28: Sentinel-1 pair, "Satkhira · the Sundarbans", the dates, the dB bar −24…0, and "dark = water / bright = land, trees, towns". 41:44: "new water = 124.9 km² ≈ 125 km²". 41:52: "√125 ≈ 11.2 km · 11 × 11 = 121 ≈ 125 km²", with an 11-km box drawn on the image on its words (cue 41:50.95). |
+| 12 | opening line has no "the easy way" | **fixed** | 00:00.3–00:13.8 cues: "In this video, we'll learn how turning arrows and cylinders work, …". The printed promise "made easy" is kept (house title), and it is not voiced. s01 (01:20) and s35 name Amphan, Nargis and Idai in order. |
+
+**Other checks.**
+- Swipes, from 1-fps strips:
+  - s30 (41:34–41:55) goes right → left → right → middle.
+  - s32 natural (43:31–43:46) and s32 false colour (44:15–44:32) both go right → left → right → middle.
+  - s34 false colour (45:50–46:09) goes right → left → right → middle.
+  - **s34 natural (45:35–45:49) goes right → left → right and stops on "before", with no middle stop (S3).**
+- Maths font: θ̂, r̂, u_r, Δθ and the conversion rows are KaTeX, and the words are sans.
+- Every number in the notes scenes is named, except the items listed below.
+- Nothing overlaps beyond M2, S4 and C8.
+
+### Must
+- **M1 · 27:02–27:45 (s18 S5–S9, 1622–1665 s) · the "height" axis label is clipped.** The new close camera crops it to "nt" at the top-left corner (27:05, 27:10, 27:20). From about 27:30 the arrow tip leaves the frame, and the top layer touches the top edge (27:40). **Fix:** pull the camera back about 10 %, or pin the axis label in screen space at 40 px or more inside the frame.
+- **M2 · 29:02–29:08 (s19 S10, the close side look) · the colour bar sits on the layers.** The bar "−16 · 0 · +16 m/s / − in / + out" lies on top of the two middle layers, which run under it to the right edge (29:05 full frame). **Fix:** fade the bar out for the close look, or end the layers left of x ≈ 1150.
+- **M3 · 43:41–44:14 (s32 S7–S11, 33 s) · the false-colour key appears beside a natural-colour picture.**
+  - What is wrong:
+    - "false colour: bands 7-2-1", the band mapping (SWIR → red, NIR → green, red → blue) and the swatches "plants / dry fields / clouds / water" stand next to the **natural-colour** pair.
+    - The natural pair is still swiping and holds at the middle.
+    - Its source line still reads "natural colour (bands 1-4-3)".
+    - A viewer reads "pink = dry fields" while seeing a brown and green picture.
+    - "the same two days" also appears at 44:03, about 11 s before its words (44:14.65).
+  - **Fix:**
+    - On S7 ("So flood mappers use false colour"), dim the natural pair and title it "next: false colour", or cross-fade straight to the false-colour *before* image.
+    - Show the swatches only once the false-colour picture is up.
+    - Reveal "the same two days" on S12.
+
+### Should
+- **S1 · 28:55 (s19 S8) · the radar arrows appear two minutes before the radar is introduced.** "in → up → out", "up: measured by radar", the yellow up arrows and the source text "up arrows: NOAA P-3 tail Doppler radar" all appear here. The voice says only "comes in … goes out", and the radar is first spoken at 30:56 (s20). **Fix:** hold the arrows and label until 30:52–30:56, or drop them from s19.
+- **S2 · 42:45 (s31 S8) and 45:20 (s33 S5) · the knot conversions are not spoken.**
+  - The rows "× 1.852 ≈ 167 / 157 km/h" and "÷ 3.6 ≈ 46 / 44 m/s" are on screen, but the voice jumps from knots to m/s and never names 1.852, 3.6 or km/h. This breaks the rule that every number on screen is named, in sync with the voice.
+  - The rows are also in muted grey, the lowest-contrast maths in the movie.
+  - **Fix:** add one clause, "a knot is 1.852 km/h, so about 167 km/h, or 46 m/s", and set the rows in the key colour.
+- **S3 · 45:35–45:49 (s34 S1–S3) · the Idai natural-colour swipe has no middle stop.** It goes right → left → right and ends on "before", which breaks the user's swipe rule. **Fix:** add the middle hold before "Now the same two days in false colour" (45:49.5).
+- **S4 · 41:34–41:55 (s30 S8–S10) · the "before · 16 May" tag collides with the map marks.** The Satkhira gold dot sits on the word "before" (crop `c2512_label.jpg`), the tag touches the N arrow, and the dot is about 80 px from its "Satkhira" label. **Fix:** move the date tag to the bottom-left, and put the dot next to its name.
+- **S5 · 41:44–41:55 (s30 S9) · the 125 km² has no inputs, and the counted water is not marked.** "new water = 124.9 km²" appears with no pixel count × pixel area, and the new-water pixels are not marked, so the viewer cannot see which patches make the 125 km². **Fix:** tint the new-water mask (for example cyan) on the after image on S9, and add "N pixels × 0.0001 km² ≈ 124.9 km²".
+- **S6 · 42:58–43:06 (s31 S11) · the eye cannot be seen.** The MODIS Aqua 2 May frame is nearly uniform white cloud, so the gold "eye" circle marks nothing visible (`t2582.jpg`). **Fix:** use a wider crop showing the spiral, as Idai's VIIRS frame does, or contrast-stretch the image.
+- **S7 · 07:52–08:55 (s06 S1–S12) · the right half is nearly empty.** For about 60 s the right half holds only "how does θ̂ change?". "s = 1 × Δθ = Δθ" shows faintly for about 4 s at 08:32. **Fix:** add sentence keywords in the maths zone: "same unit circle", "a quarter turn ahead", "turns by the same Δθ", "slides Δθ along the circle".
+
+### Cosmetic
+- **C1 · 34:50 (s24 S1).** "≈ 0.2 km up" is on screen but not said.
+- **C2 · 41:58 (s31 S1).** "Cyclone Nargis · May 2008" appears about 2 s before the voice says "Cyclone Nargis".
+- **C3 · s31–s32.** Pathein, Labutta and Bogale are labelled but never named. Yangon is labelled from 42:12 and named at 42:52.
+- **C4 · 45:25 (s33 S7).** "low, flat land: two rivers": the two rivers are not marked.
+- **C5 · 45:32 (s33 S8).** The zoom transition shows a cloud-speckled MODIS rectangle pasted into the blurred Blue Marble.
+- **C6 · 41:10 (s30 S2).** The Sentinel-1 icon appears about 1 s before its name.
+- **C7 · 43:50 and 45:35.** The Bogale and Dondo labels drop to half opacity on one side of the swipe line.
+- **C8 · 43:02 (s31).** The dashed track runs through the "Irrawaddy delta" label.
+
+### What works (keep)
+- All 12 notes have landed:
+  - the s07 calculation is complete and checks to three decimals;
+  - the radar source line is exact;
+  - the Nargis and Idai case studies run globe → place → track and clock → intensity with arithmetic → storm picture → zoom → natural → false colour;
+  - the Amphan radar segment explains clouds and pixel size in plain words before the Sentinel-1 pair;
+  - the s24 contours and no-data areas are labelled on their words.
+- Hemisphere physics is right throughout: NH anticlockwise for Ian, Amphan and Nargis, and SH clockwise for Idai, shown with both icons.
+
+### Verdict: FIX (#5b notes1 verification: 3 Must, 7 Should, 8 Cosmetic)
