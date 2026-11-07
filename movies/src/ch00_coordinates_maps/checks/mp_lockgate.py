@@ -42,8 +42,8 @@ def main() -> int:
         return 1
     oh = owner(H)
     if mode == "voice":
-        heavy_ok = (not H.exists()) or ("render" in oh.lower() and not any(w in oh.lower() for w in ("k6", "still", "ssr")))
-        return 0 if heavy_ok and free_gb() >= 8 else 1
+        heavy_ok = not H.exists()  # 2026-11-07: the VOICE phase includes a mix (~11.5 GB): no overlap with any HEAVY job
+        return 0 if heavy_ok and free_gb() >= 14 else 1
     if mode == "heavy":
         return 0 if not H.exists() and not V.exists() else 1
     raise SystemExit(f"mode {mode}?")

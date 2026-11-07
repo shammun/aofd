@@ -54,11 +54,11 @@ def main() -> int:
     if mode == "voice":
         if HEAVY.exists():
             o = owner(HEAVY)
-            if re.search(r"k6|still|ssr", o, re.I) or not re.search(r"render", o, re.I):
+            if True:  # 2026-11-07: VOICE phase includes a mix (~11.5 GB): no overlap with any HEAVY job
                 reasons.append(f"HEAVY.lock held by a non-render job: {o}")
         free = psutil.virtual_memory().available / 1e9
-        if free < 8:
-            reasons.append(f"RAM {free:.1f} GB free < 8")
+        if free < 14:
+            reasons.append(f"RAM {free:.1f} GB free < 14")
     elif mode == "heavy":
         if VOICE.exists():
             reasons.append(f"VOICE.lock held: {owner(VOICE)}")
