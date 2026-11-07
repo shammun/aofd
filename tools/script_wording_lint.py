@@ -20,6 +20,7 @@ BANNED = [
     (re.compile(r"\bassume nothing\b", re.I), "private reassurance"),
     (re.compile(r"\bnever mix the two cent", re.I), "private reassurance"),
     (re.compile(r"\bby the author\b", re.I), "no maker credit"),
+    (re.compile(r"\bmade easy\b", re.I), "no 'made easy' anywhere, voice or title (user 2026-11-06)"),
 ]
 
 

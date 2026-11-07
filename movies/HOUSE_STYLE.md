@@ -50,7 +50,7 @@ Transitions are spoken bridges, never cards:
 ### The opening title (s00, about 10 s; `movies/src/house/kit/title.tsx`)
 **Left column, x 100–1075:**
 - **Title:** `RiseText` at **150 px, weight 800**, filled with `TitleGradient` (teal `C.first` to gold `C.gold`). Letters rise 24 px and fade in over 8 frames with a 2-frame stagger; two lines ("The dot" / "product").
-- **Promise:** "made easy" at **96 px**, warm white `C.key`. It pulses (×1.06) when the voice says the concept's name (never voice "the easy way").
+- **No "made easy" / "easy" anywhere in the title or the first frame** (user, 2026-11-06: "very annoying"). The old promise line is removed; the title is the concept name, then the subtitle. The concept name pulses (×1.06) when the voice says it. Later-movie names are said without "made easy" ("our tensors movie").
 - **Subtitle:** "and how meteorology uses it" at **68 px**, warm white, with the application word in teal.
   - Change the application word per movie: meteorology, oceanography, the climate…
 
@@ -62,7 +62,13 @@ Transitions are spoken bridges, never cards:
 **One spoken sentence** in this pattern:
 > "In this video, we'll learn the <concept>, and see how <field> uses it to <the application in plain words>."
 
-**Never say "the easy way"** (user, 2026-11-06: it sounds unnatural). The on-screen promise pulses on the concept's name instead.
+**Never say "the easy way"** (user, 2026-11-06: it sounds unnatural), and never write "easy" in the title.
+
+**Series parts (user, 2026-11-06).** In a multi-part series:
+- Part N ≥ 2 opens (right after the title sentence) with a short "so far / this time" bridge: what the earlier parts covered, what this part adds, and what comes later in it.
+- When a part uses a result derived in an earlier part, show the equation on screen at that moment, say "we derived this in Part K" (keyword "derived in Part K: <name>"), and move on to the implications. Never use an earlier result silently; never re-derive it at length.
+- Each part ends smoothly: a recap of what this part did, then one or two sentences on what the next part covers and why (a teaser that links to it), then the house ending. No abrupt cut, no new idea in the last minute, music and picture fade out together.
+- Every application (e.g. storm surge, floods) is preceded on screen by the equation that links it to the maths (e.g. along/across-shore wind by rotated axes) and a worked calculation with the real data; the reasoning ("onshore wind piles water against the coast") is said before the evidence is shown.
 
 **Spoken wording rules (user, 2026-11-06, all movies; checked by `tools/script_wording_lint.py` before every TTS):**
 - No numbered spoken steps ("Step one … Step two …"). Let a step-by-step explanation flow: "First, …", "Next, …", "Now …", "So …". On-screen step labels are fine.
