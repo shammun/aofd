@@ -11,7 +11,7 @@ import { CurvedLink } from "../house/kit/extras";
 import { Part } from "../house/kit/tex";
 import { GlobeCam } from "./kit_mp/globe";
 import {
-  AT, Arrow, CalcStack, ColourBar, D, D2R, Globe, IMGS, K, Keyword, Layered, Lbl, OptTag, ProjMap, PV, RasterImg, SRC_BM, SRC_T2M, SS, Scene,
+  AT, Arrow, CalcStack, ColourBar, D, D2R, Globe, HL, IMGS, K, Keyword, Layered, Lbl, OptTag, ProjMap, PV, RasterImg, Recall, SRC_BM, SRC_T2M, SS, Scene,
   SkipChip, Svg, TIS, TeX, XC, fin, fout, gLine, gdot, keepTime, llD, mapBox, mapPt, mix, poly, prog, psi, tissotD, win, eeOutline,
 } from "./mp_lib";
 import { EQ_S08, EQ_S09, EQ_S10, EQ_S11, EQ_S12, EQ_S13, cutAt } from "./mp_eq";
@@ -69,9 +69,9 @@ const S08: React.FC = () => {
         {pat(760, 111.2 * u, 111.2 * u, C.second, fin(f, t5), "flat square", 800)}
         {pat(925, 111.2 * u, hM, C.gold, fin(f, t6), "Mercator", 745)}
         <g opacity={fin(f, t5 + 40)}><Bracket p={[760 - 50, 712]} q={[760 + 50, 712]} c={C.second} off={0} /></g>
-        <Lbl x={760} y={560} t="× 1.5 wide" c={C.second} s={T.floor} a="middle" o={win(f, t5 + 40, t6 + 70)} />
+        <Lbl x={760} y={560} t="$\times$ 1.5 wide" c={C.second} s={T.floor} a="middle" o={win(f, t5 + 40, t6 + 70)} />
         <g opacity={fin(f, t6 + 70)}><Bracket p={[990, 700]} q={[990, 700 - hM]} c={C.gold} off={0} /></g>
-        <Lbl x={925} y={700 - hM - 34} t="× 1.5 tall" c={C.gold} s={T.floor} a="middle" o={fin(f, t6 + 70)} />
+        <Lbl x={925} y={700 - hM - 34} t="$\times$ 1.5 tall" c={C.gold} s={T.floor} a="middle" o={fin(f, t6 + 70)} />
         <SkipChip f={f} k={k} to={keepTime("s12_rhumb_straight")} />
         <Keyword f={f} text="a formula for Mercator's map" at={[XC, 200]} s={T.floor} appear={0} out={t4 - 18} />
         <Keyword f={f} text="keep shapes: same stretch" at={[XC, 560]} s={T.floor} appear={t6} out={t9 - 18} c={C.gold} />
@@ -83,13 +83,15 @@ const S08: React.FC = () => {
         { lhs: String.raw`\Delta y_{\text{globe}}`, rhs: String.raw`=a\,\Delta\varphi`, at: AT(k, 4, "true length") },
         { lhs: String.raw`\Delta y_{\text{Mercator}}`, rhs: String.raw`=\dfrac{a\,\Delta\varphi}{\cos\varphi}`, at: t7 + 30, h: 120 },
         { lhs: String.raw`1^\circ\ \text{north}`, rhs: String.raw`=111.2\ \text{km}`, at: AT(k, 9, "a hundred") },
-        { lhs: String.raw`\text{Brest}`, rhs: String.raw`=111.19\times1.5059`, at: AT(k, 10, "times one point"), c: C.gold },
+        { lhs: String.raw`\text{Brest}`, rhs: String.raw`=111.19\times1.5059`, at: AT(k, 10, "where the stretch"), c: C.gold, glow: HL(f, AT(k, 10, "one point five zero six")) },
         { rhs: String.raw`\approx167.4\ \text{km}`, at: AT(k, 10, "about a hundred"), c: C.gold, cont: true },
         { lhs: String.raw`60^\circ\text{N}`, rhs: String.raw`=111.2\times2`, at: AT(k, 11, "twice as long"), c: C.gold },
         { rhs: String.raw`=222.4\ \text{km}`, at: AT(k, 11, "about two hundred"), c: C.gold, cont: true },
       ]} />
       <TeX s={EQ_S08} x={XC} y={690} size={96} o={fin(f, t13)} />
-      <Svg><Keyword f={f} text="d instead of Δ: a tiny step" at={[XC, 560]} s={T.floor} appear={t12} out={t14 - 18} /></Svg>
+      <Svg><Keyword f={f} text="$d$ instead of $\Delta$: a tiny step" at={[XC, 560]} s={T.floor} appear={t12} out={t14 - 18} /></Svg>
+      {/* remake 2026-11-07 (R16): the true north step is Part 3's distance north */}
+      <Recall f={f} tex="" name="distance north" part={3} x={XC} y={480} appear={AT(k, 4, "From Part 3")} out={t6 - 18} />
     </Scene>
   );
 };
@@ -141,7 +143,6 @@ const S09: React.FC = () => {
           opacity={show[i] * (i % 2 ? 1 : 0.6)} />)}
         <Lbl x={TCOL[0]} y={360} t="step" c={C.muted} s={T.floor} b={false} o={fin(f, t5)} />
         <Lbl x={TCOL[1]} y={360} t="middle" c={C.muted} s={T.floor} b={false} o={fin(f, t5)} />
-        <Lbl x={TCOL[2]} y={360} t="1/cos" c={C.muted} s={T.floor} b={false} o={fin(f, t5)} />
         <Lbl x={TCOL[3]} y={360} t="drawn" c={C.muted} s={T.floor} b={false} o={fin(f, t5)} />
         <Lbl x={TCOL[4]} y={360} t="total" c={C.muted} s={T.floor} b={false} o={fin(f, t5)} />
         {cell(0, RY(0), "0–10°", rowO(t5, t7))}{cell(1, RY(0), "5°", rowO(AT(k, 5, "five degrees"), t7))}{cell(2, RY(0), "1.004", rowO(AT(k, 5, "one point zero zero four"), t7))}
@@ -157,12 +158,13 @@ const S09: React.FC = () => {
         <Lbl x={LX + 190} y={ladY(0.175) + 40} t="≈ 1116 km" c={C.first} s={T.floor} o={win(f, r1 + 20, t8)} />
         <Lbl x={LX + 190} y={110} t="≥ 2 more" c={C.gold} s={T.floor} o={fin(f, AT(k, 13, "at least two more"))} />
         <OptTag f={f} />
-        <Keyword f={f} text="how high is latitude φ?" at={[XC, 170]} appear={0} out={t1 - 18} />
+        <Keyword f={f} text="how high is latitude $\varphi$?" at={[XC, 170]} appear={0} out={t1 - 18} />
         <Keyword f={f} text="the steps grow" at={[XC, 300]} appear={t12} out={t14 - 18} c={C.gold} />
         <Keyword f={f} text="1599: Edward Wright," at={[XC, 170]} appear={AT(k, 14, "fifteen ninety nine")} />
         <Lbl x={XC} y={235} t="a table of added-up steps" c={C.key} s={T.floor} o={fin(f, AT(k, 14, "Edward Wright"))} />
       </Svg>
       <TeX s={EQ_S09} x={XC} y={192} size={62} o={fin(f, t1) * fout(f, t14 - 20, 12)} />
+      <TeX s={String.raw`1/\cos`} x={TCOL[2]} y={360} size={44} c={C.muted} o={fin(f, t5)} />{/* the column head in TeX (symbol lint C5) */}
       <TeX s={String.raw`\Delta\varphi=10^\circ=0.1745\ \text{rad}`} x={XC} y={300} size={56} o={win(f, t3, t6 - 10)} />
       <TeX s={String.raw`0.1745\times1.004\approx0.175`} x={XC} y={300} size={56} o={win(f, t6 + 8, t12 - 18)} />
       <TeX s={String.raw`\times\dfrac{1}{\cos\varphi}`} x={LX + 30} y={ladY(1.9)} size={54} c={C.gold} o={fin(f, t12 + 10)} />
@@ -199,27 +201,29 @@ const S10: React.FC = () => {
         <OptTag f={f} />
         <Keyword f={f} text="an exact answer" at={[XC, 160]} appear={0} out={t1 - 18} />
         <Keyword f={f} text="natural logarithm: ln" at={[XC, 160]} appear={t1} out={t6 - 18} />
-        <Keyword f={f} text="e to what power gives x?" at={[XC, 360]} s={T.floor} appear={t3} out={t6 - 18} />
+        <Keyword f={f} text="$e$ to what power gives $x$?" at={[XC, 360]} s={T.floor} appear={t3} out={t6 - 18} />
         <Keyword f={f} text="test it on the table" at={[XC, 360]} s={T.floor} appear={t8} out={t9 - 18} />
         <Lbl x={lnX(1)} y={lnY(0) + 40} t="1" c={C.gold} s={T.floor} a="middle" o={gO * fin(f, t4)} />
-        <Lbl x={lnX(Math.E)} y={lnY(0) + 40} t="e" c={C.gold} s={T.floor} a="middle" o={gO * fin(f, t5)} />
-        <Lbl x={lnX(4.1) + 10} y={lnY(0) - 30} t="x" c={C.muted} s={T.floor} o={gO} />
-        <Lbl x={lnX(3.0)} y={lnY(1.3)} t="ln x" c={C.first} s={T.floor} o={gO} />
+        <Lbl x={lnX(Math.E)} y={lnY(0) + 40} t="$e$" c={C.gold} s={T.floor} a="middle" o={gO * fin(f, t5)} />
+        <Lbl x={lnX(4.1) + 10} y={lnY(0) - 30} t="$x$" c={C.muted} s={T.floor} o={gO} />
+        <Lbl x={lnX(3.0)} y={lnY(1.3)} t="$\ln x$" c={C.first} s={T.floor} o={gO} />
         <Lbl x={1460} y={680} t="same ✓" c={C.gold} s={T.key} o={win(f, AT(k, 12, "the same"), t13)} />
       </Svg>
+      {/* remake 2026-11-07 (R16): adding up tiny steps = Part 3's integration */}
+      <Recall f={f} tex="" name="integration" part={3} x={XC} y={250} appear={AT(k, 0, "the integration")} out={t2 - 14} />
       <TeX s={String.raw`e\approx2.718`} x={XC} y={260} size={68} o={win(f, t2, t6 - 18)} />
       <TeX s={String.raw`\ln 1=0`} x={XC} y={460} size={68} o={win(f, t4, t6 - 18)} />
       <TeX s={String.raw`\ln e=1`} x={XC + 330} y={460} size={68} o={win(f, t5, t6 - 18)} />
       <TeX s={EQ_S10} x={XC} y={200} size={66} o={fin(f, t6)} />
       <TeX s={String.raw`\dfrac{\pi}{4}\ \text{rad}=45^\circ`} x={XC} y={345} size={56} c={C.gold} o={win(f, t7, t8 - 20)} />
       <CalcStack f={f} x={XC + 10} y={400} size={54} maxLines={3} rows={[
-        { rhs: String.raw`45^\circ+30^\circ=75^\circ`, at: t9 },
-        { rhs: String.raw`\tan 75^\circ\approx3.732`, at: t10 },
-        { rhs: String.raw`\ln 3.732\approx1.317`, at: AT(k, 10, "l n of three") },
+        { rhs: String.raw`45^\circ+60^\circ/2=75^\circ`, at: AT(k, 9, "adding half") },
+        { rhs: String.raw`\tan 75^\circ\approx3.732`, at: t10, glow: HL(f, AT(k, 10, "three point seven")) },
+        { rhs: String.raw`\ln 3.732\approx1.317`, at: AT(k, 10, "the l n of that") },
         { rhs: String.raw`10^\circ\text{ steps: }1.313`, at: AT(k, 11, "one point three one three") },
         { rhs: String.raw`1^\circ\text{ steps: }1.317`, at: AT(k, 12, "one point three one seven") },
-        { rhs: String.raw`45^\circ+24.2^\circ=69.2^\circ`, at: t13 },
-        { rhs: String.raw`\tan 69.2^\circ\approx2.6325`, at: t14 },
+        { rhs: String.raw`45^\circ+48.4^\circ/2=69.2^\circ`, at: t13 },
+        { rhs: String.raw`\tan 69.2^\circ\approx2.6325`, at: t14, glow: HL(f, AT(k, 14, "two point six")) },
         { rhs: String.raw`\ln 2.6325\approx0.968`, at: AT(k, 14, "its l n") },
         { rhs: String.raw`0.968\times6371\approx6167\ \text{km}`, at: AT(k, 15, "about six thousand") - 20, c: C.gold },
       ]} />
@@ -250,7 +254,7 @@ const S11: React.FC = () => {
           <Lbl x={gx(p)} y={gy(0) + 40} t={`${p}°`} c={C.muted} s={52} a="middle" b={false} /></g>)}
         {[1, 2, 3].map((v) => <g key={v}><line x1={gx(0) - 12} y1={gy(v)} x2={gx(0)} y2={gy(v)} stroke={C.muted} strokeWidth={3} />
           <Lbl x={gx(0) - 20} y={gy(v)} t={`${v}`} c={C.muted} s={52} a="end" b={false} /></g>)}
-        <Lbl x={gx(0) + 16} y={gy(3.55)} t="y / a" c={C.muted} s={T.floor} b={false} />
+        <Lbl x={gx(0) + 16} y={gy(3.55)} t="$y/a$" c={C.muted} s={T.floor} b={false} />
         <path d={cv} fill="none" stroke={C.first} strokeWidth={6} />
         <Arrow p={[gx(85.5), gy(3.2)]} q={[gx(86.5), gy(3.62)]} color={C.first} w={6} head={24} o={fin(f, t11)} />
         <circle cx={gx(0)} cy={gy(0)} r={12 + 8 * pulse(f, t10 + 20, 40)} fill={C.gold} opacity={fin(f, t10)} />
@@ -354,18 +358,19 @@ const S12: React.FC = () => {
         <g opacity={win(f, t9, t14, 14)}>
           {tri([780, 600], 0.62 * D.rh.k40)}
           {tri([980, 690], 0.62 * D.rh.k50)}
-          <Lbl x={560} y={820} t="both legs × 1/cos φ: same slant" c={C.gold} s={T.floor} o={fin(f, t10)} />
+          <Lbl x={560} y={820} t="both legs $\times\,1/\cos\varphi$: same slant" c={C.gold} s={T.floor} o={fin(f, t10)} />
         </g>
         <line x1={mapPt(V12, "mc", R.lon[0], R.lon[1])[0]} y1={mapPt(V12, "mc", R.lon[0], R.lon[1])[1] - 3} x2={mapPt(V12, "mc", R.lax[0], R.lax[1])[0]} y2={mapPt(V12, "mc", R.lax[0], R.lax[1])[1] - 3}
           stroke={C.gold} strokeWidth={2} strokeDasharray="4 8" opacity={win(f, t12 + 60, t13)} />
         <Keyword f={f} text="if you skipped, keep this:" at={[XC, 110]} appear={0} out={t2 - 18} c={C.gold} />
         <Keyword f={f} text="never shows the poles" at={[XC, 360]} s={T.floor} appear={AT(k, 1, "never show")} out={t2 - 18} />
-        <Keyword f={f} text="rhumb line: one compass bearing" at={[XC, 110]} s={T.floor} appear={t3} out={t12 - 18} />
+        {/* remake 2026-11-07 (R16): the rhumb line (and its 258.5° from London to Los Angeles) is Part 6's: Recall label below */}
         <Keyword f={f} text="same slant → straight line" at={[XC, 620]} appear={t12} out={t14 - 18} c={C.gold} />
         <Keyword f={f} text="great circle: curved here" at={[XC, 700]} s={T.floor} appear={t13} out={t14 - 18} />
         <Keyword f={f} text="globe ↔ map: they swap looks" at={[XC, 620]} appear={t14} />
       </Svg>
       <TeX s={String.raw`\text{each strip}\times\dfrac{1}{\cos\varphi}`} x={XC} y={250} size={60} c={C.key} o={win(f, t1, t2 - 18)} />
+      <Recall f={f} tex="" name="rhumb line, one bearing" part={6} x={XC} y={110} appear={AT(k, 3, "as we saw in Part 6")} out={t12 - 18} />
       <TeX s={eq12[0]} x={XC} y={250} size={56} o={win(f, t7, t12 - 18)} />
       <TeX s={"=" + eq12[1]} x={XC} y={360} size={56} o={win(f, t7 + 10, t12 - 18)} />
       <TeX s={String.raw`\dfrac{4.9\,k}{1\,k}=4.9`} x={XC} y={480} size={64} c={C.gold} o={win(f, t10, t12 - 18)} />
@@ -405,11 +410,11 @@ const S13: React.FC = () => {
           <rect x={Bp[0]} y={Bp[1] - 100 * u * (1 + g)} width={100 * u * (1 + g)} height={100 * u * (1 + g)} fill={C.gold} fillOpacity={0.25} stroke={C.gold} strokeWidth={5} />
           <Bracket p={[Bp[0], Bp[1] + 20]} q={[Bp[0] + 100 * u * (1 + g), Bp[1] + 20]} c={C.gold} off={0} />
           <Bracket p={[Bp[0] + 100 * u * (1 + g) + 20, Bp[1]]} q={[Bp[0] + 100 * u * (1 + g) + 20, Bp[1] - 100 * u * (1 + g)]} c={C.gold} off={0} />
-          <Lbl x={Bp[0] + 50 * u * (1 + g)} y={Bp[1] + 60} t="× 2 → 200 km" c={C.gold} s={T.floor} a="middle" o={fin(f, t4 + 60)} />
+          <Lbl x={Bp[0] + 50 * u * (1 + g)} y={Bp[1] + 60} t="$\times$ 2 → 200 km" c={C.gold} s={T.floor} a="middle" o={fin(f, t4 + 60)} />
           <Lbl x={Bp[0] + 130} y={250} t="on Mercator's map" c={C.muted} s={T.floor} a="middle" b={false} />
         </g>
         <Lbl x={A[0] + 50 * u} y={A[1] + 110} t="10 000 km²" c={C.first} s={T.key} a="middle" o={fin(f, t3)} />
-        <Lbl x={Bp[0] + 130} y={A[1] + 140} t="40 000 km²: × 4" c={C.gold} s={T.key} a="middle" o={fin(f, AT(k, 5, "four times"))} />
+        <Lbl x={Bp[0] + 190} y={A[1] + 140} t="40 000 km²: 4 times" c={C.gold} s={T.key} a="middle" o={fin(f, AT(k, 5, "four times"))} />
       </Svg>
       <ProjMap id="s13m" v={V13} name="mc" img={IMGS.mc} imgO={0.8} coast={0.45} o={mapO}>
         {() => <>{(AR.gl as number[][]).map((L, i) => <g key={`g${i}`}>{out(L, C.first, 1 - 0.6 * lift)}</g>)}{(AR.af as number[][]).map((L, i) => <g key={`a${i}`}>{out(L, C.second, 1 - 0.6 * lift)}</g>)}</>}
@@ -431,11 +436,11 @@ const S13: React.FC = () => {
       </Svg>
       <CalcStack f={f} x={XC} y={200} size={56} maxLines={2} o={fout(f, t8 - 10, 12)} rows={[
         { rhs: String.raw`100\times100=10\,000\ \text{km}^2`, at: t3 },
-        { rhs: String.raw`200\times200=40\,000\ \text{km}^2`, at: AT(k, 5, "two hundred by") },
+        { rhs: String.raw`200\times200=40\,000\ \text{km}^2`, at: AT(k, 5, "two hundred kilometres wide") },
       ]} />
       <TeX s={ps[0].t} x={XC} y={430} size={64} o={fin(f, t6) * fout(f, t8 - 10, 12)} />
       <TeX s={ps[1].t} x={XC + 330} y={560} size={64} o={fin(f, AT(k, 6, "which is one over")) * fout(f, t8 - 10, 12)} />
-      <TeX s={String.raw`\text{Svalbard: }4.9\times4.9\approx24`} x={XC} y={690} size={60} c={C.gold} o={fin(f, AT(k, 7, "four point nine times")) * fout(f, t8 - 10, 12)} />
+      <TeX s={String.raw`\text{Svalbard: }4.9\times4.9\approx24`} x={XC} y={690} size={60} c={C.gold} o={fin(f, AT(k, 7, "squaring it")) * fout(f, t8 - 10, 12)} />
       <TeX s={String.raw`30.4\div2.17\approx14`} x={XC} y={300} size={64} c={C.gold} o={fin(f, t10) * fout(f, t11 - 18)} />
       <SourceBelow text="Image: NASA Blue Marble NG · borders: Natural Earth" pic={mapBox(V13, "mc", 80)} w={760} o={mapO} name="s13 src" />
     </Scene>

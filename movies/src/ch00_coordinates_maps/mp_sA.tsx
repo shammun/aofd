@@ -1,22 +1,24 @@
-// ch00_coordinates_maps scenes s00-s07: the title, the hook (Mercator + polar map), the Parts 1/3/6 recap, the orange peel (the
-// morphing Earth: globe → 12 gores → plate carrée), the plate carrée built line by line (x = a λ, y = a φ, Brest), its stretch
-// k = 1/cos φ with Tissot circles, the "keep this" + gradient pointer, and Mercator's idea (photo stretch, strips, conformal).
+// ch00_coordinates_maps scenes s00-s07: the title (series layout, remake 2026-11-07), the hook (Mercator + polar map), the orange peel
+// (the morphing Earth: globe → 12 gores → plate carrée), the plate carrée built line by line (x = a λ, y = a φ, Brest; Part 1's arc rule and
+// Part 3's distance north recalled where used), its stretch k = 1/cos φ with Tissot circles, the "keep this" + gradient pointer (Part 6's scale
+// factors and Part 3's one-degree distances recalled), and Mercator's idea (photo stretch, strips, conformal). (The opening recap s02 was cut
+// in the remake 2026-11-07: no opening recaps.)
 // Projected positions: JS mirrors of fluidpy.geo.mapproj.forward checked in mp_lib; numbers from data/mp.json only.
 import React from "react";
 import { useCurrentFrame } from "remotion";
 import { C, T } from "../house/kit/type";
 import { Bracket, Pt, pulse } from "../house/kit/draw";
-import { RiseText, TitleGradient } from "../house/kit/title";
+import { SeriesTitle } from "./kit_mp/SeriesTitle";
 import { SourceBelow } from "../house/kit/frame";
 import { CurvedLink } from "../house/kit/extras";
 import { Part } from "../house/kit/tex";
-import { GlobeCam } from "./kit_mp/globe";
 import {
-  AT, Arrow, BREST, CalcStack, D, D2R, Face, Globe, IMGS, K, LYB, Layered, Lbl, Keyword, MorphView, OptTag, PolarMap, ProjMap, PV, RasterImg, SRC_BM,
-  SS, Scene, SideCallout, SkipChip, Svg, TIS, TeX, XC, fin, flatCam, flatPos, fout, gLine, gdot, globeG, keepTime, llD, mapBox, mapPt, mix, mixPV, morphD,
-  poly, prog, pv, tissotC, tissotD, tissotFlat, win, R_PS, coastD,
+  AT, Arrow, BREST, CalcStack, D, D2R, Face, Globe, HL, IMGS, K, LYB, Layered, Lbl, Keyword, MorphView, OptTag, PolarMap, ProjMap, PV, RasterImg, Recall,
+  SRC_BM, SS, Scene, SideCallout, SkipChip, Svg, TIS, TeX, XC, fin, flatCam, flatPos, fout, gLine, gdot, globeG, keepTime, llD, mapBox, mapPt, mix, mixPV,
+  morphD, poly, prog, pv, tissotC, tissotD, tissotFlat, win, R_PS, coastD,
 } from "./mp_lib";
 import { EQ_S02, EQ_S04, EQ_S05, EQ_S06, cutAt } from "./mp_eq";
+import { GlobeCam } from "./kit_mp/globe";
 
 // ---------------------------------------------------------------- numbers on screen = the data (the module throws otherwise)
 const CHECK_A: [string, number, number, number][] = [
@@ -34,26 +36,23 @@ const SRC_IMG = "Image: NASA Blue Marble NG";
 const TB = { x: 1130, y: 170, w: 710, h: 470 };
 const S00: React.FC = () => {
   const f = useCurrentFrame(), k = K("s00_title");
-  const tEasy = AT(k, 0, "map projections"), tPole = AT(k, 0, "above the pole");
-  const pz = 1 + 0.06 * pulse(f, tEasy, 14);
+  // remake 2026-11-07 (R1, natural openings): Part B on "they're used"; the concept name pulses on "coordinates"
+  const tCo = AT(k, 0, "coordinates"), tPole = AT(k, 0, "they're used");
   const oA = fout(f, tPole, 12), oB = fin(f, tPole, 12);
-  const s = prog(f, 40, 100) + prog(f, 110, 160) + prog(f, 175, 235);
-  const spin = -30 * (1 - prog(f, 0, 40));
-  const Dd = mix(3.5, mix(8.6, 11.5, prog(f, 175, 235)), prog(f, 40, 120));
+  // the Part A morph (globe → gores → plate carrée → Mercator) is time-scaled so that it ends before Part B's cross-fade (remake: B moved earlier)
+  const q = Math.min(1, (tPole - 6) / 235);
+  const s = prog(f, 40 * q, 100 * q) + prog(f, 110 * q, 160 * q) + prog(f, 175 * q, 235 * q);
+  const spin = -30 * (1 - prog(f, 0, 40 * q));
+  const Dd = mix(3.5, mix(8.6, 11.5, prog(f, 175 * q, 235 * q)), prog(f, 40 * q, 120 * q));
   const st = flatCam({ D: Dd, pp: [TB.w / 2, TB.h / 2] });
   const pos = flatPos(s, spin);
   const vB: PV = { cx: TB.x + TB.w / 2, cy: TB.y + TB.h / 2, s: 225 / R_PS };
   return (
     <Scene fadeIn={false}>
+      {/* remake 2026-11-07 (R1/R2): the series title layout of every Coordinates part (kit_mp/SeriesTitle = Part 6's = Part 4's = Part 2's = Part 1's);
+          'made easy' and its pulse removed */}
       <Svg>
-        <defs><TitleGradient id="ttl" x1={100} x2={700} /></defs>
-        <RiseText f={f} t="Coordinates · Part 7" x={104} y={130} s={64} at={2} fill={C.key} />
-        <RiseText f={f} t="Maps" x={100} y={315} s={150} at={6} fill="url(#ttl)" />
-        <g transform={`translate(104 430) scale(${pz}) translate(-104 -430)`}>
-          <RiseText f={f} t="made easy" x={104} y={440} s={88} at={16} fill={C.key} />
-        </g>
-        <RiseText f={f} t="projections and" x={106} y={590} s={68} at={26} fill={C.key} />
-        <RiseText f={f} t="the view from the pole" x={106} y={680} s={68} at={32} fill={C.key} colors={(i) => (i >= 14 ? C.first : undefined)} />
+        <SeriesTitle f={f} concept="Coordinates" part="Part 7 · Maps" sub={["map projections", "and the view from the pole"]} pulseAt={tCo} />
       </Svg>
       <MorphView st={st} box={TB} pos={pos} o={oA * fin(f, 2, 10)} />
       <Svg o={oA * fin(f, 2, 10)}>
@@ -75,7 +74,7 @@ const S00: React.FC = () => {
 const V01: PV = { cx: 450, cy: 350, s: 118 };
 const VP01: PV = { cx: 1400, cy: 350, s: 290 / R_PS };
 /** seven code-drawn thumbnails of the seven parts (the seventh lit) */
-const PartThumb: React.FC<{ i: number; x: number; y: number; o: number; lit: boolean }> = ({ i, x, y, o, lit }) => {
+export const PartThumb: React.FC<{ i: number; x: number; y: number; o: number; lit: boolean }> = ({ i, x, y, o, lit }) => {
   const c = lit ? C.gold : C.local, w = 140, h = 96, cx = x + w / 2, cy = y + h / 2;
   return <g opacity={o}>
     <rect x={x} y={y} width={w} height={h} rx={12} fill="#1b2540" stroke={lit ? C.gold : C.grid} strokeWidth={3} />
@@ -95,7 +94,7 @@ const PartThumb: React.FC<{ i: number; x: number; y: number; o: number; lit: boo
 };
 const S01: React.FC = () => {
   const f = useCurrentFrame(), k = K("s01_hook");
-  const tBig = AT(k, 0, "as big as Africa"), tArc = AT(k, 0, "whole Arctic"), tSeven = AT(k, 1, "last of seven parts"), tFlat = AT(k, 2, "flattened onto maps"),
+  const tBig = AT(k, 0, "as big as Africa"), tArc = AT(k, 0, "whole Arctic"), tSeven = AT(k, 1, "last of seven parts"), tFlat = AT(k, 2, "Mercator's map")   /* remake: the natural lead-in names the maps */,
     tPole = AT(k, 3, "above the North Pole");
   const pg = pulse(f, tBig, 24), pf = pulse(f, tFlat, 24);
   const outline = (L: number[], c: string) => <path d={llD(V01, "mc", L, undefined, 0, 85, true)} fill={c} fillOpacity={0.25 + 0.3 * pg} stroke={c} strokeWidth={3 + 3 * pg} />;
@@ -116,62 +115,6 @@ const S01: React.FC = () => {
       <SourceBelow text="Image: NASA Blue Marble NG · Data: NCEP/NCAR R1 · 21 Jan 2026" pic={{ x: VP01.cx - 290, y: VP01.cy - 290, w: 580, h: 580 }} w={580} gap={12}
         o={fin(f, tPole, 20)} name="s01 src p2" />
       <SourceBelow text={SRC_BM} pic={{ x: VP01.cx - 290, y: VP01.cy - 290, w: 580, h: 580 }} w={580} gap={12} o={fout(f, tPole - 12, 12)} name="s01 src p" />
-    </Scene>
-  );
-};
-
-// ================================================================ s02 recap (Parts 1, 3, 6): one item per sentence, older ones at 60 %
-const CAM02: GlobeCam = { lat: 36, lon: -50, dist: 3.5 };
-const S02: React.FC = () => {
-  const f = useCurrentFrame(), k = K("s02_part6_recap");
-  const t1 = SS(k, 1), t2 = SS(k, 2), tA = AT(k, 2, "the letter a"), t3 = SS(k, 3), t4 = SS(k, 4), t5 = SS(k, 5), tGC = AT(k, 6, "the great circle, about"),
-    tRh = AT(k, 6, "rhumb line, which keeps");
-  const items = [t1, t2, tA, t3, t4, t5, tGC, tRh];
-  const io = (i: number) => fin(f, items[i]) * (i < items.length - 1 ? mix(1, 0.6, fin(f, items[i + 1])) : 1);
-  const gO = 1 - win(f, t1 - 6, t2 - 10, 12);
-  const pO = win(f, t1, t2 - 10, 12);
-  const R = D.routes;
-  const merLats = Array.from({ length: 50 }, (_, i) => (BREST[0] * i) / 49);
-  const parLons = Array.from({ length: 121 }, (_, i) => -180 + 3 * i);
-  // Part 1's polar grid: arc rule s = r θ
-  const c1: Pt = [520, 430], r1 = 290, th = 55 * prog(f, t1 + 10, t1 + 70);
-  return (
-    <Scene>
-      <Globe cam={CAM02} o={gO} grat={0.3} coast={0.45} over={(G) => <>
-        {gLine(G, merLats, merLats.map(() => BREST[1]), C.first, 7, win(f, t2, t3 + 10))}
-        {gLine(G, [0, 0], [0, BREST[1]], C.second, 7, win(f, t2, t3 + 10))}
-        {gLine(G, [BREST[0] - 6, BREST[0] + 6], [BREST[1], BREST[1]], C.gold, 10, win(f, t3, t4))}
-        {gLine(G, parLons.map(() => BREST[0]), parLons, C.first, 5, win(f, t4, t5 + 30))}
-        {gLine(G, R.gc[0], R.gc[1], C.gold, 7, fin(f, tGC))}
-        {gLine(G, R.rh[0], R.rh[1], C.local, 7, fin(f, tRh))}
-        {gdot(G, BREST[0], BREST[1], C.gold, 10, fin(f, t2) * fout(f, tGC - 10))}
-        {gdot(G, R.lon[0], R.lon[1], C.key, 10, fin(f, tGC))}{gdot(G, R.lax[0], R.lax[1], C.key, 10, fin(f, tGC))}
-      </>} />
-      <Svg>
-        <g opacity={pO}>
-          <circle cx={c1[0]} cy={c1[1]} r={r1} fill="none" stroke={C.local} strokeWidth={3} />
-          {[0, 1, 2, 3, 4, 5].map((i) => <line key={i} x1={c1[0]} y1={c1[1]} x2={c1[0] + r1 * Math.cos(i * Math.PI / 3)} y2={c1[1] - r1 * Math.sin(i * Math.PI / 3)} stroke={C.grid} strokeWidth={2} />)}
-          <line x1={c1[0]} y1={c1[1]} x2={c1[0] + r1} y2={c1[1]} stroke={C.first} strokeWidth={6} />
-          <line x1={c1[0]} y1={c1[1]} x2={c1[0] + r1 * Math.cos(th * D2R)} y2={c1[1] - r1 * Math.sin(th * D2R)} stroke={C.first} strokeWidth={6} />
-          <path d={poly(Array.from({ length: 30 }, (_, i) => [c1[0] + r1 * Math.cos((th * D2R * i) / 29), c1[1] - r1 * Math.sin((th * D2R * i) / 29)] as Pt))} fill="none" stroke={C.gold} strokeWidth={9} />
-          <path d={poly(Array.from({ length: 20 }, (_, i) => [c1[0] + 70 * Math.cos((th * D2R * i) / 19), c1[1] - 70 * Math.sin((th * D2R * i) / 19)] as Pt))} fill="none" stroke={C.second} strokeWidth={5} />
-        </g>
-        <Keyword f={f} text="from the earlier parts" at={[XC, 120]} appear={0} out={t1 - 18} />
-        <Lbl x={XC + 260} y={120} t="arc rule" c={C.muted} s={T.floor} o={io(0)} />
-        <Lbl x={XC} y={720} t="great circle ≈ 8755 km" c={C.gold} s={T.key} o={io(6)} />
-        <Lbl x={XC} y={795} t="rhumb line: + 11 %" c={C.local} s={T.key} o={io(7)} />
-        <Lbl x={XC + 220} y={640} t="scale factors" c={C.muted} s={T.floor} o={io(5)} />
-      </Svg>
-      <TeX s={String.raw`s=r\,\theta`} x={XC} y={120} size={68} o={io(0)} />
-      <TeX s={String.raw`r`} x={c1[0] + r1 / 2} y={c1[1] + 34} size={54} c={C.first} ax={0.5} o={pO} />
-      <TeX s={String.raw`s`} x={c1[0] + (r1 + 40) * Math.cos(27.5 * D2R)} y={c1[1] - (r1 + 40) * Math.sin(27.5 * D2R)} size={54} c={C.gold} ax={0.5} o={pO * fin(f, t1 + 72)} />
-      <TeX s={String.raw`\theta`} x={c1[0] + 110 * Math.cos(27.5 * D2R)} y={c1[1] - 110 * Math.sin(27.5 * D2R)} size={54} c={C.second} ax={0.5} o={pO * fin(f, t1 + 72)} />
-      <TeX s={String.raw`\varphi\ \text{latitude},\quad\lambda\ \text{longitude}`} x={XC} y={210} size={56} o={io(1)} />
-      <TeX s={String.raw`a\approx 6400\ \text{km}\ (6371\ \text{km})`} x={XC} y={300} size={60} o={io(2)} />
-      <TeX s={String.raw`1^\circ\ \text{north}\approx111.2\ \text{km}`} x={XC} y={390} size={60} o={io(3)} />
-      <TeX s={String.raw`1^\circ\ \text{east at Brest}\approx73.8\ \text{km}`} x={XC} y={475} size={54} o={io(4)} />
-      <TeX s={EQ_S02} x={XC} y={560} size={60} o={io(5)} />
-      <SourceBelow text={SRC_IMG} pic={{ x: 120, y: 40, w: 840, h: 760 }} w={840} o={gO} name="s02 src" />
     </Scene>
   );
 };
@@ -266,12 +209,11 @@ const S04: React.FC = () => {
       <Svg>
         {/* the unroll (drawn over the globe and the page while it moves) */}
         <UnrollEquator f={f} t0={t5 + 10} t1={t5 + 80} v={v} />
-        <Lbl x={mapPt(v, "pc", 0, 0)[0]} y={mapPt(v, "pc", 0, 0)[1] + 48} t="2πa ≈ 40 000 km" c={C.gold} s={T.floor} a="middle" o={win(f, t6, t7 - 10)} />
+        <Lbl x={mapPt(v, "pc", 0, 0)[0]} y={mapPt(v, "pc", 0, 0)[1] + 48} t="$2\pi a\approx$ 40 000 km" c={C.gold} s={T.floor} a="middle" o={win(f, t6, t7 - 10)} />
         <g data-lc-maplabel="1"><Lbl x={pB[0] - 18} y={pB[1] - 36} t="Brest" c={C.key} s={T.floor} a="end" o={brO} /></g>
         <Keyword f={f} text="the simplest map" at={[XC, 230]} appear={0} out={t9 - 18} />
         <Keyword f={f} text="lines we know the lengths of" at={[XC, 330]} s={T.floor} appear={t3} out={t7 - 18} />
-        <Keyword f={f} text="arc rule" at={[XC, 330]} s={T.floor} appear={t8} out={t10 - 18} />
-        <Keyword f={f} text="distance north (Part 3)" at={[XC, 330]} s={T.floor} appear={t12} out={t14 - 18} />
+        {/* remake 2026-11-07 (R16): the arc rule (Part 1), the letter a and the distance north (Part 3) are Recall items below */}
         <SkipChip f={f} k={k} to={keepTime("s06_gradient_preview")} />
         <CurvedLink f={f} from={[XC - 14, 230]} to={[pLam[0], pLam[1] - 14]} start={t9 + 8} end={t10} bend={60} />
         <SideCallout f={f} lines="≈ −500 km" at={[XC + 20, 700]} appear={t16 + 40} out={t19} target={[(p0[0] + pX[0]) / 2, p0[1] + 10]} c={C.second} bend={-40} />
@@ -280,12 +222,16 @@ const S04: React.FC = () => {
         <Lbl x={XC} y={740} t="and along every meridian" c={C.key} s={T.floor} o={fin(f, t19 + 68)} />
         <Keyword f={f} text="plate carrée = flat square" at={[XC, 810]} appear={AT(k, 20, "plate carrée")} c={C.gold} />
       </Svg>
-      <TeX s={String.raw`\theta\to\lambda,\ \ r\to a`} x={XC + 230} y={330} size={54} c={C.muted} o={win(f, t8 + 10, t10 - 18)} />
+      <Recall f={f} tex={String.raw`a\approx6371\ \text{km}`} lab="from Part 3:" name="the Earth's radius" x={XC} y={520} appear={AT(k, 6, "the letter a")}
+        out={t10 - 12} glow={HL(f, AT(k, 6, "six thousand"))} />
+      <Recall f={f} tex={String.raw`s=r\,\theta`} name="arc length" part={1} x={XC} y={330} appear={AT(k, 8, "the arc rule")} out={t10 - 18} />
+      <Recall f={f} tex={String.raw`\Delta y=a\,\Delta\varphi`} name="distance north" part={3} x={XC} y={330} appear={AT(k, 12, "the distance north")} out={t14 - 18} />
+      <TeX s={String.raw`\theta\to\lambda,\ \ r\to a`} x={XC + 260} y={330} size={54} c={C.muted} o={win(f, t8 + 10, t10 - 18)} />
       <TeX s={String.raw`a\,\lambda`} x={(mapPt(v, "pc", 0, 0)[0] + pLam[0]) / 2} y={pLam[1] - 50} size={54} c={C.first} ax={0.5} o={win(f, t7 + 30, t10)} />
       <Layered parts={eqParts} x={XC} y={230} size={76} layers={[{ t: [0], o: fin(f, t9) }, { t: [1, 2], o: fin(f, t13 + 40) }]} />
       <CalcStack f={f} x={XC + 110} y={300} size={56} maxLines={2} o={fout(f, t19 + 50, 14)} rows={[
         { lhs: String.raw`\varphi,\ \lambda`, rhs: String.raw`=48.4^\circ,\ \ -4.5^\circ`, at: AT(k, 14, "forty eight") },
-        { lhs: String.raw`\times\dfrac{\pi}{180}`, rhs: String.raw`=0.8447,\ \ -0.0785`, at: AT(k, 15, "zero point") },
+        { lhs: String.raw`\times\dfrac{\pi}{180}`, rhs: String.raw`=0.8447,\ \ -0.0785`, at: AT(k, 15, "zero point"), glow: HL(f, AT(k, 15, "zero point")) },
         { lhs: String.raw`x`, rhs: String.raw`=6371\times(-0.0785)`, at: t16, c: C.second },
         { rhs: String.raw`\approx-500\ \text{km}`, at: AT(k, 16, "about minus"), c: C.second, cont: true },
         { lhs: String.raw`y`, rhs: String.raw`=6371\times0.8447`, at: t17, c: C.first },
@@ -356,23 +302,26 @@ const S05: React.FC = () => {
         <OptTag f={f} />
         <Keyword f={f} text="a parallel" at={[XC, 200]} appear={0} out={tLong - 18} />
         <SideCallout f={f} lines="40 030 km" at={[XC + 14, 200]} appear={tLong} out={t8 - 20} target={[pRight[0] - 8, pRight[1] - 10]} c={C.first} bend={30} />
-        <SideCallout f={f} lines="a cos φ ≈ 4230 km" at={[XC + 14, 290]} appear={t3 + 20} out={t8 - 20} target={radMid} c={C.gold} bend={-30} />
+        <SideCallout f={f} lines="$a\cos\varphi\approx$ 4230 km" at={[XC + 14, 290]} appear={t3 + 20} out={t8 - 20} target={radMid} c={C.gold} bend={-30} />
         <SideCallout f={f} lines="≈ 4.9" at={[XC + 14, 570]} appear={t12 + 20} out={t14} target={band(LYB[0])} c={C.gold} bend={20} />
         <SideCallout f={f} lines="= 2" at={[XC + 14, 650]} appear={t11 + 20} out={t14} target={band(60)} c={C.gold} bend={20} />
         <SideCallout f={f} lines="≈ 1.5" at={[XC + 14, 730]} appear={t10 + 20} out={t14} target={band(BREST[0])} c={C.gold} bend={20} />
         <Keyword f={f} text="north-south: not stretched" at={[XC, 820]} s={T.floor} appear={t13} out={t14 + 120} />
-        <Keyword f={f} text="circle → oval, 1.5 × wider" at={[XC, 700]} s={T.floor} appear={t14 + 40} />
+        <Keyword f={f} text="circle → oval, 1.5 $\times$ wider" at={[XC, 700]} s={T.floor} appear={t14 + 40} />
         <Keyword f={f} text="squashed near the poles" at={[XC, 770]} s={T.floor} appear={AT(k, 14, "squashed flat")} />
       </Svg>
       <CalcStack f={f} x={XC} y={370} size={60} maxLines={2} o={fout(f, t8 - 20, 12)} rows={[
         { rhs: String.raw`2\pi\times4230\ \text{km}\approx26\,580\ \text{km}`, at: AT(k, 4, "twenty six") },
-        { rhs: String.raw`40\,030\div26\,580\approx1.5`, at: AT(k, 6, "divided by") },
+        { rhs: String.raw`40\,030\div26\,580\approx1.5`, at: AT(k, 6, "dividing") },
       ]} />
       <TeX s={eqA} x={XC} y={330} size={64} o={fin(f, t8) * fout(f, tCan - 10, 6)} />
       <TeX s={struck} x={XC} y={330} size={64} o={fin(f, tCan + 4)} />
-      <TeX s={String.raw`\text{Brest: }1/0.664\approx1.5`} x={XC + 230} y={730} size={48} c={C.muted} o={win(f, t10 + 30, t14)} />
-      <TeX s={String.raw`1/0.5`} x={XC + 160} y={650} size={48} c={C.muted} o={win(f, t11 + 30, t14)} />
-      <TeX s={String.raw`1/0.204`} x={XC + 190} y={570} size={48} c={C.muted} o={win(f, t12 + 30, t14)} />
+      {/* remake 2026-11-07: the cosines are the inputs, said in the voice and glowing on their words; the divisions stay on screen only */}
+      <TeX s={String.raw`\text{Brest: }1/0.664\approx1.5`} x={XC + 230} y={730} size={48} c={C.muted} o={win(f, AT(k, 10, "zero point six") - 8, t14)}
+        glow={HL(f, AT(k, 10, "zero point six"))} />
+      <TeX s={String.raw`1/0.5`} x={XC + 160} y={650} size={48} c={C.muted} o={win(f, AT(k, 11, "zero point five") - 8, t14)} glow={HL(f, AT(k, 11, "zero point five"))} />
+      <TeX s={String.raw`1/0.204`} x={XC + 190} y={570} size={48} c={C.muted} o={win(f, AT(k, 12, "zero point two") - 8, t14)} glow={HL(f, AT(k, 12, "zero point two"))} />
+      <Recall f={f} tex="" name="radius of a parallel" part={3} x={XC} y={610} appear={AT(k, 3, "As we saw in Part 3")} out={t8 - 20} />
       <SourceBelow text={SRC_IMG} pic={B4} w={830} gap={12} name="s05 src" />
     </Scene>
   );
@@ -386,8 +335,9 @@ const B6L = { ...B6, lon0: -4.5 - lonSpan6 / 2 - 0.5, lon1: -4.5 + lonSpan6 / 2 
 const P6 = (la: number, lo: number): Pt => [B6L.x + ((lo - B6L.lon0) / (B6L.lon1 - B6L.lon0)) * B6L.w, B6L.y + ((B6L.lat1 - la) / (B6L.lat1 - B6L.lat0)) * B6L.h];
 const S06: React.FC = () => {
   const f = useCurrentFrame(), k = K("s06_gradient_preview");
-  const t1 = SS(k, 1), t2 = SS(k, 2), t3 = SS(k, 3), t4 = SS(k, 4), t5 = SS(k, 5), t6 = SS(k, 6), tNot = AT(k, 6, "not by a hundred"), t7 = SS(k, 7), t8 = SS(k, 8), t9 = SS(k, 9),
-    t10 = SS(k, 10), tGr = AT(k, 10, "The gradient"), t11 = SS(k, 11), tPr = AT(k, 11, "Pressure as a vertical");
+  // remake 2026-11-07 (R16): a new S3 recalls Part 6's scale factors (tR); the old S3..S11 are now S4..S12 (t3..t11 keep their old meaning)
+  const t1 = SS(k, 1), t2 = SS(k, 2), tR = SS(k, 3), t3 = SS(k, 4), t4 = SS(k, 5), t5 = SS(k, 6), t6 = SS(k, 7), tNot = AT(k, 7, "not by the hundred"), t7 = SS(k, 8),
+    t8 = SS(k, 9), t9 = SS(k, 10), t10 = SS(k, 11), tGr = AT(k, 11, "The gradient"), t11 = SS(k, 12), tPr = AT(k, 12, "Pressure as a vertical");
   const o1 = fout(f, t3 + 30, 20), o2 = fin(f, t3 + 50, 20);
   const pA = P6(BREST[0], -5), pB = P6(BREST[0], -4);
   const ghostW = (pB[0] - pA[0]) * (D.slope.dy / D.slope.dx);
@@ -421,17 +371,17 @@ const S06: React.FC = () => {
         </g>
         <rect x={B6.x} y={B6.y} width={B6.w} height={B6.h} fill="none" stroke={C.grid} strokeWidth={3} />
         <g data-lc-maplabel="1">
-          <Lbl x={pA[0]} y={pA[1] - 40} t="T" c={C.key} s={T.key} a="middle" o={fin(f, t4)} />
-          <Lbl x={pB[0] + 10} y={pB[1] - 40} t="T + 1 °C" c={C.key} s={T.key} a="start" o={fin(f, AT(k, 4, "one degree Celsius"))} />
-          <Lbl x={(pA[0] + pB[0]) / 2} y={pA[1] + 80} t="73.8 km" c={C.first} s={T.floor} a="middle" o={fin(f, AT(k, 6, "seventy three"))} />
+          <Lbl x={pA[0]} y={pA[1] - 40} t="$T$" c={C.key} s={T.key} a="middle" o={fin(f, t4)} />
+          <Lbl x={pB[0] + 10} y={pB[1] - 40} t="$T+1$ °C" c={C.key} s={T.key} a="start" o={fin(f, AT(k, 5, "one degree Celsius"))} />
+          <Lbl x={(pA[0] + pB[0]) / 2} y={pA[1] + 80} t="73.8 km" c={C.first} s={T.floor} a="middle" o={fin(f, AT(k, 7, "seventy three"))} />
           <Lbl x={pA[0] + ghostW / 2} y={pA[1] + 160} t="111.2 km: not this" c={C.local} s={T.floor} a="middle" o={fin(f, tNot)} />
         </g>
       </Svg> : null}
       <Svg>
         <Keyword f={f} text="if you skipped, keep this:" at={[XC, 110]} appear={0} c={C.gold} out={t3 + 20} />
-        <SideCallout f={f} lines="× 4.9" at={[XC + 14, 330]} appear={AT(k, 2, "almost five")} out={t3 + 20} target={band(LYB[0])} c={C.gold} bend={20} />
-        <SideCallout f={f} lines="× 2" at={[XC + 14, 410]} appear={AT(k, 2, "two at sixty")} out={t3 + 20} target={band(60)} c={C.gold} bend={20} />
-        <SideCallout f={f} lines="× 1.5" at={[XC + 14, 490]} appear={AT(k, 2, "one and a half")} out={t3 + 20} target={band(BREST[0])} c={C.gold} bend={20} />
+        <SideCallout f={f} lines="$\times$ 4.9" at={[XC + 14, 330]} appear={AT(k, 2, "almost five")} out={tR - 10} target={band(LYB[0])} c={C.gold} bend={20} />
+        <SideCallout f={f} lines="$\times$ 2" at={[XC + 14, 410]} appear={AT(k, 2, "two at sixty")} out={tR - 10} target={band(60)} c={C.gold} bend={20} />
+        <SideCallout f={f} lines="$\times$ 1.5" at={[XC + 14, 490]} appear={AT(k, 2, "one and a half")} out={tR - 10} target={band(BREST[0])} c={C.gold} bend={20} />
         <Keyword f={f} text="weather data: on this grid" at={[XC, 110]} s={T.floor} appear={t3 + 40} out={t5 - 18} />
         <Keyword f={f} text="per kilometre, not per degree" at={[XC, 110]} s={T.floor} appear={t5} out={t8 - 18} />
         <Keyword f={f} text="next: The gradient" at={[XC, 775]} appear={tGr} out={tPr - 18} c={C.key} />
@@ -439,8 +389,12 @@ const S06: React.FC = () => {
         <Lbl x={XC} y={822} t="coordinate" c={C.key} s={T.key} o={fin(f, tPr + 8)} italic />
       </Svg>
       <TeX s={String.raw`x=a\,\lambda,\ \ y=a\,\varphi`} x={XC} y={200} size={60} o={win(f, t1, t3 + 20)} />
+      {/* remake 2026-11-07 (R16): Part 6's scale factors (new S3) and Part 3's one-degree east distance (S7) at their point of use */}
+      <Recall f={f} tex={EQ_S02} name="scale factors" part={6} x={XC} y={420} size={60} appear={AT(k, 3, "In Part 6")} out={t4 - 10} />
+      <Recall f={f} tex={String.raw`\Delta x=a\cos\varphi\,\Delta\lambda\approx73.8\ \text{km}`} name="distances" part={3} x={XC} y={420} size={52}
+        appear={AT(k, 7, "as we found in Part 3")} out={t8 - 12} glow={HL(f, AT(k, 7, "seventy three"))} />
       <TeX s={String.raw`\dfrac{1\ ^\circ\text{C}}{73.8\ \text{km}}\approx 1.4\ ^\circ\text{C per }100\ \text{km}`} x={XC} y={250} size={52} o={fin(f, t7)} />
-      <Layered parts={p1} x={XC} y={400} size={66} layers={[{ t: "all", o: fin(f, t8) }, { t: [], u: [1], o: fin(f, AT(k, 8, "one over the Earth")) }]} />
+      <Layered parts={p1} x={XC} y={400} size={66} layers={[{ t: "all", o: fin(f, t8) }, { t: [], u: [1], o: fin(f, AT(k, 9, "one over the Earth")) }]} />
       <Layered parts={p2} x={XC} y={575} size={66} layers={[{ t: "all", o: fin(f, t9) }, { t: [], u: [1], o: fin(f, t9 + 20) }]} />
       <SourceBelow text={SRC_BM} pic={mapBox(V6, "pc")} w={880} o={o1} name="s06 src a" />
       <SourceBelow text="Image: NASA Blue Marble NG · coast: Natural Earth · grid: illustrative" pic={B6} w={920} o={o2} name="s06 src b" />
@@ -459,7 +413,7 @@ const S07: React.FC = () => {
   const g = prog(f, t4, t4 + 40), m = prog(f, t11, t11 + 90);
   const v = mixPV(mixPV(V7a, V7b, g), V7c, m);
   const P = (la: number, lo: number) => mapPt(v, "pc", la, lo, "mc", m);
-  const strips = [{ la: BREST[0], kk: D.k.k[0], at: t5, tag: "× 1.5" }, { la: 60, kk: D.k.k[1], at: t6, tag: "× 2" }, { la: LYB[0], kk: D.k.k[2], at: t7, tag: "× 4.9" }];
+  const strips = [{ la: BREST[0], kk: D.k.k[0], at: t5, tag: "$\times$ 1.5" }, { la: 60, kk: D.k.k[1], at: t6, tag: "$\times$ 2" }, { la: LYB[0], kk: D.k.k[2], at: t7, tag: "$\times$ 4.9" }];
   const box = (() => { const a = mapBox(v, "pc"), b = mapBox(v, "mc", 80); return { x: a.x, w: a.w, y: mix(a.y, b.y, m), h: mix(a.h, b.h, m) }; })();
   const stretchO = (at: number) => win(f, at, t8, 10) * (1 - m);
   // the Brest circle: plate-carrée oval → Mercator circle, drawn about the plate-carrée centre
@@ -515,5 +469,5 @@ const S07: React.FC = () => {
 };
 
 export const SCENES_A: Record<string, React.FC> = {
-  s00_title: S00, s01_hook: S01, s02_part6_recap: S02, s03_flattening: S03, s04_plate_carree: S04, s05_stretch_k: S05, s06_gradient_preview: S06, s07_mercator_idea: S07,
+  s00_title: S00, s01_hook: S01, s03_flattening: S03, s04_plate_carree: S04, s05_stretch_k: S05, s06_gradient_preview: S06, s07_mercator_idea: S07,
 };

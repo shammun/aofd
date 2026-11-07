@@ -1,0 +1,12 @@
+# ch00_coordinates_maps (#5g, Part 7): sound cue sheet for tools/sound/mix.py (remake 2026-11-07, final spliced TTS timing).
+# Score: the storyboard's own style 'polar-chart' (tools/sound/styles.py), seed 31 (E Aeolian, 4/4 at 60, glassy vibraphone chords over a low
+# bowed drone, a light paper rustle; from s16 on the pad thins and a high glass drone and a faint celesta shimmer enter). Those s16 settings
+# hold the pre-remake s16 start (1310.0 s) in styles.py; checks/mp_mix.py sets them to the s16 start of the final timing.json before it calls
+# tools/sound/mix.py's build() (the shared tool is not edited).
+# The 2.5-s tail is the silent end-card hold: the music fades out there while the picture fades with it (s23, R3).
+# Effects: none (HOUSE_STYLE §8: effects only where the picture shows the sound; the storyboard's s18 'wind_high_far' candidate has no
+# effect in tools/sound/sfx.py and the 10-hPa stratosphere has no audible wind to show).
+music: {style: polar-chart, seed: 31, bed_lufs: -28, duck_db: 5, tail_s: 2.5}
+timing: timing.json
+sfx_duck_db: 5
+effects: []

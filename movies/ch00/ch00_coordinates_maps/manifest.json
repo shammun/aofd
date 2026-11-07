@@ -5,7 +5,7 @@
  "builder": "movies/data/build_ch00_coordinates_maps.py",
  "fluidpy": {
   "repo": "../Fluid Dynamics",
-  "commit": "8cab62ebf6f6fb3ab1979fdbf5d404c2c77400b2",
+  "commit": "1823b5f34b8951a56202762a02d9027567bcda0f",
   "dirty_tracked": true,
   "mapproj_py_sha256": "f8da90cb00f90da803adbd4754feceb68775dfc0400ff116a1c2e60d45c64769",
   "sphere_py_sha256": "49866e7d01f39d2c4ee3fe963d0c8730b69ea867c8c7a00a402a878d68436207",
@@ -218,98 +218,92 @@
    "scene": "s00_title"
   },
   {
-   "time": "0:34",
-   "t_s": 34.8,
-   "title": "What we use from Parts 1, 3 and 6",
-   "scene": "s02_part6_recap"
-  },
-  {
-   "time": "1:29",
-   "t_s": 89.7,
+   "time": "0:45",
+   "t_s": 45.728,
    "title": "Flattening the Earth",
    "scene": "s03_flattening"
   },
   {
-   "time": "2:02",
-   "t_s": 122.95,
+   "time": "1:18",
+   "t_s": 78.978,
    "title": "Every step: the flat square map and its stretch (optional maths)",
    "scene": "s04_plate_carree"
   },
   {
-   "time": "6:14",
-   "t_s": 374.255,
+   "time": "5:39",
+   "t_s": 339.812,
    "title": "Scale factors on weather grids",
    "scene": "s06_gradient_preview"
   },
   {
-   "time": "7:41",
-   "t_s": 461.33,
+   "time": "7:23",
+   "t_s": 443.491,
    "title": "Mercator's idea",
    "scene": "s07_mercator_idea"
   },
   {
-   "time": "9:06",
-   "t_s": 546.53,
+   "time": "8:48",
+   "t_s": 528.691,
    "title": "Every step: Mercator's formula (optional maths)",
    "scene": "s08_mercator_dy"
   },
   {
-   "time": "16:15",
-   "t_s": 975.76,
+   "time": "15:49",
+   "t_s": 949.184,
    "title": "Why the rhumb line is straight",
    "scene": "s12_rhumb_straight"
   },
   {
-   "time": "17:48",
-   "t_s": 1068.485,
+   "time": "17:27",
+   "t_s": 1047.335,
    "title": "The price: areas",
    "scene": "s13_area_stretch"
   },
   {
-   "time": "19:14",
-   "t_s": 1154.335,
+   "time": "18:51",
+   "t_s": 1131.915,
    "title": "Equal-area maps: pick the map for the job",
    "scene": "s14_equal_earth"
   },
   {
-   "time": "20:46",
-   "t_s": 1246.51,
+   "time": "20:24",
+   "t_s": 1224.09,
    "title": "Why so many coordinate systems",
    "scene": "s15_why_many"
   },
   {
-   "time": "21:50",
-   "t_s": 1310.685,
+   "time": "21:28",
+   "t_s": 1288.265,
    "title": "The view from the pole",
    "scene": "s16_globe_to_pole"
   },
   {
-   "time": "23:10",
-   "t_s": 1390.76,
+   "time": "22:48",
+   "t_s": 1368.34,
    "title": "A tour of the polar map",
    "scene": "s17_where_is_what"
   },
   {
-   "time": "24:54",
-   "t_s": 1494.56,
+   "time": "24:32",
+   "t_s": 1472.785,
    "title": "The stratospheric polar vortex",
    "scene": "s18_vortex"
   },
   {
-   "time": "26:22",
-   "t_s": 1582.435,
+   "time": "26:00",
+   "t_s": 1560.572,
    "title": "East is round, north is in",
    "scene": "s19_vortex_components"
   },
   {
-   "time": "27:37",
-   "t_s": 1657.335,
+   "time": "27:17",
+   "t_s": 1637.051,
    "title": "Choosing the origin",
    "scene": "s20_origin_wheel"
   },
   {
-   "time": "30:59",
-   "t_s": 1859.96,
+   "time": "30:46",
+   "t_s": 1846.934,
    "title": "To sum up",
    "scene": "s22_recap"
   }
@@ -319,9 +313,9 @@
    "block": "A",
    "chip_scene": "s04_plate_carree",
    "chip_sentence": 2,
-   "chip_at_s": 131.75,
-   "skip_to": "6:14",
-   "skip_to_s": 374.255,
+   "chip_at_s": 87.778,
+   "skip_to": "5:39",
+   "skip_to_s": 339.812,
    "keep_scene": "s06_gradient_preview",
    "keep_line": "If you skipped, here's what to keep."
   },
@@ -329,9 +323,9 @@
    "block": "B",
    "chip_scene": "s08_mercator_dy",
    "chip_sentence": 2,
-   "chip_at_s": 562.055,
-   "skip_to": "16:15",
-   "skip_to_s": 975.76,
+   "chip_at_s": 544.216,
+   "skip_to": "15:49",
+   "skip_to_s": 949.184,
    "keep_scene": "s12_rhumb_straight",
    "keep_line": "If you skipped, here's what to keep."
   }
@@ -2250,9 +2244,9 @@
  "physics": [
   {
    "fn": "fluidpy.geo.sphere.arc_lengths",
-   "scene": "s02/s06",
+   "scene": "s06",
    "data": "data/mp.json",
-   "eq": "δy = a δφ, δx = a cos φ δλ (1°) at Brest",
+   "eq": "δy = a δφ, δx = a cos φ δλ (1°) at Brest (recalled from Part 3)",
    "params": {
     "lat": 48.39
    },
@@ -2260,9 +2254,9 @@
   },
   {
    "fn": "fluidpy.geo.sphere.great_circle_distance",
-   "scene": "s02/s12",
+   "scene": "s12",
    "data": "data/mp.json",
-   "eq": "London–Los Angeles great circle",
+   "eq": "London–Los Angeles great circle (recalled from Part 6)",
    "params": {
     "lat1": 51.51,
     "lon1": -0.13,
@@ -2667,8 +2661,8 @@
  "physics_heavy": [
   {
    "fn": "fluidpy.geo.sphere.rhumb_line",
-   "scene": "s02/s12",
-   "eq": "London–Los Angeles rhumb line (constant bearing)",
+   "scene": "s12",
+   "eq": "London–Los Angeles rhumb line (constant bearing; recalled from Part 6)",
    "params": {
     "lat1": 51.51,
     "lon1": -0.13,
@@ -2680,7 +2674,7 @@
   },
   {
    "fn": "fluidpy.geo.sphere.great_circle_points",
-   "scene": "s02/s12",
+   "scene": "s12",
    "eq": "London–Los Angeles great-circle track",
    "params": {
     "lat1": 51.51,

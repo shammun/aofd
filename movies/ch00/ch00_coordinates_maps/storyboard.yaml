@@ -7,10 +7,13 @@
 id: ch00_coordinates_maps
 title: 'Coordinates, Part 7 — Maps: projections and the view from the pole'
 title_card:
-  line1: Coordinates · Part 7
-  line2: Maps
-  subtitle: projections and the view from the pole
-  spoken: short (s00 sentence)
+  layout: series layout (kit_mp/SeriesTitle, remake 2026-11-07)
+  line1: Coordinates
+  line2: Part 7 · Maps
+  subtitle:
+  - map projections
+  - and the view from the pole
+  spoken: s00 sentence (no 'easy'; 'see how they're used to …')
 version: 1
 concepts:
 - the gradient on the sphere named (Vallis (2.31) horizontal part), pointer to
@@ -22,7 +25,7 @@ concepts:
 - 'the 10-hPa stratospheric polar vortex on 21 Jan 2026: east = tangential (theta-hat), north = -radial (-r-hat); westerlies anticlockwise seen from above
   the North Pole'
 - choosing the origin of polar coordinates (flat ring; the vortex about the pole vs about its own centre)
-target_duration_s: 1948.9339
+target_duration_s: 1973.5  # provisional (remake 2026-11-07, mp_r7_splice --provisional); final_timing.py --final rewrites it
 fps: 30
 size:
 - 1920
@@ -46,7 +49,7 @@ audio:
   beats: '[beat] = 1.5-s hold after worked calculations (tools/tts.py)'
   music:
     source: tools/music.py --style (tools/sound/styles.py; procedural, our own, CC0)
-    style: polar-chart (NEW style to add; distinct from chart-voyage of Part 6)
+    style: polar-chart (tools/sound/styles.py, Part 7's own score; its 'from s16 on' layers are set to the final s16 start by checks/mp_mix.py)
     spec: E Aeolian, 4/4 at 60 bpm; slow glassy vibraphone chords (Em - C - G - D, 8 s each) over a soft cello drone; a light paper-rustle texture under
       the map scenes; from the polar-map scenes (s16) on, the pad thins and an airy high drone and a faint wind-chime shimmer enter (the stratosphere);
       no drums; reverb long, wet 0.32; low-pass 6 kHz
@@ -54,11 +57,10 @@ audio:
     level: bed -28 LUFS, ducked 5 dB under speech; mix -16 LUFS, true peak <= -1.5 dBTP; 2.5-s tail on the silent end-card hold
     runner_up: ice-polar, seed 31 (if no other part uses it)
     distinct_from: compass-orbit (Part 1), the other coordinates parts, maths-calm, rotation-turning, index-lattice, tangent-glide, air-flowing, storm-tense
-  effects_candidates:
-  - scene: s18_vortex
-    kind: wind_high_far
-    intensity: 0.08
-    shows: the trails start moving (AT 'let the air move' only, 3 s, faded)
+    fade: picture and music fade out together over the 2.5-s silent end-card hold (R3; mix tail 2.5 s)
+  effects_candidates: []
+  effects_note: 'remake 2026-11-07: the s18 ''wind_high_far'' candidate is dropped (no such effect in tools/sound/sfx.py; the 10-hPa stratosphere has no
+    audible wind to show); sound.yaml effects: [] (= Parts 4 and 6)'
 dry_run:
   tool: tools/tts.py
   run: G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_maps/dryrun3_spliced
@@ -72,6 +74,44 @@ dry_run:
   words_per_minute_speaking: 157.9
   warnings:
   - 's19_vortex_components s4: 17.3 chars/s > 17.0 (slow the speed or shorten)'
+remake_2026_11_07:
+  log: movies/ch00/ch00_coordinates_maps/remake_2026-11-07_log.md
+  master_plan: movies/ch00/coordinates_series/master_plan_2026-11-07.md (R1, R3, R16, R19, §C)
+  cut:
+  - s02_part6_recap (no opening recap; its facts recalled at s04, s05, s06, s08, s10, s12, s19, s20, s21)
+  recalls:
+    s04:
+    - 'from Part 3: the Earth''s radius'
+    - 'derived in Part 1: arc length'
+    - 'derived in Part 3: distance north'
+    s05:
+    - 'derived in Part 3: radius of a parallel'
+    s06:
+    - 'derived in Part 6: scale factors'
+    - 'derived in Part 3: distances'
+    s08:
+    - 'derived in Part 3: distance north'
+    s10:
+    - 'derived in Part 3: integration'
+    s12:
+    - 'derived in Part 6: rhumb line, one bearing'
+    s19:
+    - 'derived in Part 4: east, north'
+    - 'derived in Part 1: polar unit vectors'
+    s20:
+    - 'derived in Part 1: components'
+    s21:
+    - 'derived in Part 1: ring averages'
+  facts: 'fact_check_2026-11-07 summary row 7 applied (s19: ''a few hundred'' km); new claims in the log''s fact table'
+  voice_rules: 'natural openings (s00, s01); show the arithmetic, voice the meaning (s04, s05, s08, s09, s10, s11, s13, s20); inputs said + highlighted
+    (HL: cosines, radians, tangents, a, the stretch 1.506, 73.8 km); C5 symbol lint 33 -> 0 ($…$ labels)'
+  ending: s22 recap with numbers + the close of the seven-part series + the two-sentence gradient teaser; s23 picture + music fade together over the 2.5-s
+    hold
+  narration_tools:
+  - checks/r7_text.py
+  - checks/mp_r7_splice.py
+  - checks/final_timing.py
+  - checks/mp_words.py
 conventions:
   latitude and longitude: phi (latitude, north positive), lambda (longitude, east positive; west negative, e.g. London -0.13 deg, Los Angeles -118.24 deg)
   earth radius: a = 6371 km (easy 6400); spoken "the Earth's radius" (Kokoro reads a lone "a" as the article); once "the letter a" (s02, lexicon proposal)
@@ -95,7 +135,8 @@ cross_part:
   - 'Part 3 (#5c): latitude phi, longitude lambda, Brest 48.4 N 4.5 W (48.39, -4.49), a = 6371 km (6400), r-hat = (cos phi cos lambda, cos phi sin lambda,
     sin phi), the parallel''s radius a cos phi (Brest 4230 km), Delta y = a Delta phi (111.2 km per degree), Delta x = a cos phi Delta lambda (Brest 73.8
     km per degree), Longyearbyen 78.22 N 15.65 E (1/cos = 4.9), adding up = integration, Delta vs d'
-  - 'Part 4 (#5d): i, j, k at a station; frames that move (recap only)'
+  - 'Part 4 (#5d): local east i and north j at a place (recalled at s19, ''derived in Part 4: east, north''); Part 5 (#5e): not used (frames that move were
+    only in the cut recap)'
   - '0.1 / 0.1b dot product movie: a . b = |a||b| cos angle, the shadow'
   - '#4 derivatives: the centred difference, the limit'
   - 'Part 6 (#5f): scale factors (the word), the great circle (8755 km) and the rhumb line (258.5 deg, +11 %) London-Los Angeles'
@@ -126,10 +167,11 @@ cross_part:
   - polar stereographic reading (D54)
   - origin choice (D56)
   - the gradient pointer (<= 1 min)
-  teaser_in: 'Part 6 ends: "In Part 7, we''ll flatten the Earth onto maps, see what each map stretches, and find out why the rhumb line is straight on the
-    most famous map of all."'
-  teaser_out: 'this part ends: "Next in this series, we''ll measure how fast the temperature changes across a map: the gradient." (split plan §2g, word
-    for word)'
+  teaser_in: 'Part 6 ends (s14 S7-S8): "In Part 7, we''ll flatten the Earth onto maps, and work out exactly what each map stretches. That explains why the
+    rhumb line comes out straight on the most famous map of all, and why weather data on a grid need care near the poles."'
+  teaser_out: 'this part (the last) ends (s22 S7-S9): "With that, our seven parts on coordinates are complete, from arrows on a flat map to winds over the
+    whole round Earth. Next in this series comes the gradient: how fast, and in which direction, temperature or pressure changes across a map. It''s where
+    the one over the Earth''s radius times cosine phi that we met here does its real work." (continuity_plan §3)'
   for_6_the_gradient: 'the scale-factor idea (s03-s05) is recapped in one sentence there, not rebuilt; Brest''s one-degree east width is 73.8 km here (shared
     CHECK row DM04 with Part 3 and #6; the quarter-degree box width follows from it: 18.46 km)'
 data_block:
@@ -234,7 +276,7 @@ maths_skip:
     skip_to_scene: s06_gradient_preview
     skip_to_t: 373.3839
     skip_to_mmss: '6:12 (provisional: dry run; refill after the final TTS)'
-    keep_line: S1 of s06_gradient_preview
+    keep_line: S0 of s06_gradient_preview
   - chip_scene: s08_mercator_dy
     block:
     - s08_mercator_dy
@@ -243,16 +285,12 @@ maths_skip:
     skip_to_scene: s12_rhumb_straight
     skip_to_t: 974.8839
     skip_to_mmss: '16:14 (provisional: dry run; refill after the final TTS)'
-    keep_line: S1 of s12_rhumb_straight
+    keep_line: S0 of s12_rhumb_straight
 chapter_marks:
 - t: 0.3
   mmss: 0:00
   title: 'Maps: the question'
   scene: s00_title
-- t: 33.9235
-  mmss: 0:33
-  title: What we use from Parts 1, 3 and 6
-  scene: s02_part6_recap
 - t: 88.8235
   mmss: '1:28'
   title: Flattening the Earth
@@ -322,13 +360,15 @@ scenes:
   - - 0.3
     - 9.8735
   beat: opening title (HOUSE_STYLE §3)
-  visual: 'TITLE FRAME (house/kit/title.tsx). Left x 100-1075: RiseText ''Coordinates · Part 7'' (line 1, TitleGradient teal -> gold, weight 800; letters
-    rise 24 px over 8 frames, 2-frame stagger), then ''Maps'' (line 2, warm white, 96 px, pulses x1.06 on AT(1, ''map projections'')), then the subtitle ''projections
-    and the view from the pole'' (68 px, ''the pole'' teal), all >= 50 px clear of the animation. Right x 1130-1840, y 180-636: Part A (frame 0 -> AT(1,
-    ''read the winds'')): the BMNG globe peels into gores and stretches into the plate carrée, then the Mercator map grows taller, Tissot circles riding
-    along (real sphere). Part B (12-frame cross-fade on AT(1, ''above the pole'')): the polar map with warm-white wind trails running round the 10-hPa vortex.
-    Source line ''Image: NASA Blue Marble NG · Data: NCEP/NCAR Reanalysis 1 · 21 Jan 2026 · 10 hPa'' below the right column (y <= 860). Poster = frame 200.'
-  voiceover: In this video, we'll learn map projections, and see how meteorology uses them to draw weather maps, and to read the winds from above the pole.
+  visual: "TITLE FRAME (remake 2026-11-07, the series layout of every Coordinates part, kit_mp/SeriesTitle = Part 6's kit_rt = Part 4's kit_fr = Part 2's\
+    \ kit_cs = Part 1's kit_cf): left x 100-1075, line 1 'Coordinates' (RiseText 150 px, weight 800, TitleGradient teal -> gold) pulsing x1.06 on AT(0, 'coordinates');\
+    \ line 2 'Part 7 \xB7 Maps' (warm white, <= 80 px); subtitle 'map projections' / 'and the view from the pole' (68 px, two lines). No 'made easy' (R1;\
+    \ the old 88-px pulsing 'made easy' line is gone). Right x 1130-1840, y 170-640: Part A (frame 0 -> AT(0, \"they're used\")): the BMNG globe peels into\
+    \ gores and stretches into the plate carr\xE9e, then the Mercator map grows taller, Tissot circles riding along (time-scaled to end before the cross-fade).\
+    \ Part B (12-frame cross-fade on \"they're used\"): the polar map with warm-white wind trails running round the 10-hPa vortex. Source lines below the\
+    \ right column. Poster = frame 200."
+  voiceover: In this video, we'll learn how coordinates flatten our round Earth into maps, and see how they're used to draw weather maps, and to read the
+    winds high above the North Pole.
   on_screen_eq: null
   physics_source:
     fn: fluidpy.geo.mapproj.forward('gores', 'platecarree', 'mercator', 'polar_stereographic'); fluidpy.geo.mapproj.tissot_ellipses (a = EARTH_RADIUS);
@@ -363,15 +403,16 @@ scenes:
   - - 28.7235
     - 33.1235
   beat: hook question
-  visual: 'Full width from frame 0. Left x 80-900: a Mercator world map (BMNG + NE admin-0) with Greenland and Africa outlined, about the same size. Right
-    x 980-1840: the polar map (BMNG, rings and spokes faint). AT(1, ''as big as Africa'') both outlines pulse. AT(1, ''whole Arctic on one page'') the polar
-    map brightens. AT(2, ''last of seven parts'') seven small code-drawn thumbnails in a row under both pictures (the seventh lit, the others at 35 %),
-    keyword ''maps'' under the seventh. AT(3, ''flattened onto maps'') the Mercator map brightens again; AT(4, ''above the North Pole'') warm-white trails
-    start on the polar map (from s18''s data). Source lines ''Image: NASA Blue Marble NG · Natural Earth'' below each map, never on it; the two maps >=
-    80 px apart.'
-  voiceover: Why does Greenland look as big as Africa on so many maps, and how do forecasters draw the whole Arctic on one page? This is the last of seven
-    parts on coordinates. Let's see how the round Earth is flattened onto maps, and what each kind of map stretches. Then let's read a weather map drawn
-    from above the North Pole.
+  visual: "Full width from frame 0. Left x 80-900: a Mercator world map (BMNG + NE admin-0) with Greenland and Africa outlined, about the same size. Right\
+    \ x 980-1840: the polar map (BMNG, rings and spokes faint). AT(1, 'as big as Africa') both outlines pulse. AT(1, 'whole Arctic on one page') the polar\
+    \ map brightens. AT(2, 'last of seven parts') seven small code-drawn thumbnails in a row under both pictures (the seventh lit, the others at 35 %), keyword\
+    \ 'maps' under the seventh. AT(3, 'flattened onto maps') the Mercator map brightens again; AT(4, 'above the North Pole') warm-white trails start on the\
+    \ polar map (from s18's data). Source lines 'Image: NASA Blue Marble NG \xB7 Natural Earth' below each map, never on it; the two maps >= 80 px apart.\
+    \ REMAKE 2026-11-07: S2 is the natural lead-in naming this part's maps (the flat square map of weather data, Mercator's map where the rhumb line is straight,\
+    \ equal-area maps), picking up Part 6's teaser; the Mercator map's pulse is on \"Mercator's map\"."
+  voiceover: 'Why does Greenland look as big as Africa on so many maps, and how do forecasters draw the whole Arctic on one page? This is the last of seven
+    parts on coordinates. Now let''s dive into the maps themselves: the flat square map that weather data come on, Mercator''s map, where the rhumb line comes
+    out straight, and maps that keep areas true, with exactly what each one stretches. Then let''s read a weather map drawn from above the North Pole.'
   on_screen_eq: null
   physics_source:
     fn: fluidpy.geo.mapproj.forward('mercator', 'polar_stereographic'); fluidpy.geo.sphere.polygon_area
@@ -390,74 +431,6 @@ scenes:
   feedback:
   - U-CO-101
   layout: Maps >= 80 px apart; source lines below.
-- id: s02_part6_recap
-  t:
-  - 33.9235
-  - 88.8235
-  sentence_times:
-  - - 33.9235
-    - 36.9235
-  - - 37.2735
-    - 44.6485
-  - - 44.9985
-    - 55.7735
-  - - 56.1235
-    - 62.1735
-  - - 62.5235
-    - 69.5985
-  - - 69.9485
-    - 74.2735
-  - - 74.6235
-    - 88.5235
-  beat: recap of Parts 1, 3 and 6 (<= 60 s), only the tools this part uses
-  visual: 'One beat per sentence, mini pictures (code-drawn, no headings): AT(2, ''arc rule'') Part 1''s polar grid with ''s = r θ''; AT(3, ''latitude,
-    phi'') a small globe with Brest''s φ and λ arcs; AT(3, ''the letter a'') the radius ''a ≈ 6400 km (6371 km)''; AT(4, ''One degree of latitude'') ''1°
-    north ≈ 111.2 km''; AT(5, ''One degree of longitude'') ''1° east ≈ 73.8 km at Brest''; AT(6, ''scale factors'') the three-row table θ: r, φ: a, λ: a
-    cos φ; AT(7, ''the great circle, about'') the globe with the gold London-Los Angeles arc and ''≈ 8755 km''; AT(7, ''rhumb line, which keeps'') the slate
-    rhumb line ''+11 %''.'
-  voiceover: 'Here''s what we''ll use from the earlier parts. The arc rule from Part 1: the distance along a circle is its radius times the angle, in radians.
-    From Part 3, the latitude, phi, the longitude, lambda, and the Earth''s radius, the letter a, about six thousand three hundred and seventy one kilometres.
-    One degree of latitude is about a hundred and eleven point two kilometres everywhere. One degree of longitude is that times cosine phi: about seventy
-    three point eight kilometres at Brest. In Part 6, we called these multipliers scale factors. And we found two routes from London to Los Angeles: the
-    great circle, about eight thousand seven hundred and fifty five kilometres, and the rhumb line, which keeps one compass bearing and is about eleven
-    percent longer.'
-  on_screen_eq:
-    latex: h_\varphi=a,\qquad h_\lambda=a\cos\varphi
-    vallis_eq: 'text before (2.27): (δx, δy, δz) = (r cos ϑ δλ, r δϑ, δr) with r = a; ϑ shown as φ'
-    page_png: chapters/pages/ch02/p081.png
-  calc_rows:
-  - s=r\,\theta
-  - a\approx 6400\ \text{km}\ (6371\ \text{km})
-  - 1^\circ\ \text{north}\approx111.2\ \text{km},\quad 1^\circ\ \text{east at Brest}\approx73.8\ \text{km}
-  physics_source:
-    fn: fluidpy.geo.sphere.arc_lengths; fluidpy.geo.sphere.great_circle_distance; fluidpy.geo.sphere.rhumb_line
-    params:
-      brest:
-      - 48.39
-      - -4.49
-      from:
-      - 51.51
-      - -0.13
-      to:
-      - 34.05
-      - -118.24
-    test: ../Fluid Dynamics/tests/geo/test_sphere.py::test_arc_lengths_V1_degree_lengths_RM01_RM02, ::test_great_circle_distance_V5_vs_pyproj_geod, ::test_rhumb_line_V1_limits_meridian_equator_parallel
-  exaggeration: []
-  kind: recap diagrams
-  data: none (code-drawn; BMNG on the small globe)
-  tool: Remotion SVG
-  runner_up: —
-  why: Part 7 uses the arc rule, a, the degree lengths, the scale factors and the two routes; recall them, never re-teach
-  related:
-  - movie: '#5c'
-    slug: ch00_coordinates_sphere
-    covers: latitude, longitude, degree lengths
-  - movie: '#5f'
-    slug: ch00_coordinates_routes
-    covers: scale factors, great circle, rhumb line
-  feedback:
-  - U-CO-101
-  layout: Pictures left, keywords and KaTeX right; one item per sentence, the previous one dimmed to 60 %.
 - id: s03_flattening
   t:
   - 88.8235
@@ -481,10 +454,9 @@ scenes:
   visual: 'ProjectionMorph (three.js, build-1 s31 module) from frame 0: the BMNG globe. AT(3, ''orange peel'') it peels into 12 gores (mapproj ''gores'')
     that lie flat with wedge-shaped gaps between them. AT(5, ''Close the gaps'') the gores stretch sideways until the gaps close (morph into the plate carrée),
     the Tissot circles riding along and widening towards the poles. Keyword ''every flat map stretches something''.'
-  voiceover: 'Every map starts by flattening the Earth onto a page. And here''s the catch: you can''t flatten a sphere without stretching or tearing it.
-    Try it with an orange peel. Cut it into slices from pole to pole, and lay them flat, and gaps open up between them. Close the gaps by stretching, and
-    the shapes change. Every flat map of the Earth makes a choice about what to stretch. Let''s build the simplest map, and work out exactly how much it
-    stretches.'
+  voiceover: 'Every map starts by flattening the Earth onto a page. And here''s the catch: you can''t flatten a sphere without stretching or tearing it. Try
+    it with an orange peel. Cut it into slices from pole to pole, and lay them flat, and gaps open up between them. Close the gaps by stretching, and the
+    shapes change. Every flat map of the Earth makes a choice about what to stretch. Let''s build the simplest map, and work out exactly how much it stretches.'
   on_screen_eq: null
   calc_rows: []
   physics_source:
@@ -552,36 +524,44 @@ scenes:
   - - 250.3289
     - 257.4289
   beat: 'D48 (1)-(3): why x = a lambda and y = a phi make sense; Brest on the map'
-  visual: 'Two views side by side (picture zone split): left, the globe with the equator gold; right, the empty page with the x axis. AT(6, ''Cut it, and
-    unroll'') the equator unrolls from the globe onto the page as a straight gold line ''2πa ≈ 40 030 km'', with ticks every 30° of λ (each ''≈ 3336 km'').
-    AT(10, ''So we set x'') ''x = a λ'' in the column with a gold link to one tick. AT(11, ''Second, the meridians'') Brest''s meridian lights teal on the
-    globe and unrolls onto the page as a vertical line from the equator; AT(14, ''So we draw every meridian'') all meridians every 30° drop into place;
-    ''y = a φ''. AT(''Let''s try Brest'') inputs row, CalcStack, and Brest''s dot lands on the page at (−500, 5381) km with dashed teal legs and gold links
-    from the two numbers. AT(20, ''true to scale'') the equator and the meridians pulse. AT(21, ''plate carrée'') keyword ''plate carrée = flat square'';
-    the BMNG plate carrée fills in under the lines. AT(3, ''skip ahead'') the maths-skip chip appears top-right of the column (x 1500-1840, y 50-110): ''every
-    step · optional · skip to mm:ss'' (44 px, warm white on a thin gold outline: the one chip the user''s 2026-11-05 maths-skip rule asks for; mm:ss filled
-    after the final TTS); it stays 6 s, then shrinks to a small ''optional maths'' tag in the same corner until the block ends.'
+  visual: "Two views side by side (picture zone split): left, the globe with the equator gold; right, the empty page with the x axis. AT(6, 'Cut it, and unroll')\
+    \ the equator unrolls from the globe onto the page as a straight gold line '2\u03C0a \u2248 40 030 km', with ticks every 30\xB0 of \u03BB (each '\u2248\
+    \ 3336 km'). AT(10, 'So we set x') 'x = a \u03BB' in the column with a gold link to one tick. AT(11, 'Second, the meridians') Brest's meridian lights\
+    \ teal on the globe and unrolls onto the page as a vertical line from the equator; AT(14, 'So we draw every meridian') all meridians every 30\xB0 drop\
+    \ into place; 'y = a \u03C6'. AT('Let's try Brest') inputs row, CalcStack, and Brest's dot lands on the page at (\u2212500, 5381) km with dashed teal\
+    \ legs and gold links from the two numbers. AT(20, 'true to scale') the equator and the meridians pulse. AT(21, 'plate carr\xE9e') keyword 'plate carr\xE9\
+    e = flat square'; the BMNG plate carr\xE9e fills in under the lines. AT(3, 'skip ahead') the maths-skip chip appears top-right of the column (x 1500-1840,\
+    \ y 50-110): 'every step \xB7 optional \xB7 skip to mm:ss' (44 px, warm white on a thin gold outline: the one chip the user's 2026-11-05 maths-skip rule\
+    \ asks for; mm:ss filled after the final TTS); it stays 6 s, then shrinks to a small 'optional maths' tag in the same corner until the block ends. REMAKE\
+    \ 2026-11-07: S6: Recall 'a \u2248 6371 km' + gold 'from Part 3: the Earth's radius' (y 520, glow on 'six thousand'); S8: Recall 's = r \u03B8' + 'derived\
+    \ in Part 1: arc length' (y 330, replaces the 'arc rule' keyword; '\u03B8 \u2192 \u03BB, r \u2192 a' moved to x XC+260); S12: Recall '\u0394y = a \u0394\
+    \u03C6' + 'derived in Part 3: distance north' (y 330, replaces 'distance north (Part 3)'); S14 introduces Brest (Part 3); the radians row glows on 'zero\
+    \ point' (input); S16-S17 no longer read the products (rows stay on screen)."
   voiceover: "Next, we'll build the simplest map step by step, with every number. That's for anyone who enjoys every step. For the intuition behind weather,\
     \ climate science or GIS, you only need the result, so if it feels like a lot, skip ahead to the time on screen. We'll build it from the lines on the\
     \ globe whose lengths we know. First, the equator. Cut it, and unroll it into a straight line across the page. Its length is two pi times the Earth's\
-    \ radius, about forty thousand kilometres. A place at longitude lambda, in radians, is the Earth's radius times lambda along the equator from the prime\
-    \ meridian. That's the arc rule again. So we set x equal to the Earth's radius times lambda. [beat] Second, the meridians. Each one runs from the equator\
-    \ to the pole, and a place at latitude phi is the Earth's radius times phi from the equator, along its meridian. That's the distance north from Part 3.\
-    \ So we draw every meridian as a straight line going up the page, and set y equal to the Earth's radius times phi. [beat] Let's try Brest, at forty eight\
-    \ point four degrees north, and four and a half degrees west. In radians, that's zero point eight four four seven, and minus zero point zero seven eight\
-    \ five. So x is six thousand three hundred and seventy one times minus zero point zero seven eight five, about minus five hundred kilometres: just west\
-    \ of the middle line. [beat] And y is six thousand three hundred and seventy one times zero point eight four four seven, about five thousand three hundred\
-    \ and eighty two kilometres. [beat] That's exactly how far Brest is from the equator, walking north along its meridian. So along the equator, and along\
-    \ every meridian, this map is true to scale. It's called the plate carr\xE9e, French for flat square, and most weather data come on exactly this kind\
-    \ of grid."
+    \ radius, which, as in Part 3, we write as the letter a, about six thousand three hundred and seventy one kilometres, so the equator is about forty thousand\
+    \ kilometres long. A place at longitude lambda, in radians, is the Earth's radius times lambda along the equator from the prime meridian. That's the arc\
+    \ rule, which we found in Part 1. So we set x equal to the Earth's radius times lambda. [beat] Second, the meridians. Each one runs from the equator to\
+    \ the pole, and a place at latitude phi is the Earth's radius times phi from the equator, along its meridian. That's the distance north, which we found\
+    \ in Part 3. So we draw every meridian as a straight line going up the page, and set y equal to the Earth's radius times phi. [beat] Let's try Brest,\
+    \ the port city at the western tip of France that we met in Part 3, at forty eight point four degrees north, and four and a half degrees west. In radians,\
+    \ that's zero point eight four four seven, and minus zero point zero seven eight five. So x, the Earth's radius times lambda, comes to about minus five\
+    \ hundred kilometres: just west of the middle line. [beat] And y, the Earth's radius times phi, comes to about five thousand three hundred and eighty\
+    \ two kilometres. [beat] That's exactly how far Brest is from the equator, walking north along its meridian. So along the equator, and along every meridian,\
+    \ this map is true to scale. It's called the plate carr\xE9e, French for flat square, and most weather data come on exactly this kind of grid."
   on_screen_eq:
     latex: x=a\,\lambda,\qquad y=a\,\varphi
     vallis_eq: 'none in Vallis: plate carrée (Snyder 1987 eqs 12-1, 12-2), built from the metric δx = a cos ϑ δλ, δy = a δϑ (text before (2.27))'
     page_png: chapters/pages/ch02/p081.png
   calc_rows:
-  - \varphi=48.4^\circ=0.8446\ \text{rad},\quad \lambda=-4.5^\circ=-0.0784\ \text{rad}
-  - x=6371\times(-0.0784)\approx-500\ \text{km}
-  - y=6371\times0.8446\approx5381\ \text{km}
+  - a\approx6371\ \text{km}
+  - s=r\,\theta
+  - \Delta y=a\,\Delta\varphi
+  - \varphi,\ \lambda=48.4^\circ,\ -4.5^\circ
+  - \times\dfrac{\pi}{180}=0.8447,\ -0.0785
+  - x=6371\times(-0.0785)\approx-500\ \text{km}
+  - y=6371\times0.8447\approx5382\ \text{km}
   physics_source:
     fn: fluidpy.geo.mapproj.forward('platecarree')
     params:
@@ -638,24 +618,25 @@ scenes:
   - - 363.1789
     - 372.5789
   beat: 'D48 (4)-(6): k = 1/cos phi derived from the parallel''s two lengths; Tissot ovals'
-  visual: 'Left: the globe with Brest''s parallel lit teal and its radius a cos φ drawn from the axis (gold link ''≈ 4230 km''); right: the plate carrée
-    with the same parallel as a full-width teal line. AT(2, ''as long as the equator'') the map''s parallel tagged ''40 030 km''; AT(5, ''true length'')
-    the globe''s parallel tagged ''≈ 26 580 km''. Column CalcStack, then the symbolic Layered TeX: k = 2πa / (2πa cos φ) with the 2π and the a struck through
-    (Strike) on AT(10, ''cancel''). AT(7, ''At Brest'') / AT(12, ''sixty degrees'') / AT(13, ''Longyearbyen'') three gold links from 1.5, 2 and 4.9 to three
-    bands on the map at +48.4°, +60° and +78.2° (all north of the equator, Must 6, DC32b). AT(15, ''small circle near Brest'') Tissot circles (radius 500
-    km traced on the real sphere, a = EARTH_RADIUS) on the globe and their ovals on the map, the Brest oval with a teal width bracket ''1.5×'' and a height
-    bracket ''1×''.'
+  visual: "Left: the globe with Brest's parallel lit teal and its radius a cos \u03C6 drawn from the axis (gold link '\u2248 4230 km'); right: the plate carr\xE9\
+    e with the same parallel as a full-width teal line. AT(2, 'as long as the equator') the map's parallel tagged '40 030 km'; AT(5, 'true length') the globe's\
+    \ parallel tagged '\u2248 26 580 km'. Column CalcStack, then the symbolic Layered TeX: k = 2\u03C0a / (2\u03C0a cos \u03C6) with the 2\u03C0 and the a\
+    \ struck through (Strike) on AT(10, 'cancel'). AT(7, 'At Brest') / AT(12, 'sixty degrees') / AT(13, 'Longyearbyen') three gold links from 1.5, 2 and 4.9\
+    \ to three bands on the map at +48.4\xB0, +60\xB0 and +78.2\xB0 (all north of the equator, Must 6, DC32b). AT(15, 'small circle near Brest') Tissot circles\
+    \ (radius 500 km traced on the real sphere, a = EARTH_RADIUS) on the globe and their ovals on the map, the Brest oval with a teal width bracket '1.5\xD7\
+    ' and a height bracket '1\xD7'. REMAKE 2026-11-07: S3: gold 'derived in Part 3: radius of a parallel' (y 610, until the formula); S4/S6 say what is multiplied\
+    \ / divided, the rows stay; S10-S12 voice the cosines (inputs), and '1/0.664', '1/0.5', '1/0.204' appear and glow on their words."
   voiceover: 'Now look at a circle of latitude, called a parallel. On this map, every parallel is drawn as a straight line across the page, as long as the
     equator: two pi times the Earth''s radius, about forty thousand and thirty kilometres. But on the globe, the parallel through Brest is a smaller circle.
-    As we saw in Part 3, its radius is the Earth''s radius times cosine phi, about four thousand two hundred and thirty kilometres. So its true length is
-    two pi times four thousand two hundred and thirty, about twenty six thousand five hundred and eighty kilometres. [beat] The map draws twenty six thousand
-    five hundred and eighty kilometres as forty thousand and thirty. So east-west distances at Brest are stretched by forty thousand and thirty divided
-    by twenty six thousand five hundred and eighty, about one point five. [beat] Let''s write that with symbols. The stretch, called k, is two pi times
-    the Earth''s radius, divided by two pi times the Earth''s radius times cosine phi. The two pi and the radius cancel, so k equals one over cosine phi.
-    [beat] At Brest, that''s one over zero point six six four, about one point five. At sixty degrees north, it''s one over zero point five, which is two.
-    And at Longyearbyen, on Svalbard, at seventy eight point two degrees north, it''s one over zero point two zero four, almost five. [beat] North-south
-    distances aren''t stretched at all. So a small circle near Brest is drawn as an oval, one and a half times wider than it is tall, and near the poles,
-    shapes are squashed flat.'
+    As we saw in Part 3, its radius is the Earth''s radius times cosine phi, about four thousand two hundred and thirty kilometres. So its true length, two
+    pi times that radius, is about twenty six thousand five hundred and eighty kilometres. [beat] The map draws twenty six thousand five hundred and eighty
+    kilometres as forty thousand and thirty. So east-west distances at Brest are stretched: dividing the drawn length by the true length gives about one point
+    five. [beat] Let''s write that with symbols. The stretch, called k, is two pi times the Earth''s radius, divided by two pi times the Earth''s radius times
+    cosine phi. The two pi and the radius cancel, so k equals one over cosine phi. [beat] At Brest, the cosine of phi is zero point six six four, so k is
+    about one point five. At sixty degrees north, the cosine is zero point five, so k is two. And at Longyearbyen, the Arctic town on Svalbard that we met
+    in Part 3, at seventy eight point two degrees north, the cosine is only zero point two zero four, so k is almost five. [beat] North-south distances aren''t
+    stretched at all. So a small circle near Brest is drawn as an oval, one and a half times wider than it is tall, and near the poles, shapes are squashed
+    flat.'
   on_screen_eq:
     latex: k=\dfrac{2\pi a}{2\pi a\cos\varphi}=\dfrac{1}{\cos\varphi}
     vallis_eq: 'none in Vallis: plate carrée scale along the parallel (Snyder 1987 eq. 12-3 with φ1 = 0); from δx = a cos ϑ δλ (text before (2.27))'
@@ -726,26 +707,33 @@ scenes:
   - - 449.2039
     - 459.6539
   beat: 'takeaway after the plate-carrée block; then the <= 1-min gradient pointer (scale factors in a slope; #6 is next)'
-  visual: 'AT(''here''s what to keep'') keyword ''if you skipped, keep this:'' (54 px, gold) and the takeaway''s numbers as keywords in the column, beside
-    the picture named in the sentence. Here: the plate carrée with the three bands ''× 1.5'', ''× 2'', ''× 4.9'' (north of the equator, Must 6). Then Left
-    from frame 0: a zoomed ERA5-style grid near Brest (BMNG + NE coast), two grid points one degree of longitude apart, ''10 °C'' and ''11 °C'' on them
-    (illustrative), the 73.8-km gap bracketed in teal, and a ghost 111.2-km bracket (slate, dashed) for the wrong choice. Right: CalcStack ''1 °C ÷ 73.8
-    km ≈ 1.4 °C per 100 km''. AT(9, ''In symbols'') the horizontal gradient on the sphere in Layered TeX with a gold underbrace under 1/(a cos φ) ''scale
-    factor of λ'' and under 1/a ''scale factor of φ''. AT(10, ''The gradient'') keyword ''next: The gradient'' (54 px, warm white, the title in italics).
-    AT(12, ''Pressure as a vertical coordinate'') keyword ''more: Pressure as a vertical coordinate'' replaces it (>= 8 frames apart).'
+  visual: "AT('here's what to keep') keyword 'if you skipped, keep this:' (54 px, gold) and the takeaway's numbers as keywords in the column, beside the picture\
+    \ named in the sentence. Here: the plate carr\xE9e with the three bands '\xD7 1.5', '\xD7 2', '\xD7 4.9' (north of the equator, Must 6). Then Left from\
+    \ frame 0: a zoomed ERA5-style grid near Brest (BMNG + NE coast), two grid points one degree of longitude apart, '10 \xB0C' and '11 \xB0C' on them (illustrative),\
+    \ the 73.8-km gap bracketed in teal, and a ghost 111.2-km bracket (slate, dashed) for the wrong choice. Right: CalcStack '1 \xB0C \xF7 73.8 km \u2248\
+    \ 1.4 \xB0C per 100 km'. AT(9, 'In symbols') the horizontal gradient on the sphere in Layered TeX with a gold underbrace under 1/(a cos \u03C6) 'scale\
+    \ factor of \u03BB' and under 1/a 'scale factor of \u03C6'. AT(10, 'The gradient') keyword 'next: The gradient' (54 px, warm white, the title in italics).\
+    \ AT(12, 'Pressure as a vertical coordinate') keyword 'more: Pressure as a vertical coordinate' replaces it (>= 8 frames apart). REMAKE 2026-11-07: new\
+    \ S3 (Part 6's scale factors): Recall 'h_\u03C6 = a, h_\u03BB = a cos \u03C6' + 'derived in Part 6: scale factors' (y 420, the former s02 equation); the\
+    \ \xD74.9 / \xD72 / \xD71.5 callouts leave just before it; S7: Recall '\u0394x = a cos \u03C6 \u0394\u03BB \u2248 73.8 km' + 'derived in Part 3: distances'\
+    \ (y 420, glow on 'seventy three'); later cues shifted by one sentence."
   voiceover: 'If you skipped, here''s what to keep. The simplest map uses longitude and latitude as x and y. It''s true along the equator and along every
     meridian, but it stretches east-west distances by one over cosine phi: about one and a half times at Brest, two at sixty degrees north, and almost five
-    at Svalbard. Scale factors like this matter for weather data, because most weather data come on exactly this kind of grid. Suppose two grid points near
-    Brest are one degree of longitude apart, and the temperature differs by one degree Celsius between them. The slope we want is per kilometre, not per
-    degree. So we divide by the true distance, seventy three point eight kilometres, not by a hundred and eleven point two. That''s about one point four
-    degrees per hundred kilometres. [beat] In symbols, the eastward slope is one over the Earth''s radius times cosine phi, times the change with longitude.
-    Together with the northward slope, it makes the gradient on the sphere. We''ll build it step by step in the next movie in this series: The gradient.
-    Weather models also use a curvilinear coordinate in the vertical, pressure instead of height, which has its own movie too: Pressure as a vertical coordinate.'
+    at Svalbard. In Part 6, we called the distance walked for each radian of a coordinate its scale factor: the Earth''s radius for latitude, and the radius
+    times cosine phi for longitude. Scale factors like this matter for weather data, because most weather data come on exactly this kind of grid. Suppose
+    two grid points near Brest are one degree of longitude apart, and the temperature differs by one degree Celsius between them. The slope we want is per
+    kilometre, not per degree. So we divide by the true distance east, seventy three point eight kilometres, as we found in Part 3, not by the hundred and
+    eleven point two kilometres of a degree north. That''s about one point four degrees per hundred kilometres. [beat] In symbols, the eastward slope is one
+    over the Earth''s radius times cosine phi, times the change with longitude. Together with the northward slope, it makes the gradient on the sphere. We''ll
+    build it step by step in the next movie in this series: The gradient. Weather models also use a curvilinear coordinate in the vertical, pressure instead
+    of height, which has its own movie too: Pressure as a vertical coordinate.'
   on_screen_eq:
     latex: \nabla T=\mathbf i\,\dfrac{1}{a\cos\varphi}\dfrac{\partial T}{\partial\lambda}+\mathbf j\,\dfrac{1}{a}\dfrac{\partial T}{\partial\varphi}
     vallis_eq: (2.31), horizontal part, r = a, scalar φ -> T (ϑ shown as φ, latitude)
     page_png: chapters/pages/ch02/p081.png
   calc_rows:
+  - h_\varphi=a,\qquad h_\lambda=a\cos\varphi
+  - \Delta x=a\cos\varphi\,\Delta\lambda\approx73.8\ \text{km}
   - \dfrac{1\ ^\circ\text{C}}{73.8\ \text{km}}\approx 1.4\ ^\circ\text{C per }100\ \text{km}
   physics_source:
     fn: fluidpy.geo.sphere.gradient; fluidpy.geo.sphere.arc_lengths
@@ -822,8 +810,8 @@ scenes:
     near Brest by one point five too. Near sixty degrees north, both by two. Near Svalbard, both by almost five. [beat] Now watch a small circle from the
     globe. On the flat square map, it becomes an oval, too wide. Stretch its strip north-south by the same factor, and it becomes a circle again, only bigger.
     Unlike a photo, though, each strip of latitude needs its own stretch, so the map grows taller and taller towards the poles. Because small shapes stay
-    the right shape, small angles stay true as well: the angle at which a road crosses a meridian on the map is the angle on the ground. Maps like this
-    are called conformal, which means that they keep shapes and angles right in every small patch.'
+    the right shape, small angles stay true as well: the angle at which a road crosses a meridian on the map is the angle on the ground. Maps like this are
+    called conformal, which means that they keep shapes and angles right in every small patch.'
   on_screen_eq: null
   calc_rows: []
   physics_source:
@@ -883,23 +871,23 @@ scenes:
   - - 640.8289
     - 649.2539
   beat: 'D49 step by step: the north step drawn a d(phi)/cos(phi)'
-  visual: 'Left: the globe slice along Brest''s meridian with a small north step a Δφ (teal); right of it, the plate carrée strip and the Mercator strip
-    at Brest side by side, the same step drawn ''× 1'' and ''× 1.506'' long (teal brackets). Column: the derivation in four lines, each on its words (what
-    we did · the line · why: ''keep shapes: same stretch both ways''). AT(''Let''s put in numbers'') CalcStack with inputs ''Δφ = 1°, a Δφ = 111.2 km''.
-    AT(12, ''sixty degrees north'') a second bracket ''× 2''. AT(13, ''write d instead of delta'') the final line dy = a dφ / cos φ in the main equation
-    size (96 px). AT(3, ''skip ahead'') the maths-skip chip appears top-right of the column (x 1500-1840, y 50-110): ''every step · optional · skip to mm:ss''
-    (44 px, warm white on a thin gold outline: the one chip the user''s 2026-11-05 maths-skip rule asks for; mm:ss filled after the final TTS); it stays
-    6 s, then shrinks to a small ''optional maths'' tag in the same corner until the block ends.'
+  visual: "Left: the globe slice along Brest's meridian with a small north step a \u0394\u03C6 (teal); right of it, the plate carr\xE9e strip and the Mercator\
+    \ strip at Brest side by side, the same step drawn '\xD7 1' and '\xD7 1.506' long (teal brackets). Column: the derivation in four lines, each on its words\
+    \ (what we did \xB7 the line \xB7 why: 'keep shapes: same stretch both ways'). AT('Let's put in numbers') CalcStack with inputs '\u0394\u03C6 = 1\xB0\
+    , a \u0394\u03C6 = 111.2 km'. AT(12, 'sixty degrees north') a second bracket '\xD7 2'. AT(13, 'write d instead of delta') the final line dy = a d\u03C6\
+    \ / cos \u03C6 in the main equation size (96 px). AT(3, 'skip ahead') the maths-skip chip appears top-right of the column (x 1500-1840, y 50-110): 'every\
+    \ step \xB7 optional \xB7 skip to mm:ss' (44 px, warm white on a thin gold outline: the one chip the user's 2026-11-05 maths-skip rule asks for; mm:ss\
+    \ filled after the final TTS); it stays 6 s, then shrinks to a small 'optional maths' tag in the same corner until the block ends. REMAKE 2026-11-07:\
+    \ S4: gold 'derived in Part 3: distance north' (y 480); S10 voices the stretch 1.506 (input; the Brest row glows on it), the product stays on screen."
   voiceover: 'Now let''s turn Mercator''s idea into a formula, with every step and every number. This part is for learners who want to see how the formula
-    is built; you don''t need it for the intuition behind weather, climate science or GIS. If it feels like too much, skip ahead to the time on screen.
-    Take a small step north on the globe, by delta phi. From Part 3, its true length is the Earth''s radius times delta phi. On the flat square map, it''s
-    drawn just that long, while east-west is drawn one over cosine phi times too long. To keep the shapes, Mercator draws the north step one over cosine
-    phi times longer too. So on his map, the step is drawn as the Earth''s radius times delta phi, divided by cosine phi. [beat] Let''s put in numbers.
-    One degree north is a hundred and eleven point two kilometres on the ground, everywhere. At Brest, Mercator draws it a hundred and eleven point two
-    times one point five zero six long, about a hundred and sixty seven point four kilometres. [beat] At sixty degrees north, he draws it twice as long,
-    about two hundred and twenty two point four kilometres. [beat] When the step is tiny, we write d instead of delta, as in Part 3. So d y equals the Earth''s
-    radius times d phi, divided by cosine phi. This says how fast the map''s height grows as we go north: slowly near the equator, and faster and faster
-    towards the pole.'
+    is built; you don''t need it for the intuition behind weather, climate science or GIS. If it feels like too much, skip ahead to the time on screen. Take
+    a small step north on the globe, by delta phi. From Part 3, its true length is the Earth''s radius times delta phi. On the flat square map, it''s drawn
+    just that long, while east-west is drawn one over cosine phi times too long. To keep the shapes, Mercator draws the north step one over cosine phi times
+    longer too. So on his map, the step is drawn as the Earth''s radius times delta phi, divided by cosine phi. [beat] Let''s put in numbers. One degree north
+    is a hundred and eleven point two kilometres on the ground, everywhere. At Brest, where the stretch is one point five zero six, Mercator draws it about
+    a hundred and sixty seven point four kilometres long. [beat] At sixty degrees north, he draws it twice as long, about two hundred and twenty two point
+    four kilometres. [beat] When the step is tiny, we write d instead of delta, as in Part 3. So d y equals the Earth''s radius times d phi, divided by cosine
+    phi. This says how fast the map''s height grows as we go north: slowly near the equator, and faster and faster towards the pole.'
   on_screen_eq:
     latex: dy=\dfrac{a\,d\varphi}{\cos\varphi}
     vallis_eq: 'none in Vallis: Mercator differential (Snyder 1987 eq. 7-2 differentiated); built from δy = a δϑ (text before (2.27))'
@@ -966,22 +954,23 @@ scenes:
   - - 749.7539
     - 761.7289
   beat: 'D50 part 1: Mercator y by adding up the drawn steps (table, 10-degree steps, midpoint stretch); Edward Wright 1599'
-  visual: 'Left: a tall Mercator ladder (y axis in units of a, 0 at the equator) next to a globe slice; each 10° step on the globe (teal arc) is drawn on
-    the ladder as a teal block whose height is the step × stretch; blocks stack up from the equator on their words, the first three computed in full, the
-    rest quicker. Column: a table without boxes with columns ''step'', ''middle'', ''1/cos'', ''drawn step'', ''total'' (52-68 px, rows on their words,
-    older rows at 60 %). AT(13, ''they grow'') a gold brace along the blocks. AT(14, ''eighty to ninety'') the 80-90 block is drawn as an open-topped block
-    that runs off the top of the ladder with an upward arrow. AT(15, ''Edward Wright'') keyword ''1599: Edward Wright, a table of added-up steps''.'
+  visual: "Left: a tall Mercator ladder (y axis in units of a, 0 at the equator) next to a globe slice; each 10\xB0 step on the globe (teal arc) is drawn\
+    \ on the ladder as a teal block whose height is the step \xD7 stretch; blocks stack up from the equator on their words, the first three computed in full,\
+    \ the rest quicker. Column: a table without boxes with columns 'step', 'middle', '1/cos', 'drawn step', 'total' (52-68 px, rows on their words, older\
+    \ rows at 60 %). AT(13, 'they grow') a gold brace along the blocks. AT(14, 'eighty to ninety') the 80-90 block is drawn as an open-topped block that runs\
+    \ off the top of the ladder with an upward arrow. AT(15, 'Edward Wright') keyword '1599: Edward Wright, a table of added-up steps'. REMAKE 2026-11-07:\
+    \ S6 says what is multiplied (ten degrees in radians times the stretch) and the result; the '0.1745 \xD7 1.004 \u2248 0.175' row stays; the table head\
+    \ '1/cos' is drawn in TeX (symbol lint C5)."
   voiceover: 'So how high up the map is a place at latitude phi? It''s the sum of all the drawn steps, from the equator up to phi. Let''s add them up, ten
-    degrees at a time. Ten degrees is zero point one seven four five radians. For each step, we use the stretch in the middle of the step. From zero to
-    ten degrees, the middle is five degrees, where one over cosine is one point zero zero four. So the first step is drawn zero point one seven four five
-    times one point zero zero four, about zero point one seven five times the Earth''s radius, or about one thousand one hundred and sixteen kilometres.
-    [beat] From ten to twenty degrees, the middle is fifteen degrees, the stretch is one point zero three five, and the step is zero point one eight one.
-    The running total is zero point three five six. [beat] From twenty to thirty degrees, the stretch is one point one zero three, the step is zero point
-    one nine three, and the total is zero point five four nine. [beat] Let''s speed up. The total reaches about one point zero one at fifty degrees, one
-    point three one at sixty, one point seven three at seventy, and two point four at eighty. [beat] Look at the steps: they grow as we go north, because
-    the stretch grows. The last ten degrees, from eighty to ninety, add at least two more on their own, and we''ll see soon that they add far more. Navigators
-    really did it this way: in fifteen ninety nine, the English mathematician Edward Wright published a table made by adding up such steps, one minute of
-    latitude at a time.'
+    degrees at a time. Ten degrees is zero point one seven four five radians. For each step, we use the stretch in the middle of the step. From zero to ten
+    degrees, the middle is five degrees, where one over cosine is one point zero zero four. So the first drawn step, ten degrees in radians times that stretch,
+    is about zero point one seven five Earth radii, or about one thousand one hundred and sixteen kilometres. [beat] From ten to twenty degrees, the middle
+    is fifteen degrees, the stretch is one point zero three five, and the step is zero point one eight one. The running total is zero point three five six.
+    [beat] From twenty to thirty degrees, the stretch is one point one zero three, the step is zero point one nine three, and the total is zero point five
+    four nine. [beat] Let''s speed up. The total reaches about one point zero one at fifty degrees, one point three one at sixty, one point seven three at
+    seventy, and two point four at eighty. [beat] Look at the steps: they grow as we go north, because the stretch grows. The last ten degrees, from eighty
+    to ninety, add at least two more on their own, and we''ll see soon that they add far more. Navigators really did it this way: in fifteen ninety nine,
+    the English mathematician Edward Wright published a table made by adding up such steps, one minute of latitude at a time.'
   on_screen_eq:
     latex: y\approx a\sum\dfrac{\Delta\varphi}{\cos\varphi_{\text{mid}}}
     vallis_eq: 'none in Vallis: Wright''s meridional parts (sum of secants), the midpoint rule of the integral of a sec φ (Snyder 1987 §7)'
@@ -1050,30 +1039,38 @@ scenes:
   - - 870.4089
     - 875.1839
   beat: 'D50 part 2: the natural log primed; y = a ln tan(pi/4 + phi/2) matches the sums'
-  visual: 'Column first: ''e ≈ 2.718''; ''ln x: e to what power gives x?''; ''ln 1 = 0'', ''ln e = 1'' (68 px) on their words; a small curve of ln x (teal)
-    through (1, 0) and (e, 1) on the left. AT(''Here''s the answer'') the main formula (96 px) with a gold underbrace under π/4 ''forty five degrees''.
-    AT(''Let''s test it'') the table from s20 returns on the left with a new column ''formula''; the 60° row: inputs ''45° + 30° = 75°'', ''tan 75° ≈ 3.732'',
-    ''ln 3.732 ≈ 1.317'' beside ''10° sum 1.313'' and ''1° sum 1.317'' (gold ''same'' tick). AT(14, ''At Brest'') the Brest row and the Mercator ladder''s
-    Brest mark at 0.968 a ≈ 6165 km, with the plate carrée''s 5381 km mark beside it (slate) for comparison.'
+  visual: "Column first: 'e \u2248 2.718'; 'ln x: e to what power gives x?'; 'ln 1 = 0', 'ln e = 1' (68 px) on their words; a small curve of ln x (teal) through\
+    \ (1, 0) and (e, 1) on the left. AT('Here's the answer') the main formula (96 px) with a gold underbrace under \u03C0/4 'forty five degrees'. AT('Let's\
+    \ test it') the table from s20 returns on the left with a new column 'formula'; the 60\xB0 row: inputs '45\xB0 + 30\xB0 = 75\xB0', 'tan 75\xB0 \u2248\
+    \ 3.732', 'ln 3.732 \u2248 1.317' beside '10\xB0 sum 1.313' and '1\xB0 sum 1.317' (gold 'same' tick). AT(14, 'At Brest') the Brest row and the Mercator\
+    \ ladder's Brest mark at 0.968 a \u2248 6165 km, with the plate carr\xE9e's 5381 km mark beside it (slate) for comparison. REMAKE 2026-11-07: S0: gold\
+    \ 'derived in Part 3: integration' (y 250); the angle rows now read '45\xB0 + 60\xB0/2 = 75\xB0' and '45\xB0 + 48.4\xB0/2 = 69.2\xB0' (the half latitude\
+    \ labelled; the sums are not voiced); the tangent rows glow on their words (inputs)."
   voiceover: 'Adding up tiny steps like this is the integration we met in Part 3, and this sum has an exact answer. To write it, we need one new tool, the
     natural logarithm, written l n. The number e is about two point seven one eight. The natural logarithm of a number answers one question: e to what power
     gives this number? So l n of one is zero, because e to the power zero is one. And l n of e is one. [beat] Here''s the answer to our sum: y equals the
     Earth''s radius, times the natural logarithm of the tangent of forty five degrees plus half the latitude. Forty five degrees is pi over four radians,
-    so on screen it''s pi over four plus phi over two. Let''s test it against our table. At sixty degrees, forty five plus thirty is seventy five degrees.
-    Its tangent is three point seven three two, and l n of three point seven three two is one point three one seven. [beat] Our ten-degree sum gave one point
-    three one three, very close. With one-degree steps, the sum gives one point three one seven, the same to three decimals. [beat] At Brest, forty five plus
-    half of forty eight point four is sixty nine point two degrees. Its tangent is two point six three two five, and its l n is zero point nine six eight.
-    So on a Mercator map, Brest sits zero point nine six eight times the Earth''s radius above the equator, about six thousand one hundred and sixty seven
-    kilometres. [beat] On the flat square map, it was five thousand three hundred and eighty two.'
+    so on screen it''s pi over four plus phi over two. Let''s test it against our table. At sixty degrees, adding half the latitude to forty five degrees
+    gives seventy five degrees. Its tangent is three point seven three two, and the l n of that is one point three one seven. [beat] Our ten-degree sum gave
+    one point three one three, very close. With one-degree steps, the sum gives one point three one seven, the same to three decimals. [beat] At Brest, forty
+    five degrees plus half its latitude gives sixty nine point two degrees. Its tangent is two point six three two five, and its l n is zero point nine six
+    eight. So on a Mercator map, Brest sits zero point nine six eight Earth radii above the equator, about six thousand one hundred and sixty seven kilometres.
+    [beat] On the flat square map, it was five thousand three hundred and eighty two.'
   on_screen_eq:
     latex: y=a\,\ln\tan\!\left(\dfrac{\pi}{4}+\dfrac{\varphi}{2}\right)
     vallis_eq: 'none in Vallis: Mercator ordinate (Snyder 1987 eq. 7-2); fluidpy.geo.sphere.isometric_latitude, fluidpy.geo.mapproj.forward(''mercator'')'
     page_png: null
   calc_rows:
   - e\approx2.718,\quad \ln 1=0,\quad \ln e=1
-  - 60^\circ:\ \tan 75^\circ\approx3.732,\quad \ln 3.732\approx1.317
-  - '\text{sums: }1.313\ (10^\circ\text{ steps}),\ \ 1.317\ (1^\circ\text{ steps})'
-  - '\text{Brest: }\tan 69.2^\circ\approx2.632,\ \ln 2.632\approx0.968,\ \ 0.968\times6371\approx6165\ \text{km}'
+  - 45^\circ+60^\circ/2=75^\circ
+  - \tan 75^\circ\approx3.732
+  - \ln 3.732\approx1.317
+  - '10^\circ\text{ steps: }1.313'
+  - '1^\circ\text{ steps: }1.317'
+  - 45^\circ+48.4^\circ/2=69.2^\circ
+  - \tan 69.2^\circ\approx2.6325
+  - \ln 2.6325\approx0.968
+  - 0.968\times6371\approx6167\ \text{km}
   physics_source:
     fn: fluidpy.geo.sphere.isometric_latitude; fluidpy.geo.mapproj.forward('mercator')
     params:
@@ -1132,19 +1129,20 @@ scenes:
   - - 967.2589
     - 974.0839
   beat: 'D50 checks: centred-difference slope at 60 deg = 2.00; y(0) = 0; y -> infinity at the pole'
-  visual: 'Left: the curve y/a = ln tan(π/4 + φ/2) against φ (0-85°), teal; at 60° the two points at 59° and 61° (dots) and their chord (gold) with its
-    rise 0.0698 and run 0.0349 rad bracketed. Column: CalcStack. AT(8, ''exactly two'') ''1/cos 60° = 2'' with a gold ''same'' tick. AT(11, ''At the equator'')
-    the curve''s start point (0, 0) pulses. AT(12, ''at the pole'') the curve rises past the top of the plot with an upward arrow; the 85° point labelled
-    ''3.13 a ≈ 19 950 km''. AT(15, ''cut off'') a small Mercator world map with its top edge at about 85° (ticks ''80°'', ''85°'').'
-  voiceover: 'How can we be sure the formula is right everywhere, not just at a few points? Its slope must match the drawn step: one over cosine phi for
-    each radian of phi. Let''s check its slope at sixty degrees with the centred difference from the derivatives movie. At sixty one degrees, the formula
-    gives one point three five two four. At fifty nine degrees, it gives one point two eight two six. [beat] The difference is zero point zero six nine
-    eight, and the two points are two degrees apart, which is zero point zero three four nine radians. Zero point zero six nine eight divided by zero point
-    zero three four nine is about two point zero zero. [beat] And one over the cosine of sixty degrees is exactly two. So the formula''s slope is the stretch
-    we wanted. Two more checks. At the equator, the tangent of forty five degrees is one, and l n of one is zero, so y is zero, as it should be. [beat]
-    And at the pole, the angle becomes ninety degrees, where the tangent has no end: it grows without limit. So the pole is infinitely far up the map. At
-    eighty five degrees, y is already three point one three times the Earth''s radius, about nineteen thousand nine hundred and fifty kilometres. [beat]
-    That''s why Mercator maps are always cut off before the poles, usually somewhere past eighty degrees.'
+  visual: "Left: the curve y/a = ln tan(\u03C0/4 + \u03C6/2) against \u03C6 (0-85\xB0), teal; at 60\xB0 the two points at 59\xB0 and 61\xB0 (dots) and their\
+    \ chord (gold) with its rise 0.0698 and run 0.0349 rad bracketed. Column: CalcStack. AT(8, 'exactly two') '1/cos 60\xB0 = 2' with a gold 'same' tick.\
+    \ AT(11, 'At the equator') the curve's start point (0, 0) pulses. AT(12, 'at the pole') the curve rises past the top of the plot with an upward arrow;\
+    \ the 85\xB0 point labelled '3.13 a \u2248 19 950 km'. AT(15, 'cut off') a small Mercator world map with its top edge at about 85\xB0 (ticks '80\xB0',\
+    \ '85\xB0'). REMAKE 2026-11-07: S6 says what is divided ('the difference by that step') and the result; S13 'Earth radii'; rows unchanged."
+  voiceover: 'How can we be sure the formula is right everywhere, not just at a few points? Its slope must match the drawn step: one over cosine phi for each
+    radian of phi. Let''s check its slope at sixty degrees with the centred difference from the derivatives movie. At sixty one degrees, the formula gives
+    one point three five two four. At fifty nine degrees, it gives one point two eight two six. [beat] The difference is zero point zero six nine eight, and
+    the two points are two degrees apart, which is zero point zero three four nine radians. Dividing the difference by that step gives about two point zero
+    zero. [beat] And one over the cosine of sixty degrees is exactly two. So the formula''s slope is the stretch we wanted. Two more checks. At the equator,
+    the tangent of forty five degrees is one, and l n of one is zero, so y is zero, as it should be. [beat] And at the pole, the angle becomes ninety degrees,
+    where the tangent has no end: it grows without limit. So the pole is infinitely far up the map. At eighty five degrees, y is already three point one three
+    Earth radii, about nineteen thousand nine hundred and fifty kilometres. [beat] That''s why Mercator maps are always cut off before the poles, usually
+    somewhere past eighty degrees.'
   on_screen_eq:
     latex: \dfrac{y(61^\circ)-y(59^\circ)}{2^\circ\ \text{in rad}}\approx\dfrac{a}{\cos 60^\circ}
     vallis_eq: 'none in Vallis: centred difference (derivatives movie #4); dy/dφ = a sec φ (Snyder 1987 eq. 7-2)'
@@ -1213,23 +1211,24 @@ scenes:
   - - 1057.6089
     - 1066.8089
   beat: 'D52: constant bearing = constant slant; Mercator stretches both parts equally, so the rhumb line is straight'
-  visual: 'Left: the globe with the slate rhumb line; AT(5, ''Zoom into any short piece'') a zoom inset (house Zoom-reveal) of one short piece: a right
-    triangle with legs ''west 4.9'' and ''south 1'' (teal, orange) and the bearing arc. AT(9, ''Now draw it on the Mercator map'') the triangle moves to
-    the Mercator map (right), both legs grow by the same factor (two copies at two latitudes, ''× 1.31'' at 40° N and ''× 1.56'' at 50° N on the legs),
-    the slant unchanged (gold ''same'' tick). AT(13, ''straight line'') the London-Los Angeles rhumb line draws straight on Mercator (slate) with a ruler
-    glyph; AT(14, ''comes out curved'') the gold great circle bulges north on the same map. AT(15, ''swap looks'') the globe (left) and the map (right)
-    side by side, both routes on each. AT(''here''s what to keep'') keyword ''if you skipped, keep this:'' (54 px, gold) and the takeaway''s numbers as
-    keywords in the column, beside the picture named in the sentence. Here: the Mercator ladder with its steps growing towards the top, ''× 1/cos φ'' beside
-    it.'
+  visual: "Left: the globe with the slate rhumb line; AT(5, 'Zoom into any short piece') a zoom inset (house Zoom-reveal) of one short piece: a right triangle\
+    \ with legs 'west 4.9' and 'south 1' (teal, orange) and the bearing arc. AT(9, 'Now draw it on the Mercator map') the triangle moves to the Mercator map\
+    \ (right), both legs grow by the same factor (two copies at two latitudes, '\xD7 1.31' at 40\xB0 N and '\xD7 1.56' at 50\xB0 N on the legs), the slant\
+    \ unchanged (gold 'same' tick). AT(13, 'straight line') the London-Los Angeles rhumb line draws straight on Mercator (slate) with a ruler glyph; AT(14,\
+    \ 'comes out curved') the gold great circle bulges north on the same map. AT(15, 'swap looks') the globe (left) and the map (right) side by side, both\
+    \ routes on each. AT('here's what to keep') keyword 'if you skipped, keep this:' (54 px, gold) and the takeaway's numbers as keywords in the column, beside\
+    \ the picture named in the sentence. Here: the Mercator ladder with its steps growing towards the top, '\xD7 1/cos \u03C6' beside it. REMAKE 2026-11-07:\
+    \ S3/S7: Part 6's rhumb line London-Los Angeles (258.5\xB0) recalled: gold 'derived in Part 6: rhumb line, one bearing' (y 110, two lines) replaces the\
+    \ 'rhumb line: one compass bearing' keyword."
   voiceover: 'If you skipped, here''s what to keep. Mercator stretches north-south by the same amount as east-west, one over cosine phi, so his map grows
     taller and taller towards the poles, and it can never show the poles themselves. Now we can see why a rhumb line is straight on a Mercator map. A rhumb
-    line keeps one compass bearing. Zoom into any short piece of it. On the globe, it''s a tiny slanted step: some distance west, and some distance south.
-    Keeping the same bearing means the same slant everywhere. For our route at two hundred and fifty eight and a half degrees, every piece goes about four
-    point nine kilometres west for each kilometre south. [beat] Now draw it on the Mercator map. At each latitude, Mercator stretches the west part and
-    the south part by the same amount, one over cosine phi. Stretching both parts by the same amount leaves their ratio unchanged. So on the map, every
-    piece of the route has the same slant, four point nine across for each one down. A line whose slant never changes is a straight line. [beat] The great
-    circle keeps changing its bearing, so on this map it comes out curved, bulging towards the pole. The two routes swap looks: on the globe, the great
-    circle looks straight and the rhumb line curves, and on Mercator''s map it''s the other way round.'
+    line, as we saw in Part 6, keeps one compass bearing. Zoom into any short piece of it. On the globe, it''s a tiny slanted step: some distance west, and
+    some distance south. Keeping the same bearing means the same slant everywhere. For Part 6''s rhumb line from London to Los Angeles, at two hundred and
+    fifty eight and a half degrees, every piece goes about four point nine kilometres west for each kilometre south. [beat] Now draw it on the Mercator map.
+    At each latitude, Mercator stretches the west part and the south part by the same amount, one over cosine phi. Stretching both parts by the same amount
+    leaves their ratio unchanged. So on the map, every piece of the route has the same slant, four point nine across for each one down. A line whose slant
+    never changes is a straight line. [beat] The great circle keeps changing its bearing, so on this map it comes out curved, bulging towards the pole. The
+    two routes swap looks: on the globe, the great circle looks straight and the rhumb line curves, and on Mercator''s map it''s the other way round.'
   on_screen_eq:
     latex: \dfrac{\text{west step}}{\text{south step}}=\tan(258.5^\circ-180^\circ)\approx4.9
     vallis_eq: 'none in Vallis: loxodrome (Snyder 1987 §7, tan α = Δλ/Δψ); fluidpy.geo.sphere.rhumb_line'
@@ -1292,19 +1291,21 @@ scenes:
   - - 1146.9839
     - 1152.6589
   beat: 'D51: area stretch k squared (a 100-km square at 60 N, Svalbard 24), Greenland vs Africa 14'
-  visual: 'Column keywords at the top right from frame 0 (''conformal has a price'', Should 18). Left: a 100 × 100 km square on the globe at 60° N (teal)
-    and its Mercator copy 200 × 200 km (teal, sides bracketed ''× 2''), with ''10 000 km²'' and ''40 000 km²'' beside them. AT(7, ''k times k'') the Layered
-    TeX ''area stretch = k × k = 1/cos²φ''. AT(8, ''Svalbard'') ''4.9 × 4.9 ≈ 24''. AT(9, ''Greenland looks about as big'') a full Mercator map (BMNG +
-    NE admin-0 outlines) placed BELOW the column text with >= 40 px clear (U-CO-076): Greenland and Africa outlined. AT(10, ''In truth'') both outlines
-    lift off and are re-drawn at true relative area beside the map in the column (''2.17 million km²'', ''30.4 million km²'', ''≈ 14×''); the ''true size''
-    labels sit in the column, never on Greenland.'
+  visual: "Column keywords at the top right from frame 0 ('conformal has a price', Should 18). Left: a 100 \xD7 100 km square on the globe at 60\xB0 N (teal)\
+    \ and its Mercator copy 200 \xD7 200 km (teal, sides bracketed '\xD7 2'), with '10 000 km\xB2' and '40 000 km\xB2' beside them. AT(7, 'k times k') the\
+    \ Layered TeX 'area stretch = k \xD7 k = 1/cos\xB2\u03C6'. AT(8, 'Svalbard') '4.9 \xD7 4.9 \u2248 24'. AT(9, 'Greenland looks about as big') a full Mercator\
+    \ map (BMNG + NE admin-0 outlines) placed BELOW the column text with >= 40 px clear (U-CO-076): Greenland and Africa outlined. AT(10, 'In truth') both\
+    \ outlines lift off and are re-drawn at true relative area beside the map in the column ('2.17 million km\xB2', '30.4 million km\xB2', '\u2248 14\xD7\
+    '); the 'true size' labels sit in the column, never on Greenland. REMAKE 2026-11-07: S3, S5, S7, S10 no longer read the products, the square or the division\
+    \ (rows stay; cues on 'two hundred kilometres wide' and 'squaring it'); the map label reads '40 000 km\xB2: 4 times' (x Bp+190, clear of '10 000 km\xB2\
+    ')."
   voiceover: 'But keeping shapes has a price: sizes. How much is an area stretched? Take a small square on the globe at sixty degrees north, a hundred kilometres
-    on each side. Its area is a hundred times a hundred, ten thousand square kilometres. On a Mercator map, its width is stretched by two, and its height
-    by two as well. So it''s drawn two hundred by two hundred, which is forty thousand square kilometres: four times too big. [beat] In general, the width
-    is stretched by k and the height by k, so the area is stretched by k times k, k squared, which is one over cosine phi, squared. At Svalbard, k is about
-    four point nine, so areas are stretched by about four point nine times four point nine, about twenty four. [beat] That''s why, on a Mercator map, Greenland
+    on each side. Its area is ten thousand square kilometres. On a Mercator map, its width is stretched by two, and its height by two as well. So it''s drawn
+    two hundred kilometres wide and two hundred tall, an area of forty thousand square kilometres: four times too big. [beat] In general, the width is stretched
+    by k and the height by k, so the area is stretched by k times k, k squared, which is one over cosine phi, squared. At Svalbard, k is about four point
+    nine, and squaring it gives about twenty four, so areas there are drawn about twenty four times too big. [beat] That''s why, on a Mercator map, Greenland
     looks about as big as Africa. In truth, Greenland covers about two point one seven million square kilometres, and Africa about thirty point four million.
-    Thirty point four divided by two point one seven is about fourteen, so Africa is about fourteen times bigger. [beat] The Mercator map is great for directions
+    Dividing Africa''s area by Greenland''s gives about fourteen, so Africa is about fourteen times bigger. [beat] The Mercator map is great for directions
     and shapes, and poor for comparing sizes.'
   on_screen_eq:
     latex: \text{area stretch}=k\times k=\dfrac{1}{\cos^2\varphi}
@@ -1379,15 +1380,15 @@ scenes:
     AT(11, ''thirty one degrees'') a 90° angle mark at 60° N 30° E on both maps, Equal Earth''s skewed by 31° (gold arc). AT(13, ''pick the map for the
     job'') keywords ''conformal -> winds, directions'' and ''equal-area -> amounts''. AT(15, ''How weather maps are made'') keyword ''more: How weather
     maps are made''.'
-  voiceover: 'For climate maps, sizes often matter more. If we want to know how much of the Earth was warmer than usual last month, a map that inflates
-    the polar regions would mislead us. So climate scientists often use equal-area maps, such as the Equal Earth map, from twenty eighteen. On it, every
-    patch keeps its true share of the Earth''s area, so Greenland shows at its real size, about a fourteenth of Africa. Here''s the same temperature map
-    for September twenty twenty six, drawn both ways. The colours show how much warmer or colder each place was than its usual September, the average from
-    nineteen ninety one to twenty twenty. That difference from the usual is called an anomaly. On the Mercator map, the far north looks huge. On the Equal
-    Earth map, it shrinks to its true size. The price now is shape. Towards the poles, shapes get skewed: at sixty degrees north and thirty degrees east,
-    angles can be off by about thirty one degrees. [beat] No flat map can keep both areas and shapes right everywhere. So the rule is: pick the map for
-    the job. Use conformal maps for winds and directions, and equal-area maps for comparing amounts. Which maps forecasters use, and why, has its own movie
-    later in this series: How weather maps are made.'
+  voiceover: 'For climate maps, sizes often matter more. If we want to know how much of the Earth was warmer than usual last month, a map that inflates the
+    polar regions would mislead us. So climate scientists often use equal-area maps, such as the Equal Earth map, from twenty eighteen. On it, every patch
+    keeps its true share of the Earth''s area, so Greenland shows at its real size, about a fourteenth of Africa. Here''s the same temperature map for September
+    twenty twenty six, drawn both ways. The colours show how much warmer or colder each place was than its usual September, the average from nineteen ninety
+    one to twenty twenty. That difference from the usual is called an anomaly. On the Mercator map, the far north looks huge. On the Equal Earth map, it shrinks
+    to its true size. The price now is shape. Towards the poles, shapes get skewed: at sixty degrees north and thirty degrees east, angles can be off by about
+    thirty one degrees. [beat] No flat map can keep both areas and shapes right everywhere. So the rule is: pick the map for the job. Use conformal maps for
+    winds and directions, and equal-area maps for comparing amounts. Which maps forecasters use, and why, has its own movie later in this series: How weather
+    maps are made.'
   on_screen_eq: null
   calc_rows: []
   physics_source:
@@ -1454,10 +1455,10 @@ scenes:
     rule'') the three mini pictures shrink into a row and the Mercator and Equal Earth thumbnails join them.'
   voiceover: 'So why are there so many coordinate systems and maps? There are three good reasons. The first is shape. When the coordinates match the shape
     of the problem, the numbers become simple. A ring round a hurricane''s eye is just r equals a constant, the Earth''s surface is just r equals its radius,
-    and a great circle route is just one angle, sigma. The second is measurement. We use the coordinates that our instruments and data use. A radar sees
-    distance and direction, a weather station feels east, north and up, and weather data come on a grid of latitude and longitude. The third is meaning.
-    The right coordinates split a vector into the parts that physics cares about: spin and inflow round a storm, along and across a coast, or round and
-    in for a whirl round the pole, as we''ll see next. Maps follow the same rule: we choose the one that keeps what our question needs.'
+    and a great circle route is just one angle, sigma. The second is measurement. We use the coordinates that our instruments and data use. A radar sees distance
+    and direction, a weather station feels east, north and up, and weather data come on a grid of latitude and longitude. The third is meaning. The right
+    coordinates split a vector into the parts that physics cares about: spin and inflow round a storm, along and across a coast, or round and in for a whirl
+    round the pole, as we''ll see next. Maps follow the same rule: we choose the one that keeps what our question needs.'
   on_screen_eq: null
   calc_rows: []
   physics_source: null
@@ -1516,12 +1517,12 @@ scenes:
     ''true at 60° N''.'
   voiceover: 'There''s one more map that every forecaster knows: the view from above a pole. Let''s get there from the globe. Here''s the Earth, turning.
     Now let''s rise up above the North Pole, and look straight down. From up here, the circles of latitude become rings round the pole, and the meridians
-    become spokes, like the spokes of a wheel. Now let''s flatten this view into a map. The North Pole sits in the middle. The rings are the latitudes:
-    seventy five, sixty, forty five and thirty degrees north, going outward. The spokes are the longitudes. Zero degrees, the prime meridian through Greenwich,
-    points down. Ninety degrees east points right, a hundred and eighty degrees points up, and ninety degrees west points left. [beat] So going east means
-    going round anticlockwise, as seen from above the North Pole. This is polar coordinates again: the distance from the middle grows with the distance
-    from the pole, and the angle round the middle is the longitude. This kind of map is called polar stereographic, and this one is drawn true to scale
-    at sixty degrees north, like many weather charts of the pole.'
+    become spokes, like the spokes of a wheel. Now let''s flatten this view into a map. The North Pole sits in the middle. The rings are the latitudes: seventy
+    five, sixty, forty five and thirty degrees north, going outward. The spokes are the longitudes. Zero degrees, the prime meridian through Greenwich, points
+    down. Ninety degrees east points right, a hundred and eighty degrees points up, and ninety degrees west points left. [beat] So going east means going
+    round anticlockwise, as seen from above the North Pole. This is polar coordinates again: the distance from the middle grows with the distance from the
+    pole, and the angle round the middle is the longitude. This kind of map is called polar stereographic, and this one is drawn true to scale at sixty degrees
+    north, like many weather charts of the pole.'
   on_screen_eq: null
   calc_rows: []
   physics_source:
@@ -1599,11 +1600,11 @@ scenes:
     Barents Sea (75° N, 40° E, italic sea label), Siberia (along 90° E), Bering Strait and Alaska (65° N, 150° W), Canada and Hudson Bay (60° N, 85° W).
     The column shows the current place''s ''(lat, lon)'' (68 px), one at a time. AT(''where''s Los Angeles'') a prediction pause (beat), then its dot appears
     at 34° N 118° W, upper left, with its label inside the frame. Labels stay (all at 100 %) until s29.'
-  voiceover: 'If you''ve never seen a map like this, it can be hard to tell where things are, so let''s take a short tour. To find any place, first find
-    its ring, for the latitude, and then its spoke, for the longitude. Near the bottom, at forty eight point four degrees north and four and a half degrees
-    west, is Brest: just past the forty five degree ring, a little left of the zero spoke. Closer to the pole, past the sixty degree ring, is Iceland, at
-    about sixty five degrees north and nineteen degrees west. To its left is Greenland, the big island, around seventy two degrees north and forty degrees
-    west. To the right of the zero spoke is Scandinavia. Further in, at seventy eight point two degrees north and fifteen point six degrees east, is Longyearbyen,
+  voiceover: 'If you''ve never seen a map like this, it can be hard to tell where things are, so let''s take a short tour. To find any place, first find its
+    ring, for the latitude, and then its spoke, for the longitude. Near the bottom, at forty eight point four degrees north and four and a half degrees west,
+    is Brest: just past the forty five degree ring, a little left of the zero spoke. Closer to the pole, past the sixty degree ring, is Iceland, at about
+    sixty five degrees north and nineteen degrees west. To its left is Greenland, the big island, around seventy two degrees north and forty degrees west.
+    To the right of the zero spoke is Scandinavia. Further in, at seventy eight point two degrees north and fifteen point six degrees east, is Longyearbyen,
     on Svalbard. Between Scandinavia and the pole lies the Barents Sea, around seventy five degrees north and forty degrees east. To the right, along the
     ninety degrees east spoke, stretches Siberia. At the top, near a hundred and eighty degrees, is the Bering Strait, with Alaska to its left, around sixty
     five degrees north and a hundred and fifty degrees west. And on the left, along ninety degrees west, is Canada, with Hudson Bay at about sixty degrees
@@ -1694,13 +1695,13 @@ scenes:
     near 60° N 90° E brighten; readout ''≈ 79 m/s ≈ 284 km/h''. AT(12, ''stratospheric polar vortex'') keyword ''stratospheric polar vortex''.'
   voiceover: 'Now let''s put real weather on this map. The air pressure falls as we go up. About thirty kilometres up, in the stratosphere, the layer above
     the one where our weather happens, it''s only ten hectopascals, about a hundredth of the pressure at the ground. The height where the pressure is exactly
-    ten hectopascals isn''t the same everywhere, and this map shows it on the twenty first of January, twenty twenty six. The colours show that height,
-    and the lines join places where it''s the same, every four hundred metres. We''ll fade the place labels now, so that the weather is easy to see. The
-    surface is lowest, about twenty eight point six kilometres, over the Barents Sea, at about seventy three degrees north and forty four degrees east.
-    And it''s higher further south: about thirty point seven kilometres on average along thirty degrees north. [beat] Now let''s let the air move. The winds
-    blow nearly along these lines, round and round the Arctic, from west to east. The fastest, nearly eighty metres per second, about two hundred and eighty
-    four kilometres per hour, blow over Siberia, near sixty degrees north. [beat] This great winter whirl of cold air, high above the Arctic, is called
-    the stratospheric polar vortex.'
+    ten hectopascals isn''t the same everywhere, and this map shows it on the twenty first of January, twenty twenty six. The colours show that height, and
+    the lines join places where it''s the same, every four hundred metres. We''ll fade the place labels now, so that the weather is easy to see. The surface
+    is lowest, about twenty eight point six kilometres, over the Barents Sea, at about seventy three degrees north and forty four degrees east. And it''s
+    higher further south: about thirty point seven kilometres on average along thirty degrees north. [beat] Now let''s let the air move. The winds blow nearly
+    along these lines, round and round the Arctic, from west to east. The fastest, nearly eighty metres per second, about two hundred and eighty four kilometres
+    per hour, blow over Siberia, near sixty degrees north. [beat] This great winter whirl of cold air, high above the Arctic, is called the stratospheric
+    polar vortex.'
   on_screen_eq: null
   calc_rows:
   - 79\ \text{m/s}\times3.6\approx284\ \text{km/h}
@@ -1769,19 +1770,21 @@ scenes:
   - - 1647.1089
     - 1655.6589
   beat: 'D55: east = tangential (theta-hat), north = -radial (-r-hat); u_theta = u, u_r = -v; westerlies anticlockwise'
-  visual: 'Same map, field dimmed to 60 %, trails slowed. AT(2, ''Pick any point'') a point at 60° N 90° W (left) gets its east arrow i (orange) and north
-    arrow j (orange). AT(3, ''theta hat'') the map''s polar arrows r̂ and θ̂ (slate) at the same point; θ̂ slides onto i with a gold ''same'' tick. AT(5,
-    ''opposite of r hat'') r̂ flips onto j: tag ''−r̂''. Column: ''i = θ̂'', ''j = −r̂'', then ''u_θ = u'', ''u_r = −v'' on their words. AT(3, ''anticlockwise'')
-    a gold arrow round the 60° ring. AT(10, ''hurricane in Part 1'') a small Part 1 hurricane-ring thumbnail beside the map with a size bar (≈ 100 km vs
-    ≈ 6000 km across). AT(11, ''long winter night'') a dark polar-night cap over the middle of the map (slate shading north of the terminator for 21 Jan,
-    from the solar declination).'
-  voiceover: 'Let''s describe these winds in the map''s polar coordinates. Pick any point, and draw its east and north arrows. The east arrow points round
-    the middle, anticlockwise as seen from above: it''s exactly the map''s theta hat at that point. The north arrow points straight at the middle, towards
-    the pole. That''s the opposite of r hat, which points outward. So the north arrow is minus r hat. [beat] That means the eastward wind u is the tangential
-    wind round the pole, and the northward wind v is the radial wind with its sign flipped, because blowing north means blowing in. So u sub theta equals
-    u, and u sub r equals minus v. Westerly winds, the winds from the west, go round anticlockwise, as seen from above the North Pole. So the polar vortex
-    spins the same way as the hurricane in Part 1, but it''s far wider: thousands of kilometres across, instead of about a hundred. And unlike a hurricane,
-    it isn''t fed by a warm sea: it forms because the polar stratosphere cools in the long winter night.'
+  visual: "Same map, field dimmed to 60 %, trails slowed. AT(2, 'Pick any point') a point at 60\xB0 N 90\xB0 W (left) gets its east arrow i (orange) and north\
+    \ arrow j (orange). AT(3, 'theta hat') the map's polar arrows r\u0302 and \u03B8\u0302 (slate) at the same point; \u03B8\u0302 slides onto i with a gold\
+    \ 'same' tick. AT(5, 'opposite of r hat') r\u0302 flips onto j: tag '\u2212r\u0302'. Column: 'i = \u03B8\u0302', 'j = \u2212r\u0302', then 'u_\u03B8 =\
+    \ u', 'u_r = \u2212v' on their words. AT(3, 'anticlockwise') a gold arrow round the 60\xB0 ring. AT(10, 'hurricane in Part 1') a small Part 1 hurricane-ring\
+    \ thumbnail beside the map with a size bar (\u2248 100 km vs \u2248 6000 km across). AT(11, 'long winter night') a dark polar-night cap over the middle\
+    \ of the map (slate shading north of the terminator for 21 Jan, from the solar declination). REMAKE 2026-11-07: S1: gold 'derived in Part 4: east, north'\
+    \ (y 480); S2: Recall '\u03B8\u0302, r\u0302' + 'derived in Part 1: polar unit vectors' (y 560); both leave before the size bars. Fact row 7 (R19): the\
+    \ bar label is 'hurricane: a few hundred km' (bar 52 px, was 12) and S9 says 'instead of a few hundred'."
+  voiceover: 'Let''s describe these winds in the map''s polar coordinates. Pick any point, and draw its local east and north arrows, as in Part 4. The east
+    arrow points round the middle, anticlockwise as seen from above: it''s exactly the theta hat of Part 1 at that point. The north arrow points straight
+    at the middle, towards the pole. That''s the opposite of r hat, which points outward. So the north arrow is minus r hat. [beat] That means the eastward
+    wind u is the tangential wind round the pole, and the northward wind v is the radial wind with its sign flipped, because blowing north means blowing in.
+    So u sub theta equals u, and u sub r equals minus v. Westerly winds, the winds from the west, go round anticlockwise, as seen from above the North Pole.
+    So the polar vortex spins the same way as the hurricane in Part 1, but it''s far wider: thousands of kilometres across, instead of a few hundred. And
+    unlike a hurricane, it isn''t fed by a warm sea: it forms because the polar stratosphere cools in the long winter night.'
   on_screen_eq:
     latex: u_\theta=u,\qquad u_r=-v
     vallis_eq: 'none in Vallis: polar components on the polar map (Part 1 D04 with i = θ̂, j = −r̂); Vallis (2.29) v = i u + j v + k w for i, j'
@@ -1847,25 +1850,27 @@ scenes:
   - - 1767.3089
     - 1773.2089
   beat: 'D56 part 1 (re-thought, U-CO-083): a flat ring of air, two origins, one point worked by hand'
-  visual: 'Full picture zone, a clean flat diagram (no map): a ring of radius 1000 km (km ticks 52 px) round its centre C, ten teal arrows going round anticlockwise
-    with moving dashes (10 m/s). AT(4, ''origin at its centre'') origin O₁ = C with r̂, θ̂ (orange) at one point; column ''round 10'', ''in/out 0''. AT(6,
-    ''move the origin'') the origin glides 500 km west to O₂ (gold dot, the old origin stays faint). AT(7, ''top of the ring'') point P marked; its wind
-    (−10, 0) as a teal arrow. AT(9, ''five hundred kilometres east'') dashed legs 500 east and 1000 north from O₂ to P, the slanted line O₂P with its length
-    on AT(10, ''square root''); r̂ (orange) along O₂P. Column CalcStack with inputs ''u = −10, v = 0; r̂ = (0.447, 0.894)''. AT(12, ''radial wind is minus
-    ten'') the wind''s shadow on r̂ (rose band, ''−'' glyph): ''u_r ≈ −4.5''. AT(14, ''tangential wind uses theta hat'') θ̂ about O₂ (orange) and the shadow
-    on it (teal band): ''u_θ ≈ 8.9''. AT(17, ''Nothing is flowing in'') the radial bands at three more ring points appear (in on one side, out on the other)
-    and a gold note ''from the origin, not the air''.'
-  voiceover: 'There''s one more choice hidden in polar coordinates: where to put the origin. Let''s see why it matters with a simple flat example first.
-    Picture a ring of air, a thousand kilometres from its own centre, going round anticlockwise at ten metres per second. With the origin at its centre,
-    every air parcel on the ring moves purely round. The tangential wind is ten, and the radial wind is zero, all the way round. Now keep the same air,
-    but move the origin five hundred kilometres to the west. Look at the top of the ring, due north of the centre. There, the wind blows due west: u is
-    minus ten, and v is zero. Seen from the new origin, this point is five hundred kilometres east and a thousand kilometres north. Its distance is the
-    square root of five hundred squared plus a thousand squared, about one thousand one hundred and eighteen kilometres. So its r hat is five hundred and
-    a thousand, each divided by one thousand one hundred and eighteen: zero point four four seven, zero point eight nine four. [beat] The radial wind is
-    minus ten times zero point four four seven, plus zero times zero point eight nine four, which is about minus four and a half. It looks as if the air
-    is flowing in. [beat] The tangential wind uses theta hat, minus zero point eight nine four, zero point four four seven. It''s minus ten times minus
-    zero point eight nine four, plus zero, which is about eight point nine. [beat] Same air, same wind, but the new origin splits it differently. Nothing
-    is flowing in at all: the in and out part comes only from where we put the origin.'
+  visual: "Full picture zone, a clean flat diagram (no map): a ring of radius 1000 km (km ticks 52 px) round its centre C, ten teal arrows going round anticlockwise\
+    \ with moving dashes (10 m/s). AT(4, 'origin at its centre') origin O\u2081 = C with r\u0302, \u03B8\u0302 (orange) at one point; column 'round 10', 'in/out\
+    \ 0'. AT(6, 'move the origin') the origin glides 500 km west to O\u2082 (gold dot, the old origin stays faint). AT(7, 'top of the ring') point P marked;\
+    \ its wind (\u221210, 0) as a teal arrow. AT(9, 'five hundred kilometres east') dashed legs 500 east and 1000 north from O\u2082 to P, the slanted line\
+    \ O\u2082P with its length on AT(10, 'square root'); r\u0302 (orange) along O\u2082P. Column CalcStack with inputs 'u = \u221210, v = 0; r\u0302 = (0.447,\
+    \ 0.894)'. AT(12, 'radial wind is minus ten') the wind's shadow on r\u0302 (rose band, '\u2212' glyph): 'u_r \u2248 \u22124.5'. AT(14, 'tangential wind\
+    \ uses theta hat') \u03B8\u0302 about O\u2082 (orange) and the shadow on it (teal band): 'u_\u03B8 \u2248 8.9'. AT(17, 'Nothing is flowing in') the radial\
+    \ bands at three more ring points appear (in on one side, out on the other) and a gold note 'from the origin, not the air'. REMAKE 2026-11-07: S9-S11,\
+    \ S14 say what is done (Pythagoras; divide each leg; multiply u and v by r\u0302's / \u03B8\u0302's parts and add) and the results; every row stays on\
+    \ screen; gold 'derived in Part 1: components' (y 120) from S11."
+  voiceover: 'There''s one more choice hidden in polar coordinates: where to put the origin. Let''s see why it matters with a simple flat example first. Picture
+    a ring of air, a thousand kilometres from its own centre, going round anticlockwise at ten metres per second. With the origin at its centre, every air
+    parcel on the ring moves purely round. The tangential wind is ten, and the radial wind is zero, all the way round. Now keep the same air, but move the
+    origin five hundred kilometres to the west. Look at the top of the ring, due north of the centre. There, the wind blows due west: u is minus ten, and
+    v is zero. Seen from the new origin, this point is five hundred kilometres east and a thousand kilometres north. Its distance comes from Pythagoras: we
+    square the two legs, add them, and take the square root, which gives about one thousand one hundred and eighteen kilometres. To get its r hat, we divide
+    each leg by that distance, which gives zero point four four seven and zero point eight nine four. [beat] As in Part 1, the radial wind is the dot product
+    of the wind with r hat: we multiply u by r hat''s first part and v by its second, and add them, which gives about minus four and a half. It looks as if
+    the air is flowing in. [beat] The tangential wind uses theta hat, minus zero point eight nine four, zero point four four seven. Doing the same with theta
+    hat''s two parts gives about eight point nine. [beat] Same air, same wind, but the new origin splits it differently. Nothing is flowing in at all: the
+    in and out part comes only from where we put the origin.'
   on_screen_eq:
     latex: u_r=\mathbf u\cdot\hat{\mathbf r},\qquad u_\theta=\mathbf u\cdot\hat{\boldsymbol\theta}
     vallis_eq: 'none in Vallis: polar components as dot products (Part 1 D04)'
@@ -1928,24 +1933,29 @@ scenes:
   - - 1851.6589
     - 1858.2839
   beat: 'D56 part 2: the vortex about the pole vs about its own centre (17.5 vs 47 m/s round; ratio 1.9 vs 0.4); pointers U09, G03'
-  visual: 'Back to the polar map (field and trails at 70 %). AT(2, ''Its own centre'') the gold cross at 72.9° N 44.3° E with ''≈ 1900 km'' along a gold
-    line to the pole. AT(4, ''ring two thousand kilometres from the pole'') a slate ring round the pole; its winds split into round (teal) and in/out (rose
-    with a ''−'' glyph for in) ticks at 36 points, a legend ''ticks: round · in/out'' in the column (Should 10). Column bars (Balance style, one shared
-    zero line): ''round ≈ 17.5 m/s'', ''in/out (typical) ≈ 33 m/s'', ratio bar ''≈ 1.9''. AT(''vortex''s own centre instead'') the ring re-centres on the
-    gold cross (eased glide), the ticks re-split: ''round ≈ 47 m/s'', ''in/out ≈ 20 m/s'', ratio bar ''≈ 0.4'' beside the first (Should 10 kept). AT(8,
-    ''just like the hurricane'') the Part 1 ring thumbnail. AT(11, ''Waves on the jet'') keywords ''more: Waves on the jet'' and then ''more: The polar
-    vortex'' (>= 8 frames apart).'
-  voiceover: 'Now back to the vortex. Its own centre isn''t at the pole. It''s at about seventy two point nine degrees north and forty four point three
-    degrees east, over the Barents Sea, about one thousand nine hundred kilometres from the pole. Let''s draw a ring two thousand kilometres from the pole,
-    and split the winds on it with the pole as the origin. The round part averages only about seventeen and a half metres per second, and the in and out
-    part is typically about thirty three, almost twice as big: a ratio of about one point nine. [beat] Now draw a ring two thousand kilometres from the
-    vortex''s own centre instead. The round part averages about forty seven metres per second, and the in and out part is typically about twenty, less than
-    half: a ratio of about zero point four. [beat] So about its own centre, the vortex is mostly spin, just like the hurricane round its eye. Choosing the
-    origin is part of choosing good coordinates: put it at the centre of the thing that turns. When the polar vortex weakens or splits, cold air can spill
-    south into the places where people live. That story has its own movies later in this series: Waves on the jet, and The polar vortex.'
+  visual: "Back to the polar map (field and trails at 70 %). AT(2, 'Its own centre') the gold cross at 72.9\xB0 N 44.3\xB0 E with '\u2248 1900 km' along a\
+    \ gold line to the pole. AT(4, 'ring two thousand kilometres from the pole') a slate ring round the pole; its winds split into round (teal) and in/out\
+    \ (rose with a '\u2212' glyph for in) ticks at 36 points, a legend 'ticks: round \xB7 in/out' in the column (Should 10). Column bars (Balance style, one\
+    \ shared zero line): 'round \u2248 17.5 m/s', 'in/out (typical) \u2248 33 m/s', ratio bar '\u2248 1.9'. AT('vortex's own centre instead') the ring re-centres\
+    \ on the gold cross (eased glide), the ticks re-split: 'round \u2248 47 m/s', 'in/out \u2248 20 m/s', ratio bar '\u2248 0.4' beside the first (Should\
+    \ 10 kept). AT(8, 'just like the hurricane') the Part 1 ring thumbnail. AT(11, 'Waves on the jet') keywords 'more: Waves on the jet' and then 'more: The\
+    \ polar vortex' (>= 8 frames apart). REMAKE 2026-11-07: S3: Recall '\u016B = (1/N) \u03A3 u_i' + 'derived in Part 1: ring averages' (y 580, size 46),\
+    \ gone before the second ring's rows."
+  voiceover: 'Now back to the vortex. Its own centre isn''t at the pole. It''s at about seventy two point nine degrees north and forty four point three degrees
+    east, over the Barents Sea, about one thousand nine hundred kilometres from the pole. Let''s draw a ring two thousand kilometres from the pole, split
+    the wind at each point on it into its round and in and out parts with the pole as the origin, and average round the ring, as in Part 1. The round part
+    averages only about seventeen and a half metres per second, and the in and out part is typically about thirty three, almost twice as big: a ratio of about
+    one point nine. [beat] Now draw a ring two thousand kilometres from the vortex''s own centre instead. The round part averages about forty seven metres
+    per second, and the in and out part is typically about twenty, less than half: a ratio of about zero point four. [beat] So about its own centre, the vortex
+    is mostly spin, just like the hurricane round its eye. Choosing the origin is part of choosing good coordinates: put it at the centre of the thing that
+    turns. When the polar vortex weakens or splits, cold air can spill south into the places where people live. That story has its own movies later in this
+    series: Waves on the jet, and The polar vortex.'
   on_screen_eq: null
   calc_rows:
-  - \dfrac{\text{in/out (rms)}}{\text{round (mean)}}:\ \ 1.9\ \text{about the pole},\quad 0.4\ \text{about the centre}
+  - \bar u=\dfrac{1}{N}\sum_{i=1}^{N}u_i
+  - (90^\circ-72.9^\circ)\times111.2\approx1900\ \text{km}
+  - \text{ratio}=33\div17.5\approx1.9
+  - \text{ratio}=20\div47\approx0.4
   physics_source:
     fn: fluidpy.diag.cyclone.storm_centre (10 hPa heights); fluidpy.diag.cyclone.storm_relative_wind (NCEP 10 hPa u, v; centre = pole vs centre)
     params:
@@ -1999,17 +2009,23 @@ scenes:
   - - 1918.9839
     - 1925.2339
   beat: recap ('To sum up'); last sentence names The gradient as the next movie
-  visual: 'One beat per sentence, mini pictures reused (no headings): the orange peel; the plate carrée with ''x = a λ, y = a φ'' and ''k = 1/cos φ''; the
-    two Brest grid points with ''73.8 km''; the Mercator ladder with dy and the ln tan formula; the rhumb line straight on Mercator; the 100-km square ''×
-    4'' and Greenland vs Africa; the Equal Earth map; the polar map with i = θ̂, j = −r̂ and the vortex centre; a gradient-arrow thumbnail with the keyword
-    ''next: The gradient'' on the last sentence. Each spoken number on screen at its words.'
+  visual: "One beat per sentence, mini pictures reused (no headings): the orange peel; the plate carr\xE9e with 'x = a \u03BB, y = a \u03C6' and 'k = 1/cos\
+    \ \u03C6'; the two Brest grid points with '73.8 km'; the Mercator ladder with dy and the ln tan formula; the rhumb line straight on Mercator; the 100-km\
+    \ square '\xD7 4' and Greenland vs Africa; the Equal Earth map; the polar map with i = \u03B8\u0302, j = \u2212r\u0302 and the vortex centre; a gradient-arrow\
+    \ thumbnail with the keyword 'next: The gradient' on the last sentence. Each spoken number on screen at its words. REMAKE 2026-11-07: 10 sentences: S0-S6\
+    \ the recap with numbers on the minis ('\xD7 1.5 at Brest', '73.8 km', 'Brest \u2248 6167 km' on the ladder, 'Mercator: \xD7 24 at Svalbard'); S7 closes\
+    \ the series (the seven part thumbnails of s01, all lit, 'coordinates: all seven parts'); S8-S9 the two-sentence gradient teaser (isotherms + arrow, 'next:\
+    \ The gradient', then '1/(a cos \u03C6) \u2202T/\u2202\u03BB' in gold)."
   voiceover: 'To sum up, flattening the Earth always stretches something. The flat square map, with x equal to the Earth''s radius times lambda, and y equal
-    to the radius times phi, is true along the equator and the meridians, but it stretches east-west by one over cosine phi. Scale factors like this matter
-    whenever we measure slopes on a weather grid. Mercator stretches north-south by the same amount, so small shapes and angles stay right, and rhumb lines
-    are straight. His map''s height is the Earth''s radius times l n of the tangent of forty five degrees plus half the latitude. But areas grow by one
-    over cosine phi, squared, so equal-area maps are better for comparing amounts. Seen from above the North Pole, a map is polar coordinates again: east
-    is round, north is in, and the polar vortex is mostly spin about its own centre. Next in this series, we''ll measure how fast the temperature changes
-    across a map: the gradient.'
+    to the radius times phi, is true along the equator and the meridians, but it stretches east-west by one over cosine phi: about one and a half times at
+    Brest. Scale factors like this matter whenever we measure slopes on a weather grid, where one degree east at Brest is only seventy three point eight kilometres.
+    Mercator stretches north-south by the same amount, so small shapes and angles stay right, and rhumb lines are straight. His map''s height is the Earth''s
+    radius times l n of the tangent of forty five degrees plus half the latitude, which puts Brest about six thousand one hundred and sixty seven kilometres
+    above the equator. But areas grow by one over cosine phi, squared, about twenty four times at Svalbard, so equal-area maps are better for comparing amounts.
+    Seen from above the North Pole, a map is polar coordinates again: east is round, north is in, and the polar vortex is mostly spin about its own centre.
+    With that, our seven parts on coordinates are complete, from arrows on a flat map to winds over the whole round Earth. Next in this series comes the gradient:
+    how fast, and in which direction, temperature or pressure changes across a map. It''s where the one over the Earth''s radius times cosine phi that we
+    met here does its real work.'
   on_screen_eq:
     latex: y=a\,\ln\tan\!\left(\dfrac{\pi}{4}+\dfrac{\varphi}{2}\right)
     vallis_eq: none in Vallis (Mercator, Snyder 1987 eq. 7-2); repeated from s10
@@ -2046,13 +2062,13 @@ scenes:
   - - 1940.9839
     - 1948.6339
   beat: series end card (maths-tutorial ending, word for word; decision 2)
-  visual: 'House end card (HOUSE_STYLE §3): four faint topic thumbnails along the top (globe with a great circle, Mercator map, polar map, a gradient arrow);
-    keyword lines ''a series of maths tutorials'' (68 px) and ''atmospheric science · meteorology · fluid dynamics'' (54 px); a notebook icon with ''coordinates
-    notebook''; stacked notebook icons with ''notebooks for the other maths concepts''; 24-px gap between icons and text (Should 14). Then the 2.5-s silent
-    hold while the music fades.'
+  visual: "House end card (HOUSE_STYLE \xA73): four faint topic thumbnails along the top (globe with a great circle, Mercator map, polar map, a gradient arrow);\
+    \ keyword lines 'a series of maths tutorials' (68 px) and 'atmospheric science \xB7 meteorology \xB7 fluid dynamics' (54 px); a notebook icon with 'coordinates\
+    \ notebook'; stacked notebook icons with 'notebooks for the other maths concepts'; 24-px gap between icons and text (Should 14). Then the 2.5-s silent\
+    \ hold while the music fades. REMAKE 2026-11-07: the picture fades out with the music over the 2.5-s silent hold (R3; = Part 6's s15)."
   voiceover: This video is one of a series of related maths tutorials, so watch out for the others. They're made for students of atmospheric science, meteorology
-    and fluid dynamics, and anyone else who needs these ideas. The notebook for coordinates, and the notebooks for the other maths concepts, are on the
-    website that goes with this video.
+    and fluid dynamics, and anyone else who needs these ideas. The notebook for coordinates, and the notebooks for the other maths concepts, are on the website
+    that goes with this video.
   on_screen_eq: null
   calc_rows: []
   physics_source: null

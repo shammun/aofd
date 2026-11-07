@@ -3,2878 +3,2555 @@
  "speed": 1.0,
  "fps": 30,
  "sample_rate": 24000,
- "gaps": {
-  "sentence": 0.35,
-  "scene": 0.8,
-  "lead": 0.3,
-  "tail": 0.3
- },
- "provisional": "copied from the measured dry run dryrun3_spliced (absolute times, incl. its 0.3-s s02->s03 splice gap) by checks/make_timing.py; s17 S12 'Just inside the thirty degree ring' and s18 S10 'two hundred and eighty four' re-worded after the run (clips not re-measured); 7 sentences re-voiced by the calc & sync audit #5g with ESTIMATED clip lengths (checks/revoice.py; shift -0.166 s); the final TTS replaces it",
- "estimated_sentences": [
-  "s00_title S0",
-  "s04_plate_carree S15",
-  "s04_plate_carree S16",
-  "s04_plate_carree S17",
-  "s10_ln_formula S14",
-  "s10_ln_formula S15",
-  "s10_ln_formula S16"
- ],
+ "provisional": "remake 2026-11-07 static phase: re-used clip lengths from the dry runs, new sentences estimated at 14.27 chars/s (mp_r7_splice.py --provisional); the final splice replaces it",
  "scenes": [
   {
    "id": "s00_title",
    "start": 0.3,
    "sentences": [
     {
-     "text": "In this video, we'll learn map projections, and see how meteorology uses them to draw weather maps, and to read the winds from above the pole.",
-     "audio_text": null,
+     "text": "In this video, we'll learn how coordinates flatten our round Earth into maps, and see how they're used to draw weather maps, and to read the winds high above the North Pole.",
      "start": 0.3,
-     "end": 9.8735,
-     "dur": 9.5735,
+     "end": 12.4248,
+     "dur": 12.1248,
      "start_frame": 9,
-     "end_frame": 296,
+     "end_frame": 373,
      "estimated": true
     }
    ],
-   "end": 10.6735,
+   "end": 13.2248,
    "start_frame": 9,
-   "end_frame": 320,
-   "timing_source": "dryrun3_spliced:s00_title"
+   "end_frame": 397
   },
   {
    "id": "s01_hook",
-   "start": 10.6735,
+   "start": 13.2248,
    "sentences": [
     {
      "text": "Why does Greenland look as big as Africa on so many maps, and how do forecasters draw the whole Arctic on one page?",
-     "audio_text": null,
-     "start": 10.6735,
-     "end": 18.5485,
+     "start": 13.2248,
+     "end": 21.0998,
      "dur": 7.875,
-     "start_frame": 320,
-     "end_frame": 556
+     "start_frame": 397,
+     "end_frame": 633
     },
     {
      "text": "This is the last of seven parts on coordinates.",
-     "audio_text": null,
-     "start": 18.8985,
-     "end": 22.3485,
+     "start": 21.4498,
+     "end": 24.8998,
      "dur": 3.45,
-     "start_frame": 567,
-     "end_frame": 670
+     "start_frame": 643,
+     "end_frame": 747
     },
     {
-     "text": "Let's see how the round Earth is flattened onto maps, and what each kind of map stretches.",
-     "audio_text": null,
-     "start": 22.6985,
-     "end": 28.3735,
-     "dur": 5.675,
-     "start_frame": 681,
-     "end_frame": 851
+     "text": "Now let's dive into the maps themselves: the flat square map that weather data come on, Mercator's map, where the rhumb line comes out straight, and maps that keep areas true, with exactly what each one stretches.",
+     "start": 25.2498,
+     "end": 40.1779,
+     "dur": 14.9282,
+     "start_frame": 757,
+     "end_frame": 1205,
+     "estimated": true
     },
     {
      "text": "Then let's read a weather map drawn from above the North Pole.",
-     "audio_text": null,
-     "start": 28.7235,
-     "end": 33.1235,
+     "start": 40.5279,
+     "end": 44.9279,
      "dur": 4.4,
-     "start_frame": 862,
-     "end_frame": 994
+     "start_frame": 1216,
+     "end_frame": 1348
     }
    ],
-   "end": 33.9235,
-   "start_frame": 320,
-   "end_frame": 1018,
-   "timing_source": "dryrun3_spliced:s01_hook"
-  },
-  {
-   "id": "s02_part6_recap",
-   "start": 33.9235,
-   "sentences": [
-    {
-     "text": "Here's what we'll use from the earlier parts.",
-     "audio_text": null,
-     "start": 33.9235,
-     "end": 36.9235,
-     "dur": 3.0,
-     "start_frame": 1018,
-     "end_frame": 1108
-    },
-    {
-     "text": "The arc rule from Part 1: the distance along a circle is its radius times the angle, in radians.",
-     "audio_text": null,
-     "start": 37.2735,
-     "end": 44.6485,
-     "dur": 7.375,
-     "start_frame": 1118,
-     "end_frame": 1339
-    },
-    {
-     "text": "From Part 3, the latitude, phi, the longitude, lambda, and the Earth's radius, the letter a, about six thousand three hundred and seventy one kilometres.",
-     "audio_text": null,
-     "start": 44.9985,
-     "end": 55.7735,
-     "dur": 10.775,
-     "start_frame": 1350,
-     "end_frame": 1673
-    },
-    {
-     "text": "One degree of latitude is about a hundred and eleven point two kilometres everywhere.",
-     "audio_text": null,
-     "start": 56.1235,
-     "end": 62.1735,
-     "dur": 6.05,
-     "start_frame": 1684,
-     "end_frame": 1865
-    },
-    {
-     "text": "One degree of longitude is that times cosine phi: about seventy three point eight kilometres at Brest.",
-     "audio_text": null,
-     "start": 62.5235,
-     "end": 69.5985,
-     "dur": 7.075,
-     "start_frame": 1876,
-     "end_frame": 2088
-    },
-    {
-     "text": "In Part 6, we called these multipliers scale factors.",
-     "audio_text": null,
-     "start": 69.9485,
-     "end": 74.2735,
-     "dur": 4.325,
-     "start_frame": 2098,
-     "end_frame": 2228
-    },
-    {
-     "text": "And we found two routes from London to Los Angeles: the great circle, about eight thousand seven hundred and fifty five kilometres, and the rhumb line, which keeps one compass bearing and is about eleven percent longer.",
-     "audio_text": null,
-     "start": 74.6235,
-     "end": 88.5235,
-     "dur": 13.9,
-     "start_frame": 2239,
-     "end_frame": 2656
-    }
-   ],
-   "end": 88.8235,
-   "start_frame": 1018,
-   "end_frame": 2665,
-   "timing_source": "dryrun3_spliced:s02_part6_recap"
+   "end": 45.7279,
+   "start_frame": 397,
+   "end_frame": 1372
   },
   {
    "id": "s03_flattening",
-   "start": 88.8235,
+   "start": 45.7279,
    "sentences": [
     {
      "text": "Every map starts by flattening the Earth onto a page.",
-     "audio_text": null,
-     "start": 88.8235,
-     "end": 92.5985,
+     "start": 45.7279,
+     "end": 49.5029,
      "dur": 3.775,
-     "start_frame": 2665,
-     "end_frame": 2778
+     "start_frame": 1372,
+     "end_frame": 1485
     },
     {
      "text": "And here's the catch: you can't flatten a sphere without stretching or tearing it.",
-     "audio_text": null,
-     "start": 92.9485,
-     "end": 97.8735,
+     "start": 49.8529,
+     "end": 54.7779,
      "dur": 4.925,
-     "start_frame": 2788,
-     "end_frame": 2936
+     "start_frame": 1496,
+     "end_frame": 1643
     },
     {
      "text": "Try it with an orange peel.",
-     "audio_text": null,
-     "start": 98.2235,
-     "end": 100.4235,
+     "start": 55.1279,
+     "end": 57.3279,
      "dur": 2.2,
-     "start_frame": 2947,
-     "end_frame": 3013
+     "start_frame": 1654,
+     "end_frame": 1720
     },
     {
      "text": "Cut it into slices from pole to pole, and lay them flat, and gaps open up between them.",
-     "audio_text": null,
-     "start": 100.7735,
-     "end": 107.3235,
+     "start": 57.6779,
+     "end": 64.2279,
      "dur": 6.55,
-     "start_frame": 3023,
-     "end_frame": 3220
+     "start_frame": 1730,
+     "end_frame": 1927
     },
     {
      "text": "Close the gaps by stretching, and the shapes change.",
-     "audio_text": null,
-     "start": 107.6735,
-     "end": 111.3235,
+     "start": 64.5779,
+     "end": 68.2279,
      "dur": 3.65,
-     "start_frame": 3230,
-     "end_frame": 3340
+     "start_frame": 1937,
+     "end_frame": 2047
     },
     {
      "text": "Every flat map of the Earth makes a choice about what to stretch.",
-     "audio_text": null,
-     "start": 111.6735,
-     "end": 115.9485,
+     "start": 68.5779,
+     "end": 72.8529,
      "dur": 4.275,
-     "start_frame": 3350,
-     "end_frame": 3478
+     "start_frame": 2057,
+     "end_frame": 2186
     },
     {
      "text": "Let's build the simplest map, and work out exactly how much it stretches.",
-     "audio_text": null,
-     "start": 116.2985,
-     "end": 121.2735,
+     "start": 73.2029,
+     "end": 78.1779,
      "dur": 4.975,
-     "start_frame": 3489,
-     "end_frame": 3638
+     "start_frame": 2196,
+     "end_frame": 2345
     }
    ],
-   "end": 122.0735,
-   "start_frame": 2665,
-   "end_frame": 3662,
-   "timing_source": "dryrun3_spliced:s03_flattening"
+   "end": 78.9779,
+   "start_frame": 1372,
+   "end_frame": 2369
   },
   {
    "id": "s04_plate_carree",
-   "start": 122.0735,
+   "start": 78.9779,
    "sentences": [
     {
      "text": "Next, we'll build the simplest map step by step, with every number.",
-     "audio_text": null,
-     "start": 122.0735,
-     "end": 127.1235,
+     "start": 78.9779,
+     "end": 84.0279,
      "dur": 5.05,
-     "start_frame": 3662,
-     "end_frame": 3814
+     "start_frame": 2369,
+     "end_frame": 2521
     },
     {
      "text": "That's for anyone who enjoys every step.",
-     "audio_text": null,
-     "start": 127.4735,
-     "end": 130.5235,
+     "start": 84.3779,
+     "end": 87.4279,
      "dur": 3.05,
-     "start_frame": 3824,
-     "end_frame": 3916
+     "start_frame": 2531,
+     "end_frame": 2623
     },
     {
      "text": "For the intuition behind weather, climate science or GIS, you only need the result, so if it feels like a lot, skip ahead to the time on screen.",
-     "audio_text": null,
-     "start": 130.8735,
-     "end": 140.9985,
+     "start": 87.7779,
+     "end": 97.9029,
      "dur": 10.125,
-     "start_frame": 3926,
-     "end_frame": 4230
+     "start_frame": 2633,
+     "end_frame": 2937
     },
     {
      "text": "We'll build it from the lines on the globe whose lengths we know.",
-     "audio_text": null,
-     "start": 141.3485,
-     "end": 145.5735,
+     "start": 98.2529,
+     "end": 102.4779,
      "dur": 4.225,
-     "start_frame": 4240,
-     "end_frame": 4367
+     "start_frame": 2948,
+     "end_frame": 3074
     },
     {
      "text": "First, the equator.",
-     "audio_text": null,
-     "start": 145.9235,
-     "end": 147.9735,
+     "start": 102.8279,
+     "end": 104.8779,
      "dur": 2.05,
-     "start_frame": 4378,
-     "end_frame": 4439
+     "start_frame": 3085,
+     "end_frame": 3146
     },
     {
      "text": "Cut it, and unroll it into a straight line across the page.",
-     "audio_text": null,
-     "start": 148.3235,
-     "end": 152.4235,
+     "start": 105.2279,
+     "end": 109.3279,
      "dur": 4.1,
-     "start_frame": 4450,
-     "end_frame": 4573
+     "start_frame": 3157,
+     "end_frame": 3280
     },
     {
-     "text": "Its length is two pi times the Earth's radius, about forty thousand kilometres.",
-     "audio_text": null,
-     "start": 152.7735,
-     "end": 158.3735,
-     "dur": 5.6,
-     "start_frame": 4583,
-     "end_frame": 4751
+     "text": "Its length is two pi times the Earth's radius, which, as in Part 3, we write as the letter a, about six thousand three hundred and seventy one kilometres, so the equator is about forty thousand kilometres long.",
+     "start": 109.6779,
+     "end": 124.3959,
+     "dur": 14.7179,
+     "start_frame": 3290,
+     "end_frame": 3732,
+     "estimated": true
     },
     {
      "text": "A place at longitude lambda, in radians, is the Earth's radius times lambda along the equator from the prime meridian.",
-     "audio_text": null,
-     "start": 158.7235,
-     "end": 166.8485,
+     "start": 124.7459,
+     "end": 132.8709,
      "dur": 8.125,
-     "start_frame": 4762,
-     "end_frame": 5005
+     "start_frame": 3742,
+     "end_frame": 3986
     },
     {
-     "text": "That's the arc rule again.",
-     "audio_text": null,
-     "start": 167.1985,
-     "end": 169.3235,
-     "dur": 2.125,
-     "start_frame": 5016,
-     "end_frame": 5080
+     "text": "That's the arc rule, which we found in Part 1.",
+     "start": 133.2209,
+     "end": 136.4448,
+     "dur": 3.2239,
+     "start_frame": 3997,
+     "end_frame": 4093,
+     "estimated": true
     },
     {
      "text": "So we set x equal to the Earth's radius times lambda.",
-     "audio_text": null,
-     "start": 169.6735,
-     "end": 173.6735,
+     "start": 136.7948,
+     "end": 140.7948,
      "dur": 4.0,
-     "start_frame": 5090,
-     "end_frame": 5210,
+     "start_frame": 4104,
+     "end_frame": 4224,
      "beat": true
     },
     {
      "text": "Second, the meridians.",
-     "audio_text": null,
-     "start": 175.1735,
-     "end": 177.1985,
+     "start": 142.2948,
+     "end": 144.3198,
      "dur": 2.025,
-     "start_frame": 5255,
-     "end_frame": 5316
+     "start_frame": 4269,
+     "end_frame": 4330
     },
     {
      "text": "Each one runs from the equator to the pole, and a place at latitude phi is the Earth's radius times phi from the equator, along its meridian.",
-     "audio_text": null,
-     "start": 177.5485,
-     "end": 187.1485,
+     "start": 144.6698,
+     "end": 154.2698,
      "dur": 9.6,
-     "start_frame": 5326,
-     "end_frame": 5614
+     "start_frame": 4340,
+     "end_frame": 4628
     },
     {
-     "text": "That's the distance north from Part 3.",
-     "audio_text": null,
-     "start": 187.4985,
-     "end": 190.5235,
-     "dur": 3.025,
-     "start_frame": 5625,
-     "end_frame": 5716
-    },
-    {
-     "text": "So we draw every meridian as a straight line going up the page, and set y equal to the Earth's radius times phi.",
-     "audio_text": null,
-     "start": 190.8735,
-     "end": 198.4735,
-     "dur": 7.6,
-     "start_frame": 5726,
-     "end_frame": 5954,
-     "beat": true
-    },
-    {
-     "text": "Let's try Brest, at forty eight point four degrees north, and four and a half degrees west.",
-     "audio_text": null,
-     "start": 199.9735,
-     "end": 205.8985,
-     "dur": 5.925,
-     "start_frame": 5999,
-     "end_frame": 6177
-    },
-    {
-     "text": "In radians, that's zero point eight four four seven, and minus zero point zero seven eight five.",
-     "audio_text": null,
-     "start": 206.2485,
-     "end": 213.1676,
-     "dur": 6.9191,
-     "start_frame": 6187,
-     "end_frame": 6395,
+     "text": "That's the distance north, which we found in Part 3.",
+     "start": 154.6198,
+     "end": 158.2642,
+     "dur": 3.6444,
+     "start_frame": 4639,
+     "end_frame": 4748,
      "estimated": true
     },
     {
-     "text": "So x is six thousand three hundred and seventy one times minus zero point zero seven eight five, about minus five hundred kilometres: just west of the middle line.",
-     "audio_text": null,
-     "start": 213.5176,
-     "end": 225.0426,
-     "dur": 11.525,
-     "start_frame": 6406,
-     "end_frame": 6751,
+     "text": "So we draw every meridian as a straight line going up the page, and set y equal to the Earth's radius times phi.",
+     "start": 158.6142,
+     "end": 166.2142,
+     "dur": 7.6,
+     "start_frame": 4758,
+     "end_frame": 4986,
+     "beat": true
+    },
+    {
+     "text": "Let's try Brest, the port city at the western tip of France that we met in Part 3, at forty eight point four degrees north, and four and a half degrees west.",
+     "start": 167.7142,
+     "end": 178.7176,
+     "dur": 11.0034,
+     "start_frame": 5031,
+     "end_frame": 5362,
+     "estimated": true
+    },
+    {
+     "text": "In radians, that's zero point eight four four seven, and minus zero point zero seven eight five.",
+     "start": 179.0676,
+     "end": 185.7958,
+     "dur": 6.7282,
+     "start_frame": 5372,
+     "end_frame": 5574,
+     "estimated": true
+    },
+    {
+     "text": "So x, the Earth's radius times lambda, comes to about minus five hundred kilometres: just west of the middle line.",
+     "start": 186.1458,
+     "end": 194.1356,
+     "dur": 7.9897,
+     "start_frame": 5584,
+     "end_frame": 5824,
      "beat": true,
      "estimated": true
     },
     {
-     "text": "And y is six thousand three hundred and seventy one times zero point eight four four seven, about five thousand three hundred and eighty two kilometres.",
-     "audio_text": null,
-     "start": 226.5426,
-     "end": 236.9039,
-     "dur": 10.3613,
-     "start_frame": 6796,
-     "end_frame": 7107,
+     "text": "And y, the Earth's radius times phi, comes to about five thousand three hundred and eighty two kilometres.",
+     "start": 195.6356,
+     "end": 203.0646,
+     "dur": 7.429,
+     "start_frame": 5869,
+     "end_frame": 6092,
      "beat": true,
      "estimated": true
     },
     {
      "text": "That's exactly how far Brest is from the equator, walking north along its meridian.",
-     "audio_text": null,
-     "start": 238.4039,
-     "end": 244.3289,
+     "start": 204.5646,
+     "end": 210.4896,
      "dur": 5.925,
-     "start_frame": 7152,
-     "end_frame": 7330
+     "start_frame": 6137,
+     "end_frame": 6315
     },
     {
      "text": "So along the equator, and along every meridian, this map is true to scale.",
-     "audio_text": null,
-     "start": 244.6789,
-     "end": 249.9789,
+     "start": 210.8396,
+     "end": 216.1396,
      "dur": 5.3,
-     "start_frame": 7340,
-     "end_frame": 7499
+     "start_frame": 6325,
+     "end_frame": 6484
     },
     {
      "text": "It's called the plate carrée, French for flat square, and most weather data come on exactly this kind of grid.",
-     "audio_text": null,
-     "start": 250.3289,
-     "end": 257.4289,
+     "start": 216.4896,
+     "end": 223.5896,
      "dur": 7.1,
-     "start_frame": 7510,
-     "end_frame": 7723
+     "start_frame": 6495,
+     "end_frame": 6708
     }
    ],
-   "end": 258.2289,
-   "start_frame": 3662,
-   "end_frame": 7747,
-   "timing_source": "dryrun3_spliced:s04_plate_carree"
+   "end": 224.3896,
+   "start_frame": 2369,
+   "end_frame": 6732
   },
   {
    "id": "s05_stretch_k",
-   "start": 258.2289,
+   "start": 224.3896,
    "sentences": [
     {
      "text": "Now look at a circle of latitude, called a parallel.",
-     "audio_text": null,
-     "start": 258.2289,
-     "end": 261.9789,
+     "start": 224.3896,
+     "end": 228.1396,
      "dur": 3.75,
-     "start_frame": 7747,
-     "end_frame": 7859
+     "start_frame": 6732,
+     "end_frame": 6844
     },
     {
      "text": "On this map, every parallel is drawn as a straight line across the page, as long as the equator: two pi times the Earth's radius, about forty thousand and thirty kilometres.",
-     "audio_text": null,
-     "start": 262.3289,
-     "end": 274.5289,
+     "start": 228.4896,
+     "end": 240.6896,
      "dur": 12.2,
-     "start_frame": 7870,
-     "end_frame": 8236
+     "start_frame": 6855,
+     "end_frame": 7221
     },
     {
      "text": "But on the globe, the parallel through Brest is a smaller circle.",
-     "audio_text": null,
-     "start": 274.8789,
-     "end": 279.4289,
+     "start": 241.0396,
+     "end": 245.5896,
      "dur": 4.55,
-     "start_frame": 8246,
-     "end_frame": 8383
+     "start_frame": 7231,
+     "end_frame": 7368
     },
     {
      "text": "As we saw in Part 3, its radius is the Earth's radius times cosine phi, about four thousand two hundred and thirty kilometres.",
-     "audio_text": null,
-     "start": 279.7789,
-     "end": 289.2039,
+     "start": 245.9396,
+     "end": 255.3646,
      "dur": 9.425,
-     "start_frame": 8393,
-     "end_frame": 8676
+     "start_frame": 7378,
+     "end_frame": 7661
     },
     {
-     "text": "So its true length is two pi times four thousand two hundred and thirty, about twenty six thousand five hundred and eighty kilometres.",
-     "audio_text": null,
-     "start": 289.5539,
-     "end": 298.3039,
-     "dur": 8.75,
-     "start_frame": 8687,
-     "end_frame": 8949,
-     "beat": true
+     "text": "So its true length, two pi times that radius, is about twenty six thousand five hundred and eighty kilometres.",
+     "start": 255.7146,
+     "end": 263.424,
+     "dur": 7.7094,
+     "start_frame": 7671,
+     "end_frame": 7903,
+     "beat": true,
+     "estimated": true
     },
     {
      "text": "The map draws twenty six thousand five hundred and eighty kilometres as forty thousand and thirty.",
-     "audio_text": null,
-     "start": 299.8039,
-     "end": 306.5039,
+     "start": 264.924,
+     "end": 271.624,
      "dur": 6.7,
-     "start_frame": 8994,
-     "end_frame": 9195
+     "start_frame": 7948,
+     "end_frame": 8149
     },
     {
-     "text": "So east-west distances at Brest are stretched by forty thousand and thirty divided by twenty six thousand five hundred and eighty, about one point five.",
-     "audio_text": null,
-     "start": 306.8539,
-     "end": 317.1789,
-     "dur": 10.325,
-     "start_frame": 9206,
-     "end_frame": 9515,
-     "beat": true
+     "text": "So east-west distances at Brest are stretched: dividing the drawn length by the true length gives about one point five.",
+     "start": 271.974,
+     "end": 280.3142,
+     "dur": 8.3402,
+     "start_frame": 8159,
+     "end_frame": 8409,
+     "beat": true,
+     "estimated": true
     },
     {
      "text": "Let's write that with symbols.",
-     "audio_text": null,
-     "start": 318.6789,
-     "end": 320.9539,
+     "start": 281.8142,
+     "end": 284.0892,
      "dur": 2.275,
-     "start_frame": 9560,
-     "end_frame": 9629
+     "start_frame": 8454,
+     "end_frame": 8523
     },
     {
      "text": "The stretch, called k, is two pi times the Earth's radius, divided by two pi times the Earth's radius times cosine phi.",
-     "audio_text": null,
-     "start": 321.3039,
-     "end": 330.0039,
+     "start": 284.4392,
+     "end": 293.1392,
      "dur": 8.7,
-     "start_frame": 9639,
-     "end_frame": 9900
+     "start_frame": 8533,
+     "end_frame": 8794
     },
     {
      "text": "The two pi and the radius cancel, so k equals one over cosine phi.",
-     "audio_text": null,
-     "start": 330.3539,
-     "end": 335.9289,
+     "start": 293.4892,
+     "end": 299.0642,
      "dur": 5.575,
-     "start_frame": 9911,
-     "end_frame": 10078,
+     "start_frame": 8805,
+     "end_frame": 8972,
      "beat": true
     },
     {
-     "text": "At Brest, that's one over zero point six six four, about one point five.",
-     "audio_text": null,
-     "start": 337.4289,
-     "end": 342.9789,
-     "dur": 5.55,
-     "start_frame": 10123,
-     "end_frame": 10289
+     "text": "At Brest, the cosine of phi is zero point six six four, so k is about one point five.",
+     "start": 300.5642,
+     "end": 306.5214,
+     "dur": 5.9573,
+     "start_frame": 9017,
+     "end_frame": 9196,
+     "estimated": true
     },
     {
-     "text": "At sixty degrees north, it's one over zero point five, which is two.",
-     "audio_text": null,
-     "start": 343.3289,
-     "end": 348.4789,
-     "dur": 5.15,
-     "start_frame": 10300,
-     "end_frame": 10454
+     "text": "At sixty degrees north, the cosine is zero point five, so k is two.",
+     "start": 306.8714,
+     "end": 311.5671,
+     "dur": 4.6957,
+     "start_frame": 9206,
+     "end_frame": 9347,
+     "estimated": true
     },
     {
-     "text": "And at Longyearbyen, on Svalbard, at seventy eight point two degrees north, it's one over zero point two zero four, almost five.",
-     "audio_text": null,
-     "start": 348.8289,
-     "end": 358.0289,
-     "dur": 9.2,
-     "start_frame": 10465,
-     "end_frame": 10741,
-     "beat": true
+     "text": "And at Longyearbyen, the Arctic town on Svalbard that we met in Part 3, at seventy eight point two degrees north, the cosine is only zero point two zero four, so k is almost five.",
+     "start": 311.9171,
+     "end": 324.4624,
+     "dur": 12.5453,
+     "start_frame": 9358,
+     "end_frame": 9734,
+     "beat": true,
+     "estimated": true
     },
     {
      "text": "North-south distances aren't stretched at all.",
-     "audio_text": null,
-     "start": 359.5289,
-     "end": 362.8289,
+     "start": 325.9624,
+     "end": 329.2624,
      "dur": 3.3,
-     "start_frame": 10786,
-     "end_frame": 10885
+     "start_frame": 9779,
+     "end_frame": 9878
     },
     {
      "text": "So a small circle near Brest is drawn as an oval, one and a half times wider than it is tall, and near the poles, shapes are squashed flat.",
-     "audio_text": null,
-     "start": 363.1789,
-     "end": 372.5789,
+     "start": 329.6124,
+     "end": 339.0124,
      "dur": 9.4,
-     "start_frame": 10895,
-     "end_frame": 11177
+     "start_frame": 9888,
+     "end_frame": 10170
     }
    ],
-   "end": 373.3789,
-   "start_frame": 7747,
-   "end_frame": 11201,
-   "timing_source": "dryrun3_spliced:s05_stretch_k"
+   "end": 339.8124,
+   "start_frame": 6732,
+   "end_frame": 10194
   },
   {
    "id": "s06_gradient_preview",
-   "start": 373.3789,
+   "start": 339.8124,
    "sentences": [
     {
      "text": "If you skipped, here's what to keep.",
-     "audio_text": null,
-     "start": 373.3789,
-     "end": 376.0539,
+     "start": 339.8124,
+     "end": 342.4874,
      "dur": 2.675,
-     "start_frame": 11201,
-     "end_frame": 11282
+     "start_frame": 10194,
+     "end_frame": 10275
     },
     {
      "text": "The simplest map uses longitude and latitude as x and y.",
-     "audio_text": null,
-     "start": 376.4039,
-     "end": 381.1289,
+     "start": 342.8374,
+     "end": 347.5624,
      "dur": 4.725,
-     "start_frame": 11292,
-     "end_frame": 11434
+     "start_frame": 10285,
+     "end_frame": 10427
     },
     {
      "text": "It's true along the equator and along every meridian, but it stretches east-west distances by one over cosine phi: about one and a half times at Brest, two at sixty degrees north, and almost five at Svalbard.",
-     "audio_text": null,
-     "start": 381.4789,
-     "end": 395.8789,
+     "start": 347.9124,
+     "end": 362.3124,
      "dur": 14.4,
-     "start_frame": 11444,
-     "end_frame": 11876
+     "start_frame": 10437,
+     "end_frame": 10869
+    },
+    {
+     "text": "In Part 6, we called the distance walked for each radian of a coordinate its scale factor: the Earth's radius for latitude, and the radius times cosine phi for longitude.",
+     "start": 362.6624,
+     "end": 374.5769,
+     "dur": 11.9145,
+     "start_frame": 10880,
+     "end_frame": 11237,
+     "estimated": true
     },
     {
      "text": "Scale factors like this matter for weather data, because most weather data come on exactly this kind of grid.",
-     "audio_text": null,
-     "start": 396.2289,
-     "end": 403.2789,
+     "start": 374.9269,
+     "end": 381.9769,
      "dur": 7.05,
-     "start_frame": 11887,
-     "end_frame": 12098
+     "start_frame": 11248,
+     "end_frame": 11459
     },
     {
      "text": "Suppose two grid points near Brest are one degree of longitude apart, and the temperature differs by one degree Celsius between them.",
-     "audio_text": null,
-     "start": 403.6289,
-     "end": 412.6539,
+     "start": 382.3269,
+     "end": 391.3519,
      "dur": 9.025,
-     "start_frame": 12109,
-     "end_frame": 12380
+     "start_frame": 11470,
+     "end_frame": 11741
     },
     {
      "text": "The slope we want is per kilometre, not per degree.",
-     "audio_text": null,
-     "start": 413.0039,
-     "end": 416.7039,
+     "start": 391.7019,
+     "end": 395.4019,
      "dur": 3.7,
-     "start_frame": 12390,
-     "end_frame": 12501
+     "start_frame": 11751,
+     "end_frame": 11862
     },
     {
-     "text": "So we divide by the true distance, seventy three point eight kilometres, not by a hundred and eleven point two.",
-     "audio_text": null,
-     "start": 417.0539,
-     "end": 424.6289,
-     "dur": 7.575,
-     "start_frame": 12512,
-     "end_frame": 12739
+     "text": "So we divide by the true distance east, seventy three point eight kilometres, as we found in Part 3, not by the hundred and eleven point two kilometres of a degree north.",
+     "start": 395.7519,
+     "end": 407.6664,
+     "dur": 11.9145,
+     "start_frame": 11873,
+     "end_frame": 12230,
+     "estimated": true
     },
     {
      "text": "That's about one point four degrees per hundred kilometres.",
-     "audio_text": null,
-     "start": 424.9789,
-     "end": 429.1289,
+     "start": 408.0164,
+     "end": 412.1664,
      "dur": 4.15,
-     "start_frame": 12749,
-     "end_frame": 12874,
+     "start_frame": 12240,
+     "end_frame": 12365,
      "beat": true
     },
     {
      "text": "In symbols, the eastward slope is one over the Earth's radius times cosine phi, times the change with longitude.",
-     "audio_text": null,
-     "start": 430.6289,
-     "end": 438.9539,
+     "start": 413.6664,
+     "end": 421.9914,
      "dur": 8.325,
-     "start_frame": 12919,
-     "end_frame": 13169
+     "start_frame": 12410,
+     "end_frame": 12660
     },
     {
      "text": "Together with the northward slope, it makes the gradient on the sphere.",
-     "audio_text": null,
-     "start": 439.3039,
-     "end": 443.8539,
+     "start": 422.3414,
+     "end": 426.8914,
      "dur": 4.55,
-     "start_frame": 13179,
-     "end_frame": 13316
+     "start_frame": 12670,
+     "end_frame": 12807
     },
     {
      "text": "We'll build it step by step in the next movie in this series: The gradient.",
-     "audio_text": null,
-     "start": 444.2039,
-     "end": 448.8539,
+     "start": 427.2414,
+     "end": 431.8914,
      "dur": 4.65,
-     "start_frame": 13326,
-     "end_frame": 13466
+     "start_frame": 12817,
+     "end_frame": 12957
     },
     {
      "text": "Weather models also use a curvilinear coordinate in the vertical, pressure instead of height, which has its own movie too: Pressure as a vertical coordinate.",
-     "audio_text": null,
-     "start": 449.2039,
-     "end": 459.6539,
+     "start": 432.2414,
+     "end": 442.6914,
      "dur": 10.45,
-     "start_frame": 13476,
-     "end_frame": 13790
+     "start_frame": 12967,
+     "end_frame": 13281
     }
    ],
-   "end": 460.4539,
-   "start_frame": 11201,
-   "end_frame": 13814,
-   "timing_source": "dryrun3_spliced:s06_gradient_preview"
+   "end": 443.4914,
+   "start_frame": 10194,
+   "end_frame": 13305
   },
   {
    "id": "s07_mercator_idea",
-   "start": 460.4539,
+   "start": 443.4914,
    "sentences": [
     {
      "text": "In fifteen sixty nine, the map maker Gerardus Mercator had a clever idea to fix the squashed shapes of the flat square map.",
-     "audio_text": null,
-     "start": 460.4539,
-     "end": 468.8789,
+     "start": 443.4914,
+     "end": 451.9164,
      "dur": 8.425,
-     "start_frame": 13814,
-     "end_frame": 14066
+     "start_frame": 13305,
+     "end_frame": 13557
     },
     {
      "text": "Think of stretching a photo.",
-     "audio_text": null,
-     "start": 469.2289,
-     "end": 471.4289,
+     "start": 452.2664,
+     "end": 454.4664,
      "dur": 2.2,
-     "start_frame": 14077,
-     "end_frame": 14143
+     "start_frame": 13568,
+     "end_frame": 13634
     },
     {
      "text": "If you stretch it only sideways, faces look too wide.",
-     "audio_text": null,
-     "start": 471.7789,
-     "end": 475.8539,
+     "start": 454.8164,
+     "end": 458.8914,
      "dur": 4.075,
-     "start_frame": 14153,
-     "end_frame": 14276
+     "start_frame": 13644,
+     "end_frame": 13767
     },
     {
      "text": "But if you also stretch it up and down by the same amount, faces look right again, just bigger.",
-     "audio_text": null,
-     "start": 476.2039,
-     "end": 482.4289,
+     "start": 459.2414,
+     "end": 465.4664,
      "dur": 6.225,
-     "start_frame": 14286,
-     "end_frame": 14473
+     "start_frame": 13777,
+     "end_frame": 13964
     },
     {
      "text": "Mercator did this to the map, one strip of latitude at a time.",
-     "audio_text": null,
-     "start": 482.7789,
-     "end": 487.3539,
+     "start": 465.8164,
+     "end": 470.3914,
      "dur": 4.575,
-     "start_frame": 14483,
-     "end_frame": 14621
+     "start_frame": 13974,
+     "end_frame": 14112
     },
     {
      "text": "Near Brest, east-west is stretched by one point five, so he stretched north-south near Brest by one point five too.",
-     "audio_text": null,
-     "start": 487.7039,
-     "end": 495.7289,
+     "start": 470.7414,
+     "end": 478.7664,
      "dur": 8.025,
-     "start_frame": 14631,
-     "end_frame": 14872
+     "start_frame": 14122,
+     "end_frame": 14363
     },
     {
      "text": "Near sixty degrees north, both by two.",
-     "audio_text": null,
-     "start": 496.0789,
-     "end": 499.4289,
+     "start": 479.1164,
+     "end": 482.4664,
      "dur": 3.35,
-     "start_frame": 14882,
-     "end_frame": 14983
+     "start_frame": 14373,
+     "end_frame": 14474
     },
     {
      "text": "Near Svalbard, both by almost five.",
-     "audio_text": null,
-     "start": 499.7789,
-     "end": 502.9539,
+     "start": 482.8164,
+     "end": 485.9914,
      "dur": 3.175,
-     "start_frame": 14993,
-     "end_frame": 15089,
+     "start_frame": 14484,
+     "end_frame": 14580,
      "beat": true
     },
     {
      "text": "Now watch a small circle from the globe.",
-     "audio_text": null,
-     "start": 504.4539,
-     "end": 507.3789,
+     "start": 487.4914,
+     "end": 490.4164,
      "dur": 2.925,
-     "start_frame": 15134,
-     "end_frame": 15221
+     "start_frame": 14625,
+     "end_frame": 14712
     },
     {
      "text": "On the flat square map, it becomes an oval, too wide.",
-     "audio_text": null,
-     "start": 507.7289,
-     "end": 511.7539,
+     "start": 490.7664,
+     "end": 494.7914,
      "dur": 4.025,
-     "start_frame": 15232,
-     "end_frame": 15353
+     "start_frame": 14723,
+     "end_frame": 14844
     },
     {
      "text": "Stretch its strip north-south by the same factor, and it becomes a circle again, only bigger.",
-     "audio_text": null,
-     "start": 512.1039,
-     "end": 518.3039,
+     "start": 495.1414,
+     "end": 501.3414,
      "dur": 6.2,
-     "start_frame": 15363,
-     "end_frame": 15549
+     "start_frame": 14854,
+     "end_frame": 15040
     },
     {
      "text": "Unlike a photo, though, each strip of latitude needs its own stretch, so the map grows taller and taller towards the poles.",
-     "audio_text": null,
-     "start": 518.6539,
-     "end": 526.9789,
+     "start": 501.6914,
+     "end": 510.0164,
      "dur": 8.325,
-     "start_frame": 15560,
-     "end_frame": 15809
+     "start_frame": 15051,
+     "end_frame": 15300
     },
     {
      "text": "Because small shapes stay the right shape, small angles stay true as well: the angle at which a road crosses a meridian on the map is the angle on the ground.",
-     "audio_text": null,
-     "start": 527.3289,
-     "end": 537.6289,
+     "start": 510.3664,
+     "end": 520.6664,
      "dur": 10.3,
-     "start_frame": 15820,
-     "end_frame": 16129
+     "start_frame": 15311,
+     "end_frame": 15620
     },
     {
      "text": "Maps like this are called conformal, which means that they keep shapes and angles right in every small patch.",
-     "audio_text": null,
-     "start": 537.9789,
-     "end": 544.8539,
+     "start": 521.0164,
+     "end": 527.8914,
      "dur": 6.875,
-     "start_frame": 16139,
-     "end_frame": 16346
+     "start_frame": 15630,
+     "end_frame": 15837
     }
    ],
-   "end": 545.6539,
-   "start_frame": 13814,
-   "end_frame": 16370,
-   "timing_source": "dryrun3_spliced:s07_mercator_idea"
+   "end": 528.6914,
+   "start_frame": 13305,
+   "end_frame": 15861
   },
   {
    "id": "s08_mercator_dy",
-   "start": 545.6539,
+   "start": 528.6914,
    "sentences": [
     {
      "text": "Now let's turn Mercator's idea into a formula, with every step and every number.",
-     "audio_text": null,
-     "start": 545.6539,
-     "end": 551.5039,
+     "start": 528.6914,
+     "end": 534.5414,
      "dur": 5.85,
-     "start_frame": 16370,
-     "end_frame": 16545
+     "start_frame": 15861,
+     "end_frame": 16036
     },
     {
      "text": "This part is for learners who want to see how the formula is built; you don't need it for the intuition behind weather, climate science or GIS.",
-     "audio_text": null,
-     "start": 551.8539,
-     "end": 560.8289,
+     "start": 534.8914,
+     "end": 543.8664,
      "dur": 8.975,
-     "start_frame": 16556,
-     "end_frame": 16825
+     "start_frame": 16047,
+     "end_frame": 16316
     },
     {
      "text": "If it feels like too much, skip ahead to the time on screen.",
-     "audio_text": null,
-     "start": 561.1789,
-     "end": 565.3789,
+     "start": 544.2164,
+     "end": 548.4164,
      "dur": 4.2,
-     "start_frame": 16835,
-     "end_frame": 16961
+     "start_frame": 16326,
+     "end_frame": 16452
     },
     {
      "text": "Take a small step north on the globe, by delta phi.",
-     "audio_text": null,
-     "start": 565.7289,
-     "end": 569.7039,
+     "start": 548.7664,
+     "end": 552.7414,
      "dur": 3.975,
-     "start_frame": 16972,
-     "end_frame": 17091
+     "start_frame": 16463,
+     "end_frame": 16582
     },
     {
      "text": "From Part 3, its true length is the Earth's radius times delta phi.",
-     "audio_text": null,
-     "start": 570.0539,
-     "end": 575.1289,
+     "start": 553.0914,
+     "end": 558.1664,
      "dur": 5.075,
-     "start_frame": 17102,
-     "end_frame": 17254
+     "start_frame": 16593,
+     "end_frame": 16745
     },
     {
      "text": "On the flat square map, it's drawn just that long, while east-west is drawn one over cosine phi times too long.",
-     "audio_text": null,
-     "start": 575.4789,
-     "end": 583.4289,
+     "start": 558.5164,
+     "end": 566.4664,
      "dur": 7.95,
-     "start_frame": 17264,
-     "end_frame": 17503
+     "start_frame": 16755,
+     "end_frame": 16994
     },
     {
      "text": "To keep the shapes, Mercator draws the north step one over cosine phi times longer too.",
-     "audio_text": null,
-     "start": 583.7789,
-     "end": 589.9789,
+     "start": 566.8164,
+     "end": 573.0164,
      "dur": 6.2,
-     "start_frame": 17513,
-     "end_frame": 17699
+     "start_frame": 17004,
+     "end_frame": 17190
     },
     {
      "text": "So on his map, the step is drawn as the Earth's radius times delta phi, divided by cosine phi.",
-     "audio_text": null,
-     "start": 590.3289,
-     "end": 597.5789,
+     "start": 573.3664,
+     "end": 580.6164,
      "dur": 7.25,
-     "start_frame": 17710,
-     "end_frame": 17927,
+     "start_frame": 17201,
+     "end_frame": 17418,
      "beat": true
     },
     {
      "text": "Let's put in numbers.",
-     "audio_text": null,
-     "start": 599.0789,
-     "end": 601.0289,
+     "start": 582.1164,
+     "end": 584.0664,
      "dur": 1.95,
-     "start_frame": 17972,
-     "end_frame": 18031
+     "start_frame": 17463,
+     "end_frame": 17522
     },
     {
      "text": "One degree north is a hundred and eleven point two kilometres on the ground, everywhere.",
-     "audio_text": null,
-     "start": 601.3789,
-     "end": 607.8289,
+     "start": 584.4164,
+     "end": 590.8664,
      "dur": 6.45,
-     "start_frame": 18041,
-     "end_frame": 18235
+     "start_frame": 17532,
+     "end_frame": 17726
     },
     {
-     "text": "At Brest, Mercator draws it a hundred and eleven point two times one point five zero six long, about a hundred and sixty seven point four kilometres.",
-     "audio_text": null,
-     "start": 608.1789,
-     "end": 619.0289,
-     "dur": 10.85,
-     "start_frame": 18245,
-     "end_frame": 18571,
-     "beat": true
+     "text": "At Brest, where the stretch is one point five zero six, Mercator draws it about a hundred and sixty seven point four kilometres long.",
+     "start": 591.2164,
+     "end": 600.5378,
+     "dur": 9.3214,
+     "start_frame": 17736,
+     "end_frame": 18016,
+     "beat": true,
+     "estimated": true
     },
     {
      "text": "At sixty degrees north, he draws it twice as long, about two hundred and twenty two point four kilometres.",
-     "audio_text": null,
-     "start": 620.5289,
-     "end": 627.8789,
+     "start": 602.0378,
+     "end": 609.3878,
      "dur": 7.35,
-     "start_frame": 18616,
-     "end_frame": 18836,
+     "start_frame": 18061,
+     "end_frame": 18282,
      "beat": true
     },
     {
      "text": "When the step is tiny, we write d instead of delta, as in Part 3.",
-     "audio_text": null,
-     "start": 629.3789,
-     "end": 634.3539,
+     "start": 610.8878,
+     "end": 615.8628,
      "dur": 4.975,
-     "start_frame": 18881,
-     "end_frame": 19031
+     "start_frame": 18327,
+     "end_frame": 18476
     },
     {
      "text": "So d y equals the Earth's radius times d phi, divided by cosine phi.",
-     "audio_text": null,
-     "start": 634.7039,
-     "end": 640.4789,
+     "start": 616.2128,
+     "end": 621.9878,
      "dur": 5.775,
-     "start_frame": 19041,
-     "end_frame": 19214
+     "start_frame": 18486,
+     "end_frame": 18660
     },
     {
      "text": "This says how fast the map's height grows as we go north: slowly near the equator, and faster and faster towards the pole.",
-     "audio_text": null,
-     "start": 640.8289,
-     "end": 649.2539,
+     "start": 622.3378,
+     "end": 630.7628,
      "dur": 8.425,
-     "start_frame": 19225,
-     "end_frame": 19478
+     "start_frame": 18670,
+     "end_frame": 18923
     }
    ],
-   "end": 650.0539,
-   "start_frame": 16370,
-   "end_frame": 19502,
-   "timing_source": "dryrun3_spliced:s08_mercator_dy"
+   "end": 631.5628,
+   "start_frame": 15861,
+   "end_frame": 18947
   },
   {
    "id": "s09_adding_steps",
-   "start": 650.0539,
+   "start": 631.5628,
    "sentences": [
     {
      "text": "So how high up the map is a place at latitude phi?",
-     "audio_text": null,
-     "start": 650.0539,
-     "end": 653.7039,
+     "start": 631.5628,
+     "end": 635.2128,
      "dur": 3.65,
-     "start_frame": 19502,
-     "end_frame": 19611
+     "start_frame": 18947,
+     "end_frame": 19056
     },
     {
      "text": "It's the sum of all the drawn steps, from the equator up to phi.",
-     "audio_text": null,
-     "start": 654.0539,
-     "end": 658.4539,
+     "start": 635.5628,
+     "end": 639.9628,
      "dur": 4.4,
-     "start_frame": 19622,
-     "end_frame": 19754
+     "start_frame": 19067,
+     "end_frame": 19199
     },
     {
      "text": "Let's add them up, ten degrees at a time.",
-     "audio_text": null,
-     "start": 658.8039,
-     "end": 661.9789,
+     "start": 640.3128,
+     "end": 643.4878,
      "dur": 3.175,
-     "start_frame": 19764,
-     "end_frame": 19859
+     "start_frame": 19209,
+     "end_frame": 19305
     },
     {
      "text": "Ten degrees is zero point one seven four five radians.",
-     "audio_text": null,
-     "start": 662.3289,
-     "end": 666.9039,
+     "start": 643.8378,
+     "end": 648.4128,
      "dur": 4.575,
-     "start_frame": 19870,
-     "end_frame": 20007
+     "start_frame": 19315,
+     "end_frame": 19452
     },
     {
      "text": "For each step, we use the stretch in the middle of the step.",
-     "audio_text": null,
-     "start": 667.2539,
-     "end": 671.0789,
+     "start": 648.7628,
+     "end": 652.5878,
      "dur": 3.825,
-     "start_frame": 20018,
-     "end_frame": 20132
+     "start_frame": 19463,
+     "end_frame": 19578
     },
     {
      "text": "From zero to ten degrees, the middle is five degrees, where one over cosine is one point zero zero four.",
-     "audio_text": null,
-     "start": 671.4289,
-     "end": 679.0789,
+     "start": 652.9378,
+     "end": 660.5878,
      "dur": 7.65,
-     "start_frame": 20143,
-     "end_frame": 20372
+     "start_frame": 19588,
+     "end_frame": 19818
     },
     {
-     "text": "So the first step is drawn zero point one seven four five times one point zero zero four, about zero point one seven five times the Earth's radius, or about one thousand one hundred and sixteen kilometres.",
-     "audio_text": null,
-     "start": 679.4289,
-     "end": 694.1039,
-     "dur": 14.675,
-     "start_frame": 20383,
-     "end_frame": 20823,
-     "beat": true
+     "text": "So the first drawn step, ten degrees in radians times that stretch, is about zero point one seven five Earth radii, or about one thousand one hundred and sixteen kilometres.",
+     "start": 660.9378,
+     "end": 673.0626,
+     "dur": 12.1248,
+     "start_frame": 19828,
+     "end_frame": 20192,
+     "beat": true,
+     "estimated": true
     },
     {
      "text": "From ten to twenty degrees, the middle is fifteen degrees, the stretch is one point zero three five, and the step is zero point one eight one.",
-     "audio_text": null,
-     "start": 695.6039,
-     "end": 705.2539,
+     "start": 674.5626,
+     "end": 684.2126,
      "dur": 9.65,
-     "start_frame": 20868,
-     "end_frame": 21158
+     "start_frame": 20237,
+     "end_frame": 20526
     },
     {
      "text": "The running total is zero point three five six.",
-     "audio_text": null,
-     "start": 705.6039,
-     "end": 709.0789,
+     "start": 684.5626,
+     "end": 688.0376,
      "dur": 3.475,
-     "start_frame": 21168,
-     "end_frame": 21272,
+     "start_frame": 20537,
+     "end_frame": 20641,
      "beat": true
     },
     {
      "text": "From twenty to thirty degrees, the stretch is one point one zero three, the step is zero point one nine three, and the total is zero point five four nine.",
-     "audio_text": null,
-     "start": 710.5789,
-     "end": 721.1789,
+     "start": 689.5376,
+     "end": 700.1376,
      "dur": 10.6,
-     "start_frame": 21317,
-     "end_frame": 21635,
+     "start_frame": 20686,
+     "end_frame": 21004,
      "beat": true
     },
     {
      "text": "Let's speed up.",
-     "audio_text": null,
-     "start": 722.6789,
-     "end": 724.4039,
+     "start": 701.6376,
+     "end": 703.3626,
      "dur": 1.725,
-     "start_frame": 21680,
-     "end_frame": 21732
+     "start_frame": 21049,
+     "end_frame": 21101
     },
     {
      "text": "The total reaches about one point zero one at fifty degrees, one point three one at sixty, one point seven three at seventy, and two point four at eighty.",
-     "audio_text": null,
-     "start": 724.7539,
-     "end": 735.3539,
+     "start": 703.7126,
+     "end": 714.3126,
      "dur": 10.6,
-     "start_frame": 21743,
-     "end_frame": 22061,
+     "start_frame": 21111,
+     "end_frame": 21429,
      "beat": true
     },
     {
      "text": "Look at the steps: they grow as we go north, because the stretch grows.",
-     "audio_text": null,
-     "start": 736.8539,
-     "end": 741.4539,
+     "start": 715.8126,
+     "end": 720.4126,
      "dur": 4.6,
-     "start_frame": 22106,
-     "end_frame": 22244
+     "start_frame": 21474,
+     "end_frame": 21612
     },
     {
      "text": "The last ten degrees, from eighty to ninety, add at least two more on their own, and we'll see soon that they add far more.",
-     "audio_text": null,
-     "start": 741.8039,
-     "end": 749.4039,
+     "start": 720.7626,
+     "end": 728.3626,
      "dur": 7.6,
-     "start_frame": 22254,
-     "end_frame": 22482
+     "start_frame": 21623,
+     "end_frame": 21851
     },
     {
      "text": "Navigators really did it this way: in fifteen ninety nine, the English mathematician Edward Wright published a table made by adding up such steps, one minute of latitude at a time.",
-     "audio_text": null,
-     "start": 749.7539,
-     "end": 761.7289,
+     "start": 728.7126,
+     "end": 740.6876,
      "dur": 11.975,
-     "start_frame": 22493,
-     "end_frame": 22852
+     "start_frame": 21861,
+     "end_frame": 22221
     }
    ],
-   "end": 762.5289,
-   "start_frame": 19502,
-   "end_frame": 22876,
-   "timing_source": "dryrun3_spliced:s09_adding_steps"
+   "end": 741.4876,
+   "start_frame": 18947,
+   "end_frame": 22245
   },
   {
    "id": "s10_ln_formula",
-   "start": 762.5289,
+   "start": 741.4876,
    "sentences": [
     {
      "text": "Adding up tiny steps like this is the integration we met in Part 3, and this sum has an exact answer.",
-     "audio_text": null,
-     "start": 762.5289,
-     "end": 770.3289,
+     "start": 741.4876,
+     "end": 749.2876,
      "dur": 7.8,
-     "start_frame": 22876,
-     "end_frame": 23110
+     "start_frame": 22245,
+     "end_frame": 22479
     },
     {
      "text": "To write it, we need one new tool, the natural logarithm, written l n.",
-     "audio_text": null,
-     "start": 770.6789,
-     "end": 775.8289,
+     "start": 749.6376,
+     "end": 754.7876,
      "dur": 5.15,
-     "start_frame": 23120,
-     "end_frame": 23275
+     "start_frame": 22489,
+     "end_frame": 22644
     },
     {
      "text": "The number e is about two point seven one eight.",
-     "audio_text": null,
-     "start": 776.1789,
-     "end": 779.6039,
+     "start": 755.1376,
+     "end": 758.5626,
      "dur": 3.425,
-     "start_frame": 23285,
-     "end_frame": 23388
+     "start_frame": 22654,
+     "end_frame": 22757
     },
     {
      "text": "The natural logarithm of a number answers one question: e to what power gives this number?",
-     "audio_text": null,
-     "start": 779.9539,
-     "end": 786.3789,
+     "start": 758.9126,
+     "end": 765.3376,
      "dur": 6.425,
-     "start_frame": 23399,
-     "end_frame": 23591
+     "start_frame": 22767,
+     "end_frame": 22960
     },
     {
      "text": "So l n of one is zero, because e to the power zero is one.",
-     "audio_text": null,
-     "start": 786.7289,
-     "end": 791.4789,
+     "start": 765.6876,
+     "end": 770.4376,
      "dur": 4.75,
-     "start_frame": 23602,
-     "end_frame": 23744
+     "start_frame": 22971,
+     "end_frame": 23113
     },
     {
      "text": "And l n of e is one.",
-     "audio_text": null,
-     "start": 791.8289,
-     "end": 794.0039,
+     "start": 770.7876,
+     "end": 772.9626,
      "dur": 2.175,
-     "start_frame": 23755,
-     "end_frame": 23820,
+     "start_frame": 23124,
+     "end_frame": 23189,
      "beat": true
     },
     {
      "text": "Here's the answer to our sum: y equals the Earth's radius, times the natural logarithm of the tangent of forty five degrees plus half the latitude.",
-     "audio_text": null,
-     "start": 795.5039,
-     "end": 805.8039,
+     "start": 774.4626,
+     "end": 784.7626,
      "dur": 10.3,
-     "start_frame": 23865,
-     "end_frame": 24174
+     "start_frame": 23234,
+     "end_frame": 23543
     },
     {
      "text": "Forty five degrees is pi over four radians, so on screen it's pi over four plus phi over two.",
-     "audio_text": null,
-     "start": 806.1539,
-     "end": 813.2039,
+     "start": 785.1126,
+     "end": 792.1626,
      "dur": 7.05,
-     "start_frame": 24185,
-     "end_frame": 24396
+     "start_frame": 23553,
+     "end_frame": 23765
     },
     {
      "text": "Let's test it against our table.",
-     "audio_text": null,
-     "start": 813.5539,
-     "end": 816.1289,
+     "start": 792.5126,
+     "end": 795.0876,
      "dur": 2.575,
-     "start_frame": 24407,
-     "end_frame": 24484
+     "start_frame": 23775,
+     "end_frame": 23853
     },
     {
-     "text": "At sixty degrees, forty five plus thirty is seventy five degrees.",
-     "audio_text": null,
-     "start": 816.4789,
-     "end": 821.5289,
-     "dur": 5.05,
-     "start_frame": 24494,
-     "end_frame": 24646
-    },
-    {
-     "text": "Its tangent is three point seven three two, and l n of three point seven three two is one point three one seven.",
-     "audio_text": null,
-     "start": 821.8789,
-     "end": 829.9039,
-     "dur": 8.025,
-     "start_frame": 24656,
-     "end_frame": 24897,
-     "beat": true
-    },
-    {
-     "text": "Our ten-degree sum gave one point three one three, very close.",
-     "audio_text": null,
-     "start": 831.4039,
-     "end": 835.9289,
-     "dur": 4.525,
-     "start_frame": 24942,
-     "end_frame": 25078
-    },
-    {
-     "text": "With one-degree steps, the sum gives one point three one seven, the same to three decimals.",
-     "audio_text": null,
-     "start": 836.2789,
-     "end": 842.8539,
-     "dur": 6.575,
-     "start_frame": 25088,
-     "end_frame": 25286,
-     "beat": true
-    },
-    {
-     "text": "At Brest, forty five plus half of forty eight point four is sixty nine point two degrees.",
-     "audio_text": null,
-     "start": 844.3539,
-     "end": 850.9039,
-     "dur": 6.55,
-     "start_frame": 25331,
-     "end_frame": 25527
-    },
-    {
-     "text": "Its tangent is two point six three two five, and its l n is zero point nine six eight.",
-     "audio_text": null,
-     "start": 851.2539,
-     "end": 857.465,
-     "dur": 6.2111,
-     "start_frame": 25538,
-     "end_frame": 25724,
+     "text": "At sixty degrees, adding half the latitude to forty five degrees gives seventy five degrees.",
+     "start": 795.4376,
+     "end": 801.8854,
+     "dur": 6.4479,
+     "start_frame": 23863,
+     "end_frame": 24057,
      "estimated": true
     },
     {
-     "text": "So on a Mercator map, Brest sits zero point nine six eight times the Earth's radius above the equator, about six thousand one hundred and sixty seven kilometres.",
-     "audio_text": null,
-     "start": 857.815,
-     "end": 868.9089,
-     "dur": 11.0939,
-     "start_frame": 25734,
-     "end_frame": 26067,
+     "text": "Its tangent is three point seven three two, and the l n of that is one point three one seven.",
+     "start": 802.2354,
+     "end": 808.7534,
+     "dur": 6.5179,
+     "start_frame": 24067,
+     "end_frame": 24263,
+     "beat": true,
+     "estimated": true
+    },
+    {
+     "text": "Our ten-degree sum gave one point three one three, very close.",
+     "start": 810.2534,
+     "end": 814.7784,
+     "dur": 4.525,
+     "start_frame": 24308,
+     "end_frame": 24443
+    },
+    {
+     "text": "With one-degree steps, the sum gives one point three one seven, the same to three decimals.",
+     "start": 815.1284,
+     "end": 821.7034,
+     "dur": 6.575,
+     "start_frame": 24454,
+     "end_frame": 24651,
+     "beat": true
+    },
+    {
+     "text": "At Brest, forty five degrees plus half its latitude gives sixty nine point two degrees.",
+     "start": 823.2034,
+     "end": 829.3008,
+     "dur": 6.0974,
+     "start_frame": 24696,
+     "end_frame": 24879,
+     "estimated": true
+    },
+    {
+     "text": "Its tangent is two point six three two five, and its l n is zero point nine six eight.",
+     "start": 829.6508,
+     "end": 835.6781,
+     "dur": 6.0273,
+     "start_frame": 24890,
+     "end_frame": 25070,
+     "estimated": true
+    },
+    {
+     "text": "So on a Mercator map, Brest sits zero point nine six eight Earth radii above the equator, about six thousand one hundred and sixty seven kilometres.",
+     "start": 836.0281,
+     "end": 846.4008,
+     "dur": 10.3726,
+     "start_frame": 25081,
+     "end_frame": 25392,
      "beat": true,
      "estimated": true
     },
     {
      "text": "On the flat square map, it was five thousand three hundred and eighty two.",
-     "audio_text": null,
-     "start": 870.4089,
-     "end": 875.1839,
-     "dur": 4.775,
-     "start_frame": 26112,
-     "end_frame": 26256,
+     "start": 847.9008,
+     "end": 853.0871,
+     "dur": 5.1863,
+     "start_frame": 25437,
+     "end_frame": 25593,
      "estimated": true
     }
    ],
-   "end": 875.9839,
-   "start_frame": 22876,
-   "end_frame": 26280,
-   "timing_source": "dryrun3_spliced:s10_ln_formula"
+   "end": 853.8871,
+   "start_frame": 22245,
+   "end_frame": 25617
   },
   {
    "id": "s11_slope_check",
-   "start": 875.9839,
+   "start": 853.8871,
    "sentences": [
     {
      "text": "How can we be sure the formula is right everywhere, not just at a few points?",
-     "audio_text": null,
-     "start": 875.9839,
-     "end": 881.0839,
+     "start": 853.8871,
+     "end": 858.9871,
      "dur": 5.1,
-     "start_frame": 26280,
-     "end_frame": 26433
+     "start_frame": 25617,
+     "end_frame": 25770
     },
     {
      "text": "Its slope must match the drawn step: one over cosine phi for each radian of phi.",
-     "audio_text": null,
-     "start": 881.4339,
-     "end": 887.4089,
+     "start": 859.3371,
+     "end": 865.3121,
      "dur": 5.975,
-     "start_frame": 26443,
-     "end_frame": 26622
+     "start_frame": 25780,
+     "end_frame": 25959
     },
     {
      "text": "Let's check its slope at sixty degrees with the centred difference from the derivatives movie.",
-     "audio_text": null,
-     "start": 887.7589,
-     "end": 893.6839,
+     "start": 865.6621,
+     "end": 871.5871,
      "dur": 5.925,
-     "start_frame": 26633,
-     "end_frame": 26811
+     "start_frame": 25970,
+     "end_frame": 26148
     },
     {
      "text": "At sixty one degrees, the formula gives one point three five two four.",
-     "audio_text": null,
-     "start": 894.0339,
-     "end": 899.1589,
+     "start": 871.9371,
+     "end": 877.0621,
      "dur": 5.125,
-     "start_frame": 26821,
-     "end_frame": 26975
+     "start_frame": 26158,
+     "end_frame": 26312
     },
     {
      "text": "At fifty nine degrees, it gives one point two eight two six.",
-     "audio_text": null,
-     "start": 899.5089,
-     "end": 903.8089,
+     "start": 877.4121,
+     "end": 881.7121,
      "dur": 4.3,
-     "start_frame": 26985,
-     "end_frame": 27114,
+     "start_frame": 26322,
+     "end_frame": 26451,
      "beat": true
     },
     {
      "text": "The difference is zero point zero six nine eight, and the two points are two degrees apart, which is zero point zero three four nine radians.",
-     "audio_text": null,
-     "start": 905.3089,
-     "end": 914.5089,
+     "start": 883.2121,
+     "end": 892.4121,
      "dur": 9.2,
-     "start_frame": 27159,
-     "end_frame": 27435
+     "start_frame": 26496,
+     "end_frame": 26772
     },
     {
-     "text": "Zero point zero six nine eight divided by zero point zero three four nine is about two point zero zero.",
-     "audio_text": null,
-     "start": 914.8589,
-     "end": 922.7589,
-     "dur": 7.9,
-     "start_frame": 27446,
-     "end_frame": 27683,
-     "beat": true
+     "text": "Dividing the difference by that step gives about two point zero zero.",
+     "start": 892.7621,
+     "end": 897.598,
+     "dur": 4.8359,
+     "start_frame": 26783,
+     "end_frame": 26928,
+     "beat": true,
+     "estimated": true
     },
     {
      "text": "And one over the cosine of sixty degrees is exactly two.",
-     "audio_text": null,
-     "start": 924.2589,
-     "end": 928.8839,
+     "start": 899.098,
+     "end": 903.723,
      "dur": 4.625,
-     "start_frame": 27728,
-     "end_frame": 27867
+     "start_frame": 26973,
+     "end_frame": 27112
     },
     {
      "text": "So the formula's slope is the stretch we wanted.",
-     "audio_text": null,
-     "start": 929.2339,
-     "end": 932.7089,
+     "start": 904.073,
+     "end": 907.548,
      "dur": 3.475,
-     "start_frame": 27877,
-     "end_frame": 27981
+     "start_frame": 27122,
+     "end_frame": 27226
     },
     {
      "text": "Two more checks.",
-     "audio_text": null,
-     "start": 933.0589,
-     "end": 934.8339,
+     "start": 907.898,
+     "end": 909.673,
      "dur": 1.775,
-     "start_frame": 27992,
-     "end_frame": 28045
+     "start_frame": 27237,
+     "end_frame": 27290
     },
     {
      "text": "At the equator, the tangent of forty five degrees is one, and l n of one is zero, so y is zero, as it should be.",
-     "audio_text": null,
-     "start": 935.1839,
-     "end": 943.5339,
+     "start": 910.023,
+     "end": 918.373,
      "dur": 8.35,
-     "start_frame": 28056,
-     "end_frame": 28306,
+     "start_frame": 27301,
+     "end_frame": 27551,
      "beat": true
     },
     {
      "text": "And at the pole, the angle becomes ninety degrees, where the tangent has no end: it grows without limit.",
-     "audio_text": null,
-     "start": 945.0339,
-     "end": 952.4339,
+     "start": 919.873,
+     "end": 927.273,
      "dur": 7.4,
-     "start_frame": 28351,
-     "end_frame": 28573
+     "start_frame": 27596,
+     "end_frame": 27818
     },
     {
      "text": "So the pole is infinitely far up the map.",
-     "audio_text": null,
-     "start": 952.7839,
-     "end": 955.7589,
+     "start": 927.623,
+     "end": 930.598,
      "dur": 2.975,
-     "start_frame": 28584,
-     "end_frame": 28673
+     "start_frame": 27829,
+     "end_frame": 27918
     },
     {
-     "text": "At eighty five degrees, y is already three point one three times the Earth's radius, about nineteen thousand nine hundred and fifty kilometres.",
-     "audio_text": null,
-     "start": 956.1089,
-     "end": 965.7589,
-     "dur": 9.65,
-     "start_frame": 28683,
-     "end_frame": 28973,
-     "beat": true
+     "text": "At eighty five degrees, y is already three point one three Earth radii, about nineteen thousand nine hundred and fifty kilometres.",
+     "start": 930.948,
+     "end": 940.0591,
+     "dur": 9.1111,
+     "start_frame": 27928,
+     "end_frame": 28202,
+     "beat": true,
+     "estimated": true
     },
     {
      "text": "That's why Mercator maps are always cut off before the poles, usually somewhere past eighty degrees.",
-     "audio_text": null,
-     "start": 967.2589,
-     "end": 974.0839,
+     "start": 941.5591,
+     "end": 948.3841,
      "dur": 6.825,
-     "start_frame": 29018,
-     "end_frame": 29223
+     "start_frame": 28247,
+     "end_frame": 28452
     }
    ],
-   "end": 974.8839,
-   "start_frame": 26280,
-   "end_frame": 29247,
-   "timing_source": "dryrun3_spliced:s11_slope_check"
+   "end": 949.1841,
+   "start_frame": 25617,
+   "end_frame": 28476
   },
   {
    "id": "s12_rhumb_straight",
-   "start": 974.8839,
+   "start": 949.1841,
    "sentences": [
     {
      "text": "If you skipped, here's what to keep.",
-     "audio_text": null,
-     "start": 974.8839,
-     "end": 977.5589,
+     "start": 949.1841,
+     "end": 951.8591,
      "dur": 2.675,
-     "start_frame": 29247,
-     "end_frame": 29327
+     "start_frame": 28476,
+     "end_frame": 28556
     },
     {
      "text": "Mercator stretches north-south by the same amount as east-west, one over cosine phi, so his map grows taller and taller towards the poles, and it can never show the poles themselves.",
-     "audio_text": null,
-     "start": 977.9089,
-     "end": 990.1089,
+     "start": 952.2091,
+     "end": 964.4091,
      "dur": 12.2,
-     "start_frame": 29337,
-     "end_frame": 29703
+     "start_frame": 28566,
+     "end_frame": 28932
     },
     {
      "text": "Now we can see why a rhumb line is straight on a Mercator map.",
-     "audio_text": null,
-     "start": 990.4589,
-     "end": 994.4589,
+     "start": 964.7591,
+     "end": 968.7591,
      "dur": 4.0,
-     "start_frame": 29714,
-     "end_frame": 29834
+     "start_frame": 28943,
+     "end_frame": 29063
     },
     {
-     "text": "A rhumb line keeps one compass bearing.",
-     "audio_text": null,
-     "start": 994.8089,
-     "end": 997.6839,
-     "dur": 2.875,
-     "start_frame": 29844,
-     "end_frame": 29931
+     "text": "A rhumb line, as we saw in Part 6, keeps one compass bearing.",
+     "start": 969.1091,
+     "end": 973.3843,
+     "dur": 4.2752,
+     "start_frame": 29073,
+     "end_frame": 29202,
+     "estimated": true
     },
     {
      "text": "Zoom into any short piece of it.",
-     "audio_text": null,
-     "start": 998.0339,
-     "end": 1000.5339,
+     "start": 973.7343,
+     "end": 976.2343,
      "dur": 2.5,
-     "start_frame": 29941,
-     "end_frame": 30016
+     "start_frame": 29212,
+     "end_frame": 29287
     },
     {
      "text": "On the globe, it's a tiny slanted step: some distance west, and some distance south.",
-     "audio_text": null,
-     "start": 1000.8839,
-     "end": 1006.7089,
+     "start": 976.5843,
+     "end": 982.4093,
      "dur": 5.825,
-     "start_frame": 30027,
-     "end_frame": 30201
+     "start_frame": 29298,
+     "end_frame": 29472
     },
     {
      "text": "Keeping the same bearing means the same slant everywhere.",
-     "audio_text": null,
-     "start": 1007.0589,
-     "end": 1011.1339,
+     "start": 982.7593,
+     "end": 986.8343,
      "dur": 4.075,
-     "start_frame": 30212,
-     "end_frame": 30334
+     "start_frame": 29483,
+     "end_frame": 29605
     },
     {
-     "text": "For our route at two hundred and fifty eight and a half degrees, every piece goes about four point nine kilometres west for each kilometre south.",
-     "audio_text": null,
-     "start": 1011.4839,
-     "end": 1020.2839,
-     "dur": 8.8,
-     "start_frame": 30345,
-     "end_frame": 30609,
-     "beat": true
+     "text": "For Part 6's rhumb line from London to Los Angeles, at two hundred and fifty eight and a half degrees, every piece goes about four point nine kilometres west for each kilometre south.",
+     "start": 987.1843,
+     "end": 1000.0099,
+     "dur": 12.8256,
+     "start_frame": 29616,
+     "end_frame": 30000,
+     "beat": true,
+     "estimated": true
     },
     {
      "text": "Now draw it on the Mercator map.",
-     "audio_text": null,
-     "start": 1021.7839,
-     "end": 1024.2839,
+     "start": 1001.5099,
+     "end": 1004.0099,
      "dur": 2.5,
-     "start_frame": 30654,
-     "end_frame": 30729
+     "start_frame": 30045,
+     "end_frame": 30120
     },
     {
      "text": "At each latitude, Mercator stretches the west part and the south part by the same amount, one over cosine phi.",
-     "audio_text": null,
-     "start": 1024.6339,
-     "end": 1032.4589,
+     "start": 1004.3599,
+     "end": 1012.1849,
      "dur": 7.825,
-     "start_frame": 30739,
-     "end_frame": 30974
+     "start_frame": 30131,
+     "end_frame": 30366
     },
     {
      "text": "Stretching both parts by the same amount leaves their ratio unchanged.",
-     "audio_text": null,
-     "start": 1032.8089,
-     "end": 1037.6089,
+     "start": 1012.5349,
+     "end": 1017.3349,
      "dur": 4.8,
-     "start_frame": 30984,
-     "end_frame": 31128
+     "start_frame": 30376,
+     "end_frame": 30520
     },
     {
      "text": "So on the map, every piece of the route has the same slant, four point nine across for each one down.",
-     "audio_text": null,
-     "start": 1037.9589,
-     "end": 1044.9089,
+     "start": 1017.6849,
+     "end": 1024.6349,
      "dur": 6.95,
-     "start_frame": 31139,
-     "end_frame": 31347
+     "start_frame": 30531,
+     "end_frame": 30739
     },
     {
      "text": "A line whose slant never changes is a straight line.",
-     "audio_text": null,
-     "start": 1045.2589,
-     "end": 1048.9089,
+     "start": 1024.9849,
+     "end": 1028.6349,
      "dur": 3.65,
-     "start_frame": 31358,
-     "end_frame": 31467,
+     "start_frame": 30750,
+     "end_frame": 30859,
      "beat": true
     },
     {
      "text": "The great circle keeps changing its bearing, so on this map it comes out curved, bulging towards the pole.",
-     "audio_text": null,
-     "start": 1050.4089,
-     "end": 1057.2589,
+     "start": 1030.1349,
+     "end": 1036.9849,
      "dur": 6.85,
-     "start_frame": 31512,
-     "end_frame": 31718
+     "start_frame": 30904,
+     "end_frame": 31110
     },
     {
      "text": "The two routes swap looks: on the globe, the great circle looks straight and the rhumb line curves, and on Mercator's map it's the other way round.",
-     "audio_text": null,
-     "start": 1057.6089,
-     "end": 1066.8089,
+     "start": 1037.3349,
+     "end": 1046.5349,
      "dur": 9.2,
-     "start_frame": 31728,
-     "end_frame": 32004
+     "start_frame": 31120,
+     "end_frame": 31396
     }
    ],
-   "end": 1067.6089,
-   "start_frame": 29247,
-   "end_frame": 32028,
-   "timing_source": "dryrun3_spliced:s12_rhumb_straight"
+   "end": 1047.3349,
+   "start_frame": 28476,
+   "end_frame": 31420
   },
   {
    "id": "s13_area_stretch",
-   "start": 1067.6089,
+   "start": 1047.3349,
    "sentences": [
     {
      "text": "But keeping shapes has a price: sizes.",
-     "audio_text": null,
-     "start": 1067.6089,
-     "end": 1070.9089,
+     "start": 1047.3349,
+     "end": 1050.6349,
      "dur": 3.3,
-     "start_frame": 32028,
-     "end_frame": 32127
+     "start_frame": 31420,
+     "end_frame": 31519
     },
     {
      "text": "How much is an area stretched?",
-     "audio_text": null,
-     "start": 1071.2589,
-     "end": 1073.5089,
+     "start": 1050.9849,
+     "end": 1053.2349,
      "dur": 2.25,
-     "start_frame": 32138,
-     "end_frame": 32205
+     "start_frame": 31530,
+     "end_frame": 31597
     },
     {
      "text": "Take a small square on the globe at sixty degrees north, a hundred kilometres on each side.",
-     "audio_text": null,
-     "start": 1073.8589,
-     "end": 1080.0089,
+     "start": 1053.5849,
+     "end": 1059.7349,
      "dur": 6.15,
-     "start_frame": 32216,
-     "end_frame": 32400
+     "start_frame": 31608,
+     "end_frame": 31792
     },
     {
-     "text": "Its area is a hundred times a hundred, ten thousand square kilometres.",
-     "audio_text": null,
-     "start": 1080.3589,
-     "end": 1085.8339,
-     "dur": 5.475,
-     "start_frame": 32411,
-     "end_frame": 32575
+     "text": "Its area is ten thousand square kilometres.",
+     "start": 1060.0849,
+     "end": 1063.0986,
+     "dur": 3.0137,
+     "start_frame": 31803,
+     "end_frame": 31893,
+     "estimated": true
     },
     {
      "text": "On a Mercator map, its width is stretched by two, and its height by two as well.",
-     "audio_text": null,
-     "start": 1086.1839,
-     "end": 1091.6089,
+     "start": 1063.4486,
+     "end": 1068.8736,
      "dur": 5.425,
-     "start_frame": 32586,
-     "end_frame": 32748
+     "start_frame": 31903,
+     "end_frame": 32066
     },
     {
-     "text": "So it's drawn two hundred by two hundred, which is forty thousand square kilometres: four times too big.",
-     "audio_text": null,
-     "start": 1091.9589,
-     "end": 1099.2589,
-     "dur": 7.3,
-     "start_frame": 32759,
-     "end_frame": 32978,
-     "beat": true
+     "text": "So it's drawn two hundred kilometres wide and two hundred tall, an area of forty thousand square kilometres: four times too big.",
+     "start": 1069.2236,
+     "end": 1078.1945,
+     "dur": 8.9709,
+     "start_frame": 32077,
+     "end_frame": 32346,
+     "beat": true,
+     "estimated": true
     },
     {
      "text": "In general, the width is stretched by k and the height by k, so the area is stretched by k times k, k squared, which is one over cosine phi, squared.",
-     "audio_text": null,
-     "start": 1100.7589,
-     "end": 1111.7839,
+     "start": 1079.6945,
+     "end": 1090.7195,
      "dur": 11.025,
-     "start_frame": 33023,
-     "end_frame": 33354
+     "start_frame": 32391,
+     "end_frame": 32722
     },
     {
-     "text": "At Svalbard, k is about four point nine, so areas are stretched by about four point nine times four point nine, about twenty four.",
-     "audio_text": null,
-     "start": 1112.1339,
-     "end": 1121.4089,
-     "dur": 9.275,
-     "start_frame": 33364,
-     "end_frame": 33642,
-     "beat": true
+     "text": "At Svalbard, k is about four point nine, and squaring it gives about twenty four, so areas there are drawn about twenty four times too big.",
+     "start": 1091.0695,
+     "end": 1100.8113,
+     "dur": 9.7419,
+     "start_frame": 32732,
+     "end_frame": 33024,
+     "beat": true,
+     "estimated": true
     },
     {
      "text": "That's why, on a Mercator map, Greenland looks about as big as Africa.",
-     "audio_text": null,
-     "start": 1122.9089,
-     "end": 1128.2089,
+     "start": 1102.3113,
+     "end": 1107.6113,
      "dur": 5.3,
-     "start_frame": 33687,
-     "end_frame": 33846
+     "start_frame": 33069,
+     "end_frame": 33228
     },
     {
      "text": "In truth, Greenland covers about two point one seven million square kilometres, and Africa about thirty point four million.",
-     "audio_text": null,
-     "start": 1128.5589,
-     "end": 1137.1089,
+     "start": 1107.9613,
+     "end": 1116.5113,
      "dur": 8.55,
-     "start_frame": 33857,
-     "end_frame": 34113
+     "start_frame": 33239,
+     "end_frame": 33495
     },
     {
-     "text": "Thirty point four divided by two point one seven is about fourteen, so Africa is about fourteen times bigger.",
-     "audio_text": null,
-     "start": 1137.4589,
-     "end": 1145.4839,
-     "dur": 8.025,
-     "start_frame": 34124,
-     "end_frame": 34365,
-     "beat": true
+     "text": "Dividing Africa's area by Greenland's gives about fourteen, so Africa is about fourteen times bigger.",
+     "start": 1116.8613,
+     "end": 1123.94,
+     "dur": 7.0786,
+     "start_frame": 33506,
+     "end_frame": 33718,
+     "beat": true,
+     "estimated": true
     },
     {
      "text": "The Mercator map is great for directions and shapes, and poor for comparing sizes.",
-     "audio_text": null,
-     "start": 1146.9839,
-     "end": 1152.6589,
+     "start": 1125.44,
+     "end": 1131.115,
      "dur": 5.675,
-     "start_frame": 34410,
-     "end_frame": 34580
+     "start_frame": 33763,
+     "end_frame": 33933
     }
    ],
-   "end": 1153.4589,
-   "start_frame": 32028,
-   "end_frame": 34604,
-   "timing_source": "dryrun3_spliced:s13_area_stretch"
+   "end": 1131.915,
+   "start_frame": 31420,
+   "end_frame": 33957
   },
   {
    "id": "s14_equal_earth",
-   "start": 1153.4589,
+   "start": 1131.915,
    "sentences": [
     {
      "text": "For climate maps, sizes often matter more.",
-     "audio_text": null,
-     "start": 1153.4589,
-     "end": 1156.9589,
+     "start": 1131.915,
+     "end": 1135.415,
      "dur": 3.5,
-     "start_frame": 34604,
-     "end_frame": 34709
+     "start_frame": 33957,
+     "end_frame": 34062
     },
     {
      "text": "If we want to know how much of the Earth was warmer than usual last month, a map that inflates the polar regions would mislead us.",
-     "audio_text": null,
-     "start": 1157.3089,
-     "end": 1165.6839,
+     "start": 1135.765,
+     "end": 1144.14,
      "dur": 8.375,
-     "start_frame": 34719,
-     "end_frame": 34971
+     "start_frame": 34073,
+     "end_frame": 34324
     },
     {
      "text": "So climate scientists often use equal-area maps, such as the Equal Earth map, from twenty eighteen.",
-     "audio_text": null,
-     "start": 1166.0339,
-     "end": 1173.1339,
+     "start": 1144.49,
+     "end": 1151.59,
      "dur": 7.1,
-     "start_frame": 34981,
-     "end_frame": 35194
+     "start_frame": 34335,
+     "end_frame": 34548
     },
     {
      "text": "On it, every patch keeps its true share of the Earth's area, so Greenland shows at its real size, about a fourteenth of Africa.",
-     "audio_text": null,
-     "start": 1173.4839,
-     "end": 1182.0089,
+     "start": 1151.94,
+     "end": 1160.465,
      "dur": 8.525,
-     "start_frame": 35205,
-     "end_frame": 35460
+     "start_frame": 34558,
+     "end_frame": 34814
     },
     {
      "text": "Here's the same temperature map for September twenty twenty six, drawn both ways.",
-     "audio_text": null,
-     "start": 1182.3589,
-     "end": 1187.9839,
+     "start": 1160.815,
+     "end": 1166.44,
      "dur": 5.625,
-     "start_frame": 35471,
-     "end_frame": 35640
+     "start_frame": 34824,
+     "end_frame": 34993
     },
     {
      "text": "The colours show how much warmer or colder each place was than its usual September, the average from nineteen ninety one to twenty twenty.",
-     "audio_text": null,
-     "start": 1188.3339,
-     "end": 1197.5089,
+     "start": 1166.79,
+     "end": 1175.965,
      "dur": 9.175,
-     "start_frame": 35650,
-     "end_frame": 35925
+     "start_frame": 35004,
+     "end_frame": 35279
     },
     {
      "text": "That difference from the usual is called an anomaly.",
-     "audio_text": null,
-     "start": 1197.8589,
-     "end": 1201.5339,
+     "start": 1176.315,
+     "end": 1179.99,
      "dur": 3.675,
-     "start_frame": 35936,
-     "end_frame": 36046
+     "start_frame": 35289,
+     "end_frame": 35400
     },
     {
      "text": "On the Mercator map, the far north looks huge.",
-     "audio_text": null,
-     "start": 1201.8839,
-     "end": 1205.3839,
+     "start": 1180.34,
+     "end": 1183.84,
      "dur": 3.5,
-     "start_frame": 36057,
-     "end_frame": 36162
+     "start_frame": 35410,
+     "end_frame": 35515
     },
     {
      "text": "On the Equal Earth map, it shrinks to its true size.",
-     "audio_text": null,
-     "start": 1205.7339,
-     "end": 1209.5339,
+     "start": 1184.19,
+     "end": 1187.99,
      "dur": 3.8,
-     "start_frame": 36172,
-     "end_frame": 36286
+     "start_frame": 35526,
+     "end_frame": 35640
     },
     {
      "text": "The price now is shape.",
-     "audio_text": null,
-     "start": 1209.8839,
-     "end": 1211.9089,
+     "start": 1188.34,
+     "end": 1190.365,
      "dur": 2.025,
-     "start_frame": 36297,
-     "end_frame": 36357
+     "start_frame": 35650,
+     "end_frame": 35711
     },
     {
      "text": "Towards the poles, shapes get skewed: at sixty degrees north and thirty degrees east, angles can be off by about thirty one degrees.",
-     "audio_text": null,
-     "start": 1212.2589,
-     "end": 1221.4589,
+     "start": 1190.715,
+     "end": 1199.915,
      "dur": 9.2,
-     "start_frame": 36368,
-     "end_frame": 36644,
+     "start_frame": 35721,
+     "end_frame": 35997,
      "beat": true
     },
     {
      "text": "No flat map can keep both areas and shapes right everywhere.",
-     "audio_text": null,
-     "start": 1222.9589,
-     "end": 1227.4089,
+     "start": 1201.415,
+     "end": 1205.865,
      "dur": 4.45,
-     "start_frame": 36689,
-     "end_frame": 36822
+     "start_frame": 36042,
+     "end_frame": 36176
     },
     {
      "text": "So the rule is: pick the map for the job.",
-     "audio_text": null,
-     "start": 1227.7589,
-     "end": 1230.9089,
+     "start": 1206.215,
+     "end": 1209.365,
      "dur": 3.15,
-     "start_frame": 36833,
-     "end_frame": 36927
+     "start_frame": 36186,
+     "end_frame": 36281
     },
     {
      "text": "Use conformal maps for winds and directions, and equal-area maps for comparing amounts.",
-     "audio_text": null,
-     "start": 1231.2589,
-     "end": 1237.3589,
+     "start": 1209.715,
+     "end": 1215.815,
      "dur": 6.1,
-     "start_frame": 36938,
-     "end_frame": 37121
+     "start_frame": 36291,
+     "end_frame": 36474
     },
     {
      "text": "Which maps forecasters use, and why, has its own movie later in this series: How weather maps are made.",
-     "audio_text": null,
-     "start": 1237.7089,
-     "end": 1244.8339,
+     "start": 1216.165,
+     "end": 1223.29,
      "dur": 7.125,
-     "start_frame": 37131,
-     "end_frame": 37345
+     "start_frame": 36485,
+     "end_frame": 36699
     }
    ],
-   "end": 1245.6339,
-   "start_frame": 34604,
-   "end_frame": 37369,
-   "timing_source": "dryrun3_spliced:s14_equal_earth"
+   "end": 1224.09,
+   "start_frame": 33957,
+   "end_frame": 36723
   },
   {
    "id": "s15_why_many",
-   "start": 1245.6339,
+   "start": 1224.09,
    "sentences": [
     {
      "text": "So why are there so many coordinate systems and maps?",
-     "audio_text": null,
-     "start": 1245.6339,
-     "end": 1249.2589,
+     "start": 1224.09,
+     "end": 1227.715,
      "dur": 3.625,
-     "start_frame": 37369,
-     "end_frame": 37478
+     "start_frame": 36723,
+     "end_frame": 36831
     },
     {
      "text": "There are three good reasons.",
-     "audio_text": null,
-     "start": 1249.6089,
-     "end": 1251.7839,
+     "start": 1228.065,
+     "end": 1230.24,
      "dur": 2.175,
-     "start_frame": 37488,
-     "end_frame": 37554
+     "start_frame": 36842,
+     "end_frame": 36907
     },
     {
      "text": "The first is shape.",
-     "audio_text": null,
-     "start": 1252.1339,
-     "end": 1253.9589,
+     "start": 1230.59,
+     "end": 1232.415,
      "dur": 1.825,
-     "start_frame": 37564,
-     "end_frame": 37619
+     "start_frame": 36918,
+     "end_frame": 36972
     },
     {
      "text": "When the coordinates match the shape of the problem, the numbers become simple.",
-     "audio_text": null,
-     "start": 1254.3089,
-     "end": 1259.3339,
+     "start": 1232.765,
+     "end": 1237.79,
      "dur": 5.025,
-     "start_frame": 37629,
-     "end_frame": 37780
+     "start_frame": 36983,
+     "end_frame": 37134
     },
     {
      "text": "A ring round a hurricane's eye is just r equals a constant, the Earth's surface is just r equals its radius, and a great circle route is just one angle, sigma.",
-     "audio_text": null,
-     "start": 1259.6839,
-     "end": 1270.8589,
+     "start": 1238.14,
+     "end": 1249.315,
      "dur": 11.175,
-     "start_frame": 37791,
-     "end_frame": 38126
+     "start_frame": 37144,
+     "end_frame": 37479
     },
     {
      "text": "The second is measurement.",
-     "audio_text": null,
-     "start": 1271.2089,
-     "end": 1273.4589,
+     "start": 1249.665,
+     "end": 1251.915,
      "dur": 2.25,
-     "start_frame": 38136,
-     "end_frame": 38204
+     "start_frame": 37490,
+     "end_frame": 37557
     },
     {
      "text": "We use the coordinates that our instruments and data use.",
-     "audio_text": null,
-     "start": 1273.8089,
-     "end": 1277.7089,
+     "start": 1252.265,
+     "end": 1256.165,
      "dur": 3.9,
-     "start_frame": 38214,
-     "end_frame": 38331
+     "start_frame": 37568,
+     "end_frame": 37685
     },
     {
      "text": "A radar sees distance and direction, a weather station feels east, north and up, and weather data come on a grid of latitude and longitude.",
-     "audio_text": null,
-     "start": 1278.0589,
-     "end": 1287.6839,
+     "start": 1256.515,
+     "end": 1266.14,
      "dur": 9.625,
-     "start_frame": 38342,
-     "end_frame": 38631
+     "start_frame": 37695,
+     "end_frame": 37984
     },
     {
      "text": "The third is meaning.",
-     "audio_text": null,
-     "start": 1288.0339,
-     "end": 1289.9589,
+     "start": 1266.49,
+     "end": 1268.415,
      "dur": 1.925,
-     "start_frame": 38641,
-     "end_frame": 38699
+     "start_frame": 37995,
+     "end_frame": 38052
     },
     {
      "text": "The right coordinates split a vector into the parts that physics cares about: spin and inflow round a storm, along and across a coast, or round and in for a whirl round the pole, as we'll see next.",
-     "audio_text": null,
-     "start": 1290.3089,
-     "end": 1303.4589,
+     "start": 1268.765,
+     "end": 1281.915,
      "dur": 13.15,
-     "start_frame": 38709,
-     "end_frame": 39104
+     "start_frame": 38063,
+     "end_frame": 38457
     },
     {
      "text": "Maps follow the same rule: we choose the one that keeps what our question needs.",
-     "audio_text": null,
-     "start": 1303.8089,
-     "end": 1309.0089,
+     "start": 1282.265,
+     "end": 1287.465,
      "dur": 5.2,
-     "start_frame": 39114,
-     "end_frame": 39270
+     "start_frame": 38468,
+     "end_frame": 38624
     }
    ],
-   "end": 1309.8089,
-   "start_frame": 37369,
-   "end_frame": 39294,
-   "timing_source": "dryrun3_spliced:s15_why_many"
+   "end": 1288.265,
+   "start_frame": 36723,
+   "end_frame": 38648
   },
   {
    "id": "s16_globe_to_pole",
-   "start": 1309.8089,
+   "start": 1288.265,
    "sentences": [
     {
      "text": "There's one more map that every forecaster knows: the view from above a pole.",
-     "audio_text": null,
-     "start": 1309.8089,
-     "end": 1315.1589,
+     "start": 1288.265,
+     "end": 1293.615,
      "dur": 5.35,
-     "start_frame": 39294,
-     "end_frame": 39455
+     "start_frame": 38648,
+     "end_frame": 38808
     },
     {
      "text": "Let's get there from the globe.",
-     "audio_text": null,
-     "start": 1315.5089,
-     "end": 1317.7589,
+     "start": 1293.965,
+     "end": 1296.215,
      "dur": 2.25,
-     "start_frame": 39465,
-     "end_frame": 39533
+     "start_frame": 38819,
+     "end_frame": 38886
     },
     {
      "text": "Here's the Earth, turning.",
-     "audio_text": null,
-     "start": 1318.1089,
-     "end": 1320.3089,
+     "start": 1296.565,
+     "end": 1298.765,
      "dur": 2.2,
-     "start_frame": 39543,
-     "end_frame": 39609
+     "start_frame": 38897,
+     "end_frame": 38963
     },
     {
      "text": "Now let's rise up above the North Pole, and look straight down.",
-     "audio_text": null,
-     "start": 1320.6589,
-     "end": 1324.8839,
+     "start": 1299.115,
+     "end": 1303.34,
      "dur": 4.225,
-     "start_frame": 39620,
-     "end_frame": 39747
+     "start_frame": 38973,
+     "end_frame": 39100
     },
     {
      "text": "From up here, the circles of latitude become rings round the pole, and the meridians become spokes, like the spokes of a wheel.",
-     "audio_text": null,
-     "start": 1325.2339,
-     "end": 1333.5839,
+     "start": 1303.69,
+     "end": 1312.04,
      "dur": 8.35,
-     "start_frame": 39757,
-     "end_frame": 40008
+     "start_frame": 39111,
+     "end_frame": 39361
     },
     {
      "text": "Now let's flatten this view into a map.",
-     "audio_text": null,
-     "start": 1333.9339,
-     "end": 1336.6839,
+     "start": 1312.39,
+     "end": 1315.14,
      "dur": 2.75,
-     "start_frame": 40018,
-     "end_frame": 40101
+     "start_frame": 39372,
+     "end_frame": 39454
     },
     {
      "text": "The North Pole sits in the middle.",
-     "audio_text": null,
-     "start": 1337.0339,
-     "end": 1339.4589,
+     "start": 1315.49,
+     "end": 1317.915,
      "dur": 2.425,
-     "start_frame": 40111,
-     "end_frame": 40184
+     "start_frame": 39465,
+     "end_frame": 39537
     },
     {
      "text": "The rings are the latitudes: seventy five, sixty, forty five and thirty degrees north, going outward.",
-     "audio_text": null,
-     "start": 1339.8089,
-     "end": 1347.1089,
+     "start": 1318.265,
+     "end": 1325.565,
      "dur": 7.3,
-     "start_frame": 40194,
-     "end_frame": 40413
+     "start_frame": 39548,
+     "end_frame": 39767
     },
     {
      "text": "The spokes are the longitudes.",
-     "audio_text": null,
-     "start": 1347.4589,
-     "end": 1349.8089,
+     "start": 1325.915,
+     "end": 1328.265,
      "dur": 2.35,
-     "start_frame": 40424,
-     "end_frame": 40494
+     "start_frame": 39777,
+     "end_frame": 39848
     },
     {
      "text": "Zero degrees, the prime meridian through Greenwich, points down.",
-     "audio_text": null,
-     "start": 1350.1589,
-     "end": 1354.5089,
+     "start": 1328.615,
+     "end": 1332.965,
      "dur": 4.35,
-     "start_frame": 40505,
-     "end_frame": 40635
+     "start_frame": 39858,
+     "end_frame": 39989
     },
     {
      "text": "Ninety degrees east points right, a hundred and eighty degrees points up, and ninety degrees west points left.",
-     "audio_text": null,
-     "start": 1354.8589,
-     "end": 1362.2839,
+     "start": 1333.315,
+     "end": 1340.74,
      "dur": 7.425,
-     "start_frame": 40646,
-     "end_frame": 40869,
+     "start_frame": 39999,
+     "end_frame": 40222,
      "beat": true
     },
     {
      "text": "So going east means going round anticlockwise, as seen from above the North Pole.",
-     "audio_text": null,
-     "start": 1363.7839,
-     "end": 1369.5339,
+     "start": 1342.24,
+     "end": 1347.99,
      "dur": 5.75,
-     "start_frame": 40914,
-     "end_frame": 41086
+     "start_frame": 40267,
+     "end_frame": 40440
     },
     {
      "text": "This is polar coordinates again: the distance from the middle grows with the distance from the pole, and the angle round the middle is the longitude.",
-     "audio_text": null,
-     "start": 1369.8839,
-     "end": 1379.1089,
+     "start": 1348.34,
+     "end": 1357.565,
      "dur": 9.225,
-     "start_frame": 41097,
-     "end_frame": 41373
+     "start_frame": 40450,
+     "end_frame": 40727
     },
     {
      "text": "This kind of map is called polar stereographic, and this one is drawn true to scale at sixty degrees north, like many weather charts of the pole.",
-     "audio_text": null,
-     "start": 1379.4589,
-     "end": 1389.0839,
+     "start": 1357.915,
+     "end": 1367.54,
      "dur": 9.625,
-     "start_frame": 41384,
-     "end_frame": 41673
+     "start_frame": 40737,
+     "end_frame": 41026
     }
    ],
-   "end": 1389.8839,
-   "start_frame": 39294,
-   "end_frame": 41697,
-   "timing_source": "dryrun3_spliced:s16_globe_to_pole"
+   "end": 1368.34,
+   "start_frame": 38648,
+   "end_frame": 41050
   },
   {
    "id": "s17_where_is_what",
-   "start": 1389.8839,
+   "start": 1368.34,
    "sentences": [
     {
      "text": "If you've never seen a map like this, it can be hard to tell where things are, so let's take a short tour.",
-     "audio_text": null,
-     "start": 1389.8839,
-     "end": 1396.5839,
+     "start": 1368.34,
+     "end": 1375.04,
      "dur": 6.7,
-     "start_frame": 41697,
-     "end_frame": 41898
+     "start_frame": 41050,
+     "end_frame": 41251
     },
     {
      "text": "To find any place, first find its ring, for the latitude, and then its spoke, for the longitude.",
-     "audio_text": null,
-     "start": 1396.9339,
-     "end": 1403.2339,
+     "start": 1375.39,
+     "end": 1381.69,
      "dur": 6.3,
-     "start_frame": 41908,
-     "end_frame": 42097
+     "start_frame": 41262,
+     "end_frame": 41451
     },
     {
      "text": "Near the bottom, at forty eight point four degrees north and four and a half degrees west, is Brest: just past the forty five degree ring, a little left of the zero spoke.",
-     "audio_text": null,
-     "start": 1403.5839,
-     "end": 1414.8339,
+     "start": 1382.04,
+     "end": 1393.29,
      "dur": 11.25,
-     "start_frame": 42108,
-     "end_frame": 42445
+     "start_frame": 41461,
+     "end_frame": 41799
     },
     {
      "text": "Closer to the pole, past the sixty degree ring, is Iceland, at about sixty five degrees north and nineteen degrees west.",
-     "audio_text": null,
-     "start": 1415.1839,
-     "end": 1423.7339,
+     "start": 1393.64,
+     "end": 1402.19,
      "dur": 8.55,
-     "start_frame": 42456,
-     "end_frame": 42712
+     "start_frame": 41809,
+     "end_frame": 42066
     },
     {
      "text": "To its left is Greenland, the big island, around seventy two degrees north and forty degrees west.",
-     "audio_text": null,
-     "start": 1424.0839,
-     "end": 1431.1089,
+     "start": 1402.54,
+     "end": 1409.565,
      "dur": 7.025,
-     "start_frame": 42723,
-     "end_frame": 42933
+     "start_frame": 42076,
+     "end_frame": 42287
     },
     {
      "text": "To the right of the zero spoke is Scandinavia.",
-     "audio_text": null,
-     "start": 1431.4589,
-     "end": 1434.8089,
+     "start": 1409.915,
+     "end": 1413.265,
      "dur": 3.35,
-     "start_frame": 42944,
-     "end_frame": 43044
+     "start_frame": 42297,
+     "end_frame": 42398
     },
     {
      "text": "Further in, at seventy eight point two degrees north and fifteen point six degrees east, is Longyearbyen, on Svalbard.",
-     "audio_text": null,
-     "start": 1435.1589,
-     "end": 1443.5089,
+     "start": 1413.615,
+     "end": 1421.965,
      "dur": 8.35,
-     "start_frame": 43055,
-     "end_frame": 43305
+     "start_frame": 42408,
+     "end_frame": 42659
     },
     {
      "text": "Between Scandinavia and the pole lies the Barents Sea, around seventy five degrees north and forty degrees east.",
-     "audio_text": null,
-     "start": 1443.8589,
-     "end": 1451.6089,
+     "start": 1422.315,
+     "end": 1430.065,
      "dur": 7.75,
-     "start_frame": 43316,
-     "end_frame": 43548
+     "start_frame": 42669,
+     "end_frame": 42902
     },
     {
      "text": "To the right, along the ninety degrees east spoke, stretches Siberia.",
-     "audio_text": null,
-     "start": 1451.9589,
-     "end": 1456.9589,
+     "start": 1430.415,
+     "end": 1435.415,
      "dur": 5.0,
-     "start_frame": 43559,
-     "end_frame": 43709
+     "start_frame": 42912,
+     "end_frame": 43062
     },
     {
      "text": "At the top, near a hundred and eighty degrees, is the Bering Strait, with Alaska to its left, around sixty five degrees north and a hundred and fifty degrees west.",
-     "audio_text": null,
-     "start": 1457.3089,
-     "end": 1468.3339,
+     "start": 1435.765,
+     "end": 1446.79,
      "dur": 11.025,
-     "start_frame": 43719,
-     "end_frame": 44050
+     "start_frame": 43073,
+     "end_frame": 43404
     },
     {
      "text": "And on the left, along ninety degrees west, is Canada, with Hudson Bay at about sixty degrees north.",
-     "audio_text": null,
-     "start": 1468.6839,
-     "end": 1475.9339,
+     "start": 1447.14,
+     "end": 1454.39,
      "dur": 7.25,
-     "start_frame": 44061,
-     "end_frame": 44278,
+     "start_frame": 43414,
+     "end_frame": 43632,
      "beat": true
     },
     {
      "text": "One last test: where's Los Angeles, at thirty four degrees north and a hundred and eighteen degrees west?",
-     "audio_text": null,
-     "start": 1477.4339,
-     "end": 1484.5589,
+     "start": 1455.89,
+     "end": 1463.015,
      "dur": 7.125,
-     "start_frame": 44323,
-     "end_frame": 44537
+     "start_frame": 43677,
+     "end_frame": 43890
     },
     {
      "text": "Just inside the thirty degree ring, between the ninety west and the hundred and eighty spokes, on the upper left.",
-     "audio_text": null,
-     "start": 1484.9089,
-     "end": 1492.1839,
-     "dur": 7.275,
-     "start_frame": 44547,
-     "end_frame": 44766,
-     "beat": true
+     "start": 1463.365,
+     "end": 1471.2846,
+     "dur": 7.9196,
+     "start_frame": 43901,
+     "end_frame": 44139,
+     "beat": true,
+     "estimated": true
     }
    ],
-   "end": 1493.6839,
-   "start_frame": 41697,
-   "end_frame": 44811,
-   "timing_source": "dryrun3_spliced:s17_where_is_what"
+   "end": 1472.7846,
+   "start_frame": 41050,
+   "end_frame": 44184
   },
   {
    "id": "s18_vortex",
-   "start": 1493.6839,
+   "start": 1472.7846,
    "sentences": [
     {
      "text": "Now let's put real weather on this map.",
-     "audio_text": null,
-     "start": 1493.6839,
-     "end": 1496.4839,
+     "start": 1472.7846,
+     "end": 1475.5846,
      "dur": 2.8,
-     "start_frame": 44811,
-     "end_frame": 44895
+     "start_frame": 44184,
+     "end_frame": 44268
     },
     {
      "text": "The air pressure falls as we go up.",
-     "audio_text": null,
-     "start": 1496.8339,
-     "end": 1499.6339,
+     "start": 1475.9346,
+     "end": 1478.7346,
      "dur": 2.8,
-     "start_frame": 44905,
-     "end_frame": 44989
+     "start_frame": 44278,
+     "end_frame": 44362
     },
     {
      "text": "About thirty kilometres up, in the stratosphere, the layer above the one where our weather happens, it's only ten hectopascals, about a hundredth of the pressure at the ground.",
-     "audio_text": "About thirty kilometres up, in the stratosphere, the layer above the one where our weather happens, it's only ten [hectopascals](/hˈɛktəpˌæskᵊlz/), about a hundredth of the pressure at the ground.",
-     "start": 1499.9839,
-     "end": 1511.1339,
+     "start": 1479.0846,
+     "end": 1490.2346,
      "dur": 11.15,
-     "start_frame": 45000,
-     "end_frame": 45334
+     "start_frame": 44373,
+     "end_frame": 44707
     },
     {
      "text": "The height where the pressure is exactly ten hectopascals isn't the same everywhere, and this map shows it on the twenty first of January, twenty twenty six.",
-     "audio_text": "The height where the pressure is exactly ten [hectopascals](/hˈɛktəpˌæskᵊlz/) isn't the same everywhere, and this map shows it on the twenty first of January, twenty twenty six.",
-     "start": 1511.4839,
-     "end": 1521.6089,
+     "start": 1490.5846,
+     "end": 1500.7096,
      "dur": 10.125,
-     "start_frame": 45345,
-     "end_frame": 45648
+     "start_frame": 44718,
+     "end_frame": 45021
     },
     {
      "text": "The colours show that height, and the lines join places where it's the same, every four hundred metres.",
-     "audio_text": null,
-     "start": 1521.9589,
-     "end": 1528.7589,
+     "start": 1501.0596,
+     "end": 1507.8596,
      "dur": 6.8,
-     "start_frame": 45659,
-     "end_frame": 45863
+     "start_frame": 45032,
+     "end_frame": 45236
     },
     {
      "text": "We'll fade the place labels now, so that the weather is easy to see.",
-     "audio_text": null,
-     "start": 1529.1089,
-     "end": 1533.7089,
+     "start": 1508.2096,
+     "end": 1512.8096,
      "dur": 4.6,
-     "start_frame": 45873,
-     "end_frame": 46011
+     "start_frame": 45246,
+     "end_frame": 45384
     },
     {
      "text": "The surface is lowest, about twenty eight point six kilometres, over the Barents Sea, at about seventy three degrees north and forty four degrees east.",
-     "audio_text": null,
-     "start": 1534.0589,
-     "end": 1543.8839,
+     "start": 1513.1596,
+     "end": 1522.9846,
      "dur": 9.825,
-     "start_frame": 46022,
-     "end_frame": 46317
+     "start_frame": 45395,
+     "end_frame": 45690
     },
     {
      "text": "And it's higher further south: about thirty point seven kilometres on average along thirty degrees north.",
-     "audio_text": null,
-     "start": 1544.2339,
-     "end": 1551.2089,
+     "start": 1523.3346,
+     "end": 1530.3096,
      "dur": 6.975,
-     "start_frame": 46327,
-     "end_frame": 46536,
+     "start_frame": 45700,
+     "end_frame": 45909,
      "beat": true
     },
     {
      "text": "Now let's let the air move.",
-     "audio_text": null,
-     "start": 1552.7089,
-     "end": 1554.8339,
+     "start": 1531.8096,
+     "end": 1533.9346,
      "dur": 2.125,
-     "start_frame": 46581,
-     "end_frame": 46645
+     "start_frame": 45954,
+     "end_frame": 46018
     },
     {
      "text": "The winds blow nearly along these lines, round and round the Arctic, from west to east.",
-     "audio_text": null,
-     "start": 1555.1839,
-     "end": 1561.4089,
+     "start": 1534.2846,
+     "end": 1540.5096,
      "dur": 6.225,
-     "start_frame": 46656,
-     "end_frame": 46842
+     "start_frame": 46029,
+     "end_frame": 46215
     },
     {
      "text": "The fastest, nearly eighty metres per second, about two hundred and eighty four kilometres per hour, blow over Siberia, near sixty degrees north.",
-     "audio_text": null,
-     "start": 1561.7589,
-     "end": 1572.0089,
-     "dur": 10.25,
-     "start_frame": 46853,
-     "end_frame": 47160,
-     "beat": true
+     "start": 1540.8596,
+     "end": 1551.022,
+     "dur": 10.1624,
+     "start_frame": 46226,
+     "end_frame": 46531,
+     "beat": true,
+     "estimated": true
     },
     {
      "text": "This great winter whirl of cold air, high above the Arctic, is called the stratospheric polar vortex.",
-     "audio_text": null,
-     "start": 1573.5089,
-     "end": 1580.7589,
+     "start": 1552.522,
+     "end": 1559.772,
      "dur": 7.25,
-     "start_frame": 47205,
-     "end_frame": 47423
+     "start_frame": 46576,
+     "end_frame": 46793
     }
    ],
-   "end": 1581.5589,
-   "start_frame": 44811,
-   "end_frame": 47447,
-   "timing_source": "dryrun3_spliced:s18_vortex"
+   "end": 1560.572,
+   "start_frame": 44184,
+   "end_frame": 46817
   },
   {
    "id": "s19_vortex_components",
-   "start": 1581.5589,
+   "start": 1560.572,
    "sentences": [
     {
      "text": "Let's describe these winds in the map's polar coordinates.",
-     "audio_text": null,
-     "start": 1581.5589,
-     "end": 1585.8339,
+     "start": 1560.572,
+     "end": 1564.847,
      "dur": 4.275,
-     "start_frame": 47447,
-     "end_frame": 47575
+     "start_frame": 46817,
+     "end_frame": 46945
     },
     {
-     "text": "Pick any point, and draw its east and north arrows.",
-     "audio_text": null,
-     "start": 1586.1839,
-     "end": 1589.9339,
-     "dur": 3.75,
-     "start_frame": 47586,
-     "end_frame": 47698
+     "text": "Pick any point, and draw its local east and north arrows, as in Part 4.",
+     "start": 1565.197,
+     "end": 1570.1731,
+     "dur": 4.9761,
+     "start_frame": 46956,
+     "end_frame": 47105,
+     "estimated": true
     },
     {
-     "text": "The east arrow points round the middle, anticlockwise as seen from above: it's exactly the map's theta hat at that point.",
-     "audio_text": null,
-     "start": 1590.2839,
-     "end": 1598.4839,
-     "dur": 8.2,
-     "start_frame": 47709,
-     "end_frame": 47955
+     "text": "The east arrow points round the middle, anticlockwise as seen from above: it's exactly the theta hat of Part 1 at that point.",
+     "start": 1570.5231,
+     "end": 1579.2837,
+     "dur": 8.7607,
+     "start_frame": 47116,
+     "end_frame": 47379,
+     "estimated": true
     },
     {
      "text": "The north arrow points straight at the middle, towards the pole.",
-     "audio_text": null,
-     "start": 1598.8339,
-     "end": 1602.5339,
+     "start": 1579.6337,
+     "end": 1583.3337,
      "dur": 3.7,
-     "start_frame": 47965,
-     "end_frame": 48076
+     "start_frame": 47389,
+     "end_frame": 47500
     },
     {
      "text": "That's the opposite of r hat, which points outward.",
-     "audio_text": null,
-     "start": 1602.8839,
-     "end": 1606.5839,
+     "start": 1583.6837,
+     "end": 1587.3837,
      "dur": 3.7,
-     "start_frame": 48087,
-     "end_frame": 48198
+     "start_frame": 47511,
+     "end_frame": 47622
     },
     {
      "text": "So the north arrow is minus r hat.",
-     "audio_text": null,
-     "start": 1606.9339,
-     "end": 1609.7589,
+     "start": 1587.7337,
+     "end": 1590.5587,
      "dur": 2.825,
-     "start_frame": 48208,
-     "end_frame": 48293,
+     "start_frame": 47632,
+     "end_frame": 47717,
      "beat": true
     },
     {
      "text": "That means the eastward wind u is the tangential wind round the pole, and the northward wind v is the radial wind with its sign flipped, because blowing north means blowing in.",
-     "audio_text": null,
-     "start": 1611.2589,
-     "end": 1623.3089,
+     "start": 1592.0587,
+     "end": 1604.1087,
      "dur": 12.05,
-     "start_frame": 48338,
-     "end_frame": 48699
+     "start_frame": 47762,
+     "end_frame": 48123
     },
     {
      "text": "So u sub theta equals u, and u sub r equals minus v.",
-     "audio_text": null,
-     "start": 1623.6589,
-     "end": 1628.5339,
+     "start": 1604.4587,
+     "end": 1609.3337,
      "dur": 4.875,
-     "start_frame": 48710,
-     "end_frame": 48856
+     "start_frame": 48134,
+     "end_frame": 48280
     },
     {
      "text": "Westerly winds, the winds from the west, go round anticlockwise, as seen from above the North Pole.",
-     "audio_text": null,
-     "start": 1628.8839,
-     "end": 1636.1089,
+     "start": 1609.6837,
+     "end": 1616.9087,
      "dur": 7.225,
-     "start_frame": 48867,
-     "end_frame": 49083
+     "start_frame": 48291,
+     "end_frame": 48507
     },
     {
-     "text": "So the polar vortex spins the same way as the hurricane in Part 1, but it's far wider: thousands of kilometres across, instead of about a hundred.",
-     "audio_text": null,
-     "start": 1636.4589,
-     "end": 1646.7589,
-     "dur": 10.3,
-     "start_frame": 49094,
-     "end_frame": 49403
+     "text": "So the polar vortex spins the same way as the hurricane in Part 1, but it's far wider: thousands of kilometres across, instead of a few hundred.",
+     "start": 1617.2587,
+     "end": 1627.351,
+     "dur": 10.0923,
+     "start_frame": 48518,
+     "end_frame": 48821,
+     "estimated": true
     },
     {
      "text": "And unlike a hurricane, it isn't fed by a warm sea: it forms because the polar stratosphere cools in the long winter night.",
-     "audio_text": null,
-     "start": 1647.1089,
-     "end": 1655.6589,
+     "start": 1627.701,
+     "end": 1636.251,
      "dur": 8.55,
-     "start_frame": 49413,
-     "end_frame": 49670
+     "start_frame": 48831,
+     "end_frame": 49088
     }
    ],
-   "end": 1656.4589,
-   "start_frame": 47447,
-   "end_frame": 49694,
-   "timing_source": "dryrun3_spliced:s19_vortex_components"
+   "end": 1637.051,
+   "start_frame": 46817,
+   "end_frame": 49112
   },
   {
    "id": "s20_origin_wheel",
-   "start": 1656.4589,
+   "start": 1637.051,
    "sentences": [
     {
      "text": "There's one more choice hidden in polar coordinates: where to put the origin.",
-     "audio_text": null,
-     "start": 1656.4589,
-     "end": 1661.6589,
+     "start": 1637.051,
+     "end": 1642.251,
      "dur": 5.2,
-     "start_frame": 49694,
-     "end_frame": 49850
+     "start_frame": 49112,
+     "end_frame": 49268
     },
     {
      "text": "Let's see why it matters with a simple flat example first.",
-     "audio_text": null,
-     "start": 1662.0089,
-     "end": 1666.1339,
+     "start": 1642.601,
+     "end": 1646.726,
      "dur": 4.125,
-     "start_frame": 49860,
-     "end_frame": 49984
+     "start_frame": 49278,
+     "end_frame": 49402
     },
     {
      "text": "Picture a ring of air, a thousand kilometres from its own centre, going round anticlockwise at ten metres per second.",
-     "audio_text": null,
-     "start": 1666.4839,
-     "end": 1674.8339,
+     "start": 1647.076,
+     "end": 1655.426,
      "dur": 8.35,
-     "start_frame": 49995,
-     "end_frame": 50245
+     "start_frame": 49412,
+     "end_frame": 49663
     },
     {
      "text": "With the origin at its centre, every air parcel on the ring moves purely round.",
-     "audio_text": null,
-     "start": 1675.1839,
-     "end": 1680.6589,
+     "start": 1655.776,
+     "end": 1661.251,
      "dur": 5.475,
-     "start_frame": 50256,
-     "end_frame": 50420
+     "start_frame": 49673,
+     "end_frame": 49838
     },
     {
      "text": "The tangential wind is ten, and the radial wind is zero, all the way round.",
-     "audio_text": null,
-     "start": 1681.0089,
-     "end": 1686.4839,
+     "start": 1661.601,
+     "end": 1667.076,
      "dur": 5.475,
-     "start_frame": 50430,
-     "end_frame": 50595
+     "start_frame": 49848,
+     "end_frame": 50012
     },
     {
      "text": "Now keep the same air, but move the origin five hundred kilometres to the west.",
-     "audio_text": null,
-     "start": 1686.8339,
-     "end": 1692.4339,
+     "start": 1667.426,
+     "end": 1673.026,
      "dur": 5.6,
-     "start_frame": 50605,
-     "end_frame": 50773
+     "start_frame": 50023,
+     "end_frame": 50191
     },
     {
      "text": "Look at the top of the ring, due north of the centre.",
-     "audio_text": null,
-     "start": 1692.7839,
-     "end": 1696.2589,
+     "start": 1673.376,
+     "end": 1676.851,
      "dur": 3.475,
-     "start_frame": 50784,
-     "end_frame": 50888
+     "start_frame": 50201,
+     "end_frame": 50306
     },
     {
      "text": "There, the wind blows due west: u is minus ten, and v is zero.",
-     "audio_text": null,
-     "start": 1696.6089,
-     "end": 1701.6589,
+     "start": 1677.201,
+     "end": 1682.251,
      "dur": 5.05,
-     "start_frame": 50898,
-     "end_frame": 51050
+     "start_frame": 50316,
+     "end_frame": 50468
     },
     {
      "text": "Seen from the new origin, this point is five hundred kilometres east and a thousand kilometres north.",
-     "audio_text": null,
-     "start": 1702.0089,
-     "end": 1708.7589,
+     "start": 1682.601,
+     "end": 1689.351,
      "dur": 6.75,
-     "start_frame": 51060,
-     "end_frame": 51263
+     "start_frame": 50478,
+     "end_frame": 50681
     },
     {
-     "text": "Its distance is the square root of five hundred squared plus a thousand squared, about one thousand one hundred and eighteen kilometres.",
-     "audio_text": null,
-     "start": 1709.1089,
-     "end": 1718.3589,
-     "dur": 9.25,
-     "start_frame": 51273,
-     "end_frame": 51551
+     "text": "Its distance comes from Pythagoras: we square the two legs, add them, and take the square root, which gives about one thousand one hundred and eighteen kilometres.",
+     "start": 1689.701,
+     "end": 1701.1249,
+     "dur": 11.4239,
+     "start_frame": 50691,
+     "end_frame": 51034,
+     "estimated": true
     },
     {
-     "text": "So its r hat is five hundred and a thousand, each divided by one thousand one hundred and eighteen: zero point four four seven, zero point eight nine four.",
-     "audio_text": null,
-     "start": 1718.7089,
-     "end": 1729.6089,
-     "dur": 10.9,
-     "start_frame": 51561,
-     "end_frame": 51888,
-     "beat": true
+     "text": "To get its r hat, we divide each leg by that distance, which gives zero point four four seven and zero point eight nine four.",
+     "start": 1701.4749,
+     "end": 1710.2356,
+     "dur": 8.7607,
+     "start_frame": 51044,
+     "end_frame": 51307,
+     "beat": true,
+     "estimated": true
     },
     {
-     "text": "The radial wind is minus ten times zero point four four seven, plus zero times zero point eight nine four, which is about minus four and a half.",
-     "audio_text": null,
-     "start": 1731.1089,
-     "end": 1741.4339,
-     "dur": 10.325,
-     "start_frame": 51933,
-     "end_frame": 52243
+     "text": "As in Part 1, the radial wind is the dot product of the wind with r hat: we multiply u by r hat's first part and v by its second, and add them, which gives about minus four and a half.",
+     "start": 1711.7356,
+     "end": 1724.6313,
+     "dur": 12.8957,
+     "start_frame": 51352,
+     "end_frame": 51739,
+     "estimated": true
     },
     {
      "text": "It looks as if the air is flowing in.",
-     "audio_text": null,
-     "start": 1741.7839,
-     "end": 1744.4589,
+     "start": 1724.9813,
+     "end": 1727.6563,
      "dur": 2.675,
-     "start_frame": 52254,
-     "end_frame": 52334,
+     "start_frame": 51749,
+     "end_frame": 51830,
      "beat": true
     },
     {
      "text": "The tangential wind uses theta hat, minus zero point eight nine four, zero point four four seven.",
-     "audio_text": null,
-     "start": 1745.9589,
-     "end": 1753.0089,
+     "start": 1729.1563,
+     "end": 1736.2063,
      "dur": 7.05,
-     "start_frame": 52379,
-     "end_frame": 52590
+     "start_frame": 51875,
+     "end_frame": 52086
     },
     {
-     "text": "It's minus ten times minus zero point eight nine four, plus zero, which is about eight point nine.",
-     "audio_text": null,
-     "start": 1753.3589,
-     "end": 1760.3339,
-     "dur": 6.975,
-     "start_frame": 52601,
-     "end_frame": 52810,
-     "beat": true
+     "text": "Doing the same with theta hat's two parts gives about eight point nine.",
+     "start": 1736.5563,
+     "end": 1741.5324,
+     "dur": 4.9761,
+     "start_frame": 52097,
+     "end_frame": 52246,
+     "beat": true,
+     "estimated": true
     },
     {
      "text": "Same air, same wind, but the new origin splits it differently.",
-     "audio_text": null,
-     "start": 1761.8339,
-     "end": 1766.9589,
+     "start": 1743.0324,
+     "end": 1748.1574,
      "dur": 5.125,
-     "start_frame": 52855,
-     "end_frame": 53009
+     "start_frame": 52291,
+     "end_frame": 52445
     },
     {
      "text": "Nothing is flowing in at all: the in and out part comes only from where we put the origin.",
-     "audio_text": null,
-     "start": 1767.3089,
-     "end": 1773.2089,
+     "start": 1748.5074,
+     "end": 1754.4074,
      "dur": 5.9,
-     "start_frame": 53019,
-     "end_frame": 53196
+     "start_frame": 52455,
+     "end_frame": 52632
     }
    ],
-   "end": 1774.0089,
-   "start_frame": 49694,
-   "end_frame": 53220,
-   "timing_source": "dryrun3_spliced:s20_origin_wheel"
+   "end": 1755.2074,
+   "start_frame": 49112,
+   "end_frame": 52656
   },
   {
    "id": "s21_origin_vortex",
-   "start": 1774.0089,
+   "start": 1755.2074,
    "sentences": [
     {
      "text": "Now back to the vortex.",
-     "audio_text": null,
-     "start": 1774.0089,
-     "end": 1776.1839,
+     "start": 1755.2074,
+     "end": 1757.3824,
      "dur": 2.175,
-     "start_frame": 53220,
-     "end_frame": 53286
+     "start_frame": 52656,
+     "end_frame": 52721
     },
     {
      "text": "Its own centre isn't at the pole.",
-     "audio_text": null,
-     "start": 1776.5339,
-     "end": 1779.1589,
+     "start": 1757.7324,
+     "end": 1760.3574,
      "dur": 2.625,
-     "start_frame": 53296,
-     "end_frame": 53375
+     "start_frame": 52732,
+     "end_frame": 52811
     },
     {
      "text": "It's at about seventy two point nine degrees north and forty four point three degrees east, over the Barents Sea, about one thousand nine hundred kilometres from the pole.",
-     "audio_text": null,
-     "start": 1779.5089,
-     "end": 1790.2339,
+     "start": 1760.7074,
+     "end": 1771.4324,
      "dur": 10.725,
-     "start_frame": 53385,
-     "end_frame": 53707
+     "start_frame": 52821,
+     "end_frame": 53143
     },
     {
-     "text": "Let's draw a ring two thousand kilometres from the pole, and split the winds on it with the pole as the origin.",
-     "audio_text": null,
-     "start": 1790.5839,
-     "end": 1797.8089,
-     "dur": 7.225,
-     "start_frame": 53718,
-     "end_frame": 53934
+     "text": "Let's draw a ring two thousand kilometres from the pole, split the wind at each point on it into its round and in and out parts with the pole as the origin, and average round the ring, as in Part 1.",
+     "start": 1771.7824,
+     "end": 1785.6593,
+     "dur": 13.8769,
+     "start_frame": 53153,
+     "end_frame": 53570,
+     "estimated": true
     },
     {
      "text": "The round part averages only about seventeen and a half metres per second, and the in and out part is typically about thirty three, almost twice as big: a ratio of about one point nine.",
-     "audio_text": null,
-     "start": 1798.1589,
-     "end": 1810.5839,
+     "start": 1786.0093,
+     "end": 1798.4343,
      "dur": 12.425,
-     "start_frame": 53945,
-     "end_frame": 54318,
+     "start_frame": 53580,
+     "end_frame": 53953,
      "beat": true
     },
     {
      "text": "Now draw a ring two thousand kilometres from the vortex's own centre instead.",
-     "audio_text": null,
-     "start": 1812.0839,
-     "end": 1817.9339,
+     "start": 1799.9343,
+     "end": 1805.7843,
      "dur": 5.85,
-     "start_frame": 54363,
-     "end_frame": 54538
+     "start_frame": 53998,
+     "end_frame": 54174
     },
     {
      "text": "The round part averages about forty seven metres per second, and the in and out part is typically about twenty, less than half: a ratio of about zero point four.",
-     "audio_text": null,
-     "start": 1818.2839,
-     "end": 1829.2589,
+     "start": 1806.1343,
+     "end": 1817.1093,
      "dur": 10.975,
-     "start_frame": 54549,
-     "end_frame": 54878,
+     "start_frame": 54184,
+     "end_frame": 54513,
      "beat": true
     },
     {
      "text": "So about its own centre, the vortex is mostly spin, just like the hurricane round its eye.",
-     "audio_text": null,
-     "start": 1830.7589,
-     "end": 1837.2839,
+     "start": 1818.6093,
+     "end": 1825.1343,
      "dur": 6.525,
-     "start_frame": 54923,
-     "end_frame": 55119
+     "start_frame": 54558,
+     "end_frame": 54754
     },
     {
      "text": "Choosing the origin is part of choosing good coordinates: put it at the centre of the thing that turns.",
-     "audio_text": null,
-     "start": 1837.6339,
-     "end": 1844.2839,
+     "start": 1825.4843,
+     "end": 1832.1343,
      "dur": 6.65,
-     "start_frame": 55129,
-     "end_frame": 55329
+     "start_frame": 54765,
+     "end_frame": 54964
     },
     {
      "text": "When the polar vortex weakens or splits, cold air can spill south into the places where people live.",
-     "audio_text": null,
-     "start": 1844.6339,
-     "end": 1851.3089,
+     "start": 1832.4843,
+     "end": 1839.1593,
      "dur": 6.675,
-     "start_frame": 55339,
-     "end_frame": 55539
+     "start_frame": 54975,
+     "end_frame": 55175
     },
     {
      "text": "That story has its own movies later in this series: Waves on the jet, and The polar vortex.",
-     "audio_text": null,
-     "start": 1851.6589,
-     "end": 1858.2839,
+     "start": 1839.5093,
+     "end": 1846.1343,
      "dur": 6.625,
-     "start_frame": 55550,
-     "end_frame": 55749
+     "start_frame": 55185,
+     "end_frame": 55384
     }
    ],
-   "end": 1859.0839,
-   "start_frame": 53220,
-   "end_frame": 55773,
-   "timing_source": "dryrun3_spliced:s21_origin_vortex"
+   "end": 1846.9343,
+   "start_frame": 52656,
+   "end_frame": 55408
   },
   {
    "id": "s22_recap",
-   "start": 1859.0839,
+   "start": 1846.9343,
    "sentences": [
     {
      "text": "To sum up, flattening the Earth always stretches something.",
-     "audio_text": null,
-     "start": 1859.0839,
-     "end": 1863.0089,
+     "start": 1846.9343,
+     "end": 1850.8593,
      "dur": 3.925,
-     "start_frame": 55773,
-     "end_frame": 55890
+     "start_frame": 55408,
+     "end_frame": 55526
     },
     {
-     "text": "The flat square map, with x equal to the Earth's radius times lambda, and y equal to the radius times phi, is true along the equator and the meridians, but it stretches east-west by one over cosine phi.",
-     "audio_text": null,
-     "start": 1863.3589,
-     "end": 1877.6089,
-     "dur": 14.25,
-     "start_frame": 55901,
-     "end_frame": 56328
+     "text": "The flat square map, with x equal to the Earth's radius times lambda, and y equal to the radius times phi, is true along the equator and the meridians, but it stretches east-west by one over cosine phi: about one and a half times at Brest.",
+     "start": 1851.2093,
+     "end": 1867.9597,
+     "dur": 16.7504,
+     "start_frame": 55536,
+     "end_frame": 56039,
+     "estimated": true
     },
     {
-     "text": "Scale factors like this matter whenever we measure slopes on a weather grid.",
-     "audio_text": null,
-     "start": 1877.9589,
-     "end": 1883.1339,
-     "dur": 5.175,
-     "start_frame": 56339,
-     "end_frame": 56494
+     "text": "Scale factors like this matter whenever we measure slopes on a weather grid, where one degree east at Brest is only seventy three point eight kilometres.",
+     "start": 1868.3097,
+     "end": 1879.0327,
+     "dur": 10.7231,
+     "start_frame": 56049,
+     "end_frame": 56371,
+     "estimated": true
     },
     {
      "text": "Mercator stretches north-south by the same amount, so small shapes and angles stay right, and rhumb lines are straight.",
-     "audio_text": null,
-     "start": 1883.4839,
-     "end": 1891.2589,
+     "start": 1879.3827,
+     "end": 1887.1577,
      "dur": 7.775,
-     "start_frame": 56505,
-     "end_frame": 56738
+     "start_frame": 56381,
+     "end_frame": 56615
     },
     {
-     "text": "His map's height is the Earth's radius times l n of the tangent of forty five degrees plus half the latitude.",
-     "audio_text": null,
-     "start": 1891.6089,
-     "end": 1899.6089,
-     "dur": 8.0,
-     "start_frame": 56748,
-     "end_frame": 56988
+     "text": "His map's height is the Earth's radius times l n of the tangent of forty five degrees plus half the latitude, which puts Brest about six thousand one hundred and sixty seven kilometres above the equator.",
+     "start": 1887.5077,
+     "end": 1901.7351,
+     "dur": 14.2273,
+     "start_frame": 56625,
+     "end_frame": 57052,
+     "estimated": true
     },
     {
-     "text": "But areas grow by one over cosine phi, squared, so equal-area maps are better for comparing amounts.",
-     "audio_text": null,
-     "start": 1899.9589,
-     "end": 1907.4089,
-     "dur": 7.45,
-     "start_frame": 56999,
-     "end_frame": 57222
+     "text": "But areas grow by one over cosine phi, squared, about twenty four times at Svalbard, so equal-area maps are better for comparing amounts.",
+     "start": 1902.0851,
+     "end": 1911.6868,
+     "dur": 9.6017,
+     "start_frame": 57063,
+     "end_frame": 57351,
+     "estimated": true
     },
     {
      "text": "Seen from above the North Pole, a map is polar coordinates again: east is round, north is in, and the polar vortex is mostly spin about its own centre.",
-     "audio_text": null,
-     "start": 1907.7589,
-     "end": 1918.6339,
+     "start": 1912.0368,
+     "end": 1922.9118,
      "dur": 10.875,
-     "start_frame": 57233,
-     "end_frame": 57559
+     "start_frame": 57361,
+     "end_frame": 57687
     },
     {
-     "text": "Next in this series, we'll measure how fast the temperature changes across a map: the gradient.",
-     "audio_text": null,
-     "start": 1918.9839,
-     "end": 1925.2339,
-     "dur": 6.25,
-     "start_frame": 57570,
-     "end_frame": 57757
+     "text": "With that, our seven parts on coordinates are complete, from arrows on a flat map to winds over the whole round Earth.",
+     "start": 1923.2618,
+     "end": 1931.5318,
+     "dur": 8.2701,
+     "start_frame": 57698,
+     "end_frame": 57946,
+     "estimated": true
+    },
+    {
+     "text": "Next in this series comes the gradient: how fast, and in which direction, temperature or pressure changes across a map.",
+     "start": 1931.8818,
+     "end": 1940.222,
+     "dur": 8.3402,
+     "start_frame": 57956,
+     "end_frame": 58207,
+     "estimated": true
+    },
+    {
+     "text": "It's where the one over the Earth's radius times cosine phi that we met here does its real work.",
+     "start": 1940.572,
+     "end": 1947.3002,
+     "dur": 6.7282,
+     "start_frame": 58217,
+     "end_frame": 58419,
+     "estimated": true
     }
    ],
-   "end": 1926.0339,
-   "start_frame": 55773,
-   "end_frame": 57781,
-   "timing_source": "dryrun3_spliced:s22_recap"
+   "end": 1948.1002,
+   "start_frame": 55408,
+   "end_frame": 58443
   },
   {
    "id": "s23_end",
-   "start": 1926.0339,
+   "start": 1948.1002,
    "sentences": [
     {
      "text": "This video is one of a series of related maths tutorials, so watch out for the others.",
-     "audio_text": null,
-     "start": 1926.0339,
-     "end": 1932.2339,
+     "start": 1948.1002,
+     "end": 1954.3002,
      "dur": 6.2,
-     "start_frame": 57781,
-     "end_frame": 57967
+     "start_frame": 58443,
+     "end_frame": 58629
     },
     {
      "text": "They're made for students of atmospheric science, meteorology and fluid dynamics, and anyone else who needs these ideas.",
-     "audio_text": null,
-     "start": 1932.5839,
-     "end": 1940.6339,
+     "start": 1954.6502,
+     "end": 1962.7002,
      "dur": 8.05,
-     "start_frame": 57978,
-     "end_frame": 58219
+     "start_frame": 58640,
+     "end_frame": 58881
     },
     {
      "text": "The notebook for coordinates, and the notebooks for the other maths concepts, are on the website that goes with this video.",
-     "audio_text": null,
-     "start": 1940.9839,
-     "end": 1948.6339,
+     "start": 1963.0502,
+     "end": 1970.7002,
      "dur": 7.65,
-     "start_frame": 58230,
-     "end_frame": 58459
+     "start_frame": 58892,
+     "end_frame": 59121
     }
    ],
-   "end": 1948.9339,
-   "start_frame": 57781,
-   "end_frame": 58468,
-   "timing_source": "dryrun3_spliced:s23_end"
+   "end": 1971.0002,
+   "start_frame": 58443,
+   "end_frame": 59130
   }
  ],
- "total_s": 1948.9339,
- "total_frames": 58469
+ "total_s": 1971.0002,
+ "total_frames": 59131
 }

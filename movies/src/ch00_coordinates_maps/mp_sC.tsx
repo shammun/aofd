@@ -1,20 +1,23 @@
 // ch00_coordinates_maps scenes s16-s23: from the turning globe up over the North Pole and flat into the polar stereographic map
 // (the morphing Earth, then the pixel-aligned SVG polar map), the place tour, the 10 hPa polar vortex of 21 Jan 2026 (height
 // field, contours, wind trails from advect_on_sphere), east = round and north = in, the moved origin on a flat ring, the vortex
-// about the pole vs about its own centre, the recap and the series end card. Numbers from data/mp.json only.
+// about the pole vs about its own centre, the recap (with numbers, the close of the seven-part series and the gradient teaser) and the
+// series end card fading out with the music (remake 2026-11-07, R3; Part 1/4 recalls at s19-s21, R16). Numbers from data/mp.json only.
 import React from "react";
 import { useCurrentFrame } from "remotion";
 import { C, T } from "../house/kit/type";
 import { Pt, pulse, textW } from "../house/kit/draw";
 import { SourceBelow } from "../house/kit/frame";
+import { ramp } from "../house";
 import { AnimatedWindArrow } from "../house/kit/wind";
 import { Notebook } from "../house/kit/icons";
 import { CamState } from "./kit_mp/cam";
 import {
-  AT, Arrow, CalcStack, D, D2R, H, HeightBar, K, Keyword, LEN, Lbl, MorphView, PolarMap, ProjMap, PV, R_PS, RINGS, SRC_VX, SS, Scene, SideCallout, SpokeLabels,
+  AT, Arrow, CalcStack, D, D2R, H, HL, HOLD, HeightBar, K, Keyword, LEN, Lbl, MorphView, PolarMap, ProjMap, PV, R_PS, RINGS, Recall, SRC_VX, SS, Scene, SideCallout, SpokeLabels,
   Svg, TeX, VP, VPIC, XC, fin, fout, llD, mapPt, mix, morphD, poly, polarPos, prog, rhoPS, win, BREST,
 } from "./mp_lib";
-import { Ladder } from "./mp_sB";
+import { Ladder, LS, LY0 } from "./mp_sB";
+import { PartThumb } from "./mp_sA";
 import { EQ_S19, EQ_S20, EQ_S22 } from "./mp_eq";
 
 const VX = D.vortex, PL = D.places, WH = D.wheel;
@@ -83,7 +86,7 @@ const S16: React.FC = () => {
         <Keyword f={f} text="east = anticlockwise" at={[XC, 360]} s={T.floor} appear={t11} out={t12 - 18} c={C.gold} />
         <Lbl x={XC} y={420} t="(seen from above the North Pole)" c={C.muted} s={T.floor} b={false} o={win(f, t11 + 8, t12 - 18)} />
         <Keyword f={f} text="polar coordinates again" at={[XC, 360]} appear={t12} />
-        <Lbl x={XC} y={430} t="r grows away from the pole" c={C.key} s={T.floor} o={fin(f, AT(k, 12, "the distance from the middle"))} />
+        <Lbl x={XC} y={430} t="$r$ grows away from the pole" c={C.key} s={T.floor} o={fin(f, AT(k, 12, "the distance from the middle"))} />
         <Lbl x={XC} y={490} t="angle: the longitude" c={C.key} s={T.floor} o={fin(f, AT(k, 12, "the angle round"))} />
         <Keyword f={f} text="polar stereographic" at={[XC, 620]} appear={AT(k, 13, "polar stereographic")} c={C.gold} />
         <Lbl x={XC} y={690} t="true to scale at 60° N" c={C.key} s={T.floor} o={fin(f, AT(k, 13, "true to scale"))} />
@@ -215,7 +218,7 @@ const S18: React.FC = () => {
         <Keyword f={f} text="real weather on this map" at={[XC, 110]} appear={0} out={t1 - 18} />
         <Keyword f={f} text="pressure falls as we go up" at={[XC, 110]} s={T.floor} appear={t1} out={t2 - 18} />
         <Keyword f={f} text="stratosphere: ≈ 30 km up" at={[XC, 110]} s={T.floor} appear={t2} out={t3 - 18} />
-        <Lbl x={XC} y={180} t="10 hPa ≈ 1/100 of ground pressure" c={C.key} s={T.floor} o={win(f, AT(k, 2, "only ten"), t3 - 18)} />
+        <Lbl x={XC} y={180} t="10 hPa ≈ $1/100$ of ground pressure" c={C.key} s={T.floor} o={win(f, AT(k, 2, "only ten"), t3 - 18)} />
         <Keyword f={f} text="height of the 10 hPa surface" at={[XC, 110]} s={T.floor} appear={t3} />
         <Lbl x={XC} y={180} t="21 Jan 2026" c={C.muted} s={T.floor} b={false} o={fin(f, AT(k, 3, "twenty first"))} />
         <HeightBar x={XC + 20} y={300} o={fin(f, tShow, 20)} />
@@ -265,8 +268,8 @@ const S19: React.FC = () => {
         <Keyword f={f} text="north = in, towards the pole" at={[XC, 190]} s={T.floor} appear={t3} out={t8 - 18} />
         <Keyword f={f} text="westerlies: anticlockwise" at={[XC, 110]} appear={t8} out={t10 - 18} c={C.gold} />
         <g opacity={fin(f, t9)}>
-          <Lbl x={XC} y={470} t="hurricane ≈ 100 km" c={C.key} s={T.floor} />
-          <rect x={XC} y={500} width={12} height={22} fill={C.first} />
+          <Lbl x={XC} y={470} t="hurricane: a few hundred km" c={C.key} s={T.floor} />
+          <rect x={XC} y={500} width={52} height={22} fill={C.first} />
           <Lbl x={XC} y={570} t="polar vortex: thousands of km" c={C.key} s={T.floor} />
           <rect x={XC} y={600} width={700} height={22} fill={C.first} opacity={0.75} />
         </g>
@@ -279,6 +282,9 @@ const S19: React.FC = () => {
       <TeX s={H.r} x={tip(rh, 140)[0]} y={tip(rh, 140)[1]} size={54} c={C.local} ax={0.5} halo o={fin(f, t4)} />
       <TeX s={String.raw`\mathbf i=\hat{\boldsymbol\theta},\qquad \mathbf j=-\hat{\mathbf r}`} x={XC} y={290} size={64} o={fin(f, t5)} />
       <TeX s={EQ_S19} x={XC} y={380} size={64} c={C.gold} o={fin(f, t7)} />
+      {/* remake 2026-11-07 (R16): local east / north arrows (Part 4) and the polar unit vectors (Part 1) at their point of use (gone before the bars) */}
+      <Recall f={f} tex="" name="east, north" part={4} x={XC} y={480} appear={AT(k, 1, "as in Part 4")} out={t9 - 18} />
+      <Recall f={f} tex={String.raw`\hat{\boldsymbol\theta},\ \hat{\mathbf r}`} name="polar unit vectors" part={1} x={XC} y={560} appear={AT(k, 2, "theta hat")} out={t9 - 18} />
       <SourceBelow text={SRC_VX} pic={VPIC} w={760} name="s19 src" />
     </Scene>
   );
@@ -352,6 +358,8 @@ const S20: React.FC = () => {
         <Keyword f={f} text="from the origin, not the air" at={[XC, 800]} s={T.floor} appear={t16} c={C.gold} />
       </Svg>
       <TeX s={EQ_S20} x={XC} y={200} size={56} o={fin(f, t3)} />
+      {/* remake 2026-11-07 (R16): components as dot products with r̂ and θ̂ are Part 1's (said at S11) */}
+      <Recall f={f} tex="" name="components" part={1} x={XC} y={120} appear={AT(k, 11, "As in Part 1")} out={t15 - 18} />
       <TeX s={String.raw`O_1`} x={C20[0] + 20} y={C20[1] + 40} size={52} c={C.gold} o={fin(f, t3) * mix(1, 0, sh)} />
       <TeX s={String.raw`O_2`} x={O[0] - 20} y={O[1] + 40} size={52} c={C.gold} ax={1} o={fin(f, t5 + 60)} />
       <TeX s={String.raw`P`} x={P[0] + 20} y={P[1] - 40} size={52} c={C.key} o={fin(f, t6)} />
@@ -359,11 +367,11 @@ const S20: React.FC = () => {
       <TeX s={H.th} x={P[0] + th[0] * 150} y={P[1] + th[1] * 150 - 10} size={52} c={C.second} ax={0.5} o={fin(f, t13)} />
       <CalcStack f={f} x={XC} y={310} size={54} maxLines={3} o={fout(f, t15 - 10, 12)} rows={[
         { rhs: String.raw`\sqrt{500^2+1000^2}\approx1118\ \text{km}`, at: AT(k, 9, "about one thousand") },
-        { rhs: String.raw`\hat{\mathbf r}=\left(\dfrac{500}{1118},\ \dfrac{1000}{1118}\right)`, at: AT(k, 10, "each divided"), h: 96 },
+        { rhs: String.raw`\hat{\mathbf r}=\left(\dfrac{500}{1118},\ \dfrac{1000}{1118}\right)`, at: AT(k, 10, "divide each leg"), h: 96 },
         { rhs: String.raw`\approx(0.447,\ 0.894)`, at: AT(k, 10, "zero point four"), cont: true },
-        { rhs: String.raw`u_r=(-10)(0.447)+(0)(0.894)`, at: AT(k, 11, "minus ten times"), c: C.neg, size: 48 },
+        { rhs: String.raw`u_r=(-10)(0.447)+(0)(0.894)`, at: AT(k, 11, "we multiply u"), c: C.neg, size: 48 },
         { rhs: String.raw`\approx-4.5`, at: AT(k, 11, "about minus four"), c: C.neg, cont: true },
-        { rhs: String.raw`u_\theta=(-10)(-0.894)+0`, at: AT(k, 14, "minus ten times"), c: C.first, size: 48 },
+        { rhs: String.raw`u_\theta=(-10)(-0.894)+0`, at: t14, c: C.first, size: 48 },
         { rhs: String.raw`\approx8.9`, at: AT(k, 14, "about eight"), c: C.first, cont: true },
       ]} />
     </Scene>
@@ -424,6 +432,8 @@ const S21: React.FC = () => {
       </Svg>
       <TeX s={String.raw`(90^\circ-72.9^\circ)\times111.2\approx1900\ \text{km}`} x={XC} y={360} size={46} c={C.gold} o={win(f, AT(k, 2, "about one thousand"), t3 - 18)} />
       <TeX s={String.raw`\text{ratio}=33\div17.5\approx1.9`} x={XC} y={475} size={54} c={C.gold} o={fin(f, AT(k, 4, "one point nine"))} />
+      {/* remake 2026-11-07 (R16): the ring split and the ring average are Part 1's (S3); gone before the second ring's rows (y 540-) */}
+      <Recall f={f} tex={String.raw`\bar u=\dfrac{1}{N}\sum_{i=1}^{N}u_i`} name="ring averages" part={1} x={XC} y={580} size={46} appear={AT(k, 3, "as in Part 1")} out={t5 - 12} />
       <TeX s={String.raw`\text{ratio}=20\div47\approx0.4`} x={XC} y={695} size={54} c={C.gold} o={fin(f, AT(k, 6, "zero point four"))} />
       <SourceBelow text={SRC_VX} pic={VPIC} w={760} name="s21 src" />
     </Scene>
@@ -431,12 +441,15 @@ const S21: React.FC = () => {
 };
 
 // ================================================================ s22 recap: one mini picture per sentence, older ones dimmed
+// remake 2026-11-07 (R3, the last part): 10 sentences: S0-S6 the recap (now with its numbers: × 1.5 at Brest, 73.8 km, 6167 km, × 24 at
+// Svalbard), S7 the close of the seven-part series (the seven part thumbnails, all lit), S8-S9 the two-sentence teaser for the gradient.
 const VR1: PV = { cx: 540, cy: 430, s: 135 }, VR3: PV = { cx: 540, cy: 440, s: 95 }, VR5: PV = { cx: 540, cy: 440, s: 160 }, VR6: PV = { cx: 540, cy: 440, s: 230 };
 const S22: React.FC = () => {
   const f = useCurrentFrame(), k = K("s22_recap");
-  const ts = Array.from({ length: 8 }, (_, i) => SS(k, i));
-  const b = (i: number) => win(f, ts[i], i < 7 ? ts[i + 1] - 10 : 1e9, 12);
-  const io = (i: number) => fin(f, ts[i]) * (i < 7 ? mix(1, 0.6, fin(f, ts[i + 1])) : 1);
+  const NS = 10, ts = Array.from({ length: NS }, (_, i) => SS(k, i));
+  const b = (i: number) => win(f, ts[i], i < NS - 1 ? ts[i + 1] - 10 : 1e9, 12);
+  const io = (i: number) => fin(f, ts[i]) * (i < NS - 1 ? mix(1, 0.6, fin(f, ts[i + 1])) : 1);
+  const bT = win(f, ts[8], 1e9, 12);                           // the teaser picture holds through S8 and S9
   const R = D.routes;
   const rhFlat: number[] = [], gcFlat: number[] = [];
   (R.rh[0] as number[]).forEach((la, i) => rhFlat.push(la, R.rh[1][i]));
@@ -453,25 +466,36 @@ const S22: React.FC = () => {
           {[BREST[0], 60, 78.22].map((la) => <line key={la} x1={VR1.cx - Math.PI * VR1.s} y1={mapPt(VR1, "pc", la, 0)[1]} x2={VR1.cx + Math.PI * VR1.s} y2={mapPt(VR1, "pc", la, 0)[1]}
             stroke={C.gold} strokeWidth={5} opacity={0.8} />)}
           <path d={(D.coast as number[][]).map((L) => llD(VR1, "pc", L)).join("")} fill="none" stroke={C.key} strokeOpacity={0.6} strokeWidth={1.5} />
+          <g data-lc-maplabel="1"><Lbl x={VR1.cx - Math.PI * VR1.s + 20} y={mapPt(VR1, "pc", BREST[0], 0)[1] - 30} t="$\times$ 1.5 at Brest" c={C.gold} s={T.floor}
+            o={fin(f, AT(k, 1, "one and a half"))} /></g>
         </g>
         <g opacity={b(2)}>
           {[360, 640].map((x, i) => <circle key={i} cx={x} cy={430} r={16} fill={C.gold} />)}
           <line x1={360} y1={490} x2={640} y2={490} stroke={C.first} strokeWidth={6} />
           <Lbl x={500} y={540} t="73.8 km" c={C.first} s={T.key} a="middle" />
-          <Lbl x={360} y={380} t="T" c={C.key} s={T.key} a="middle" /><Lbl x={640} y={380} t="T + 1 °C" c={C.key} s={T.key} a="middle" />
+          <Lbl x={360} y={380} t="$T$" c={C.key} s={T.key} a="middle" /><Lbl x={640} y={380} t="$T+1$ °C" c={C.key} s={T.key} a="middle" />
         </g>
       </Svg>
       <ProjMap id="s22m" v={VR3} name="mc" latTop={80} img={null} coast={0.6} o={b(3)}>
         {() => <><path d={llD(VR3, "mc", rhFlat)} fill="none" stroke={C.local} strokeWidth={6} /><path d={llD(VR3, "mc", gcFlat)} fill="none" stroke={C.gold} strokeWidth={6} /></>}
       </ProjMap>
-      <Svg o={b(4)}><Ladder f={f} x={420} show={[1, 1, 1, 1, 1, 1, 1, 1]} open={1} /></Svg>
+      <Svg o={b(4)}><Ladder f={f} x={420} show={[1, 1, 1, 1, 1, 1, 1, 1]} open={1} />
+        <line x1={380} y1={LY0 - D.ln.yB * LS} x2={630} y2={LY0 - D.ln.yB * LS} stroke={C.gold} strokeWidth={5} opacity={fin(f, AT(k, 4, "puts Brest"))} />
+        <Lbl x={650} y={LY0 - D.ln.yB * LS} t="Brest ≈ 6167 km" c={C.gold} s={T.floor} o={fin(f, AT(k, 4, "puts Brest"))} /></Svg>
       <ProjMap id="s22e" v={VR5} name="ee" clipEllipse sea="#1d2a44" img={null} coast={0.6} o={b(5)} />
+      <Svg o={b(5)}><Lbl x={540} y={735} t="Mercator: $\times$ 24 at Svalbard" c={C.gold} s={T.floor} a="middle" o={fin(f, AT(k, 5, "twenty four"))} /></Svg>
       <PolarMap f={f} v={VR6} o={b(6)} base={0} rings={0.6} spokes={0.5} dimBase={0} id="s22p"
         children={(Pp) => { const q = Pp(60, -90), cz = Pp(VX.c[0], VX.c[1]); return <>
           <Arrow p={q} q={[q[0], q[1] + 90]} color={C.second} w={8} head={30} /><Arrow p={q} q={[q[0] + 90, q[1]]} color={C.second} w={8} head={30} />
           {cross(cz, 1, 14)}</>; }} />
       <Svg>
+        {/* S7: the seven parts, all lit (the thumbnails of s01) */}
         <g opacity={b(7)}>
+          {Array.from({ length: 7 }, (_, i) => <PartThumb key={i} i={i} x={i < 4 ? 150 + 175 * i : 237 + 175 * (i - 4)} y={i < 4 ? 300 : 450} o={1} lit />)}
+          <Lbl x={540} y={640} t="coordinates: all seven parts" c={C.key} s={T.key} a="middle" />
+        </g>
+        {/* S8-S9: the teaser picture (isotherms and the direction of fastest change) */}
+        <g opacity={bT}>
           {[0, 1, 2, 3, 4].map((i) => <path key={i} d={`M ${180 + i * 150} 220 Q ${260 + i * 150} 430 ${180 + i * 150} 680`} fill="none" stroke={C.local} strokeWidth={4} />)}
           <Arrow p={[300, 450]} q={[720, 450]} color={C.second} w={10} head={40} />
         </g>
@@ -479,13 +503,15 @@ const S22: React.FC = () => {
         <Lbl x={XC} y={330} t="scale factors → slopes on a grid" c={C.key} s={T.floor} o={io(2)} />
         <Lbl x={XC} y={400} t="Mercator: rhumb lines straight" c={C.key} s={T.floor} o={io(3)} />
         <Lbl x={XC} y={805} t="east is round, north is in" c={C.key} s={T.floor} o={io(6)} />
-        <Keyword f={f} text="next: The gradient" at={[300, 790]} appear={AT(k, 7, "the gradient")} c={C.gold} />
+        <Keyword f={f} text="next: The gradient" at={[300, 790]} appear={AT(k, 8, "the gradient")} c={C.gold} />
       </Svg>
       <TeX s={String.raw`x=a\,\lambda,\quad y=a\,\varphi`} x={XC} y={200} size={58} o={io(1)} />
       <TeX s={String.raw`k=\dfrac{1}{\cos\varphi}`} x={XC + 480} y={200} size={58} o={io(1)} />
       <TeX s={EQ_S22} x={XC} y={500} size={60} o={io(4)} />
       <TeX s={String.raw`\text{area stretch}=\dfrac{1}{\cos^2\varphi}`} x={XC} y={640} size={56} o={io(5)} />
       <TeX s={String.raw`u_\theta=u,\qquad u_r=-v`} x={XC} y={738} size={52} c={C.gold} o={io(6)} />
+      <TeX s={String.raw`\dfrac{1}{a\cos\varphi}\,\dfrac{\partial T}{\partial\lambda}`} x={180} y={140} size={56} c={C.gold} o={fin(f, AT(k, 9, "one over"))}
+        glow={HL(f, AT(k, 9, "one over"))} />
       <SourceBelow text="coast: Natural Earth" pic={{ x: 120, y: 120, w: 840, h: 640 }} w={840} o={Math.max(b(1), b(3), b(5), b(6))} name="s22 src" />
     </Scene>
   );
@@ -516,7 +542,8 @@ const S23: React.FC = () => {
   rel.forEach((t, i) => { if (COLX[Math.floor(i / 5)] + textW(t, T.floor) > (COLX[Math.floor(i / 5) + 1] ?? 1840) - 10) throw new Error(`end card: "${t}" too wide`); });
   return (
     <Scene>
-      <Svg>
+      {/* remake 2026-11-07 (R3): the picture fades out with the music over the 2.5-s silent hold (= Part 6's s15) */}
+      <Svg o={1 - ramp(f, LEN(k) - HOLD, LEN(k) - 4)}>
         <g opacity={fin(f, 6)}>{[420, 760, 1100, 1440].map((x, i) => thumb(x, i))}</g>
         <Lbl x={960} y={315} t="a series of maths tutorials" c={C.key} s={T.calc} a="middle" o={fin(f, 10)} />
         <Lbl x={960} y={395} t="atmospheric science · meteorology · fluid dynamics" c={C.key} s={T.key} a="middle" o={fin(f, AT(k, 1, "atmospheric science"))} />

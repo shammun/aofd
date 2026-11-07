@@ -65,7 +65,8 @@ PLACES = {"brest": ("Brest", 48.39, -4.49, "land"), "iceland": ("Iceland", 65.0,
           "barents": ("Barents Sea", 75.0, 40.0, "sea"), "siberia": ("Siberia", 65.0, 100.0, "land"), "bering": ("Bering Strait", 65.8, -169.0, "sea"),
           "alaska": ("Alaska", 65.0, -150.0, "land"), "canada": ("Canada", 56.0, -100.0, "land"), "hudson": ("Hudson Bay", 60.0, -85.0, "sea"),
           "la": ("Los Angeles", 34.05, -118.24, "land")}
-CHAPTERS = [("s00_title", "Maps: the question"), ("s02_part6_recap", "What we use from Parts 1, 3 and 6"), ("s03_flattening", "Flattening the Earth"),
+# remake 2026-11-07: s02_part6_recap cut (no opening recaps); its facts are recalled where used (s04, s05, s06, s08, s10, s12, s19-s21)
+CHAPTERS = [("s00_title", "Maps: the question"), ("s03_flattening", "Flattening the Earth"),
             ("s04_plate_carree", "Every step: the flat square map and its stretch (optional maths)"), ("s06_gradient_preview", "Scale factors on weather grids"),
             ("s07_mercator_idea", "Mercator's idea"), ("s08_mercator_dy", "Every step: Mercator's formula (optional maths)"),
             ("s12_rhumb_straight", "Why the rhumb line is straight"), ("s13_area_stretch", "The price: areas"),
@@ -151,17 +152,18 @@ def main() -> int:
     from fluidpy.geo.constants import EARTH_RADIUS
     row("DM00", "EARTH_RADIUS = 6371 km (the movie's a)", EARTH_RADIUS / 1e3, A_KM, 1e-9)
 
-    # ================================================================ s02 recap (Parts 1, 3, 6)
-    AL = call(GS + "arc_lengths", "s02/s06", "δy = a δφ, δx = a cos φ δλ (1°) at Brest", lat=BREST[0])
+    # ================================================================ recalls of Parts 3 and 6 (remake 2026-11-07: the old s02 recap is cut; s06 recalls
+    # Δx = a cos φ Δλ ≈ 73.8 km "derived in Part 3: distances" and the scale factors "derived in Part 6"; s12 recalls Part 6's rhumb line)
+    AL = call(GS + "arc_lengths", "s06", "δy = a δφ, δx = a cos φ δλ (1°) at Brest (recalled from Part 3)", lat=BREST[0])
     dy1, dx1 = AL.dy / 1e3, AL.dx / 1e3
     row("DM01", "1° north = 111.2 km, 1° east at Brest = 73.8 km (arc_lengths)", [dy1, dx1], [111.2, 73.8], [0.05, 0.05])
-    dgc = call(GS + "great_circle_distance", "s02/s12", "London–Los Angeles great circle", lat1=LON[0], lon1=LON[1], lat2=LAX[0], lon2=LAX[1]) / 1e3
-    RH = call(GS + "rhumb_line", "s02/s12", "London–Los Angeles rhumb line (constant bearing)", heavy_call=True, lat1=LON[0], lon1=LON[1], lat2=LAX[0], lon2=LAX[1], n=121)
+    dgc = call(GS + "great_circle_distance", "s12", "London–Los Angeles great circle (recalled from Part 6)", lat1=LON[0], lon1=LON[1], lat2=LAX[0], lon2=LAX[1]) / 1e3
+    RH = call(GS + "rhumb_line", "s12", "London–Los Angeles rhumb line (constant bearing; recalled from Part 6)", heavy_call=True, lat1=LON[0], lon1=LON[1], lat2=LAX[0], lon2=LAX[1], n=121)
     rh_d, rh_b = float(RH.distance) / 1e3, float(RH.bearing)
     row("DM13", "rhumb 9732.8 km, 258.49°, × 1.1116 of the great circle 8755 km, +977.5 km", [rh_d, rh_b, rh_d / dgc, rh_d - dgc, dgc],
         [9732.8, 258.49, 1.1116, 977.5, 8755.3], [0.1, 0.01, 1e-4, 0.2, 0.5])
     row("DM13", "screen '≈ 8755 km', '+11 %'", [round(dgc), round(100 * (rh_d / dgc - 1))], [8755, 11], 0)
-    gcp = call(GS + "great_circle_points", "s02/s12", "London–Los Angeles great-circle track", heavy_call=True, lat1=LON[0], lon1=LON[1], lat2=LAX[0], lon2=LAX[1], n=121)
+    gcp = call(GS + "great_circle_points", "s12", "London–Los Angeles great-circle track", heavy_call=True, lat1=LON[0], lon1=LON[1], lat2=LAX[0], lon2=LAX[1], n=121)
     V["routes"] = {"gc": [B1.r6(np.ravel(gcp[0]), 3), B1.r6(np.ravel(gcp[1]), 3)], "rh": [B1.r6(RH.lat, 3), B1.r6(SPH.wrap_lon(np.asarray(RH.lon)), 3)],
                    "d_gc": dgc, "d_rh": rh_d, "brg": rh_b, "lon": list(LON), "lax": list(LAX)}
 
