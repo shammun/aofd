@@ -9,7 +9,7 @@ import { fileURLToPath } from "node:url";
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const SRC = path.resolve(HERE, "..");
 const ROOT = path.resolve(SRC, "../../..");
-const tm = JSON.parse(fs.readFileSync(path.join(ROOT, "movies/ch00/ch00_coordinates_sphere/timing.json"), "utf8"));
+const tm = JSON.parse(fs.readFileSync(process.env.CS_TIMING || path.join(ROOT, "movies/ch00/ch00_coordinates_sphere/timing.json"), "utf8"));   // CS_TIMING: an estimated timing (remake dry check)
 const FPS = 30, HOLD = 75;
 const sc = tm.scenes, IDS = sc.map((s) => s.id);
 const CUT = sc.map((s, i) => (i === 0 ? 0 : Math.round(s.start * FPS)));

@@ -16,7 +16,9 @@ import {
   Scene, SideCallout, SkipChip, Svg, TeX, Thermo, VIOLET, XC, XZ, arcD, chipSpan, clamp, cutAt, discOf, fin, fout, gdot, gseg, globeG, keepGone, keepTime, ll, merPath, mix,
   parPath, plab, poly, prog, rep, spinPath, splitVis, win,
   RAD, Magnify, KeepPic,
+  Recall, HOLD,
 } from "./cs_lib";
+import { ramp } from "../house";
 import { EQ_S18, EQ_S27, EQ_S28, EQ_S29, EQ_S30, EQ_S31, EQ_S32, EQ_S33, EQ_S34 } from "./cs_eq";
 
 const E5 = D.era5, AR = D.area, BD = D.band, TM = D.t2m;
@@ -202,7 +204,7 @@ const S27: React.FC = () => {
 // ================================================================ s28 the area of one ERA5 box (3-D tiles)
 const S28: React.FC = () => {
   const f = useCurrentFrame(), k = K("s28_box_areas");
-  const tRad = SS(k, 1), tA2 = SS(k, 2), tEq = AT(k, 3, "that's about"), tCos = SS(k, 4), tK = AT(k, 5, "is about"), tB = AT(k, 6, "it's about"), tL = AT(k, 7, "it's only about"),
+  const tRad = SS(k, 1), tA2 = SS(k, 2), tEq = AT(k, 3, "that's about") + 19, tCos = SS(k, 4), tK = AT(k, 5, "it's about"), tB = AT(k, 6, "is about five"), tL = AT(k, 7, "it's only about"),
     tChk = SS(k, 8), tEx = SS(k, 9);
   // still review k6r2: the tile row 80 px right (its left tags "27.8 km" / "wide:" started at x 20, left of the x 60 margin)
   const st = orbitCam({ az: -62, el: 38, dist: 260, target: [60, 0, 0], fov: 30 }, [600, 430]);
@@ -245,15 +247,15 @@ const S28: React.FC = () => {
       <TeX s={String.raw`\text{rows unrounded (rounded: }\approx772)`} x={120} y={710} size={44} c={C.muted} o={win(f, tEq + 15, tCos - 20)} />
       <CalcStack f={f} x={XC} y={230} size={52} maxLines={4} rows={[
         { lhs: "", rhs: rows[0], at: tRad },
-        { lhs: "", rhs: rows[1], at: AT(k, 1, "is zero point"), cont: true },
+        { lhs: "", rhs: rows[1], at: AT(k, 1, "is zero point"), cont: true, glow: pulse(f, AT(k, 1, "is zero point"), 30) },
         { lhs: "", rhs: rows[2], at: tA2 },
         { lhs: "", rhs: rows[3], at: AT(k, 2, "about forty"), cont: true },
-        { lhs: "", rhs: String.raw`40.59\times10^{6}\times0.0043633`, at: SS(k, 3), size: 46 },
-        { lhs: "", rhs: String.raw`\times0.0043633`, at: AT(k, 3, "and times"), size: 46, cont: true },
-        { lhs: "", rhs: String.raw`\approx772.8\approx773\ \text{km}^2`, at: tEq, cont: true },
-        { lhs: "", rhs: String.raw`772.8\times0.9219\approx712.4\approx712\ \text{km}^2`, at: tK - 20, size: 46 },
-        { lhs: "", rhs: String.raw`772.8\times0.6639\approx513.1\approx513\ \text{km}^2`, at: tB - 20, size: 46 },
-        { lhs: "", rhs: String.raw`772.8\times0.2045\approx158.0\approx158\ \text{km}^2`, at: tL - 20, size: 46 },
+        { lhs: "", rhs: String.raw`\Delta A_{\text{eq}}=40.59\times10^{6}\times0.0043633`, at: SS(k, 3), size: 46 },
+        { lhs: "", rhs: String.raw`\times0.0043633`, at: AT(k, 3, ", twice"), size: 46, cont: true },
+        { lhs: "", rhs: String.raw`\approx772.8\approx773\ \text{km}^2`, at: tEq, cont: true, glow: pulse(f, tEq, 30) },
+        { lhs: "", rhs: String.raw`\Delta A=772.8\times0.9219\approx712\ \text{km}^2`, at: tK - 20, size: 46, glow: pulse(f, AT(k, 5, "zero point nine"), 30) },
+        { lhs: "", rhs: String.raw`\Delta A=772.8\times0.6639\approx513\ \text{km}^2`, at: tB - 20, size: 46 },
+        { lhs: "", rhs: String.raw`\Delta A=772.8\times0.2045\approx158\ \text{km}^2`, at: tL - 20, size: 46 },
       ]} />
     </Scene>
   );
@@ -339,12 +341,14 @@ const S30: React.FC = () => {
       {/* K6 k6r1: right of the orange step bar (above it, it sat on the "30°" tag and the arrow tip) */}
       <TeX s={String.raw`\Delta(\sin\varphi)`} x={xb + 22} y={(y20 + y30) / 2} size={T.key} c={C.second} ax={0} o={fin(f, tCall)} halo />
       <TeX s={EQ_S30} x={XC} y={160} size={T.calc} c={C.ink} o={fin(f, tSo)} />
+      {/* remake 2026-11-07 (R16): Part 2's slope of sine on "But Part 2 gave us a shortcut", until the check's rows come in */}
+      <Recall f={f} tex={String.raw`\dfrac{d}{d\theta}\sin\theta=\cos\theta`} name="slope of sine" part={2} x={XC} y={330} size={50} appear={SS(k, 1)} out={tTen - 12} />
       <CalcStack f={f} x={XC + 40} y={260} size={52} maxLines={4} rows={[
-        { lhs: String.raw`10^\circ`, rhs: String.raw`=10\times\dfrac{\pi}{180}\approx0.1745\ \text{rad}`, at: tTen },   // still review: the conversion's arithmetic (A1)
-        { lhs: String.raw`\cos25^\circ`, rhs: String.raw`\approx0.906`, at: tMid + 30 },
-        { lhs: "", rhs: String.raw`0.906\times0.1745\approx0.158`, at: tProd - 20, ul: tToo },
-        { lhs: "", rhs: String.raw`\sin30^\circ-\sin20^\circ=0.5-0.342`, at: tGrow + 40, size: 46 },
-        { lhs: "", rhs: String.raw`=0.158`, at: AT(k, 10, "zero point one five eight"), ul: tToo, cont: true },
+        { lhs: String.raw`\Delta\varphi`, rhs: String.raw`=10\times\dfrac{\pi}{180}\approx0.1745\ \text{rad}`, at: tTen, glow: pulse(f, AT(k, 6, "zero point one"), 30) },   // still review: the conversion's arithmetic (A1)
+        { lhs: String.raw`\cos25^\circ`, rhs: String.raw`\approx0.906`, at: tMid + 30, glow: pulse(f, AT(k, 7, "zero point nine"), 30) },
+        { lhs: "", rhs: String.raw`0.906\times0.1745\approx0.158`, at: tProd - 20, ul: tToo, glow: pulse(f, AT(k, 8, "about zero point"), 30) },
+        { lhs: "", rhs: String.raw`\Delta(\sin\varphi)=\sin30^\circ-\sin20^\circ`, at: tGrow + 40, size: 46 },
+        { lhs: "", rhs: String.raw`=0.5-0.342=0.158`, at: AT(k, 10, "zero point one five eight"), ul: tToo, cont: true },
       ]} />
       <TeX s={String.raw`\text{strip}\approx2\pi a^2\,\Delta(\sin\varphi)`} x={XC} y={810} size={T.calc} c={C.ink} o={fin(f, tStrip)} />
     </Scene>
@@ -354,7 +358,7 @@ const S30: React.FC = () => {
 // ================================================================ s31 adding the strips: integration
 const S31: React.FC = () => {
   const f = useCurrentFrame(), k = K("s31_adding_strips");
-  const tStack = SS(k, 0), tStair = SS(k, 1), tAdd = SS(k, 2), tZero = SS(k, 3), tSum = SS(k, 4), tBand = SS(k, 5), tChk = SS(k, 6), tSteps = AT(k, 7, "zero point one seven four"),
+  const tStack = SS(k, 0), tStair = SS(k, 1), tAdd = SS(k, 2), tZero = SS(k, 3), tSum = SS(k, 4), tBand = SS(k, 5), tChk = SS(k, 6), tSteps = SS(k, 7) + 15,
     tFive = SS(k, 8), tName = SS(k, 9), tS = SS(k, 10), tPrime = SS(k, 11), tInt = SS(k, 12);
   const cam = globePath([{ f: 0, lat: 22, lon: 0, dist: 3.4 }, { f: LEN(k) + 10, lat: 22, lon: -8, dist: 3.4 }], f);
   const A = { x: 1140, y: 140, w: 640, h: 380 };
@@ -394,12 +398,12 @@ const S31: React.FC = () => {
       <TeX s={eqs[1]} x={XC} y={665} size={T.eq} c={C.ink} o={fin(f, tBand) * fout(f, SS(k, 7) - 12)} />
       <CalcStack f={f} x={XC} y={600} size={44} maxLines={4} rows={[
         { lhs: "", rhs: String.raw`\sin10^\circ\approx0.174,\ \ \sin20^\circ\approx0.342`, at: SS(k, 7), out: SS(k, 8) - 8, c: C.muted },
-        { lhs: "", rhs: String.raw`0^\circ\to10^\circ:\ \ 0.174-0=0.174`, at: AT(k, 7, "zero point one seven four"), out: SS(k, 8) - 8 },
-        { lhs: "", rhs: String.raw`10^\circ\to20^\circ:\ \ 0.342-0.174=0.168`, at: AT(k, 7, "zero point one six eight"), out: SS(k, 8) - 8 },
-        { lhs: "", rhs: String.raw`20^\circ\to30^\circ:\ \ 0.500-0.342=0.158`, at: AT(k, 7, "zero point one five eight"), out: SS(k, 8) - 8 },
+        { lhs: "", rhs: String.raw`0^\circ\to10^\circ:\ \ 0.174-0=0.174`, at: SS(k, 7) + 15, out: SS(k, 8) - 8 },
+        { lhs: "", rhs: String.raw`10^\circ\to20^\circ:\ \ 0.342-0.174=0.168`, at: SS(k, 7) + 40, out: SS(k, 8) - 8 },
+        { lhs: "", rhs: String.raw`20^\circ\to30^\circ:\ \ 0.500-0.342=0.158`, at: SS(k, 7) + 65, out: SS(k, 8) - 8 },
       ]} />
       <TeX s={String.raw`0.174+0.168+0.158`} x={XC} y={730} size={52} c={C.ink} o={win(f, SS(k, 8), tName - 22)} />
-      <TeX s={String.raw`=0.500=\sin30^\circ`} x={XC + 60} y={800} size={52} c={C.ink} o={win(f, AT(k, 8, "They add up"), tName - 22)} />
+      <TeX s={String.raw`=0.500=\sin30^\circ`} x={XC + 60} y={800} size={52} c={C.ink} o={win(f, AT(k, 8, "they add up"), tName - 22)} />
       <Layered parts={[{ t: String.raw`\int_0^{\varphi}`, u: { w: String.raw`\text{sum}`, c: C.gold } }, { t: String.raw`\cos\varphi'` },
         { t: String.raw`\,d\varphi'`, u: { w: String.raw`\text{tiny step}`, c: C.gold } }, { t: String.raw`=\sin\varphi` }]} x={XC} y={705} size={64}
         layers={[{ t: "all", o: fin(f, tInt) }, { t: [], u: [0, 2], o: fin(f, tInt + 25) }]} />
@@ -602,8 +606,8 @@ const S34: React.FC = () => {
         { lhs: "", rhs: String.raw`\text{weights: }\cos0^\circ=1,\ \cos60^\circ=\dfrac12`, at: tHalf + 20 },
         { lhs: "", rhs: String.raw`\text{weighted: }(30\times1+0\times\dfrac12)`, at: tW + 30, size: 46 },
         // still review k6r2 (A1): the divisor is the sum of the weights, 1 + ½ = 1.5, and the numerator 30; then 30 ÷ 1.5 on "That's twenty"
-        { lhs: "", rhs: String.raw`\div(1+\dfrac12)`, at: AT(k, 8, "all divided"), size: 46, cont: true },
-        { lhs: "", rhs: String.raw`=30\div1.5=20\ ^\circ\text{C}`, at: SS(k, 9), size: 46 },
+        { lhs: "", rhs: String.raw`\div(1+\dfrac12)`, at: AT(k, 8, "and divides"), size: 46, cont: true },
+        { lhs: "", rhs: String.raw`\text{weighted}=30\div1.5=20\ ^\circ\text{C}`, at: SS(k, 9), size: 46 },
       ]} />
       {/* k6r3: the toy rows (all worked by "That's twenty") leave before the general formula comes in on the next sentence, in their place */}
       <TeX s={EQ_S34} x={XC} y={500} size={T.eq} c={C.ink} o={fin(f, tWhy) * fout(f, tReal - 10)} />
@@ -646,7 +650,10 @@ const Mini: React.FC<{ i: number; o: number }> = ({ i, o }) => {
       {i === 10 ? <>{[0, 1, 2, 3].map((q) => <rect key={q} x={c[0] - 200} y={c[1] - 200 + q * 110} width={360 * Math.cos(q * 25 * D2R)} height={50} fill={C.gold} rx={6} />)}</> : null}
       {i === 11 ? <path d={`M${c[0] - 220} ${c[1] + 100}L${c[0] + 140} ${c[1] + 100}L${c[0] + 220} ${c[1] - 60}L${c[0] - 140} ${c[1] - 60}Z`} fill={C.gold} fillOpacity={0.4} stroke={C.gold} strokeWidth={5} /> : null}
       {i === 12 ? <>{Array.from({ length: 9 }, (_, q) => <rect key={q} x={c[0] - 280 + q * 60} y={c[1] + 200 - 400 * Math.sin((q + 1) * 10 * D2R)} width={56} height={400 * Math.sin((q + 1) * 10 * D2R)} fill={C.gold} opacity={0.6} />)}</> : null}
-      {i === 13 ? <><line x1={c[0]} y1={c[1] + 220} x2={c[0]} y2={c[1] + 40} stroke={C.muted} strokeWidth={8} />
+      {i === 13 ? <>{[[TM.plain, C.muted, "plain"], [TM.weighted, C.gold, "weighted"]].map(([v, cc, t], q) => <g key={q}>
+        <rect x={c[0] - 240} y={c[1] - 110 + q * 190} width={28 * (v as number)} height={80} fill={cc as string} rx={6} />
+        <Lbl x={c[0] - 240} y={c[1] - 145 + q * 190} t={`${t} ${(v as number).toFixed(1)} °C`} c={C.key} s={T.floor} /></g>)}</> : null}
+      {i === 14 ? <><line x1={c[0]} y1={c[1] + 220} x2={c[0]} y2={c[1] + 40} stroke={C.muted} strokeWidth={8} />
         <Arrow p={[c[0], c[1] + 40]} q={[c[0] + 200, c[1] + 40]} color={C.second} /><Arrow p={[c[0], c[1] + 40]} q={[c[0] + 110, c[1] - 60]} color={C.second} />
         <Arrow p={[c[0], c[1] + 40]} q={[c[0], c[1] - 170]} color={C.first} /><Lbl x={c[0] + 160} y={c[1] - 150} t="?" c={C.gold} s={T.hero} /></> : null}
     </g>
@@ -654,21 +661,35 @@ const Mini: React.FC<{ i: number; o: number }> = ({ i, o }) => {
 };
 const S35: React.FC = () => {
   const f = useCurrentFrame(), k = K("s35_recap");
-  const n = 14;
+  // remake 2026-11-07 (R3): 16 sentences: the recap S0-S12 (S10 and S12 with their numbers), S13 the ERA5 numbers, S14-S15 the two-sentence
+  // teaser to Part 4 (one picture and keyword for both); the end card follows
+  const n = 16, NP = 15;
   // Part 1 lessons D3: each beat at full strength until ITS sentence ends (it used to start fading 10 frames early: the gaps are
   // 10-11 frames); the next beat comes in 8 frames after its sentence starts, so the 10-frame fade-out + 8-frame swap gap still fit
-  const a = (j: number) => SS(k, j) + (j ? 8 : 0), b = (j: number) => (j + 1 < n ? SE(k, j) : LEN(k) + 20);
+  const a = (j: number) => SS(k, j) + (j ? 8 : 0), b = (j: number) => (j + 1 < NP ? SE(k, j) : LEN(k) + 20);
+  if (TM.plain.toFixed(1) !== "7.1" || TM.weighted.toFixed(1) !== "16.3") throw new Error("CHECK s35: ERA5 means changed (voice says 7.1 / 16.3)");
+  if (D.deg.dx1[3].toFixed(0) !== "74") throw new Error("CHECK s35: Brest degree east (voice says about 74 km)");
   const kw: [number, string, string | null][] = [
     [0, "distance + two angles", null], [1, "", String.raw`a\approx6400\ \text{km}`], [2, String.raw`latitude $\varphi$`, null], [3, "", String.raw`\text{colatitude}=90^\circ-\varphi`],
     [4, "parallel: round the axis", null], [5, "meridian: round the centre", null], [6, String.raw`longitude $\lambda$: east +`, null],
     [7, "", EQ_S18.split(String.raw`,\quad `)[2]], [8, "", String.raw`U=\Omega\,a\cos\varphi\approx464.6\ \text{m/s}`], [9, "", String.raw`\Delta y=a\,\Delta\varphi\approx111\ \text{km}`],
-    [10, "", String.raw`\Delta x=a\cos\varphi\,\Delta\lambda`], [11, "", String.raw`dA=a^2\cos\varphi\,d\varphi\,d\lambda`], [12, String.raw`share $\sin\varphi$ · weights $\cos\varphi$`, null], [13, "Part 4: turning frames", null],
+    [10, "", String.raw`\Delta x=a\cos\varphi\,\Delta\lambda`], [11, "", String.raw`dA=a^2\cos\varphi\,d\varphi\,d\lambda`], [12, String.raw`share $\sin\varphi$ · weights $\cos\varphi$`, null],
+    [13, "7.1 → 16.3 °C", null], [14, "Part 4: turning frames", null],
   ];
   return (
     <Scene>
-      <Svg>{Array.from({ length: n }, (_, j) => <Mini key={j} i={j} o={fin(f, a(j), 10) * fout(f, b(j), 10)} />)}</Svg>
-      <Svg>{kw.filter((q) => q[1]).map(([j, t]) => <Keyword key={j} f={f} text={t} at={[XC, 430]} appear={a(j)} out={j + 1 < n ? b(j) : undefined} />)}</Svg>
-      {kw.filter((q) => q[2]).map(([j, , s]) => <TeX key={j} s={s as string} x={XC} y={430} size={j === 7 ? T.calc : 60} c={C.ink} o={fin(f, a(j)) * (j + 1 < n ? fout(f, b(j)) : 1)} />)}
+      <Svg>{Array.from({ length: NP }, (_, j) => <Mini key={j} i={j} o={fin(f, a(j), 10) * fout(f, b(j), 10)} />)}</Svg>
+      <Svg>{kw.filter((q) => q[1]).map(([j, t]) => <Keyword key={j} f={f} text={t} at={[XC, 430]} appear={a(j)} out={j + 1 < NP ? b(j) : undefined} />)}</Svg>
+      {kw.filter((q) => q[2]).map(([j, , s]) => <TeX key={j} s={s as string} x={XC} y={430} size={j === 7 ? T.calc : 60} c={C.ink} o={fin(f, a(j)) * (j + 1 < NP ? fout(f, b(j)) : 1)} />)}
+      <Svg>
+        <Lbl x={XC} y={540} t="Brest: ≈ 74 km per degree" c={C.key} s={T.floor} o={win(f, AT(k, 10, "about seventy four") + 28, b(10))} />
+        <Lbl x={XC} y={540} t="ERA5 · September 2026" c={C.key} s={T.floor} o={win(f, a(13) + 8, b(13))} />
+        <Lbl x={XC} y={540} t="its own east, north, up" c={C.key} s={T.floor} o={win(f, AT(k, 14, "its own east") - 18, SS(k, 15) - 14)} />
+        <Lbl x={XC} y={540} t="they turn as the air moves" c={C.key} s={T.floor} o={fin(f, SS(k, 15) + 8)} />
+      </Svg>
+      {/* data frame (house rule): the source line under the ERA5 bars */}
+      <SourceBelow text="Data: ERA5 (Copernicus C3S) · 2-m temperature · September 2026 · global means" pic={{ x: 270, y: 250, w: 520, h: 340 }} w={760}
+        o={fin(f, a(13), 10) * fout(f, b(13), 10)} name="s35 src era5" />
       <Svg><Lbl x={XC} y={540} t="$\sin\leftrightarrow\cos$" c={C.key} s={T.key} o={win(f, AT(k, 3, "swaps sine"), b(3))} />
         </Svg>
       <TeX s={String.raw`x=a\cos\varphi\cos\lambda,\ \ y=a\cos\varphi\sin\lambda`} x={XC} y={540} size={48} c={C.ink} o={win(f, AT(k, 7, "x is the radius"), b(7))} />
@@ -694,7 +715,8 @@ const S36: React.FC = () => {
   );
   return (
     <Scene>
-      <Svg>
+      {/* remake 2026-11-07 (R3): the picture fades out over the 75-frame hold, together with the music's 2.5-s tail (Part 2's s42) */}
+      <Svg o={1 - ramp(f, LEN(k) - HOLD, LEN(k) - 4)}>
         <g opacity={fin(f, 6)}>{[420, 760, 1100, 1440].map((x, i) => thumb(x, i))}</g>
         <Lbl x={960} y={330} t="a series of maths tutorials" c={C.key} s={T.calc} a="middle" o={fin(f, 10)} />
         <Lbl x={960} y={410} t="atmospheric science · meteorology · fluid dynamics" c={C.key} s={T.key} a="middle" o={fin(f, AT(k, 1, "atmospheric science"))} />

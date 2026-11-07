@@ -605,3 +605,36 @@ export const splitVis = (G: GProj, pts: V3[]): { front: Pt[][]; back: Pt[][] } =
   if (cur.length > 1 && curV !== null) (curV ? front : back).push(cur);
   return { front, back };
 };
+
+/** remake 2026-11-07 (master plan R16, HOUSE_STYLE §3 "Series parts"): an earlier part's result recalled at its point of use: the
+ *  equation (KaTeX, exactly as that part writes it) and the gold keyword "derived in Part K: <name>" under it (two lines when too
+ *  wide). Port of Part 2's Recall (src/ch00_coordinates_storm/cs_lib.tsx) with a verb ("derived", "defined", "met") for things a part
+ *  defined rather than derived. Label and equation share one data-lc-own group (K6 ownership). */
+export const Recall: React.FC<{ f: number; tex: string; name: string; x: number; y: number; appear: number; out?: number; size?: number; c?: string; part?: number;
+  verb?: string; gap?: number; side?: boolean }> = ({ f, tex, name, x, y, appear, out, size = 50, c = C.ink, part = 1, verb = "derived", gap, side = false }) => {
+  const o = ramp(f, appear, appear + 10) * (out !== undefined ? 1 - ramp(f, out, out + 10) : 1);
+  const lab = `${verb} in Part ${part}: ${name}`;
+  const two = x + textW(lab, T.floor) > 1842;
+  if (side) {   // the gold keyword in two lines right of the equation (where there is no room below)
+    const xs = x + texW(tex, size) + 36;
+    if (xs + Math.max(textW(`${verb} in Part ${part}:`, T.floor), textW(name, T.floor)) > 1842) throw new Error(`Recall "${name}" (side) ends past 1842`);
+    if (o <= 0) return null;
+    return (
+      <>
+        <TeX s={tex} x={x} y={y} size={size} c={c} o={o} />
+        <Svg o={o}><g data-lc-own="recall"><HLbl x={xs} y={y - 8} t={`${verb} in Part ${part}:`} c={C.gold} s={T.floor} />
+          <HLbl x={xs} y={y + 44} t={name} c={C.gold} s={T.floor} /></g></Svg>
+      </>
+    );
+  }
+  if (two && x + textW(name, T.floor) > 1842) throw new Error(`Recall "${name}" ends past 1842`);
+  if (o <= 0) return null;
+  const dy = gap ?? (FRAC_ROW.test(tex) ? size * 1.25 : size * 0.85) + 18;
+  return (
+    <>
+      <TeX s={tex} x={x} y={y} size={size} c={c} o={o} />
+      <Svg o={o}><g data-lc-own="recall">{two ? <><HLbl x={x} y={y + dy} t={`${verb} in Part ${part}:`} c={C.gold} s={T.floor} />
+        <HLbl x={x} y={y + dy + 52} t={name} c={C.gold} s={T.floor} /></> : <HLbl x={x} y={y + dy} t={lab} c={C.gold} s={T.floor} />}</g></Svg>
+    </>
+  );
+};

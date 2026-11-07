@@ -17,6 +17,7 @@ import {
   Scene, SideCallout, SkipChip, Svg, TV3, TeX, VIOLET, XC, XZ, arcD, chipSpan, clamp, cutAt, discOf, e2g, eastAt, facePt, facing, faceArc, fin, fout, gdot, globeG,
   gseg, keepGone, keepTime, latFace, ll, merFace, merPath, mix, parPath, plab, poly, prog, splitVis, win, eqFace, Face, faceFlat, face3, spinPath,
   RAD, Magnify, KeepPic,
+  Recall,
 } from "./cs_lib";
 import { CAM_TOP, DiscFlatBase, FItem, FLAT_C, FLAT_R, LON0, MerFlatBase, PHI, TOP_C, TOP_R, TwoView, camFace, merCut, ptOf } from "./cs_two";
 import { EQ_S13, EQ_S15, EQ_S16, EQ_S17, EQ_S18, EQ_S19, EQ_S20, EQ_S21, EQ_S22, EQ_S24, EQ_S25 } from "./cs_eq";
@@ -161,7 +162,7 @@ const S14: React.FC = () => {
 // ================================================================ s15 z = a sin φ
 const S15: React.FC = () => {
   const f = useCurrentFrame(), k = K("s15_brest_z");
-  const tUp = SS(k, 1), tOpp = SS(k, 2), tRule = SS(k, 3), tEq = SS(k, 4), tNum = SS(k, 5), tA = AT(k, 6, "six thousand three hundred"), tSin = SS(k, 7), tRes = AT(k, 8, "which is about"),
+  const tUp = SS(k, 1), tOpp = SS(k, 2), tRule = SS(k, 3), tEq = SS(k, 4), tNum = SS(k, 5), tA = AT(k, 6, "six thousand three hundred"), tSin = SS(k, 7), tRes = AT(k, 8, "z is about"),
     tEasy = SS(k, 9), tPole = AT(k, 10, "on the North Pole's side"), tSouth = SS(k, 11);
   const items: FItem[] = [
     ...allOld(sideItems(ALL0)),
@@ -196,10 +197,10 @@ const S15: React.FC = () => {
         x={XC} y={680} size={T.calc} layers={[{ t: "all", o: fin(f, tEq) * fout(f, tNum - 15) }, { t: [], u: [1, 2], o: fin(f, tEq + 20) * fout(f, tNum - 15) }]} />
       <TeX s={EQ_S15} x={KX3} y={330} size={T.calc} c={C.ink} o={fin(f, tNum)} />
       <CalcStack f={f} x={XC + 60} y={560} size={52} maxLines={2} rows={[
-        { lhs: "a", rhs: String.raw`=6371\ \text{km}`, at: tA },
-        { lhs: "", rhs: String.raw`\sin48.4^\circ\approx0.7478`, at: tSin, cont: true },
-        { lhs: "z", rhs: String.raw`=6371\ \text{km}\times0.7478\approx4764\ \text{km}`, at: tRes - 30, size: 46 },
-        { lhs: "", rhs: String.raw`6400\times\dfrac34=4800`, at: tEasy, c: C.muted },
+        { lhs: "a", rhs: String.raw`=6371\ \text{km}`, at: tA, glow: pulse(f, tA, 30) },
+        { lhs: "", rhs: String.raw`\sin48.4^\circ\approx0.7478`, at: tSin, cont: true, glow: pulse(f, AT(k, 7, "zero point seven"), 30) },
+        { lhs: "z", rhs: String.raw`=6371\ \text{km}\times0.7478\approx4764\ \text{km}`, at: tRes - 30, size: 46, glow: pulse(f, tRes, 30) },
+        { lhs: "", rhs: String.raw`z\approx6400\times\dfrac34=4800`, at: tEasy, c: C.muted },
       ]} />
       {void tSin}
     </Scene>
@@ -209,7 +210,7 @@ const S15: React.FC = () => {
 // ================================================================ s16 the distance from the axis a cos φ
 const S16: React.FC = () => {
   const f = useCurrentFrame(), k = K("s16_brest_axis_distance");
-  const tNext = SS(k, 1), tCos = SS(k, 2), tRes = AT(k, 3, "which is about"), tEasy = SS(k, 4), tDisc = SS(k, 5), tBoth = SS(k, 6);
+  const tNext = SS(k, 1), tCos = SS(k, 2), tRes = AT(k, 3, "is about four thousand"), tEasy = SS(k, 4), tDisc = SS(k, 5), tBoth = SS(k, 6), tCyl = SS(k, 7);
   const items: FItem[] = [
     ...allOld(sideItems(ALL0)),
     { k: "band", a: [BU, 0], b: [BU, BV], c: C.second, w: 10, fo: 0.4, at: 0, same: false },
@@ -244,10 +245,12 @@ const S16: React.FC = () => {
         <Lbl x={XC} y={660} t="next = long $\times\cos$" c={C.key} s={T.floor} o={win(f, tNext, tCos - 15)} />
         <Keyword f={f} text="up 4764 · out 4230 km" at={[XC, 820]} appear={tBoth} s={T.floor} />
       </Svg>
-      <CalcStack f={f} x={XC + 160} y={545} size={52} maxLines={2} rows={[   // K6 k6r1: y 600 put the fraction row into the caption band (y 920)
-        { lhs: String.raw`\cos48.4^\circ`, rhs: String.raw`\approx0.6639`, at: tCos },
-        { lhs: String.raw`a\cos\varphi`, rhs: String.raw`=6371\ \text{km}\times0.6639`, at: tRes - 30 },
-        { lhs: "", rhs: String.raw`\approx4230\ \text{km}`, at: tRes, cont: true },
+      {/* remake 2026-11-07 (R16, continuity plan §3): Part 2's cylindrical coordinates, round the Earth's axis, on the new S7; the rows leave first */}
+      <Recall f={f} tex={String.raw`(r,\ \theta,\ z)`} name="cylindrical coordinates" verb="defined" part={2} x={XC} y={600} size={T.calc} appear={tCyl} />
+      <CalcStack f={f} x={XC + 160} y={545} size={52} maxLines={2} o={fout(f, tCyl - 14)} rows={[   // K6 k6r1: y 600 put the fraction row into the caption band (y 920)
+        { lhs: String.raw`\cos48.4^\circ`, rhs: String.raw`\approx0.6639`, at: tCos, glow: pulse(f, AT(k, 2, "zero point six"), 30) },
+        { lhs: String.raw`a\cos\varphi`, rhs: String.raw`=6371\ \text{km}\times0.6639`, at: tRes - 30, glow: pulse(f, AT(k, 3, "six thousand three hundred") + 17, 30) },
+        { lhs: "", rhs: String.raw`\approx4230\ \text{km}`, at: tRes, cont: true, glow: pulse(f, tRes, 30) },
         { lhs: "", rhs: String.raw`6400\times\dfrac23\approx4270`, at: tEasy, c: C.muted, out: tBoth - 15 },
       ]} />
     </Scene>
@@ -303,19 +306,20 @@ const S17: React.FC = () => {
         <g opacity={win(f, tLam + 15, tNum - 10)}>
           <Magnify src={ptOf(faceFlat(TOP_C, TOP_R), [0.45 * Math.cos(BREST[1] * D2R / 2), 0.45 * Math.sin(BREST[1] * D2R / 2)])} srcR={24} at={IC} r={IR + 12} label="magnified $6\times$" ly={IC[1] - IR - 46} o={1} />
         </g>
-        <Keyword f={f} text="Part 1: polar" at={[XC, 640]} appear={tPolar} out={tParts - 20} />
       </Svg>
       <TeX s={String.raw`\lambda`} x={IC[0] + IR * 0.8} y={IC[1] + 20} size={T.key} c={C.second} ax={0} o={win(f, tLam + 15, tNum - 10)} halo />
-      <TeX s={String.raw`r\to a\cos\varphi,\quad \theta\to\lambda`} x={XC} y={730} size={60} c={C.ink} o={win(f, tPolar + 15, tParts - 15)} />
+      {/* remake 2026-11-07 (R16): Part 1's polar lines with "derived in Part 1" (was the keyword "Part 1: polar"); the mapping line under them */}
+      <Recall f={f} tex={String.raw`x=r\cos\theta,\ \ y=r\sin\theta`} name="polar coordinates" x={XC} y={585} size={46} appear={tPolar} out={tParts - 20} />
+      <TeX s={String.raw`r\to a\cos\varphi,\quad \theta\to\lambda`} x={XC} y={790} size={60} c={C.ink} o={win(f, tPolar + 15, tParts - 15)} />
       <TeX s={eqs[0]} x={XC} y={650} size={60} c={C.ink} o={win(f, tParts, tCx - 15)} />
       <TeX s={eqs[1]} x={XC} y={740} size={60} c={C.ink} o={win(f, AT(k, 7, "and the y part"), tCx - 15)} />
       {/* Part 1 lessons (stack bottom guard): at y 600 the last row (≈ −332 km) sat at y ≈ 906, in the caption band; 528 ends at 868 */}
       <CalcStack f={f} x={XC + 100} y={528} size={48} maxLines={2} rows={[
-        { lhs: String.raw`\cos(-4.5^\circ)`, rhs: String.raw`\approx0.9969`, at: tCx },
-        { lhs: "x", rhs: String.raw`=4230\times0.9969\approx4217\ \text{km}`, at: tX - 30, cont: true },
-        { lhs: String.raw`\sin(-4.5^\circ)`, rhs: String.raw`\approx-0.0785`, at: tSy },
+        { lhs: String.raw`\cos(-4.5^\circ)`, rhs: String.raw`\approx0.9969`, at: tCx, glow: pulse(f, AT(k, 9, "zero point nine"), 30) },
+        { lhs: "x", rhs: String.raw`=4230\times0.9969\approx4217\ \text{km}`, at: tX - 30, cont: true, glow: pulse(f, tX, 30) },
+        { lhs: String.raw`\sin(-4.5^\circ)`, rhs: String.raw`\approx-0.0785`, at: tSy, glow: pulse(f, AT(k, 11, "minus zero point"), 30) },
         { lhs: "y", rhs: String.raw`=4230\times(-0.0785)`, at: tY - 30, cont: true },
-        { lhs: "", rhs: String.raw`\approx-332\ \text{km}`, at: tY, cont: true },
+        { lhs: "", rhs: String.raw`\approx-332\ \text{km}`, at: tY, cont: true, glow: pulse(f, tY, 30) },
       ]} />
     </Scene>
   );
@@ -378,10 +382,10 @@ const S18: React.FC = () => {
       <TeX s={String.raw`(4217,\ -332,\ 4764)\ \text{km}`} x={XC} y={520} size={60} c={C.ink} o={fin(f, tB) * fadeF} />
       <TeX s={String.raw`(4217,\ -332,\ 4764)\ \text{km}`} x={XC} y={130} size={52} c={C.ink} o={fin(f, tChk - 10) * fade1} />
       <CalcStack f={f} x={XC + 20} y={250} size={46} maxLines={3} rows={[
-        { lhs: "", rhs: String.raw`\sqrt{4217^2+332^2}`, at: tPy1 + 20, out: tParts - 20 },
+        { lhs: "", rhs: String.raw`a\cos\varphi=\sqrt{4217^2+332^2}`, at: tPy1 + 20, out: tParts - 20 },
         { lhs: "", rhs: String.raw`=\sqrt{17\,783\,000+110\,000}`, at: tPy1 + 45, out: tParts - 20, cont: true },
         { lhs: "", rhs: String.raw`=\sqrt{17\,893\,000}\approx4230\ \text{km}`, at: AT(k, 7, "gives back"), out: tParts - 20, cont: true },
-        { lhs: "", rhs: String.raw`\sqrt{4230^2+4764^2}`, at: tPy2 + 20, out: tParts - 20 },
+        { lhs: "", rhs: String.raw`a=\sqrt{4230^2+4764^2}`, at: tPy2 + 20, out: tParts - 20 },
         { lhs: "", rhs: String.raw`=\sqrt{17\,893\,000+22\,696\,000}`, at: tPy2 + 45, out: tParts - 20, cont: true },
         { lhs: "", rhs: String.raw`=\sqrt{40\,589\,000}\approx6371\ \text{km}`, at: AT(k, 8, "gives six thousand"), out: tParts - 20, cont: true },
         { lhs: "", rhs: String.raw`\cos^2\varphi+\sin^2\varphi=1`, at: tOne, out: tParts - 20 },
@@ -391,6 +395,9 @@ const S18: React.FC = () => {
       {/* calc audit M5: the division is shown, on "For Brest, they're about" (0.6619, −0.0521, 0.7478) */}
       <TeX s={String.raw`(4217,\ -332,\ 4764)\div6371`} x={XC} y={390} size={52} c={C.ink} o={fin(f, tNum)} />
       <TeX s={String.raw`\approx(0.662,\ -0.052,\ 0.748)`} x={XC + 40} y={470} size={52} c={C.ink} o={fin(f, AT(k, 14, "about zero point"))} />
+      {/* remake 2026-11-07 (R16): Part 1's unit vector r̂ on "We call it r hat, just as in Part 1" */}
+      <Recall f={f} tex={String.raw`\hat{\mathbf r}=\dfrac{(r\cos\theta,\ r\sin\theta)}{r}=(\cos\theta,\ \sin\theta)`} name="unit vector" x={XC} y={750} size={44}
+        appear={tHat} out={tP4 - 12} />
       {void [tChk, EQ_S19]}
     </Scene>
   );
@@ -399,9 +406,11 @@ const S18: React.FC = () => {
 // ================================================================ s19 Khulna (flight, side view, top view)
 const S19: React.FC = () => {
   const f = useCurrentFrame(), k = K("s19_khulna");
-  const tKh = AT(k, 1, "Khulna"), tBd = AT(k, 1, "Bangladesh"), tSb = AT(k, 1, "Sundarbans"), tAm = AT(k, 1, "Cyclone Amphan"), tLL = SS(k, 2), tSide = SS(k, 3),
-    tZ = AT(k, 4, "about two thousand four hundred"), tR = AT(k, 5, "five thousand eight hundred"), tLow = SS(k, 6), tTop = SS(k, 7), tX = AT(k, 8, "about forty one"),
-    tY = AT(k, 9, "five thousand eight hundred"), tAlong = SS(k, 10), tLen = SS(k, 11);
+  // remake 2026-11-07 (fact-check row 6): "the other side of Asia" / "came ashore" replaced; the Amphan sentence is S2 (+1 for every later one)
+  const tKh = AT(k, 1, "Khulna"), tBd = AT(k, 1, "Bangladesh"), tSb = AT(k, 1, "Sundarbans"), tAm = AT(k, 2, "Cyclone Amphan"), tKm = AT(k, 2, "seventy nine"),
+    tLL = SS(k, 3), tSide = SS(k, 4),
+    tZ = AT(k, 5, "about two thousand four hundred"), tR = AT(k, 6, "five thousand eight hundred"), tLow = SS(k, 7), tTop = SS(k, 8), tX = AT(k, 9, "about forty one"),
+    tY = AT(k, 10, "five thousand eight hundred"), tAlong = SS(k, 11), tLen = SS(k, 12);
   const zOut = tLL + 40;
   // K6 k6r1: unzoomed dist 4.3 → 4.6 and centre y 420 → 400 (the disc reached y 829, on the source line); the place names show only
   // when zoomed in (≥ 85 %: they piled up while the camera zoomed), and the source line steps aside while the growing disc covers it
@@ -465,6 +474,9 @@ const S19: React.FC = () => {
         extra3={() => <g opacity={fin(f, tAlong)}><Arrow p={c0t} q={pK} color={RAD} /><circle cx={pK[0]} cy={pK[1]} r={10} fill={C.gold} stroke={C.bg} strokeWidth={3} /></g>} /> : null}
       <Svg>
         <Keyword f={f} text="another city" at={[XZ, 170]} appear={0} out={tLL - 20} o={oA} />
+        {/* remake 2026-11-07: the closest approach of Amphan's centre (IBTrACS v04r01 NI, interpolated; Part 2 cs.json amphan.close.Khulna.km = 79.4) */}
+        <Keyword f={f} text="Amphan's centre:" at={[XZ, 280]} appear={tAm} out={tLL - 20} s={50} />
+        <Keyword f={f} text="≈ 79 km to the west" at={[XZ, 345]} appear={tKm} out={tLL - 20} s={50} />
         <Keyword f={f} text="22.8° N, 89.6° E" at={[XZ, 280]} appear={tLL} out={tSide - 24} />
         <Keyword f={f} text="lower, and" at={[KX3, 440]} appear={tLow} out={tTop - 24} s={48} />
         <Keyword f={f} text="farther from" at={[KX3, 500]} appear={tLow} out={tTop - 24} s={48} />
@@ -472,20 +484,20 @@ const S19: React.FC = () => {
         <Keyword f={f} text="almost along $y$" at={[1440, 150]} appear={tAlong} s={50} />
       </Svg>
       {oB > 0 ? <CalcStack f={f} x={XC + 125} y={620} size={46} maxLines={2} o={oB} rows={[
-        { lhs: String.raw`\sin\varphi`, rhs: String.raw`=\sin22.8^\circ\approx0.3875`, at: AT(k, 3, "sine phi is") },
+        { lhs: String.raw`\sin\varphi`, rhs: String.raw`=\sin22.8^\circ\approx0.3875`, at: AT(k, 4, "sine phi is"), glow: pulse(f, AT(k, 4, "zero point three"), 30) },
         { lhs: "z", rhs: String.raw`=6371\times0.3875\approx2469\ \text{km}`, at: tZ - 30 },
-        { lhs: String.raw`\cos\varphi`, rhs: String.raw`=\cos22.8^\circ\approx0.9219`, at: AT(k, 5, "Cosine phi is") },
+        { lhs: String.raw`\cos\varphi`, rhs: String.raw`=\cos22.8^\circ\approx0.9219`, at: AT(k, 6, "Cosine phi is"), glow: pulse(f, AT(k, 6, "zero point nine") + 15, 30) },
         { lhs: String.raw`a\cos\varphi`, rhs: String.raw`=6371\times0.9219\approx5873\ \text{km}`, at: tR - 30 },
       ]} /> : null}
       {oC > 0 ? <CalcStack f={f} x={XC + 20} y={580} size={44} maxLines={4} o={oC} rows={[
-        { lhs: String.raw`\cos\lambda`, rhs: String.raw`=\cos89.6^\circ\approx0.00698`, at: AT(k, 8, "Its cosine") },
+        { lhs: String.raw`\cos\lambda`, rhs: String.raw`=\cos89.6^\circ\approx0.00698`, at: AT(k, 9, "Its cosine"), glow: pulse(f, AT(k, 9, "zero point zero"), 30) },
         { lhs: "x", rhs: String.raw`=5873\times0.00698\approx41\ \text{km}`, at: tX - 30 },
-        { lhs: String.raw`\sin\lambda`, rhs: String.raw`=\sin89.6^\circ\approx1.000`, at: AT(k, 9, "Its sine") },
+        { lhs: String.raw`\sin\lambda`, rhs: String.raw`=\sin89.6^\circ\approx1.000`, at: AT(k, 10, "Its sine"), glow: pulse(f, AT(k, 10, "almost exactly one"), 30) },
         { lhs: "y", rhs: String.raw`=5873\times1.000\approx5873\ \text{km}`, at: tY - 30 },
-        { lhs: "", rhs: String.raw`41^2+5873^2+2469^2`, at: tLen },
+        { lhs: "", rhs: String.raw`a^2=41^2+5873^2+2469^2`, at: tLen },
         { lhs: "", rhs: String.raw`=1\,681+34\,492\,129+6\,095\,961`, at: tLen + 30 },
         { lhs: "", rhs: String.raw`=40\,589\,771`, at: tLen + 60 },
-        { lhs: "", rhs: String.raw`\sqrt{40\,589\,771}\approx6371\ \text{km}`, at: AT(k, 11, "six thousand") },
+        { lhs: "", rhs: String.raw`a=\sqrt{40\,589\,771}\approx6371\ \text{km}`, at: AT(k, 12, "six thousand") },
       ]} /> : null}
       {void [facePx, EQ_S19]}
     </Scene>
@@ -538,11 +550,6 @@ const S20: React.FC = () => {
           <Lbl x={1240} y={345} t="noon to noon: 4 min longer" c={C.key} s={T.floor} />
         </g>
         <Keyword f={f} text="spin rate, rad/s" at={[1420, 800]} appear={tRadS + 30} out={tRing - 22} />
-        <g opacity={fin(f, tRing)}>
-          <circle cx={1130} cy={800} r={26} fill="none" stroke={C.muted} strokeWidth={3} />
-          <Arrow p={[1130, 774]} q={[1170, 774]} color={C.first} w={5} head={16} halo={false} />
-        </g>
-        <Lbl x={1180} y={800} t="speed = radius $\times$ turning rate" c={C.key} s={T.floor} o={fin(f, tRing)} />
       </Svg>
       {/* still review k6r2: T names the "one turn" row, left of its clock (under the star icon it sat on the star) */}
       <TeX s="T" x={1084} y={236} size={T.key} c={C.ink} ax={1} o={win(f, tCapT, tRes - 22)} />
@@ -551,12 +558,14 @@ const S20: React.FC = () => {
         { lhs: "", rhs: String.raw`360^\circ\div365\ \text{days}\approx1^\circ\ \text{a day}`, at: AT(k, 9, "so each day"), out: tFar - 10 },
         { lhs: "", rhs: String.raw`\text{noon to noon: }360^\circ+1^\circ=361^\circ`, at: AT(k, 10, "three hundred and sixty one"), out: tFar - 10 },
         { lhs: "", rhs: String.raw`24\ \text{h}=1440\ \text{min}`, at: AT(k, 11, "one thousand four hundred and forty minutes"), out: tFar - 10 },
-        { lhs: "", rhs: String.raw`1440\div360=4\ \text{min per }1^\circ`, at: AT(k, 11, "divided by"), out: tFar - 10 },
+        { lhs: "", rhs: String.raw`1440\div360=4\ \text{min per }1^\circ`, at: AT(k, 11, "so each degree"), out: tFar - 10 },
       ]} />
       <TeX s={String.raw`\text{distance}=2\pi\,a\cos\varphi`} x={XC} y={450} size={60} c={C.ink} o={fin(f, tDist2) * fout(f, tRes - 22)} />
       <TeX s={String.raw`\text{speed}=\text{distance}\div T`} x={XC} y={540} size={60} c={C.ink} o={fin(f, tSpeed) * fout(f, tRes - 22)} />
       <TeX s={String.raw`U=\textcolor{${VIOLET}}{\dfrac{2\pi}{T}}\,a\cos\varphi`} x={XC} y={650} size={T.calc} c={C.ink} o={fin(f, tU) * fout(f, tRes - 22)} glow={pulse(f, tPull, 30)} />
       <TeX s={A[1]} x={XC} y={800} size={60} c={VIOLET} o={win(f, tOm, tRing - 22)} />
+      {/* remake 2026-11-07 (R16): Part 2's ring rule (speed = radius × turning rate), replacing the plain label; gold keyword at its side */}
+      <Recall f={f} tex={String.raw`v=r\,\dfrac{d\theta}{dt}`} name="angle rate on a ring" part={2} x={XC} y={785} size={46} appear={tRing} side />
       <TeX s={A1[0]} x={XC} y={450} size={T.eq} c={C.ink} o={fin(f, tRes)} />
       <TeX s={String.raw`=\Omega${A1[1]}`} x={XC + 40} y={630} size={96} c={C.ink} o={fin(f, tRes + 15)} />
     </Scene>
@@ -568,7 +577,8 @@ const S21: React.FC = () => {
   const f = useCurrentFrame(), k = K("s21_ground_speeds");
   const g0 = keepGone(k, 2);
   // fix loop 1 (review 1 S3): the easy-numbers sentence is now four (S8-S11: 2π × 6400, ÷ 24 h, × 3.6 explained, 464.6 × 3.6); later sentences +3
-  const tNum = SS(k, 3), tT = SS(k, 4), tOm = SS(k, 5), tEq = SS(k, 6), tUeq = AT(k, 7, "which is about"), tEasy = SS(k, 8), tJet = SS(k, 12), tS = SS(k, 13), tK = SS(k, 14),
+  const tNum = SS(k, 3), tT = SS(k, 4), tOm = SS(k, 5), tEq = SS(k, 6), tUeq = AT(k, 7, "which is about") + 15,
+    tEasy = SS(k, 8), tJet = SS(k, 12), tS = SS(k, 13), tK = SS(k, 14),
     tB = SS(k, 15), tL = SS(k, 16), tL2 = SS(k, 17), tPole = SS(k, 18), tEast = SS(k, 19), tFeel = SS(k, 20), tCP = SS(k, 21);
   const cam = spinPath([{ f: 0, lat: 25, lon: 40, dist: 3.4 }, { f: tS - 30, lat: 20, lon: 80, dist: 3.4 }, { f: tS + 20, lat: 15, lon: 95, dist: 3.4 },
     { f: tK + 20, lat: 25, lon: 75, dist: 3.4 }, { f: tB + 20, lat: 35, lon: 10, dist: 3.4 }, { f: tL + 20, lat: 52, lon: 20, dist: 3.4 },
@@ -608,28 +618,28 @@ const S21: React.FC = () => {
         <g opacity={win(f, tJet, tS - 10)}><PlaneIcon p={[1140, 620]} s={1.2} /><Lbl x={1200} y={620} t="passenger jet ≈ 900 km/h" c={C.key} s={T.floor} /></g>
       </Svg>
       <TeX s={EQ_S21} x={XC} y={130} size={T.eq} c={C.ink} o={fin(f, g0 + 8)} />
-      <CalcStack f={f} x={XC - 30} y={230} size={46} maxLines={3} rows={[
-        { lhs: "T", rhs: String.raw`=23\times3600+56\times60+4`, at: tT },
+      <CalcStack f={f} x={XC - 30} y={252} size={46} maxLines={3} rows={[
+        { lhs: "T", rhs: String.raw`=23\times3600+56\times60+4`, at: tT, glow: pulse(f, tT, 30) },
         { lhs: "", rhs: String.raw`=82\,800+3\,360+4=86\,164\ \text{s}`, at: AT(k, 4, "is eighty six"), cont: true },
-        { lhs: String.raw`\Omega`, rhs: String.raw`=\dfrac{2\pi}{86\,164\ \text{s}}\approx7.292\times10^{-5}\ \text{rad/s}`, at: AT(k, 5, "two pi divided"), h: 110, size: 44 },
+        { lhs: String.raw`\Omega`, rhs: String.raw`=\dfrac{2\pi}{86\,164\ \text{s}}\approx7.292\times10^{-5}\ \text{rad/s}`, at: AT(k, 5, "two pi divided") + 17, h: 110, size: 44 },
         // calc audit S3: cos 0° = 1 on its words, and the U row carries the × 1
         { lhs: String.raw`\cos0^\circ`, rhs: "=1", at: AT(k, 6, "cosine phi is one"), size: 44 },
         { lhs: String.raw`U_{\text{eq}}`, rhs: String.raw`=7.292\times10^{-5}\times6.371\times10^{6}\times1`, at: tUeq - 40, size: 44 },
-        { lhs: "", rhs: String.raw`\approx464.6\ \text{m/s}`, at: tUeq, size: 44, cont: true },
+        { lhs: "", rhs: String.raw`\approx464.6\ \text{m/s}`, at: tUeq, size: 44, cont: true, glow: pulse(f, tUeq, 30) },
         // review 1 S3: every number of the easy check is spoken, each row on its words, at full ink (the house dims the older rows)
-        { lhs: "", rhs: String.raw`2\pi\times6400\ \text{km}\approx40\,000\ \text{km}`, at: AT(k, 8, "which is about forty thousand") },
-        { lhs: "", rhs: String.raw`40\,000\ \text{km}\div24\ \text{h}\approx1670\ \text{km/h}`, at: AT(k, 9, "is about one thousand") },
+        { lhs: "", rhs: String.raw`\text{equator}\approx2\pi\times6400\approx40\,000\ \text{km}`, at: AT(k, 8, "about forty thousand") },
+        { lhs: "", rhs: String.raw`U_{\text{eq}}\approx40\,000\ \text{km}\div24\ \text{h}\approx1670\ \text{km/h}`, at: AT(k, 9, "is about one thousand") },
         { lhs: String.raw`1\ \text{m/s}`, rhs: String.raw`=3600\ \text{m/h}=3.6\ \text{km/h}`, at: AT(k, 10, "we multiply by") },
-        { lhs: "", rhs: String.raw`464.6\ \text{m/s}\times3.6\approx1670\ \text{km/h}`, at: AT(k, 11, "is also about") },
-        { lhs: "", rhs: String.raw`1670\div900\approx1.9`, at: AT(k, 12, "divided by nine hundred") },
+        { lhs: "", rhs: String.raw`U_{\text{eq}}=464.6\ \text{m/s}\times3.6\approx1670\ \text{km/h}`, at: AT(k, 11, "is also about") },
+        { lhs: "", rhs: String.raw`\text{ground}\div\text{jet}=1670\div900\approx1.9`, at: AT(k, 12, "so the ground") },
         // calc audit M3: Singapore's latitude and its cos φ are named and shown before they are used
-        { lhs: "", rhs: String.raw`\text{Singapore }1.35^\circ\text{N: }\cos\varphi\approx0.9997`, at: AT(k, 13, "one point three five"), size: 44 },
-        { lhs: "", rhs: String.raw`464.6\times0.9997\approx464\ \text{m/s}`, at: AT(k, 13, "moves at about") },
-        { lhs: "", rhs: String.raw`464.6\times0.9219\approx428\ \text{m/s}`, at: AT(k, 14, "so it's about") },
-        { lhs: "", rhs: String.raw`464.6\times0.6639\approx308\ \text{m/s}`, at: AT(k, 15, "so it's about") },
+        { lhs: "", rhs: String.raw`\text{Singapore }1.35^\circ\text{N: }\cos\varphi\approx0.9997`, at: AT(k, 13, "one point three five"), size: 44, glow: pulse(f, AT(k, 13, "zero point nine"), 30) },
+        { lhs: "", rhs: String.raw`U=464.6\times0.9997\approx464\ \text{m/s}`, at: AT(k, 13, "moves at about") },
+        { lhs: "", rhs: String.raw`U_{\text{Khulna}}=464.6\times0.9219\approx428\ \text{m/s}`, at: AT(k, 14, "so it's about"), glow: pulse(f, AT(k, 14, "zero point nine") + 16, 30) },
+        { lhs: "", rhs: String.raw`U_{\text{Brest}}=464.6\times0.6639\approx308\ \text{m/s}`, at: AT(k, 15, "so it's about"), glow: pulse(f, AT(k, 15, "zero point six") + 16, 30) },
         // calc audit M3: Longyearbyen's 78.2° N and cos 78.2° on their words; the product on "So the ground there"
-        { lhs: "", rhs: String.raw`\text{Longyearbyen }78.2^\circ\text{N: }\cos\varphi\approx0.2045`, at: AT(k, 16, "seventy eight point two"), size: 44 },
-        { lhs: "", rhs: String.raw`464.6\times0.2045\approx95\ \text{m/s}`, at: AT(k, 17, "So the ground there") },
+        { lhs: "", rhs: String.raw`\text{Longyearbyen }78.2^\circ\text{N: }\cos\varphi\approx0.2045`, at: AT(k, 16, "seventy eight point two"), size: 44, glow: pulse(f, AT(k, 16, "zero point two") - 16, 30) },
+        { lhs: "", rhs: String.raw`U=464.6\times0.2045\approx95\ \text{m/s}`, at: AT(k, 17, "So the ground there") },
       ]} />
       <KeepLine f={f} k={k} last={2} lines={[String.raw`height $a\sin\varphi$ ·`, String.raw`from the axis $a\cos\varphi$ ·`, String.raw`ground east at $\Omega\,a\cos\varphi$`]} />
       {/* Part 1 lessons B4: the keep line's own picture (the slice: a sin φ, a cos φ, east ⊙ at Ω a cos φ) */}
@@ -676,7 +686,8 @@ const S22: React.FC = () => {
         <Keyword f={f} text="the centre" at={[KX3 + 60, 215]} appear={tMer} />
         <Keyword f={f} text="same everywhere" at={[KX3, 380]} appear={tSame} s={48} />
       </Svg>
-      <TeX s={String.raw`s=r\,\theta`} x={XC} y={660} size={60} c={C.ink} o={win(f, tRule, tEq - 15)} />
+      {/* remake 2026-11-07 (R16): Part 1's arc length rule exactly as Part 1 writes it, with "derived in Part 1" */}
+      <Recall f={f} tex={String.raw`s=r\,\theta\quad(\theta\ \text{in radians})`} name="arc length" x={XC} y={650} size={52} appear={tRule} out={tEq - 15} />
       {/* K6 k6r1: calc size and shorter under-words (they ran to x 2299) */}
       <Layered parts={[{ t: String.raw`\Delta y=` }, { t: String.raw`a`, c: RAD, u: { w: String.raw`\text{radius}`, c: C.gold } },
         { t: String.raw`\,\Delta\varphi`, u: { w: String.raw`\text{change in }\varphi\text{ (rad)}`, c: C.gold } }]} x={XC} y={680} size={T.calc}
@@ -684,9 +695,9 @@ const S22: React.FC = () => {
       <TeX s={EQ_S22} x={KX3} y={460} size={T.eq} c={C.ink} o={fin(f, tTurn)} />
       <CalcStack f={f} x={XC + 50} y={600} size={44} maxLines={3} rows={[
         { lhs: String.raw`360^\circ`, rhs: String.raw`=2\pi\ \text{rad}`, at: AT(k, 10, "or two pi radians") },   // review 1 S4 / calc audit S4: the spoken full turn
-        { lhs: String.raw`1^\circ`, rhs: String.raw`=\pi/180\approx0.01745\ \text{rad}`, at: tDeg - 20 },
-        { lhs: String.raw`\Delta y`, rhs: String.raw`=6371\ \text{km}\times0.01745\approx111.2\ \text{km}`, at: tKm - 30 },
-        { lhs: "", rhs: String.raw`6400\times0.0175=112`, at: tEasy, c: C.muted },
+        { lhs: String.raw`1^\circ`, rhs: String.raw`=\pi/180\approx0.01745\ \text{rad}`, at: tDeg - 20, glow: pulse(f, tDeg, 30) },
+        { lhs: String.raw`\Delta y`, rhs: String.raw`=6371\ \text{km}\times0.01745\approx111.2\ \text{km}`, at: tKm - 30, glow: pulse(f, AT(k, 12, "six thousand three hundred") + 16, 30) },
+        { lhs: "", rhs: String.raw`\Delta y\approx6400\times0.0175=112`, at: tEasy, c: C.muted },
       ]} />
 
       <SkipChip f={f} k={k} to={keepTime("s25_degree_east")} />
@@ -698,7 +709,7 @@ const S22: React.FC = () => {
 // ================================================================ s23 two examples: the nautical mile, Brest to the equator
 const S23: React.FC = () => {
   const f = useCurrentFrame(), k = K("s23_north_examples");
-  const tMin = SS(k, 1), tNm = AT(k, 2, "nautical mile"), tSouth = SS(k, 3), tMul = AT(k, 4, "is about"), tLonger = SS(k, 5), tCurve = SS(k, 6), tStraight = SS(k, 7);
+  const tMin = SS(k, 1), tNm = AT(k, 2, "nautical mile"), tSouth = SS(k, 3), tMul = AT(k, 4, "come to about"), tLonger = SS(k, 5), tCurve = SS(k, 6), tStraight = SS(k, 7);
   const walk = prog(f, tSouth + 20, SE(k, 3) + 20);
   const items: FItem[] = [
     ...allOld(sideItems(ALL0)).filter((x) => x.k !== "fill" && x.k !== "tick" && !(x.k === "seg" && x.dash)),
@@ -729,7 +740,7 @@ const S23: React.FC = () => {
         {void P2}
       </Svg>
       <CalcStack f={f} x={XC + 40} y={600} size={56} maxLines={2} rows={[
-        { lhs: "", rhs: String.raw`111.2\ \text{km}\div60\approx1.85\ \text{km}`, at: AT(k, 1, "which is about"), out: tCurve - 15 },
+        { lhs: "", rhs: String.raw`1'=111.2\div60\approx1.85\ \text{km}`, at: AT(k, 1, "about one point"), out: tCurve - 15 },
         { lhs: "", rhs: String.raw`48.4\times111.2\ \text{km}\approx5382\ \text{km}`, at: tMul - 20, out: tCurve - 15 },
       ]} />
       {/* calc audit S1: the spoken height 4764 km is shown, next to the walk it is compared with */}
@@ -742,7 +753,7 @@ const S23: React.FC = () => {
 // ================================================================ s24 distance east: Δx = a cos φ Δλ (the parallel's disc)
 const S24: React.FC = () => {
   const f = useCurrentFrame(), k = K("s24_distance_east");
-  const tPar = SS(k, 1), tRound = AT(k, 2, "a circle round"), tRad = SS(k, 3), tSlice = SS(k, 4), tWalk = SS(k, 5), tRule = SS(k, 6), tEq = SS(k, 7), tNum = AT(k, 8, "which is about"),
+  const tPar = SS(k, 1), tRound = AT(k, 2, "a circle round"), tRad = SS(k, 3), tSlice = SS(k, 4), tWalk = SS(k, 5), tRule = SS(k, 6), tEq = SS(k, 7), tNum = AT(k, 8, "gives about"),
     tTwo = SS(k, 9);
   const cam = { lat: 38, lon: LON0 - 90, dist: 3.3 };
   const lift = 0.45 * prog(f, tSlice, tSlice + 40), capO = 1 - 0.85 * prog(f, tSlice, tSlice + 40);
@@ -792,9 +803,11 @@ const S24: React.FC = () => {
       <Layered parts={[{ t: String.raw`\Delta x=` }, { t: String.raw`a\cos\varphi`, u: { w: String.raw`\text{radius of the parallel}`, c: C.gold } }, { t: String.raw`\,\Delta\lambda` }]}
         x={XC} y={650} size={T.calc} layers={[{ t: "all", o: fin(f, tEq) * fout(f, tTwo - 15) }, { t: [], u: [1], o: fin(f, tEq + 25) * fout(f, tTwo - 15) }]} />
       <TeX s={EQ_S24} x={XC} y={610} size={60} c={C.ink} o={fin(f, tTwo)} />
-      <TeX s={String.raw`\Delta x=4230\ \text{km}\times0.01745\approx73.8\ \text{km}`} x={XC} y={790} size={44} c={C.ink} o={win(f, tNum - 20, tTwo - 22)} />
+      <TeX s={String.raw`\Delta x=4230\ \text{km}\times0.01745\approx73.8\ \text{km}`} x={XC} y={790} size={44} c={C.ink} o={win(f, tNum - 20, tTwo - 22)} glow={pulse(f, tNum, 30)} />
       <TeX s={String.raw`\cos48.4^\circ\approx\dfrac23`} x={1560} y={760} size={46} c={C.ink} o={fin(f, tTwo + 20)} />
-      {void [tPar, tRule, facePt, face3]}
+      {/* remake 2026-11-07 (R16): "by the same arc length rule" (S6) */}
+      <Recall f={f} tex={String.raw`s=r\,\theta\quad(\theta\ \text{in radians})`} name="arc length" x={XC} y={650} size={52} appear={tRule} out={tEq - 15} />
+      {void [tPar, facePt, face3]}
     </Scene>
   );
 };

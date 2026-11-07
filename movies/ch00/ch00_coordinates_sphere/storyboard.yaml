@@ -20,7 +20,7 @@ concepts:
 - latitude-longitude grid boxes of reanalysis data (ERA5 0.25 deg) and their true sizes
 - area element dA = a^2 cos phi dphi dlambda; band area 2 pi a^2 sin phi by adding strips (integration, owned here); Archimedes' cylinder
 - cos-latitude weighting of global means (fluidpy.diag.climatology.global_mean)
-target_duration_s: 2991.65
+target_duration_s: 2909.2
 fps: 30
 size:
 - 1920
@@ -166,518 +166,854 @@ honesty_notes:
 build_1:
   tts:
     tool: tools/tts.py
-    run: G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_sphere/build1/rf1/tts
+    run: G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_sphere/r7/tts
     voice: af_bella
     speed: 1.0
-    audio_s: 2989.15
-    total_frames: 89675
-    cues: 735
+    audio_s: 2906.7
+    total_frames: 87201
+    cues: 712
     warnings: []
-    sentences: 454
-    words: 7232
-    render_s: 1017.8
+    sentences: 449
+    words: 7007
+    render_s: null
     self_check:
-      spliced_fix1:
-        method: BS.1770-4 loudness match to the nearest unchanged neighbours + look-ahead limiter (-1.5 dBTP)
-        corr_resynth: 0.9955
+      expected_s: 2906.7
+      audio_s: 2906.7
+      diff_ms: 0.0
+      len_ok: true
+      cues_ok: true
+      spliced_r7:
+        method: sentence matching against the rf1 narration; new clips BS.1770-4 loudness-matched to the nearest re-used clips + look-ahead limiter (-1.5
+          dBTP)
+        corr_resynth: 0.9971
+        reused: 405
+        new: 44
+        dropped:
+        - 's00_title S0: In this video, we''ll learn coordinates on our round Earth, and see how meteorology uses them to measure distances and areas on
+          its weather grids.'
+        - 's01_hook S2: Let''s see how latitude and longitude are built, and how they turn into kilometres.'
+        - 's02_part2_recap S0: First, a quick look back.'
+        - 's02_part2_recap S1: In Part 1, we met polar coordinates on a flat map: a distance r, and an angle theta, measured anticlockwise from east, as
+          seen from above.'
+        - 's02_part2_recap S2: We found that x equals r cosine theta, and y equals r sine theta.'
+        - 's02_part2_recap S3: We met radians, and the arc length rule: the length of an arc is the radius times the angle, in radians.'
+        - 's02_part2_recap S4: In Part 2, we watched arrows turn, and we found the slopes of sine and cosine.'
+        - 's02_part2_recap S5: When an angle grows by a tiny step, its sine grows by about its cosine times that step.'
+        - 's02_part2_recap S6: We saw that air going round a ring is always accelerating, towards the centre of the ring.'
+        - 's02_part2_recap S7: Then we added a height z, to get cylindrical coordinates, and looked inside Hurricane Ian and Cyclone Amphan.'
+        - 's02_part2_recap S8: Now let''s take these ideas to the biggest round shape of all: the Earth.'
+        - 's06_parallel S5: Brest''s parallel runs east through central Europe, Ukraine, Kazakhstan and Mongolia.'
+        - 's06_parallel S6: Then it runs on round through the northern United States and eastern Canada, and back across the Atlantic to Brest.'
+        - 's07_colatitude S6: For Brest, it''s ninety minus forty eight point four, which is forty one point six degrees.'
+        - 's11_longitude S12: Then Brest is at three hundred and sixty minus four point five, which is three hundred and fifty five point five degrees.'
+        - 's15_brest_z S8: So z is six thousand three hundred and seventy one times zero point seven four seven eight, which is about four thousand seven
+          hundred and sixty four kilometres.'
+        - 's15_brest_z S9: With easy numbers, six thousand four hundred times three quarters is four thousand eight hundred: about the same.'
+        - 's16_brest_axis_distance S3: So the distance from the axis is six thousand three hundred and seventy one times zero point six six three nine,
+          which is about four thousand two hundred and thirty kilometres.'
+        - 's16_brest_axis_distance S4: With easy numbers, six thousand four hundred times two thirds is about four thousand two hundred and seventy: close.'
+        - 's17_brest_top S10: So x is four thousand two hundred and thirty times zero point nine nine six nine, about four thousand two hundred and seventeen
+          kilometres.'
+        - 's17_brest_top S12: So y is four thousand two hundred and thirty times minus zero point zero seven eight five, about minus three hundred and thirty
+          two kilometres.'
+        - 's18_position_vector S7: First, Pythagoras in the equator plane: the square root of x squared plus y squared gives back the distance from the
+          axis, four thousand two hundred and thirty.'
+        - 's18_position_vector S8: Then Pythagoras in the side view: the square root of four thousand two hundred and thirty squared, plus z squared, gives
+          six thousand three hundred and seventy one.'
+        - 's18_position_vector S12: We call it r hat, just as on the flat map.'
+        - 's19_khulna S0: Let''s do the same for a city on the other side of Asia.'
+        - 's19_khulna S1: Khulna is in the southwest of Bangladesh, near the Sundarbans, the world''s largest mangrove forest, close to where Cyclone Amphan,
+          from Part 2, came ashore in May twenty twenty.'
+        - 's19_khulna S4: So Khulna''s height above the equator plane is six thousand three hundred and seventy one times zero point three eight seven five,
+          about two thousand four hundred and sixty nine kilometres.'
+        - 's20_spin_rate S11: A day of twenty four hours is one thousand four hundred and forty minutes, and one thousand four hundred and forty divided
+          by three hundred and sixty is four minutes for each degree.'
+        - 's21_ground_speeds S5: So capital Omega is two pi divided by eighty six thousand one hundred and sixty four, which is about seven point two nine
+          two times ten to the minus five radians per second.'
+        - 's21_ground_speeds S7: So the ground moves at seven point two nine two times ten to the minus five, times six point three seven one million metres,
+          which is about four hundred and sixty four point six metres per second.'
+        - 's21_ground_speeds S8: With easy numbers, the equator is two pi times six thousand four hundred kilometres, which is about forty thousand kilometres
+          round.'
+        - 's21_ground_speeds S11: Four hundred and sixty four point six times three point six is also about one thousand six hundred and seventy.'
+        - 's21_ground_speeds S12: A passenger jet flies at about nine hundred kilometres per hour, and one thousand six hundred and seventy divided by nine
+          hundred is about one point nine, so the ground at the equator moves almost twice as fast.'
+        - 's22_distance_north S12: Times six thousand three hundred and seventy one kilometres, that''s about one hundred and eleven point two kilometres.'
+        - 's22_distance_north S13: With easy numbers, six thousand four hundred times zero point zero one seven five is one hundred and twelve: about the
+          same.'
+        - 's23_north_examples S1: One minute of latitude is a sixtieth of a degree, so it''s one hundred and eleven point two divided by sixty, which is
+          about one point eight five kilometres.'
+        - 's23_north_examples S4: Forty eight point four degrees, times one hundred and eleven point two kilometres per degree, is about five thousand three
+          hundred and eighty two kilometres.'
+        - 's24_distance_east S8: For one degree at Brest, that''s four thousand two hundred and thirty kilometres times zero point zero one seven four five,
+          which is about seventy three point eight kilometres.'
+        - 's28_box_areas S2: The radius squared is six thousand three hundred and seventy one squared, about forty point six million square kilometres.'
+        - 's28_box_areas S3: Times zero point zero zero four three six, and times zero point zero zero four three six again, that''s about seven hundred
+          and seventy three square kilometres, for a box on the equator.'
+        - 's28_box_areas S5: At Khulna, seven hundred and seventy three times zero point nine two one nine is about seven hundred and twelve square kilometres.'
+        - 's28_box_areas S6: At Brest, times zero point six six three nine, it''s about five hundred and thirteen.'
+        - 's28_box_areas S7: At Longyearbyen, times zero point two zero four five, it''s only about a hundred and fifty eight.'
+        - 's30_slope_of_sine S8: So cosine phi times delta phi is zero point nine zero six times zero point one seven four five, about zero point one five
+          eight.'
+        - 's31_adding_strips S7: Their steps in sine phi are zero point one seven four, zero point one six eight, and zero point one five eight.'
+        - 's31_adding_strips S8: They add up to zero point five, which is exactly the sine of thirty degrees.'
+        - 's34_global_mean S8: So the area-weighted average is thirty times one, plus zero times one half, all divided by one and a half.'
+        - 's35_recap S10: A step east is the radius, times cosine phi, times delta lambda, and it shrinks towards the poles.'
+        - 's35_recap S13: In Part 4, we''ll stand at a weather station, and see how its own east, north and up arrows turn as the air moves.'
         replaced:
         - scene: s00_title
-          neighbours:
-          - S0
-          - S1
+          sentence: 0
+          text: In this video, we'll learn coordinates on our round Earth, and see how they're used to measure distances and areas on weather grids.
+          audio_text: null
           neighbours_lufs:
           - -16.78
           - -16.18
           target_lufs: -16.47
-          raw_lufs: -24.41
-          gain_db: 8.56
-          limiter_gr_db: -3.29
-          final_lufs: -16.5
-          true_peak_dbtp: -1.97
-          within_1p5_lu: true
-          dur_s: 9.5
-          new: In this video, we'll learn coordinates on our round Earth, and see how meteorology uses them to measure distances and areas on its weather
-            grids.
-          item: R1
-          sentence: 0
-          part: 0
-          old: In this video, we'll learn coordinates on our round Earth the easy way, and see how meteorology uses them to measure distances and areas
-            on its weather grids.
-          old_dur_s: 10.375
+          raw_lufs: -24.44
+          gain_db: 8.63
+          limiter_gr_db: -2.95
+          final_lufs: -16.52
+          true_peak_dbtp: -1.89
+          dur_s: 8.275
           beat: false
-        - scene: s17_brest_top
-          neighbours:
-          - S1
+        - scene: s01_hook
+          sentence: 2
+          text: Now let's dive into latitude and longitude, and how they turn into kilometres.
+          audio_text: null
           neighbours_lufs:
-          - -15.79
-          target_lufs: -15.79
-          raw_lufs: -24.69
-          gain_db: 9.43
-          limiter_gr_db: -2.13
-          final_lufs: -15.84
+          - -16.18
+          - -16.78
+          - -16.55
+          - -15.48
+          target_lufs: -16.22
+          raw_lufs: -25.52
+          gain_db: 9.84
+          limiter_gr_db: -5.87
+          final_lufs: -16.24
           true_peak_dbtp: -2.04
-          within_1p5_lu: true
-          dur_s: 2.0
-          new: Now for the top view.
-          item: R2
-          sentence: 0
-          part: 0
-          old: 'Second step: the top view.'
-          old_dur_s: 2.625
+          dur_s: 5.65
           beat: false
-        - scene: s20_spin_rate
-          neighbours:
-          - S8
-          - S10
+        - scene: s06_parallel
+          sentence: 5
+          text: Brest's parallel runs east through central Europe, Ukraine, southern Russia, Kazakhstan, the far west of China, Mongolia, north-east China
+            and Russia's Far East.
+          audio_text: null
           neighbours_lufs:
-          - -16.21
-          - -16.31
-          target_lufs: -16.26
-          raw_lufs: -24.98
-          gain_db: 9.01
-          limiter_gr_db: -2.48
-          final_lufs: -16.27
-          true_peak_dbtp: -1.75
-          within_1p5_lu: true
-          dur_s: 3.625
-          new: Next, how far does the place travel in one turn?
-          item: R2
-          sentence: 9
-          part: 0
-          old: Second, how far does the place travel in one turn?
-          old_dur_s: 3.625
+          - -15.89
+          - -16.42
+          - -15.77
+          - -16.53
+          target_lufs: -16.14
+          raw_lufs: -24.57
+          gain_db: 8.93
+          limiter_gr_db: -3.41
+          final_lufs: -16.17
+          true_peak_dbtp: -1.96
+          dur_s: 11.45
           beat: false
-        - scene: s20_spin_rate
-          neighbours:
-          - S11
-          - S13
+        - scene: s06_parallel
+          sentence: 6
+          text: Then it crosses the Pacific, the southern tip of Vancouver Island, the northern United States and eastern Canada, and comes back across
+            the Atlantic to Brest.
+          audio_text: null
           neighbours_lufs:
-          - -16.75
-          - -16.22
-          target_lufs: -16.48
-          raw_lufs: -25.91
-          gain_db: 10.0
-          limiter_gr_db: -3.19
-          final_lufs: -16.54
-          true_peak_dbtp: -1.93
-          within_1p5_lu: true
-          dur_s: 3.125
-          new: So, speed is distance divided by time.
-          item: R2
-          sentence: 12
-          part: 0
-          old: Third, speed is distance divided by time.
-          old_dur_s: 3.55
+          - -15.89
+          - -16.42
+          - -15.77
+          - -16.53
+          target_lufs: -16.14
+          raw_lufs: -23.93
+          gain_db: 8.35
+          limiter_gr_db: -3.69
+          final_lufs: -16.16
+          true_peak_dbtp: -1.82
+          dur_s: 10.675
           beat: false
-      expected_s: 2989.15
-      audio_s: 2989.15
-      diff_ms: 0.0
-      len_ok: true
-      cues_ok: true
-      spliced_rf1:
-        method: BS.1770-4 loudness match to the nearest unchanged neighbours + look-ahead limiter (-1.5 dBTP)
-        corr_resynth: 0.9952
-        replaced:
-        - scene: s10_prime_meridian
-          neighbours:
-          - S11
-          - S13
+        - scene: s07_colatitude
+          sentence: 6
+          text: For Brest, taking its latitude away from ninety degrees leaves forty one point six degrees.
+          audio_text: null
           neighbours_lufs:
-          - -16.04
-          - -16.35
-          target_lufs: -16.2
-          raw_lufs: -24.66
-          gain_db: 8.97
-          limiter_gr_db: -5.37
-          final_lufs: -16.21
-          true_peak_dbtp: -1.75
-          within_1p5_lu: true
-          dur_s: 6.825
-          new: Then it runs south over the open South Atlantic and the Southern Ocean, all the way to Antarctica.
-          item: M2 calc
-          sentence: 12
-          part: 0
-          old: Then it runs south over the open South Atlantic and the Southern Ocean, for more than eight thousand kilometres.
-          old_dur_s: 7.55
-          beat: false
-        - scene: s20_spin_rate
-          neighbours:
-          - S7
-          - S9
-          neighbours_lufs:
-          - -16.79
-          - -16.27
-          target_lufs: -16.52
-          raw_lufs: -25.23
-          gain_db: 8.9
-          limiter_gr_db: -2.73
-          final_lufs: -16.53
-          true_peak_dbtp: -1.7
-          within_1p5_lu: true
-          dur_s: 7.275
-          new: It's four minutes shorter than a day from noon to noon, because the Earth also moves along its orbit round the Sun.
-          item: S2 rev
-          sentence: 8
-          part: 0
-          old: It's four minutes shorter than a day from noon to noon, because the Earth also moves along its orbit round the Sun.
-          old_dur_s: 7.275
-          beat: false
-        - scene: s20_spin_rate
-          neighbours:
-          - S7
-          - S9
-          neighbours_lufs:
-          - -16.79
-          - -16.27
-          target_lufs: -16.52
-          raw_lufs: -24.68
-          gain_db: 8.37
-          limiter_gr_db: -2.97
-          final_lufs: -16.53
-          true_peak_dbtp: -2.02
-          within_1p5_lu: true
-          dur_s: 8.9
-          new: In a year of three hundred and sixty five days, the Earth goes once round the Sun, so each day it moves about one degree along its orbit.
-          item: S2 rev
-          sentence: 8
-          part: 1
-          old: null
-          old_dur_s: null
-          beat: false
-        - scene: s20_spin_rate
-          neighbours:
-          - S7
-          - S9
-          neighbours_lufs:
-          - -16.79
-          - -16.27
-          target_lufs: -16.52
-          raw_lufs: -24.23
-          gain_db: 8.03
-          limiter_gr_db: -3.53
-          final_lufs: -16.53
-          true_peak_dbtp: -1.97
-          within_1p5_lu: true
-          dur_s: 7.25
-          new: So from noon to noon, the Earth turns about three hundred and sixty one degrees, not three hundred and sixty.
-          item: S2 rev
-          sentence: 8
-          part: 2
-          old: null
-          old_dur_s: null
-          beat: false
-        - scene: s20_spin_rate
-          neighbours:
-          - S7
-          - S9
-          neighbours_lufs:
-          - -16.79
-          - -16.27
-          target_lufs: -16.52
-          raw_lufs: -24.55
-          gain_db: 8.5
-          limiter_gr_db: -5.1
-          final_lufs: -16.54
-          true_peak_dbtp: -1.77
-          within_1p5_lu: true
-          dur_s: 11.3
-          new: A day of twenty four hours is one thousand four hundred and forty minutes, and one thousand four hundred and forty divided by three hundred
-            and sixty is four minutes for each degree.
-          item: S2 rev
-          sentence: 8
-          part: 3
-          old: null
-          old_dur_s: null
-          beat: false
-        - scene: s20_spin_rate
-          neighbours:
-          - S11
-          - S13
-          neighbours_lufs:
-          - -16.75
-          - -16.22
-          target_lufs: -16.48
-          raw_lufs: -25.48
-          gain_db: 9.78
-          limiter_gr_db: -3.61
-          final_lufs: -16.58
-          true_peak_dbtp: -1.76
-          within_1p5_lu: true
-          dur_s: 3.35
-          new: Then, speed is distance divided by time.
-          item: M5 rev
-          sentence: 12
-          part: 0
-          old: So, speed is distance divided by time.
-          old_dur_s: 3.125
-          beat: false
-        - scene: s20_spin_rate
-          neighbours:
-          - S13
-          - S15
-          neighbours_lufs:
-          - -16.22
-          - -16.4
+          - -16.05
+          - -16.62
+          - -16.59
+          - -16.02
           target_lufs: -16.31
-          raw_lufs: -25.19
-          gain_db: 9.26
-          limiter_gr_db: -2.6
+          raw_lufs: -25.51
+          gain_db: 9.61
+          limiter_gr_db: -3.53
           final_lufs: -16.32
           true_peak_dbtp: -1.9
-          within_1p5_lu: true
-          dur_s: 6.05
-          new: 'Now we pull out the part that''s the same for every place: two pi divided by capital T.'
-          item: M5 rev
-          sentence: 14
-          part: 0
-          old: 'Fourth, we pull out the part that''s the same for every place: two pi divided by capital T.'
-          old_dur_s: 6.45
-          beat: false
-        - scene: s21_ground_speeds
-          neighbours:
-          - S7
-          - S11
-          neighbours_lufs:
-          - -15.35
-          - -15.72
-          target_lufs: -15.53
-          raw_lufs: -25.0
-          gain_db: 10.12
-          limiter_gr_db: -4.54
-          final_lufs: -15.58
-          true_peak_dbtp: -1.91
-          within_1p5_lu: true
-          dur_s: 9.125
-          new: With easy numbers, the equator is two pi times six thousand four hundred kilometres, which is about forty thousand kilometres round.
-          item: S3 rev
-          sentence: 8
-          part: 0
-          old: With easy numbers, the equator is about forty thousand kilometres round, and forty thousand kilometres in twenty four hours is about one
-            thousand six hundred and seventy kilometres per hour.
-          old_dur_s: 12.6
-          beat: false
-        - scene: s21_ground_speeds
-          neighbours:
-          - S7
-          - S11
-          neighbours_lufs:
-          - -15.35
-          - -15.72
-          target_lufs: -15.53
-          raw_lufs: -25.38
-          gain_db: 10.51
-          limiter_gr_db: -6.25
-          final_lufs: -15.56
-          true_peak_dbtp: -1.95
-          within_1p5_lu: true
-          dur_s: 7.8
-          new: And forty thousand kilometres in twenty four hours is about one thousand six hundred and seventy kilometres per hour.
-          item: S3 rev
-          sentence: 8
-          part: 1
-          old: null
-          old_dur_s: null
-          beat: false
-        - scene: s21_ground_speeds
-          neighbours:
-          - S7
-          - S11
-          neighbours_lufs:
-          - -15.35
-          - -15.72
-          target_lufs: -15.53
-          raw_lufs: -24.4
-          gain_db: 9.5
-          limiter_gr_db: -7.21
-          final_lufs: -15.59
-          true_peak_dbtp: -1.68
-          within_1p5_lu: true
-          dur_s: 12.05
-          new: To turn metres per second into kilometres per hour, we multiply by three point six, because an hour has three thousand six hundred seconds,
-            and a kilometre has a thousand metres.
-          item: S3 rev
-          sentence: 8
-          part: 2
-          old: null
-          old_dur_s: null
-          beat: false
-        - scene: s21_ground_speeds
-          neighbours:
-          - S7
-          - S11
-          neighbours_lufs:
-          - -15.35
-          - -15.72
-          target_lufs: -15.53
-          raw_lufs: -24.56
-          gain_db: 9.99
-          limiter_gr_db: -5.45
-          final_lufs: -15.63
-          true_peak_dbtp: -2.01
-          within_1p5_lu: true
-          dur_s: 8.225
-          new: Four hundred and sixty four point six times three point six is also about one thousand six hundred and seventy.
-          item: S3 rev
-          sentence: 8
-          part: 3
-          old: null
-          old_dur_s: null
-          beat: false
-        - scene: s21_ground_speeds
-          neighbours:
-          - S7
-          - S11
-          neighbours_lufs:
-          - -15.35
-          - -15.72
-          target_lufs: -15.53
-          raw_lufs: -24.54
-          gain_db: 9.55
-          limiter_gr_db: -5.78
-          final_lufs: -15.55
-          true_peak_dbtp: -1.95
-          within_1p5_lu: true
-          dur_s: 14.275
-          new: A passenger jet flies at about nine hundred kilometres per hour, and one thousand six hundred and seventy divided by nine hundred is about
-            one point nine, so the ground at the equator moves almost twice as fast.
-          item: S3 rev
-          sentence: 9
-          part: 0
-          old: That's almost twice as fast as a passenger jet.
-          old_dur_s: 3.7
-          beat: false
-        - scene: s21_ground_speeds
-          neighbours:
-          - S7
-          - S11
-          neighbours_lufs:
-          - -15.35
-          - -15.72
-          target_lufs: -15.53
-          raw_lufs: -24.42
-          gain_db: 9.35
-          limiter_gr_db: -5.16
-          final_lufs: -15.56
-          true_peak_dbtp: -1.89
-          within_1p5_lu: true
-          dur_s: 12.85
-          new: Singapore, at one point three five degrees north, almost on the equator, has cosine phi zero point nine nine nine seven, so it moves at about
-            four hundred and sixty four metres per second.
-          item: M3 calc
-          sentence: 10
-          part: 0
-          old: Singapore, almost on the equator, moves at about four hundred and sixty four metres per second.
-          old_dur_s: 6.475
+          dur_s: 6.625
           beat: true
-        - scene: s33_archimedes
-          neighbours:
-          - S9
-          - S11
+        - scene: s11_longitude
+          sentence: 12
+          text: Then Brest, four and a half degrees short of a full turn, is at three hundred and fifty five point five degrees.
+          audio_text: null
           neighbours_lufs:
-          - -16.0
-          - -17.07
-          target_lufs: -16.5
-          raw_lufs: -24.8
-          gain_db: 8.56
-          limiter_gr_db: -3.76
-          final_lufs: -16.51
-          true_peak_dbtp: -1.91
-          within_1p5_lu: true
-          dur_s: 7.975
-          new: But the Earth's surface there is steep, so the strip is wider along the surface than its height, by one over cosine phi.
-          item: S10 rev
-          sentence: 10
-          part: 0
-          old: But the Earth's surface there is steep, so the strip is wider along the surface than its height, by the same factor.
-          old_dur_s: 7.35
-          beat: false
-        - scene: s34_global_mean
-          neighbours:
-          - S9
-          - S11
+          - -16.5
+          - -16.38
+          - -16.48
+          - -16.45
+          target_lufs: -16.45
+          raw_lufs: -24.85
+          gain_db: 8.78
+          limiter_gr_db: -4.01
+          final_lufs: -16.46
+          true_peak_dbtp: -1.65
+          dur_s: 7.45
+          beat: true
+        - scene: s15_brest_z
+          sentence: 8
+          text: Multiplying the two, z is about four thousand seven hundred and sixty four kilometres.
+          audio_text: null
           neighbours_lufs:
-          - -16.74
-          - -15.53
-          target_lufs: -16.09
-          raw_lufs: -25.62
-          gain_db: 10.54
-          limiter_gr_db: -5.34
-          final_lufs: -16.16
-          true_peak_dbtp: -1.78
-          within_1p5_lu: true
-          dur_s: 5.125
-          new: That's why a global average gives each latitude a weight of cosine phi.
-          item: S8 rev
-          sentence: 10
-          part: 0
-          old: That's why a global average gives each latitude a weight of cosine phi.
-          old_dur_s: 5.125
-          beat: false
-        - scene: s34_global_mean
-          neighbours:
-          - S9
-          - S11
-          neighbours_lufs:
-          - -16.74
-          - -15.53
-          target_lufs: -16.09
-          raw_lufs: -25.14
-          gain_db: 10.48
-          limiter_gr_db: -7.2
-          final_lufs: -16.25
-          true_peak_dbtp: -1.78
-          within_1p5_lu: true
-          dur_s: 3.0
-          new: We write the average temperature as T bar.
-          item: S8 rev
-          sentence: 10
-          part: 1
-          old: null
-          old_dur_s: null
-          beat: false
-        - scene: s34_global_mean
-          neighbours:
-          - S9
-          - S11
-          neighbours_lufs:
-          - -16.74
-          - -15.53
-          target_lufs: -16.09
-          raw_lufs: -24.79
-          gain_db: 9.22
-          limiter_gr_db: -6.95
-          final_lufs: -16.12
-          true_peak_dbtp: -2.0
-          within_1p5_lu: true
-          dur_s: 7.0
-          new: The Greek capital letter sigma means add up over all the boxes, which we number with the letter j.
-          item: S8 rev
-          sentence: 10
-          part: 2
-          old: null
-          old_dur_s: null
-          beat: false
-        - scene: s34_global_mean
-          neighbours:
-          - S9
-          - S11
-          neighbours_lufs:
-          - -16.74
-          - -15.53
-          target_lufs: -16.09
-          raw_lufs: -24.89
-          gain_db: 10.02
-          limiter_gr_db: -7.92
-          final_lufs: -16.12
+          - -16.78
+          - -16.66
+          - -15.99
+          - -15.66
+          target_lufs: -16.25
+          raw_lufs: -25.09
+          gain_db: 9.51
+          limiter_gr_db: -4.38
+          final_lufs: -16.28
           true_peak_dbtp: -1.98
-          within_1p5_lu: true
-          dur_s: 6.925
-          new: So T bar is the sum of cosine phi times the temperature, divided by the sum of the cosines.
-          item: S8 rev
+          dur_s: 6.4
+          beat: true
+        - scene: s15_brest_z
+          sentence: 9
+          text: 'With easy numbers, it comes out at four thousand eight hundred: about the same.'
+          audio_text: null
+          neighbours_lufs:
+          - -16.78
+          - -16.66
+          - -15.99
+          - -15.66
+          target_lufs: -16.25
+          raw_lufs: -24.94
+          gain_db: 9.05
+          limiter_gr_db: -6.15
+          final_lufs: -16.26
+          true_peak_dbtp: -1.88
+          dur_s: 5.25
+          beat: true
+        - scene: s16_brest_axis_distance
+          sentence: 3
+          text: Times the Earth's radius, six thousand three hundred and seventy one kilometres, the distance from the axis is about four thousand two hundred
+            and thirty kilometres.
+          audio_text: null
+          neighbours_lufs:
+          - -16.83
+          - -15.84
+          - -16.49
+          - -15.84
+          target_lufs: -16.23
+          raw_lufs: -24.73
+          gain_db: 8.82
+          limiter_gr_db: -8.13
+          final_lufs: -16.24
+          true_peak_dbtp: -1.74
+          dur_s: 10.6
+          beat: true
+        - scene: s16_brest_axis_distance
+          sentence: 4
+          text: 'With easy numbers, it''s about four thousand two hundred and seventy: close.'
+          audio_text: null
+          neighbours_lufs:
+          - -16.83
+          - -15.84
+          - -16.49
+          - -15.84
+          target_lufs: -16.23
+          raw_lufs: -24.95
+          gain_db: 9.31
+          limiter_gr_db: -4.65
+          final_lufs: -16.25
+          true_peak_dbtp: -1.91
+          dur_s: 5.475
+          beat: true
+        - scene: s16_brest_axis_distance
+          sentence: 7
+          text: 'They''re the same two lengths as in Part 2''s cylindrical coordinates, this time round the Earth''s axis: a distance out from the axis,
+            and a height along it.'
+          audio_text: null
+          neighbours_lufs:
+          - -15.84
+          - -16.49
+          - -15.84
+          - -15.79
+          target_lufs: -15.98
+          raw_lufs: -24.65
+          gain_db: 9.19
+          limiter_gr_db: -6.55
+          final_lufs: -16.0
+          true_peak_dbtp: -1.88
+          dur_s: 10.375
+          beat: false
+        - scene: s17_brest_top
           sentence: 10
-          part: 3
-          old: null
-          old_dur_s: null
+          text: So x, the distance from the axis times this cosine, is about four thousand two hundred and seventeen kilometres.
+          audio_text: null
+          neighbours_lufs:
+          - -17.01
+          - -16.44
+          - -16.38
+          - -15.58
+          target_lufs: -16.32
+          raw_lufs: -24.55
+          gain_db: 9.05
+          limiter_gr_db: -6.73
+          final_lufs: -16.35
+          true_peak_dbtp: -1.83
+          dur_s: 8.025
+          beat: true
+        - scene: s17_brest_top
+          sentence: 12
+          text: So y, the distance from the axis times this sine, is about minus three hundred and thirty two kilometres.
+          audio_text: null
+          neighbours_lufs:
+          - -16.38
+          - -17.01
+          - -15.58
+          - -16.22
+          target_lufs: -16.27
+          raw_lufs: -24.87
+          gain_db: 9.24
+          limiter_gr_db: -7.08
+          final_lufs: -16.3
+          true_peak_dbtp: -1.78
+          dur_s: 7.25
+          beat: true
+        - scene: s18_position_vector
+          sentence: 7
+          text: 'First, Pythagoras in the equator plane: squaring x and y, adding them and taking the square root gives back the distance from the axis,
+            four thousand two hundred and thirty.'
+          audio_text: null
+          neighbours_lufs:
+          - -16.1
+          - -16.02
+          - -16.75
+          - -17.0
+          target_lufs: -16.45
+          raw_lufs: -24.42
+          gain_db: 8.31
+          limiter_gr_db: -4.61
+          final_lufs: -16.45
+          true_peak_dbtp: -1.97
+          dur_s: 11.65
+          beat: true
+        - scene: s18_position_vector
+          sentence: 8
+          text: Then Pythagoras in the side view, with that distance and z, gives six thousand three hundred and seventy one.
+          audio_text: null
+          neighbours_lufs:
+          - -16.1
+          - -16.02
+          - -16.75
+          - -17.0
+          target_lufs: -16.45
+          raw_lufs: -24.68
+          gain_db: 8.72
+          limiter_gr_db: -3.42
+          final_lufs: -16.46
+          true_peak_dbtp: -1.94
+          dur_s: 7.375
+          beat: true
+        - scene: s18_position_vector
+          sentence: 12
+          text: We call it r hat, just as in Part 1, on the flat map.
+          audio_text: null
+          neighbours_lufs:
+          - -16.26
+          - -17.0
+          - -16.28
+          - -16.11
+          target_lufs: -16.4
+          raw_lufs: -25.34
+          gain_db: 9.07
+          limiter_gr_db: -1.1
+          final_lufs: -16.4
+          true_peak_dbtp: -2.0
+          dur_s: 4.175
+          beat: false
+        - scene: s19_khulna
+          sentence: 0
+          text: Let's do the same for a city much farther east and south, in South Asia.
+          audio_text: null
+          neighbours_lufs:
+          - -16.49
+          - -16.11
+          - -16.3
+          - -16.34
+          target_lufs: -16.31
+          raw_lufs: -25.06
+          gain_db: 9.34
+          limiter_gr_db: -2.57
+          final_lufs: -16.35
+          true_peak_dbtp: -1.88
+          dur_s: 4.8
+          beat: false
+        - scene: s19_khulna
+          sentence: 1
+          text: Khulna is in the southwest of Bangladesh, near the Sundarbans, the world's largest mangrove forest.
+          audio_text: null
+          neighbours_lufs:
+          - -16.49
+          - -16.11
+          - -16.3
+          - -16.34
+          target_lufs: -16.31
+          raw_lufs: -24.88
+          gain_db: 9.12
+          limiter_gr_db: -2.89
+          final_lufs: -16.34
+          true_peak_dbtp: -2.0
+          dur_s: 7.025
+          beat: false
+        - scene: s19_khulna
+          sentence: 2
+          text: In May twenty twenty, the centre of Cyclone Amphan, from Part 2, passed about seventy nine kilometres to its west.
+          audio_text: null
+          neighbours_lufs:
+          - -16.49
+          - -16.11
+          - -16.3
+          - -16.34
+          target_lufs: -16.31
+          raw_lufs: -24.25
+          gain_db: 8.32
+          limiter_gr_db: -3.09
+          final_lufs: -16.32
+          true_peak_dbtp: -1.91
+          dur_s: 8.2
+          beat: false
+        - scene: s19_khulna
+          sentence: 5
+          text: So Khulna's height above the equator plane, the Earth's radius times this sine, is about two thousand four hundred and sixty nine kilometres.
+          audio_text: null
+          neighbours_lufs:
+          - -16.34
+          - -16.3
+          - -16.09
+          - -15.89
+          target_lufs: -16.15
+          raw_lufs: -24.8
+          gain_db: 9.27
+          limiter_gr_db: -4.9
+          final_lufs: -16.17
+          true_peak_dbtp: -1.94
+          dur_s: 9.25
+          beat: true
+        - scene: s20_spin_rate
+          sentence: 11
+          text: A day has one thousand four hundred and forty minutes, so each degree of turn takes four minutes.
+          audio_text: null
+          neighbours_lufs:
+          - -16.53
+          - -16.53
+          - -16.27
+          - -16.31
+          target_lufs: -16.41
+          raw_lufs: -25.69
+          gain_db: 9.81
+          limiter_gr_db: -4.9
+          final_lufs: -16.43
+          true_peak_dbtp: -1.97
+          dur_s: 6.225
+          beat: false
+        - scene: s21_ground_speeds
+          sentence: 5
+          text: So capital Omega, two pi divided by capital T, is about seven point two nine two times ten to the minus five radians per second.
+          audio_text: null
+          neighbours_lufs:
+          - -15.91
+          - -16.43
+          - -16.71
+          - -15.56
+          target_lufs: -16.13
+          raw_lufs: -24.59
+          gain_db: 9.14
+          limiter_gr_db: -6.37
+          final_lufs: -16.15
+          true_peak_dbtp: -1.93
+          dur_s: 9.975
+          beat: true
+        - scene: s21_ground_speeds
+          sentence: 7
+          text: So the ground moves at capital Omega times the Earth's radius, which is about four hundred and sixty four point six metres per second.
+          audio_text: null
+          neighbours_lufs:
+          - -16.71
+          - -15.91
+          - -15.56
+          - -15.59
+          target_lufs: -15.92
+          raw_lufs: -24.62
+          gain_db: 9.08
+          limiter_gr_db: -3.66
+          final_lufs: -15.93
+          true_peak_dbtp: -1.79
+          dur_s: 9.25
+          beat: true
+        - scene: s21_ground_speeds
+          sentence: 8
+          text: With easy numbers, the equator is about forty thousand kilometres round.
+          audio_text: null
+          neighbours_lufs:
+          - -16.71
+          - -15.91
+          - -15.56
+          - -15.59
+          target_lufs: -15.92
+          raw_lufs: -25.48
+          gain_db: 10.17
+          limiter_gr_db: -4.34
+          final_lufs: -15.94
+          true_peak_dbtp: -1.96
+          dur_s: 5.275
+          beat: false
+        - scene: s21_ground_speeds
+          sentence: 11
+          text: So four hundred and sixty four point six metres per second is also about one thousand six hundred and seventy kilometres per hour.
+          audio_text: null
+          neighbours_lufs:
+          - -15.59
+          - -15.56
+          - -15.56
+          - -15.72
+          target_lufs: -15.61
+          raw_lufs: -24.34
+          gain_db: 9.22
+          limiter_gr_db: -4.79
+          final_lufs: -15.63
+          true_peak_dbtp: -1.9
+          dur_s: 9.25
+          beat: false
+        - scene: s21_ground_speeds
+          sentence: 12
+          text: A passenger jet flies at about nine hundred kilometres per hour, so the ground at the equator moves almost twice as fast.
+          audio_text: null
+          neighbours_lufs:
+          - -15.59
+          - -15.56
+          - -15.56
+          - -15.72
+          target_lufs: -15.61
+          raw_lufs: -25.34
+          gain_db: 9.98
+          limiter_gr_db: -3.82
+          final_lufs: -15.61
+          true_peak_dbtp: -1.89
+          dur_s: 8.225
+          beat: false
+        - scene: s22_distance_north
+          sentence: 12
+          text: Times the Earth's radius, six thousand three hundred and seventy one kilometres, that's about one hundred and eleven point two kilometres.
+          audio_text: null
+          neighbours_lufs:
+          - -16.41
+          - -17.16
+          - -16.58
+          - -16.68
+          target_lufs: -16.7
+          raw_lufs: -25.16
+          gain_db: 8.55
+          limiter_gr_db: -3.09
+          final_lufs: -16.7
+          true_peak_dbtp: -1.85
+          dur_s: 8.95
+          beat: true
+        - scene: s22_distance_north
+          sentence: 13
+          text: 'With easy numbers, it''s about one hundred and twelve: about the same.'
+          audio_text: null
+          neighbours_lufs:
+          - -16.41
+          - -17.16
+          - -16.58
+          - -16.68
+          target_lufs: -16.7
+          raw_lufs: -24.91
+          gain_db: 8.61
+          limiter_gr_db: -5.82
+          final_lufs: -16.71
+          true_peak_dbtp: -2.01
+          dur_s: 5.0
+          beat: true
+        - scene: s23_north_examples
+          sentence: 1
+          text: 'One minute of latitude is a sixtieth of a degree: about one point eight five kilometres.'
+          audio_text: null
+          neighbours_lufs:
+          - -16.25
+          - -16.68
+          - -15.91
+          - -15.91
+          target_lufs: -16.18
+          raw_lufs: -24.64
+          gain_db: 8.99
+          limiter_gr_db: -5.47
+          final_lufs: -16.2
+          true_peak_dbtp: -2.05
+          dur_s: 6.2
+          beat: true
+        - scene: s23_north_examples
+          sentence: 4
+          text: At one hundred and eleven point two kilometres per degree, Brest's forty eight point four degrees come to about five thousand three hundred
+            and eighty two kilometres.
+          audio_text: null
+          neighbours_lufs:
+          - -15.91
+          - -15.91
+          - -15.79
+          - -17.05
+          target_lufs: -16.13
+          raw_lufs: -24.61
+          gain_db: 8.98
+          limiter_gr_db: -5.18
+          final_lufs: -16.15
+          true_peak_dbtp: -1.53
+          dur_s: 10.525
+          beat: true
+        - scene: s24_distance_east
+          sentence: 8
+          text: For one degree at Brest, the radius of its parallel times one degree in radians gives about seventy three point eight kilometres.
+          audio_text: null
+          neighbours_lufs:
+          - -16.1
+          - -16.34
+          - -16.01
+          - -15.78
+          target_lufs: -16.05
+          raw_lufs: -25.16
+          gain_db: 9.68
+          limiter_gr_db: -4.0
+          final_lufs: -16.09
+          true_peak_dbtp: -1.59
+          dur_s: 8.525
+          beat: true
+        - scene: s28_box_areas
+          sentence: 2
+          text: The radius squared is about forty point six million square kilometres.
+          audio_text: null
+          neighbours_lufs:
+          - -16.55
+          - -17.45
+          - -16.09
+          - -16.54
+          target_lufs: -16.63
+          raw_lufs: -25.0
+          gain_db: 9.32
+          limiter_gr_db: -4.59
+          final_lufs: -16.68
+          true_peak_dbtp: -1.96
+          dur_s: 4.925
+          beat: true
+        - scene: s28_box_areas
+          sentence: 3
+          text: Times that quarter degree in radians, twice, that's about seven hundred and seventy three square kilometres, for a box on the equator.
+          audio_text: null
+          neighbours_lufs:
+          - -16.55
+          - -17.45
+          - -16.09
+          - -16.54
+          target_lufs: -16.63
+          raw_lufs: -24.76
+          gain_db: 8.31
+          limiter_gr_db: -2.65
+          final_lufs: -16.63
+          true_peak_dbtp: -1.88
+          dur_s: 9.05
+          beat: true
+        - scene: s28_box_areas
+          sentence: 5
+          text: At Khulna, where cosine phi is zero point nine two one nine, it's about seven hundred and twelve square kilometres.
+          audio_text: null
+          neighbours_lufs:
+          - -16.09
+          - -16.55
+          - -16.54
+          - -15.97
+          target_lufs: -16.28
+          raw_lufs: -25.06
+          gain_db: 9.1
+          limiter_gr_db: -4.16
+          final_lufs: -16.28
+          true_peak_dbtp: -1.98
+          dur_s: 7.9
+          beat: true
+        - scene: s28_box_areas
+          sentence: 6
+          text: At Brest, the equator box times Brest's cosine phi is about five hundred and thirteen.
+          audio_text: null
+          neighbours_lufs:
+          - -16.09
+          - -16.55
+          - -16.54
+          - -15.97
+          target_lufs: -16.28
+          raw_lufs: -25.22
+          gain_db: 9.67
+          limiter_gr_db: -4.38
+          final_lufs: -16.48
+          true_peak_dbtp: -1.53
+          dur_s: 6.175
+          beat: true
+        - scene: s28_box_areas
+          sentence: 7
+          text: At Longyearbyen, with its much smaller cosine phi, it's only about a hundred and fifty eight.
+          audio_text: null
+          neighbours_lufs:
+          - -16.09
+          - -16.55
+          - -16.54
+          - -15.97
+          target_lufs: -16.28
+          raw_lufs: -24.36
+          gain_db: 8.33
+          limiter_gr_db: -3.12
+          final_lufs: -16.29
+          true_peak_dbtp: -1.66
+          dur_s: 6.2
+          beat: true
+        - scene: s30_slope_of_sine
+          sentence: 8
+          text: So cosine phi times delta phi is about zero point one five eight.
+          audio_text: null
+          neighbours_lufs:
+          - -16.4
+          - -17.26
+          - -16.13
+          - -17.29
+          target_lufs: -16.74
+          raw_lufs: -25.62
+          gain_db: 9.55
+          limiter_gr_db: -5.22
+          final_lufs: -17.11
+          true_peak_dbtp: -1.53
+          dur_s: 5.175
+          beat: true
+        - scene: s31_adding_strips
+          sentence: 7
+          text: Each strip's step is the sine at its top minus the sine at its bottom.
+          audio_text: null
+          neighbours_lufs:
+          - -16.59
+          - -15.44
+          - -16.12
+          - -16.61
+          target_lufs: -16.16
+          raw_lufs: -24.74
+          gain_db: 9.45
+          limiter_gr_db: -6.4
+          final_lufs: -16.2
+          true_peak_dbtp: -2.05
+          dur_s: 4.925
+          beat: true
+        - scene: s31_adding_strips
+          sentence: 8
+          text: Together, they add up to zero point five, which is exactly the sine of thirty degrees.
+          audio_text: null
+          neighbours_lufs:
+          - -16.59
+          - -15.44
+          - -16.12
+          - -16.61
+          target_lufs: -16.16
+          raw_lufs: -25.44
+          gain_db: 9.98
+          limiter_gr_db: -8.1
+          final_lufs: -16.2
+          true_peak_dbtp: -1.93
+          dur_s: 6.3
+          beat: true
+        - scene: s34_global_mean
+          sentence: 8
+          text: So the area-weighted average multiplies each temperature by its weight, adds them up, and divides by the sum of the weights.
+          audio_text: null
+          neighbours_lufs:
+          - -16.47
+          - -17.24
+          - -16.74
+          - -16.16
+          target_lufs: -16.63
+          raw_lufs: -24.9
+          gain_db: 8.66
+          limiter_gr_db: -6.93
+          final_lufs: -16.65
+          true_peak_dbtp: -1.71
+          dur_s: 7.9
+          beat: false
+        - scene: s35_recap
+          sentence: 10
+          text: 'A step east is the radius, times cosine phi, times delta lambda: about seventy four kilometres per degree at Brest, and it shrinks towards
+            the poles.'
+          audio_text: null
+          neighbours_lufs:
+          - -15.95
+          - -15.61
+          - -16.01
+          - -16.01
+          target_lufs: -15.89
+          raw_lufs: -24.5
+          gain_db: 9.29
+          limiter_gr_db: -6.27
+          final_lufs: -15.91
+          true_peak_dbtp: -1.88
+          dur_s: 10.65
+          beat: false
+        - scene: s35_recap
+          sentence: 13
+          text: For September twenty twenty six, that weighting turned ERA5's plain average of about seven point one degrees Celsius into about sixteen
+            point three.
+          audio_text: For September twenty twenty six, that weighting turned [ERA5](/ˌiˌɑɹˈA fˈIv/)'s plain average of about seven point one degrees Celsius
+            into about sixteen point three.
+          neighbours_lufs:
+          - -16.01
+          - -16.01
+          - -16.64
+          - -15.98
+          target_lufs: -16.15
+          raw_lufs: -24.69
+          gain_db: 8.93
+          limiter_gr_db: -5.3
+          final_lufs: -16.16
+          true_peak_dbtp: -1.98
+          dur_s: 10.5
+          beat: false
+        - scene: s35_recap
+          sentence: 14
+          text: In Part 4, we'll stand at a weather station and give it its own east, north and up arrows.
+          audio_text: null
+          neighbours_lufs:
+          - -16.01
+          - -16.01
+          - -16.64
+          - -15.98
+          target_lufs: -16.15
+          raw_lufs: -24.81
+          gain_db: 9.35
+          limiter_gr_db: -3.38
+          final_lufs: -16.22
+          true_peak_dbtp: -1.67
+          dur_s: 6.4
+          beat: false
+        - scene: s35_recap
+          sentence: 15
+          text: As the air moves over the round Earth, those arrows turn by themselves, and that turning adds extra terms to how the wind changes.
+          audio_text: null
+          neighbours_lufs:
+          - -16.01
+          - -16.01
+          - -16.64
+          - -15.98
+          target_lufs: -16.15
+          raw_lufs: -24.95
+          gain_db: 9.38
+          limiter_gr_db: -4.81
+          final_lufs: -16.17
+          true_peak_dbtp: -1.79
+          dur_s: 8.85
           beat: false
 quiz_hook: Singapore is almost on the equator and Longyearbyen is at 78.2 N. How many kilometres is one degree of longitude at each, how fast
   does the ground move east at each, and what share of the northern hemisphere lies south of 78.2 N? (111.2 and 22.7 km; about 464 and 95 m/s;
@@ -688,126 +1024,133 @@ chapter_marks:
   mmss: '0:00.3'
   title: title, hook and look back
   scene: s00_title
-- t: 97.875
-  mmss: '1:37.9'
+- t: 37.15
+  mmss: '0:37.1'
   title: the sphere, latitude and the parallel
   scene: s03_sphere
-- t: 350.65
-  mmss: '5:50.6'
+- t: 297.95
+  mmss: '4:57.9'
   title: colatitude and the sine-cosine swap
   scene: s07_colatitude
-- t: 529.375
-  mmss: '8:49.4'
+- t: 477.0
+  mmss: '7:57.0'
   title: meridians, the prime meridian, longitude
   scene: s09_meridians
-- t: 825.15
-  mmss: '13:45.1'
+- t: 772.0
+  mmss: '12:52.0'
   title: Earth-centred x, y, z
   scene: s13_earth_axes
-- t: 897.95
-  mmss: '14:58.0'
+- t: 844.8
+  mmss: '14:04.8'
   title: Brest's position, step by step
   scene: s14_brest_side
-- t: 1325.75
-  mmss: '22:05.8'
+- t: 1265.725
+  mmss: '21:05.7'
   title: Khulna
   scene: s19_khulna
-- t: 1424.325
-  mmss: '23:44.3'
+- t: 1365.5
+  mmss: '22:45.5'
   title: the spinning ground
   scene: s20_spin_rate
-- t: 1750.5
-  mmss: '29:10.5'
+- t: 1671.475
+  mmss: '27:51.5'
   title: distances north and east
   scene: s22_distance_north
-- t: 2060.8
-  mmss: '34:20.8'
+- t: 1972.25
+  mmss: '32:52.2'
   title: ERA5 grid boxes
   scene: s26_grid_boxes
-- t: 2165.55
-  mmss: '36:05.6'
+- t: 2077.0
+  mmss: '34:37.0'
   title: areas, step by step
   scene: s27_area_patch
-- t: 2642.775
-  mmss: '44:02.8'
+- t: 2538.425
+  mmss: '42:18.4'
   title: Archimedes
   scene: s33_archimedes
-- t: 2723.975
-  mmss: '45:24.0'
+- t: 2619.625
+  mmss: '43:39.6'
   title: global averages
   scene: s34_global_mean
-- t: 2847.4
-  mmss: '47:27.4'
+- t: 2743.15
+  mmss: '45:43.2'
   title: to sum up
   scene: s35_recap
 skip_blocks:
 - id: K1
   chip_scene: s08_sin_cos_swap
   chip_sentence: 4
-  chip_t: 414.925
+  chip_t: 362.55
   skip_to_scene: s09_meridians
-  skip_to_t: 529.375
-  skip_to_mmss: '8:49'
+  skip_to_t: 477.0
+  skip_to_mmss: '7:57'
   keep_sentence: If you skipped, here's what to keep. The colatitude is measured down from the pole, so a book that uses it has a cosine wherever we have
     a sine of the latitude, and the other way round. Now for the second angle.
   takeaway_keyword: 'colatitude from the pole: sin ↔ cos'
   note: final TTS (build 1, make_timing.py --final); the chip shows skip_to_mmss = floor of the keep sentence start (cs_lib keepTime)
-  chip: every step · optional / skip to 8:49
+  chip: every step · optional / skip to 7:57
 - id: K2
   chip_scene: s14_brest_side
   chip_sentence: 3
-  chip_t: 913.05
+  chip_t: 859.9
   skip_to_scene: s21_ground_speeds
-  skip_to_t: 1558.65
-  skip_to_mmss: '25:58'
+  skip_to_t: 1494.75
+  skip_to_mmss: '24:54'
   keep_sentence: If you skipped, here's what to keep. A place at latitude phi sits the Earth's radius times sine phi above the equator plane, and the radius
     times cosine phi from the Earth's axis. As the Earth spins, that place is carried east at capital Omega, times its distance from the axis.
   takeaway_keyword: height a sin φ · from the axis a cos φ · ground east at Ω a cos φ
   note: final TTS (build 1, make_timing.py --final); the chip shows skip_to_mmss = floor of the keep sentence start (cs_lib keepTime)
-  chip: every step · optional / skip to 25:58
+  chip: every step · optional / skip to 24:54
 - id: K3
   chip_scene: s22_distance_north
   chip_sentence: 2
-  chip_t: 1755.1
+  chip_t: 1676.075
   skip_to_scene: s25_degree_east
-  skip_to_t: 1979.75
-  skip_to_mmss: '32:59'
+  skip_to_t: 1891.2
+  skip_to_mmss: '31:31'
   keep_sentence: If you skipped, here's what to keep. A degree of latitude is always about a hundred and eleven kilometres, but a degree of longitude is
     that times cosine phi, so it shrinks towards the poles. Let's compare one degree of longitude at four places, side by side.
   takeaway_keyword: 1° north ≈ 111 km · 1° east = 111 km × cos φ
   note: final TTS (build 1, make_timing.py --final); the chip shows skip_to_mmss = floor of the keep sentence start (cs_lib keepTime)
-  chip: every step · optional / skip to 32:59
+  chip: every step · optional / skip to 31:31
 - id: K4
   chip_scene: s27_area_patch
   chip_sentence: 5
-  chip_t: 2186.3
+  chip_t: 2097.75
   skip_to_scene: s34_global_mean
-  skip_to_t: 2723.975
-  skip_to_mmss: '45:23'
+  skip_to_t: 2619.625
+  skip_to_mmss: '43:39'
   keep_sentence: 'If you skipped, here''s what to keep. Grid boxes shrink towards the poles by cosine phi, so the tropics are huge and the polar caps are
     small: half of the whole Earth lies between thirty degrees south and thirty degrees north. Here''s where this matters for climate.'
   takeaway_keyword: boxes shrink by cos φ · half the Earth within 30° of the equator
   note: final TTS (build 1, make_timing.py --final); the chip shows skip_to_mmss = floor of the keep sentence start (cs_lib keepTime)
-  chip: every step · optional / skip to 45:23
+  chip: every step · optional / skip to 43:39
+remake_2026_11_07:
+  brief: movies/ch00/coordinates_series/master_plan_2026-11-07.md (R1, R3, R16, R19, §C); continuity_plan.md §3/§5/§6/§7 (5c); fact_check_2026-11-07.md
+    rows 5, 6
+  R1: s00 series title layout, no 'made easy'
+  C2_no_opening_recap: s02_part2_recap cut; its facts recalled at the point of use (R16)
+  R16: recalls in s08, s11, s16 (voiced S7), s17, s18 (S12 re-voiced), s20, s22, s24, s30 (see each scene's `recalls`)
+  R19: s06 Brest parallel list (row 5); s19 Khulna wording (row 6)
+  R3: 's35: recap with numbers (S10 74 km per degree at Brest; S13 ERA5 7.1 -> 16.3 °C), two-sentence teaser (S14-S15); s36 picture fades with the music'
 scenes:
 - id: s00_title
+  remake_2026_11_07: "R1/R2: series title layout (kit_cs/SeriesTitle.tsx = Parts 1-2): 'Coordinates' 150 px gradient, pulsing on AT(0,'coordinates'); 'Part\
+    \ 3 \xB7 Our round Earth'; subtitle 'latitude, longitude, / distances and areas'. No 'made easy'."
   t:
   - 0.3
-  - 10.6
+  - 9.375
   sentence_times:
   - - 0.3
-    - 9.8
+    - 8.575
   beat: opening title (HOUSE_STYLE §3)
-  visual: 'TITLE FRAME (house/kit/title.tsx). Left x 100-1075, top to bottom: ''Coordinates · Part 3'' (68 px, warm white); the title ''Our round
-    Earth'' as RiseText (150 px, weight 800, two lines ''Our round'' / ''Earth'', TitleGradient teal -> gold; letters rise 24 px over 8 frames,
-    2-frame stagger); ''made easy'' (96 px, warm white) pulses x1.06 on AT(0,''coordinates on our round Earth'') (HOUSE_STYLE §3, 2026-11-06: never voice "the easy way"); the subtitle ''latitude, longitude, distances
-    and areas'' (68 px, warm white, one or two lines); >= 50 px clear of the animation. The spoken sentence stays short. Right x 1130-1840, y
+  visual: 'TITLE FRAME (house/kit/title.tsx). Left x 100-1075, top to bottom: the series title (kit_cs/SeriesTitle.tsx, as Parts 1-2): ''Coordinates'' RiseText 150 px weight 800 TitleGradient teal -> gold, pulsing x1.06 on AT(0,''coordinates''); ''Part 3 · Our round Earth'' 80 px warm white; the subtitle ''latitude, longitude, / distances and areas'' (68 px, warm white); no ''made easy'' (R1); >= 50 px clear of the animation. The spoken sentence stays short. Right x 1130-1840, y
     180-636: Part A (frame 0 -> AT(1,''meteorology'')): the globe turns to Brest, the half facing the camera slides away along Brest''s meridian
     plane (HalfEarthMesh), the centre dot appears, the arrow to Brest draws, and the gold latitude wedge opens from the equator line to 48.4 deg
     (no number). Part B (12-frame cross-fade on ''meteorology''): the whole globe with ERA5-style grid lines over Europe and the Arctic, the boxes
     visibly thinning northwards; one box at Brest and one at Svalbard light up gold. SourceBelow under the animation ''Image: NASA Blue Marble
     Next Generation'' (y <= 860). Poster = frame 200.'
-  voiceover: In this video, we'll learn coordinates on our round Earth, and see how meteorology uses them to measure distances and areas on its weather grids.
+  voiceover: In this video, we'll learn coordinates on our round Earth, and see how they're used to measure distances and areas on weather grids.
   on_screen_eq: null
   physics_source:
     fn: fluidpy.geo.sphere.unit_vector, meridian_points, parallel_points, arc_lengths (0.25 deg)
@@ -835,17 +1178,17 @@ scenes:
   layout: Title frame; the source line below the animation, never on it. No other text.
 - id: s01_hook
   t:
-  - 10.6
-  - 38.125
+  - 9.375
+  - 37.15
   sentence_times:
-  - - 10.6
-    - 16.125
-  - - 16.475
-    - 23.925
-  - - 24.275
-    - 29.675
-  - - 30.025
-    - 37.325
+  - - 9.375
+    - 14.9
+  - - 15.25
+    - 22.7
+  - - 23.05
+    - 28.7
+  - - 29.05
+    - 36.35
   beat: hook question
   visual: 'Full width from frame 0. Left (picture zone): the unzoomed globe turning slowly (Atlantic, Europe, Asia), three gold dots at Brest,
     Khulna, Singapore (no labels: no place is spoken here). Right column: S1 on AT(1,''where a place is'') keyword ''where?'' (54 px warm white);
@@ -854,9 +1197,9 @@ scenes:
     moving past a station, a great-circle route, world map), the third lit, the others at 35 %, keyword ''round Earth'' under the third. S3 on
     AT(3,''latitude and longitude''): the graticule brightens; AT(3,''kilometres''): keyword ''degrees -> km''. S4 on AT(4,''grid boxes''): a
     few 0.25-deg boxes drawn near Svalbard; AT(4,''tropics''): the band 30 S - 30 N tints teal for 2 s.'
-  voiceover: How do we say where a place is on a round Earth, and how far apart two places are? This is the third of seven parts on coordinates,
-    and in this part, we leave the flat map and go round the globe. Let's see how latitude and longitude are built, and how they turn into kilometres.
-    Then let's see what they tell us about the grid boxes of weather data, and about how much of the Earth lies in the tropics.
+  voiceover: How do we say where a place is on a round Earth, and how far apart two places are? This is the third of seven parts on coordinates, and in this
+    part, we leave the flat map and go round the globe. Now let's dive into latitude and longitude, and how they turn into kilometres. Then let's see what
+    they tell us about the grid boxes of weather data, and about how much of the Earth lies in the tropics.
   on_screen_eq: null
   physics_source:
     fn: fluidpy.geo.sphere.unit_vector, great_circle_points, arc_lengths
@@ -879,88 +1222,33 @@ scenes:
     y 760-830) only where a tour adds insight, and every zoom ends with a zoom out to the start view; cameras <= 90 deg/s, eased. Thumbnails are
     drawings, not cards. No text over the picture or over other text; links never cross text, ticks or each other (the builder checks its own
     stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
-- id: s02_part2_recap
-  t:
-  - 38.125
-  - 97.875
-  sentence_times:
-  - - 38.125
-    - 40.5
-  - - 40.85
-    - 51.175
-  - - 51.525
-    - 56.9
-  - - 57.25
-    - 64.725
-  - - 65.075
-    - 70.925
-  - - 71.275
-    - 77.725
-  - - 78.075
-    - 84.075
-  - - 84.425
-    - 91.975
-  - - 92.325
-    - 97.075
-  beat: recap of Parts 1-2 (<= 60 s, split plan §2g)
-  visual: 'One mini picture per sentence in the picture zone, cross-fading (no headings, no cards): S2 the polar grid with the balloon, r and
-    the theta arc (slate) ''anticlockwise, seen from above''; S3 the 3-4-5 triangle with ''x = r cos θ'', ''y = r sin θ''; S4 an arc on a circle
-    with ''s = r θ''; S5-S6 r-hat''s tip moving a small step along the unit circle with ''Δ(sin θ) ≈ cos θ Δθ'' (Part 2''s slope picture, reused);
-    S7 a parcel on a ring, velocity arrows tail to tail, the inward acceleration arrow (rose); S8 the cylinder (r, θ, z) round Ian''s eye and
-    a thumbnail of Amphan, with a source line under the storm thumbnails (''Data: <Part 2 products> · Ian 28 Sep 2022 · Amphan 20 May 2020'');
-    S9 the cylinder rounds into the globe. Keywords in the column, one per sentence, each <= 4 words.'
-  voiceover: 'First, a quick look back. In Part 1, we met polar coordinates on a flat map: a distance r, and an angle theta, measured anticlockwise
-    from east, as seen from above. We found that x equals r cosine theta, and y equals r sine theta. We met radians, and the arc length rule:
-    the length of an arc is the radius times the angle, in radians. In Part 2, we watched arrows turn, and we found the slopes of sine and cosine.
-    When an angle grows by a tiny step, its sine grows by about its cosine times that step. We saw that air going round a ring is always accelerating,
-    towards the centre of the ring. Then we added a height z, to get cylindrical coordinates, and looked inside Hurricane Ian and Cyclone Amphan.
-    Now let''s take these ideas to the biggest round shape of all: the Earth.'
-  on_screen_eq: null
-  physics_source:
-    fn: reuses Part 1 and Part 2 pictures (fluidpy.core.coords.unit_vectors_polar; fluidpy.diag.cyclone.storm_relative_wind)
-    params:
-      note: no new number
-    test: ../Fluid Dynamics/tests/test_ch03.py::test_coordinates_V1_unit_vectors_and_projections
-  exaggeration:
-  - mini pictures, schematic (illustrative)
-  kind: recap montage
-  data: Part 1-2 data (storm thumbnails)
-  tool: Remotion SVG
-  runner_up: —
-  why: 'split plan §2g: opening recap of the earlier parts and the tools this part needs (x = r cos θ, s = r θ, the slope of sine)'
-  related: []
-  feedback:
-  - U-CO-101
-  - U-CO-057
-  layout: 'Source line under the storm thumbnails only. No text over the picture or over other text; links never cross text, ticks or each other
-    (the builder checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s03_sphere
   t:
-  - 97.875
-  - 152.3
+  - 37.15
+  - 91.575
   sentence_times:
-  - - 97.875
-    - 99.875
-  - - 100.225
-    - 104.825
-  - - 105.175
-    - 108.55
-  - - 108.9
-    - 112.75
-  - - 113.1
-    - 119.975
-  - - 120.325
-    - 126.4
-  - - 126.75
-    - 133.125
-  - - 133.475
-    - 138.375
-  - - 138.725
-    - 144.65
-  - - 145.0
-    - 148.175
-  - - 148.525
-    - 151.5
+  - - 37.15
+    - 39.15
+  - - 39.5
+    - 44.1
+  - - 44.45
+    - 47.825
+  - - 48.175
+    - 52.025
+  - - 52.375
+    - 59.25
+  - - 59.6
+    - 65.675
+  - - 66.025
+    - 72.4
+  - - 72.75
+    - 77.65
+  - - 78.0
+    - 83.925
+  - - 84.275
+    - 87.45
+  - - 87.8
+    - 90.775
   beat: 'building block: spherical coordinates (origin at the centre; a distance and two angles)'
   visual: 'Unzoomed globe from frame 0, keyword ''sphere'' in the column. S2-S4: the globe turns slowly; on AT(4,''the Earth''s centre'') the
     globe becomes 70 % transparent for 2 s and a gold dot shows the centre inside it, then the globe returns to opaque. S5: three points light
@@ -968,12 +1256,11 @@ scenes:
     on AT(6,''which we call r''): the line to Brest is labelled ''r'' at its middle (teal). S7: two small angle arcs at the centre fade in, unlabelled
     (slate). S8: keyword ''spherical coordinates'' (54 px). S9: keywords ''latitude'', ''longitude''. S10-S11: a gold knife plane fades in through
     the axis and Brest (preview of s04).'
-  voiceover: 'Let''s start with the shape. The Earth is very nearly a ball, a sphere, so let''s treat it as one. On the flat map, we measured
-    from an origin. On the Earth, the natural origin is the Earth''s centre. Then any point, on the ground, up in the air, or deep underground,
-    can be pinned down by three numbers. The first is its distance from the centre, which we call r, just as on the flat map. The other two are
-    angles, which say in which direction the point lies, as seen from the centre. A distance and two angles like this are called spherical coordinates.
-    On the Earth, the two angles are the ones you know from maps: latitude and longitude. But the centre is hidden deep inside the Earth. So to
-    see it, let''s cut the Earth open.'
+  voiceover: 'Let''s start with the shape. The Earth is very nearly a ball, a sphere, so let''s treat it as one. On the flat map, we measured from an origin.
+    On the Earth, the natural origin is the Earth''s centre. Then any point, on the ground, up in the air, or deep underground, can be pinned down by three
+    numbers. The first is its distance from the centre, which we call r, just as on the flat map. The other two are angles, which say in which direction the
+    point lies, as seen from the centre. A distance and two angles like this are called spherical coordinates. On the Earth, the two angles are the ones you
+    know from maps: latitude and longitude. But the centre is hidden deep inside the Earth. So to see it, let''s cut the Earth open.'
   on_screen_eq: null
   physics_source:
     fn: fluidpy.geo.sphere.unit_vector; fluidpy.core.coords.spherical_from_cartesian (r and two angles)
@@ -1003,31 +1290,31 @@ scenes:
     Opening keyword from frame 0 (Should 18).'
 - id: s04_slice_radius
   t:
-  - 152.3
-  - 215.575
+  - 91.575
+  - 154.85
   sentence_times:
-  - - 152.3
-    - 162.875
-  - - 163.225
-    - 168.45
-  - - 168.8
-    - 171.975
-  - - 172.325
-    - 176.0
-  - - 176.35
-    - 180.625
-  - - 180.975
-    - 188.275
-  - - 189.775
-    - 194.1
-  - - 194.45
-    - 196.125
-  - - 196.475
-    - 199.975
-  - - 200.325
-    - 208.3
-  - - 208.65
-    - 214.775
+  - - 91.575
+    - 102.15
+  - - 102.5
+    - 107.725
+  - - 108.075
+    - 111.25
+  - - 111.6
+    - 115.275
+  - - 115.625
+    - 119.9
+  - - 120.25
+    - 127.55
+  - - 129.05
+    - 133.375
+  - - 133.725
+    - 135.4
+  - - 135.75
+    - 139.25
+  - - 139.6
+    - 147.575
+  - - 147.925
+    - 154.05
   beat: 'building block: the sliced Earth, r from the centre, the Earth''s radius a (Must 17, U-CO-033, U-CO-050)'
   visual: 'Sliced Earth: kit_cp HalfEarthMesh (the cross-product Part 2 slice, UV2-20) with lon0 = the meridian of the place; outside textured,
     the flat cut face a warm dark-grey section with faint interior rings (decorative), the Earth''s centre a gold dot, the spin axis slate through
@@ -1038,13 +1325,12 @@ scenes:
     radius'', then ''a ≈ 6400 km'' (easy, 68 px) and ''(6371 km)'' (exact, 54 px, muted), each on its spoken number, with a gold link from the
     column to the arrow''s middle. S7-S8 on AT(8,''We call it a''): the arrow''s tag changes ''r'' -> ''a'' (KaTeX), the keyword ''a'' pulses.
     S9: column ''r = a on the ground''. S10: a tiny balloon icon 10 km above Brest (height drawn x50) with the calc row ''10 ÷ 6371 ≈ 0.16 %''.'
-  voiceover: Imagine slicing the Earth in half with a flat knife that passes through the North Pole, the South Pole, and the city of Brest, a
-    port at the western tip of France. Now we can see the flat face of the cut, with the Earth's centre in the middle of it. Let's draw an arrow
-    from the centre to Brest. Its length is Brest's distance from the centre, r. For any place on the ground, that length is the Earth's radius.
-    It's about six thousand four hundred kilometres, or more exactly, six thousand three hundred and seventy one. [beat] It's used in so many
-    formulas that it gets its own letter. We call it a. So for places on the ground, r equals a. A weather balloon ten kilometres up is only ten
-    kilometres farther from the centre, about a sixth of one percent more. That's why, for the weather, we can usually use the Earth's radius
-    for every height in the air.
+  voiceover: Imagine slicing the Earth in half with a flat knife that passes through the North Pole, the South Pole, and the city of Brest, a port at the
+    western tip of France. Now we can see the flat face of the cut, with the Earth's centre in the middle of it. Let's draw an arrow from the centre to Brest.
+    Its length is Brest's distance from the centre, r. For any place on the ground, that length is the Earth's radius. It's about six thousand four hundred
+    kilometres, or more exactly, six thousand three hundred and seventy one. [beat] It's used in so many formulas that it gets its own letter. We call it
+    a. So for places on the ground, r equals a. A weather balloon ten kilometres up is only ten kilometres farther from the centre, about a sixth of one percent
+    more. That's why, for the weather, we can usually use the Earth's radius for every height in the air.
   on_screen_eq:
     latex: a\approx 6400\ \text{km}\quad(6371\ \text{km})
     vallis_eq: 'Vallis §2.2.2 (p. 61): ''If a is the radius of the Earth'' (the symbol a); value fluidpy.geo.constants.EARTH_RADIUS (mean radius)'
@@ -1082,31 +1368,31 @@ scenes:
     checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s05_latitude
   t:
-  - 215.575
-  - 271.275
+  - 154.85
+  - 210.55
   sentence_times:
-  - - 215.575
-    - 218.125
-  - - 218.475
-    - 222.95
-  - - 223.3
-    - 229.325
-  - - 229.675
-    - 232.4
-  - - 232.75
-    - 239.175
-  - - 240.675
-    - 245.15
-  - - 245.5
-    - 248.05
-  - - 248.4
-    - 253.1
-  - - 253.45
-    - 257.325
-  - - 257.675
-    - 263.15
-  - - 263.5
-    - 270.475
+  - - 154.85
+    - 157.4
+  - - 157.75
+    - 162.225
+  - - 162.575
+    - 168.6
+  - - 168.95
+    - 171.675
+  - - 172.025
+    - 178.45
+  - - 179.95
+    - 184.425
+  - - 184.775
+    - 187.325
+  - - 187.675
+    - 192.375
+  - - 192.725
+    - 196.6
+  - - 196.95
+    - 202.425
+  - - 202.775
+    - 209.75
   beat: 'building block: latitude phi as an angle at the centre (U-CO-034: the 48.4-deg angle visibly drawn)'
   visual: 'The half-Earth from s04, face turned 15 deg from frontal (never edge-on: U-CO-034), camera fixed. S1-S2: a slate line draws from the
     centre to the equator point on the face''s rim (''equator'' label outside the globe edge). S3 on AT(3,''the angle between''): a gold arc (8
@@ -1115,12 +1401,11 @@ scenes:
     S7-S10: a ghost arrow swings to the equator (''φ = 0°''), to 45 deg (''45°''), to the North Pole (''90° N'', right of and below the pole dot,
     inside the frame: Must 10), to the South Pole (''−90°'' with the ''−'' glyph, rose); each label on its words; then the ghost returns to Brest.
     S11: the column shows the range ''−90° … +90°''.'
-  voiceover: Now let's measure the first angle. On the cut face, draw a line from the centre out to the equator. Latitude is the angle between
-    that line and the arrow to the place, measured at the centre. We write it with the Greek letter phi. For Brest, the arrow is turned up from
-    the equator line by about forty eight point four degrees. [beat] That's why we say Brest is at forty eight point four degrees north. At the
-    equator, phi is zero. Halfway from the equator to the North Pole, it's forty five degrees. At the North Pole itself, it's ninety degrees north.
-    At the South Pole, it's ninety degrees south, which we write as minus ninety. So latitude says how far north or south a place is, from minus
-    ninety to plus ninety degrees.
+  voiceover: Now let's measure the first angle. On the cut face, draw a line from the centre out to the equator. Latitude is the angle between that line and
+    the arrow to the place, measured at the centre. We write it with the Greek letter phi. For Brest, the arrow is turned up from the equator line by about
+    forty eight point four degrees. [beat] That's why we say Brest is at forty eight point four degrees north. At the equator, phi is zero. Halfway from the
+    equator to the North Pole, it's forty five degrees. At the North Pole itself, it's ninety degrees north. At the South Pole, it's ninety degrees south,
+    which we write as minus ninety. So latitude says how far north or south a place is, from minus ninety to plus ninety degrees.
   on_screen_eq:
     latex: \varphi_{\text{Brest}}\approx 48.4^\circ\ \text{N}
     vallis_eq: Vallis §2.2.2 (p. 61) coordinates (λ, ϑ, r) and Fig. 2.3 (p. 62); Kundu App. B §B.5 spherical polar coordinates with colatitude
@@ -1151,55 +1436,58 @@ scenes:
     inside the wedge or beside the pole dot, never on the arc or the globe limb. No text over the picture or over other text; links never cross
     text, ticks or each other (the builder checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s06_parallel
+  remake_2026_11_07: 'fact-check row 5: the parallel''s full list (central Europe, Ukraine, southern Russia, Kazakhstan, far west of China, Mongolia, north-east
+    China, Russia''s Far East; the Pacific, Vancouver Island, northern United States, eastern Canada, the Atlantic); 13 labels on their words, the added ones
+    at the middle of their Natural Earth crossing segment (cs.json par48.seg).'
   t:
-  - 271.275
-  - 350.65
+  - 210.55
+  - 297.95
   sentence_times:
-  - - 271.275
-    - 274.35
-  - - 274.7
-    - 277.8
-  - - 278.15
-    - 288.25
-  - - 288.6
-    - 293.1
-  - - 293.45
-    - 298.475
-  - - 298.825
-    - 305.15
-  - - 305.5
-    - 313.275
-  - - 313.625
-    - 320.8
-  - - 321.15
-    - 325.75
-  - - 326.1
-    - 329.625
-  - - 329.975
-    - 333.875
-  - - 334.225
-    - 337.775
-  - - 338.125
-    - 346.05
-  - - 346.4
-    - 349.85
+  - - 210.55
+    - 213.625
+  - - 213.975
+    - 217.075
+  - - 217.425
+    - 227.525
+  - - 227.875
+    - 232.375
+  - - 232.725
+    - 237.75
+  - - 238.1
+    - 249.55
+  - - 249.9
+    - 260.575
+  - - 260.925
+    - 268.1
+  - - 268.45
+    - 273.05
+  - - 273.4
+    - 276.925
+  - - 277.275
+    - 281.175
+  - - 281.525
+    - 285.075
+  - - 285.425
+    - 293.35
+  - - 293.7
+    - 297.15
   beat: 'building block: the parallel (a circle round the axis), then sliced across (U-CO-036)'
   visual: 'S1-S2: the halves rejoin (1 s) and the whole globe turns slowly eastwards. S3: Brest''s arrow sweeps round the axis like a cone (the
     gold wedge kept at 48.4 deg to the equator plane), its tip leaving an orange trail: the parallel. S4: column ''same latitude 48.4°''. S5 on
-    AT(5,''parallel''): keyword ''parallel'' (54 px), the orange ring brightens. S6-S7: the camera follows the ring east; labels ''central Europe'',
-    ''Ukraine'', ''Kazakhstan'', ''Mongolia'', ''United States'', ''Canada'', ''Atlantic'' on their words, each a short label at its spot, centred
+    AT(5,''parallel''): keyword ''parallel'' (54 px), the orange ring brightens. S6-S7: the camera follows the ring east; labels ''central Europe'', ''Ukraine'', ''Russia'', ''Kazakhstan'', ''China'', ''Mongolia'', ''China'', ''Russia'', ''Pacific'', ''Vancouver Island'', ''United States'', ''Canada'', ''Atlantic'' on their words (fact-check row 5), each a short label at its spot, centred
     within 1 s (Natural Earth crossings, CHECK DS05); the camera returns to Brest. S8 on AT(8,''straight across''): a horizontal knife plane cuts
     at 48.4 N; the cap above lifts away 300 px and fades to 20 %, showing the flat disc (orange rim). S9-S10: the disc''s centre dot (slate) on
     the axis; the Earth''s centre dot (gold) below it; a short slate bracket ''not the same centre''. S11: column ''parallel = circle round the
     axis''. S12: six thin parallel rings (0, 15 … 75 deg) shrinking towards the pole. S13: the cap returns.'
-  voiceover: 'Which other places share Brest''s latitude? Let''s put the Earth back together and turn it. Brest''s arrow sweeps round the Earth''s
-    axis, always at forty eight point four degrees above the equator plane, and its tip traces a circle round the globe. Every place on that circle
-    has the same latitude as Brest. This circle is called a parallel, because it runs parallel to the equator. Brest''s parallel runs east through
-    central Europe, Ukraine, Kazakhstan and Mongolia. Then it runs on round through the northern United States and eastern Canada, and back across
-    the Atlantic to Brest. Now let''s slice the Earth the other way: straight across, through Brest''s parallel, at right angles to the axis.
-    The cut face is a flat disc, and its rim is Brest''s parallel. The centre of this disc is not the Earth''s centre. It sits on the Earth''s
-    axis, above the equator plane. So a parallel is a circle round the Earth''s axis. The equator is the biggest parallel, and the parallels get
-    smaller and smaller towards the poles, where they shrink to a point. We''ll measure the size of Brest''s parallel very soon.'
+  voiceover: 'Which other places share Brest''s latitude? Let''s put the Earth back together and turn it. Brest''s arrow sweeps round the Earth''s axis, always
+    at forty eight point four degrees above the equator plane, and its tip traces a circle round the globe. Every place on that circle has the same latitude
+    as Brest. This circle is called a parallel, because it runs parallel to the equator. Brest''s parallel runs east through central Europe, Ukraine, southern
+    Russia, Kazakhstan, the far west of China, Mongolia, north-east China and Russia''s Far East. Then it crosses the Pacific, the southern tip of Vancouver
+    Island, the northern United States and eastern Canada, and comes back across the Atlantic to Brest. Now let''s slice the Earth the other way: straight
+    across, through Brest''s parallel, at right angles to the axis. The cut face is a flat disc, and its rim is Brest''s parallel. The centre of this disc
+    is not the Earth''s centre. It sits on the Earth''s axis, above the equator plane. So a parallel is a circle round the Earth''s axis. The equator is the
+    biggest parallel, and the parallels get smaller and smaller towards the poles, where they shrink to a point. We''ll measure the size of Brest''s parallel
+    very soon.'
   on_screen_eq: null
   physics_source:
     fn: fluidpy.geo.sphere.parallel_points (radius a cos phi); fluidpy.data.naturalearth.read_records (admin-0 crossings of 48.4 N)
@@ -1227,40 +1515,40 @@ scenes:
     Opening keyword from frame 0 (Should 18).'
 - id: s07_colatitude
   t:
-  - 350.65
-  - 401.675
+  - 297.95
+  - 349.3
   sentence_times:
-  - - 350.65
-    - 354.075
-  - - 354.425
-    - 357.525
-  - - 357.875
-    - 365.55
-  - - 365.9
-    - 368.8
-  - - 369.15
-    - 375.575
-  - - 375.925
-    - 380.225
-  - - 380.575
-    - 386.875
-  - - 388.375
-    - 391.45
-  - - 391.8
-    - 395.55
-  - - 395.9
-    - 400.875
+  - - 297.95
+    - 301.375
+  - - 301.725
+    - 304.825
+  - - 305.175
+    - 312.85
+  - - 313.2
+    - 316.1
+  - - 316.45
+    - 322.875
+  - - 323.225
+    - 327.525
+  - - 327.875
+    - 334.5
+  - - 336.0
+    - 339.075
+  - - 339.425
+    - 343.175
+  - - 343.525
+    - 348.5
   beat: 'building block: colatitude (an angle from the pole) vs the parallel (a circle) (U-CO-035)'
   visual: 'Back to the half-Earth face (camera continuity with s05). The gold phi wedge stays. S2 on AT(2,''start from the North Pole''): a slate
     arc opens at the centre from the axis down to the Brest arrow (slate 15 % wedge); S3 on AT(3,''colatitude''): keyword ''colatitude'' (slate)
     beside the wedge''s outer edge. S4: a right-angle tick between the axis and the equator line; both wedges pulse in turn; column ''φ + colatitude
     = 90°''. S5: ''colatitude = 90° − φ''. S6: CalcStack ''90° − 48.4° = 41.6°''. S7-S9: contrast in the column: a small slate angle glyph with
     ''colatitude: an angle'', a small orange ring glyph with ''parallel: a circle''; on the globe the parallel ring (orange) fades in for S9 only.'
-  voiceover: There's a second way to measure the same direction. You'll meet it in many maths and physics books. Instead of starting from the
-    equator, start from the North Pole, and measure the angle down from the Earth's axis to the arrow. This angle is called the colatitude. Latitude
-    and colatitude together fill the right angle between the equator plane and the axis. So the colatitude is ninety degrees minus the latitude.
-    For Brest, it's ninety minus forty eight point four, which is forty one point six degrees. [beat] Be careful not to mix up two words here.
-    The colatitude is an angle, measured at the centre. A parallel is a circle, made of all the places with the same latitude.
+  voiceover: There's a second way to measure the same direction. You'll meet it in many maths and physics books. Instead of starting from the equator, start
+    from the North Pole, and measure the angle down from the Earth's axis to the arrow. This angle is called the colatitude. Latitude and colatitude together
+    fill the right angle between the equator plane and the axis. So the colatitude is ninety degrees minus the latitude. For Brest, taking its latitude away
+    from ninety degrees leaves forty one point six degrees. [beat] Be careful not to mix up two words here. The colatitude is an angle, measured at the centre.
+    A parallel is a circle, made of all the places with the same latitude.
   on_screen_eq:
     latex: \text{colatitude}=90^\circ-\varphi
     vallis_eq: 'Vallis §2.2.2 (p. 61): ''In some other fields of study co-latitude is used''; Kundu App. B §B.5 uses colatitude θ (page image)'
@@ -1290,52 +1578,56 @@ scenes:
     the picture or over other text; links never cross text, ticks or each other (the builder checks its own stills: K6 cannot see these). No headings.
     Opening keyword from frame 0 (Should 18).'
 - id: s08_sin_cos_swap
+  recalls:
+  - at: S8 'From Part 1, the side next to an angle'
+    latex: x=r\cos\theta,\ \ y=r\sin\theta
+    keyword: 'derived in Part 1: polar coordinates'
   t:
-  - 401.675
-  - 529.375
+  - 349.3
+  - 477.0
   sentence_times:
-  - - 401.675
-    - 404.825
-  - - 405.175
-    - 408.2
-  - - 408.55
-    - 414.575
-  - - 414.925
-    - 422.75
-  - - 423.1
-    - 425.875
-  - - 426.225
-    - 429.9
-  - - 430.25
-    - 436.1
-  - - 436.45
-    - 440.725
-  - - 441.075
-    - 450.475
-  - - 450.825
-    - 454.525
-  - - 454.875
-    - 459.875
-  - - 460.225
-    - 465.025
-  - - 465.375
-    - 469.75
-  - - 470.1
-    - 475.1
-  - - 475.45
-    - 480.575
-  - - 480.925
-    - 487.475
-  - - 487.825
-    - 496.275
-  - - 496.625
-    - 501.45
-  - - 501.8
-    - 508.625
-  - - 508.975
-    - 518.8
-  - - 520.3
-    - 528.575
+  - - 349.3
+    - 352.45
+  - - 352.8
+    - 355.825
+  - - 356.175
+    - 362.2
+  - - 362.55
+    - 370.375
+  - - 370.725
+    - 373.5
+  - - 373.85
+    - 377.525
+  - - 377.875
+    - 383.725
+  - - 384.075
+    - 388.35
+  - - 388.7
+    - 398.1
+  - - 398.45
+    - 402.15
+  - - 402.5
+    - 407.5
+  - - 407.85
+    - 412.65
+  - - 413.0
+    - 417.375
+  - - 417.725
+    - 422.725
+  - - 423.075
+    - 428.2
+  - - 428.55
+    - 435.1
+  - - 435.45
+    - 443.9
+  - - 444.25
+    - 449.075
+  - - 449.425
+    - 456.25
+  - - 456.6
+    - 466.425
+  - - 467.925
+    - 476.2
   beat: 'derivation D26: sine and cosine swap places (U-CO-037)'
   visual: 'TwoViewSlice (new kit_co component, promote to house/kit on second use): left x 80-940 the three.js slice, right x 980-1840 the same
     cut face drawn flat in SVG; ONE item list {kind, frame} drives both views, so every item (centre, axis, equator line, arrow, angle arc, dropped
@@ -1352,19 +1644,18 @@ scenes:
     the one allowed chip): on AT(4,''skip ahead'') a small rounded chip, top-right of the column (x 1500-1840, y 60-150, 44 px, warm white on
     a 20 % gold fill, no border): ''every step · optional'' / ''skip to {mm:ss}'' (mm:ss = the landing sentence''s
     start in the final timing.json, filled by the builder); it stays 8 s, fades over 0.5 s, never over the picture.'
-  voiceover: Why does it matter which angle a book uses? Because sine and cosine swap places. The next minute and a half shows exactly why, for
-    anyone who likes to see every step. You don't need it for the intuition of weather, climate science or mapping, so feel free to skip ahead
-    to the time on screen. Let's see why, on one triangle. Take the arrow to Brest, but shrink it to length one. From its tip, drop a line straight
-    down to the equator plane, parallel to the axis. Together with the equator line, this makes a right triangle. From Part 1, the side next to
-    an angle is the long side times the cosine, and the side opposite it is the long side times the sine. At the centre, the angle is the latitude,
-    phi. The side next to it lies along the equator plane, so it's cosine phi. The side opposite it runs parallel to the axis, so it's sine phi.
-    Now look from the triangle's other sharp corner, at Brest's end. The three angles of a triangle add up to a hundred and eighty degrees. The
-    right angle takes ninety, so the two sharp angles share the other ninety. So the angle at Brest's end is ninety degrees minus phi, which is
-    exactly the colatitude. From that corner, the side next to it is the one parallel to the axis, and the side opposite it is the one in the
-    equator plane. Same triangle, same sides, but next and opposite have swapped. So the sine of the colatitude equals cosine phi, and the cosine
-    of the colatitude equals sine phi. For Brest, the sine of forty one point six degrees is zero point six six three nine, and so is the cosine
-    of forty eight point four degrees. [beat] So wherever this video has a sine of the latitude, a book that uses the colatitude has a cosine,
-    and the other way round.
+  voiceover: Why does it matter which angle a book uses? Because sine and cosine swap places. The next minute and a half shows exactly why, for anyone who
+    likes to see every step. You don't need it for the intuition of weather, climate science or mapping, so feel free to skip ahead to the time on screen.
+    Let's see why, on one triangle. Take the arrow to Brest, but shrink it to length one. From its tip, drop a line straight down to the equator plane, parallel
+    to the axis. Together with the equator line, this makes a right triangle. From Part 1, the side next to an angle is the long side times the cosine, and
+    the side opposite it is the long side times the sine. At the centre, the angle is the latitude, phi. The side next to it lies along the equator plane,
+    so it's cosine phi. The side opposite it runs parallel to the axis, so it's sine phi. Now look from the triangle's other sharp corner, at Brest's end.
+    The three angles of a triangle add up to a hundred and eighty degrees. The right angle takes ninety, so the two sharp angles share the other ninety. So
+    the angle at Brest's end is ninety degrees minus phi, which is exactly the colatitude. From that corner, the side next to it is the one parallel to the
+    axis, and the side opposite it is the one in the equator plane. Same triangle, same sides, but next and opposite have swapped. So the sine of the colatitude
+    equals cosine phi, and the cosine of the colatitude equals sine phi. For Brest, the sine of forty one point six degrees is zero point six six three nine,
+    and so is the cosine of forty eight point four degrees. [beat] So wherever this video has a sine of the latitude, a book that uses the colatitude has
+    a cosine, and the other way round.
   on_screen_eq:
     latex: \sin(90^\circ-\varphi)=\cos\varphi,\qquad \cos(90^\circ-\varphi)=\sin\varphi
     vallis_eq: 'none: arithmetic or a definition (no book equation) (trigonometry; the bridge between Vallis''s latitude and Kundu App. B''s colatitude)'
@@ -1421,31 +1712,31 @@ scenes:
     builder checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s09_meridians
   t:
-  - 529.375
-  - 590.725
+  - 477.0
+  - 538.35
   sentence_times:
-  - - 529.375
-    - 532.05
-  - - 532.4
-    - 541.8
-  - - 542.15
-    - 544.325
-  - - 544.675
-    - 548.3
-  - - 548.65
-    - 556.675
-  - - 557.025
-    - 560.05
-  - - 560.4
-    - 568.375
-  - - 568.725
-    - 574.55
-  - - 574.9
-    - 579.825
-  - - 580.175
-    - 584.95
-  - - 585.3
-    - 589.925
+  - - 477.0
+    - 479.675
+  - - 480.025
+    - 489.425
+  - - 489.775
+    - 491.95
+  - - 492.3
+    - 495.925
+  - - 496.275
+    - 504.3
+  - - 504.65
+    - 507.675
+  - - 508.025
+    - 516.0
+  - - 516.35
+    - 522.175
+  - - 522.525
+    - 527.45
+  - - 527.8
+    - 532.575
+  - - 532.925
+    - 537.55
   beat: 'building block: meridians (U-CO-038, U-CO-039)'
   visual: 'Whole globe, camera at 30 deg N above the Atlantic. S2 on AT(2,''Start at the North Pole''): the camera rises to look at the pole from
     60 deg N; S2-S3: an orange line draws from the North Pole due south while the camera follows its tip down the globe (top -> bottom, about
@@ -1456,13 +1747,12 @@ scenes:
     centre (gold dot). S9: a parallel ring beside it, its centre on the axis (slate); keyword ''centre vs axis''. KEEP LINE (user rule 2026-11-05):
     S1 is the ''If you skipped, here''s what to keep'' sentence; during it the takeaway keyword ''colatitude from the pole: sin ↔ cos'' (54 px,
     warm white, gold underline) sits at the top of the column, then moves to its usual place.'
-  voiceover: If you skipped, here's what to keep. The colatitude is measured down from the pole, so a book that uses it has a cosine wherever
-    we have a sine of the latitude, and the other way round. Now for the second angle. First, we need another kind of line on the globe. Start
-    at the North Pole, and draw a line straight down the globe, heading due south all the way, until it reaches the South Pole. This half circle
-    is called a meridian. All along one meridian, the Sun is highest in the sky at the same moment, at midday, and that's where the name comes
-    from. Let's turn the globe and draw more of them, twelve, evenly spaced all the way round. Every meridian runs from pole to pole, and they
-    all meet at the poles. Each one is half of a big circle whose centre is the Earth's centre. That's the difference from the parallels, whose
-    centres sit on the axis.
+  voiceover: If you skipped, here's what to keep. The colatitude is measured down from the pole, so a book that uses it has a cosine wherever we have a sine
+    of the latitude, and the other way round. Now for the second angle. First, we need another kind of line on the globe. Start at the North Pole, and draw
+    a line straight down the globe, heading due south all the way, until it reaches the South Pole. This half circle is called a meridian. All along one meridian,
+    the Sun is highest in the sky at the same moment, at midday, and that's where the name comes from. Let's turn the globe and draw more of them, twelve,
+    evenly spaced all the way round. Every meridian runs from pole to pole, and they all meet at the poles. Each one is half of a big circle whose centre
+    is the Earth's centre. That's the difference from the parallels, whose centres sit on the axis.
   on_screen_eq: null
   physics_source:
     fn: fluidpy.geo.sphere.meridian_points (half great circles)
@@ -1502,37 +1792,37 @@ scenes:
     Opening keyword from frame 0 (Should 18).'
 - id: s10_prime_meridian
   t:
-  - 590.725
-  - 679.95
+  - 538.35
+  - 627.575
   sentence_times:
-  - - 590.725
-    - 594.325
-  - - 594.675
-    - 601.625
-  - - 601.975
-    - 604.275
-  - - 604.625
-    - 608.325
-  - - 608.675
-    - 613.425
-  - - 613.775
-    - 623.225
-  - - 623.575
-    - 630.075
-  - - 630.425
-    - 638.3
-  - - 638.65
-    - 645.1
-  - - 645.45
-    - 651.825
-  - - 652.175
-    - 661.2
-  - - 661.55
-    - 667.15
-  - - 667.5
-    - 674.325
-  - - 674.675
-    - 679.15
+  - - 538.35
+    - 541.95
+  - - 542.3
+    - 549.25
+  - - 549.6
+    - 551.9
+  - - 552.25
+    - 555.95
+  - - 556.3
+    - 561.05
+  - - 561.4
+    - 570.85
+  - - 571.2
+    - 577.7
+  - - 578.05
+    - 585.925
+  - - 586.275
+    - 592.725
+  - - 593.075
+    - 599.45
+  - - 599.8
+    - 608.825
+  - - 609.175
+    - 614.775
+  - - 615.125
+    - 621.95
+  - - 622.3
+    - 626.775
   beat: 'building block: the prime meridian tour, pole to pole (U-CO-040)'
   visual: 'Zoom-reveal (HOUSE_STYLE §5b): the globe goes full-bleed (dist 4.3 -> 2.4 over 1.5 s), the keyword column on the faded right. S1: the
     0-deg meridian turns gold. S2 on AT(2,''Greenwich''): ''Greenwich'' with a gold dot in London. S4: the camera flies to the North Pole and
@@ -1609,38 +1899,42 @@ scenes:
     never cross text, ticks or each other (the builder checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0
     (Should 18).'
 - id: s11_longitude
+  recalls:
+  - at: S7-S9 'the same way the angle theta turned in Part 1'
+    latex: \theta\ \text{anticlockwise from east}
+    keyword: 'defined in Part 1: polar angle'
   t:
-  - 679.95
-  - 768.575
+  - 627.575
+  - 715.425
   sentence_times:
-  - - 679.95
-    - 682.725
-  - - 683.075
-    - 686.95
-  - - 687.3
-    - 693.025
-  - - 693.375
-    - 699.425
-  - - 699.775
-    - 705.8
-  - - 706.15
-    - 712.95
-  - - 713.3
-    - 716.15
-  - - 716.5
-    - 724.025
-  - - 724.375
-    - 730.625
-  - - 730.975
-    - 736.7
-  - - 737.05
-    - 744.075
-  - - 745.575
-    - 752.15
-  - - 752.5
-    - 760.725
-  - - 762.225
-    - 767.775
+  - - 627.575
+    - 630.35
+  - - 630.7
+    - 634.575
+  - - 634.925
+    - 640.65
+  - - 641.0
+    - 647.05
+  - - 647.4
+    - 653.425
+  - - 653.775
+    - 660.575
+  - - 660.925
+    - 663.775
+  - - 664.125
+    - 671.65
+  - - 672.0
+    - 678.25
+  - - 678.6
+    - 684.325
+  - - 684.675
+    - 691.7
+  - - 693.2
+    - 699.775
+  - - 700.125
+    - 707.575
+  - - 709.075
+    - 714.625
   beat: 'building block: longitude lambda as an angle at the centre (top view, equatorial slice)'
   visual: 'S1-S2: the camera rises above the North Pole (<= 60 deg/s); the meridians look like spokes. S3 on AT(4,''slice the Earth across''):
     a horizontal knife plane at the equator; the northern half lifts and fades to 20 %; the round face of the equatorial cut faces the camera,
@@ -1649,15 +1943,14 @@ scenes:
     with a x6 magnifier inset in the column; KaTeX ''λ'' at the wedge. S7: a curved arrow on the rim ''east'' (anticlockwise seen from above).
     S8-S9: ''+'' arc to the east up to 180, ''−'' (rose, with the glyph) to the west. S10: column ''λ = −4.5°'' (84 px). S11-S12: a 0-360 ruler
     slides under it: ''360° − 4.5° = 355.5°''. S13: a gold ''same meridian'' tick linking the two numbers.'
-  voiceover: Now we can define the second angle. Let's look down on the Earth from far above the North Pole. From up here, every meridian looks
-    like a spoke of a wheel, running out from the pole. Now slice the Earth across, along the equator, and look at the round face of the cut.
-    Its centre is the Earth's centre, and the meridians meet its rim like the ends of the spokes. Longitude is the angle at the centre, from the
-    prime meridian round to the meridian of the place. We write it with the Greek letter lambda. Seen from above the North Pole, east is anticlockwise,
-    the same way the angle theta turned in Part 1. Places east of Greenwich have positive longitude, up to a hundred and eighty degrees east.
-    Places to the west have negative longitude, down to minus a hundred and eighty. Brest is about four and a half degrees west of Greenwich,
-    so its lambda is minus four point five degrees. [beat] Some data sets count longitude from zero to three hundred and sixty degrees, always
-    going east. Then Brest is at three hundred and sixty minus four point five, which is three hundred and fifty five point five degrees. [beat]
-    Both numbers point to the same meridian, so always check which way your data counts.
+  voiceover: Now we can define the second angle. Let's look down on the Earth from far above the North Pole. From up here, every meridian looks like a spoke
+    of a wheel, running out from the pole. Now slice the Earth across, along the equator, and look at the round face of the cut. Its centre is the Earth's
+    centre, and the meridians meet its rim like the ends of the spokes. Longitude is the angle at the centre, from the prime meridian round to the meridian
+    of the place. We write it with the Greek letter lambda. Seen from above the North Pole, east is anticlockwise, the same way the angle theta turned in
+    Part 1. Places east of Greenwich have positive longitude, up to a hundred and eighty degrees east. Places to the west have negative longitude, down to
+    minus a hundred and eighty. Brest is about four and a half degrees west of Greenwich, so its lambda is minus four point five degrees. [beat] Some data
+    sets count longitude from zero to three hundred and sixty degrees, always going east. Then Brest, four and a half degrees short of a full turn, is at
+    three hundred and fifty five point five degrees. [beat] Both numbers point to the same meridian, so always check which way your data counts.
   on_screen_eq:
     latex: \lambda_{\text{Brest}}\approx-4.5^\circ\ \ (=355.5^\circ\ \text{in }0\text{–}360)
     vallis_eq: Vallis §2.2.2 (p. 61) coordinates (λ, ϑ, r) and Fig. 2.3 (p. 62); Kundu App. B §B.5 spherical polar coordinates with colatitude
@@ -1690,25 +1983,25 @@ scenes:
     Opening keyword from frame 0 (Should 18).'
 - id: s12_graticule
   t:
-  - 768.575
-  - 825.15
+  - 715.425
+  - 772.0
   sentence_times:
-  - - 768.575
-    - 772.075
-  - - 772.425
-    - 780.975
-  - - 781.325
-    - 792.475
-  - - 792.825
-    - 797.05
-  - - 797.4
-    - 806.4
-  - - 806.75
-    - 811.3
-  - - 811.65
-    - 816.25
-  - - 816.6
-    - 824.35
+  - - 715.425
+    - 718.925
+  - - 719.275
+    - 727.825
+  - - 728.175
+    - 739.325
+  - - 739.675
+    - 743.9
+  - - 744.25
+    - 753.25
+  - - 753.6
+    - 758.15
+  - - 758.5
+    - 763.1
+  - - 763.45
+    - 771.2
   beat: 'building block: the graticule, drawn line by line (U-CO-041)'
   visual: 'Whole globe, camera at 20 deg N. S1-S2: meridians every 15 deg draw one by one (slate, 4 px), the spoken ones tagged ''0°'', ''15°
     E'', ''30° E'' at the equator; the globe turns so each one passes the centre. S3: parallels every 15 deg draw from the equator up and down
@@ -1716,12 +2009,12 @@ scenes:
     S4 on AT(4,''graticule''): keyword ''graticule'' (54 px). S5: one crossing near the camera gets a gold right-angle tick. S6-S7: column ''place
     = (latitude, longitude)''. S8: Brest''s parallel and meridian highlight (orange, slate) and meet in a gold dot with ''Brest (48.4° N, 4.5°
     W)''.'
-  voiceover: 'Now let''s cover the globe with both kinds of line. First, the meridians, one every fifteen degrees of longitude: zero, fifteen
-    east, thirty east, and all the way round. Then the parallels, one every fifteen degrees of latitude: the equator, fifteen north, thirty north,
-    forty five, sixty and seventy five, and the same to the south. Together, they make a grid on the globe, called the graticule. Every meridian
-    crosses every parallel at a right angle, because the meridians run north and south, and the parallels run east and west. Any place on Earth
-    sits where one parallel meets one meridian. So two numbers, its latitude and its longitude, pin it down. Brest sits where the parallel at
-    forty eight point four degrees north meets the meridian at four point five degrees west.'
+  voiceover: 'Now let''s cover the globe with both kinds of line. First, the meridians, one every fifteen degrees of longitude: zero, fifteen east, thirty
+    east, and all the way round. Then the parallels, one every fifteen degrees of latitude: the equator, fifteen north, thirty north, forty five, sixty and
+    seventy five, and the same to the south. Together, they make a grid on the globe, called the graticule. Every meridian crosses every parallel at a right
+    angle, because the meridians run north and south, and the parallels run east and west. Any place on Earth sits where one parallel meets one meridian.
+    So two numbers, its latitude and its longitude, pin it down. Brest sits where the parallel at forty eight point four degrees north meets the meridian
+    at four point five degrees west.'
   on_screen_eq: null
   physics_source:
     fn: fluidpy.geo.sphere.parallel_points, meridian_points
@@ -1746,33 +2039,33 @@ scenes:
     Opening keyword from frame 0 (Should 18).'
 - id: s13_earth_axes
   t:
-  - 825.15
-  - 897.95
+  - 772.0
+  - 844.8
   sentence_times:
-  - - 825.15
-    - 829.9
-  - - 830.25
-    - 840.425
-  - - 840.775
-    - 845.925
-  - - 846.275
-    - 851.025
-  - - 851.375
-    - 859.85
-  - - 860.2
-    - 867.9
-  - - 868.25
-    - 873.525
-  - - 873.875
-    - 877.15
-  - - 877.5
-    - 883.775
-  - - 884.125
-    - 888.95
-  - - 889.3
-    - 893.125
-  - - 893.475
-    - 897.15
+  - - 772.0
+    - 776.75
+  - - 777.1
+    - 787.275
+  - - 787.625
+    - 792.775
+  - - 793.125
+    - 797.875
+  - - 798.225
+    - 806.7
+  - - 807.05
+    - 814.75
+  - - 815.1
+    - 820.375
+  - - 820.725
+    - 824.0
+  - - 824.35
+    - 830.625
+  - - 830.975
+    - 835.8
+  - - 836.15
+    - 839.975
+  - - 840.325
+    - 844.0
   beat: 'derivation D23 (1): the Earth-centred x, y, z axes (U-CO-046)'
   visual: 'Globe 60 % transparent so the centre shows. S3: gold centre dot. S4 on AT(4,''The z axis''): an orange axis line from the centre up
     the spin axis, out through the North Pole, KaTeX ''z'' at its tip. S5 on AT(5,''The x axis''): an axis line to (0 N, 0 E), tip ''x'', with
@@ -1781,13 +2074,13 @@ scenes:
     arrows from the centre along the axes, tagged x̂, ŷ, ẑ (KaTeX hats, orange); column ''x̂ → 0° N 0° E'', ''ŷ → 0° N 90° E'', ''ẑ → North Pole''.
     S8: right-angle ticks between the three. S9: column ''x̂ × ŷ = ẑ'' with a small curl glyph (cross product movie). S10: the globe and the arrows
     turn together (axes fixed to the Earth). S11: column ''goal: Brest''s x, y, z''. S12: two small icons ''side view'', ''top view''.'
-  voiceover: Latitude and longitude tell us where a place is on the surface. But in physics, we often want the place as an arrow in space, from
-    the Earth's centre, with x, y and z parts, like the balloon's arrow in Part 1. For that, we first need three axes, all starting at the Earth's
-    centre. The z axis runs up the Earth's spin axis, towards the North Pole. The x axis runs out to the point where the prime meridian meets
-    the equator, in the Gulf of Guinea, off the coast of West Africa. The y axis runs out to the equator at ninety degrees east, in the Indian
-    Ocean, south of the Bay of Bengal. The arrows of length one along them are called x hat, y hat and z hat. All three are at right angles to
-    each other. They're arranged so that x hat cross y hat gives z hat, as in the cross product movie. And they turn with the Earth, so a city's
-    x, y and z never change. Our goal now is to find Brest's x, y and z. We'll do it in two steps, with one slice each time.
+  voiceover: Latitude and longitude tell us where a place is on the surface. But in physics, we often want the place as an arrow in space, from the Earth's
+    centre, with x, y and z parts, like the balloon's arrow in Part 1. For that, we first need three axes, all starting at the Earth's centre. The z axis
+    runs up the Earth's spin axis, towards the North Pole. The x axis runs out to the point where the prime meridian meets the equator, in the Gulf of Guinea,
+    off the coast of West Africa. The y axis runs out to the equator at ninety degrees east, in the Indian Ocean, south of the Bay of Bengal. The arrows of
+    length one along them are called x hat, y hat and z hat. All three are at right angles to each other. They're arranged so that x hat cross y hat gives
+    z hat, as in the cross product movie. And they turn with the Earth, so a city's x, y and z never change. Our goal now is to find Brest's x, y and z. We'll
+    do it in two steps, with one slice each time.
   on_screen_eq:
     latex: \hat{\mathbf x}\times\hat{\mathbf y}=\hat{\mathbf z}
     vallis_eq: 'none: arithmetic or a definition (no book equation) (definition of Earth-fixed axes; right-handed as in the cross product movie)'
@@ -1814,37 +2107,37 @@ scenes:
     Opening keyword from frame 0 (Should 18).'
 - id: s14_brest_side
   t:
-  - 897.95
-  - 975.35
+  - 844.8
+  - 922.2
   sentence_times:
-  - - 897.95
-    - 904.7
-  - - 905.05
-    - 912.7
-  - - 913.05
-    - 917.325
-  - - 917.675
-    - 919.85
-  - - 920.2
-    - 927.45
-  - - 927.8
-    - 933.175
-  - - 933.525
-    - 936.5
-  - - 936.85
-    - 942.15
-  - - 942.5
-    - 947.35
-  - - 947.7
-    - 952.65
-  - - 953.0
-    - 959.825
-  - - 960.175
-    - 965.9
-  - - 966.25
-    - 969.45
-  - - 969.8
-    - 974.55
+  - - 844.8
+    - 851.55
+  - - 851.9
+    - 859.55
+  - - 859.9
+    - 864.175
+  - - 864.525
+    - 866.7
+  - - 867.05
+    - 874.3
+  - - 874.65
+    - 880.025
+  - - 880.375
+    - 883.35
+  - - 883.7
+    - 889.0
+  - - 889.35
+    - 894.2
+  - - 894.55
+    - 899.5
+  - - 899.85
+    - 906.675
+  - - 907.025
+    - 912.75
+  - - 913.1
+    - 916.3
+  - - 916.65
+    - 921.4
   beat: 'derivation D23 (2): the side view, globe and diagram drawn together (U-CO-042, U-CO-043)'
   visual: 'TwoViewSlice (new kit_co component, promote to house/kit on second use): left x 80-940 the three.js slice, right x 980-1840 the same
     cut face drawn flat in SVG; ONE item list {kind, frame} drives both views, so every item (centre, axis, equator line, arrow, angle arc, dropped
@@ -1859,14 +2152,14 @@ scenes:
     ''right triangle''. SKIP CHIP (user rule 2026-11-05; the one allowed chip): on AT(3,''skip ahead'') a small rounded chip, top-right of the
     column (x 1500-1840, y 60-150, 44 px, warm white on a 20 % gold fill, no border): ''every step · optional'' / ''skip to {mm:ss}'' (mm:ss = the landing sentence''s start in the final timing.json, filled by the builder); it stays 8 s, fades over 0.5
     s, never over the picture.'
-  voiceover: 'The next few minutes build Brest''s position, and then the speed of the spinning ground, one step at a time. They''re here for anyone
-    who wants every step, and you don''t need them for the intuition of weather, climate science or mapping. So if it feels like a lot, skip ahead
-    to the time on screen. First, the side view. Let''s slice the Earth along Brest''s meridian again, and next to it, draw the same cut face
-    flat on the page. Everything we draw on the globe, we''ll draw on the flat diagram at the same moment. Here''s the centre, in both pictures.
-    Here''s the Earth''s axis, pointing up to the North Pole: that''s the z direction. Here''s the line from the centre out to the equator, on
-    Brest''s meridian. Here''s the arrow from the centre to Brest, as long as the Earth''s radius. And here''s the latitude, phi, forty eight
-    point four degrees, between the equator line and the arrow. Now drop a line from Brest straight down to the equator plane, parallel to the
-    axis. It meets the equator line at a right angle. So we have a right triangle, and the arrow to Brest is its long side.'
+  voiceover: 'The next few minutes build Brest''s position, and then the speed of the spinning ground, one step at a time. They''re here for anyone who wants
+    every step, and you don''t need them for the intuition of weather, climate science or mapping. So if it feels like a lot, skip ahead to the time on screen.
+    First, the side view. Let''s slice the Earth along Brest''s meridian again, and next to it, draw the same cut face flat on the page. Everything we draw
+    on the globe, we''ll draw on the flat diagram at the same moment. Here''s the centre, in both pictures. Here''s the Earth''s axis, pointing up to the
+    North Pole: that''s the z direction. Here''s the line from the centre out to the equator, on Brest''s meridian. Here''s the arrow from the centre to Brest,
+    as long as the Earth''s radius. And here''s the latitude, phi, forty eight point four degrees, between the equator line and the arrow. Now drop a line
+    from Brest straight down to the equator plane, parallel to the axis. It meets the equator line at a right angle. So we have a right triangle, and the
+    arrow to Brest is its long side.'
   on_screen_eq: null
   physics_source:
     fn: fluidpy.geo.sphere.unit_vector (Brest); geometry of the meridian plane
@@ -1890,33 +2183,33 @@ scenes:
     builder checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s15_brest_z
   t:
-  - 975.35
-  - 1052.875
+  - 922.2
+  - 992.7
   sentence_times:
-  - - 975.35
-    - 978.4
-  - - 978.75
-    - 985.375
-  - - 985.725
-    - 988.7
-  - - 989.05
-    - 993.525
-  - - 993.875
-    - 997.5
-  - - 997.85
-    - 999.625
-  - - 999.975
-    - 1006.325
-  - - 1006.675
-    - 1012.15
-  - - 1012.5
-    - 1023.95
-  - - 1025.45
-    - 1032.675
-  - - 1034.175
-    - 1042.475
-  - - 1042.825
-    - 1052.075
+  - - 922.2
+    - 925.25
+  - - 925.6
+    - 932.225
+  - - 932.575
+    - 935.55
+  - - 935.9
+    - 940.375
+  - - 940.725
+    - 944.35
+  - - 944.7
+    - 946.475
+  - - 946.825
+    - 953.175
+  - - 953.525
+    - 959.0
+  - - 959.35
+    - 965.75
+  - - 967.25
+    - 972.5
+  - - 974.0
+    - 982.3
+  - - 982.65
+    - 991.9
   beat: 'derivation D23 (3): z = a sin phi with every value labelled (U-CO-046, U-CO-047, U-CO-048)'
   visual: 'TwoViewSlice (new kit_co component, promote to house/kit on second use): left x 80-940 the three.js slice, right x 980-1840 the same
     cut face drawn flat in SVG; ONE item list {kind, frame} drives both views, so every item (centre, axis, equator line, arrow, angle arc, dropped
@@ -1929,14 +2222,13 @@ scenes:
     ''z = 6371 km × 0.7478 ≈ 4764 km''; at the result the leg tag ''z ≈ 4764 km'' appears in BOTH views on the same frame, beside the leg. S9:
     easy row ''6400 × 3/4 = 4800''. S10: an arrowhead on the leg pointing up, ''towards the North Pole''. S11: a ghost southern place (30 S) with
     its leg pointing down and ''z < 0'' (rose, ''−'' glyph).'
-  voiceover: 'What''s Brest''s height above the equator plane? That height is the side of the triangle that runs parallel to the axis, so it''s
-    measured along z. It''s the side opposite the angle phi. By the rule from Part 1, it''s the long side times sine phi. So z equals the Earth''s
-    radius times sine phi. Now the numbers. The long side is the Earth''s radius, six thousand three hundred and seventy one kilometres. The sine
-    of forty eight point four degrees is zero point seven four seven eight. So z is six thousand three hundred and seventy one times zero point
-    seven four seven eight, which is about four thousand seven hundred and sixty four kilometres. [beat] With easy numbers, six thousand four
-    hundred times three quarters is four thousand eight hundred: about the same. [beat] So Brest sits about four thousand seven hundred and sixty
-    four kilometres above the equator plane, on the North Pole''s side. A place in the southern hemisphere has a negative latitude, so its sine,
-    and its z, are negative: it lies below the equator plane.'
+  voiceover: 'What''s Brest''s height above the equator plane? That height is the side of the triangle that runs parallel to the axis, so it''s measured along
+    z. It''s the side opposite the angle phi. By the rule from Part 1, it''s the long side times sine phi. So z equals the Earth''s radius times sine phi.
+    Now the numbers. The long side is the Earth''s radius, six thousand three hundred and seventy one kilometres. The sine of forty eight point four degrees
+    is zero point seven four seven eight. Multiplying the two, z is about four thousand seven hundred and sixty four kilometres. [beat] With easy numbers,
+    it comes out at four thousand eight hundred: about the same. [beat] So Brest sits about four thousand seven hundred and sixty four kilometres above the
+    equator plane, on the North Pole''s side. A place in the southern hemisphere has a negative latitude, so its sine, and its z, are negative: it lies below
+    the equator plane.'
   on_screen_eq:
     latex: z=a\sin\varphi
     vallis_eq: 'Vallis §2.2.2 (p. 61) coordinates (λ, ϑ, r) and Fig. 2.3 (p. 62); Kundu App. B §B.5 spherical polar coordinates with colatitude
@@ -1988,24 +2280,31 @@ scenes:
   layout: 'SourceBelow under the 3-D view only. No text over the picture or over other text; links never cross text, ticks or each other (the
     builder checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s16_brest_axis_distance
+  remake_2026_11_07: 'R16: new S7 recalls Part 2''s cylindrical coordinates (a distance from an axis, a height along it), this time round the Earth''s axis.'
+  recalls:
+  - at: S7 (new) 'the same two lengths as in Part 2's cylindrical coordinates'
+    latex: (r,\ \theta,\ z)
+    keyword: 'defined in Part 2: cylindrical coordinates'
   t:
-  - 1052.875
-  - 1113.575
+  - 992.7
+  - 1060.2
   sentence_times:
-  - - 1052.875
-    - 1058.525
-  - - 1058.875
-    - 1064.35
-  - - 1064.7
-    - 1070.25
-  - - 1070.6
-    - 1082.325
-  - - 1083.825
-    - 1092.1
-  - - 1093.6
-    - 1100.3
-  - - 1100.65
-    - 1112.775
+  - - 992.7
+    - 998.35
+  - - 998.7
+    - 1004.175
+  - - 1004.525
+    - 1010.075
+  - - 1010.425
+    - 1021.025
+  - - 1022.525
+    - 1028.0
+  - - 1029.5
+    - 1036.2
+  - - 1036.55
+    - 1048.675
+  - - 1049.025
+    - 1059.4
   beat: 'derivation D23 (4)-(5): the distance from the axis a cos phi (U-CO-049)'
   visual: 'TwoViewSlice (new kit_co component, promote to house/kit on second use): left x 80-940 the three.js slice, right x 980-1840 the same
     cut face drawn flat in SVG; ONE item list {kind, frame} drives both views, so every item (centre, axis, equator line, arrow, angle arc, dropped
@@ -2017,12 +2316,13 @@ scenes:
     the result''s words. S5: easy row ''6400 × 2/3 ≈ 4270''. S6: in the 3-D view the parallel disc of s06 fades in round the axis; its radius
     is the same leg (gold ''same'' tick between the leg and the disc radius). S7: both views show both tags ''4764 km'' (up) and ''4230 km'' (out
     from the axis).'
-  voiceover: 'Next, the triangle''s other short side: Brest''s distance from the Earth''s axis. It''s the side next to the angle phi, so it''s
-    the long side times cosine phi. The cosine of forty eight point four degrees is zero point six six three nine. So the distance from the axis
-    is six thousand three hundred and seventy one times zero point six six three nine, which is about four thousand two hundred and thirty kilometres.
-    [beat] With easy numbers, six thousand four hundred times two thirds is about four thousand two hundred and seventy: close. [beat] This distance
-    is exactly the radius of Brest''s parallel, the disc we sliced across earlier. On both pictures, the two short sides now carry their lengths:
-    four thousand seven hundred and sixty four kilometres up, and four thousand two hundred and thirty kilometres out from the axis.'
+  voiceover: 'Next, the triangle''s other short side: Brest''s distance from the Earth''s axis. It''s the side next to the angle phi, so it''s the long side
+    times cosine phi. The cosine of forty eight point four degrees is zero point six six three nine. Times the Earth''s radius, six thousand three hundred
+    and seventy one kilometres, the distance from the axis is about four thousand two hundred and thirty kilometres. [beat] With easy numbers, it''s about
+    four thousand two hundred and seventy: close. [beat] This distance is exactly the radius of Brest''s parallel, the disc we sliced across earlier. On both
+    pictures, the two short sides now carry their lengths: four thousand seven hundred and sixty four kilometres up, and four thousand two hundred and thirty
+    kilometres out from the axis. They''re the same two lengths as in Part 2''s cylindrical coordinates, this time round the Earth''s axis: a distance out
+    from the axis, and a height along it.'
   on_screen_eq:
     latex: a\cos\varphi
     vallis_eq: 'Vallis §2.2.2 (p. 61), text before (2.27): (δx, δy, δz) = (r cos ϑ δλ, r δϑ, δr); Vallis writes latitude ϑ, we write φ; r = a
@@ -2071,38 +2371,42 @@ scenes:
   layout: 'SourceBelow under the 3-D view only. No text over the picture or over other text; links never cross text, ticks or each other (the
     builder checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s17_brest_top
+  recalls:
+  - at: S6 'That's polar coordinates on a flat face, exactly as in Part 1'
+    latex: x=r\cos\theta,\ \ y=r\sin\theta
+    keyword: 'derived in Part 1: polar coordinates'
   t:
-  - 1113.575
-  - 1218.775
+  - 1060.2
+  - 1160.575
   sentence_times:
-  - - 1113.575
-    - 1115.575
-  - - 1115.925
-    - 1124.325
-  - - 1124.675
-    - 1128.45
-  - - 1128.8
-    - 1135.975
-  - - 1136.325
-    - 1144.15
-  - - 1144.5
-    - 1153.225
-  - - 1153.575
-    - 1164.225
-  - - 1164.575
-    - 1171.85
-  - - 1172.2
-    - 1173.975
-  - - 1174.325
-    - 1180.05
-  - - 1180.4
-    - 1190.45
-  - - 1191.95
-    - 1198.1
-  - - 1198.45
-    - 1208.5
-  - - 1210.0
-    - 1217.975
+  - - 1060.2
+    - 1062.2
+  - - 1062.55
+    - 1070.95
+  - - 1071.3
+    - 1075.075
+  - - 1075.425
+    - 1082.6
+  - - 1082.95
+    - 1090.775
+  - - 1091.125
+    - 1099.85
+  - - 1100.2
+    - 1110.85
+  - - 1111.2
+    - 1118.475
+  - - 1118.825
+    - 1120.6
+  - - 1120.95
+    - 1126.675
+  - - 1127.025
+    - 1135.05
+  - - 1136.55
+    - 1142.7
+  - - 1143.05
+    - 1150.3
+  - - 1151.8
+    - 1159.775
   beat: 'derivation D24: the top view, x = a cos phi cos lambda, y = a cos phi sin lambda (U-CO-044, U-CO-045)'
   visual: 'TwoViewSlice (new kit_co component, promote to house/kit on second use): left x 80-940 the three.js slice, right x 980-1840 the same
     cut face drawn flat in SVG; ONE item list {kind, frame} drives both views, so every item (centre, axis, equator line, arrow, angle arc, dropped
@@ -2121,11 +2425,10 @@ scenes:
     That foot is four thousand two hundred and thirty kilometres from the centre, the distance from the axis we just found. And it lies on Brest's meridian,
     so it's at Brest's longitude, lambda, minus four and a half degrees, measured from the x axis. That's polar coordinates on a flat face, exactly as in
     Part 1, with the distance from the axis playing the part of r, and lambda playing the part of theta. So the x part is that distance times cosine lambda,
-    and the y part is that distance times sine lambda. Now the numbers. The cosine of minus four point five degrees is zero point nine nine six nine. So x
-    is four thousand two hundred and thirty times zero point nine nine six nine, about four thousand two hundred and seventeen kilometres. [beat] The sine
-    of minus four point five degrees is minus zero point zero seven eight five. So y is four thousand two hundred and thirty times minus zero point zero seven
-    eight five, about minus three hundred and thirty two kilometres. [beat] The y part is small, because Brest is close to the prime meridian, and it's negative,
-    because Brest is just west of it.
+    and the y part is that distance times sine lambda. Now the numbers. The cosine of minus four point five degrees is zero point nine nine six nine. So x,
+    the distance from the axis times this cosine, is about four thousand two hundred and seventeen kilometres. [beat] The sine of minus four point five degrees
+    is minus zero point zero seven eight five. So y, the distance from the axis times this sine, is about minus three hundred and thirty two kilometres. [beat]
+    The y part is small, because Brest is close to the prime meridian, and it's negative, because Brest is just west of it.
   on_screen_eq:
     latex: x=a\cos\varphi\cos\lambda,\qquad y=a\cos\varphi\sin\lambda
     vallis_eq: Vallis §2.2.2 (p. 61) coordinates (λ, ϑ, r) and Fig. 2.3 (p. 62); Kundu App. B §B.5 spherical polar coordinates with colatitude
@@ -2177,42 +2480,47 @@ scenes:
   layout: 'SourceBelow under the 3-D view only. No text over the picture or over other text; links never cross text, ticks or each other (the
     builder checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s18_position_vector
+  remake_2026_11_07: 'R16: S12 names Part 1 for r hat (re-voiced).'
+  recalls:
+  - at: S12 'We call it r hat, just as in Part 1'
+    latex: \hat{\mathbf r}=\dfrac{(r\cos\theta,\ r\sin\theta)}{r}=(\cos\theta,\ \sin\theta)
+    keyword: 'derived in Part 1: unit vector'
   t:
-  - 1218.775
-  - 1325.75
+  - 1160.575
+  - 1265.725
   sentence_times:
-  - - 1218.775
-    - 1221.275
-  - - 1221.625
-    - 1226.55
-  - - 1226.9
+  - - 1160.575
+    - 1163.075
+  - - 1163.425
+    - 1168.35
+  - - 1168.7
+    - 1174.25
+  - - 1174.6
+    - 1179.875
+  - - 1180.225
+    - 1183.825
+  - - 1184.175
+    - 1193.975
+  - - 1195.475
+    - 1200.025
+  - - 1200.375
+    - 1212.025
+  - - 1213.525
+    - 1220.9
+  - - 1222.4
+    - 1228.1
+  - - 1228.45
     - 1232.45
   - - 1232.8
-    - 1238.075
-  - - 1238.425
-    - 1242.025
-  - - 1242.375
-    - 1252.175
-  - - 1253.675
-    - 1258.225
-  - - 1258.575
-    - 1269.4
-  - - 1270.9
-    - 1281.675
-  - - 1283.175
-    - 1288.875
-  - - 1289.225
-    - 1293.225
-  - - 1293.575
-    - 1299.3
-  - - 1299.65
-    - 1303.075
-  - - 1303.425
-    - 1309.45
-  - - 1309.8
-    - 1317.925
-  - - 1319.425
-    - 1324.95
+    - 1238.525
+  - - 1238.875
+    - 1243.05
+  - - 1243.4
+    - 1249.425
+  - - 1249.775
+    - 1257.9
+  - - 1259.4
+    - 1264.925
   beat: 'derivation D23-D24 assembled: the position vector, its length check, r-hat'
   visual: 'Left (picture zone): the whole globe, semi-transparent, with the teal position arrow from the centre to Brest and its three parts drawn
     as a dashed box path (x along x, y along y, z up; orange), each tagged with its km (''4217'', ''−332'', ''4764''). Right (maths zone): the
@@ -2220,17 +2528,15 @@ scenes:
     −332, 4764) km''. S6-S8: CalcStack ''√(4217² + 332²) ≈ 4230'' with a gold link to the in-plane diagonal, then ''√(4230² + 4764²) ≈ 6371''
     with a link to the arrow. S9: ''cos²φ + sin²φ = 1''. S10-S12: the arrow shrinks to length 1 (orange r-hat, KaTeX hat) pointing out of Brest;
     S13: ''r̂ = (cos φ cos λ, cos φ sin λ, sin φ)''; S14: ''≈ (0.662, −0.052, 0.748)''. S15: keyword ''Part 4: up''.'
-  voiceover: 'Let''s put the two steps together. The distance from the axis is the Earth''s radius times cosine phi. So x is the Earth''s radius,
-    times cosine phi, times cosine lambda. And y is the Earth''s radius, times cosine phi, times sine lambda. And z is the Earth''s radius times
-    sine phi. For Brest, that''s four thousand two hundred and seventeen, minus three hundred and thirty two, and four thousand seven hundred
-    and sixty four kilometres. [beat] Let''s check that this arrow really is as long as the Earth''s radius. First, Pythagoras in the equator
-    plane: the square root of x squared plus y squared gives back the distance from the axis, four thousand two hundred and thirty. [beat] Then
-    Pythagoras in the side view: the square root of four thousand two hundred and thirty squared, plus z squared, gives six thousand three hundred
-    and seventy one. [beat] It works for every place, because cosine squared plus sine squared is always one. Now divide the arrow by its length,
-    the Earth''s radius. We get an arrow of length one, pointing straight up from the place, away from the centre. We call it r hat, just as on
-    the flat map. Its parts are cosine phi cosine lambda, cosine phi sine lambda, and sine phi. For Brest, they''re about zero point six six two,
-    minus zero point zero five two, and zero point seven four eight. [beat] We''ll use this arrow again in Part 4, as the up direction of a weather
-    station.'
+  voiceover: 'Let''s put the two steps together. The distance from the axis is the Earth''s radius times cosine phi. So x is the Earth''s radius, times cosine
+    phi, times cosine lambda. And y is the Earth''s radius, times cosine phi, times sine lambda. And z is the Earth''s radius times sine phi. For Brest, that''s
+    four thousand two hundred and seventeen, minus three hundred and thirty two, and four thousand seven hundred and sixty four kilometres. [beat] Let''s
+    check that this arrow really is as long as the Earth''s radius. First, Pythagoras in the equator plane: squaring x and y, adding them and taking the square
+    root gives back the distance from the axis, four thousand two hundred and thirty. [beat] Then Pythagoras in the side view, with that distance and z, gives
+    six thousand three hundred and seventy one. [beat] It works for every place, because cosine squared plus sine squared is always one. Now divide the arrow
+    by its length, the Earth''s radius. We get an arrow of length one, pointing straight up from the place, away from the centre. We call it r hat, just as
+    in Part 1, on the flat map. Its parts are cosine phi cosine lambda, cosine phi sine lambda, and sine phi. For Brest, they''re about zero point six six
+    two, minus zero point zero five two, and zero point seven four eight. [beat] We''ll use this arrow again in Part 4, as the up direction of a weather station.'
   on_screen_eq:
     latex: x=a\cos\varphi\cos\lambda,\quad y=a\cos\varphi\sin\lambda,\quad z=a\sin\varphi
     vallis_eq: Vallis §2.2.2 (p. 61) coordinates (λ, ϑ, r) and Fig. 2.3 (p. 62); Kundu App. B §B.5 spherical polar coordinates with colatitude
@@ -2266,34 +2572,38 @@ scenes:
     in the maths zone only. No text over the picture or over other text; links never cross text, ticks or each other (the builder checks its own
     stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s19_khulna
+  remake_2026_11_07: "fact-check row 6: 'much farther east and south, in South Asia'; Amphan's centre passed about 79 km to Khulna's west (Part 2 cs.json\
+    \ amphan.close.Khulna.km = 79.4, IBTrACS v04r01 NI); keywords 'Amphan's centre:' / '\u2248 79 km to the west'. Later sentences +1."
   t:
-  - 1325.75
-  - 1424.325
+  - 1265.725
+  - 1365.5
   sentence_times:
-  - - 1325.75
-    - 1329.475
-  - - 1329.825
-    - 1342.15
-  - - 1342.5
-    - 1348.2
-  - - 1348.55
-    - 1353.175
-  - - 1353.525
-    - 1365.9
-  - - 1367.4
-    - 1377.125
-  - - 1378.625
-    - 1385.425
-  - - 1385.775
-    - 1393.1
-  - - 1393.45
-    - 1400.5
-  - - 1402.0
-    - 1409.275
-  - - 1410.775
-    - 1416.85
-  - - 1417.2
-    - 1423.525
+  - - 1265.725
+    - 1270.525
+  - - 1270.875
+    - 1277.9
+  - - 1278.25
+    - 1286.45
+  - - 1286.8
+    - 1292.5
+  - - 1292.85
+    - 1297.475
+  - - 1297.825
+    - 1307.075
+  - - 1308.575
+    - 1318.3
+  - - 1319.8
+    - 1326.6
+  - - 1326.95
+    - 1334.275
+  - - 1334.625
+    - 1341.675
+  - - 1343.175
+    - 1350.45
+  - - 1351.95
+    - 1358.025
+  - - 1358.375
+    - 1364.7
   beat: 'derivation D25: the same for Khulna (Bay of Bengal city; Amphan from Part 2)'
   visual: 'S1-S2: zoom-reveal flight to Khulna (globe full-bleed, Bay of Bengal centred within 1 s of ''Khulna''): labels ''Khulna'', ''Bangladesh'',
     ''Sundarbans'' (the mangrove green visible in BMNG), ''Bay of Bengal'', and a thin Amphan track line (IBTrACS) on their words, its source
@@ -2302,16 +2612,15 @@ scenes:
     0.3875 ≈ 2469'', ''6371 × 0.9219 ≈ 5873''; a faint ghost of Brest''s triangle for comparison. S8-S10: top view: the foot at 89.6 deg from
     x, legs ''x ≈ 41 km'', ''y ≈ 5873 km''; CalcStack ''5873 × 0.00698 ≈ 41'', ''5873 × 1.000 ≈ 5873''. S11: the 3-D arrow almost along y, tilted
     up. S12: ''√(41² + 5873² + 2469²) ≈ 6371 km''.'
-  voiceover: Let's do the same for a city on the other side of Asia. Khulna is in the southwest of Bangladesh, near the Sundarbans, the world's
-    largest mangrove forest, close to where Cyclone Amphan, from Part 2, came ashore in May twenty twenty. It's at about twenty two point eight
-    degrees north, and eighty nine point six degrees east. In the side view, sine phi is zero point three eight seven five. So Khulna's height
-    above the equator plane is six thousand three hundred and seventy one times zero point three eight seven five, about two thousand four hundred
-    and sixty nine kilometres. [beat] Cosine phi is zero point nine two one nine, so its distance from the axis is about five thousand eight hundred
-    and seventy three kilometres. [beat] Khulna is much closer to the equator than Brest, so it sits lower, and much farther from the axis. In
-    the top view, lambda is eighty nine point six degrees, almost a right angle from the prime meridian. Its cosine is only zero point zero zero
-    six nine eight, so x is about forty one kilometres. [beat] Its sine is almost exactly one, so y is about five thousand eight hundred and seventy
-    three kilometres. [beat] So Khulna's arrow points almost straight along the y axis, tilted up towards the North Pole. And once again, its
-    length comes out at six thousand three hundred and seventy one kilometres.
+  voiceover: Let's do the same for a city much farther east and south, in South Asia. Khulna is in the southwest of Bangladesh, near the Sundarbans, the world's
+    largest mangrove forest. In May twenty twenty, the centre of Cyclone Amphan, from Part 2, passed about seventy nine kilometres to its west. It's at about
+    twenty two point eight degrees north, and eighty nine point six degrees east. In the side view, sine phi is zero point three eight seven five. So Khulna's
+    height above the equator plane, the Earth's radius times this sine, is about two thousand four hundred and sixty nine kilometres. [beat] Cosine phi is
+    zero point nine two one nine, so its distance from the axis is about five thousand eight hundred and seventy three kilometres. [beat] Khulna is much closer
+    to the equator than Brest, so it sits lower, and much farther from the axis. In the top view, lambda is eighty nine point six degrees, almost a right
+    angle from the prime meridian. Its cosine is only zero point zero zero six nine eight, so x is about forty one kilometres. [beat] Its sine is almost exactly
+    one, so y is about five thousand eight hundred and seventy three kilometres. [beat] So Khulna's arrow points almost straight along the y axis, tilted
+    up towards the North Pole. And once again, its length comes out at six thousand three hundred and seventy one kilometres.
   on_screen_eq:
     latex: x=a\cos\varphi\cos\lambda,\quad y=a\cos\varphi\sin\lambda,\quad z=a\sin\varphi
     vallis_eq: Vallis §2.2.2 (p. 61) coordinates (λ, ϑ, r) and Fig. 2.3 (p. 62); Kundu App. B §B.5 spherical polar coordinates with colatitude
@@ -2349,54 +2658,58 @@ scenes:
     line below the globe. No text over the picture or over other text; links never cross text, ticks or each other (the builder checks its own
     stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s20_spin_rate
+  recalls:
+  - at: S21 'It's Part 2's rule for a ring again'
+    latex: v=r\,\dfrac{d\theta}{dt}
+    keyword: 'derived in Part 2: angle rate on a ring'
   t:
-  - 1424.325
-  - 1558.65
+  - 1365.5
+  - 1494.75
   sentence_times:
-  - - 1424.325
-    - 1428.075
-  - - 1428.425
-    - 1435.55
-  - - 1435.9
-    - 1442.525
-  - - 1442.875
-    - 1445.275
-  - - 1445.625
-    - 1448.65
-  - - 1449.0
-    - 1451.875
-  - - 1452.225
-    - 1460.275
-  - - 1460.625
-    - 1463.125
-  - - 1463.475
-    - 1470.75
-  - - 1471.1
-    - 1480.0
-  - - 1480.35
-    - 1487.6
-  - - 1487.95
-    - 1499.25
-  - - 1499.6
-    - 1503.225
-  - - 1503.575
-    - 1508.475
-  - - 1508.825
-    - 1513.35
-  - - 1513.7
-    - 1517.05
-  - - 1517.4
-    - 1525.85
-  - - 1526.2
-    - 1532.25
-  - - 1532.6
-    - 1537.0
-  - - 1537.35
-    - 1543.825
-  - - 1544.175
-    - 1550.475
-  - - 1551.975
-    - 1557.85
+  - - 1365.5
+    - 1369.25
+  - - 1369.6
+    - 1376.725
+  - - 1377.075
+    - 1383.7
+  - - 1384.05
+    - 1386.45
+  - - 1386.8
+    - 1389.825
+  - - 1390.175
+    - 1393.05
+  - - 1393.4
+    - 1401.45
+  - - 1401.8
+    - 1404.3
+  - - 1404.65
+    - 1411.925
+  - - 1412.275
+    - 1421.175
+  - - 1421.525
+    - 1428.775
+  - - 1429.125
+    - 1435.35
+  - - 1435.7
+    - 1439.325
+  - - 1439.675
+    - 1444.575
+  - - 1444.925
+    - 1449.45
+  - - 1449.8
+    - 1453.15
+  - - 1453.5
+    - 1461.95
+  - - 1462.3
+    - 1468.35
+  - - 1468.7
+    - 1473.1
+  - - 1473.45
+    - 1479.925
+  - - 1480.275
+    - 1486.575
+  - - 1488.075
+    - 1493.95
   beat: 'derivation D27 (1)-(4): ground speed U = Omega a cos phi (U-CO-051)'
   visual: 'Globe with the spin axis (slate) and Brest''s parallel (orange ring, radius tag ''a cos φ''), spinning slowly. S5-S6: a clock glyph
     with a star icon, ''one turn: 23 h 56 min'', ''T'' (KaTeX). S7: a small sun-and-orbit glyph in the column (the Earth moving along its orbit:
@@ -2408,13 +2721,13 @@ scenes:
     out, one step at a time. First, how long does one turn take? Measured against the distant stars, the Earth turns once every twenty three hours, fifty
     six minutes and four seconds. We call this time capital T. It''s four minutes shorter than a day from noon to noon, because the Earth also moves along
     its orbit round the Sun. In a year of three hundred and sixty five days, the Earth goes once round the Sun, so each day it moves about one degree along
-    its orbit. So from noon to noon, the Earth turns about three hundred and sixty one degrees, not three hundred and sixty. A day of twenty four hours is
-    one thousand four hundred and forty minutes, and one thousand four hundred and forty divided by three hundred and sixty is four minutes for each degree.
-    Next, how far does the place travel in one turn? Once round its circle, which is two pi times the radius of the circle. That''s two pi, times the Earth''s
-    radius, times cosine phi. Then, speed is distance divided by time. So the ground speed, capital U, is two pi, times the Earth''s radius, times cosine
-    phi, divided by capital T. Now we pull out the part that''s the same for every place: two pi divided by capital T. That''s the angle the Earth turns through
-    each second, in radians. It''s called the Earth''s spin rate, and we write it capital Omega, as in the cross product movie. So capital U equals capital
-    Omega, times the Earth''s radius, times cosine phi. [beat] It''s Part 2''s rule for a ring again: the speed is the radius times the turning rate.'
+    its orbit. So from noon to noon, the Earth turns about three hundred and sixty one degrees, not three hundred and sixty. A day has one thousand four hundred
+    and forty minutes, so each degree of turn takes four minutes. Next, how far does the place travel in one turn? Once round its circle, which is two pi
+    times the radius of the circle. That''s two pi, times the Earth''s radius, times cosine phi. Then, speed is distance divided by time. So the ground speed,
+    capital U, is two pi, times the Earth''s radius, times cosine phi, divided by capital T. Now we pull out the part that''s the same for every place: two
+    pi divided by capital T. That''s the angle the Earth turns through each second, in radians. It''s called the Earth''s spin rate, and we write it capital
+    Omega, as in the cross product movie. So capital U equals capital Omega, times the Earth''s radius, times cosine phi. [beat] It''s Part 2''s rule for
+    a ring again: the speed is the radius times the turning rate.'
   on_screen_eq:
     latex: U=\dfrac{2\pi\,a\cos\varphi}{T}=\Omega\,a\cos\varphi,\qquad \Omega=\dfrac{2\pi}{T}
     vallis_eq: 'our step: the speed of a point on its parallel; cf. Vallis (2.36) Ω = Ω(j cos ϑ + k sin ϑ) (p. 62) for the vector Ω; |Ω × r| =
@@ -2473,53 +2786,53 @@ scenes:
     Opening keyword from frame 0 (Should 18).'
 - id: s21_ground_speeds
   t:
-  - 1558.65
-  - 1750.5
+  - 1494.75
+  - 1671.475
   sentence_times:
-  - - 1558.65
-    - 1561.325
-  - - 1561.675
-    - 1571.9
-  - - 1572.25
-    - 1579.375
-  - - 1579.725
-    - 1581.5
-  - - 1581.85
-    - 1589.675
-  - - 1590.025
-    - 1602.225
-  - - 1603.725
-    - 1606.8
-  - - 1607.15
-    - 1620.425
-  - - 1621.925
-    - 1631.05
-  - - 1631.4
-    - 1639.2
-  - - 1639.55
-    - 1651.6
-  - - 1651.95
-    - 1660.175
-  - - 1660.525
-    - 1674.8
-  - - 1675.15
-    - 1688.0
-  - - 1689.5
-    - 1696.475
-  - - 1697.975
-    - 1704.5
-  - - 1706.0
-    - 1715.675
-  - - 1716.025
-    - 1720.8
-  - - 1722.3
-    - 1727.725
-  - - 1728.075
-    - 1732.375
-  - - 1732.725
-    - 1739.05
-  - - 1739.4
-    - 1749.7
+  - - 1494.75
+    - 1497.425
+  - - 1497.775
+    - 1508.0
+  - - 1508.35
+    - 1515.475
+  - - 1515.825
+    - 1517.6
+  - - 1517.95
+    - 1525.775
+  - - 1526.125
+    - 1536.1
+  - - 1537.6
+    - 1540.675
+  - - 1541.025
+    - 1550.275
+  - - 1551.775
+    - 1557.05
+  - - 1557.4
+    - 1565.2
+  - - 1565.55
+    - 1577.6
+  - - 1577.95
+    - 1587.2
+  - - 1587.55
+    - 1595.775
+  - - 1596.125
+    - 1608.975
+  - - 1610.475
+    - 1617.45
+  - - 1618.95
+    - 1625.475
+  - - 1626.975
+    - 1636.65
+  - - 1637.0
+    - 1641.775
+  - - 1643.275
+    - 1648.7
+  - - 1649.05
+    - 1653.35
+  - - 1653.7
+    - 1660.025
+  - - 1660.375
+    - 1670.675
   beat: 'derivation D27 (5)-(6): numbers at the equator, Singapore, Khulna, Brest, Longyearbyen, the pole (Must 11)'
   visual: 'Globe spinning slowly (one turn in 20 s), the axis slate; rings for the equator, Khulna, Brest, Longyearbyen (Singapore''s ring is
     the equator''s within 0.03 %); each ring gets a teal speed arrow pointing east with moving dashes, length ∝ Ω a cos φ. S1-S2: CalcStack ''T
@@ -2533,22 +2846,20 @@ scenes:
     usual place.'
   voiceover: If you skipped, here's what to keep. A place at latitude phi sits the Earth's radius times sine phi above the equator plane, and the radius times
     cosine phi from the Earth's axis. As the Earth spins, that place is carried east at capital Omega, times its distance from the axis. Now the numbers.
-    Twenty three hours, fifty six minutes and four seconds is eighty six thousand one hundred and sixty four seconds. So capital Omega is two pi divided by
-    eighty six thousand one hundred and sixty four, which is about seven point two nine two times ten to the minus five radians per second. [beat] At the
-    equator, cosine phi is one. So the ground moves at seven point two nine two times ten to the minus five, times six point three seven one million metres,
-    which is about four hundred and sixty four point six metres per second. [beat] With easy numbers, the equator is two pi times six thousand four hundred
-    kilometres, which is about forty thousand kilometres round. And forty thousand kilometres in twenty four hours is about one thousand six hundred and seventy
-    kilometres per hour. To turn metres per second into kilometres per hour, we multiply by three point six, because an hour has three thousand six hundred
-    seconds, and a kilometre has a thousand metres. Four hundred and sixty four point six times three point six is also about one thousand six hundred and
-    seventy. A passenger jet flies at about nine hundred kilometres per hour, and one thousand six hundred and seventy divided by nine hundred is about one
-    point nine, so the ground at the equator moves almost twice as fast. Singapore, at one point three five degrees north, almost on the equator, has cosine
-    phi zero point nine nine nine seven, so it moves at about four hundred and sixty four metres per second. [beat] At Khulna, cosine phi is zero point nine
-    two one nine, so it's about four hundred and twenty eight. [beat] At Brest, cosine phi is zero point six six three nine, so it's about three hundred and
-    eight. [beat] At Longyearbyen, on the Arctic islands of Svalbard, seventy eight point two degrees north, cosine phi is zero point two zero four five.
-    So the ground there moves at only about ninety five metres per second. [beat] And at the poles, cosine phi is zero, so the ground just turns on the spot.
-    Every one of these speeds points east, the way the Earth turns. We don't feel any of it, because the air, the sea and we ourselves all move along with
-    the ground. But this shrinking circle is part of the reason why the Earth's spin affects the winds differently at different latitudes, as we saw in the
-    cross product movie.
+    Twenty three hours, fifty six minutes and four seconds is eighty six thousand one hundred and sixty four seconds. So capital Omega, two pi divided by
+    capital T, is about seven point two nine two times ten to the minus five radians per second. [beat] At the equator, cosine phi is one. So the ground moves
+    at capital Omega times the Earth's radius, which is about four hundred and sixty four point six metres per second. [beat] With easy numbers, the equator
+    is about forty thousand kilometres round. And forty thousand kilometres in twenty four hours is about one thousand six hundred and seventy kilometres
+    per hour. To turn metres per second into kilometres per hour, we multiply by three point six, because an hour has three thousand six hundred seconds,
+    and a kilometre has a thousand metres. So four hundred and sixty four point six metres per second is also about one thousand six hundred and seventy kilometres
+    per hour. A passenger jet flies at about nine hundred kilometres per hour, so the ground at the equator moves almost twice as fast. Singapore, at one
+    point three five degrees north, almost on the equator, has cosine phi zero point nine nine nine seven, so it moves at about four hundred and sixty four
+    metres per second. [beat] At Khulna, cosine phi is zero point nine two one nine, so it's about four hundred and twenty eight. [beat] At Brest, cosine
+    phi is zero point six six three nine, so it's about three hundred and eight. [beat] At Longyearbyen, on the Arctic islands of Svalbard, seventy eight
+    point two degrees north, cosine phi is zero point two zero four five. So the ground there moves at only about ninety five metres per second. [beat] And
+    at the poles, cosine phi is zero, so the ground just turns on the spot. Every one of these speeds points east, the way the Earth turns. We don't feel
+    any of it, because the air, the sea and we ourselves all move along with the ground. But this shrinking circle is part of the reason why the Earth's spin
+    affects the winds differently at different latitudes, as we saw in the cross product movie.
   on_screen_eq:
     latex: U=\Omega\,a\cos\varphi
     vallis_eq: our step (see s20)
@@ -2594,42 +2905,46 @@ scenes:
     cross text, ticks or each other (the builder checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should
     18).'
 - id: s22_distance_north
+  recalls:
+  - at: S7 'by the arc length rule from Part 1'
+    latex: s=r\,\theta\quad(\theta\ \text{in radians})
+    keyword: 'derived in Part 1: arc length'
   t:
-  - 1750.5
-  - 1857.225
+  - 1671.475
+  - 1775.325
   sentence_times:
-  - - 1750.5
-    - 1754.75
-  - - 1755.1
-    - 1764.95
-  - - 1765.3
-    - 1767.5
-  - - 1767.85
-    - 1770.85
-  - - 1771.2
-    - 1778.425
-  - - 1778.775
-    - 1783.225
-  - - 1783.575
-    - 1790.825
-  - - 1791.175
-    - 1799.175
-  - - 1799.525
-    - 1808.125
-  - - 1808.475
-    - 1811.075
-  - - 1811.425
-    - 1816.425
-  - - 1816.775
-    - 1824.2
-  - - 1825.7
-    - 1833.525
-  - - 1835.025
-    - 1844.025
-  - - 1845.525
-    - 1851.225
-  - - 1851.575
-    - 1856.425
+  - - 1671.475
+    - 1675.725
+  - - 1676.075
+    - 1685.925
+  - - 1686.275
+    - 1688.475
+  - - 1688.825
+    - 1691.825
+  - - 1692.175
+    - 1699.4
+  - - 1699.75
+    - 1704.2
+  - - 1704.55
+    - 1711.8
+  - - 1712.15
+    - 1720.15
+  - - 1720.5
+    - 1729.1
+  - - 1729.45
+    - 1732.05
+  - - 1732.4
+    - 1737.4
+  - - 1737.75
+    - 1745.175
+  - - 1746.675
+    - 1755.625
+  - - 1757.125
+    - 1762.125
+  - - 1763.625
+    - 1769.325
+  - - 1769.675
+    - 1774.525
   beat: 'derivation D28: Delta y = a Delta phi on the meridian slice (U-CO-052)'
   visual: 'TwoViewSlice (new kit_co component, promote to house/kit on second use): left x 80-940 the three.js slice, right x 980-1840 the same
     cut face drawn flat in SVG; ONE item list {kind, frame} drives both views, so every item (centre, axis, equator line, arrow, angle arc, dropped
@@ -2645,17 +2960,16 @@ scenes:
     (x 1500-1840, y 60-150, 44 px, warm white on a 20 % gold fill, no border): ''every step · optional'' / ''skip
     to {mm:ss}'' (mm:ss = the landing sentence''s start in the final timing.json, filled by the builder); it stays 8 s, fades over 0.5 s, never
     over the picture.'
-  voiceover: 'Now let''s measure distances on the ground, step by step. If you''d rather keep to the big picture, skip ahead to the time on screen:
-    these steps aren''t needed for the intuition of weather, climate science or mapping. Let''s start with going north. Slice the Earth along
-    a meridian again. Walking due north, you follow the meridian, and a meridian is part of a circle whose centre is the Earth''s centre. So the
-    radius of that circle is the full radius of the Earth. As you walk north, your latitude grows, and latitude is exactly the angle at the centre
-    of this circle. So by the arc length rule from Part 1, the distance walked is the radius times the change of angle, in radians. We write it
-    like this: delta y, the distance north, equals the Earth''s radius times delta phi, the change in latitude. Let''s find the length of one
-    degree. A full turn is three hundred and sixty degrees, or two pi radians. So one degree is pi over one hundred and eighty, which is zero
-    point zero one seven four five radians. [beat] Times six thousand three hundred and seventy one kilometres, that''s about one hundred and
-    eleven point two kilometres. [beat] With easy numbers, six thousand four hundred times zero point zero one seven five is one hundred and twelve:
-    about the same. [beat] And it''s the same at every latitude, because every meridian has the same radius. So a degree north is always about
-    a hundred and eleven kilometres.'
+  voiceover: 'Now let''s measure distances on the ground, step by step. If you''d rather keep to the big picture, skip ahead to the time on screen: these
+    steps aren''t needed for the intuition of weather, climate science or mapping. Let''s start with going north. Slice the Earth along a meridian again.
+    Walking due north, you follow the meridian, and a meridian is part of a circle whose centre is the Earth''s centre. So the radius of that circle is the
+    full radius of the Earth. As you walk north, your latitude grows, and latitude is exactly the angle at the centre of this circle. So by the arc length
+    rule from Part 1, the distance walked is the radius times the change of angle, in radians. We write it like this: delta y, the distance north, equals
+    the Earth''s radius times delta phi, the change in latitude. Let''s find the length of one degree. A full turn is three hundred and sixty degrees, or
+    two pi radians. So one degree is pi over one hundred and eighty, which is zero point zero one seven four five radians. [beat] Times the Earth''s radius,
+    six thousand three hundred and seventy one kilometres, that''s about one hundred and eleven point two kilometres. [beat] With easy numbers, it''s about
+    one hundred and twelve: about the same. [beat] And it''s the same at every latitude, because every meridian has the same radius. So a degree north is
+    always about a hundred and eleven kilometres.'
   on_screen_eq:
     latex: \Delta y=a\,\Delta\varphi
     vallis_eq: 'Vallis §2.2.2 (p. 61), text before (2.27): (δx, δy, δz) = (r cos ϑ δλ, r δϑ, δr); Vallis writes latitude ϑ, we write φ; r = a
@@ -2708,36 +3022,35 @@ scenes:
     builder checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s23_north_examples
   t:
-  - 1857.225
-  - 1910.65
+  - 1775.325
+  - 1825.05
   sentence_times:
-  - - 1857.225
-    - 1859.0
-  - - 1859.35
-    - 1869.85
-  - - 1871.35
-    - 1876.7
-  - - 1877.05
-    - 1882.75
-  - - 1883.1
-    - 1893.025
-  - - 1894.525
-    - 1902.6
-  - - 1902.95
-    - 1906.075
-  - - 1906.425
-    - 1909.85
+  - - 1775.325
+    - 1777.1
+  - - 1777.45
+    - 1783.65
+  - - 1785.15
+    - 1790.5
+  - - 1790.85
+    - 1796.55
+  - - 1796.9
+    - 1807.425
+  - - 1808.925
+    - 1817.0
+  - - 1817.35
+    - 1820.475
+  - - 1820.825
+    - 1824.25
   beat: 'worked examples: one minute = the nautical mile; Brest to the equator 5382 km (arc vs straight height)'
   visual: 'Same two-view. S1-S2: the step shrinks to one minute (x60 magnifier inset in the flat view); CalcStack ''111.2 km ÷ 60 ≈ 1.85 km'',
     keyword ''nautical mile''. S3-S4: the walker goes from Brest down the rim to the equator (orange arc, both views); CalcStack ''48.4 × 111.2
     km ≈ 5382 km''. S5-S6: the straight upright leg ''z ≈ 4764 km'' (from s15) beside the arc in both views, tags ''5382 km along the curve''
     and ''4764 km straight''.'
-  voiceover: Two examples. One minute of latitude is a sixtieth of a degree, so it's one hundred and eleven point two divided by sixty, which
-    is about one point eight five kilometres. [beat] That's the nautical mile from the weather basics movie, and that's where it comes from. Next,
-    how far is Brest from the equator, walking due south along its meridian? Forty eight point four degrees, times one hundred and eleven point
-    two kilometres per degree, is about five thousand three hundred and eighty two kilometres. [beat] Notice that's longer than Brest's height
-    above the equator plane, four thousand seven hundred and sixty four kilometres. The walk follows the curved surface of the Earth. The height
-    is a straight line, through the inside.
+  voiceover: 'Two examples. One minute of latitude is a sixtieth of a degree: about one point eight five kilometres. [beat] That''s the nautical mile from
+    the weather basics movie, and that''s where it comes from. Next, how far is Brest from the equator, walking due south along its meridian? At one hundred
+    and eleven point two kilometres per degree, Brest''s forty eight point four degrees come to about five thousand three hundred and eighty two kilometres.
+    [beat] Notice that''s longer than Brest''s height above the equator plane, four thousand seven hundred and sixty four kilometres. The walk follows the
+    curved surface of the Earth. The height is a straight line, through the inside.'
   on_screen_eq: null
   calc_rows:
   - 111.2\ \text{km}\div60\approx1.85\ \text{km}
@@ -2767,30 +3080,34 @@ scenes:
   layout: 'SourceBelow under the 3-D view only. No text over the picture or over other text; links never cross text, ticks or each other (the
     builder checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s24_distance_east
+  recalls:
+  - at: S6 'by the same arc length rule'
+    latex: s=r\,\theta\quad(\theta\ \text{in radians})
+    keyword: 'derived in Part 1: arc length'
   t:
-  - 1910.65
-  - 1979.75
+  - 1825.05
+  - 1891.2
   sentence_times:
-  - - 1910.65
-    - 1912.8
-  - - 1913.15
-    - 1916.275
-  - - 1916.625
-    - 1924.2
-  - - 1924.55
-    - 1930.525
-  - - 1930.875
-    - 1934.2
-  - - 1934.55
-    - 1943.275
-  - - 1943.625
-    - 1951.225
-  - - 1951.575
-    - 1958.875
-  - - 1959.225
-    - 1970.7
-  - - 1972.2
-    - 1978.95
+  - - 1825.05
+    - 1827.2
+  - - 1827.55
+    - 1830.675
+  - - 1831.025
+    - 1838.6
+  - - 1838.95
+    - 1844.925
+  - - 1845.275
+    - 1848.6
+  - - 1848.95
+    - 1857.675
+  - - 1858.025
+    - 1865.625
+  - - 1865.975
+    - 1873.275
+  - - 1873.625
+    - 1882.15
+  - - 1883.65
+    - 1890.4
   beat: 'derivation D29: Delta x = a cos phi Delta lambda on the parallel slice (U-CO-053)'
   visual: 'TwoViewSlice (new kit_co component, promote to house/kit on second use): left x 80-940 the three.js slice, right x 980-1840 the same
     cut face drawn flat in SVG; ONE item list {kind, frame} drives both views, so every item (centre, axis, equator line, arrow, angle arc, dropped
@@ -2802,13 +3119,12 @@ scenes:
     centre beside the disc radius, keyword ''not round the centre''. S5-S6: two radii of the disc to the ends of a step, ''Δλ'' at the disc centre
     (gold), the arc ''Δx'' (orange band), drawn x5. S7: ''Δx = a cos φ Δλ'' (96 px) with an underbrace ''radius of the parallel'' under a cos
     φ. S8: CalcStack ''Δx = 4230 km × 0.01745 ≈ 73.8 km''. S9: a bar comparison ''73.8 vs 111.2'' and ''cos 48.4° ≈ 2/3''.'
-  voiceover: 'Going east is different. Walking due east, you follow a parallel. And a parallel, as we saw when we sliced across, is a circle round
-    the Earth''s axis, not round its centre. Its radius is the distance from the axis: the Earth''s radius times cosine phi. Let''s slice across
-    at Brest''s latitude again. As you walk east along this circle, your longitude grows, and longitude is the angle at the centre of this circle,
-    on the axis. So by the same arc length rule, the distance east is the radius of the parallel times the change in longitude. We write it like
-    this: delta x equals the Earth''s radius, times cosine phi, times delta lambda. For one degree at Brest, that''s four thousand two hundred
-    and thirty kilometres times zero point zero one seven four five, which is about seventy three point eight kilometres. [beat] That''s only
-    two thirds of a degree north, because Brest''s parallel is only two thirds as big as the equator.'
+  voiceover: 'Going east is different. Walking due east, you follow a parallel. And a parallel, as we saw when we sliced across, is a circle round the Earth''s
+    axis, not round its centre. Its radius is the distance from the axis: the Earth''s radius times cosine phi. Let''s slice across at Brest''s latitude again.
+    As you walk east along this circle, your longitude grows, and longitude is the angle at the centre of this circle, on the axis. So by the same arc length
+    rule, the distance east is the radius of the parallel times the change in longitude. We write it like this: delta x equals the Earth''s radius, times
+    cosine phi, times delta lambda. For one degree at Brest, the radius of its parallel times one degree in radians gives about seventy three point eight
+    kilometres. [beat] That''s only two thirds of a degree north, because Brest''s parallel is only two thirds as big as the equator.'
   on_screen_eq:
     latex: \Delta x=a\cos\varphi\,\Delta\lambda
     vallis_eq: 'Vallis §2.2.2 (p. 61), text before (2.27): (δx, δy, δz) = (r cos ϑ δλ, r δϑ, δr); Vallis writes latitude ϑ, we write φ; r = a
@@ -2861,31 +3177,31 @@ scenes:
     builder checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s25_degree_east
   t:
-  - 1979.75
-  - 2060.8
+  - 1891.2
+  - 1972.25
   sentence_times:
-  - - 1979.75
-    - 1982.425
-  - - 1982.775
-    - 1993.0
-  - - 1993.35
-    - 1998.25
-  - - 1998.6
-    - 2004.25
-  - - 2004.6
-    - 2015.075
-  - - 2016.575
-    - 2023.825
-  - - 2025.325
-    - 2028.6
-  - - 2030.1
-    - 2039.475
-  - - 2040.975
-    - 2044.875
-  - - 2045.225
-    - 2052.8
-  - - 2053.15
-    - 2060.0
+  - - 1891.2
+    - 1893.875
+  - - 1894.225
+    - 1904.45
+  - - 1904.8
+    - 1909.7
+  - - 1910.05
+    - 1915.7
+  - - 1916.05
+    - 1926.525
+  - - 1928.025
+    - 1935.275
+  - - 1936.775
+    - 1940.05
+  - - 1941.55
+    - 1950.925
+  - - 1952.425
+    - 1956.325
+  - - 1956.675
+    - 1964.25
+  - - 1964.6
+    - 1971.45
   beat: 'intuition: one degree east at four latitudes, globe and flat strip side by side (U-CO-055, U-CO-056; Should 16)'
   visual: 'Two-view: left the globe (camera at 35 N) with four parallel discs cut at 1.35 N (Singapore), 22.8 N (Khulna), 48.4 N (Brest), 78.2
     N (Longyearbyen), each a thin translucent disc with its radius drawn from the axis (teal) and a gold 1-deg step on its rim (x5); right a flat
@@ -2896,14 +3212,14 @@ scenes:
     / ''Unlike: a meridian through every place''. KEEP LINE (user rule 2026-11-05): S1 is the ''If you skipped, here''s what to keep'' sentence;
     during it the takeaway keyword ''1° north ≈ 111 km · 1° east = 111 km × cos φ'' (54 px, warm white, gold underline) sits at the top of the
     column, then moves to its usual place.'
-  voiceover: If you skipped, here's what to keep. A degree of latitude is always about a hundred and eleven kilometres, but a degree of longitude
-    is that times cosine phi, so it shrinks towards the poles. Let's compare one degree of longitude at four places, side by side. Each one is
-    one hundred and eleven point two kilometres, times cosine phi. At Singapore, cosine phi is almost exactly one, so one degree east is about
-    one hundred and eleven point two kilometres, the same as a degree north. [beat] At Khulna, cosine phi is zero point nine two one nine, so
-    it's about one hundred and two point five. [beat] At Brest, it's about seventy three point eight. [beat] At Longyearbyen, cosine phi is zero
-    point two zero four five, so one degree east is only about twenty two point seven kilometres. [beat] And at the pole, where all the meridians
-    meet, it's zero. Like the segments of a peeled orange, the meridians are widest apart at the equator, and they come together at the poles.
-    Unlike an orange, which has a fixed number of segments, there's a meridian through every single place.
+  voiceover: If you skipped, here's what to keep. A degree of latitude is always about a hundred and eleven kilometres, but a degree of longitude is that
+    times cosine phi, so it shrinks towards the poles. Let's compare one degree of longitude at four places, side by side. Each one is one hundred and eleven
+    point two kilometres, times cosine phi. At Singapore, cosine phi is almost exactly one, so one degree east is about one hundred and eleven point two kilometres,
+    the same as a degree north. [beat] At Khulna, cosine phi is zero point nine two one nine, so it's about one hundred and two point five. [beat] At Brest,
+    it's about seventy three point eight. [beat] At Longyearbyen, cosine phi is zero point two zero four five, so one degree east is only about twenty two
+    point seven kilometres. [beat] And at the pole, where all the meridians meet, it's zero. Like the segments of a peeled orange, the meridians are widest
+    apart at the equator, and they come together at the poles. Unlike an orange, which has a fixed number of segments, there's a meridian through every single
+    place.
   on_screen_eq:
     latex: \Delta x=111.2\ \text{km}\times\cos\varphi\quad(\Delta\lambda=1^\circ)
     vallis_eq: 'Vallis §2.2.2 (p. 61), text before (2.27): (δx, δy, δz) = (r cos ϑ δλ, r δϑ, δr); Vallis writes latitude ϑ, we write φ; r = a
@@ -2943,39 +3259,39 @@ scenes:
     checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s26_grid_boxes
   t:
-  - 2060.8
-  - 2165.55
+  - 1972.25
+  - 2077.0
   sentence_times:
-  - - 2060.8
-    - 2064.475
-  - - 2064.825
-    - 2075.85
-  - - 2076.2
-    - 2082.075
-  - - 2082.425
-    - 2087.65
-  - - 2088.0
-    - 2096.85
-  - - 2098.35
-    - 2101.1
-  - - 2101.45
-    - 2107.5
-  - - 2109.0
-    - 2113.475
-  - - 2114.975
-    - 2117.825
-  - - 2119.325
-    - 2127.275
-  - - 2128.775
-    - 2132.45
-  - - 2132.8
-    - 2140.525
-  - - 2142.025
-    - 2149.5
-  - - 2149.85
-    - 2156.775
-  - - 2157.125
-    - 2164.75
+  - - 1972.25
+    - 1975.925
+  - - 1976.275
+    - 1987.3
+  - - 1987.65
+    - 1993.525
+  - - 1993.875
+    - 1999.1
+  - - 1999.45
+    - 2008.3
+  - - 2009.8
+    - 2012.55
+  - - 2012.9
+    - 2018.95
+  - - 2020.45
+    - 2024.925
+  - - 2026.425
+    - 2029.275
+  - - 2030.775
+    - 2038.725
+  - - 2040.225
+    - 2043.9
+  - - 2044.25
+    - 2051.975
+  - - 2053.475
+    - 2060.95
+  - - 2061.3
+    - 2068.225
+  - - 2068.575
+    - 2076.2
   beat: 'application: ERA5 grid boxes thin towards the poles (Should 6 spoken)'
   visual: 'Four real map panels side by side, each 400 px wide with 20-px gaps (x 80-480, 500-900, 920-1320, 1340-1740; y 140-600), each in a
     polar-aspect LAEA centred on its place so the boxes keep their true shape: Singapore (Strait of Singapore), Khulna (the Sundarbans and the
@@ -3029,45 +3345,45 @@ scenes:
     these). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s27_area_patch
   t:
-  - 2165.55
-  - 2275.2
+  - 2077.0
+  - 2186.65
   sentence_times:
-  - - 2165.55
-    - 2168.125
-  - - 2168.475
-    - 2170.1
-  - - 2170.45
-    - 2178.125
-  - - 2178.475
-    - 2185.95
-  - - 2186.3
-    - 2196.5
-  - - 2196.85
-    - 2202.1
-  - - 2202.45
-    - 2207.025
-  - - 2207.375
-    - 2213.425
-  - - 2213.775
-    - 2219.65
-  - - 2220.0
-    - 2225.15
-  - - 2225.5
-    - 2229.575
-  - - 2229.925
-    - 2234.875
-  - - 2235.225
-    - 2242.7
-  - - 2243.05
-    - 2247.975
-  - - 2248.325
-    - 2255.65
-  - - 2256.0
-    - 2262.6
-  - - 2262.95
-    - 2271.175
-  - - 2271.525
-    - 2274.4
+  - - 2077.0
+    - 2079.575
+  - - 2079.925
+    - 2081.55
+  - - 2081.9
+    - 2089.575
+  - - 2089.925
+    - 2097.4
+  - - 2097.75
+    - 2107.95
+  - - 2108.3
+    - 2113.55
+  - - 2113.9
+    - 2118.475
+  - - 2118.825
+    - 2124.875
+  - - 2125.225
+    - 2131.1
+  - - 2131.45
+    - 2136.6
+  - - 2136.95
+    - 2141.025
+  - - 2141.375
+    - 2146.325
+  - - 2146.675
+    - 2154.15
+  - - 2154.5
+    - 2159.425
+  - - 2159.775
+    - 2167.1
+  - - 2167.45
+    - 2174.05
+  - - 2174.4
+    - 2182.625
+  - - 2182.975
+    - 2185.85
   beat: 'derivation D30: dA = a^2 cos phi dphi dlambda (U-CO-058; Should 7)'
   visual: 'Globe zoomed to a patch at Brest (zoom-reveal), between two meridians and two parallels 5 deg apart (x20 an ERA5 box so it reads);
     the patch gold, slightly curved. S4: its north-south side tagged ''a Δφ'' (orange); S5: its east-west side ''a cos φ Δλ'' (orange), each a
@@ -3078,17 +3394,16 @@ scenes:
     chip): on AT(5,''skip ahead'') a small rounded chip, top-right of the column (x 1500-1840, y 60-150, 44 px, warm white on a 20 % gold fill,
     no border): ''every step · optional'' / ''skip to {mm:ss}'' (mm:ss = the landing sentence''s start in the
     final timing.json, filled by the builder); it stays 8 s, fades over 0.5 s, never over the picture.'
-  voiceover: Distances give us areas. Why do we care? Because to average anything over the Earth, like the temperature, we need to know how much
-    area each grid box covers. The next few minutes build the area of a small patch, and then of whole bands round the Earth, one step at a time.
-    They're for anyone who wants every step, and not needed for the intuition of weather, climate science or mapping, so feel free to skip ahead to the time on screen. Take a small
-    patch of the surface, between two meridians and two parallels. Its north-south side is the Earth's radius times delta phi. Its east-west side
-    is the Earth's radius times cosine phi times delta lambda. The two sides meet at a right angle, because meridians cross parallels at right
-    angles. And when the patch is small, it's almost flat, so it's almost a rectangle. The area of a rectangle is its width times its height.
-    So the patch's area is about the east-west side times the north-south side. Collecting the pieces, that's the radius squared, times cosine
-    phi, times delta phi, times delta lambda. As the patch shrinks, the bending of the surface matters less and less. In the limit, we write the
-    tiny area as d capital A, and the tiny steps as d phi and d lambda. So d capital A equals the radius squared, times cosine phi, d phi, d lambda.
-    From here on, delta means a small step, and a small d means a step so tiny that the approximation becomes exact. And the angles are always
-    in radians.
+  voiceover: Distances give us areas. Why do we care? Because to average anything over the Earth, like the temperature, we need to know how much area each
+    grid box covers. The next few minutes build the area of a small patch, and then of whole bands round the Earth, one step at a time. They're for anyone
+    who wants every step, and not needed for the intuition of weather, climate science or mapping, so feel free to skip ahead to the time on screen. Take
+    a small patch of the surface, between two meridians and two parallels. Its north-south side is the Earth's radius times delta phi. Its east-west side
+    is the Earth's radius times cosine phi times delta lambda. The two sides meet at a right angle, because meridians cross parallels at right angles. And
+    when the patch is small, it's almost flat, so it's almost a rectangle. The area of a rectangle is its width times its height. So the patch's area is about
+    the east-west side times the north-south side. Collecting the pieces, that's the radius squared, times cosine phi, times delta phi, times delta lambda.
+    As the patch shrinks, the bending of the surface matters less and less. In the limit, we write the tiny area as d capital A, and the tiny steps as d phi
+    and d lambda. So d capital A equals the radius squared, times cosine phi, d phi, d lambda. From here on, delta means a small step, and a small d means
+    a step so tiny that the approximation becomes exact. And the angles are always in radians.
   on_screen_eq:
     latex: dA=a^2\cos\varphi\,d\varphi\,d\lambda
     vallis_eq: 'Vallis §2.2.2 (p. 61), text before (2.27): (δx, δy, δz) = (r cos ϑ δλ, r δϑ, δr); Vallis writes latitude ϑ, we write φ; r = a
@@ -3151,43 +3466,41 @@ scenes:
     Opening keyword from frame 0 (Should 18).'
 - id: s28_box_areas
   t:
-  - 2275.2
-  - 2355.1
+  - 2186.65
+  - 2258.125
   sentence_times:
-  - - 2275.2
-    - 2278.925
-  - - 2279.275
-    - 2284.725
-  - - 2285.075
-    - 2293.325
-  - - 2294.825
-    - 2307.45
-  - - 2308.95
-    - 2312.525
-  - - 2312.875
-    - 2322.0
-  - - 2323.5
-    - 2329.475
-  - - 2330.975
-    - 2337.675
-  - - 2339.175
-    - 2344.9
-  - - 2345.25
-    - 2353.6
+  - - 2186.65
+    - 2190.375
+  - - 2190.725
+    - 2196.175
+  - - 2196.525
+    - 2201.45
+  - - 2202.95
+    - 2212.0
+  - - 2213.5
+    - 2217.075
+  - - 2217.425
+    - 2225.325
+  - - 2226.825
+    - 2233.0
+  - - 2234.5
+    - 2240.7
+  - - 2242.2
+    - 2247.925
+  - - 2248.275
+    - 2256.625
   beat: 'worked numbers: ERA5 box areas 773, 712, 513, 158 km^2; the exact curved patch'
   visual: 'Left: four 3-D tiles (flat, to scale with each other) in a row like the s26 boxes, each with x and y edge tags (27.8 × 27.8, 27.8 ×
     25.6, 27.8 × 18.5, 27.8 × 5.7 km) and its place name below; right: CalcStack. S1: ''0.25° ≈ 0.00436 rad''. S2: ''a² = 6371² ≈ 40.6 million
     km²''. S3: ''40.6 × 10⁶ × 0.00436 × 0.00436 ≈ 773 km²'' -> the equator tile fills gold. S4: ''× cos φ''. S5-S7: ''773 × 0.9219 ≈ 712'', ''773
     × 0.6639 ≈ 513'', ''773 × 0.2045 ≈ 158'' km², each tile filling on its words with a gold link from its number. S8-S9: Brest''s tile becomes
     the true curved patch beside the flat one, ''exact: 513.1 km²'' with a gold ''same'' tick.'
-  voiceover: Let's work out the area of one ERA5 box. A quarter of a degree is zero point zero zero four three six radians. The radius squared
-    is six thousand three hundred and seventy one squared, about forty point six million square kilometres. [beat] Times zero point zero zero
-    four three six, and times zero point zero zero four three six again, that's about seven hundred and seventy three square kilometres, for a
-    box on the equator. [beat] Every other box is that, times cosine phi. At Khulna, seven hundred and seventy three times zero point nine two
-    one nine is about seven hundred and twelve square kilometres. [beat] At Brest, times zero point six six three nine, it's about five hundred
-    and thirteen. [beat] At Longyearbyen, times zero point two zero four five, it's only about a hundred and fifty eight. [beat] As a check, a
-    computer can work out the exact area of the curved patch at Brest. It's also about five hundred and thirteen point one square kilometres,
-    so the flat rectangle is a very good approximation. [beat]
+  voiceover: Let's work out the area of one ERA5 box. A quarter of a degree is zero point zero zero four three six radians. The radius squared is about forty
+    point six million square kilometres. [beat] Times that quarter degree in radians, twice, that's about seven hundred and seventy three square kilometres,
+    for a box on the equator. [beat] Every other box is that, times cosine phi. At Khulna, where cosine phi is zero point nine two one nine, it's about seven
+    hundred and twelve square kilometres. [beat] At Brest, the equator box times Brest's cosine phi is about five hundred and thirteen. [beat] At Longyearbyen,
+    with its much smaller cosine phi, it's only about a hundred and fifty eight. [beat] As a check, a computer can work out the exact area of the curved patch
+    at Brest. It's also about five hundred and thirteen point one square kilometres, so the flat rectangle is a very good approximation. [beat]
   on_screen_eq:
     latex: \Delta A\approx a^2\cos\varphi\,\Delta\varphi\,\Delta\lambda
     vallis_eq: 'Vallis §2.2.2 (p. 61), text before (2.27): (δx, δy, δz) = (r cos ϑ δλ, r δϑ, δr); Vallis writes latitude ϑ, we write φ; r = a
@@ -3224,40 +3537,40 @@ scenes:
     builder checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s29_strip_round
   t:
-  - 2355.1
-  - 2414.425
+  - 2258.125
+  - 2317.45
   sentence_times:
-  - - 2355.1
-    - 2357.1
-  - - 2357.45
-    - 2363.95
-  - - 2364.3
-    - 2365.725
-  - - 2366.075
-    - 2374.575
-  - - 2374.925
-    - 2377.875
-  - - 2378.225
-    - 2386.45
-  - - 2386.8
-    - 2391.425
-  - - 2391.775
-    - 2400.725
-  - - 2401.075
-    - 2405.975
-  - - 2406.325
-    - 2413.625
+  - - 2258.125
+    - 2260.125
+  - - 2260.475
+    - 2266.975
+  - - 2267.325
+    - 2268.75
+  - - 2269.1
+    - 2277.6
+  - - 2277.95
+    - 2280.9
+  - - 2281.25
+    - 2289.475
+  - - 2289.825
+    - 2294.45
+  - - 2294.8
+    - 2303.75
+  - - 2304.1
+    - 2309.0
+  - - 2309.35
+    - 2316.65
   beat: 'derivation D31 (1)-(2): a strip all round the Earth (U-CO-059)'
   visual: 'Globe at a 20 deg N view. S1-S3: column keyword ''area between 0° and φ?''; the band 0-30 N tints teal. S4: a thin gold strip all round
     between phi and phi + Δphi (drawn 5 deg wide at 25 N). S5 on AT(5,''Cut it and unroll it''): the strip cuts at one meridian and unrolls into
     a long thin flat ribbon below the globe (3-D, 2 s), keyword ''almost a rectangle''. S6: its length tag ''2π a cos φ'' (link to the parallel''s
     radius on the globe). S7: its width tag ''a Δφ''. S8: ''strip ≈ 2π a cos φ × a Δφ = 2π a² cos φ Δφ''.'
-  voiceover: 'Now a bigger question. How much of the Earth''s surface lies between the equator and some latitude, say thirty degrees north? Why
-    care? Because that''s how much of the planet is tropical and subtropical, and it tells us how much each part of the world counts in a global
-    average. Let''s build that area from thin strips. Take one strip that goes all the way round the Earth, between latitude phi and a little
-    further north, phi plus delta phi. Cut it and unroll it, and it''s almost a long, thin rectangle. Its length is the length of the parallel:
-    two pi times its radius, which is two pi, times the Earth''s radius, times cosine phi. Its width is the step north: the Earth''s radius times
-    delta phi. So the strip''s area is about two pi, times the radius squared, times cosine phi, times delta phi.'
+  voiceover: 'Now a bigger question. How much of the Earth''s surface lies between the equator and some latitude, say thirty degrees north? Why care? Because
+    that''s how much of the planet is tropical and subtropical, and it tells us how much each part of the world counts in a global average. Let''s build that
+    area from thin strips. Take one strip that goes all the way round the Earth, between latitude phi and a little further north, phi plus delta phi. Cut
+    it and unroll it, and it''s almost a long, thin rectangle. Its length is the length of the parallel: two pi times its radius, which is two pi, times the
+    Earth''s radius, times cosine phi. Its width is the step north: the Earth''s radius times delta phi. So the strip''s area is about two pi, times the radius
+    squared, times cosine phi, times delta phi.'
   on_screen_eq:
     latex: \text{strip}\approx2\pi a\cos\varphi\times a\,\Delta\varphi=2\pi a^2\cos\varphi\,\Delta\varphi
     vallis_eq: 'Vallis §2.2.2 (p. 61), text before (2.27): (δx, δy, δz) = (r cos ϑ δλ, r δϑ, δr); Vallis writes latitude ϑ, we write φ; r = a
@@ -3304,46 +3617,49 @@ scenes:
     the picture or over other text; links never cross text, ticks or each other (the builder checks its own stills: K6 cannot see these). No headings.
     Opening keyword from frame 0 (Should 18).'
 - id: s30_slope_of_sine
+  recalls:
+  - at: S1-S5 'But Part 2 gave us a shortcut'
+    latex: \dfrac{d}{d\theta}\sin\theta=\cos\theta
+    keyword: 'derived in Part 2: slope of sine'
   t:
-  - 2414.425
-  - 2489.0
+  - 2317.45
+  - 2387.05
   sentence_times:
-  - - 2414.425
-    - 2417.725
-  - - 2418.075
-    - 2420.725
-  - - 2421.075
-    - 2427.575
-  - - 2427.925
-    - 2433.9
-  - - 2434.25
-    - 2436.75
-  - - 2437.1
-    - 2442.475
-  - - 2442.825
-    - 2447.4
-  - - 2447.75
-    - 2454.3
-  - - 2454.65
-    - 2464.8
-  - - 2466.3
-    - 2474.4
-  - - 2474.75
-    - 2478.05
-  - - 2479.55
-    - 2488.2
+  - - 2317.45
+    - 2320.75
+  - - 2321.1
+    - 2323.75
+  - - 2324.1
+    - 2330.6
+  - - 2330.95
+    - 2336.925
+  - - 2337.275
+    - 2339.775
+  - - 2340.125
+    - 2345.5
+  - - 2345.85
+    - 2350.425
+  - - 2350.775
+    - 2357.325
+  - - 2357.675
+    - 2362.85
+  - - 2364.35
+    - 2372.45
+  - - 2372.8
+    - 2376.1
+  - - 2377.6
+    - 2386.25
   beat: 'derivation D31 (3)-(4): the slope of sine from Part 2 turns cos phi dphi into Delta(sin phi)'
   visual: 'Left: Part 2''s unit-circle picture (reused module): the arrow at angle phi, a small step Δphi, the tip rising by Δ(sin φ) (orange)
     ≈ cos φ Δφ; right: CalcStack. S3-S4: ''cos φ Δφ ≈ Δ(sin φ)''. S5-S8: the check with a 20-30 deg strip: ''Δφ = 10° ≈ 0.1745 rad'', ''cos 25°
     ≈ 0.906'', ''0.906 × 0.1745 ≈ 0.158''; S9-S10: ''sin 30° − sin 20° = 0.5 − 0.342 = 0.158'' with a gold ''same'' tick. S11: ''strip ≈ 2π a²
     Δ(sin φ)''.'
-  voiceover: 'Adding up lots of cosines like this looks hard. But Part 2 gave us a shortcut. When an angle grows by a small step, its sine grows
-    by about its cosine times that step. So cosine phi times delta phi is just how much sine phi grows across the strip. We call that delta sine
-    phi. Let''s check it with a strip ten degrees wide, from twenty to thirty degrees north. Ten degrees is zero point one seven four five radians.
-    Cosine phi at the middle of the strip, at twenty five degrees, is zero point nine zero six. So cosine phi times delta phi is zero point nine
-    zero six times zero point one seven four five, about zero point one five eight. [beat] And sine phi grows from zero point three four two,
-    at twenty degrees, to zero point five, at thirty degrees. That''s a step of zero point one five eight too. [beat] So the strip''s area is
-    two pi, times the radius squared, times delta sine phi: the change in sine phi across the strip.'
+  voiceover: 'Adding up lots of cosines like this looks hard. But Part 2 gave us a shortcut. When an angle grows by a small step, its sine grows by about
+    its cosine times that step. So cosine phi times delta phi is just how much sine phi grows across the strip. We call that delta sine phi. Let''s check
+    it with a strip ten degrees wide, from twenty to thirty degrees north. Ten degrees is zero point one seven four five radians. Cosine phi at the middle
+    of the strip, at twenty five degrees, is zero point nine zero six. So cosine phi times delta phi is about zero point one five eight. [beat] And sine phi
+    grows from zero point three four two, at twenty degrees, to zero point five, at thirty degrees. That''s a step of zero point one five eight too. [beat]
+    So the strip''s area is two pi, times the radius squared, times delta sine phi: the change in sine phi across the strip.'
   on_screen_eq:
     latex: \cos\varphi\,\Delta\varphi\approx\Delta(\sin\varphi)
     vallis_eq: 'none: arithmetic or a definition (no book equation) (the slope of sine, derived in Part 2 D12)'
@@ -3391,49 +3707,48 @@ scenes:
     builder checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s31_adding_strips
   t:
-  - 2489.0
-  - 2569.9
+  - 2387.05
+  - 2465.55
   sentence_times:
-  - - 2489.0
-    - 2493.975
-  - - 2494.325
-    - 2499.4
-  - - 2499.75
-    - 2505.475
-  - - 2505.825
-    - 2508.825
-  - - 2509.175
-    - 2512.7
-  - - 2513.05
-    - 2520.825
-  - - 2522.325
-    - 2527.05
-  - - 2527.4
-    - 2535.475
-  - - 2536.975
-    - 2542.525
-  - - 2544.025
-    - 2548.65
-  - - 2549.0
-    - 2554.225
-  - - 2554.575
-    - 2561.75
-  - - 2562.1
-    - 2569.1
+  - - 2387.05
+    - 2392.025
+  - - 2392.375
+    - 2397.45
+  - - 2397.8
+    - 2403.525
+  - - 2403.875
+    - 2406.875
+  - - 2407.225
+    - 2410.75
+  - - 2411.1
+    - 2418.875
+  - - 2420.375
+    - 2425.1
+  - - 2425.45
+    - 2430.375
+  - - 2431.875
+    - 2438.175
+  - - 2439.675
+    - 2444.3
+  - - 2444.65
+    - 2449.875
+  - - 2450.225
+    - 2457.4
+  - - 2457.75
+    - 2464.75
   beat: 'derivation D31 (5)-(6): the staircase sum; integration named'
   visual: 'Left: three ten-degree strips on the globe (0-10, 10-20, 20-30 N), each lighting in turn; right: a staircase graph (x latitude 0-90
     deg, y sin φ 0-1, 52-px ticks) with the sine curve and three steps (gold risers 0.174, 0.168, 0.158) appearing with their strips on the same
     frame. S2-S3: keyword ''steps add up: top − bottom''. S5: ''band = 2π a² sin φ'' (96 px). S6-S8: CalcStack ''0.174 + 0.168 + 0.158 = 0.500
     = sin 30°''. S9-S12: the steps get thinner (1 deg) until the staircase is the curve; the tall S draws: ''∫₀^φ cos φ′ dφ′ = sin φ'' with underbraces
     ''sum'' (∫), ''tiny step'' (dφ′), ''latitude of each strip'' (φ′).'
-  voiceover: 'Now stack the strips, from the equator all the way up to latitude phi. Each strip adds its own step in sine phi, like the steps
-    of a staircase. And all the steps of a staircase add up to the height of the top, minus the height of the bottom. At the equator, sine phi
-    is zero. So all the steps together add up to just sine phi. That means the area between the equator and latitude phi is two pi, times the
-    radius squared, times sine phi. [beat] Let''s check with ten degree strips, from the equator to thirty degrees. Their steps in sine phi are
-    zero point one seven four, zero point one six eight, and zero point one five eight. [beat] They add up to zero point five, which is exactly
-    the sine of thirty degrees. [beat] This adding up of thinner and thinner strips has a name: integration. We write it with a tall S, for sum,
-    and a small d for the tiny steps. Inside, we call the latitude of each strip phi prime, so it isn''t mixed up with the top latitude, phi.
-    So the integral of cosine phi prime, d phi prime, from zero up to phi, equals sine phi.'
+  voiceover: 'Now stack the strips, from the equator all the way up to latitude phi. Each strip adds its own step in sine phi, like the steps of a staircase.
+    And all the steps of a staircase add up to the height of the top, minus the height of the bottom. At the equator, sine phi is zero. So all the steps together
+    add up to just sine phi. That means the area between the equator and latitude phi is two pi, times the radius squared, times sine phi. [beat] Let''s check
+    with ten degree strips, from the equator to thirty degrees. Each strip''s step is the sine at its top minus the sine at its bottom. [beat] Together, they
+    add up to zero point five, which is exactly the sine of thirty degrees. [beat] This adding up of thinner and thinner strips has a name: integration. We
+    write it with a tall S, for sum, and a small d for the tiny steps. Inside, we call the latitude of each strip phi prime, so it isn''t mixed up with the
+    top latitude, phi. So the integral of cosine phi prime, d phi prime, from zero up to phi, equals sine phi.'
   on_screen_eq:
     latex: \int_0^{\varphi}\cos\varphi'\,d\varphi'=\sin\varphi,\qquad A_{0\to\varphi}=2\pi a^2\sin\varphi
     vallis_eq: 'none: arithmetic or a definition (no book equation) (integration of the area element of Vallis §2.2.2 p. 61; fluidpy.geo.sphere.band_area)'
@@ -3495,45 +3810,45 @@ scenes:
     its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s32_band_fraction
   t:
-  - 2569.9
-  - 2642.775
+  - 2465.55
+  - 2538.425
   sentence_times:
-  - - 2569.9
-    - 2572.05
-  - - 2572.4
-    - 2574.925
-  - - 2575.275
-    - 2582.75
-  - - 2583.1
-    - 2587.825
-  - - 2589.325
-    - 2597.45
-  - - 2598.95
-    - 2605.425
-  - - 2605.775
-    - 2608.7
-  - - 2609.05
-    - 2614.85
-  - - 2616.35
-    - 2618.625
-  - - 2618.975
-    - 2624.775
-  - - 2626.275
-    - 2635.75
-  - - 2637.25
-    - 2641.975
+  - - 2465.55
+    - 2467.7
+  - - 2468.05
+    - 2470.575
+  - - 2470.925
+    - 2478.4
+  - - 2478.75
+    - 2483.475
+  - - 2484.975
+    - 2493.1
+  - - 2494.6
+    - 2501.075
+  - - 2501.425
+    - 2504.35
+  - - 2504.7
+    - 2510.5
+  - - 2512.0
+    - 2514.275
+  - - 2514.625
+    - 2520.425
+  - - 2521.925
+    - 2531.4
+  - - 2532.9
+    - 2537.625
   beat: 'derivation D31 (7)-(8): checks and the share sin phi; half the Earth within 30 deg of the equator'
   visual: 'Globe (whole, unzoomed). S1-S3: the band fills from the equator to the pole (teal), ''sin 90° = 1'', CalcStack ''2π a² ≈ 255 million
     km²''. S4: the southern hemisphere fills too: ''4π a² ≈ 510 million km²''. S5: ''share = sin φ''. S6-S7: the band 0-30 N teal, the rest of
     the NH slate, ''1/2'' on each part. S8-S9: 30 S - 30 N teal, ''half of the Earth''. S10: Brest''s parallel, ''0.7478 ≈ 3/4 lies south of Brest''.
     S11: keywords ''tropics: huge'', ''polar caps: small''.'
-  voiceover: 'Let''s check the formula. Go all the way up to the North Pole. The sine of ninety degrees is one, so the northern hemisphere has
-    an area of two pi times the radius squared. That''s about two hundred and fifty five million square kilometres. [beat] The whole Earth is
-    twice that, four pi times the radius squared: about five hundred and ten million square kilometres. [beat] So the share of the northern hemisphere
-    between the equator and latitude phi is simply sine phi. The sine of thirty degrees is one half. So half of the northern hemisphere lies between
-    the equator and thirty degrees north. [beat] The same goes for the south. So half of the whole Earth lies between thirty degrees south and
-    thirty degrees north. [beat] At Brest''s latitude, sine phi is zero point seven four seven eight, so about three quarters of the northern
-    hemisphere lies south of Brest. [beat] The tropics and subtropics are huge, and the polar caps are small.'
+  voiceover: 'Let''s check the formula. Go all the way up to the North Pole. The sine of ninety degrees is one, so the northern hemisphere has an area of
+    two pi times the radius squared. That''s about two hundred and fifty five million square kilometres. [beat] The whole Earth is twice that, four pi times
+    the radius squared: about five hundred and ten million square kilometres. [beat] So the share of the northern hemisphere between the equator and latitude
+    phi is simply sine phi. The sine of thirty degrees is one half. So half of the northern hemisphere lies between the equator and thirty degrees north.
+    [beat] The same goes for the south. So half of the whole Earth lies between thirty degrees south and thirty degrees north. [beat] At Brest''s latitude,
+    sine phi is zero point seven four seven eight, so about three quarters of the northern hemisphere lies south of Brest. [beat] The tropics and subtropics
+    are huge, and the polar caps are small.'
   on_screen_eq:
     latex: \dfrac{2\pi a^2\sin\varphi}{2\pi a^2}=\sin\varphi
     vallis_eq: 'none: arithmetic or a definition (no book equation)'
@@ -3578,35 +3893,35 @@ scenes:
     Opening keyword from frame 0 (Should 18).'
 - id: s33_archimedes
   t:
-  - 2642.775
-  - 2723.975
+  - 2538.425
+  - 2619.625
   sentence_times:
-  - - 2642.775
-    - 2649.1
-  - - 2649.45
-    - 2657.375
-  - - 2657.725
-    - 2666.7
-  - - 2667.05
-    - 2672.7
-  - - 2673.05
-    - 2677.25
-  - - 2677.6
-    - 2681.15
-  - - 2681.5
-    - 2687.4
-  - - 2687.75
-    - 2695.5
-  - - 2697.0
-    - 2698.75
-  - - 2699.1
-    - 2706.175
-  - - 2706.525
-    - 2714.5
-  - - 2714.85
-    - 2717.6
-  - - 2717.95
-    - 2723.175
+  - - 2538.425
+    - 2544.75
+  - - 2545.1
+    - 2553.025
+  - - 2553.375
+    - 2562.35
+  - - 2562.7
+    - 2568.35
+  - - 2568.7
+    - 2572.9
+  - - 2573.25
+    - 2576.8
+  - - 2577.15
+    - 2583.05
+  - - 2583.4
+    - 2591.15
+  - - 2592.65
+    - 2594.4
+  - - 2594.75
+    - 2601.825
+  - - 2602.175
+    - 2610.15
+  - - 2610.5
+    - 2613.25
+  - - 2613.6
+    - 2618.825
   beat: 'intuition: Archimedes'' cylinder (equal heights, equal areas)'
   visual: 'Globe inside a snug translucent cylinder (radius a, slate wireframe, 3-D, the camera orbiting slowly from outside at 15 deg elevation).
     S3: the band 0-phi (phi = 48.4) on the globe teal; horizontal arrows push it out onto the cylinder, where a matching teal band appears. S4:
@@ -3651,47 +3966,47 @@ scenes:
     checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s34_global_mean
   t:
-  - 2723.975
-  - 2847.4
+  - 2619.625
+  - 2743.15
   sentence_times:
-  - - 2723.975
-    - 2726.65
-  - - 2727.0
-    - 2739.65
-  - - 2740.0
-    - 2742.6
-  - - 2742.95
-    - 2748.125
-  - - 2748.475
-    - 2752.2
-  - - 2752.55
-    - 2757.2
-  - - 2757.55
-    - 2760.425
-  - - 2760.775
-    - 2768.825
-  - - 2769.175
-    - 2776.975
-  - - 2777.325
-    - 2779.375
-  - - 2780.875
-    - 2786.0
-  - - 2786.35
-    - 2789.35
-  - - 2789.7
-    - 2796.7
-  - - 2797.05
-    - 2803.975
-  - - 2804.325
-    - 2814.825
-  - - 2815.175
-    - 2821.1
-  - - 2822.6
-    - 2827.125
-  - - 2828.625
-    - 2841.375
-  - - 2841.725
-    - 2846.6
+  - - 2619.625
+    - 2622.3
+  - - 2622.65
+    - 2635.3
+  - - 2635.65
+    - 2638.25
+  - - 2638.6
+    - 2643.775
+  - - 2644.125
+    - 2647.85
+  - - 2648.2
+    - 2652.85
+  - - 2653.2
+    - 2656.075
+  - - 2656.425
+    - 2664.475
+  - - 2664.825
+    - 2672.725
+  - - 2673.075
+    - 2675.125
+  - - 2676.625
+    - 2681.75
+  - - 2682.1
+    - 2685.1
+  - - 2685.45
+    - 2692.45
+  - - 2692.8
+    - 2699.725
+  - - 2700.075
+    - 2710.575
+  - - 2710.925
+    - 2716.85
+  - - 2718.35
+    - 2722.875
+  - - 2724.375
+    - 2737.125
+  - - 2737.475
+    - 2742.35
   beat: 'application: the cos phi weighting of a global mean (toy, then ERA5 September 2026: 7.1 vs 16.3 C)'
   visual: 'S1-S6 (toy): two 3-D tiles from s28, the equator one (area 1) and the 60 N one (area 1/2), each with a thermometer icon ''30 °C'' and
     ''0 °C''; CalcStack ''plain: (30 + 0) ÷ 2 = 15'', ''weights: cos 0° = 1, cos 60° = 1/2'', ''weighted: (30 × 1 + 0 × 1/2) ÷ 1.5 = 20 °C''.
@@ -3706,13 +4021,13 @@ scenes:
     half of the whole Earth lies between thirty degrees south and thirty degrees north. Here''s where this matters for climate. Imagine a planet with just
     two grid boxes, the same size in degrees. One is on the equator, at thirty degrees Celsius. The other is at sixty degrees north, at zero degrees Celsius.
     A plain average says fifteen degrees. But the box at sixty degrees covers only cosine sixty degrees, which is one half of the area of the equator box.
-    So the area-weighted average is thirty times one, plus zero times one half, all divided by one and a half. That''s twenty degrees. [beat] That''s why
-    a global average gives each latitude a weight of cosine phi. We write the average temperature as T bar. The Greek capital letter sigma means add up over
-    all the boxes, which we number with the letter j. So T bar is the sum of cosine phi times the temperature, divided by the sum of the cosines. Now let''s
-    do it with real data: ERA5''s air temperature two metres above the ground, averaged over September twenty twenty six, on a one degree grid. A plain average
-    of all the grid boxes gives about seven point one degrees Celsius. [beat] Weighted by cosine phi, it''s about sixteen point three degrees. [beat] The
-    plain average is more than nine degrees too cold, because the many thin boxes near the poles, over the cold Arctic and the frozen Antarctic, count as
-    much as the big tropical ones. This cosine weighting is how global average temperatures are worked out.'
+    So the area-weighted average multiplies each temperature by its weight, adds them up, and divides by the sum of the weights. That''s twenty degrees. [beat]
+    That''s why a global average gives each latitude a weight of cosine phi. We write the average temperature as T bar. The Greek capital letter sigma means
+    add up over all the boxes, which we number with the letter j. So T bar is the sum of cosine phi times the temperature, divided by the sum of the cosines.
+    Now let''s do it with real data: ERA5''s air temperature two metres above the ground, averaged over September twenty twenty six, on a one degree grid.
+    A plain average of all the grid boxes gives about seven point one degrees Celsius. [beat] Weighted by cosine phi, it''s about sixteen point three degrees.
+    [beat] The plain average is more than nine degrees too cold, because the many thin boxes near the poles, over the cold Arctic and the frozen Antarctic,
+    count as much as the big tropical ones. This cosine weighting is how global average temperatures are worked out.'
   on_screen_eq:
     latex: \overline{T}=\dfrac{\sum_j\cos\varphi_j\,T_j}{\sum_j\cos\varphi_j}
     vallis_eq: 'our step: weights from dA = a² cos ϑ dϑ dλ (Vallis §2.2.2); fluidpy.diag.climatology.global_mean'
@@ -3742,38 +4057,45 @@ scenes:
     other text; links never cross text, ticks or each other (the builder checks its own stills: K6 cannot see these). No headings. Opening keyword
     from frame 0 (Should 18).'
 - id: s35_recap
+  remake_2026_11_07: "R3: S10 with 'about seventy four kilometres per degree at Brest'; new S13 ERA5 Sep 2026 plain 7.1 -> weighted 16.3 \xB0C (bars + source\
+    \ line); S14-S15 two-sentence teaser to Part 4 (a station's own east, north and up arrows; they turn as the air moves; extra terms in how the wind changes).\
+    \ The end card (s36) follows; picture and music fade together over the 2.5-s hold."
   t:
-  - 2847.4
-  - 2966.25
+  - 2743.15
+  - 2883.8
   sentence_times:
-  - - 2847.4
-    - 2856.05
-  - - 2856.4
-    - 2864.2
-  - - 2864.55
-    - 2870.3
-  - - 2870.65
-    - 2877.925
-  - - 2878.275
-    - 2883.275
-  - - 2883.625
-    - 2888.625
-  - - 2888.975
-    - 2896.725
-  - - 2897.075
-    - 2910.875
-  - - 2911.225
-    - 2922.175
-  - - 2922.525
-    - 2929.95
-  - - 2930.3
-    - 2937.55
-  - - 2937.9
-    - 2944.675
-  - - 2945.025
-    - 2957.05
-  - - 2957.4
-    - 2965.45
+  - - 2743.15
+    - 2751.8
+  - - 2752.15
+    - 2759.95
+  - - 2760.3
+    - 2766.05
+  - - 2766.4
+    - 2773.675
+  - - 2774.025
+    - 2779.025
+  - - 2779.375
+    - 2784.375
+  - - 2784.725
+    - 2792.475
+  - - 2792.825
+    - 2806.625
+  - - 2806.975
+    - 2817.925
+  - - 2818.275
+    - 2825.7
+  - - 2826.05
+    - 2836.7
+  - - 2837.05
+    - 2843.825
+  - - 2844.175
+    - 2856.2
+  - - 2856.55
+    - 2867.05
+  - - 2867.4
+    - 2873.8
+  - - 2874.15
+    - 2883.0
   beat: recap ('To sum up'); the last sentence is the teaser to Part 4 (split plan §2g)
   visual: 'One beat per sentence, mini pictures reused (no headings): the globe with the centre and r; the sliced face with ''a ≈ 6400 km''; the
     phi wedge; the colatitude wedge with ''sin ↔ cos''; a parallel disc and a meridian; the lambda wedge from Greenwich; the two-view triangles
@@ -3787,10 +4109,12 @@ scenes:
     round the axis, from the prime meridian through Greenwich, positive to the east. Two slices give the position arrow: x is the radius times cosine phi
     times cosine lambda, y is the radius times cosine phi times sine lambda, and z is the radius times sine phi. The ground is carried east at capital Omega,
     times the radius, times cosine phi: about four hundred and sixty four point six metres per second at the equator. A step north is the radius times delta
-    phi, about a hundred and eleven kilometres per degree, everywhere. A step east is the radius, times cosine phi, times delta lambda, and it shrinks towards
-    the poles. So a small patch has an area of the radius squared, times cosine phi, d phi, d lambda. Adding up strips shows that the band from the equator
-    to latitude phi holds a share sine phi of its hemisphere, which is why global averages weight each latitude by cosine phi. In Part 4, we''ll stand at
-    a weather station, and see how its own east, north and up arrows turn as the air moves.'
+    phi, about a hundred and eleven kilometres per degree, everywhere. A step east is the radius, times cosine phi, times delta lambda: about seventy four
+    kilometres per degree at Brest, and it shrinks towards the poles. So a small patch has an area of the radius squared, times cosine phi, d phi, d lambda.
+    Adding up strips shows that the band from the equator to latitude phi holds a share sine phi of its hemisphere, which is why global averages weight each
+    latitude by cosine phi. For September twenty twenty six, that weighting turned ERA5''s plain average of about seven point one degrees Celsius into about
+    sixteen point three. In Part 4, we''ll stand at a weather station and give it its own east, north and up arrows. As the air moves over the round Earth,
+    those arrows turn by themselves, and that turning adds extra terms to how the wind changes.'
   on_screen_eq: null
   physics_source: null
   exaggeration:
@@ -3810,24 +4134,25 @@ scenes:
     cross text, ticks or each other (the builder checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should
     18).'
 - id: s36_end
+  remake_2026_11_07: 'R3: the end card''s picture fades out over the 75-frame hold, with the music''s 2.5-s tail (tools/sound/mix.py tail_s 2.5).'
   t:
-  - 2966.25
-  - 2989.15
+  - 2883.8
+  - 2906.7
   sentence_times:
-  - - 2966.25
-    - 2972.45
-  - - 2972.8
-    - 2980.85
-  - - 2981.2
-    - 2988.85
+  - - 2883.8
+    - 2890.0
+  - - 2890.35
+    - 2898.4
+  - - 2898.75
+    - 2906.4
   beat: series end card (maths ending, HOUSE_STYLE §3, word for word; decision 2)
   visual: 'END CARD (house EndCard): four faint topic thumbnails along the top (the sliced globe with phi, the graticule, the two-view triangle,
     the dA tile); keyword lines ''a series of maths tutorials'' (68 px) and ''atmospheric science · meteorology · fluid dynamics'' (54 px); notebook
     icon ''coordinates notebook''; stacked notebook icons ''notebooks for the other maths concepts'' with a 24-px gap under the icon row (Should
     14). Then a 2.5-s silent hold while the music fades.'
-  voiceover: This video is one of a series of related maths tutorials, so watch out for the others. They're made for students of atmospheric science,
-    meteorology and fluid dynamics, and anyone else who needs these ideas. The notebook for coordinates, and the notebooks for the other maths
-    concepts, are on the website that goes with this video.
+  voiceover: This video is one of a series of related maths tutorials, so watch out for the others. They're made for students of atmospheric science, meteorology
+    and fluid dynamics, and anyone else who needs these ideas. The notebook for coordinates, and the notebooks for the other maths concepts, are on the website
+    that goes with this video.
   on_screen_eq: null
   physics_source: null
   exaggeration:

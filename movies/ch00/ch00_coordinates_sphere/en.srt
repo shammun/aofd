@@ -1,3474 +1,3372 @@
 1
-00:00:00,300 --> 00:00:04,153
+00:00:00,300 --> 00:00:03,964
 In this video, we'll learn
 coordinates on our round Earth,
 
 2
-00:00:04,153 --> 00:00:08,006
-and see how meteorology uses
-them to measure distances and
+00:00:03,964 --> 00:00:08,575
+and see how they're used to measure
+distances and areas on weather grids.
 
 3
-00:00:08,006 --> 00:00:09,800
-areas on its weather grids.
-
-4
-00:00:10,600 --> 00:00:16,125
+00:00:09,375 --> 00:00:14,900
 How do we say where a place is on a round
 Earth, and how far apart two places are?
 
-5
-00:00:16,475 --> 00:00:19,697
+4
+00:00:15,250 --> 00:00:18,472
 This is the third of seven
 parts on coordinates,
 
-6
-00:00:19,697 --> 00:00:23,925
+5
+00:00:18,472 --> 00:00:22,700
 and in this part, we leave the flat
 map and go round the globe.
 
+6
+00:00:23,050 --> 00:00:26,205
+Now let's dive into
+latitude and longitude,
+
 7
-00:00:24,275 --> 00:00:29,675
-Let's see how latitude and longitude are
-built, and how they turn into kilometres.
+00:00:26,205 --> 00:00:28,700
+and how they turn into kilometres.
 
 8
-00:00:30,025 --> 00:00:34,214
+00:00:29,050 --> 00:00:33,239
 Then let's see what they tell us
 about the grid boxes of weather data,
 
 9
-00:00:34,214 --> 00:00:37,325
+00:00:33,239 --> 00:00:36,350
 and about how much of the Earth
 lies in the tropics.
 
 10
-00:00:38,125 --> 00:00:40,500
-First, a quick look back.
-
-11
-00:00:40,850 --> 00:00:45,673
-In Part 1, we met polar coordinates
-on a flat map: a distance r,
-
-12
-00:00:45,673 --> 00:00:51,175
-and an angle theta, measured anticlockwise
-from east, as seen from above.
-
-13
-00:00:51,525 --> 00:00:56,900
-We found that x equals r cosine
-theta, and y equals r sine theta.
-
-14
-00:00:57,250 --> 00:01:00,153
-We met radians, and the arc length rule:
-
-15
-00:01:00,153 --> 00:01:04,725
-the length of an arc is the radius
-times the angle, in radians.
-
-16
-00:01:05,075 --> 00:01:10,925
-In Part 2, we watched arrows turn, and we
-found the slopes of sine and cosine.
-
-17
-00:01:11,275 --> 00:01:13,900
-When an angle grows by a tiny step,
-
-18
-00:01:13,900 --> 00:01:17,725
-its sine grows by about
-its cosine times that step.
-
-19
-00:01:18,075 --> 00:01:21,985
-We saw that air going round a ring
-is always accelerating,
-
-20
-00:01:21,985 --> 00:01:24,075
-towards the centre of the ring.
-
-21
-00:01:24,425 --> 00:01:28,410
-Then we added a height z, to get
-cylindrical coordinates,
-
-22
-00:01:28,410 --> 00:01:31,975
-and looked inside Hurricane
-Ian and Cyclone Amphan.
-
-23
-00:01:32,325 --> 00:01:37,075
-Now let's take these ideas to the biggest
-round shape of all: the Earth.
-
-24
-00:01:37,875 --> 00:01:39,875
+00:00:37,150 --> 00:00:39,150
 Let's start with the shape.
 
-25
-00:01:40,225 --> 00:01:44,825
+11
+00:00:39,500 --> 00:00:44,100
 The Earth is very nearly a ball, a
 sphere, so let's treat it as one.
 
-26
-00:01:45,175 --> 00:01:48,550
+12
+00:00:44,450 --> 00:00:47,825
 On the flat map, we
 measured from an origin.
 
-27
-00:01:48,900 --> 00:01:52,750
+13
+00:00:48,175 --> 00:00:52,025
 On the Earth, the natural
 origin is the Earth's centre.
 
-28
-00:01:53,100 --> 00:01:56,133
+14
+00:00:52,375 --> 00:00:55,408
 Then any point, on the
 ground, up in the air,
 
-29
-00:01:56,133 --> 00:01:59,975
+15
+00:00:55,408 --> 00:00:59,250
 or deep underground, can be
 pinned down by three numbers.
 
-30
-00:02:00,325 --> 00:02:06,400
+16
+00:00:59,600 --> 00:01:05,675
 The first is its distance from the centre,
 which we call r, just as on the flat map.
 
-31
-00:02:06,750 --> 00:02:09,734
+17
+00:01:06,025 --> 00:01:09,009
 The other two are
 angles, which say in which
 
-32
-00:02:09,734 --> 00:02:13,125
+18
+00:01:09,009 --> 00:01:12,400
 direction the point lies, as seen
 from the centre.
 
-33
-00:02:13,475 --> 00:02:18,375
+19
+00:01:12,750 --> 00:01:17,650
 A distance and two angles like this
 are called spherical coordinates.
 
-34
-00:02:18,725 --> 00:02:23,028
+20
+00:01:18,000 --> 00:01:22,303
 On the Earth, the two angles
 are the ones you know from maps:
 
-35
-00:02:23,028 --> 00:02:24,650
+21
+00:01:22,303 --> 00:01:23,925
 latitude and longitude.
 
-36
-00:02:25,000 --> 00:02:28,175
+22
+00:01:24,275 --> 00:01:27,450
 But the centre is hidden
 deep inside the Earth.
 
-37
-00:02:28,525 --> 00:02:31,500
+23
+00:01:27,800 --> 00:01:30,775
 So to see it, let's cut the Earth open.
 
-38
-00:02:32,300 --> 00:02:35,256
+24
+00:01:31,575 --> 00:01:34,531
 Imagine slicing the Earth
 in half with a flat
 
-39
-00:02:35,256 --> 00:02:37,949
+25
+00:01:34,531 --> 00:01:37,224
 knife that passes through the North Pole,
 
-40
-00:02:37,949 --> 00:02:42,875
+26
+00:01:37,224 --> 00:01:42,150
 the South Pole, and the city of Brest, a
 port at the western tip of France.
 
-41
-00:02:43,225 --> 00:02:45,713
+27
+00:01:42,500 --> 00:01:44,988
 Now we can see the flat face of the cut,
 
-42
-00:02:45,713 --> 00:02:48,450
+28
+00:01:44,988 --> 00:01:47,725
 with the Earth's centre
 in the middle of it.
 
-43
-00:02:48,800 --> 00:02:51,975
+29
+00:01:48,075 --> 00:01:51,250
 Let's draw an arrow
 from the centre to Brest.
 
-44
-00:02:52,325 --> 00:02:56,000
+30
+00:01:51,600 --> 00:01:55,275
 Its length is Brest's
 distance from the centre, r.
 
-45
-00:02:56,350 --> 00:03:00,625
+31
+00:01:55,625 --> 00:01:59,900
 For any place on the ground, that
 length is the Earth's radius.
 
-46
-00:03:00,975 --> 00:03:04,219
+32
+00:02:00,250 --> 00:02:03,494
 It's about six thousand
 four hundred kilometres,
 
-47
-00:03:04,219 --> 00:03:08,275
+33
+00:02:03,494 --> 00:02:07,550
 or more exactly, six thousand
 three hundred and seventy one.
 
-48
-00:03:09,775 --> 00:03:14,100
+34
+00:02:09,050 --> 00:02:13,375
 It's used in so many formulas
 that it gets its own letter.
 
-49
-00:03:14,450 --> 00:03:16,125
+35
+00:02:13,725 --> 00:02:15,400
 We call it a.
 
-50
-00:03:16,475 --> 00:03:19,975
+36
+00:02:15,750 --> 00:02:19,250
 So for places on the ground, r equals a.
 
-51
-00:03:20,325 --> 00:03:23,281
+37
+00:02:19,600 --> 00:02:22,556
 A weather balloon ten
 kilometres up is only
 
-52
-00:03:23,281 --> 00:03:25,962
+38
+00:02:22,556 --> 00:02:25,238
 ten kilometres farther from the centre,
 
-53
-00:03:25,962 --> 00:03:28,300
+39
+00:02:25,238 --> 00:02:27,575
 about a sixth of one percent more.
 
-54
-00:03:28,650 --> 00:03:30,474
+40
+00:02:27,925 --> 00:02:29,749
 That's why, for the weather,
 
-55
-00:03:30,474 --> 00:03:34,775
+41
+00:02:29,749 --> 00:02:34,050
 we can usually use the Earth's
 radius for every height in the air.
 
-56
-00:03:35,575 --> 00:03:38,125
+42
+00:02:34,850 --> 00:02:37,400
 Now let's measure the first angle.
 
-57
-00:03:38,475 --> 00:03:42,950
+43
+00:02:37,750 --> 00:02:42,225
 On the cut face, draw a line
 from the centre out to the equator.
 
-58
-00:03:43,300 --> 00:03:46,179
+44
+00:02:42,575 --> 00:02:45,454
 Latitude is the angle
 between that line and
 
-59
-00:03:46,179 --> 00:03:49,325
+45
+00:02:45,454 --> 00:02:48,600
 the arrow to the place,
 measured at the centre.
 
-60
-00:03:49,675 --> 00:03:52,400
+46
+00:02:48,950 --> 00:02:51,675
 We write it with the Greek letter phi.
 
-61
-00:03:52,750 --> 00:03:56,441
+47
+00:02:52,025 --> 00:02:55,716
 For Brest, the arrow is turned
 up from the equator line
 
-62
-00:03:56,441 --> 00:03:59,175
+48
+00:02:55,716 --> 00:02:58,450
 by about forty eight point four degrees.
 
-63
-00:04:00,675 --> 00:04:05,150
+49
+00:02:59,950 --> 00:03:04,425
 That's why we say Brest is at forty
 eight point four degrees north.
 
-64
-00:04:05,500 --> 00:04:08,050
+50
+00:03:04,775 --> 00:03:07,325
 At the equator, phi is zero.
 
-65
-00:04:08,400 --> 00:04:13,100
+51
+00:03:07,675 --> 00:03:12,375
 Halfway from the equator to the North
 Pole, it's forty five degrees.
 
-66
-00:04:13,450 --> 00:04:17,325
+52
+00:03:12,725 --> 00:03:16,600
 At the North Pole
 itself, it's ninety degrees north.
 
-67
-00:04:17,675 --> 00:04:23,150
+53
+00:03:16,950 --> 00:03:22,425
 At the South Pole, it's ninety degrees
 south, which we write as minus ninety.
 
-68
-00:04:23,500 --> 00:04:27,367
+54
+00:03:22,775 --> 00:03:26,642
 So latitude says how far
 north or south a place is,
 
-69
-00:04:27,367 --> 00:04:30,475
+55
+00:03:26,642 --> 00:03:29,750
 from minus ninety to plus ninety degrees.
 
-70
-00:04:31,275 --> 00:04:34,350
+56
+00:03:30,550 --> 00:03:33,625
 Which other places share Brest's latitude?
 
-71
-00:04:34,700 --> 00:04:37,800
+57
+00:03:33,975 --> 00:03:37,075
 Let's put the Earth back
 together and turn it.
 
-72
-00:04:38,150 --> 00:04:41,055
+58
+00:03:37,425 --> 00:03:40,330
 Brest's arrow sweeps
 round the Earth's axis,
 
-73
-00:04:41,055 --> 00:04:45,345
+59
+00:03:40,330 --> 00:03:44,620
 always at forty eight point four
 degrees above the equator plane,
 
-74
-00:04:45,345 --> 00:04:48,250
+60
+00:03:44,620 --> 00:03:47,525
 and its tip traces a circle
 round the globe.
 
-75
-00:04:48,600 --> 00:04:53,100
+61
+00:03:47,875 --> 00:03:52,375
 Every place on that circle has
 the same latitude as Brest.
 
-76
-00:04:53,450 --> 00:04:58,475
+62
+00:03:52,725 --> 00:03:57,750
 This circle is called a parallel,
 because it runs parallel to the equator.
 
-77
-00:04:58,825 --> 00:05:05,150
-Brest's parallel runs east through central
-Europe, Ukraine, Kazakhstan and Mongolia.
+63
+00:03:58,100 --> 00:04:03,573
+Brest's parallel runs east through
+central Europe, Ukraine, southern Russia,
 
-78
-00:05:05,500 --> 00:05:09,592
-Then it runs on round through
-the northern United States and
+64
+00:04:03,573 --> 00:04:06,742
+Kazakhstan, the far
+west of China, Mongolia,
 
-79
-00:05:09,592 --> 00:05:13,275
-eastern Canada, and back
-across the Atlantic to Brest.
+65
+00:04:06,742 --> 00:04:09,550
+north-east China and Russia's Far East.
 
-80
-00:05:13,625 --> 00:05:17,309
+66
+00:04:09,900 --> 00:04:14,416
+Then it crosses the Pacific,
+the southern tip of Vancouver Island,
+
+67
+00:04:14,416 --> 00:04:17,564
+the northern United
+States and eastern Canada,
+
+68
+00:04:17,564 --> 00:04:20,575
+and comes back across
+the Atlantic to Brest.
+
+69
+00:04:20,925 --> 00:04:24,609
 Now let's slice the Earth
 the other way: straight across,
 
-81
-00:05:17,309 --> 00:05:20,800
+70
+00:04:24,609 --> 00:04:28,100
 through Brest's parallel,
 at right angles to the axis.
 
-82
-00:05:21,150 --> 00:05:25,750
+71
+00:04:28,450 --> 00:04:33,050
 The cut face is a flat
 disc, and its rim is Brest's parallel.
 
-83
-00:05:26,100 --> 00:05:29,625
+72
+00:04:33,400 --> 00:04:36,925
 The centre of this disc
 is not the Earth's centre.
 
-84
-00:05:29,975 --> 00:05:33,875
+73
+00:04:37,275 --> 00:04:41,175
 It sits on the Earth's
 axis, above the equator plane.
 
-85
-00:05:34,225 --> 00:05:37,775
+74
+00:04:41,525 --> 00:04:45,075
 So a parallel is a circle
 round the Earth's axis.
 
-86
-00:05:38,125 --> 00:05:42,528
+75
+00:04:45,425 --> 00:04:49,828
 The equator is the biggest parallel,
 and the parallels get smaller and
 
-87
-00:05:42,528 --> 00:05:46,050
+76
+00:04:49,828 --> 00:04:53,350
 smaller towards the poles, where
 they shrink to a point.
 
-88
-00:05:46,400 --> 00:05:49,850
+77
+00:04:53,700 --> 00:04:57,150
 We'll measure the size
 of Brest's parallel very soon.
 
-89
-00:05:50,650 --> 00:05:54,075
+78
+00:04:57,950 --> 00:05:01,375
 There's a second way
 to measure the same direction.
 
-90
-00:05:54,425 --> 00:05:57,525
+79
+00:05:01,725 --> 00:05:04,825
 You'll meet it in many
 maths and physics books.
 
-91
-00:05:57,875 --> 00:06:01,773
+80
+00:05:05,175 --> 00:05:09,073
 Instead of starting from the equator,
 start from the North Pole,
 
-92
-00:06:01,773 --> 00:06:05,550
+81
+00:05:09,073 --> 00:05:12,850
 and measure the angle down
 from the Earth's axis to the arrow.
 
-93
-00:06:05,900 --> 00:06:08,800
+82
+00:05:13,200 --> 00:05:16,100
 This angle is called the colatitude.
 
-94
-00:06:09,150 --> 00:06:09,988
+83
+00:05:16,450 --> 00:05:17,288
 Latitude and
 
-95
-00:06:09,988 --> 00:06:15,575
+84
+00:05:17,288 --> 00:05:22,875
 colatitude together fill the right angle
 between the equator plane and the axis.
 
-96
-00:06:15,925 --> 00:06:20,225
+85
+00:05:23,225 --> 00:05:27,525
 So the colatitude is ninety
 degrees minus the latitude.
 
-97
-00:06:20,575 --> 00:06:24,256
-For Brest, it's ninety
-minus forty eight point four,
+86
+00:05:27,875 --> 00:05:31,299
+For Brest, taking
+its latitude away from ninety
 
-98
-00:06:24,256 --> 00:06:26,875
-which is forty one point six degrees.
+87
+00:05:31,299 --> 00:05:34,500
+degrees leaves forty
+one point six degrees.
 
-99
-00:06:28,375 --> 00:06:31,450
+88
+00:05:36,000 --> 00:05:39,075
 Be careful not to mix up two words here.
 
-100
-00:06:31,800 --> 00:06:35,550
+89
+00:05:39,425 --> 00:05:43,175
 The colatitude is an angle,
 measured at the centre.
 
-101
-00:06:35,900 --> 00:06:40,875
+90
+00:05:43,525 --> 00:05:48,500
 A parallel is a circle, made of all
 the places with the same latitude.
 
-102
-00:06:41,675 --> 00:06:44,825
+91
+00:05:49,300 --> 00:05:52,450
 Why does it matter
 which angle a book uses?
 
-103
-00:06:45,175 --> 00:06:48,200
+92
+00:05:52,800 --> 00:05:55,825
 Because sine and cosine swap places.
 
-104
-00:06:48,550 --> 00:06:51,778
+93
+00:05:56,175 --> 00:05:59,403
 The next minute and a half
 shows exactly why,
 
-105
-00:06:51,778 --> 00:06:54,575
+94
+00:05:59,403 --> 00:06:02,200
 for anyone who likes to see every step.
 
-106
-00:06:54,925 --> 00:06:57,891
+95
+00:06:02,550 --> 00:06:05,516
 You don't need it
 for the intuition of weather,
 
-107
-00:06:57,891 --> 00:07:02,750
+96
+00:06:05,516 --> 00:06:10,375
 climate science or mapping, so feel free
 to skip ahead to the time on screen.
 
-108
-00:07:03,100 --> 00:07:05,875
+97
+00:06:10,725 --> 00:06:13,500
 Let's see why, on one triangle.
 
-109
-00:07:06,225 --> 00:07:09,900
+98
+00:06:13,850 --> 00:06:17,525
 Take the arrow to Brest, but
 shrink it to length one.
 
-110
-00:07:10,250 --> 00:07:16,100
+99
+00:06:17,875 --> 00:06:23,725
 From its tip, drop a line straight down to
 the equator plane, parallel to the axis.
 
-111
-00:07:16,450 --> 00:07:20,725
+100
+00:06:24,075 --> 00:06:28,350
 Together with the equator
 line, this makes a right triangle.
 
-112
-00:07:21,075 --> 00:07:26,353
+101
+00:06:28,700 --> 00:06:33,978
 From Part 1, the side next to an angle
 is the long side times the cosine,
 
-113
-00:07:26,353 --> 00:07:30,475
+102
+00:06:33,978 --> 00:06:38,100
 and the side opposite it
 is the long side times the sine.
 
-114
-00:07:30,825 --> 00:07:34,525
+103
+00:06:38,450 --> 00:06:42,150
 At the centre, the angle
 is the latitude, phi.
 
-115
-00:07:34,875 --> 00:07:39,875
+104
+00:06:42,500 --> 00:06:47,500
 The side next to it lies along
 the equator plane, so it's cosine phi.
 
-116
-00:07:40,225 --> 00:07:45,025
+105
+00:06:47,850 --> 00:06:52,650
 The side opposite it runs parallel
 to the axis, so it's sine phi.
 
-117
-00:07:45,375 --> 00:07:49,750
+106
+00:06:53,000 --> 00:06:57,375
 Now look from the triangle's other
 sharp corner, at Brest's end.
 
-118
-00:07:50,100 --> 00:07:55,100
+107
+00:06:57,725 --> 00:07:02,725
 The three angles of a triangle add
 up to a hundred and eighty degrees.
 
-119
-00:07:55,450 --> 00:08:00,575
+108
+00:07:03,075 --> 00:07:08,200
 The right angle takes ninety, so the two
 sharp angles share the other ninety.
 
-120
-00:08:00,925 --> 00:08:05,093
+109
+00:07:08,550 --> 00:07:12,718
 So the angle at Brest's end
 is ninety degrees minus phi,
 
-121
-00:08:05,093 --> 00:08:07,475
+110
+00:07:12,718 --> 00:07:15,100
 which is exactly the colatitude.
 
-122
-00:08:07,825 --> 00:08:12,482
+111
+00:07:15,450 --> 00:07:20,107
 From that corner, the side next to it
 is the one parallel to the axis,
 
-123
-00:08:12,482 --> 00:08:16,275
+112
+00:07:20,107 --> 00:07:23,900
 and the side opposite it
 is the one in the equator plane.
 
-124
-00:08:16,625 --> 00:08:21,450
+113
+00:07:24,250 --> 00:07:29,075
 Same triangle, same sides, but
 next and opposite have swapped.
 
-125
-00:08:21,800 --> 00:08:25,177
+114
+00:07:29,425 --> 00:07:32,802
 So the sine of the colatitude
 equals cosine phi,
 
-126
-00:08:25,177 --> 00:08:28,625
+115
+00:07:32,802 --> 00:07:36,250
 and the cosine of the colatitude
 equals sine phi.
 
-127
-00:08:28,975 --> 00:08:34,912
+116
+00:07:36,600 --> 00:07:42,537
 For Brest, the sine of forty one point six
 degrees is zero point six six three nine,
 
-128
-00:08:34,912 --> 00:08:38,800
+117
+00:07:42,537 --> 00:07:46,425
 and so is the cosine of forty
 eight point four degrees.
 
-129
-00:08:40,300 --> 00:08:43,748
+118
+00:07:47,925 --> 00:07:51,373
 So wherever this video
 has a sine of the latitude,
 
-130
-00:08:43,748 --> 00:08:48,575
+119
+00:07:51,373 --> 00:07:56,200
 a book that uses the colatitude
 has a cosine, and the other way round.
 
-131
-00:08:49,375 --> 00:08:52,050
+120
+00:07:57,000 --> 00:07:59,675
 If you skipped, here's what to keep.
 
-132
-00:08:52,400 --> 00:08:55,362
+121
+00:08:00,025 --> 00:08:02,987
 The colatitude is measured
 down from the pole,
 
-133
-00:08:55,362 --> 00:09:00,255
+122
+00:08:02,987 --> 00:08:07,880
 so a book that uses it has a cosine
 wherever we have a sine of the latitude,
 
-134
-00:09:00,255 --> 00:09:01,800
+123
+00:08:07,880 --> 00:08:09,425
 and the other way round.
 
-135
-00:09:02,150 --> 00:09:04,325
+124
+00:08:09,775 --> 00:08:11,950
 Now for the second angle.
 
-136
-00:09:04,675 --> 00:09:08,300
+125
+00:08:12,300 --> 00:08:15,925
 First, we need another
 kind of line on the globe.
 
-137
-00:09:08,650 --> 00:09:12,725
+126
+00:08:16,275 --> 00:08:20,350
 Start at the North Pole, and draw a line
 straight down the globe,
 
-138
-00:09:12,725 --> 00:09:16,675
+127
+00:08:20,350 --> 00:08:24,300
 heading due south all the way, until
 it reaches the South Pole.
 
-139
-00:09:17,025 --> 00:09:20,050
+128
+00:08:24,650 --> 00:08:27,675
 This half circle is called a meridian.
 
-140
-00:09:20,400 --> 00:09:25,211
+129
+00:08:28,025 --> 00:08:32,836
 All along one meridian, the Sun
 is highest in the sky at the same moment,
 
-141
-00:09:25,211 --> 00:09:28,375
+130
+00:08:32,836 --> 00:08:36,000
 at midday, and that's
 where the name comes from.
 
-142
-00:09:28,725 --> 00:09:31,743
+131
+00:08:36,350 --> 00:08:39,368
 Let's turn the globe
 and draw more of them,
 
-143
-00:09:31,743 --> 00:09:34,550
+132
+00:08:39,368 --> 00:08:42,175
 twelve, evenly spaced all the way round.
 
-144
-00:09:34,900 --> 00:09:39,825
+133
+00:08:42,525 --> 00:08:47,450
 Every meridian runs from pole
 to pole, and they all meet at the poles.
 
-145
-00:09:40,175 --> 00:09:44,950
+134
+00:08:47,800 --> 00:08:52,575
 Each one is half of a big circle
 whose centre is the Earth's centre.
 
-146
-00:09:45,300 --> 00:09:49,925
+135
+00:08:52,925 --> 00:08:57,550
 That's the difference from the parallels,
 whose centres sit on the axis.
 
-147
-00:09:50,725 --> 00:09:54,325
+136
+00:08:58,350 --> 00:09:01,950
 One meridian is chosen
 as the starting line.
 
-148
-00:09:54,675 --> 00:09:57,162
+137
+00:09:02,300 --> 00:09:04,787
 It passes through Greenwich, in London,
 
-149
-00:09:57,162 --> 00:10:01,625
+138
+00:09:04,787 --> 00:09:09,250
 and it was agreed at an international
 meeting in eighteen eighty four.
 
-150
-00:10:01,975 --> 00:10:04,275
+139
+00:09:09,600 --> 00:09:11,900
 It's called the prime meridian.
 
-151
-00:10:04,625 --> 00:10:08,325
+140
+00:09:12,250 --> 00:09:15,950
 Let's follow it from the top
 of the globe to the bottom.
 
-152
-00:10:08,675 --> 00:10:13,425
+141
+00:09:16,300 --> 00:09:21,050
 It starts at the North Pole, in the middle
 of the frozen Arctic Ocean.
 
-153
-00:10:13,775 --> 00:10:18,337
+142
+00:09:21,400 --> 00:09:25,962
 It runs south between Greenland
 and Norway, over the Norwegian Sea and
 
-154
-00:10:18,337 --> 00:10:23,225
+143
+00:09:25,962 --> 00:09:30,850
 the North Sea, and comes ashore on the
 east coast of England, in Yorkshire.
 
-155
-00:10:23,575 --> 00:10:26,523
+144
+00:09:31,200 --> 00:09:34,148
 It passes through Greenwich,
 in east London,
 
-156
-00:10:26,523 --> 00:10:30,075
+145
+00:09:34,148 --> 00:09:37,700
 and leaves England on the south
 coast, near Brighton.
 
-157
-00:10:30,425 --> 00:10:34,239
+146
+00:09:38,050 --> 00:09:41,864
 It crosses the English Channel,
 and runs right through France,
 
-158
-00:10:34,239 --> 00:10:38,300
+147
+00:09:41,864 --> 00:09:45,925
 from Normandy in the north
 to the Pyrenees mountains in the south.
 
-159
-00:10:38,650 --> 00:10:40,958
+148
+00:09:46,275 --> 00:09:48,583
 Then it crosses the east of Spain,
 
-160
-00:10:40,958 --> 00:10:45,100
+149
+00:09:48,583 --> 00:09:52,725
 and reaches the Mediterranean
 Sea a little north of Valencia.
 
-161
-00:10:45,450 --> 00:10:51,825
+150
+00:09:53,075 --> 00:09:59,450
 In Africa, it crosses the Sahara desert
 in Algeria, then Mali, and Burkina Faso.
 
-162
-00:10:52,175 --> 00:10:56,953
+151
+00:09:59,800 --> 00:10:04,578
 Further south, it runs for a short
 way along the border between Togo and
 
-163
-00:10:56,953 --> 00:11:01,200
+152
+00:10:04,578 --> 00:10:08,825
 Ghana, then through Ghana, to the coast
 near the capital, Accra.
 
-164
-00:11:01,550 --> 00:11:07,150
+153
+00:10:09,175 --> 00:10:14,775
 Out in the Gulf of Guinea, part of the
 Atlantic Ocean, it crosses the equator.
 
-165
-00:11:07,500 --> 00:11:11,088
+154
+00:10:15,125 --> 00:10:18,713
 Then it runs south over the open
 South Atlantic and
 
-166
-00:11:11,088 --> 00:11:14,325
+155
+00:10:18,713 --> 00:10:21,950
 the Southern Ocean, all
 the way to Antarctica.
 
-167
-00:11:14,675 --> 00:11:19,150
+156
+00:10:22,300 --> 00:10:26,775
 It reaches the ice of Antarctica,
 and finally the South Pole.
 
-168
-00:11:19,950 --> 00:11:22,725
+157
+00:10:27,575 --> 00:10:30,350
 Now we can define the second angle.
 
-169
-00:11:23,075 --> 00:11:26,950
+158
+00:10:30,700 --> 00:10:34,575
 Let's look down on the Earth
 from far above the North Pole.
 
-170
-00:11:27,300 --> 00:11:31,274
+159
+00:10:34,925 --> 00:10:38,899
 From up here, every meridian
 looks like a spoke of a wheel,
 
-171
-00:11:31,274 --> 00:11:33,025
+160
+00:10:38,899 --> 00:10:40,650
 running out from the pole.
 
-172
-00:11:33,375 --> 00:11:36,688
+161
+00:10:41,000 --> 00:10:44,313
 Now slice the Earth
 across, along the equator,
 
-173
-00:11:36,688 --> 00:11:39,425
+162
+00:10:44,313 --> 00:10:47,050
 and look at the round face of the cut.
 
-174
-00:11:39,775 --> 00:11:41,936
+163
+00:10:47,400 --> 00:10:49,561
 Its centre is the Earth's centre,
 
-175
-00:11:41,936 --> 00:11:45,800
+164
+00:10:49,561 --> 00:10:53,425
 and the meridians meet its rim
 like the ends of the spokes.
 
-176
-00:11:46,150 --> 00:11:48,771
+165
+00:10:53,775 --> 00:10:56,396
 Longitude is the angle at the centre,
 
-177
-00:11:48,771 --> 00:11:52,950
+166
+00:10:56,396 --> 00:11:00,575
 from the prime meridian round
 to the meridian of the place.
 
-178
-00:11:53,300 --> 00:11:56,150
+167
+00:11:00,925 --> 00:11:03,775
 We write it with the Greek letter lambda.
 
-179
-00:11:56,500 --> 00:12:00,564
+168
+00:11:04,125 --> 00:11:08,188
 Seen from above the North
 Pole, east is anticlockwise,
 
-180
-00:12:00,564 --> 00:12:04,025
+169
+00:11:08,188 --> 00:11:11,650
 the same way the angle
 theta turned in Part 1.
 
-181
-00:12:04,375 --> 00:12:07,816
+170
+00:11:12,000 --> 00:11:15,441
 Places east of Greenwich
 have positive longitude,
 
-182
-00:12:07,816 --> 00:12:10,625
+171
+00:11:15,441 --> 00:11:18,250
 up to a hundred and eighty degrees east.
 
-183
-00:12:10,975 --> 00:12:14,131
+172
+00:11:18,600 --> 00:11:21,756
 Places to the west have
 negative longitude,
 
-184
-00:12:14,131 --> 00:12:16,700
+173
+00:11:21,756 --> 00:11:24,325
 down to minus a hundred and eighty.
 
-185
-00:12:17,050 --> 00:12:20,900
+174
+00:11:24,675 --> 00:11:28,525
 Brest is about four and a half
 degrees west of Greenwich,
 
-186
-00:12:20,900 --> 00:12:24,075
+175
+00:11:28,525 --> 00:11:31,700
 so its lambda is minus
 four point five degrees.
 
-187
-00:12:25,575 --> 00:12:29,842
+176
+00:11:33,200 --> 00:11:37,467
 Some data sets count longitude
 from zero to three hundred and
 
-188
-00:12:29,842 --> 00:12:32,150
+177
+00:11:37,467 --> 00:11:39,775
 sixty degrees, always going east.
 
-189
-00:12:32,500 --> 00:12:36,818
-Then Brest is at three hundred
-and sixty minus four point five,
+178
+00:11:40,125 --> 00:11:43,951
+Then Brest, four and a half
+degrees short of a full turn,
 
-190
-00:12:36,818 --> 00:12:40,725
-which is three hundred and fifty
+179
+00:11:43,951 --> 00:11:47,575
+is at three hundred and fifty
 five point five degrees.
 
-191
-00:12:42,225 --> 00:12:44,900
+180
+00:11:49,075 --> 00:11:51,750
 Both numbers point to the same meridian,
 
-192
-00:12:44,900 --> 00:12:47,775
+181
+00:11:51,750 --> 00:11:54,625
 so always check which
 way your data counts.
 
-193
-00:12:48,575 --> 00:12:52,075
+182
+00:11:55,425 --> 00:11:58,925
 Now let's cover the globe
 with both kinds of line.
 
-194
-00:12:52,425 --> 00:12:56,921
+183
+00:11:59,275 --> 00:12:03,771
 First, the meridians, one every
 fifteen degrees of longitude:
 
-195
-00:12:56,921 --> 00:13:00,975
+184
+00:12:03,771 --> 00:12:07,825
 zero, fifteen east, thirty
 east, and all the way round.
 
-196
-00:13:01,325 --> 00:13:05,342
+185
+00:12:08,175 --> 00:12:12,192
 Then the parallels, one every
 fifteen degrees of latitude:
 
-197
-00:13:05,342 --> 00:13:07,212
+186
+00:12:12,192 --> 00:12:14,062
 the equator, fifteen north,
 
-198
-00:13:07,212 --> 00:13:12,475
+187
+00:12:14,062 --> 00:12:19,325
 thirty north, forty five, sixty and
 seventy five, and the same to the south.
 
-199
-00:13:12,825 --> 00:13:17,050
+188
+00:12:19,675 --> 00:12:23,900
 Together, they make a grid
 on the globe, called the graticule.
 
-200
-00:13:17,400 --> 00:13:21,094
+189
+00:12:24,250 --> 00:12:27,944
 Every meridian crosses every
 parallel at a right angle,
 
-201
-00:13:21,094 --> 00:13:26,400
+190
+00:12:27,944 --> 00:12:33,250
 because the meridians run north and south,
 and the parallels run east and west.
 
-202
-00:13:26,750 --> 00:13:31,300
+191
+00:12:33,600 --> 00:12:38,150
 Any place on Earth sits where
 one parallel meets one meridian.
 
-203
-00:13:31,650 --> 00:13:36,250
+192
+00:12:38,500 --> 00:12:43,100
 So two numbers, its latitude
 and its longitude, pin it down.
 
-204
-00:13:36,600 --> 00:13:40,669
+193
+00:12:43,450 --> 00:12:47,519
 Brest sits where the parallel
 at forty eight point four degrees
 
-205
-00:13:40,669 --> 00:13:44,350
+194
+00:12:47,519 --> 00:12:51,200
 north meets the meridian
 at four point five degrees west.
 
-206
-00:13:45,150 --> 00:13:49,900
+195
+00:12:52,000 --> 00:12:56,750
 Latitude and longitude tell us
 where a place is on the surface.
 
-207
-00:13:50,250 --> 00:13:54,560
+196
+00:12:57,100 --> 00:13:01,410
 But in physics, we often want
 the place as an arrow in space,
 
-208
-00:13:54,560 --> 00:14:00,425
+197
+00:13:01,410 --> 00:13:07,275
 from the Earth's centre, with x, y and z
 parts, like the balloon's arrow in Part 1.
 
-209
-00:14:00,775 --> 00:14:05,925
+198
+00:13:07,625 --> 00:13:12,775
 For that, we first need three axes, all
 starting at the Earth's centre.
 
-210
-00:14:06,275 --> 00:14:11,025
+199
+00:13:13,125 --> 00:13:17,875
 The z axis runs up the Earth's
 spin axis, towards the North Pole.
 
-211
-00:14:11,375 --> 00:14:16,407
+200
+00:13:18,225 --> 00:13:23,257
 The x axis runs out to the point where
 the prime meridian meets the equator,
 
-212
-00:14:16,407 --> 00:14:19,850
+201
+00:13:23,257 --> 00:13:26,700
 in the Gulf of Guinea, off
 the coast of West Africa.
 
-213
-00:14:20,200 --> 00:14:24,413
+202
+00:13:27,050 --> 00:13:31,263
 The y axis runs out to the equator
 at ninety degrees east,
 
-214
-00:14:24,413 --> 00:14:27,900
+203
+00:13:31,263 --> 00:13:34,750
 in the Indian Ocean, south
 of the Bay of Bengal.
 
-215
-00:14:28,250 --> 00:14:33,525
+204
+00:13:35,100 --> 00:13:40,375
 The arrows of length one along them
 are called x hat, y hat and z hat.
 
-216
-00:14:33,875 --> 00:14:37,150
+205
+00:13:40,725 --> 00:13:44,000
 All three are at right
 angles to each other.
 
-217
-00:14:37,500 --> 00:14:41,560
+206
+00:13:44,350 --> 00:13:48,410
 They're arranged so that x hat
 cross y hat gives z hat,
 
-218
-00:14:41,560 --> 00:14:43,775
+207
+00:13:48,410 --> 00:13:50,625
 as in the cross product movie.
 
-219
-00:14:44,125 --> 00:14:48,950
+208
+00:13:50,975 --> 00:13:55,800
 And they turn with the Earth, so
 a city's x, y and z never change.
 
-220
-00:14:49,300 --> 00:14:53,125
+209
+00:13:56,150 --> 00:13:59,975
 Our goal now is to find
 Brest's x, y and z.
 
-221
-00:14:53,475 --> 00:14:57,150
+210
+00:14:00,325 --> 00:14:04,000
 We'll do it in two
 steps, with one slice each time.
 
-222
-00:14:57,950 --> 00:15:01,325
+211
+00:14:04,800 --> 00:14:08,175
 The next few minutes build
 Brest's position, and then
 
-223
-00:15:01,325 --> 00:15:04,700
+212
+00:14:08,175 --> 00:14:11,550
 the speed of the spinning
 ground, one step at a time.
 
-224
-00:15:05,050 --> 00:15:07,782
+213
+00:14:11,900 --> 00:14:14,632
 They're here for anyone
 who wants every step,
 
-225
-00:15:07,782 --> 00:15:12,700
+214
+00:14:14,632 --> 00:14:19,550
 and you don't need them for the intuition
 of weather, climate science or mapping.
 
-226
-00:15:13,050 --> 00:15:17,325
+215
+00:14:19,900 --> 00:14:24,175
 So if it feels like a lot, skip
 ahead to the time on screen.
 
-227
-00:15:17,675 --> 00:15:19,850
+216
+00:14:24,525 --> 00:14:26,700
 First, the side view.
 
-228
-00:15:20,200 --> 00:15:23,656
+217
+00:14:27,050 --> 00:14:30,506
 Let's slice the Earth along
 Brest's meridian again,
 
-229
-00:15:23,656 --> 00:15:27,450
+218
+00:14:30,506 --> 00:14:34,300
 and next to it, draw the same
 cut face flat on the page.
 
-230
-00:15:27,800 --> 00:15:29,898
+219
+00:14:34,650 --> 00:14:36,748
 Everything we draw on the globe,
 
-231
-00:15:29,898 --> 00:15:33,175
+220
+00:14:36,748 --> 00:14:40,025
 we'll draw on the flat
 diagram at the same moment.
 
-232
-00:15:33,525 --> 00:15:36,500
+221
+00:14:40,375 --> 00:14:43,350
 Here's the centre, in both pictures.
 
-233
-00:15:36,850 --> 00:15:42,150
+222
+00:14:43,700 --> 00:14:49,000
 Here's the Earth's axis, pointing up
 to the North Pole: that's the z direction.
 
-234
-00:15:42,500 --> 00:15:47,350
+223
+00:14:49,350 --> 00:14:54,200
 Here's the line from the centre out
 to the equator, on Brest's meridian.
 
-235
-00:15:47,700 --> 00:15:52,650
+224
+00:14:54,550 --> 00:14:59,500
 Here's the arrow from the centre
 to Brest, as long as the Earth's radius.
 
-236
-00:15:53,000 --> 00:15:57,163
+225
+00:14:59,850 --> 00:15:04,013
 And here's the latitude,
 phi, forty eight point four degrees,
 
-237
-00:15:57,163 --> 00:15:59,825
+226
+00:15:04,013 --> 00:15:06,675
 between the equator line and the arrow.
 
-238
-00:16:00,175 --> 00:16:04,452
+227
+00:15:07,025 --> 00:15:11,302
 Now drop a line from Brest
 straight down to the equator plane,
 
-239
-00:16:04,452 --> 00:16:05,900
+228
+00:15:11,302 --> 00:15:12,750
 parallel to the axis.
 
-240
-00:16:06,250 --> 00:16:09,450
+229
+00:15:13,100 --> 00:15:16,300
 It meets the equator
 line at a right angle.
 
-241
-00:16:09,800 --> 00:16:14,550
+230
+00:15:16,650 --> 00:15:21,400
 So we have a right triangle,
 and the arrow to Brest is its long side.
 
-242
-00:16:15,350 --> 00:16:18,400
+231
+00:15:22,200 --> 00:15:25,250
 What's Brest's height
 above the equator plane?
 
-243
-00:16:18,750 --> 00:16:23,650
+232
+00:15:25,600 --> 00:15:30,500
 That height is the side of the triangle
 that runs parallel to the axis,
 
-244
-00:16:23,650 --> 00:16:25,375
+233
+00:15:30,500 --> 00:15:32,225
 so it's measured along z.
 
-245
-00:16:25,725 --> 00:16:28,700
+234
+00:15:32,575 --> 00:15:35,550
 It's the side opposite the angle phi.
 
-246
-00:16:29,050 --> 00:16:33,525
+235
+00:15:35,900 --> 00:15:40,375
 By the rule from Part 1, it's
 the long side times sine phi.
 
-247
-00:16:33,875 --> 00:16:37,500
+236
+00:15:40,725 --> 00:15:44,350
 So z equals the Earth's
 radius times sine phi.
 
-248
-00:16:37,850 --> 00:16:39,625
+237
+00:15:44,700 --> 00:15:46,475
 Now the numbers.
 
-249
-00:16:39,975 --> 00:16:42,515
+238
+00:15:46,825 --> 00:15:49,365
 The long side is the Earth's radius,
 
-250
-00:16:42,515 --> 00:16:46,325
+239
+00:15:49,365 --> 00:15:53,175
 six thousand three hundred
 and seventy one kilometres.
 
-251
-00:16:46,675 --> 00:16:52,150
+240
+00:15:53,525 --> 00:15:59,000
 The sine of forty eight point four degrees
 is zero point seven four seven eight.
 
-252
-00:16:52,500 --> 00:16:55,236
-So z is six thousand three hundred and
-
-253
-00:16:55,236 --> 00:16:58,981
-seventy one times
-zero point seven four seven eight,
-
-254
-00:16:58,981 --> 00:17:03,950
-which is about four thousand seven
-hundred and sixty four kilometres.
-
-255
-00:17:05,450 --> 00:17:06,622
-With easy numbers,
-
-256
-00:17:06,622 --> 00:17:11,699
-six thousand four hundred times three
-quarters is four thousand eight hundred:
-
-257
-00:17:11,699 --> 00:17:17,616
-about the same. So Brest sits about
+241
+00:15:59,350 --> 00:16:04,094
+Multiplying the two, z is about
 four thousand seven hundred and
 
-258
-00:17:17,616 --> 00:17:22,475
+242
+00:16:04,094 --> 00:16:05,750
+sixty four kilometres.
+
+243
+00:16:07,250 --> 00:16:12,500
+With easy numbers, it comes out at four
+thousand eight hundred: about the same.
+
+244
+00:16:14,000 --> 00:16:17,441
+So Brest sits about four
+thousand seven hundred and
+
+245
+00:16:17,441 --> 00:16:22,300
 sixty four kilometres above the equator
 plane, on the North Pole's side.
 
-259
-00:17:22,825 --> 00:17:27,056
+246
+00:16:22,650 --> 00:16:26,881
 A place in the southern hemisphere
 has a negative latitude,
 
-260
-00:17:27,056 --> 00:17:32,075
+247
+00:16:26,881 --> 00:16:31,900
 so its sine, and its z, are negative:
 it lies below the equator plane.
 
-261
-00:17:32,875 --> 00:17:38,525
+248
+00:16:32,700 --> 00:16:38,350
 Next, the triangle's other short side:
 Brest's distance from the Earth's axis.
 
-262
-00:17:38,875 --> 00:17:44,350
+249
+00:16:38,700 --> 00:16:44,175
 It's the side next to the angle phi, so
 it's the long side times cosine phi.
 
-263
-00:17:44,700 --> 00:17:50,250
+250
+00:16:44,525 --> 00:16:50,075
 The cosine of forty eight point four
 degrees is zero point six six three nine.
 
-264
-00:17:50,600 --> 00:17:54,845
-So the distance from the axis
-is six thousand three hundred and
+251
+00:16:50,425 --> 00:16:55,627
+Times the Earth's radius, six thousand
+three hundred and seventy one kilometres,
 
-265
-00:17:54,845 --> 00:17:58,080
-seventy one times
-zero point six six three nine,
+252
+00:16:55,627 --> 00:16:59,854
+the distance from the axis is about
+four thousand two hundred and
 
-266
-00:17:58,080 --> 00:18:02,325
-which is about four thousand two
-hundred and thirty kilometres.
+253
+00:16:59,854 --> 00:17:01,025
+thirty kilometres.
 
-267
-00:18:03,825 --> 00:18:05,132
-With easy numbers,
+254
+00:17:02,525 --> 00:17:08,000
+With easy numbers, it's about four
+thousand two hundred and seventy: close.
 
-268
-00:18:05,132 --> 00:18:11,011
-six thousand four hundred times two thirds
-is about four thousand two hundred and
-
-269
-00:18:11,011 --> 00:18:12,100
-seventy: close.
-
-270
-00:18:13,600 --> 00:18:17,769
+255
+00:17:09,500 --> 00:17:13,669
 This distance is exactly
 the radius of Brest's parallel,
 
-271
-00:18:17,769 --> 00:18:20,300
+256
+00:17:13,669 --> 00:17:16,200
 the disc we sliced across earlier.
 
-272
-00:18:20,650 --> 00:18:24,649
+257
+00:17:16,550 --> 00:17:20,549
 On both pictures, the two short
 sides now carry their lengths:
 
-273
-00:18:24,649 --> 00:18:26,648
+258
+00:17:20,549 --> 00:17:22,548
 four thousand seven hundred and
 
-274
-00:18:26,648 --> 00:18:30,453
+259
+00:17:22,548 --> 00:17:26,353
 sixty four kilometres up, and four
 thousand two hundred and
 
-275
-00:18:30,453 --> 00:18:32,775
+260
+00:17:26,353 --> 00:17:28,675
 thirty kilometres out from the axis.
 
-276
-00:18:33,575 --> 00:18:35,575
+261
+00:17:29,025 --> 00:17:33,636
+They're the same two lengths
+as in Part 2's cylindrical coordinates,
+
+262
+00:17:33,636 --> 00:17:35,874
+this time round the Earth's axis:
+
+263
+00:17:35,874 --> 00:17:39,400
+a distance out from the
+axis, and a height along it.
+
+264
+00:17:40,200 --> 00:17:42,200
 Now for the top view.
 
-277
-00:18:35,925 --> 00:18:39,725
+265
+00:17:42,550 --> 00:17:46,350
 Now look down on the Earth
 from far above the North Pole,
 
-278
-00:18:39,725 --> 00:18:44,325
+266
+00:17:46,350 --> 00:17:50,950
 and slice it across along the equator
 plane, as we did for longitude.
 
-279
-00:18:44,675 --> 00:18:48,450
+267
+00:17:51,300 --> 00:17:55,075
 Next to it, again, the same
 face is drawn flat.
 
-280
-00:18:48,800 --> 00:18:52,720
+268
+00:17:55,425 --> 00:17:59,345
 Brest itself is above this
 plane, but straight below Brest,
 
-281
-00:18:52,720 --> 00:18:55,975
+269
+00:17:59,345 --> 00:18:02,600
 in the plane, is the foot
 of the line we dropped.
 
-282
-00:18:56,325 --> 00:18:59,110
+270
+00:18:02,950 --> 00:18:05,735
 That foot is four thousand two hundred and
 
-283
-00:18:59,110 --> 00:19:04,150
+271
+00:18:05,735 --> 00:18:10,775
 thirty kilometres from the centre, the
 distance from the axis we just found.
 
-284
-00:19:04,500 --> 00:19:08,793
+272
+00:18:11,125 --> 00:18:15,418
 And it lies on Brest's meridian,
 so it's at Brest's longitude,
 
-285
-00:19:08,793 --> 00:19:13,225
+273
+00:18:15,418 --> 00:18:19,850
 lambda, minus four and a half degrees,
 measured from the x axis.
 
-286
-00:19:13,575 --> 00:19:17,891
+274
+00:18:20,200 --> 00:18:24,516
 That's polar coordinates on a flat
 face, exactly as in Part 1,
 
-287
-00:19:17,891 --> 00:19:21,650
+275
+00:18:24,516 --> 00:18:28,275
 with the distance from the axis
 playing the part of r,
 
-288
-00:19:21,650 --> 00:19:24,225
+276
+00:18:28,275 --> 00:18:30,850
 and lambda playing the part of theta.
 
-289
-00:19:24,575 --> 00:19:28,249
+277
+00:18:31,200 --> 00:18:34,874
 So the x part is that
 distance times cosine lambda,
 
-290
-00:19:28,249 --> 00:19:31,850
+278
+00:18:34,874 --> 00:18:38,475
 and the y part is that
 distance times sine lambda.
 
-291
-00:19:32,200 --> 00:19:33,975
+279
+00:18:38,825 --> 00:18:40,600
 Now the numbers.
 
-292
-00:19:34,325 --> 00:19:40,050
+280
+00:18:40,950 --> 00:18:46,675
 The cosine of minus four point five
 degrees is zero point nine nine six nine.
 
-293
-00:19:40,400 --> 00:19:43,114
-So x is four thousand two hundred and
+281
+00:18:47,025 --> 00:18:50,712
+So x, the distance
+from the axis times this cosine,
 
-294
-00:19:43,114 --> 00:19:46,269
-thirty times
-zero point nine nine six nine,
+282
+00:18:50,712 --> 00:18:55,050
+is about four thousand two
+hundred and seventeen kilometres.
 
-295
-00:19:46,269 --> 00:19:50,450
-about four thousand two hundred
-and seventeen kilometres.
-
-296
-00:19:51,950 --> 00:19:58,100
+283
+00:18:56,550 --> 00:19:02,700
 The sine of minus four point five degrees
 is minus zero point zero seven eight five.
 
-297
-00:19:58,450 --> 00:20:01,087
-So y is four thousand two hundred and
+284
+00:19:03,050 --> 00:19:06,466
+So y, the distance
+from the axis times this sine,
 
-298
-00:20:01,087 --> 00:20:04,794
-thirty times minus
-zero point zero seven eight five,
-
-299
-00:20:04,794 --> 00:20:08,500
-about minus three hundred
+285
+00:19:06,466 --> 00:19:10,300
+is about minus three hundred
 and thirty two kilometres.
 
-300
-00:20:10,000 --> 00:20:14,461
+286
+00:19:11,800 --> 00:19:16,261
 The y part is small, because Brest
 is close to the prime meridian,
 
-301
-00:20:14,461 --> 00:20:17,975
+287
+00:19:16,261 --> 00:19:19,775
 and it's negative, because
 Brest is just west of it.
 
-302
-00:20:18,775 --> 00:20:21,275
+288
+00:19:20,575 --> 00:19:23,075
 Let's put the two steps together.
 
-303
-00:20:21,625 --> 00:20:26,550
+289
+00:19:23,425 --> 00:19:28,350
 The distance from the axis
 is the Earth's radius times cosine phi.
 
-304
-00:20:26,900 --> 00:20:32,450
+290
+00:19:28,700 --> 00:19:34,250
 So x is the Earth's radius, times cosine
 phi, times cosine lambda.
 
-305
-00:20:32,800 --> 00:20:38,075
+291
+00:19:34,600 --> 00:19:39,875
 And y is the Earth's radius, times cosine
 phi, times sine lambda.
 
-306
-00:20:38,425 --> 00:20:42,025
+292
+00:19:40,225 --> 00:19:43,825
 And z is the Earth's
 radius times sine phi.
 
-307
-00:20:42,375 --> 00:20:45,425
+293
+00:19:44,175 --> 00:19:47,225
 For Brest, that's four
 thousand two hundred and
 
-308
-00:20:45,425 --> 00:20:47,632
+294
+00:19:47,225 --> 00:19:49,432
 seventeen, minus three hundred and
 
-309
-00:20:47,632 --> 00:20:52,175
+295
+00:19:49,432 --> 00:19:53,975
 thirty two, and four thousand seven
 hundred and sixty four kilometres.
 
-310
-00:20:53,675 --> 00:20:58,225
+296
+00:19:55,475 --> 00:20:00,025
 Let's check that this arrow really
 is as long as the Earth's radius.
 
-311
-00:20:58,575 --> 00:21:01,264
+297
+00:20:00,375 --> 00:20:05,348
 First, Pythagoras in the equator plane:
+squaring x and y, adding them and
 
-312
-00:21:01,264 --> 00:21:04,229
-the square root
-of x squared plus y squared
+298
+00:20:05,348 --> 00:20:09,504
+taking the square root gives
+back the distance from the axis,
 
-313
-00:21:04,229 --> 00:21:06,849
-gives back the distance from the axis,
-
-314
-00:21:06,849 --> 00:21:09,400
+299
+00:20:09,504 --> 00:20:12,025
 four thousand two hundred and thirty.
 
-315
-00:21:10,900 --> 00:21:13,095
-Then Pythagoras in the side view:
+300
+00:20:13,525 --> 00:20:17,349
+Then Pythagoras in the side
+view, with that distance and
 
-316
-00:21:13,095 --> 00:21:16,288
-the square root of four
-thousand two hundred and
+301
+00:20:17,349 --> 00:20:20,900
+z, gives six thousand three
+hundred and seventy one.
 
-317
-00:21:16,288 --> 00:21:21,675
-thirty squared, plus z squared, gives six
-thousand three hundred and seventy one.
-
-318
-00:21:23,175 --> 00:21:28,875
+302
+00:20:22,400 --> 00:20:28,100
 It works for every place, because cosine
 squared plus sine squared is always one.
 
-319
-00:21:29,225 --> 00:21:33,225
+303
+00:20:28,450 --> 00:20:32,450
 Now divide the arrow by its
 length, the Earth's radius.
 
-320
-00:21:33,575 --> 00:21:35,527
+304
+00:20:32,800 --> 00:20:34,752
 We get an arrow of length one,
 
-321
-00:21:35,527 --> 00:21:39,300
+305
+00:20:34,752 --> 00:20:38,525
 pointing straight up from the
 place, away from the centre.
 
-322
-00:21:39,650 --> 00:21:43,075
-We call it r hat, just as on the flat map.
+306
+00:20:38,875 --> 00:20:43,050
+We call it r hat, just
+as in Part 1, on the flat map.
 
-323
-00:21:43,425 --> 00:21:49,450
+307
+00:20:43,400 --> 00:20:49,425
 Its parts are cosine phi cosine lambda,
 cosine phi sine lambda, and sine phi.
 
-324
-00:21:49,800 --> 00:21:53,282
+308
+00:20:49,775 --> 00:20:53,257
 For Brest, they're about
 zero point six six two,
 
-325
-00:21:53,282 --> 00:21:57,925
+309
+00:20:53,257 --> 00:20:57,900
 minus zero point zero five two, and
 zero point seven four eight.
 
-326
-00:21:59,425 --> 00:22:04,950
+310
+00:20:59,400 --> 00:21:04,925
 We'll use this arrow again in Part 4, as
 the up direction of a weather station.
 
-327
-00:22:05,750 --> 00:22:09,475
-Let's do the same for a city
-on the other side of Asia.
+311
+00:21:05,725 --> 00:21:10,525
+Let's do the same for a city much
+farther east and south, in South Asia.
 
-328
-00:22:09,825 --> 00:22:12,713
+312
+00:21:10,875 --> 00:21:13,814
 Khulna is in the southwest of Bangladesh,
 
-329
-00:22:12,713 --> 00:22:16,727
+313
+00:21:13,814 --> 00:21:17,900
 near the Sundarbans,
-the world's largest mangrove forest,
+the world's largest mangrove forest.
 
-330
-00:22:16,727 --> 00:22:22,150
-close to where Cyclone Amphan, from
-Part 2, came ashore in May twenty twenty.
+314
+00:21:18,250 --> 00:21:21,951
+In May twenty twenty, the centre
+of Cyclone Amphan,
 
-331
-00:22:22,500 --> 00:22:25,730
+315
+00:21:21,951 --> 00:21:26,450
+from Part 2, passed about seventy
+nine kilometres to its west.
+
+316
+00:21:26,800 --> 00:21:30,030
 It's at about twenty
 two point eight degrees north,
 
-332
-00:22:25,730 --> 00:22:28,200
+317
+00:21:30,030 --> 00:21:32,500
 and eighty nine point six degrees east.
 
-333
-00:22:28,550 --> 00:22:33,175
+318
+00:21:32,850 --> 00:21:37,475
 In the side view, sine phi
 is zero point three eight seven five.
 
-334
-00:22:33,525 --> 00:22:38,581
+319
+00:21:37,825 --> 00:21:43,045
 So Khulna's height above the equator
-plane is six thousand three hundred and
+plane, the Earth's radius times this sine,
 
-335
-00:22:38,581 --> 00:22:42,041
-seventy one times
-zero point three eight seven five,
+320
+00:21:43,045 --> 00:21:47,075
+is about two thousand four
+hundred and sixty nine kilometres.
 
-336
-00:22:42,041 --> 00:22:45,900
-about two thousand four hundred
-and sixty nine kilometres.
-
-337
-00:22:47,400 --> 00:22:50,430
+321
+00:21:48,575 --> 00:21:51,605
 Cosine phi
 is zero point nine two one nine,
 
-338
-00:22:50,430 --> 00:22:55,363
+322
+00:21:51,605 --> 00:21:56,538
 so its distance from the axis is about
 five thousand eight hundred and
 
-339
-00:22:55,363 --> 00:22:57,125
+323
+00:21:56,538 --> 00:21:58,300
 seventy three kilometres.
 
-340
-00:22:58,625 --> 00:23:01,990
+324
+00:21:59,800 --> 00:22:03,165
 Khulna is much closer
 to the equator than Brest,
 
-341
-00:23:01,990 --> 00:23:05,425
+325
+00:22:03,165 --> 00:22:06,600
 so it sits lower, and much
 farther from the axis.
 
-342
-00:23:05,775 --> 00:23:09,868
+326
+00:22:06,950 --> 00:22:11,043
 In the top view, lambda
 is eighty nine point six degrees,
 
-343
-00:23:09,868 --> 00:23:13,100
+327
+00:22:11,043 --> 00:22:14,275
 almost a right angle
 from the prime meridian.
 
-344
-00:23:13,450 --> 00:23:17,758
+328
+00:22:14,625 --> 00:22:18,933
 Its cosine is only
 zero point zero zero six nine eight,
 
-345
-00:23:17,758 --> 00:23:20,500
+329
+00:22:18,933 --> 00:22:21,675
 so x is about forty one kilometres.
 
-346
-00:23:22,000 --> 00:23:24,211
+330
+00:22:23,175 --> 00:22:25,386
 Its sine is almost exactly one,
 
-347
-00:23:24,211 --> 00:23:29,275
+331
+00:22:25,386 --> 00:22:30,450
 so y is about five thousand eight
 hundred and seventy three kilometres.
 
-348
-00:23:30,775 --> 00:23:34,647
+332
+00:22:31,950 --> 00:22:35,822
 So Khulna's arrow points almost
 straight along the y axis,
 
-349
-00:23:34,647 --> 00:23:36,850
+333
+00:22:35,822 --> 00:22:38,025
 tilted up towards the North Pole.
 
-350
-00:23:37,200 --> 00:23:41,961
+334
+00:22:38,375 --> 00:22:43,136
 And once again, its length comes out
 at six thousand three hundred and
 
-351
-00:23:41,961 --> 00:23:43,525
+335
+00:22:43,136 --> 00:22:44,700
 seventy one kilometres.
 
-352
-00:23:44,325 --> 00:23:48,075
+336
+00:22:45,500 --> 00:22:49,250
 That distance from the axis
 has a second meaning.
 
-353
-00:23:48,425 --> 00:23:50,634
+337
+00:22:49,600 --> 00:22:51,809
 The Earth spins round its axis,
 
-354
-00:23:50,634 --> 00:23:55,550
+338
+00:22:51,809 --> 00:22:56,725
 so every place on the ground is carried
 round a circle: its parallel.
 
-355
-00:23:55,900 --> 00:23:59,933
+339
+00:22:57,075 --> 00:23:01,108
 The radius of that circle
 is the distance from the axis,
 
-356
-00:23:59,933 --> 00:24:02,525
+340
+00:23:01,108 --> 00:23:03,700
 the Earth's radius times cosine phi.
 
-357
-00:24:02,875 --> 00:24:05,275
+341
+00:23:04,050 --> 00:23:06,450
 How fast is the ground moving?
 
-358
-00:24:05,625 --> 00:24:08,650
+342
+00:23:06,800 --> 00:23:09,825
 Let's work it out, one step at a time.
 
-359
-00:24:09,000 --> 00:24:11,875
+343
+00:23:10,175 --> 00:23:13,050
 First, how long does one turn take?
 
-360
-00:24:12,225 --> 00:24:14,633
+344
+00:23:13,400 --> 00:23:15,808
 Measured against the distant stars,
 
-361
-00:24:14,633 --> 00:24:20,275
+345
+00:23:15,808 --> 00:23:21,450
 the Earth turns once every twenty three
 hours, fifty six minutes and four seconds.
 
-362
-00:24:20,625 --> 00:24:23,125
+346
+00:23:21,800 --> 00:23:24,300
 We call this time capital T.
 
-363
-00:24:23,475 --> 00:24:26,985
+347
+00:23:24,650 --> 00:23:28,160
 It's four minutes shorter
 than a day from noon to noon,
 
-364
-00:24:26,985 --> 00:24:30,750
+348
+00:23:28,160 --> 00:23:31,925
 because the Earth also moves
 along its orbit round the Sun.
 
-365
-00:24:31,100 --> 00:24:36,466
+349
+00:23:32,275 --> 00:23:37,641
 In a year of three hundred and sixty five
 days, the Earth goes once round the Sun,
 
-366
-00:24:36,466 --> 00:24:40,000
+350
+00:23:37,641 --> 00:23:41,175
 so each day it moves about
 one degree along its orbit.
 
-367
-00:24:40,350 --> 00:24:44,445
+351
+00:23:41,525 --> 00:23:45,620
 So from noon to noon, the Earth
 turns about three hundred and
 
-368
-00:24:44,445 --> 00:24:47,600
+352
+00:23:45,620 --> 00:23:48,775
 sixty one degrees,
 not three hundred and sixty.
 
-369
-00:24:47,950 --> 00:24:52,596
-A day of twenty four hours is one
-thousand four hundred and forty minutes,
+353
+00:23:49,125 --> 00:23:52,627
+A day has one thousand four
+hundred and forty minutes,
 
-370
-00:24:52,596 --> 00:24:56,864
-and one thousand four hundred
-and forty divided by three hundred and
+354
+00:23:52,627 --> 00:23:55,350
+so each degree of turn takes four minutes.
 
-371
-00:24:56,864 --> 00:24:59,250
-sixty is four minutes for each degree.
-
-372
-00:24:59,600 --> 00:25:03,225
+355
+00:23:55,700 --> 00:23:59,325
 Next, how far does the place
 travel in one turn?
 
-373
-00:25:03,575 --> 00:25:08,475
+356
+00:23:59,675 --> 00:24:04,575
 Once round its circle, which is two
 pi times the radius of the circle.
 
-374
-00:25:08,825 --> 00:25:13,350
+357
+00:24:04,925 --> 00:24:09,450
 That's two pi, times the Earth's
 radius, times cosine phi.
 
-375
-00:25:13,700 --> 00:25:17,050
+358
+00:24:09,800 --> 00:24:13,150
 Then, speed is distance divided by time.
 
-376
-00:25:17,400 --> 00:25:20,717
+359
+00:24:13,500 --> 00:24:16,817
 So the ground speed, capital U, is two pi,
 
-377
-00:25:20,717 --> 00:25:25,850
+360
+00:24:16,817 --> 00:24:21,950
 times the Earth's radius, times cosine
 phi, divided by capital T.
 
-378
-00:25:26,200 --> 00:25:30,257
+361
+00:24:22,300 --> 00:24:26,357
 Now we pull out the part that's
 the same for every place:
 
-379
-00:25:30,257 --> 00:25:32,250
+362
+00:24:26,357 --> 00:24:28,350
 two pi divided by capital T.
 
-380
-00:25:32,600 --> 00:25:37,000
+363
+00:24:28,700 --> 00:24:33,100
 That's the angle the Earth turns
 through each second, in radians.
 
-381
-00:25:37,350 --> 00:25:39,667
+364
+00:24:33,450 --> 00:24:35,767
 It's called the Earth's spin rate,
 
-382
-00:25:39,667 --> 00:25:43,825
+365
+00:24:35,767 --> 00:24:39,925
 and we write it capital
 Omega, as in the cross product movie.
 
-383
-00:25:44,175 --> 00:25:50,475
+366
+00:24:40,275 --> 00:24:46,575
 So capital U equals capital Omega, times
 the Earth's radius, times cosine phi.
 
-384
-00:25:51,975 --> 00:25:54,523
+367
+00:24:48,075 --> 00:24:50,623
 It's Part 2's rule for a ring again:
 
-385
-00:25:54,523 --> 00:25:57,850
+368
+00:24:50,623 --> 00:24:53,950
 the speed is the radius
 times the turning rate.
 
-386
-00:25:58,650 --> 00:26:01,325
+369
+00:24:54,750 --> 00:24:57,425
 If you skipped, here's what to keep.
 
-387
-00:26:01,675 --> 00:26:04,596
+370
+00:24:57,775 --> 00:25:00,696
 A place at latitude phi sits the Earth's
 
-388
-00:26:04,596 --> 00:26:07,956
+371
+00:25:00,696 --> 00:25:04,056
 radius times sine phi
 above the equator plane,
 
-389
-00:26:07,956 --> 00:26:11,900
+372
+00:25:04,056 --> 00:25:08,000
 and the radius times cosine
 phi from the Earth's axis.
 
-390
-00:26:12,250 --> 00:26:16,951
+373
+00:25:08,350 --> 00:25:13,051
 As the Earth spins, that place
 is carried east at capital Omega,
 
-391
-00:26:16,951 --> 00:26:19,375
+374
+00:25:13,051 --> 00:25:15,475
 times its distance from the axis.
 
-392
-00:26:19,725 --> 00:26:21,500
+375
+00:25:15,825 --> 00:25:17,600
 Now the numbers.
 
-393
-00:26:21,850 --> 00:26:24,715
+376
+00:25:17,950 --> 00:25:20,815
 Twenty three hours, fifty six minutes and
 
-394
-00:26:24,715 --> 00:26:29,675
+377
+00:25:20,815 --> 00:25:25,775
 four seconds is eighty six thousand
 one hundred and sixty four seconds.
 
-395
-00:26:30,025 --> 00:26:35,264
-So capital Omega is two pi divided by
-eighty six thousand one hundred and
+378
+00:25:26,125 --> 00:25:29,738
+So capital Omega, two
+pi divided by capital T,
 
-396
-00:26:35,264 --> 00:26:39,283
-sixty four, which is about
-seven point two nine two times
-
-397
-00:26:39,283 --> 00:26:42,225
+379
+00:25:29,738 --> 00:25:36,100
+is about seven point two nine two times
 ten to the minus five radians per second.
 
-398
-00:26:43,725 --> 00:26:46,800
+380
+00:25:37,600 --> 00:25:40,675
 At the equator, cosine phi is one.
 
-399
-00:26:47,150 --> 00:26:52,351
-So the ground moves at seven point two
-nine two times ten to the minus five,
+381
+00:25:41,025 --> 00:25:45,337
+So the ground moves at capital
+Omega times the Earth's radius,
 
-400
-00:26:52,351 --> 00:26:55,567
-times six point three seven one
-million metres,
-
-401
-00:26:55,567 --> 00:27:00,425
+382
+00:25:45,337 --> 00:25:50,275
 which is about four hundred and sixty
 four point six metres per second.
 
-402
-00:27:01,925 --> 00:27:03,188
-With easy numbers,
+383
+00:25:51,775 --> 00:25:57,050
+With easy numbers, the equator is about
+forty thousand kilometres round.
 
-403
-00:27:03,188 --> 00:27:07,751
-the equator is two pi times six
-thousand four hundred kilometres,
-
-404
-00:27:07,751 --> 00:27:11,050
-which is about forty
-thousand kilometres round.
-
-405
-00:27:11,400 --> 00:27:14,384
+384
+00:25:57,400 --> 00:26:00,384
 And forty thousand
 kilometres in twenty four
 
-406
-00:27:14,384 --> 00:27:17,301
+385
+00:26:00,384 --> 00:26:03,301
 hours is about one
 thousand six hundred and
 
-407
-00:27:17,301 --> 00:27:19,200
+386
+00:26:03,301 --> 00:26:05,200
 seventy kilometres per hour.
 
-408
-00:27:19,550 --> 00:27:25,233
+387
+00:26:05,550 --> 00:26:11,233
 To turn metres per second into kilometres
 per hour, we multiply by three point six,
 
-409
-00:27:25,233 --> 00:27:28,998
+388
+00:26:11,233 --> 00:26:14,998
 because an hour has three
 thousand six hundred seconds,
 
-410
-00:27:28,998 --> 00:27:31,600
+389
+00:26:14,998 --> 00:26:17,600
 and a kilometre has a thousand metres.
 
-411
-00:27:31,950 --> 00:27:33,157
-Four hundred and
+390
+00:26:17,950 --> 00:26:19,323
+So four hundred and
 
-412
-00:27:33,157 --> 00:27:39,571
-sixty four point six times three point six
+391
+00:26:19,323 --> 00:26:25,177
+sixty four point six metres per second
 is also about one thousand six hundred and
 
-413
-00:27:39,571 --> 00:27:44,917
-seventy. A passenger jet flies at about
+392
+00:26:25,177 --> 00:26:27,200
+seventy kilometres per hour.
+
+393
+00:26:27,550 --> 00:26:31,937
+A passenger jet flies at about
 nine hundred kilometres per hour,
 
-414
-00:27:44,917 --> 00:27:47,113
-and one thousand six hundred and
-
-415
-00:27:47,113 --> 00:27:50,957
-seventy divided by nine hundred
-is about one point nine,
-
-416
-00:27:50,957 --> 00:27:54,800
+394
+00:26:31,937 --> 00:26:35,775
 so the ground at the equator
 moves almost twice as fast.
 
-417
-00:27:55,150 --> 00:28:00,124
+395
+00:26:36,125 --> 00:26:41,099
 Singapore, at one point three five
 degrees north, almost on the equator,
 
-418
-00:28:00,124 --> 00:28:03,371
+396
+00:26:41,099 --> 00:26:44,346
 has cosine phi
 zero point nine nine nine seven,
 
-419
-00:28:03,371 --> 00:28:08,000
+397
+00:26:44,346 --> 00:26:48,975
 so it moves at about four hundred
 and sixty four metres per second.
 
-420
-00:28:09,500 --> 00:28:13,343
+398
+00:26:50,475 --> 00:26:54,318
 At Khulna, cosine phi
 is zero point nine two one nine,
 
-421
-00:28:13,343 --> 00:28:16,475
+399
+00:26:54,318 --> 00:26:57,450
 so it's about four
 hundred and twenty eight.
 
-422
-00:28:17,975 --> 00:28:21,805
+400
+00:26:58,950 --> 00:27:02,780
 At Brest, cosine phi
 is zero point six six three nine,
 
-423
-00:28:21,805 --> 00:28:24,500
+401
+00:27:02,780 --> 00:27:05,475
 so it's about three hundred and eight.
 
-424
-00:28:26,000 --> 00:28:29,710
+402
+00:27:06,975 --> 00:27:10,685
 At Longyearbyen,
 on the Arctic islands of Svalbard,
 
-425
-00:28:29,710 --> 00:28:32,474
+403
+00:27:10,685 --> 00:27:13,449
 seventy eight point two degrees north,
 
-426
-00:28:32,474 --> 00:28:35,675
+404
+00:27:13,449 --> 00:27:16,650
 cosine phi
 is zero point two zero four five.
 
-427
-00:28:36,025 --> 00:28:40,800
+405
+00:27:17,000 --> 00:27:21,775
 So the ground there moves at only
 about ninety five metres per second.
 
-428
-00:28:42,300 --> 00:28:47,725
+406
+00:27:23,275 --> 00:27:28,700
 And at the poles, cosine phi is zero, so
 the ground just turns on the spot.
 
-429
-00:28:48,075 --> 00:28:52,375
+407
+00:27:29,050 --> 00:27:33,350
 Every one of these speeds points
 east, the way the Earth turns.
 
-430
-00:28:52,725 --> 00:28:56,181
+408
+00:27:33,700 --> 00:27:37,156
 We don't feel any of it,
 because the air, the sea and
 
-431
-00:28:56,181 --> 00:28:59,050
+409
+00:27:37,156 --> 00:27:40,025
 we ourselves all move
 along with the ground.
 
-432
-00:28:59,400 --> 00:29:03,507
+410
+00:27:40,375 --> 00:27:44,482
 But this shrinking circle is part
 of the reason why the Earth's
 
-433
-00:29:03,507 --> 00:29:07,288
+411
+00:27:44,482 --> 00:27:48,263
 spin affects the winds differently
 at different latitudes,
 
-434
-00:29:07,288 --> 00:29:09,700
+412
+00:27:48,263 --> 00:27:50,675
 as we saw in the cross product movie.
 
-435
-00:29:10,500 --> 00:29:14,750
+413
+00:27:51,475 --> 00:27:55,725
 Now let's measure distances
 on the ground, step by step.
 
-436
-00:29:15,100 --> 00:29:19,772
+414
+00:27:56,075 --> 00:28:00,747
 If you'd rather keep to the big picture,
 skip ahead to the time on screen:
 
-437
-00:29:19,772 --> 00:29:23,245
+415
+00:28:00,747 --> 00:28:04,220
 these steps aren't needed
 for the intuition of weather,
 
-438
-00:29:23,245 --> 00:29:24,950
+416
+00:28:04,220 --> 00:28:05,925
 climate science or mapping.
 
-439
-00:29:25,300 --> 00:29:27,500
+417
+00:28:06,275 --> 00:28:08,475
 Let's start with going north.
 
-440
-00:29:27,850 --> 00:29:30,850
+418
+00:28:08,825 --> 00:28:11,825
 Slice the Earth along a meridian again.
 
-441
-00:29:31,200 --> 00:29:33,949
+419
+00:28:12,175 --> 00:28:14,924
 Walking due north, you
 follow the meridian,
 
-442
-00:29:33,949 --> 00:29:38,425
+420
+00:28:14,924 --> 00:28:19,400
 and a meridian is part of a circle
 whose centre is the Earth's centre.
 
-443
-00:29:38,775 --> 00:29:43,225
+421
+00:28:19,750 --> 00:28:24,200
 So the radius of that circle
 is the full radius of the Earth.
 
-444
-00:29:43,575 --> 00:29:46,347
+422
+00:28:24,550 --> 00:28:27,322
 As you walk north, your latitude grows,
 
-445
-00:29:46,347 --> 00:29:50,825
+423
+00:28:27,322 --> 00:28:31,800
 and latitude is exactly the angle
 at the centre of this circle.
 
-446
-00:29:51,175 --> 00:29:53,939
+424
+00:28:32,150 --> 00:28:34,914
 So by the arc length rule from Part 1,
 
-447
-00:29:53,939 --> 00:29:59,175
+425
+00:28:34,914 --> 00:28:40,150
 the distance walked is the radius
 times the change of angle, in radians.
 
-448
-00:29:59,525 --> 00:30:03,274
+426
+00:28:40,500 --> 00:28:44,249
 We write it like this:
 delta y, the distance north,
 
-449
-00:30:03,274 --> 00:30:08,125
+427
+00:28:44,249 --> 00:28:49,100
 equals the Earth's radius times delta
 phi, the change in latitude.
 
-450
-00:30:08,475 --> 00:30:11,075
+428
+00:28:49,450 --> 00:28:52,050
 Let's find the length of one degree.
 
-451
-00:30:11,425 --> 00:30:16,425
+429
+00:28:52,400 --> 00:28:57,400
 A full turn is three hundred
 and sixty degrees, or two pi radians.
 
-452
-00:30:16,775 --> 00:30:20,304
+430
+00:28:57,750 --> 00:29:01,279
 So one degree is pi over one
 hundred and eighty,
 
-453
-00:30:20,304 --> 00:30:24,200
+431
+00:29:01,279 --> 00:29:05,175
 which is zero point zero
 one seven four five radians.
 
-454
-00:30:25,700 --> 00:30:29,713
-Times six thousand three hundred
-and seventy one kilometres,
+432
+00:29:06,675 --> 00:29:10,333
+Times the Earth's radius, six
+thousand three hundred and
 
-455
-00:30:29,713 --> 00:30:33,525
-that's about one hundred
-and eleven point two kilometres.
+433
+00:29:10,333 --> 00:29:15,625
+seventy one kilometres, that's about one
+hundred and eleven point two kilometres.
 
-456
-00:30:35,025 --> 00:30:36,353
-With easy numbers,
+434
+00:29:17,125 --> 00:29:22,125
+With easy numbers, it's about one
+hundred and twelve: about the same.
 
-457
-00:30:36,353 --> 00:30:42,328
-six thousand four hundred times zero point
-zero one seven five is one hundred and
-
-458
-00:30:42,328 --> 00:30:44,025
-twelve: about the same.
-
-459
-00:30:45,525 --> 00:30:48,122
+435
+00:29:23,625 --> 00:29:26,222
 And it's the same at every latitude,
 
-460
-00:30:48,122 --> 00:30:51,225
+436
+00:29:26,222 --> 00:29:29,325
 because every meridian
 has the same radius.
 
-461
-00:30:51,575 --> 00:30:56,425
+437
+00:29:29,675 --> 00:29:34,525
 So a degree north is always
 about a hundred and eleven kilometres.
 
-462
-00:30:57,225 --> 00:30:59,000
+438
+00:29:35,325 --> 00:29:37,100
 Two examples.
 
-463
-00:30:59,350 --> 00:31:04,295
-One minute of latitude is a sixtieth
-of a degree, so it's one hundred and
+439
+00:29:37,450 --> 00:29:40,942
+One minute of latitude
+is a sixtieth of a degree:
 
-464
-00:31:04,295 --> 00:31:09,850
-eleven point two divided by sixty, which
-is about one point eight five kilometres.
+440
+00:29:40,942 --> 00:29:43,650
+about one point eight five kilometres.
 
-465
-00:31:11,350 --> 00:31:14,772
+441
+00:29:45,150 --> 00:29:48,572
 That's the nautical mile
 from the weather basics movie,
 
-466
-00:31:14,772 --> 00:31:16,700
+442
+00:29:48,572 --> 00:29:50,500
 and that's where it comes from.
 
-467
-00:31:17,050 --> 00:31:22,750
+443
+00:29:50,850 --> 00:29:56,550
 Next, how far is Brest from the equator,
 walking due south along its meridian?
 
-468
-00:31:23,100 --> 00:31:26,494
-Forty eight point four
-degrees, times one hundred and
+444
+00:29:56,900 --> 00:30:00,645
+At one hundred and eleven point two
+kilometres per degree,
 
-469
-00:31:26,494 --> 00:31:28,991
-eleven point two kilometres per degree,
+445
+00:30:00,645 --> 00:30:03,422
+Brest's forty
+eight point four degrees come
 
-470
-00:31:28,991 --> 00:31:33,025
-is about five thousand three
-hundred and eighty two kilometres.
+446
+00:30:03,422 --> 00:30:06,004
+to about five thousand three hundred and
 
-471
-00:31:34,525 --> 00:31:38,936
+447
+00:30:06,004 --> 00:30:07,425
+eighty two kilometres.
+
+448
+00:30:08,925 --> 00:30:13,336
 Notice that's longer than Brest's
 height above the equator plane,
 
-472
-00:31:38,936 --> 00:31:42,600
+449
+00:30:13,336 --> 00:30:17,000
 four thousand seven hundred
 and sixty four kilometres.
 
-473
-00:31:42,950 --> 00:31:46,075
+450
+00:30:17,350 --> 00:30:20,475
 The walk follows the curved
 surface of the Earth.
 
-474
-00:31:46,425 --> 00:31:49,850
+451
+00:30:20,825 --> 00:30:24,250
 The height is a straight
 line, through the inside.
 
-475
-00:31:50,650 --> 00:31:52,800
+452
+00:30:25,050 --> 00:30:27,200
 Going east is different.
 
-476
-00:31:53,150 --> 00:31:56,275
+453
+00:30:27,550 --> 00:30:30,675
 Walking due east, you follow a parallel.
 
-477
-00:31:56,625 --> 00:32:00,088
+454
+00:30:31,025 --> 00:30:34,488
 And a parallel, as we saw
 when we sliced across,
 
-478
-00:32:00,088 --> 00:32:04,200
+455
+00:30:34,488 --> 00:30:38,600
 is a circle round the Earth's
 axis, not round its centre.
 
-479
-00:32:04,550 --> 00:32:10,525
+456
+00:30:38,950 --> 00:30:44,925
 Its radius is the distance from the axis:
 the Earth's radius times cosine phi.
 
-480
-00:32:10,875 --> 00:32:14,200
+457
+00:30:45,275 --> 00:30:48,600
 Let's slice across
 at Brest's latitude again.
 
-481
-00:32:14,550 --> 00:32:18,497
+458
+00:30:48,950 --> 00:30:52,897
 As you walk east along this
 circle, your longitude grows,
 
-482
-00:32:18,497 --> 00:32:23,275
+459
+00:30:52,897 --> 00:30:57,675
 and longitude is the angle at the centre
 of this circle, on the axis.
 
-483
-00:32:23,625 --> 00:32:25,786
+460
+00:30:58,025 --> 00:31:00,186
 So by the same arc length rule,
 
-484
-00:32:25,786 --> 00:32:31,225
+461
+00:31:00,186 --> 00:31:05,625
 the distance east is the radius of the
 parallel times the change in longitude.
 
-485
-00:32:31,575 --> 00:32:36,002
+462
+00:31:05,975 --> 00:31:10,402
 We write it like this:
 delta x equals the Earth's radius,
 
-486
-00:32:36,002 --> 00:32:38,875
+463
+00:31:10,402 --> 00:31:13,275
 times cosine phi, times delta lambda.
 
-487
-00:32:39,225 --> 00:32:43,271
-For one degree at Brest, that's
-four thousand two hundred and
+464
+00:31:13,625 --> 00:31:15,236
+For one degree at Brest,
 
-488
-00:32:43,271 --> 00:32:47,251
-thirty kilometres times
-zero point zero one seven four five,
+465
+00:31:15,236 --> 00:31:18,861
+the radius of its parallel
+times one degree in radians
 
-489
-00:32:47,251 --> 00:32:50,700
-which is about seventy
+466
+00:31:18,861 --> 00:31:22,150
+gives about seventy
 three point eight kilometres.
 
-490
-00:32:52,200 --> 00:32:54,786
+467
+00:31:23,650 --> 00:31:26,236
 That's only two thirds of a degree north,
 
-491
-00:32:54,786 --> 00:32:58,950
+468
+00:31:26,236 --> 00:31:30,400
 because Brest's parallel is only
 two thirds as big as the equator.
 
-492
-00:32:59,750 --> 00:33:02,425
+469
+00:31:31,200 --> 00:31:33,875
 If you skipped, here's what to keep.
 
-493
-00:33:02,775 --> 00:33:07,417
+470
+00:31:34,225 --> 00:31:38,867
 A degree of latitude is always
 about a hundred and eleven kilometres,
 
-494
-00:33:07,417 --> 00:33:10,847
+471
+00:31:38,867 --> 00:31:42,297
 but a degree of longitude
 is that times cosine phi,
 
-495
-00:33:10,847 --> 00:33:13,000
+472
+00:31:42,297 --> 00:31:44,450
 so it shrinks towards the poles.
 
-496
-00:33:13,350 --> 00:33:18,250
+473
+00:31:44,800 --> 00:31:49,700
 Let's compare one degree of longitude
 at four places, side by side.
 
-497
-00:33:18,600 --> 00:33:24,250
+474
+00:31:50,050 --> 00:31:55,700
 Each one is one hundred and eleven
 point two kilometres, times cosine phi.
 
-498
-00:33:24,600 --> 00:33:27,972
+475
+00:31:56,050 --> 00:31:59,422
 At Singapore, cosine phi
 is almost exactly one,
 
-499
-00:33:27,972 --> 00:33:31,057
+476
+00:31:59,422 --> 00:32:02,507
 so one degree east
 is about one hundred and
 
-500
-00:33:31,057 --> 00:33:35,075
+477
+00:32:02,507 --> 00:32:06,525
 eleven point two kilometres,
 the same as a degree north.
 
-501
-00:33:36,575 --> 00:33:40,530
+478
+00:32:08,025 --> 00:32:11,980
 At Khulna, cosine phi
 is zero point nine two one nine,
 
-502
-00:33:40,530 --> 00:33:43,825
+479
+00:32:11,980 --> 00:32:15,275
 so it's about one hundred
 and two point five.
 
-503
-00:33:45,325 --> 00:33:48,600
+480
+00:32:16,775 --> 00:32:20,050
 At Brest, it's about
 seventy three point eight.
 
-504
-00:33:50,100 --> 00:33:54,568
+481
+00:32:21,550 --> 00:32:26,018
 At Longyearbyen, cosine phi
 is zero point two zero four five,
 
-505
-00:33:54,568 --> 00:33:59,475
+482
+00:32:26,018 --> 00:32:30,925
 so one degree east is only about
 twenty two point seven kilometres.
 
-506
-00:34:00,975 --> 00:34:04,875
+483
+00:32:32,425 --> 00:32:36,325
 And at the pole, where all
 the meridians meet, it's zero.
 
-507
-00:34:05,225 --> 00:34:07,580
+484
+00:32:36,675 --> 00:32:39,030
 Like the segments of a peeled orange,
 
-508
-00:34:07,580 --> 00:34:10,508
+485
+00:32:39,030 --> 00:32:41,958
 the meridians are widest
 apart at the equator,
 
-509
-00:34:10,508 --> 00:34:12,800
+486
+00:32:41,958 --> 00:32:44,250
 and they come together at the poles.
 
-510
-00:34:13,150 --> 00:34:16,880
+487
+00:32:44,600 --> 00:32:48,330
 Unlike an orange, which
 has a fixed number of segments,
 
-511
-00:34:16,880 --> 00:34:20,000
+488
+00:32:48,330 --> 00:32:51,450
 there's a meridian through
 every single place.
 
-512
-00:34:20,800 --> 00:34:24,475
+489
+00:32:52,250 --> 00:32:55,925
 This matters every time
 we use weather data.
 
-513
-00:34:24,825 --> 00:34:28,663
+490
+00:32:56,275 --> 00:33:00,113
 ERA5, the reanalysis we've
 used throughout this series,
 
-514
-00:34:28,663 --> 00:34:32,222
+491
+00:33:00,113 --> 00:33:03,672
 is a reconstruction
 of the past weather everywhere,
 
-515
-00:34:32,222 --> 00:34:35,850
+492
+00:33:03,672 --> 00:33:07,300
 made by combining observations
 with a weather model.
 
-516
-00:34:36,200 --> 00:34:42,075
+493
+00:33:07,650 --> 00:33:13,525
 It gives its values on a grid of latitude
 and longitude, every quarter of a degree.
 
-517
-00:34:42,425 --> 00:34:47,650
+494
+00:33:13,875 --> 00:33:19,100
 So each grid box is a quarter of a degree
 tall, and a quarter of a degree wide.
 
-518
-00:34:48,000 --> 00:34:51,293
+495
+00:33:19,450 --> 00:33:22,743
 The height is easy:
 a quarter of one hundred and
 
-519
-00:34:51,293 --> 00:34:56,850
+496
+00:33:22,743 --> 00:33:28,300
 eleven point two is about twenty seven
 point eight kilometres, at every latitude.
 
-520
-00:34:58,350 --> 00:35:01,100
+497
+00:33:29,800 --> 00:33:32,550
 The width depends on cosine phi.
 
-521
-00:35:01,450 --> 00:35:02,386
+498
+00:33:32,900 --> 00:33:33,836
 At Singapore,
 
-522
-00:35:02,386 --> 00:35:07,500
+499
+00:33:33,836 --> 00:33:38,950
 a box is about twenty seven point eight
 kilometres wide: nearly square.
 
-523
-00:35:09,000 --> 00:35:13,475
+500
+00:33:40,450 --> 00:33:44,925
 At Khulna, it's about twenty
 five point six kilometres wide.
 
-524
-00:35:14,975 --> 00:35:17,825
+501
+00:33:46,425 --> 00:33:49,275
 At Brest, about eighteen and a half.
 
-525
-00:35:19,325 --> 00:35:24,601
+502
+00:33:50,775 --> 00:33:56,051
 At Longyearbyen, a box is still twenty
 seven point eight kilometres tall,
 
-526
-00:35:24,601 --> 00:35:27,275
+503
+00:33:56,051 --> 00:33:58,725
 but only about five point seven wide.
 
-527
-00:35:28,775 --> 00:35:32,450
+504
+00:34:00,225 --> 00:34:03,900
 So the boxes get thinner
 and thinner towards the poles.
 
-528
-00:35:32,800 --> 00:35:34,112
+505
+00:34:04,250 --> 00:34:05,562
 Forget the cosine,
 
-529
-00:35:34,112 --> 00:35:38,339
+506
+00:34:05,562 --> 00:34:09,789
 and a box at Longyearbyen comes
 out four point nine times,
 
-530
-00:35:38,339 --> 00:35:40,525
+507
+00:34:09,789 --> 00:34:11,975
 so about five times, too wide.
 
-531
-00:35:42,025 --> 00:35:46,186
+508
+00:34:13,475 --> 00:34:17,636
 Every east-west distance there
 would be five times too big,
 
-532
-00:35:46,186 --> 00:35:49,500
+509
+00:34:17,636 --> 00:34:20,950
 and every east-west slope
 five times too small.
 
-533
-00:35:49,850 --> 00:35:52,004
+510
+00:34:21,300 --> 00:34:23,454
 This is also how, in Part 4,
 
-534
-00:35:52,004 --> 00:35:56,775
+511
+00:34:23,454 --> 00:34:28,225
 we'll turn a coast's latitudes
 and longitudes into kilometres.
 
-535
-00:35:57,125 --> 00:36:02,098
+512
+00:34:28,575 --> 00:34:33,548
 And it's one reason why many modern
 weather models use other kinds of grid,
 
-536
-00:36:02,098 --> 00:36:04,750
+513
+00:34:33,548 --> 00:34:36,200
 which don't crowd together at the poles.
 
-537
-00:36:05,550 --> 00:36:08,125
+514
+00:34:37,000 --> 00:34:39,575
 Distances give us areas.
 
-538
-00:36:08,475 --> 00:36:10,100
+515
+00:34:39,925 --> 00:34:41,550
 Why do we care?
 
-539
-00:36:10,450 --> 00:36:14,751
+516
+00:34:41,900 --> 00:34:46,201
 Because to average anything over
 the Earth, like the temperature,
 
-540
-00:36:14,751 --> 00:36:18,125
+517
+00:34:46,201 --> 00:34:49,575
 we need to know how much
 area each grid box covers.
 
-541
-00:36:18,475 --> 00:36:21,981
+518
+00:34:49,925 --> 00:34:53,431
 The next few minutes build
 the area of a small patch,
 
-542
-00:36:21,981 --> 00:36:25,950
+519
+00:34:53,431 --> 00:34:57,400
 and then of whole bands round
 the Earth, one step at a time.
 
-543
-00:36:26,300 --> 00:36:28,834
+520
+00:34:57,750 --> 00:35:00,284
 They're for anyone who wants every step,
 
-544
-00:36:28,834 --> 00:36:31,622
+521
+00:35:00,284 --> 00:35:03,072
 and not needed
 for the intuition of weather,
 
-545
-00:36:31,622 --> 00:36:36,500
+522
+00:35:03,072 --> 00:35:07,950
 climate science or mapping, so feel free
 to skip ahead to the time on screen.
 
-546
-00:36:36,850 --> 00:36:42,100
+523
+00:35:08,300 --> 00:35:13,550
 Take a small patch of the surface,
 between two meridians and two parallels.
 
-547
-00:36:42,450 --> 00:36:47,025
+524
+00:35:13,900 --> 00:35:18,475
 Its north-south side is the Earth's
 radius times delta phi.
 
-548
-00:36:47,375 --> 00:36:53,425
+525
+00:35:18,825 --> 00:35:24,875
 Its east-west side is the Earth's radius
 times cosine phi times delta lambda.
 
-549
-00:36:53,775 --> 00:36:56,234
+526
+00:35:25,225 --> 00:35:27,684
 The two sides meet at a right angle,
 
-550
-00:36:56,234 --> 00:36:59,650
+527
+00:35:27,684 --> 00:35:31,100
 because meridians cross
 parallels at right angles.
 
-551
-00:37:00,000 --> 00:37:05,150
+528
+00:35:31,450 --> 00:35:36,600
 And when the patch is small, it's almost
 flat, so it's almost a rectangle.
 
-552
-00:37:05,500 --> 00:37:09,575
+529
+00:35:36,950 --> 00:35:41,025
 The area of a rectangle
 is its width times its height.
 
-553
-00:37:09,925 --> 00:37:14,875
+530
+00:35:41,375 --> 00:35:46,325
 So the patch's area is about the east-west
 side times the north-south side.
 
-554
-00:37:15,225 --> 00:37:18,781
+531
+00:35:46,675 --> 00:35:50,231
 Collecting the pieces, that's
 the radius squared,
 
-555
-00:37:18,781 --> 00:37:22,700
+532
+00:35:50,231 --> 00:35:54,150
 times cosine phi, times delta
 phi, times delta lambda.
 
-556
-00:37:23,050 --> 00:37:27,975
+533
+00:35:54,500 --> 00:35:59,425
 As the patch shrinks, the bending
 of the surface matters less and less.
 
-557
-00:37:28,325 --> 00:37:32,421
+534
+00:35:59,775 --> 00:36:03,871
 In the limit, we write
 the tiny area as d capital A,
 
-558
-00:37:32,421 --> 00:37:35,650
+535
+00:36:03,871 --> 00:36:07,100
 and the tiny steps as d phi and d lambda.
 
-559
-00:37:36,000 --> 00:37:42,600
+536
+00:36:07,450 --> 00:36:14,050
 So d capital A equals the radius squared,
 times cosine phi, d phi, d lambda.
 
-560
-00:37:42,950 --> 00:37:48,063
+537
+00:36:14,400 --> 00:36:19,513
 From here on, delta means a small
 step, and a small d means a step so
 
-561
-00:37:48,063 --> 00:37:51,175
+538
+00:36:19,513 --> 00:36:22,625
 tiny that the approximation becomes exact.
 
-562
-00:37:51,525 --> 00:37:54,400
+539
+00:36:22,975 --> 00:36:25,850
 And the angles are always in radians.
 
-563
-00:37:55,200 --> 00:37:58,925
+540
+00:36:26,650 --> 00:36:30,375
 Let's work out the area of one ERA5 box.
 
-564
-00:37:59,275 --> 00:38:04,725
+541
+00:36:30,725 --> 00:36:36,175
 A quarter of a degree is zero point zero
 zero four three six radians.
 
-565
-00:38:05,075 --> 00:38:08,620
-The radius squared is six
-thousand three hundred and
-
-566
-00:38:08,620 --> 00:38:13,325
-seventy one squared, about
+542
+00:36:36,525 --> 00:36:41,450
+The radius squared is about
 forty point six million square kilometres.
 
-567
-00:38:14,825 --> 00:38:17,738
-Times zero point zero zero four three six,
+543
+00:36:42,950 --> 00:36:48,053
+Times that quarter degree in radians,
+twice, that's about seven hundred and
 
-568
-00:38:17,738 --> 00:38:21,346
-and times zero point zero
-zero four three six again,
-
-569
-00:38:21,346 --> 00:38:23,427
-that's about seven hundred and
-
-570
-00:38:23,427 --> 00:38:27,450
+544
+00:36:48,053 --> 00:36:52,000
 seventy three square kilometres,
 for a box on the equator.
 
-571
-00:38:28,950 --> 00:38:32,525
+545
+00:36:53,500 --> 00:36:57,075
 Every other box is that, times cosine phi.
 
-572
-00:38:32,875 --> 00:38:34,871
-At Khulna, seven hundred and
+546
+00:36:57,425 --> 00:37:01,583
+At Khulna, where cosine phi
+is zero point nine two one nine,
 
-573
-00:38:34,871 --> 00:38:40,218
-seventy three times zero point nine
-two one nine is about seven hundred and
+547
+00:37:01,583 --> 00:37:05,325
+it's about seven hundred
+and twelve square kilometres.
 
-574
-00:38:40,218 --> 00:38:42,000
-twelve square kilometres.
+548
+00:37:06,825 --> 00:37:07,479
+At Brest,
 
-575
-00:38:43,500 --> 00:38:46,811
-At Brest, times
-zero point six six three nine,
+549
+00:37:07,479 --> 00:37:13,000
+the equator box times Brest's cosine
+phi is about five hundred and thirteen.
 
-576
-00:38:46,811 --> 00:38:49,475
-it's about five hundred and thirteen.
+550
+00:37:14,500 --> 00:37:17,870
+At Longyearbyen,
+with its much smaller cosine phi,
 
-577
-00:38:50,975 --> 00:38:54,713
-At Longyearbyen, times
-zero point two zero four five,
-
-578
-00:38:54,713 --> 00:38:57,675
+551
+00:37:17,870 --> 00:37:20,700
 it's only about a hundred and fifty eight.
 
-579
-00:38:59,175 --> 00:39:04,900
+552
+00:37:22,200 --> 00:37:27,925
 As a check, a computer can work out the
 exact area of the curved patch at Brest.
 
-580
-00:39:05,250 --> 00:39:10,081
+553
+00:37:28,275 --> 00:37:33,106
 It's also about five hundred
 and thirteen point one square kilometres,
 
-581
-00:39:10,081 --> 00:39:13,600
+554
+00:37:33,106 --> 00:37:36,625
 so the flat rectangle
 is a very good approximation.
 
-582
-00:39:15,100 --> 00:39:17,100
+555
+00:37:38,125 --> 00:37:40,125
 Now a bigger question.
 
-583
-00:39:17,450 --> 00:39:21,350
+556
+00:37:40,475 --> 00:37:44,375
 How much of the Earth's surface
 lies between the equator and
 
-584
-00:39:21,350 --> 00:39:23,950
+557
+00:37:44,375 --> 00:37:46,975
 some latitude, say thirty degrees north?
 
-585
-00:39:24,300 --> 00:39:25,725
+558
+00:37:47,325 --> 00:37:48,750
 Why care?
 
-586
-00:39:26,075 --> 00:39:30,054
+559
+00:37:49,100 --> 00:37:53,079
 Because that's how much of the planet
 is tropical and subtropical,
 
-587
-00:39:30,054 --> 00:39:34,575
+560
+00:37:53,079 --> 00:37:57,600
 and it tells us how much each part
 of the world counts in a global average.
 
-588
-00:39:34,925 --> 00:39:37,875
+561
+00:37:57,950 --> 00:38:00,900
 Let's build that area from thin strips.
 
-589
-00:39:38,225 --> 00:39:41,828
+562
+00:38:01,250 --> 00:38:04,853
 Take one strip that goes
 all the way round the Earth,
 
-590
-00:39:41,828 --> 00:39:46,450
+563
+00:38:04,853 --> 00:38:09,475
 between latitude phi and a little
 further north, phi plus delta phi.
 
-591
-00:39:46,800 --> 00:39:51,425
+564
+00:38:09,825 --> 00:38:14,450
 Cut it and unroll it, and it's
 almost a long, thin rectangle.
 
-592
-00:39:51,775 --> 00:39:56,463
+565
+00:38:14,800 --> 00:38:19,488
 Its length is the length of the parallel:
 two pi times its radius,
 
-593
-00:39:56,463 --> 00:40:00,725
+566
+00:38:19,488 --> 00:38:23,750
 which is two pi, times the Earth's
 radius, times cosine phi.
 
-594
-00:40:01,075 --> 00:40:05,975
+567
+00:38:24,100 --> 00:38:29,000
 Its width is the step north:
 the Earth's radius times delta phi.
 
-595
-00:40:06,325 --> 00:40:09,062
+568
+00:38:29,350 --> 00:38:32,088
 So the strip's area is about two pi,
 
-596
-00:40:09,062 --> 00:40:13,625
+569
+00:38:32,088 --> 00:38:36,650
 times the radius squared,
 times cosine phi, times delta phi.
 
-597
-00:40:14,425 --> 00:40:17,725
+570
+00:38:37,450 --> 00:38:40,750
 Adding up lots of cosines
 like this looks hard.
 
-598
-00:40:18,075 --> 00:40:20,725
+571
+00:38:41,100 --> 00:38:43,750
 But Part 2 gave us a shortcut.
 
-599
-00:40:21,075 --> 00:40:23,765
+572
+00:38:44,100 --> 00:38:46,790
 When an angle grows by a small step,
 
-600
-00:40:23,765 --> 00:40:27,575
+573
+00:38:46,790 --> 00:38:50,600
 its sine grows by about
 its cosine times that step.
 
-601
-00:40:27,925 --> 00:40:33,900
+574
+00:38:50,950 --> 00:38:56,925
 So cosine phi times delta phi is just
 how much sine phi grows across the strip.
 
-602
-00:40:34,250 --> 00:40:36,750
+575
+00:38:57,275 --> 00:38:59,775
 We call that delta sine phi.
 
-603
-00:40:37,100 --> 00:40:42,475
+576
+00:39:00,125 --> 00:39:05,500
 Let's check it with a strip ten degrees
 wide, from twenty to thirty degrees north.
 
-604
-00:40:42,825 --> 00:40:47,400
+577
+00:39:05,850 --> 00:39:10,425
 Ten degrees
 is zero point one seven four five radians.
 
-605
-00:40:47,750 --> 00:40:50,516
+578
+00:39:10,775 --> 00:39:13,541
 Cosine phi at the middle of the strip,
 
-606
-00:40:50,516 --> 00:40:54,300
+579
+00:39:13,541 --> 00:39:17,325
 at twenty five degrees,
 is zero point nine zero six.
 
-607
-00:40:54,650 --> 00:40:58,517
-So cosine phi times delta
-phi is zero point nine
+580
+00:39:17,675 --> 00:39:22,850
+So cosine phi times delta phi
+is about zero point one five eight.
 
-608
-00:40:58,517 --> 00:41:02,222
-zero six times
-zero point one seven four five,
-
-609
-00:41:02,222 --> 00:41:04,800
-about zero point one five eight.
-
-610
-00:41:06,300 --> 00:41:10,085
+581
+00:39:24,350 --> 00:39:28,135
 And sine phi grows
 from zero point three four two,
 
-611
-00:41:10,085 --> 00:41:14,400
+582
+00:39:28,135 --> 00:39:32,450
 at twenty degrees,
 to zero point five, at thirty degrees.
 
-612
-00:41:14,750 --> 00:41:18,050
+583
+00:39:32,800 --> 00:39:36,100
 That's a step
 of zero point one five eight too.
 
-613
-00:41:19,550 --> 00:41:23,655
+584
+00:39:37,600 --> 00:39:41,705
 So the strip's area is two
 pi, times the radius squared,
 
-614
-00:41:23,655 --> 00:41:28,200
+585
+00:39:41,705 --> 00:39:46,250
 times delta sine phi: the change
 in sine phi across the strip.
 
-615
-00:41:29,000 --> 00:41:33,975
+586
+00:39:47,050 --> 00:39:52,025
 Now stack the strips, from the equator
 all the way up to latitude phi.
 
-616
-00:41:34,325 --> 00:41:39,400
+587
+00:39:52,375 --> 00:39:57,450
 Each strip adds its own step in sine
 phi, like the steps of a staircase.
 
-617
-00:41:39,750 --> 00:41:43,626
+588
+00:39:57,800 --> 00:40:01,676
 And all the steps of a staircase
 add up to the height of the top,
 
-618
-00:41:43,626 --> 00:41:45,475
+589
+00:40:01,676 --> 00:40:03,525
 minus the height of the bottom.
 
-619
-00:41:45,825 --> 00:41:48,825
+590
+00:40:03,875 --> 00:40:06,875
 At the equator, sine phi is zero.
 
-620
-00:41:49,175 --> 00:41:52,700
+591
+00:40:07,225 --> 00:40:10,750
 So all the steps together
 add up to just sine phi.
 
-621
-00:41:53,050 --> 00:41:56,146
+592
+00:40:11,100 --> 00:40:14,196
 That means the area
 between the equator and
 
-622
-00:41:56,146 --> 00:42:00,825
+593
+00:40:14,196 --> 00:40:18,875
 latitude phi is two pi, times the radius
 squared, times sine phi.
 
-623
-00:42:02,325 --> 00:42:07,050
+594
+00:40:20,375 --> 00:40:25,100
 Let's check with ten degree strips, from
 the equator to thirty degrees.
 
-624
-00:42:07,400 --> 00:42:11,364
-Their steps in sine phi are
-zero point one seven four,
+595
+00:40:25,450 --> 00:40:30,375
+Each strip's step is the sine
+at its top minus the sine at its bottom.
 
-625
-00:42:11,364 --> 00:42:15,475
-zero point one six eight, and
-zero point one five eight.
+596
+00:40:31,875 --> 00:40:34,914
+Together, they add up to zero point five,
 
-626
-00:42:16,975 --> 00:42:22,525
-They add up to zero point five, which
-is exactly the sine of thirty degrees.
+597
+00:40:34,914 --> 00:40:38,175
+which is exactly the sine
+of thirty degrees.
 
-627
-00:42:24,025 --> 00:42:28,650
+598
+00:40:39,675 --> 00:40:44,300
 This adding up of thinner and thinner
 strips has a name: integration.
 
-628
-00:42:29,000 --> 00:42:34,225
+599
+00:40:44,650 --> 00:40:49,875
 We write it with a tall S, for
 sum, and a small d for the tiny steps.
 
-629
-00:42:34,575 --> 00:42:38,340
+600
+00:40:50,225 --> 00:40:53,990
 Inside, we call the latitude
 of each strip phi prime,
 
-630
-00:42:38,340 --> 00:42:41,750
+601
+00:40:53,990 --> 00:40:57,400
 so it isn't mixed up
 with the top latitude, phi.
 
-631
-00:42:42,100 --> 00:42:45,030
+602
+00:40:57,750 --> 00:41:00,680
 So the integral of cosine phi prime,
 
-632
-00:42:45,030 --> 00:42:49,100
+603
+00:41:00,680 --> 00:41:04,750
 d phi prime, from zero up
 to phi, equals sine phi.
 
-633
-00:42:49,900 --> 00:42:52,050
+604
+00:41:05,550 --> 00:41:07,700
 Let's check the formula.
 
-634
-00:42:52,400 --> 00:42:54,925
+605
+00:41:08,050 --> 00:41:10,575
 Go all the way up to the North Pole.
 
-635
-00:42:55,275 --> 00:42:57,628
+606
+00:41:10,925 --> 00:41:13,278
 The sine of ninety degrees is one,
 
-636
-00:42:57,628 --> 00:43:02,750
+607
+00:41:13,278 --> 00:41:18,400
 so the northern hemisphere has an area
 of two pi times the radius squared.
 
-637
-00:43:03,100 --> 00:43:07,825
+608
+00:41:18,750 --> 00:41:23,475
 That's about two hundred and fifty
 five million square kilometres.
 
-638
-00:43:09,325 --> 00:43:13,769
+609
+00:41:24,975 --> 00:41:29,419
 The whole Earth is twice that, four
 pi times the radius squared:
 
-639
-00:43:13,769 --> 00:43:17,450
+610
+00:41:29,419 --> 00:41:33,100
 about five hundred and ten
 million square kilometres.
 
-640
-00:43:18,950 --> 00:43:23,244
+611
+00:41:34,600 --> 00:41:38,894
 So the share of the northern
 hemisphere between the equator and
 
-641
-00:43:23,244 --> 00:43:25,425
+612
+00:41:38,894 --> 00:41:41,075
 latitude phi is simply sine phi.
 
-642
-00:43:25,775 --> 00:43:28,700
+613
+00:41:41,425 --> 00:41:44,350
 The sine of thirty degrees is one half.
 
-643
-00:43:29,050 --> 00:43:33,400
+614
+00:41:44,700 --> 00:41:49,050
 So half of the northern hemisphere
 lies between the equator and
 
-644
-00:43:33,400 --> 00:43:34,850
+615
+00:41:49,050 --> 00:41:50,500
 thirty degrees north.
 
-645
-00:43:36,350 --> 00:43:38,625
+616
+00:41:52,000 --> 00:41:54,275
 The same goes for the south.
 
-646
-00:43:38,975 --> 00:43:43,342
+617
+00:41:54,625 --> 00:41:58,992
 So half of the whole Earth lies
 between thirty degrees south and
 
-647
-00:43:43,342 --> 00:43:44,775
+618
+00:41:58,992 --> 00:42:00,425
 thirty degrees north.
 
-648
-00:43:46,275 --> 00:43:50,875
+619
+00:42:01,925 --> 00:42:06,525
 At Brest's latitude, sine phi
 is zero point seven four seven eight,
 
-649
-00:43:50,875 --> 00:43:55,750
+620
+00:42:06,525 --> 00:42:11,400
 so about three quarters of the northern
 hemisphere lies south of Brest.
 
-650
-00:43:57,250 --> 00:44:01,975
+621
+00:42:12,900 --> 00:42:17,625
 The tropics and subtropics are
 huge, and the polar caps are small.
 
-651
-00:44:02,775 --> 00:44:05,495
+622
+00:42:18,425 --> 00:42:21,145
 There's a lovely picture of this result,
 
-652
-00:44:05,495 --> 00:44:09,100
+623
+00:42:21,145 --> 00:42:24,750
 found by Archimedes more
 than two thousand years ago.
 
-653
-00:44:09,450 --> 00:44:14,166
+624
+00:42:25,100 --> 00:42:29,816
 Wrap the Earth in a cylinder that
 just touches it all round the equator,
 
-654
-00:44:14,166 --> 00:44:17,375
+625
+00:42:29,816 --> 00:42:33,025
 so the cylinder has the same
 radius as the Earth.
 
-655
-00:44:17,725 --> 00:44:21,581
+626
+00:42:33,375 --> 00:42:37,231
 Now take our band, from the
 equator up to latitude phi,
 
-656
-00:44:21,581 --> 00:44:26,700
+627
+00:42:37,231 --> 00:42:42,350
 and push it straight out sideways,
 away from the axis, onto the cylinder.
 
-657
-00:44:27,050 --> 00:44:28,139
+628
+00:42:42,700 --> 00:42:43,789
 On the cylinder,
 
-658
-00:44:28,139 --> 00:44:32,700
+629
+00:42:43,789 --> 00:42:48,350
 it covers a band whose height
 is the Earth's radius times sine phi.
 
-659
-00:44:33,050 --> 00:44:37,250
+630
+00:42:48,700 --> 00:42:52,900
 That's z, the height above
 the equator plane, from earlier.
 
-660
-00:44:37,600 --> 00:44:41,150
+631
+00:42:53,250 --> 00:42:56,800
 A cylinder band is a rectangle rolled up.
 
-661
-00:44:41,500 --> 00:44:47,400
+632
+00:42:57,150 --> 00:43:03,050
 Its length is two pi times the radius, and
 its height is the radius times sine phi.
 
-662
-00:44:47,750 --> 00:44:51,433
+633
+00:43:03,400 --> 00:43:07,083
 So its area is two
 pi, times the radius squared,
 
-663
-00:44:51,433 --> 00:44:55,500
+634
+00:43:07,083 --> 00:43:11,150
 times sine phi: exactly
 the same as the Earth's band.
 
-664
-00:44:57,000 --> 00:44:58,750
+635
+00:43:12,650 --> 00:43:14,400
 Why do they match?
 
-665
-00:44:59,100 --> 00:45:04,335
+636
+00:43:14,750 --> 00:43:19,986
 Near the pole, a strip on the Earth
 is shorter round than on the cylinder,
 
-666
-00:45:04,335 --> 00:45:06,175
+637
+00:43:19,986 --> 00:43:21,825
 by a factor of cosine phi.
 
-667
-00:45:06,525 --> 00:45:09,139
+638
+00:43:22,175 --> 00:43:24,789
 But the Earth's surface there is steep,
 
-668
-00:45:09,139 --> 00:45:14,500
+639
+00:43:24,789 --> 00:43:30,150
 so the strip is wider along the surface
 than its height, by one over cosine phi.
 
-669
-00:45:14,850 --> 00:45:17,600
+640
+00:43:30,500 --> 00:43:33,250
 The two effects cancel exactly.
 
-670
-00:45:17,950 --> 00:45:23,175
+641
+00:43:33,600 --> 00:43:38,825
 So slices of the Earth of equal height
 have equal areas, wherever they are.
 
-671
-00:45:23,975 --> 00:45:26,650
+642
+00:43:39,625 --> 00:43:42,300
 If you skipped, here's what to keep.
 
-672
-00:45:27,000 --> 00:45:30,419
+643
+00:43:42,650 --> 00:43:46,069
 Grid boxes shrink towards
 the poles by cosine phi,
 
-673
-00:45:30,419 --> 00:45:34,043
+644
+00:43:46,069 --> 00:43:49,693
 so the tropics are huge
 and the polar caps are small:
 
-674
-00:45:34,043 --> 00:45:38,214
+645
+00:43:49,693 --> 00:43:53,864
 half of the whole Earth lies
 between thirty degrees south and
 
-675
-00:45:38,214 --> 00:45:39,650
+646
+00:43:53,864 --> 00:43:55,300
 thirty degrees north.
 
-676
-00:45:40,000 --> 00:45:42,600
+647
+00:43:55,650 --> 00:43:58,250
 Here's where this matters for climate.
 
-677
-00:45:42,950 --> 00:45:48,125
+648
+00:43:58,600 --> 00:44:03,775
 Imagine a planet with just two grid
 boxes, the same size in degrees.
 
-678
-00:45:48,475 --> 00:45:52,200
+649
+00:44:04,125 --> 00:44:07,850
 One is on the equator,
 at thirty degrees Celsius.
 
-679
-00:45:52,550 --> 00:45:57,200
+650
+00:44:08,200 --> 00:44:12,850
 The other is at sixty degrees
 north, at zero degrees Celsius.
 
-680
-00:45:57,550 --> 00:46:00,425
+651
+00:44:13,200 --> 00:44:16,075
 A plain average says fifteen degrees.
 
-681
-00:46:00,775 --> 00:46:05,271
+652
+00:44:16,425 --> 00:44:20,921
 But the box at sixty degrees
 covers only cosine sixty degrees,
 
-682
-00:46:05,271 --> 00:46:08,825
+653
+00:44:20,921 --> 00:44:24,475
 which is one half of the area
 of the equator box.
 
-683
-00:46:09,175 --> 00:46:12,815
-So the area-weighted
-average is thirty times one,
+654
+00:44:24,825 --> 00:44:29,385
+So the area-weighted average multiplies
+each temperature by its weight,
 
-684
-00:46:12,815 --> 00:46:16,975
-plus zero times one half, all
-divided by one and a half.
+655
+00:44:29,385 --> 00:44:32,725
+adds them up, and divides
+by the sum of the weights.
 
-685
-00:46:17,325 --> 00:46:19,375
+656
+00:44:33,075 --> 00:44:35,125
 That's twenty degrees.
 
-686
-00:46:20,875 --> 00:46:26,000
+657
+00:44:36,625 --> 00:44:41,750
 That's why a global average gives
 each latitude a weight of cosine phi.
 
-687
-00:46:26,350 --> 00:46:29,350
+658
+00:44:42,100 --> 00:44:45,100
 We write the average temperature as T bar.
 
-688
-00:46:29,700 --> 00:46:34,246
+659
+00:44:45,450 --> 00:44:49,996
 The Greek capital letter sigma
 means add up over all the boxes,
 
-689
-00:46:34,246 --> 00:46:36,700
+660
+00:44:49,996 --> 00:44:52,450
 which we number with the letter j.
 
-690
-00:46:37,050 --> 00:46:41,359
+661
+00:44:52,800 --> 00:44:57,109
 So T bar is the sum of cosine
 phi times the temperature,
 
-691
-00:46:41,359 --> 00:46:43,975
+662
+00:44:57,109 --> 00:44:59,725
 divided by the sum of the cosines.
 
-692
-00:46:44,325 --> 00:46:50,254
+663
+00:45:00,075 --> 00:45:06,004
 Now let's do it with real data: ERA5's air
 temperature two metres above the ground,
 
-693
-00:46:50,254 --> 00:46:54,825
+664
+00:45:06,004 --> 00:45:10,575
 averaged over September twenty
 twenty six, on a one degree grid.
 
-694
-00:46:55,175 --> 00:46:58,320
+665
+00:45:10,925 --> 00:45:14,070
 A plain average of all
 the grid boxes gives
 
-695
-00:46:58,320 --> 00:47:01,100
+666
+00:45:14,070 --> 00:45:16,850
 about seven point one degrees Celsius.
 
-696
-00:47:02,600 --> 00:47:07,125
+667
+00:45:18,350 --> 00:45:22,875
 Weighted by cosine phi, it's about
 sixteen point three degrees.
 
-697
-00:47:08,625 --> 00:47:12,358
+668
+00:45:24,375 --> 00:45:28,108
 The plain average is more
 than nine degrees too cold,
 
-698
-00:47:12,358 --> 00:47:15,387
+669
+00:45:28,108 --> 00:45:31,137
 because the many thin
 boxes near the poles,
 
-699
-00:47:15,387 --> 00:47:18,628
+670
+00:45:31,137 --> 00:45:34,378
 over the cold Arctic
 and the frozen Antarctic,
 
-700
-00:47:18,628 --> 00:47:21,375
+671
+00:45:34,378 --> 00:45:37,125
 count as much as the big tropical ones.
 
-701
-00:47:21,725 --> 00:47:26,600
+672
+00:45:37,475 --> 00:45:42,350
 This cosine weighting is how global
 average temperatures are worked out.
 
-702
-00:47:27,400 --> 00:47:32,985
+673
+00:45:43,150 --> 00:45:48,735
 To sum up, a point on or around the Earth
 is pinned down by spherical coordinates:
 
-703
-00:47:32,985 --> 00:47:36,050
+674
+00:45:48,735 --> 00:45:51,800
 its distance from the
 centre, and two angles.
 
-704
-00:47:36,400 --> 00:47:39,984
+675
+00:45:52,150 --> 00:45:55,734
 On the ground, that distance
 is the Earth's radius,
 
-705
-00:47:39,984 --> 00:47:44,200
+676
+00:45:55,734 --> 00:45:59,950
 about six thousand four hundred
 kilometres, which we call a.
 
-706
-00:47:44,550 --> 00:47:50,300
+677
+00:46:00,300 --> 00:46:06,050
 Latitude, phi, is the angle up from the
 equator plane, measured at the centre.
 
-707
-00:47:50,650 --> 00:47:53,747
+678
+00:46:06,400 --> 00:46:09,497
 The colatitude is ninety
 degrees minus phi,
 
-708
-00:47:53,747 --> 00:47:57,925
+679
+00:46:09,497 --> 00:46:13,675
 measured down from the pole, and it
 swaps sine and cosine.
 
-709
-00:47:58,275 --> 00:48:03,275
+680
+00:46:14,025 --> 00:46:19,025
 A parallel is a circle of constant
 latitude, round the Earth's axis.
 
-710
-00:48:03,625 --> 00:48:08,625
+681
+00:46:19,375 --> 00:46:24,375
 A meridian is a half circle from pole
 to pole, round the Earth's centre.
 
-711
-00:48:08,975 --> 00:48:12,257
+682
+00:46:24,725 --> 00:46:28,007
 Longitude, lambda, is the angle
 round the axis,
 
-712
-00:48:12,257 --> 00:48:16,725
+683
+00:46:28,007 --> 00:46:32,475
 from the prime meridian through
 Greenwich, positive to the east.
 
-713
-00:48:17,075 --> 00:48:19,851
+684
+00:46:32,825 --> 00:46:35,601
 Two slices give the position arrow:
 
-714
-00:48:19,851 --> 00:48:24,054
+685
+00:46:35,601 --> 00:46:39,804
 x is the radius times cosine
 phi times cosine lambda,
 
-715
-00:48:24,054 --> 00:48:28,099
+686
+00:46:39,804 --> 00:46:43,849
 y is the radius times cosine
 phi times sine lambda,
 
-716
-00:48:28,099 --> 00:48:30,875
+687
+00:46:43,849 --> 00:46:46,625
 and z is the radius times sine phi.
 
-717
-00:48:31,225 --> 00:48:36,805
+688
+00:46:46,975 --> 00:46:52,555
 The ground is carried east at capital
 Omega, times the radius, times cosine phi:
 
-718
-00:48:36,805 --> 00:48:42,175
+689
+00:46:52,555 --> 00:46:57,925
 about four hundred and sixty four point
 six metres per second at the equator.
 
-719
-00:48:42,525 --> 00:48:45,595
+690
+00:46:58,275 --> 00:47:01,345
 A step north
 is the radius times delta phi,
 
-720
-00:48:45,595 --> 00:48:49,950
+691
+00:47:01,345 --> 00:47:05,700
 about a hundred and eleven
 kilometres per degree, everywhere.
 
-721
-00:48:50,300 --> 00:48:53,589
-A step east
-is the radius, times cosine phi,
+692
+00:47:06,050 --> 00:47:10,687
+A step east is the radius, times cosine
+phi, times delta lambda:
 
-722
-00:48:53,589 --> 00:48:57,550
-times delta lambda, and it
-shrinks towards the poles.
+693
+00:47:10,687 --> 00:47:14,309
+about seventy four kilometres
+per degree at Brest,
 
-723
-00:48:57,900 --> 00:49:01,965
+694
+00:47:14,309 --> 00:47:16,700
+and it shrinks towards the poles.
+
+695
+00:47:17,050 --> 00:47:21,115
 So a small patch has an area
 of the radius squared,
 
-724
-00:49:01,965 --> 00:49:04,675
+696
+00:47:21,115 --> 00:47:23,825
 times cosine phi, d phi, d lambda.
 
-725
-00:49:05,025 --> 00:49:08,895
+697
+00:47:24,175 --> 00:47:28,045
 Adding up strips shows that
 the band from the equator to
 
-726
-00:49:08,895 --> 00:49:12,627
+698
+00:47:28,045 --> 00:47:31,777
 latitude phi holds a share
 sine phi of its hemisphere,
 
-727
-00:49:12,627 --> 00:49:17,050
+699
+00:47:31,777 --> 00:47:36,200
 which is why global averages
 weight each latitude by cosine phi.
 
-728
-00:49:17,400 --> 00:49:20,562
+700
+00:47:36,550 --> 00:47:38,851
+For September twenty twenty six,
+
+701
+00:47:38,851 --> 00:47:42,087
+that weighting turned
+ERA5's plain average of
+
+702
+00:47:42,087 --> 00:47:47,050
+about seven point one degrees Celsius
+into about sixteen point three.
+
+703
+00:47:47,400 --> 00:47:50,780
 In Part 4, we'll stand
-at a weather station,
+at a weather station and
 
-729
-00:49:20,562 --> 00:49:25,450
-and see how its own east, north
-and up arrows turn as the air moves.
+704
+00:47:50,780 --> 00:47:53,800
+give it its own east, north and up arrows.
 
-730
-00:49:26,250 --> 00:49:30,408
+705
+00:47:54,150 --> 00:47:59,021
+As the air moves over the round
+Earth, those arrows turn by themselves,
+
+706
+00:47:59,021 --> 00:48:03,000
+and that turning adds extra
+terms to how the wind changes.
+
+707
+00:48:03,800 --> 00:48:07,958
 This video is one of a series
 of related maths tutorials,
 
-731
-00:49:30,408 --> 00:49:32,450
+708
+00:48:07,958 --> 00:48:10,000
 so watch out for the others.
 
-732
-00:49:32,800 --> 00:49:37,197
+709
+00:48:10,350 --> 00:48:14,747
 They're made for students
 of atmospheric science, meteorology and
 
-733
-00:49:37,197 --> 00:49:40,850
+710
+00:48:14,747 --> 00:48:18,400
 fluid dynamics, and anyone
 else who needs these ideas.
 
-734
-00:49:41,200 --> 00:49:46,028
+711
+00:48:18,750 --> 00:48:23,578
 The notebook for coordinates, and the
 notebooks for the other maths concepts,
 
-735
-00:49:46,028 --> 00:49:48,850
+712
+00:48:23,578 --> 00:48:26,400
 are on the website that
 goes with this video.

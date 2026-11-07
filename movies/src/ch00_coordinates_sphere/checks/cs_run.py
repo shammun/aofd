@@ -32,6 +32,35 @@ sys.path.insert(0, str(ROOT / "tools"))
 
 
 def guard(min_gb: float = 45.0) -> None:
+    # lock protocol 2026-11-07 (tightened): K6 / stills / SSR wait until VOICE.lock (TTS / mixes) is free
+    v = Path("G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/VOICE.lock")
+    while v.exists():
+        time.sleep(20)
+    # RENDER2 slot (2026-11-07): stills / K6 only with >= 12 GB free while a full render runs
+    while subprocess.run([sys.executable, str(Path(__file__).parent / "voice_ok.py"), "--heavy"]).returncode:
+        time.sleep(20)
+    # orchestrator 2026-11-07 (series order): if <S>/WAIT_5A exists, hand our HEAVY.lock back, wait until a "#5a" K6 hold has come and gone
+    # (and an "orchestrator 5a … render" after it), then take HEAVY.lock again
+    hv = Path("G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/HEAVY.lock")
+    if (S / "WAIT_5A").exists():
+        own = lambda: (hv / "owner.txt").read_text(encoding="utf-8", errors="replace") if (hv / "owner.txt").exists() else ""  # noqa: E731
+        mine = own()
+        if "#5c" in mine:
+            shutil.rmtree(hv)   # our own lock (owner "#5c …"), released for #5a; re-taken below
+            print("HEAVY.lock released for #5a", time.ctime(), flush=True)
+        while "#5a" not in own():
+            time.sleep(20)
+        while hv.exists() and ("#5a" in own() or ("orchestrator" in own().lower() and "5a" in own() and "render" in own().lower())):
+            time.sleep(20)
+        while True:
+            try:
+                hv.mkdir()
+                break
+            except FileExistsError:
+                time.sleep(20)
+        (hv / "owner.txt").write_text(mine or f"#5c remake r7 K6 stills {time.ctime()}\n", encoding="utf-8")
+        (S / "WAIT_5A").rename(S / f"WAIT_5A_done_{time.strftime('%H%M%S')}")
+        print("HEAVY.lock re-taken after #5a", time.ctime(), flush=True)
     free = shutil.disk_usage("C:/").free / 1e9
     if free < min_gb:
         sys.exit(f"STOP: C: {free:.1f} GB free < {min_gb}")
@@ -87,8 +116,8 @@ def main() -> int:
         tool = MOVIES / "src/ch00_coordinates_sphere/checks/label_stills_cs.mjs"
         bdir = S / "bundle"
         if a.bundle or not bdir.exists():
-            if bdir.exists():
-                shutil.rmtree(bdir)
+            if bdir.exists():   # remake 2026-11-07: never delete; the previous bundle is moved aside
+                bdir.rename(S / f"bundle_prev_{time.strftime('%Y%m%d_%H%M%S')}")
             r = subprocess.run(["node", str(tool), "--bundle", str(S / "public"), str(S / "stills" / "_b"), "-", "--bundle-out", str(bdir), "--bundle-only"],
                                cwd=MOVIES, capture_output=True, text=True)
             print(r.stdout[-800:], r.stderr[-1500:])

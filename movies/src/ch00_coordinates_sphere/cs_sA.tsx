@@ -1,4 +1,4 @@
-// ch00_coordinates_sphere scenes s00-s12: the title, the hook, the Parts 1-2 recap, the sphere and its centre, the sliced Earth
+// ch00_coordinates_sphere scenes s00-s12 (s02 recap cut, remake 2026-11-07): the title, the hook, the sphere and its centre, the sliced Earth
 // and the radius a, latitude, the parallel (a circle round the axis), colatitude and the sine-cosine swap (TwoViewSlice, skip chip
 // K1), meridians, the prime-meridian tour (zoom-reveal), longitude (the equatorial slice from above) and the graticule. Globes: the
 // house GB frame (whole, unzoomed: no edge fades) or the zoom-reveal (s10: full-bleed, K1 fades, text on the darkened panel from
@@ -7,7 +7,7 @@ import React from "react";
 import { useCurrentFrame } from "remotion";
 import { C, T } from "../house/kit/type";
 import { Pt, RightTick, pulse } from "../house/kit/draw";
-import { RiseText, TitleGradient } from "../house/kit/title";
+import { SeriesTitle } from "./kit_cs/SeriesTitle";
 import { GlobeFrame, SourceBelow } from "../house/kit/frame";
 import { SunGlyph } from "../house/kit/extras";
 import { GProj, globePath, llPath } from "./kit_cs/globe";
@@ -17,7 +17,7 @@ import {
   AT, Arrow, BREST, Balloon, BandTint, CalcStack, Chevron, D, D2R, Earth, GB, GFULL, Grat, K, KHULNA, KeepLine, Keyword, LEN, LYB, Layered, Lbl, SE, SING, SRC_G,
   SS, Scene, SideCallout, SkipChip, Svg, TeX, XC, XZ, add, arcD, chipSpan, clamp, cutAt, discOf, e2g, eastAt, facing, fin, fout, gdot, globeG, gseg, keepGone,
   keepTime, ll, merPath, splitVis, mix, parPath, plab, poly, prog, rep, spinPath, win, faceArc, faceFlat, lin,
-  RAD, Magnify, KeepPic,
+  RAD, Magnify, KeepPic, Recall,
 } from "./cs_lib";
 import { FItem, FLAT_C, FLAT_R, FACE_B, LON0, MerFlatBase, PHI, TwoView, camFace, merCut, ptOf } from "./cs_two";
 import { EQ_S04, EQ_S05, EQ_S07, EQ_S08, EQ_S11 } from "./cs_eq";
@@ -40,8 +40,7 @@ const CAMF = camFace(LON0, 3.3);
 const TB = { x: 1150, y: 160, w: 690, h: 480 };
 const S00: React.FC = () => {
   const f = useCurrentFrame(), k = K("s00_title");
-  const tMet = AT(k, 0, "meteorology"), tEasy = AT(k, 0, "coordinates on our round Earth");   // HOUSE_STYLE §3 (2026-11-06): the promise pulses on the concept words, never "the easy way"
-  const pz = 1 + 0.06 * pulse(f, tEasy, 14);
+  const tMet = AT(k, 0, "to measure"), tCo = AT(k, 0, "coordinates");   // HOUSE_STYLE §3 (2026-11-06): the concept name pulses on its word
   const oA = fout(f, tMet, 12), oB = fin(f, tMet, 12);
   const camA = globePath([{ f: 0, lat: 14, lon: LON0 - 40, dist: 3.2 }, { f: 60, lat: 8, lon: LON0 - 75, dist: 3.2 }], f);
   const slide = prog(f, 40, 95);
@@ -53,15 +52,8 @@ const S00: React.FC = () => {
   return (
     <Scene fadeIn={false}>
       <Svg>
-        <defs><TitleGradient id="ttl" x1={100} x2={1000} /></defs>
-        <RiseText f={f} t="Coordinates · Part 3" x={104} y={110} s={64} at={2} fill={C.key} />
-        <RiseText f={f} t="Our round" x={100} y={265} s={150} at={6} fill="url(#ttl)" />
-        <RiseText f={f} t="Earth" x={100} y={410} s={150} at={22} fill="url(#ttl)" />
-        <g transform={`translate(104 520) scale(${pz}) translate(-104 -520)`}>
-          <RiseText f={f} t="made easy" x={104} y={530} s={96} at={30} fill={C.key} />
-        </g>
-        <RiseText f={f} t="latitude, longitude," x={106} y={665} s={68} at={40} fill={C.key} />
-        <RiseText f={f} t="distances and areas" x={106} y={755} s={68} at={46} fill={C.key} />
+        {/* remake 2026-11-07 (R1/R2): the series title layout (kit_cs/SeriesTitle = Parts 1-2), no "made easy"; "Coordinates" pulses on its word */}
+        <SeriesTitle f={f} concept="Coordinates" part="Part 3 · Our round Earth" sub={["latitude, longitude,", "distances and areas"]} pulseAt={tCo} />
       </Svg>
       <Earth cam={camA} box={TB} cut={merCut(slide)} o={oA * fin(f, 4, 10)} coast={0.4}
         over={(G) => <>
@@ -112,7 +104,7 @@ const Thumb: React.FC<{ x: number; y: number; i: number; lit: boolean }> = ({ x,
 const S01: React.FC = () => {
   const f = useCurrentFrame(), k = K("s01_hook");
   const tWhere = AT(k, 0, "where a place is"), tFar = AT(k, 0, "how far apart"), tSeven = AT(k, 1, "seven parts"), tLL = AT(k, 2, "latitude and longitude"),
-    tKm = AT(k, 2, "kilometres"), tGrid = AT(k, 3, "grid boxes"), tTrop = AT(k, 3, "tropics");
+    tKm = AT(k, 2, "kilometres") - 16, tGrid = AT(k, 3, "grid boxes"), tTrop = AT(k, 3, "tropics");
   const cam = spinPath([{ f: 0, lat: 28, lon: 15, dist: 3.4 }, { f: LEN(k) + 10, lat: 32, lon: 65, dist: 3.4, spin: 0.2 }], f);
   const gc: [number, number][] = D.gc_bk.lat.map((la: number, i: number) => [la, D.gc_bk.lon[i]]);
   const nGc = Math.max(2, Math.round(gc.length * prog(f, tFar, tFar + 40)));
@@ -140,121 +132,6 @@ const S01: React.FC = () => {
         <g opacity={fin(f, tSeven)}>{Array.from({ length: 7 }, (_, i) => <Thumb key={i} x={1130 + i * 110} y={590} i={i} lit={i === 2} />)}</g>
         <Lbl x={1350} y={675} t="round Earth" c={C.key} s={T.key} a="middle" o={fin(f, tSeven + 12)} />
       </Svg>
-    </Scene>
-  );
-};
-
-// ================================================================ s02 recap of Parts 1-2 (one mini picture per sentence)
-const RC: Pt = [520, 430];
-const MiniPolar: React.FC<{ f: number; o: number; balloon: number }> = ({ f, o, balloon }) => {
-  if (o <= 0) return null;
-  const th = 53.13 * D2R, r = 250, q: Pt = [RC[0] + r * Math.cos(th), RC[1] - r * Math.sin(th)];
-  return (
-    <g opacity={o}>
-      {[100, 200, 300].map((rr) => <circle key={rr} cx={RC[0]} cy={RC[1]} r={rr} fill="none" stroke={C.grid} strokeWidth={2} />)}
-      {Array.from({ length: 12 }, (_, i) => <line key={i} x1={RC[0]} y1={RC[1]} x2={RC[0] + 320 * Math.cos(i * Math.PI / 6)} y2={RC[1] - 320 * Math.sin(i * Math.PI / 6)} stroke={C.grid} strokeWidth={2} />)}
-      <Arrow p={[RC[0] - 330, RC[1]]} q={[RC[0] + 340, RC[1]]} color={C.muted} w={4} head={20} halo={false} />
-      <Lbl x={RC[0] + 330} y={RC[1] + 40} t="east" c={C.muted} s={T.floor} a="end" />
-      <g opacity={balloon}>
-        <line x1={RC[0]} y1={RC[1]} x2={q[0]} y2={q[1]} stroke={RAD} strokeWidth={8} strokeLinecap="round" />
-        <path d={arcD(RC, 90, 0, 53.13)} fill="none" stroke={C.local} strokeWidth={6} />
-        <Chevron at={[RC[0] + 90 * Math.cos(th), RC[1] - 90 * Math.sin(th)]} dir={[-Math.sin(th), -Math.cos(th)]} c={C.local} />
-        <Balloon p={q} s={1.1} />
-        <Lbl x={RC[0] + 0.5 * (q[0] - RC[0]) - 40} y={RC[1] + 0.5 * (q[1] - RC[1]) - 10} t="$r$" c={RAD} s={T.key} a="end" />
-        <Lbl x={RC[0] + 130} y={RC[1] - 46} t="$\theta$" c={C.local} s={T.key} />
-      </g>
-      {void f}
-    </g>
-  );
-};
-const S02: React.FC = () => {
-  const f = useCurrentFrame(), k = K("s02_part2_recap");
-  const s = (j: number) => SS(k, j);
-  const pic = (a: number, b: number) => fin(f, a, 10) * (b < 0 ? 1 : fout(f, b - 10, 10));
-  const kwo = (j: number) => (j + 1 < 9 ? SS(k, j + 1) - 20 : undefined);
-  const th = 53.13 * D2R, R = 250;
-  const tri: Pt = [RC[0] + 300, RC[1] - 400 * 0.6];
-  const ringA = (a: number): Pt => [RC[0] + 200 * Math.cos(a), RC[1] - 200 * Math.sin(a)];
-  const tCyl = s(7), tEarth = s(8);
-  const camE = globePath([{ f: 0, lat: 30, lon: 0, dist: 3.4 }, { f: LEN(k) + 10, lat: 30, lon: -8, dist: 3.4 }], f);
-  return (
-    <Scene>
-      <Svg>
-        <MiniPolar f={f} o={pic(0, s(2))} balloon={fin(f, s(1))} />
-        {/* S2: x = r cos θ, y = r sin θ (Part 1's 3-4-5 triangle) */}
-        <g opacity={pic(s(2), s(3))}>
-          <path d={`M${RC[0] - 200} ${RC[1] + 120}L${tri[0] - 200} ${RC[1] + 120}L${tri[0] - 200} ${tri[1] + 120}Z`} fill={C.ink} fillOpacity={0.08} stroke="none" />
-          <line x1={RC[0] - 200} y1={RC[1] + 120} x2={tri[0] - 200} y2={RC[1] + 120} stroke={C.second} strokeWidth={8} />
-          <line x1={tri[0] - 200} y1={RC[1] + 120} x2={tri[0] - 200} y2={tri[1] + 120} stroke={C.second} strokeWidth={8} />
-          <Arrow p={[RC[0] - 200, RC[1] + 120]} q={[tri[0] - 200, tri[1] + 120]} color={RAD} />
-          <Lbl x={RC[0] - 50} y={RC[1] + 175} t="3" c={C.second} s={T.key} a="middle" />
-          <Lbl x={tri[0] - 170} y={RC[1]} t="4" c={C.second} s={T.key} />
-          <Lbl x={RC[0] - 80} y={RC[1] - 40} t="5" c={RAD} s={T.key} a="end" />
-        </g>
-        {/* S3: s = r θ */}
-        <g opacity={pic(s(3) + 8, s(4))}>
-          <circle cx={RC[0]} cy={RC[1]} r={R} fill="none" stroke={C.grid} strokeWidth={3} />
-          <line x1={RC[0]} y1={RC[1]} x2={RC[0] + R} y2={RC[1]} stroke={RAD} strokeWidth={6} />
-          <line x1={RC[0]} y1={RC[1]} x2={RC[0] + R * Math.cos(1)} y2={RC[1] - R * Math.sin(1)} stroke={RAD} strokeWidth={6} />
-          <path d={arcD(RC, R, 0, 57.3)} fill="none" stroke={C.second} strokeWidth={14} strokeOpacity={0.8} />
-          <path d={arcD(RC, 70, 0, 57.3)} fill="none" stroke={C.local} strokeWidth={5} />
-          <Lbl x={RC[0] + 92} y={RC[1] - 40} t="$\theta$" c={C.local} s={T.key} />
-          <Lbl x={RC[0] + R * Math.cos(0.5) + 30} y={RC[1] - R * Math.sin(0.5) - 20} t="$s$" c={C.second} s={T.key} />
-          <Lbl x={RC[0] + R / 2} y={RC[1] + 40} t="$r$" c={RAD} s={T.key} a="middle" />
-        </g>
-        {/* S4-S5: the slope of sine (Part 2) */}
-        <g opacity={pic(s(4), s(6))}>
-          <circle cx={RC[0]} cy={RC[1]} r={R} fill="none" stroke={C.grid} strokeWidth={3} />
-          <line x1={RC[0] - R - 20} y1={RC[1]} x2={RC[0] + R + 20} y2={RC[1]} stroke={C.muted} strokeWidth={3} />
-          <Arrow p={RC} q={[RC[0] + R * Math.cos(0.6), RC[1] - R * Math.sin(0.6)]} color={RAD} w={8} head={30} />
-          <Arrow p={RC} q={[RC[0] + R * Math.cos(0.6 + 0.25 * prog(f, s(5), s(5) + 40)), RC[1] - R * Math.sin(0.6 + 0.25 * prog(f, s(5), s(5) + 40))]} color={RAD} w={5} head={22} o={0.55 * fin(f, s(5))} />
-          <line x1={RC[0] + R * Math.cos(0.85) + 40} y1={RC[1] - R * Math.sin(0.6)} x2={RC[0] + R * Math.cos(0.85) + 40} y2={RC[1] - R * Math.sin(0.85)}
-            stroke={C.second} strokeWidth={10} opacity={fin(f, s(5) + 40)} />
-          <path d={arcD(RC, 80, 0, 34.4)} fill="none" stroke={C.local} strokeWidth={5} />
-          <Lbl x={RC[0] + 100} y={RC[1] - 30} t="$\theta$" c={C.local} s={T.key} />
-        </g>
-        {/* S6: going round a ring = accelerating towards the centre */}
-        <g opacity={pic(s(6), s(7))}>
-          <circle cx={RC[0]} cy={RC[1]} r={200} fill="none" stroke={C.grid} strokeWidth={4} />
-          <circle cx={ringA(0.9)[0]} cy={ringA(0.9)[1]} r={14} fill={C.key} />
-          <Arrow p={ringA(0.9)} q={add(ringA(0.9), [-Math.sin(0.9) * 160, -Math.cos(0.9) * 160])} color={C.first} />
-          <Arrow p={ringA(0.9)} q={add(ringA(0.9), [-Math.cos(0.9) * 120, Math.sin(0.9) * 120])} color={C.neg} o={fin(f, s(6) + 30)} />
-          <circle cx={RC[0]} cy={RC[1]} r={8} fill={C.gold} />
-        </g>
-        {/* S7: cylindrical coordinates (r, θ, z) */}
-        <g opacity={pic(tCyl, tEarth + 25)}>
-          <ellipse cx={RC[0]} cy={RC[1] - 180} rx={230} ry={60} fill="none" stroke={C.local} strokeWidth={4} />
-          <ellipse cx={RC[0]} cy={RC[1] + 180} rx={230} ry={60} fill="none" stroke={C.local} strokeWidth={4} />
-          <line x1={RC[0] - 230} y1={RC[1] - 180} x2={RC[0] - 230} y2={RC[1] + 180} stroke={C.local} strokeWidth={4} />
-          <line x1={RC[0] + 230} y1={RC[1] - 180} x2={RC[0] + 230} y2={RC[1] + 180} stroke={C.local} strokeWidth={4} />
-          <line x1={RC[0]} y1={RC[1] + 240} x2={RC[0]} y2={RC[1] - 260} stroke={C.gold} strokeWidth={4} strokeDasharray="14 10" />
-          <Arrow p={[RC[0], RC[1] + 180]} q={[RC[0] + 200 * Math.cos(0.5), RC[1] + 180 - 52 * Math.sin(0.5)]} color={RAD} w={7} head={26} />
-          <Arrow p={[RC[0] + 200 * Math.cos(0.5), RC[1] + 180 - 52 * Math.sin(0.5)]} q={[RC[0] + 200 * Math.cos(0.5), RC[1] - 40]} color={C.second} w={7} head={26} />
-          <Lbl x={RC[0] + 70} y={RC[1] + 215} t="$r$" c={RAD} s={T.key} />
-          <Lbl x={RC[0] + 200 * Math.cos(0.5) + 26} y={RC[1] + 60} t="$z$" c={C.second} s={T.key} />
-        </g>
-      </Svg>
-      {/* S8: the cylinder rounds into the globe */}
-      <Earth cam={camE} o={fin(f, tEarth, 25)} coast={0.45} grat={0.25} />
-      <GSrc o={fin(f, tEarth, 25)} />
-      <Svg>
-        <Keyword f={f} text="a quick look back" at={[XC, 420]} appear={0} out={kwo(0)} />
-        <Keyword f={f} text="$r$ and $\theta$, from east" at={[XC, 380]} appear={s(1)} out={kwo(1)} />
-        <Lbl x={XC} y={460} t="anticlockwise, seen from above" c={C.key} s={T.floor} o={win(f, AT(k, 1, "anticlockwise"), (kwo(1) ?? 0))} />
-        <Keyword f={f} text="Part 1: radians" at={[XC, 300]} appear={s(3)} out={kwo(3)} />
-        <Keyword f={f} text="Part 2: slopes" at={[XC, 300]} appear={s(4)} out={kwo(5)} />
-        <Keyword f={f} text="always accelerating" at={[XC, 420]} appear={s(6)} out={kwo(6)} />
-        <Keyword f={f} text="towards the centre" at={[XC, 500]} appear={AT(k, 6, "towards the centre")} out={kwo(6)} />
-        <Keyword f={f} text="cylindrical: $r$, $\theta$, $z$" at={[XC, 420]} appear={s(7)} out={kwo(7)} />
-        <Keyword f={f} text="Ian · Amphan" at={[XC, 500]} appear={AT(k, 7, "Hurricane Ian")} out={kwo(7)} />
-        <Keyword f={f} text="the biggest round shape" at={[XC, 330]} appear={AT(k, 8, "the biggest")} />{/* review 1 S1 */}
-        <Keyword f={f} text="the Earth" at={[XC, 420]} appear={AT(k, 8, "the Earth")} />
-      </Svg>
-      <TeX s={String.raw`x=r\cos\theta`} x={XC} y={380} size={T.calc} c={C.ink} o={win(f, s(2), s(3) - 20)} />
-      <TeX s={String.raw`y=r\sin\theta`} x={XC} y={480} size={T.calc} c={C.ink} o={win(f, AT(k, 2, "and y equals"), s(3) - 20)} />
-      <TeX s={String.raw`s=r\,\theta`} x={XC} y={420} size={T.calc} c={C.ink} o={win(f, AT(k, 3, "the arc length rule"), s(4) - 20)} />
-      <TeX s={String.raw`\Delta(\sin\theta)\approx\cos\theta\,\Delta\theta`} x={XC} y={420} size={T.calc} c={C.ink} o={win(f, s(5), s(6) - 20)} />
-      {void [th, poly]}
     </Scene>
   );
 };
@@ -403,13 +280,27 @@ const S05: React.FC = () => {
 };
 
 // ================================================================ s06 the parallel: a circle round the axis
-const LAB48: { t: string; lon: number }[] = D.par48.labels;
+// remake 2026-11-07, fact-check row 5: the spoken list now names every country the parallel crosses (Natural Earth crossings in
+// cs.json par48.seg, DS05); the added labels sit at the middle of their crossing segment (data, not hand-placed)
+const L0: { t: string; lon: number }[] = D.par48.labels;
+const SEG = D.par48.seg as Record<string, [number, number][]>;
+const midOf = (c: string, i: number) => (SEG[c][i][0] + SEG[c][i][1]) / 2;
+const LAB48: { t: string; lon: number; say: [number, string] }[] = [
+  { t: L0[0].t, lon: L0[0].lon, say: [5, "central Europe"] }, { t: L0[1].t, lon: L0[1].lon, say: [5, "Ukraine"] },
+  { t: "Russia", lon: midOf("Russia", 0), say: [5, "southern Russia"] }, { t: L0[2].t, lon: L0[2].lon, say: [5, "Kazakhstan"] },
+  { t: "China", lon: midOf("China", 0), say: [5, "the far west of China"] }, { t: L0[3].t, lon: L0[3].lon, say: [5, "Mongolia"] },
+  { t: "China", lon: midOf("China", 2), say: [5, "north-east China"] }, { t: "Russia", lon: midOf("Russia", 1), say: [5, "Russia's Far East"] },
+  { t: "Pacific", lon: -165, say: [6, "the Pacific"] }, { t: "Vancouver Island", lon: midOf("Canada", 0), say: [6, "Vancouver Island"] },
+  { t: L0[4].t, lon: L0[4].lon, say: [6, "northern United States"] }, { t: L0[5].t, lon: L0[5].lon, say: [6, "eastern Canada"] },
+  { t: L0[6].t, lon: L0[6].lon, say: [6, "Atlantic"] },
+];
+const SEA48 = new Set(["Atlantic", "Pacific"]);
+if (L0.map((l) => l.t).join("|") !== "central Europe|Ukraine|Kazakhstan|Mongolia|United States|Canada|Atlantic") throw new Error("par48 labels changed in cs.json");
 const S06: React.FC = () => {
   const f = useCurrentFrame(), k = K("s06_parallel");
   const tJoin = SS(k, 1), tSweep = SS(k, 2), tSame = SS(k, 3), tPar = AT(k, 4, "parallel"), t5 = SS(k, 5), t6 = SS(k, 6), tAcross = AT(k, 7, "straight across"),
     tDisc = SS(k, 8), tNot = SS(k, 9), tAxis = SS(k, 10), tRound = SS(k, 11), tRings = SS(k, 12), tSoon = SS(k, 13);
-  const at = [AT(k, 5, "central Europe"), AT(k, 5, "Ukraine"), AT(k, 5, "Kazakhstan"), AT(k, 5, "Mongolia"), AT(k, 6, "northern United States"), AT(k, 6, "eastern Canada"),
-    AT(k, 6, "Atlantic")];
+  const at = LAB48.map((l) => AT(k, l.say[0], l.say[1]));
   const lonU = (lo: number) => (lo < LON0 ? lo + 360 : lo);
   const cam = spinPath([
     { f: 0, lat: 8, lon: LON0 - 75, dist: 3.3 }, { f: tJoin + 40, lat: 30, lon: -40, dist: 3.4 }, { f: t5 - 20, lat: 34, lon: -10, dist: 3.4 },
@@ -444,7 +335,11 @@ const S06: React.FC = () => {
             </g> : null}
             {gdot(Gg, BREST[0], BREST[1], C.gold, 10)}
             {/* K6 k6r1: each name is gone (10-frame fade) 8 frames before the next one comes in (they cross-faded on one spot) */}
-            {LAB48.map((l, i) => plab(Gg, PHI + 3.2, l.lon, l.t, win(f, at[i], i + 1 < at.length ? Math.min(at[i] + 75, at[i + 1] - 18) : at[i] + 75) * facing(Gg, PHI, l.lon), 0, -26, "middle", l.t === "Atlantic"))}
+            {/* remake 2026-11-07: 13 names, some under a second apart: they alternate above / below the parallel, and each is gone before the
+                next name on its own side comes in (the old rule: 8 frames clear, at most 2.5 s) */}
+            {LAB48.map((l, i) => { const up = i % 2 === 0, nx = at[i + 2];
+              return plab(Gg, up ? PHI + 3.2 : PHI - 3.2, l.lon, l.t, win(f, at[i], nx !== undefined ? Math.min(at[i] + 75, nx - 18) : at[i] + 75) * facing(Gg, PHI, l.lon),
+                0, up ? -26 : 44, "middle", SEA48.has(l.t)); })}
             {f >= tAcross ? <g opacity={fin(f, tDisc)}>
               {gseg(Gg, [0, -0.05, 0], [0, Math.sin(CB), 0], C.local, 4, 1, "10 8")}
               <circle cx={dc[0]} cy={dc[1]} r={10} fill={C.local} stroke={C.bg} strokeWidth={3} />
@@ -581,6 +476,8 @@ const S08: React.FC = () => {
       <TeX s={eqs[0]} x={XC} y={650} size={60} c={C.ink} o={fin(f, tEq)} />
       <TeX s={eqs[1]} x={XC} y={735} size={60} c={C.ink} o={fin(f, AT(k, 18, "and the cosine of the colatitude"))} />
       <TeX s={String.raw`\sin 41.6^\circ\approx 0.6639=\cos 48.4^\circ`} x={XC} y={820} size={T.floor + 6} c={C.ink} o={fin(f, tNum)} />
+      {/* remake 2026-11-07 (R16): Part 1's polar lines recalled where the triangle rule is used (S8), right of the flat face */}
+      <Recall f={f} tex={String.raw`x=r\cos\theta,\ \ y=r\sin\theta`} name="polar coordinates" x={1372} y={430} size={44} appear={tRule} out={SS(k, 12) - 10} />
       <SkipChip f={f} k={k} to={keepTime("s09_meridians")} />
       {void [t180, poly]}
     </Scene>
@@ -747,6 +644,8 @@ const S11: React.FC = () => {
         <Magnify src={ang(LON0 / 2, 0.7)} at={IC} r={IR + 14} label="magnified $6\times$" ly={IC[1] + IR + 50} o={win(f, tLon + 20, t360 - 10)} />
       </Svg>
       <TeX s={String.raw`\lambda`} x={IC[0] + IR * 0.95} y={IC[1] + 30} size={T.key} c={C.second} ax={0} o={win(f, tLam, t360 - 10)} halo />
+      {/* remake 2026-11-07 (R16): Part 1's angle convention on screen while the voice names it (S7-S9) */}
+      <Recall f={f} tex={String.raw`\theta\ \text{anticlockwise from east}`} name="polar angle" verb="defined" x={XC} y={260} size={46} appear={tEast} out={tB - 12} />
       <TeX s={part} x={XC} y={290} size={T.eq} c={C.ink} o={fin(f, tB)} />
       <TeX s={part2} x={XC + 80} y={390} size={56} c={C.ink} o={fin(f, tThen)} />
       <Svg>
@@ -759,7 +658,7 @@ const S11: React.FC = () => {
         </g>
         <Keyword f={f} text="same meridian" at={[XC, 520]} appear={tSame} />
       </Svg>
-      <TeX s={String.raw`360^\circ-4.5^\circ=355.5^\circ`} x={XC} y={800} size={60} c={C.ink} o={fin(f, AT(k, 12, "three hundred and sixty minus"))} />
+      <TeX s={String.raw`360^\circ-4.5^\circ=355.5^\circ`} x={XC} y={800} size={60} c={C.ink} o={fin(f, AT(k, 12, "three hundred and fifty five"))} />
     </Scene>
   );
 };
@@ -814,7 +713,7 @@ const S12: React.FC = () => {
 };
 
 export const SCENES_A: Record<string, React.FC> = {
-  s00_title: S00, s01_hook: S01, s02_part2_recap: S02, s03_sphere: S03, s04_slice_radius: S04, s05_latitude: S05, s06_parallel: S06, s07_colatitude: S07,
+  s00_title: S00, s01_hook: S01, s03_sphere: S03, s04_slice_radius: S04, s05_latitude: S05, s06_parallel: S06, s07_colatitude: S07,
   s08_sin_cos_swap: S08, s09_meridians: S09, s10_prime_meridian: S10, s11_longitude: S11, s12_graticule: S12,
 };
 void [LYB, discOf, eastAt, lin];

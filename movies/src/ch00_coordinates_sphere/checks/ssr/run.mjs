@@ -9,6 +9,9 @@ import { execSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
+// lock protocol 2026-11-07 (tightened): SSR waits until VOICE.lock (TTS / mixes) is free
+{ const fsW = await import("node:fs"); const V = "G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/VOICE.lock";
+  while (fsW.existsSync(V)) Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 20000); }
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const MOVIES = path.resolve(HERE, "../../../..");
