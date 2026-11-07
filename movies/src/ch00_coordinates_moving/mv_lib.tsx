@@ -10,12 +10,12 @@ import { AbsoluteFill, staticFile, useCurrentFrame } from "remotion";
 import { ramp } from "../house";
 import timing from "../../ch00/ch00_coordinates_moving/timing.json";
 import mvJ from "../../ch00/ch00_coordinates_moving/data/mv.json";
-import { C, T } from "../house/kit/type";
+import { C, FONT, T } from "../house/kit/type";
 import { Arrow, Lbl as HLbl, Pt, Svg, clamp, textW } from "../house/kit/draw";
 import { Keyword as HKeyword } from "../house/kit/notes";
 import { CurvedLink } from "../house/kit/extras";
 import { FlowParticles } from "../house/kit/wind";
-import { CalcRow, CalcStack as HCalcStack, Layered as HLayered, Part, Layer, TeX as HTeX, plainOf } from "../house/kit/tex";
+import { CalcRow, CalcStack as HCalcStack, Layered as HLayered, Part, Layer, TeX as HTeX, plainOf, texHtml, KX } from "../house/kit/tex";
 import { GlobeCam, GlobeMesh, GProj, coastPath, globeCam, globeProj, useTex, Graticule, enAt, ll } from "./kit_mv/globe";
 import { View3D } from "./kit_mv/three3d";
 import { V3 } from "./kit_mv/cam";
@@ -40,8 +40,20 @@ export const AT = (k: number, j: number, phrase: string) => {
   if (!s) throw new Error(`${sc[k].id} has no sentence ${j}`);
   const i = s.text.indexOf(phrase);
   if (i < 0) throw new Error(`phrase "${phrase}" not in ${sc[k].id} sentence ${j}: ${s.text}`);
+  // remake 2026-11-07 (= Part 4's fr_lib): timed from Kokoro word timestamps when checks/mv_words.py found the phrase (else the character estimate)
+  const w = (s as Snt & { words?: [number, string][] }).words;
+  if (w) {
+    const nm = (x: string) => x.toLowerCase().replace(/[^a-z0-9']/g, "");
+    const toks = w.map(([t, x]) => [t, nm(x)] as [number, string]).filter(([, x]) => x);
+    const ph = phrase.split(/\s+/).map(nm).filter(Boolean);
+    for (let a = 0; a + ph.length <= toks.length; a++) {
+      if (ph.every((p, q) => toks[a + q][1] === p)) return Math.round(toks[a][0] * FPS) - CUT[k];
+    }
+  }
   return Math.round((s.start + ((s.end - s.start) * i) / s.text.length) * FPS) - CUT[k];
 };
+/** house rule 2026-11-07: the gold highlight of an input / answer on its word (≈ 1.2 s glow, starting 3 frames before the word) */
+export const HL = (f: number, a: number) => (f < a - 3 || f > a + 33 ? 0 : Math.sin((Math.PI * (f - a + 3)) / 36));
 export const fin = (f: number, a: number, n = 12) => ramp(f, a, a + n);
 export const fout = (f: number, a: number, n = 10) => 1 - ramp(f, a, a + n);
 export const win = (f: number, a: number, b: number, n = 10) => fin(f, a, n) * fout(f, b, n);
@@ -162,20 +174,79 @@ export const CalcStack: React.FC<React.ComponentProps<typeof HCalcStack>> = (p) 
   stackBottomGuard(rows, p.y, p.size ?? 68, p.maxLines ?? 3);
   return <HCalcStack {...p} rows={rows} />;
 };
-/** the house SVG label with the right-edge guard */
-export const Lbl: React.FC<React.ComponentProps<typeof HLbl>> = (p) => {
-  const s = p.s ?? 54, w = textW(p.t, s), a = p.a ?? "start";
-  guard(p.t, a === "start" ? p.x : a === "end" ? p.x - w : p.x - w / 2, w * 0.97);
-  return <HLbl {...p} />;
+// ---------------------------------------------------------------- maths inside labels (remake 2026-11-07; symbol lint C5)
+// A label's maths goes in $…$ and is drawn by KaTeX; the words stay in the house sans font. Ported verbatim from Part 4
+// (src/ch00_coordinates_frames/fr_lib.tsx = Parts 3 / 2): an HTML label in a foreignObject with the same font, size, weight, colour,
+// anchor and dark halo as the SVG label, so it can stay inside any <Svg> group.
+const segs = (t: string) => t.split("$");
+/** width of a label with $…$ maths: sans words + KaTeX segments */
+export const mixW = (t: string, s: number) => segs(t).reduce((w, q, i) => w + (i % 2 ? texW(q, s) * 0.95 : textW(q, s)), 0);
+const MathLbl: React.FC<{ x: number; y: number; t: string; c?: string; s?: number; a?: "start" | "middle" | "end"; o?: number; b?: boolean }> = (
+  { x, y, t, c = C.ink, s = 54, a = "start", o = 1, b = true }) => {
+  if (s < 44) throw new Error(`label "${t}" below 44 px`);
+  if (o <= 0) return null;
+  const tx = a === "start" ? 0 : a === "middle" ? -50 : -100, hw = Math.max(2, 0.07 * s);
+  const halo = [[1, 0], [-1, 0], [0, 1], [0, -1], [0.7, 0.7], [-0.7, 0.7], [0.7, -0.7], [-0.7, -0.7]].map(([u, v]) => `${u * hw}px ${v * hw}px 0 ${C.bg}`).join(",");
+  return (
+    <foreignObject x={0} y={0} width={1920} height={1080} opacity={o} style={{ overflow: "visible", pointerEvents: "none" }}>
+      <div style={{ position: "relative", width: 1920, height: 1080 }}>
+        <div style={{ position: "absolute", left: x, top: y, transform: `translate(${tx}%, -50%)`, whiteSpace: "nowrap", fontFamily: FONT, fontSize: s,
+          fontWeight: b ? 650 : 500, color: c, lineHeight: 1.15, textShadow: halo }}>
+          {segs(t).map((q, i) => (i % 2 ? <span key={i} style={{ fontSize: s / KX }} dangerouslySetInnerHTML={{ __html: texHtml(String.raw`\textstyle ` + q) }} />
+            : <span key={i} style={{ whiteSpace: "pre" }}>{q}</span>))}
+        </div>
+      </div>
+    </foreignObject>
+  );
 };
-/** the house Keyword with the right-edge guard */
+/** the house SVG label with the right-edge guard; $…$ parts are KaTeX */
+export const Lbl: React.FC<React.ComponentProps<typeof HLbl>> = (p) => {
+  const s = p.s ?? 54, m = p.t.includes("$"), w = m ? mixW(p.t, s) : textW(p.t, s), a = p.a ?? "start";
+  guard(p.t, a === "start" ? p.x : a === "end" ? p.x - w : p.x - w / 2, w * 0.97);
+  return m ? <MathLbl {...p} /> : <HLbl {...p} />;
+};
+/** the house Keyword with the right-edge guard; with $…$ maths: the same rise / fade, gold target links as CurvedLinks */
 export const Keyword: React.FC<React.ComponentProps<typeof HKeyword>> = (p) => {
-  const s = p.s ?? 54, w = textW(p.text, s), a = p.a ?? "start";
-  guard(p.text, a === "start" ? p.at[0] : a === "end" ? p.at[0] - w : p.at[0] - w / 2, w * 0.97);
-  return <HKeyword {...p} />;
+  const s = p.s ?? 54, m = p.text.includes("$"), w = m ? mixW(p.text, s) : textW(p.text, s), a = p.a ?? "start";
+  const x0 = a === "start" ? p.at[0] : a === "end" ? p.at[0] - w : p.at[0] - w / 2;
+  guard(p.text, x0, w * 0.97);
+  if (!m) return <HKeyword {...p} />;
+  const { f, text, at, c = C.key, appear, out, o = 1, targets = [] } = p;
+  const oT = ramp(f, appear, appear + 8) * (out !== undefined ? 1 - ramp(f, out, out + 10) : 1) * o;
+  if (oT <= 0) return null;
+  const rise = 12 * (1 - ramp(f, appear, appear + 8));
+  return (
+    <g opacity={oT}>
+      {targets.map((tg, kk) => <CurvedLink key={kk} f={f} from={[tg[0] < x0 ? x0 - 12 : x0 + w + 12, at[1]]} to={tg} start={appear + 8 + 4 * kk} bend={40} />)}
+      <MathLbl x={at[0]} y={at[1] + rise} t={text} c={c} s={s} a={a} />
+    </g>
+  );
 };
 
-// ---------------------------------------------------------------- globe (three.js, kit_mv): the s02 recap mini only
+// ---------------------------------------------------------------- recalls of earlier parts and movies (remake 2026-11-07, HOUSE_STYLE §3 series parts, R16)
+/** An earlier result at its point of use (= Part 4's fr_lib Recall = Part 2's cs_lib): the equation (TeX, left edge at x, centre at y) and,
+ * under it, the gold keyword "derived in Part K: <name>" (or `lab`, e.g. "from the derivatives movie:"); two lines when one is too wide.
+ * `tex` may be "" (label only, at y). Place OUTSIDE an <Svg>. */
+export const Recall: React.FC<{ f: number; tex: string; name: string; x: number; y: number; appear: number; out?: number; size?: number; c?: string; part?: number;
+  gap?: number; lab?: string; glow?: number }> = ({ f, tex, name, x, y, appear, out, size = 54, c = C.ink, part = 1, gap, lab, glow = 0 }) => {
+  const o = ramp(f, appear, appear + 10) * (out !== undefined ? 1 - ramp(f, out, out + 10) : 1);
+  const head = lab ?? `derived in Part ${part}:`;
+  const full = `${head} ${name}`;
+  const two = x + textW(full, T.floor) > 1842;
+  guard(two ? head : full, x, textW(two ? head : full, T.floor) * 0.97);
+  if (two) guard(name, x, textW(name, T.floor) * 0.97);
+  if (o <= 0) return null;
+  const dy = tex ? (gap ?? (FRAC_ROW.test(tex) ? size * 1.25 : size * 0.85) + 18) : 0;
+  return (
+    <>
+      {tex ? <TeX s={tex} x={x} y={y} size={size} c={c} o={o} glow={glow} /> : null}
+      <Svg o={o}><g data-lc-own="recall">{two ? <><HLbl x={x} y={y + dy} t={head} c={C.gold} s={T.floor} />
+        <HLbl x={x} y={y + dy + 52} t={name} c={C.gold} s={T.floor} /></> : <HLbl x={x} y={y + dy} t={full} c={C.gold} s={T.floor} />}</g></Svg>
+    </>
+  );
+};
+
+// ---------------------------------------------------------------- globe (three.js, kit_mv): was the s02 recap mini (s02 cut in the remake 2026-11-07)
 export type Box = { x: number; y: number; w: number; h: number };
 export const globeG = (cam: GlobeCam, box: Box): GProj => {
   const st = globeCam({ ...cam, pp: cam.pp ?? [box.w / 2, box.h / 2] }, [box.w / 2, box.h / 2]);

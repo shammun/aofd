@@ -1,23 +1,22 @@
-// ch00_coordinates_moving scenes s00-s07: the title, the hook (Ciarán's 03 UTC map with a rider and a person on the shore), the
-// recap of Part 4 (Brest's tripod on the globe mini, the coast frame, turning arrows, the traveller's rate), the train (x = x′ + U t),
+// ch00_coordinates_moving scenes s00-s07: the title (series layout, remake 2026-11-07), the hook (Ciarán's 03 UTC map with a rider and a
+// person on the shore), the train (x = x′ + U t) — the s02 recap of Part 4 is cut (remake 2026-11-07, master plan §C: no opening recap) —
 // velocities add (D40), accelerations stay (D41) with the falling ball, the air parcel's acceleration in two frames (D42a, a 3-D
 // parcel cube) and the sliding gust pattern in numbers (D42b). Numbers from data/mv.json only (movies/data/build_ch00_coordinates_moving.py).
 import React from "react";
 import { useCurrentFrame } from "remotion";
 import { C, T } from "../house/kit/type";
-import { Bracket, Pt, pulse } from "../house/kit/draw";
-import { RiseText, TitleGradient } from "../house/kit/title";
+import { Bracket, Pt } from "../house/kit/draw";
+import { SeriesTitle } from "./kit_mv/SeriesTitle";
 import { SourceBelow } from "../house/kit/frame";
 import { AnimatedWindArrow } from "../house/kit/wind";
 import { CurvedLink } from "../house/kit/extras";
 import { ClockGlyph } from "../house/kit/icons";
-import { GlobeCam } from "./kit_mv/globe";
 import { View3D, Rod3D, Quad3D, Arrow3D, Ball3D } from "./kit_mv/three3d";
 import { V3, orbitCam, orbitPath, projector } from "./kit_mv/cam";
 import {
-  AT, Arrow, Axes, Barometer, BROWN, BREST, CI, CIA_MAP, CIA_PIC, CalcStack, CiaMap, D, D2R, GeoMap, Globe, H, K, Keyword, LEN, Lbl, PLY, Person, Rider,
-  SE, SRC_CIA3, SS, Scene, SideCallout, SkipChip, SpeedBar, Svg, TRK, TeX, Layered, Train, Tripod, Walker, Anemometer, XC, Ax, axP, axX, axY, boxAt, curveD, fin, fout,
-  globeG, keepTime, linesPath, lin, mix, nf, prog, ringD, tripod, win, isoD, clamp,
+  AT, Arrow, Axes, Barometer, BROWN, CI, CIA_MAP, CIA_PIC, CalcStack, CiaMap, D, D2R, GeoMap, HL, K, Keyword, LEN, Lbl, PLY, Person, Rider,
+  SE, SRC_CIA3, SS, Scene, SideCallout, SkipChip, SpeedBar, Svg, TRK, TeX, Layered, Train, Walker, Anemometer, XC, Ax, axP, axY, boxAt, curveD, fin, fout,
+  keepTime, linesPath, lin, mix, nf, prog, ringD, win, isoD, clamp,
 } from "./mv_lib";
 import { EQ_S02, EQ_S03, EQ_S04, EQ_S05, EQ_S06, EQ_S07, cutAt } from "./mv_eq";
 
@@ -54,8 +53,8 @@ const TB = { x: 1150, y: 150, w: 690, h: 480 };
 const TMAP = boxAt(50.2, -4.4, 6.0, TB.x, TB.y, TB.w, TB.h);
 const S00: React.FC = () => {
   const f = useCurrentFrame(), k = K("s00_title");
-  const tMet = AT(k, 0, "meteorology"), tEasy = AT(k, 0, "moving frames");
-  const pz = 1 + 0.06 * pulse(f, tEasy, 14);
+  // remake 2026-11-07 (R1/R2, opening rule): the series title; "Coordinates" pulses on "coordinates"; Part B cross-fades on "they're used"
+  const tCo = AT(k, 0, "coordinates"), tMet = AT(k, 0, "they're used");
   const oA = fout(f, tMet, 12), oB = fin(f, tMet, 12);
   // Part A: the train glides, the walker walks, the two rulers slide apart (schematic, time compressed)
   const u = lin(f, 0, tMet), xb = 1170 + 300 * u, wx = xb + 50 + 90 * u, sy = 520, ty = 470;
@@ -65,14 +64,7 @@ const S00: React.FC = () => {
   return (
     <Scene fadeIn={false}>
       <Svg>
-        <defs><TitleGradient id="ttl" x1={100} x2={1000} /></defs>
-        <RiseText f={f} t="Coordinates · Part 5" x={104} y={110} s={64} at={2} fill={C.key} />
-        <RiseText f={f} t="Moving" x={100} y={265} s={150} at={6} fill="url(#ttl)" />
-        <RiseText f={f} t="frames" x={100} y={410} s={150} at={16} fill="url(#ttl)" />
-        <g transform={`translate(104 515) scale(${pz}) translate(-104 -515)`}>
-          <RiseText f={f} t="made easy" x={104} y={525} s={88} at={24} fill={C.key} />
-        </g>
-        <RiseText f={f} t="and storm-relative winds" x={106} y={660} s={68} at={34} fill={C.key} colors={(i) => (i >= 4 ? C.first : undefined)} />
+        <SeriesTitle f={f} concept="Coordinates" part="Part 5 · Moving frames" sub={["storm-relative winds"]} pulseAt={tCo} />
         <g opacity={oA * fin(f, 4, 10)}>
           <line x1={TB.x} y1={ty + 14} x2={TB.x + TB.w} y2={ty + 14} stroke={C.local} strokeWidth={5} />
           <Train x={xb} y={ty} w={280} />
@@ -136,63 +128,6 @@ const S01: React.FC = () => {
   );
 };
 
-// ================================================================ s02 recap of Part 4 and of the traveller's rate
-const GBOX = { x: 100, y: 60, w: 820, h: 660 };
-const GCAM: GlobeCam = { lat: 40, lon: 4, dist: 3.0 };
-const S02: React.FC = () => {
-  const f = useCurrentFrame(), k = K("s02_part4_recap");
-  const t1 = SS(k, 1), t2 = SS(k, 2), t3 = SS(k, 3), t4 = SS(k, 4), t5 = SS(k, 5), t6 = SS(k, 6);
-  const oG = fout(f, t2 - 16, 14), oCoast = win(f, t2, t3 - 16, 14), oTurn = win(f, t3, t4 - 16, 14), oTrav = fin(f, t4, 14);
-  const G = globeG(GCAM, GBOX);
-  const tp = tripod(G, BREST[0], BREST[1], 0.25);
-  const off = (q: Pt): Pt => { const dx = q[0] - tp.b[0], dy = q[1] - tp.b[1], n = Math.hypot(dx, dy) || 1; return [q[0] + (dx / n) * 36, q[1] + (dy / n) * 36]; };
-  const pi = off(tp.i), pj = off(tp.j), pk = off(tp.k);
-  // the coast frame mini: x̂′ turned 121° from east (Part 4's coast), the wind and its part along x̂′
-  const O: Pt = [480, 470], aT = 121 * D2R, xp: Pt = [Math.cos(aT), -Math.sin(aT)], yp: Pt = [-Math.sin(aT), -Math.cos(aT)];
-  const wv: Pt = [170, -150], al = wv[0] * xp[0] + wv[1] * xp[1];
-  // the traveller mini: a slope (line), a traveller moving along it
-  const tv = lin(f, t4 + 10, t6);
-  return (
-    <Scene>
-      <Globe cam={GCAM} box={GBOX} o={oG} grat={0.25} over={(Gg) => <Tripod G={Gg} la={BREST[0]} lo={BREST[1]} L={0.25} />} />
-      <TeX s={H.i} x={pi[0]} y={pi[1]} size={48} c={C.second} ax={0.5} o={oG} halo />
-      <TeX s={H.j} x={pj[0]} y={pj[1]} size={48} c={C.second} ax={0.5} o={oG} halo />
-      <TeX s={H.k} x={pk[0]} y={pk[1]} size={48} c={C.first} ax={0.5} o={oG} halo />
-      <SourceBelow text="Image: NASA Blue Marble Next Generation · Natural Earth" pic={GBOX} w={820} o={oG} name="s02 src" />
-      <Svg>
-        <g opacity={oCoast}>
-          <path d={`M ${O[0] - 300} ${O[1] + 180} Q ${O[0] - 40} ${O[1] + 60} ${O[0] + 90} ${O[1] - 210}`} fill="none" stroke={C.key} strokeWidth={4} />
-          <Arrow p={O} q={[O[0] + xp[0] * 200, O[1] + xp[1] * 200]} color={C.second} w={8} head={30} />
-          <Arrow p={O} q={[O[0] + yp[0] * 200, O[1] + yp[1] * 200]} color={C.second} w={8} head={30} />
-          <AnimatedWindArrow from={O} to={[O[0] + wv[0], O[1] + wv[1]]} speed={12} f={f} c={C.ink} px={9} head={34} />{/* Part 1 lessons D1: the full wind is ink */}
-          <line x1={O[0]} y1={O[1]} x2={O[0] + xp[0] * al} y2={O[1] + xp[1] * al} stroke={C.first} strokeWidth={18} opacity={0.45} />
-        </g>
-        <g opacity={oTurn}>
-          <path d={`M 160 560 Q 520 300 880 560`} fill="none" stroke={C.local} strokeWidth={4} strokeDasharray="10 8" />
-          {[0.08, 0.5, 0.92].map((q) => { const x = (1 - q) * (1 - q) * 160 + 2 * (1 - q) * q * 520 + q * q * 880, yy = (1 - q) * (1 - q) * 560 + 2 * (1 - q) * q * 300 + q * q * 560,
-            a = (q - 0.5) * 50 * D2R;
-            return <g key={q}><Arrow p={[x, yy]} q={[x + 110 * Math.cos(a), yy + 110 * Math.sin(a)]} color={C.second} w={7} head={26} />
-              <Arrow p={[x, yy]} q={[x + 110 * Math.sin(a), yy - 110 * Math.cos(a)]} color={C.second} w={7} head={26} /></g>; })}
-        </g>
-        <g opacity={oTrav}>
-          <line x1={140} y1={640} x2={900} y2={300} stroke={C.second} strokeWidth={6} />
-          <circle cx={mix(220, 820, tv)} cy={mix(604, 336, tv)} r={16} fill={C.key} stroke={C.bg} strokeWidth={4} />
-          <Arrow p={[mix(220, 820, tv), mix(604, 336, tv) - 40]} q={[mix(220, 820, tv) + 120, mix(604, 336, tv) - 40 - 54]} color={C.first} w={7} head={26} />
-        </g>
-        <Keyword f={f} text="Part 4: a station's own arrows" at={[XC, 150]} appear={0} out={t1 - 18} s={T.floor} />
-        <Keyword f={f} text="the coast frame: dot products" at={[XC, 300]} appear={t2} out={t4 - 18} s={T.floor} />
-        <Keyword f={f} text="the arrows turn as air moves" at={[XC, 380]} appear={t3} out={t4 - 18} s={T.floor} />
-        <Keyword f={f} text="the traveller's rate" at={[XC, 300]} appear={t4} s={T.floor} />
-        <Keyword f={f} text="today: the frame moves" at={[XC, 760]} appear={t6} c={C.gold} />
-      </Svg>
-      <TeX s={String.raw`\mathbf v=u\,\hat{\mathbf i}+v\,\hat{\mathbf j}+w\,\hat{\mathbf k}`} x={XC} y={150} size={60} o={win(f, t1, t4 - 18)} />
-      <TeX s={String.raw`\text{along}=\mathbf v\cdot\hat{\mathbf x}'`} x={XC} y={230} size={52} c={C.first} o={win(f, AT(k, 2, "dot products"), t4 - 18)} />
-      <TeX s={String.raw`\dfrac{dT}{dt}=\dfrac{\partial T}{\partial t}+\text{speed}\times\text{slope}`} x={XC} y={420} size={52} o={fin(f, AT(k, 4, "the change at a fixed place"))} />
-      <TeX s={EQ_S02} x={XC} y={600} size={64} o={fin(f, AT(k, 5, "capital D by D t"))} />
-    </Scene>
-  );
-};
-
 // ================================================================ s03 the train: x = x′ + U t
 const trainAt = (f: number, a: number, b: number) => ({ xb: mix(100, 460, lin(f, a, b)), xw: mix(60, 180, lin(f, a, b)) });
 const S03: React.FC = () => {
@@ -230,7 +165,7 @@ const S03: React.FC = () => {
         </g>
         <Keyword f={f} text="the simplest moving frame" at={[XC, 120]} appear={0} out={t1 - 18} s={T.floor} />
         <Keyword f={f} text="why do the speeds add?" at={[XC, 400]} appear={t4} out={t6 - 18} s={T.floor} />
-        <Keyword f={f} text="x: from the station" at={[XC, 400]} appear={t6} s={T.floor} c={C.local} />
+        <Keyword f={f} text="$x$: from the station" at={[XC, 400]} appear={t6} s={T.floor} c={C.local} />
       </Svg>
       {/* Part 1 lessons C1: x′ set in KaTeX (a prime in the sans keyword is not maths) */}
       <TeX s={String.raw`x'\text{: from the back of the train}`} x={XC} y={470} size={T.floor} c={C.second} o={fin(f, t7)} />
@@ -284,7 +219,7 @@ const S04: React.FC = () => {
       <CalcStack f={f} x={XC} y={190} size={52} maxLines={3} rows={[
         { rhs: String.raw`\Delta x=\Delta x'+U\,\Delta t`, at: AT(k, 5, "delta x equals") },
         { rhs: String.raw`\dfrac{\Delta x}{\Delta t}=\dfrac{\Delta x'}{\Delta t}+U\ \Rightarrow\ u=u'+U`, at: t6, h: 130 },
-        { rhs: String.raw`1.5+20=21.5\ \text{m/s}`, at: AT(k, 10, "twenty one and a half") },
+        { rhs: String.raw`u=1.5+20=21.5\ \text{m/s}`, at: AT(k, 10, "twenty one and a half") },
       ]} />
       <TeX s={String.raw`\Delta x/\Delta t=u`} x={XC} y={440} size={48} c={C.local} o={win(f, SS(k, 7), t9 - 18)} />
       <TeX s={String.raw`\Delta x'/\Delta t=u'`} x={XC + 330} y={440} size={48} c={C.first} o={win(f, SS(k, 8), t9 - 18)} />
@@ -391,7 +326,9 @@ const S06: React.FC = () => {
         <Arrow3D from={[rx + 0.3, -1.6, 0.3]} to={[rx + 1.4, -1.6, 0.3]} color={C.second} px={7} head={24} o={fin(f, t11)} />
       </View3D>
       <Svg>
-        <Keyword f={f} text="air parcel" at={[XC, 110]} appear={0} out={t2 - 18} targets={[pc]} />
+        <Keyword f={f} text="air parcel" at={[XC, 110]} appear={0} out={Math.min(t2, AT(k, 1, "derivatives movie")) - 18} targets={[pc]} />
+        {/* remake 2026-11-07 (R16): the recalled equation's source, under its underbraces, until "put u in place of T" */}
+        <Lbl x={XC} y={312} t="from the derivatives movie" c={C.gold} s={T.floor} o={win(f, AT(k, 1, "derivatives movie"), AT(k, 5, "put u in place of T") - 12)} />
         <Lbl x={pr.p([0.6, 1.6, 0])[0] + 20} y={pr.p([0.6, 1.6, 0])[1] + 30} t="fixed place" c={C.local} s={T.floor} o={win(f, t3, t9 - 18)} />
         <Keyword f={f} text="T → u" at={[XC, 360]} appear={AT(k, 5, "put u in place of T")} out={t9 - 18} c={C.gold} />
         <Keyword f={f} text="the same for v and w" at={[XC, 560]} appear={t7} out={t9 - 18} s={T.floor} />
@@ -455,8 +392,8 @@ const S07: React.FC = () => {
         {val(GX.r, GY.adv, "+1.4", C.first, AT(k, 7, "plus one point four"))}
         {val(GX.g, GY.loc, "−4.0", C.neg, AT(k, 10, "minus four point zero"))}
         {val(GX.g, GY.adv, "+5.4", C.first, AT(k, 11, "plus five point four"))}
-        {val(GX.r, GY.sum, "+1.4", C.gold, AT(k, 12, "is plus one point four"))}
-        {val(GX.g, GY.sum, "+1.4", C.gold, AT(k, 12, "is plus one point four"))}
+        {val(GX.r, GY.sum, "+1.4", C.gold, AT(k, 12, "gives plus one point four"))}
+        {val(GX.g, GY.sum, "+1.4", C.gold, AT(k, 12, "gives plus one point four"))}
         {/* callouts ordered like their targets (the tangent's end is above the point): links never cross */}
         <SideCallout f={f} lines="0.111 m/s per km" at={[XC + 40, 110]} appear={AT(k, 2, "zero point one one one")} target={[tg1[0] + 8, tg1[1]]} s={T.floor} c={C.gold} bend={20} />
         <SideCallout f={f} lines="13.54 m/s" at={[XC + 40, 190]} appear={AT(k, 2, "thirteen point five four")} target={[p0[0] + 16, p0[1] + 4]} s={T.floor} c={C.first} bend={-20} />
@@ -469,7 +406,7 @@ const S07: React.FC = () => {
         <Keyword f={f} text="later: the material derivative" at={[XC, 600]} appear={t16} s={T.floor} />
         {/* one hour at the fixed place (anemometer, slate dashed) and following the parcel (teal) */}
         <g opacity={fin(f, t9 + 10)}>
-          <Axes A={TG} xt={[0, 1]} yt={[8, 12, 16]} xf={(v) => `${v} h`} />
+          <Axes A={TG} xt={[0, 1]} yt={[8, 12, 16]} xf={(v) => `${v} h`} />{/* lint-ok: "h" is the unit hours on the time axis, not a variable */}
           <path d={poly2(upto(an).map(([t, v]) => axP(TG)(t, v)))} fill="none" stroke={C.local} strokeWidth={5} strokeDasharray="12 8" />
           <path d={poly2(upto(pa).map(([t, v]) => axP(TG)(t, v)))} fill="none" stroke={C.first} strokeWidth={5} />
           <Lbl x={TG.x + TG.w + 16} y={axY(TG)(an[an.length - 1])} t="anemometer" c={C.local} s={T.floor} o={fin(f, SE(k, 9))} />
@@ -480,22 +417,22 @@ const S07: React.FC = () => {
       <CalcStack f={f} x={XC} y={250} size={44} maxLines={3} o={fout(f, t5 - 12)} rows={[
         { rhs: String.raw`u=10+5\sin(2\pi x/200\ \text{km})`, at: t2 },
         { rhs: String.raw`x=25\ \text{km}:\ \ 10+5\sin45^\circ`, at: t2 + 25 },
-        { rhs: String.raw`=10+3.54=13.54\ \text{m/s}`, at: AT(k, 2, "thirteen point five four"), cont: true },
+        { rhs: String.raw`=10+3.54=13.54\ \text{m/s}`, at: AT(k, 2, "thirteen point five four"), cont: true, glow: HL(f, AT(k, 2, "thirteen point five four")) },
         { rhs: String.raw`\text{slope of }\sin(kx)\text{ is }k\cos(kx)`, at: AT(k, 2, "getting stronger"), c: C.muted },
         { rhs: String.raw`5\times\dfrac{2\pi}{200}\times\cos45^\circ`, at: AT(k, 2, "getting stronger") + 25 },
-        { rhs: String.raw`\approx0.111\ \dfrac{\text{m/s}}{\text{km}}`, at: AT(k, 2, "zero point one one one"), cont: true },
+        { rhs: String.raw`\approx0.111\ \dfrac{\text{m/s}}{\text{km}}`, at: AT(k, 2, "zero point one one one"), cont: true, glow: HL(f, AT(k, 2, "zero point one one one")) },
       ]} />
       <CalcStack f={f} x={XC} y={270} size={44} maxLines={2} o={fout(f, t13 - 18)} rows={[
-        { rhs: String.raw`u'=13.54-10=3.54\ \text{m/s}`, at: AT(k, 5, "thirteen point five four minus ten") },
+        { rhs: String.raw`u'=13.54-10=3.54\ \text{m/s}`, at: AT(k, 5, "the wind's speed minus") },
         { rhs: String.raw`3.54\times3.6\approx12.7\ \text{km/h}`, at: AT(k, 5, "twelve point seven"), cont: true },
         { rhs: String.raw`\text{adv.}=12.7\times0.111\approx+1.4`, at: AT(k, 6, "so the advection is") },
         { rhs: String.raw`\dfrac{\text{km}}{\text{h}}\times\dfrac{\text{m/s}}{\text{km}}=\dfrac{\text{m/s}}{\text{h}}`, at: AT(k, 6, "so the advection is") + 30, c: C.muted, cont: true },
         { rhs: String.raw`U=10\ \text{m/s}`, at: AT(k, 9, "thirty six kilometres per hour") - 20 },
         { rhs: String.raw`10\times3.6=36\ \text{km/h}`, at: AT(k, 9, "thirty six kilometres per hour"), cont: true },
-        { rhs: String.raw`\text{local}=-36\times0.111\approx-4.0`, at: AT(k, 10, "minus thirty six") },
+        { rhs: String.raw`\text{local}=-36\times0.111\approx-4.0`, at: AT(k, 10, "minus the pattern's speed") },
         { rhs: String.raw`13.54\times3.6\approx48.7\ \text{km/h}`, at: AT(k, 11, "forty eight point seven") - 15 },
         { rhs: String.raw`\text{adv.}=48.7\times0.111\approx+5.4`, at: AT(k, 11, "plus five point four"), cont: true },
-        { rhs: String.raw`-4.0+5.4=+1.4`, at: AT(k, 12, "Add them") },
+        { rhs: String.raw`\text{sum}=-4.0+5.4=+1.4`, at: AT(k, 12, "Adding the local change") },
       ]} />
       <TeX s={EQ_S07} x={XC} y={380} size={46} o={fin(f, t13)} />
     </Scene>
@@ -504,7 +441,7 @@ const S07: React.FC = () => {
 const poly2 = (pts: Pt[]) => pts.map((p, i) => `${i ? "L" : "M"}${p[0].toFixed(1)} ${p[1].toFixed(1)}`).join("");
 
 export const SCENES_A: Record<string, React.FC> = {
-  s00_title: S00, s01_hook: S01, s02_part4_recap: S02, s03_train: S03, s04_velocities_add: S04, s05_accel_same: S05, s06_parcel_accel: S06,
+  s00_title: S00, s01_hook: S01, s03_train: S03, s04_velocities_add: S04, s05_accel_same: S05, s06_parcel_accel: S06,
   s07_sliding_pattern: S07,
 };
-void [CurvedLink, CIA_MAP, nf, Tripod, globeG];
+void [CurvedLink, CIA_MAP, nf];

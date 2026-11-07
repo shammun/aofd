@@ -5,7 +5,7 @@
  "builder": "movies/data/build_ch00_coordinates_moving.py",
  "fluidpy": {
   "repo": "../Fluid Dynamics",
-  "commit": "8cab62ebf6f6fb3ab1979fdbf5d404c2c77400b2",
+  "commit": "1823b5f34b8951a56202762a02d9027567bcda0f",
   "dirty_tracked": true,
   "kinematics_py_sha256": "dfd7e1abea38775a2469a329fd9724232a87c53fb3f01e765d5acffe5fa6b1ea",
   "coords_py_sha256": "3497d372316d1dd7fc3277a74e794eec3b8997dcb85525d1ea2d5d450111c2d2",
@@ -79,13 +79,12 @@
   },
   "exaggerations": [
    "s01 icons illustrative",
-   "s02 tripod arrows ≈ 800 km on the globe mini",
    "s06 parcel cube and map illustrative (no data)",
    "s10 inset arrows enlarged (scale in the scene: 9 px per m/s)",
    "s14 1-D profile = the real 00 UTC msl along U through Plymouth"
   ],
   "screen_deviations": [
-   "s00 title in the series layout of Parts 1 and 4 ('Coordinates · Part 5' 64 px, 'Moving' / 'frames' 150 px, 'made easy' 88 px, 'storm-relative winds' 68 px) instead of the storyboard's one-line 150-px 'Coordinates · Part 5' (does not fit x 100-1075)",
+   "s00 title in the series layout (remake 2026-11-07, kit_mv/SeriesTitle = Parts 1-4): 'Coordinates' 150 px, 'Part 5 · Moving frames' <= 80 px, 'storm-relative winds' 68 px; no 'made easy' (R1)",
    "skip chips in the lower maths zone (as Parts 1 and 4)",
    "s10 south calc written with '≈' (flag F3)"
   ],
@@ -107,98 +106,92 @@
    "scene": "s00_title"
   },
   {
-   "time": "0:13",
-   "t_s": 13.25,
+   "time": "0:14",
+   "t_s": 14.646,
    "title": "Riding with a storm: the question",
    "scene": "s01_hook"
   },
   {
-   "time": "0:37",
-   "t_s": 37.825,
-   "title": "Recap of Part 4",
-   "scene": "s02_part4_recap"
-  },
-  {
-   "time": "1:27",
-   "t_s": 87.625,
+   "time": "0:44",
+   "t_s": 44.263,
    "title": "A frame that moves: the train",
    "scene": "s03_train"
   },
   {
-   "time": "2:34",
-   "t_s": 154.175,
+   "time": "1:52",
+   "t_s": 112.514,
    "title": "Every step: why speeds add",
    "scene": "s04_velocities_add"
   },
   {
-   "time": "3:58",
-   "t_s": 238.679,
+   "time": "3:20",
+   "t_s": 200.585,
    "title": "Every step: accelerations stay the same",
    "scene": "s05_accel_same"
   },
   {
-   "time": "5:45",
-   "t_s": 345.304,
+   "time": "5:03",
+   "t_s": 303.157,
    "title": "An air parcel's acceleration in two frames",
    "scene": "s06_parcel_accel"
   },
   {
-   "time": "7:14",
-   "t_s": 434.104,
+   "time": "6:31",
+   "t_s": 391.957,
    "title": "A sliding gust pattern, in numbers",
    "scene": "s07_sliding_pattern"
   },
   {
-   "time": "9:30",
-   "t_s": 570.352,
+   "time": "8:52",
+   "t_s": 532.079,
    "title": "Storm Ciarán",
    "scene": "s08_ciaran"
   },
   {
-   "time": "10:34",
-   "t_s": 634.602,
+   "time": "10:27",
+   "t_s": 627.199,
    "title": "Why the winds were lopsided",
    "scene": "s09_lopsided"
   },
   {
-   "time": "11:22",
-   "t_s": 682.152,
+   "time": "11:17",
+   "t_s": 677.276,
    "title": "Storm-relative winds",
    "scene": "s10_storm_relative"
   },
   {
-   "time": "13:41",
-   "t_s": 821.327,
+   "time": "13:42",
+   "t_s": 822.202,
    "title": "What does not change",
    "scene": "s12_invariant"
   },
   {
-   "time": "14:53",
-   "t_s": 893.827,
+   "time": "14:57",
+   "t_s": 897.466,
    "title": "What a fixed barometer sees",
    "scene": "s13_tau"
   },
   {
-   "time": "16:30",
-   "t_s": 990.952,
+   "time": "16:34",
+   "t_s": 994.591,
    "title": "Every step: linking the barometer and the rider",
    "scene": "s14_tau_derive"
   },
   {
-   "time": "18:21",
-   "t_s": 1101.607,
+   "time": "18:30",
+   "t_s": 1110.845,
    "title": "Plymouth, in numbers",
    "scene": "s15_plymouth"
   },
   {
-   "time": "20:35",
-   "t_s": 1235.157,
+   "time": "20:44",
+   "t_s": 1244.252,
    "title": "Recap",
    "scene": "s17_recap"
   },
   {
-   "time": "21:45",
-   "t_s": 1305.757,
+   "time": "22:05",
+   "t_s": 1325.785,
    "title": "End",
    "scene": "s18_end"
   }
@@ -208,18 +201,18 @@
    "block": "A",
    "chip_scene": "s04_velocities_add",
    "chip_sentence": 2,
-   "chip_at_s": 163.95,
-   "skip_to": "5:33",
-   "skip_to_s": 333.229,
+   "chip_at_s": 122.289,
+   "skip_to": "4:51",
+   "skip_to_s": 291.082,
    "keep_line": "If you skipped, here's what to keep: in a frame moving steadily in a straight line, speeds change by the frame's own speed, but accelerations, and so forces, stay the same."
   },
   {
    "block": "B",
    "chip_scene": "s14_tau_derive",
    "chip_sentence": 2,
-   "chip_at_s": 996.002,
-   "skip_to": "18:12",
-   "skip_to_s": 1092.832,
+   "chip_at_s": 999.641,
+   "skip_to": "18:22",
+   "skip_to_s": 1102.07,
    "keep_line": "If you skipped, here's what to keep: what the barometer sees is the storm changing, minus the pattern sliding past."
   }
  ],
@@ -233,7 +226,7 @@
  },
  "render_assets": {},
  "data_files": {
-  "mv.json": "b1ec2f812770086a65b6f5d22368d9dd34e0047abd5f309332f0edd59a984c25",
+  "mv.json": "2e59e7dae577ee83718f90053d279913e9ce5aa5ddf6a84c6e6d62e9aa0fd5ae",
   "img/cia_msl_00.png": "f4129056494dee7b0b22f93ac02ec74d151a9461e8d62f830593b971a7139848",
   "img/cia_msl_01.png": "9135c62dfe5a7f3112049d8421dbf00a7002b7d823aa7143ef72941e6429b9c4",
   "img/cia_msl_02.png": "e314c2b6b150769a0cb6831d37d13da05a3360268533e8087fb72254112b1fdd",
@@ -612,6 +605,49 @@
     0.05,
     0
    ],
+   "pass": true
+  },
+  {
+   "id": "DP44",
+   "name": "s08: θ = 90° − 71° = 19°; cos 19° = sin 71° = 0.946, sin 19° = cos 71° = 0.326; 14.6 × 0.946 = 13.8; 14.6 × 0.326 = 4.8",
+   "value": [
+    0.945519,
+    0.945519,
+    0.325568,
+    13.8116,
+    4.7596,
+    71.0
+   ],
+   "ref": [
+    0.946,
+    0.946,
+    0.326,
+    13.8,
+    4.8,
+    71.0
+   ],
+   "tol": [
+    0.0005,
+    0.0005,
+    0.0005,
+    0.05,
+    0.05,
+    0
+   ],
+   "pass": true
+  },
+  {
+   "id": "DP44",
+   "name": "s08: U = 13.8 î + 4.8 ĵ = the tracked motion's east / north parts to 0.1 (translation_velocity)",
+   "value": [
+    13.780632,
+    4.754094
+   ],
+   "ref": [
+    13.8,
+    4.8
+   ],
+   "tol": 0.051,
    "pass": true
   },
   {

@@ -31,7 +31,9 @@ const AT = (k, j, phrase) => { const s = sc[k].sentences[j]; const i = s.text.in
   return Math.round((s.start + ((s.end - s.start) * i) / s.text.length) * FPS) - CUT[k]; };
 const clamp = (x, a, b) => Math.min(b, Math.max(a, x));
 const easeIO = (t) => (t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
-const textW = (t, s) => [...t].reduce((w, ch) => w + s * (/[ .,:;()|'·]/.test(ch) ? 0.3 : /[mwMW]/.test(ch) ? 0.85 : /[A-Z0-9°]/.test(ch) ? 0.6 : 0.53), 0);
+// remake 2026-11-07: a label with $…$ maths (mv_lib MathLbl) is measured by its rendered characters: TeX commands dropped, \times → ×
+const texPlain = (t) => t.replace(/\$([^$]*)\$/g, (_, q) => q.replace(/\\times/g, "×").replace(/\\[a-zA-Z]+/g, "").replace(/[{}]/g, ""));
+const textW = (t0, s) => [...texPlain(t0)].reduce((w, ch) => w + s * (/[ .,:;()|'·]/.test(ch) ? 0.3 : /[mwMW]/.test(ch) ? 0.85 : /[A-Z0-9°]/.test(ch) ? 0.6 : 0.53), 0);
 const T = { hero: 128, eq: 84, calc: 68, key: 54, floor: 44 };
 const swarp = (x, segs) => segs.reduce((v, [a, b]) => { if (v <= a || v >= b) return v;
   const y = 0.5 - 0.5 * Math.cos((Math.PI * (v - a)) / (b - a)), u = y < 0.5 ? Math.cbrt(y / 4) : 1 - Math.cbrt(2 * (1 - y)) / 2; return a + (b - a) * u; }, x); // = the TSX helper

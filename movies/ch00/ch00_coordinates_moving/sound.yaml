@@ -1,0 +1,15 @@
+# ch00_coordinates_moving (#5e, Part 5): sound cue sheet for tools/sound/mix.py (remake 2026-11-07, final spliced TTS timing).
+# Score: the storyboard's own style 'passing-front' (tools/sound/styles.py), seed 43 (A Aeolian, 4/4 at 66 bpm, a warm pad pulsing on the
+# beat and drifting left to right, a celesta figure that stays put in the centre). Distinct from Parts 1-4 (ice-polar, eyewall-spiral,
+# meridian-glass, frame-drift). The style's airy wind layer enters "from s08 on" and styles.py holds the PRE-remake s08 start (564.1 s);
+# checks/mv_mix.py sets that layer's enter_s to the s08 start of the final timing.json before it calls tools/sound/mix.py's build() (the
+# shared tool is not edited; proposed to the orchestrator: read enter_s from a scene id).
+# Effects only where the picture shows the thing (HOUSE_STYLE §8), from the storyboard's effects_candidates:
+#  - s08 S1-S3: Ciarán's isobars sweep in over the Channel hour by hour; a soft gusty wind bed (candidate 'wind_rising' is not in
+#    tools/sound/sfx.py: wind_gusty at low intensity instead); offset 2.0 s = about the start of S1.
+#  - s03 'rail_rhythm_soft' (the train gliding) has no effect in tools/sound/sfx.py and is dropped.
+music: {style: passing-front, seed: 43, bed_lufs: -28, duck_db: 5, tail_s: 2.5}
+timing: timing.json
+sfx_duck_db: 5
+effects:
+  - {effect: wind_gusty, scene: s08, offset: 2.0, duration: 16.0, intensity: 0.1, lufs: -29, fade_in: 1.5, fade_out: 2.5, seed: 64}

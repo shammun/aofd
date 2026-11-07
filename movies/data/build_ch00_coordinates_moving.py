@@ -1,6 +1,6 @@
 """Physics and real-data products for the Chapter-0 movie #5e "Coordinates, Part 5 — Moving frames: storm-relative winds"
-(movies/ch00/ch00_coordinates_moving/storyboard.yaml, 19 scenes; CHECK rows DC50-DC56 kept from build 1 under their names,
-new rows DP29-DP42 for the split movie's new numbers).
+(movies/ch00/ch00_coordinates_moving/storyboard.yaml, 18 scenes after the remake of 2026-11-07, which cut s02_part4_recap; CHECK rows
+DC50-DC56 kept from build 1 under their names, rows DP29-DP43 for the split movie's numbers, DP44 for the remake's s08 trig inputs).
 
 Run with the main venv::
 
@@ -18,7 +18,7 @@ fields (no download; every input is already on disk):
   ``fluidpy.diag.trajectories.advect_on_sphere``, ``fluidpy.core.coords.velocity_components``,
 
 on ERA5 hourly surface fields for Storm Ciarán (G: derived, ARCO ERA5), the ISD SYNOP of Brest-Guipavas, Natural Earth 10 m
-coast and NASA Blue Marble NG (the s02 globe mini).
+coast and NASA Blue Marble NG (the render asset of the former s02 globe mini; s02 is cut, the asset is still staged with --public).
 
 Writes movies/ch00/ch00_coordinates_moving/data/mv.json (numbers + small arrays the composition only indexes and interpolates;
 ``say`` = the spoken / written rounded values, each asserted here), data/img/*.png (Ciarán wind-speed and sea-level-pressure
@@ -57,7 +57,7 @@ NEWQUAY = (50.42, -5.08)        # the s01 'Cornish shore' spot (hook icons; arro
 CIA_BOX = (44.0, 58.0, -15.0, 5.0)
 GS, DC, DT_, KN, GC, CS = ("fluidpy.geo.sphere.", "fluidpy.diag.cyclone.", "fluidpy.diag.trajectories.", "fluidpy.core.kinematics.",
                            "fluidpy.geo.calculus.", "fluidpy.core.coords.")
-CHAPTERS = [("s00_title", "Title"), ("s01_hook", "Riding with a storm: the question"), ("s02_part4_recap", "Recap of Part 4"),
+CHAPTERS = [("s00_title", "Title"), ("s01_hook", "Riding with a storm: the question"),
             ("s03_train", "A frame that moves: the train"), ("s04_velocities_add", "Every step: why speeds add"),
             ("s05_accel_same", "Every step: accelerations stay the same"), ("s06_parcel_accel", "An air parcel's acceleration in two frames"),
             ("s07_sliding_pattern", "A sliding gust pattern, in numbers"), ("s08_ciaran", "Storm Ciarán"), ("s09_lopsided", "Why the winds were lopsided"),
@@ -234,7 +234,7 @@ def main() -> int:
                   "parc": B1.r6(parc, 3), "parc_x_km": B1.r6(path[0] / 1e3, 2)}
     say["slide"] = {"u": "13.54", "slope": "0.111", "rel": "3.54", "rel_kmh": "12.7", "U_kmh": "36", "u_kmh": "48.7", "loc_g": "−4.0", "adv_g": "+5.4", "adv_r": "+1.4"}
 
-    # ================================================================ s02 Brest's local frame (recap mini; Part 4 numbers)
+    # ================================================================ Brest's local frame (Part 4 numbers; the s02 recap mini is cut in the remake, the TSX CHECK keeps the row)
     eB = call(GS + "enu_basis", "s02", "(i, j, k) east, north, up at Brest", lat=BREST[0], lon=BREST[1])
     V["brest"] = {"ll": list(BREST), "i": B1.r6(eB[0], 4), "j": B1.r6(eB[1], 4), "k": B1.r6(eB[2], 4)}
     row("DP29", "Brest k = (0.662, −0.052, 0.748) (Part 4)", np.asarray(eB[2]), [0.662, -0.052, 0.748], 5e-4)
@@ -260,6 +260,11 @@ def main() -> int:
     row("DC52", "motion 14.58 m/s towards 71.0° (east 13.78, north 4.75)", [spd, brg, Ue, Un], [14.58, 71.0, 13.78, 4.75], [0.02, 0.2, 0.02, 0.02])
     row("DP33", "screen: |U| ≈ 14.6 m/s ≈ 52.5 km/h; 14.6 sin 71° ≈ 13.8; 14.6 cos 71° ≈ 4.8; 'roughly fifteen'",
         [round(spd, 1), spd * 3.6, 14.6 * np.sin(71 * D2R), 14.6 * np.cos(71 * D2R), round(spd)], [14.6, 52.5, 13.8, 4.8, 15], [0, 0.05, 0.05, 0.05, 0])
+    # remake 2026-11-07 (s08 S5-S8): Part 1's rule (maths angle = 90° − bearing; east = |U| cos θ = |U| sin bearing), the trig inputs said and
+    # highlighted (sin 71° ≈ 0.946, cos 71° ≈ 0.326, the bearing rounded as spoken), the rounded products, and U in Part 4's local arrows
+    row("DP44", "s08: θ = 90° − 71° = 19°; cos 19° = sin 71° = 0.946, sin 19° = cos 71° = 0.326; 14.6 × 0.946 = 13.8; 14.6 × 0.326 = 4.8",
+        [np.cos((90 - 71) * D2R), np.sin(71 * D2R), np.cos(71 * D2R), 14.6 * 0.946, 14.6 * 0.326, round(brg)], [0.946, 0.946, 0.326, 13.8, 4.8, 71], [5e-4, 5e-4, 5e-4, 0.05, 0.05, 0])
+    row("DP44", "s08: U = 13.8 î + 4.8 ĵ = the tracked motion's east / north parts to 0.1 (translation_velocity)", [Ue, Un], [13.8, 4.8], 0.051)
     # calc & sync audit #5e E3: the 00 -> 06 UTC move with Part 3's flat rules (one move per row on screen)
     la0, lo0, la1, lo1 = (float(trk.lat[k00]), float(trk.lon[k00]), float(trk.lat[k06]), float(trk.lon[k06]))
     dphi3, dlam3, pm3 = round(la1, 3) - round(la0, 3), round(lo1, 3) - round(lo0, 3), (round(la0, 3) + round(la1, 3)) / 2
@@ -444,7 +449,7 @@ def main() -> int:
                    "cmin": [float(c23m), float(trk.msl_min[k00] / 100), float(c01m)], "ghost": ghost, "gust_kt": g911,
                    "coast": B1.box_lines(coast, (43.0, 59.0, -16.0, 6.0), nd=3, step=2), "brest": list(BREST)}
     V["luts"] = {"speed": B1.lut_hex("cmocean.speed"), "p": B1.lut_hex("cividis")}
-    say["ciaran"] = {"p00": "954.5", "spd": "14.6", "kmh": "52.5", "brg": "71°", "Ue": "13.8", "Un": "4.8", "S": "18", "N": "7", "vtm": "14.1 / 13.8", "vrm": "−6.0 / −5.9",
+    say["ciaran"] = {"p00": "954.5", "spd": "14.6", "kmh": "52.5", "brg": "71°", "sin71": "0.946", "cos71": "0.326", "Ue": "13.8", "Un": "4.8", "S": "18", "N": "7", "vtm": "14.1 / 13.8", "vrm": "−6.0 / −5.9",
                      "gust": "84 kt ≈ 156 km/h", "p23": "964.1", "p01": "956.5", "dpdt": "−3.8", "along": "0.061", "UgP": "3.2", "dpdtau": "−0.6", "dist": "123 km"}
     # ================================================================ s17 recap = scene rows
     row("DP42", "recap: U ≈ 15 m/s; spin ≈ 14; −3.8 at Plymouth; 9.8; −4.0 + 5.4 = 1.4", [round(spd), round(float(Rg.tangential_mean[0])), round(dpdt, 1), round(loc_g, 1) + round(adv_g, 1)],
@@ -509,10 +514,10 @@ def main() -> int:
                        "time_compression": {"s00": "title animations (train, hourly isobars) in a few seconds", "s07": "one hour of the gust pattern in about 4 s",
                                             "s08": "hourly fields 21 -> 06 UTC at about 1 h per 1.5 s; particles 600 s per sample through the frozen 03 UTC field",
                                             "s13": "the frozen-pattern ghost slid 1 h and 2 h in a few seconds"},
-                       "exaggerations": ["s01 icons illustrative", "s02 tripod arrows ≈ 800 km on the globe mini", "s06 parcel cube and map illustrative (no data)",
+                       "exaggerations": ["s01 icons illustrative", "s06 parcel cube and map illustrative (no data)",
                                          "s10 inset arrows enlarged (scale in the scene: 9 px per m/s)", "s14 1-D profile = the real 00 UTC msl along U through Plymouth"],
-                       "screen_deviations": ["s00 title in the series layout of Parts 1 and 4 ('Coordinates · Part 5' 64 px, 'Moving' / 'frames' 150 px, 'made easy' 88 px, "
-                                             "'storm-relative winds' 68 px) instead of the storyboard's one-line 150-px 'Coordinates · Part 5' (does not fit x 100-1075)",
+                       "screen_deviations": ["s00 title in the series layout (remake 2026-11-07, kit_mv/SeriesTitle = Parts 1-4): 'Coordinates' 150 px, "
+                                             "'Part 5 · Moving frames' <= 80 px, 'storm-relative winds' 68 px; no 'made easy' (R1)",
                                              "skip chips in the lower maths zone (as Parts 1 and 4)", "s10 south calc written with '≈' (flag F3)"],
                        "data_report": "reports/data/ch00_coordinates_research.md (2026-11-05): Ciarán unchanged from build 1"},
         "credits": ["Contains modified Copernicus Climate Change Service information 2026 (ERA5 hourly surface for Ciarán, via the ARCO ERA5 store).",

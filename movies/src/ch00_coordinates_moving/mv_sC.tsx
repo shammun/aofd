@@ -9,9 +9,10 @@ import { SourceBelow } from "../house/kit/frame";
 import { AnimatedWindArrow } from "../house/kit/wind";
 import { CurvedLink } from "../house/kit/extras";
 import { Notebook } from "../house/kit/icons";
+import { ramp } from "../house";
 import {
-  AT, Arrow, Ax, Axes, Barometer, BROWN, CI, CalcStack, CiaMap, D, D2R, K, Keyword, LEN, Lbl, Layered, MapBox, PBar, PLY, Place, Rider, SE, SS, Scene, SideCallout,
-  SkipChip, SpeedBar, Svg, TRK, TeX, Train, Walker, XC, arcD, axP, axX, axY, boxAt, clamp, curveD, fin, fout, keepTime, lin, mapP, mix, prog, ringD, win, ParcelDot,
+  AT, Arrow, Ax, Axes, Barometer, BROWN, CI, CalcStack, CiaMap, D, D2R, HL, HOLD, K, Keyword, LEN, Lbl, Layered, MapBox, PBar, PLY, Place, Recall, Rider, SE, SS, Scene,
+  SideCallout, SkipChip, SpeedBar, Svg, TRK, TeX, Train, Walker, XC, arcD, axP, axX, axY, boxAt, clamp, curveD, fin, fout, keepTime, lin, mapP, mix, prog, ringD, win, ParcelDot,
 } from "./mv_lib";
 import { EQ_S13, EQ_S14, EQ_S16 } from "./mv_eq";
 
@@ -124,7 +125,8 @@ const S14: React.FC = () => {
         <Keyword f={f} text="how are the two rates linked?" at={[XC, 120]} appear={0} out={t3 - 18} s={T.floor} />
         <Keyword f={f} text="1. the rider: a traveller at U" at={[XC, 120]} appear={t3} out={t5 - 18} s={T.floor} c={C.second} />
         <Keyword f={f} text="3. move it across the =" at={[XC, 425]} appear={t8} out={t16 - 18} s={T.floor} c={C.gold} />
-        <Keyword f={f} text="speed × slope along U" at={[XC, 715]} appear={t13} out={t16 - 18} s={T.floor} c={C.first} />
+        <Keyword f={f} text="$\nabla p$ · cross product movie" at={[XC, 690]} appear={AT(k, 5, "where grad p")} out={t8 - 18} s={T.floor} c={C.gold} />
+        <Keyword f={f} text="speed $\times$ slope along $\mathbf U$" at={[XC, 715]} appear={t13} out={t16 - 18} s={T.floor} c={C.first} />
         <Keyword f={f} text="what to keep" at={[XC, 715]} appear={t16} c={C.gold} />
         <SkipChip f={f} k={k} to={keepTime("s14_tau_derive")} />
         <CurvedLink f={f} from={[XC + 520, 290]} to={[XC + 560, 455]} start={t8 + 10} end={t10} bend={-80} />
@@ -135,6 +137,9 @@ const S14: React.FC = () => {
         { rhs: String.raw`\dfrac{dp}{dt}=\dfrac{\partial p}{\partial t}+\mathbf U\cdot\nabla p`, at: AT(k, 5, "With the dot product"), h: 120 },
         { rhs: String.raw`\dfrac{\partial p}{\partial\tau}=\dfrac{\partial p}{\partial t}+\mathbf U\cdot\nabla p`, at: AT(k, 7, "So partial p by partial tau"), h: 120 },
       ]} />
+      {/* remake 2026-11-07 (R16; series audit §3a): the traveller's rate from the derivatives movie (S4), grad p from the cross product movie (S5) */}
+      <Recall f={f} tex={String.raw`\dfrac{dT}{dt}=\dfrac{\partial T}{\partial t}+\text{speed}\times\text{slope}`} name="the traveller's rate"
+        lab="from the derivatives movie:" x={XC} y={470} size={46} appear={AT(k, 4, "derivatives movie")} out={t8 - 12} />
       <Layered parts={parts} x={XC} y={560} size={72} layers={[{ t: "all", o: fin(f, t9) }, { t: [], u: [0], o: fin(f, t11) }, { t: [], u: [2], o: fin(f, t12) }, { t: [], u: [3], o: fin(f, t15) }]} />
       <TeX s={String.raw`\dfrac{\cancel{\text{km}}}{\text{h}}\times\dfrac{\text{hPa}}{\cancel{\text{km}}}=\dfrac{\text{hPa}}{\text{h}}`} x={XC} y={800} size={48} o={win(f, t14, t16 - 18)} />
     </Scene>
@@ -189,10 +194,12 @@ const S15: React.FC = () => {
       <CalcStack f={f} x={XC} y={300} size={44} maxLines={3} rows={[
         { rhs: String.raw`\dfrac{\partial p}{\partial t}\approx\dfrac{956.5-964.1}{2\ \text{h}}\approx-3.8\ \text{hPa/h}`, at: AT(k, 2, "about minus three point eight"), h: 110 },
         { rhs: String.raw`|\nabla p|\approx0.062\ \text{hPa/km},\ \text{towards }63^\circ`, at: t4, c: C.local },
-        { rhs: String.raw`\text{along }71^\circ:\ 0.062\times\cos8^\circ\approx0.061`, at: AT(k, 4, "zero point zero six one"), c: C.local, cont: true },
+        { rhs: String.raw`\text{along }71^\circ:\ 0.062\times\cos8^\circ\approx0.061`, at: AT(k, 4, "zero point zero six one"), c: C.local, cont: true,
+          glow: HL(f, AT(k, 4, "zero point zero six one")) },
         { rhs: String.raw`|\mathbf U|\approx14.58\ \text{m/s}\times3.6\approx52.5\ \text{km/h}`, at: AT(k, 5, "fifty two and a half") },
-        { rhs: String.raw`\mathbf U\cdot\nabla p\approx52.5\times0.061\approx3.2\ \text{hPa/h}`, at: AT(k, 6, "fifty two and a half times") },
-        { rhs: String.raw`\dfrac{\partial p}{\partial\tau}\approx-3.8+3.2=-0.6\ \text{hPa/h}`, at: AT(k, 8, "minus three point eight plus"), h: 110, c: C.second },
+        { rhs: String.raw`\mathbf U\cdot\nabla p\approx52.5\times0.061\approx3.2\ \text{hPa/h}`, at: AT(k, 6, "the storm's speed times") },
+        { rhs: String.raw`\dfrac{\partial p}{\partial\tau}\approx-3.8+3.2=-0.6\ \text{hPa/h}`, at: AT(k, 8, "Adding"), h: 110, c: C.second,
+          glow: HL(f, AT(k, 8, "minus zero point six")) },
       ]} />
       <SourceBelow text={SRC_PLY} pic={{ x: 80, y: 40, w: 920, h: 772 }} w={920} name="s15 src" />
     </Scene>
@@ -205,9 +212,9 @@ const S16: React.FC = () => {
   const t1 = SS(k, 1), t2 = SS(k, 2), t3 = SS(k, 3), t4 = SS(k, 4), t5 = SS(k, 5), t6 = SS(k, 6);
   const Y0 = 130, SCL = 140;                                        // the zero line and px per hPa/h (Must 14: the bars get the whole picture zone)
   const bars = [
-    { x: 160, v: PL.dpdt, c: C.local, val: "−3.8", name: "barometer", a: AT(k, 0, "minus three point eight equals") },
-    { x: 500, v: -PL.UgP, c: C.first, val: "−3.2", name: "sliding past", a: AT(k, 0, "minus three point two") },
-    { x: 860, v: PL.dpdtau, c: C.second, val: "−0.6", name: "storm changing", a: AT(k, 0, "minus zero point six") },
+    { x: 160, v: PL.dpdt, c: C.local, val: "−3.8", name: "barometer", a: AT(k, 0, "three point eight") },
+    { x: 500, v: -PL.UgP, c: C.first, val: "−3.2", name: "sliding past", a: AT(k, 0, "three point two") },
+    { x: 860, v: PL.dpdtau, c: C.second, val: "−0.6", name: "storm changing", a: AT(k, 0, "zero point six") },
   ];
   const BW = 80;
   return (
@@ -232,7 +239,7 @@ const S16: React.FC = () => {
         <Keyword f={f} text="same idea: advection" at={[XC, 650]} appear={t5} s={T.floor} />
         <Keyword f={f} text="later: reading maps over time" at={[XC, 730]} appear={t6} s={T.floor} />
       </Svg>
-      <TeX s={EQ_S16} x={XC} y={180} size={56} o={fin(f, 6)} />
+      <TeX s={EQ_S16} x={XC} y={180} size={56} o={fin(f, AT(k, 0, "splits into"))} />
       <TeX s={String.raw`\dfrac{954.0-954.9}{2\ \text{h}}\approx-0.5\ \text{hPa/h}`} x={XC} y={515} size={48} o={fin(f, AT(k, 4, "fell from"))} />
       <SourceBelow text="Data: ERA5 (Copernicus C3S) · 2 Nov 2023 · Plymouth and the tracked centre" pic={{ x: 80, y: 40, w: 920, h: 720 }} w={920} name="s16 src" />
     </Scene>
@@ -244,7 +251,8 @@ const RB: MapBox = boxAt(50.3, -4.0, 8.0, 160, 140, 760, 560);
 const S17: React.FC = () => {
   const f = useCurrentFrame(), k = K("s17_recap");
   // Part 1 lessons D3: each beat at full strength until ITS sentence ends; the next enters 8 frames after its sentence starts
-  const n = 10, beat = (j: number) => (j < n - 1 ? win(f, SS(k, j) + (j ? 8 : 0), SE(k, j), 10) : fin(f, SS(k, j) + 8));
+  // remake 2026-11-07 (R3): the teaser is two sentences (S9, S10); its picture and its words stay to the end of the scene
+  const n = 11, beat = (j: number) => (j < n - 2 ? win(f, SS(k, j) + (j ? 8 : 0), SE(k, j), 10) : fin(f, SS(k, j) + 8));
   const O: Pt = [520, 430];
   const sRel = CI.pts.N.s as number[], gRel = CI.pts.N.g as number[];
   const pic = (j: number) => {
@@ -274,6 +282,7 @@ const S17: React.FC = () => {
   const txt: [number, string, string?][] = [[1, "accelerations unchanged", "same 9.8 m/s², same forces"], [2, "acceleration = local + advection"], [3, "pieces differ, the sum doesn't", "−4.0 + 5.4 = 0 + 1.4"],
     [4, "Ciarán: ≈ 15 m/s, east-north-east"], [5, "storm-relative wind"], [6, "average spin ≈ 14 m/s, both frames"],
     [7, "a fixed barometer's rate =", "storm changing − sliding past"], [8, "Plymouth: −3.8 = −0.6 − 3.2 hPa/h", "mostly the storm arriving"], [9, "Part 6: great circles, rhumb lines"]];
+  const oT10 = beat(10);
   return (
     <Scene>
       <Svg>{Array.from({ length: n }, (_, j) => pic(j))}</Svg>
@@ -287,6 +296,7 @@ const S17: React.FC = () => {
       <Svg><SpeedBar x={XC} y={780} o={Math.max(beat(4), beat(6))} /></Svg>
       <Svg>
         {txt.map(([j, a, b]) => <g key={j} opacity={beat(j)}><Lbl x={XC} y={360} t={a} c={C.key} s={T.floor} />{b ? <Lbl x={XC} y={440} t={b} c={C.gold} s={T.floor} /> : null}</g>)}
+        <Lbl x={XC} y={440} t="flights cross Greenland" c={C.gold} s={T.floor} o={oT10} />
       </Svg>
       <TeX s={String.raw`x=x'+U\,t,\qquad u=u'+U`} x={XC} y={360} size={56} o={beat(0)} />
       {/* Part 1 lessons C1: the recap's v′ = v − U set in KaTeX (was a sans label) */}
@@ -318,7 +328,8 @@ const S18: React.FC = () => {
   rel.forEach((t, i) => { if (COLX[Math.floor(i / 5)] + textW(t, T.floor) > (COLX[Math.floor(i / 5) + 1] ?? 1840) - 10) throw new Error(`end card: "${t}" too wide`); });
   return (
     <Scene>
-      <Svg>
+      {/* remake 2026-11-07 (R3): the picture fades out with the music over the 2.5-s silent hold (= Parts 2 and 4) */}
+      <Svg o={1 - ramp(f, LEN(k) - HOLD, LEN(k) - 4)}>
         <g opacity={fin(f, 6)}>{[420, 760, 1100, 1440].map((x, i) => thumb(x, i))}</g>
         <Lbl x={960} y={315} t="a series of maths tutorials" c={C.key} s={T.calc} a="middle" o={fin(f, 10)} />
         <Lbl x={960} y={395} t="atmospheric science · meteorology · fluid dynamics" c={C.key} s={T.key} a="middle" o={fin(f, AT(k, 1, "atmospheric science"))} />

@@ -10,8 +10,8 @@ import { SourceBelow } from "../house/kit/frame";
 import { AnimatedWindArrow } from "../house/kit/wind";
 import { CurvedLink } from "../house/kit/extras";
 import {
-  AT, Arrow, BREST, CI, CIA_PIC, CalcStack, CiaMap, ClockText, D, D2R, HOUR, HouseIcon, K, Keyword, LEN, Lbl, Layered, MapBox, Place, Proj, SE, SRC_CIA, SRC_CIA3, SS,
-  Scene, SideCallout, SpeedBar, Svg, TRK, TeX, XC, arcD, boxAt, clamp, fin, fout, lin, mapP, mix, nf, pieces, prog, ringD, sectorD, win,
+  AT, Arrow, BREST, CI, CIA_PIC, CalcStack, CiaMap, ClockText, D, D2R, HL, HOUR, HouseIcon, K, Keyword, LEN, Lbl, Layered, MapBox, Place, Proj, Recall, SE, SRC_CIA,
+  SRC_CIA3, SS, Scene, SideCallout, SpeedBar, Svg, TRK, TeX, XC, arcD, boxAt, clamp, fin, fout, lin, mapP, mix, nf, pieces, prog, ringD, sectorD, win,
 } from "./mv_lib";
 import { EQ_S08, EQ_S10 } from "./mv_eq";
 
@@ -32,6 +32,9 @@ const CHECK_B: [string, number, number, number][] = [
   ["e3 la0", E3.ll0[0], 49.667, 0], ["e3 lo0", E3.ll0[1], -5.717, 0], ["e3 la6", E3.ll6[0], 50.516, 0], ["e3 lo6", E3.ll6[1], -1.505, 0],
   ["e3 dy", E3.dy, 94.4, 0.05], ["e3 dx", E3.dx, 300.4, 0.05], ["mcos", E4.mcos, 0.906, 5e-4],
   ...(E4.tu5 as number[]).map((v, i) => [`tu5 ${i}`, v, [11.4, 13.8, 14.6, 13.7, 11.3][i], 0.05] as [string, number, number, number]),
+  // remake 2026-11-07: the trig inputs said and highlighted in s08 (rounded bearing 71°, as said), their products, and Part 1's N = 72 in s12
+  ["sin71", Math.sin(71 * D2R), 0.946, 5e-4], ["cos71", Math.cos(71 * D2R), 0.326, 5e-4], ["east 14.6", 14.6 * 0.946, 13.8, 0.05], ["north 14.6", 14.6 * 0.326, 4.8, 0.05],
+  ["brg rounds to 71", Math.round(CI.brg), 71, 0], ["N ring", RG.lat.length, 72, 0],
 ];
 CHECK_B.forEach(([n, v, r, tol]) => { if (!(Math.abs(v - r) <= tol)) throw new Error(`CHECK ${n}: data ${v} vs screen ${r}`); });
 
@@ -47,7 +50,7 @@ const uv = (v: number[], s: number): Pt => [v[0] * s, -v[1] * s];     // (east, 
 // ================================================================ s08 Storm Ciarán and its motion U
 const S08: React.FC = () => {
   const f = useCurrentFrame(), k = K("s08_ciaran");
-  const t1 = SS(k, 1), t2 = SS(k, 2), t3 = SS(k, 3), t4 = SS(k, 4), t5 = SS(k, 5), t6 = SS(k, 6), t7 = SS(k, 7);
+  const t1 = SS(k, 1), t2 = SS(k, 2), t3 = SS(k, 3), t4 = SS(k, 4), t5 = SS(k, 5), t6 = SS(k, 6), t8 = SS(k, 8);
   // hourly 21 -> 00 UTC while S2-S3 speak, held at midnight for S4, then 00 -> 06 UTC while the motion is told (1 h ≈ 1.5-2 s)
   const h = f < t4 ? 3 * lin(f, t1 + 10, SE(k, 2)) : 3 + 6 * lin(f, t4, AT(k, 4, "roughly fifteen"));
   const hi = Math.min(9, Math.floor(h + 1e-6));
@@ -98,13 +101,23 @@ const S08: React.FC = () => {
         { rhs: String.raw`\sqrt{94.4^2+300.4^2}\approx315\ \text{km}`, at: tSp - 50 },
         { rhs: String.raw`315\,000\ \text{m}\div21\,600\ \text{s}\approx14.6\ \text{m/s}`, at: tSp - 20, cont: true },
       ]} />
-      <CalcStack f={f} x={1270} y={250} size={48} maxLines={3} rows={[
-        { lhs: String.raw`|\mathbf U|`, rhs: String.raw`\approx14.6\ \text{m/s}\approx15`, at: t5, c: C.second },
-        { lhs: String.raw`\text{east}`, rhs: String.raw`=14.6\sin71^\circ\approx13.8`, at: AT(k, 5, "fourteen point six times sine") },
-        { lhs: String.raw`\text{north}`, rhs: String.raw`=14.6\cos71^\circ\approx4.8`, at: AT(k, 6, "fourteen point six times cosine") },
+      {/* remake 2026-11-07 (R16): Part 1's bearing rule at its point of use; S6-S7 the calculation with the trig inputs highlighted on their
+          words; S8 the answer as U in Part 4's local east and north arrows */}
+      <Recall f={f} tex={String.raw`\theta=90^\circ-\text{bearing}`} name="polar coordinates, bearings" x={XC} y={280} size={46} appear={t5} out={t6 - 12} />
+      <TeX s={String.raw`\text{east}=|\mathbf U|\cos\theta,\ \ \text{north}=|\mathbf U|\sin\theta`} x={XC} y={460} size={44}
+        o={win(f, AT(k, 5, "east and north parts"), t6 - 12)} />
+      <CalcStack f={f} x={XC} y={270} size={44} maxLines={3} o={fout(f, t8 - 12)} rows={[
+        { rhs: String.raw`\text{east}=|\mathbf U|\sin71^\circ`, at: t6 },
+        { rhs: String.raw`\text{north}=|\mathbf U|\cos71^\circ`, at: AT(k, 6, "its north part"), cont: true },
+        { rhs: String.raw`\sin71^\circ\approx0.946,\ \ \cos71^\circ\approx0.326`, at: AT(k, 7, "Sine seventy one"), c: C.gold,
+          glow: Math.max(HL(f, AT(k, 7, "Sine seventy one")), HL(f, AT(k, 7, "cosine seventy one"))) },
+        { rhs: String.raw`\text{east}=14.6\times0.946\approx13.8\ \text{m/s}`, at: AT(k, 7, "the east part is about") },
+        { rhs: String.raw`\text{north}=14.6\times0.326\approx4.8\ \text{m/s}`, at: AT(k, 7, "the north part about"), cont: true },
       ]} />
-      <TeX s={eq[0]} x={XC} y={520} size={46} c={C.second} o={fin(f, t7)} />
-      <TeX s={eq[1]} x={XC} y={590} size={46} c={C.second} o={fin(f, t7 + 10)} />
+      <TeX s={eq[0]} x={XC} y={300} size={46} c={C.second} o={fin(f, t8)} />
+      <TeX s={eq[1]} x={XC} y={370} size={46} c={C.second} o={fin(f, t8 + 10)} />
+      <Recall f={f} tex={String.raw`\mathbf U=13.8\,\hat{\mathbf i}+4.8\,\hat{\mathbf j}`} name="local east and north arrows" lab="from Part 4:" x={XC} y={470}
+        size={46} c={C.second} appear={AT(k, 8, "thirteen point eight times i hat")} />
       <SourceBelow text={SRC_CIA} pic={CIA_PIC} w={920} name="s08 src" />
     </Scene>
   );
@@ -149,6 +162,10 @@ const S09: React.FC = () => {
         <Keyword f={f} text="north: they partly cancel" at={[XC, 670]} appear={t6} s={T.floor} c={C.neg} />
         <SpeedBar x={XC} y={780} />
       </Svg>
+      {/* remake 2026-11-07 (R16): Part 1's split at its point of use (S1), leaving before the side values (S2) */}
+      <TeX s={String.raw`u_r=u\cos\theta+v\sin\theta`} x={XC} y={320} size={46} c={C.first} o={win(f, AT(k, 1, "we split"), AT(k, 2, "about eighteen") - 12)} />
+      <Recall f={f} tex={String.raw`u_\theta=-u\sin\theta+v\cos\theta`} name="radial and tangential wind" x={XC} y={385} size={46} c={C.first}
+        appear={AT(k, 1, "with the formulas")} out={AT(k, 2, "about eighteen") - 12} />
       <SourceBelow text={SRC_CIA3} pic={CIA_PIC} w={920} name="s09 src" />
     </Scene>
   );
@@ -197,10 +214,11 @@ const S10: React.FC = () => {
         <CurvedLink f={f} from={[pN[0] + 12, pN[1] - 8]} to={[ON[0] - 14, ON[1] - 8]} start={t8 + 6} bend={60} />
         <CurvedLink f={f} from={[pS[0] + 12, pS[1] + 6]} to={[OS[0] - 14, OS[1] + 4]} start={t5 + 6} bend={-30} />
         {/* Part 1 lessons B1: the insets say what they magnify (the map's arrows at 6 px per m/s, the insets at 9) */}
-        <Lbl x={640} y={820} t="insets: 1.5× larger" c={C.muted} s={T.floor} b={false} o={fin(f, t5 + 6)} />
+        <Lbl x={640} y={820} t="insets: 1.5$\times$ larger" c={C.muted} s={T.floor} b={false} o={fin(f, t5 + 6)} />
         <SpeedBar x={XC} y={100} />
         <Keyword f={f} text="riding with the storm's centre" at={[XC, 240]} appear={0} out={t1 - 18} s={T.floor} />
         <Keyword f={f} text="storm-relative wind" at={[XC, 240]} appear={t1} c={C.gold} />
+        <Keyword f={f} text="met in the vectors movie" at={[XC, 420]} appear={AT(k, 1, "vectors movie")} out={t4 - 18} s={T.floor} c={C.gold} />
         <Keyword f={f} text="−U: the arrow reversed" at={[XC, 420]} appear={t4} s={T.floor} c={C.second} />
         <Keyword f={f} text="rider: the north is windier" at={[XC, 790]} appear={t11} s={T.floor} c={C.gold} />
       </Svg>
@@ -342,6 +360,9 @@ const S12: React.FC = () => {
         <Keyword f={f} text="motion: the whole pattern" at={[XC, 730]} appear={t8 + 10} out={t9 - 18} s={T.floor} c={C.second} />
         <Keyword f={f} text="a house: the ground wind" at={[XC, 150]} appear={t9} s={T.floor} />
       </Svg>
+      {/* remake 2026-11-07 (R16): Part 1's ring average, N = 72 points every 5° (as here) */}
+      <Recall f={f} tex={String.raw`\bar u_\theta=\dfrac{1}{N}\sum_{i=1}^{N}u_{\theta,i},\ \ N=72`} name="ring averages" x={XC} y={300} size={46}
+        appear={AT(k, 2, "ring average")} out={t4 - 18} />
       <SourceBelow text={SRC_CIA3} pic={RPIC} w={880} o={oR} name="s12 src a" />
       <CiaMap f={f} h={6} o={oM} id="cia12">
         {() => <HouseIcon x={brest[0]} y={brest[1] - 6} s={0.9} />}
