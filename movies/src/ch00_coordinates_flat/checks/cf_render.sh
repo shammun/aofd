@@ -7,6 +7,7 @@ M="$R/movies/ch00/ch00_coordinates_flat"
 O="$R/movies/out/ch00/ch00_coordinates_flat"
 PY="$R/.venv/Scripts/python.exe"
 K6TAG="${K6TAG:-k6r4}"
+set -o pipefail   # a refused join or failed render must stop the script (2026-11-07: old chunks were joined-refused, then QA ran on the stale mp4)
 cd "$R" || exit 1
 mkdir -p "$S/tmp" "$O"; export TEMP="$S/tmp" TMP="$S/tmp"
 "$PY" tools/disk_guard.py --report | tail -2

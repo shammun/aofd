@@ -9,6 +9,7 @@ M="$R/movies/ch00/ch00_coordinates_sphere"
 O="$R/movies/out/ch00/ch00_coordinates_sphere"
 PY="$R/.venv/Scripts/python.exe"
 K6TAG="${K6TAG:?set K6TAG to the clean (0-hit) K6 stills tag, e.g. K6TAG=k6r1 bash cs_render.sh}"
+set -o pipefail   # stop on a failed render or refused join (2026-11-07)
 cd "$R" || exit 1
 [ -d "G:/" ] || { echo "G: missing: stop (never fall back to C:)"; exit 1; }
 mkdir -p "$S/tmp" "$O"; export TEMP="$S/tmp" TMP="$S/tmp"
