@@ -93,104 +93,104 @@
    "scene": "s00_title"
   },
   {
-   "time": "0:09",
-   "t_s": 9.85,
+   "time": "0:08",
+   "t_s": 8.9,
    "title": "What are coordinates?",
    "scene": "s01_hook"
   },
   {
-   "time": "0:30",
-   "t_s": 30.35,
+   "time": "0:35",
+   "t_s": 35.05,
    "title": "Origin, axes and Cartesian coordinates",
    "scene": "s02_coordinates"
   },
   {
-   "time": "2:22",
-   "t_s": 142.55,
+   "time": "2:27",
+   "t_s": 147.25,
    "title": "Polar coordinates",
    "scene": "s04_polar"
   },
   {
-   "time": "4:36",
-   "t_s": 276.425,
+   "time": "4:39",
+   "t_s": 279.15,
    "title": "Maths angle, compass bearing and wind 'from'",
    "scene": "s06_bearings"
   },
   {
-   "time": "5:16",
-   "t_s": 316.275,
+   "time": "5:18",
+   "t_s": 318.875,
    "title": "Radians and arc length",
    "scene": "s07_radians"
   },
   {
-   "time": "6:30",
-   "t_s": 390.225,
+   "time": "6:29",
+   "t_s": 389.275,
    "title": "The unit vector r-hat",
    "scene": "s08_r_hat"
   },
   {
-   "time": "7:54",
-   "t_s": 474.25,
+   "time": "7:46",
+   "t_s": 466.6,
    "title": "Every step: theta-hat and the 90-degree turn rule",
    "scene": "s09_where_theta_grows"
   },
   {
-   "time": "14:37",
-   "t_s": 877.025,
+   "time": "14:18",
+   "t_s": 858.85,
    "title": "Polar unit vectors depend on place",
    "scene": "s12_arrows_depend"
   },
   {
-   "time": "15:16",
-   "t_s": 916.875,
+   "time": "14:58",
+   "t_s": 898.7,
    "title": "Every step: a wind's radial and tangential parts",
    "scene": "s13_components"
   },
   {
-   "time": "19:04",
-   "t_s": 1144.3,
+   "time": "18:31",
+   "t_s": 1111.425,
    "title": "Every step: turned axes and the rotation matrix",
    "scene": "s15_turn_axes"
   },
   {
-   "time": "30:08",
-   "t_s": 1808.925,
+   "time": "28:52",
+   "t_s": 1732.45,
    "title": "Hurricane Ian in polar coordinates",
    "scene": "s21_ian_polar"
   },
   {
-   "time": "33:59",
-   "t_s": 2039.925,
+   "time": "32:34",
+   "t_s": 1954.75,
    "title": "What 35 and 13 mean",
    "scene": "s23_what_numbers_mean"
   },
   {
-   "time": "36:31",
-   "t_s": 2191.775,
+   "time": "34:49",
+   "t_s": 2089.5,
    "title": "Every step: three ring points by hand",
    "scene": "s24_ring_points"
   },
   {
-   "time": "40:10",
-   "t_s": 2410.35,
+   "time": "38:03",
+   "t_s": 2283.0,
    "title": "Why hurricane scientists use polar coordinates",
    "scene": "s25_why_polar_storm"
   },
   {
-   "time": "42:19",
-   "t_s": 2539.6,
+   "time": "40:12",
+   "t_s": 2412.25,
    "title": "The inflow angle and four angles",
    "scene": "s26_inflow_angle"
   },
   {
-   "time": "43:37",
-   "t_s": 2617.675,
+   "time": "41:30",
+   "t_s": 2490.325,
    "title": "Recap",
    "scene": "s27_recap"
   },
   {
-   "time": "45:14",
-   "t_s": 2714.875,
+   "time": "43:07",
+   "t_s": 2587.525,
    "title": "End",
    "scene": "s28_end"
   }
@@ -198,30 +198,30 @@
  "maths_skips": [
   {
    "block_from": "s09_where_theta_grows",
-   "skip_line_s": 474.25,
-   "skip_to": "14:25",
-   "skip_to_s": 865.125,
+   "skip_line_s": 466.6,
+   "skip_to": "14:06",
+   "skip_to_s": 846.95,
    "keep_line": "If you skipped, here's what to keep: r hat points away from the centre, theta hat points round it, anticlockwise, and theta hat is r hat turned by ninety degrees."
   },
   {
    "block_from": "s13_components",
-   "skip_line_s": 916.875,
-   "skip_to": "18:52",
-   "skip_to_s": 1132.625,
+   "skip_line_s": 898.7,
+   "skip_to": "18:19",
+   "skip_to_s": 1099.75,
    "keep_line": "If you skipped, here's what to keep: any wind splits into an in or out part along r hat, and a round part along theta hat, and each part is a dot product."
   },
   {
    "block_from": "s15_turn_axes",
-   "skip_line_s": 1144.3,
-   "skip_to": "29:55",
-   "skip_to_s": 1795.4,
+   "skip_line_s": 1111.425,
+   "skip_to": "28:38",
+   "skip_to_s": 1718.925,
    "keep_line": "If you skipped, here's what to keep: turning the axes by an angle alpha changes the numbers that describe an arrow, but not the arrow itself, and polar parts are just axes turned by theta."
   },
   {
    "block_from": "s24_ring_points",
-   "skip_line_s": 2191.775,
-   "skip_to": "39:58",
-   "skip_to_s": 2398.9,
+   "skip_line_s": 2089.5,
+   "skip_to": "37:51",
+   "skip_to_s": 2271.55,
    "keep_line": "If you skipped, here's what to keep: at every point round the ring, the wind's east and north parts turn into an in or out part and a round part, and then we average them."
   }
  ],
@@ -1267,12 +1267,12 @@
     -11.2,
     -23.2
    ],
-   "tol": 0.06,
+   "tol": 0.05,
    "pass": true
   },
   {
    "id": "DF24",
-   "name": "R7 eight points 0-315°: u_θ = 38.0, 29.5, 16.9, 38.7, 45.6, 43.7, 24.6, 34.6 m/s",
+   "name": "R7 eight points 0-315°: u_θ = 38.0, 29.5, 16.9, 38.6 (hand sum 7.14 + 31.46; library 38.65), 45.6, 43.7, 24.5, 34.6 m/s",
    "value": [
     38.014012,
     29.528484,
@@ -1287,13 +1287,22 @@
     38.0,
     29.5,
     16.9,
-    38.7,
+    38.6,
     45.6,
     43.7,
-    24.6,
+    24.5,
     34.6
    ],
-   "tol": 0.06,
+   "tol": [
+    0.05,
+    0.05,
+    0.05,
+    0.06,
+    0.05,
+    0.05,
+    0.05,
+    0.05
+   ],
    "pass": true
   },
   {
@@ -1760,6 +1769,23 @@
     0.0001,
     0.0001,
     0.005
+   ],
+   "pass": true
+  },
+  {
+   "id": "DF26",
+   "name": "fix 1 after fb1 (review 2 Should 3): the s26 screen tan⁻¹(0.38) ≈ 20.8° ≈ 21° (tan⁻¹(0.382) = 20.9° is the unrounded ratio)",
+   "value": [
+    20.806791,
+    20.916052
+   ],
+   "ref": [
+    20.8,
+    20.9
+   ],
+   "tol": [
+    0.05,
+    0.05
    ],
    "pass": true
   },

@@ -15,3761 +15,3761 @@
    "start": 0.3,
    "sentences": [
     {
-     "text": "In this video, we'll learn coordinates on a flat map, and see how meteorology uses them to measure the winds round a hurricane's eye.",
+     "text": "In this video, we'll learn coordinates on a flat map, and see how they're used to measure the winds around a hurricane's eye.",
      "audio_text": null,
      "start": 0.3,
-     "end": 9.05,
-     "dur": 8.75,
+     "end": 8.1,
+     "dur": 7.8,
      "start_frame": 9,
-     "end_frame": 272
+     "end_frame": 243
     }
    ],
-   "end": 9.85,
+   "end": 8.9,
    "start_frame": 9,
-   "end_frame": 296
+   "end_frame": 267
   },
   {
    "id": "s01_hook",
-   "start": 9.85,
+   "start": 8.9,
    "sentences": [
     {
      "text": "What are coordinates, and why do we need more than one kind?",
      "audio_text": null,
-     "start": 9.85,
-     "end": 13.75,
+     "start": 8.9,
+     "end": 12.8,
      "dur": 3.9,
-     "start_frame": 296,
-     "end_frame": 412
+     "start_frame": 267,
+     "end_frame": 384
     },
     {
      "text": "This is the first of seven parts on coordinates, and in this part, we stay on a flat map.",
      "audio_text": null,
-     "start": 14.1,
-     "end": 20.375,
+     "start": 13.15,
+     "end": 19.425,
      "dur": 6.275,
-     "start_frame": 423,
-     "end_frame": 611
+     "start_frame": 394,
+     "end_frame": 583
     },
     {
-     "text": "Let's see what coordinates are, and why they're built the way they are.",
+     "text": "Now let's dive into what coordinates are, how they're built and how they're used: x and y, polar coordinates with r and theta, and turned axes.",
      "audio_text": null,
-     "start": 20.725,
-     "end": 24.975,
-     "dur": 4.25,
-     "start_frame": 622,
-     "end_frame": 749
+     "start": 19.775,
+     "end": 29.675,
+     "dur": 9.9,
+     "start_frame": 593,
+     "end_frame": 890
     },
     {
      "text": "Then let's see what they tell us about the winds round a hurricane.",
      "audio_text": null,
-     "start": 25.325,
-     "end": 29.55,
+     "start": 30.025,
+     "end": 34.25,
      "dur": 4.225,
-     "start_frame": 760,
-     "end_frame": 886
+     "start_frame": 901,
+     "end_frame": 1028
     }
    ],
-   "end": 30.35,
-   "start_frame": 296,
-   "end_frame": 910
+   "end": 35.05,
+   "start_frame": 267,
+   "end_frame": 1052
   },
   {
    "id": "s02_coordinates",
-   "start": 30.35,
+   "start": 35.05,
    "sentences": [
     {
      "text": "Let's start with a flat map.",
      "audio_text": null,
-     "start": 30.35,
-     "end": 32.65,
+     "start": 35.05,
+     "end": 37.35,
      "dur": 2.3,
-     "start_frame": 910,
-     "end_frame": 980
+     "start_frame": 1052,
+     "end_frame": 1120
     },
     {
      "text": "To say where something is, we need a starting point, and some directions to count from.",
      "audio_text": null,
-     "start": 33.0,
-     "end": 38.95,
+     "start": 37.7,
+     "end": 43.65,
      "dur": 5.95,
-     "start_frame": 990,
-     "end_frame": 1168
+     "start_frame": 1131,
+     "end_frame": 1310
     },
     {
      "text": "The starting point is called the origin.",
      "audio_text": null,
-     "start": 39.3,
-     "end": 42.3,
+     "start": 44.0,
+     "end": 47.0,
      "dur": 3.0,
-     "start_frame": 1179,
-     "end_frame": 1269
+     "start_frame": 1320,
+     "end_frame": 1410
     },
     {
      "text": "Let's put it at a weather station.",
      "audio_text": null,
-     "start": 42.65,
-     "end": 45.125,
+     "start": 47.35,
+     "end": 49.825,
      "dur": 2.475,
-     "start_frame": 1280,
-     "end_frame": 1354
+     "start_frame": 1420,
+     "end_frame": 1495
     },
     {
      "text": "Now draw one line through it pointing east, and one pointing north.",
      "audio_text": null,
-     "start": 45.475,
-     "end": 50.05,
+     "start": 50.175,
+     "end": 54.75,
      "dur": 4.575,
-     "start_frame": 1364,
-     "end_frame": 1502
+     "start_frame": 1505,
+     "end_frame": 1642
     },
     {
      "text": "These lines are called the axes.",
      "audio_text": null,
-     "start": 50.4,
-     "end": 52.975,
+     "start": 55.1,
+     "end": 57.675,
      "dur": 2.575,
-     "start_frame": 1512,
-     "end_frame": 1589
+     "start_frame": 1653,
+     "end_frame": 1730
     },
     {
      "text": "A weather balloon drifts three kilometres east and four kilometres north of the station.",
      "audio_text": null,
-     "start": 53.325,
-     "end": 59.4,
+     "start": 58.025,
+     "end": 64.1,
      "dur": 6.075,
-     "start_frame": 1600,
-     "end_frame": 1782
+     "start_frame": 1741,
+     "end_frame": 1923
     },
     {
      "text": "So we can write its position as the pair of numbers three and four.",
      "audio_text": null,
-     "start": 59.75,
-     "end": 64.175,
+     "start": 64.45,
+     "end": 68.875,
      "dur": 4.425,
-     "start_frame": 1792,
-     "end_frame": 1925,
+     "start_frame": 1934,
+     "end_frame": 2066,
      "beat": true
     },
     {
      "text": "These two numbers are called its coordinates, and together they pin down one place on the map.",
      "audio_text": null,
-     "start": 65.675,
-     "end": 71.65,
+     "start": 70.375,
+     "end": 76.35,
      "dur": 5.975,
-     "start_frame": 1970,
-     "end_frame": 2150
+     "start_frame": 2111,
+     "end_frame": 2290
     },
     {
      "text": "Measuring along straight axes at right angles, like this, is called Cartesian coordinates, after the French thinker René Descartes.",
      "audio_text": null,
-     "start": 72.0,
-     "end": 80.825,
+     "start": 76.7,
+     "end": 85.525,
      "dur": 8.825,
-     "start_frame": 2160,
-     "end_frame": 2425
+     "start_frame": 2301,
+     "end_frame": 2566
     }
    ],
-   "end": 81.625,
-   "start_frame": 910,
-   "end_frame": 2449
+   "end": 86.325,
+   "start_frame": 1052,
+   "end_frame": 2590
   },
   {
    "id": "s03_cartesian_arrows",
-   "start": 81.625,
+   "start": 86.325,
    "sentences": [
     {
      "text": "Each axis comes with a unit vector: an arrow of length one that points along it.",
      "audio_text": null,
-     "start": 81.625,
-     "end": 87.275,
+     "start": 86.325,
+     "end": 91.975,
      "dur": 5.65,
-     "start_frame": 2449,
-     "end_frame": 2618
+     "start_frame": 2590,
+     "end_frame": 2759
     },
     {
      "text": "We write x hat for the arrow pointing east, and y hat for the arrow pointing north.",
      "audio_text": null,
-     "start": 87.625,
-     "end": 93.325,
+     "start": 92.325,
+     "end": 98.025,
      "dur": 5.7,
-     "start_frame": 2629,
-     "end_frame": 2800
+     "start_frame": 2770,
+     "end_frame": 2941
     },
     {
      "text": "The balloon's position is three times x hat, plus four times y hat. Three steps of x hat take us three kilometres east, and four steps of y hat take us four kilometres north, which lands exactly on the balloon.",
      "audio_text": null,
-     "start": 93.675,
-     "end": 109.125,
+     "start": 98.375,
+     "end": 113.825,
      "dur": 15.45,
-     "start_frame": 2810,
-     "end_frame": 3274
+     "start_frame": 2951,
+     "end_frame": 3415
     },
     {
      "text": "We met arrows like these in the vectors movie of this series.",
      "audio_text": null,
-     "start": 109.475,
-     "end": 113.6,
+     "start": 114.175,
+     "end": 118.3,
      "dur": 4.125,
-     "start_frame": 3284,
-     "end_frame": 3408
+     "start_frame": 3425,
+     "end_frame": 3549
     },
     {
      "text": "Here's their key property: x hat points the same way everywhere on the map.",
      "audio_text": null,
-     "start": 113.95,
-     "end": 119.0,
+     "start": 118.65,
+     "end": 123.7,
      "dur": 5.05,
-     "start_frame": 3418,
-     "end_frame": 3570
+     "start_frame": 3560,
+     "end_frame": 3711
     },
     {
      "text": "Move the balloon anywhere you like, and the two arrows don't change.",
      "audio_text": null,
-     "start": 119.35,
-     "end": 123.8,
+     "start": 124.05,
+     "end": 128.5,
      "dur": 4.45,
-     "start_frame": 3580,
-     "end_frame": 3714
+     "start_frame": 3722,
+     "end_frame": 3855
     },
     {
      "text": "That's what makes Cartesian coordinates so easy to work with.",
      "audio_text": null,
-     "start": 124.15,
-     "end": 128.275,
+     "start": 128.85,
+     "end": 132.975,
      "dur": 4.125,
-     "start_frame": 3724,
-     "end_frame": 3848
+     "start_frame": 3866,
+     "end_frame": 3989
     },
     {
      "text": "But many things in the weather aren't laid out in squares.",
      "audio_text": null,
-     "start": 128.625,
-     "end": 132.225,
+     "start": 133.325,
+     "end": 136.925,
      "dur": 3.6,
-     "start_frame": 3859,
-     "end_frame": 3967
+     "start_frame": 4000,
+     "end_frame": 4108
     },
     {
      "text": "A hurricane spins round its eye, and a weather radar looks out in rings.",
      "audio_text": null,
-     "start": 132.575,
-     "end": 137.725,
+     "start": 137.275,
+     "end": 142.425,
      "dur": 5.15,
-     "start_frame": 3977,
-     "end_frame": 4132
+     "start_frame": 4118,
+     "end_frame": 4273
     },
     {
      "text": "For those, there's a better way to say where something is.",
      "audio_text": null,
-     "start": 138.075,
-     "end": 141.75,
+     "start": 142.775,
+     "end": 146.45,
      "dur": 3.675,
-     "start_frame": 4142,
-     "end_frame": 4252
+     "start_frame": 4283,
+     "end_frame": 4394
     }
    ],
-   "end": 142.55,
-   "start_frame": 2449,
-   "end_frame": 4276
+   "end": 147.25,
+   "start_frame": 2590,
+   "end_frame": 4418
   },
   {
    "id": "s04_polar",
-   "start": 142.55,
+   "start": 147.25,
    "sentences": [
     {
      "text": "Instead of going east and north, we can give two other numbers: how far away the balloon is, and in which direction.",
      "audio_text": null,
-     "start": 142.55,
-     "end": 150.35,
+     "start": 147.25,
+     "end": 155.05,
      "dur": 7.8,
-     "start_frame": 4276,
-     "end_frame": 4510
+     "start_frame": 4418,
+     "end_frame": 4652
     },
     {
      "text": "The distance from the origin is called r.",
      "audio_text": null,
-     "start": 150.7,
-     "end": 153.625,
+     "start": 155.4,
+     "end": 158.325,
      "dur": 2.925,
-     "start_frame": 4521,
-     "end_frame": 4609
+     "start_frame": 4662,
+     "end_frame": 4750
     },
     {
-     "text": "By Pythagoras, r is the square root of three squared plus four squared. Three squared is nine, and four squared is sixteen, so that's the square root of twenty five: five kilometres.",
+     "text": "By Pythagoras, we square the balloon's two coordinates, three and four, add them, and take the square root, and we get five kilometres.",
      "audio_text": null,
-     "start": 153.975,
-     "end": 167.075,
-     "dur": 13.1,
-     "start_frame": 4619,
-     "end_frame": 5012,
+     "start": 158.675,
+     "end": 167.575,
+     "dur": 8.9,
+     "start_frame": 4760,
+     "end_frame": 5027,
      "beat": true
     },
     {
      "text": "The direction is an angle, called theta.",
      "audio_text": null,
-     "start": 168.575,
-     "end": 171.725,
+     "start": 169.075,
+     "end": 172.225,
      "dur": 3.15,
-     "start_frame": 5057,
-     "end_frame": 5152
+     "start_frame": 5072,
+     "end_frame": 5167
     },
     {
      "text": "Mathematicians measure it from the east axis, turning anticlockwise as seen from above.",
      "audio_text": null,
-     "start": 172.075,
-     "end": 178.5,
+     "start": 172.575,
+     "end": 179.0,
      "dur": 6.425,
-     "start_frame": 5162,
-     "end_frame": 5355
+     "start_frame": 5177,
+     "end_frame": 5370
     },
     {
      "text": "In a right triangle, the tangent of an angle is the side opposite it divided by the side next to it: here the north side over the east side, four over three, about one point three three. The angle with that tangent is about fifty three point one degrees, so theta is about fifty three degrees.",
      "audio_text": null,
-     "start": 178.85,
-     "end": 198.8,
+     "start": 179.35,
+     "end": 199.3,
      "dur": 19.95,
-     "start_frame": 5366,
-     "end_frame": 5964,
+     "start_frame": 5380,
+     "end_frame": 5979,
      "beat": true
     },
     {
      "text": "So the same balloon is at r equals five kilometres, and theta equals fifty three degrees.",
      "audio_text": null,
-     "start": 200.3,
-     "end": 206.625,
+     "start": 200.8,
+     "end": 207.125,
      "dur": 6.325,
-     "start_frame": 6009,
-     "end_frame": 6199
+     "start_frame": 6024,
+     "end_frame": 6214
     },
     {
      "text": "These two numbers are called polar coordinates.",
      "audio_text": null,
-     "start": 206.975,
-     "end": 210.275,
+     "start": 207.475,
+     "end": 210.775,
      "dur": 3.3,
-     "start_frame": 6209,
-     "end_frame": 6308
+     "start_frame": 6224,
+     "end_frame": 6323
     },
     {
      "text": "A weather radar measures exactly this pair: how far away the raindrops are, and in which direction.",
      "audio_text": null,
-     "start": 210.625,
-     "end": 217.5,
+     "start": 211.125,
+     "end": 218.0,
      "dur": 6.875,
-     "start_frame": 6319,
-     "end_frame": 6525
+     "start_frame": 6334,
+     "end_frame": 6540
     }
    ],
-   "end": 218.3,
-   "start_frame": 4276,
-   "end_frame": 6549
+   "end": 218.8,
+   "start_frame": 4418,
+   "end_frame": 6564
   },
   {
    "id": "s05_polar_back",
-   "start": 218.3,
+   "start": 218.8,
    "sentences": [
     {
      "text": "Can we go back the other way?",
      "audio_text": null,
-     "start": 218.3,
-     "end": 220.6,
+     "start": 218.8,
+     "end": 221.1,
      "dur": 2.3,
-     "start_frame": 6549,
-     "end_frame": 6618
+     "start_frame": 6564,
+     "end_frame": 6633
     },
     {
      "text": "Yes.",
      "audio_text": null,
-     "start": 220.95,
-     "end": 222.3,
+     "start": 221.45,
+     "end": 222.8,
      "dur": 1.35,
-     "start_frame": 6628,
-     "end_frame": 6669
+     "start_frame": 6644,
+     "end_frame": 6684
     },
     {
      "text": "Think of the right triangle with the balloon at its tip.",
      "audio_text": null,
-     "start": 222.65,
-     "end": 226.125,
+     "start": 223.15,
+     "end": 226.625,
      "dur": 3.475,
-     "start_frame": 6680,
-     "end_frame": 6784
+     "start_frame": 6694,
+     "end_frame": 6799
     },
     {
      "text": "Its long side is r, and its angle at the station is theta.",
      "audio_text": null,
-     "start": 226.475,
-     "end": 230.95,
+     "start": 226.975,
+     "end": 231.45,
      "dur": 4.475,
-     "start_frame": 6794,
-     "end_frame": 6928
+     "start_frame": 6809,
+     "end_frame": 6944
     },
     {
      "text": "The side going east is r times cosine theta, and the side going north is r times sine theta.",
      "audio_text": null,
-     "start": 231.3,
-     "end": 238.25,
+     "start": 231.8,
+     "end": 238.75,
      "dur": 6.95,
-     "start_frame": 6939,
-     "end_frame": 7148
+     "start_frame": 6954,
+     "end_frame": 7162
     },
     {
      "text": "Let's check.",
      "audio_text": null,
-     "start": 238.6,
-     "end": 240.175,
+     "start": 239.1,
+     "end": 240.675,
      "dur": 1.575,
-     "start_frame": 7158,
-     "end_frame": 7205
+     "start_frame": 7173,
+     "end_frame": 7220
     },
     {
-     "text": "Cosine theta is the east side divided by the long side, and sine theta is the north side divided by the long side. For our balloon that's three fifths, zero point six, and four fifths, zero point eight. So five times the cosine of theta is five times zero point six, which is three.",
+     "text": "Cosine theta is the east side divided by the long side, and sine theta is the north side divided by the long side. For our balloon that's three fifths, zero point six, and four fifths, zero point eight. So five kilometres times the cosine of theta gives back the east side: three.",
      "audio_text": null,
-     "start": 240.525,
-     "end": 261.275,
-     "dur": 20.75,
-     "start_frame": 7216,
-     "end_frame": 7838
+     "start": 241.025,
+     "end": 261.825,
+     "dur": 20.8,
+     "start_frame": 7231,
+     "end_frame": 7855
     },
     {
-     "text": "And five times zero point eight is four.",
+     "text": "And five kilometres times the sine gives back the north side: four.",
      "audio_text": null,
-     "start": 261.625,
-     "end": 264.5,
-     "dur": 2.875,
-     "start_frame": 7849,
-     "end_frame": 7935,
+     "start": 262.175,
+     "end": 267.225,
+     "dur": 5.05,
+     "start_frame": 7865,
+     "end_frame": 8017,
      "beat": true
     },
     {
      "text": "So x equals r cosine theta, and y equals r sine theta.",
      "audio_text": null,
-     "start": 266.0,
-     "end": 270.85,
+     "start": 268.725,
+     "end": 273.575,
      "dur": 4.85,
-     "start_frame": 7980,
-     "end_frame": 8126
+     "start_frame": 8062,
+     "end_frame": 8207
     },
     {
      "text": "These two lines are all we need to switch between the two systems.",
      "audio_text": null,
-     "start": 271.2,
-     "end": 275.625,
+     "start": 273.925,
+     "end": 278.35,
      "dur": 4.425,
-     "start_frame": 8136,
-     "end_frame": 8269
+     "start_frame": 8218,
+     "end_frame": 8350
     }
    ],
-   "end": 276.425,
-   "start_frame": 6549,
-   "end_frame": 8293
+   "end": 279.15,
+   "start_frame": 6564,
+   "end_frame": 8374
   },
   {
    "id": "s06_bearings",
-   "start": 276.425,
+   "start": 279.15,
    "sentences": [
     {
      "text": "One warning before we go on.",
      "audio_text": null,
-     "start": 276.425,
-     "end": 278.9,
+     "start": 279.15,
+     "end": 281.625,
      "dur": 2.475,
-     "start_frame": 8293,
-     "end_frame": 8367
+     "start_frame": 8374,
+     "end_frame": 8449
     },
     {
      "text": "Meteorologists and navigators measure directions differently.",
      "audio_text": null,
-     "start": 279.25,
-     "end": 283.9,
+     "start": 281.975,
+     "end": 286.625,
      "dur": 4.65,
-     "start_frame": 8378,
-     "end_frame": 8517
+     "start_frame": 8459,
+     "end_frame": 8599
     },
     {
      "text": "A compass bearing starts from north, and turns clockwise as seen from above.",
      "audio_text": null,
-     "start": 284.25,
-     "end": 289.375,
+     "start": 286.975,
+     "end": 292.1,
      "dur": 5.125,
-     "start_frame": 8528,
-     "end_frame": 8681
+     "start_frame": 8609,
+     "end_frame": 8763
     },
     {
-     "text": "So the balloon's bearing is ninety minus fifty three, which is thirty seven degrees.",
+     "text": "So the balloon's bearing is ninety degrees minus theta: thirty seven degrees.",
      "audio_text": null,
-     "start": 289.725,
-     "end": 295.45,
-     "dur": 5.725,
-     "start_frame": 8692,
-     "end_frame": 8864,
+     "start": 292.45,
+     "end": 298.05,
+     "dur": 5.6,
+     "start_frame": 8774,
+     "end_frame": 8942,
      "beat": true
     },
     {
      "text": "Weather reports add one more twist: a wind's direction says where the wind blows from, as we saw in the weather basics movie.",
      "audio_text": null,
-     "start": 296.95,
-     "end": 305.55,
+     "start": 299.55,
+     "end": 308.15,
      "dur": 8.6,
-     "start_frame": 8908,
-     "end_frame": 9166
+     "start_frame": 8986,
+     "end_frame": 9244
     },
     {
      "text": "So a west wind blows towards the east.",
      "audio_text": null,
-     "start": 305.9,
-     "end": 308.8,
+     "start": 308.5,
+     "end": 311.4,
      "dur": 2.9,
-     "start_frame": 9177,
-     "end_frame": 9264
+     "start_frame": 9255,
+     "end_frame": 9342
     },
     {
      "text": "Same arrows, different rulers, so it's always worth checking which angle a data set uses.",
      "audio_text": null,
-     "start": 309.15,
-     "end": 315.475,
+     "start": 311.75,
+     "end": 318.075,
      "dur": 6.325,
-     "start_frame": 9274,
-     "end_frame": 9464
+     "start_frame": 9352,
+     "end_frame": 9542
     }
    ],
-   "end": 316.275,
-   "start_frame": 8293,
-   "end_frame": 9488
+   "end": 318.875,
+   "start_frame": 8374,
+   "end_frame": 9566
   },
   {
    "id": "s07_radians",
-   "start": 316.275,
+   "start": 318.875,
    "sentences": [
     {
      "text": "Before polar coordinates can do their real work, we need one more building block: measuring angles in radians.",
      "audio_text": null,
-     "start": 316.275,
-     "end": 323.925,
+     "start": 318.875,
+     "end": 326.525,
      "dur": 7.65,
-     "start_frame": 9488,
-     "end_frame": 9718
+     "start_frame": 9566,
+     "end_frame": 9796
     },
     {
      "text": "Take a circle of radius r, and walk along its edge.",
      "audio_text": null,
-     "start": 324.275,
-     "end": 328.225,
+     "start": 326.875,
+     "end": 330.825,
      "dur": 3.95,
-     "start_frame": 9728,
-     "end_frame": 9847
+     "start_frame": 9806,
+     "end_frame": 9925
     },
     {
      "text": "The angle in radians is the distance you walked, divided by the radius.",
      "audio_text": null,
-     "start": 328.575,
-     "end": 333.775,
+     "start": 331.175,
+     "end": 336.375,
      "dur": 5.2,
-     "start_frame": 9857,
-     "end_frame": 10013
+     "start_frame": 9935,
+     "end_frame": 10091
     },
     {
      "text": "So the distance along the edge, called the arc length, is the radius times the angle.",
      "audio_text": null,
-     "start": 334.125,
-     "end": 340.075,
+     "start": 336.725,
+     "end": 342.675,
      "dur": 5.95,
-     "start_frame": 10024,
-     "end_frame": 10202
+     "start_frame": 10102,
+     "end_frame": 10280
     },
     {
      "text": "A full circle is two pi radians, because its edge is two pi times the radius.",
      "audio_text": null,
-     "start": 340.425,
-     "end": 346.0,
+     "start": 343.025,
+     "end": 348.6,
      "dur": 5.575,
-     "start_frame": 10213,
-     "end_frame": 10380
+     "start_frame": 10291,
+     "end_frame": 10458
     },
     {
-     "text": "Two pi is about six point two eight, so one radian is three hundred and sixty degrees divided by six point two eight: about fifty seven degrees.",
+     "text": "So one radian is three hundred and sixty degrees divided by two pi: about fifty seven degrees.",
      "audio_text": null,
-     "start": 346.35,
-     "end": 356.475,
-     "dur": 10.125,
-     "start_frame": 10390,
-     "end_frame": 10694
+     "start": 348.95,
+     "end": 356.075,
+     "dur": 7.125,
+     "start_frame": 10468,
+     "end_frame": 10682
     },
     {
      "text": "Let's try easy numbers.",
      "audio_text": null,
-     "start": 356.825,
-     "end": 359.1,
+     "start": 356.425,
+     "end": 358.7,
      "dur": 2.275,
-     "start_frame": 10705,
-     "end_frame": 10773
+     "start_frame": 10693,
+     "end_frame": 10761
     },
     {
-     "text": "On a ring five kilometres from the station, turn by zero point two radians: that's about eleven and a half degrees. It walks you five times zero point two, which is one kilometre.",
+     "text": "On a ring five kilometres from the station, turn by zero point two radians: that's about eleven and a half degrees. It walks you the radius times the angle: one kilometre.",
      "audio_text": null,
-     "start": 359.45,
-     "end": 372.625,
-     "dur": 13.175,
-     "start_frame": 10784,
-     "end_frame": 11179,
+     "start": 359.05,
+     "end": 371.675,
+     "dur": 12.625,
+     "start_frame": 10772,
+     "end_frame": 11150,
      "beat": true
     },
     {
      "text": "On a ring fifty kilometres out, the same turn walks you ten kilometres.",
      "audio_text": null,
-     "start": 374.125,
-     "end": 379.225,
+     "start": 373.175,
+     "end": 378.275,
      "dur": 5.1,
-     "start_frame": 11224,
-     "end_frame": 11377,
+     "start_frame": 11195,
+     "end_frame": 11348,
      "beat": true
     },
     {
      "text": "The same angle gives ten times the distance.",
      "audio_text": null,
-     "start": 380.725,
-     "end": 384.05,
+     "start": 379.775,
+     "end": 383.1,
      "dur": 3.325,
-     "start_frame": 11422,
-     "end_frame": 11522
+     "start_frame": 11393,
+     "end_frame": 11493
     },
     {
      "text": "Keep this rule in mind, because it explains a lot about maps of the Earth.",
      "audio_text": null,
-     "start": 384.4,
-     "end": 389.425,
+     "start": 383.45,
+     "end": 388.475,
      "dur": 5.025,
-     "start_frame": 11532,
-     "end_frame": 11683
+     "start_frame": 11504,
+     "end_frame": 11654
     }
    ],
-   "end": 390.225,
-   "start_frame": 9488,
-   "end_frame": 11707
+   "end": 389.275,
+   "start_frame": 9566,
+   "end_frame": 11678
   },
   {
    "id": "s08_r_hat",
-   "start": 390.225,
+   "start": 389.275,
    "sentences": [
     {
      "text": "Polar coordinates come with their own unit vectors, so let's build them one at a time.",
      "audio_text": null,
-     "start": 390.225,
-     "end": 395.95,
+     "start": 389.275,
+     "end": 395.0,
      "dur": 5.725,
-     "start_frame": 11707,
-     "end_frame": 11878
+     "start_frame": 11678,
+     "end_frame": 11850
     },
     {
      "text": "The first is called r hat.",
      "audio_text": null,
-     "start": 396.3,
-     "end": 398.6,
+     "start": 395.35,
+     "end": 397.65,
      "dur": 2.3,
-     "start_frame": 11889,
-     "end_frame": 11958
+     "start_frame": 11860,
+     "end_frame": 11930
     },
     {
      "text": "It's an arrow of length one that points away from the station, towards the balloon.",
      "audio_text": null,
-     "start": 398.95,
-     "end": 404.075,
+     "start": 398.0,
+     "end": 403.125,
      "dur": 5.125,
-     "start_frame": 11968,
-     "end_frame": 12122
+     "start_frame": 11940,
+     "end_frame": 12094
     },
     {
      "text": "Here's how to get it.",
      "audio_text": null,
-     "start": 404.425,
-     "end": 406.25,
+     "start": 403.475,
+     "end": 405.3,
      "dur": 1.825,
-     "start_frame": 12133,
-     "end_frame": 12188
+     "start_frame": 12104,
+     "end_frame": 12159
     },
     {
      "text": "The arrow from the station to the balloon is three, four, and its length is r, five kilometres.",
      "audio_text": null,
-     "start": 406.6,
-     "end": 413.3,
+     "start": 405.65,
+     "end": 412.35,
      "dur": 6.7,
-     "start_frame": 12198,
-     "end_frame": 12399
+     "start_frame": 12170,
+     "end_frame": 12370
     },
     {
      "text": "Dividing an arrow by its own length keeps its direction, and makes its length one.",
      "audio_text": null,
-     "start": 413.65,
-     "end": 419.1,
+     "start": 412.7,
+     "end": 418.15,
      "dur": 5.45,
-     "start_frame": 12410,
-     "end_frame": 12573
+     "start_frame": 12381,
+     "end_frame": 12544
     },
     {
      "text": "So r hat is three fifths, four fifths, which is zero point six, zero point eight. We draw r hat at the balloon, because it tells us the direction there.",
      "audio_text": null,
-     "start": 419.45,
-     "end": 430.575,
+     "start": 418.5,
+     "end": 429.625,
      "dur": 11.125,
-     "start_frame": 12584,
-     "end_frame": 12917,
+     "start_frame": 12555,
+     "end_frame": 12889,
      "beat": true
     },
     {
-     "text": "Its length is the square root of zero point six squared plus zero point eight squared. That's zero point three six plus zero point six four, which is one, and the square root of one is one.",
+     "text": "For r hat, we square its two components, add them, and take the square root, and we get exactly one.",
      "audio_text": null,
-     "start": 432.075,
-     "end": 445.625,
-     "dur": 13.55,
-     "start_frame": 12962,
-     "end_frame": 13369
+     "start": 431.125,
+     "end": 437.975,
+     "dur": 6.85,
+     "start_frame": 12934,
+     "end_frame": 13139
     },
     {
      "text": "The same works for any point.",
      "audio_text": null,
-     "start": 445.975,
-     "end": 448.225,
+     "start": 438.325,
+     "end": 440.575,
      "dur": 2.25,
-     "start_frame": 13379,
-     "end_frame": 13447
+     "start_frame": 13150,
+     "end_frame": 13217
     },
     {
      "text": "The arrow to it is r cosine theta, r sine theta, as we just saw.",
      "audio_text": null,
-     "start": 448.575,
-     "end": 453.825,
+     "start": 440.925,
+     "end": 446.175,
      "dur": 5.25,
-     "start_frame": 13457,
-     "end_frame": 13615
+     "start_frame": 13228,
+     "end_frame": 13385
     },
     {
      "text": "Dividing by r, the r cancels, so r hat is cosine theta, sine theta.",
      "audio_text": null,
-     "start": 454.175,
-     "end": 459.85,
+     "start": 446.525,
+     "end": 452.2,
      "dur": 5.675,
-     "start_frame": 13625,
-     "end_frame": 13796,
+     "start_frame": 13396,
+     "end_frame": 13566,
      "beat": true
     },
     {
      "text": "Why is it called r hat?",
      "audio_text": null,
-     "start": 461.35,
-     "end": 463.525,
+     "start": 453.7,
+     "end": 455.875,
      "dur": 2.175,
-     "start_frame": 13840,
-     "end_frame": 13906
+     "start_frame": 13611,
+     "end_frame": 13676
     },
     {
      "text": "Hold theta fixed and let r grow, and the balloon slides straight outward, along this arrow.",
      "audio_text": null,
-     "start": 463.875,
-     "end": 470.3,
+     "start": 456.225,
+     "end": 462.65,
      "dur": 6.425,
-     "start_frame": 13916,
-     "end_frame": 14109
+     "start_frame": 13687,
+     "end_frame": 13880
     },
     {
      "text": "So r hat points the way r grows.",
      "audio_text": null,
-     "start": 470.65,
-     "end": 473.45,
+     "start": 463.0,
+     "end": 465.8,
      "dur": 2.8,
-     "start_frame": 14120,
-     "end_frame": 14204
+     "start_frame": 13890,
+     "end_frame": 13974
     }
    ],
-   "end": 474.25,
-   "start_frame": 11707,
-   "end_frame": 14228
+   "end": 466.6,
+   "start_frame": 11678,
+   "end_frame": 13998
   },
   {
    "id": "s09_where_theta_grows",
-   "start": 474.25,
+   "start": 466.6,
    "sentences": [
     {
      "text": "The next few minutes build theta hat one step at a time, for anyone who enjoys seeing every move.",
      "audio_text": null,
-     "start": 474.25,
-     "end": 480.95,
+     "start": 466.6,
+     "end": 473.3,
      "dur": 6.7,
-     "start_frame": 14228,
-     "end_frame": 14428
+     "start_frame": 13998,
+     "end_frame": 14199
     },
     {
      "text": "You don't need these steps for the intuition of weather, climate science or maps, so if it feels like too much, skip ahead to the time on screen.",
      "audio_text": null,
-     "start": 481.3,
-     "end": 490.75,
+     "start": 473.65,
+     "end": 483.1,
      "dur": 9.45,
-     "start_frame": 14439,
-     "end_frame": 14722
+     "start_frame": 14210,
+     "end_frame": 14493
     },
     {
      "text": "Now the second arrow, theta hat.",
      "audio_text": null,
-     "start": 491.1,
-     "end": 493.85,
+     "start": 483.45,
+     "end": 486.2,
      "dur": 2.75,
-     "start_frame": 14733,
-     "end_frame": 14816
+     "start_frame": 14504,
+     "end_frame": 14586
     },
     {
      "text": "Its job is to point the way theta grows.",
      "audio_text": null,
-     "start": 494.2,
-     "end": 497.3,
+     "start": 486.55,
+     "end": 489.65,
      "dur": 3.1,
-     "start_frame": 14826,
-     "end_frame": 14919
+     "start_frame": 14596,
+     "end_frame": 14690
     },
     {
      "text": "So let's do the same experiment, with the roles swapped.",
      "audio_text": null,
-     "start": 497.65,
-     "end": 501.375,
+     "start": 490.0,
+     "end": 493.725,
      "dur": 3.725,
-     "start_frame": 14930,
-     "end_frame": 15041
+     "start_frame": 14700,
+     "end_frame": 14812
     },
     {
      "text": "Hold r fixed at five kilometres, and let theta grow a little.",
      "audio_text": null,
-     "start": 501.725,
-     "end": 506.375,
+     "start": 494.075,
+     "end": 498.725,
      "dur": 4.65,
-     "start_frame": 15052,
-     "end_frame": 15191
+     "start_frame": 14822,
+     "end_frame": 14962
     },
     {
      "text": "The balloon slides along the circle of radius five kilometres round the station.",
      "audio_text": null,
-     "start": 506.725,
-     "end": 512.15,
+     "start": 499.075,
+     "end": 504.5,
      "dur": 5.425,
-     "start_frame": 15202,
-     "end_frame": 15364
+     "start_frame": 14972,
+     "end_frame": 15135
     },
     {
      "text": "Which way is that, exactly?",
      "audio_text": null,
-     "start": 512.5,
-     "end": 514.85,
+     "start": 504.85,
+     "end": 507.2,
      "dur": 2.35,
-     "start_frame": 15375,
-     "end_frame": 15446
+     "start_frame": 15146,
+     "end_frame": 15216
     },
     {
      "text": "While it slides, its distance from the station doesn't change.",
      "audio_text": null,
-     "start": 515.2,
-     "end": 519.5,
+     "start": 507.55,
+     "end": 511.85,
      "dur": 4.3,
-     "start_frame": 15456,
-     "end_frame": 15585
+     "start_frame": 15226,
+     "end_frame": 15356
     },
     {
      "text": "If its move had any part along r hat, the balloon would get further from the station, or closer to it. For example, with a part of a tenth of a kilometre along r hat, it would end up five point one or four point nine kilometres from the station, not five.",
      "audio_text": null,
-     "start": 519.85,
-     "end": 537.275,
+     "start": 512.2,
+     "end": 529.625,
      "dur": 17.425,
-     "start_frame": 15596,
-     "end_frame": 16118
+     "start_frame": 15366,
+     "end_frame": 15889
     },
     {
      "text": "So a small slide along the circle has no part along r hat: it's at right angles to r hat.",
      "audio_text": null,
-     "start": 537.625,
-     "end": 544.525,
+     "start": 529.975,
+     "end": 536.875,
      "dur": 6.9,
-     "start_frame": 16129,
-     "end_frame": 16336
+     "start_frame": 15899,
+     "end_frame": 16106
     },
     {
      "text": "That's why the edge of a circle always runs at right angles to its radius.",
      "audio_text": null,
-     "start": 544.875,
-     "end": 550.15,
+     "start": 537.225,
+     "end": 542.5,
      "dur": 5.275,
-     "start_frame": 16346,
-     "end_frame": 16504
+     "start_frame": 16117,
+     "end_frame": 16275
     },
     {
      "text": "But there are two directions at right angles to r hat: one turned anticlockwise from it, and one turned clockwise.",
      "audio_text": null,
-     "start": 550.5,
-     "end": 558.675,
+     "start": 542.85,
+     "end": 551.025,
      "dur": 8.175,
-     "start_frame": 16515,
-     "end_frame": 16760
+     "start_frame": 16286,
+     "end_frame": 16531
     },
     {
      "text": "Theta grows anticlockwise, as seen from above, so the balloon slides anticlockwise.",
      "audio_text": null,
-     "start": 559.025,
-     "end": 565.375,
+     "start": 551.375,
+     "end": 557.725,
      "dur": 6.35,
-     "start_frame": 16771,
-     "end_frame": 16961
+     "start_frame": 16541,
+     "end_frame": 16732
     },
     {
      "text": "So theta hat is r hat, turned by ninety degrees anticlockwise.",
      "audio_text": null,
-     "start": 565.725,
-     "end": 570.925,
+     "start": 558.075,
+     "end": 563.275,
      "dur": 5.2,
-     "start_frame": 16972,
-     "end_frame": 17128,
+     "start_frame": 16742,
+     "end_frame": 16898,
      "beat": true
     },
     {
      "text": "To turn that picture into numbers, we need one small tool: a rule for turning any arrow by ninety degrees.",
      "audio_text": null,
-     "start": 572.425,
-     "end": 579.9,
+     "start": 564.775,
+     "end": 572.25,
      "dur": 7.475,
-     "start_frame": 17173,
-     "end_frame": 17397
+     "start_frame": 16943,
+     "end_frame": 17168
     }
    ],
-   "end": 580.7,
-   "start_frame": 14228,
-   "end_frame": 17421
+   "end": 573.05,
+   "start_frame": 13998,
+   "end_frame": 17192
   },
   {
    "id": "s10_turn_90",
-   "start": 580.7,
+   "start": 573.05,
    "sentences": [
     {
      "text": "Let's start with the two easiest arrows.",
      "audio_text": null,
-     "start": 580.7,
-     "end": 583.575,
+     "start": 573.05,
+     "end": 575.925,
      "dur": 2.875,
-     "start_frame": 17421,
-     "end_frame": 17507
+     "start_frame": 17192,
+     "end_frame": 17278
     },
     {
      "text": "Turn x hat, which points east, by ninety degrees anticlockwise, and it points north.",
      "audio_text": null,
-     "start": 583.925,
-     "end": 590.025,
+     "start": 576.275,
+     "end": 582.375,
      "dur": 6.1,
-     "start_frame": 17518,
-     "end_frame": 17701
+     "start_frame": 17288,
+     "end_frame": 17471
     },
     {
      "text": "So it becomes zero, one.",
      "audio_text": null,
-     "start": 590.375,
-     "end": 592.7,
+     "start": 582.725,
+     "end": 585.05,
      "dur": 2.325,
-     "start_frame": 17711,
-     "end_frame": 17781,
+     "start_frame": 17482,
+     "end_frame": 17552,
      "beat": true
     },
     {
      "text": "Turn y hat, which points north, and it points west.",
      "audio_text": null,
-     "start": 594.2,
-     "end": 597.95,
+     "start": 586.55,
+     "end": 590.3,
      "dur": 3.75,
-     "start_frame": 17826,
-     "end_frame": 17938
+     "start_frame": 17596,
+     "end_frame": 17709
     },
     {
      "text": "So it becomes minus one, zero.",
      "audio_text": null,
-     "start": 598.3,
-     "end": 601.15,
+     "start": 590.65,
+     "end": 593.5,
      "dur": 2.85,
-     "start_frame": 17949,
-     "end_frame": 18034,
+     "start_frame": 17720,
+     "end_frame": 17805,
      "beat": true
     },
     {
      "text": "Now take any arrow, with an east part p and a north part q.",
      "audio_text": null,
-     "start": 602.65,
-     "end": 607.25,
+     "start": 595.0,
+     "end": 599.6,
      "dur": 4.6,
-     "start_frame": 18080,
-     "end_frame": 18218
+     "start_frame": 17850,
+     "end_frame": 17988
     },
     {
      "text": "It's p steps along x hat, followed by q steps along y hat.",
      "audio_text": null,
-     "start": 607.6,
-     "end": 612.65,
+     "start": 599.95,
+     "end": 605.0,
      "dur": 5.05,
-     "start_frame": 18228,
-     "end_frame": 18380
+     "start_frame": 17998,
+     "end_frame": 18150
     },
     {
      "text": "If we turn the whole drawing by ninety degrees, both pieces turn together, and they stay joined, tip to tail.",
      "audio_text": null,
-     "start": 613.0,
-     "end": 620.475,
+     "start": 605.35,
+     "end": 612.825,
      "dur": 7.475,
-     "start_frame": 18390,
-     "end_frame": 18614
+     "start_frame": 18160,
+     "end_frame": 18385
     },
     {
      "text": "So the p steps east become p steps north, and the q steps north become q steps west.",
      "audio_text": null,
-     "start": 620.825,
-     "end": 627.35,
+     "start": 613.175,
+     "end": 619.7,
      "dur": 6.525,
-     "start_frame": 18625,
-     "end_frame": 18820
+     "start_frame": 18395,
+     "end_frame": 18591
     },
     {
      "text": "Steps to the west count as minus in the east part.",
      "audio_text": null,
-     "start": 627.7,
-     "end": 631.525,
+     "start": 620.05,
+     "end": 623.875,
      "dur": 3.825,
-     "start_frame": 18831,
-     "end_frame": 18946
+     "start_frame": 18602,
+     "end_frame": 18716
     },
     {
      "text": "p times zero, one is zero, p, and q times minus one, zero is minus q, zero. Adding the east parts gives minus q, and adding the north parts gives p. So the turned arrow is minus q, p.",
      "audio_text": null,
-     "start": 631.875,
-     "end": 647.6,
+     "start": 624.225,
+     "end": 639.95,
      "dur": 15.725,
-     "start_frame": 18956,
-     "end_frame": 19428,
+     "start_frame": 18727,
+     "end_frame": 19198,
      "beat": true
     },
     {
      "text": "In words: swap the two numbers, and put a minus sign on the first one.",
      "audio_text": null,
-     "start": 649.1,
-     "end": 654.1,
+     "start": 641.45,
+     "end": 646.45,
      "dur": 5.0,
-     "start_frame": 19473,
-     "end_frame": 19623
+     "start_frame": 19244,
+     "end_frame": 19394
     },
     {
      "text": "Let's try it on the balloon's arrow, three, four.",
      "audio_text": null,
-     "start": 654.45,
-     "end": 657.9,
+     "start": 646.8,
+     "end": 650.25,
      "dur": 3.45,
-     "start_frame": 19634,
-     "end_frame": 19737
+     "start_frame": 19404,
+     "end_frame": 19508
     },
     {
      "text": "Swap them, and put a minus on the first: minus four, three.",
      "audio_text": null,
-     "start": 658.25,
-     "end": 662.525,
+     "start": 650.6,
+     "end": 654.875,
      "dur": 4.275,
-     "start_frame": 19748,
-     "end_frame": 19876,
+     "start_frame": 19518,
+     "end_frame": 19646,
      "beat": true
     },
     {
      "text": "Is that really a quarter turn?",
      "audio_text": null,
-     "start": 664.025,
-     "end": 666.375,
+     "start": 656.375,
+     "end": 658.725,
      "dur": 2.35,
-     "start_frame": 19921,
-     "end_frame": 19991
+     "start_frame": 19691,
+     "end_frame": 19762
     },
     {
-     "text": "Minus four squared is sixteen and three squared is nine, so its length is the square root of twenty five: five, the same as the balloon's arrow.",
+     "text": "For the turned arrow, minus four, three, we square each component, add them, and take the square root, and we get five, the same as the balloon's arrow.",
      "audio_text": null,
-     "start": 666.725,
-     "end": 676.55,
-     "dur": 9.825,
-     "start_frame": 20002,
-     "end_frame": 20296
+     "start": 659.075,
+     "end": 669.075,
+     "dur": 10.0,
+     "start_frame": 19772,
+     "end_frame": 20072
     },
     {
-     "text": "And its dot product with three, four is three times minus four, plus four times three, which is zero.",
+     "text": "And its dot product with three, four, multiplying the matching parts and adding, comes to zero.",
      "audio_text": null,
-     "start": 676.9,
-     "end": 684.0,
-     "dur": 7.1,
-     "start_frame": 20307,
-     "end_frame": 20520,
+     "start": 669.425,
+     "end": 676.175,
+     "dur": 6.75,
+     "start_frame": 20083,
+     "end_frame": 20285,
      "beat": true
     },
     {
      "text": "A zero dot product means a right angle, as we saw in the dot product movie.",
      "audio_text": null,
-     "start": 685.5,
-     "end": 691.125,
+     "start": 677.675,
+     "end": 683.3,
      "dur": 5.625,
-     "start_frame": 20565,
-     "end_frame": 20734
+     "start_frame": 20330,
+     "end_frame": 20499
     }
    ],
-   "end": 691.925,
-   "start_frame": 17421,
-   "end_frame": 20758
+   "end": 684.1,
+   "start_frame": 17192,
+   "end_frame": 20523
   },
   {
    "id": "s11_theta_hat",
-   "start": 691.925,
+   "start": 684.1,
    "sentences": [
     {
      "text": "Now let's turn r hat itself.",
      "audio_text": null,
-     "start": 691.925,
-     "end": 694.3,
+     "start": 684.1,
+     "end": 686.475,
      "dur": 2.375,
-     "start_frame": 20758,
-     "end_frame": 20829
+     "start_frame": 20523,
+     "end_frame": 20594
     },
     {
      "text": "Its east part is cosine theta, and its north part is sine theta.",
      "audio_text": null,
-     "start": 694.65,
-     "end": 699.475,
+     "start": 686.825,
+     "end": 691.65,
      "dur": 4.825,
-     "start_frame": 20840,
-     "end_frame": 20984
+     "start_frame": 20605,
+     "end_frame": 20750
     },
     {
      "text": "Using the rule, we swap them and put a minus on the first.",
      "audio_text": null,
-     "start": 699.825,
-     "end": 703.95,
+     "start": 692.0,
+     "end": 696.125,
      "dur": 4.125,
-     "start_frame": 20995,
-     "end_frame": 21118
+     "start_frame": 20760,
+     "end_frame": 20884
     },
     {
      "text": "So theta hat is minus sine theta, cosine theta.",
      "audio_text": null,
-     "start": 704.3,
-     "end": 708.3,
+     "start": 696.475,
+     "end": 700.475,
      "dur": 4.0,
-     "start_frame": 21129,
-     "end_frame": 21249,
+     "start_frame": 20894,
+     "end_frame": 21014,
      "beat": true
     },
     {
      "text": "Here's the same thing as a picture.",
      "audio_text": null,
-     "start": 709.8,
-     "end": 712.325,
+     "start": 701.975,
+     "end": 704.5,
      "dur": 2.525,
-     "start_frame": 21294,
-     "end_frame": 21370
+     "start_frame": 21059,
+     "end_frame": 21135
     },
     {
      "text": "Turn r hat's little triangle by ninety degrees.",
      "audio_text": null,
-     "start": 712.675,
-     "end": 716.4,
+     "start": 704.85,
+     "end": 708.575,
      "dur": 3.725,
-     "start_frame": 21380,
-     "end_frame": 21492
+     "start_frame": 21146,
+     "end_frame": 21257
     },
     {
      "text": "Its east side, cosine theta, now points north, so cosine theta becomes the north part.",
      "audio_text": null,
-     "start": 716.75,
-     "end": 723.475,
+     "start": 708.925,
+     "end": 715.65,
      "dur": 6.725,
-     "start_frame": 21502,
-     "end_frame": 21704
+     "start_frame": 21268,
+     "end_frame": 21470
     },
     {
      "text": "Its north side, sine theta, now points west, so minus sine theta becomes the east part.",
      "audio_text": null,
-     "start": 723.825,
-     "end": 730.65,
+     "start": 716.0,
+     "end": 722.825,
      "dur": 6.825,
-     "start_frame": 21715,
-     "end_frame": 21920
+     "start_frame": 21480,
+     "end_frame": 21685
     },
     {
      "text": "Let's check that this makes sense.",
      "audio_text": null,
-     "start": 731.0,
-     "end": 733.425,
+     "start": 723.175,
+     "end": 725.6,
      "dur": 2.425,
-     "start_frame": 21930,
-     "end_frame": 22003
+     "start_frame": 21695,
+     "end_frame": 21768
     },
     {
      "text": "At theta equals zero, the point is due east of the station. Minus sine zero is zero, and cosine zero is one, so theta hat is zero, one.",
      "audio_text": null,
-     "start": 733.775,
-     "end": 744.65,
+     "start": 725.95,
+     "end": 736.825,
      "dur": 10.875,
-     "start_frame": 22013,
-     "end_frame": 22340
+     "start_frame": 21778,
+     "end_frame": 22105
     },
     {
      "text": "It points north, which is the way the point slides when theta grows.",
      "audio_text": null,
-     "start": 745.0,
-     "end": 749.75,
+     "start": 737.175,
+     "end": 741.925,
      "dur": 4.75,
-     "start_frame": 22350,
-     "end_frame": 22492,
+     "start_frame": 22115,
+     "end_frame": 22258,
      "beat": true
     },
     {
      "text": "At ninety degrees, the point is due north. Minus sine ninety is minus one, and cosine ninety is zero, so theta hat is minus one, zero.",
      "audio_text": null,
-     "start": 751.25,
-     "end": 762.2,
+     "start": 743.425,
+     "end": 754.375,
      "dur": 10.95,
-     "start_frame": 22538,
-     "end_frame": 22866
+     "start_frame": 22303,
+     "end_frame": 22631
     },
     {
      "text": "It points west.",
      "audio_text": null,
-     "start": 762.55,
-     "end": 764.35,
+     "start": 754.725,
+     "end": 756.525,
      "dur": 1.8,
-     "start_frame": 22876,
-     "end_frame": 22930,
+     "start_frame": 22642,
+     "end_frame": 22696,
      "beat": true
     },
     {
      "text": "At the balloon, theta hat is minus zero point eight, zero point six.",
      "audio_text": null,
-     "start": 765.85,
-     "end": 770.975,
+     "start": 758.025,
+     "end": 763.15,
      "dur": 5.125,
-     "start_frame": 22976,
-     "end_frame": 23129,
+     "start_frame": 22741,
+     "end_frame": 22894,
      "beat": true
     },
     {
-     "text": "Its length is one, and its dot product with r hat is minus zero point four eight plus zero point four eight, which is zero, so it's at right angles.",
+     "text": "Its length is one, and its dot product with r hat is zero, so it's at right angles.",
      "audio_text": null,
-     "start": 772.475,
-     "end": 782.675,
-     "dur": 10.2,
-     "start_frame": 23174,
-     "end_frame": 23480
+     "start": 764.65,
+     "end": 770.6,
+     "dur": 5.95,
+     "start_frame": 22940,
+     "end_frame": 23118
     },
     {
      "text": "And one last check, without using the theta hat formula.",
      "audio_text": null,
-     "start": 783.025,
-     "end": 787.275,
+     "start": 770.95,
+     "end": 775.2,
      "dur": 4.25,
-     "start_frame": 23491,
-     "end_frame": 23618
+     "start_frame": 23128,
+     "end_frame": 23256
     },
     {
      "text": "The balloon is five kilometres from the station: three kilometres east and four north.",
      "audio_text": null,
-     "start": 787.625,
-     "end": 793.725,
+     "start": 775.55,
+     "end": 781.65,
      "dur": 6.1,
-     "start_frame": 23629,
-     "end_frame": 23812
+     "start_frame": 23266,
+     "end_frame": 23450
     },
     {
      "text": "Turn it by a tenth of a degree.",
      "audio_text": null,
-     "start": 794.075,
-     "end": 796.35,
+     "start": 782.0,
+     "end": 784.275,
      "dur": 2.275,
-     "start_frame": 23822,
-     "end_frame": 23890
+     "start_frame": 23460,
+     "end_frame": 23528
     },
     {
      "text": "In radians, that's a tenth times pi over one hundred and eighty, about zero point zero zero one seven four five.",
      "audio_text": null,
-     "start": 796.7,
-     "end": 805.0,
+     "start": 784.625,
+     "end": 792.925,
      "dur": 8.3,
-     "start_frame": 23901,
-     "end_frame": 24150
+     "start_frame": 23539,
+     "end_frame": 23788
     },
     {
-     "text": "By the arc rule, s equals r times the change in theta, so it slides five thousand metres times that: about eight point seven metres along the circle.",
+     "text": "By the arc rule, s equals r times the change in theta: with r at five thousand metres, that's about eight point seven metres along the circle.",
      "audio_text": null,
-     "start": 806.5,
-     "end": 817.025,
-     "dur": 10.525,
-     "start_frame": 24195,
-     "end_frame": 24511
+     "start": 794.425,
+     "end": 804.6,
+     "dur": 10.175,
+     "start_frame": 23833,
+     "end_frame": 24138
     },
     {
      "text": "Its position comes from x equals r cosine theta, and y equals r sine theta.",
      "audio_text": null,
-     "start": 818.525,
-     "end": 824.725,
+     "start": 806.1,
+     "end": 812.3,
      "dur": 6.2,
-     "start_frame": 24556,
-     "end_frame": 24742
+     "start_frame": 24183,
+     "end_frame": 24369
     },
     {
      "text": "It moves from three thousand metres east and four thousand metres north, to about two thousand nine hundred and ninety three, and four thousand and five point two.",
      "audio_text": null,
-     "start": 825.075,
-     "end": 835.9,
+     "start": 812.65,
+     "end": 823.475,
      "dur": 10.825,
-     "start_frame": 24752,
-     "end_frame": 25077
+     "start_frame": 24380,
+     "end_frame": 24704
     },
     {
-     "text": "That's about seven metres west, and five point two metres north. Check: seven squared is forty nine, and five point two squared is twenty seven point zero four. The square root of seventy six point zero four is about eight point seven: the same slide.",
+     "text": "That's about seven metres west, and five point two metres north. Squaring these two, adding them, and taking the square root gives about eight point seven metres: the same slide.",
      "audio_text": null,
-     "start": 836.25,
-     "end": 854.625,
-     "dur": 18.375,
-     "start_frame": 25088,
-     "end_frame": 25639
+     "start": 823.825,
+     "end": 836.45,
+     "dur": 12.625,
+     "start_frame": 24715,
+     "end_frame": 25094
     },
     {
      "text": "Dividing each by eight point seven gives about minus zero point eight and zero point six: theta hat again.",
      "audio_text": null,
-     "start": 856.125,
-     "end": 863.625,
+     "start": 837.95,
+     "end": 845.45,
      "dur": 7.5,
-     "start_frame": 25684,
-     "end_frame": 25909
+     "start_frame": 25138,
+     "end_frame": 25364
     },
     {
      "text": "If you skipped, here's what to keep: r hat points away from the centre, theta hat points round it, anticlockwise, and theta hat is r hat turned by ninety degrees.",
      "audio_text": null,
-     "start": 865.125,
-     "end": 876.225,
+     "start": 846.95,
+     "end": 858.05,
      "dur": 11.1,
-     "start_frame": 25954,
-     "end_frame": 26287
+     "start_frame": 25408,
+     "end_frame": 25742
     }
    ],
-   "end": 877.025,
-   "start_frame": 20758,
-   "end_frame": 26311
+   "end": 858.85,
+   "start_frame": 20523,
+   "end_frame": 25766
   },
   {
    "id": "s12_arrows_depend",
-   "start": 877.025,
+   "start": 858.85,
    "sentences": [
     {
      "text": "Now let's move the balloon round the circle, and watch both arrows.",
      "audio_text": null,
-     "start": 877.025,
-     "end": 881.55,
+     "start": 858.85,
+     "end": 863.375,
      "dur": 4.525,
-     "start_frame": 26311,
-     "end_frame": 26446
+     "start_frame": 25766,
+     "end_frame": 25901
     },
     {
      "text": "Due east of the station, r hat points east, and theta hat points north.",
      "audio_text": null,
-     "start": 881.9,
-     "end": 887.2,
+     "start": 863.725,
+     "end": 869.025,
      "dur": 5.3,
-     "start_frame": 26457,
-     "end_frame": 26616
+     "start_frame": 25912,
+     "end_frame": 26071
     },
     {
      "text": "Due north, r hat points north, and theta hat points west.",
      "audio_text": null,
-     "start": 887.55,
-     "end": 891.85,
+     "start": 869.375,
+     "end": 873.675,
      "dur": 4.3,
-     "start_frame": 26626,
-     "end_frame": 26756
+     "start_frame": 26081,
+     "end_frame": 26210
     },
     {
      "text": "Due west, r hat points west, and theta hat points south.",
      "audio_text": null,
-     "start": 892.2,
-     "end": 896.55,
+     "start": 874.025,
+     "end": 878.375,
      "dur": 4.35,
-     "start_frame": 26766,
-     "end_frame": 26896
+     "start_frame": 26221,
+     "end_frame": 26351
     },
     {
      "text": "So r hat and theta hat turn as the balloon goes round, while x hat and y hat never change.",
      "audio_text": null,
-     "start": 896.9,
-     "end": 903.675,
+     "start": 878.725,
+     "end": 885.5,
      "dur": 6.775,
-     "start_frame": 26907,
-     "end_frame": 27110
+     "start_frame": 26362,
+     "end_frame": 26565
     },
     {
      "text": "That's the big difference between the two systems: polar unit vectors depend on where you are.",
      "audio_text": null,
-     "start": 904.025,
-     "end": 910.3,
+     "start": 885.85,
+     "end": 892.125,
      "dur": 6.275,
-     "start_frame": 27121,
-     "end_frame": 27309
+     "start_frame": 26576,
+     "end_frame": 26764
     },
     {
      "text": "Keep this in mind, because these turning arrows will matter a lot in Part 2.",
      "audio_text": null,
-     "start": 910.65,
-     "end": 916.075,
+     "start": 892.475,
+     "end": 897.9,
      "dur": 5.425,
-     "start_frame": 27320,
-     "end_frame": 27482
+     "start_frame": 26774,
+     "end_frame": 26937
     }
    ],
-   "end": 916.875,
-   "start_frame": 26311,
-   "end_frame": 27506
+   "end": 898.7,
+   "start_frame": 25766,
+   "end_frame": 26961
   },
   {
    "id": "s13_components",
-   "start": 916.875,
+   "start": 898.7,
    "sentences": [
     {
      "text": "The next two scenes split a wind into its polar parts, number by number, for learners who want every step.",
      "audio_text": null,
-     "start": 916.875,
-     "end": 924.0,
+     "start": 898.7,
+     "end": 905.825,
      "dur": 7.125,
-     "start_frame": 27506,
-     "end_frame": 27720
+     "start_frame": 26961,
+     "end_frame": 27175
     },
     {
      "text": "If you'd rather keep the big picture, skip ahead to the time on screen; you won't miss anything you need for weather, climate or maps.",
      "audio_text": null,
-     "start": 924.35,
-     "end": 932.525,
+     "start": 906.175,
+     "end": 914.35,
      "dur": 8.175,
-     "start_frame": 27730,
-     "end_frame": 27976
+     "start_frame": 27185,
+     "end_frame": 27430
     },
     {
      "text": "Now let's describe a wind in polar coordinates.",
      "audio_text": null,
-     "start": 932.875,
-     "end": 936.65,
+     "start": 914.7,
+     "end": 918.475,
      "dur": 3.775,
-     "start_frame": 27986,
-     "end_frame": 28100
+     "start_frame": 27441,
+     "end_frame": 27554
     },
     {
      "text": "Suppose that at the balloon, the wind blows due east at ten metres per second.",
      "audio_text": null,
-     "start": 937.0,
-     "end": 942.325,
+     "start": 918.825,
+     "end": 924.15,
      "dur": 5.325,
-     "start_frame": 28110,
-     "end_frame": 28270
+     "start_frame": 27565,
+     "end_frame": 27724
     },
     {
      "text": "We'll call the wind arrow bold u.",
      "audio_text": null,
-     "start": 942.675,
-     "end": 945.15,
+     "start": 924.5,
+     "end": 926.975,
      "dur": 2.475,
-     "start_frame": 28280,
-     "end_frame": 28354
+     "start_frame": 27735,
+     "end_frame": 27809
     },
     {
      "text": "Its eastward part is called u, and its northward part v.",
      "audio_text": null,
-     "start": 945.5,
-     "end": 949.8,
+     "start": 927.325,
+     "end": 931.625,
      "dur": 4.3,
-     "start_frame": 28365,
-     "end_frame": 28494
+     "start_frame": 27820,
+     "end_frame": 27949
     },
     {
      "text": "Here, u is ten and v is zero.",
      "audio_text": null,
-     "start": 950.15,
-     "end": 952.9,
+     "start": 931.975,
+     "end": 934.725,
      "dur": 2.75,
-     "start_frame": 28504,
-     "end_frame": 28587,
+     "start_frame": 27959,
+     "end_frame": 28042,
      "beat": true
     },
     {
      "text": "How much of this wind blows away from the station, and how much blows round it?",
      "audio_text": null,
-     "start": 954.4,
-     "end": 959.675,
+     "start": 936.225,
+     "end": 941.5,
      "dur": 5.275,
-     "start_frame": 28632,
-     "end_frame": 28790
+     "start_frame": 28087,
+     "end_frame": 28245
     },
     {
      "text": "The part along r hat is called the radial wind, u sub r.",
      "audio_text": null,
-     "start": 960.025,
-     "end": 964.575,
+     "start": 941.85,
+     "end": 946.4,
      "dur": 4.55,
-     "start_frame": 28801,
-     "end_frame": 28937
+     "start_frame": 28256,
+     "end_frame": 28392
     },
     {
      "text": "The part along theta hat is called the tangential wind, u sub theta.",
      "audio_text": null,
-     "start": 964.925,
-     "end": 970.125,
+     "start": 946.75,
+     "end": 951.95,
      "dur": 5.2,
-     "start_frame": 28948,
-     "end_frame": 29104
+     "start_frame": 28402,
+     "end_frame": 28558
     },
     {
      "text": "To find each one, we take the dot product of the wind with that unit vector, as in the dot product movie.",
      "audio_text": null,
-     "start": 970.475,
-     "end": 977.85,
+     "start": 952.3,
+     "end": 959.675,
      "dur": 7.375,
-     "start_frame": 29114,
-     "end_frame": 29336
+     "start_frame": 28569,
+     "end_frame": 28790
     },
     {
      "text": "It gives the length of the wind's shadow along that arrow.",
      "audio_text": null,
-     "start": 978.2,
-     "end": 982.175,
+     "start": 960.025,
+     "end": 964.0,
      "dur": 3.975,
-     "start_frame": 29346,
-     "end_frame": 29465
+     "start_frame": 28801,
+     "end_frame": 28920
     },
     {
      "text": "Here are the inputs.",
      "audio_text": null,
-     "start": 982.525,
-     "end": 984.425,
+     "start": 964.35,
+     "end": 966.25,
      "dur": 1.9,
-     "start_frame": 29476,
-     "end_frame": 29533
+     "start_frame": 28930,
+     "end_frame": 28988
     },
     {
      "text": "The wind is ten, zero.",
      "audio_text": null,
-     "start": 984.775,
-     "end": 987.2,
+     "start": 966.6,
+     "end": 969.025,
      "dur": 2.425,
-     "start_frame": 29543,
-     "end_frame": 29616
+     "start_frame": 28998,
+     "end_frame": 29071
     },
     {
      "text": "The angle theta is fifty three degrees.",
      "audio_text": null,
-     "start": 987.55,
-     "end": 990.8,
+     "start": 969.375,
+     "end": 972.625,
      "dur": 3.25,
-     "start_frame": 29626,
-     "end_frame": 29724
+     "start_frame": 29081,
+     "end_frame": 29179
     },
     {
      "text": "R hat is zero point six, zero point eight, and theta hat is minus zero point eight, zero point six.",
      "audio_text": null,
-     "start": 991.15,
-     "end": 998.75,
+     "start": 972.975,
+     "end": 980.575,
      "dur": 7.6,
-     "start_frame": 29734,
-     "end_frame": 29962
+     "start_frame": 29189,
+     "end_frame": 29417
     },
     {
      "text": "First, the radial wind.",
      "audio_text": null,
-     "start": 999.1,
-     "end": 1001.525,
+     "start": 980.925,
+     "end": 983.35,
      "dur": 2.425,
-     "start_frame": 29973,
-     "end_frame": 30046
+     "start_frame": 29428,
+     "end_frame": 29500
     },
     {
-     "text": "Multiply the matching parts, and add: ten times zero point six, plus zero times zero point eight.",
+     "text": "Multiply the matching parts, and add: the wind's east part times r hat's east part, plus its north part times r hat's north part.",
      "audio_text": null,
-     "start": 1001.875,
-     "end": 1009.025,
-     "dur": 7.15,
-     "start_frame": 30056,
-     "end_frame": 30271
+     "start": 983.7,
+     "end": 992.975,
+     "dur": 9.275,
+     "start_frame": 29511,
+     "end_frame": 29789
     },
     {
-     "text": "That's six plus zero, so u sub r is six metres per second.",
+     "text": "That gives u sub r equals six metres per second.",
      "audio_text": null,
-     "start": 1009.375,
-     "end": 1014.2,
-     "dur": 4.825,
-     "start_frame": 30281,
-     "end_frame": 30426,
+     "start": 993.325,
+     "end": 997.225,
+     "dur": 3.9,
+     "start_frame": 29800,
+     "end_frame": 29917,
      "beat": true
     },
     {
-     "text": "Next, the tangential wind: ten times minus zero point eight, plus zero times zero point six.",
+     "text": "Next, the tangential wind: the same, with theta hat's two parts.",
      "audio_text": null,
-     "start": 1015.7,
-     "end": 1022.9,
-     "dur": 7.2,
-     "start_frame": 30471,
-     "end_frame": 30687
+     "start": 998.725,
+     "end": 1003.675,
+     "dur": 4.95,
+     "start_frame": 29962,
+     "end_frame": 30110
     },
     {
-     "text": "That's minus eight plus zero, so u sub theta is minus eight metres per second.",
+     "text": "That gives u sub theta equals minus eight metres per second.",
      "audio_text": null,
-     "start": 1023.25,
-     "end": 1029.05,
-     "dur": 5.8,
-     "start_frame": 30698,
-     "end_frame": 30872,
+     "start": 1004.025,
+     "end": 1008.775,
+     "dur": 4.75,
+     "start_frame": 30121,
+     "end_frame": 30263,
      "beat": true
     },
     {
      "text": "So six metres per second blow away from the station, and eight blow round it.",
      "audio_text": null,
-     "start": 1030.55,
-     "end": 1035.95,
+     "start": 1010.275,
+     "end": 1015.675,
      "dur": 5.4,
-     "start_frame": 30916,
-     "end_frame": 31078
+     "start_frame": 30308,
+     "end_frame": 30470
     },
     {
      "text": "The minus sign means the wind goes round against theta hat: clockwise, as seen from above.",
      "audio_text": null,
-     "start": 1036.3,
-     "end": 1042.925,
+     "start": 1016.025,
+     "end": 1022.65,
      "dur": 6.625,
-     "start_frame": 31089,
-     "end_frame": 31288
+     "start_frame": 30481,
+     "end_frame": 30680
     }
    ],
-   "end": 1043.725,
-   "start_frame": 27506,
-   "end_frame": 31312
+   "end": 1023.45,
+   "start_frame": 26961,
+   "end_frame": 30704
   },
   {
    "id": "s14_rebuild_general",
-   "start": 1043.725,
+   "start": 1023.45,
    "sentences": [
     {
      "text": "Let's check that these two parts really make up the same wind.",
      "audio_text": null,
-     "start": 1043.725,
-     "end": 1047.575,
+     "start": 1023.45,
+     "end": 1027.3,
      "dur": 3.85,
-     "start_frame": 31312,
-     "end_frame": 31427
+     "start_frame": 30704,
+     "end_frame": 30819
     },
     {
      "text": "We rebuild it: six times r hat, plus minus eight times theta hat.",
      "audio_text": null,
-     "start": 1047.925,
-     "end": 1052.975,
+     "start": 1027.65,
+     "end": 1032.7,
      "dur": 5.05,
-     "start_frame": 31438,
-     "end_frame": 31589
+     "start_frame": 30830,
+     "end_frame": 30981
     },
     {
-     "text": "Six times zero point six, zero point eight is three point six, four point eight.",
+     "text": "Six times r hat gives three point six, four point eight.",
      "audio_text": null,
-     "start": 1053.325,
-     "end": 1059.225,
-     "dur": 5.9,
-     "start_frame": 31600,
-     "end_frame": 31777,
+     "start": 1033.05,
+     "end": 1037.175,
+     "dur": 4.125,
+     "start_frame": 30992,
+     "end_frame": 31115,
      "beat": true
     },
     {
-     "text": "Minus eight times minus zero point eight is plus six point four, because two minus signs make a plus, and minus eight times zero point six is minus four point eight.",
+     "text": "And minus eight times theta hat gives six point four, minus four point eight.",
      "audio_text": null,
-     "start": 1060.725,
-     "end": 1071.9,
-     "dur": 11.175,
-     "start_frame": 31822,
-     "end_frame": 32157,
+     "start": 1038.675,
+     "end": 1043.9,
+     "dur": 5.225,
+     "start_frame": 31160,
+     "end_frame": 31317,
      "beat": true
     },
     {
-     "text": "Adding the east parts gives three point six plus six point four, which is ten.",
+     "text": "If we add those two arrows, the east parts give ten.",
      "audio_text": null,
-     "start": 1073.4,
-     "end": 1078.85,
-     "dur": 5.45,
-     "start_frame": 32202,
-     "end_frame": 32365
+     "start": 1045.4,
+     "end": 1049.375,
+     "dur": 3.975,
+     "start_frame": 31362,
+     "end_frame": 31481
     },
     {
-     "text": "The north parts give four point eight minus four point eight, which is zero.",
+     "text": "And the north parts give zero.",
      "audio_text": null,
-     "start": 1079.2,
-     "end": 1084.025,
-     "dur": 4.825,
-     "start_frame": 32376,
-     "end_frame": 32521,
+     "start": 1049.725,
+     "end": 1052.1,
+     "dur": 2.375,
+     "start_frame": 31492,
+     "end_frame": 31563,
      "beat": true
     },
     {
      "text": "We're back to ten, zero: the same wind, measured with new arrows.",
      "audio_text": null,
-     "start": 1085.525,
-     "end": 1090.4,
+     "start": 1053.6,
+     "end": 1058.475,
      "dur": 4.875,
-     "start_frame": 32566,
-     "end_frame": 32712
+     "start_frame": 31608,
+     "end_frame": 31754
     },
     {
-     "text": "Its length agrees too: six squared is thirty six and eight squared is sixty four, which makes a hundred, and its square root is ten: the same as the wind's own length.",
+     "text": "Its length agrees too: we square its two parts, six and minus eight, add them, and take the square root, and we get ten, the same as the wind's own length.",
      "audio_text": null,
-     "start": 1090.75,
-     "end": 1101.65,
-     "dur": 10.9,
-     "start_frame": 32722,
-     "end_frame": 33050,
+     "start": 1058.825,
+     "end": 1068.775,
+     "dur": 9.95,
+     "start_frame": 31765,
+     "end_frame": 32063,
      "beat": true
     },
     {
      "text": "The same dot products work for any wind and any angle.",
      "audio_text": null,
-     "start": 1103.15,
-     "end": 1107.35,
+     "start": 1070.275,
+     "end": 1074.475,
      "dur": 4.2,
-     "start_frame": 33094,
-     "end_frame": 33220
+     "start_frame": 32108,
+     "end_frame": 32234
     },
     {
      "text": "With the wind u, v, and r hat equal to cosine theta, sine theta, u sub r is u cosine theta plus v sine theta.",
      "audio_text": null,
-     "start": 1107.7,
-     "end": 1116.775,
+     "start": 1074.825,
+     "end": 1083.9,
      "dur": 9.075,
-     "start_frame": 33231,
-     "end_frame": 33503,
+     "start_frame": 32245,
+     "end_frame": 32517,
      "beat": true
     },
     {
      "text": "And with theta hat equal to minus sine theta, cosine theta, u sub theta is minus u sine theta plus v cosine theta.",
      "audio_text": null,
-     "start": 1118.275,
-     "end": 1127.175,
+     "start": 1085.4,
+     "end": 1094.3,
      "dur": 8.9,
-     "start_frame": 33548,
-     "end_frame": 33815,
+     "start_frame": 32562,
+     "end_frame": 32829,
      "beat": true
     },
     {
      "text": "We'll use these two lines on a real hurricane soon.",
      "audio_text": null,
-     "start": 1128.675,
-     "end": 1132.275,
+     "start": 1095.8,
+     "end": 1099.4,
      "dur": 3.6,
-     "start_frame": 33860,
-     "end_frame": 33968
+     "start_frame": 32874,
+     "end_frame": 32982
     },
     {
      "text": "If you skipped, here's what to keep: any wind splits into an in or out part along r hat, and a round part along theta hat, and each part is a dot product.",
      "audio_text": null,
-     "start": 1132.625,
-     "end": 1143.5,
+     "start": 1099.75,
+     "end": 1110.625,
      "dur": 10.875,
-     "start_frame": 33979,
-     "end_frame": 34305
+     "start_frame": 32992,
+     "end_frame": 33319
     }
    ],
-   "end": 1144.3,
-   "start_frame": 31312,
-   "end_frame": 34329
+   "end": 1111.425,
+   "start_frame": 30704,
+   "end_frame": 33343
   },
   {
    "id": "s15_turn_axes",
-   "start": 1144.3,
+   "start": 1111.425,
    "sentences": [
     {
      "text": "The next few scenes turn the axes and build the rotation matrix, one step at a time, for anyone who wants every step.",
      "audio_text": null,
-     "start": 1144.3,
-     "end": 1152.525,
+     "start": 1111.425,
+     "end": 1119.65,
      "dur": 8.225,
-     "start_frame": 34329,
-     "end_frame": 34576
+     "start_frame": 33343,
+     "end_frame": 33590
     },
     {
      "text": "They aren't needed for the intuition of weather, climate science or maps, so feel free to skip ahead to the time on screen.",
      "audio_text": null,
-     "start": 1152.875,
-     "end": 1160.65,
+     "start": 1120.0,
+     "end": 1127.775,
      "dur": 7.775,
-     "start_frame": 34586,
-     "end_frame": 34820
+     "start_frame": 33600,
+     "end_frame": 33833
     },
     {
      "text": "Now let's look at a second way to change coordinates.",
      "audio_text": null,
-     "start": 1161.0,
-     "end": 1164.8,
+     "start": 1128.125,
+     "end": 1131.925,
      "dur": 3.8,
-     "start_frame": 34830,
-     "end_frame": 34944
+     "start_frame": 33844,
+     "end_frame": 33958
     },
     {
      "text": "This time, we keep the origin where it is, and we just turn the axes.",
      "audio_text": null,
-     "start": 1165.15,
-     "end": 1170.275,
+     "start": 1132.275,
+     "end": 1137.4,
      "dur": 5.125,
-     "start_frame": 34954,
-     "end_frame": 35108
+     "start_frame": 33968,
+     "end_frame": 34122
     },
     {
      "text": "Why would we want that?",
      "audio_text": null,
-     "start": 1170.625,
-     "end": 1172.55,
+     "start": 1137.75,
+     "end": 1139.675,
      "dur": 1.925,
-     "start_frame": 35119,
-     "end_frame": 35176
+     "start_frame": 34132,
+     "end_frame": 34190
     },
     {
      "text": "Along a coastline, a runway or a valley, it's often more useful to measure along it and across it than east and north.",
      "audio_text": null,
-     "start": 1172.9,
-     "end": 1180.975,
+     "start": 1140.025,
+     "end": 1148.1,
      "dur": 8.075,
-     "start_frame": 35187,
-     "end_frame": 35429
+     "start_frame": 34201,
+     "end_frame": 34443
     },
     {
      "text": "The arrow itself stays the same.",
      "audio_text": null,
-     "start": 1181.325,
-     "end": 1183.9,
+     "start": 1148.45,
+     "end": 1151.025,
      "dur": 2.575,
-     "start_frame": 35440,
-     "end_frame": 35517
+     "start_frame": 34454,
+     "end_frame": 34531
     },
     {
      "text": "Only the rulers we measure it with turn.",
      "audio_text": null,
-     "start": 1184.25,
-     "end": 1187.125,
+     "start": 1151.375,
+     "end": 1154.25,
      "dur": 2.875,
-     "start_frame": 35528,
-     "end_frame": 35614
+     "start_frame": 34541,
+     "end_frame": 34628
     },
     {
      "text": "Say the new x axis is turned by an angle alpha, anticlockwise as seen from above.",
      "audio_text": null,
-     "start": 1187.475,
-     "end": 1193.725,
+     "start": 1154.6,
+     "end": 1160.85,
      "dur": 6.25,
-     "start_frame": 35624,
-     "end_frame": 35812
+     "start_frame": 34638,
+     "end_frame": 34826
     },
     {
      "text": "We call its unit vector x hat prime.",
      "audio_text": null,
-     "start": 1194.075,
-     "end": 1196.975,
+     "start": 1161.2,
+     "end": 1164.1,
      "dur": 2.9,
-     "start_frame": 35822,
-     "end_frame": 35909
+     "start_frame": 34836,
+     "end_frame": 34923
     },
     {
      "text": "The little dash is read prime, and it marks the new axes.",
      "audio_text": null,
-     "start": 1197.325,
-     "end": 1201.575,
+     "start": 1164.45,
+     "end": 1168.7,
      "dur": 4.25,
-     "start_frame": 35920,
-     "end_frame": 36047
+     "start_frame": 34934,
+     "end_frame": 35061
     },
     {
      "text": "Like r hat, it's an arrow of length one at an angle, so it's cosine alpha, sine alpha.",
      "audio_text": null,
-     "start": 1201.925,
-     "end": 1208.15,
+     "start": 1169.05,
+     "end": 1175.275,
      "dur": 6.225,
-     "start_frame": 36058,
-     "end_frame": 36244,
+     "start_frame": 35072,
+     "end_frame": 35258,
      "beat": true
     },
     {
      "text": "Let's use alpha equals thirty degrees.",
      "audio_text": null,
-     "start": 1209.65,
-     "end": 1212.725,
+     "start": 1176.775,
+     "end": 1179.85,
      "dur": 3.075,
-     "start_frame": 36290,
-     "end_frame": 36382
+     "start_frame": 35303,
+     "end_frame": 35396
     },
     {
-     "text": "Cosine of thirty degrees is the square root of three over two: one point seven three two over two, about zero point eight six six. Sine of thirty degrees is exactly one half.",
+     "text": "Cosine of thirty degrees is the square root of three over two, about zero point eight six six. Sine of thirty degrees is exactly one half.",
      "audio_text": null,
-     "start": 1213.075,
-     "end": 1226.475,
-     "dur": 13.4,
-     "start_frame": 36392,
-     "end_frame": 36794
+     "start": 1180.2,
+     "end": 1190.725,
+     "dur": 10.525,
+     "start_frame": 35406,
+     "end_frame": 35722
     },
     {
      "text": "So x hat prime is zero point eight six six, zero point five.",
      "audio_text": null,
-     "start": 1226.825,
-     "end": 1231.575,
+     "start": 1191.075,
+     "end": 1195.825,
      "dur": 4.75,
-     "start_frame": 36805,
-     "end_frame": 36947,
+     "start_frame": 35732,
+     "end_frame": 35875,
      "beat": true
     }
    ],
-   "end": 1233.075,
-   "start_frame": 34329,
-   "end_frame": 36992
+   "end": 1197.325,
+   "start_frame": 33343,
+   "end_frame": 35920
   },
   {
    "id": "s16_y_prime",
-   "start": 1233.075,
+   "start": 1197.325,
    "sentences": [
     {
      "text": "What about the new y axis?",
      "audio_text": null,
-     "start": 1233.075,
-     "end": 1235.35,
+     "start": 1197.325,
+     "end": 1199.6,
      "dur": 2.275,
-     "start_frame": 36992,
-     "end_frame": 37060
+     "start_frame": 35920,
+     "end_frame": 35988
     },
     {
      "text": "It must be at right angles to the new x axis, and turned anticlockwise from it, just as north is from east.",
      "audio_text": null,
-     "start": 1235.7,
-     "end": 1243.3,
+     "start": 1199.95,
+     "end": 1207.55,
      "dur": 7.6,
-     "start_frame": 37071,
-     "end_frame": 37299
+     "start_frame": 35998,
+     "end_frame": 36226
     },
     {
      "text": "So y hat prime is x hat prime turned by ninety degrees, and we already have the rule for that: swap the two numbers, and put a minus on the first.",
      "audio_text": null,
-     "start": 1243.65,
-     "end": 1253.475,
+     "start": 1207.9,
+     "end": 1217.725,
      "dur": 9.825,
-     "start_frame": 37310,
-     "end_frame": 37604
+     "start_frame": 36237,
+     "end_frame": 36532
     },
     {
      "text": "That gives minus sine alpha, cosine alpha.",
      "audio_text": null,
-     "start": 1253.825,
-     "end": 1257.475,
+     "start": 1218.075,
+     "end": 1221.725,
      "dur": 3.65,
-     "start_frame": 37615,
-     "end_frame": 37724,
+     "start_frame": 36542,
+     "end_frame": 36652,
      "beat": true
     },
     {
      "text": "With thirty degrees, y hat prime is minus zero point five, zero point eight six six.",
      "audio_text": null,
-     "start": 1258.975,
-     "end": 1265.375,
+     "start": 1223.225,
+     "end": 1229.625,
      "dur": 6.4,
-     "start_frame": 37769,
-     "end_frame": 37961,
+     "start_frame": 36697,
+     "end_frame": 36889,
      "beat": true
     },
     {
      "text": "Let's check it.",
      "audio_text": null,
-     "start": 1266.875,
-     "end": 1268.525,
+     "start": 1231.125,
+     "end": 1232.775,
      "dur": 1.65,
-     "start_frame": 38006,
-     "end_frame": 38056
+     "start_frame": 36934,
+     "end_frame": 36983
     },
     {
-     "text": "Its length is one, because zero point two five plus zero point seven five is one.",
+     "text": "Squaring its two components, adding them, and taking the square root gives one.",
      "audio_text": null,
-     "start": 1268.875,
-     "end": 1274.925,
-     "dur": 6.05,
-     "start_frame": 38066,
-     "end_frame": 38248
+     "start": 1233.125,
+     "end": 1238.45,
+     "dur": 5.325,
+     "start_frame": 36994,
+     "end_frame": 37154
     },
     {
-     "text": "And its dot product with x hat prime is zero point eight six six times minus zero point five, plus zero point five times zero point eight six six. That's minus zero point four three three plus zero point four three three, which is zero.",
+     "text": "And its dot product with x hat prime is zero: when we multiply the matching parts, the two products cancel.",
      "audio_text": null,
-     "start": 1275.275,
-     "end": 1292.425,
-     "dur": 17.15,
-     "start_frame": 38258,
-     "end_frame": 38773,
+     "start": 1238.8,
+     "end": 1246.225,
+     "dur": 7.425,
+     "start_frame": 37164,
+     "end_frame": 37387,
      "beat": true
     },
     {
      "text": "So the new axes are at right angles, just like the old ones.",
      "audio_text": null,
-     "start": 1293.925,
-     "end": 1298.25,
+     "start": 1247.725,
+     "end": 1252.05,
      "dur": 4.325,
-     "start_frame": 38818,
-     "end_frame": 38948
+     "start_frame": 37432,
+     "end_frame": 37562
     }
    ],
-   "end": 1299.05,
-   "start_frame": 36992,
-   "end_frame": 38972
+   "end": 1252.85,
+   "start_frame": 35920,
+   "end_frame": 37586
   },
   {
    "id": "s17_new_components",
-   "start": 1299.05,
+   "start": 1252.85,
    "sentences": [
     {
      "text": "Now we can measure the balloon's arrow, three, four, with the new rulers.",
      "audio_text": null,
-     "start": 1299.05,
-     "end": 1304.075,
+     "start": 1252.85,
+     "end": 1257.875,
      "dur": 5.025,
-     "start_frame": 38972,
-     "end_frame": 39122
+     "start_frame": 37586,
+     "end_frame": 37736
     },
     {
      "text": "Its new coordinates are called x prime and y prime.",
      "audio_text": null,
-     "start": 1304.425,
-     "end": 1308.375,
+     "start": 1258.225,
+     "end": 1262.175,
      "dur": 3.95,
-     "start_frame": 39133,
-     "end_frame": 39251
+     "start_frame": 37747,
+     "end_frame": 37865
     },
     {
      "text": "X prime answers one question: how much of the arrow lies along the new x axis?",
      "audio_text": null,
-     "start": 1308.725,
-     "end": 1314.625,
+     "start": 1262.525,
+     "end": 1268.425,
      "dur": 5.9,
-     "start_frame": 39262,
-     "end_frame": 39439
+     "start_frame": 37876,
+     "end_frame": 38053
     },
     {
      "text": "That's the length of the arrow's shadow on that axis, which is its dot product with x hat prime.",
      "audio_text": null,
-     "start": 1314.975,
-     "end": 1321.55,
+     "start": 1268.775,
+     "end": 1275.35,
      "dur": 6.575,
-     "start_frame": 39449,
-     "end_frame": 39646
+     "start_frame": 38063,
+     "end_frame": 38260
     },
     {
      "text": "Multiply the matching parts, and add: x times cosine alpha, plus y times sine alpha.",
      "audio_text": null,
-     "start": 1321.9,
-     "end": 1328.65,
+     "start": 1275.7,
+     "end": 1282.45,
      "dur": 6.75,
-     "start_frame": 39657,
-     "end_frame": 39860,
+     "start_frame": 38271,
+     "end_frame": 38474,
      "beat": true
     },
     {
      "text": "In the same way, y prime is the dot product with y hat prime: minus x sine alpha, plus y cosine alpha.",
      "audio_text": null,
-     "start": 1330.15,
-     "end": 1338.575,
+     "start": 1283.95,
+     "end": 1292.375,
      "dur": 8.425,
-     "start_frame": 39904,
-     "end_frame": 40157,
+     "start_frame": 38518,
+     "end_frame": 38771,
      "beat": true
     },
     {
-     "text": "Now the numbers, with x equals three, y equals four, and alpha equals thirty degrees.",
+     "text": "Now the numbers: x is three and y is four, alpha is thirty degrees, the cosine of thirty degrees is about zero point eight six six, and its sine is zero point five.",
      "audio_text": null,
-     "start": 1340.075,
-     "end": 1346.575,
-     "dur": 6.5,
-     "start_frame": 40202,
-     "end_frame": 40397
+     "start": 1293.875,
+     "end": 1305.975,
+     "dur": 12.1,
+     "start_frame": 38816,
+     "end_frame": 39179
     },
     {
-     "text": "X prime is three times zero point eight six six, plus four times zero point five.",
+     "text": "For x prime, we take x times the cosine, plus y times the sine.",
      "audio_text": null,
-     "start": 1346.925,
-     "end": 1353.025,
-     "dur": 6.1,
-     "start_frame": 40408,
-     "end_frame": 40591
+     "start": 1306.325,
+     "end": 1311.525,
+     "dur": 5.2,
+     "start_frame": 39190,
+     "end_frame": 39346
     },
     {
-     "text": "That's two point six plus two, about four point six.",
+     "text": "That gives about four point six.",
      "audio_text": null,
-     "start": 1353.375,
-     "end": 1357.375,
-     "dur": 4.0,
-     "start_frame": 40601,
-     "end_frame": 40721,
+     "start": 1311.875,
+     "end": 1314.35,
+     "dur": 2.475,
+     "start_frame": 39356,
+     "end_frame": 39430,
      "beat": true
     },
     {
-     "text": "Y prime is minus three times zero point five, plus four times zero point eight six six.",
+     "text": "For y prime, we take minus x times the sine, plus y times the cosine.",
      "audio_text": null,
-     "start": 1358.875,
-     "end": 1365.35,
-     "dur": 6.475,
-     "start_frame": 40766,
-     "end_frame": 40960
+     "start": 1315.85,
+     "end": 1321.725,
+     "dur": 5.875,
+     "start_frame": 39476,
+     "end_frame": 39652
     },
     {
-     "text": "That's minus one point five plus three point four six, about one point nine six.",
+     "text": "That gives about one point nine six.",
      "audio_text": null,
-     "start": 1365.7,
-     "end": 1371.5,
-     "dur": 5.8,
-     "start_frame": 40971,
-     "end_frame": 41145,
+     "start": 1322.075,
+     "end": 1324.75,
+     "dur": 2.675,
+     "start_frame": 39662,
+     "end_frame": 39742,
      "beat": true
     },
     {
      "text": "So in the turned axes, the balloon is at about four point six, one point nine six.",
      "audio_text": null,
-     "start": 1373.0,
-     "end": 1379.1,
+     "start": 1326.25,
+     "end": 1332.35,
      "dur": 6.1,
-     "start_frame": 41190,
-     "end_frame": 41373
+     "start_frame": 39788,
+     "end_frame": 39970
     },
     {
      "text": "Is it the same arrow?",
      "audio_text": null,
-     "start": 1379.45,
-     "end": 1381.375,
+     "start": 1332.7,
+     "end": 1334.625,
      "dur": 1.925,
-     "start_frame": 41384,
-     "end_frame": 41441
+     "start_frame": 39981,
+     "end_frame": 40039
     },
     {
-     "text": "Its length is the square root of four point six squared plus one point nine six squared.",
+     "text": "Let's find its length: we square the two new coordinates, add them, and take the square root.",
      "audio_text": null,
-     "start": 1381.725,
-     "end": 1387.675,
-     "dur": 5.95,
-     "start_frame": 41452,
-     "end_frame": 41630
+     "start": 1334.975,
+     "end": 1341.0,
+     "dur": 6.025,
+     "start_frame": 40049,
+     "end_frame": 40230
     },
     {
-     "text": "Four point six squared is about twenty one point one six, and one point nine six squared is about three point eight four. Together that's twenty five, and its square root is five kilometres, as before.",
+     "text": "It comes out at five kilometres, as before.",
      "audio_text": null,
-     "start": 1388.025,
-     "end": 1401.925,
-     "dur": 13.9,
-     "start_frame": 41641,
-     "end_frame": 42058,
+     "start": 1341.35,
+     "end": 1344.8,
+     "dur": 3.45,
+     "start_frame": 40240,
+     "end_frame": 40344,
      "beat": true
     },
     {
      "text": "The arrow didn't move.",
      "audio_text": null,
-     "start": 1403.425,
-     "end": 1405.375,
+     "start": 1346.3,
+     "end": 1348.25,
      "dur": 1.95,
-     "start_frame": 42103,
-     "end_frame": 42161
+     "start_frame": 40389,
+     "end_frame": 40448
     },
     {
      "text": "Only the numbers that describe it changed, because we measure it with different rulers.",
      "audio_text": null,
-     "start": 1405.725,
-     "end": 1411.225,
+     "start": 1348.6,
+     "end": 1354.1,
      "dur": 5.5,
-     "start_frame": 42172,
-     "end_frame": 42337
+     "start_frame": 40458,
+     "end_frame": 40623
     }
    ],
-   "end": 1412.025,
-   "start_frame": 38972,
-   "end_frame": 42361
+   "end": 1354.9,
+   "start_frame": 37586,
+   "end_frame": 40647
   },
   {
    "id": "s18_matrix",
-   "start": 1412.025,
+   "start": 1354.9,
    "sentences": [
     {
      "text": "These two lines have the same shape, so let's line them up.",
      "audio_text": null,
-     "start": 1412.025,
-     "end": 1415.875,
+     "start": 1354.9,
+     "end": 1358.75,
      "dur": 3.85,
-     "start_frame": 42361,
-     "end_frame": 42476
+     "start_frame": 40647,
+     "end_frame": 40762
     },
     {
      "text": "Write x prime above y prime, with the x terms in one column and the y terms in the other.",
      "audio_text": null,
-     "start": 1416.225,
-     "end": 1422.675,
+     "start": 1359.1,
+     "end": 1365.55,
      "dur": 6.45,
-     "start_frame": 42487,
-     "end_frame": 42680
+     "start_frame": 40773,
+     "end_frame": 40966
     },
     {
      "text": "Now look at just the four numbers in front of x and y.",
      "audio_text": null,
-     "start": 1423.025,
-     "end": 1426.775,
+     "start": 1365.9,
+     "end": 1369.65,
      "dur": 3.75,
-     "start_frame": 42691,
-     "end_frame": 42803
+     "start_frame": 40977,
+     "end_frame": 41090
     },
     {
      "text": "The top row is cosine alpha and sine alpha, and the bottom row is minus sine alpha and cosine alpha.",
      "audio_text": null,
-     "start": 1427.125,
-     "end": 1434.7,
+     "start": 1370.0,
+     "end": 1377.575,
      "dur": 7.575,
-     "start_frame": 42814,
-     "end_frame": 43041
+     "start_frame": 41100,
+     "end_frame": 41327
     },
     {
      "text": "That square of four numbers is called a rotation matrix, because it turns old coordinates into new ones.",
      "audio_text": null,
-     "start": 1435.05,
-     "end": 1442.075,
+     "start": 1377.925,
+     "end": 1384.95,
      "dur": 7.025,
-     "start_frame": 43052,
-     "end_frame": 43262
+     "start_frame": 41338,
+     "end_frame": 41548
     },
     {
      "text": "To use it, go along one row.",
      "audio_text": null,
-     "start": 1442.425,
-     "end": 1445.2,
+     "start": 1385.3,
+     "end": 1388.075,
      "dur": 2.775,
-     "start_frame": 43273,
-     "end_frame": 43356
+     "start_frame": 41559,
+     "end_frame": 41642
     },
     {
      "text": "Multiply its first number by x, and its second number by y, then add.",
      "audio_text": null,
-     "start": 1445.55,
-     "end": 1451.1,
+     "start": 1388.425,
+     "end": 1393.975,
      "dur": 5.55,
-     "start_frame": 43366,
-     "end_frame": 43533
+     "start_frame": 41653,
+     "end_frame": 41819
     },
     {
      "text": "The top row gives x prime, and the bottom row gives y prime.",
      "audio_text": null,
-     "start": 1451.45,
-     "end": 1456.05,
+     "start": 1394.325,
+     "end": 1398.925,
      "dur": 4.6,
-     "start_frame": 43544,
-     "end_frame": 43682
+     "start_frame": 41830,
+     "end_frame": 41968
     },
     {
-     "text": "With our numbers, the top row gives zero point eight six six times three, plus zero point five times four: four point six again. And the bottom row gives minus zero point five times three, plus zero point eight six six times four: one point nine six, our y prime again.",
+     "text": "With our numbers, the top row gives four point six again, and the bottom row gives one point nine six, our y prime again.",
      "audio_text": null,
-     "start": 1456.4,
-     "end": 1475.775,
-     "dur": 19.375,
-     "start_frame": 43692,
-     "end_frame": 44273,
+     "start": 1399.275,
+     "end": 1407.575,
+     "dur": 8.3,
+     "start_frame": 41978,
+     "end_frame": 42227,
      "beat": true
     },
     {
      "text": "Each of the four numbers has a meaning, too.",
      "audio_text": null,
-     "start": 1477.275,
-     "end": 1480.325,
+     "start": 1409.075,
+     "end": 1412.125,
      "dur": 3.05,
-     "start_frame": 44318,
-     "end_frame": 44410
+     "start_frame": 42272,
+     "end_frame": 42364
     },
     {
      "text": "The dot product of two arrows of length one is the cosine of the angle between them. As in the dot product movie: length times length times the cosine of the angle, and both lengths are one.",
      "audio_text": null,
-     "start": 1480.675,
-     "end": 1494.05,
+     "start": 1412.475,
+     "end": 1425.85,
      "dur": 13.375,
-     "start_frame": 44420,
-     "end_frame": 44822
+     "start_frame": 42374,
+     "end_frame": 42776
     },
     {
      "text": "So each number is the cosine of the angle between one new axis and one old axis.",
      "audio_text": null,
-     "start": 1494.4,
-     "end": 1500.75,
+     "start": 1426.2,
+     "end": 1432.55,
      "dur": 6.35,
-     "start_frame": 44832,
-     "end_frame": 45022
+     "start_frame": 42786,
+     "end_frame": 42976
     },
     {
      "text": "That's why they're called direction cosines.",
      "audio_text": null,
-     "start": 1501.1,
-     "end": 1504.0,
+     "start": 1432.9,
+     "end": 1435.8,
      "dur": 2.9,
-     "start_frame": 45033,
-     "end_frame": 45120
+     "start_frame": 42987,
+     "end_frame": 43074
     },
     {
      "text": "For example, the angle between x hat prime and x hat is alpha, so their dot product is cosine alpha: the top left number. The angle between x hat prime and y hat is ninety degrees minus alpha, and its cosine is sine alpha. The angle between y hat prime and x hat is ninety degrees plus alpha, and its cosine is minus sine alpha.",
      "audio_text": null,
-     "start": 1504.35,
-     "end": 1530.475,
+     "start": 1436.15,
+     "end": 1462.275,
      "dur": 26.125,
-     "start_frame": 45130,
-     "end_frame": 45914
+     "start_frame": 43084,
+     "end_frame": 43868
     }
    ],
-   "end": 1531.275,
-   "start_frame": 42361,
-   "end_frame": 45938
+   "end": 1463.075,
+   "start_frame": 40647,
+   "end_frame": 43892
   },
   {
    "id": "s19_index_form",
-   "start": 1531.275,
+   "start": 1463.075,
    "sentences": [
     {
      "text": "In the vectors movie, we met index notation, a short way to write all of this.",
      "audio_text": null,
-     "start": 1531.275,
-     "end": 1536.975,
+     "start": 1463.075,
+     "end": 1468.775,
      "dur": 5.7,
-     "start_frame": 45938,
-     "end_frame": 46109
+     "start_frame": 43892,
+     "end_frame": 44063
     },
     {
      "text": "Let's rewrite it one step at a time.",
      "audio_text": null,
-     "start": 1537.325,
-     "end": 1540.025,
+     "start": 1469.125,
+     "end": 1471.825,
      "dur": 2.7,
-     "start_frame": 46120,
-     "end_frame": 46201
+     "start_frame": 44074,
+     "end_frame": 44155
     },
     {
      "text": "First, the names.",
      "audio_text": null,
-     "start": 1540.375,
-     "end": 1542.25,
+     "start": 1472.175,
+     "end": 1474.05,
      "dur": 1.875,
-     "start_frame": 46211,
-     "end_frame": 46268
+     "start_frame": 44165,
+     "end_frame": 44222
     },
     {
      "text": "The old coordinates x and y become x sub one and x sub two.",
      "audio_text": null,
-     "start": 1542.6,
-     "end": 1547.65,
+     "start": 1474.4,
+     "end": 1479.45,
      "dur": 5.05,
-     "start_frame": 46278,
-     "end_frame": 46430
+     "start_frame": 44232,
+     "end_frame": 44384
     },
     {
      "text": "The old unit vectors x hat and y hat become e sub one and e sub two, and the new ones become e prime sub one and e prime sub two.",
      "audio_text": null,
-     "start": 1548.0,
-     "end": 1558.05,
+     "start": 1479.8,
+     "end": 1489.85,
      "dur": 10.05,
-     "start_frame": 46440,
-     "end_frame": 46742
+     "start_frame": 44394,
+     "end_frame": 44696
     },
     {
      "text": "Next, each direction cosine gets two labels.",
      "audio_text": null,
-     "start": 1558.4,
-     "end": 1562.175,
+     "start": 1490.2,
+     "end": 1493.975,
      "dur": 3.775,
-     "start_frame": 46752,
-     "end_frame": 46865
+     "start_frame": 44706,
+     "end_frame": 44819
     },
     {
      "text": "C sub i j is the dot product of old arrow number i with new arrow number j.",
      "audio_text": null,
-     "start": 1562.525,
-     "end": 1568.75,
+     "start": 1494.325,
+     "end": 1500.55,
      "dur": 6.225,
-     "start_frame": 46876,
-     "end_frame": 47062
+     "start_frame": 44830,
+     "end_frame": 45016
     },
     {
      "text": "Let's work out all four.",
      "audio_text": null,
-     "start": 1569.1,
-     "end": 1571.225,
+     "start": 1500.9,
+     "end": 1503.025,
      "dur": 2.125,
-     "start_frame": 47073,
-     "end_frame": 47137
+     "start_frame": 45027,
+     "end_frame": 45091
     },
     {
-     "text": "C one one is x hat dot x hat prime: one times cosine alpha, plus zero times sine alpha, which is cosine alpha.",
+     "text": "C one one is x hat dot x hat prime, which is cosine alpha.",
      "audio_text": null,
-     "start": 1571.575,
-     "end": 1580.725,
-     "dur": 9.15,
-     "start_frame": 47147,
-     "end_frame": 47422,
+     "start": 1503.375,
+     "end": 1508.275,
+     "dur": 4.9,
+     "start_frame": 45101,
+     "end_frame": 45248,
      "beat": true
     },
     {
      "text": "C one two is x hat dot y hat prime, which is minus sine alpha.",
      "audio_text": null,
-     "start": 1582.225,
-     "end": 1587.575,
+     "start": 1509.775,
+     "end": 1515.125,
      "dur": 5.35,
-     "start_frame": 47467,
-     "end_frame": 47627,
+     "start_frame": 45293,
+     "end_frame": 45454,
      "beat": true
     },
     {
      "text": "C two one is y hat dot x hat prime, which is sine alpha.",
      "audio_text": null,
-     "start": 1589.075,
-     "end": 1593.95,
+     "start": 1516.625,
+     "end": 1521.5,
      "dur": 4.875,
-     "start_frame": 47672,
-     "end_frame": 47818,
+     "start_frame": 45499,
+     "end_frame": 45645,
      "beat": true
     },
     {
      "text": "And C two two is y hat dot y hat prime, which is cosine alpha.",
      "audio_text": null,
-     "start": 1595.45,
-     "end": 1600.75,
+     "start": 1523.0,
+     "end": 1528.3,
      "dur": 5.3,
-     "start_frame": 47864,
-     "end_frame": 48022,
+     "start_frame": 45690,
+     "end_frame": 45849,
      "beat": true
     },
     {
      "text": "Now the rule: new coordinate number j is x sub i times C sub i j.",
      "audio_text": null,
-     "start": 1602.25,
-     "end": 1607.85,
+     "start": 1529.8,
+     "end": 1535.4,
      "dur": 5.6,
-     "start_frame": 48068,
-     "end_frame": 48236
+     "start_frame": 45894,
+     "end_frame": 46062
     },
     {
      "text": "The index i appears twice, so, as in the vectors movie, we add up the terms for i equals one and i equals two.",
      "audio_text": null,
-     "start": 1608.2,
-     "end": 1616.675,
+     "start": 1535.75,
+     "end": 1544.225,
      "dur": 8.475,
-     "start_frame": 48246,
-     "end_frame": 48500
+     "start_frame": 46072,
+     "end_frame": 46327
     },
     {
      "text": "For j equals one, that's x sub one times C one one, plus x sub two times C two one.",
      "audio_text": null,
-     "start": 1617.025,
-     "end": 1624.075,
+     "start": 1544.575,
+     "end": 1551.625,
      "dur": 7.05,
-     "start_frame": 48511,
-     "end_frame": 48722
+     "start_frame": 46337,
+     "end_frame": 46549
     },
     {
      "text": "That's x cosine alpha plus y sine alpha: our x prime. With our numbers that's four point six again.",
      "audio_text": null,
-     "start": 1624.425,
-     "end": 1632.65,
+     "start": 1551.975,
+     "end": 1560.2,
      "dur": 8.225,
-     "start_frame": 48733,
-     "end_frame": 48980,
+     "start_frame": 46559,
+     "end_frame": 46806,
      "beat": true
     },
     {
      "text": "For j equals two, it's x sub one times C one two, plus x sub two times C two two.",
      "audio_text": null,
-     "start": 1634.15,
-     "end": 1641.0,
+     "start": 1561.7,
+     "end": 1568.55,
      "dur": 6.85,
-     "start_frame": 49024,
-     "end_frame": 49230
+     "start_frame": 46851,
+     "end_frame": 47056
     },
     {
      "text": "That's minus x sine alpha plus y cosine alpha: our y prime. With our numbers that's one point nine six.",
      "audio_text": null,
-     "start": 1641.35,
-     "end": 1649.825,
+     "start": 1568.9,
+     "end": 1577.375,
      "dur": 8.475,
-     "start_frame": 49240,
-     "end_frame": 49495,
+     "start_frame": 47067,
+     "end_frame": 47321,
      "beat": true
     },
     {
      "text": "So the short line says exactly what our two long lines say.",
      "audio_text": null,
-     "start": 1651.325,
-     "end": 1655.65,
+     "start": 1578.875,
+     "end": 1583.2,
      "dur": 4.325,
-     "start_frame": 49540,
-     "end_frame": 49670
+     "start_frame": 47366,
+     "end_frame": 47496
     },
     {
      "text": "If we set the four C's in a square, with i for the row and j for the column, we get our rotation matrix flipped over its diagonal.",
      "audio_text": null,
-     "start": 1656.0,
-     "end": 1664.825,
+     "start": 1583.55,
+     "end": 1592.375,
      "dur": 8.825,
-     "start_frame": 49680,
-     "end_frame": 49945
+     "start_frame": 47506,
+     "end_frame": 47771
     },
     {
      "text": "That's only because this form reads down the columns instead of along the rows, and the four numbers are the same.",
      "audio_text": null,
-     "start": 1665.175,
-     "end": 1672.275,
+     "start": 1592.725,
+     "end": 1599.825,
      "dur": 7.1,
-     "start_frame": 49955,
-     "end_frame": 50168
+     "start_frame": 47782,
+     "end_frame": 47995
     },
     {
      "text": "The same rule works in three dimensions, and for things called tensors, which we'll meet in our tensors movie, later in this series.",
      "audio_text": null,
-     "start": 1672.625,
-     "end": 1681.275,
+     "start": 1600.175,
+     "end": 1608.825,
      "dur": 8.65,
-     "start_frame": 50179,
-     "end_frame": 50438
+     "start_frame": 48005,
+     "end_frame": 48265
     }
    ],
-   "end": 1682.075,
-   "start_frame": 45938,
-   "end_frame": 50462
+   "end": 1609.625,
+   "start_frame": 43892,
+   "end_frame": 48289
   },
   {
    "id": "s20_polar_is_turned",
-   "start": 1682.075,
+   "start": 1609.625,
    "sentences": [
     {
      "text": "Here's a nice link between the two ideas.",
      "audio_text": null,
-     "start": 1682.075,
-     "end": 1685.05,
+     "start": 1609.625,
+     "end": 1612.6,
      "dur": 2.975,
-     "start_frame": 50462,
-     "end_frame": 50552
+     "start_frame": 48289,
+     "end_frame": 48378
     },
     {
      "text": "Go back to the balloon, at fifty three degrees, and turn the axes by alpha equals theta, fifty three degrees.",
      "audio_text": null,
-     "start": 1685.4,
-     "end": 1693.0,
+     "start": 1612.95,
+     "end": 1620.55,
      "dur": 7.6,
-     "start_frame": 50562,
-     "end_frame": 50790
+     "start_frame": 48388,
+     "end_frame": 48616
     },
     {
      "text": "Then x hat prime is cosine theta, sine theta, which is r hat.",
      "audio_text": null,
-     "start": 1693.35,
-     "end": 1698.5,
+     "start": 1620.9,
+     "end": 1626.05,
      "dur": 5.15,
-     "start_frame": 50800,
-     "end_frame": 50955
+     "start_frame": 48627,
+     "end_frame": 48782
     },
     {
      "text": "And y hat prime is minus sine theta, cosine theta, which is theta hat.",
      "audio_text": null,
-     "start": 1698.85,
-     "end": 1704.325,
+     "start": 1626.4,
+     "end": 1631.875,
      "dur": 5.475,
-     "start_frame": 50966,
-     "end_frame": 51130,
+     "start_frame": 48792,
+     "end_frame": 48956,
      "beat": true
     },
     {
      "text": "So r hat and theta hat are just the east and north arrows, turned by the angle theta.",
      "audio_text": null,
-     "start": 1705.825,
-     "end": 1712.075,
+     "start": 1633.375,
+     "end": 1639.625,
      "dur": 6.25,
-     "start_frame": 51175,
-     "end_frame": 51362
+     "start_frame": 49001,
+     "end_frame": 49189
     },
     {
      "text": "That means the polar parts of any arrow are its coordinates in turned axes.",
      "audio_text": null,
-     "start": 1712.425,
-     "end": 1717.7,
+     "start": 1639.975,
+     "end": 1645.25,
      "dur": 5.275,
-     "start_frame": 51373,
-     "end_frame": 51531
+     "start_frame": 49199,
+     "end_frame": 49358
     },
     {
-     "text": "Let's check with the east wind, ten, zero.",
+     "text": "Let's check with the east wind, ten, zero, and the cosine and sine of theta, zero point six and zero point eight.",
      "audio_text": null,
-     "start": 1718.05,
-     "end": 1721.575,
-     "dur": 3.525,
-     "start_frame": 51542,
-     "end_frame": 51647
+     "start": 1645.6,
+     "end": 1653.725,
+     "dur": 8.125,
+     "start_frame": 49368,
+     "end_frame": 49612
     },
     {
-     "text": "X prime is ten times zero point six, plus zero times zero point eight, which is six.",
+     "text": "X prime is the wind's dot product with r hat, which is six.",
      "audio_text": null,
-     "start": 1721.925,
-     "end": 1728.525,
-     "dur": 6.6,
-     "start_frame": 51658,
-     "end_frame": 51856,
+     "start": 1654.075,
+     "end": 1658.7,
+     "dur": 4.625,
+     "start_frame": 49622,
+     "end_frame": 49761,
      "beat": true
     },
     {
-     "text": "Y prime is minus ten times zero point eight, plus zero times zero point six, which is minus eight.",
+     "text": "Y prime is its dot product with theta hat, which is minus eight.",
      "audio_text": null,
-     "start": 1730.025,
-     "end": 1737.525,
-     "dur": 7.5,
-     "start_frame": 51901,
-     "end_frame": 52126,
+     "start": 1660.2,
+     "end": 1665.0,
+     "dur": 4.8,
+     "start_frame": 49806,
+     "end_frame": 49950,
      "beat": true
     },
     {
      "text": "Those are exactly u sub r and u sub theta from before.",
      "audio_text": null,
-     "start": 1739.025,
-     "end": 1743.525,
+     "start": 1666.5,
+     "end": 1671.0,
      "dur": 4.5,
-     "start_frame": 52171,
-     "end_frame": 52306
+     "start_frame": 49995,
+     "end_frame": 50130
     },
     {
      "text": "Now the balloon's own position arrow, three, four.",
      "audio_text": null,
-     "start": 1743.875,
-     "end": 1747.55,
+     "start": 1671.35,
+     "end": 1675.025,
      "dur": 3.675,
-     "start_frame": 52316,
-     "end_frame": 52426
+     "start_frame": 50140,
+     "end_frame": 50251
     },
     {
-     "text": "X prime is three times zero point six, plus four times zero point eight.",
+     "text": "X prime is its dot product with r hat: three times r hat's east part, plus four times its north part.",
      "audio_text": null,
-     "start": 1747.9,
-     "end": 1753.325,
-     "dur": 5.425,
-     "start_frame": 52437,
-     "end_frame": 52600
+     "start": 1675.375,
+     "end": 1682.9,
+     "dur": 7.525,
+     "start_frame": 50261,
+     "end_frame": 50487
     },
     {
-     "text": "That's one point eight plus three point two, which is five.",
+     "text": "That gives five.",
      "audio_text": null,
-     "start": 1753.675,
-     "end": 1757.65,
-     "dur": 3.975,
-     "start_frame": 52610,
-     "end_frame": 52730,
+     "start": 1683.25,
+     "end": 1685.0,
+     "dur": 1.75,
+     "start_frame": 50498,
+     "end_frame": 50550,
      "beat": true
     },
     {
-     "text": "Y prime is minus three times zero point eight, plus four times zero point six.",
+     "text": "Y prime is its dot product with theta hat, in the same way.",
      "audio_text": null,
-     "start": 1759.15,
-     "end": 1764.9,
-     "dur": 5.75,
-     "start_frame": 52774,
-     "end_frame": 52947
+     "start": 1686.5,
+     "end": 1691.075,
+     "dur": 4.575,
+     "start_frame": 50595,
+     "end_frame": 50732
     },
     {
-     "text": "That's minus two point four plus two point four, which is zero.",
+     "text": "That gives zero.",
      "audio_text": null,
-     "start": 1765.25,
-     "end": 1769.725,
-     "dur": 4.475,
-     "start_frame": 52958,
-     "end_frame": 53092,
+     "start": 1691.425,
+     "end": 1693.25,
+     "dur": 1.825,
+     "start_frame": 50743,
+     "end_frame": 50798,
      "beat": true
     },
     {
      "text": "So the balloon is at five, zero in these axes: five kilometres along r hat, and nothing along theta hat, because r hat points straight at the balloon.",
      "audio_text": null,
-     "start": 1771.225,
-     "end": 1781.875,
+     "start": 1694.75,
+     "end": 1705.4,
      "dur": 10.65,
-     "start_frame": 53137,
-     "end_frame": 53456
+     "start_frame": 50842,
+     "end_frame": 51162
     },
     {
      "text": "There's one difference, though.",
      "audio_text": null,
-     "start": 1782.225,
-     "end": 1784.4,
+     "start": 1705.75,
+     "end": 1707.925,
      "dur": 2.175,
-     "start_frame": 53467,
-     "end_frame": 53532
+     "start_frame": 51172,
+     "end_frame": 51238
     },
     {
      "text": "With turned axes, we choose one angle for the whole map.",
      "audio_text": null,
-     "start": 1784.75,
-     "end": 1789.025,
+     "start": 1708.275,
+     "end": 1712.55,
      "dur": 4.275,
-     "start_frame": 53542,
-     "end_frame": 53671
+     "start_frame": 51248,
+     "end_frame": 51376
     },
     {
      "text": "With polar coordinates, the angle is theta, so it changes from place to place.",
      "audio_text": null,
-     "start": 1789.375,
-     "end": 1795.05,
+     "start": 1712.9,
+     "end": 1718.575,
      "dur": 5.675,
-     "start_frame": 53681,
-     "end_frame": 53852
+     "start_frame": 51387,
+     "end_frame": 51557
     },
     {
      "text": "If you skipped, here's what to keep: turning the axes by an angle alpha changes the numbers that describe an arrow, but not the arrow itself, and polar parts are just axes turned by theta.",
      "audio_text": null,
-     "start": 1795.4,
-     "end": 1808.125,
+     "start": 1718.925,
+     "end": 1731.65,
      "dur": 12.725,
-     "start_frame": 53862,
-     "end_frame": 54244
+     "start_frame": 51568,
+     "end_frame": 51950
     }
    ],
-   "end": 1808.925,
-   "start_frame": 50462,
-   "end_frame": 54268
+   "end": 1732.45,
+   "start_frame": 48289,
+   "end_frame": 51974
   },
   {
    "id": "s21_ian_polar",
-   "start": 1808.925,
+   "start": 1732.45,
    "sentences": [
     {
      "text": "Now let's take polar coordinates to a real storm.",
      "audio_text": null,
-     "start": 1808.925,
-     "end": 1812.35,
+     "start": 1732.45,
+     "end": 1735.875,
      "dur": 3.425,
-     "start_frame": 54268,
-     "end_frame": 54370
+     "start_frame": 51974,
+     "end_frame": 52076
     },
     {
      "text": "Here is Hurricane Ian on the twenty eighth of September, twenty twenty-two, at six in the evening, universal time, an hour before it came ashore on the southwest coast of Florida.",
      "audio_text": null,
-     "start": 1812.7,
-     "end": 1824.625,
+     "start": 1736.225,
+     "end": 1748.15,
      "dur": 11.925,
-     "start_frame": 54381,
-     "end_frame": 54739
+     "start_frame": 52087,
+     "end_frame": 52444
     },
     {
      "text": "The colours show the wind speed ten metres above the ground, from a weather model analysis with grid points every three kilometres.",
      "audio_text": null,
-     "start": 1824.975,
-     "end": 1833.675,
+     "start": 1748.5,
+     "end": 1757.2,
      "dur": 8.7,
-     "start_frame": 54749,
-     "end_frame": 55010
+     "start_frame": 52455,
+     "end_frame": 52716
     },
     {
      "text": "Like most weather data, it gives each wind as two numbers: its eastward part u, and its northward part v.",
      "audio_text": null,
-     "start": 1834.025,
-     "end": 1841.55,
+     "start": 1757.55,
+     "end": 1765.075,
      "dur": 7.525,
-     "start_frame": 55021,
-     "end_frame": 55246
+     "start_frame": 52726,
+     "end_frame": 52952
     },
     {
      "text": "The calm centre of the storm is called the eye.",
      "audio_text": null,
-     "start": 1841.9,
-     "end": 1845.075,
+     "start": 1765.425,
+     "end": 1768.6,
      "dur": 3.175,
-     "start_frame": 55257,
-     "end_frame": 55352
+     "start_frame": 52963,
+     "end_frame": 53058
     },
     {
      "text": "Let's put the origin in the middle of the eye, and zoom in.",
      "audio_text": null,
-     "start": 1845.425,
-     "end": 1849.3,
+     "start": 1768.95,
+     "end": 1772.825,
      "dur": 3.875,
-     "start_frame": 55363,
-     "end_frame": 55479
+     "start_frame": 53068,
+     "end_frame": 53185
     },
     {
      "text": "The eye sits just off the coast, over the warm Gulf of Mexico, with the flat, low land of southwest Florida to its east.",
      "audio_text": null,
-     "start": 1849.65,
-     "end": 1858.1,
+     "start": 1773.175,
+     "end": 1781.625,
      "dur": 8.45,
-     "start_frame": 55490,
-     "end_frame": 55743
+     "start_frame": 53195,
+     "end_frame": 53449
     },
     {
      "text": "Round the eye, the winds are the strongest in the storm.",
      "audio_text": null,
-     "start": 1858.45,
-     "end": 1862.325,
+     "start": 1781.975,
+     "end": 1785.85,
      "dur": 3.875,
-     "start_frame": 55754,
-     "end_frame": 55870
+     "start_frame": 53459,
+     "end_frame": 53576
     },
     {
      "text": "Now every point round the eye gets its polar coordinates: its distance r from the centre, and its angle theta from east.",
      "audio_text": null,
-     "start": 1862.675,
-     "end": 1870.95,
+     "start": 1786.2,
+     "end": 1794.475,
      "dur": 8.275,
-     "start_frame": 55880,
-     "end_frame": 56128
+     "start_frame": 53586,
+     "end_frame": 53834
     }
    ],
-   "end": 1871.75,
-   "start_frame": 54268,
-   "end_frame": 56152
+   "end": 1795.275,
+   "start_frame": 51974,
+   "end_frame": 53858
   },
   {
    "id": "s22_spin_inflow",
-   "start": 1871.75,
+   "start": 1795.275,
    "sentences": [
     {
      "text": "Every wind on the map now has two polar parts.",
      "audio_text": null,
-     "start": 1871.75,
-     "end": 1875.25,
+     "start": 1795.275,
+     "end": 1798.775,
      "dur": 3.5,
-     "start_frame": 56152,
-     "end_frame": 56258
+     "start_frame": 53858,
+     "end_frame": 53963
     },
     {
      "text": "The radial wind, u sub r, blows in or out.",
      "audio_text": null,
-     "start": 1875.6,
-     "end": 1879.375,
+     "start": 1799.125,
+     "end": 1802.9,
      "dur": 3.775,
-     "start_frame": 56268,
-     "end_frame": 56381
+     "start_frame": 53974,
+     "end_frame": 54087
     },
     {
      "text": "The tangential wind, u sub theta, blows round the eye.",
      "audio_text": null,
-     "start": 1879.725,
-     "end": 1884.175,
+     "start": 1803.25,
+     "end": 1807.7,
      "dur": 4.45,
-     "start_frame": 56392,
-     "end_frame": 56525
+     "start_frame": 54098,
+     "end_frame": 54231
     },
     {
      "text": "Let's draw a ring twenty five kilometres from the centre, and work out both parts at seventy two points round it, one every five degrees.",
      "audio_text": null,
-     "start": 1884.525,
-     "end": 1893.675,
+     "start": 1808.05,
+     "end": 1817.2,
      "dur": 9.15,
-     "start_frame": 56536,
-     "end_frame": 56810
+     "start_frame": 54242,
+     "end_frame": 54516
     },
     {
      "text": "Then we average each part round the ring: we add up the seventy two values, and divide by seventy two. In symbols, the average radial wind, u sub r bar, is one over N times the sum of all the u sub r values, from point one to point N. Here N is seventy two, one point every five degrees round the ring. The average tangential wind, u sub theta bar, is made in the same way.",
      "audio_text": null,
-     "start": 1894.025,
-     "end": 1923.125,
+     "start": 1817.55,
+     "end": 1846.65,
      "dur": 29.1,
-     "start_frame": 56821,
-     "end_frame": 57694
+     "start_frame": 54526,
+     "end_frame": 55400
     },
     {
-     "text": "The seventy two tangential winds add up to about two thousand five hundred and six metres per second. Divided by seventy two, that's about thirty four point eight, or about thirty five metres per second.",
+     "text": "The seventy two tangential winds, starting with thirty eight at theta equals zero, add up to about two thousand five hundred and six metres per second. So their average is about thirty four point eight, or about thirty five metres per second.",
      "audio_text": null,
-     "start": 1923.475,
-     "end": 1938.1,
-     "dur": 14.625,
-     "start_frame": 57704,
-     "end_frame": 58143,
+     "start": 1847.0,
+     "end": 1863.575,
+     "dur": 16.575,
+     "start_frame": 55410,
+     "end_frame": 55907,
      "beat": true
     },
     {
      "text": "To turn metres per second into kilometres per hour, we multiply by three point six, because an hour has three thousand six hundred seconds, and a kilometre has a thousand metres.",
      "audio_text": null,
-     "start": 1939.6,
-     "end": 1951.65,
+     "start": 1865.075,
+     "end": 1877.125,
      "dur": 12.05,
-     "start_frame": 58188,
-     "end_frame": 58550
+     "start_frame": 55952,
+     "end_frame": 56314
     },
     {
      "text": "So thirty five metres per second is about a hundred and twenty six kilometres per hour.",
      "audio_text": null,
-     "start": 1952.0,
-     "end": 1958.125,
+     "start": 1877.475,
+     "end": 1883.6,
      "dur": 6.125,
-     "start_frame": 58560,
-     "end_frame": 58744,
+     "start_frame": 56324,
+     "end_frame": 56508,
      "beat": true
     },
     {
      "text": "The air goes round anticlockwise, as seen from above, as in every northern hemisphere hurricane.",
      "audio_text": null,
-     "start": 1959.625,
-     "end": 1966.85,
+     "start": 1885.1,
+     "end": 1892.325,
      "dur": 7.225,
-     "start_frame": 58789,
-     "end_frame": 59006
+     "start_frame": 56553,
+     "end_frame": 56770
     },
     {
-     "text": "The seventy two radial winds start with minus eight point seven at theta equals zero, minus ten point three at five degrees, and minus eleven point two at ten degrees, and they go on all the way round the ring. Together they add up to about minus nine hundred and fifty seven. Divided by seventy two, that's about minus thirteen point three, or about minus thirteen metres per second.",
+     "text": "The seventy two radial winds, starting with minus eight point seven at theta equals zero, add up to about minus nine hundred and fifty seven. So their average is about minus thirteen point three, or about minus thirteen metres per second.",
      "audio_text": null,
-     "start": 1967.2,
-     "end": 1994.225,
-     "dur": 27.025,
-     "start_frame": 59016,
-     "end_frame": 59827,
+     "start": 1892.675,
+     "end": 1909.05,
+     "dur": 16.375,
+     "start_frame": 56780,
+     "end_frame": 57272,
      "beat": true
     },
     {
      "text": "The minus sign means that, on average, the air is flowing in, towards the eye.",
      "audio_text": null,
-     "start": 1995.725,
-     "end": 2001.2,
+     "start": 1910.55,
+     "end": 1916.025,
      "dur": 5.475,
-     "start_frame": 59872,
-     "end_frame": 60036
+     "start_frame": 57316,
+     "end_frame": 57481
     },
     {
      "text": "The real storm was even stronger.",
      "audio_text": null,
-     "start": 2001.55,
-     "end": 2004.175,
+     "start": 1916.375,
+     "end": 1919.0,
      "dur": 2.625,
-     "start_frame": 60046,
-     "end_frame": 60125
+     "start_frame": 57491,
+     "end_frame": 57570
     },
     {
      "text": "The official estimate of its strongest wind at that hour, averaged over a minute, is about a hundred and thirty five knots.",
      "audio_text": null,
-     "start": 2004.525,
-     "end": 2012.575,
+     "start": 1919.35,
+     "end": 1927.4,
      "dur": 8.05,
-     "start_frame": 60136,
-     "end_frame": 60377
+     "start_frame": 57580,
+     "end_frame": 57822
     },
     {
      "text": "One knot is about one point eight five kilometres per hour, so that's about two hundred and fifty kilometres per hour, or about sixty nine metres per second.",
      "audio_text": null,
-     "start": 2012.925,
-     "end": 2023.175,
+     "start": 1927.75,
+     "end": 1938.0,
      "dur": 10.25,
-     "start_frame": 60388,
-     "end_frame": 60695,
+     "start_frame": 57832,
+     "end_frame": 58140,
      "beat": true
     },
     {
      "text": "That's the single strongest wind, while our thirty five is an average round the ring, and even the strongest wind on our model ring is only about forty nine. The model analysis smooths out the strongest winds.",
      "audio_text": null,
-     "start": 2024.675,
-     "end": 2039.125,
+     "start": 1939.5,
+     "end": 1953.95,
      "dur": 14.45,
-     "start_frame": 60740,
-     "end_frame": 61174
+     "start_frame": 58185,
+     "end_frame": 58618
     }
    ],
-   "end": 2039.925,
-   "start_frame": 56152,
-   "end_frame": 61198
+   "end": 1954.75,
+   "start_frame": 53858,
+   "end_frame": 58642
   },
   {
    "id": "s23_what_numbers_mean",
-   "start": 2039.925,
+   "start": 1954.75,
    "sentences": [
     {
      "text": "So what do these two numbers mean, and how are they different?",
      "audio_text": null,
-     "start": 2039.925,
-     "end": 2043.775,
+     "start": 1954.75,
+     "end": 1958.6,
      "dur": 3.85,
-     "start_frame": 61198,
-     "end_frame": 61313
+     "start_frame": 58642,
+     "end_frame": 58758
     },
     {
      "text": "Thirty five is how fast the air goes round the eye.",
      "audio_text": null,
-     "start": 2044.125,
-     "end": 2047.75,
+     "start": 1958.95,
+     "end": 1962.575,
      "dur": 3.625,
-     "start_frame": 61324,
-     "end_frame": 61432
+     "start_frame": 58768,
+     "end_frame": 58877
     },
     {
      "text": "Thirteen is how fast it moves towards the eye.",
      "audio_text": null,
-     "start": 2048.1,
-     "end": 2051.65,
+     "start": 1962.925,
+     "end": 1966.475,
      "dur": 3.55,
-     "start_frame": 61443,
-     "end_frame": 61550
+     "start_frame": 58888,
+     "end_frame": 58994
     },
     {
      "text": "They're two parts of the same wind, at right angles to each other.",
      "audio_text": null,
-     "start": 2052.0,
-     "end": 2056.575,
+     "start": 1966.825,
+     "end": 1971.4,
      "dur": 4.575,
-     "start_frame": 61560,
-     "end_frame": 61697
+     "start_frame": 59005,
+     "end_frame": 59142
     },
     {
-     "text": "By Pythagoras, together they make an arrow of the square root of thirty five squared plus thirteen squared. Thirty five squared is twelve hundred and twenty five, and thirteen squared is a hundred and sixty nine. Together that's thirteen hundred and ninety four, and its square root is about thirty seven metres per second.",
+     "text": "By Pythagoras, we square the two parts, thirty five and thirteen, add them, and take the square root, and we get an arrow of about thirty seven metres per second.",
      "audio_text": null,
-     "start": 2056.925,
-     "end": 2079.125,
-     "dur": 22.2,
-     "start_frame": 61708,
-     "end_frame": 62374,
+     "start": 1971.75,
+     "end": 1982.475,
+     "dur": 10.725,
+     "start_frame": 59152,
+     "end_frame": 59474,
      "beat": true
     },
     {
      "text": "It points mostly round, and a little in.",
      "audio_text": null,
-     "start": 2080.625,
-     "end": 2083.85,
+     "start": 1983.975,
+     "end": 1987.2,
      "dur": 3.225,
-     "start_frame": 62419,
-     "end_frame": 62516
+     "start_frame": 59519,
+     "end_frame": 59616
     },
     {
      "text": "Thirteen metres per second, times three point six, is about forty seven kilometres per hour, towards the centre.",
      "audio_text": null,
-     "start": 2084.2,
-     "end": 2092.025,
+     "start": 1987.55,
+     "end": 1995.375,
      "dur": 7.825,
-     "start_frame": 62526,
-     "end_frame": 62761,
+     "start_frame": 59626,
+     "end_frame": 59861,
      "beat": true
     },
     {
      "text": "Now imagine, just for a moment, that nothing changed.",
      "audio_text": null,
-     "start": 2093.525,
-     "end": 2097.25,
+     "start": 1996.875,
+     "end": 2000.6,
      "dur": 3.725,
-     "start_frame": 62806,
-     "end_frame": 62918
+     "start_frame": 59906,
+     "end_frame": 60018
     },
     {
      "text": "An air parcel, a small volume of air that moves with the flow, starts on this ring, twenty five kilometres out.",
      "audio_text": null,
-     "start": 2097.6,
-     "end": 2105.425,
+     "start": 2000.95,
+     "end": 2008.775,
      "dur": 7.825,
-     "start_frame": 62928,
-     "end_frame": 63163
+     "start_frame": 60028,
+     "end_frame": 60263
     },
     {
-     "text": "Moving in at thirteen metres per second, it would have to cover twenty five kilometres, which is twenty five thousand metres. Twenty five thousand divided by thirteen is about nineteen hundred and twenty three seconds. Divided by sixty seconds a minute, that's about thirty two minutes.",
+     "text": "Moving in at thirteen metres per second, it would have to cover twenty five kilometres. Time is distance divided by speed, so that takes about nineteen hundred and twenty three seconds, or about thirty two minutes.",
      "audio_text": null,
-     "start": 2105.775,
-     "end": 2126.1,
-     "dur": 20.325,
-     "start_frame": 63173,
-     "end_frame": 63783,
+     "start": 2009.125,
+     "end": 2023.825,
+     "dur": 14.7,
+     "start_frame": 60274,
+     "end_frame": 60715,
      "beat": true
     },
     {
      "text": "Going round at thirty five metres per second, one lap of this ring, two pi times twenty five kilometres, is about a hundred and fifty seven kilometres. That takes about four thousand four hundred and ninety seconds, which is about seventy five minutes.",
      "audio_text": null,
-     "start": 2127.6,
-     "end": 2144.75,
+     "start": 2025.325,
+     "end": 2042.475,
      "dur": 17.15,
-     "start_frame": 63828,
-     "end_frame": 64342,
+     "start_frame": 60760,
+     "end_frame": 61274,
      "beat": true
     },
     {
      "text": "So the air is moving round and moving in at the same time.",
      "audio_text": null,
-     "start": 2146.25,
-     "end": 2150.5,
+     "start": 2043.975,
+     "end": 2048.225,
      "dur": 4.25,
-     "start_frame": 64388,
-     "end_frame": 64515
+     "start_frame": 61319,
+     "end_frame": 61447
     },
     {
      "text": "In any stretch of time, it goes thirty five metres round for every thirteen in, and thirty five over thirteen is about two point seven. So for every metre it moves in, it moves almost three metres round.",
      "audio_text": null,
-     "start": 2150.85,
-     "end": 2165.275,
+     "start": 2048.575,
+     "end": 2063.0,
      "dur": 14.425,
-     "start_frame": 64526,
-     "end_frame": 64958,
+     "start_frame": 61457,
+     "end_frame": 61890,
      "beat": true
     },
     {
      "text": "The air doesn't fall straight into the eye: it spirals in.",
      "audio_text": null,
-     "start": 2166.775,
-     "end": 2170.775,
+     "start": 2064.5,
+     "end": 2068.5,
      "dur": 4.0,
-     "start_frame": 65003,
-     "end_frame": 65123
+     "start_frame": 61935,
+     "end_frame": 62055
     },
     {
      "text": "In the real storm, the inflow slows down near the ring of strongest winds, and the air rises there instead, in towering clouds.",
      "audio_text": null,
-     "start": 2171.125,
-     "end": 2180.4,
+     "start": 2068.85,
+     "end": 2078.125,
      "dur": 9.275,
-     "start_frame": 65134,
-     "end_frame": 65412
+     "start_frame": 62066,
+     "end_frame": 62344
     },
     {
      "text": "We'll look at that rising air in Part 2, and the whole story of how hurricanes work has its own movie later in this series: How tropical cyclones form.",
      "audio_text": null,
-     "start": 2180.75,
-     "end": 2190.975,
+     "start": 2078.475,
+     "end": 2088.7,
      "dur": 10.225,
-     "start_frame": 65422,
-     "end_frame": 65729
+     "start_frame": 62354,
+     "end_frame": 62661
     }
    ],
-   "end": 2191.775,
-   "start_frame": 61198,
-   "end_frame": 65753
+   "end": 2089.5,
+   "start_frame": 58642,
+   "end_frame": 62685
   },
   {
    "id": "s24_ring_points",
-   "start": 2191.775,
+   "start": 2089.5,
    "sentences": [
     {
      "text": "Next, we work out three ring points by hand, for anyone who wants to see every number.",
      "audio_text": null,
-     "start": 2191.775,
-     "end": 2197.85,
+     "start": 2089.5,
+     "end": 2095.575,
      "dur": 6.075,
-     "start_frame": 65753,
-     "end_frame": 65936
+     "start_frame": 62685,
+     "end_frame": 62867
     },
     {
      "text": "You don't need these steps for the intuition of weather, climate science or maps, so if that feels like too much, skip ahead to the time on screen.",
      "audio_text": null,
-     "start": 2198.2,
-     "end": 2207.65,
+     "start": 2095.925,
+     "end": 2105.375,
      "dur": 9.45,
-     "start_frame": 65946,
-     "end_frame": 66230
+     "start_frame": 62878,
+     "end_frame": 63161
     },
     {
      "text": "Where do those averages come from?",
      "audio_text": null,
-     "start": 2208.0,
-     "end": 2210.55,
+     "start": 2105.725,
+     "end": 2108.275,
      "dur": 2.55,
-     "start_frame": 66240,
-     "end_frame": 66316
+     "start_frame": 63172,
+     "end_frame": 63248
     },
     {
      "text": "Let's work out three of the seventy two points by hand.",
      "audio_text": null,
-     "start": 2210.9,
-     "end": 2214.525,
+     "start": 2108.625,
+     "end": 2112.25,
      "dur": 3.625,
-     "start_frame": 66327,
-     "end_frame": 66436
+     "start_frame": 63259,
+     "end_frame": 63368
     },
     {
      "text": "Remember, the data give us u and v, the eastward and northward parts.",
      "audio_text": null,
-     "start": 2214.875,
-     "end": 2220.175,
+     "start": 2112.6,
+     "end": 2117.9,
      "dur": 5.3,
-     "start_frame": 66446,
-     "end_frame": 66605
+     "start_frame": 63378,
+     "end_frame": 63537
     },
     {
      "text": "First, the point due east of the eye, at theta equals zero.",
      "audio_text": null,
-     "start": 2220.525,
-     "end": 2224.825,
+     "start": 2118.25,
+     "end": 2122.55,
      "dur": 4.3,
-     "start_frame": 66616,
-     "end_frame": 66745
+     "start_frame": 63548,
+     "end_frame": 63677
     },
     {
      "text": "There, u is minus eight point seven, and v is thirty eight: the wind blows north, and a little west.",
      "audio_text": null,
-     "start": 2225.175,
-     "end": 2232.075,
+     "start": 2122.9,
+     "end": 2129.8,
      "dur": 6.9,
-     "start_frame": 66755,
-     "end_frame": 66962,
+     "start_frame": 63687,
+     "end_frame": 63894,
      "beat": true
     },
     {
      "text": "Our rule has cosine of zero, which is one, and sine of zero, which is zero.",
      "audio_text": null,
-     "start": 2233.575,
-     "end": 2239.025,
+     "start": 2131.3,
+     "end": 2136.75,
      "dur": 5.45,
-     "start_frame": 67007,
-     "end_frame": 67171
+     "start_frame": 63939,
+     "end_frame": 64102
     },
     {
      "text": "So u sub r equals u, which is minus eight point seven: a little in.",
      "audio_text": null,
-     "start": 2239.375,
-     "end": 2244.875,
+     "start": 2137.1,
+     "end": 2142.6,
      "dur": 5.5,
-     "start_frame": 67181,
-     "end_frame": 67346
+     "start_frame": 64113,
+     "end_frame": 64278
     },
     {
      "text": "And u sub theta equals v, which is thirty eight: round.",
      "audio_text": null,
-     "start": 2245.225,
-     "end": 2249.65,
+     "start": 2142.95,
+     "end": 2147.375,
      "dur": 4.425,
-     "start_frame": 67357,
-     "end_frame": 67490
+     "start_frame": 64288,
+     "end_frame": 64421
     },
     {
      "text": "Here, the wind blows mostly round.",
      "audio_text": null,
-     "start": 2250.0,
-     "end": 2252.95,
+     "start": 2147.725,
+     "end": 2150.675,
      "dur": 2.95,
-     "start_frame": 67500,
-     "end_frame": 67588,
+     "start_frame": 64432,
+     "end_frame": 64520,
      "beat": true
     },
     {
      "text": "Next, the point due north of the eye, at ninety degrees.",
      "audio_text": null,
-     "start": 2254.45,
-     "end": 2258.575,
+     "start": 2152.175,
+     "end": 2156.3,
      "dur": 4.125,
-     "start_frame": 67634,
-     "end_frame": 67757
+     "start_frame": 64565,
+     "end_frame": 64689
     },
     {
      "text": "There, u is minus sixteen point nine, and v is minus thirty seven point four: the wind blows mostly towards the south, and a little west.",
      "audio_text": null,
-     "start": 2258.925,
-     "end": 2268.775,
+     "start": 2156.65,
+     "end": 2166.5,
      "dur": 9.85,
-     "start_frame": 67768,
-     "end_frame": 68063,
+     "start_frame": 64700,
+     "end_frame": 64995,
      "beat": true
     },
     {
      "text": "Now the cosine is zero and the sine is one.",
      "audio_text": null,
-     "start": 2270.275,
-     "end": 2273.875,
+     "start": 2168.0,
+     "end": 2171.6,
      "dur": 3.6,
-     "start_frame": 68108,
-     "end_frame": 68216
+     "start_frame": 65040,
+     "end_frame": 65148
     },
     {
      "text": "So u sub r equals v, which is minus thirty seven point four: in.",
      "audio_text": null,
-     "start": 2274.225,
-     "end": 2279.95,
+     "start": 2171.95,
+     "end": 2177.675,
      "dur": 5.725,
-     "start_frame": 68227,
-     "end_frame": 68398
+     "start_frame": 65158,
+     "end_frame": 65330
     },
     {
-     "text": "And u sub theta is minus u times one, plus v times zero. Minus times minus sixteen point nine makes plus sixteen point nine: round.",
+     "text": "And u sub theta is minus u times one, plus v times zero, which leaves minus u: plus sixteen point nine, round.",
      "audio_text": null,
-     "start": 2280.3,
-     "end": 2291.2,
-     "dur": 10.9,
-     "start_frame": 68409,
-     "end_frame": 68736,
+     "start": 2178.025,
+     "end": 2186.65,
+     "dur": 8.625,
+     "start_frame": 65341,
+     "end_frame": 65600,
      "beat": true
     },
     {
      "text": "Last, the point to the northwest, at a hundred and thirty five degrees.",
      "audio_text": null,
-     "start": 2292.7,
-     "end": 2297.875,
+     "start": 2188.15,
+     "end": 2193.325,
      "dur": 5.175,
-     "start_frame": 68781,
-     "end_frame": 68936
+     "start_frame": 65644,
+     "end_frame": 65800
     },
     {
      "text": "There, u is minus ten point one, and v is minus forty four point five.",
      "audio_text": null,
-     "start": 2298.225,
-     "end": 2303.725,
+     "start": 2193.675,
+     "end": 2199.175,
      "dur": 5.5,
-     "start_frame": 68947,
-     "end_frame": 69112,
+     "start_frame": 65810,
+     "end_frame": 65975,
      "beat": true
     },
     {
-     "text": "A hundred and thirty five degrees is forty five degrees short of due west, so its cosine is minus one over the square root of two, about minus zero point seven zero seven, and its sine is plus zero point seven zero seven.",
+     "text": "A hundred and thirty five degrees is forty five degrees short of due west, so its cosine is minus the cosine of forty five degrees, about minus zero point seven zero seven, and its sine is plus zero point seven zero seven.",
      "audio_text": null,
-     "start": 2305.225,
-     "end": 2320.325,
-     "dur": 15.1,
-     "start_frame": 69157,
-     "end_frame": 69610
+     "start": 2200.675,
+     "end": 2216.325,
+     "dur": 15.65,
+     "start_frame": 66020,
+     "end_frame": 66490
     },
     {
-     "text": "So u sub r is minus ten point one times minus zero point seven zero seven, plus minus forty four point five times zero point seven zero seven.",
+     "text": "So u sub r is u times the cosine, plus v times the sine.",
      "audio_text": null,
-     "start": 2320.675,
-     "end": 2332.1,
-     "dur": 11.425,
-     "start_frame": 69620,
-     "end_frame": 69963
+     "start": 2216.675,
+     "end": 2221.525,
+     "dur": 4.85,
+     "start_frame": 66500,
+     "end_frame": 66646
     },
     {
-     "text": "That's seven point one four minus thirty one point four six, about minus twenty four point three: in.",
+     "text": "That gives about minus twenty four point three: in.",
      "audio_text": null,
-     "start": 2332.45,
-     "end": 2339.7,
-     "dur": 7.25,
-     "start_frame": 69974,
-     "end_frame": 70191,
+     "start": 2221.875,
+     "end": 2225.75,
+     "dur": 3.875,
+     "start_frame": 66656,
+     "end_frame": 66772,
      "beat": true
     },
     {
-     "text": "And u sub theta is minus u times sine, so minus minus ten point one, which is plus ten point one, times zero point seven zero seven, plus minus forty four point five times minus zero point seven zero seven.",
+     "text": "And u sub theta is minus u times the sine, plus v times the cosine.",
      "audio_text": null,
-     "start": 2341.2,
-     "end": 2356.7,
-     "dur": 15.5,
-     "start_frame": 70236,
-     "end_frame": 70701
+     "start": 2227.25,
+     "end": 2232.7,
+     "dur": 5.45,
+     "start_frame": 66818,
+     "end_frame": 66981
     },
     {
-     "text": "That's seven point one four plus thirty one point four six, about thirty eight point six: round.",
+     "text": "That gives about thirty eight point six: round.",
      "audio_text": null,
-     "start": 2357.05,
-     "end": 2364.05,
-     "dur": 7.0,
-     "start_frame": 70712,
-     "end_frame": 70922,
+     "start": 2233.05,
+     "end": 2236.7,
+     "dur": 3.65,
+     "start_frame": 66992,
+     "end_frame": 67101,
      "beat": true
     },
     {
      "text": "The other points work the same way, so here are five more, without the arithmetic. With all eight points, every forty five degrees round the ring, the in or out arrows point inward at seven of them, and outward only at two hundred and twenty five degrees, on the southwest side. The computer does exactly this at all seventy two points, and then takes the averages. And our first point, minus eight point seven at theta equals zero, is the very first term of the radial sum.",
      "audio_text": null,
-     "start": 2365.55,
-     "end": 2398.55,
+     "start": 2238.2,
+     "end": 2271.2,
      "dur": 33.0,
-     "start_frame": 70966,
-     "end_frame": 71956
+     "start_frame": 67146,
+     "end_frame": 68136
     },
     {
      "text": "If you skipped, here's what to keep: at every point round the ring, the wind's east and north parts turn into an in or out part and a round part, and then we average them.",
      "audio_text": null,
-     "start": 2398.9,
-     "end": 2409.55,
+     "start": 2271.55,
+     "end": 2282.2,
      "dur": 10.65,
-     "start_frame": 71967,
-     "end_frame": 72286
+     "start_frame": 68146,
+     "end_frame": 68466
     }
    ],
-   "end": 2410.35,
-   "start_frame": 65753,
-   "end_frame": 72310
+   "end": 2283.0,
+   "start_frame": 62685,
+   "end_frame": 68490
   },
   {
    "id": "s25_why_polar_storm",
-   "start": 2410.35,
+   "start": 2283.0,
    "sentences": [
     {
      "text": "Why bother with polar coordinates here?",
      "audio_text": null,
-     "start": 2410.35,
-     "end": 2413.175,
+     "start": 2283.0,
+     "end": 2285.825,
      "dur": 2.825,
-     "start_frame": 72310,
-     "end_frame": 72395
+     "start_frame": 68490,
+     "end_frame": 68575
     },
     {
      "text": "Let's go all the way round the ring, and plot the winds against the angle theta.",
      "audio_text": null,
-     "start": 2413.525,
-     "end": 2418.7,
+     "start": 2286.175,
+     "end": 2291.35,
      "dur": 5.175,
-     "start_frame": 72406,
-     "end_frame": 72561
+     "start_frame": 68585,
+     "end_frame": 68740
     },
     {
      "text": "First, the eastward wind u, the solid orange line, and the northward wind v, the dashed orange line.",
      "audio_text": null,
-     "start": 2419.05,
-     "end": 2426.55,
+     "start": 2291.7,
+     "end": 2299.2,
      "dur": 7.5,
-     "start_frame": 72572,
-     "end_frame": 72796
+     "start_frame": 68751,
+     "end_frame": 68976
     },
     {
      "text": "Our three points sit on these lines.",
      "audio_text": null,
-     "start": 2426.9,
-     "end": 2429.45,
+     "start": 2299.55,
+     "end": 2302.1,
      "dur": 2.55,
-     "start_frame": 72807,
-     "end_frame": 72884
+     "start_frame": 68986,
+     "end_frame": 69063
     },
     {
      "text": "Both lines swing up and down, from plus to minus, by tens of metres per second.",
      "audio_text": null,
-     "start": 2429.8,
-     "end": 2435.675,
+     "start": 2302.45,
+     "end": 2308.325,
      "dur": 5.875,
-     "start_frame": 72894,
-     "end_frame": 73070
+     "start_frame": 69074,
+     "end_frame": 69250
     },
     {
      "text": "They swing because the wind keeps turning as we go round the eye.",
      "audio_text": null,
-     "start": 2436.025,
-     "end": 2440.65,
+     "start": 2308.675,
+     "end": 2313.3,
      "dur": 4.625,
-     "start_frame": 73081,
-     "end_frame": 73220
+     "start_frame": 69260,
+     "end_frame": 69399
     },
     {
      "text": "On the east side it blows north, on the west side it blows south, and on the south side it blows east, all the way round.",
      "audio_text": null,
-     "start": 2441.0,
-     "end": 2449.1,
+     "start": 2313.65,
+     "end": 2321.75,
      "dur": 8.1,
-     "start_frame": 73230,
-     "end_frame": 73473
+     "start_frame": 69410,
+     "end_frame": 69652
     },
     {
      "text": "Now let's plot the two polar parts round the same ring.",
      "audio_text": null,
-     "start": 2449.45,
-     "end": 2453.125,
+     "start": 2322.1,
+     "end": 2325.775,
      "dur": 3.675,
-     "start_frame": 73484,
-     "end_frame": 73594
+     "start_frame": 69663,
+     "end_frame": 69773
     },
     {
      "text": "The tangential wind, u sub theta, is the teal line, and the radial wind, u sub r, is the rose line.",
      "audio_text": null,
-     "start": 2453.475,
-     "end": 2461.075,
+     "start": 2326.125,
+     "end": 2333.725,
      "dur": 7.6,
-     "start_frame": 73604,
-     "end_frame": 73832
+     "start_frame": 69784,
+     "end_frame": 70012
     },
     {
      "text": "The tangential wind stays positive all the way round, between about seventeen and forty seven, with an average of thirty five.",
      "audio_text": null,
-     "start": 2461.425,
-     "end": 2470.35,
+     "start": 2334.075,
+     "end": 2343.0,
      "dur": 8.925,
-     "start_frame": 73843,
-     "end_frame": 74110
+     "start_frame": 70022,
+     "end_frame": 70290
     },
     {
      "text": "The radial wind wobbles more, between about minus forty and plus fourteen, because the storm isn't perfectly round.",
      "audio_text": null,
-     "start": 2470.7,
-     "end": 2478.85,
+     "start": 2343.35,
+     "end": 2351.5,
      "dur": 8.15,
-     "start_frame": 74121,
-     "end_frame": 74366
+     "start_frame": 70300,
+     "end_frame": 70545
     },
     {
      "text": "It's negative at fifty eight of the seventy two points, and only on the southwest side does it blow outward, by up to about fourteen metres per second.",
      "audio_text": null,
-     "start": 2479.2,
-     "end": 2488.725,
+     "start": 2351.85,
+     "end": 2361.375,
      "dur": 9.525,
-     "start_frame": 74376,
-     "end_frame": 74662
+     "start_frame": 70556,
+     "end_frame": 70841
     },
     {
      "text": "So, on average, the air flows in.",
      "audio_text": null,
-     "start": 2489.075,
-     "end": 2492.075,
+     "start": 2361.725,
+     "end": 2364.725,
      "dur": 3.0,
-     "start_frame": 74672,
-     "end_frame": 74762
+     "start_frame": 70852,
+     "end_frame": 70942
     },
     {
      "text": "Instead of two lines that swing from plus to minus, we get two numbers that mean something: how fast the storm spins, and how fast the air flows in.",
      "audio_text": null,
-     "start": 2492.425,
-     "end": 2502.775,
+     "start": 2365.075,
+     "end": 2375.425,
      "dur": 10.35,
-     "start_frame": 74773,
-     "end_frame": 75083
+     "start_frame": 70952,
+     "end_frame": 71263
     },
     {
      "text": "That's why hurricane scientists use polar coordinates. The same idea works on a coast, where we turn the axes to split the wind into a part along the shore and a part across it. Wind blowing across the shore, towards the land, pushes sea water onto the coast. In Part 2, we'll use these same equations on real storms. We'll measure how much of the wind blew onto the land, see on tide gauges how high the water rose, and then look at the flooded land in satellite pictures taken before and after the storm.",
      "audio_text": null,
-     "start": 2503.125,
-     "end": 2538.8,
+     "start": 2375.775,
+     "end": 2411.45,
      "dur": 35.675,
-     "start_frame": 75094,
-     "end_frame": 76164
+     "start_frame": 71273,
+     "end_frame": 72344
     }
    ],
-   "end": 2539.6,
-   "start_frame": 72310,
-   "end_frame": 76188
+   "end": 2412.25,
+   "start_frame": 68490,
+   "end_frame": 72368
   },
   {
    "id": "s26_inflow_angle",
-   "start": 2539.6,
+   "start": 2412.25,
    "sentences": [
     {
      "text": "There's one more angle that hurricane scientists use.",
      "audio_text": null,
-     "start": 2539.6,
-     "end": 2543.25,
+     "start": 2412.25,
+     "end": 2415.9,
      "dur": 3.65,
-     "start_frame": 76188,
-     "end_frame": 76298
+     "start_frame": 72368,
+     "end_frame": 72477
     },
     {
      "text": "The wind crosses each ring at a slant, a little inward.",
      "audio_text": null,
-     "start": 2543.6,
-     "end": 2547.6,
+     "start": 2416.25,
+     "end": 2420.25,
      "dur": 4.0,
-     "start_frame": 76308,
-     "end_frame": 76428
+     "start_frame": 72488,
+     "end_frame": 72608
     },
     {
      "text": "The angle between the wind and the ring's own direction, theta hat, is called the inflow angle.",
      "audio_text": null,
-     "start": 2547.95,
-     "end": 2554.5,
+     "start": 2420.6,
+     "end": 2427.15,
      "dur": 6.55,
-     "start_frame": 76438,
-     "end_frame": 76635
+     "start_frame": 72618,
+     "end_frame": 72814
     },
     {
      "text": "Its tangent is the side opposite the angle over the side next to it: the inward part over the round part, thirteen point three over thirty four point eight, about zero point three eight.",
      "audio_text": null,
-     "start": 2554.85,
-     "end": 2566.75,
+     "start": 2427.5,
+     "end": 2439.4,
      "dur": 11.9,
-     "start_frame": 76646,
-     "end_frame": 77002
+     "start_frame": 72825,
+     "end_frame": 73182
     },
     {
      "text": "So the inflow angle, the angle with that tangent, is about twenty one degrees.",
      "audio_text": null,
-     "start": 2567.1,
-     "end": 2572.8,
+     "start": 2439.75,
+     "end": 2445.45,
      "dur": 5.7,
-     "start_frame": 77013,
-     "end_frame": 77184,
+     "start_frame": 73192,
+     "end_frame": 73364,
      "beat": true
     },
     {
      "text": "We've now met four different angles, so let's put them side by side.",
      "audio_text": null,
-     "start": 2574.3,
-     "end": 2578.925,
+     "start": 2446.95,
+     "end": 2451.575,
      "dur": 4.625,
-     "start_frame": 77229,
-     "end_frame": 77368
+     "start_frame": 73408,
+     "end_frame": 73547
     },
     {
      "text": "Theta says where a point is, measured from east, anticlockwise as seen from above.",
      "audio_text": null,
-     "start": 2579.275,
-     "end": 2585.25,
+     "start": 2451.925,
+     "end": 2457.9,
      "dur": 5.975,
-     "start_frame": 77378,
-     "end_frame": 77558
+     "start_frame": 73558,
+     "end_frame": 73737
     },
     {
      "text": "The compass bearing says which way something points, measured from north, clockwise as seen from above.",
      "audio_text": null,
-     "start": 2585.6,
-     "end": 2592.4,
+     "start": 2458.25,
+     "end": 2465.05,
      "dur": 6.8,
-     "start_frame": 77568,
-     "end_frame": 77772
+     "start_frame": 73748,
+     "end_frame": 73952
     },
     {
      "text": "Alpha says how far we turned our axes.",
      "audio_text": null,
-     "start": 2592.75,
-     "end": 2595.85,
+     "start": 2465.4,
+     "end": 2468.5,
      "dur": 3.1,
-     "start_frame": 77782,
-     "end_frame": 77876
+     "start_frame": 73962,
+     "end_frame": 74055
     },
     {
      "text": "And the inflow angle says how far the wind leans inward from the ring.",
      "audio_text": null,
-     "start": 2596.2,
-     "end": 2601.175,
+     "start": 2468.85,
+     "end": 2473.825,
      "dur": 4.975,
-     "start_frame": 77886,
-     "end_frame": 78035
+     "start_frame": 74066,
+     "end_frame": 74215
     },
     {
      "text": "They answer four different questions, so it's always worth checking which angle you're looking at.",
      "audio_text": null,
-     "start": 2601.525,
-     "end": 2607.3,
+     "start": 2474.175,
+     "end": 2479.95,
      "dur": 5.775,
-     "start_frame": 78046,
-     "end_frame": 78219
+     "start_frame": 74225,
+     "end_frame": 74398
     },
     {
      "text": "The storm's spin also has its own measure, called vorticity, which has its own movie later in this series: Vorticity in plain words.",
      "audio_text": null,
-     "start": 2607.65,
-     "end": 2616.875,
+     "start": 2480.3,
+     "end": 2489.525,
      "dur": 9.225,
-     "start_frame": 78230,
-     "end_frame": 78506
+     "start_frame": 74409,
+     "end_frame": 74686
     }
    ],
-   "end": 2617.675,
-   "start_frame": 76188,
-   "end_frame": 78530
+   "end": 2490.325,
+   "start_frame": 72368,
+   "end_frame": 74710
   },
   {
    "id": "s27_recap",
-   "start": 2617.675,
+   "start": 2490.325,
    "sentences": [
     {
      "text": "To sum up, coordinates are numbers that pin down a place, measured from an origin along chosen directions.",
      "audio_text": null,
-     "start": 2617.675,
-     "end": 2624.9,
+     "start": 2490.325,
+     "end": 2497.55,
      "dur": 7.225,
-     "start_frame": 78530,
-     "end_frame": 78747
+     "start_frame": 74710,
+     "end_frame": 74926
     },
     {
      "text": "Cartesian coordinates use x and y, and their unit vectors, x hat and y hat, are the same everywhere.",
      "audio_text": null,
-     "start": 2625.25,
-     "end": 2632.8,
+     "start": 2497.9,
+     "end": 2505.45,
      "dur": 7.55,
-     "start_frame": 78758,
-     "end_frame": 78984
+     "start_frame": 74937,
+     "end_frame": 75164
     },
     {
      "text": "Polar coordinates use the distance r and the angle theta, with x equals r cosine theta, and y equals r sine theta.",
      "audio_text": null,
-     "start": 2633.15,
-     "end": 2642.175,
+     "start": 2505.8,
+     "end": 2514.825,
      "dur": 9.025,
-     "start_frame": 78994,
-     "end_frame": 79265
+     "start_frame": 75174,
+     "end_frame": 75445
     },
     {
      "text": "The arc length is the radius times the angle, in radians.",
      "audio_text": null,
-     "start": 2642.525,
-     "end": 2646.825,
+     "start": 2515.175,
+     "end": 2519.475,
      "dur": 4.3,
-     "start_frame": 79276,
-     "end_frame": 79405
+     "start_frame": 75455,
+     "end_frame": 75584
     },
     {
      "text": "R hat points the way r grows.",
      "audio_text": null,
-     "start": 2647.175,
-     "end": 2649.825,
+     "start": 2519.825,
+     "end": 2522.475,
      "dur": 2.65,
-     "start_frame": 79415,
-     "end_frame": 79495
+     "start_frame": 75595,
+     "end_frame": 75674
     },
     {
      "text": "Theta hat points the way theta grows: it's r hat turned by ninety degrees, minus sine theta, cosine theta.",
      "audio_text": null,
-     "start": 2650.175,
-     "end": 2658.2,
+     "start": 2522.825,
+     "end": 2530.85,
      "dur": 8.025,
-     "start_frame": 79505,
-     "end_frame": 79746
+     "start_frame": 75685,
+     "end_frame": 75926
     },
     {
      "text": "The parts of a wind along these two arrows are dot products: the radial and the tangential wind.",
      "audio_text": null,
-     "start": 2658.55,
-     "end": 2665.175,
+     "start": 2531.2,
+     "end": 2537.825,
      "dur": 6.625,
-     "start_frame": 79756,
-     "end_frame": 79955
+     "start_frame": 75936,
+     "end_frame": 76135
     },
     {
      "text": "Turning the axes by an angle alpha gives new coordinates for the same arrow, and the four direction cosines make the rotation matrix.",
      "audio_text": null,
-     "start": 2665.525,
-     "end": 2674.675,
+     "start": 2538.175,
+     "end": 2547.325,
      "dur": 9.15,
-     "start_frame": 79966,
-     "end_frame": 80240
+     "start_frame": 76145,
+     "end_frame": 76420
     },
     {
      "text": "Polar parts are just turned axes, with an angle that changes from place to place.",
      "audio_text": null,
-     "start": 2675.025,
-     "end": 2680.725,
+     "start": 2547.675,
+     "end": 2553.375,
      "dur": 5.7,
-     "start_frame": 80251,
-     "end_frame": 80422
+     "start_frame": 76430,
+     "end_frame": 76601
     },
     {
      "text": "Round Hurricane Ian's eye, they split the wind into about thirty five metres per second of spin and thirteen of inflow, so the air spirals in at about twenty one degrees.",
      "audio_text": null,
-     "start": 2681.075,
-     "end": 2692.675,
+     "start": 2553.725,
+     "end": 2565.325,
      "dur": 11.6,
-     "start_frame": 80432,
-     "end_frame": 80780
+     "start_frame": 76612,
+     "end_frame": 76960
     },
     {
      "text": "In Part 2, we'll find out how fast r hat and theta hat turn as we go round, and add height to get cylindrical coordinates. Then we'll use these same turned axes on real storms: how much wind blew onto the land, how high the water rose, and what the flooding looked like from space, before and after.",
      "audio_text": null,
-     "start": 2693.025,
-     "end": 2714.075,
+     "start": 2565.675,
+     "end": 2586.725,
      "dur": 21.05,
-     "start_frame": 80791,
-     "end_frame": 81422
+     "start_frame": 76970,
+     "end_frame": 77602
     }
    ],
-   "end": 2714.875,
-   "start_frame": 78530,
-   "end_frame": 81446
+   "end": 2587.525,
+   "start_frame": 74710,
+   "end_frame": 77626
   },
   {
    "id": "s28_end",
-   "start": 2714.875,
+   "start": 2587.525,
    "sentences": [
     {
      "text": "This video is one of a series of related maths tutorials, so watch out for the others.",
      "audio_text": null,
-     "start": 2714.875,
-     "end": 2721.075,
+     "start": 2587.525,
+     "end": 2593.725,
      "dur": 6.2,
-     "start_frame": 81446,
-     "end_frame": 81632
+     "start_frame": 77626,
+     "end_frame": 77812
     },
     {
      "text": "They're made for students of atmospheric science, meteorology and fluid dynamics, and anyone else who needs these ideas.",
      "audio_text": null,
-     "start": 2721.425,
-     "end": 2729.475,
+     "start": 2594.075,
+     "end": 2602.125,
      "dur": 8.05,
-     "start_frame": 81643,
-     "end_frame": 81884
+     "start_frame": 77822,
+     "end_frame": 78064
     },
     {
      "text": "The notebook for coordinates, and the notebooks for the other maths concepts, are on the website that goes with this video.",
      "audio_text": null,
-     "start": 2729.825,
-     "end": 2737.475,
+     "start": 2602.475,
+     "end": 2610.125,
      "dur": 7.65,
-     "start_frame": 81895,
-     "end_frame": 82124
+     "start_frame": 78074,
+     "end_frame": 78304
     }
    ],
-   "end": 2737.775,
-   "start_frame": 81446,
-   "end_frame": 82133
+   "end": 2610.425,
+   "start_frame": 77626,
+   "end_frame": 78313
   }
  ],
- "total_s": 2737.775,
- "total_frames": 82134,
+ "total_s": 2610.425,
+ "total_frames": 78313,
  "render_s": 1317.7,
  "loudnorm_input": {
   "input_i": "-24.83",
@@ -3783,7 +3783,7 @@
   "normalization_type": "dynamic",
   "target_offset": "0.46"
  },
- "cues": 651,
+ "cues": 622,
  "warnings": [],
  "self_check": {
   "spliced_fix1": {
@@ -5141,11 +5141,6 @@
     }
    ]
   },
-  "expected_s": 2737.775,
-  "audio_s": 2737.775,
-  "diff_ms": 0.0,
-  "len_ok": true,
-  "cues_ok": true,
   "spliced_fb1106": {
    "method": "compound replacement: one Kokoro clip per spoken sentence, 0.35-s house gap inside an entry; BS.1770-4 match to the nearest unchanged neighbours + limiter (-1.5 dBTP)",
    "replaced": [
@@ -5388,6 +5383,1164 @@
        "limiter_gr_db": -6.82,
        "final_lufs": -15.61,
        "true_peak_dbtp": -1.86
+      }
+     ]
+    }
+   ]
+  },
+  "expected_s": 2610.425,
+  "audio_s": 2610.425,
+  "diff_ms": 0.0,
+  "len_ok": true,
+  "cues_ok": true,
+  "spliced_fix1107": {
+   "method": "show it, don't voice it (user 2026-11-07): compound replacement, one Kokoro clip per spoken sentence, 0.35-s house gap inside an entry; BS.1770-4 match to the nearest unchanged neighbours + limiter (-1.5 dBTP); cues never split a number",
+   "replaced": [
+    {
+     "scene": "s00_title",
+     "sentence": 1,
+     "old": "In this video, we'll learn coordinates on a flat map, and see how meteorology uses them to measure the winds round a hurricane's eye.",
+     "new": "In this video, we'll learn coordinates on a flat map, and see how they're used to measure the winds around a hurricane's eye.",
+     "neighbours_lufs": [
+      -16.89,
+      -16.36
+     ],
+     "dur_s": 7.8,
+     "old_dur_s": 8.75,
+     "parts": [
+      {
+       "text": "In this video, we'll learn coordinates on a flat map, and see how they're used to measure the winds around a hurricane's eye.",
+       "gain_db": 7.73,
+       "limiter_gr_db": -1.93,
+       "final_lufs": -16.64,
+       "true_peak_dbtp": -1.93
+      }
+     ]
+    },
+    {
+     "scene": "s01_hook",
+     "sentence": 3,
+     "old": "Let's see what coordinates are, and why they're built the way they are.",
+     "new": "Now let's dive into what coordinates are, how they're built and how they're used: x and y, polar coordinates with r and theta, and turned axes.",
+     "neighbours_lufs": [
+      -16.36,
+      -17.07
+     ],
+     "dur_s": 9.9,
+     "old_dur_s": 4.25,
+     "parts": [
+      {
+       "text": "Now let's dive into what coordinates are, how they're built and how they're used: x and y, polar coordinates with r and theta, and turned axes.",
+       "gain_db": 8.36,
+       "limiter_gr_db": -4.95,
+       "final_lufs": -16.7,
+       "true_peak_dbtp": -1.86
+      }
+     ]
+    },
+    {
+     "scene": "s04_polar",
+     "sentence": 3,
+     "old": "By Pythagoras, r is the square root of three squared plus four squared. Three squared is nine, and four squared is sixteen, so that's the square root of twenty five: five kilometres.",
+     "new": "By Pythagoras, we square the balloon's two coordinates, three and four, add them, and take the square root, and we get five kilometres.",
+     "neighbours_lufs": [
+      -16.68,
+      -16.81
+     ],
+     "dur_s": 8.9,
+     "old_dur_s": 13.1,
+     "parts": [
+      {
+       "text": "By Pythagoras, we square the balloon's two coordinates, three and four, add them, and take the square root, and we get five kilometres.",
+       "gain_db": 8.04,
+       "limiter_gr_db": -3.85,
+       "final_lufs": -16.74,
+       "true_peak_dbtp": -1.96
+      }
+     ]
+    },
+    {
+     "scene": "s05_polar_back",
+     "sentence": 7,
+     "old": "Cosine theta is the east side divided by the long side, and sine theta is the north side divided by the long side. For our balloon that's three fifths, zero point six, and four fifths, zero point eight. So five times the cosine of theta is five times zero point six, which is three.",
+     "new": "Cosine theta is the east side divided by the long side, and sine theta is the north side divided by the long side. For our balloon that's three fifths, zero point six, and four fifths, zero point eight. So five kilometres times the cosine of theta gives back the east side: three.",
+     "neighbours_lufs": [
+      -15.49,
+      -16.86
+     ],
+     "dur_s": 20.8,
+     "old_dur_s": 20.75,
+     "parts": [
+      {
+       "text": "Cosine theta is the east side divided by the long side, and sine theta is the north side divided by the long side.",
+       "gain_db": 9.62,
+       "limiter_gr_db": -5.07,
+       "final_lufs": -16.16,
+       "true_peak_dbtp": -1.91
+      },
+      {
+       "text": "For our balloon that's three fifths, zero point six, and four fifths, zero point eight.",
+       "gain_db": 8.51,
+       "limiter_gr_db": -2.98,
+       "final_lufs": -16.13,
+       "true_peak_dbtp": -1.99
+      },
+      {
+       "text": "So five kilometres times the cosine of theta gives back the east side: three.",
+       "gain_db": 9.35,
+       "limiter_gr_db": -2.11,
+       "final_lufs": -16.13,
+       "true_peak_dbtp": -1.97
+      }
+     ]
+    },
+    {
+     "scene": "s05_polar_back",
+     "sentence": 8,
+     "old": "And five times zero point eight is four.",
+     "new": "And five kilometres times the sine gives back the north side: four.",
+     "neighbours_lufs": [
+      -15.49,
+      -16.86
+     ],
+     "dur_s": 5.05,
+     "old_dur_s": 2.875,
+     "parts": [
+      {
+       "text": "And five kilometres times the sine gives back the north side: four.",
+       "gain_db": 9.1,
+       "limiter_gr_db": -2.9,
+       "final_lufs": -16.12,
+       "true_peak_dbtp": -2.08
+      }
+     ]
+    },
+    {
+     "scene": "s06_bearings",
+     "sentence": 4,
+     "old": "So the balloon's bearing is ninety minus fifty three, which is thirty seven degrees.",
+     "new": "So the balloon's bearing is ninety degrees minus theta: thirty seven degrees.",
+     "neighbours_lufs": [
+      -16.12,
+      -16.15
+     ],
+     "dur_s": 5.6,
+     "old_dur_s": 5.725,
+     "parts": [
+      {
+       "text": "So the balloon's bearing is ninety degrees minus theta: thirty seven degrees.",
+       "gain_db": 9.89,
+       "limiter_gr_db": -5.13,
+       "final_lufs": -16.15,
+       "true_peak_dbtp": -1.84
+      }
+     ]
+    },
+    {
+     "scene": "s07_radians",
+     "sentence": 6,
+     "old": "Two pi is about six point two eight, so one radian is three hundred and sixty degrees divided by six point two eight: about fifty seven degrees.",
+     "new": "So one radian is three hundred and sixty degrees divided by two pi: about fifty seven degrees.",
+     "neighbours_lufs": [
+      -17.3,
+      -17.46
+     ],
+     "dur_s": 7.125,
+     "old_dur_s": 10.125,
+     "parts": [
+      {
+       "text": "So one radian is three hundred and sixty degrees divided by two pi: about fifty seven degrees.",
+       "gain_db": 7.98,
+       "limiter_gr_db": -5.38,
+       "final_lufs": -17.39,
+       "true_peak_dbtp": -2.03
+      }
+     ]
+    },
+    {
+     "scene": "s07_radians",
+     "sentence": 8,
+     "old": "On a ring five kilometres from the station, turn by zero point two radians: that's about eleven and a half degrees. It walks you five times zero point two, which is one kilometre.",
+     "new": "On a ring five kilometres from the station, turn by zero point two radians: that's about eleven and a half degrees. It walks you the radius times the angle: one kilometre.",
+     "neighbours_lufs": [
+      -17.46,
+      -17.0
+     ],
+     "dur_s": 12.625,
+     "old_dur_s": 13.175,
+     "parts": [
+      {
+       "text": "On a ring five kilometres from the station, turn by zero point two radians: that's about eleven and a half degrees.",
+       "gain_db": 7.95,
+       "limiter_gr_db": -3.53,
+       "final_lufs": -17.23,
+       "true_peak_dbtp": -2.0
+      },
+      {
+       "text": "It walks you the radius times the angle: one kilometre.",
+       "gain_db": 8.34,
+       "limiter_gr_db": -2.59,
+       "final_lufs": -17.23,
+       "true_peak_dbtp": -1.91
+      }
+     ]
+    },
+    {
+     "scene": "s08_r_hat",
+     "sentence": 8,
+     "old": "Its length is the square root of zero point six squared plus zero point eight squared. That's zero point three six plus zero point six four, which is one, and the square root of one is one.",
+     "new": "For r hat, we square its two components, add them, and take the square root, and we get exactly one.",
+     "neighbours_lufs": [
+      -16.0,
+      -15.77
+     ],
+     "dur_s": 6.85,
+     "old_dur_s": 13.55,
+     "parts": [
+      {
+       "text": "For r hat, we square its two components, add them, and take the square root, and we get exactly one.",
+       "gain_db": 9.39,
+       "limiter_gr_db": -3.75,
+       "final_lufs": -15.92,
+       "true_peak_dbtp": -1.61
+      }
+     ]
+    },
+    {
+     "scene": "s10_turn_90",
+     "sentence": 16,
+     "old": "Minus four squared is sixteen and three squared is nine, so its length is the square root of twenty five: five, the same as the balloon's arrow.",
+     "new": "For the turned arrow, minus four, three, we square each component, add them, and take the square root, and we get five, the same as the balloon's arrow.",
+     "neighbours_lufs": [
+      -16.51,
+      -16.35
+     ],
+     "dur_s": 10.0,
+     "old_dur_s": 9.825,
+     "parts": [
+      {
+       "text": "For the turned arrow, minus four, three, we square each component, add them, and take the square root, and we get five, the same as the balloon's arrow.",
+       "gain_db": 8.42,
+       "limiter_gr_db": -5.33,
+       "final_lufs": -16.43,
+       "true_peak_dbtp": -1.86
+      }
+     ]
+    },
+    {
+     "scene": "s10_turn_90",
+     "sentence": 17,
+     "old": "And its dot product with three, four is three times minus four, plus four times three, which is zero.",
+     "new": "And its dot product with three, four, multiplying the matching parts and adding, comes to zero.",
+     "neighbours_lufs": [
+      -16.51,
+      -16.35
+     ],
+     "dur_s": 6.75,
+     "old_dur_s": 7.1,
+     "parts": [
+      {
+       "text": "And its dot product with three, four, multiplying the matching parts and adding, comes to zero.",
+       "gain_db": 8.03,
+       "limiter_gr_db": -3.19,
+       "final_lufs": -16.44,
+       "true_peak_dbtp": -1.87
+      }
+     ]
+    },
+    {
+     "scene": "s11_theta_hat",
+     "sentence": 15,
+     "old": "Its length is one, and its dot product with r hat is minus zero point four eight plus zero point four eight, which is zero, so it's at right angles.",
+     "new": "Its length is one, and its dot product with r hat is zero, so it's at right angles.",
+     "neighbours_lufs": [
+      -16.05,
+      -15.81
+     ],
+     "dur_s": 5.95,
+     "old_dur_s": 10.2,
+     "parts": [
+      {
+       "text": "Its length is one, and its dot product with r hat is zero, so it's at right angles.",
+       "gain_db": 9.66,
+       "limiter_gr_db": -4.63,
+       "final_lufs": -15.99,
+       "true_peak_dbtp": -1.69
+      }
+     ]
+    },
+    {
+     "scene": "s11_theta_hat",
+     "sentence": 20,
+     "old": "By the arc rule, s equals r times the change in theta, so it slides five thousand metres times that: about eight point seven metres along the circle.",
+     "new": "By the arc rule, s equals r times the change in theta: with r at five thousand metres, that's about eight point seven metres along the circle.",
+     "neighbours_lufs": [
+      -15.85,
+      -15.99
+     ],
+     "dur_s": 10.175,
+     "old_dur_s": 10.525,
+     "parts": [
+      {
+       "text": "By the arc rule, s equals r times the change in theta: with r at five thousand metres, that's about eight point seven metres along the circle.",
+       "gain_db": 9.15,
+       "limiter_gr_db": -6.21,
+       "final_lufs": -16.12,
+       "true_peak_dbtp": -1.6
+      }
+     ]
+    },
+    {
+     "scene": "s11_theta_hat",
+     "sentence": 23,
+     "old": "That's about seven metres west, and five point two metres north. Check: seven squared is forty nine, and five point two squared is twenty seven point zero four. The square root of seventy six point zero four is about eight point seven: the same slide.",
+     "new": "That's about seven metres west, and five point two metres north. Squaring these two, adding them, and taking the square root gives about eight point seven metres: the same slide.",
+     "neighbours_lufs": [
+      -15.85,
+      -15.84
+     ],
+     "dur_s": 12.625,
+     "old_dur_s": 18.375,
+     "parts": [
+      {
+       "text": "That's about seven metres west, and five point two metres north.",
+       "gain_db": 10.19,
+       "limiter_gr_db": -5.5,
+       "final_lufs": -15.91,
+       "true_peak_dbtp": -1.91
+      },
+      {
+       "text": "Squaring these two, adding them, and taking the square root gives about eight point seven metres: the same slide.",
+       "gain_db": 9.42,
+       "limiter_gr_db": -5.98,
+       "final_lufs": -15.87,
+       "true_peak_dbtp": -1.95
+      }
+     ]
+    },
+    {
+     "scene": "s13_components",
+     "sentence": 18,
+     "old": "Multiply the matching parts, and add: ten times zero point six, plus zero times zero point eight.",
+     "new": "Multiply the matching parts, and add: the wind's east part times r hat's east part, plus its north part times r hat's north part.",
+     "neighbours_lufs": [
+      -17.05,
+      -16.5
+     ],
+     "dur_s": 9.275,
+     "old_dur_s": 7.15,
+     "parts": [
+      {
+       "text": "Multiply the matching parts, and add: the wind's east part times r hat's east part, plus its north part times r hat's north part.",
+       "gain_db": 7.86,
+       "limiter_gr_db": -3.91,
+       "final_lufs": -16.77,
+       "true_peak_dbtp": -1.86
+      }
+     ]
+    },
+    {
+     "scene": "s13_components",
+     "sentence": 19,
+     "old": "That's six plus zero, so u sub r is six metres per second.",
+     "new": "That gives u sub r equals six metres per second.",
+     "neighbours_lufs": [
+      -17.05,
+      -16.5
+     ],
+     "dur_s": 3.9,
+     "old_dur_s": 4.825,
+     "parts": [
+      {
+       "text": "That gives u sub r equals six metres per second.",
+       "gain_db": 9.04,
+       "limiter_gr_db": -3.01,
+       "final_lufs": -16.78,
+       "true_peak_dbtp": -1.82
+      }
+     ]
+    },
+    {
+     "scene": "s13_components",
+     "sentence": 20,
+     "old": "Next, the tangential wind: ten times minus zero point eight, plus zero times zero point six.",
+     "new": "Next, the tangential wind: the same, with theta hat's two parts.",
+     "neighbours_lufs": [
+      -17.05,
+      -16.5
+     ],
+     "dur_s": 4.95,
+     "old_dur_s": 7.2,
+     "parts": [
+      {
+       "text": "Next, the tangential wind: the same, with theta hat's two parts.",
+       "gain_db": 8.6,
+       "limiter_gr_db": -1.95,
+       "final_lufs": -16.77,
+       "true_peak_dbtp": -1.87
+      }
+     ]
+    },
+    {
+     "scene": "s13_components",
+     "sentence": 21,
+     "old": "That's minus eight plus zero, so u sub theta is minus eight metres per second.",
+     "new": "That gives u sub theta equals minus eight metres per second.",
+     "neighbours_lufs": [
+      -17.05,
+      -16.5
+     ],
+     "dur_s": 4.75,
+     "old_dur_s": 5.8,
+     "parts": [
+      {
+       "text": "That gives u sub theta equals minus eight metres per second.",
+       "gain_db": 8.55,
+       "limiter_gr_db": -2.71,
+       "final_lufs": -16.77,
+       "true_peak_dbtp": -1.66
+      }
+     ]
+    },
+    {
+     "scene": "s14_rebuild_general",
+     "sentence": 3,
+     "old": "Six times zero point six, zero point eight is three point six, four point eight.",
+     "new": "Six times r hat gives three point six, four point eight.",
+     "neighbours_lufs": [
+      -15.89,
+      -16.38
+     ],
+     "dur_s": 4.125,
+     "old_dur_s": 5.9,
+     "parts": [
+      {
+       "text": "Six times r hat gives three point six, four point eight.",
+       "gain_db": 9.21,
+       "limiter_gr_db": -2.26,
+       "final_lufs": -16.13,
+       "true_peak_dbtp": -1.98
+      }
+     ]
+    },
+    {
+     "scene": "s14_rebuild_general",
+     "sentence": 4,
+     "old": "Minus eight times minus zero point eight is plus six point four, because two minus signs make a plus, and minus eight times zero point six is minus four point eight.",
+     "new": "And minus eight times theta hat gives six point four, minus four point eight.",
+     "neighbours_lufs": [
+      -15.89,
+      -16.38
+     ],
+     "dur_s": 5.225,
+     "old_dur_s": 11.175,
+     "parts": [
+      {
+       "text": "And minus eight times theta hat gives six point four, minus four point eight.",
+       "gain_db": 8.58,
+       "limiter_gr_db": -3.92,
+       "final_lufs": -16.16,
+       "true_peak_dbtp": -2.0
+      }
+     ]
+    },
+    {
+     "scene": "s14_rebuild_general",
+     "sentence": 5,
+     "old": "Adding the east parts gives three point six plus six point four, which is ten.",
+     "new": "If we add those two arrows, the east parts give ten.",
+     "neighbours_lufs": [
+      -15.89,
+      -16.38
+     ],
+     "dur_s": 3.975,
+     "old_dur_s": 5.45,
+     "parts": [
+      {
+       "text": "If we add those two arrows, the east parts give ten.",
+       "gain_db": 10.39,
+       "limiter_gr_db": -4.71,
+       "final_lufs": -16.21,
+       "true_peak_dbtp": -1.87
+      }
+     ]
+    },
+    {
+     "scene": "s14_rebuild_general",
+     "sentence": 6,
+     "old": "The north parts give four point eight minus four point eight, which is zero.",
+     "new": "And the north parts give zero.",
+     "neighbours_lufs": [
+      -15.89,
+      -16.38
+     ],
+     "dur_s": 2.375,
+     "old_dur_s": 4.825,
+     "parts": [
+      {
+       "text": "And the north parts give zero.",
+       "gain_db": 7.48,
+       "limiter_gr_db": -0.12,
+       "final_lufs": -16.13,
+       "true_peak_dbtp": -1.82
+      }
+     ]
+    },
+    {
+     "scene": "s14_rebuild_general",
+     "sentence": 8,
+     "old": "Its length agrees too: six squared is thirty six and eight squared is sixty four, which makes a hundred, and its square root is ten: the same as the wind's own length.",
+     "new": "Its length agrees too: we square its two parts, six and minus eight, add them, and take the square root, and we get ten, the same as the wind's own length.",
+     "neighbours_lufs": [
+      -16.38,
+      -16.15
+     ],
+     "dur_s": 9.95,
+     "old_dur_s": 10.9,
+     "parts": [
+      {
+       "text": "Its length agrees too: we square its two parts, six and minus eight, add them, and take the square root, and we get ten, the same as the wind's own length.",
+       "gain_db": 8.46,
+       "limiter_gr_db": -4.85,
+       "final_lufs": -16.26,
+       "true_peak_dbtp": -1.99
+      }
+     ]
+    },
+    {
+     "scene": "s15_turn_axes",
+     "sentence": 14,
+     "old": "Cosine of thirty degrees is the square root of three over two: one point seven three two over two, about zero point eight six six. Sine of thirty degrees is exactly one half.",
+     "new": "Cosine of thirty degrees is the square root of three over two, about zero point eight six six. Sine of thirty degrees is exactly one half.",
+     "neighbours_lufs": [
+      -17.14,
+      -16.25
+     ],
+     "dur_s": 10.525,
+     "old_dur_s": 13.4,
+     "parts": [
+      {
+       "text": "Cosine of thirty degrees is the square root of three over two, about zero point eight six six.",
+       "gain_db": 9.15,
+       "limiter_gr_db": -5.38,
+       "final_lufs": -16.7,
+       "true_peak_dbtp": -1.9
+      },
+      {
+       "text": "Sine of thirty degrees is exactly one half.",
+       "gain_db": 9.5,
+       "limiter_gr_db": -3.79,
+       "final_lufs": -16.74,
+       "true_peak_dbtp": -1.82
+      }
+     ]
+    },
+    {
+     "scene": "s16_y_prime",
+     "sentence": 7,
+     "old": "Its length is one, because zero point two five plus zero point seven five is one.",
+     "new": "Squaring its two components, adding them, and taking the square root gives one.",
+     "neighbours_lufs": [
+      -14.98,
+      -17.04
+     ],
+     "dur_s": 5.325,
+     "old_dur_s": 6.05,
+     "parts": [
+      {
+       "text": "Squaring its two components, adding them, and taking the square root gives one.",
+       "gain_db": 9.57,
+       "limiter_gr_db": -6.23,
+       "final_lufs": -15.92,
+       "true_peak_dbtp": -1.84
+      }
+     ]
+    },
+    {
+     "scene": "s16_y_prime",
+     "sentence": 8,
+     "old": "And its dot product with x hat prime is zero point eight six six times minus zero point five, plus zero point five times zero point eight six six. That's minus zero point four three three plus zero point four three three, which is zero.",
+     "new": "And its dot product with x hat prime is zero: when we multiply the matching parts, the two products cancel.",
+     "neighbours_lufs": [
+      -14.98,
+      -17.04
+     ],
+     "dur_s": 7.425,
+     "old_dur_s": 17.15,
+     "parts": [
+      {
+       "text": "And its dot product with x hat prime is zero: when we multiply the matching parts, the two products cancel.",
+       "gain_db": 9.03,
+       "limiter_gr_db": -4.33,
+       "final_lufs": -16.01,
+       "true_peak_dbtp": -1.81
+      }
+     ]
+    },
+    {
+     "scene": "s17_new_components",
+     "sentence": 7,
+     "old": "Now the numbers, with x equals three, y equals four, and alpha equals thirty degrees.",
+     "new": "Now the numbers: x is three and y is four, alpha is thirty degrees, the cosine of thirty degrees is about zero point eight six six, and its sine is zero point five.",
+     "neighbours_lufs": [
+      -15.72,
+      -16.19
+     ],
+     "dur_s": 12.1,
+     "old_dur_s": 6.5,
+     "parts": [
+      {
+       "text": "Now the numbers: x is three and y is four, alpha is thirty degrees, the cosine of thirty degrees is about zero point eight six six, and its sine is zero point five.",
+       "gain_db": 9.0,
+       "limiter_gr_db": -7.84,
+       "final_lufs": -15.96,
+       "true_peak_dbtp": -1.8
+      }
+     ]
+    },
+    {
+     "scene": "s20_polar_is_turned",
+     "sentence": 7,
+     "old": "Let's check with the east wind, ten, zero.",
+     "new": "Let's check with the east wind, ten, zero, and the cosine and sine of theta, zero point six and zero point eight.",
+     "neighbours_lufs": [
+      -16.16,
+      -16.27
+     ],
+     "dur_s": 8.125,
+     "old_dur_s": 3.525,
+     "parts": [
+      {
+       "text": "Let's check with the east wind, ten, zero, and the cosine and sine of theta, zero point six and zero point eight.",
+       "gain_db": 8.97,
+       "limiter_gr_db": -5.92,
+       "final_lufs": -16.23,
+       "true_peak_dbtp": -1.94
+      }
+     ]
+    },
+    {
+     "scene": "s17_new_components",
+     "sentence": 8,
+     "old": "X prime is three times zero point eight six six, plus four times zero point five.",
+     "new": "For x prime, we take x times the cosine, plus y times the sine.",
+     "neighbours_lufs": [
+      -15.72,
+      -16.19
+     ],
+     "dur_s": 5.2,
+     "old_dur_s": 6.1,
+     "parts": [
+      {
+       "text": "For x prime, we take x times the cosine, plus y times the sine.",
+       "gain_db": 10.23,
+       "limiter_gr_db": -6.8,
+       "final_lufs": -16.02,
+       "true_peak_dbtp": -1.71
+      }
+     ]
+    },
+    {
+     "scene": "s17_new_components",
+     "sentence": 9,
+     "old": "That's two point six plus two, about four point six.",
+     "new": "That gives about four point six.",
+     "neighbours_lufs": [
+      -15.72,
+      -16.19
+     ],
+     "dur_s": 2.475,
+     "old_dur_s": 4.0,
+     "parts": [
+      {
+       "text": "That gives about four point six.",
+       "gain_db": 10.81,
+       "limiter_gr_db": -3.58,
+       "final_lufs": -16.11,
+       "true_peak_dbtp": -1.7
+      }
+     ]
+    },
+    {
+     "scene": "s17_new_components",
+     "sentence": 10,
+     "old": "Y prime is minus three times zero point five, plus four times zero point eight six six.",
+     "new": "For y prime, we take minus x times the sine, plus y times the cosine.",
+     "neighbours_lufs": [
+      -15.72,
+      -16.19
+     ],
+     "dur_s": 5.875,
+     "old_dur_s": 6.475,
+     "parts": [
+      {
+       "text": "For y prime, we take minus x times the sine, plus y times the cosine.",
+       "gain_db": 9.47,
+       "limiter_gr_db": -4.17,
+       "final_lufs": -15.99,
+       "true_peak_dbtp": -1.69
+      }
+     ]
+    },
+    {
+     "scene": "s17_new_components",
+     "sentence": 11,
+     "old": "That's minus one point five plus three point four six, about one point nine six.",
+     "new": "That gives about one point nine six.",
+     "neighbours_lufs": [
+      -15.72,
+      -16.19
+     ],
+     "dur_s": 2.675,
+     "old_dur_s": 5.8,
+     "parts": [
+      {
+       "text": "That gives about one point nine six.",
+       "gain_db": 10.89,
+       "limiter_gr_db": -4.16,
+       "final_lufs": -16.03,
+       "true_peak_dbtp": -2.0
+      }
+     ]
+    },
+    {
+     "scene": "s17_new_components",
+     "sentence": 14,
+     "old": "Its length is the square root of four point six squared plus one point nine six squared.",
+     "new": "Let's find its length: we square the two new coordinates, add them, and take the square root.",
+     "neighbours_lufs": [
+      -16.54,
+      -16.85
+     ],
+     "dur_s": 6.025,
+     "old_dur_s": 5.95,
+     "parts": [
+      {
+       "text": "Let's find its length: we square the two new coordinates, add them, and take the square root.",
+       "gain_db": 7.77,
+       "limiter_gr_db": -4.97,
+       "final_lufs": -16.69,
+       "true_peak_dbtp": -1.93
+      }
+     ]
+    },
+    {
+     "scene": "s17_new_components",
+     "sentence": 15,
+     "old": "Four point six squared is about twenty one point one six, and one point nine six squared is about three point eight four. Together that's twenty five, and its square root is five kilometres, as before.",
+     "new": "It comes out at five kilometres, as before.",
+     "neighbours_lufs": [
+      -16.54,
+      -16.85
+     ],
+     "dur_s": 3.45,
+     "old_dur_s": 13.9,
+     "parts": [
+      {
+       "text": "It comes out at five kilometres, as before.",
+       "gain_db": 8.91,
+       "limiter_gr_db": -1.28,
+       "final_lufs": -16.7,
+       "true_peak_dbtp": -1.95
+      }
+     ]
+    },
+    {
+     "scene": "s18_matrix",
+     "sentence": 9,
+     "old": "With our numbers, the top row gives zero point eight six six times three, plus zero point five times four: four point six again. And the bottom row gives minus zero point five times three, plus zero point eight six six times four: one point nine six, our y prime again.",
+     "new": "With our numbers, the top row gives four point six again, and the bottom row gives one point nine six, our y prime again.",
+     "neighbours_lufs": [
+      -16.31,
+      -16.26
+     ],
+     "dur_s": 8.3,
+     "old_dur_s": 19.375,
+     "parts": [
+      {
+       "text": "With our numbers, the top row gives four point six again, and the bottom row gives one point nine six, our y prime again.",
+       "gain_db": 8.37,
+       "limiter_gr_db": -3.0,
+       "final_lufs": -16.3,
+       "true_peak_dbtp": -1.86
+      }
+     ]
+    },
+    {
+     "scene": "s19_index_form",
+     "sentence": 9,
+     "old": "C one one is x hat dot x hat prime: one times cosine alpha, plus zero times sine alpha, which is cosine alpha.",
+     "new": "C one one is x hat dot x hat prime, which is cosine alpha.",
+     "neighbours_lufs": [
+      -16.03,
+      -16.27
+     ],
+     "dur_s": 4.9,
+     "old_dur_s": 9.15,
+     "parts": [
+      {
+       "text": "C one one is x hat dot x hat prime, which is cosine alpha.",
+       "gain_db": 9.17,
+       "limiter_gr_db": -3.47,
+       "final_lufs": -16.17,
+       "true_peak_dbtp": -1.93
+      }
+     ]
+    },
+    {
+     "scene": "s20_polar_is_turned",
+     "sentence": 8,
+     "old": "X prime is ten times zero point six, plus zero times zero point eight, which is six.",
+     "new": "X prime is the wind's dot product with r hat, which is six.",
+     "neighbours_lufs": [
+      -16.16,
+      -16.27
+     ],
+     "dur_s": 4.625,
+     "old_dur_s": 6.6,
+     "parts": [
+      {
+       "text": "X prime is the wind's dot product with r hat, which is six.",
+       "gain_db": 9.06,
+       "limiter_gr_db": -4.51,
+       "final_lufs": -16.22,
+       "true_peak_dbtp": -1.89
+      }
+     ]
+    },
+    {
+     "scene": "s20_polar_is_turned",
+     "sentence": 9,
+     "old": "Y prime is minus ten times zero point eight, plus zero times zero point six, which is minus eight.",
+     "new": "Y prime is its dot product with theta hat, which is minus eight.",
+     "neighbours_lufs": [
+      -16.16,
+      -16.27
+     ],
+     "dur_s": 4.8,
+     "old_dur_s": 7.5,
+     "parts": [
+      {
+       "text": "Y prime is its dot product with theta hat, which is minus eight.",
+       "gain_db": 8.78,
+       "limiter_gr_db": -2.32,
+       "final_lufs": -16.23,
+       "true_peak_dbtp": -2.06
+      }
+     ]
+    },
+    {
+     "scene": "s20_polar_is_turned",
+     "sentence": 12,
+     "old": "X prime is three times zero point six, plus four times zero point eight.",
+     "new": "X prime is its dot product with r hat: three times r hat's east part, plus four times its north part.",
+     "neighbours_lufs": [
+      -16.11,
+      -15.53
+     ],
+     "dur_s": 7.525,
+     "old_dur_s": 5.425,
+     "parts": [
+      {
+       "text": "X prime is its dot product with r hat: three times r hat's east part, plus four times its north part.",
+       "gain_db": 8.91,
+       "limiter_gr_db": -4.89,
+       "final_lufs": -15.81,
+       "true_peak_dbtp": -1.52
+      }
+     ]
+    },
+    {
+     "scene": "s20_polar_is_turned",
+     "sentence": 13,
+     "old": "That's one point eight plus three point two, which is five.",
+     "new": "That gives five.",
+     "neighbours_lufs": [
+      -16.11,
+      -15.53
+     ],
+     "dur_s": 1.75,
+     "old_dur_s": 3.975,
+     "parts": [
+      {
+       "text": "That gives five.",
+       "gain_db": 9.26,
+       "limiter_gr_db": -1.64,
+       "final_lufs": -15.9,
+       "true_peak_dbtp": -2.04
+      }
+     ]
+    },
+    {
+     "scene": "s20_polar_is_turned",
+     "sentence": 14,
+     "old": "Y prime is minus three times zero point eight, plus four times zero point six.",
+     "new": "Y prime is its dot product with theta hat, in the same way.",
+     "neighbours_lufs": [
+      -16.11,
+      -15.53
+     ],
+     "dur_s": 4.575,
+     "old_dur_s": 5.75,
+     "parts": [
+      {
+       "text": "Y prime is its dot product with theta hat, in the same way.",
+       "gain_db": 9.17,
+       "limiter_gr_db": -3.16,
+       "final_lufs": -15.85,
+       "true_peak_dbtp": -2.0
+      }
+     ]
+    },
+    {
+     "scene": "s20_polar_is_turned",
+     "sentence": 15,
+     "old": "That's minus two point four plus two point four, which is zero.",
+     "new": "That gives zero.",
+     "neighbours_lufs": [
+      -16.11,
+      -15.53
+     ],
+     "dur_s": 1.825,
+     "old_dur_s": 4.475,
+     "parts": [
+      {
+       "text": "That gives zero.",
+       "gain_db": 9.53,
+       "limiter_gr_db": -2.05,
+       "final_lufs": -15.85,
+       "true_peak_dbtp": -2.03
+      }
+     ]
+    },
+    {
+     "scene": "s22_spin_inflow",
+     "sentence": 6,
+     "old": "The seventy two tangential winds add up to about two thousand five hundred and six metres per second. Divided by seventy two, that's about thirty four point eight, or about thirty five metres per second.",
+     "new": "The seventy two tangential winds, starting with thirty eight at theta equals zero, add up to about two thousand five hundred and six metres per second. So their average is about thirty four point eight, or about thirty five metres per second.",
+     "neighbours_lufs": [
+      -16.14,
+      -15.66
+     ],
+     "dur_s": 16.575,
+     "old_dur_s": 14.625,
+     "parts": [
+      {
+       "text": "The seventy two tangential winds, starting with thirty eight at theta equals zero, add up to about two thousand five hundred and six metres per second.",
+       "gain_db": 8.98,
+       "limiter_gr_db": -8.07,
+       "final_lufs": -15.9,
+       "true_peak_dbtp": -1.52
+      },
+      {
+       "text": "So their average is about thirty four point eight, or about thirty five metres per second.",
+       "gain_db": 9.62,
+       "limiter_gr_db": -4.1,
+       "final_lufs": -15.92,
+       "true_peak_dbtp": -1.74
+      }
+     ]
+    },
+    {
+     "scene": "s22_spin_inflow",
+     "sentence": 10,
+     "old": "The seventy two radial winds start with minus eight point seven at theta equals zero, minus ten point three at five degrees, and minus eleven point two at ten degrees, and they go on all the way round the ring. Together they add up to about minus nine hundred and fifty seven. Divided by seventy two, that's about minus thirteen point three, or about minus thirteen metres per second.",
+     "new": "The seventy two radial winds, starting with minus eight point seven at theta equals zero, add up to about minus nine hundred and fifty seven. So their average is about minus thirteen point three, or about minus thirteen metres per second.",
+     "neighbours_lufs": [
+      -16.19,
+      -16.86
+     ],
+     "dur_s": 16.375,
+     "old_dur_s": 27.025,
+     "parts": [
+      {
+       "text": "The seventy two radial winds, starting with minus eight point seven at theta equals zero, add up to about minus nine hundred and fifty seven.",
+       "gain_db": 8.5,
+       "limiter_gr_db": -7.78,
+       "final_lufs": -16.51,
+       "true_peak_dbtp": -2.03
+      },
+      {
+       "text": "So their average is about minus thirteen point three, or about minus thirteen metres per second.",
+       "gain_db": 8.2,
+       "limiter_gr_db": -4.41,
+       "final_lufs": -16.52,
+       "true_peak_dbtp": -1.92
+      }
+     ]
+    },
+    {
+     "scene": "s23_what_numbers_mean",
+     "sentence": 5,
+     "old": "By Pythagoras, together they make an arrow of the square root of thirty five squared plus thirteen squared. Thirty five squared is twelve hundred and twenty five, and thirteen squared is a hundred and sixty nine. Together that's thirteen hundred and ninety four, and its square root is about thirty seven metres per second.",
+     "new": "By Pythagoras, we square the two parts, thirty five and thirteen, add them, and take the square root, and we get an arrow of about thirty seven metres per second.",
+     "neighbours_lufs": [
+      -16.47,
+      -16.6
+     ],
+     "dur_s": 10.725,
+     "old_dur_s": 22.2,
+     "parts": [
+      {
+       "text": "By Pythagoras, we square the two parts, thirty five and thirteen, add them, and take the square root, and we get an arrow of about thirty seven metres per second.",
+       "gain_db": 7.92,
+       "limiter_gr_db": -3.93,
+       "final_lufs": -16.54,
+       "true_peak_dbtp": -1.92
+      }
+     ]
+    },
+    {
+     "scene": "s23_what_numbers_mean",
+     "sentence": 10,
+     "old": "Moving in at thirteen metres per second, it would have to cover twenty five kilometres, which is twenty five thousand metres. Twenty five thousand divided by thirteen is about nineteen hundred and twenty three seconds. Divided by sixty seconds a minute, that's about thirty two minutes.",
+     "new": "Moving in at thirteen metres per second, it would have to cover twenty five kilometres. Time is distance divided by speed, so that takes about nineteen hundred and twenty three seconds, or about thirty two minutes.",
+     "neighbours_lufs": [
+      -15.49,
+      -15.8
+     ],
+     "dur_s": 14.7,
+     "old_dur_s": 20.325,
+     "parts": [
+      {
+       "text": "Moving in at thirteen metres per second, it would have to cover twenty five kilometres.",
+       "gain_db": 9.63,
+       "limiter_gr_db": -3.72,
+       "final_lufs": -15.68,
+       "true_peak_dbtp": -1.85
+      },
+      {
+       "text": "Time is distance divided by speed, so that takes about nineteen hundred and twenty three seconds, or about thirty two minutes.",
+       "gain_db": 9.6,
+       "limiter_gr_db": -5.44,
+       "final_lufs": -15.67,
+       "true_peak_dbtp": -1.73
+      }
+     ]
+    },
+    {
+     "scene": "s24_ring_points",
+     "sentence": 19,
+     "old": "A hundred and thirty five degrees is forty five degrees short of due west, so its cosine is minus one over the square root of two, about minus zero point seven zero seven, and its sine is plus zero point seven zero seven.",
+     "new": "A hundred and thirty five degrees is forty five degrees short of due west, so its cosine is minus the cosine of forty five degrees, about minus zero point seven zero seven, and its sine is plus zero point seven zero seven.",
+     "neighbours_lufs": [
+      -16.16,
+      -15.88
+     ],
+     "dur_s": 15.65,
+     "old_dur_s": 15.1,
+     "parts": [
+      {
+       "text": "A hundred and thirty five degrees is forty five degrees short of due west, so its cosine is minus the cosine of forty five degrees, about minus zero point seven zero seven, and its sine is plus zero point seven zero seven.",
+       "gain_db": 9.1,
+       "limiter_gr_db": -6.75,
+       "final_lufs": -16.03,
+       "true_peak_dbtp": -1.84
+      }
+     ]
+    },
+    {
+     "scene": "s24_ring_points",
+     "sentence": 16,
+     "old": "And u sub theta is minus u times one, plus v times zero. Minus times minus sixteen point nine makes plus sixteen point nine: round.",
+     "new": "And u sub theta is minus u times one, plus v times zero, which leaves minus u: plus sixteen point nine, round.",
+     "neighbours_lufs": [
+      -15.88,
+      -16.61
+     ],
+     "dur_s": 8.625,
+     "old_dur_s": 10.9,
+     "parts": [
+      {
+       "text": "And u sub theta is minus u times one, plus v times zero, which leaves minus u: plus sixteen point nine, round.",
+       "gain_db": 9.16,
+       "limiter_gr_db": -4.9,
+       "final_lufs": -16.28,
+       "true_peak_dbtp": -1.98
+      }
+     ]
+    },
+    {
+     "scene": "s24_ring_points",
+     "sentence": 20,
+     "old": "So u sub r is minus ten point one times minus zero point seven zero seven, plus minus forty four point five times zero point seven zero seven.",
+     "new": "So u sub r is u times the cosine, plus v times the sine.",
+     "neighbours_lufs": [
+      -16.16,
+      -15.88
+     ],
+     "dur_s": 4.85,
+     "old_dur_s": 11.425,
+     "parts": [
+      {
+       "text": "So u sub r is u times the cosine, plus v times the sine.",
+       "gain_db": 10.33,
+       "limiter_gr_db": -5.99,
+       "final_lufs": -16.06,
+       "true_peak_dbtp": -1.94
+      }
+     ]
+    },
+    {
+     "scene": "s24_ring_points",
+     "sentence": 21,
+     "old": "That's seven point one four minus thirty one point four six, about minus twenty four point three: in.",
+     "new": "That gives about minus twenty four point three: in.",
+     "neighbours_lufs": [
+      -16.16,
+      -15.88
+     ],
+     "dur_s": 3.875,
+     "old_dur_s": 7.25,
+     "parts": [
+      {
+       "text": "That gives about minus twenty four point three: in.",
+       "gain_db": 9.55,
+       "limiter_gr_db": -3.43,
+       "final_lufs": -16.07,
+       "true_peak_dbtp": -1.85
+      }
+     ]
+    },
+    {
+     "scene": "s24_ring_points",
+     "sentence": 22,
+     "old": "And u sub theta is minus u times sine, so minus minus ten point one, which is plus ten point one, times zero point seven zero seven, plus minus forty four point five times minus zero point seven zero seven.",
+     "new": "And u sub theta is minus u times the sine, plus v times the cosine.",
+     "neighbours_lufs": [
+      -16.16,
+      -15.88
+     ],
+     "dur_s": 5.45,
+     "old_dur_s": 15.5,
+     "parts": [
+      {
+       "text": "And u sub theta is minus u times the sine, plus v times the cosine.",
+       "gain_db": 9.84,
+       "limiter_gr_db": -5.24,
+       "final_lufs": -16.11,
+       "true_peak_dbtp": -1.83
+      }
+     ]
+    },
+    {
+     "scene": "s24_ring_points",
+     "sentence": 23,
+     "old": "That's seven point one four plus thirty one point four six, about thirty eight point six: round.",
+     "new": "That gives about thirty eight point six: round.",
+     "neighbours_lufs": [
+      -16.16,
+      -15.88
+     ],
+     "dur_s": 3.65,
+     "old_dur_s": 7.0,
+     "parts": [
+      {
+       "text": "That gives about thirty eight point six: round.",
+       "gain_db": 10.13,
+       "limiter_gr_db": -3.66,
+       "final_lufs": -16.11,
+       "true_peak_dbtp": -1.94
       }
      ]
     }

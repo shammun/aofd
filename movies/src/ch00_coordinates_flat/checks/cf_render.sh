@@ -11,7 +11,7 @@ set -o pipefail   # a refused join or failed render must stop the script (2026-1
 cd "$R" || exit 1
 mkdir -p "$S/tmp" "$O"; export TEMP="$S/tmp" TMP="$S/tmp"
 "$PY" tools/disk_guard.py --report | tail -2
-SND="${SND:-sound9}"   # feedback 2026-11-06/07: the re-mix on the final fb1106 narration lives in build1/sound9
+SND="${SND:-sound10}"  # fix 1 after fb1 (2026-11-07): the mix on the fix1107 narration lives in build1/sound10 (sound9 = fb1106)
 cp "$S/$SND/narration_music_cf.wav" "$S/bundle/public/" || exit 1
 "$PY" movies/src/ch00_coordinates_flat/checks/cf_run.py render --conc 2 "$@" 2>&1 | tee -a "$S/render.log" || exit 1
 "$PY" movies/src/ch00_coordinates_flat/checks/cf_run.py join --mb 150 2>&1 | tee -a "$S/render.log" || exit 1

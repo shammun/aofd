@@ -25,7 +25,9 @@ c1 = (tm["self_check"].get("spliced_fix1c") or {}).get("replaced", [])   # fix 1
 c2 = (tm["self_check"].get("spliced_fix2") or {}).get("replaced", [])    # fix 2: review 2 Must 2a/2b (s11 S20, S23)
 c3 = (tm["self_check"].get("spliced_fb1106") or {}).get("replaced", [])  # user feedback 2026-11-06 (cf_fb1106_splice.py, 12 entries)
 byid = {s["id"]: s for s in tm["scenes"]}
-later = {(r_["scene"], r_["sentence"]) for r_ in c3}   # sentences replaced again by fb1106: skip their older replacements (idempotent re-runs)
+c4 = (tm["self_check"].get("spliced_fix1107") or {}).get("replaced", [])  # fix 1 after fb1 (2026-11-07): show it, don't voice it (cf_fix1107_splice.py)
+later4 = {(r_["scene"], r_["sentence"]) for r_ in c4}
+later = {(r_["scene"], r_["sentence"]) for r_ in c3} | later4   # sentences replaced again later: skip their older replacements (idempotent re-runs)
 for sc in sb["scenes"]:
     v = re.sub(r"\s+", " ", sc["voiceover"])
     for r_ in rep:
@@ -44,9 +46,14 @@ for sc in sb["scenes"]:
                 sys.exit(f"{sc['id']}: fix-2 old sentence not in voiceover: {r_['old']}")
             v = v.replace(r_["old"], r_["new"])
     for r_ in c3:
-        if r_["scene"] == sc["id"] and r_["new"] not in v:
+        if r_["scene"] == sc["id"] and (r_["scene"], r_["sentence"]) not in later4 and r_["new"] not in v:
             if r_["old"] not in v:
                 sys.exit(f"{sc['id']}: fb1106 old sentence not in voiceover: {r_['old']}")
+            v = v.replace(r_["old"], r_["new"])
+    for r_ in c4:
+        if r_["scene"] == sc["id"] and r_["new"] not in v:
+            if r_["old"] not in v:
+                sys.exit(f"{sc['id']}: fix1107 old sentence not in voiceover: {r_['old']}")
             v = v.replace(r_["old"], r_["new"])
     if u1 and sc["id"] == u1["scene"] and u1["new"][0]["new"] not in v:   # user note U1: the s11 block (beats between new sentences)
         pat = r"\s*(?:\[beat\]\s*)?".join(re.escape(x) for x in u1["old"])
@@ -63,12 +70,13 @@ for sc in sb["scenes"]:
         sys.exit(f"voiceover drift in {sc['id']}")
 sb["target_duration_s"] = tm["total_s"]
 sb["build_1"]["fix1_tts"] = {"tool": "movies/src/ch00_coordinates_flat/checks/cf_fix1_splice.py (six sentences re-voiced, af_bella x1.0, spliced)",
-                             "run": "G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_flat/" + ("fb1106/tts" if c3 else "fix2/tts" if c2 else "fix1c/tts" if c1 else "fix1b/tts" if u1 else "fix1/tts"), "audio_s": tm["total_s"],
+                             "run": "G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_flat/" + ("fix1107/tts" if c4 else "fb1106/tts" if c3 else "fix2/tts" if c2 else "fix1c/tts" if c1 else "fix1b/tts" if u1 else "fix1/tts"), "audio_s": tm["total_s"],
                              "cues": tm["cues"], "warnings": tm["warnings"], "sentences": sum(len(s["sentences"]) for s in tm["scenes"]),
                              "replaced": [f"{r_['scene']} S{r_['sentence']}" for r_ in rep]
                              + [f"{r_['scene']} S{r_['sentence']} ({r_['item']}, fix 1c)" for r_ in c1]
                              + [f"{r_['scene']} S{r_['sentence']} ({r_['item']}, fix 2)" for r_ in c2]
                              + [f"{r_['scene']} S{r_['sentence']} ({r_['item']}, feedback 2026-11-06)" for r_ in c3]
+                             + [f"{r_['scene']} S{r_['sentence']} (show it, don't voice it, 2026-11-07)" for r_ in c4]
                              + ([f"{u1['scene']} S{u1['replaced_sentences'][0]}-S{u1['replaced_sentences'][1]} -> {len(u1['new'])} sentences (user note U1, cf_fix1b_splice.py)"] if u1 else [])}
 sb["maths_skip"]["blocks"] = man["maths_skips"]
 sb["maths_skip"]["rule"] = sb["maths_skip"]["rule"].replace("('every step, if you want it' / 'skip to\n    mm:ss')", "").replace(

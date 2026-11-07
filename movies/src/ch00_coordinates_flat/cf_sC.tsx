@@ -34,7 +34,7 @@ const CHECK_C: [string, number, number, number][] = [
   ["72 pts", 360 / 5, 72, 0], ["kt", 135 * 1.85, 250, 0.3], ["250/3.6", 250 / 3.6, 69, 0.5], ["ring max", IAN.ring_vmax, 49, 0.2],
   ["35^2", 35 * 35, 1225, 0], ["13^2", 13 * 13, 169, 0], ["sqrt1394", Math.sqrt(1394), 37.3, 0.05], ["25000/13", 25000 / 13, 1923, 0.5], ["1923/60", 1923 / 60, 32, 0.1],
   ["2pi25", 2 * 3.1416 * 25, 157, 0.1], ["157000/35", 157000 / 35, 4490, 5], ["4490/60", 4490 / 60, 75, 0.2], ["35/13", 35 / 13, 2.7, 0.01],
-  ["cos135", Math.cos(135 * D2R), -0.707, 5e-4], ["1/sqrt2", 1 / Math.SQRT2, 0.707, 5e-4], ["13.3/34.8", 13.3 / 34.8, 0.382, 5e-4], ["atan .382", Math.atan(0.382) / D2R, 20.9, 0.05],
+  ["cos135", Math.cos(135 * D2R), -0.707, 5e-4], ["1/sqrt2", 1 / Math.SQRT2, 0.707, 5e-4], ["13.3/34.8", 13.3 / 34.8, 0.382, 5e-4], ["atan .382", Math.atan(0.382) / D2R, 20.9, 0.05], ["atan .38 (s26 screen, review 2 Should 3)", Math.atan(0.38) / D2R, 20.8, 0.05],
   ["vt min", Math.min(...(IAN.ring.vt as number[])), 17, 0.2], ["vt max", Math.max(...(IAN.ring.vt as number[])), 47, 0.2], ["vr min", Math.min(...(IAN.ring.vr as number[])), -40, 0.2],
   ["v 0", IAN.ring.v[0], 38, 0.1], ["v 180", IAN.ring.v[36], -46, 0.5], ["u 270", IAN.ring.u[54], 25, 0.5], ["58", 72 - 14, 58, 0],
 ];
@@ -53,12 +53,16 @@ const CX = 1230;   // the text column
 // feedback 2026-11-06 (R7): the eight-point picture of s24 (every 45°): the map zoomed so the 25-km ring is ≈ 230 px, arrows S8 px per m/s
 const Z8: MapBox = boxAt(IAN.c[0], IAN.c[1], 0.72, MB.x, MB.y, MB.w, MB.h);
 const S8 = 2.4;
+/** drawn u_r length on the eight-point map (px): true scale, at least 34 px so a small value is not hidden under its 11-px dot */
+const L8 = (ur: number) => Math.sign(ur) * Math.max(Math.abs(ur) * S8, 34);
 const AZ8 = [0, 45, 90, 135, 180, 225, 270, 315];
 /** the on-map value labels of the eight points: the library values to 0.1 (135°: 38.6, the value worked by hand from 7.14 + 31.46) */
 const LAB8: Record<number, [string, string]> = { 0: ["-8.7", "38.0"], 45: ["-16.1", "29.5"], 90: ["-37.4", "16.9"], 135: ["-24.3", "38.6"], 180: ["-1.9", "45.6"],
-  225: ["+13.5", "43.7"], 270: ["-11.2", "24.6"], 315: ["-23.2", "34.6"] };
-AZ8.forEach((az) => { const d = IAN.pts8[String(az)], [a, b] = LAB8[az];
-  if (Math.abs(d.ur - parseFloat(a)) > 0.06 || Math.abs(d.ut - parseFloat(b)) > 0.06) throw new Error(`CHECK s24 eight points ${az}: data ${d.ur}, ${d.ut} vs ${a}, ${b}`); });
+  225: ["+13.5", "43.7"], 270: ["-11.2", "24.5"], 315: ["-23.2", "34.6"] };
+// fix 1 after fb1 (review 1 S1 / review 2 Should 2): half the last digit (0.05) everywhere, except the hand-worked 135° u_θ (38.6 from
+// 7.14 + 31.46; library 38.65), checked at 0.06 as in the builder row DF24
+AZ8.forEach((az) => { const d = IAN.pts8[String(az)], [a, b] = LAB8[az], tb = az === 135 ? 0.06 : 0.05;
+  if (Math.abs(d.ur - parseFloat(a)) > 0.05 + 1e-9 || Math.abs(d.ut - parseFloat(b)) > tb + 1e-9) throw new Error(`CHECK s24 eight points ${az}: data ${d.ur}, ${d.ut} vs ${a}, ${b}`); });
 if (AZ8.filter((az) => IAN.pts8[String(az)].ur < 0).length !== 7 || IAN.pts8["225"].ur <= 0) throw new Error("CHECK s24: 'in at 7 of 8, out at 225°'");
 // R8: the first terms of the two ring sums as written and spoken (θ = 0°, 5°, 10°)
 [[IAN.ring.vr, [-8.7, -10.3, -11.2]], [IAN.ring.vt, [38.0, 37.8, 38.3]]].forEach(([d, r]) => (r as number[]).forEach((v, i) => {
@@ -136,18 +140,22 @@ const S22: React.FC = () => {
   const dots = Math.round(72 * prog(f, t72, t72 + 30));
   // fix 2 (review 2 Must 4/5): the anticlockwise labels and the ū_r division leave 12 frames before the knots chain starts in their place
   const blk = fout(f, tBest - 24, 12);
-  const tAddT = AT(k, 5, "add up"), tDivT = AT(k, 5, "Divided by"), t35c = AT(k, 5, "or about thirty five"), tAddR = AT(k, 9, "add up"), tDivR = AT(k, 9, "Divided by"),
+  // fix 1 after fb1 (review 2 Must 1/2; "show it, don't voice it"): each running sum starts as the sentence starts and reaches 72 of 72
+  // exactly on the spoken total ("two thousand five hundred", "minus nine hundred"); the total then holds until the fraction replaces it
+  const tAddT = SS(k, 5), tSumT = AT(k, 5, "two thousand five hundred"), tDivT = AT(k, 5, "So their average"), t35c = AT(k, 5, "or about thirty five"),
+    tAddR = AT(k, 9, "at theta equals zero"), tSumR = AT(k, 9, "minus nine hundred"), tDivR = AT(k, 9, "So their average"),
     t13c = AT(k, 9, "or about minus thirteen"), t69 = AT(k, 13, "sixty nine"), t49 = AT(k, 14, "forty nine"), tSmW = AT(k, 14, "The model analysis");
   // feedback 2026-11-06 (R8): the averaging rule in symbols, N = 72, the first terms of each sum
   const tSym = AT(k, 4, "In symbols"), tN = AT(k, 4, "Here N is"), tThS = AT(k, 4, "The average tangential wind"),
-    tFirst = [AT(k, 9, "minus eight point seven"), AT(k, 9, "minus ten point three"), AT(k, 9, "minus eleven point two"), AT(k, 9, "and they go on")];
+    // the voice names the first term (−8.7 at θ = 0); −10.3, −11.2 and "…" follow on screen, half a second apart
+    tFirst = [0, 15, 30, 45].map((d) => AT(k, 9, "minus eight point seven") + d);
   const nFirst = tFirst.filter((t) => f >= t).length;
   const FIRST_R = ["-8.7", "-10.3", "-11.2", String.raw`-\dots`];
   const numR = FIRST_R.map((q, i) => (i < nFirst ? q : String.raw`\phantom{${q}}`)).join("");
   // the running sums (fix 1c C32): the 72 values added in turn while their dots light
-  const nT = Math.min(72, Math.round(72 * prog(f, tAddT, tDivT - 8))), nR = Math.min(72, Math.round(72 * prog(f, tAddR, tDivR - 8)));
+  const nT = Math.min(72, Math.round(72 * prog(f, tAddT, tSumT))), nR = Math.min(72, Math.round(72 * prog(f, Math.max(tAddR, tFirst[3]), tSumR)));
   const sumT = (RING.vt as number[]).slice(0, nT).reduce((a2, b2) => a2 + b2, 0), sumR = (RING.vr as number[]).slice(0, nR).reduce((a2, b2) => a2 + b2, 0);
-  const runI = f < tVr ? nT : nR, runOn = win(f, tAddT, tDivT, 6) + win(f, tAddR, tDivR, 6);
+  const runI = f < tVr ? nT : nR, runOn = win(f, tAddT, tDivT, 6) + win(f, Math.max(tAddR, tFirst[3]), tDivR, 6);
   return (
     <Scene>
       <GeoMap id="s22m" B={ZOOM} fade={1}>
@@ -189,10 +197,10 @@ const S22: React.FC = () => {
         <Lbl x={CX} y={500} t="official estimate: 135 kt" c={C.local} s={T.floor} o={fin(f, tBest)} />
         <Keyword f={f} text="analysis smooths the peak" at={[CX, 420]} s={T.floor} appear={tSmW} />
         {/* fix 2 (review 2 Must 4): each running sum on two lines, inside x ≤ 1842 */}
-        <Lbl x={CX} y={465} t={`sum so far: ${nf(sumT, 1)} m/s`} c={C.gold} s={T.floor} o={win(f, tAddT, tDivT - 20)} />
-        <Lbl x={CX} y={520} t={`${nT} of 72 points`} c={C.gold} s={T.floor} o={win(f, tAddT, tDivT - 20)} />
-        <Lbl x={CX} y={765} t={`sum so far: ${nf(sumR, 1)} m/s`} c={C.gold} s={T.floor} o={win(f, tAddR, tDivR - 20)} />
-        <Lbl x={CX} y={820} t={`${nR} of 72 points`} c={C.gold} s={T.floor} o={win(f, tAddR, tDivR - 20)} />
+        <Lbl x={CX} y={465} t={`${nT < 72 ? "sum so far" : "sum"}: ${nf(sumT, 1)} m/s`} c={C.gold} s={T.floor} o={win(f, tAddT, tDivT - 17)} />
+        <Lbl x={CX} y={520} t={`${nT} of 72 points`} c={C.gold} s={T.floor} o={win(f, tAddT, tDivT - 17)} />
+        <Lbl x={CX} y={765} t={`${nR < 72 ? "sum so far" : "sum"}: ${nf(sumR, 1)} m/s`} c={C.gold} s={T.floor} o={win(f, Math.max(tAddR, tFirst[3]), tDivR - 17)} />
+        <Lbl x={CX} y={820} t={`${nR} of 72 points`} c={C.gold} s={T.floor} o={win(f, Math.max(tAddR, tFirst[3]), tDivR - 17)} />
       </Svg>
       {/* fix 1 Must 2: the tags sit beside the middle of their own arrow, on the side away from the other arrow and the coast */}
       <TeX s={String.raw`\boldsymbol{u_r}`} x={(one.p0[0] + one.rp[0]) / 2 - 42} y={(one.p0[1] + one.rp[1]) / 2 + 42} size={56} ax={0.5} c={C.neg} halo haloW={0.11} o={win(f, tR, tVt - 12)} />
@@ -231,7 +239,11 @@ const S23: React.FC = () => {
   const f = useCurrentFrame(), k = K("s23_what_numbers_mean");
   const t35 = SS(k, 1), t13 = SS(k, 2), tRA = SS(k, 3), tPy = SS(k, 4), tMost = SS(k, 5), tKmh = SS(k, 6), tImg = SS(k, 7), tPar = SS(k, 8), tT = SS(k, 9), tLap = SS(k, 10),
     tBoth = SS(k, 11), tRat = SS(k, 12), tSp = SS(k, 13), tRise = SS(k, 14), tMore = SS(k, 15);
-  const tRoot = AT(k, 4, "square root"), t37 = AT(k, 4, "thirty seven");
+  // fix 1 after fb1 ("show it, don't voice it"): the squares are on screen only; the voice says "By Pythagoras, together they make an
+  // arrow of about thirty seven", so the rows land on "together", "an arrow" and "thirty seven"
+  const tRoot = AT(k, 4, "By Pythagoras"), t37 = AT(k, 4, "thirty seven"), tSq = AT(k, 4, "add them"), tRt = Math.max(tSq + 12, AT(k, 4, "take the square root"));
+  // review 2 Must 3: the clock holds 0 min, then 32 min, and sweeps only on "thirty two minutes" / "seventy five minutes"
+  const t32 = AT(k, 9, "thirty two minutes"), t75 = AT(k, 10, "seventy five minutes");
   const PB = { x: 80, y: 40, w: 900, h: 740 };
   const B = boxAt(IAN.c[0], IAN.c[1], 0.555, PB.x, PB.y, PB.w, PB.h);
   const P = mapP(B);
@@ -243,7 +255,7 @@ const S23: React.FC = () => {
   const s = 6;
   const tip: Pt = [pr[0] + et[0] * 35 * s - er[0] * 13 * s, pr[1] + et[1] * 35 * s - er[1] * 13 * s];
   const lapO = fin(f, tLap);
-  const minNow = f < tT ? 0 : f < tLap ? 32 * prog(f, tT, tT + 60) : 32 + 43 * prog(f, tLap, tLap + 60);
+  const minNow = f < t32 ? 0 : f < t75 ? 32 * prog(f, t32, t32 + 18) : 32 + 43 * prog(f, t75, t75 + 18);
   // the spiral segment (constant inflow angle ≈ 21°): r = R exp(−tan(21°) φ) for a quarter turn
   const sp = prog(f, tSp, tSp + 40), spiral: Pt[] = [];
   for (let i = 0; i <= 40 * sp; i++) { const ph = (i / 40) * (Math.PI / 2), rr = R * Math.exp(-Math.tan(SAY.angle * D2R) * ph); spiral.push([cE[0] + rr * Math.cos(a0 * D2R + ph), cE[1] - rr * Math.sin(a0 * D2R + ph)]); }
@@ -295,11 +307,11 @@ const S23: React.FC = () => {
       {/* fix 3 (review 3 Must 3): the column leaves at tRise − 10, so the ⊙ label never reads into "= 35/13 ≈ 2.7" */}
       <CalcStack f={f} x={1260} y={190} size={52} maxLines={2} o={fout(f, tRise - 12, 10)} rows={[
         { lhs: cutAt(EQ_S23, String.raw`\approx`)[0], rhs: String.raw`\phantom{\approx}`, at: tRoot, h: 90 },
-        { rhs: String.raw`=\sqrt{1225+169}`, at: AT(k, 4, "twelve hundred"), cont: true },
-        { rhs: String.raw`=\sqrt{1394}\approx37.3`, at: AT(k, 4, "thirteen hundred"), cont: true },
+        { rhs: String.raw`=\sqrt{1225+169}`, at: tSq, cont: true },
+        { rhs: String.raw`=\sqrt{1394}\approx37.3`, at: tRt, cont: true },
         { rhs: String.raw`\approx${cutAt(EQ_S23, String.raw`\approx`)[1]}`, at: t37, cont: true },
         { lhs: String.raw`13\times3.6`, rhs: String.raw`\approx47\ \mathrm{km/h}`, at: AT(k, 6, "forty seven") },
-        { lhs: String.raw`25\ \mathrm{km}`, rhs: String.raw`=25\,000\ \mathrm{m}`, at: AT(k, 9, "twenty five thousand metres") },
+        { lhs: String.raw`25\ \mathrm{km}`, rhs: String.raw`=25\,000\ \mathrm{m}`, at: AT(k, 9, "twenty five kilometres") },
         { lhs: "t", rhs: String.raw`=\dfrac{25\,000\ \mathrm{m}}{13\ \mathrm{m/s}}\approx1923\ \mathrm{s}`, at: AT(k, 9, "nineteen hundred and twenty three"), h: 120 },
         { rhs: String.raw`\approx1923\div60\approx32\ \mathrm{min}`, at: AT(k, 9, "thirty two minutes"), cont: true, h: 80 },
         { lhs: String.raw`2\pi\times25\ \mathrm{km}`, rhs: String.raw`=2\times3.1416\times25`, at: AT(k, 10, "two pi times") },
@@ -330,15 +342,20 @@ const S24: React.FC = () => {
   const f = useCurrentFrame(), k = K("s24_ring_points");
   const tRem = SS(k, 4), tA = SS(k, 5), tAuv = SS(k, 6), tAcs = SS(k, 7), tAr = SS(k, 8), tAt = SS(k, 9), tB = SS(k, 11), tBuv = SS(k, 12), tBcs = SS(k, 13), tBr = SS(k, 14), tBt = SS(k, 15),
     tC = SS(k, 16), tCuv = SS(k, 17), tCcs = SS(k, 18), tCr = SS(k, 19), tCr2 = AT(k, 20, "minus twenty four"), tCt = SS(k, 21), tCt2 = AT(k, 22, "thirty eight point six"), tAll = SS(k, 23);
+  // fix 1 after fb1 ("show it, don't voice it"; review 2 Should 7): the voice names each term ("u times the cosine, plus v times the
+  // sine") and the result; each written term lands on its words, the products in between come one by one before the result
+  const tCr1b = AT(k, 19, "plus v times the sine"), tCt1b = AT(k, 21, "plus v times the cosine"), tB16 = AT(k, 15, "plus sixteen point nine");
+  const pC = [Math.max(tCr1b + 18, SS(k, 20) - 14)], pT = [tCt1b + 18];
+  pC.push(Math.max(pC[0] + 12, SS(k, 20) + 6)); pT.push(Math.max(pT[0] + 12, SE(k, 21) - 4)); pT.push(Math.max(pT[1] + 12, SS(k, 22) + 4));
   // feedback 2026-11-06 (R7, scope 2026-11-07): after the three worked points (unchanged), five more points without the
   // arithmetic and all eight u_r / u_θ arrows with their values (re-voiced S24); the map zooms in (ring ≈ 230 px) for the eight
-  const tFive = AT(k, 23, "so here are five more"), tSeven = AT(k, 23, "With all eight points"),
+  const tFive = AT(k, 23, "so here are five more"), t7of8 = AT(k, 23, "seven of them"), t225 = AT(k, 23, "two hundred and twenty five"),
     tComp = AT(k, 23, "The computer does"), tLink = AT(k, 23, "And our first point"), tKeep = SS(k, 24);
   const z8 = prog(f, tAll, tAll + 40);
   const B24 = zoomBox(ZOOM, Z8, z8);
   const P = mapP(B24);
   const cE = P(IAN.c[0], IAN.c[1]);
-  const pts = [{ az: 0, d: P0, t0: tA, tuv: tAuv, tr: tAr, tt: tAt, end: tB }, { az: 90, d: P90, t0: tB, tuv: tBuv, tr: tBr, tt: tBt, end: tC }, { az: 135, d: P135, t0: tC, tuv: tCuv, tr: tCr2, tt: tCt2, end: tAll }];
+  const pts = [{ az: 0, d: P0, t0: tA, tuv: tAuv, tr: tAr, tt: tAt, end: tB }, { az: 90, d: P90, t0: tB, tuv: tBuv, tr: tBr, tt: tB16, end: tC }, { az: 135, d: P135, t0: tC, tuv: tCuv, tr: tCr2, tt: tCt2, end: tAll }];
   const cur = f < tB ? 0 : f < tC ? 1 : 2;
   const su = 4, LUa = 90;
   const sweep = Math.round(72 * prog(f, tAll + 10, tAll + 70));
@@ -389,11 +406,14 @@ const S24: React.FC = () => {
           const g = prog(f, t0, t0 + 18), o = fin(f, t0, 8) * fout(f, tKeep - 12);
           return o <= 0 ? null : <g key={`p8${n}`} opacity={o}>
             <circle cx={q[0]} cy={q[1]} r={11} fill={C.gold} stroke={C.bg} strokeWidth={3} />
-            <Arrow p={q} q={[q[0] + er[0] * d.ur * S8 * g, q[1] + er[1] * d.ur * S8 * g]} color={C.neg} w={8} head={24} />
+            {/* fix 1 after fb1 (review 2 Should 5): a drawn length of at least 34 px (the 180° u_r, −1.9 m/s, was 4.6 px under its dot);
+                the label keeps the true value */}
+            <Arrow p={q} q={[q[0] + er[0] * L8(d.ur) * g, q[1] + er[1] * L8(d.ur) * g]} color={C.neg} w={8} head={24} />
             <Arrow p={q} q={[q[0] + et[0] * d.ut * S8 * g, q[1] + et[1] * d.ut * S8 * g]} color={C.first} w={8} head={24} />
             {az === 0 ? <circle cx={q[0]} cy={q[1]} r={26} fill="none" stroke={C.gold} strokeWidth={5} opacity={fin(f, tLink)} /> : null}
           </g>; })}
-        <Keyword f={f} text="in at 7 of 8 · out at 225°" at={[CX, 740]} s={T.floor} c={C.neg} appear={tSeven} out={tComp - 18} />
+        {/* fix 1 after fb1 (review 2 Should 4): "in at 7 of 8" on "seven of them", "· out at 225°" added on "two hundred and twenty five" */}
+        <Keyword f={f} text={f < t225 ? "in at 7 of 8" : "in at 7 of 8 · out at 225°"} at={[CX, 740]} s={T.floor} c={C.neg} appear={t7of8} out={tComp - 18} />
         {/* fix 1c C39: r̂ at 135° with its equal west and north legs (a 45° triangle) */}
         {(() => { const j = iAz(135), q = P(RING.lat[j], RING.lon[j]), L = 100, c = L / Math.SQRT2; const o = win(f, AT(k, 18, "forty five degrees"), tCr);
           return o <= 0 ? null : <g opacity={o}>
@@ -421,7 +441,8 @@ const S24: React.FC = () => {
         const t0 = [0, 90, 135].includes(az) ? tAll + 40 : tFive + 30 + 14 * [45, 180, 225, 270, 315].indexOf(az);
         const o = fin(f, t0 + 12, 10) * fout(f, tKeep - 12);
         if (o <= 0) return null;
-        const c: Pt = [q[0] + er[0] * 92 - et[0] * 40, q[1] + er[1] * 92 - et[1] * 40];
+        const off = az === 225 ? 122 : 92;   // fix 1 after fb1 (review 1 C2): the one outward arrow (+13.5) no longer points into its label
+        const c: Pt = [q[0] + er[0] * off - et[0] * 40, q[1] + er[1] * off - et[1] * 40];
         return <React.Fragment key={`l8${az}`}>
           <TeX s={String.raw`\boldsymbol{${LAB8[az][0]}}`} x={c[0]} y={c[1] - 25} size={44} ax={0.5} c={C.neg} halo haloW={0.12} o={o} />
           <TeX s={String.raw`\boldsymbol{${LAB8[az][1]}}`} x={c[0]} y={c[1] + 25} size={44} ax={0.5} c={C.first} halo haloW={0.12} o={o} />
@@ -436,7 +457,7 @@ const S24: React.FC = () => {
       <TeX s={String.raw`135^\circ:\ u=-10.1,\ v=-44.5`} x={CX} y={395} size={44} c={C.local} o={win(f, tCuv, tAll - 18)} />
       {/* K6 after fix 1c: cos 135° on two lines (it ran to x 1845); the 135° stack starts under it (y 590, it met the cosine line) */}
       <TeX s={String.raw`\cos135^\circ=-\cos45^\circ`} x={CX} y={455} size={44} c={C.local} o={win(f, AT(k, 18, "its cosine"), tCr - 16)} />
-      <TeX s={String.raw`=-\dfrac{1}{\sqrt2}\approx-0.707`} x={CX + 112} y={540} size={44} c={C.local} o={win(f, AT(k, 18, "minus one over"), tCr - 16)} />
+      <TeX s={String.raw`=-\dfrac{1}{\sqrt2}\approx-0.707`} x={CX + 112} y={540} size={44} c={C.local} o={win(f, AT(k, 18, "about minus zero point"), tCr - 16)} />
       {/* fix 3 (review 3 cosmetic + Should 4): both values stay up, compact, while the two sums use them */}
       <TeX s={String.raw`\cos135^\circ\approx-0.707`} x={CX} y={450} size={44} c={C.local} o={win(f, tCr + 4, tAll - 18)} />
       <TeX s={String.raw`\sin135^\circ\approx0.707`} x={CX} y={504} size={44} c={C.local} o={win(f, tCr + 4, tAll - 18)} />
@@ -444,8 +465,8 @@ const S24: React.FC = () => {
       <TeX s={String.raw`\sin135^\circ=\sin45^\circ`} x={CX} y={622} size={44} c={C.local} o={win(f, AT(k, 18, "and its sine"), tCr - 16)} />
       <TeX s={String.raw`=\dfrac{1}{\sqrt2}\approx0.707`} x={CX + 112} y={708} size={44} c={C.local} o={win(f, AT(k, 18, "and its sine") + 15, tCr - 16)} />
       {/* R7: the eight points' legend and summary; R8 link: the θ = 0° point is the first term of the radial sum */}
-      <Svg><Lbl x={CX} y={410} t="$u_r$: in ($-$) or out ($+$)" c={C.neg} s={T.floor} o={win(f, tFive, tKeep - 12)} />
-      <Lbl x={CX} y={465} t="$u_\theta$: round" c={C.first} s={T.floor} o={win(f, tFive, tKeep - 12)} /></Svg>
+      <Svg><Lbl x={CX} y={410} t="$u_r$ (m/s): in ($-$) or out ($+$)" c={C.neg} s={T.floor} o={win(f, tFive, tKeep - 12)} />
+      <Lbl x={CX} y={465} t="$u_\theta$ (m/s): round" c={C.first} s={T.floor} o={win(f, tFive, tKeep - 12)} /></Svg>
       <TeX s={String.raw`\overline{u_r}=\dfrac{\textcolor{${C.gold}}{-8.7}-10.3-11.2-\dots}{72}`} x={CX} y={752} size={44} o={win(f, tLink, tKeep - 12)} />
       <TeX s={String.raw`\approx-13.3\ \mathrm{m/s}`} x={CX + 52} y={842} size={44} o={win(f, tLink + 20, tKeep - 12)} />
       {/* K6 after fix 1c: the 0° and 90° products and their results on two lines each, "=" column 1250 at 44 px (rows ran to x 2069) */}
@@ -460,28 +481,28 @@ const S24: React.FC = () => {
         { rhs: String.raw`=-37.4`, at: AT(k, 14, "minus thirty seven point four"), cont: true },
         { lhs: String.raw`u_\theta`, rhs: String.raw`=-(-16.9)(1)+(-37.4)(0)`, at: tBt },
         // fix 3 (review 3 Should 4, A2): the sign move on its own line
-        { rhs: String.raw`-(-16.9)=+16.9`, at: AT(k, 15, "Minus times minus"), cont: true },
-        { lhs: String.raw`u_\theta`, rhs: String.raw`=+16.9`, at: AT(k, 15, "makes plus"), cont: true },
+        { rhs: String.raw`-(-16.9)=+16.9`, at: AT(k, 15, "which leaves minus u"), cont: true },
+        { lhs: String.raw`u_\theta`, rhs: String.raw`=+16.9`, at: Math.max(AT(k, 15, "which leaves minus u") + 12, tB16), cont: true },
       ]} />
       {/* K6 after fix 1c: two pages instead of one sliding stack (the u_r rows slid up through the cosine line): u_r fades before
           u_θ comes, in the same place */}
       {/* fix 3 (review 3 Should 4, A2): each product with its sign on its own line before the sum */}
       <CalcStack f={f} x={1310} y={545} size={46} maxLines={5} o={fout(f, tCt - 14)} rows={[
         { lhs: "u_r", rhs: String.raw`=(-10.1)\times(-0.707)`, at: tCr, h: 56 },
-        { rhs: String.raw`+(-44.5)\times0.707`, at: tCr + 30, cont: true, h: 56 },
-        { rhs: String.raw`(-10.1)(-0.707)=+7.14`, at: SS(k, 20), h: 56 },
-        { rhs: String.raw`(-44.5)(0.707)=-31.46`, at: AT(k, 20, "minus thirty one"), h: 56 },
-        { lhs: "u_r", rhs: String.raw`=7.14-31.46\approx-24.3`, at: tCr2, h: 56 },
+        { rhs: String.raw`+(-44.5)\times0.707`, at: Math.max(tCr + 12, tCr1b), cont: true, h: 56 },
+        { rhs: String.raw`(-10.1)(-0.707)=+7.14`, at: pC[0], h: 56 },
+        { rhs: String.raw`(-44.5)(0.707)=-31.46`, at: pC[1], h: 56 },
+        { lhs: "u_r", rhs: String.raw`=7.14-31.46\approx-24.3`, at: Math.max(pC[1] + 12, tCr2), h: 56 },
       ]} />
       {/* fix 2 (review 2 Should 4): the first row holds the whole sum (two lines), so no line reads "u_θ = 10.1 × 0.707" */}
       {/* fix 3 (review 3 Should 4, A2): −(−10.1) = +10.1 and (−44.5)(−0.707) = +31.46 each on their own line */}
       <CalcStack f={f} x={1250} y={545} size={44} maxLines={6} o={fout(f, tAll - 18)} rows={[
         { lhs: String.raw`u_\theta`, rhs: String.raw`=-(-10.1)(0.707)`, at: tCt, h: 50 },
-        { rhs: String.raw`\quad+(-44.5)(-0.707)`, at: tCt, cont: true, h: 50 },
-        { rhs: String.raw`-(-10.1)=+10.1`, at: AT(k, 21, "which is plus ten point one"), h: 50 },
-        { rhs: String.raw`10.1\times0.707=7.14`, at: AT(k, 21, "times zero point seven zero seven"), h: 50 },
-        { rhs: String.raw`(-44.5)(-0.707)=+31.46`, at: AT(k, 21, "times minus zero point"), h: 50 },
-        { lhs: String.raw`u_\theta`, rhs: String.raw`=7.14+31.46\approx38.6`, at: tCt2, h: 50 },
+        { rhs: String.raw`\quad+(-44.5)(-0.707)`, at: Math.max(tCt + 12, tCt1b), cont: true, h: 50 },
+        { rhs: String.raw`-(-10.1)=+10.1`, at: pT[0], h: 50 },
+        { rhs: String.raw`10.1\times0.707=7.14`, at: pT[1], h: 50 },
+        { rhs: String.raw`(-44.5)(-0.707)=+31.46`, at: pT[2], h: 50 },
+        { lhs: String.raw`u_\theta`, rhs: String.raw`=7.14+31.46\approx38.6`, at: Math.max(pT[2] + 12, tCt2), h: 50 },
       ]} />
       <TeX s={String.raw`0^\circ:\ u_r\approx-8.7,\ u_\theta\approx38.0`} x={CX} y={530} size={44} o={fin(f, tAll)} />
       <TeX s={String.raw`90^\circ:\ u_r=-37.4,\ u_\theta=16.9`} x={CX} y={600} size={44} o={fin(f, tAll)} />
@@ -512,7 +533,8 @@ const S25: React.FC = () => {
   const mi = Math.min(71, Math.floor(prog(f, tUV, SE(k, 12)) * 72));
   const mk = P(RING.lat[mi], RING.lon[mi]);
   const PA = axP(A), Y = axY(A);
-  const dim = 1 - 0.7 * fin(f, tPol);   // fix 2 (review 2 Should 6): u and v at 30 % from S8
+  const dim = 1 - 0.7 * fin(f, tPol);
+  const legO = fout(f, tPush - 22, 12);   // fix 1 after fb1 (Must 1): the legend leaves before the coast lines take its rows   // fix 2 (review 2 Should 6): u and v at 30 % from S8
   return (
     <Scene>
       <GeoMap id="s25m" B={B} fade={1 - prog(f, 0, 30)}>
@@ -559,12 +581,12 @@ const S25: React.FC = () => {
             <Lbl x={q[0] + dx} y={q[1] + dy} t={t} c={C.gold} s={T.floor} a={an} /></g>; })}
         <Lbl x={A.x + A.w + 14} y={Y(RING.u[71]) - 6} t="u" c={C.second} s={T.floor} o={fin(f, tUV + 30) * fout(f, tTeal - 12)} />
         <Lbl x={A.x + A.w + 14} y={Y(RING.v[71]) + 10} t="v" c={C.second} s={T.floor} o={fin(f, tV + 30) * fout(f, tTeal - 12)} />
-        <line x1={1180} y1={745} x2={1240} y2={745} stroke={C.second} strokeWidth={6} opacity={fin(f, tUV) * dim} />
-        <Lbl x={1252} y={745} t="eastward u" c={C.second} s={T.floor} o={fin(f, tUV) * dim} />
-        <line x1={1500} y1={745} x2={1560} y2={745} stroke={C.second} strokeWidth={6} strokeDasharray="12 8" opacity={fin(f, tV) * dim} />
-        <Lbl x={1572} y={745} t="northward v" c={C.second} s={T.floor} o={fin(f, tV) * dim} />
-        <line x1={1180} y1={805} x2={1240} y2={805} stroke={C.first} strokeWidth={7} opacity={fin(f, tTeal)} />
-        <line x1={1500} y1={805} x2={1560} y2={805} stroke={C.neg} strokeWidth={7} strokeDasharray="14 8" opacity={fin(f, tRose)} />
+        <line x1={1180} y1={745} x2={1240} y2={745} stroke={C.second} strokeWidth={6} opacity={fin(f, tUV) * dim * legO} />
+        <Lbl x={1252} y={745} t="eastward u" c={C.second} s={T.floor} o={fin(f, tUV) * dim * legO} />
+        <line x1={1500} y1={745} x2={1560} y2={745} stroke={C.second} strokeWidth={6} strokeDasharray="12 8" opacity={fin(f, tV) * dim * legO} />
+        <Lbl x={1572} y={745} t="northward v" c={C.second} s={T.floor} o={fin(f, tV) * dim * legO} />
+        <line x1={1180} y1={805} x2={1240} y2={805} stroke={C.first} strokeWidth={7} opacity={fin(f, tTeal) * legO} />
+        <line x1={1500} y1={805} x2={1560} y2={805} stroke={C.neg} strokeWidth={7} strokeDasharray="14 8" opacity={fin(f, tRose) * legO} />
         <SpeedBar x={1480} y={200} w={240} />
         <Keyword f={f} text="why polar here?" at={[1180, 96]} appear={0} out={tSw - 18} />
         <Keyword f={f} text="u, v swing: the wind turns" at={[1180, 96]} s={T.floor} appear={tSw} out={tNeg - 18} />
@@ -580,15 +602,17 @@ const S25: React.FC = () => {
             <Arrow p={q} q={[q[0] + ac[0] * 100, q[1] + ac[1] * 100]} color={C.second} w={7} head={24} o={fin(f, tPush)} />
             <circle cx={q[0]} cy={q[1]} r={9} fill={C.gold} stroke={C.bg} strokeWidth={3} />
           </g>; })()}
-        <Lbl x={120} y={650} t="across the shore, towards the land:" c={C.key} s={T.floor} o={win(f, tPush, tP2 - 18)} />
-        <Lbl x={120} y={705} t="sea water pushed onto the coast" c={C.key} s={T.floor} o={win(f, tPush + 10, tP2 - 18)} />
-        {/* user 2026-11-07: the three impact keywords, each on its words, in the same place over the Gulf */}
-        <Keyword f={f} text="Part 2: wind onto the land" at={[120, 595]} s={T.floor} appear={Math.max(tP2, tOnto - 20)} />
-        <Keyword f={f} text="→ water level" at={[160, 650]} s={T.floor} appear={tGauge} />
-        <Keyword f={f} text="→ flood maps" at={[160, 705]} s={T.floor} appear={tFlood} />
+        {/* fix 1 after fb1 (review 1 Must 1, HOUSE_STYLE §5b): the pointer lines left the HRRR map. The plot legend (its curves keep their
+            end labels) leaves as the coast sentence starts, and the lines take its two rows in the right column (y 745 / 805, inside the
+            K6 safe area: bottom ≤ 880, right ≤ 1842), each on its words; only the x′ / y′ point labels stay on the map */}
+        <Lbl x={1180} y={745} t="across the shore → land:" c={C.key} s={T.floor} o={win(f, tPush, tP2 - 18)} />
+        <Lbl x={1180} y={805} t="sea water pushed ashore" c={C.key} s={T.floor} o={win(f, tPush + 10, tP2 - 18)} />
+        {/* user 2026-11-07: the impact chain, each step on its words */}
+        <Keyword f={f} text="Part 2: wind onto the land" at={[1180, 745]} s={T.floor} appear={Math.max(tP2, tOnto - 20)} />
+        <Keyword f={f} text={f < tFlood ? "→ water level" : "→ water level → flood maps"} at={[1180, 805]} s={T.floor} appear={tGauge} />
       </Svg>
-      <TeX s={String.raw`\text{round }u_\theta`} x={1252} y={805} size={44} c={C.first} o={fin(f, tTeal)} />
-      <TeX s={String.raw`\text{in-out }u_r`} x={1572} y={805} size={44} c={C.neg} o={fin(f, tRose)} />
+      <TeX s={String.raw`\text{round }u_\theta`} x={1252} y={805} size={44} c={C.first} o={fin(f, tTeal) * legO} />
+      <TeX s={String.raw`\text{in-out }u_r`} x={1572} y={805} size={44} c={C.neg} o={fin(f, tRose) * legO} />
       <TeX s={String.raw`u_\theta`} x={A.x + A.w + 14} y={Y(RING.vt[71])} size={44} c={C.first} o={fin(f, tTeal + 30)} />
       <TeX s={String.raw`u_r`} x={A.x + A.w + 14} y={Y(RING.vr[71])} size={44} c={C.neg} o={fin(f, tRose + 30)} />
       {(() => { const q = P(26.45, -81.95), al: Pt = [-Math.sin(31 * D2R), -Math.cos(31 * D2R)], ac: Pt = [Math.cos(31 * D2R), -Math.sin(31 * D2R)];
@@ -674,7 +698,7 @@ const S26: React.FC = () => {
       {/* K6 after fix 1c: 30 px lower (the two fractions touched); the inverse on two lines (it ran to x 1880) */}
       <TeX s={`=${tr}`} x={1200} y={400} size={56} o={win(f, AT(k, 3, "thirteen point three over"), tFour - 18)} />
       <TeX s={String.raw`\text{inflow angle}=\tan^{-1}(0.38)`} x={1080} y={510} size={50} c={C.neg} o={win(f, AT(k, 4, "the angle with that tangent"), tFour - 18)} />
-      <TeX s={String.raw`\approx20.9^\circ\approx21^\circ`} x={1340} y={580} size={50} c={C.neg} o={win(f, AT(k, 4, "twenty one degrees"), tFour - 18)} />
+      <TeX s={String.raw`\approx20.8^\circ\approx21^\circ`} x={1340} y={580} size={50} c={C.neg} o={win(f, AT(k, 4, "twenty one degrees"), tFour - 18)} />
 
     </Scene>
   );
@@ -785,7 +809,7 @@ const S27: React.FC = () => {
       <TeX s={String.raw`\text{Part 2: how fast }\hat{\mathbf r},\ \hat{\boldsymbol\theta}\text{ turn}`} x={1080} y={360} size={50} c={C.key} o={beat(10)} />
       <TeX s={String.raw`+\ \text{height: cylindrical coordinates}`} x={1080} y={440} size={50} c={C.key} o={beat(10) * fin(f, AT(k, 10, "add height"))} />
       <TeX s={String.raw`x',\ y'\text{: wind onto the land}`} x={1080} y={520} size={50} c={C.key} o={beat(10) * fin(f, AT(k, 10, "Then we'll use"))} />
-      <TeX s={String.raw`\text{water level, flooding before / after}`} x={1080} y={600} size={50} c={C.muted} o={beat(10) * fin(f, AT(k, 10, "how high the"))} />
+      <TeX s={String.raw`\text{water level, flooding before / after}`} x={1080} y={600} size={50} c={C.key} o={beat(10) * fin(f, AT(k, 10, "how high the"))} />
       <Svg><Keyword f={f} text="to sum up" at={[1080, 200]} appear={0} out={st[1] - 18} /></Svg>
     </Scene>
   );

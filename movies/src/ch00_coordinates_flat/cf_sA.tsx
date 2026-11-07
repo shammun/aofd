@@ -52,7 +52,7 @@ const TB = { x: 1150, y: 150, w: 690, h: 480 };
 const S00: React.FC = () => {
   const f = useCurrentFrame(), k = K("s00_title");
   // feedback 2026-11-06 (R1/R2): no "made easy"; the concept name pulses when the voice says "coordinates"
-  const tMet = AT(k, 0, "meteorology"), tCo = AT(k, 0, "coordinates");
+  const tMet = AT(k, 0, "how they're used")   /* user 2026-11-07: no "meteorology" in the voice */, tCo = AT(k, 0, "coordinates");
   // Part A: polar grid round the station, the balloon (3, 4) km gliding once round the 5-km circle with r̂, θ̂; then the square grid turns 30°
   const O: Pt = [1445, 400], u = 40;
   const th = PL.th + 360 * prog(f, 16, 104);
@@ -292,7 +292,9 @@ const S03: React.FC = () => {
 // ================================================================ s04 polar coordinates (kept)
 const S04: React.FC = () => {
   const f = useCurrentFrame(), k = K("s04_polar");
-  const tR = AT(k, 1, "called r"), tPy = AT(k, 2, "Pythagoras"), t25 = AT(k, 2, "twenty five"), t5 = AT(k, 2, "five kilometres");
+  // fix 1 after fb1 ("show it, don't voice it"): the squares are no longer read out; 9 + 16 and √25 come between "four squared" and
+  // "five kilometres", one row every half second
+  const tR = AT(k, 1, "called r"), tPy = AT(k, 2, "Pythagoras"), t5 = AT(k, 2, "five kilometres"), t916 = AT(k, 2, "add them"), t25 = Math.max(t916 + 12, AT(k, 2, "take the square root"));
   const tTh = AT(k, 3, "called theta"), tAnti = AT(k, 4, "anticlockwise"), tTan = AT(k, 5, "tangent"), t53 = AT(k, 5, "fifty three"), tPair = SS(k, 6);
   const tPol = AT(k, 7, "polar coordinates"), tRad = AT(k, 8, "weather radar");
   const th = PL.th;
@@ -316,8 +318,8 @@ const S04: React.FC = () => {
         <Balloon p={BAL} />
         <Lbl x={mid[0] - 34} y={mid[1] - 20} t="r" c={C.ink} s={T.calc} a="end" o={fin(f, tR)} />
         {/* fix 1c C2: the legs carry their lengths; a right-angle mark at the foot */}
-        <Lbl x={pp(1.5, 0)[0]} y={PO[1] + 92} t="3 km" c={C.gold} s={T.floor} a="middle" o={fin(f, AT(k, 2, "Three squared"))} />
-        <Lbl x={pp(3, 0)[0] + 24} y={pp(3, 2)[1]} t="4 km" c={C.gold} s={T.floor} o={fin(f, AT(k, 2, "four squared is"))} />
+        <Lbl x={pp(1.5, 0)[0]} y={PO[1] + 92} t="3 km" c={C.gold} s={T.floor} a="middle" o={fin(f, AT(k, 2, "three and four"))} />
+        <Lbl x={pp(3, 0)[0] + 24} y={pp(3, 2)[1]} t="4 km" c={C.gold} s={T.floor} o={fin(f, AT(k, 2, "and four"))} />
         <RightTick at={pp(3, 0)} u1={[-1, 0]} u2={[0, -1]} c={C.gold} o={fin(f, tPy)} />
         <path d={arcD(PO, 110, 0, th * prog(f, tTh, tTh + 24))} fill="none" stroke={C.local} strokeWidth={6} opacity={fin(f, tTh)} />
         <Lbl x={PO[0] + 140} y={PO[1] - 56} t="θ" c={C.local} s={T.calc} o={fin(f, tTh + 10)} />
@@ -333,7 +335,7 @@ const S04: React.FC = () => {
       <TeX s={String.raw`r=${cutAt(EQ_S04, String.raw`,\qquad r=`)[1]}`} x={1100} y={85} size={50} c={C.local} o={win(f, tPy, t53 - 12)} />
       <CalcStack f={f} x={1240} y={150} size={54} maxLines={2} rows={[
         { lhs: "r", rhs: String.raw`=\sqrt{3^2+4^2}`, at: tPy },
-        { rhs: String.raw`=\sqrt{9+16}`, at: AT(k, 2, "is nine"), cont: true },
+        { rhs: String.raw`=\sqrt{9+16}`, at: t916, cont: true },
         { rhs: String.raw`=\sqrt{25}`, at: t25, cont: true },
         { rhs: String.raw`=5\ \mathrm{km}`, at: t5, cont: true },
         { lhs: String.raw`\tan\theta`, rhs: String.raw`=\dfrac{\text{north side}}{\text{east side}}`, at: tTan, h: 132 },
@@ -349,7 +351,9 @@ const S04: React.FC = () => {
 // ================================================================ s05 back to x, y (kept)
 const S05: React.FC = () => {
   const f = useCurrentFrame(), k = K("s05_polar_back");
-  const tTri = SS(k, 2), tSides = SS(k, 4), tC = SS(k, 6), t4 = SS(k, 7), tEq = SS(k, 8), tX5 = AT(k, 6, "So five times");
+  const tTri = SS(k, 2), tSides = SS(k, 4), tC = SS(k, 6), t4 = SS(k, 7), tEq = SS(k, 8), tX5 = AT(k, 6, "So five kilometres times");
+  // fix 1 after fb1: each product row lands on its result words ("gives back the east side: three")
+  const tX5r = AT(k, 6, "gives back the east side"), t4r = AT(k, 7, "gives back the north side");
   return (
     <Scene>
       <Svg>
@@ -381,8 +385,8 @@ const S05: React.FC = () => {
         { rhs: String.raw`=\dfrac{3}{5}=0.6`, at: AT(k, 6, "three fifths"), cont: true, h: 128 },
         { lhs: String.raw`\sin\theta`, rhs: String.raw`=\dfrac{\text{north side}}{r}`, at: AT(k, 6, "and sine theta"), h: 132 },
         { rhs: String.raw`=\dfrac{4}{5}=0.8`, at: AT(k, 6, "four fifths"), cont: true, h: 128 },
-        { lhs: String.raw`x=r\cos\theta`, rhs: String.raw`=5\times0.6=3`, at: tX5 },
-        { lhs: String.raw`y=r\sin\theta`, rhs: String.raw`=5\times0.8=4`, at: t4 },
+        { lhs: String.raw`x=r\cos\theta`, rhs: String.raw`=5\times0.6=3`, at: tX5r },
+        { lhs: String.raw`y=r\sin\theta`, rhs: String.raw`=5\times0.8=4`, at: t4r },
       ]} />
       <TeX s={String.raw`(\theta\approx53.13^\circ)`} x={1100} y={190} size={46} c={C.local} o={win(f, tC, tEq - 10)} />
       <TeX s={EQ_S05} x={1100} y={770} size={60} o={fin(f, tEq)} />
@@ -393,7 +397,7 @@ const S05: React.FC = () => {
 // ================================================================ s06 maths angle vs compass bearing vs "from" (kept)
 const S06: React.FC = () => {
   const f = useCurrentFrame(), k = K("s06_bearings");
-  const tBear = SS(k, 2), tCalc = AT(k, 3, "ninety minus fifty three"), tFrom = SS(k, 4), tWest = SS(k, 5), tCheck = SS(k, 6);
+  const tBear = SS(k, 2), tCalc = AT(k, 3, "ninety degrees minus theta"), t37 = AT(k, 3, "thirty seven"), tFrom = SS(k, 4), tWest = SS(k, 5), tCheck = SS(k, 6);
   const brg = 90 - PL.th;
   const W0: Pt = [1250, 560], W1: Pt = [1650, 560];
   const B6 = [String.raw`\text{bearing}`, String.raw`=90^\circ-\theta`, String.raw`=90^\circ-53^\circ`, String.raw`=37^\circ`];
@@ -412,7 +416,7 @@ const S06: React.FC = () => {
         <g opacity={fin(f, tBear)}>
           <path d={arcD(PO, 210, 90, 90 - brg * prog(f, tBear, tBear + 30))} fill="none" stroke={C.gold} strokeWidth={6} />
           <ArcHead c={PO} r={210} a={90 - brg * prog(f, tBear, tBear + 30)} dir={-1} col={C.gold} />
-          <Lbl x={PO[0] + 70} y={PO[1] - 250} t="37°" c={C.gold} s={T.key} o={fin(f, tCalc + 20)} />
+          <Lbl x={PO[0] + 70} y={PO[1] - 250} t="37°" c={C.gold} s={T.key} o={fin(f, Math.max(tCalc + 15, t37))} />
         </g>
         <Lbl x={1100} y={110} t="compass: from north, clockwise" c={C.gold} s={T.floor} o={fin(f, tBear)} />
         <Keyword f={f} text="from" at={[W0[0] - 20, W0[1] - 92]} a="end" appear={tFrom} />
@@ -428,7 +432,7 @@ const S06: React.FC = () => {
       <CalcStack f={f} x={1360} y={180} size={60} rows={[
         { lhs: B6[0], rhs: B6[1], at: tBear + 20 },
         { rhs: B6[2], at: tCalc, cont: true },
-        { rhs: B6[3], at: tCalc + 30, cont: true },
+        { rhs: B6[3], at: Math.max(tCalc + 15, t37), cont: true },
       ]} />
       {/* fix 3 (review 3 Must 6): the "u = +10, v = 0" row is gone (u and v are first defined in s13); "from" keeps its own line
           above the arrow and the words "a west wind blows east" sit under it */}

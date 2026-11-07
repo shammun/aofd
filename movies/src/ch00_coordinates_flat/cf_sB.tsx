@@ -12,7 +12,7 @@ import { Check } from "../house/kit/icons";
 import { AnimatedWindArrow } from "../house/kit/wind";
 import { CurvedLink } from "../house/kit/extras";
 import {
-  AT, ArcHead, Arrow, BDot, D2R, K, LEN, Lbl, PL, SE, SS, Scene, SkipChip, keepTime, Station, Svg, arcD, clamp, fin, fout, mix, prog, rotP, rotS, win,
+  AT, ArcHead, Arrow, BDot, D2R, K, LEN, Lbl, PL, SE, SS, Scene, SkipChip, keepTime, Station, Svg, arcD, clamp, fin, fout, hiOn, hiSize, mix, prog, rotP, rotS, win,
 } from "./cf_lib";
 import { EQ_S08, EQ_S09, EQ_S10, EQ_S11, EQ_S13, EQ_S14, EQ_S15, EQ_S16, EQ_S17, EQ_S18, EQ_S19, EQ_S20, cutAt } from "./cf_eq";
 
@@ -99,8 +99,8 @@ const S08: React.FC = () => {
         { rhs: String.raw`=\left(\dfrac{3}{5},\ \dfrac{4}{5}\right)`, at: t35, cont: true, h: 130 },
         { rhs: String.raw`=(0.6,\ 0.8)`, at: AT(k, 6, "zero point six, zero point eight"), cont: true },
         { lhs: String.raw`|\hat{\mathbf r}|`, rhs: String.raw`=\sqrt{0.6^2+0.8^2}`, at: tLen },
-        { rhs: String.raw`=\sqrt{0.36+0.64}`, at: AT(k, 7, "That's zero point three six"), cont: true },
-        { rhs: String.raw`=\sqrt{1}=1`, at: AT(k, 7, "square root of one"), cont: true },
+        { rhs: String.raw`=\sqrt{0.36+0.64}`, at: AT(k, 7, "add them"), cont: true },
+        { rhs: String.raw`=\sqrt{1}=1`, at: Math.max(AT(k, 7, "add them") + 12, AT(k, 7, "exactly one")), cont: true },
       ]} />
       <TeX s={s8a} x={1080} y={540} size={58} o={f < tCan ? fin(f, tAny) : 0} />
       <TeX s={cancelled} x={1080} y={540} size={58} o={f < tCan ? 0 : 1} />
@@ -288,10 +288,10 @@ const S10: React.FC = () => {
         { rhs: String.raw`=(-q,\ p)`, at: tRes, cont: true },
         { lhs: String.raw`(3,\ 4)`, rhs: String.raw`\to\ (-4,\ 3)`, at: tSw },
         { lhs: String.raw`|(-4,\ 3)|`, rhs: String.raw`=\sqrt{(-4)^2+3^2}`, at: tLen },
-        { rhs: String.raw`=\sqrt{16+9}=\sqrt{25}=5`, at: AT(k, 15, "square root of twenty five"), cont: true },
-        { lhs: String.raw`|(3,\ 4)|`, rhs: String.raw`=\sqrt{9+16}=5`, at: AT(k, 15, "same as the balloon"), cont: false },
+        { rhs: String.raw`=\sqrt{16+9}=\sqrt{25}=5`, at: AT(k, 15, "we get five"), cont: true },
+        { lhs: String.raw`|(3,\ 4)|`, rhs: String.raw`=\sqrt{9+16}=5`, at: AT(k, 15, "the same as"), cont: false },
         { lhs: String.raw`(3,\ 4)\cdot(-4,\ 3)`, rhs: String.raw`=3\times(-4)+4\times3`, at: tDot },
-        { rhs: String.raw`=-12+12=0`, at: tDot + 60, cont: true },
+        { rhs: String.raw`=-12+12=0`, at: AT(k, 16, "comes to zero"), cont: true },
       ]} />
       <TeX s={EQ_S10} x={1100} y={640} size={84} o={fin(f, tWords)} />
       <Svg><Lbl x={1080} y={722} t="west = minus" c={C.local} s={T.floor} o={win(f, tMin, tWords - 18)} /></Svg>
@@ -336,7 +336,9 @@ const S11: React.FC = () => {
     tXY = SS(k, 20), tFrom = AT(k, 21, "three thousand"), tTo = AT(k, 21, "two thousand nine hundred"), tTo2 = AT(k, 21, "four thousand and five"), tAft = AT(k, 21, "to about"),
     tWest = AT(k, 22, "seven metres west"), tNorth = AT(k, 22, "five point two metres north"),
     // fix 2 (review 2 Must 2a): the √ check is now spoken (S23 part 2-3), each row on its words
-    tSq = AT(k, 22, "seven squared"), tRoot = AT(k, 22, "The square root of seventy six"), t87b = AT(k, 22, "is about eight point seven"),
+    // fix 1 after fb1 ("show it, don't voice it"): the squares stay on screen only; the voice says "By Pythagoras, those two make about 8.7"
+    tSq = AT(k, 22, "Squaring these two"), t4927 = AT(k, 22, "adding them"), t87b = Math.max(t4927 + 24, AT(k, 22, "eight point seven")),
+    tRoot = Math.max(t4927 + 12, t87b - 12),
     tDiv = SS(k, 23), tGives = AT(k, 23, "gives about"), tAgain = AT(k, 23, "theta hat again"), tKeep = SS(k, 24);
   const rot = 90 * prog(f, tPic + 15, tPic + 60);
   const tip = onC(O11, R11, TH), foot: Pt = [tip[0], O11[1]];
@@ -477,9 +479,9 @@ const S11: React.FC = () => {
         { lhs: String.raw`\theta\approx53.13^\circ:\ \hat{\boldsymbol\theta}`, rhs: String.raw`=(-\sin53.13^\circ,\ \cos53.13^\circ)`, at: tBal },
         { rhs: String.raw`=(-0.8,\ 0.6)`, at: AT(k, 13, "minus zero point eight"), cont: true },
         { lhs: String.raw`|\hat{\boldsymbol\theta}|`, rhs: String.raw`=\sqrt{(-0.8)^2+0.6^2}`, at: tLen },
-        { rhs: String.raw`=\sqrt{0.64+0.36}=1`, at: tLen + 40, cont: true },
+        { rhs: String.raw`=\sqrt{0.64+0.36}=1`, at: Math.max(tLen + 15, AT(k, 14, "is one")), cont: true },
         { lhs: String.raw`\hat{\mathbf r}\cdot\hat{\boldsymbol\theta}`, rhs: String.raw`=0.6\times(-0.8)+0.8\times0.6`, at: tDotW },
-        { rhs: String.raw`=-0.48+0.48=0`, at: tDotW + 50, cont: true },
+        { rhs: String.raw`=-0.48+0.48=0`, at: Math.max(tDotW + 15, AT(k, 14, "is zero")), cont: true },
       ]} />
       {/* U1 column: one line per spoken phrase */}
       {/* K6 after fix 1c: "=" column 1250 → 1290 (the "before" label clears the inset), long rows split at their "≈"/"=", two lines
@@ -511,7 +513,7 @@ const S11: React.FC = () => {
         // fix 2 (review 2 Must 2a): the length check, each row on its spoken words
         // (a short left side "length", so the √ never starts left of the column: measured x ≥ 1150)
         { lhs: String.raw`\text{length}`, rhs: String.raw`=\sqrt{7.0^2+5.2^2}`, at: tSq, h: 84 },
-        { rhs: String.raw`=\sqrt{49+27.04}`, at: AT(k, 22, "twenty seven point zero four"), cont: true, h: 84 },
+        { rhs: String.raw`=\sqrt{49+27.04}`, at: t4927, cont: true, h: 84 },
         { rhs: String.raw`=\sqrt{76.04}`, at: tRoot, cont: true, h: 84 },
         { rhs: String.raw`\approx8.7\ \mathrm{m}=s`, at: t87b, cont: true, h: 70 },
       ]} />
@@ -590,7 +592,7 @@ const LOC: Pt = [190, 170];   // s13 locator centre (fix 1c C18)
 const S13: React.FC = () => {
   const f = useCurrentFrame(), k = K("s13_components");
   const tWind = SS(k, 3), tBold = AT(k, 4, "bold u"), tUV = SS(k, 5), t10 = SS(k, 6), tRad = SS(k, 8), tTan = SS(k, 9), tDot = SS(k, 10), tSh = AT(k, 11, "shadow"),
-    tIn = SS(k, 12), tIW = SS(k, 13), tITh = SS(k, 14), tIR = AT(k, 15, "R hat is"), tIT = AT(k, 15, "theta hat is"), tR1 = SS(k, 17), tR6 = AT(k, 18, "u sub r is six"),
+    tIn = SS(k, 12), tIW = SS(k, 13), tITh = SS(k, 14), tIR = AT(k, 15, "R hat is"), tIT = AT(k, 15, "theta hat is"), tR1 = SS(k, 17), tR6 = AT(k, 18, "six metres"),
     tT1 = SS(k, 19), tT8 = AT(k, 20, "minus eight metres"), tSay = SS(k, 21), tCw = SS(k, 22);
   const W = at(B13, [1, 0], 10 * MS);
   const fr = at(B13, ER13, 6 * MS * prog(f, tR6 - 4, tR6 + 14)), ft = at(B13, ET13, -8 * MS * prog(f, tT8 - 4, tT8 + 14));
@@ -675,6 +677,7 @@ const S14: React.FC = () => {
   // fix 3 (review 3 Should 3): the keep line shows the split, not the rebuild: the number column and the tick leave, the two
   // parts are named on the picture (rose in/out along r̂, teal round along θ̂), the two general formulas stay
   const tKeep = SS(k, 12), kOut = fout(f, tKeep - 12, 12);
+  const r3a = AT(k, 3, "theta hat gives"), r3b = Math.max(r3a + 12, AT(k, 3, "six point four")), r3c = Math.max(r3b + 12, AT(k, 3, "minus four point eight"));
   const tKIn = AT(k, 12, "an in or out part"), tKRd = AT(k, 12, "a round part"), tKDot = AT(k, 12, "each part is a dot product");
   return (
     <Scene>
@@ -715,18 +718,19 @@ const S14: React.FC = () => {
       {/* fix 1c C19/C20: scalar × vector part by part, the double minus, and the lengths with their squares */}
       <CalcStack f={f} x={1270} y={110} size={46} maxLines={2} o={old * kOut} rows={[
         { lhs: String.raw`6\,\hat{\mathbf r}`, rhs: String.raw`=6\,(0.6,\ 0.8)`, at: t6 + 10 },
-        { rhs: String.raw`=(6\times0.6,\ 6\times0.8)`, at: AT(k, 2, "zero point six, zero point eight"), cont: true },
-        { rhs: String.raw`=(3.6,\ 4.8)`, at: AT(k, 2, "three point six"), cont: true },
+        { rhs: String.raw`=(6\times0.6,\ 6\times0.8)`, at: AT(k, 2, "r hat gives"), cont: true },
+        { rhs: String.raw`=(3.6,\ 4.8)`, at: Math.max(AT(k, 2, "r hat gives") + 12, AT(k, 2, "three point six")), cont: true },
         { lhs: String.raw`-8\,\hat{\boldsymbol\theta}`, rhs: String.raw`=-8\,(-0.8,\ 0.6)`, at: t8 + 10 },
-        // fix 3 (review 3 Should 4, A2): each product on its words, and the sign move on its own line
-        { rhs: String.raw`(-8)(-0.8)=+6.4`, at: AT(k, 3, "is plus six point four"), cont: true },
-        { rhs: String.raw`\text{minus}\times\text{minus}=\text{plus}`, at: AT(k, 3, "two minus signs"), cont: true },
-        { rhs: String.raw`(-8)(0.6)=-4.8`, at: AT(k, 3, "minus eight times zero point six"), cont: true },
-        { lhs: String.raw`-8\,\hat{\boldsymbol\theta}`, rhs: String.raw`=(6.4,\ -4.8)`, at: AT(k, 3, "minus four point eight") + 20, cont: true },
+        // fix 3 (review 3 Should 4, A2): each product on its own line; fix 1 after fb1 ("show it, don't voice it"): the voice says only
+        // "minus eight times theta hat gives six point four, minus four point eight", so the rows land on those words
+        { rhs: String.raw`(-8)(-0.8)=+6.4`, at: r3a, cont: true },
+        { rhs: String.raw`\text{minus}\times\text{minus}=\text{plus}`, at: r3b, cont: true },
+        { rhs: String.raw`(-8)(0.6)=-4.8`, at: r3c, cont: true },
+        { lhs: String.raw`-8\,\hat{\boldsymbol\theta}`, rhs: String.raw`=(6.4,\ -4.8)`, at: r3c + 20, cont: true },
         { lhs: "\\text{sum}", rhs: String.raw`=(3.6+6.4,\ 4.8-4.8)`, at: tE },
-        { rhs: String.raw`=(10,\ 0)`, at: tBack, cont: true },
+        { rhs: String.raw`=(10,\ 0)`, at: AT(k, 4, "give ten"), cont: true },
         { lhs: String.raw`\sqrt{6^2+8^2}`, rhs: String.raw`=\sqrt{36+64}`, at: tLen },
-        { rhs: String.raw`=\sqrt{100}=10\ \mathrm{m/s}`, at: AT(k, 7, "square root is ten"), cont: true },
+        { rhs: String.raw`=\sqrt{100}=10\ \mathrm{m/s}`, at: AT(k, 7, "we get ten"), cont: true },
         { lhs: String.raw`|(10,\ 0)|`, rhs: String.raw`=\sqrt{10^2+0^2}=10\ \mathrm{m/s}`, at: AT(k, 7, "wind's own length") },
       ]} />
       <CalcStack f={f} x={1180} y={470} size={54} maxLines={4} rows={[
@@ -823,7 +827,7 @@ const S15: React.FC = () => {
       <TeX s={EQ_S15} x={1080} y={652} size={68} o={fin(f, tCS)} />
       <CalcStack f={f} x={1260} y={230} size={50} maxLines={2} rows={[   /* K6 k6f2: ends above x̂′ = (cos α, sin α) */
         { lhs: String.raw`\cos30^\circ`, rhs: String.raw`=\dfrac{\sqrt3}{2}`, at: tCos, h: 132 },
-        { rhs: String.raw`=\dfrac{1.732}{2}\approx0.866`, at: AT(k, 13, "one point seven three two"), cont: true, h: 128 },
+        { rhs: String.raw`=\dfrac{1.732}{2}\approx0.866`, at: AT(k, 13, "about zero point eight six six"), cont: true, h: 128 },
         { lhs: String.raw`\sin30^\circ`, rhs: String.raw`=\dfrac12=0.5`, at: AT(k, 13, "exactly one half"), h: 110 },
       ]} />
       <TeX s={String.raw`\hat{\mathbf x}'=(0.866,\ 0.5)`} x={1120} y={750} size={60} o={fin(f, tNum)} />
@@ -879,11 +883,11 @@ const S16: React.FC = () => {
         { lhs: String.raw`\hat{\mathbf y}'`, rhs: String.raw`=(-\sin30^\circ,\ \cos30^\circ)`, at: tNum },
         { rhs: String.raw`=(-0.5,\ 0.866)`, at: AT(k, 4, "minus zero point five"), cont: true },
         { lhs: String.raw`|\hat{\mathbf y}'|`, rhs: String.raw`=\sqrt{(-0.5)^2+0.866^2}`, at: tLen },
-        { rhs: String.raw`=\sqrt{0.25+0.75}=1`, at: AT(k, 6, "zero point two five"), cont: true },
-        { rhs: String.raw`(0.866^2\approx0.75,\ \text{exactly }\dfrac34)`, at: AT(k, 6, "zero point two five") + 40, cont: true, c: C.muted, h: 110 },
+        { rhs: String.raw`=\sqrt{0.25+0.75}=1`, at: AT(k, 6, "gives one"), cont: true },
+        { rhs: String.raw`(0.866^2\approx0.75,\ \text{exactly }\dfrac34)`, at: Math.min(AT(k, 6, "gives one") + 30, tDot - 12), cont: true, c: C.muted, h: 110 },
         { lhs: String.raw`\hat{\mathbf x}'\cdot\hat{\mathbf y}'`, rhs: String.raw`=0.866\times(-0.5)`, at: tDot },
-        { rhs: String.raw`\quad+0.5\times0.866`, at: AT(k, 7, "plus zero point five times"), cont: true },
-        { rhs: String.raw`=-0.433+0.433=0`, at: AT(k, 7, "minus zero point four three three"), cont: true },
+        { rhs: String.raw`\quad+0.5\times0.866`, at: Math.max(tDot + 12, AT(k, 7, "x hat prime")), cont: true },
+        { rhs: String.raw`=-0.433+0.433=0`, at: Math.max(tDot + 24, AT(k, 7, "is zero")), cont: true },
       ]} />
     </Scene>
   );
@@ -898,6 +902,7 @@ const S17: React.FC = () => {
   const tQ = SS(k, 2), tSh = SS(k, 3), tX = AT(k, 4, "x times cosine"), tY = SS(k, 5), tIn = SS(k, 6), tX1 = SS(k, 7), tX46 = AT(k, 8, "about four point six"), tY1 = SS(k, 9),
     tY196 = AT(k, 10, "one point nine six"), tAt = SS(k, 11), tSame = SS(k, 12), tL1 = SS(k, 13), tL5 = SS(k, 14), tNew = SS(k, 15);
   const ex = rotS([1, 0], A30), ey = rotS(ex, 90);
+  const tA30 = AT(k, 6, "alpha is thirty degrees"), tC30 = AT(k, 6, "zero point eight six six"), tS30 = AT(k, 6, "zero point five");
   const xp = PL.xp30[0], yp = PL.xp30[1];
   const fx = at(O15, ex, xp * U15), fy = at(O15, ey, yp * U15);
   const [e1, e2] = cutAt(EQ_S17, String.raw`,\qquad `);
@@ -933,15 +938,20 @@ const S17: React.FC = () => {
         { lhs: y1L, rhs: String.raw`=(x,\ y)\cdot(-\sin\alpha,\ \cos\alpha)`, at: tY },
         { rhs: `=${y1R}`, at: AT(k, 5, "minus x sine"), cont: true },
       ]} />
-      <TeX s={String.raw`x=3,\ \ y=4,\ \ \alpha=30^\circ`} x={1080} y={200} size={52} c={C.local} o={fin(f, tIn)} />
-      <CalcStack f={f} x={1160} y={280} size={52} maxLines={2} rows={[
+      {/* fix 1 after fb1 (user 2026-11-07, ~23:20): the inputs written and said; α = 30°, cos 30° ≈ 0.866 and sin 30° = 0.5 are
+          highlighted in gold on their spoken words (Kokoro word times) */}
+      <TeX s={String.raw`x=3,\ \ y=4,`} x={1080} y={200} size={52} c={C.local} o={fin(f, AT(k, 6, "x is three"))} />
+      <TeX s={String.raw`\alpha=30^\circ`} x={1440} y={200} size={hiSize(f, tA30, 52)} c={hiOn(f, tA30) ? C.gold : C.local} o={fin(f, tA30)} />
+      <TeX s={String.raw`\cos30^\circ\approx0.866,`} x={1080} y={292} size={hiSize(f, tC30, 52)} c={hiOn(f, tC30) ? C.gold : C.local} o={fin(f, tC30)} />
+      <TeX s={String.raw`\sin30^\circ=0.5`} x={1560} y={292} size={hiSize(f, tS30, 52)} c={hiOn(f, tS30) ? C.gold : C.local} o={fin(f, tS30)} />
+      <CalcStack f={f} x={1160} y={380} size={52} maxLines={2} rows={[
         { lhs: "x'", rhs: String.raw`=3\times0.866+4\times0.5`, at: tX1 },
         { rhs: String.raw`=2.60+2\approx4.60`, at: tX46, cont: true },
         { lhs: "y'", rhs: String.raw`=-3\times0.5+4\times0.866`, at: tY1 },
         { rhs: String.raw`=-1.5+3.46\approx1.96`, at: tY196, cont: true },
         { lhs: String.raw`\text{length}`, rhs: String.raw`=\sqrt{4.6^2+1.96^2}`, at: tL1 },
-        { rhs: String.raw`=\sqrt{21.16+3.84}`, at: AT(k, 14, "twenty one point one six"), cont: true },
-        { rhs: String.raw`\approx\sqrt{25}=5\ \mathrm{km}`, at: AT(k, 14, "square root is five"), cont: true },
+        { rhs: String.raw`=\sqrt{21.16+3.84}`, at: AT(k, 13, "add them"), cont: true },
+        { rhs: String.raw`\approx\sqrt{25}=5\ \mathrm{km}`, at: AT(k, 14, "five kilometres"), cont: true },
       ]} />
     </Scene>
   );
@@ -1142,6 +1152,7 @@ const S20: React.FC = () => {
   // "same arrow, new numbers" picture in the column (the (3, 4) arrow, ink, on the old axes and on axes turned by α = 30°, with
   // both number pairs), then on "axes turned by theta" the balloon's x̂, ŷ (dashed) turning by θ into r̂, θ̂ (gold arc).
   const tKeep = SS(k, 19), kOut = fout(f, tKeep - 14, 12), kIn = fin(f, tKeep + 8, 14);
+  const tC6 = AT(k, 6, "zero point six"), tS8 = AT(k, 6, "zero point eight");   // fix 1 after fb1: the two inputs said + highlighted
   const tKPol = AT(k, 19, "polar parts are just axes"), tKNum = AT(k, 19, "changes the numbers");
   const MO: Pt = [1250, 640], MU = 52, ex30 = rotS([1, 0], 30), ey30 = rotS(ex30, 90);   // the column picture: origin, px per km
   const M34: Pt = [MO[0] + 3 * MU, MO[1] - 4 * MU];
@@ -1232,17 +1243,20 @@ const S20: React.FC = () => {
       <TeX s={`${lhs20}:\\quad ${rhs20}`} x={1080} y={110} size={56} o={fin(f, tX) * kOut} />
       <TeX s={String.raw`\hat{\mathbf x}'=(\cos\theta,\ \sin\theta)=\hat{\mathbf r}`} x={1080} y={200} size={50} o={fin(f, AT(k, 2, "which is r hat")) * kOut} />
       <TeX s={String.raw`\hat{\mathbf y}'=(-\sin\theta,\ \cos\theta)=\hat{\boldsymbol\theta}`} x={1080} y={260} size={50} o={fin(f, AT(k, 3, "which is theta hat")) * kOut} />
-      <TeX s={String.raw`\mathbf u=(10,\ 0),\ \ \cos\theta=0.6,\ \ \sin\theta=0.8`} x={1080} y={390} size={46} c={C.local} o={win(f, tW, tPos - 18)} />
+      <TeX s={String.raw`\mathbf u=(10,\ 0)`} x={1080} y={410} size={46} c={C.local} o={win(f, tW, tPos - 18)} />
+      {/* fix 1 after fb1 (user 2026-11-07): cos θ and sin θ stay up while the position (3, 4) is turned too */}
+      <TeX s={String.raw`\cos\theta=0.6,`} x={1080} y={335} size={hiSize(f, tC6, 46)} c={hiOn(f, tC6) ? C.gold : C.local} o={win(f, tC6, tOne - 18) * kOut} />
+      <TeX s={String.raw`\sin\theta=0.8`} x={1330} y={335} size={hiSize(f, tS8, 46)} c={hiOn(f, tS8) ? C.gold : C.local} o={win(f, tS8, tOne - 18) * kOut} />
       {/* K6 after fix 1c: each line split at its result (they ran to x 1880), aligned at "=", the result on "which is …" */}
-      <CalcStack f={f} x={1130} y={440} size={50} maxLines={2} o={fout(f, tPos - 18)} rows={[
+      <CalcStack f={f} x={1130} y={470} size={50} maxLines={2} o={fout(f, tPos - 18)} rows={[
         { lhs: "x'", rhs: String.raw`=10\times0.6+0\times0.8`, at: tWx },
         { rhs: String.raw`=6+0=6`, at: AT(k, 7, "which is six"), cont: true },
         { lhs: "y'", rhs: String.raw`=-10\times0.8+0\times0.6`, at: tWy },
         { rhs: String.raw`=-8+0=-8`, at: AT(k, 8, "which is minus eight"), cont: true },
       ]} />
-      <TeX s={String.raw`x'=u_r,\ \ y'=u_\theta`} x={1080} y={750} size={50} o={win(f, tSame, tPos - 18)} />
-      <TeX s={String.raw`\text{the position }(3,\ 4)`} x={1080} y={390} size={46} c={C.local} o={win(f, tPos, tOne - 18)} />
-      <CalcStack f={f} x={1160} y={440} size={50} maxLines={2} o={fout(f, tOne - 18)} rows={[
+      <TeX s={String.raw`x'=u_r,\ \ y'=u_\theta`} x={1080} y={790} size={50} o={win(f, tSame, tPos - 18)} />
+      <TeX s={String.raw`\text{the position }(3,\ 4)`} x={1080} y={410} size={46} c={C.local} o={win(f, tPos, tOne - 18)} />
+      <CalcStack f={f} x={1160} y={470} size={50} maxLines={2} o={fout(f, tOne - 18)} rows={[
         { lhs: "x'", rhs: String.raw`=3\times0.6+4\times0.8`, at: tPx },
         { rhs: String.raw`=1.8+3.2=5`, at: tPx2, cont: true },
         { lhs: "y'", rhs: String.raw`=-3\times0.8+4\times0.6`, at: tPy },

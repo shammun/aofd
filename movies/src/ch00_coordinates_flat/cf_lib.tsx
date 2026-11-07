@@ -8,6 +8,7 @@ import { AbsoluteFill, staticFile, useCurrentFrame } from "remotion";
 import { PoleThermometer, ramp } from "../house";
 import timing from "../../ch00/ch00_coordinates_flat/timing.json";
 import cfJ from "../../ch00/ch00_coordinates_flat/data/cf.json";
+import wordsJ from "../../ch00/ch00_coordinates_flat/words.json";
 import { C, FONT, T } from "../house/kit/type";
 import { Arrow, Lbl as HLbl, Pt, Svg, clamp } from "../house/kit/draw";
 import { Keyword as HKeyword } from "../house/kit/notes";
@@ -28,15 +29,35 @@ export const END = [...CUT.slice(1), CF_FRAMES];
 export const LEN = (k: number) => END[k] - CUT[k];
 export const SS = (k: number, j: number) => { const s = sc[k].sentences[j]; if (!s) throw new Error(`${sc[k].id} has no sentence ${j}`); return Math.round(s.start * FPS) - CUT[k]; };
 export const SE = (k: number, j: number) => { const s = sc[k].sentences[j]; if (!s) throw new Error(`${sc[k].id} has no sentence ${j}`); return Math.round(s.end * FPS) - CUT[k]; };
-/** frame (scene-relative) at which the quoted words are spoken inside sentence j (character-proportional) */
+// fix 1 after fb1 (review 2 Should 11): Kokoro token start times per timing entry (words.json, written by checks/cf_fix1107_splice.py)
+type WEnt = { text: string; w: [number, string][] };
+const WORDS = (wordsJ as unknown as { scenes: Record<string, Record<string, WEnt>> }).scenes;
+const wnorm = (x: string) => x.toLowerCase().replace(/[^a-z0-9']/g, "");
+/** seconds from the sentence start at which `phrase` is spoken, from the Kokoro word times; null if no word times for this text */
+export const wordTime = (k: number, j: number, phrase: string): number | null => {
+  const e = WORDS[sc[k].id]?.[String(j)];
+  if (!e || e.text !== sc[k].sentences[j].text) return null;
+  const toks = e.w.map(([t, x]) => [t, wnorm(x)] as [number, string]).filter(([, x]) => x);
+  const ph = phrase.split(/\s+/).map(wnorm).filter((x) => x);
+  // AT uses the first occurrence of the phrase in the text, so the first token match
+  for (let i = 0; i + ph.length <= toks.length; i++) if (ph.every((x, q) => toks[i + q][1] === x)) return toks[i][0];
+  return null;
+};
+/** frame (scene-relative) at which the quoted words are spoken inside sentence j: the Kokoro word time when known, else
+ *  character-proportional (the house AT) */
 export const AT = (k: number, j: number, phrase: string) => {
   const s = sc[k].sentences[j];
   if (!s) throw new Error(`${sc[k].id} has no sentence ${j}`);
   const i = s.text.indexOf(phrase);
   if (i < 0) throw new Error(`phrase "${phrase}" not in ${sc[k].id} sentence ${j}: ${s.text}`);
+  const w = wordTime(k, j, phrase);
+  if (w !== null) return Math.round((s.start + w) * FPS) - CUT[k];
   return Math.round((s.start + ((s.end - s.start) * i) / s.text.length) * FPS) - CUT[k];
 };
 export const fin = (f: number, a: number, n = 12) => ramp(f, a, a + n);
+/** fix 1 after fb1 (user 2026-11-07): a non-obvious input is highlighted on its spoken word: gold for 45 frames, size +8 % at the peak */
+export const hiOn = (f: number, t: number) => f >= t - 2 && f <= t + 45;
+export const hiSize = (f: number, t: number, s: number) => s * (1 + 0.08 * Math.sin(Math.PI * clamp((f - t + 2) / 47, 0, 1)));
 export const fout = (f: number, a: number, n = 10) => 1 - ramp(f, a, a + n);
 export const win = (f: number, a: number, b: number, n = 10) => fin(f, a, n) * fout(f, b, n);
 export const mix = (a: number, b: number, t: number) => a + (b - a) * t;

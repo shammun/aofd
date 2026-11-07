@@ -144,7 +144,7 @@ def main() -> int:
     if bad:
         sys.exit("REFUSE JOIN (partial render): " + "; ".join(bad))
     out = S / "build1_1080.mp4"
-    r = subprocess.run([sys.executable, str(ROOT / "tools/movie_wb/join2pass.py"), str(rd), str(S / os.environ.get("SND", "sound9") / "narration_music_cf.wav"), str(out), "--mb", a.mb,
+    r = subprocess.run([sys.executable, str(ROOT / "tools/movie_wb/join2pass.py"), str(rd), str(S / os.environ.get("SND", "sound10") / "narration_music_cf.wav"), str(out), "--mb", a.mb,
                         "--abr", "128k", "--alim", "0.5"], cwd=ROOT)
     return r.returncode
 

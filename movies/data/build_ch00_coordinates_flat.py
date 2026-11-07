@@ -275,9 +275,12 @@ def main() -> int:
         pts8[azd] = {"u": float(ring["u"][j]), "v": float(ring["v"][j]), "ur": float(ring["vr"][j]), "ut": float(ring["vt"][j]), "j": j,
                      "ur1": round(float(ring["vr"][j]), 1), "ut1": round(float(ring["vt"][j]), 1)}
     row("DF24", "R7 eight points 0-315° (every 45°): u_r = −8.7, −16.1, −37.4, −24.3, −1.9, +13.5, −11.2, −23.2 m/s",
-        [p["ur"] for p in pts8.values()], [-8.7, -16.1, -37.4, -24.3, -1.9, 13.5, -11.2, -23.2], 0.06)
-    row("DF24", "R7 eight points 0-315°: u_θ = 38.0, 29.5, 16.9, 38.7, 45.6, 43.7, 24.6, 34.6 m/s",
-        [p["ut"] for p in pts8.values()], [38.0, 29.5, 16.9, 38.7, 45.6, 43.7, 24.6, 34.6], 0.06)
+        [p["ur"] for p in pts8.values()], [-8.7, -16.1, -37.4, -24.3, -1.9, 13.5, -11.2, -23.2], 0.05)
+    # fix 1 after fb1 (review 1 S1, review 2 Should 2): 270° is 24.547 -> 24.5 (was 24.6); the tolerance is half the last digit (0.05)
+    # so a mis-rounding fails. 135° shows 38.6, the value worked by hand from the rounded inputs (7.14 + 31.46 = 38.60, s24 S22/S23);
+    # the library gives 38.65, so that one element is checked against the hand value with 0.06 (stated, not loosened elsewhere).
+    row("DF24", "R7 eight points 0-315°: u_θ = 38.0, 29.5, 16.9, 38.6 (hand sum 7.14 + 31.46; library 38.65), 45.6, 43.7, 24.5, 34.6 m/s",
+        [p["ut"] for p in pts8.values()], [38.0, 29.5, 16.9, 38.6, 45.6, 43.7, 24.5, 34.6], [0.05, 0.05, 0.05, 0.06, 0.05, 0.05, 0.05, 0.05])
     row("DF24", "R7 the rule reproduces the library at all eight points (u_r, u_θ; < 0.2 m/s)",
         [[p["u"] * np.cos(np.deg2rad(az)) + p["v"] * np.sin(np.deg2rad(az)) - p["ur"], -p["u"] * np.sin(np.deg2rad(az)) + p["v"] * np.cos(np.deg2rad(az)) - p["ut"]]
          for az, p in pts8.items()], np.zeros((8, 2)), 0.2)
@@ -358,6 +361,8 @@ def main() -> int:
         [0, 0, 0.05, 1, 0.01, 0.01, 1, 0.01])
     row("DF28", "C38-C40: (−16.9)(0) + (−37.4)(1) = −37.4; −(−16.9)(1) = 16.9; cos 135° = −1/√2 = −0.707; −(−10.1)(0.707) = 7.14",
         [-37.4, 16.9, np.cos(np.deg2rad(135)), -1 / np.sqrt(2), 10.1 * 0.707], [-37.4, 16.9, -0.7071, -0.7071, 7.14], [1e-12, 1e-12, 1e-4, 1e-4, 0.005])
+    row("DF26", "fix 1 after fb1 (review 2 Should 3): the s26 screen tan⁻¹(0.38) ≈ 20.8° ≈ 21° (tan⁻¹(0.382) = 20.9° is the unrounded ratio)",
+        [np.degrees(np.arctan(0.38)), np.degrees(np.arctan(13.3 / 34.8))], [20.8, 20.9], [0.05, 0.05])
     row("DF28", "C41/C43: 72 − 14 = 58 points in; tan⁻¹(13.3/34.8 = 0.382) = 20.9°", [72 - 14, 13.3 / 34.8, np.degrees(np.arctan(0.382))], [58, 0.382, 20.9], [0, 5e-4, 0.05])
     V["ian"]["sum_vt"], V["ian"]["sum_vr"], V["ian"]["ring_vmax"] = float(np.sum(ring["vt"])), float(np.sum(ring["vr"])), float(sp_.max())
 
