@@ -42,7 +42,7 @@ agents, set `setup.s11_poc` to `approved` and remove `setup.awaiting_user`.
 After a compaction or in a new session, read `G:/Geophysical Fluid Dynamics/aofd-data/context_kb/README.md` →
 `STATE.md` → `CHANGELOG.md`; playbooks in `context_kb/howto/`; full transcripts in `context_kb/transcripts/`.
 After every major event (render/QA/review done, user decision, new rule, new method) update `context_kb/STATE.md`
-(and a `howto/` playbook when a new method was used), then run `.venv/Scripts/python.exe tools/kb_sync.py --drive --log "<what>"`.
+(and a `howto/` playbook when a new method was used; `provenance/` when data is downloaded, analysed or placed in a movie), then run `.venv/Scripts/python.exe tools/kb_sync.py --drive --log "<what>"`.
 (A PreCompact hook running the same sync is proposed; it needs the user to add it.) Keep the repo lean: only rules and necessary files here.
 
 ## When the user says "update" (or asks where things stand)
