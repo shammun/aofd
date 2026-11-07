@@ -403,3 +403,8 @@ equations", pos 122), as audit P11 recommends.
 6. Fact tables for all six movies are run before any TTS (verify-every-fact).
 7. #4: rebuild its fix-2 narration from v1/tts with the fix-1/fix-2 splice scripts, verify against timing.json, then splice.
 8. Render into new ew1107/ folders (never reuse old chunks). Order: after the Coordinates parts' heavy work, one movie at a time under HEAVY.lock.
+
+## §9 Added 2026-11-07 (user): natural openings and arithmetic in the voice — apply in the same batch
+- s00: replace "…and see how meteorology uses it/them to …" with "…and see how it's/they're used to …" (all six movies; same re-voice as the "easy way" line, so no extra splice).
+- s01: replace the robotic "Let's see what X is, why it's built this way (the way it is), and what it tells us about …" with an easy-going lead-in naming the movie's own pieces ("Now let's dive into what the dot product is, how it's built and how it's used: its two forms, its shadow picture, and the wind."). One extra sentence per movie.
+- Sweep each script with `tools/script_wording_lint.py` (now flags voiced arithmetic, sign rules, both opening formulas); re-voice every flagged sentence so the voice says what is combined and the result, while the screen keeps the full breakdown. This turns the slot-keep splice into a re-timed render where sentences shorten.
