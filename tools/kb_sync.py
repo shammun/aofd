@@ -17,7 +17,7 @@ Layout on G: (``KB``)::
     context_kb/transcripts/     every session transcript (*.jsonl, incl. subagent transcripts), copied incrementally
 
 Drive (``--drive``): ``aofd knowledge base/`` gets README.md, STATE.md, CHANGELOG.md and ``aofd_kb_text.zip``
-(howto + mirror + memory + user_skills; no transcripts, no book text), replaced in place on every sync.
+(howto + provenance + mirror + memory + user_skills; no transcripts, no book text), replaced in place on every sync.
 
 Never copied: book PDFs, chapters/, _private/, credentials, audio, video, node_modules, virtual envs.
 
@@ -143,7 +143,7 @@ def bundle() -> Path:
         for name in ("README.md", "STATE.md", "CHANGELOG.md"):
             if (KB / name).exists():
                 z.write(KB / name, name)
-        for sub in ("howto", "mirror", "memory", "user_skills"):
+        for sub in ("howto", "provenance", "mirror", "memory", "user_skills"):
             for f in (KB / sub).rglob("*"):
                 if f.is_file():
                     z.write(f, str(f.relative_to(KB)))
