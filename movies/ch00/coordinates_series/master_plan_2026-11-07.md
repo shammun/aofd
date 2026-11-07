@@ -38,6 +38,16 @@ Each movie goes through:
 | R17 | Check that Parts 3–7 follow on step by step for a first-time learner (para 12; chat "check whether the seven are designed correctly") | all | §B below; `continuity_plan.md` §1 and §4 gaps fixed (5d s12 S12 forward use; #6 "coordinates movie"; repeats trimmed) | final series check with `deps_v6.py` |
 | R18 | After the seven, continue with the remaining movies (chat) | #6 → M01 … | Gradient revision (∇T clear), then the series plan order | — |
 
+**User clarification (2026-11-07).** "I liked most of the contents and frames of the first video. It just needs consistency and linking to the second video, especially the calculation of the wind across and along the shore and the water pushed by it."
+
+So **5a changes are minimal.** Priorities:
+1. R1/R2: the title and first sentence.
+2. Forward links: wherever 5a shows x′ and y′ or the along/across idea, a short pointer says that Part 2 uses exactly these equations to split coastal winds and to show their effect on the water with gauges and satellite maps.
+3. R7/R8: tight additions inside the existing scenes.
+4. Consistency fixes.
+
+**5b, in turn,** must recall 5a's equations at the right moment, right before each tide-water or flood before/after, and show a few calculations with them there. Each recall comes in where the story needs it, so nothing feels forced.
+
 ## B. Is the seven-part design right? (orchestrator's assessment)
 
 - **Order.** 5a flat → 5b storm (turning arrows, cylindrical, water) → 5c sphere → 5d local frames → 5e moving frames → 5f routes → 5g maps. Each part's maths is taught before it is needed, with three exceptions:
