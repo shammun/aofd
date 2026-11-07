@@ -51,7 +51,8 @@ GS, GM = "fluidpy.geo.sphere.", "fluidpy.geo.mapproj."
 TILTS = (20.0, 40.0, 60.0)                              # s06 small circles through both cities (planes tilted about the chord)
 
 # storyboard chapter_marks (titles verbatim) and maths_skip block
-CHAPTERS = [("s00_title", "Routes: the question"), ("s02_part5_recap", "What we use from Parts 1, 3, 4 and 5"),
+# remake 2026-11-07: s02_part5_recap cut (no opening recaps); its facts are recalled where used (s04, s07, s08, s11)
+CHAPTERS = [("s00_title", "Routes: the question"),
             ("s03_curvilinear", "Curvilinear coordinates and scale factors"), ("s05_shortest_way", "The shortest way: great circles"),
             ("s07_sigma", "The angle sigma and d = a sigma"), ("s08_position_arrows", "Every step: working out sigma (optional maths)"),
             ("s11_route_shape", "Where the route goes"), ("s12_rhumb", "The rhumb line"), ("s13_why_rhumb", "Why sailors liked the rhumb line"),
@@ -117,9 +118,10 @@ def main() -> int:
     A_KM = EARTH_RADIUS / 1e3
     row("DM01", "a = 6371 km (fluidpy.geo.constants.EARTH_RADIUS, metres)", A_KM, 6371.0, 1e-9)
 
-    # ================================================================ s02 recap (Parts 1, 3)
-    AL = call(GS + "arc_lengths", "s02", "δy = a δφ, δx = a cos φ δλ (1°, Brest)", lat=BREST[0], dlat=1.0, dlon=1.0)
-    rB = np.asarray(call(GS + "unit_vector", "s02", "r̂ = (cos φ cos λ, cos φ sin λ, sin φ) (Brest)", lat=BREST[0], lon=BREST[1]))
+    # ================================================================ Part 3 recalls (remake 2026-11-07: the old s02 recap is cut; s04 recalls
+    # Δy = a Δφ, Δx = a cos φ Δλ "derived in Part 3: distances", s08 the position vector "derived in Part 3: position vector")
+    AL = call(GS + "arc_lengths", "s04", "δy = a δφ, δx = a cos φ δλ (1°, Brest; recalled from Part 3)", lat=BREST[0], dlat=1.0, dlon=1.0)
+    rB = np.asarray(call(GS + "unit_vector", "s08", "r̂ = (cos φ cos λ, cos φ sin λ, sin φ) (Brest; recalled from Part 3)", lat=BREST[0], lon=BREST[1]))
     cB, sB, cLb, sLb = np.cos(BREST[0] * D2R), np.sin(BREST[0] * D2R), np.cos(BREST[1] * D2R), np.sin(BREST[1] * D2R)
     row("DM02", "r̂ formula = unit_vector at Brest", rB - np.array([cB * cLb, cB * sLb, sB]), [0, 0, 0], 1e-15)
     row("DM02", "1° north = 111.19 km ('about a hundred and eleven'); 1° east at Brest = 73.84 km = 111.19 × cos φ", [float(AL.dy) / 1e3, float(AL.dx) / 1e3, float(AL.dy) / 1e3 * cB],

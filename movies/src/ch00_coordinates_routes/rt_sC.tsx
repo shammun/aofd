@@ -5,13 +5,14 @@
 import React from "react";
 import { useCurrentFrame } from "remotion";
 import { C, T } from "../house/kit/type";
+import { ramp } from "../house";
 import { Pt } from "../house/kit/draw";
 import { GlobeFrame, SourceBelow } from "../house/kit/frame";
 import { CurvedLink } from "../house/kit/extras";
 import { Notebook } from "../house/kit/icons";
 import { GProj, GlobeCam, globePath } from "./kit_rt/globe";
 import {
-  AT, Arrow, BREST, CalcStack, Compass, D, D2R, Disc, GB, GC, Globe, H, K, Keyword, LAX, LEN, LIS, LON, LL, Lbl, Magnifier, MercMap, OrthoGlobe, PlaneIcon, RH, RHP, RO,
+  AT, Arrow, BREST, CalcStack, Compass, D, D2R, Disc, GB, GC, Globe, H, HL, HOLD, K, Keyword, Recall, LAX, LEN, LIS, LON, LL, Lbl, Magnifier, MercMap, OrthoGlobe, PlaneIcon, RH, RHP, RO,
   Route, SE, SLATE, sang, SRC_G, SS, Scene, SideCallout, Svg, TableIcon, TeX, XC, add, along, arcD, clamp, dP, discOf, fin, flatPath, fout, gdot, globeG, mercBox, mercY,
   mix, opath, ortho, plab, poly, prog, scaleDisc, textW, win,
 } from "./rt_lib";
@@ -41,16 +42,20 @@ const atLon = (pts: LL[], lo: number) => pts.reduce((b, q, i) => (Math.abs(q[1] 
 const MB11 = { x: 1100, y: 150, w: 600, h: 0 }, ME11 = { x0: -130 * D2R, x1: 10 * D2R, y0: mercY(25), y1: mercY(68) };
 const S11: React.FC = () => {
   const f = useCurrentFrame(), k = K("s11_route_shape");
-  const tKeep = SS(k, 1), tWhere = SS(k, 2), tWSW = AT(k, 3, "west-south-west"), tB0 = AT(k, 4, "three hundred and twelve degrees"), tVx = AT(k, 5, "sixty two point four degrees north"),
-    tGl = AT(k, 5, "Greenland"), tCan = AT(k, 6, "northern Canada"), tB1 = AT(k, 6, "two hundred and fourteen degrees"), tChg = AT(k, 7, "almost a hundred degrees"), tWhy = SS(k, 8);
+  // remake 2026-11-07: the new S5 says where the heading comes from (Part 4's east and north arrows); the F1 rows are cued on its words
+  const tKeep = SS(k, 1), tWhere = SS(k, 2), tWSW = AT(k, 3, "west-south-west"), tB0 = AT(k, 4, "three hundred and twelve degrees"), tHow = SS(k, 5),
+    tEN = AT(k, 5, "own east and north arrows"), tMeas = AT(k, 5, "how much of"), tAlong = AT(k, 5, "along each one"), tTurn = AT(k, 5, "turn that into"),
+    tVx = AT(k, 6, "sixty two point four degrees north"), tGl = AT(k, 6, "Greenland"), tCan = AT(k, 7, "northern Canada"), tB1 = AT(k, 7, "two hundred and fourteen degrees"),
+    tChg = AT(k, 8, "almost a hundred degrees"), tWhy = SS(k, 9);
   const cam = globePath([{ f: 0, ...CAM_ROUTE }, { f: LEN(k) + 10, ...CAM_ROUTE, lon: -62 }], f);
   const G = globeG(cam);
   const see = win(f, tKeep, tWhere - 10, 16);
-  const fly = prog(f, tB0, SE(k, 7));
+  const fly = prog(f, tB0, SE(k, 8));
   const hd = RO.head as number[], hi = Math.min(180, Math.round(fly * 180));
   const pL = G.p(LON[0], LON[1]), pA = G.p(LAX[0], LAX[1]);
   const MBf = mercBox(MB11, ME11);
-  const mapO = win(f, tWSW, tChg - 18);
+  // remake 2026-11-07: the WSW chart leaves before the F1 stack enters (its label at y 519 sat on the stack's first row)
+  const mapO = win(f, tWSW, tHow - 12);
   const cities = D.mc.cities as number[];
   // heading strip (in the column after the chart has gone): 11 samples of the heading along the route (every tenth)
   const SX = 1130, SW = 660, SY = 300;
@@ -70,7 +75,7 @@ const S11: React.FC = () => {
           {plab(Gg, RO.vx[0], RO.vx[1], "62.4° N", fin(f, tVx), 18, -30)}
           {plab(Gg, 72, -40, "Greenland", fin(f, tGl), 0, 0, "middle", true)}
           {plab(Gg, 58, -100, "Canada", fin(f, tCan), 0, 0, "middle", true)}
-          {fly > 0 && P.vis ? <PlaneIcon p={P.p} a={P.a} s={0.7} o={fout(f, SE(k, 7) + 20)} /> : null}
+          {fly > 0 && P.vis ? <PlaneIcon p={P.p} a={P.a} s={0.7} o={fout(f, SE(k, 8) + 20)} /> : null}
         </>; }} />
       <GlobeFrame id="s11k" zoom={0} disc={discOf(cam)} />
       <GSrc />
@@ -104,26 +109,28 @@ const S11: React.FC = () => {
         <Keyword f={f} text="over Greenland and Canada" at={[XC, 820]} s={T.floor} appear={tWhy} />
       </Svg>
       <SourceBelow text="Map: Natural Earth (Mercator)" pic={MBf} w={600} o={mapO} name="s11 src map" />
-      {/* audit F1: the three route numbers from Part 4's local arrows and the cross product (each on its spoken words) */}
-      <CalcStack f={f} x={XC} y={500} size={44} maxLines={2} o={fout(f, tChg - 18)} rows={[
-        { rhs: String.raw`\hat{\mathbf i}_1=(0.002,\ 1.000,\ 0)`, at: SS(k, 4), c: C.muted, h: 56 },
-        { rhs: String.raw`\hat{\mathbf j}_1=(-0.783,\ 0.002,\ 0.622)`, at: SS(k, 4) + 12, c: C.muted, cont: true, h: 56 },
-        { rhs: String.raw`e=\hat{\mathbf r}_2\cdot\hat{\mathbf i}_1,\ \ n=\hat{\mathbf r}_2\cdot\hat{\mathbf j}_1`, at: SS(k, 4) + 25, c: C.muted, h: 56 },
-        { rhs: String.raw`e=-0.001-0.730=-0.731`, at: SS(k, 4) + 40, h: 56 },
-        { rhs: String.raw`n=0.307-0.001+0.348`, at: SS(k, 4) + 60, h: 56 },
-        { rhs: String.raw`=0.654`, at: SS(k, 4) + 75, cont: true, h: 56 },
-        { rhs: String.raw`\tan\beta=0.731\div0.654\approx1.12\Rightarrow48^\circ`, at: tB0 - 30, h: 56 },
-        { rhs: String.raw`360^\circ-48^\circ=312^\circ\ \text{(north-west)}`, at: tB0, c: C.gold, cont: true, h: 56 },
-        { rhs: String.raw`\text{axis }\hat{\mathbf n}=\hat{\mathbf r}_1\times\hat{\mathbf r}_2\div\sin\sigma`, at: SS(k, 5), c: C.muted, h: 56 },
-        { rhs: String.raw`n_z=(-0.454-0.000)\div0.981`, at: SS(k, 5) + 20, h: 56 },
-        { rhs: String.raw`\approx-0.463`, at: SS(k, 5) + 35, cont: true, h: 56 },
-        { rhs: String.raw`\text{highest point: }90^\circ\text{ from }\hat{\mathbf n}`, at: SS(k, 5) + 50, c: C.muted, h: 56 },
-        { rhs: String.raw`\cos\varphi_{\max}=|n_z|=0.463\Rightarrow62.4^\circ\text{N}`, at: tVx - 10, c: C.gold, cont: true, h: 56 },
-        { rhs: String.raw`\text{at LA: east }0.549,\ \text{north }0.813`, at: SS(k, 6), c: C.muted, h: 56 },
-        { rhs: String.raw`\tan=0.549\div0.813\approx0.675\Rightarrow34^\circ`, at: SS(k, 6) + 30, cont: true, h: 56 },
-        { rhs: String.raw`34^\circ+180^\circ=214^\circ\ \text{(south-west)}`, at: tB1, c: C.gold, cont: true, h: 56 },
+      {/* audit F1: the three route numbers from Part 4's local arrows and the cross product. Remake 2026-11-07: the heading rows are cued
+          on the new S5 (what is combined is said; the products stay on screen), Part 4 recalled above the stack, each answer glows */}
+      <Recall f={f} tex="" name="local east and north" part={4} x={XC} y={410} appear={AT(k, 5, "from Part 4")} out={SS(k, 6) - 10} />
+      <CalcStack f={f} x={XC} y={540} size={44} maxLines={2} o={fout(f, tChg - 18)} rows={[
+        { rhs: String.raw`\hat{\mathbf i}_1=(0.002,\ 1.000,\ 0)`, at: tEN, c: C.muted, h: 56 },
+        { rhs: String.raw`\hat{\mathbf j}_1=(-0.783,\ 0.002,\ 0.622)`, at: tEN + 12, c: C.muted, cont: true, h: 56 },
+        { rhs: String.raw`e=\hat{\mathbf r}_2\cdot\hat{\mathbf i}_1,\ \ n=\hat{\mathbf r}_2\cdot\hat{\mathbf j}_1`, at: tMeas, c: C.muted, h: 56 },
+        { rhs: String.raw`e=-0.001-0.730=-0.731`, at: tAlong, h: 56 },
+        { rhs: String.raw`n=0.307-0.001+0.348`, at: tAlong + 20, h: 56 },
+        { rhs: String.raw`=0.654`, at: tAlong + 35, cont: true, h: 56 },
+        { rhs: String.raw`\tan\beta=0.731\div0.654\approx1.12\Rightarrow48^\circ`, at: tTurn, h: 56 },
+        { rhs: String.raw`360^\circ-48^\circ=312^\circ\ \text{(north-west)}`, at: tTurn + 30, c: C.gold, cont: true, h: 56, glow: HL(f, tTurn + 30) },
+        { rhs: String.raw`\text{axis }\hat{\mathbf n}=\hat{\mathbf r}_1\times\hat{\mathbf r}_2\div\sin\sigma`, at: SS(k, 6), c: C.muted, h: 56 },
+        { rhs: String.raw`n_z=(-0.454-0.000)\div0.981`, at: SS(k, 6) + 20, h: 56 },
+        { rhs: String.raw`\approx-0.463`, at: SS(k, 6) + 35, cont: true, h: 56 },
+        { rhs: String.raw`\text{highest point: }90^\circ\text{ from }\hat{\mathbf n}`, at: SS(k, 6) + 50, c: C.muted, h: 56 },
+        { rhs: String.raw`\cos\varphi_{\max}=|n_z|=0.463\Rightarrow62.4^\circ\text{N}`, at: tVx - 10, c: C.gold, cont: true, h: 56, glow: HL(f, tVx) },
+        { rhs: String.raw`\text{at LA: east }0.549,\ \text{north }0.813`, at: SS(k, 7), c: C.muted, h: 56 },
+        { rhs: String.raw`\tan=0.549\div0.813\approx0.675\Rightarrow34^\circ`, at: SS(k, 7) + 30, cont: true, h: 56 },
+        { rhs: String.raw`34^\circ+180^\circ=214^\circ\ \text{(south-west)}`, at: tB1, c: C.gold, cont: true, h: 56, glow: HL(f, tB1) },
       ]} />
-      {void tCan}
+      {void [tCan, tHow]}
     </Scene>
   );
 };
@@ -132,7 +139,7 @@ const S11: React.FC = () => {
 const S12: React.FC = () => {
   const f = useCurrentFrame(), k = K("s12_rhumb");
   const tRh = AT(k, 1, "rhumb line"), tSame = AT(k, 1, "crosses every meridian"), tB = AT(k, 2, "two hundred and fifty eight"), tS = AT(k, 3, "further south"), tLen = AT(k, 3, "nine thousand"),
-    tHow = SS(k, 4), tR = AT(k, 5, "is about one point"), tPct = AT(k, 5, "eleven percent"), tX = SS(k, 6), tHr = AT(k, 6, "more than an hour"), tSp = AT(k, 7, "spiral round and round");
+    tHow = SS(k, 4), tR = AT(k, 5, "gives about one point"), tPct = AT(k, 5, "eleven percent"), tX = SS(k, 6), tHr = AT(k, 6, "more than an hour"), tSp = AT(k, 7, "spiral round and round");
   const cam = globePath([{ f: 0, ...CAM_ROUTE, lon: -62 }, { f: LEN(k) + 10, ...CAM_ROUTE, lon: -64 }], f);
   const G = globeG(cam), pL = G.p(LON[0], LON[1]);
   const marks = [-20, -40, -60, -80, -100].map((lo) => atLon(RHP, lo));
@@ -175,7 +182,7 @@ const S12: React.FC = () => {
         { lhs: String.raw`9733-8755`, rhs: String.raw`\approx978\ \text{km}`, at: tX },
         { lhs: String.raw`978\ \text{km}\div900\ \text{km/h}`, rhs: String.raw`\approx1.1\ \text{h}`, at: tHr },
       ]} />
-      <TeX s={String.raw`+11\,\%`} x={XC} y={660} size={60} c={C.gold} o={fin(f, tPct)} />
+      <TeX s={String.raw`+11\,\%`} x={XC} y={660} size={60} c={C.gold} o={fin(f, tPct)} glow={HL(f, tPct)} />
       <CalcStack f={f} x={XC} y={400} size={44} maxLines={3} o={fout(f, tHow - 12)} rows={[
         { rhs: String.raw`\psi=\ln\tan(45^\circ+\varphi/2)\ \text{(Part 7)}`, at: tSame, c: C.muted, h: 58 },
         { rhs: String.raw`\psi_{\text{London}}=\ln\tan70.755^\circ=1.0523`, at: tSame + 30, h: 58 },
@@ -201,7 +208,8 @@ const S13: React.FC = () => {
   const f = useCurrentFrame(), k = K("s13_why_rhumb");
   const t3 = SS(k, 1), tR1 = SS(k, 2), tSet = AT(k, 3, "two hundred and fifty eight"), tNew = SS(k, 4), tCalc = AT(k, 5, "a lot of calculation"), tR2 = SS(k, 6), tBL = SS(k, 7),
     tBLx = AT(k, 7, "a hundred and fifty metres"), tR3 = SS(k, 8), tMerc = AT(k, 9, "Mercator map"), tRuler = AT(k, 10, "with a ruler"), tAng = AT(k, 10, "read off its angle"),
-    tLegs = AT(k, 11, "rhumb-line legs"), tP7 = AT(k, 12, "in Part 7");
+    // remake 2026-11-07 (continuity §6): the Part 7 line is said once, in the recap; the keyword stays, after the Mercator sentence
+    tLegs = AT(k, 11, "rhumb-line legs"), tP7 = AT(k, 9, "a straight line") + 30;
   const CAM_BL: GlobeCam = { lat: 40, lon: -14, dist: 3.4 };
   const cam = globePath([{ f: 0, ...CAM_ROUTE, lon: -64 }, { f: tR2, ...CAM_ROUTE, lon: -64 }, { f: tR2 + 100, ...CAM_BL }, { f: tR3, ...CAM_BL },
     { f: tR3 + 100, ...CAM_ROUTE }, { f: LEN(k) + 10, ...CAM_ROUTE, lon: -61 }], f);
@@ -264,7 +272,7 @@ const S13: React.FC = () => {
               <path d={arcD(a, 52, 90, 90 - RH.brg)} fill="none" stroke={C.gold} strokeWidth={4} opacity={fin(f, tAng)} />
             </>; }} />
         <Lbl x={XC} y={MBf.y + MBf.h + 76} t="Mercator: straight, 258.5°" c={SLATE} s={T.floor} o={r3o * fin(f, tAng)} />
-        <Keyword f={f} text="Part 7: maps" at={[XC, 840]} s={T.floor} appear={tP7} c={C.gold} />
+        <Keyword f={f} text="why straight: Part 7" at={[XC, 840]} s={T.floor} appear={tP7} c={C.gold} />
       </Svg>
       <SourceBelow text="Map: Natural Earth (Mercator)" pic={MBf} w={700} o={r3o * fin(f, tMerc)} name="s13 src map" />
       <CalcStack f={f} x={XC} y={430} size={44} maxLines={2} o={r2o} rows={[
@@ -283,7 +291,8 @@ const S13: React.FC = () => {
 const cells: Pt[] = [[235, 175], [540, 175], [845, 175], [235, 455], [540, 455], [845, 455], [235, 735], [540, 735]];
 const S14: React.FC = () => {
   const f = useCurrentFrame(), k = K("s14_recap");
-  const t = [0, 1, 2, 3, 4, 5, 6, 7].map((j) => SS(k, j));
+  // remake 2026-11-07 (R3): S7 + S8 are the two-sentence teaser (one beat: the Mercator mini + "Part 7: maps", then "care near the poles")
+  const t = [0, 1, 2, 3, 4, 5, 6, 7, 8].map((j) => SS(k, j));
   const op = (j: number) => fin(f, t[j]) * (j < 7 ? 1 - 0.4 * fin(f, t[j + 1]) : 1);
   const O2 = ortho(45, -55, cells[2], 115), O6 = ortho(45, -55, cells[6], 115);
   const D3 = scaleDisc(DISC, cells[3], 105);
@@ -333,6 +342,7 @@ const S14: React.FC = () => {
         <Lbl x={XC} y={560} t="heading 312° → 214°" c={C.key} s={T.floor} o={op(5)} />
         <Lbl x={XC} y={650} t="rhumb: one bearing · +11 %" c={SLATE} s={T.floor} o={op(6)} />
         <Lbl x={XC} y={740} t="Part 7: maps" c={C.gold} s={T.floor} o={op(7)} />
+        <Lbl x={XC} y={815} t="care near the poles" c={C.key} s={T.floor} o={fin(f, AT(k, 8, "care near the poles"))} />
       </Svg>
       <TeX s={String.raw`h_\theta=r,\quad h_\varphi=a,\quad h_\lambda=a\cos\varphi`} x={XC} y={200} size={48} o={op(1)} />
       <TeX s={EQ_S14} x={XC} y={380} size={50} o={op(3)} />
@@ -364,7 +374,8 @@ const S15: React.FC = () => {
   rel.forEach((tt, i) => { if (COLX[Math.floor(i / 5)] + textW(tt, T.floor) > (COLX[Math.floor(i / 5) + 1] ?? 1840) - 10) throw new Error(`end card: "${tt}" too wide`); });
   return (
     <Scene>
-      <Svg>
+      {/* remake 2026-11-07 (R3): the picture fades out with the music over the 2.5-s silent hold (= Part 4's s29) */}
+      <Svg o={1 - ramp(f, LEN(k) - HOLD, LEN(k) - 4)}>
         <g opacity={fin(f, 6)}>{[420, 760, 1100, 1440].map((x, i) => thumb(x, i))}</g>
         <Lbl x={960} y={315} t="a series of maths tutorials" c={C.key} s={T.calc} a="middle" o={fin(f, 10)} />
         <Lbl x={960} y={395} t="atmospheric science · meteorology · fluid dynamics" c={C.key} s={T.key} a="middle" o={fin(f, AT(k, 1, "atmospheric science"))} />

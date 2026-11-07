@@ -1,21 +1,22 @@
-// ch00_coordinates_routes scenes s00-s05: the title, the hook (globe + Mercator chart), the recap of Parts 1-5, curvilinear
-// coordinates, scale factors (ring → see-through globe at Brest), and what a great circle is. Globes: the house GB frame (whole,
+// ch00_coordinates_routes scenes s00-s05: the title (series layout, remake 2026-11-07), the hook (globe + Mercator chart), curvilinear
+// coordinates, scale factors (ring → see-through globe at Brest; Part 1's arc rule and Part 3's distances recalled where used), and what a
+// great circle is. (The opening recap s02 was cut in the remake 2026-11-07: no opening recaps.) Globes: the house GB frame (whole,
 // unzoomed; no edge fade) with a source line below; every number from data/rt.json (CHECK rows below re-assert the screen strings).
 import React from "react";
 import { useCurrentFrame } from "remotion";
 import { C, T } from "../house/kit/type";
 import { Pt, pulse } from "../house/kit/draw";
-import { RiseText, TitleGradient } from "../house/kit/title";
+import { SeriesTitle } from "./kit_rt/SeriesTitle";
 import { GlobeFrame, SourceBelow } from "../house/kit/frame";
 import { CurvedLink } from "../house/kit/extras";
 import { GlobeCam, LatCircle, globePath } from "./kit_rt/globe";
 import { V3 } from "./kit_rt/cam";
 import {
-  AT, Arrow, BREST, CalcStack, Compass, D, D2R, GB, GC, Globe, H, K, Keyword, LAX, LEN, LON, LL, LYB, Lbl, MercMap, OrthoGlobe, PlaneIcon, RHP, RO, RH,
-  Route, SE, SLATE, SRC_G, SS, Scene, Svg, TeX, XC, add, along, arcD, clamp, discOf, e2g, fin, fout, gdot, globeG, gseg, ll, mercBox, mercY, mix, opath,
+  AT, Arrow, BREST, CalcStack, Compass, D, D2R, GB, GC, Globe, H, HL, K, Keyword, LAX, LEN, LON, LL, LYB, Lbl, MercMap, OrthoGlobe, PlaneIcon, RHP, RO, RH,
+  Recall, Route, SE, SLATE, SRC_G, SS, Scene, Svg, TeX, XC, add, along, arcD, clamp, discOf, e2g, fin, fout, gdot, globeG, gseg, ll, mercBox, mercY, mix, opath,
   ortho, pieces, plab, poly, prog, win, facing, flatPath,
 } from "./rt_lib";
-import { EQ_S02, EQ_S04 } from "./rt_eq";
+import { EQ_S04 } from "./rt_eq";
 
 // ---------------------------------------------------------------- numbers on screen = the data (the render fails otherwise)
 const SCL = D.scale;
@@ -42,8 +43,8 @@ const lab = (la: number, lo: number, t: string) => ({ la, lo, t });
 const TA = { x: 1180, y: 170, w: 600, h: 470 }, TBb = { x: 1130, y: 170, w: 470, h: 470 };
 const S00: React.FC = () => {
   const f = useCurrentFrame(), k = K("s00_title");
-  const tApp = AT(k, 0, "meteorology and aviation"), tEasy = AT(k, 0, "routes"), tFl = AT(k, 0, "shortest flights");
-  const pz = 1 + 0.06 * pulse(f, tEasy, 14);
+  // remake 2026-11-07 (R1, natural openings): Part B on "they're used"; the concept name pulses on "coordinates"
+  const tApp = AT(k, 0, "they're used"), tCo = AT(k, 0, "coordinates"), tFl = AT(k, 0, "shortest flights");
   const oA = fout(f, tApp, 12), oB = fin(f, tApp, 12);
   const camA = globePath([{ f: 0, lat: 46, lon: -40, dist: 3.4 }, { f: 330, lat: 50, lon: -58, dist: 3.4 }], f);
   const camB = { lat: 52, lon: -60, dist: 3.4 };
@@ -51,15 +52,9 @@ const S00: React.FC = () => {
   const hd = RO.head as number[], hi = Math.min(180, Math.round(fly * 180));
   return (
     <Scene fadeIn={false}>
+      {/* remake 2026-11-07 (R1/R2): the series title layout of every Coordinates part (kit_rt/SeriesTitle = Part 4's = Part 2's = Part 1's) */}
       <Svg>
-        <defs><TitleGradient id="ttl" x1={100} x2={1000} /></defs>
-        <RiseText f={f} t="Coordinates" x={100} y={235} s={150} at={2} fill="url(#ttl)" />
-        <RiseText f={f} t="Part 6" x={100} y={390} s={150} at={14} fill="url(#ttl)" />
-        <g transform={`translate(104 505) scale(${pz}) translate(-104 -505)`}>
-          <RiseText f={f} t="Routes" x={104} y={530} s={96} at={24} fill={C.key} />
-        </g>
-        <RiseText f={f} t="great circles" x={106} y={660} s={68} at={32} fill={C.gold} />
-        <RiseText f={f} t="and rhumb lines" x={106} y={750} s={68} at={40} fill={C.key} colors={(i) => (i >= 4 ? SLATE : undefined)} />
+        <SeriesTitle f={f} concept="Coordinates" part="Part 6 · Routes" sub={["great circles", "and rhumb lines"]} pulseAt={tCo} />
       </Svg>
       <Globe cam={camA} box={TA} o={oA * fin(f, 4, 10)} grat={0.3} coast={0.35}
         over={(G) => <>
@@ -141,80 +136,6 @@ const S01: React.FC = () => {
   );
 };
 
-// ================================================================ s02 recap of Parts 1, 3, 4, 5 (one beat per sentence, older beats at 60 %)
-const S02: React.FC = () => {
-  const f = useCurrentFrame(), k = K("s02_part5_recap");
-  const t = [0, 1, 2, 3, 4, 5, 6, 7].map((j) => SS(k, j));
-  const dimTo = (j: number) => (j < 7 ? 1 - 0.4 * fin(f, t[j + 1]) : 1);
-  const tArc = AT(k, 1, "arc rule"), tPhi = AT(k, 2, "latitude, phi"), tA = AT(k, 2, "the letter a"), tR = AT(k, 3, "position arrow");
-  // Part 1's polar ring (top left)
-  const P1c: Pt = [270, 250], Rr = 150, th = 50;
-  // Part 3's globe (orthographic, right of it)
-  const O = ortho(28, -25, [730, 300], 210);
-  const br = O.p(BREST[0], BREST[1]), c0 = O.c;
-  const slide = (BREST[0] + 30 * clamp((f - t[5] - 20) / 90, 0, 1));         // the dot moves north along Brest's meridian (S5)
-  const stepE = (la: number): LL[] => Array.from({ length: 11 }, (_, i) => [la, BREST[1] + i] as LL);
-  const r2 = pieces(EQ_S02, [String.raw`\ \cos\varphi\sin`]);
-  return (
-    <Scene>
-      <Svg>
-        <g opacity={fin(f, 0) * dimTo(1)}>
-          {[50, 100, 150].map((r) => <circle key={r} cx={P1c[0]} cy={P1c[1]} r={r} fill="none" stroke={C.first} strokeWidth={2.5} opacity={0.7} />)}
-          {[0, 45, 90, 135].map((a) => <line key={a} x1={P1c[0] - 170 * Math.cos(a * D2R)} y1={P1c[1] + 170 * Math.sin(a * D2R)} x2={P1c[0] + 170 * Math.cos(a * D2R)} y2={P1c[1] - 170 * Math.sin(a * D2R)} stroke={C.first} strokeWidth={2} opacity={0.5} />)}
-          <line x1={P1c[0]} y1={P1c[1]} x2={P1c[0] + Rr} y2={P1c[1]} stroke={C.key} strokeWidth={4} opacity={fin(f, tArc)} />
-          <line x1={P1c[0]} y1={P1c[1]} x2={P1c[0] + Rr * Math.cos(th * D2R)} y2={P1c[1] - Rr * Math.sin(th * D2R)} stroke={C.key} strokeWidth={4} opacity={fin(f, tArc)} />
-          <path d={arcD(P1c, Rr, 0, th)} fill="none" stroke={C.gold} strokeWidth={8} opacity={fin(f, tArc)} />
-          <path d={arcD(P1c, 46, 0, th)} fill="none" stroke={C.gold} strokeWidth={4} opacity={fin(f, tArc)} />
-        </g>
-        <g opacity={fin(f, t[2]) * dimTo(5)}>
-          <OrthoGlobe O={O} />
-          <path d={opath(O, Array.from({ length: 25 }, (_, i) => [(BREST[0] * i) / 24, BREST[1]] as LL))} fill="none" stroke={C.gold} strokeWidth={5} opacity={fin(f, tPhi)} />
-          <path d={opath(O, Array.from({ length: 13 }, (_, i) => [0, (BREST[1] * i) / 12] as LL))} fill="none" stroke={C.gold} strokeWidth={5} opacity={fin(f, tPhi + 20)} />
-          <line x1={c0[0]} y1={c0[1]} x2={br[0]} y2={br[1]} stroke={C.key} strokeWidth={4} strokeDasharray="10 7" opacity={fin(f, tA)} />
-          <Arrow p={c0} q={add(c0, [br[0] - c0[0], br[1] - c0[1]], 0.62)} color={C.ink} w={8} head={28} o={fin(f, tR) * dimTo(3)} />
-          <circle cx={br[0]} cy={br[1]} r={9} fill={C.gold} stroke={C.bg} strokeWidth={3} />
-          <circle cx={c0[0]} cy={c0[1]} r={7} fill={C.key} opacity={fin(f, tA)} />
-          {/* S4: one degree north (teal step on the meridian, ×10); S5: one degree east, shrinking as the dot moves north */}
-          <path d={opath(O, Array.from({ length: 11 }, (_, i) => [BREST[0] + i, BREST[1]] as LL))} fill="none" stroke={C.first} strokeWidth={10} opacity={fin(f, t[4]) * dimTo(4)} strokeLinecap="round" />
-          <path d={opath(O, stepE(slide))} fill="none" stroke={C.first} strokeWidth={10} opacity={fin(f, t[5])} strokeLinecap="round" />
-          <circle cx={O.p(slide, BREST[1])[0]} cy={O.p(slide, BREST[1])[1]} r={8} fill={C.key} opacity={fin(f, t[5])} />
-        </g>
-        {/* S6: a station's east, north, up arrows (Part 4); S7: a storm and the frame moving with it (Part 5) */}
-        <g opacity={fin(f, t[6]) * dimTo(6)}>
-          <line x1={140} y1={720} x2={420} y2={720} stroke={C.grid} strokeWidth={4} />
-          <Arrow p={[260, 720]} q={[380, 720]} color={C.second} w={8} head={28} />
-          <Arrow p={[260, 720]} q={[205, 655]} color={C.second} w={8} head={28} />
-          <Arrow p={[260, 720]} q={[260, 590]} color={C.first} w={8} head={28} />
-          <circle cx={260} cy={720} r={9} fill={C.gold} stroke={C.bg} strokeWidth={3} />
-        </g>
-        <g opacity={fin(f, t[7])}>
-          {[30, 55, 80].map((r) => <circle key={r} cx={640 + 1.6 * Math.max(0, f - t[7])} cy={690} r={r} fill="none" stroke={C.first} strokeWidth={3} opacity={0.8} />)}
-          <Arrow p={[560, 800]} q={[820, 800]} color={C.second} w={8} head={28} />
-        </g>
-      </Svg>
-      <TeX s={H.k} x={268} y={570} size={48} c={C.first} ax={0.5} o={fin(f, t[6]) * dimTo(6)} />
-      <TeX s={String.raw`r`} x={P1c[0] + Rr / 2} y={P1c[1] + 30} size={50} c={C.key} ax={0.5} o={fin(f, tArc) * dimTo(1)} />
-      <TeX s={String.raw`\theta`} x={P1c[0] + 64} y={P1c[1] - 28} size={48} c={C.gold} o={fin(f, tArc) * dimTo(1)} />
-      <TeX s={String.raw`s`} x={P1c[0] + Rr * Math.cos(25 * D2R) + 30} y={P1c[1] - Rr * Math.sin(25 * D2R) - 18} size={52} c={C.gold} o={fin(f, tArc) * dimTo(1)} />
-      <TeX s={String.raw`a`} x={mix(c0[0], br[0], 0.45) - 30} y={mix(c0[1], br[1], 0.45)} size={50} c={C.key} ax={1} o={fin(f, tA) * dimTo(5)} halo />
-      <Svg>
-        <Keyword f={f} text="from the earlier parts" at={[XC, 110]} appear={0} out={t[1] - 18} />
-        <Lbl x={XC} y={110} t="Part 1" c={C.muted} s={T.floor} o={fin(f, t[1]) * dimTo(1)} />
-        <Lbl x={XC} y={300} t="Part 3" c={C.muted} s={T.floor} o={fin(f, t[2]) * dimTo(5)} />
-        <Keyword f={f} text="Part 4: station arrows turn" at={[XC, 730]} s={T.floor} appear={t[6]} o={dimTo(6)} />
-        <Keyword f={f} text="Part 5: frames that move" at={[XC, 810]} s={T.floor} appear={t[7]} />
-      </Svg>
-      <TeX s={String.raw`s=r\,\theta`} x={XC} y={190} size={60} o={fin(f, tArc) * dimTo(1)} />
-      <TeX s={String.raw`\varphi,\ \lambda`} x={XC + 170} y={300} size={54} o={fin(f, tPhi) * dimTo(5)} />
-      <TeX s={String.raw`a\approx 6400\ \text{km}\ (6371\ \text{km})`} x={XC} y={375} size={50} o={fin(f, tA) * dimTo(5)} />
-      <TeX s={r2[0]} x={XC} y={455} size={48} o={fin(f, tR) * dimTo(3)} />
-      <TeX s={r2[1]} x={XC + 110} y={515} size={48} o={fin(f, tR) * dimTo(3)} />
-      <TeX s={String.raw`\Delta y=a\,\Delta\varphi\approx 111.2\ \text{km per }1^\circ`} x={XC} y={590} size={46} o={fin(f, t[4]) * dimTo(5)} />
-      <TeX s={String.raw`\Delta x=a\cos\varphi\,\Delta\lambda`} x={XC} y={655} size={46} o={fin(f, t[5]) * dimTo(5)} />
-    </Scene>
-  );
-};
-
 // ================================================================ s03 curvilinear coordinates: three systems side by side (Should 8: pictures centred at y 300, ×1.15)
 const S03: React.FC = () => {
   const f = useCurrentFrame(), k = K("s03_curvilinear");
@@ -260,6 +181,8 @@ const S03: React.FC = () => {
         <Lbl x={xs[0]} y={505} t="polar" c={C.muted} s={T.floor} a="middle" o={fout(f, tF3 - 20)} />
         <Lbl x={xs[1]} y={505} t="cylindrical" c={C.muted} s={T.floor} a="middle" o={fout(f, tF3 - 20)} />
         <Lbl x={xs[2]} y={505} t="latitude, longitude" c={C.muted} s={T.floor} a="middle" o={fout(f, tF3 - 20)} />
+        {/* remake 2026-11-07 (R16): the part each system comes from, under its name */}
+        {["Part 1", "Part 2", "Part 3"].map((t, i) => <Lbl key={t} x={xs[i]} y={565} t={t} c={C.gold} s={T.floor} a="middle" o={fin(f, 8 + 10 * i) * fout(f, tF3 - 20)} />)}
         <Keyword f={f} text="1° east ≈ 111 km (equator)" at={[1270, 520]} s={T.floor} appear={tDeg} c={C.first} />
         <Keyword f={f} text="1° east ≈ 23 km (78° N)" at={[1270, 585]} s={T.floor} appear={tDeg + 20} c={C.first} />
         <Keyword f={f} text="curvilinear: lines that can curve" at={[90, 640]} appear={tCv} />
@@ -281,8 +204,10 @@ const S03: React.FC = () => {
 const CAM4: GlobeCam = { lat: 40, lon: -50, dist: 3.4 };
 const S04: React.FC = () => {
   const f = useCurrentFrame(), k = K("s04_scale_factors");
-  const tRing = SS(k, 1), tMult = SS(k, 2), tSF = AT(k, 3, "scale factor"), tTh = SS(k, 4), tN = AT(k, 5, "stepping north"), tLat = AT(k, 5, "scale factor of latitude"),
-    tE = AT(k, 6, "Stepping east"), tPar = AT(k, 6, "a circle whose radius"), tLon = SS(k, 7), tBr = SS(k, 8), tDeg = SS(k, 9), tDy = SS(k, 10), tCos = SS(k, 11), tDx = SS(k, 12), tSame = SS(k, 13);
+  // remake 2026-11-07: S1 recalls Part 1's arc rule, S5 Part 3's distances, S6 names the letter a (6371 km, said + highlighted)
+  const tRing = SS(k, 1), tMult = SS(k, 2), tSF = AT(k, 3, "scale factor"), tTh = SS(k, 4), tN = AT(k, 5, "stepping north"), tLat = AT(k, 6, "scale factor of latitude"),
+    tA = AT(k, 6, "the letter a"), tA6 = AT(k, 6, "six thousand"), tE = AT(k, 7, "Stepping east"), tPar = AT(k, 7, "a circle whose radius"), tLon = SS(k, 8),
+    tBr = SS(k, 9), tDeg = SS(k, 10), tDy = SS(k, 11), tCos = SS(k, 12), tDx = SS(k, 13), tSame = SS(k, 14);
   const ring = fout(f, tN - 10, 16), glo = fin(f, tN, 16);
   const c1: Pt = [540, 430], R = 300, dth = 25;
   const G = globeG(CAM4);
@@ -326,26 +251,33 @@ const S04: React.FC = () => {
       <Svg>
         <Keyword f={f} text="how far for a small step?" at={[XC, 110]} appear={0} out={tSF - 18} />
         <Keyword f={f} text="scale factor = metres per unit" at={[XC, 110]} s={T.floor} appear={tSF} c={C.gold} />
-        <Lbl x={XC} y={200} t="θ:" c={C.muted} s={T.floor} o={fin(f, tTh)} />
-        <Lbl x={XC} y={275} t="φ:" c={C.muted} s={T.floor} o={fin(f, tLat)} />
-        <Lbl x={XC} y={350} t="λ:" c={C.muted} s={T.floor} o={fin(f, tLon)} />
-        <Keyword f={f} text="r × the step" at={[XC + 330, 200]} s={T.floor} appear={tMult} out={tTh - 18} />
+        <Keyword f={f} text="$r\times$ the step" at={[XC, 360]} s={T.floor} appear={tMult} out={tTh - 18} />
         <Keyword f={f} text="at Brest" at={[XC + 520, yIn - 20]} s={T.floor} appear={tBr} />
         <Keyword f={f} text="same 1° step: 111.2 km or 73.8 km" at={[XC, 830]} s={T.floor} appear={tSame} />
         <CurvedLink f={f} from={[XC - 14, 620]} to={[nT[0] + 14, nT[1] + 4]} start={tDy + 40} bend={40} end={tCos - 10} />
         <CurvedLink f={f} from={[XC - 14, 682]} to={[mE[0] + 8, mE[1] + 12]} start={tDx + 40} bend={-40} />
       </Svg>
+      {/* the row tags (θ:, φ:, λ:) in KaTeX (symbol lint C5, remake 2026-11-07) */}
+      <TeX s={String.raw`\theta:`} x={XC} y={200} size={44} c={C.muted} o={fin(f, tTh)} />
+      <TeX s={String.raw`\varphi:`} x={XC} y={275} size={44} c={C.muted} o={fin(f, tLat)} />
+      <TeX s={String.raw`\lambda:`} x={XC} y={350} size={44} c={C.muted} o={fin(f, tLon)} />
       <TeX s={rows[0]} x={XC + 80} y={200} size={56} o={fin(f, tTh)} />
       <TeX s={rows[1]} x={XC + 80} y={275} size={56} o={fin(f, tLat)} />
       <TeX s={rows[2]} x={XC + 80} y={350} size={56} o={fin(f, tLon)} />
       <TeX s={String.raw`\varphi=48.4^\circ,\quad a=6371\ \text{km}`} x={XC} y={yIn - 20} size={46} o={fin(f, tBr)} />
-      <TeX s={String.raw`1^\circ=0.01745\ \text{rad}`} x={XC} y={yIn + 42} size={46} o={fin(f, tDeg)} />
+      <TeX s={String.raw`1^\circ=0.01745\ \text{rad}`} x={XC} y={yIn + 42} size={46} o={fin(f, tDeg)} glow={HL(f, AT(k, 10, "zero point zero one"))} />
+      {/* remake 2026-11-07 (R16): Part 1's arc rule and Part 3's distances recalled where they are used; a = 6371 km said and highlighted */}
+      <Recall f={f} tex={String.raw`s=r\,\Delta\theta`} name="arc length" part={1} x={XC} y={200} appear={AT(k, 1, "In Part 1")} out={tTh - 18} />
+      <Recall f={f} tex={String.raw`\Delta y=a\,\Delta\varphi,\quad \Delta x=a\cos\varphi\,\Delta\lambda`} name="distances" part={3} x={XC} y={560} size={50}
+        appear={AT(k, 5, "as we found in Part 3")} out={tBr - 12} />
+      <TeX s={String.raw`a\approx6371\ \text{km}`} x={XC} y={720} size={50} o={win(f, tA, tBr - 12)} glow={HL(f, tA6)} />
+      {/* show it, don't voice it (2026-11-07): the products stay on screen; each result has its symbol; cos 48.4° (an input) glows on its word */}
       <CalcStack f={f} x={1270} y={585} size={46} maxLines={2} rows={[
-        { lhs: String.raw`\Delta y`, rhs: String.raw`=6371\times0.01745`, at: AT(k, 10, "six thousand"), c: C.first, lc: C.first },
-        { rhs: String.raw`\approx 111.2\ \text{km}`, at: AT(k, 10, "about a hundred"), c: C.first, cont: true },
-        { lhs: String.raw`\cos 48.4^\circ`, rhs: String.raw`\approx 0.664`, at: AT(k, 11, "is zero point") },
-        { lhs: String.raw`\Delta x`, rhs: String.raw`=111.2\times0.664`, at: AT(k, 12, "a hundred and eleven"), c: C.first, lc: C.first },
-        { rhs: String.raw`\approx 73.8\ \text{km}`, at: AT(k, 12, "only about"), c: C.first, cont: true },
+        { lhs: String.raw`\Delta y`, rhs: String.raw`=6371\times0.01745`, at: AT(k, 11, "the Earth's radius times that"), c: C.first, lc: C.first },
+        { rhs: String.raw`\approx 111.2\ \text{km}`, at: AT(k, 11, "about a hundred"), c: C.first, cont: true },
+        { lhs: String.raw`\cos 48.4^\circ`, rhs: String.raw`\approx 0.664`, at: AT(k, 12, "is zero point"), glow: HL(f, AT(k, 12, "is zero point")) },
+        { lhs: String.raw`\Delta x`, rhs: String.raw`=111.2\times0.664`, at: AT(k, 13, "those hundred"), c: C.first, lc: C.first },
+        { rhs: String.raw`\approx 73.8\ \text{km}`, at: AT(k, 13, "only about"), c: C.first, cont: true },
       ]} />
       {void [tDy, tCos, tDx]}
     </Scene>
@@ -405,6 +337,6 @@ const S05: React.FC = () => {
 };
 
 export const SCENES_A: Record<string, React.FC> = {
-  s00_title: S00, s01_hook: S01, s02_part5_recap: S02, s03_curvilinear: S03, s04_scale_factors: S04, s05_shortest_way: S05,
+  s00_title: S00, s01_hook: S01, s03_curvilinear: S03, s04_scale_factors: S04, s05_shortest_way: S05,
 };
 void [lab, facing, RHP, CalcStack];

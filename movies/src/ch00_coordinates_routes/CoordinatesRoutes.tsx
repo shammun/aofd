@@ -9,13 +9,15 @@ import { SCENES_C } from "./rt_sC";
 
 /**
  * Chapter-0 movie #5f "Coordinates, Part 6 — Routes: great circles and rhumb lines"
- * (movies/ch00/ch00_coordinates_routes/storyboard.yaml, 16 scenes), 1920×1080, 30 fps; length = timing.json + 2.5-s hold.
+ * (movies/ch00/ch00_coordinates_routes/storyboard.yaml, 15 scenes since the remake 2026-11-07 cut the opening recap s02), 1920×1080, 30 fps;
+ * length = timing.json + 2.5-s hold (the end card fades with the music over it).
  * House style movies/HOUSE_STYLE.md (reference ch00_dot_product_why v6) incl. §5b: one title (s00), keywords not sentences, no
  * boxes (except the user's maths-skip chip), no references, source lines below the pictures (K2), globes in the house frame
  * (whole, unzoomed), caption band empty, text ≥ 44 px and ending before x 1842 (rt_lib guard), reveals on their words (AT).
  * Every number comes from data/rt.json (movies/data/build_ch00_coordinates_routes.py, tested fluidpy functions, CHECK rows
- * DM01-DM17); scene files only index and place. timing.json is PROVISIONAL (measured dry run, checks/make_timing.py) until the
- * final TTS.
+ *  DM01-DM21); scene files only index and place. timing.json is PROVISIONAL (re-used dry-run clips + estimated new sentences,
+ * checks/rt_r7_splice.py --provisional) until the final splice (checks/rt_r7_splice.py, final_timing.py --final, rt_words.py) replaces the
+ * provisional file.
  */
 export const RT_FPS = FPS;
 export { RT_FRAMES };

@@ -3,1457 +3,1232 @@
  "speed": 1.0,
  "fps": 30,
  "sample_rate": 24000,
- "gaps": {
-  "sentence": 0.35,
-  "scene": 0.8,
-  "lead": 0.3,
-  "tail": 0.3
- },
- "provisional": "made from the measured dry run dryrun2_spliced (the full script, with s02 re-measured alone in mini_s02 and spliced in) by checks/make_timing.py; the final TTS replaces it; 3 re-voiced sentences ESTIMATED (checks/revoice.py, shift +2.091 s)",
+ "provisional": "remake 2026-11-07 static phase: re-used clip lengths from the dry runs, new sentences estimated at 14.64 chars/s (rt_r7_splice.py --provisional); the final splice replaces it",
  "scenes": [
   {
    "id": "s00_title",
    "start": 0.3,
    "sentences": [
     {
-     "text": "In this video, we'll learn about routes across our round Earth, and see how meteorology and aviation use them to plan the shortest flights.",
-     "audio_text": null,
+     "text": "In this video, we'll learn about routes across our round Earth and the coordinates behind them, and see how they're used to plan the shortest flights.",
      "start": 0.3,
-     "end": 9.2161,
-     "dur": 8.9161,
+     "end": 10.5454,
+     "dur": 10.2454,
      "start_frame": 9,
-     "end_frame": 276,
+     "end_frame": 316,
      "estimated": true
     }
    ],
-   "end": 10.0161,
+   "end": 11.3454,
    "start_frame": 9,
-   "end_frame": 300
+   "end_frame": 340
   },
   {
    "id": "s01_hook",
-   "start": 10.0161,
+   "start": 11.3454,
    "sentences": [
     {
      "text": "What's the shortest way from London to Los Angeles, and why doesn't a plane fly the way a flat map seems to point?",
-     "audio_text": null,
-     "start": 10.0161,
-     "end": 17.7661,
+     "start": 11.3454,
+     "end": 19.0954,
      "dur": 7.75,
-     "start_frame": 300,
-     "end_frame": 533
+     "start_frame": 340,
+     "end_frame": 573
     },
     {
      "text": "This is the sixth of seven parts on coordinates.",
-     "audio_text": null,
-     "start": 18.1161,
-     "end": 21.4911,
+     "start": 19.4454,
+     "end": 22.8204,
      "dur": 3.375,
-     "start_frame": 543,
-     "end_frame": 645
+     "start_frame": 583,
+     "end_frame": 685
     },
     {
-     "text": "Let's find the shortest route over our round Earth, and see how its length is measured.",
-     "audio_text": null,
-     "start": 21.8411,
-     "end": 27.1411,
-     "dur": 5.3,
-     "start_frame": 655,
-     "end_frame": 814
+     "text": "Now let's dive into the pieces we need: scale factors, which turn a change in latitude or longitude into kilometres, and the great circle, the shortest route over our round Earth.",
+     "start": 23.1704,
+     "end": 35.3967,
+     "dur": 12.2262,
+     "start_frame": 695,
+     "end_frame": 1062,
+     "estimated": true
     },
     {
      "text": "Then let's meet the route that sailors used for centuries, and see why they liked it.",
-     "audio_text": null,
-     "start": 27.4911,
-     "end": 32.9911,
+     "start": 35.7467,
+     "end": 41.2467,
      "dur": 5.5,
-     "start_frame": 825,
-     "end_frame": 990
+     "start_frame": 1072,
+     "end_frame": 1237
     }
    ],
-   "end": 33.7911,
-   "start_frame": 300,
-   "end_frame": 1014
-  },
-  {
-   "id": "s02_part5_recap",
-   "start": 33.7911,
-   "sentences": [
-    {
-     "text": "Here's what we'll use from the earlier parts.",
-     "audio_text": null,
-     "start": 33.7911,
-     "end": 36.7911,
-     "dur": 3.0,
-     "start_frame": 1014,
-     "end_frame": 1104
-    },
-    {
-     "text": "In Part 1, we met polar coordinates and the arc rule: the distance along a circle is its radius times the angle, in radians.",
-     "audio_text": null,
-     "start": 37.1411,
-     "end": 46.5661,
-     "dur": 9.425,
-     "start_frame": 1114,
-     "end_frame": 1397
-    },
-    {
-     "text": "In Part 3, we gave each place a latitude, phi, and a longitude, lambda, and we wrote the Earth's radius as the letter a: about six thousand three hundred and seventy one kilometres.",
-     "audio_text": null,
-     "start": 46.9161,
-     "end": 59.4911,
-     "dur": 12.575,
-     "start_frame": 1407,
-     "end_frame": 1785
-    },
-    {
-     "text": "A place's position arrow of length one is cosine phi cosine lambda, cosine phi sine lambda, sine phi.",
-     "audio_text": null,
-     "start": 59.8411,
-     "end": 67.5911,
-     "dur": 7.75,
-     "start_frame": 1795,
-     "end_frame": 2028
-    },
-    {
-     "text": "One degree of latitude is about a hundred and eleven kilometres.",
-     "audio_text": null,
-     "start": 67.9411,
-     "end": 72.8661,
-     "dur": 4.925,
-     "start_frame": 2038,
-     "end_frame": 2186
-    },
-    {
-     "text": "One degree of longitude is that times cosine phi.",
-     "audio_text": null,
-     "start": 73.2161,
-     "end": 77.3411,
-     "dur": 4.125,
-     "start_frame": 2196,
-     "end_frame": 2320
-    },
-    {
-     "text": "In Part 4, a weather station's east, north and up arrows turned as the air moved.",
-     "audio_text": null,
-     "start": 77.6911,
-     "end": 83.8411,
-     "dur": 6.15,
-     "start_frame": 2331,
-     "end_frame": 2515
-    },
-    {
-     "text": "And in Part 5, we saw a moving storm's winds from a frame that moves with it.",
-     "audio_text": null,
-     "start": 84.1911,
-     "end": 89.7911,
-     "dur": 5.6,
-     "start_frame": 2526,
-     "end_frame": 2694
-    }
-   ],
-   "end": 90.0911,
-   "start_frame": 1014,
-   "end_frame": 2703
+   "end": 42.0467,
+   "start_frame": 340,
+   "end_frame": 1261
   },
   {
    "id": "s03_curvilinear",
-   "start": 90.0911,
+   "start": 42.0467,
    "sentences": [
     {
      "text": "Let's start by putting our coordinate systems side by side: polar coordinates on a flat map, cylindrical coordinates round a hurricane, and latitude and longitude on the Earth.",
-     "audio_text": null,
-     "start": 90.0911,
-     "end": 101.8161,
+     "start": 42.0467,
+     "end": 53.7717,
      "dur": 11.725,
-     "start_frame": 2703,
-     "end_frame": 3054
+     "start_frame": 1261,
+     "end_frame": 1613
     },
     {
      "text": "They're all called curvilinear coordinates, which means coordinates whose lines can curve.",
-     "audio_text": null,
-     "start": 102.1661,
-     "end": 107.9911,
+     "start": 54.1217,
+     "end": 59.9467,
      "dur": 5.825,
-     "start_frame": 3065,
-     "end_frame": 3240
+     "start_frame": 1624,
+     "end_frame": 1798
     },
     {
      "text": "They share three features.",
-     "audio_text": null,
-     "start": 108.3411,
-     "end": 110.4661,
+     "start": 60.2967,
+     "end": 62.4217,
      "dur": 2.125,
-     "start_frame": 3250,
-     "end_frame": 3314
+     "start_frame": 1809,
+     "end_frame": 1873
     },
     {
      "text": "First, the coordinate lines are curves: the rings round a radar, the circles of latitude, and the meridians.",
-     "audio_text": null,
-     "start": 110.8161,
-     "end": 118.4161,
+     "start": 62.7717,
+     "end": 70.3717,
      "dur": 7.6,
-     "start_frame": 3324,
-     "end_frame": 3552
+     "start_frame": 1883,
+     "end_frame": 2111
     },
     {
      "text": "Second, the unit vectors change from place to place: r hat and theta hat turn as we go round, and so do the east and north arrows on the globe.",
-     "audio_text": null,
-     "start": 118.7661,
-     "end": 128.6661,
+     "start": 70.7217,
+     "end": 80.6217,
      "dur": 9.9,
-     "start_frame": 3563,
-     "end_frame": 3860
+     "start_frame": 2122,
+     "end_frame": 2419
     },
     {
      "text": "Third, a change in a coordinate isn't a distance by itself.",
-     "audio_text": null,
-     "start": 129.0161,
-     "end": 133.5661,
+     "start": 80.9717,
+     "end": 85.5217,
      "dur": 4.55,
-     "start_frame": 3870,
-     "end_frame": 4007
+     "start_frame": 2429,
+     "end_frame": 2566
     },
     {
      "text": "Turning by one degree can mean a short walk or a long one, depending on where you are.",
-     "audio_text": null,
-     "start": 133.9161,
-     "end": 139.5411,
+     "start": 85.8717,
+     "end": 91.4967,
      "dur": 5.625,
-     "start_frame": 4017,
-     "end_frame": 4186
+     "start_frame": 2576,
+     "end_frame": 2745
     },
     {
      "text": "That third feature needs a name, so let's look at it closely.",
-     "audio_text": null,
-     "start": 139.8911,
-     "end": 144.0411,
+     "start": 91.8467,
+     "end": 95.9967,
      "dur": 4.15,
-     "start_frame": 4197,
-     "end_frame": 4321
+     "start_frame": 2755,
+     "end_frame": 2880
     }
    ],
-   "end": 144.8411,
-   "start_frame": 2703,
-   "end_frame": 4345
+   "end": 96.7967,
+   "start_frame": 1261,
+   "end_frame": 2904
   },
   {
    "id": "s04_scale_factors",
-   "start": 144.8411,
+   "start": 96.7967,
    "sentences": [
     {
      "text": "How far do we walk when one coordinate changes by a small step?",
-     "audio_text": null,
-     "start": 144.8411,
-     "end": 149.3161,
+     "start": 96.7967,
+     "end": 101.2717,
      "dur": 4.475,
-     "start_frame": 4345,
-     "end_frame": 4479
+     "start_frame": 2904,
+     "end_frame": 3038
     },
     {
-     "text": "In Part 1, on a ring of radius r, turning by a small angle delta theta walks r times delta theta.",
-     "audio_text": null,
-     "start": 149.6661,
-     "end": 157.7161,
-     "dur": 8.05,
-     "start_frame": 4490,
-     "end_frame": 4731
+     "text": "In Part 1, we found the arc rule: on a ring of radius r, turning by a small angle delta theta walks r times delta theta.",
+     "start": 101.6217,
+     "end": 109.818,
+     "dur": 8.1964,
+     "start_frame": 3049,
+     "end_frame": 3295,
+     "estimated": true
     },
     {
      "text": "So for theta, the distance walked is r times the step.",
-     "audio_text": null,
-     "start": 158.0661,
-     "end": 162.1411,
+     "start": 110.168,
+     "end": 114.243,
      "dur": 4.075,
-     "start_frame": 4742,
-     "end_frame": 4864
+     "start_frame": 3305,
+     "end_frame": 3427
     },
     {
      "text": "That multiplier, the metres walked per unit of the coordinate, is called a scale factor.",
-     "audio_text": null,
-     "start": 162.4911,
-     "end": 168.6911,
+     "start": 114.593,
+     "end": 120.793,
      "dur": 6.2,
-     "start_frame": 4875,
-     "end_frame": 5061
+     "start_frame": 3438,
+     "end_frame": 3624
     },
     {
      "text": "For theta, the scale factor is r.",
-     "audio_text": null,
-     "start": 169.0411,
-     "end": 171.9911,
+     "start": 121.143,
+     "end": 124.093,
      "dur": 2.95,
-     "start_frame": 5071,
-     "end_frame": 5160
+     "start_frame": 3634,
+     "end_frame": 3723
     },
     {
-     "text": "On the Earth, stepping north by delta phi walks the Earth's radius times delta phi, so the scale factor of latitude is the Earth's radius.",
-     "audio_text": null,
-     "start": 172.3411,
-     "end": 181.8411,
-     "dur": 9.5,
-     "start_frame": 5170,
-     "end_frame": 5455
+     "text": "On the Earth, as we found in Part 3, stepping north by a small change in latitude, delta phi, walks the Earth's radius times delta phi.",
+     "start": 124.443,
+     "end": 133.6639,
+     "dur": 9.2209,
+     "start_frame": 3733,
+     "end_frame": 4010,
+     "estimated": true
     },
     {
-     "text": "Stepping east by delta lambda walks round a parallel, a circle whose radius is the Earth's radius times cosine phi.",
-     "audio_text": null,
-     "start": 182.1911,
-     "end": 190.4411,
-     "dur": 8.25,
-     "start_frame": 5466,
-     "end_frame": 5713
+     "text": "So the scale factor of latitude is the Earth's radius, which we write as the letter a, about six thousand three hundred and seventy one kilometres.",
+     "start": 134.0139,
+     "end": 144.0545,
+     "dur": 10.0405,
+     "start_frame": 4020,
+     "end_frame": 4322,
+     "estimated": true
+    },
+    {
+     "text": "Stepping east by a small change in longitude, delta lambda, walks round a parallel, a circle whose radius is the Earth's radius times cosine phi.",
+     "start": 144.4045,
+     "end": 154.3084,
+     "dur": 9.9039,
+     "start_frame": 4332,
+     "end_frame": 4629,
+     "estimated": true
     },
     {
      "text": "So the scale factor of longitude is the Earth's radius times cosine phi.",
-     "audio_text": null,
-     "start": 190.7911,
-     "end": 196.3661,
+     "start": 154.6584,
+     "end": 160.2334,
      "dur": 5.575,
-     "start_frame": 5724,
-     "end_frame": 5891
+     "start_frame": 4640,
+     "end_frame": 4807
     },
     {
      "text": "Let's put numbers on it at Brest, at forty eight point four degrees north.",
-     "audio_text": null,
-     "start": 196.7161,
-     "end": 201.4911,
+     "start": 160.5834,
+     "end": 165.3584,
      "dur": 4.775,
-     "start_frame": 5901,
-     "end_frame": 6045
+     "start_frame": 4818,
+     "end_frame": 4961
     },
     {
      "text": "One degree is zero point zero one seven four five radians.",
-     "audio_text": null,
-     "start": 201.8411,
-     "end": 206.6161,
+     "start": 165.7084,
+     "end": 170.4834,
      "dur": 4.775,
-     "start_frame": 6055,
-     "end_frame": 6198
+     "start_frame": 4971,
+     "end_frame": 5115
     },
     {
-     "text": "So one degree north walks six thousand three hundred and seventy one kilometres times zero point zero one seven four five, about a hundred and eleven point two kilometres.",
-     "audio_text": null,
-     "start": 206.9661,
-     "end": 219.0911,
-     "dur": 12.125,
-     "start_frame": 6209,
-     "end_frame": 6573,
-     "beat": true
-    },
-    {
-     "text": "The cosine of forty eight point four degrees is zero point six six four.",
-     "audio_text": null,
-     "start": 220.5911,
-     "end": 225.8411,
-     "dur": 5.25,
-     "start_frame": 6618,
-     "end_frame": 6775
-    },
-    {
-     "text": "So one degree east walks a hundred and eleven point two times zero point six six four, only about seventy three point eight kilometres.",
-     "audio_text": null,
-     "start": 226.1911,
-     "end": 235.6161,
-     "dur": 9.425,
-     "start_frame": 6786,
-     "end_frame": 7068,
-     "beat": true
-    },
-    {
-     "text": "The same one-degree step gives two different distances, and the scale factors keep track of that.",
-     "audio_text": null,
-     "start": 237.1161,
-     "end": 243.6911,
-     "dur": 6.575,
-     "start_frame": 7113,
-     "end_frame": 7311
-    }
-   ],
-   "end": 244.4911,
-   "start_frame": 4345,
-   "end_frame": 7335
-  },
-  {
-   "id": "s05_shortest_way",
-   "start": 244.4911,
-   "sentences": [
-    {
-     "text": "Now let's put coordinates to work on a question every airline asks: what's the shortest way between two places?",
-     "audio_text": null,
-     "start": 244.4911,
-     "end": 252.0411,
-     "dur": 7.55,
-     "start_frame": 7335,
-     "end_frame": 7561
-    },
-    {
-     "text": "It matters, because a shorter route burns less fuel and takes less time.",
-     "audio_text": null,
-     "start": 252.3911,
-     "end": 257.4411,
-     "dur": 5.05,
-     "start_frame": 7572,
-     "end_frame": 7723
-    },
-    {
-     "text": "On a flat sheet of paper, the shortest way is a straight line.",
-     "audio_text": null,
-     "start": 257.7911,
-     "end": 262.1161,
-     "dur": 4.325,
-     "start_frame": 7734,
-     "end_frame": 7863
-    },
-    {
-     "text": "But a plane can't tunnel through the Earth, so it has to follow the curved surface.",
-     "audio_text": null,
-     "start": 262.4661,
-     "end": 267.9161,
-     "dur": 5.45,
-     "start_frame": 7874,
-     "end_frame": 8037
-    },
-    {
-     "text": "On a sphere, the shortest way follows a great circle.",
-     "audio_text": null,
-     "start": 268.2661,
-     "end": 272.1661,
-     "dur": 3.9,
-     "start_frame": 8048,
-     "end_frame": 8165
-    },
-    {
-     "text": "A great circle is any circle on the sphere whose centre is the centre of the Earth.",
-     "audio_text": null,
-     "start": 272.5161,
-     "end": 278.0411,
-     "dur": 5.525,
-     "start_frame": 8175,
-     "end_frame": 8341
-    },
-    {
-     "text": "The equator is one, and so is every meridian, together with its partner on the other side of the globe.",
-     "audio_text": null,
-     "start": 278.3911,
-     "end": 285.2161,
-     "dur": 6.825,
-     "start_frame": 8352,
-     "end_frame": 8556
-    },
-    {
-     "text": "The other circles of latitude are not great circles: their centres sit on the Earth's axis, above or below the Earth's centre, so they're smaller.",
-     "audio_text": null,
-     "start": 285.5661,
-     "end": 294.9661,
-     "dur": 9.4,
-     "start_frame": 8567,
-     "end_frame": 8849
-    }
-   ],
-   "end": 295.7661,
-   "start_frame": 7335,
-   "end_frame": 8873
-  },
-  {
-   "id": "s06_great_circle",
-   "start": 295.7661,
-   "sentences": [
-    {
-     "text": "Let's find the great circle through London and Los Angeles.",
-     "audio_text": null,
-     "start": 295.7661,
-     "end": 299.8661,
-     "dur": 4.1,
-     "start_frame": 8873,
-     "end_frame": 8996
-    },
-    {
-     "text": "London is at fifty one and a half degrees north, almost on the prime meridian.",
-     "audio_text": null,
-     "start": 300.2161,
-     "end": 305.6911,
-     "dur": 5.475,
-     "start_frame": 9006,
-     "end_frame": 9171
-    },
-    {
-     "text": "Los Angeles is at thirty four degrees north, and a hundred and eighteen degrees west.",
-     "audio_text": null,
-     "start": 306.0411,
-     "end": 311.8911,
-     "dur": 5.85,
-     "start_frame": 9181,
-     "end_frame": 9357
-    },
-    {
-     "text": "Picture a flat sheet slicing through the globe, so that it passes through London, through Los Angeles, and through the Earth's centre.",
-     "audio_text": null,
-     "start": 312.2411,
-     "end": 320.2661,
-     "dur": 8.025,
-     "start_frame": 9367,
-     "end_frame": 9608
-    },
-    {
-     "text": "Three points that aren't in a line fix exactly one flat sheet, just as three legs steady a stool.",
-     "audio_text": null,
-     "start": 320.6161,
-     "end": 327.3411,
-     "dur": 6.725,
-     "start_frame": 9618,
-     "end_frame": 9820
-    },
-    {
-     "text": "Where the sheet cuts the Earth's surface, it traces a great circle, and the part between the two cities is the great circle route.",
-     "audio_text": null,
-     "start": 327.6911,
-     "end": 335.7161,
-     "dur": 8.025,
-     "start_frame": 9831,
-     "end_frame": 10071
-    },
-    {
-     "text": "Why is it the shortest?",
-     "audio_text": null,
-     "start": 336.0661,
-     "end": 338.0661,
-     "dur": 2.0,
-     "start_frame": 10082,
-     "end_frame": 10142
-    },
-    {
-     "text": "Think of all the circles on the globe that pass through both cities.",
-     "audio_text": null,
-     "start": 338.4161,
-     "end": 342.7161,
-     "dur": 4.3,
-     "start_frame": 10152,
-     "end_frame": 10281
-    },
-    {
-     "text": "The great circle is the biggest of them, so between the two cities it bends the least.",
-     "audio_text": null,
-     "start": 343.0661,
-     "end": 348.5161,
-     "dur": 5.45,
-     "start_frame": 10292,
-     "end_frame": 10455
-    },
-    {
-     "text": "A string pulled tight between the two cities on a desk globe lies right along it.",
-     "audio_text": null,
-     "start": 348.8661,
-     "end": 354.3161,
-     "dur": 5.45,
-     "start_frame": 10466,
-     "end_frame": 10629
-    }
-   ],
-   "end": 355.1161,
-   "start_frame": 8873,
-   "end_frame": 10653
-  },
-  {
-   "id": "s07_sigma",
-   "start": 355.1161,
-   "sentences": [
-    {
-     "text": "How long is this route?",
-     "audio_text": null,
-     "start": 355.1161,
-     "end": 357.0911,
-     "dur": 1.975,
-     "start_frame": 10653,
-     "end_frame": 10713
-    },
-    {
-     "text": "Let's turn the globe, so that we look straight at the slicing sheet.",
-     "audio_text": null,
-     "start": 357.4411,
-     "end": 361.5911,
-     "dur": 4.15,
-     "start_frame": 10723,
-     "end_frame": 10848
-    },
-    {
-     "text": "Now it's just a flat circle, with the Earth's centre in the middle, and its radius is the Earth's radius.",
-     "audio_text": null,
-     "start": 361.9411,
-     "end": 368.7161,
-     "dur": 6.775,
-     "start_frame": 10858,
-     "end_frame": 11061
-    },
-    {
-     "text": "Draw one arrow from the centre to London, and another one to Los Angeles.",
-     "audio_text": null,
-     "start": 369.0661,
-     "end": 374.2661,
-     "dur": 5.2,
-     "start_frame": 11072,
-     "end_frame": 11228
-    },
-    {
-     "text": "The angle between these two arrows, at the Earth's centre, is called sigma.",
-     "audio_text": null,
-     "start": 374.6161,
-     "end": 379.5911,
-     "dur": 4.975,
-     "start_frame": 11238,
-     "end_frame": 11388
-    },
-    {
-     "text": "The route is the arc of the circle between the two arrow tips.",
-     "audio_text": null,
-     "start": 379.9411,
-     "end": 384.3161,
-     "dur": 4.375,
-     "start_frame": 11398,
-     "end_frame": 11529
-    },
-    {
-     "text": "And that's exactly the picture of the arc rule from Part 1: the distance along a circle is the radius times the angle.",
-     "audio_text": null,
-     "start": 384.6661,
-     "end": 393.0161,
-     "dur": 8.35,
-     "start_frame": 11540,
-     "end_frame": 11790
-    },
-    {
-     "text": "So the distance d equals the Earth's radius times sigma, with sigma in radians.",
-     "audio_text": null,
-     "start": 393.3661,
-     "end": 399.1411,
-     "dur": 5.775,
-     "start_frame": 11801,
-     "end_frame": 11974,
-     "beat": true
-    },
-    {
-     "text": "Here's a way to feel it.",
-     "audio_text": null,
-     "start": 400.6411,
-     "end": 402.5911,
-     "dur": 1.95,
-     "start_frame": 12019,
-     "end_frame": 12078
-    },
-    {
-     "text": "Every degree of sigma is one degree of a great circle, about a hundred and eleven point two kilometres on the ground, just like a degree of latitude along a meridian.",
-     "audio_text": null,
-     "start": 402.9411,
-     "end": 413.6661,
-     "dur": 10.725,
-     "start_frame": 12088,
-     "end_frame": 12410
-    },
-    {
-     "text": "So once we know sigma, we know the distance.",
-     "audio_text": null,
-     "start": 414.0161,
-     "end": 417.2411,
-     "dur": 3.225,
-     "start_frame": 12420,
-     "end_frame": 12517
-    }
-   ],
-   "end": 418.0411,
-   "start_frame": 10653,
-   "end_frame": 12541
-  },
-  {
-   "id": "s08_position_arrows",
-   "start": 418.0411,
-   "sentences": [
-    {
-     "text": "The next few minutes work out sigma step by step, with every number.",
-     "audio_text": null,
-     "start": 418.0411,
-     "end": 422.8661,
-     "dur": 4.825,
-     "start_frame": 12541,
-     "end_frame": 12686
-    },
-    {
-     "text": "They're here for anyone who enjoys seeing every step, but you don't need them for the intuition behind weather, climate science or GIS.",
-     "audio_text": null,
-     "start": 423.2161,
-     "end": 431.9161,
-     "dur": 8.7,
-     "start_frame": 12696,
-     "end_frame": 12957
-    },
-    {
-     "text": "If it feels like a lot, skip ahead to the time on screen, and you won't miss the big idea.",
-     "audio_text": null,
-     "start": 432.2661,
-     "end": 438.3411,
-     "dur": 6.075,
-     "start_frame": 12968,
-     "end_frame": 13150
-    },
-    {
-     "text": "To find sigma, we need the two position arrows of length one, r hat one for London and r hat two for Los Angeles.",
-     "audio_text": null,
-     "start": 438.6911,
-     "end": 447.0411,
-     "dur": 8.35,
-     "start_frame": 13161,
-     "end_frame": 13411
-    },
-    {
-     "text": "From Part 3, each one is cosine phi cosine lambda, cosine phi sine lambda, sine phi.",
-     "audio_text": null,
-     "start": 447.3911,
-     "end": 454.0911,
-     "dur": 6.7,
-     "start_frame": 13422,
-     "end_frame": 13623
-    },
-    {
-     "text": "London is at fifty one point five one degrees north, and zero point one three degrees west, so its lambda is minus zero point one three degrees.",
-     "audio_text": null,
-     "start": 454.4411,
-     "end": 464.8411,
-     "dur": 10.4,
-     "start_frame": 13633,
-     "end_frame": 13945
-    },
-    {
-     "text": "The cosine of fifty one point five one degrees is zero point six two two, and the cosine of minus zero point one three degrees is almost exactly one.",
-     "audio_text": null,
-     "start": 465.1911,
-     "end": 476.4661,
-     "dur": 11.275,
-     "start_frame": 13956,
-     "end_frame": 14294
-    },
-    {
-     "text": "So the first part is zero point six two two.",
-     "audio_text": null,
-     "start": 476.8161,
-     "end": 480.1411,
-     "dur": 3.325,
-     "start_frame": 14304,
-     "end_frame": 14404,
-     "beat": true
-    },
-    {
-     "text": "The sine of minus zero point one three degrees is minus zero point zero zero two three, so the second part is zero point six two two times that, about minus zero point zero zero one.",
-     "audio_text": null,
-     "start": 481.6411,
-     "end": 495.1661,
-     "dur": 13.525,
-     "start_frame": 14449,
-     "end_frame": 14855,
-     "beat": true
-    },
-    {
-     "text": "The third part is the sine of fifty one point five one degrees, zero point seven eight three.",
-     "audio_text": null,
-     "start": 496.6661,
-     "end": 503.1661,
-     "dur": 6.5,
-     "start_frame": 14900,
-     "end_frame": 15095,
-     "beat": true
-    },
-    {
-     "text": "Los Angeles is at thirty four point zero five degrees north, and a hundred and eighteen point two four degrees west, so its lambda is minus a hundred and eighteen point two four degrees.",
-     "audio_text": null,
-     "start": 504.6661,
-     "end": 517.0911,
-     "dur": 12.425,
-     "start_frame": 15140,
-     "end_frame": 15513
-    },
-    {
-     "text": "Its cosine phi is zero point eight two nine, its cosine lambda is minus zero point four seven three, and its sine lambda is minus zero point eight eight one.",
-     "audio_text": null,
-     "start": 517.4411,
-     "end": 528.6411,
-     "dur": 11.2,
-     "start_frame": 15523,
-     "end_frame": 15859
-    },
-    {
-     "text": "So its first part is zero point eight two nine times minus zero point four seven three, about minus zero point three nine two.",
-     "audio_text": null,
-     "start": 528.9911,
-     "end": 538.0911,
-     "dur": 9.1,
-     "start_frame": 15870,
-     "end_frame": 16143,
-     "beat": true
-    },
-    {
-     "text": "Its second part is zero point eight two nine times minus zero point eight eight one, about minus zero point seven three zero.",
-     "audio_text": null,
-     "start": 539.5911,
-     "end": 548.4411,
-     "dur": 8.85,
-     "start_frame": 16188,
-     "end_frame": 16453,
-     "beat": true
-    },
-    {
-     "text": "And its third part, the sine of thirty four point zero five degrees, is zero point five six zero.",
-     "audio_text": null,
-     "start": 549.9411,
-     "end": 557.1411,
-     "dur": 7.2,
-     "start_frame": 16498,
-     "end_frame": 16714,
-     "beat": true
-    }
-   ],
-   "end": 558.6411,
-   "start_frame": 12541,
-   "end_frame": 16759
-  },
-  {
-   "id": "s09_cos_sigma",
-   "start": 558.6411,
-   "sentences": [
-    {
-     "text": "Now let's use the rule from the dot product movie.",
-     "audio_text": null,
-     "start": 558.6411,
-     "end": 562.2661,
-     "dur": 3.625,
-     "start_frame": 16759,
-     "end_frame": 16868
-    },
-    {
-     "text": "The dot product of two arrows is the product of their lengths, times the cosine of the angle between them.",
-     "audio_text": null,
-     "start": 562.6161,
-     "end": 569.5911,
-     "dur": 6.975,
-     "start_frame": 16878,
-     "end_frame": 17088
-    },
-    {
-     "text": "Our two arrows both have length one, so their dot product is just the cosine of sigma.",
-     "audio_text": null,
-     "start": 569.9411,
-     "end": 575.8911,
-     "dur": 5.95,
-     "start_frame": 17098,
-     "end_frame": 17277
-    },
-    {
-     "text": "That's the shadow picture again: the shadow of one arrow of length one on the other.",
-     "audio_text": null,
-     "start": 576.2411,
-     "end": 581.6661,
-     "dur": 5.425,
-     "start_frame": 17287,
-     "end_frame": 17450
-    },
-    {
-     "text": "To take the dot product, multiply the matching parts and add.",
-     "audio_text": null,
-     "start": 582.0161,
-     "end": 586.4161,
-     "dur": 4.4,
-     "start_frame": 17460,
-     "end_frame": 17592
-    },
-    {
-     "text": "Zero point six two two times minus zero point three nine two is minus zero point two four four.",
-     "audio_text": null,
-     "start": 586.7661,
-     "end": 593.8911,
-     "dur": 7.125,
-     "start_frame": 17603,
-     "end_frame": 17817,
-     "beat": true
-    },
-    {
-     "text": "Minus zero point zero zero one times minus zero point seven three zero is about plus zero point zero zero one.",
-     "audio_text": null,
-     "start": 595.3911,
-     "end": 603.9661,
-     "dur": 8.575,
-     "start_frame": 17862,
-     "end_frame": 18119,
-     "beat": true
-    },
-    {
-     "text": "And zero point seven eight three times zero point five six zero is zero point four three eight.",
-     "audio_text": null,
-     "start": 605.4661,
-     "end": 612.4161,
-     "dur": 6.95,
-     "start_frame": 18164,
-     "end_frame": 18372,
-     "beat": true
-    },
-    {
-     "text": "Adding the three gives about zero point one nine five.",
-     "audio_text": null,
-     "start": 613.9161,
-     "end": 617.4911,
-     "dur": 3.575,
-     "start_frame": 18417,
-     "end_frame": 18525
-    },
-    {
-     "text": "So the cosine of sigma is zero point one nine five.",
-     "audio_text": null,
-     "start": 617.8411,
-     "end": 621.8161,
-     "dur": 3.975,
-     "start_frame": 18535,
-     "end_frame": 18654,
-     "beat": true
-    },
-    {
-     "text": "Which angle has a cosine of zero point one nine five?",
-     "audio_text": null,
-     "start": 623.3161,
-     "end": 627.3911,
-     "dur": 4.075,
-     "start_frame": 18699,
-     "end_frame": 18822
-    },
-    {
-     "text": "A calculator's inverse cosine says about seventy eight point seven degrees.",
-     "audio_text": null,
-     "start": 627.7411,
-     "end": 633.1161,
-     "dur": 5.375,
-     "start_frame": 18832,
-     "end_frame": 18993,
-     "beat": true
-    },
-    {
-     "text": "A cosine just below zero point two means an angle a little less than ninety degrees, so London and Los Angeles are almost a quarter of the way round the Earth from each other.",
-     "audio_text": null,
-     "start": 634.6161,
-     "end": 646.0911,
-     "dur": 11.475,
-     "start_frame": 19038,
-     "end_frame": 19383
-    }
-   ],
-   "end": 646.8911,
-   "start_frame": 16759,
-   "end_frame": 19407
-  },
-  {
-   "id": "s10_distance",
-   "start": 646.8911,
-   "sentences": [
-    {
-     "text": "The arc rule needs sigma in radians.",
-     "audio_text": null,
-     "start": 646.8911,
-     "end": 649.8161,
-     "dur": 2.925,
-     "start_frame": 19407,
-     "end_frame": 19494
-    },
-    {
-     "text": "One degree is pi over a hundred and eighty radians, about zero point zero one seven four five.",
-     "audio_text": null,
-     "start": 650.1661,
-     "end": 657.2411,
-     "dur": 7.075,
-     "start_frame": 19505,
-     "end_frame": 19717
-    },
-    {
-     "text": "So seventy eight point seven four degrees, or more exactly seventy eight point seven three eight, times pi over a hundred and eighty, is about one point three seven four two radians.",
-     "audio_text": null,
-     "start": 657.5911,
-     "end": 670.9359,
-     "dur": 13.3448,
-     "start_frame": 19728,
-     "end_frame": 20128,
+     "text": "So one degree north walks the Earth's radius times that, about a hundred and eleven point two kilometres.",
+     "start": 170.8334,
+     "end": 178.0052,
+     "dur": 7.1718,
+     "start_frame": 5125,
+     "end_frame": 5340,
      "beat": true,
      "estimated": true
     },
     {
-     "text": "Now the distance is the Earth's radius times sigma: six thousand three hundred and seventy one kilometres times one point three seven four two.",
-     "audio_text": null,
-     "start": 672.4359,
-     "end": 682.4609,
-     "dur": 10.025,
-     "start_frame": 20173,
-     "end_frame": 20474
+     "text": "The cosine of forty eight point four degrees is zero point six six four.",
+     "start": 179.5052,
+     "end": 184.7552,
+     "dur": 5.25,
+     "start_frame": 5385,
+     "end_frame": 5543
     },
     {
-     "text": "That's about eight thousand seven hundred and fifty five kilometres.",
-     "audio_text": null,
-     "start": 682.8109,
-     "end": 687.5609,
-     "dur": 4.75,
-     "start_frame": 20484,
-     "end_frame": 20627,
+     "text": "So one degree east walks those hundred and eleven point two kilometres times the cosine, only about seventy three point eight kilometres.",
+     "start": 185.1052,
+     "end": 194.4627,
+     "dur": 9.3575,
+     "start_frame": 5553,
+     "end_frame": 5834,
+     "beat": true,
+     "estimated": true
+    },
+    {
+     "text": "The same one-degree step gives two different distances, and the scale factors keep track of that.",
+     "start": 195.9627,
+     "end": 202.5377,
+     "dur": 6.575,
+     "start_frame": 5879,
+     "end_frame": 6076
+    }
+   ],
+   "end": 203.3377,
+   "start_frame": 2904,
+   "end_frame": 6100
+  },
+  {
+   "id": "s05_shortest_way",
+   "start": 203.3377,
+   "sentences": [
+    {
+     "text": "Now let's put coordinates to work on a question every airline asks: what's the shortest way between two places?",
+     "start": 203.3377,
+     "end": 210.8877,
+     "dur": 7.55,
+     "start_frame": 6100,
+     "end_frame": 6327
+    },
+    {
+     "text": "It matters, because a shorter route burns less fuel and takes less time.",
+     "start": 211.2377,
+     "end": 216.2877,
+     "dur": 5.05,
+     "start_frame": 6337,
+     "end_frame": 6489
+    },
+    {
+     "text": "On a flat sheet of paper, the shortest way is a straight line.",
+     "start": 216.6377,
+     "end": 220.9627,
+     "dur": 4.325,
+     "start_frame": 6499,
+     "end_frame": 6629
+    },
+    {
+     "text": "But a plane can't tunnel through the Earth, so it has to follow the curved surface.",
+     "start": 221.3127,
+     "end": 226.7627,
+     "dur": 5.45,
+     "start_frame": 6639,
+     "end_frame": 6803
+    },
+    {
+     "text": "On a sphere, the shortest way follows a great circle.",
+     "start": 227.1127,
+     "end": 231.0127,
+     "dur": 3.9,
+     "start_frame": 6813,
+     "end_frame": 6930
+    },
+    {
+     "text": "A great circle is any circle on the sphere whose centre is the centre of the Earth.",
+     "start": 231.3627,
+     "end": 236.8877,
+     "dur": 5.525,
+     "start_frame": 6941,
+     "end_frame": 7107
+    },
+    {
+     "text": "The equator is one, and so is every meridian, together with its partner on the other side of the globe.",
+     "start": 237.2377,
+     "end": 244.0627,
+     "dur": 6.825,
+     "start_frame": 7117,
+     "end_frame": 7322
+    },
+    {
+     "text": "The other circles of latitude are not great circles: their centres sit on the Earth's axis, above or below the Earth's centre, so they're smaller.",
+     "start": 244.4127,
+     "end": 253.8127,
+     "dur": 9.4,
+     "start_frame": 7332,
+     "end_frame": 7614
+    }
+   ],
+   "end": 254.6127,
+   "start_frame": 6100,
+   "end_frame": 7638
+  },
+  {
+   "id": "s06_great_circle",
+   "start": 254.6127,
+   "sentences": [
+    {
+     "text": "Let's find the great circle through London and Los Angeles.",
+     "start": 254.6127,
+     "end": 258.7127,
+     "dur": 4.1,
+     "start_frame": 7638,
+     "end_frame": 7761
+    },
+    {
+     "text": "London is at fifty one and a half degrees north, almost on the prime meridian.",
+     "start": 259.0627,
+     "end": 264.5377,
+     "dur": 5.475,
+     "start_frame": 7772,
+     "end_frame": 7936
+    },
+    {
+     "text": "Los Angeles is at thirty four degrees north, and a hundred and eighteen degrees west.",
+     "start": 264.8877,
+     "end": 270.7377,
+     "dur": 5.85,
+     "start_frame": 7947,
+     "end_frame": 8122
+    },
+    {
+     "text": "Picture a flat sheet slicing through the globe, so that it passes through London, through Los Angeles, and through the Earth's centre.",
+     "start": 271.0877,
+     "end": 279.1127,
+     "dur": 8.025,
+     "start_frame": 8133,
+     "end_frame": 8373
+    },
+    {
+     "text": "Three points that aren't in a line fix exactly one flat sheet, just as three legs steady a stool.",
+     "start": 279.4627,
+     "end": 286.1877,
+     "dur": 6.725,
+     "start_frame": 8384,
+     "end_frame": 8586
+    },
+    {
+     "text": "Where the sheet cuts the Earth's surface, it traces a great circle, and the part between the two cities is the great circle route.",
+     "start": 286.5377,
+     "end": 294.5627,
+     "dur": 8.025,
+     "start_frame": 8596,
+     "end_frame": 8837
+    },
+    {
+     "text": "Why is it the shortest?",
+     "start": 294.9127,
+     "end": 296.9127,
+     "dur": 2.0,
+     "start_frame": 8847,
+     "end_frame": 8907
+    },
+    {
+     "text": "Think of all the circles on the globe that pass through both cities.",
+     "start": 297.2627,
+     "end": 301.5627,
+     "dur": 4.3,
+     "start_frame": 8918,
+     "end_frame": 9047
+    },
+    {
+     "text": "The great circle is the biggest of them, so between the two cities it bends the least.",
+     "start": 301.9127,
+     "end": 307.3627,
+     "dur": 5.45,
+     "start_frame": 9057,
+     "end_frame": 9221
+    },
+    {
+     "text": "A string pulled tight between the two cities on a desk globe lies right along it.",
+     "start": 307.7127,
+     "end": 313.1627,
+     "dur": 5.45,
+     "start_frame": 9231,
+     "end_frame": 9395
+    },
+    {
+     "text": "And the puck from Part 4, gliding over a smooth Earth with nothing pushing it, was moving along exactly such a great circle.",
+     "start": 313.5127,
+     "end": 321.9823,
+     "dur": 8.4696,
+     "start_frame": 9405,
+     "end_frame": 9659,
+     "estimated": true
+    }
+   ],
+   "end": 322.7823,
+   "start_frame": 7638,
+   "end_frame": 9683
+  },
+  {
+   "id": "s07_sigma",
+   "start": 322.7823,
+   "sentences": [
+    {
+     "text": "How long is this route?",
+     "start": 322.7823,
+     "end": 324.7573,
+     "dur": 1.975,
+     "start_frame": 9683,
+     "end_frame": 9743
+    },
+    {
+     "text": "Let's turn the globe, so that we look straight at the slicing sheet.",
+     "start": 325.1073,
+     "end": 329.2573,
+     "dur": 4.15,
+     "start_frame": 9753,
+     "end_frame": 9878
+    },
+    {
+     "text": "Now it's just a flat circle, with the Earth's centre in the middle, and its radius is the Earth's radius.",
+     "start": 329.6073,
+     "end": 336.3823,
+     "dur": 6.775,
+     "start_frame": 9888,
+     "end_frame": 10091
+    },
+    {
+     "text": "Draw one arrow from the centre to London, and another one to Los Angeles.",
+     "start": 336.7323,
+     "end": 341.9323,
+     "dur": 5.2,
+     "start_frame": 10102,
+     "end_frame": 10258
+    },
+    {
+     "text": "The angle between these two arrows, at the Earth's centre, is called sigma.",
+     "start": 342.2823,
+     "end": 347.2573,
+     "dur": 4.975,
+     "start_frame": 10268,
+     "end_frame": 10418
+    },
+    {
+     "text": "The route is the arc of the circle between the two arrow tips.",
+     "start": 347.6073,
+     "end": 351.9823,
+     "dur": 4.375,
+     "start_frame": 10428,
+     "end_frame": 10559
+    },
+    {
+     "text": "And that's exactly the picture of the arc rule from Part 1: the distance along a circle is the radius times the angle.",
+     "start": 352.3323,
+     "end": 360.6823,
+     "dur": 8.35,
+     "start_frame": 10570,
+     "end_frame": 10820
+    },
+    {
+     "text": "So the distance d equals the Earth's radius times sigma, with sigma in radians.",
+     "start": 361.0323,
+     "end": 366.8073,
+     "dur": 5.775,
+     "start_frame": 10831,
+     "end_frame": 11004,
      "beat": true
     },
     {
-     "text": "Let's check it the quick way: seventy eight point seven four degrees, times a hundred and eleven point two kilometres per degree, is about eight thousand seven hundred and fifty six kilometres, the same to within the rounding.",
-     "audio_text": null,
-     "start": 689.0609,
-     "end": 703.0164,
-     "dur": 13.9555,
-     "start_frame": 20672,
-     "end_frame": 21090,
+     "text": "Here's a way to feel it.",
+     "start": 368.3073,
+     "end": 370.2573,
+     "dur": 1.95,
+     "start_frame": 11049,
+     "end_frame": 11108
+    },
+    {
+     "text": "Every degree of sigma is one degree of a great circle, about a hundred and eleven point two kilometres on the ground, just like a degree of latitude along a meridian.",
+     "start": 370.6073,
+     "end": 381.3323,
+     "dur": 10.725,
+     "start_frame": 11118,
+     "end_frame": 11440
+    },
+    {
+     "text": "So once we know sigma, we know the distance.",
+     "start": 381.6823,
+     "end": 384.9073,
+     "dur": 3.225,
+     "start_frame": 11450,
+     "end_frame": 11547
+    }
+   ],
+   "end": 385.7073,
+   "start_frame": 9683,
+   "end_frame": 11571
+  },
+  {
+   "id": "s08_position_arrows",
+   "start": 385.7073,
+   "sentences": [
+    {
+     "text": "The next few minutes work out sigma step by step, with every number.",
+     "start": 385.7073,
+     "end": 390.5323,
+     "dur": 4.825,
+     "start_frame": 11571,
+     "end_frame": 11716
+    },
+    {
+     "text": "They're here for anyone who enjoys seeing every step, but you don't need them for the intuition behind weather, climate science or GIS.",
+     "start": 390.8823,
+     "end": 399.5823,
+     "dur": 8.7,
+     "start_frame": 11726,
+     "end_frame": 11987
+    },
+    {
+     "text": "If it feels like a lot, skip ahead to the time on screen, and you won't miss the big idea.",
+     "start": 399.9323,
+     "end": 406.0073,
+     "dur": 6.075,
+     "start_frame": 11998,
+     "end_frame": 12180
+    },
+    {
+     "text": "To find sigma, we need the two position arrows of length one, r hat one for London and r hat two for Los Angeles.",
+     "start": 406.3573,
+     "end": 414.7073,
+     "dur": 8.35,
+     "start_frame": 12191,
+     "end_frame": 12441
+    },
+    {
+     "text": "From Part 3, each one is cosine phi cosine lambda, cosine phi sine lambda, sine phi.",
+     "start": 415.0573,
+     "end": 421.7573,
+     "dur": 6.7,
+     "start_frame": 12452,
+     "end_frame": 12653
+    },
+    {
+     "text": "London is at fifty one point five one degrees north, and zero point one three degrees west, so its lambda is minus zero point one three degrees.",
+     "start": 422.1073,
+     "end": 432.5073,
+     "dur": 10.4,
+     "start_frame": 12663,
+     "end_frame": 12975
+    },
+    {
+     "text": "The cosine of fifty one point five one degrees is zero point six two two, and the cosine of minus zero point one three degrees is almost exactly one.",
+     "start": 432.8573,
+     "end": 444.1323,
+     "dur": 11.275,
+     "start_frame": 12986,
+     "end_frame": 13324
+    },
+    {
+     "text": "So the first part is zero point six two two.",
+     "start": 444.4823,
+     "end": 447.8073,
+     "dur": 3.325,
+     "start_frame": 13334,
+     "end_frame": 13434,
+     "beat": true
+    },
+    {
+     "text": "The sine of minus zero point one three degrees is minus zero point zero zero two three, so the second part, cosine phi times sine lambda, is about minus zero point zero zero one.",
+     "start": 449.3073,
+     "end": 461.4652,
+     "dur": 12.1579,
+     "start_frame": 13479,
+     "end_frame": 13844,
+     "beat": true,
+     "estimated": true
+    },
+    {
+     "text": "The third part is the sine of fifty one point five one degrees, zero point seven eight three.",
+     "start": 462.9652,
+     "end": 469.4652,
+     "dur": 6.5,
+     "start_frame": 13889,
+     "end_frame": 14084,
+     "beat": true
+    },
+    {
+     "text": "Los Angeles is at thirty four point zero five degrees north, and a hundred and eighteen point two four degrees west, so its lambda is minus a hundred and eighteen point two four degrees.",
+     "start": 470.9652,
+     "end": 483.3902,
+     "dur": 12.425,
+     "start_frame": 14129,
+     "end_frame": 14502
+    },
+    {
+     "text": "Its cosine phi is zero point eight two nine, its cosine lambda is minus zero point four seven three, and its sine lambda is minus zero point eight eight one.",
+     "start": 483.7402,
+     "end": 494.9402,
+     "dur": 11.2,
+     "start_frame": 14512,
+     "end_frame": 14848
+    },
+    {
+     "text": "So its first part, cosine phi times cosine lambda, is about minus zero point three nine two.",
+     "start": 495.2902,
+     "end": 501.5741,
+     "dur": 6.2839,
+     "start_frame": 14859,
+     "end_frame": 15047,
+     "beat": true,
+     "estimated": true
+    },
+    {
+     "text": "Its second part, cosine phi times sine lambda, is about minus zero point seven three zero.",
+     "start": 503.0741,
+     "end": 509.2213,
+     "dur": 6.1473,
+     "start_frame": 15092,
+     "end_frame": 15277,
+     "beat": true,
+     "estimated": true
+    },
+    {
+     "text": "And its third part, the sine of thirty four point zero five degrees, is zero point five six zero.",
+     "start": 510.7213,
+     "end": 517.9213,
+     "dur": 7.2,
+     "start_frame": 15322,
+     "end_frame": 15538,
+     "beat": true
+    }
+   ],
+   "end": 519.4213,
+   "start_frame": 11571,
+   "end_frame": 15583
+  },
+  {
+   "id": "s09_cos_sigma",
+   "start": 519.4213,
+   "sentences": [
+    {
+     "text": "Now let's use the rule from the dot product movie.",
+     "start": 519.4213,
+     "end": 523.0463,
+     "dur": 3.625,
+     "start_frame": 15583,
+     "end_frame": 15691
+    },
+    {
+     "text": "The dot product of two arrows is the product of their lengths, times the cosine of the angle between them.",
+     "start": 523.3963,
+     "end": 530.3713,
+     "dur": 6.975,
+     "start_frame": 15702,
+     "end_frame": 15911
+    },
+    {
+     "text": "Our two arrows both have length one, so their dot product is just the cosine of sigma.",
+     "start": 530.7213,
+     "end": 536.6713,
+     "dur": 5.95,
+     "start_frame": 15922,
+     "end_frame": 16100
+    },
+    {
+     "text": "That's the shadow picture again: the shadow of one arrow of length one on the other.",
+     "start": 537.0213,
+     "end": 542.4463,
+     "dur": 5.425,
+     "start_frame": 16111,
+     "end_frame": 16273
+    },
+    {
+     "text": "To take the dot product, we multiply London's first part by Los Angeles' first part, then the second parts, and then the third parts, and add the three products.",
+     "start": 542.7963,
+     "end": 553.7931,
+     "dur": 10.9968,
+     "start_frame": 16284,
+     "end_frame": 16614,
+     "estimated": true
+    },
+    {
+     "text": "That gives about zero point one nine five, so the cosine of sigma is zero point one nine five.",
+     "start": 554.1431,
+     "end": 560.5636,
+     "dur": 6.4205,
+     "start_frame": 16624,
+     "end_frame": 16817,
+     "beat": true,
+     "estimated": true
+    },
+    {
+     "text": "Which angle has a cosine of zero point one nine five?",
+     "start": 562.0636,
+     "end": 566.1386,
+     "dur": 4.075,
+     "start_frame": 16862,
+     "end_frame": 16984
+    },
+    {
+     "text": "A calculator's inverse cosine says about seventy eight point seven degrees.",
+     "start": 566.4886,
+     "end": 571.8636,
+     "dur": 5.375,
+     "start_frame": 16995,
+     "end_frame": 17156,
+     "beat": true
+    },
+    {
+     "text": "A cosine just below zero point two means an angle a little less than ninety degrees, so London and Los Angeles are almost a quarter of the way round the Earth from each other.",
+     "start": 573.3636,
+     "end": 584.8386,
+     "dur": 11.475,
+     "start_frame": 17201,
+     "end_frame": 17545
+    }
+   ],
+   "end": 585.6386,
+   "start_frame": 15583,
+   "end_frame": 17569
+  },
+  {
+   "id": "s10_distance",
+   "start": 585.6386,
+   "sentences": [
+    {
+     "text": "The arc rule needs sigma in radians.",
+     "start": 585.6386,
+     "end": 588.5636,
+     "dur": 2.925,
+     "start_frame": 17569,
+     "end_frame": 17657
+    },
+    {
+     "text": "One degree is pi over a hundred and eighty radians, about zero point zero one seven four five.",
+     "start": 588.9136,
+     "end": 595.9886,
+     "dur": 7.075,
+     "start_frame": 17667,
+     "end_frame": 17880
+    },
+    {
+     "text": "So sigma, seventy eight point seven three eight degrees to be exact, is about one point three seven four two radians.",
+     "start": 596.3386,
+     "end": 604.33,
+     "dur": 7.9914,
+     "start_frame": 17890,
+     "end_frame": 18130,
+     "beat": true,
+     "estimated": true
+    },
+    {
+     "text": "Now the distance is the Earth's radius, six thousand three hundred and seventy one kilometres, times sigma in radians.",
+     "start": 605.83,
+     "end": 613.8898,
+     "dur": 8.0597,
+     "start_frame": 18175,
+     "end_frame": 18417,
+     "estimated": true
+    },
+    {
+     "text": "That's about eight thousand seven hundred and fifty five kilometres.",
+     "start": 614.2398,
+     "end": 618.9898,
+     "dur": 4.75,
+     "start_frame": 18427,
+     "end_frame": 18570,
+     "beat": true
+    },
+    {
+     "text": "Let's check it the quick way: every degree of sigma is about a hundred and eleven point two kilometres, so seventy eight point seven four degrees make about eight thousand seven hundred and fifty six kilometres, the same to within the rounding.",
+     "start": 620.4898,
+     "end": 637.1557,
+     "dur": 16.6659,
+     "start_frame": 18615,
+     "end_frame": 19115,
      "beat": true,
      "estimated": true
     },
     {
      "text": "At a cruising speed of about nine hundred kilometres per hour, that's nearly ten hours in the air, before any help or hindrance from the winds.",
-     "audio_text": null,
-     "start": 704.5164,
-     "end": 713.7164,
+     "start": 638.6557,
+     "end": 647.8557,
      "dur": 9.2,
-     "start_frame": 21135,
-     "end_frame": 21411
+     "start_frame": 19160,
+     "end_frame": 19436
     }
    ],
-   "end": 714.5164,
-   "start_frame": 19407,
-   "end_frame": 21435
+   "end": 648.6557,
+   "start_frame": 17569,
+   "end_frame": 19460
   },
   {
    "id": "s11_route_shape",
-   "start": 714.5164,
+   "start": 648.6557,
    "sentences": [
     {
      "text": "If you skipped, here's what to keep.",
-     "audio_text": null,
-     "start": 714.5164,
-     "end": 717.1914,
+     "start": 648.6557,
+     "end": 651.3307,
      "dur": 2.675,
-     "start_frame": 21435,
-     "end_frame": 21516
+     "start_frame": 19460,
+     "end_frame": 19540
     },
     {
      "text": "Seen from the Earth's centre, London and Los Angeles are about seventy nine degrees apart, so the great circle route between them is about eight thousand seven hundred and fifty five kilometres long.",
-     "audio_text": null,
-     "start": 717.5414,
-     "end": 730.0164,
+     "start": 651.6807,
+     "end": 664.1557,
      "dur": 12.475,
-     "start_frame": 21526,
-     "end_frame": 21900
+     "start_frame": 19550,
+     "end_frame": 19925
     },
     {
      "text": "Where does this route go?",
-     "audio_text": null,
-     "start": 730.3664,
-     "end": 732.3414,
+     "start": 664.5057,
+     "end": 666.4807,
      "dur": 1.975,
-     "start_frame": 21911,
-     "end_frame": 21970
+     "start_frame": 19935,
+     "end_frame": 19994
     },
     {
      "text": "On most flat maps, Los Angeles looks to the west-south-west of London.",
-     "audio_text": null,
-     "start": 732.6914,
-     "end": 737.8414,
+     "start": 666.8307,
+     "end": 671.9807,
      "dur": 5.15,
-     "start_frame": 21981,
-     "end_frame": 22135
+     "start_frame": 20005,
+     "end_frame": 20159
     },
     {
      "text": "But the great circle leaves London heading north-west, at a compass bearing of about three hundred and twelve degrees.",
-     "audio_text": null,
-     "start": 738.1914,
-     "end": 745.2914,
+     "start": 672.3307,
+     "end": 679.4307,
      "dur": 7.1,
-     "start_frame": 22146,
-     "end_frame": 22359
+     "start_frame": 20170,
+     "end_frame": 20383
+    },
+    {
+     "text": "That heading comes from London's own east and north arrows, from Part 4: we measure how much of Los Angeles' position arrow points along each one, and turn that into a compass bearing.",
+     "start": 679.7807,
+     "end": 692.3484,
+     "dur": 12.5677,
+     "start_frame": 20393,
+     "end_frame": 20770,
+     "estimated": true
     },
     {
      "text": "It climbs to its highest latitude, about sixty two point four degrees north, near the south-west coast of Greenland.",
-     "audio_text": null,
-     "start": 745.6414,
-     "end": 753.5164,
+     "start": 692.6984,
+     "end": 700.5734,
      "dur": 7.875,
-     "start_frame": 22369,
-     "end_frame": 22605
+     "start_frame": 20781,
+     "end_frame": 21017
     },
     {
      "text": "Then it turns south over northern Canada, and arrives at Los Angeles heading south-west, at a bearing of about two hundred and fourteen degrees.",
-     "audio_text": null,
-     "start": 753.8664,
-     "end": 763.3664,
+     "start": 700.9234,
+     "end": 710.4234,
      "dur": 9.5,
-     "start_frame": 22616,
-     "end_frame": 22901,
+     "start_frame": 21028,
+     "end_frame": 21313,
      "beat": true
     },
     {
      "text": "So along the way, the compass heading changes by almost a hundred degrees.",
-     "audio_text": null,
-     "start": 764.8664,
-     "end": 770.2164,
+     "start": 711.9234,
+     "end": 717.2734,
      "dur": 5.35,
-     "start_frame": 22946,
-     "end_frame": 23106
+     "start_frame": 21358,
+     "end_frame": 21518
     },
     {
      "text": "That's why flights from Europe to California pass over Greenland and Canada.",
-     "audio_text": null,
-     "start": 770.5664,
-     "end": 775.9664,
+     "start": 717.6234,
+     "end": 723.0234,
      "dur": 5.4,
-     "start_frame": 23117,
-     "end_frame": 23279
+     "start_frame": 21529,
+     "end_frame": 21691
     }
    ],
-   "end": 776.7664,
-   "start_frame": 21435,
-   "end_frame": 23303
+   "end": 723.8234,
+   "start_frame": 19460,
+   "end_frame": 21715
   },
   {
    "id": "s12_rhumb",
-   "start": 776.7664,
+   "start": 723.8234,
    "sentences": [
     {
      "text": "Sailors used a different route for centuries.",
-     "audio_text": null,
-     "start": 776.7664,
-     "end": 780.0164,
+     "start": 723.8234,
+     "end": 727.0734,
      "dur": 3.25,
-     "start_frame": 23303,
-     "end_frame": 23400
+     "start_frame": 21715,
+     "end_frame": 21812
     },
     {
      "text": "It's called the rhumb line: a route that keeps the same compass bearing all the way, so it crosses every meridian at the same angle.",
-     "audio_text": null,
-     "start": 780.3664,
-     "end": 788.7914,
+     "start": 727.4234,
+     "end": 735.8484,
      "dur": 8.425,
-     "start_frame": 23411,
-     "end_frame": 23664
+     "start_frame": 21823,
+     "end_frame": 22075
     },
     {
      "text": "From London to Los Angeles, the rhumb line holds a bearing of about two hundred and fifty eight and a half degrees, a little south of due west.",
-     "audio_text": null,
-     "start": 789.1414,
-     "end": 798.1914,
+     "start": 736.1984,
+     "end": 745.2484,
      "dur": 9.05,
-     "start_frame": 23674,
-     "end_frame": 23946
+     "start_frame": 22086,
+     "end_frame": 22357
     },
     {
      "text": "It stays further south than the great circle, and it's about nine thousand seven hundred and thirty three kilometres long.",
-     "audio_text": null,
-     "start": 798.5414,
-     "end": 806.4164,
+     "start": 745.5984,
+     "end": 753.4734,
      "dur": 7.875,
-     "start_frame": 23956,
-     "end_frame": 24192,
+     "start_frame": 22368,
+     "end_frame": 22604,
      "beat": true
     },
     {
      "text": "How much longer is that?",
-     "audio_text": null,
-     "start": 807.9164,
-     "end": 809.9414,
+     "start": 754.9734,
+     "end": 756.9984,
      "dur": 2.025,
-     "start_frame": 24237,
-     "end_frame": 24298
+     "start_frame": 22649,
+     "end_frame": 22710
     },
     {
-     "text": "Nine thousand seven hundred and thirty three divided by eight thousand seven hundred and fifty five is about one point one one, so the rhumb line is about eleven percent longer.",
-     "audio_text": null,
-     "start": 810.2914,
-     "end": 822.4164,
-     "dur": 12.125,
-     "start_frame": 24309,
-     "end_frame": 24672,
-     "beat": true
+     "text": "Dividing the rhumb line's length by the great circle's gives about one point one one, so the rhumb line is about eleven percent longer.",
+     "start": 757.3484,
+     "end": 766.5693,
+     "dur": 9.2209,
+     "start_frame": 22720,
+     "end_frame": 22997,
+     "beat": true,
+     "estimated": true
     },
     {
      "text": "The extra is about nine hundred and seventy eight kilometres, more than an hour of flying at nine hundred kilometres per hour.",
-     "audio_text": null,
-     "start": 823.9164,
-     "end": 832.0664,
+     "start": 768.0693,
+     "end": 776.2193,
      "dur": 8.15,
-     "start_frame": 24717,
-     "end_frame": 24962,
+     "start_frame": 23042,
+     "end_frame": 23287,
      "beat": true
     },
     {
      "text": "And if you kept following a rhumb line, it would spiral round and round towards a pole.",
-     "audio_text": null,
-     "start": 833.5664,
-     "end": 839.0414,
+     "start": 777.7193,
+     "end": 783.1943,
      "dur": 5.475,
-     "start_frame": 25007,
-     "end_frame": 25171
+     "start_frame": 23332,
+     "end_frame": 23496
     }
    ],
-   "end": 839.8414,
-   "start_frame": 23303,
-   "end_frame": 25195
+   "end": 783.9943,
+   "start_frame": 21715,
+   "end_frame": 23520
   },
   {
    "id": "s13_why_rhumb",
-   "start": 839.8414,
+   "start": 783.9943,
    "sentences": [
     {
      "text": "So why would anyone choose the longer route?",
-     "audio_text": null,
-     "start": 839.8414,
-     "end": 842.8414,
+     "start": 783.9943,
+     "end": 786.9943,
      "dur": 3.0,
-     "start_frame": 25195,
-     "end_frame": 25285
+     "start_frame": 23520,
+     "end_frame": 23610
     },
     {
      "text": "There are three reasons.",
-     "audio_text": null,
-     "start": 843.1914,
-     "end": 845.1164,
+     "start": 787.3443,
+     "end": 789.2693,
      "dur": 1.925,
-     "start_frame": 25296,
-     "end_frame": 25353
+     "start_frame": 23620,
+     "end_frame": 23678
     },
     {
      "text": "The first is steering.",
-     "audio_text": null,
-     "start": 845.4664,
-     "end": 847.3164,
+     "start": 789.6193,
+     "end": 791.4693,
      "dur": 1.85,
-     "start_frame": 25364,
-     "end_frame": 25419
+     "start_frame": 23689,
+     "end_frame": 23744
     },
     {
      "text": "A rhumb line needs one compass setting for the whole trip: set two hundred and fifty eight and a half degrees, and hold it.",
-     "audio_text": null,
-     "start": 847.6664,
-     "end": 855.2914,
+     "start": 791.8193,
+     "end": 799.4443,
      "dur": 7.625,
-     "start_frame": 25430,
-     "end_frame": 25659
+     "start_frame": 23755,
+     "end_frame": 23983
     },
     {
      "text": "The great circle needs a new heading all the time, from three hundred and twelve degrees at London to two hundred and fourteen at Los Angeles.",
-     "audio_text": null,
-     "start": 855.6414,
-     "end": 864.8914,
+     "start": 799.7943,
+     "end": 809.0443,
      "dur": 9.25,
-     "start_frame": 25669,
-     "end_frame": 25947
+     "start_frame": 23994,
+     "end_frame": 24271
     },
     {
      "text": "Before satellites and computers, a ship's navigator with a compass could steer a rhumb line easily, but a great circle only with a lot of calculation.",
-     "audio_text": null,
-     "start": 865.2414,
-     "end": 875.1664,
+     "start": 809.3943,
+     "end": 819.3193,
      "dur": 9.925,
-     "start_frame": 25957,
-     "end_frame": 26255
+     "start_frame": 24282,
+     "end_frame": 24580
     },
     {
      "text": "The second reason is that, on short trips, the extra distance is tiny.",
-     "audio_text": null,
-     "start": 875.5164,
-     "end": 880.9414,
+     "start": 819.6693,
+     "end": 825.0943,
      "dur": 5.425,
-     "start_frame": 26265,
-     "end_frame": 26428
+     "start_frame": 24590,
+     "end_frame": 24753
     },
     {
      "text": "From Brest to Lisbon, about one thousand one hundred and thirty eight kilometres, the rhumb line is only about a hundred and fifty metres longer.",
-     "audio_text": null,
-     "start": 881.2914,
-     "end": 890.7164,
+     "start": 825.4443,
+     "end": 834.8693,
      "dur": 9.425,
-     "start_frame": 26439,
-     "end_frame": 26721,
+     "start_frame": 24763,
+     "end_frame": 25046,
      "beat": true
     },
     {
      "text": "The third reason is a map.",
-     "audio_text": null,
-     "start": 892.2164,
-     "end": 894.4414,
+     "start": 836.3693,
+     "end": 838.5943,
      "dur": 2.225,
-     "start_frame": 26766,
-     "end_frame": 26833
+     "start_frame": 25091,
+     "end_frame": 25158
     },
     {
      "text": "On the most famous flat map, the Mercator map, a rhumb line is a straight line.",
-     "audio_text": null,
-     "start": 894.7914,
-     "end": 900.4164,
+     "start": 838.9443,
+     "end": 844.5693,
      "dur": 5.625,
-     "start_frame": 26844,
-     "end_frame": 27012
+     "start_frame": 25168,
+     "end_frame": 25337
     },
     {
      "text": "So a navigator could draw the route with a ruler, read off its angle, and steer by it.",
-     "audio_text": null,
-     "start": 900.7664,
-     "end": 906.5914,
+     "start": 844.9193,
+     "end": 850.7443,
      "dur": 5.825,
-     "start_frame": 27023,
-     "end_frame": 27198
+     "start_frame": 25348,
+     "end_frame": 25522
     },
     {
      "text": "That's why long voyages were often split into a few rhumb-line legs that follow the great circle closely: each leg is easy to steer, and the whole route is nearly the shortest.",
-     "audio_text": null,
-     "start": 906.9414,
-     "end": 918.4164,
+     "start": 851.0943,
+     "end": 862.5693,
      "dur": 11.475,
-     "start_frame": 27208,
-     "end_frame": 27552
-    },
-    {
-     "text": "We'll see why that map makes rhumb lines straight in Part 7, when we flatten the Earth.",
-     "audio_text": null,
-     "start": 918.7664,
-     "end": 924.3414,
-     "dur": 5.575,
-     "start_frame": 27563,
-     "end_frame": 27730
+     "start_frame": 25533,
+     "end_frame": 25877
     }
    ],
-   "end": 925.1414,
-   "start_frame": 25195,
-   "end_frame": 27754
+   "end": 863.3693,
+   "start_frame": 23520,
+   "end_frame": 25901
   },
   {
    "id": "s14_recap",
-   "start": 925.1414,
+   "start": 863.3693,
    "sentences": [
     {
      "text": "To sum up, curvilinear coordinates have curved lines, unit vectors that turn, and scale factors that turn a change of coordinate into a distance.",
-     "audio_text": null,
-     "start": 925.1414,
-     "end": 935.0914,
+     "start": 863.3693,
+     "end": 873.3193,
      "dur": 9.95,
-     "start_frame": 27754,
-     "end_frame": 28053
+     "start_frame": 25901,
+     "end_frame": 26200
     },
     {
      "text": "On the Earth, the scale factor of latitude is the Earth's radius, and of longitude, the radius times cosine phi.",
-     "audio_text": null,
-     "start": 935.4414,
-     "end": 943.6164,
+     "start": 873.6693,
+     "end": 881.8443,
      "dur": 8.175,
-     "start_frame": 28063,
-     "end_frame": 28308
+     "start_frame": 26210,
+     "end_frame": 26455
     },
     {
      "text": "The shortest way between two places follows a great circle, whose centre is the Earth's centre.",
-     "audio_text": null,
-     "start": 943.9664,
-     "end": 950.1914,
+     "start": 882.1943,
+     "end": 888.4193,
      "dur": 6.225,
-     "start_frame": 28319,
-     "end_frame": 28506
+     "start_frame": 26466,
+     "end_frame": 26653
     },
     {
      "text": "Its length is the Earth's radius times sigma, the angle at the centre, and the cosine of sigma is the dot product of the two position arrows.",
-     "audio_text": null,
-     "start": 950.5414,
-     "end": 960.1914,
+     "start": 888.7693,
+     "end": 898.4193,
      "dur": 9.65,
-     "start_frame": 28516,
-     "end_frame": 28806
+     "start_frame": 26663,
+     "end_frame": 26953
     },
     {
      "text": "From London to Los Angeles, that's about seventy eight point seven degrees, or about eight thousand seven hundred and fifty five kilometres.",
-     "audio_text": null,
-     "start": 960.5414,
-     "end": 969.9164,
+     "start": 898.7693,
+     "end": 908.1443,
      "dur": 9.375,
-     "start_frame": 28816,
-     "end_frame": 29097
+     "start_frame": 26963,
+     "end_frame": 27244
     },
     {
      "text": "Along the great circle, the compass heading changes all the way, from three hundred and twelve degrees to two hundred and fourteen.",
-     "audio_text": null,
-     "start": 970.2664,
-     "end": 978.3914,
+     "start": 908.4943,
+     "end": 916.6193,
      "dur": 8.125,
-     "start_frame": 29108,
-     "end_frame": 29352
+     "start_frame": 27255,
+     "end_frame": 27499
     },
     {
      "text": "A rhumb line keeps one compass bearing, so it's easy to steer, but here it's about eleven percent longer.",
-     "audio_text": null,
-     "start": 978.7414,
-     "end": 985.7914,
+     "start": 916.9693,
+     "end": 924.0193,
      "dur": 7.05,
-     "start_frame": 29362,
-     "end_frame": 29574
+     "start_frame": 27509,
+     "end_frame": 27721
     },
     {
-     "text": "In Part 7, we'll flatten the Earth onto maps, see what each map stretches, and find out why the rhumb line is straight on the most famous map of all.",
-     "audio_text": null,
-     "start": 986.1414,
-     "end": 995.7664,
-     "dur": 9.625,
-     "start_frame": 29584,
-     "end_frame": 29873
+     "text": "In Part 7, we'll flatten the Earth onto maps, and work out exactly what each map stretches.",
+     "start": 924.3693,
+     "end": 930.5849,
+     "dur": 6.2156,
+     "start_frame": 27731,
+     "end_frame": 27918,
+     "estimated": true
+    },
+    {
+     "text": "That explains why the rhumb line comes out straight on the most famous map of all, and why weather data on a grid need care near the poles.",
+     "start": 930.9349,
+     "end": 940.429,
+     "dur": 9.4941,
+     "start_frame": 27928,
+     "end_frame": 28213,
+     "estimated": true
     }
    ],
-   "end": 996.5664,
-   "start_frame": 27754,
-   "end_frame": 29897
+   "end": 941.229,
+   "start_frame": 25901,
+   "end_frame": 28237
   },
   {
    "id": "s15_end",
-   "start": 996.5664,
+   "start": 941.229,
    "sentences": [
     {
      "text": "This video is one of a series of related maths tutorials, so watch out for the others.",
-     "audio_text": null,
-     "start": 996.5664,
-     "end": 1002.7664,
+     "start": 941.229,
+     "end": 947.429,
      "dur": 6.2,
-     "start_frame": 29897,
-     "end_frame": 30083
+     "start_frame": 28237,
+     "end_frame": 28423
     },
     {
      "text": "They're made for students of atmospheric science, meteorology and fluid dynamics, and anyone else who needs these ideas.",
-     "audio_text": null,
-     "start": 1003.1164,
-     "end": 1011.1664,
+     "start": 947.779,
+     "end": 955.829,
      "dur": 8.05,
-     "start_frame": 30093,
-     "end_frame": 30335
+     "start_frame": 28433,
+     "end_frame": 28675
     },
     {
      "text": "The notebook for coordinates, and the notebooks for the other maths concepts, are on the website that goes with this video.",
-     "audio_text": null,
-     "start": 1011.5164,
-     "end": 1019.1664,
+     "start": 956.179,
+     "end": 963.829,
      "dur": 7.65,
-     "start_frame": 30345,
-     "end_frame": 30575
+     "start_frame": 28685,
+     "end_frame": 28915
     }
    ],
-   "end": 1019.4664,
-   "start_frame": 29897,
-   "end_frame": 30584
+   "end": 964.129,
+   "start_frame": 28237,
+   "end_frame": 28924
   }
  ],
- "total_s": 1019.4664,
- "total_frames": 30584,
- "cues_dry_run": 255,
- "splice": {
-  "scene": "s02_part5_recap",
-  "from": "G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_routes/mini_s02",
-  "old_s": 71.15,
-  "new_s": 56.3,
-  "delta_s": -14.85
- },
- "estimated_sentences": [
-  "s00_title S0",
-  "s10_distance S2",
-  "s10_distance S5"
- ]
+ "total_s": 964.129,
+ "total_frames": 28924
 }

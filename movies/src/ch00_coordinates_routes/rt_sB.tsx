@@ -11,7 +11,7 @@ import { CurvedLink } from "../house/kit/extras";
 import { Part } from "../house/kit/tex";
 import { GlobeCam, globePath } from "./kit_rt/globe";
 import {
-  AT, Arrow, CalcStack, ClockIcon, D, D2R, Disc, DiscV, GB, GC, Globe, H, K, Keyword, LAX, LEN, LON, LL, Layered, Lbl, OptionalTag, PlaneIcon, RO, Route, SE,
+  AT, Arrow, CalcStack, ClockIcon, D, D2R, Disc, DiscV, GB, GC, Globe, H, HL, K, Keyword, Recall, along, LAX, LEN, LON, LL, Layered, Lbl, OptionalTag, PlaneIcon, RO, Route, SE,
   SLATE, SRC_G, SS, Scene, SideCallout, SkipChip, Stool, Svg, TeX, XC, add, arcD, chipSpan, clamp, dP, discOf, e2g, fin, fout, gdot, globeG, mix, pieces,
   plab, poly, prog, sang, scaleDisc, skipTo, win,
 } from "./rt_lib";
@@ -50,7 +50,9 @@ const tipAt = (V: DiscV, a: number, off = 48): Pt => dP(V, a, V.R + off);
 const S06: React.FC = () => {
   const f = useCurrentFrame(), k = K("s06_great_circle");
   const tLon = AT(k, 1, "London"), tLA = AT(k, 2, "Los Angeles"), tSh = AT(k, 3, "flat sheet slicing"), tStool = AT(k, 4, "three legs steady a stool"), tTr = AT(k, 5, "traces a great circle"),
-    tWhy = SS(k, 6), tAll = AT(k, 7, "all the circles"), tBig = AT(k, 8, "biggest of them"), tStr = AT(k, 9, "string pulled tight");
+    tWhy = SS(k, 6), tAll = AT(k, 7, "all the circles"), tBig = AT(k, 8, "biggest of them"), tStr = AT(k, 9, "string pulled tight"),
+    tPuck = AT(k, 10, "the puck from Part 4");   // remake 2026-11-07: Part 4's puck "along a great circle, which we'll meet in Part 6" paid off
+  const puckT = prog(f, tPuck + 10, LEN(k) - 10);
   const cam = globePath([{ f: 0, lat: 24, lon: -32, dist: 3.4 }, { f: 20, lat: 24, lon: -32, dist: 3.4 }, { f: tLon + 20, lat: LON[0], lon: LON[1], dist: 3.4 },
     { f: tLA - 12, lat: LON[0], lon: LON[1], dist: 3.4 }, { f: tLA + 80, ...CAM_ROUTE }, { f: LEN(k) + 10, ...CAM_ROUTE, lon: -61 }], f);
   const sheet = win(f, tSh, tWhy - 10, 16);
@@ -74,6 +76,8 @@ const S06: React.FC = () => {
             {gdot(G, LON[0], LON[1], C.gold, 10 + 8 * pul)}{gdot(G, LAX[0], LAX[1], C.gold, 10 + 8 * pul, fin(f, tLA))}
             {plab(G, LON[0], LON[1], "London", fin(f, tLon), -18, -36, "end")}
             {plab(G, LAX[0], LAX[1], "Los Angeles", fin(f, tLA), 16, 42)}
+            {/* the Part 4 puck gliding along the great circle (illustrative; the route's own points) */}
+            {(() => { const P = along(G, GC, puckT); return P.vis && f >= tPuck ? <circle cx={P.p[0]} cy={P.p[1]} r={13} fill={C.key} stroke={C.bg} strokeWidth={4} opacity={fin(f, tPuck)} /> : null; })()}
           </>; }} />
       <GlobeFrame id="s06k" zoom={0} disc={discOf(cam)} />
       <GSrc />
@@ -90,6 +94,7 @@ const S06: React.FC = () => {
         <Keyword f={f} text="circles through both cities" at={[XC, 290]} s={T.floor} appear={tAll} c={SLATE} />
         <Keyword f={f} text="the biggest bends the least" at={[XC, 370]} s={T.floor} appear={tBig} c={C.gold} />
         <Keyword f={f} text="a string pulled tight" at={[XC, 450]} s={T.floor} appear={tStr} />
+        <Keyword f={f} text="Part 4's puck: a great circle" at={[XC, 530]} s={T.floor} appear={tPuck} c={C.gold} />
       </Svg>
     </Scene>
   );
@@ -135,8 +140,9 @@ const S07: React.FC = () => {
           <path d={arcD(ic, 30, 0, 60)} fill="none" stroke={C.gold} strokeWidth={3} />
         </g>
         <Keyword f={f} text="how long?" at={[XC, 110]} appear={0} out={tRule - 18} />
-        <Lbl x={XC} y={190} t="Part 1:" c={C.muted} s={T.floor} o={fin(f, tRule)} />
-        <Keyword f={f} text="know σ → know the distance" at={[XC, 830]} s={T.floor} appear={tKnow} />
+        {/* remake 2026-11-07 (R16): the recall keyword of the series ("derived in Part K: <name>") */}
+        <Lbl x={XC} y={190} t="derived in Part 1: arc length" c={C.gold} s={T.floor} o={fin(f, tRule)} />
+        <Keyword f={f} text="know $\sigma$ → know the distance" at={[XC, 830]} s={T.floor} appear={tKnow} />
       </Svg>
       <TeX s={H.r1} x={tipAt(V, V.a1)[0]} y={tipAt(V, V.a1)[1]} size={54} c={C.ink} ax={0.5} o={fin(f, tA1)} halo />
       <TeX s={H.r2} x={tipAt(V, V.a2)[0]} y={tipAt(V, V.a2)[1]} size={54} c={C.second} ax={0.5} o={fin(f, tA2)} halo />
@@ -185,7 +191,7 @@ const S08: React.FC = () => {
           <Arrow p={AX} q={o1} color={C.ink} w={8} head={28} o={fin(f, tP3)} />
           <Arrow p={AX} q={o2} color={C.second} w={8} head={28} o={fin(f, tQ3)} />
         </g>
-        <Keyword f={f} text="σ, step by step" at={[XC, 250]} appear={0} out={tR - 18} />
+        <Keyword f={f} text="$\sigma$, step by step" at={[XC, 250]} appear={0} out={tR - 18} />
         <SkipChip f={f} k={k} to={skipTo("s11_route_shape")} />
       </Svg>
       <TeX s={H.r1} x={tipAt(D8, D8.a1, 34)[0]} y={tipAt(D8, D8.a1, 34)[1]} size={48} c={C.ink} ax={0.5} halo />
@@ -199,25 +205,28 @@ const S08: React.FC = () => {
       <TeX s={String.raw`\hat{\mathbf r}_1:\ \text{London},\quad \hat{\mathbf r}_2:\ \text{Los Angeles}`} x={XC} y={250} size={46} o={fin(f, tR)} />
       <TeX s={r2f[0]} x={XC} y={335} size={46} o={fin(f, tF)} />
       <TeX s={r2f[1]} x={XC + 110} y={395} size={46} o={fin(f, tF)} />
+      {/* remake 2026-11-07 (R16): the position arrow recalled from Part 3 (the old opening recap carried it) */}
+      <Recall f={f} tex="" name="position vector" part={3} x={XC} y={450} appear={AT(k, 4, "From Part 3")} out={tLon - 10} />
       <TeX s={String.raw`\text{London: }\varphi=51.51^\circ,\ \lambda=-0.13^\circ`} x={XC} y={495} size={46} c={C.ink} o={win(f, tLon, outL)} />
+      {/* show it, don't voice it (2026-11-07): the products are on screen; the trig values (inputs) glow on their words */}
       <CalcStack f={f} x={1230} y={575} size={44} maxLines={2} o={fout(f, outL)} rows={[
         { lhs: String.raw`\text{1st}`, rhs: String.raw`=\cos 51.51^\circ\times\cos(-0.13^\circ)`, at: tC1 },
-        { rhs: String.raw`=0.622\times1.000\approx0.622`, at: tP1, cont: true },
-        { lhs: String.raw`\sin(-0.13^\circ)`, rhs: String.raw`=-0.0023`, at: tS },
+        { rhs: String.raw`=0.622\times1.000\approx0.622`, at: AT(k, 6, "is zero point six two two"), cont: true, glow: HL(f, AT(k, 6, "is zero point six two two")) },
+        { lhs: String.raw`\sin(-0.13^\circ)`, rhs: String.raw`=-0.0023`, at: tS, glow: HL(f, AT(k, 8, "is minus zero point zero zero two three")) },
         { lhs: String.raw`\text{2nd}`, rhs: String.raw`=0.622\times(-0.0023)`, at: AT(k, 8, "so the second part") },
         { rhs: String.raw`\approx-0.001`, at: tP2, cont: true },
-        { lhs: String.raw`\text{3rd}`, rhs: String.raw`=\sin 51.51^\circ\approx0.783`, at: SS(k, 9) },
+        { lhs: String.raw`\text{3rd}`, rhs: String.raw`=\sin 51.51^\circ\approx0.783`, at: SS(k, 9), glow: HL(f, tP3) },
       ]} />
       <TeX s={String.raw`\text{Los Angeles: }\varphi=34.05^\circ,`} x={XC} y={470} size={46} c={C.second} o={fin(f, tLA)} />
       <TeX s={String.raw`\lambda=-118.24^\circ`} x={XC + 330} y={525} size={46} c={C.second} o={fin(f, tLA)} />
       <CalcStack f={f} x={1230} y={575} size={44} maxLines={2} rows={[
-        { lhs: String.raw`\cos\varphi`, rhs: String.raw`=0.829,\ \ \cos\lambda=-0.473`, at: tC2 },
-        { lhs: String.raw`\sin\lambda`, rhs: String.raw`=-0.881`, at: AT(k, 11, "its sine lambda"), cont: true },
+        { lhs: String.raw`\cos\varphi`, rhs: String.raw`=0.829,\ \ \cos\lambda=-0.473`, at: tC2, glow: HL(f, AT(k, 11, "zero point eight two nine")) },
+        { lhs: String.raw`\sin\lambda`, rhs: String.raw`=-0.881`, at: AT(k, 11, "its sine lambda"), cont: true, glow: HL(f, AT(k, 11, "minus zero point eight eight one")) },
         { lhs: String.raw`\text{1st}`, rhs: String.raw`=0.829\times(-0.473)`, at: SS(k, 12) },
         { rhs: String.raw`\approx-0.392`, at: tQ1, cont: true },
         { lhs: String.raw`\text{2nd}`, rhs: String.raw`=0.829\times(-0.881)`, at: SS(k, 13) },
         { rhs: String.raw`\approx-0.730`, at: tQ2, cont: true },
-        { lhs: String.raw`\text{3rd}`, rhs: String.raw`=\sin 34.05^\circ\approx0.560`, at: SS(k, 14) },
+        { lhs: String.raw`\text{3rd}`, rhs: String.raw`=\sin 34.05^\circ\approx0.560`, at: SS(k, 14), glow: HL(f, tQ3) },
       ]} />
       {void [chipEnd, tQ1, tQ2]}
     </Scene>
@@ -228,9 +237,13 @@ const S08: React.FC = () => {
 const D9 = scaleDisc(DISC, [430, 330], 250);
 const S09: React.FC = () => {
   const f = useCurrentFrame(), k = K("s09_cos_sigma");
-  const tRule = SS(k, 1), tLen = SS(k, 2), tSh = SS(k, 3), tMul = SS(k, 4), tM = [AT(k, 5, "Zero point"), AT(k, 6, "Minus zero"), AT(k, 7, "zero point seven")],
-    tPr = [AT(k, 5, "is minus"), AT(k, 6, "is about plus"), AT(k, 7, "is zero point four")], tSum = SS(k, 8), tCos = SS(k, 9), tWhich = SS(k, 10), tInv = AT(k, 11, "inverse cosine"),
-    tQ = AT(k, 12, "quarter of the way round");
+  // remake 2026-11-07 (show it, don't voice it): one sentence says which parts are multiplied and that they are added (S4); the
+  // three products and the sum are on screen, each on the words for its parts; S5 gives the result
+  const tRule = SS(k, 1), tLen = SS(k, 2), tSh = SS(k, 3), tMul = SS(k, 4),
+    tM = [AT(k, 4, "London's first part"), AT(k, 4, "then the second parts"), AT(k, 4, "then the third")],
+    tPr = [AT(k, 4, "London's first part") + 24, AT(k, 4, "then the second parts") + 20, AT(k, 4, "then the third") + 20], tSum = AT(k, 4, "add the three products"),
+    tCos = AT(k, 5, "about zero point"), tWhich = SS(k, 6), tInv = AT(k, 7, "inverse cosine"), tSig = AT(k, 7, "about seventy eight"),
+    tQ = AT(k, 8, "quarter of the way round");
   const V = D9, xs = [1330, 1520, 1710], y1 = 255, y2 = 345;
   const u1: Pt = [Math.cos(V.a1 * D2R), -Math.sin(V.a1 * D2R)];
   const tip2 = dP(V, V.a2), foot = add(V.c, u1, V.R * RO.dot);
@@ -247,7 +260,7 @@ const S09: React.FC = () => {
         {xs.map((x, i) => <g key={i} opacity={fin(f, tM[i])}>
           <path d={`M ${x + 66} ${y1 - 8} L ${x + 80} ${y1 - 8} L ${x + 80} ${y2 + 8} L ${x + 66} ${y2 + 8}`} fill="none" stroke={C.gold} strokeWidth={5} strokeLinejoin="round" />
         </g>)}
-        <Keyword f={f} text="the dot product rule" at={[XC, 165]} appear={0} out={tRule - 18} />
+        <Keyword f={f} text="rule from the dot product movie" at={[XC, 165]} s={T.floor} appear={0} out={tRule - 18} />
         <CurvedLink f={f} from={[1086, 815]} to={[sigP[0] + 20, sigP[1] + 10]} start={tInv + 40} bend={-80} />
         <OptionalTag f={f} from={-20} />
       </Svg>
@@ -268,9 +281,9 @@ const S09: React.FC = () => {
         { lhs: String.raw`0.783\times0.560`, rhs: String.raw`\approx0.438`, at: tPr[2] },
       ]} />
       <TeX s={String.raw`\cos\sigma\approx-0.244+0.001+0.438`} x={XC} y={675} size={46} o={fin(f, tSum)} />
-      <TeX s={String.raw`\approx0.195`} x={XC + 260} y={735} size={50} c={C.gold} o={fin(f, AT(k, 8, "about zero point"))} />
-      <TeX s={String.raw`\sigma=\cos^{-1}(0.195)\approx78.7^\circ`} x={XC} y={815} size={46} c={C.gold} o={fin(f, tInv)} />
-      {void [tMul, tCos, tWhich]}
+      <TeX s={String.raw`\approx0.195`} x={XC + 260} y={735} size={50} c={C.gold} o={fin(f, tCos)} glow={HL(f, tCos)} />
+      <TeX s={String.raw`\sigma=\cos^{-1}(0.195)\approx78.7^\circ`} x={XC} y={815} size={46} c={C.gold} o={fin(f, tInv)} glow={HL(f, tSig)} />
+      {void [tMul, tWhich]}
     </Scene>
   );
 };
@@ -280,7 +293,7 @@ const D10 = scaleDisc(DISC, [430, 400], 250);
 const S10: React.FC = () => {
   const f = useCurrentFrame(), k = K("s10_distance");
   const tRad = SS(k, 1), tSig = AT(k, 2, "seventy eight point seven three eight"), tSigE = AT(k, 2, "about one point"), tD = SS(k, 3), tDv = AT(k, 4, "eight thousand"),
-    tQ = AT(k, 5, "the quick way"), tQv = AT(k, 5, "is about eight thousand"), tQr = AT(k, 5, "the same to within"), tCr = AT(k, 6, "nine hundred kilometres per hour"), tH = AT(k, 6, "nearly ten hours");
+    tQ = AT(k, 5, "the quick way"), tQv = AT(k, 5, "make about eight thousand"), tQr = AT(k, 5, "the same to within"), tCr = AT(k, 6, "nine hundred kilometres per hour"), tH = AT(k, 6, "nearly ten hours");
   const V = D10, m = mid(V);
   const e = pieces(EQ_S10, [String.raw`\approx 6371`, String.raw`\approx 8755`]);
   const ticks = Array.from({ length: 7 }, (_, i) => V.a1 + SGN * 10 * (i + 1));
@@ -296,20 +309,20 @@ const S10: React.FC = () => {
         <CurvedLink f={f} from={[XC - 14, 500]} to={[lab[0] + 70, lab[1] + 24]} start={tDv + 20} bend={60} end={tQ - 12} />
         <PlaneIcon p={[mix(300, 560, fly), 760]} s={0.9} o={fin(f, tCr)} />
         <ClockIcon c={[700, 760]} o={fin(f, tH)} />
-        <Keyword f={f} text="σ in radians" at={[XC, 170]} appear={0} out={tRad - 18} />
+        <Keyword f={f} text="$\sigma$ in radians" at={[XC, 170]} appear={0} out={tRad - 18} />
         <Keyword f={f} text="10° ≈ 1112 km" at={[tk1[0], tk1[1]]} s={T.floor} appear={tQ + 50} />
         <OptionalTag f={f} from={-20} to={LEN(k) - 14} />
       </Svg>
       <TeX s={String.raw`\sigma`} x={dP(V, m, V.R * 0.42)[0]} y={dP(V, m, V.R * 0.42)[1]} size={56} c={C.gold} ax={0.5} halo />
       <TeX s={String.raw`\approx9.7\ \text{h}`} x={760} y={760} size={52} o={fin(f, tH)} />
       <CalcStack f={f} x={1230} y={175} size={46} maxLines={3} rows={[
-        { lhs: String.raw`1^\circ`, rhs: String.raw`=\dfrac{\pi}{180}\ \text{rad}\approx0.01745\ \text{rad}`, at: tRad, h: 92 },
+        { lhs: String.raw`1^\circ`, rhs: String.raw`=\dfrac{\pi}{180}\ \text{rad}\approx0.01745\ \text{rad}`, at: tRad, h: 92, glow: HL(f, AT(k, 1, "about zero point")) },
         // Part 1 lessons A6: the row says which exact angle it uses (78.74 x 0.01745 would give 1.3740, not 1.3742)
         { lhs: String.raw`\sigma`, rhs: String.raw`\approx78.738^\circ\times\dfrac{\pi}{180}`, at: tSig },
         { rhs: String.raw`\approx1.3742\ \text{rad}`, at: tSigE, cont: true },
       ]} />
-      <Layered parts={[{ t: e[0] }, { t: e[1] }]} layers={[{ t: [0], o: 1 }, { t: [1], o: fin(f, AT(k, 3, "six thousand")) }]} x={XC} y={500} size={50} o={fin(f, tD)} />
-      <TeX s={e[2]} x={XC + 120} y={570} size={54} c={C.gold} o={fin(f, tDv)} />
+      <Layered parts={[{ t: e[0] }, { t: e[1] }]} layers={[{ t: [0], o: 1 }, { t: [1], o: fin(f, AT(k, 3, "six thousand")), glow: HL(f, AT(k, 3, "six thousand")) }]} x={XC} y={500} size={50} o={fin(f, tD)} />
+      <TeX s={e[2]} x={XC + 120} y={570} size={54} c={C.gold} o={fin(f, tDv)} glow={HL(f, tDv)} />
       {/* Part 1 lessons A6: the quick check said as it is: 78.74 x 111.2 = 8755.9, so 8756, the same to within the rounding */}
       <TeX s={String.raw`78.74\times111.2\ \text{km}\approx8756\ \text{km}`} x={XC} y={670} size={44} o={fin(f, tQv)} />
       <TeX s={String.raw`\approx8755\ \text{(rounding)}`} x={XC + 40} y={724} size={44} c={C.muted} o={fin(f, tQr)} />

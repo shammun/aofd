@@ -5,7 +5,7 @@
  "builder": "movies/data/build_ch00_coordinates_routes.py",
  "fluidpy": {
   "repo": "../Fluid Dynamics",
-  "commit": "8cab62ebf6f6fb3ab1979fdbf5d404c2c77400b2",
+  "commit": "1823b5f34b8951a56202762a02d9027567bcda0f",
   "dirty_tracked": true,
   "sphere_py_sha256": "49866e7d01f39d2c4ee3fe963d0c8730b69ea867c8c7a00a402a878d68436207",
   "mapproj_py_sha256": "f8da90cb00f90da803adbd4754feceb68775dfc0400ff116a1c2e60d45c64769",
@@ -84,56 +84,50 @@
    "scene": "s00_title"
   },
   {
-   "time": "0:34",
-   "t_s": 34.625,
-   "title": "What we use from Parts 1, 3, 4 and 5",
-   "scene": "s02_part5_recap"
-  },
-  {
-   "time": "1:30",
-   "t_s": 90.925,
+   "time": "0:42",
+   "t_s": 42.047,
    "title": "Curvilinear coordinates and scale factors",
    "scene": "s03_curvilinear"
   },
   {
-   "time": "4:05",
-   "t_s": 245.325,
+   "time": "3:23",
+   "t_s": 203.338,
    "title": "The shortest way: great circles",
    "scene": "s05_shortest_way"
   },
   {
-   "time": "5:55",
-   "t_s": 355.95,
+   "time": "5:22",
+   "t_s": 322.782,
    "title": "The angle sigma and d = a sigma",
    "scene": "s07_sigma"
   },
   {
-   "time": "6:58",
-   "t_s": 418.875,
+   "time": "6:25",
+   "t_s": 385.707,
    "title": "Every step: working out sigma (optional maths)",
    "scene": "s08_position_arrows"
   },
   {
-   "time": "11:55",
-   "t_s": 715.35,
+   "time": "10:48",
+   "t_s": 648.656,
    "title": "Where the route goes",
    "scene": "s11_route_shape"
   },
   {
-   "time": "12:57",
-   "t_s": 777.6,
+   "time": "12:03",
+   "t_s": 723.823,
    "title": "The rhumb line",
    "scene": "s12_rhumb"
   },
   {
-   "time": "14:00",
-   "t_s": 840.675,
+   "time": "13:03",
+   "t_s": 783.994,
    "title": "Why sailors liked the rhumb line",
    "scene": "s13_why_rhumb"
   },
   {
-   "time": "15:25",
-   "t_s": 925.975,
+   "time": "14:23",
+   "t_s": 863.369,
    "title": "To sum up",
    "scene": "s14_recap"
   }
@@ -148,10 +142,10 @@
     "s10_distance"
    ],
    "chip_sentence": 2,
-   "chip_at_s": 433.1,
+   "chip_at_s": 399.932,
    "skip_to_scene": "s11_route_shape",
-   "skip_to": "11:55",
-   "skip_to_s": 715.35,
+   "skip_to": "10:48",
+   "skip_to_s": 648.656,
    "keep_line": "If you skipped, here's what to keep."
   }
  ],
@@ -1284,9 +1278,9 @@
  "physics": [
   {
    "fn": "fluidpy.geo.sphere.arc_lengths",
-   "scene": "s02",
+   "scene": "s04",
    "data": "data/rt.json",
-   "eq": "δy = a δφ, δx = a cos φ δλ (1°, Brest)",
+   "eq": "δy = a δφ, δx = a cos φ δλ (1°, Brest; recalled from Part 3)",
    "params": {
     "lat": 48.39,
     "dlat": 1.0,
@@ -1296,9 +1290,9 @@
   },
   {
    "fn": "fluidpy.geo.sphere.unit_vector",
-   "scene": "s02",
+   "scene": "s08",
    "data": "data/rt.json",
-   "eq": "r̂ = (cos φ cos λ, cos φ sin λ, sin φ) (Brest)",
+   "eq": "r̂ = (cos φ cos λ, cos φ sin λ, sin φ) (Brest; recalled from Part 3)",
    "params": {
     "lat": 48.39,
     "lon": -4.49

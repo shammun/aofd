@@ -1,0 +1,9 @@
+# ch00_coordinates_routes (#5f, Part 6): sound cue sheet for tools/sound/mix.py (remake 2026-11-07, final spliced TTS timing).
+# Score: the storyboard's own style 'chart-voyage' (tools/sound/styles.py), seed 29 (D Dorian, 6/8 at 66, a warm string pad rocking like a
+# ship's swell, a marimba figure that rises a fifth and settles, a faint ship's bell every fourth bar; no drums). No scene-timed layers.
+# The 2.5-s tail is the silent end-card hold: the music fades out there while the picture fades with it (s15, R3).
+# Effects: none (HOUSE_STYLE §8: effects only where the picture shows the sound; no candidates in the storyboard).
+music: {style: chart-voyage, seed: 29, bed_lufs: -28, duck_db: 5, tail_s: 2.5}
+timing: timing.json
+sfx_duck_db: 5
+effects: []

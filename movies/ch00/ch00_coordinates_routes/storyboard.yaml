@@ -7,10 +7,13 @@
 id: ch00_coordinates_routes
 title: 'Coordinates, Part 6 — Routes: great circles and rhumb lines'
 title_card:
-  line1: Coordinates · Part 6
-  line2: Routes
-  subtitle: great circles and rhumb lines
-  spoken: short (s00 sentence)
+  layout: series layout (kit_rt/SeriesTitle, remake 2026-11-07)
+  line1: Coordinates
+  line2: Part 6 · Routes
+  subtitle:
+  - great circles
+  - and rhumb lines
+  spoken: s00 sentence (no 'easy'; 'see how they're used to …')
 version: 1
 concepts:
 - curvilinear coordinates (curved coordinate lines, unit vectors that change with place, scale factors); scale factors r, a, a cos phi (Vallis §2.2.2, text
@@ -43,7 +46,7 @@ audio:
   beats: '[beat] = 1.5-s hold after worked calculations (tools/tts.py)'
   music:
     source: tools/music.py --style (tools/sound/styles.py; procedural, our own, CC0)
-    style: chart-voyage (NEW style to add; each coordinates part needs its own score, HOUSE_STYLE §8)
+    style: chart-voyage (tools/sound/styles.py, Part 6's own score; no scene-entry layers)
     spec: D Dorian, 6/8 at 66 bpm, a slow rocking like a ship's swell; a soft marimba figure that rises a fifth and settles (a course being laid), over
       a warm low string pad (Dm - G - Am - C, 8 s each); a faint bell on the downbeat every fourth bar (a ship's bell); no drums; reverb long, wet 0.30;
       low-pass 6 kHz
@@ -51,6 +54,7 @@ audio:
     level: bed -28 LUFS, ducked 5 dB under speech; mix -16 LUFS, true peak <= -1.5 dBTP; 2.5-s tail on the silent end-card hold
     runner_up: ice-polar, seed 29 (only if no other coordinates part uses it)
     distinct_from: compass-orbit (Part 1), the other coordinates parts, maths-calm, rotation-turning, index-lattice, tangent-glide, air-flowing, storm-tense
+    fade: picture and music fade out together over the 2.5-s silent end-card hold (R3; mix tail 2.5 s)
   effects_candidates: []
 dry_run:
   tool: tools/tts.py
@@ -64,9 +68,35 @@ dry_run:
   words_per_minute_overall: 147.8
   words_per_minute_speaking: 160.5
   warnings: []
+remake_2026_11_07:
+  log: movies/ch00/ch00_coordinates_routes/remake_2026-11-07_log.md
+  master_plan: movies/ch00/coordinates_series/master_plan_2026-11-07.md (R1, R3, R16, R19, §C)
+  cut:
+  - s02_part5_recap (no opening recap; its facts recalled at s04, s07, s08, s11)
+  recalls:
+    s04:
+    - 'derived in Part 1: arc length'
+    - 'derived in Part 3: distances'
+    s07:
+    - 'derived in Part 1: arc length'
+    s08:
+    - 'derived in Part 3: position vector'
+    s09:
+    - rule from the dot product movie
+    s11:
+    - 'derived in Part 4: local east and north'
+    s06:
+    - 'Part 4''s puck: a great circle (payoff of Part 4 s26)'
+  voice_rules: natural openings (s00, s01); show the arithmetic, voice the meaning (s04, s08, s09, s10, s12); inputs said + highlighted (HL)
+  ending: s13's Part 7 line cut; s14 two-sentence teaser; s15 picture + music fade together over the 2.5-s hold
+  narration_tools:
+  - checks/r7_text.py
+  - checks/rt_r7_splice.py
+  - checks/final_timing.py
+  - checks/rt_words.py
 conventions:
   latitude and longitude: phi (latitude, north positive), lambda (longitude, east positive; west negative, e.g. London -0.13 deg, Los Angeles -118.24 deg)
-  earth radius: a = 6371 km (easy 6400); spoken "the Earth's radius" (Kokoro reads a lone "a" as the article); once "the letter a" (s02, lexicon proposal)
+  earth radius: a = 6371 km (easy 6400); spoken "the Earth's radius" (Kokoro reads a lone "a" as the article); once "the letter a" (s04 S6 since the remake 2026-11-07; lexicon proposal)
   position arrow: r-hat = (cos phi cos lambda, cos phi sin lambda, sin phi); x to 0 deg on the equator, y to 90 E, z to the North Pole (Part 3)
   bearing: compass bearing from north, clockwise as seen from above (Part 1); true bearings (magnetic variation ignored)
   delta vs d: Delta for a finite step, d for the tiny limit (Part 3, Should 7)
@@ -87,7 +117,8 @@ cross_part:
   - 'Part 3 (#5c): latitude phi, longitude lambda, Brest 48.4 N 4.5 W (48.39, -4.49), a = 6371 km (6400), r-hat = (cos phi cos lambda, cos phi sin lambda,
     sin phi), the parallel''s radius a cos phi (Brest 4230 km), Delta y = a Delta phi (111.2 km per degree), Delta x = a cos phi Delta lambda (Brest 73.8
     km per degree), Longyearbyen 78.22 N 15.65 E (1/cos = 4.9), adding up = integration, Delta vs d'
-  - 'Part 4 (#5d): i, j, k at a station (recap only); Part 5 (#5e, moving frames): storm-relative winds (recap only)'
+  - 'Part 4 (#5d): local east i-hat and north j-hat at a place (recalled at s11, ''derived in Part 4: local east and north''); the force-free puck along
+    a great circle (paid off at s06). Part 5 (#5e): not used (its storm-relative winds were only in the cut recap)'
   - '0.1 / 0.1b dot product movie: a . b = |a||b| cos angle, the shadow'
   - '#4 derivatives: the centred difference, the limit'
   numbers_shared:
@@ -114,9 +145,10 @@ cross_part:
   - great-circle distance (D45)
   - why the great circle is shortest (picture, D46)
   - rhumb line and why navigators used it (D47)
-  teaser_in: 'Part 5 (#5e) ends: "In Part 6, we''ll find the shortest way round the Earth: great circles, and rhumb lines."'
-  teaser_out: 'this part ends: "In Part 7, we''ll flatten the Earth onto maps, see what each map stretches, and find out why the rhumb line is straight
-    on the most famous map of all."'
+  teaser_in: 'Part 5 (#5e) ends (continuity_plan §3): "In Part 6, we''ll find the shortest way between two places on the round Earth: the great circle,
+    and the rhumb line that sailors steered for centuries. It explains why flights from Europe to California pass over Greenland."'
+  teaser_out: 'this part ends (s14 S7-S8): "In Part 7, we''ll flatten the Earth onto maps, and work out exactly what each map stretches. That explains why
+    the rhumb line comes out straight on the most famous map of all, and why weather data on a grid need care near the poles."'
   for_6_the_gradient: 'Part 6 does not name The gradient; Part 7 (#5g) carries the gradient pointer and names #6 as next'
 data_block:
   status: no weather data in this part (globe imagery and vector data only)
@@ -181,10 +213,6 @@ chapter_marks:
   mmss: 0:00
   title: 'Routes: the question'
   scene: s00_title
-- t: 33.7861
-  mmss: 0:33
-  title: What we use from Parts 1, 3, 4 and 5
-  scene: s02_part5_recap
 - t: 90.0861
   mmss: '1:29'
   title: Curvilinear coordinates and scale factors
@@ -226,13 +254,15 @@ scenes:
   - - 0.3
     - 9.2161
   beat: opening title (HOUSE_STYLE §3)
-  visual: 'TITLE FRAME (house/kit/title.tsx). Left x 100-1075: RiseText ''Coordinates · Part 6'' (line 1, TitleGradient teal -> gold, weight 800; letters
-    rise 24 px over 8 frames, 2-frame stagger), then ''Routes'' (line 2, warm white, 96 px, pulses x1.06 on AT(1, ''routes'')), then the subtitle
-    ''great circles and rhumb lines'' (68 px, ''great circles'' gold, ''rhumb lines'' slate), all >= 50 px clear of the animation. Right x 1130-1840, y
-    180-636: Part A (frame 0 -> AT(1, ''meteorology and aviation'')): a BMNG globe turns; the London-Los Angeles great circle draws in gold through the
-    slicing sheet. Part B (12-frame cross-fade on AT(1, ''shortest flights'')): a plane glyph flies the gold arc while a slate rhumb line draws beside it,
-    with two compass dials (one sweeping, one fixed). Source line ''Image: NASA Blue Marble NG'' below the right column (y <= 860). Poster = frame 200.'
-  voiceover: In this video, we'll learn about routes across our round Earth, and see how meteorology and aviation use them to plan the shortest flights.
+  visual: "TITLE FRAME (remake 2026-11-07, the series layout of every Coordinates part, kit_rt/SeriesTitle = Part 4's kit_fr = Part 2's kit_cs = Part 1's\
+    \ kit_cf): left x 100-1075, line 1 'Coordinates' (RiseText 150 px, weight 800, TitleGradient teal -> gold) pulsing x1.06 on AT(0, 'coordinates'); line\
+    \ 2 'Part 6 \xB7 Routes' (warm white, <= 80 px); subtitle 'great circles' / 'and rhumb lines' (68 px, two lines: one line is 1004 px, wider than the 975-px\
+    \ column). No 'made easy' (R1). Right x 1180-1840, y 170-640: Part A (frame 0 -> AT(0, \"they're used\")): a BMNG globe turns; the London-Los Angeles\
+    \ great circle draws in gold through the slicing sheet. Part B (12-frame cross-fade on \"they're used\"): a plane glyph flies the gold arc while a slate\
+    \ rhumb line draws beside it (from AT(0, 'shortest flights')), with two compass dials (one sweeping, one fixed). Source line 'Image: NASA Blue Marble\
+    \ Next Generation' below the right column. Poster = frame 200."
+  voiceover: In this video, we'll learn about routes across our round Earth and the coordinates behind them, and see how they're used to plan the shortest
+    flights.
   on_screen_eq: null
   physics_source:
     fn: fluidpy.geo.sphere.great_circle_points; fluidpy.geo.sphere.rhumb_line; fluidpy.geo.sphere.initial_bearing
@@ -269,15 +299,17 @@ scenes:
   - - 27.4911
     - 32.9911
   beat: hook question
-  visual: 'Full width from frame 0. Left x 80-1000: the BMNG globe (>= 760 px across, unzoomed, no edge fade) turned so that London and Los Angeles are
-    both in view, labels ''London'' and ''Los Angeles'' (54 px) right of and below their dots, fully inside the canvas (Must 7, U-CO-065). Right x 1060-1840:
-    a Mercator world map (NE 50 m land) with the same two cities and the dashed slate ''straight-looking'' WSW line. AT(1, ''shortest way'') the gold great
+  visual: 'Full width from frame 0. Left x 80-1000: the BMNG globe (>= 760 px across, unzoomed, no edge fade) turned so that London and Los Angeles are both
+    in view, labels ''London'' and ''Los Angeles'' (54 px) right of and below their dots, fully inside the canvas (Must 7, U-CO-065). Right x 1060-1840: a
+    Mercator world map (NE 50 m land) with the same two cities and the dashed slate ''straight-looking'' WSW line. AT(1, ''shortest way'') the gold great
     circle pulses on the globe. AT(1, ''flat map seems to point'') the dashed line pulses on the map. AT(2, ''sixth of seven parts'') seven small code-drawn
     thumbnails in a row under both pictures (grid, storm cylinder, globe, station arrows, moving storm, globe with a route, world map; the sixth lit, the
-    others at 35 %); keyword ''routes'' under the sixth. AT(4, ''sailors'') the slate rhumb line draws on the globe.'
-  voiceover: What's the shortest way from London to Los Angeles, and why doesn't a plane fly the way a flat map seems to point? This is the sixth of seven
-    parts on coordinates. Let's find the shortest route over our round Earth, and see how its length is measured. Then let's meet the route that sailors
-    used for centuries, and see why they liked it.
+    others at 35 %); keyword ''routes'' under the sixth. AT(4, ''sailors'') the slate rhumb line draws on the globe. REMAKE 2026-11-07: S2 is the natural
+    lead-in naming this part''s pieces (scale factors, the great circle); no new picture (the column holds the chart and the seven thumbnails); S3 (sailors)
+    unchanged.'
+  voiceover: 'What''s the shortest way from London to Los Angeles, and why doesn''t a plane fly the way a flat map seems to point? This is the sixth of seven
+    parts on coordinates. Now let''s dive into the pieces we need: scale factors, which turn a change in latitude or longitude into kilometres, and the great
+    circle, the shortest route over our round Earth. Then let''s meet the route that sailors used for centuries, and see why they liked it.'
   on_screen_eq: null
   physics_source:
     fn: fluidpy.geo.sphere.great_circle_points; fluidpy.geo.mapproj.forward('mercator')
@@ -302,79 +334,6 @@ scenes:
   - U-CO-101
   layout: 'Globe and map >= 60 px apart; ''Image: NASA Blue Marble NG · Natural Earth'' below each picture (y <= 860); thumbnails are drawings, not cards.
     Los Angeles label right of and below its dot, >= 40 px inside the canvas edge.'
-- id: s02_part5_recap
-  t:
-  - 33.7911
-  - 90.0911
-  sentence_times:
-  - - 33.7911
-    - 36.7911
-  - - 37.1411
-    - 46.5661
-  - - 46.9161
-    - 59.4911
-  - - 59.8411
-    - 67.5911
-  - - 67.9411
-    - 72.8661
-  - - 73.2161
-    - 77.3411
-  - - 77.6911
-    - 83.8411
-  - - 84.1911
-    - 89.7911
-  beat: recap of Parts 1, 3 and 4 (<= 60 s), only the tools this part uses
-  visual: 'One beat per sentence, mini pictures (code-drawn, no headings): AT(2, ''polar coordinates'') the Part 1 polar grid with the arc ''s = r θ'' highlighted
-    (gold arc, ''r'' and ''θ'' tags); AT(3, ''latitude, phi'') a small globe with Brest''s φ and λ arcs; AT(3, ''the letter a'') the radius drawn from the
-    centre with ''a ≈ 6400 km (6371 km)''; AT(4, ''position arrow'') r̂ from the centre with its three parts in KaTeX; AT(5, ''One degree of latitude'')
-    ''1° north ≈ 111.2 km'' beside a meridian step; AT(6, ''One degree of longitude'') ''1° east = 111.2 km × cos φ'' beside a parallel step that shrinks
-    as the dot moves north; AT(7, ''In Part 4'') a station with i, j, k (orange) and a tiny moving-frame storm icon.'
-  voiceover: 'Here''s what we''ll use from the earlier parts. In Part 1, we met polar coordinates and the arc rule: the distance along a circle is its radius
-    times the angle, in radians. In Part 3, we gave each place a latitude, phi, and a longitude, lambda, and we wrote the Earth''s radius as the letter
-    a: about six thousand three hundred and seventy one kilometres. A place''s position arrow of length one is cosine phi cosine lambda, cosine phi sine
-    lambda, sine phi. One degree of latitude is about a hundred and eleven kilometres. One degree of longitude is that times cosine phi. In Part 4, a weather
-    station''s east, north and up arrows turned as the air moved. And in Part 5, we saw a moving storm''s winds from a frame that moves with it.'
-  on_screen_eq:
-    latex: \hat{\mathbf r}=(\cos\varphi\cos\lambda,\ \cos\varphi\sin\lambda,\ \sin\varphi)
-    vallis_eq: 'none as written: unit position vector, Vallis §2.2.2 Fig. 2.3 geometry (position r(λ, ϑ, r)); recalled from Part 3 (#5c D23-D24 with a =
-      1)'
-    page_png: chapters/pages/ch02/p081.png
-  calc_rows:
-  - s=r\,\theta
-  - a\approx 6400\ \text{km}\ (6371\ \text{km})
-  - \Delta y=a\,\Delta\varphi\approx 111.2\ \text{km per }1^\circ
-  - \Delta x=a\cos\varphi\,\Delta\lambda
-  physics_source:
-    fn: fluidpy.geo.sphere.unit_vector; fluidpy.geo.sphere.arc_lengths; fluidpy.geo.constants.EARTH_RADIUS
-    params:
-      lat_brest: 48.39
-      lon_brest: -4.49
-    test: ../Fluid Dynamics/tests/geo/test_sphere.py::test_unit_vector_V1_axes_and_norm, ::test_arc_lengths_V1_degree_lengths_RM01_RM02
-  exaggeration: []
-  kind: recap diagrams
-  data: none (code-drawn)
-  tool: Remotion SVG
-  runner_up: —
-  why: Part 5 uses the arc rule, r̂, Δx and Δy, and the letter a; recall them, never re-teach (split plan §2g)
-  related:
-  - movie: '#5a'
-    slug: ch00_coordinates_flat
-    covers: polar coordinates
-    arc rule: null
-    r-hat: null
-    theta-hat: null
-  - movie: '#5c'
-    slug: ch00_coordinates_sphere
-    covers: latitude
-    longitude: null
-    position vector: null
-    delta x and delta y: null
-  - movie: '#5d'
-    slug: ch00_coordinates_frames
-    covers: i, j, k; frames that move
-  feedback:
-  - U-CO-101
-  layout: Pictures left, keywords and the KaTeX rows right; one item per sentence, the previous one dimmed to 60 %.
 - id: s03_curvilinear
   t:
   - 90.0911
@@ -397,17 +356,19 @@ scenes:
   - - 139.8911
     - 144.0411
   beat: 'building block: curvilinear coordinates (the three shared features)'
-  visual: 'Three pictures across the top from frame 0 (centred at y 300, x1.15, Should 8): a radar''s polar grid, the Part 2 hurricane cylinder, a globe
-    graticule. AT(2, ''curvilinear coordinates'') keyword ''curvilinear'' (54 px) below. AT(4, ''coordinate lines are curves'') the rings, the cylinder''s
-    circles and the meridians/parallels light gold in turn. AT(5, ''unit vectors change'') r̂, θ̂ (orange) at three points round the radar grid and i, j
-    at three points on the globe, visibly pointing different ways. AT(7, ''one degree can mean'') two 1° wedges on the globe, one near the equator and one
-    near the pole, their ground arcs in teal, with ''≈ 111 km'' and ''≈ 23 km'' under them (keywords below the pictures, y 560-700).'
+  visual: "Three pictures across the top from frame 0 (centred at y 300, x1.15, Should 8): a radar's polar grid, the Part 2 hurricane cylinder, a globe graticule.\
+    \ AT(2, 'curvilinear coordinates') keyword 'curvilinear' (54 px) below. AT(4, 'coordinate lines are curves') the rings, the cylinder's circles and the\
+    \ meridians/parallels light gold in turn. AT(5, 'unit vectors change') r\u0302, \u03B8\u0302 (orange) at three points round the radar grid and i, j at\
+    \ three points on the globe, visibly pointing different ways. AT(7, 'one degree can mean') two 1\xB0 wedges on the globe, one near the equator and one\
+    \ near the pole, their ground arcs in teal, with '\u2248 111 km' and '\u2248 23 km' under them (keywords below the pictures, y 560-700). REMAKE 2026-11-07:\
+    \ under 'polar', 'cylindrical', 'latitude, longitude' the gold tags 'Part 1', 'Part 2', 'Part 3' (y 565, fading with the names on S5): where each system\
+    \ was met (R16)."
   voiceover: 'Let''s start by putting our coordinate systems side by side: polar coordinates on a flat map, cylindrical coordinates round a hurricane, and
     latitude and longitude on the Earth. They''re all called curvilinear coordinates, which means coordinates whose lines can curve. They share three features.
     First, the coordinate lines are curves: the rings round a radar, the circles of latitude, and the meridians. Second, the unit vectors change from place
     to place: r hat and theta hat turn as we go round, and so do the east and north arrows on the globe. Third, a change in a coordinate isn''t a distance
-    by itself. Turning by one degree can mean a short walk or a long one, depending on where you are. That third feature needs a name, so let''s look at
-    it closely.'
+    by itself. Turning by one degree can mean a short walk or a long one, depending on where you are. That third feature needs a name, so let''s look at it
+    closely.'
   on_screen_eq: null
   calc_rows: []
   physics_source:
@@ -468,26 +429,36 @@ scenes:
   - - 237.1161
     - 243.6911
   beat: 'building block: scale factor = metres walked per unit of the coordinate (D53)'
-  visual: 'Left x 80-1000 from frame 0: Part 1''s ring of radius r with a small turn Δθ, the arc drawn teal and tagged ''r Δθ''. AT(4, ''scale factor'')
-    keyword ''scale factor = metres per unit''. AT(6, ''stepping north'') the picture cross-fades to a small globe sliced along Brest''s meridian: the north
-    step a Δφ in teal on the meridian circle (radius a). AT(7, ''Stepping east'') the parallel through Brest (radius a cos φ drawn from the axis, gold link)
-    and the east step a cos φ Δλ in teal. Right x 1060-1840: a three-row table without boxes (θ: r; φ: a; λ: a cos φ), each row on its words. Then the Brest
-    CalcStack with its inputs row ''φ = 48.4°, a = 6371 km, 1° = 0.01745 rad'' written first; each number links (gold) to its arc on the globe.'
-  voiceover: How far do we walk when one coordinate changes by a small step? In Part 1, on a ring of radius r, turning by a small angle delta theta walks
-    r times delta theta. So for theta, the distance walked is r times the step. That multiplier, the metres walked per unit of the coordinate, is called
-    a scale factor. For theta, the scale factor is r. On the Earth, stepping north by delta phi walks the Earth's radius times delta phi, so the scale factor
-    of latitude is the Earth's radius. Stepping east by delta lambda walks round a parallel, a circle whose radius is the Earth's radius times cosine phi.
-    So the scale factor of longitude is the Earth's radius times cosine phi. Let's put numbers on it at Brest, at forty eight point four degrees north.
-    One degree is zero point zero one seven four five radians. So one degree north walks six thousand three hundred and seventy one kilometres times zero
-    point zero one seven four five, about a hundred and eleven point two kilometres. [beat] The cosine of forty eight point four degrees is zero point six
-    six four. So one degree east walks a hundred and eleven point two times zero point six six four, only about seventy three point eight kilometres. [beat]
-    The same one-degree step gives two different distances, and the scale factors keep track of that.
+  visual: "Left x 80-1000 from frame 0: Part 1's ring of radius r with a small turn \u0394\u03B8, the arc drawn teal and tagged 'r \u0394\u03B8'. AT(4, 'scale\
+    \ factor') keyword 'scale factor = metres per unit'. AT(6, 'stepping north') the picture cross-fades to a small globe sliced along Brest's meridian: the\
+    \ north step a \u0394\u03C6 in teal on the meridian circle (radius a). AT(7, 'Stepping east') the parallel through Brest (radius a cos \u03C6 drawn from\
+    \ the axis, gold link) and the east step a cos \u03C6 \u0394\u03BB in teal. Right x 1060-1840: a three-row table without boxes (\u03B8: r; \u03C6: a;\
+    \ \u03BB: a cos \u03C6), each row on its words. Then the Brest CalcStack with its inputs row '\u03C6 = 48.4\xB0, a = 6371 km, 1\xB0 = 0.01745 rad' written\
+    \ first; each number links (gold) to its arc on the globe. REMAKE 2026-11-07: column S1-S3: Recall 's = r \u0394\u03B8' + gold 'derived in Part 1: arc\
+    \ length' (y 200; 'r \xD7 the step' moved to y 360); S5-S8: Recall '\u0394y = a \u0394\u03C6, \u0394x = a cos \u03C6 \u0394\u03BB' + 'derived in Part\
+    \ 3: distances' (y 560) and 'a \u2248 6371 km' (y 720, gold glow on 'six thousand'); the \u03B8:/\u03C6:/\u03BB: row tags in KaTeX; '1\xB0 = 0.01745 rad'\
+    \ and 'cos 48.4\xB0 \u2248 0.664' glow on their words; the CalcStack rows cue on 'the Earth's radius times that' / 'those hundred' (show it, don't voice\
+    \ it)."
+  voiceover: 'How far do we walk when one coordinate changes by a small step? In Part 1, we found the arc rule: on a ring of radius r, turning by a small
+    angle delta theta walks r times delta theta. So for theta, the distance walked is r times the step. That multiplier, the metres walked per unit of the
+    coordinate, is called a scale factor. For theta, the scale factor is r. On the Earth, as we found in Part 3, stepping north by a small change in latitude,
+    delta phi, walks the Earth''s radius times delta phi. So the scale factor of latitude is the Earth''s radius, which we write as the letter a, about six
+    thousand three hundred and seventy one kilometres. Stepping east by a small change in longitude, delta lambda, walks round a parallel, a circle whose
+    radius is the Earth''s radius times cosine phi. So the scale factor of longitude is the Earth''s radius times cosine phi. Let''s put numbers on it at
+    Brest, at forty eight point four degrees north. One degree is zero point zero one seven four five radians. So one degree north walks the Earth''s radius
+    times that, about a hundred and eleven point two kilometres. [beat] The cosine of forty eight point four degrees is zero point six six four. So one degree
+    east walks those hundred and eleven point two kilometres times the cosine, only about seventy three point eight kilometres. [beat] The same one-degree
+    step gives two different distances, and the scale factors keep track of that.'
   on_screen_eq:
     latex: h_\theta=r,\qquad h_\varphi=a,\qquad h_\lambda=a\cos\varphi
     vallis_eq: 'text before (2.27): (δx, δy, δz) = (r cos ϑ δλ, r δϑ, δr) with r = a; ϑ shown as φ (latitude)'
     page_png: chapters/pages/ch02/p081.png
   calc_rows:
-  - \varphi=48.4^\circ,\quad a=6371\ \text{km},\quad 1^\circ=0.01745\ \text{rad}
+  - s=r\,\Delta\theta
+  - \Delta y=a\,\Delta\varphi,\quad \Delta x=a\cos\varphi\,\Delta\lambda
+  - a\approx6371\ \text{km}
+  - \varphi=48.4^\circ,\quad a=6371\ \text{km}
+  - 1^\circ=0.01745\ \text{rad}
   - \Delta y=6371\times0.01745\approx 111.2\ \text{km}
   - \cos 48.4^\circ\approx 0.664
   - \Delta x=111.2\times0.664\approx 73.8\ \text{km}
@@ -587,19 +558,22 @@ scenes:
   - - 348.8661
     - 354.3161
   beat: 'D45 (1)-(3), D46: the slicing sheet through both cities and the centre; why the great circle is shortest'
-  visual: Globe from frame 0, turning so that London is centred and labelled within 1 s of AT(1, 'London'); on AT(1, 'Los Angeles') the camera eases (<=
-    90 °/s) until both cities and the whole route are centred; 'Los Angeles' right of and below its dot, fully inside the frame (U-CO-065, Must 7). AT(4,
-    'flat sheet slicing') a translucent disc (warm white, 25 %) through both cities and the Earth's centre cuts the globe; the globe's near half fades to
-    40 % so the centre dot shows; three gold dots (London, Los Angeles, centre) pulse on AT(5, 'three legs steady a stool') beside a tiny three-legged stool
-    glyph in the column. AT(6, 'traces a great circle') the cut line draws gold all round, the London-LA part thicker. AT(8, 'all the circles') three smaller
-    circles through both cities (slate, from tilted planes not through the centre) draw and visibly bend more; AT(9, 'biggest of them') they fade and the
-    gold one stays. AT(10, 'string pulled tight') a taut warm-white string snaps onto the gold arc.
-  voiceover: Let's find the great circle through London and Los Angeles. London is at fifty one and a half degrees north, almost on the prime meridian.
-    Los Angeles is at thirty four degrees north, and a hundred and eighteen degrees west. Picture a flat sheet slicing through the globe, so that it passes
-    through London, through Los Angeles, and through the Earth's centre. Three points that aren't in a line fix exactly one flat sheet, just as three legs
-    steady a stool. Where the sheet cuts the Earth's surface, it traces a great circle, and the part between the two cities is the great circle route. Why
-    is it the shortest? Think of all the circles on the globe that pass through both cities. The great circle is the biggest of them, so between the two
-    cities it bends the least. A string pulled tight between the two cities on a desk globe lies right along it.
+  visual: "Globe from frame 0, turning so that London is centred and labelled within 1 s of AT(1, 'London'); on AT(1, 'Los Angeles') the camera eases (<=\
+    \ 90 \xB0/s) until both cities and the whole route are centred; 'Los Angeles' right of and below its dot, fully inside the frame (U-CO-065, Must 7). AT(4,\
+    \ 'flat sheet slicing') a translucent disc (warm white, 25 %) through both cities and the Earth's centre cuts the globe; the globe's near half fades to\
+    \ 40 % so the centre dot shows; three gold dots (London, Los Angeles, centre) pulse on AT(5, 'three legs steady a stool') beside a tiny three-legged stool\
+    \ glyph in the column. AT(6, 'traces a great circle') the cut line draws gold all round, the London-LA part thicker. AT(8, 'all the circles') three smaller\
+    \ circles through both cities (slate, from tilted planes not through the centre) draw and visibly bend more; AT(9, 'biggest of them') they fade and the\
+    \ gold one stays. AT(10, 'string pulled tight') a taut warm-white string snaps onto the gold arc. REMAKE 2026-11-07: new S10: Part 4's puck paid off (Part\
+    \ 4 s26: 'The puck goes straight, along a great circle, which we'll meet in Part 6'): a teal puck dot glides along the gold great circle from London;\
+    \ keyword 'Part 4's puck: a great circle' (gold, y 530)."
+  voiceover: Let's find the great circle through London and Los Angeles. London is at fifty one and a half degrees north, almost on the prime meridian. Los
+    Angeles is at thirty four degrees north, and a hundred and eighteen degrees west. Picture a flat sheet slicing through the globe, so that it passes through
+    London, through Los Angeles, and through the Earth's centre. Three points that aren't in a line fix exactly one flat sheet, just as three legs steady
+    a stool. Where the sheet cuts the Earth's surface, it traces a great circle, and the part between the two cities is the great circle route. Why is it
+    the shortest? Think of all the circles on the globe that pass through both cities. The great circle is the biggest of them, so between the two cities
+    it bends the least. A string pulled tight between the two cities on a desk globe lies right along it. And the puck from Part 4, gliding over a smooth
+    Earth with nothing pushing it, was moving along exactly such a great circle.
   on_screen_eq: null
   calc_rows: []
   physics_source:
@@ -659,12 +633,14 @@ scenes:
   - - 414.0161
     - 417.2411
   beat: 'D45 (1)-(3): what sigma is, and why d = a sigma (the arc rule on the slice)'
-  visual: 'The camera turns (eased, <= 60 °/s) until it looks straight at the slicing disc: the globe fades to a faint outline and the disc becomes a flat
-    circle of radius a (gold rim, ''a'' tag on a radius). AT(4, ''one arrow from the centre'') teal arrow to London; AT(4, ''another one'') orange arrow
-    to Los Angeles (KaTeX tags r̂₁, r̂₂ at the tips). AT(5, ''called sigma'') the angle at the centre draws as a gold arc with ''σ''. AT(6, ''arc of the
-    circle'') the arc between the tips lights gold, tagged ''d''. AT(7, ''arc rule from Part 1'') a small inset (right column) of Part 1''s ring with ''s
-    = r θ'' slides in beside, with gold ''same'' ticks: r ↔ a, θ ↔ σ, s ↔ d. AT(8, ''d equals'') the equation builds in the column. AT(10, ''Every degree'')
-    a 1° wedge at the centre with its 111.2-km arc ticks along the gold arc (78 ticks would be too many: every 10° tick labelled 10°, 20° …).'
+  visual: "The camera turns (eased, <= 60 \xB0/s) until it looks straight at the slicing disc: the globe fades to a faint outline and the disc becomes a flat\
+    \ circle of radius a (gold rim, 'a' tag on a radius). AT(4, 'one arrow from the centre') teal arrow to London; AT(4, 'another one') orange arrow to Los\
+    \ Angeles (KaTeX tags r\u0302\u2081, r\u0302\u2082 at the tips). AT(5, 'called sigma') the angle at the centre draws as a gold arc with '\u03C3'. AT(6,\
+    \ 'arc of the circle') the arc between the tips lights gold, tagged 'd'. AT(7, 'arc rule from Part 1') a small inset (right column) of Part 1's ring with\
+    \ 's = r \u03B8' slides in beside, with gold 'same' ticks: r \u2194 a, \u03B8 \u2194 \u03C3, s \u2194 d. AT(8, 'd equals') the equation builds in the\
+    \ column. AT(10, 'Every degree') a 1\xB0 wedge at the centre with its 111.2-km arc ticks along the gold arc (78 ticks would be too many: every 10\xB0\
+    \ tick labelled 10\xB0, 20\xB0 \u2026). REMAKE 2026-11-07: the muted 'Part 1:' tag above the inset ring is now the series recall keyword 'derived in Part\
+    \ 1: arc length' (gold, y 190)."
   voiceover: 'How long is this route? Let''s turn the globe, so that we look straight at the slicing sheet. Now it''s just a flat circle, with the Earth''s
     centre in the middle, and its radius is the Earth''s radius. Draw one arrow from the centre to London, and another one to Los Angeles. The angle between
     these two arrows, at the Earth''s centre, is called sigma. The route is the arc of the circle between the two arrow tips. And that''s exactly the picture
@@ -735,26 +711,28 @@ scenes:
   - - 549.9411
     - 557.1411
   beat: 'D45 (4)-(5): the two unit position arrows written out with every input'
-  visual: 'Left: the face-on disc stays, small, at the top left with r̂₁ (teal) and r̂₂ (orange). Main area: two rows of three columns, London (teal) then
-    Los Angeles (orange). Each row starts with its inputs ''φ = 51.51°, λ = −0.13°'' / ''φ = 34.05°, λ = −118.24°'' (68 px), then the three parts appear
-    one by one on their words, each as ''cos 51.51° × cos(−0.13°) = 0.622 × 1.000 ≈ 0.622'' style CalcStack rows; finished parts move into the vector r̂₁
-    = (0.622, −0.001, 0.783), r̂₂ = (−0.392, −0.730, 0.560). A small 3-D axes glyph (x to 0° on the equator, y to 90° E, z to the North Pole, as in Part
-    3) shows each arrow. AT(3, ''skip ahead'') the maths-skip chip appears top-right of the column (x 1500-1840, y 50-110): ''every step · optional · skip
-    to mm:ss'' (44 px, warm white on a thin gold outline: the one chip the user''s 2026-11-05 maths-skip rule asks for; mm:ss filled after the final TTS);
-    it stays 6 s, then shrinks to a small ''optional maths'' tag in the same corner until the block ends.'
+  visual: "Left: the face-on disc stays, small, at the top left with r\u0302\u2081 (teal) and r\u0302\u2082 (orange). Main area: two rows of three columns,\
+    \ London (teal) then Los Angeles (orange). Each row starts with its inputs '\u03C6 = 51.51\xB0, \u03BB = \u22120.13\xB0' / '\u03C6 = 34.05\xB0, \u03BB\
+    \ = \u2212118.24\xB0' (68 px), then the three parts appear one by one on their words, each as 'cos 51.51\xB0 \xD7 cos(\u22120.13\xB0) = 0.622 \xD7 1.000\
+    \ \u2248 0.622' style CalcStack rows; finished parts move into the vector r\u0302\u2081 = (0.622, \u22120.001, 0.783), r\u0302\u2082 = (\u22120.392, \u2212\
+    0.730, 0.560). A small 3-D axes glyph (x to 0\xB0 on the equator, y to 90\xB0 E, z to the North Pole, as in Part 3) shows each arrow. AT(3, 'skip ahead')\
+    \ the maths-skip chip appears top-right of the column (x 1500-1840, y 50-110): 'every step \xB7 optional \xB7 skip to mm:ss' (44 px, warm white on a thin\
+    \ gold outline: the one chip the user's 2026-11-05 maths-skip rule asks for; mm:ss filled after the final TTS); it stays 6 s, then shrinks to a small\
+    \ 'optional maths' tag in the same corner until the block ends. REMAKE 2026-11-07: under the r\u0302 formula, gold 'derived in Part 3: position vector'\
+    \ (y 450, from 'From Part 3' until London's line); the trig inputs glow on their words (cos 51.51\xB0 row on 'is zero point six two two', sin(\u22120.13\xB0\
+    ), LA's cos \u03C6 / cos \u03BB / sin \u03BB); the voice names what is multiplied (cosine phi times sine lambda), the products stay on screen."
   voiceover: The next few minutes work out sigma step by step, with every number. They're here for anyone who enjoys seeing every step, but you don't need
-    them for the intuition behind weather, climate science or GIS. If it feels like a lot, skip ahead to the time on screen, and you won't miss the big
-    idea. To find sigma, we need the two position arrows of length one, r hat one for London and r hat two for Los Angeles. From Part 3, each one is cosine
-    phi cosine lambda, cosine phi sine lambda, sine phi. London is at fifty one point five one degrees north, and zero point one three degrees west, so
-    its lambda is minus zero point one three degrees. The cosine of fifty one point five one degrees is zero point six two two, and the cosine of minus
-    zero point one three degrees is almost exactly one. So the first part is zero point six two two. [beat] The sine of minus zero point one three degrees
-    is minus zero point zero zero two three, so the second part is zero point six two two times that, about minus zero point zero zero one. [beat] The third
-    part is the sine of fifty one point five one degrees, zero point seven eight three. [beat] Los Angeles is at thirty four point zero five degrees north,
-    and a hundred and eighteen point two four degrees west, so its lambda is minus a hundred and eighteen point two four degrees. Its cosine phi is zero
-    point eight two nine, its cosine lambda is minus zero point four seven three, and its sine lambda is minus zero point eight eight one. So its first
-    part is zero point eight two nine times minus zero point four seven three, about minus zero point three nine two. [beat] Its second part is zero point
-    eight two nine times minus zero point eight eight one, about minus zero point seven three zero. [beat] And its third part, the sine of thirty four point
-    zero five degrees, is zero point five six zero. [beat]
+    them for the intuition behind weather, climate science or GIS. If it feels like a lot, skip ahead to the time on screen, and you won't miss the big idea.
+    To find sigma, we need the two position arrows of length one, r hat one for London and r hat two for Los Angeles. From Part 3, each one is cosine phi
+    cosine lambda, cosine phi sine lambda, sine phi. London is at fifty one point five one degrees north, and zero point one three degrees west, so its lambda
+    is minus zero point one three degrees. The cosine of fifty one point five one degrees is zero point six two two, and the cosine of minus zero point one
+    three degrees is almost exactly one. So the first part is zero point six two two. [beat] The sine of minus zero point one three degrees is minus zero
+    point zero zero two three, so the second part, cosine phi times sine lambda, is about minus zero point zero zero one. [beat] The third part is the sine
+    of fifty one point five one degrees, zero point seven eight three. [beat] Los Angeles is at thirty four point zero five degrees north, and a hundred and
+    eighteen point two four degrees west, so its lambda is minus a hundred and eighteen point two four degrees. Its cosine phi is zero point eight two nine,
+    its cosine lambda is minus zero point four seven three, and its sine lambda is minus zero point eight eight one. So its first part, cosine phi times cosine
+    lambda, is about minus zero point three nine two. [beat] Its second part, cosine phi times sine lambda, is about minus zero point seven three zero. [beat]
+    And its third part, the sine of thirty four point zero five degrees, is zero point five six zero. [beat]
   on_screen_eq:
     latex: \hat{\mathbf r}_1\approx(0.622,\ -0.001,\ 0.783),\qquad \hat{\mathbf r}_2\approx(-0.392,\ -0.730,\ 0.560)
     vallis_eq: 'none as written: the unit position vector of Part 3 (D23-D24 with a = 1), Vallis §2.2.2 geometry'
@@ -824,19 +802,19 @@ scenes:
   - - 634.6161
     - 646.0911
   beat: 'D45 (6): cos sigma = r1 . r2 = 0.195, sigma = 78.7 deg'
-  visual: 'Column from frame 0: the two vectors from s09 one above the other, matching parts aligned. AT(2, ''product of their lengths'') the dot-product
-    movie''s shadow picture (small, left): r̂₂''s shadow on r̂₁ as a 20-px band, ''|r̂₁| = |r̂₂| = 1''. AT(5, ''multiply the matching parts'') three gold
-    brackets join the matching parts one at a time; the three products appear under them on their words; AT(9, ''Adding the three'') the sum 0.195. AT(12,
-    ''inverse cosine'') the angle σ ≈ 78.7° grows on the face-on disc (left) as a gold arc with its number linked to the column. AT(13, ''quarter of the
-    way round'') a faint 90° wedge (slate) beside σ for comparison.'
-  voiceover: 'Now let''s use the rule from the dot product movie. The dot product of two arrows is the product of their lengths, times the cosine of the
-    angle between them. Our two arrows both have length one, so their dot product is just the cosine of sigma. That''s the shadow picture again: the shadow
-    of one arrow of length one on the other. To take the dot product, multiply the matching parts and add. Zero point six two two times minus zero point
-    three nine two is minus zero point two four four. [beat] Minus zero point zero zero one times minus zero point seven three zero is about plus zero point
-    zero zero one. [beat] And zero point seven eight three times zero point five six zero is zero point four three eight. [beat] Adding the three gives
-    about zero point one nine five. So the cosine of sigma is zero point one nine five. [beat] Which angle has a cosine of zero point one nine five? A calculator''s
-    inverse cosine says about seventy eight point seven degrees. [beat] A cosine just below zero point two means an angle a little less than ninety degrees,
-    so London and Los Angeles are almost a quarter of the way round the Earth from each other.'
+  visual: "Column from frame 0: the two vectors from s09 one above the other, matching parts aligned. AT(2, 'product of their lengths') the dot-product movie's\
+    \ shadow picture (small, left): r\u0302\u2082's shadow on r\u0302\u2081 as a 20-px band, '|r\u0302\u2081| = |r\u0302\u2082| = 1'. AT(5, 'multiply the\
+    \ matching parts') three gold brackets join the matching parts one at a time; the three products appear under them on their words; AT(9, 'Adding the three')\
+    \ the sum 0.195. AT(12, 'inverse cosine') the angle \u03C3 \u2248 78.7\xB0 grows on the face-on disc (left) as a gold arc with its number linked to the\
+    \ column. AT(13, 'quarter of the way round') a faint 90\xB0 wedge (slate) beside \u03C3 for comparison. REMAKE 2026-11-07: S4 says which parts are multiplied\
+    \ and that they are added; the three products appear on 'London's first part' / 'then the second parts' / 'then the third'; the sum on 'add the three\
+    \ products'; '\u2248 0.195' (S5) and '\u03C3 \u2248 78.7\xB0' (S7) glow; the opening keyword reads 'rule from the dot product movie'."
+  voiceover: 'Now let''s use the rule from the dot product movie. The dot product of two arrows is the product of their lengths, times the cosine of the angle
+    between them. Our two arrows both have length one, so their dot product is just the cosine of sigma. That''s the shadow picture again: the shadow of one
+    arrow of length one on the other. To take the dot product, we multiply London''s first part by Los Angeles'' first part, then the second parts, and then
+    the third parts, and add the three products. That gives about zero point one nine five, so the cosine of sigma is zero point one nine five. [beat] Which
+    angle has a cosine of zero point one nine five? A calculator''s inverse cosine says about seventy eight point seven degrees. [beat] A cosine just below
+    zero point two means an angle a little less than ninety degrees, so London and Los Angeles are almost a quarter of the way round the Earth from each other.'
   on_screen_eq:
     latex: \cos\sigma=\hat{\mathbf r}_1\cdot\hat{\mathbf r}_2
     vallis_eq: 'none in Vallis: the dot product of unit vectors (dot product movie); spherical law of cosines (Snyder 1987 eq. 5-3); fluidpy.geo.sphere.central_angle'
@@ -892,16 +870,17 @@ scenes:
   - - 704.5164
     - 713.7164
   beat: 'D45 (7): sigma in radians, d = a sigma = 8755 km, and the per-degree check'
-  visual: 'Left: the face-on disc with σ and the gold arc; AT(1, ''in radians'') a small ruler shows 1° = π/180 rad. Column: CalcStack rows on their words.
-    AT(''Earth''s radius times sigma'') the gold arc''s label becomes ''≈ 8755 km'' with a gold link from the row. AT(6, ''the quick way'') the arc''s 10°
-    ticks brighten (each ''≈ 1112 km''). AT(7, ''nine hundred kilometres per hour'') a small plane glyph and clock ''≈ 9.7 h''.'
-  voiceover: 'The arc rule needs sigma in radians. One degree is pi over a hundred and eighty radians, about zero point zero one seven four five. So seventy
-    eight point seven four degrees, or more exactly seventy eight point seven three eight, times pi over a hundred and eighty, is about one point three seven
-    four two radians. [beat] Now the distance is the Earth''s radius times sigma: six thousand three hundred and seventy one kilometres times one point three
-    seven four two. That''s about eight thousand seven hundred and fifty five kilometres. [beat] Let''s check it the quick way: seventy eight point seven
-    four degrees, times a hundred and eleven point two kilometres per degree, is about eight thousand seven hundred and fifty six kilometres, the same to
-    within the rounding. [beat] At a cruising speed of about nine hundred kilometres per hour, that''s nearly ten hours in the air, before any help or hindrance
-    from the winds.'
+  visual: "Left: the face-on disc with \u03C3 and the gold arc; AT(1, 'in radians') a small ruler shows 1\xB0 = \u03C0/180 rad. Column: CalcStack rows on\
+    \ their words. AT('Earth's radius times sigma') the gold arc's label becomes '\u2248 8755 km' with a gold link from the row. AT(6, 'the quick way') the\
+    \ arc's 10\xB0 ticks brighten (each '\u2248 1112 km'). AT(7, 'nine hundred kilometres per hour') a small plane glyph and clock '\u2248 9.7 h'. REMAKE\
+    \ 2026-11-07: the rows stay; the voice no longer reads the products: '1\xB0 = \u03C0/180 rad \u2248 0.01745 rad' glows on 'about zero point', 6371 glows\
+    \ on 'six thousand', '\u2248 8755 km' on 'eight thousand'; the quick check row on 'make about eight thousand'."
+  voiceover: 'The arc rule needs sigma in radians. One degree is pi over a hundred and eighty radians, about zero point zero one seven four five. So sigma,
+    seventy eight point seven three eight degrees to be exact, is about one point three seven four two radians. [beat] Now the distance is the Earth''s radius,
+    six thousand three hundred and seventy one kilometres, times sigma in radians. That''s about eight thousand seven hundred and fifty five kilometres. [beat]
+    Let''s check it the quick way: every degree of sigma is about a hundred and eleven point two kilometres, so seventy eight point seven four degrees make
+    about eight thousand seven hundred and fifty six kilometres, the same to within the rounding. [beat] At a cruising speed of about nine hundred kilometres
+    per hour, that''s nearly ten hours in the air, before any help or hindrance from the winds.'
   on_screen_eq:
     latex: d=a\,\sigma\approx 6371\times1.3742\approx 8755\ \text{km}
     vallis_eq: 'none in Vallis: arc rule; fluidpy.geo.sphere.great_circle_distance'
@@ -958,20 +937,24 @@ scenes:
   - - 770.5664
     - 775.9664
   beat: the route leaves NW (312 deg), tops out at 62.4 N near SW Greenland, arrives SW (214 deg)
-  visual: 'Back to the globe (camera continuity from s07), the gold route drawn; a plane glyph flies it (time compressed). AT(4, ''west-south-west'') a
-    dashed slate arrow from London towards Los Angeles as it looks on a flat map, in a small Mercator inset in the column. AT(5, ''three hundred and twelve
-    degrees'') a compass rose at London (bearing from north, clockwise as seen from above, gold arc 312°). AT(6, ''sixty two point four degrees north'')
-    the vertex dot and short label ''62.4° N'' near the SW coast of Greenland; ''Greenland'' labelled at AT(6, ''Greenland''). AT(7, ''two hundred and fourteen
-    degrees'') the compass rose at Los Angeles (214°). AT(8, ''almost a hundred degrees'') a heading strip under the globe shows the plane''s heading falling
-    312° -> 214° along the route (data every 1/10 of the route). AT(''here''s what to keep'') keyword ''if you skipped, keep this:'' (54 px, gold) and the
-    takeaway''s numbers as keywords in the column, beside the picture named in the sentence. Here: the globe''s gold route with ''≈ 79°'' at the centre
-    and ''≈ 8755 km'' on the arc.'
-  voiceover: If you skipped, here's what to keep. Seen from the Earth's centre, London and Los Angeles are about seventy nine degrees apart, so the great
+  visual: "Back to the globe (camera continuity from s07), the gold route drawn; a plane glyph flies it (time compressed). AT(4, 'west-south-west') a dashed\
+    \ slate arrow from London towards Los Angeles as it looks on a flat map, in a small Mercator inset in the column. AT(5, 'three hundred and twelve degrees')\
+    \ a compass rose at London (bearing from north, clockwise as seen from above, gold arc 312\xB0). AT(6, 'sixty two point four degrees north') the vertex\
+    \ dot and short label '62.4\xB0 N' near the SW coast of Greenland; 'Greenland' labelled at AT(6, 'Greenland'). AT(7, 'two hundred and fourteen degrees')\
+    \ the compass rose at Los Angeles (214\xB0). AT(8, 'almost a hundred degrees') a heading strip under the globe shows the plane's heading falling 312\xB0\
+    \ -> 214\xB0 along the route (data every 1/10 of the route). AT('here's what to keep') keyword 'if you skipped, keep this:' (54 px, gold) and the takeaway's\
+    \ numbers as keywords in the column, beside the picture named in the sentence. Here: the globe's gold route with '\u2248 79\xB0' at the centre and '\u2248\
+    \ 8755 km' on the arc. REMAKE 2026-11-07: new S5 voices the audit-F1 heading rows (Part 4's local east and north arrows, how much of r\u0302\u2082 lies\
+    \ along each, turned into a bearing); Recall label 'derived in Part 4: local east and north' (y 410); the F1 stack moved to y 540 and cued on S5's words\
+    \ (312\xB0 glows), vertex rows on S6 (62.4\xB0 glows), LA rows on S7 (214\xB0 glows); the WSW Mercator chart now leaves before S5 (its 'flat map' label\
+    \ at y 519 sat on the stack's first row at y 500)."
+  voiceover: 'If you skipped, here''s what to keep. Seen from the Earth''s centre, London and Los Angeles are about seventy nine degrees apart, so the great
     circle route between them is about eight thousand seven hundred and fifty five kilometres long. Where does this route go? On most flat maps, Los Angeles
     looks to the west-south-west of London. But the great circle leaves London heading north-west, at a compass bearing of about three hundred and twelve
-    degrees. It climbs to its highest latitude, about sixty two point four degrees north, near the south-west coast of Greenland. Then it turns south over
-    northern Canada, and arrives at Los Angeles heading south-west, at a bearing of about two hundred and fourteen degrees. [beat] So along the way, the
-    compass heading changes by almost a hundred degrees. That's why flights from Europe to California pass over Greenland and Canada.
+    degrees. That heading comes from London''s own east and north arrows, from Part 4: we measure how much of Los Angeles'' position arrow points along each
+    one, and turn that into a compass bearing. It climbs to its highest latitude, about sixty two point four degrees north, near the south-west coast of Greenland.
+    Then it turns south over northern Canada, and arrives at Los Angeles heading south-west, at a bearing of about two hundred and fourteen degrees. [beat]
+    So along the way, the compass heading changes by almost a hundred degrees. That''s why flights from Europe to California pass over Greenland and Canada.'
   on_screen_eq: null
   calc_rows:
   - 312^\circ\ \longrightarrow\ 214^\circ
@@ -1020,16 +1003,17 @@ scenes:
   - - 833.5664
     - 839.0414
   beat: 'D47: the rhumb line, 258.5 deg, 9733 km, 11 % longer'
-  visual: 'Same globe; AT(2, ''rhumb line'') the slate rhumb line draws beside the gold great circle, with identical small gold angle marks where it crosses
-    five meridians (the same angle at every meridian; no numbers on the globe). AT(3, ''two hundred and fifty eight and a half'') compass rose at London
-    ''258.5°''. Column CalcStack on the words. AT(8, ''spiral round and round'') a short inset: the rhumb line extended on a small polar view, spiralling
-    into the pole (slate).'
-  voiceover: 'Sailors used a different route for centuries. It''s called the rhumb line: a route that keeps the same compass bearing all the way, so it
-    crosses every meridian at the same angle. From London to Los Angeles, the rhumb line holds a bearing of about two hundred and fifty eight and a half
-    degrees, a little south of due west. It stays further south than the great circle, and it''s about nine thousand seven hundred and thirty three kilometres
-    long. [beat] How much longer is that? Nine thousand seven hundred and thirty three divided by eight thousand seven hundred and fifty five is about one
-    point one one, so the rhumb line is about eleven percent longer. [beat] The extra is about nine hundred and seventy eight kilometres, more than an hour
-    of flying at nine hundred kilometres per hour. [beat] And if you kept following a rhumb line, it would spiral round and round towards a pole.'
+  visual: "Same globe; AT(2, 'rhumb line') the slate rhumb line draws beside the gold great circle, with identical small gold angle marks where it crosses\
+    \ five meridians (the same angle at every meridian; no numbers on the globe). AT(3, 'two hundred and fifty eight and a half') compass rose at London '258.5\xB0\
+    '. Column CalcStack on the words. AT(8, 'spiral round and round') a short inset: the rhumb line extended on a small polar view, spiralling into the pole\
+    \ (slate). REMAKE 2026-11-07: S5 says 'dividing the rhumb line's length by the great circle's' (the division row stays on screen); '+11 %' glows on 'eleven\
+    \ percent'."
+  voiceover: 'Sailors used a different route for centuries. It''s called the rhumb line: a route that keeps the same compass bearing all the way, so it crosses
+    every meridian at the same angle. From London to Los Angeles, the rhumb line holds a bearing of about two hundred and fifty eight and a half degrees,
+    a little south of due west. It stays further south than the great circle, and it''s about nine thousand seven hundred and thirty three kilometres long.
+    [beat] How much longer is that? Dividing the rhumb line''s length by the great circle''s gives about one point one one, so the rhumb line is about eleven
+    percent longer. [beat] The extra is about nine hundred and seventy eight kilometres, more than an hour of flying at nine hundred kilometres per hour.
+    [beat] And if you kept following a rhumb line, it would spiral round and round towards a pole.'
   on_screen_eq: null
   calc_rows:
   - 9733\ \text{km}\div8755\ \text{km}\approx1.11
@@ -1091,22 +1075,22 @@ scenes:
   - - 918.7664
     - 924.3414
   beat: 'D47: why some prefer the rhumb line (three reasons: steering, short trips, a ruler on Mercator)'
-  visual: 'Three beats, one per reason, the globe staying left. Reason 1 AT(3, ''steering''): two compass dials in the column: the rhumb dial fixed at 258.5°
-    (slate), the great-circle dial sweeping 312° -> 214° while the plane glyph flies the gold route (heading from DM12, same strip as s12). AT(6, ''a lot
-    of calculation'') a small pencil-and-table glyph. Reason 2 AT(7, ''short trips''): the globe turns (eased) to Brest and Lisbon; the two routes drawn
-    there lie on top of each other; column ''Brest -> Lisbon ≈ 1138 km'', ''rhumb + ≈ 150 m'' with a magnifier glyph. Reason 3 AT(10, ''Mercator map''):
-    a small Mercator chart with a ruler laid from London to Los Angeles along the straight slate line and a protractor reading 258.5°. AT(12, ''rhumb-line
-    legs'') on the globe, the gold great circle with four slate rhumb-line legs hugging it. AT(13, ''in Part 7'') keyword ''Part 7: maps'' (54 px) under
-    the Mercator chart.'
+  visual: "Three beats, one per reason, the globe staying left. Reason 1 AT(3, 'steering'): two compass dials in the column: the rhumb dial fixed at 258.5\xB0\
+    \ (slate), the great-circle dial sweeping 312\xB0 -> 214\xB0 while the plane glyph flies the gold route (heading from DM12, same strip as s12). AT(6,\
+    \ 'a lot of calculation') a small pencil-and-table glyph. Reason 2 AT(7, 'short trips'): the globe turns (eased) to Brest and Lisbon; the two routes drawn\
+    \ there lie on top of each other; column 'Brest -> Lisbon \u2248 1138 km', 'rhumb + \u2248 150 m' with a magnifier glyph. Reason 3 AT(10, 'Mercator map'):\
+    \ a small Mercator chart with a ruler laid from London to Los Angeles along the straight slate line and a protractor reading 258.5\xB0. AT(12, 'rhumb-line\
+    \ legs') on the globe, the gold great circle with four slate rhumb-line legs hugging it. AT(13, 'in Part 7') keyword 'Part 7: maps' (54 px) under the\
+    \ Mercator chart. REMAKE 2026-11-07: the last sentence (the Part 7 line) is cut: the teaser is said once, in the recap (continuity \xA76); the keyword\
+    \ stays as 'why straight: Part 7' (gold, y 840) 1 s after 'a straight line'."
   voiceover: 'So why would anyone choose the longer route? There are three reasons. The first is steering. A rhumb line needs one compass setting for the
     whole trip: set two hundred and fifty eight and a half degrees, and hold it. The great circle needs a new heading all the time, from three hundred and
-    twelve degrees at London to two hundred and fourteen at Los Angeles. Before satellites and computers, a ship''s navigator with a compass could steer
-    a rhumb line easily, but a great circle only with a lot of calculation. The second reason is that, on short trips, the extra distance is tiny. From
-    Brest to Lisbon, about one thousand one hundred and thirty eight kilometres, the rhumb line is only about a hundred and fifty metres longer. [beat]
-    The third reason is a map. On the most famous flat map, the Mercator map, a rhumb line is a straight line. So a navigator could draw the route with
-    a ruler, read off its angle, and steer by it. That''s why long voyages were often split into a few rhumb-line legs that follow the great circle closely:
-    each leg is easy to steer, and the whole route is nearly the shortest. We''ll see why that map makes rhumb lines straight in Part 7, when we flatten
-    the Earth.'
+    twelve degrees at London to two hundred and fourteen at Los Angeles. Before satellites and computers, a ship''s navigator with a compass could steer a
+    rhumb line easily, but a great circle only with a lot of calculation. The second reason is that, on short trips, the extra distance is tiny. From Brest
+    to Lisbon, about one thousand one hundred and thirty eight kilometres, the rhumb line is only about a hundred and fifty metres longer. [beat] The third
+    reason is a map. On the most famous flat map, the Mercator map, a rhumb line is a straight line. So a navigator could draw the route with a ruler, read
+    off its angle, and steer by it. That''s why long voyages were often split into a few rhumb-line legs that follow the great circle closely: each leg is
+    easy to steer, and the whole route is nearly the shortest.'
   on_screen_eq: null
   calc_rows:
   - '\text{Brest}\to\text{Lisbon: } 1138\ \text{km},\quad \text{rhumb} \approx +0.15\ \text{km}'
@@ -1156,17 +1140,19 @@ scenes:
   - - 986.1414
     - 995.7664
   beat: recap ('To sum up'); last sentence the teaser to Part 7
-  visual: 'One beat per sentence, mini pictures reused (no headings): the three curvilinear pictures; the scale-factor table (θ: r, φ: a, λ: a cos φ); the
-    globe with the slicing sheet; the face-on disc ''d = a σ'' with ''cos σ = r̂₁ · r̂₂''; ''78.7°'', ''≈ 8755 km''; the compass strip 312° -> 214°; the
-    rhumb line beside the great circle ''+11 %''; a Mercator thumbnail with a straight slate line and a question mark (the Part 7 teaser). Each spoken number
-    on screen at its words.'
+  visual: "One beat per sentence, mini pictures reused (no headings): the three curvilinear pictures; the scale-factor table (\u03B8: r, \u03C6: a, \u03BB\
+    : a cos \u03C6); the globe with the slicing sheet; the face-on disc 'd = a \u03C3' with 'cos \u03C3 = r\u0302\u2081 \xB7 r\u0302\u2082'; '78.7\xB0', '\u2248\
+    \ 8755 km'; the compass strip 312\xB0 -> 214\xB0; the rhumb line beside the great circle '+11 %'; a Mercator thumbnail with a straight slate line and\
+    \ a question mark (the Part 7 teaser). Each spoken number on screen at its words. REMAKE 2026-11-07: S7 + S8 are the two-sentence teaser (R3): the Mercator\
+    \ mini with '?' and 'Part 7: maps' on S7, 'care near the poles' (y 815) on S8."
   voiceover: To sum up, curvilinear coordinates have curved lines, unit vectors that turn, and scale factors that turn a change of coordinate into a distance.
-    On the Earth, the scale factor of latitude is the Earth's radius, and of longitude, the radius times cosine phi. The shortest way between two places
-    follows a great circle, whose centre is the Earth's centre. Its length is the Earth's radius times sigma, the angle at the centre, and the cosine of
-    sigma is the dot product of the two position arrows. From London to Los Angeles, that's about seventy eight point seven degrees, or about eight thousand
-    seven hundred and fifty five kilometres. Along the great circle, the compass heading changes all the way, from three hundred and twelve degrees to two
-    hundred and fourteen. A rhumb line keeps one compass bearing, so it's easy to steer, but here it's about eleven percent longer. In Part 7, we'll flatten
-    the Earth onto maps, see what each map stretches, and find out why the rhumb line is straight on the most famous map of all.
+    On the Earth, the scale factor of latitude is the Earth's radius, and of longitude, the radius times cosine phi. The shortest way between two places follows
+    a great circle, whose centre is the Earth's centre. Its length is the Earth's radius times sigma, the angle at the centre, and the cosine of sigma is
+    the dot product of the two position arrows. From London to Los Angeles, that's about seventy eight point seven degrees, or about eight thousand seven
+    hundred and fifty five kilometres. Along the great circle, the compass heading changes all the way, from three hundred and twelve degrees to two hundred
+    and fourteen. A rhumb line keeps one compass bearing, so it's easy to steer, but here it's about eleven percent longer. In Part 7, we'll flatten the Earth
+    onto maps, and work out exactly what each map stretches. That explains why the rhumb line comes out straight on the most famous map of all, and why weather
+    data on a grid need care near the poles.
   on_screen_eq:
     latex: d=a\,\sigma,\qquad \cos\sigma=\hat{\mathbf r}_1\cdot\hat{\mathbf r}_2
     vallis_eq: 'none in Vallis: arc rule and the dot product of unit vectors; repeated from s07/s09'
@@ -1200,13 +1186,13 @@ scenes:
   - - 1011.5164
     - 1019.1664
   beat: series end card (maths-tutorial ending, word for word; decision 2)
-  visual: 'House end card (HOUSE_STYLE §3): four faint topic thumbnails along the top (globe with a great circle, compass dial, rhumb line, Mercator map);
-    keyword lines ''a series of maths tutorials'' (68 px) and ''atmospheric science · meteorology · fluid dynamics'' (54 px); a notebook icon with ''coordinates
-    notebook''; stacked notebook icons with ''notebooks for the other maths concepts''; 24-px gap between icons and text (Should 14). Then the 2.5-s silent
-    hold while the music fades.'
+  visual: "House end card (HOUSE_STYLE \xA73): four faint topic thumbnails along the top (globe with a great circle, compass dial, rhumb line, Mercator map);\
+    \ keyword lines 'a series of maths tutorials' (68 px) and 'atmospheric science \xB7 meteorology \xB7 fluid dynamics' (54 px); a notebook icon with 'coordinates\
+    \ notebook'; stacked notebook icons with 'notebooks for the other maths concepts'; 24-px gap between icons and text (Should 14). Then the 2.5-s silent\
+    \ hold while the music fades. REMAKE 2026-11-07: the picture fades out with the music over the 2.5-s silent hold (R3; = Part 4's s29)."
   voiceover: This video is one of a series of related maths tutorials, so watch out for the others. They're made for students of atmospheric science, meteorology
-    and fluid dynamics, and anyone else who needs these ideas. The notebook for coordinates, and the notebooks for the other maths concepts, are on the
-    website that goes with this video.
+    and fluid dynamics, and anyone else who needs these ideas. The notebook for coordinates, and the notebooks for the other maths concepts, are on the website
+    that goes with this video.
   on_screen_eq: null
   calc_rows: []
   physics_source: null
