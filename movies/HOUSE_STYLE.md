@@ -77,6 +77,7 @@ Transitions are spoken bridges, never cards:
 - Every case study shown in a picture is introduced first: a globe, where it is, the track, the dates, then the zoom. Never show an event the voice has not introduced.
 - Every contour line, shape or colour on a chart is said and labelled: what quantity, what value, what unit.
 - Satellite pictures: show natural (true) colour first; when false colour is used, say why and what each colour means.
+- **Every fact verified** (user, 2026-11-07). Before TTS, each claim about a place, event, date, intensity, record, death toll or piece of history is checked against an authoritative source (IMD/NHC/JTWC/RSMC reports, IBTrACS, agency documentation) and logged in the movie's fact-check table. A superlative ("first", "strongest", "biggest") names exactly what it measures and on whose scale, and must not imply more. For example, Amphan was IMD's top intensity class, not the most destructive Bangladesh cyclone; Sidor (2007) and Aila (2009) came in between.
 - **No maker credit on source lines** (user, 2026-11-06): never write "drawn/plotted/processed by the author" or similar; the source line names only the data, its date and plain-words notes.
 
 Then the hook scene follows with a 10-frame cross-fade. The poster is the title frame (frame ≈ 200).
