@@ -1,8 +1,9 @@
-"""Flag narration wording the user banned (movies/HOUSE_STYLE.md §3, user 2026-11-06).
+"""Flag narration wording the user banned (movies/HOUSE_STYLE.md §3, user 2026-11-06/07).
 
 Checks the spoken lines of movie scripts (lines starting with '>' or '#' and the README are notes, not speech):
 "the easy way", spoken numbered steps ("Step one", "step 2"), "assume nothing", "never mix the two centres",
-and maker credits ("by the author").
+maker credits ("by the author"), "made easy", "how meteorology uses", the robotic hook formula
+("why it's built this way"), voiced simple arithmetic and voiced sign rules.
 
 Usage: .venv/Scripts/python.exe tools/script_wording_lint.py movies/ch00/<slug>/script.md [...]
 Exit code 1 if anything is found.
@@ -31,6 +32,10 @@ _NUM = rf"(?:minus\s+)?(?:\d[\d.,]*|{_W}(?:[\s-]+(?:and\s+)?{_W})*)"
 _OP = r"(?:plus|minus|times|multiplied\s+by|divided\s+by)"
 _RES = r"(?:,?\s*(?:equals|is|are|gives|makes|comes\s+to|that's|which\s+is|about|roughly|so|=))"
 BANNED += [
+    (re.compile(r"\bhow meteorology uses\b", re.I),
+     "say 'see how they're used to …', not 'how meteorology uses them' (user 2026-11-07)"),
+    (re.compile(r"\bwhy (it's|it is|they're|they are) built (this|the) way\b", re.I),
+     "robotic hook formula; use an easy-going lead-in naming this movie's pieces ('Now let's dive into …') (user 2026-11-07)"),
     (re.compile(rf"\b{_NUM}\s+{_OP}\s+{_NUM}{_RES}", re.I),
      "voiced arithmetic: show it on screen, say what is combined + the result (house rule 2026-11-07)"),
     (re.compile(r"\bminus times (a )?minus\b|\bnegative times (a )?negative\b", re.I),

@@ -30,7 +30,7 @@ Every later movie must look, sound, open, explain and end the same way, as if on
 | # | Beat | Reference scene | What it does |
 |---|---|---|---|
 | 0 | **Opening title** (the only heading in the movie) | s00 | Big colourful title plus a catchy animation driven by the movie's own data, plus **one** narrated sentence. See §3 |
-| 1 | **Hook question** | s01 | "What is the dot product? Let's see what it is, why it's built this way, and what it tells us about the wind." The core picture appears on the first frame |
+| 1 | **Hook question** | s01 | "What is the dot product?" then an easy-going lead-in that names this movie's own pieces, e.g. "Now let's dive into what the dot product is, how it's built and how it's used: its two forms, its shadow picture, and the wind." **Never** the robotic formula "Let's see what it is, why it's built this way / the way it is" (user 2026-11-07). The core picture appears on the first frame |
 | 2 | **Building blocks** | s02–s03 | Define each ingredient in plain words (vector, components, length), then the definition, then a worked example with easy numbers and its result named ("a scalar") |
 | 3 | **Second view or intuition** | s04–s07 | The other form (cos θ), the cases (same way / right angle / opposite), the picture (shadow), the unit-vector version |
 | 4 | **Why it is built this way** | s08–s11 | "There are three good reasons." Each reason is its own scene with a concrete physical example (wind components, work on a sled) |
@@ -52,6 +52,7 @@ Transitions are spoken bridges, never cards:
 - **Title:** `RiseText` at **150 px, weight 800**, filled with `TitleGradient` (teal `C.first` to gold `C.gold`). Letters rise 24 px and fade in over 8 frames with a 2-frame stagger; two lines ("The dot" / "product").
 - **No "made easy" / "easy" anywhere in the title or the first frame** (user, 2026-11-06: "very annoying"). The old promise line is removed; the title is the concept name, then the subtitle. The concept name pulses (×1.06) when the voice says it. Later-movie names are said without "made easy" ("our tensors movie").
 - **Subtitle:** "and how meteorology uses it" at **68 px**, warm white, with the application word in teal.
+- **The one narrated s00 sentence** (user 2026-11-07): "In this video, we'll learn <topic>, and see how <it's/they're> used to <application>." Do **not** say "see how meteorology uses them" in the voice; say "how they're used to …" (e.g. "…and see how they're used to measure the winds around a hurricane's eye"). Vary the wording between movies so openings never sound templated.
   - Change the application word per movie: meteorology, oceanography, the climate…
 
 **Right column, x 1080–1840, y 180–636:** a catchy animation in two parts, both from the movie's data.
