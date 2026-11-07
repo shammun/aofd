@@ -9,7 +9,7 @@ import { Band, Dash, Pt, RightTick, pulse } from "../house/kit/draw";
 import { CalcStack, TeX } from "../house/kit/tex";
 import { Keyword } from "../house/kit/notes";
 import { CurvedLink } from "../house/kit/extras";
-import { RiseText, TitleGradient } from "../house/kit/title";
+import { SeriesTitle } from "./kit_cf/SeriesTitle";
 import { SourceBelow } from "../house/kit/frame";
 import { AnimatedWindArrow, FlowParticles } from "../house/kit/wind";
 import {
@@ -51,8 +51,8 @@ export const IanBody: React.FC<{ P: (la: number, lo: number) => Pt; f: number; z
 const TB = { x: 1150, y: 150, w: 690, h: 480 };
 const S00: React.FC = () => {
   const f = useCurrentFrame(), k = K("s00_title");
-  const tMet = AT(k, 0, "meteorology"), tEasy = AT(k, 0, "the easy way");
-  const pz = 1 + 0.06 * pulse(f, tEasy, 14);
+  // feedback 2026-11-06 (R1/R2): no "made easy"; the concept name pulses when the voice says "coordinates"
+  const tMet = AT(k, 0, "meteorology"), tCo = AT(k, 0, "coordinates");
   // Part A: polar grid round the station, the balloon (3, 4) km gliding once round the 5-km circle with r̂, θ̂; then the square grid turns 30°
   const O: Pt = [1445, 400], u = 40;
   const th = PL.th + 360 * prog(f, 16, 104);
@@ -65,16 +65,8 @@ const S00: React.FC = () => {
   return (
     <Scene fadeIn={false}>
       <Svg>
-        <defs><TitleGradient id="ttl" x1={100} x2={1000} /></defs>
-        {/* title wording (coordinator 2026-11-05, short version): "Coordinates, Part 1 — Arrows on a flat map: polar coordinates and rotated axes" */}
-        <RiseText f={f} t="Coordinates · Part 1" x={104} y={110} s={64} at={2} fill={C.key} />
-        <RiseText f={f} t="Arrows on a" x={100} y={265} s={150} at={6} fill="url(#ttl)" />
-        <RiseText f={f} t="flat map" x={100} y={410} s={150} at={16} fill="url(#ttl)" />
-        <g transform={`translate(104 515) scale(${pz}) translate(-104 -515)`}>
-          <RiseText f={f} t="made easy" x={104} y={525} s={88} at={24} fill={C.key} />
-        </g>
-        <RiseText f={f} t="polar coordinates" x={106} y={660} s={68} at={34} fill={C.key} />
-        <RiseText f={f} t="and rotated axes" x={106} y={750} s={68} at={40} fill={C.key} />
+        {/* the series title layout (feedback 2026-11-06 R1/R2; kit_cf/SeriesTitle.tsx, proposed for the house kit): concept / part / subtitle */}
+        <SeriesTitle f={f} concept="Coordinates" part="Part 1 · Arrows on a flat map" sub={["polar coordinates", "and rotated axes"]} pulseAt={tCo} />
         <g opacity={oA * fin(f, 4, 10)}>
           {[1, 2, 3, 4, 5].map((r) => <circle key={r} cx={O[0]} cy={O[1]} r={r * u} fill="none" stroke={C.local} strokeWidth={2} opacity={0.6} />)}
           {Array.from({ length: 12 }, (_, i) => i * 30).map((a) => <line key={a} x1={O[0]} y1={O[1]} x2={O[0] + 5.6 * u * Math.cos(a * D2R)} y2={O[1] - 5.6 * u * Math.sin(a * D2R)} stroke={C.local} strokeWidth={1.6} opacity={0.45} />)}

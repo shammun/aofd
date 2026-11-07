@@ -8,9 +8,11 @@ import { AbsoluteFill, staticFile, useCurrentFrame } from "remotion";
 import { PoleThermometer, ramp } from "../house";
 import timing from "../../ch00/ch00_coordinates_flat/timing.json";
 import cfJ from "../../ch00/ch00_coordinates_flat/data/cf.json";
-import { C, T } from "../house/kit/type";
-import { Arrow, Lbl, Pt, Svg, clamp } from "../house/kit/draw";
+import { C, FONT, T } from "../house/kit/type";
+import { Arrow, Lbl as HLbl, Pt, Svg, clamp } from "../house/kit/draw";
+import { Keyword as HKeyword } from "../house/kit/notes";
 import { CurvedLink } from "../house/kit/extras";
+import { KX, texHtml } from "../house/kit/tex";
 
 export const FPS = 30;
 type Snt = { text: string; start: number; end: number };
@@ -314,4 +316,41 @@ export const ClockText: React.FC<{ x: number; y: number; t: string; min: number;
     </g>
   );
 };
-export { Arrow, Lbl, Svg, clamp };
+// ---------------------------------------------------------------- maths inside labels (feedback 2026-11-06, lint rule C5)
+// A label's maths goes in $…$ and is drawn by KaTeX (the sans font drew θ, α, ×, cos as plain text); the words stay in the house sans
+// font. Ported from Part 3 (src/ch00_coordinates_sphere/cs_lib.tsx MathLbl / Keyword): an HTML label in a foreignObject with the same
+// font, size, weight, colour, anchor and dark halo as the SVG label, so it can stay inside any <Svg> group. Strings without "$" are
+// drawn by the unchanged house Lbl / Keyword.
+const segs = (t: string) => t.split("$");
+const MathLbl: React.FC<{ x: number; y: number; t: string; c?: string; s?: number; a?: "start" | "middle" | "end"; o?: number; b?: boolean }> = (
+  { x, y, t, c = C.ink, s = 54, a = "start", o = 1, b = true }) => {
+  if (s < 44) throw new Error(`label "${t}" below 44 px`);
+  if (o <= 0) return null;
+  const tx = a === "start" ? 0 : a === "middle" ? -50 : -100, hw = Math.max(2, 0.07 * s);
+  const halo = [[1, 0], [-1, 0], [0, 1], [0, -1], [0.7, 0.7], [-0.7, 0.7], [0.7, -0.7], [-0.7, -0.7]].map(([u, v]) => `${u * hw}px ${v * hw}px 0 ${C.bg}`).join(",");
+  return (
+    <foreignObject x={0} y={0} width={1920} height={1080} opacity={o} style={{ overflow: "visible", pointerEvents: "none" }}>
+      <div style={{ position: "relative", width: 1920, height: 1080 }}>
+        <div style={{ position: "absolute", left: x, top: y, transform: `translate(${tx}%, -50%)`, whiteSpace: "nowrap", fontFamily: FONT, fontSize: s,
+          fontWeight: b ? 650 : 500, color: c, lineHeight: 1.15, textShadow: halo }}>
+          {segs(t).map((q, i) => (i % 2 ? <span key={i} style={{ fontSize: s / KX }} dangerouslySetInnerHTML={{ __html: texHtml(String.raw`\textstyle ` + q) }} />
+            : <span key={i} style={{ whiteSpace: "pre" }}>{q}</span>))}
+        </div>
+      </div>
+    </foreignObject>
+  );
+};
+/** the house SVG label; $…$ parts are KaTeX */
+export const Lbl: React.FC<React.ComponentProps<typeof HLbl>> = (p) => (p.t.includes("$") ? <MathLbl {...p} /> : <HLbl {...p} />);
+/** the house Keyword; with $…$ maths the same rise / fade (this movie's maths keywords have no pointer targets) */
+export const Keyword: React.FC<React.ComponentProps<typeof HKeyword>> = (p) => {
+  if (!p.text.includes("$")) return <HKeyword {...p} />;
+  const { f, text, at, c = C.key, appear, out, o = 1, s = 54, a = "start" } = p;
+  if ((p.targets ?? []).length) throw new Error(`Keyword "${text}": maths keyword with targets`);
+  const oT = ramp(f, appear, appear + 8) * (out !== undefined ? 1 - ramp(f, out, out + 10) : 1) * o;
+  if (oT <= 0) return null;
+  const rise = 12 * (1 - ramp(f, appear, appear + 8));
+  return <g opacity={oT}><MathLbl x={at[0]} y={at[1] + rise} t={text} c={c} s={s} a={a} /></g>;
+};
+export { Arrow, Svg, clamp };
+

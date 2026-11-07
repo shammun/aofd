@@ -266,6 +266,28 @@ def main() -> int:
         [0.005, 0.005, 1e-9, 1e-9, 0.05, 0.02])
     row("DF24", "the rule u cos θ + v sin θ, −u sin θ + v cos θ reproduces the library at the three points",
         [p["u"] * np.cos(np.deg2rad(az)) + p["v"] * np.sin(np.deg2rad(az)) - p["ur"] for az, p in pts.items()], [0, 0, 0], 0.15)
+    # feedback 2026-11-06 (R7): five more points, every 45°, arrows + values only (no calculation on screen); the screen values are
+    # the library's u_r, u_θ rounded to 0.1, and the rule u cos θ + v sin θ, −u sin θ + v cos θ reproduces them (the ring's own r̂
+    # differs from (cos θ, sin θ) by < 0.3°)
+    pts8 = {}
+    for azd in (0, 45, 90, 135, 180, 225, 270, 315):
+        j = int(np.argmin(np.abs(ring["az"] - azd)))
+        pts8[azd] = {"u": float(ring["u"][j]), "v": float(ring["v"][j]), "ur": float(ring["vr"][j]), "ut": float(ring["vt"][j]), "j": j,
+                     "ur1": round(float(ring["vr"][j]), 1), "ut1": round(float(ring["vt"][j]), 1)}
+    row("DF24", "R7 eight points 0-315° (every 45°): u_r = −8.7, −16.1, −37.4, −24.3, −1.9, +13.5, −11.2, −23.2 m/s",
+        [p["ur"] for p in pts8.values()], [-8.7, -16.1, -37.4, -24.3, -1.9, 13.5, -11.2, -23.2], 0.06)
+    row("DF24", "R7 eight points 0-315°: u_θ = 38.0, 29.5, 16.9, 38.7, 45.6, 43.7, 24.6, 34.6 m/s",
+        [p["ut"] for p in pts8.values()], [38.0, 29.5, 16.9, 38.7, 45.6, 43.7, 24.6, 34.6], 0.06)
+    row("DF24", "R7 the rule reproduces the library at all eight points (u_r, u_θ; < 0.2 m/s)",
+        [[p["u"] * np.cos(np.deg2rad(az)) + p["v"] * np.sin(np.deg2rad(az)) - p["ur"], -p["u"] * np.sin(np.deg2rad(az)) + p["v"] * np.cos(np.deg2rad(az)) - p["ut"]]
+         for az, p in pts8.items()], np.zeros((8, 2)), 0.2)
+    row("DF24", "R7 said: inflow (u_r < 0) at 7 of the 8 points, outflow only at 225° (southwest)",
+        [sum(p["ur"] < 0 for p in pts8.values()), [az for az, p in pts8.items() if p["ur"] > 0][0]], [7, 225], 0)
+    # feedback 2026-11-06 (R8): the first terms of the two ring sums, as spoken / written (θ = 0°, 5°, 10°)
+    row("DF22", "R8 first terms of Σu_r: −8.7 (θ 0°, = the hand-worked point), −10.3 (5°), −11.2 (10°)", ring["vr"][:3], [-8.7, -10.3, -11.2], 0.05)
+    row("DF22", "R8 first terms of Σu_θ: 38.0, 37.8, 38.3", ring["vt"][:3], [38.0, 37.8, 38.3], 0.05)
+    row("DF22", "R8 Σu_r / N with N = 72 = −957.2 / 72 = −13.3 (= the ring mean of storm_relative_wind)",
+        [len(ring["vr"]), float(np.sum(ring["vr"])), float(np.sum(ring["vr"])) / len(ring["vr"]), float(np.sum(ring["vr"])) / 72 - vr], [72, -957.2, -13.3, 0], [0, 0.05, 0.05, 1e-9])
     npos = int(np.sum(ring["vr"] >= 0))
     row("DF25", "ring ranges: v_t 16.9-46.8 ('17 to 47'), v_r −40.1 to +14.1 ('minus 40 to plus 14')",
         [ring["vt"].min(), ring["vt"].max(), ring["vr"].min(), ring["vr"].max()], [17, 47, -40, 14], 0.5)
@@ -278,7 +300,7 @@ def main() -> int:
                 "inflow": float(RW.inflow_angle_mean_deg[i25]), "best_kt": 135,
                 "ring": {"az": B1.r6(ring["az"], 2), "lat": B1.r6(RW.lat[i25], 4), "lon": B1.r6(RW.lon[i25], 4), "u": B1.r6(ring["u"], 2),
                          "v": B1.r6(ring["v"], 2), "vt": B1.r6(ring["vt"], 2), "vr": B1.r6(ring["vr"], 2), "rhat": B1.r6(np.asarray(RW.rhat)[i25], 4) if hasattr(RW, "rhat") else None},
-                "pts": {str(k): v for k, v in pts.items()}, "npos": npos}
+                "pts": {str(k): v for k, v in pts.items()}, "pts8": {str(k): v for k, v in pts8.items()}, "npos": npos}
     # regrid to 0.03° lat/lon for the raster and the streaklines (as build 1)
     from scipy.interpolate import griddata
     glat = np.arange(23.4, 30.0001, 0.03)

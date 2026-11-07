@@ -21,7 +21,7 @@ concepts:
 - polar components = axes turned by the local angle theta
 - 'application: a hurricane''s ring-mean tangential and radial winds, their meaning, three ring points by hand, the inflow angle (pending data
   report)'
-target_duration_s: 2632.7
+target_duration_s: 2737.775
 fps: 30
 size:
 - 1920
@@ -240,6 +240,8 @@ honesty_notes:
   laps) are listed per scene and in the manifest, not badged (HOUSE_STYLE §5).
 - Every spoken number comes from tested fluidpy functions (coords, tensors, diag.cyclone) and is asserted by CHECK rows DF02-DF26 in the Part
   1 build script (shared _coords_common.py, split plan §2h).
+- 's25 coast sketch (feedback 2026-11-06): the x′/y′ arrows at Fort Myers Beach are a schematic of Part 2''s turned axes (shore about 329°), not
+  data; the voice says Part 2 shows it with tide gauges and satellite pictures.'
 quiz_hook: 'At a point 5 km due east of a northern-hemisphere hurricane''s eye, the wind blows towards the north-west at u = -10, v = 10 m/s.
   What are u_r and u_theta, is the air flowing in, and which way does it go round, seen from above? (u_r = -10, in; u_theta = +10, anticlockwise:
   cyclonic.)'
@@ -248,21 +250,21 @@ scenes:
 - id: s00_title
   t:
   - 0.3
-  - 10.775
+  - 9.85
   sentence_times:
   - - 0.3
-    - 9.975
+    - 9.05
   beat: opening title (HOUSE_STYLE §3)
-  visual: 'TITLE FRAME (house/kit/title.tsx). Left x 100-1075: RiseText ''Coordinates · Part 1'' (64 px, warm white) then ''Arrows on a'' / ''flat
-    map'' (150 px, weight 800, TitleGradient teal -> gold; letters rise 24 px over 8 frames, 2-frame stagger); ''made easy'' (88 px, warm white)
-    pulses x1.06 on AT(1,''the easy way''); subtitle on two lines ''polar coordinates'' / ''and rotated axes'' (68 px; title wording 2026-11-05),
-    >= 50 px clear of the animation. Right x 1130-1840, y 180-636: Part A (frame 0 -> AT(1,''meteorology'')): a polar grid (rings 1-5 km, spokes
-    every 30 deg, slate) round a station; the balloon at (3, 4) km with r-hat and theta-hat (orange, KaTeX tip labels) glides once round the 5-km
-    circle, both arrows turning, while a ghost x-hat, y-hat pair stays fixed in the corner; then the square grid turns by 30 deg (x'', y''). Part
-    B (12-frame cross-fade on ''meteorology''): Ian''s 10-m wind speed round the eye (data_block), the 25-km ring with teal tangential and rose
-    inward arrows with moving dashes; its source line below the column (y <= 860). Poster = frame 200.'
-  voiceover: In this video, we'll learn coordinates on a flat map the easy way, and see how meteorology uses them to measure the winds round a
-    hurricane's eye.
+  visual: 'TITLE FRAME (house/kit/title.tsx). Left x 100-1075, the series title layout (kit_cf/SeriesTitle.tsx, feedback 2026-11-06 R1/R2): RiseText
+    ''Coordinates'' (150 px, weight 800, TitleGradient teal -> gold, letters rise 24 px over 8 frames, 2-frame stagger; pulses x1.06 on AT(0,''coordinates'')),
+    ''Part 1 · Arrows on a flat map'' (warm white, size fitted to the 975-px column), subtitle ''polar coordinates'' / ''and rotated axes'' (68
+    px); >= 50 px clear of the animation. Right x 1130-1840, y 180-636: Part A (frame 0 -> AT(1,''meteorology'')): a polar grid (rings 1-5 km,
+    spokes every 30 deg, slate) round a station; the balloon at (3, 4) km with r-hat and theta-hat (orange, KaTeX tip labels) glides once round
+    the 5-km circle, both arrows turning, while a ghost x-hat, y-hat pair stays fixed in the corner; then the square grid turns by 30 deg (x'',
+    y''). Part B (12-frame cross-fade on ''meteorology''): Ian''s 10-m wind speed round the eye (data_block), the 25-km ring with teal tangential
+    and rose inward arrows with moving dashes; its source line below the column (y <= 860). Poster = frame 200.'
+  voiceover: In this video, we'll learn coordinates on a flat map, and see how meteorology uses them to measure the winds round a hurricane's
+    eye.
   on_screen_eq: null
   physics_source:
     fn: fluidpy.core.coords.unit_vectors_polar; fluidpy.core.tensors.rotation_matrix_2d; fluidpy.diag.cyclone.storm_relative_wind
@@ -290,19 +292,22 @@ scenes:
   - U-CO-101
   layout: 'Title frame; the Ian mini-map in the right column has its source line ''Data: <product> · 28 Sep 2022, 18 UTC'' below it (>= 28 px,
     y <= 860); ring arrows animated with moving dashes. No other text.'
+  feedback_2026_11_06: 'R1/R2: ''made easy'' and its pulse removed; the series title layout (kit_cf/SeriesTitle.tsx): ''Coordinates'' 150 px house
+    gradient, pulsing x1.06 on AT(0,''coordinates''); ''Part 1 · Arrows on a flat map'' (size fitted to the 975-px column by textW); subtitle
+    ''polar coordinates'' / ''and rotated axes'' 68 px. Voice: no ''the easy way''.'
 - id: s01_hook
   t:
-  - 10.775
-  - 31.275
+  - 9.85
+  - 30.35
   sentence_times:
-  - - 10.775
-    - 14.675
-  - - 15.025
-    - 21.3
-  - - 21.65
-    - 25.9
-  - - 26.25
-    - 30.475
+  - - 9.85
+    - 13.75
+  - - 14.1
+    - 20.375
+  - - 20.725
+    - 24.975
+  - - 25.325
+    - 29.55
   beat: hook question
   visual: 'Full width from frame 0. Left x 80-900: the polar grid with the station and the balloon (r-hat, theta-hat). Right x 1000-1840: Ian''s
     wind-speed map round the eye with the 25-km ring (data_block), colour bar beside it in the gap (never on it), source line below it. S1 on
@@ -340,29 +345,29 @@ scenes:
     not cards (no boxes, no numbers on them).
 - id: s02_coordinates
   t:
-  - 31.275
-  - 82.55
+  - 30.35
+  - 81.625
   sentence_times:
-  - - 31.275
-    - 33.575
-  - - 33.925
-    - 39.875
-  - - 40.225
-    - 43.225
-  - - 43.575
-    - 46.05
-  - - 46.4
-    - 50.975
-  - - 51.325
-    - 53.9
-  - - 54.25
-    - 60.325
-  - - 60.675
-    - 65.1
-  - - 66.6
-    - 72.575
-  - - 72.925
-    - 81.75
+  - - 30.35
+    - 32.65
+  - - 33.0
+    - 38.95
+  - - 39.3
+    - 42.3
+  - - 42.65
+    - 45.125
+  - - 45.475
+    - 50.05
+  - - 50.4
+    - 52.975
+  - - 53.325
+    - 59.4
+  - - 59.75
+    - 64.175
+  - - 65.675
+    - 71.65
+  - - 72.0
+    - 80.825
   beat: 'building block: origin, axes, coordinates (kept from build 1)'
   visual: 'Picture zone x 80-1000: a flat, real map patch round Trappes (BMNG + NE 10 m admin lines, 30 x 30 km window) as the ''flat map''; a
     slate station icon (PoleThermometer) at the origin on AT(4,''weather station''). S5: an east axis and a north axis (orange) draw through it;
@@ -401,29 +406,29 @@ scenes:
     at a spot); ''(x, y) = (3, 4)'' and keywords in the maths zone.'
 - id: s03_cartesian_arrows
   t:
-  - 82.55
-  - 143.475
+  - 81.625
+  - 142.55
   sentence_times:
-  - - 82.55
-    - 88.2
-  - - 88.55
-    - 94.25
-  - - 94.6
-    - 110.05
-  - - 110.4
-    - 114.525
-  - - 114.875
-    - 119.925
-  - - 120.275
-    - 124.725
-  - - 125.075
-    - 129.2
-  - - 129.55
-    - 133.15
-  - - 133.5
-    - 138.65
-  - - 139.0
-    - 142.675
+  - - 81.625
+    - 87.275
+  - - 87.625
+    - 93.325
+  - - 93.675
+    - 109.125
+  - - 109.475
+    - 113.6
+  - - 113.95
+    - 119.0
+  - - 119.35
+    - 123.8
+  - - 124.15
+    - 128.275
+  - - 128.625
+    - 132.225
+  - - 132.575
+    - 137.725
+  - - 138.075
+    - 141.75
   beat: 'building block: Cartesian unit vectors are the same everywhere (kept)'
   visual: 'Same map. S1: unit arrows x-hat and y-hat (orange, 10 px, 40-px heads) grow at the origin; KaTeX TipLabels. S3: ''3 x-hat + 4 y-hat''
     (68 px) beside the balloon, the 3 and the 4 gold-linked to the legs. S5-S6: the balloon jumps to four other places; at each, a copy of x-hat,
@@ -456,27 +461,27 @@ scenes:
   layout: SourceBelow under the patch; each insert has its own source line below it; no overlap with the patch.
 - id: s04_polar
   t:
-  - 143.475
-  - 219.225
+  - 142.55
+  - 218.3
   sentence_times:
-  - - 143.475
-    - 151.275
-  - - 151.625
-    - 154.55
-  - - 154.9
-    - 168.0
-  - - 169.5
-    - 172.65
-  - - 173.0
-    - 179.425
-  - - 179.775
-    - 199.725
-  - - 201.225
-    - 207.55
-  - - 207.9
-    - 211.2
-  - - 211.55
-    - 218.425
+  - - 142.55
+    - 150.35
+  - - 150.7
+    - 153.625
+  - - 153.975
+    - 167.075
+  - - 168.575
+    - 171.725
+  - - 172.075
+    - 178.5
+  - - 178.85
+    - 198.8
+  - - 200.3
+    - 206.625
+  - - 206.975
+    - 210.275
+  - - 210.625
+    - 217.5
   beat: 'building block: polar coordinates (r, theta) (kept)'
   visual: 'Picture: the balloon at (3, 4) on the map; a teal line from the station to it labelled ''r'' at its midpoint on AT(2,''called r'').
     S3: CalcStack ''r = sqrt(3^2 + 4^2) = sqrt(25) = 5 km'', legs highlighted and gold-linked to 3^2 and 4^2. S5: a slate arc from the east axis
@@ -517,29 +522,29 @@ scenes:
   layout: Map patch with SourceBelow; calculations in the maths zone only.
 - id: s05_polar_back
   t:
-  - 219.225
-  - 277.35
+  - 218.3
+  - 276.425
   sentence_times:
-  - - 219.225
-    - 221.525
-  - - 221.875
-    - 223.225
-  - - 223.575
-    - 227.05
-  - - 227.4
-    - 231.875
-  - - 232.225
-    - 239.175
-  - - 239.525
-    - 241.1
-  - - 241.45
-    - 262.2
-  - - 262.55
-    - 265.425
-  - - 266.925
-    - 271.775
-  - - 272.125
-    - 276.55
+  - - 218.3
+    - 220.6
+  - - 220.95
+    - 222.3
+  - - 222.65
+    - 226.125
+  - - 226.475
+    - 230.95
+  - - 231.3
+    - 238.25
+  - - 238.6
+    - 240.175
+  - - 240.525
+    - 261.275
+  - - 261.625
+    - 264.5
+  - - 266.0
+    - 270.85
+  - - 271.2
+    - 275.625
   beat: 'building block: back to x and y (kept)'
   visual: 'Picture: the right triangle station-balloon, hypotenuse r (teal), angle theta (slate) at the station, east leg and north leg (orange
     dashed). S4: tags ''r cos theta'' on the east leg, ''r sin theta'' on the north leg. S6-S7: CalcStack ''5 cos 53 deg = 5 x 0.6 = 3'', ''5
@@ -576,23 +581,23 @@ scenes:
     see these: the builder checks its own stills). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s06_bearings
   t:
-  - 277.35
-  - 317.2
+  - 276.425
+  - 316.275
   sentence_times:
-  - - 277.35
-    - 279.825
-  - - 280.175
-    - 284.825
-  - - 285.175
-    - 290.3
-  - - 290.65
-    - 296.375
-  - - 297.875
-    - 306.475
-  - - 306.825
-    - 309.725
-  - - 310.075
-    - 316.4
+  - - 276.425
+    - 278.9
+  - - 279.25
+    - 283.9
+  - - 284.25
+    - 289.375
+  - - 289.725
+    - 295.45
+  - - 296.95
+    - 305.55
+  - - 305.9
+    - 308.8
+  - - 309.15
+    - 315.475
   beat: 'convention: maths angle vs compass bearing vs wind ''from'' (kept)'
   visual: 'Picture: the same point with two angle arcs: the maths angle from east, anticlockwise (slate, ''53 deg'') and the compass bearing from
     north, clockwise (gold, ''37 deg''). Maths: ''90 deg - 53 deg = 37 deg''. S4-S5: an arrow ''from the west'' (teal, moving dashes) blowing
@@ -628,31 +633,31 @@ scenes:
     see these: the builder checks its own stills). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s07_radians
   t:
-  - 317.2
-  - 391.15
+  - 316.275
+  - 390.225
   sentence_times:
-  - - 317.2
-    - 324.85
-  - - 325.2
-    - 329.15
-  - - 329.5
-    - 334.7
-  - - 335.05
-    - 341.0
-  - - 341.35
-    - 346.925
-  - - 347.275
-    - 357.4
-  - - 357.75
-    - 360.025
-  - - 360.375
-    - 373.55
-  - - 375.05
-    - 380.15
-  - - 381.65
-    - 384.975
-  - - 385.325
-    - 390.35
+  - - 316.275
+    - 323.925
+  - - 324.275
+    - 328.225
+  - - 328.575
+    - 333.775
+  - - 334.125
+    - 340.075
+  - - 340.425
+    - 346.0
+  - - 346.35
+    - 356.475
+  - - 356.825
+    - 359.1
+  - - 359.45
+    - 372.625
+  - - 374.125
+    - 379.225
+  - - 380.725
+    - 384.05
+  - - 384.4
+    - 389.425
   beat: 'building block: radians and arc length (kept; Should 1, Should 18)'
   visual: 'Keyword ''radians'' in the maths zone from frame 0 (Should 18). Picture: a circle round the station with radius r (teal); a walker
     dot moves along the edge leaving an orange arc; the arc length s and the angle theta (rad) tick together; keyword ''arc length'' on AT(3,''arc
@@ -694,37 +699,37 @@ scenes:
     see these: the builder checks its own stills). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s08_r_hat
   t:
-  - 391.15
-  - 475.175
+  - 390.225
+  - 474.25
   sentence_times:
-  - - 391.15
-    - 396.875
-  - - 397.225
-    - 399.525
-  - - 399.875
-    - 405.0
-  - - 405.35
-    - 407.175
-  - - 407.525
-    - 414.225
-  - - 414.575
-    - 420.025
-  - - 420.375
-    - 431.5
-  - - 433.0
-    - 446.55
-  - - 446.9
-    - 449.15
-  - - 449.5
-    - 454.75
-  - - 455.1
-    - 460.775
-  - - 462.275
-    - 464.45
-  - - 464.8
-    - 471.225
-  - - 471.575
-    - 474.375
+  - - 390.225
+    - 395.95
+  - - 396.3
+    - 398.6
+  - - 398.95
+    - 404.075
+  - - 404.425
+    - 406.25
+  - - 406.6
+    - 413.3
+  - - 413.65
+    - 419.1
+  - - 419.45
+    - 430.575
+  - - 432.075
+    - 445.625
+  - - 445.975
+    - 448.225
+  - - 448.575
+    - 453.825
+  - - 454.175
+    - 459.85
+  - - 461.35
+    - 463.525
+  - - 463.875
+    - 470.3
+  - - 470.65
+    - 473.45
   beat: 'building block: r-hat built (arrow divided by its length); the way r grows'
   visual: 'Keyword ''unit vectors'' in the maths zone from frame 0. Picture zone: station, the 5-km circle (faint slate), the balloon at (3, 4)
     km. S5 on AT(5,''three, four''): the teal position arrow station -> balloon with tip label ''(3, 4)'' and length tag ''r = 5 km'' on AT(5,''five
@@ -799,41 +804,41 @@ scenes:
     see these: the builder checks its own stills). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s09_where_theta_grows
   t:
-  - 475.175
-  - 581.625
+  - 474.25
+  - 580.7
   sentence_times:
-  - - 475.175
-    - 481.875
-  - - 482.225
-    - 491.675
-  - - 492.025
-    - 494.775
-  - - 495.125
-    - 498.225
-  - - 498.575
-    - 502.3
-  - - 502.65
-    - 507.3
-  - - 507.65
-    - 513.075
-  - - 513.425
-    - 515.775
-  - - 516.125
-    - 520.425
-  - - 520.775
-    - 538.2
-  - - 538.55
-    - 545.45
-  - - 545.8
-    - 551.075
-  - - 551.425
-    - 559.6
-  - - 559.95
-    - 566.3
-  - - 566.65
-    - 571.85
-  - - 573.35
-    - 580.825
+  - - 474.25
+    - 480.95
+  - - 481.3
+    - 490.75
+  - - 491.1
+    - 493.85
+  - - 494.2
+    - 497.3
+  - - 497.65
+    - 501.375
+  - - 501.725
+    - 506.375
+  - - 506.725
+    - 512.15
+  - - 512.5
+    - 514.85
+  - - 515.2
+    - 519.5
+  - - 519.85
+    - 537.275
+  - - 537.625
+    - 544.525
+  - - 544.875
+    - 550.15
+  - - 550.5
+    - 558.675
+  - - 559.025
+    - 565.375
+  - - 565.725
+    - 570.925
+  - - 572.425
+    - 579.9
   beat: 'derivation D01: theta-hat is the way theta grows; why +90 deg'
   visual: 'Keyword ''the way theta grows'' (KaTeX theta) in the maths zone from frame 0. Picture zone: station, the 5-km circle (teal), the balloon
     with r-hat (orange, labelled). S4-S5 on AT(4,''let theta grow''): the ''r = 5 km'' tag on the radius stays fixed (slate ''r fixed''), theta''s
@@ -907,45 +912,45 @@ scenes:
     see these: the builder checks its own stills). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s10_turn_90
   t:
-  - 581.625
-  - 692.85
+  - 580.7
+  - 691.925
   sentence_times:
-  - - 581.625
-    - 584.5
-  - - 584.85
-    - 590.95
-  - - 591.3
-    - 593.625
-  - - 595.125
-    - 598.875
-  - - 599.225
-    - 602.075
-  - - 603.575
-    - 608.175
-  - - 608.525
-    - 613.575
-  - - 613.925
-    - 621.4
-  - - 621.75
-    - 628.275
-  - - 628.625
-    - 632.45
-  - - 632.8
-    - 648.525
-  - - 650.025
-    - 655.025
-  - - 655.375
-    - 658.825
-  - - 659.175
-    - 663.45
-  - - 664.95
-    - 667.3
-  - - 667.65
-    - 677.475
-  - - 677.825
-    - 684.925
-  - - 686.425
-    - 692.05
+  - - 580.7
+    - 583.575
+  - - 583.925
+    - 590.025
+  - - 590.375
+    - 592.7
+  - - 594.2
+    - 597.95
+  - - 598.3
+    - 601.15
+  - - 602.65
+    - 607.25
+  - - 607.6
+    - 612.65
+  - - 613.0
+    - 620.475
+  - - 620.825
+    - 627.35
+  - - 627.7
+    - 631.525
+  - - 631.875
+    - 647.6
+  - - 649.1
+    - 654.1
+  - - 654.45
+    - 657.9
+  - - 658.25
+    - 662.525
+  - - 664.025
+    - 666.375
+  - - 666.725
+    - 676.55
+  - - 676.9
+    - 684.0
+  - - 685.5
+    - 691.125
   beat: 'derivation D02: the 90-deg turn rule (p, q) -> (-q, p)'
   visual: 'Keyword ''90 deg turn'' from frame 0. Picture zone: a clean x-y grid (no map), origin at x 540, y 500, unit 120 px, orange x and y
     axes faint. S1-S2 on AT(2,''it points north''): x-hat (orange) TURNS (real rigid rotation about the origin over 1 s, TurnRule90, a gold quarter-circle
@@ -1035,59 +1040,59 @@ scenes:
     see these: the builder checks its own stills). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s11_theta_hat
   t:
-  - 692.85
-  - 877.95
+  - 691.925
+  - 877.025
   sentence_times:
-  - - 692.85
-    - 695.225
-  - - 695.575
-    - 700.4
-  - - 700.75
-    - 704.875
-  - - 705.225
-    - 709.225
-  - - 710.725
-    - 713.25
-  - - 713.6
-    - 717.325
-  - - 717.675
-    - 724.4
-  - - 724.75
-    - 731.575
-  - - 731.925
-    - 734.35
-  - - 734.7
-    - 745.575
-  - - 745.925
-    - 750.675
-  - - 752.175
-    - 763.125
-  - - 763.475
-    - 765.275
-  - - 766.775
-    - 771.9
-  - - 773.4
-    - 783.6
-  - - 783.95
-    - 788.2
-  - - 788.55
-    - 794.65
-  - - 795.0
-    - 797.275
-  - - 797.625
-    - 805.925
-  - - 807.425
-    - 817.95
-  - - 819.45
-    - 825.65
-  - - 826.0
-    - 836.825
-  - - 837.175
-    - 855.55
-  - - 857.05
-    - 864.55
-  - - 866.05
-    - 877.15
+  - - 691.925
+    - 694.3
+  - - 694.65
+    - 699.475
+  - - 699.825
+    - 703.95
+  - - 704.3
+    - 708.3
+  - - 709.8
+    - 712.325
+  - - 712.675
+    - 716.4
+  - - 716.75
+    - 723.475
+  - - 723.825
+    - 730.65
+  - - 731.0
+    - 733.425
+  - - 733.775
+    - 744.65
+  - - 745.0
+    - 749.75
+  - - 751.25
+    - 762.2
+  - - 762.55
+    - 764.35
+  - - 765.85
+    - 770.975
+  - - 772.475
+    - 782.675
+  - - 783.025
+    - 787.275
+  - - 787.625
+    - 793.725
+  - - 794.075
+    - 796.35
+  - - 796.7
+    - 805.0
+  - - 806.5
+    - 817.025
+  - - 818.525
+    - 824.725
+  - - 825.075
+    - 835.9
+  - - 836.25
+    - 854.625
+  - - 856.125
+    - 863.625
+  - - 865.125
+    - 876.225
   beat: 'derivation D03: theta-hat = (-sin theta, cos theta), checked four ways'
   visual: 'Keyword ''turn r-hat'' from frame 0. Picture zone: a unit circle (radius drawn 300 px, slate) round the origin, r-hat at theta = 53
     deg with its triangle: east leg ''cos theta'' (orange solid), north leg ''sin theta'' (orange dashed), slate theta arc. Maths S1-S4: r-hat
@@ -1199,23 +1204,23 @@ scenes:
     its 7.0-m west and 5.2-m north legs; the column shows one line per phrase (calc_rows); no theta-hat formula used'
 - id: s12_arrows_depend
   t:
-  - 877.95
-  - 917.8
+  - 877.025
+  - 916.875
   sentence_times:
-  - - 877.95
-    - 882.475
-  - - 882.825
-    - 888.125
-  - - 888.475
-    - 892.775
-  - - 893.125
-    - 897.475
-  - - 897.825
-    - 904.6
-  - - 904.95
-    - 911.225
-  - - 911.575
-    - 917.0
+  - - 877.025
+    - 881.55
+  - - 881.9
+    - 887.2
+  - - 887.55
+    - 891.85
+  - - 892.2
+    - 896.55
+  - - 896.9
+    - 903.675
+  - - 904.025
+    - 910.3
+  - - 910.65
+    - 916.075
   beat: 'intuition: polar unit vectors depend on place'
   visual: 'Keyword ''depend on where you are'' waits; frame 0 shows the station, the 5-km circle and the balloon with r-hat and theta-hat (labelled).
     A ghost x-hat, y-hat pair (GhostArrow, labelled) sits fixed in the picture zone''s lower left. S1: the balloon glides round the circle (one
@@ -1254,55 +1259,55 @@ scenes:
     see these: the builder checks its own stills). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s13_components
   t:
-  - 917.8
-  - 1044.65
+  - 916.875
+  - 1043.725
   sentence_times:
-  - - 917.8
-    - 924.925
-  - - 925.275
-    - 933.45
-  - - 933.8
-    - 937.575
-  - - 937.925
-    - 943.25
-  - - 943.6
-    - 946.075
-  - - 946.425
-    - 950.725
-  - - 951.075
-    - 953.825
-  - - 955.325
-    - 960.6
-  - - 960.95
-    - 965.5
-  - - 965.85
-    - 971.05
-  - - 971.4
-    - 978.775
-  - - 979.125
-    - 983.1
-  - - 983.45
-    - 985.35
-  - - 985.7
-    - 988.125
-  - - 988.475
-    - 991.725
-  - - 992.075
-    - 999.675
-  - - 1000.025
-    - 1002.45
-  - - 1002.8
-    - 1009.95
-  - - 1010.3
-    - 1015.125
-  - - 1016.625
-    - 1023.825
-  - - 1024.175
-    - 1029.975
-  - - 1031.475
-    - 1036.875
-  - - 1037.225
-    - 1043.85
+  - - 916.875
+    - 924.0
+  - - 924.35
+    - 932.525
+  - - 932.875
+    - 936.65
+  - - 937.0
+    - 942.325
+  - - 942.675
+    - 945.15
+  - - 945.5
+    - 949.8
+  - - 950.15
+    - 952.9
+  - - 954.4
+    - 959.675
+  - - 960.025
+    - 964.575
+  - - 964.925
+    - 970.125
+  - - 970.475
+    - 977.85
+  - - 978.2
+    - 982.175
+  - - 982.525
+    - 984.425
+  - - 984.775
+    - 987.2
+  - - 987.55
+    - 990.8
+  - - 991.15
+    - 998.75
+  - - 999.1
+    - 1001.525
+  - - 1001.875
+    - 1009.025
+  - - 1009.375
+    - 1014.2
+  - - 1015.7
+    - 1022.9
+  - - 1023.25
+    - 1029.05
+  - - 1030.55
+    - 1035.95
+  - - 1036.3
+    - 1042.925
   beat: 'building block D04: a wind''s radial and tangential parts, every input on screen'
   visual: 'Keyword ''wind in polar coordinates'' from frame 0. Picture zone (zoomed on the balloon): r-hat and theta-hat (orange, tip labels for
     the whole scene, U-CO-008), the wind arrow bold u (teal, moving dashes) pointing east, 300 px = 10 m/s, tip label ''u'' (bold). S3-S5: maths
@@ -1387,35 +1392,35 @@ scenes:
     is a wind). Inputs row never overlaps the CalcStack (row 1 at y 120-260, CalcStack from y 300).'
 - id: s14_rebuild_general
   t:
-  - 1044.65
-  - 1145.225
+  - 1043.725
+  - 1144.3
   sentence_times:
-  - - 1044.65
-    - 1048.5
-  - - 1048.85
-    - 1053.9
-  - - 1054.25
-    - 1060.15
-  - - 1061.65
-    - 1072.825
-  - - 1074.325
-    - 1079.775
-  - - 1080.125
-    - 1084.95
-  - - 1086.45
-    - 1091.325
-  - - 1091.675
-    - 1102.575
-  - - 1104.075
-    - 1108.275
-  - - 1108.625
-    - 1117.7
-  - - 1119.2
-    - 1128.1
-  - - 1129.6
-    - 1133.2
-  - - 1133.55
-    - 1144.425
+  - - 1043.725
+    - 1047.575
+  - - 1047.925
+    - 1052.975
+  - - 1053.325
+    - 1059.225
+  - - 1060.725
+    - 1071.9
+  - - 1073.4
+    - 1078.85
+  - - 1079.2
+    - 1084.025
+  - - 1085.525
+    - 1090.4
+  - - 1090.75
+    - 1101.65
+  - - 1103.15
+    - 1107.35
+  - - 1107.7
+    - 1116.775
+  - - 1118.275
+    - 1127.175
+  - - 1128.675
+    - 1132.275
+  - - 1132.625
+    - 1143.5
   beat: 'check D04: rebuild the wind; the general formulas'
   visual: 'Keyword ''same wind?'' from frame 0. Picture: same zoom; the bands from s13 stay. S2-S4: tip-to-tail chain: 6 r-hat (teal arrow, label
     ''6 r-hat'') from the balloon, then -8 theta-hat (rose arrow, label ''-8 theta-hat'') from its tip, landing on the wind''s tip; gold ''same''
@@ -1468,39 +1473,39 @@ scenes:
     see these: the builder checks its own stills). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s15_turn_axes
   t:
-  - 1145.225
-  - 1234.0
+  - 1144.3
+  - 1233.075
   sentence_times:
-  - - 1145.225
-    - 1153.45
-  - - 1153.8
-    - 1161.575
-  - - 1161.925
-    - 1165.725
-  - - 1166.075
-    - 1171.2
-  - - 1171.55
-    - 1173.475
-  - - 1173.825
-    - 1181.9
-  - - 1182.25
-    - 1184.825
-  - - 1185.175
-    - 1188.05
-  - - 1188.4
-    - 1194.65
-  - - 1195.0
-    - 1197.9
-  - - 1198.25
-    - 1202.5
-  - - 1202.85
-    - 1209.075
-  - - 1210.575
-    - 1213.65
-  - - 1214.0
-    - 1227.4
-  - - 1227.75
-    - 1232.5
+  - - 1144.3
+    - 1152.525
+  - - 1152.875
+    - 1160.65
+  - - 1161.0
+    - 1164.8
+  - - 1165.15
+    - 1170.275
+  - - 1170.625
+    - 1172.55
+  - - 1172.9
+    - 1180.975
+  - - 1181.325
+    - 1183.9
+  - - 1184.25
+    - 1187.125
+  - - 1187.475
+    - 1193.725
+  - - 1194.075
+    - 1196.975
+  - - 1197.325
+    - 1201.575
+  - - 1201.925
+    - 1208.15
+  - - 1209.65
+    - 1212.725
+  - - 1213.075
+    - 1226.475
+  - - 1226.825
+    - 1231.575
   beat: 'building block: turning the axes; x-hat-prime'
   visual: 'Keyword ''turn the axes'' from frame 0. Picture zone: grid with origin; the balloon''s arrow (3, 4) teal; the old axes x, y (orange,
     then 40 %). S4 on AT(4,''coastline, a runway or a valley''): a small code-drawn coastline sketch beside the grid with ''along'' and ''across''
@@ -1544,27 +1549,27 @@ scenes:
     see these: the builder checks its own stills). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s16_y_prime
   t:
-  - 1234.0
-  - 1299.975
+  - 1233.075
+  - 1299.05
   sentence_times:
-  - - 1234.0
-    - 1236.275
-  - - 1236.625
-    - 1244.225
-  - - 1244.575
-    - 1254.4
-  - - 1254.75
-    - 1258.4
-  - - 1259.9
-    - 1266.3
-  - - 1267.8
-    - 1269.45
-  - - 1269.8
-    - 1275.85
-  - - 1276.2
-    - 1293.35
-  - - 1294.85
-    - 1299.175
+  - - 1233.075
+    - 1235.35
+  - - 1235.7
+    - 1243.3
+  - - 1243.65
+    - 1253.475
+  - - 1253.825
+    - 1257.475
+  - - 1258.975
+    - 1265.375
+  - - 1266.875
+    - 1268.525
+  - - 1268.875
+    - 1274.925
+  - - 1275.275
+    - 1292.425
+  - - 1293.925
+    - 1298.25
   beat: 'derivation D05: y-hat-prime by the 90-deg rule, drawn'
   visual: 'Keyword ''the new y axis'' from frame 0. Picture: the turned axes with x-hat-prime; S3-S4 on AT(3,''turned by ninety degrees''): x-hat-prime
     and its triangle turn 90 deg rigidly (TurnRule90, as in s10/s11) into y-hat-prime (orange, tip label); legs relabel ''cos alpha'' north-ish,
@@ -1627,43 +1632,43 @@ scenes:
     intermediate -0.433 + 0.433 is not spoken, so not written).'
 - id: s17_new_components
   t:
-  - 1299.975
-  - 1412.95
+  - 1299.05
+  - 1412.025
   sentence_times:
-  - - 1299.975
-    - 1305.0
-  - - 1305.35
-    - 1309.3
-  - - 1309.65
-    - 1315.55
-  - - 1315.9
-    - 1322.475
-  - - 1322.825
-    - 1329.575
-  - - 1331.075
-    - 1339.5
-  - - 1341.0
-    - 1347.5
-  - - 1347.85
-    - 1353.95
-  - - 1354.3
-    - 1358.3
-  - - 1359.8
-    - 1366.275
-  - - 1366.625
-    - 1372.425
-  - - 1373.925
-    - 1380.025
-  - - 1380.375
-    - 1382.3
-  - - 1382.65
-    - 1388.6
-  - - 1388.95
-    - 1402.85
-  - - 1404.35
-    - 1406.3
-  - - 1406.65
-    - 1412.15
+  - - 1299.05
+    - 1304.075
+  - - 1304.425
+    - 1308.375
+  - - 1308.725
+    - 1314.625
+  - - 1314.975
+    - 1321.55
+  - - 1321.9
+    - 1328.65
+  - - 1330.15
+    - 1338.575
+  - - 1340.075
+    - 1346.575
+  - - 1346.925
+    - 1353.025
+  - - 1353.375
+    - 1357.375
+  - - 1358.875
+    - 1365.35
+  - - 1365.7
+    - 1371.5
+  - - 1373.0
+    - 1379.1
+  - - 1379.45
+    - 1381.375
+  - - 1381.725
+    - 1387.675
+  - - 1388.025
+    - 1401.925
+  - - 1403.425
+    - 1405.375
+  - - 1405.725
+    - 1411.225
   beat: 'derivation D06: x'', y'' as shadows on the new rulers; (3, 4) -> (4.6, 1.96)'
   visual: 'Keyword ''new coordinates x'', y'''' from frame 0. Picture: the turned axes x'', y'' (orange, with km ticks along them) and the arrow
     (3, 4) (teal). S3-S4: dashed perpendicular from the tip to the x'' axis; teal band along x'' from the origin to the foot (the shadow), keyword
@@ -1748,37 +1753,37 @@ scenes:
     wind (10, 0) to the balloon''s arrow (3, 4) so that both terms of each line are non-zero.'
 - id: s18_matrix
   t:
-  - 1412.95
-  - 1532.2
+  - 1412.025
+  - 1531.275
   sentence_times:
-  - - 1412.95
-    - 1416.8
-  - - 1417.15
-    - 1423.6
-  - - 1423.95
-    - 1427.7
-  - - 1428.05
-    - 1435.625
-  - - 1435.975
-    - 1443.0
-  - - 1443.35
-    - 1446.125
-  - - 1446.475
-    - 1452.025
-  - - 1452.375
-    - 1456.975
-  - - 1457.325
-    - 1476.7
-  - - 1478.2
-    - 1481.25
-  - - 1481.6
-    - 1494.975
-  - - 1495.325
-    - 1501.675
-  - - 1502.025
-    - 1504.925
-  - - 1505.275
-    - 1531.4
+  - - 1412.025
+    - 1415.875
+  - - 1416.225
+    - 1422.675
+  - - 1423.025
+    - 1426.775
+  - - 1427.125
+    - 1434.7
+  - - 1435.05
+    - 1442.075
+  - - 1442.425
+    - 1445.2
+  - - 1445.55
+    - 1451.1
+  - - 1451.45
+    - 1456.05
+  - - 1456.4
+    - 1475.775
+  - - 1477.275
+    - 1480.325
+  - - 1480.675
+    - 1494.05
+  - - 1494.4
+    - 1500.75
+  - - 1501.1
+    - 1504.0
+  - - 1504.35
+    - 1530.475
   beat: 'derivation D07: line the two equations up -> the rotation matrix; direction cosines'
   visual: 'Keyword ''line them up'' from frame 0. Full width maths, a small picture top-left. S1-S2: the two lines from s17 slide into an aligned
     block: x-terms in one column, y-terms in another (x-terms tinted warm white, y-terms slate), aligned at ''=''. S3-S4: the four coefficients
@@ -1850,53 +1855,53 @@ scenes:
     the picture x 80-1000 from frame 0 (halves gate).'
 - id: s19_index_form
   t:
-  - 1532.2
-  - 1683.725
+  - 1531.275
+  - 1682.075
   sentence_times:
-  - - 1532.2
-    - 1537.9
-  - - 1538.25
-    - 1540.95
-  - - 1541.3
-    - 1543.175
-  - - 1543.525
-    - 1548.575
-  - - 1548.925
-    - 1558.975
-  - - 1559.325
-    - 1563.1
-  - - 1563.45
-    - 1569.675
-  - - 1570.025
-    - 1572.15
-  - - 1572.5
-    - 1581.65
-  - - 1583.15
-    - 1588.5
-  - - 1590.0
-    - 1594.875
-  - - 1596.375
-    - 1601.675
-  - - 1603.175
-    - 1608.775
-  - - 1609.125
-    - 1617.6
-  - - 1617.95
-    - 1625.0
-  - - 1625.35
-    - 1633.575
-  - - 1635.075
-    - 1641.925
-  - - 1642.275
-    - 1650.75
-  - - 1652.25
-    - 1656.575
-  - - 1656.925
-    - 1665.75
-  - - 1666.1
-    - 1673.2
-  - - 1673.55
-    - 1682.925
+  - - 1531.275
+    - 1536.975
+  - - 1537.325
+    - 1540.025
+  - - 1540.375
+    - 1542.25
+  - - 1542.6
+    - 1547.65
+  - - 1548.0
+    - 1558.05
+  - - 1558.4
+    - 1562.175
+  - - 1562.525
+    - 1568.75
+  - - 1569.1
+    - 1571.225
+  - - 1571.575
+    - 1580.725
+  - - 1582.225
+    - 1587.575
+  - - 1589.075
+    - 1593.95
+  - - 1595.45
+    - 1600.75
+  - - 1602.25
+    - 1607.85
+  - - 1608.2
+    - 1616.675
+  - - 1617.025
+    - 1624.075
+  - - 1624.425
+    - 1632.65
+  - - 1634.15
+    - 1641.0
+  - - 1641.35
+    - 1649.825
+  - - 1651.325
+    - 1655.65
+  - - 1656.0
+    - 1664.825
+  - - 1665.175
+    - 1672.275
+  - - 1672.625
+    - 1681.275
   beat: 'derivation D08: x''_j = x_i C_ij, all four C''s computed, j = 1 and 2 written out'
   visual: 'Keyword ''index notation'' from frame 0; picture zone from frame 0: the origin with x-hat, y-hat, x-hat-prime, y-hat-prime. S3-S5:
     the names table builds (three rows), and the picture''s tip labels change to e_1, e_2, e''_1, e''_2 (KaTeX) on their words. S6-S7: ''C_ij
@@ -1907,7 +1912,7 @@ scenes:
     C_ij'' (84 px) and keyword ''i repeated -> add i = 1, 2''. S15-S16: the j = 1 row; column 1 of the grid highlighted gold; gold ''same'' tick
     to a small recall of s17''s x'' line. S17-S18: the j = 2 row; column 2 highlighted; ''same'' tick to y''. S19: keyword ''same two lines''.
     S20-S21: the grid flips over its diagonal (animated, 1 s) and matches s18''s matrix (shown small beside it), keyword ''same four numbers,
-    read down the columns''. S22: keyword ''more: Tensors made easy'' (54 px).'
+    read down the columns''. S22: keyword ''more: our tensors movie'' (54 px).'
   voiceover: 'In the vectors movie, we met index notation, a short way to write all of this. Let''s rewrite it one step at a time. First, the
     names. The old coordinates x and y become x sub one and x sub two. The old unit vectors x hat and y hat become e sub one and e sub two, and
     the new ones become e prime sub one and e prime sub two. Next, each direction cosine gets two labels. C sub i j is the dot product of old
@@ -1920,7 +1925,7 @@ scenes:
     minus x sine alpha plus y cosine alpha: our y prime. With our numbers that''s one point nine six. [beat] So the short line says exactly what
     our two long lines say. If we set the four C''s in a square, with i for the row and j for the column, we get our rotation matrix flipped over
     its diagonal. That''s only because this form reads down the columns instead of along the rows, and the four numbers are the same. The same
-    rule works in three dimensions, and for things called tensors, which have their own movie later in this series: Tensors made easy.'
+    rule works in three dimensions, and for things called tensors, which we''ll meet in our tensors movie, later in this series.'
   on_screen_eq:
     latex: x'_j=x_i\,C_{ij},\qquad C_{ij}=\mathbf e_i\cdot\mathbf e'_j
     vallis_eq: none in Vallis; Kundu (2.4) x . e'_1 = x'_1 and (2.5) x'_j = x_i C_ij, C_ij = e_i . e'_j (page image ../Fluid Dynamics/chapters/pages/ch02/p069.png
@@ -1984,7 +1989,7 @@ scenes:
   related:
   - *id001
   - movie: T08
-    slug: Tensors made easy (planned, v6 pos 104)
+    slug: our tensors movie (planned, v6 pos 104)
     covers: tensors and x'_j = x_i C_ij in full
   feedback:
   - U-CO-088
@@ -1992,52 +1997,53 @@ scenes:
   - U-CO-099
   layout: 'No real-data picture: no source line. No text over the drawing or over other text; links never cross text or each other (K6 cannot
     see these: the builder checks its own stills). No headings. Opening keyword from frame 0 (Should 18). The grid has thin slate rules only (no
-    box). ''more: Tensors made easy'' is a keyword line, not a card; the voice says the title.'
+    box). ''more: our tensors movie'' is a keyword line, not a card; the voice says the title.'
+  feedback_2026_11_06: 'R1: S22 ''our tensors movie, later in this series''; keyword ''more: our tensors movie''.'
 - id: s20_polar_is_turned
   t:
-  - 1683.725
-  - 1810.575
+  - 1682.075
+  - 1808.925
   sentence_times:
-  - - 1683.725
-    - 1686.7
-  - - 1687.05
-    - 1694.65
-  - - 1695.0
-    - 1700.15
-  - - 1700.5
-    - 1705.975
-  - - 1707.475
-    - 1713.725
-  - - 1714.075
-    - 1719.35
-  - - 1719.7
-    - 1723.225
-  - - 1723.575
-    - 1730.175
-  - - 1731.675
-    - 1739.175
-  - - 1740.675
-    - 1745.175
-  - - 1745.525
-    - 1749.2
-  - - 1749.55
-    - 1754.975
-  - - 1755.325
-    - 1759.3
-  - - 1760.8
-    - 1766.55
-  - - 1766.9
-    - 1771.375
-  - - 1772.875
-    - 1783.525
-  - - 1783.875
-    - 1786.05
-  - - 1786.4
-    - 1790.675
-  - - 1791.025
-    - 1796.7
-  - - 1797.05
-    - 1809.775
+  - - 1682.075
+    - 1685.05
+  - - 1685.4
+    - 1693.0
+  - - 1693.35
+    - 1698.5
+  - - 1698.85
+    - 1704.325
+  - - 1705.825
+    - 1712.075
+  - - 1712.425
+    - 1717.7
+  - - 1718.05
+    - 1721.575
+  - - 1721.925
+    - 1728.525
+  - - 1730.025
+    - 1737.525
+  - - 1739.025
+    - 1743.525
+  - - 1743.875
+    - 1747.55
+  - - 1747.9
+    - 1753.325
+  - - 1753.675
+    - 1757.65
+  - - 1759.15
+    - 1764.9
+  - - 1765.25
+    - 1769.725
+  - - 1771.225
+    - 1781.875
+  - - 1782.225
+    - 1784.4
+  - - 1784.75
+    - 1789.025
+  - - 1789.375
+    - 1795.05
+  - - 1795.4
+    - 1808.125
   beat: 'derivation D09: polar parts are turned-axes coordinates (alpha = theta)'
   visual: 'Keyword ''alpha = theta'' from frame 0. Picture: the balloon at 53 deg on its circle with r-hat and theta-hat (labelled); the turned
     axes x'', y'' through the station at alpha = 0 at first. S2: alpha grows to 53 deg (gold arc) so that the x'' axis passes through the balloon;
@@ -2119,27 +2125,27 @@ scenes:
     see these: the builder checks its own stills). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s21_ian_polar
   t:
-  - 1810.575
-  - 1873.4
+  - 1808.925
+  - 1871.75
   sentence_times:
-  - - 1810.575
-    - 1814.0
-  - - 1814.35
-    - 1826.275
-  - - 1826.625
-    - 1835.325
-  - - 1835.675
-    - 1843.2
-  - - 1843.55
-    - 1846.725
-  - - 1847.075
-    - 1850.95
-  - - 1851.3
-    - 1859.75
-  - - 1860.1
-    - 1863.975
-  - - 1864.325
-    - 1872.6
+  - - 1808.925
+    - 1812.35
+  - - 1812.7
+    - 1824.625
+  - - 1824.975
+    - 1833.675
+  - - 1834.025
+    - 1841.55
+  - - 1841.9
+    - 1845.075
+  - - 1845.425
+    - 1849.3
+  - - 1849.65
+    - 1858.1
+  - - 1858.45
+    - 1862.325
+  - - 1862.675
+    - 1870.95
   beat: 'application: Ian in polar coordinates (PENDING DATA REPORT)'
   visual: 'PENDING DATA REPORT (reports/data/ch00_coordinates_research.md, not written on 2026-11-05). Full-width map (projection of the product;
     Lambert conformal for HRRR) of SW Florida 24-29.5 N, 85-79.5 W: 10-m wind speed shaded (cmocean ''speed'', 0-50 m/s), streaklines animated
@@ -2201,39 +2207,39 @@ scenes:
     the start of s25 (the camera returns to this scene''s start view before the curves).'
 - id: s22_spin_inflow
   t:
-  - 1873.4
-  - 2006.25
+  - 1871.75
+  - 2039.925
   sentence_times:
-  - - 1873.4
-    - 1876.9
-  - - 1877.25
-    - 1881.025
-  - - 1881.375
-    - 1885.825
-  - - 1886.175
-    - 1895.325
-  - - 1895.675
-    - 1902.675
-  - - 1903.025
-    - 1917.65
-  - - 1919.15
-    - 1931.2
-  - - 1931.55
-    - 1937.675
-  - - 1939.175
-    - 1946.4
-  - - 1946.75
-    - 1960.55
-  - - 1962.05
-    - 1967.525
-  - - 1967.875
-    - 1970.5
-  - - 1970.85
-    - 1978.9
-  - - 1979.25
-    - 1989.5
-  - - 1991.0
-    - 2005.45
+  - - 1871.75
+    - 1875.25
+  - - 1875.6
+    - 1879.375
+  - - 1879.725
+    - 1884.175
+  - - 1884.525
+    - 1893.675
+  - - 1894.025
+    - 1923.125
+  - - 1923.475
+    - 1938.1
+  - - 1939.6
+    - 1951.65
+  - - 1952.0
+    - 1958.125
+  - - 1959.625
+    - 1966.85
+  - - 1967.2
+    - 1994.225
+  - - 1995.725
+    - 2001.2
+  - - 2001.55
+    - 2004.175
+  - - 2004.525
+    - 2012.575
+  - - 2012.925
+    - 2023.175
+  - - 2024.675
+    - 2039.125
   beat: 'application: ring means 37 round, -12.5 in (PENDING DATA REPORT)'
   visual: 'PENDING DATA REPORT (reports/data/ch00_coordinates_research.md, not written on 2026-11-05). Zoomed map continues (colour bar beside,
     source below). S1-S3: at one ring point a teal tangential arrow and a rose radial arrow (pointing at the eye) with KaTeX tags ''u_theta'',
@@ -2246,17 +2252,21 @@ scenes:
     135 kt'' then ''135 x 1.85 = about 250 km/h'' (Should 4). S15: keyword ''the analysis smooths the peak''.'
   voiceover: 'Every wind on the map now has two polar parts. The radial wind, u sub r, blows in or out. The tangential wind, u sub theta, blows
     round the eye. Let''s draw a ring twenty five kilometres from the centre, and work out both parts at seventy two points round it, one every
-    five degrees. Then we average each part round the ring: we add up the seventy two values, and divide by seventy two. The seventy two tangential
-    winds add up to about two thousand five hundred and six metres per second. Divided by seventy two, that''s about thirty four point eight,
-    or about thirty five metres per second. [beat] To turn metres per second into kilometres per hour, we multiply by three point six, because
-    an hour has three thousand six hundred seconds, and a kilometre has a thousand metres. So thirty five metres per second is about a hundred
-    and twenty six kilometres per hour. [beat] The air goes round anticlockwise, as seen from above, as in every northern hemisphere hurricane.
-    The seventy two radial winds add up to about minus nine hundred and fifty seven. Divided by seventy two, that''s about minus thirteen point
-    three, or about minus thirteen metres per second. [beat] The minus sign means that, on average, the air is flowing in, towards the eye. The
-    real storm was even stronger. The official estimate of its strongest wind at that hour, averaged over a minute, is about a hundred and thirty
-    five knots. One knot is about one point eight five kilometres per hour, so that''s about two hundred and fifty kilometres per hour, or about
-    sixty nine metres per second. [beat] That''s the single strongest wind, while our thirty five is an average round the ring, and even the strongest
-    wind on our model ring is only about forty nine. The model analysis smooths out the strongest winds.'
+    five degrees. Then we average each part round the ring: we add up the seventy two values, and divide by seventy two. In symbols, the average
+    radial wind, u sub r bar, is one over N times the sum of all the u sub r values, from point one to point N. Here N is seventy two, one point
+    every five degrees round the ring. The average tangential wind, u sub theta bar, is made in the same way. The seventy two tangential winds
+    add up to about two thousand five hundred and six metres per second. Divided by seventy two, that''s about thirty four point eight, or about
+    thirty five metres per second. [beat] To turn metres per second into kilometres per hour, we multiply by three point six, because an hour
+    has three thousand six hundred seconds, and a kilometre has a thousand metres. So thirty five metres per second is about a hundred and twenty
+    six kilometres per hour. [beat] The air goes round anticlockwise, as seen from above, as in every northern hemisphere hurricane. The seventy
+    two radial winds start with minus eight point seven at theta equals zero, minus ten point three at five degrees, and minus eleven point two
+    at ten degrees, and they go on all the way round the ring. Together they add up to about minus nine hundred and fifty seven. Divided by seventy
+    two, that''s about minus thirteen point three, or about minus thirteen metres per second. [beat] The minus sign means that, on average, the
+    air is flowing in, towards the eye. The real storm was even stronger. The official estimate of its strongest wind at that hour, averaged over
+    a minute, is about a hundred and thirty five knots. One knot is about one point eight five kilometres per hour, so that''s about two hundred
+    and fifty kilometres per hour, or about sixty nine metres per second. [beat] That''s the single strongest wind, while our thirty five is an
+    average round the ring, and even the strongest wind on our model ring is only about forty nine. The model analysis smooths out the strongest
+    winds.'
   on_screen_eq:
     latex: \text{average}=\frac{\text{sum of the 72 values}}{72}
     vallis_eq: 'none: arithmetic or a definition (no book equation)'
@@ -2279,6 +2289,11 @@ scenes:
   - 35\times3.6=126\ \mathrm{km/h}
   - \overline{u_r}\approx-13\ \mathrm{m/s}
   - 135\times1.85\approx250\ \mathrm{km/h}
+  - \overline{u_r}=\dfrac{1}{N}\sum_{i=1}^{N}u_{r,i}
+  - \overline{u_\theta}=\dfrac{1}{N}\sum_{i=1}^{N}u_{\theta,i}
+  - N=360^\circ\div5^\circ=72\ \text{points}
+  - \overline{u_\theta}=\dfrac{38.0+37.8+38.3+\dots}{72}
+  - \overline{u_r}=\dfrac{-8.7-10.3-11.2-\dots}{72}
   kind: real data map + calc
   data: data_block — PENDING
   tool: Remotion SVG map + house SideCallout/CalcStack
@@ -2291,43 +2306,47 @@ scenes:
   - U-CO-022
   - U-CO-054
   layout: Readouts in the column x 1500-1840; links leave from their text's left edge and never cross (Must 5); colour bar beside the map; SourceBelow.
+  feedback_2026_11_06: 'R8: S5 (four clips) adds the rule in symbols, ū_r = (1/N) Σ u_r,i (rose) and ū_θ alike (teal), and N = 360°÷5° = 72 (gold);
+    the u_θ sum''s first terms (38.0 + 37.8 + 38.3 + …)/72 above its running sum (screen only); S10 (three clips) says and writes the u_r sum''s
+    first terms −8.7, −10.3, −11.2, … (each on its word; those three ring points ringed in gold), then the sum −957.2 (running sum moved to y
+    765/820), ÷ 72, −13.3. S11 (why negative = in) unchanged.'
 - id: s23_what_numbers_mean
   t:
-  - 2006.25
-  - 2158.1
+  - 2039.925
+  - 2191.775
   sentence_times:
-  - - 2006.25
-    - 2010.1
-  - - 2010.45
-    - 2014.075
-  - - 2014.425
-    - 2017.975
-  - - 2018.325
-    - 2022.9
-  - - 2023.25
-    - 2045.45
-  - - 2046.95
-    - 2050.175
-  - - 2050.525
-    - 2058.35
-  - - 2059.85
-    - 2063.575
-  - - 2063.925
-    - 2071.75
-  - - 2072.1
-    - 2092.425
-  - - 2093.925
-    - 2111.075
-  - - 2112.575
-    - 2116.825
-  - - 2117.175
-    - 2131.6
-  - - 2133.1
-    - 2137.1
-  - - 2137.45
-    - 2146.725
-  - - 2147.075
-    - 2157.3
+  - - 2039.925
+    - 2043.775
+  - - 2044.125
+    - 2047.75
+  - - 2048.1
+    - 2051.65
+  - - 2052.0
+    - 2056.575
+  - - 2056.925
+    - 2079.125
+  - - 2080.625
+    - 2083.85
+  - - 2084.2
+    - 2092.025
+  - - 2093.525
+    - 2097.25
+  - - 2097.6
+    - 2105.425
+  - - 2105.775
+    - 2126.1
+  - - 2127.6
+    - 2144.75
+  - - 2146.25
+    - 2150.5
+  - - 2150.85
+    - 2165.275
+  - - 2166.775
+    - 2170.775
+  - - 2171.125
+    - 2180.4
+  - - 2180.75
+    - 2190.975
   beat: 'D10: what 37 and 12.5 mean (PENDING DATA REPORT)'
   visual: 'PENDING DATA REPORT (reports/data/ch00_coordinates_research.md, not written on 2026-11-05). Picture zone: a clean top view of the 25-km
     ring round the eye drawn from the data (ring, centre dot, the zoomed map at 30 % underneath, colour bar removed while the map is faded; source
@@ -2423,59 +2442,59 @@ scenes:
   layout: 'Source line kept under the faded map; keywords in the column; ''more: How tropical cyclones form'' is a keyword line.'
 - id: s24_ring_points
   t:
-  - 2158.1
-  - 2349.575
+  - 2191.775
+  - 2410.35
   sentence_times:
-  - - 2158.1
-    - 2164.175
-  - - 2164.525
-    - 2173.975
-  - - 2174.325
-    - 2176.875
-  - - 2177.225
-    - 2180.85
-  - - 2181.2
-    - 2186.5
-  - - 2186.85
-    - 2191.15
-  - - 2191.5
-    - 2198.4
-  - - 2199.9
-    - 2205.35
-  - - 2205.7
-    - 2211.2
-  - - 2211.55
-    - 2215.975
-  - - 2216.325
-    - 2219.275
-  - - 2220.775
-    - 2224.9
-  - - 2225.25
-    - 2235.1
-  - - 2236.6
-    - 2240.2
-  - - 2240.55
-    - 2246.275
-  - - 2246.625
-    - 2257.525
-  - - 2259.025
-    - 2264.2
-  - - 2264.55
-    - 2270.05
-  - - 2271.55
-    - 2286.65
-  - - 2287.0
-    - 2298.425
-  - - 2298.775
-    - 2306.025
-  - - 2307.525
-    - 2323.025
-  - - 2323.375
-    - 2330.375
-  - - 2331.875
-    - 2337.775
-  - - 2338.125
-    - 2348.775
+  - - 2191.775
+    - 2197.85
+  - - 2198.2
+    - 2207.65
+  - - 2208.0
+    - 2210.55
+  - - 2210.9
+    - 2214.525
+  - - 2214.875
+    - 2220.175
+  - - 2220.525
+    - 2224.825
+  - - 2225.175
+    - 2232.075
+  - - 2233.575
+    - 2239.025
+  - - 2239.375
+    - 2244.875
+  - - 2245.225
+    - 2249.65
+  - - 2250.0
+    - 2252.95
+  - - 2254.45
+    - 2258.575
+  - - 2258.925
+    - 2268.775
+  - - 2270.275
+    - 2273.875
+  - - 2274.225
+    - 2279.95
+  - - 2280.3
+    - 2291.2
+  - - 2292.7
+    - 2297.875
+  - - 2298.225
+    - 2303.725
+  - - 2305.225
+    - 2320.325
+  - - 2320.675
+    - 2332.1
+  - - 2332.45
+    - 2339.7
+  - - 2341.2
+    - 2356.7
+  - - 2357.05
+    - 2364.05
+  - - 2365.55
+    - 2398.55
+  - - 2398.9
+    - 2409.55
   beat: 'D11: three ring points by hand (PENDING DATA REPORT)'
   visual: 'PENDING DATA REPORT (reports/data/ch00_coordinates_research.md, not written on 2026-11-05). Picture: the zoomed ring (map at 60 %,
     colour bar beside, source below) with three gold dots at theta = 0, 90 and 135 deg, each tagged with its angle. Column top, pinned all scene:
@@ -2502,9 +2521,12 @@ scenes:
     point seven zero seven, plus minus forty four point five times zero point seven zero seven. That''s seven point one four minus thirty one
     point four six, about minus twenty four point three: in. [beat] And u sub theta is minus u times sine, so minus minus ten point one, which
     is plus ten point one, times zero point seven zero seven, plus minus forty four point five times minus zero point seven zero seven. That''s
-    seven point one four plus thirty one point four six, about thirty eight point six: round. [beat] The computer does exactly this at all seventy
-    two points, and then takes the averages. If you skipped, here''s what to keep: at every point round the ring, the wind''s east and north parts
-    turn into an in or out part and a round part, and then we average them.'
+    seven point one four plus thirty one point four six, about thirty eight point six: round. [beat] The other points work the same way, so here
+    are five more, without the arithmetic. With all eight points, every forty five degrees round the ring, the in or out arrows point inward at
+    seven of them, and outward only at two hundred and twenty five degrees, on the southwest side. The computer does exactly this at all seventy
+    two points, and then takes the averages. And our first point, minus eight point seven at theta equals zero, is the very first term of the
+    radial sum. If you skipped, here''s what to keep: at every point round the ring, the wind''s east and north parts turn into an in or out part
+    and a round part, and then we average them.'
   on_screen_eq:
     latex: u_r=u\cos\theta+v\sin\theta,\qquad u_\theta=-u\sin\theta+v\cos\theta
     vallis_eq: 'none in Vallis; Kundu App. B §B.5 cylindrical position and unit vectors (printed p. 865, page image checked in build 1): x = R
@@ -2565,41 +2587,45 @@ scenes:
   - U-CO-007
   - U-CO-054
   layout: Calculations in the column only; tags on the map are short labels at their points; SourceBelow; colour bar beside.
+  feedback_2026_11_06: 'R7: the three worked points unchanged; S24 (four clips): ''the other points work the same way … without the arithmetic'';
+    the map zooms (ring ≈ 230 px) and all eight points every 45° get their u_r (rose) and u_θ (teal) arrows, labelled with the values (library
+    to 0.1; 135° 38.6 as worked); legend ''u_r: in (−) or out (+)'', ''u_θ: round''; keyword ''in at 7 of 8 points · out at 225°''; ''all 72,
+    then average''; R8 link: ū_r = (−8.7 − 10.3 − 11.2 − …)/72 ≈ −13.3 with −8.7 in gold and the 0° point ringed.'
 - id: s25_why_polar_storm
   t:
-  - 2349.575
-  - 2447.15
+  - 2410.35
+  - 2539.6
   sentence_times:
-  - - 2349.575
-    - 2352.4
-  - - 2352.75
-    - 2357.925
-  - - 2358.275
-    - 2365.775
-  - - 2366.125
-    - 2368.675
-  - - 2369.025
-    - 2374.9
-  - - 2375.25
-    - 2379.875
-  - - 2380.225
-    - 2388.325
-  - - 2388.675
-    - 2392.35
-  - - 2392.7
-    - 2400.3
-  - - 2400.65
-    - 2409.575
-  - - 2409.925
-    - 2418.075
-  - - 2418.425
-    - 2427.95
-  - - 2428.3
-    - 2431.3
-  - - 2431.65
-    - 2442.0
-  - - 2442.35
-    - 2446.35
+  - - 2410.35
+    - 2413.175
+  - - 2413.525
+    - 2418.7
+  - - 2419.05
+    - 2426.55
+  - - 2426.9
+    - 2429.45
+  - - 2429.8
+    - 2435.675
+  - - 2436.025
+    - 2440.65
+  - - 2441.0
+    - 2449.1
+  - - 2449.45
+    - 2453.125
+  - - 2453.475
+    - 2461.075
+  - - 2461.425
+    - 2470.35
+  - - 2470.7
+    - 2478.85
+  - - 2479.2
+    - 2488.725
+  - - 2489.075
+    - 2492.075
+  - - 2492.425
+    - 2502.775
+  - - 2503.125
+    - 2538.8
   beat: 'intuition: why polar helps; labelled curves (PENDING DATA REPORT)'
   visual: 'PENDING DATA REPORT (reports/data/ch00_coordinates_research.md, not written on 2026-11-05). On frame 0 the map zooms back out to s21''s
     start view (1 s) and settles into the left picture zone (ring view, x 80-1000) with a gold marker that goes round the ring as the curves draw.
@@ -2620,7 +2646,10 @@ scenes:
     wobbles more, between about minus forty and plus fourteen, because the storm isn''t perfectly round. It''s negative at fifty eight of the
     seventy two points, and only on the southwest side does it blow outward, by up to about fourteen metres per second. So, on average, the air
     flows in. Instead of two lines that swing from plus to minus, we get two numbers that mean something: how fast the storm spins, and how fast
-    the air flows in. That''s why hurricane scientists use polar coordinates.'
+    the air flows in. That''s why hurricane scientists use polar coordinates. The same idea works on a coast, where we turn the axes to split
+    the wind into a part along the shore and a part across it. Wind blowing across the shore, towards the land, pushes sea water onto the coast.
+    In Part 2, we''ll use these same equations on real storms. We''ll measure how much of the wind blew onto the land, see on tide gauges how
+    high the water rose, and then look at the flooded land in satellite pictures taken before and after the storm.'
   on_screen_eq: null
   physics_source:
     fn: fluidpy.diag.cyclone.storm_relative_wind (per-azimuth u, v, u_theta, u_r)
@@ -2645,35 +2674,39 @@ scenes:
   - U-CO-016
   layout: SourceBelow under the ring view; the chart is not a real-data map but plots data, so it carries the same source line under it; end labels
     inside x <= 1840; legend never over the curves.
+  feedback_2026_11_06: 'R9 (at the ''eastward, northward, round, in, out'' legend, 40:23 in fix 3) + user 2026-11-07: S15 (five clips) points
+    to Part 2''s impact; keyword ''next, in Part 2: winds at a coast''; at Fort Myers Beach the turned axes x'' (along the shore, NNW) and y''
+    (across it, towards the land, ENE); over the Gulf ''across the shore, towards the land:'' / ''sea water pushed onto the coast'', then on their
+    words ''Part 2: wind onto the land'' / ''→ water level'' / ''→ flood maps''.'
 - id: s26_inflow_angle
   t:
-  - 2447.15
-  - 2525.225
+  - 2539.6
+  - 2617.675
   sentence_times:
-  - - 2447.15
-    - 2450.8
-  - - 2451.15
-    - 2455.15
-  - - 2455.5
-    - 2462.05
-  - - 2462.4
-    - 2474.3
-  - - 2474.65
-    - 2480.35
-  - - 2481.85
-    - 2486.475
-  - - 2486.825
-    - 2492.8
-  - - 2493.15
-    - 2499.95
-  - - 2500.3
-    - 2503.4
-  - - 2503.75
-    - 2508.725
-  - - 2509.075
-    - 2514.85
-  - - 2515.2
-    - 2524.425
+  - - 2539.6
+    - 2543.25
+  - - 2543.6
+    - 2547.6
+  - - 2547.95
+    - 2554.5
+  - - 2554.85
+    - 2566.75
+  - - 2567.1
+    - 2572.8
+  - - 2574.3
+    - 2578.925
+  - - 2579.275
+    - 2585.25
+  - - 2585.6
+    - 2592.4
+  - - 2592.75
+    - 2595.85
+  - - 2596.2
+    - 2601.175
+  - - 2601.525
+    - 2607.3
+  - - 2607.65
+    - 2616.875
   beat: the inflow angle, and four angles side by side (PENDING DATA REPORT for the numbers)
   visual: 'PENDING DATA REPORT (reports/data/ch00_coordinates_research.md, not written on 2026-11-05) (numbers). Picture: one ring point enlarged:
     the ring''s tangent direction theta-hat (orange) and the ring-mean wind arrow (teal), a rose wedge between them labelled ''inflow angle''
@@ -2723,31 +2756,31 @@ scenes:
     of the mean wind; no map.)'
 - id: s27_recap
   t:
-  - 2525.225
-  - 2609.8
+  - 2617.675
+  - 2714.875
   sentence_times:
-  - - 2525.225
-    - 2532.45
-  - - 2532.8
-    - 2540.35
-  - - 2540.7
-    - 2549.725
-  - - 2550.075
-    - 2554.375
-  - - 2554.725
-    - 2557.375
-  - - 2557.725
-    - 2565.75
-  - - 2566.1
-    - 2572.725
-  - - 2573.075
-    - 2582.225
-  - - 2582.575
-    - 2588.275
-  - - 2588.625
-    - 2600.225
-  - - 2600.575
-    - 2609.0
+  - - 2617.675
+    - 2624.9
+  - - 2625.25
+    - 2632.8
+  - - 2633.15
+    - 2642.175
+  - - 2642.525
+    - 2646.825
+  - - 2647.175
+    - 2649.825
+  - - 2650.175
+    - 2658.2
+  - - 2658.55
+    - 2665.175
+  - - 2665.525
+    - 2674.675
+  - - 2675.025
+    - 2680.725
+  - - 2681.075
+    - 2692.675
+  - - 2693.025
+    - 2714.075
   beat: recap ('To sum up'); last sentence the teaser to Part 2
   visual: 'One beat per sentence, mini pictures reused (no headings): grid + origin; fixed x-hat, y-hat; r and theta with x = r cos theta, y =
     r sin theta; the arc rule; r-hat and theta-hat with the +90 deg arc and (-sin theta, cos theta); the wind''s two shadow bands; turned axes
@@ -2760,8 +2793,9 @@ scenes:
     two arrows are dot products: the radial and the tangential wind. Turning the axes by an angle alpha gives new coordinates for the same arrow,
     and the four direction cosines make the rotation matrix. Polar parts are just turned axes, with an angle that changes from place to place.
     Round Hurricane Ian''s eye, they split the wind into about thirty five metres per second of spin and thirteen of inflow, so the air spirals
-    in at about twenty one degrees. In Part 2, we''ll ask whether air going round at a steady speed is accelerating, and look at a hurricane in
-    three dimensions.'
+    in at about twenty one degrees. In Part 2, we''ll find out how fast r hat and theta hat turn as we go round, and add height to get cylindrical
+    coordinates. Then we''ll use these same turned axes on real storms: how much wind blew onto the land, how high the water rose, and what the
+    flooding looked like from space, before and after.'
   on_screen_eq: null
   physics_source: null
   exaggeration:
@@ -2777,17 +2811,20 @@ scenes:
   feedback:
   - U-CO-101
   layout: Mini pictures one per sentence; a small source line under the real-data mini picture. No headings.
+  feedback_2026_11_06: 'R3 + user 2026-11-07: the teaser (S11, two clips) names Part 2: how fast r-hat and theta-hat turn, height (cylindrical
+    coordinates), these same turned axes on real storms (wind onto the land, how high the water rose, the flooding from space before and after);
+    one line per phrase; the beat-10 picture is the balloon going round with its r-hat and theta-hat turning.'
 - id: s28_end
   t:
-  - 2609.8
-  - 2632.7
+  - 2714.875
+  - 2737.775
   sentence_times:
-  - - 2609.8
-    - 2616.0
-  - - 2616.35
-    - 2624.4
-  - - 2624.75
-    - 2632.4
+  - - 2714.875
+    - 2721.075
+  - - 2721.425
+    - 2729.475
+  - - 2729.825
+    - 2737.475
   beat: series end card (maths ending, HOUSE_STYLE §3, word for word)
   visual: 'END CARD (house EndCard): four faint topic thumbnails along the top (a square grid, polar rings with r-hat and theta-hat, turned axes,
     a storm ring); keyword lines ''a series of maths tutorials'' (68 px) and ''atmospheric science · meteorology · fluid dynamics'' (54 px); notebook
@@ -2807,6 +2844,8 @@ scenes:
   why: 'series ending word for word (decision 2: the maths ending)'
   related: []
   layout: End card. No source line.
+  feedback_2026_11_06: 'R3: the picture fades to the background over the final 2.5-s hold (frames LEN−75 … LEN−5) while the music bed fades in
+    the mix tail.'
 build_1:
   tts:
     tool: tools/tts.py
@@ -2817,9 +2856,9 @@ build_1:
     sentences: 376
   fix1_tts:
     tool: movies/src/ch00_coordinates_flat/checks/cf_fix1_splice.py (six sentences re-voiced, af_bella x1.0, spliced)
-    run: G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_flat/fix2/tts
-    audio_s: 2632.7
-    cues: 623
+    run: G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_flat/fb1106/tts
+    audio_s: 2737.775
+    cues: 651
     warnings: []
     sentences: 381
     replaced:
@@ -2868,33 +2907,40 @@ build_1:
     - s26_inflow_angle S5 (C43, fix 1c)
     - s11_theta_hat S20 (M2b, fix 2)
     - s11_theta_hat S23 (M2a, fix 2)
+    - s00_title S1 (R1, feedback 2026-11-06)
+    - s19_index_form S22 (R1, feedback 2026-11-06)
+    - s22_spin_inflow S5 (R8, feedback 2026-11-06)
+    - s22_spin_inflow S10 (R8, feedback 2026-11-06)
+    - s24_ring_points S24 (R7, feedback 2026-11-06)
+    - s25_why_polar_storm S15 (R9, feedback 2026-11-06)
+    - s27_recap S11 (R3, feedback 2026-11-06)
     - s11_theta_hat S16-S19 -> 9 sentences (user note U1, cf_fix1b_splice.py)
 maths_skip:
   rule: 'user 2026-11-05: before each step-by-step block a friendly spoken line + an on-screen chip (''every step · optional'' / ''skip to mm:ss'');
     after it, ''If you skipped, here''s what to keep: ...''. The chip is an explicit user exception to ''no boxes''.'
   blocks:
   - block_from: s09_where_theta_grows
-    skip_line_s: 475.175
-    skip_to: '14:26'
-    skip_to_s: 866.05
+    skip_line_s: 474.25
+    skip_to: '14:25'
+    skip_to_s: 865.125
     keep_line: 'If you skipped, here''s what to keep: r hat points away from the centre, theta hat points round it, anticlockwise, and theta hat
       is r hat turned by ninety degrees.'
   - block_from: s13_components
-    skip_line_s: 917.8
-    skip_to: '18:53'
-    skip_to_s: 1133.55
+    skip_line_s: 916.875
+    skip_to: '18:52'
+    skip_to_s: 1132.625
     keep_line: 'If you skipped, here''s what to keep: any wind splits into an in or out part along r hat, and a round part along theta hat, and
       each part is a dot product.'
   - block_from: s15_turn_axes
-    skip_line_s: 1145.225
-    skip_to: '29:57'
-    skip_to_s: 1797.05
+    skip_line_s: 1144.3
+    skip_to: '29:55'
+    skip_to_s: 1795.4
     keep_line: 'If you skipped, here''s what to keep: turning the axes by an angle alpha changes the numbers that describe an arrow, but not the
       arrow itself, and polar parts are just axes turned by theta.'
   - block_from: s24_ring_points
-    skip_line_s: 2158.1
-    skip_to: '38:58'
-    skip_to_s: 2338.125
+    skip_line_s: 2191.775
+    skip_to: '39:58'
+    skip_to_s: 2398.9
     keep_line: 'If you skipped, here''s what to keep: at every point round the ring, the wind''s east and north parts turn into an in or out part
       and a round part, and then we average them.'
 chapters:
@@ -2902,71 +2948,71 @@ chapters:
   t_s: 0.0
   title: Title
   scene: s00_title
-- time: 0:10
-  t_s: 10.775
+- time: 0:09
+  t_s: 9.85
   title: What are coordinates?
   scene: s01_hook
-- time: 0:31
-  t_s: 31.275
+- time: 0:30
+  t_s: 30.35
   title: Origin, axes and Cartesian coordinates
   scene: s02_coordinates
-- time: '2:23'
-  t_s: 143.475
+- time: '2:22'
+  t_s: 142.55
   title: Polar coordinates
   scene: s04_polar
-- time: '4:37'
-  t_s: 277.35
+- time: '4:36'
+  t_s: 276.425
   title: Maths angle, compass bearing and wind 'from'
   scene: s06_bearings
-- time: '5:17'
-  t_s: 317.2
+- time: '5:16'
+  t_s: 316.275
   title: Radians and arc length
   scene: s07_radians
-- time: '6:31'
-  t_s: 391.15
+- time: '6:30'
+  t_s: 390.225
   title: The unit vector r-hat
   scene: s08_r_hat
-- time: '7:55'
-  t_s: 475.175
+- time: '7:54'
+  t_s: 474.25
   title: 'Every step: theta-hat and the 90-degree turn rule'
   scene: s09_where_theta_grows
 - time: '14:37'
-  t_s: 877.95
+  t_s: 877.025
   title: Polar unit vectors depend on place
   scene: s12_arrows_depend
-- time: '15:17'
-  t_s: 917.8
+- time: '15:16'
+  t_s: 916.875
   title: 'Every step: a wind''s radial and tangential parts'
   scene: s13_components
-- time: '19:05'
-  t_s: 1145.225
+- time: '19:04'
+  t_s: 1144.3
   title: 'Every step: turned axes and the rotation matrix'
   scene: s15_turn_axes
-- time: '30:10'
-  t_s: 1810.575
+- time: '30:08'
+  t_s: 1808.925
   title: Hurricane Ian in polar coordinates
   scene: s21_ian_polar
-- time: '33:26'
-  t_s: 2006.25
+- time: '33:59'
+  t_s: 2039.925
   title: What 35 and 13 mean
   scene: s23_what_numbers_mean
-- time: '35:58'
-  t_s: 2158.1
+- time: '36:31'
+  t_s: 2191.775
   title: 'Every step: three ring points by hand'
   scene: s24_ring_points
-- time: '39:09'
-  t_s: 2349.575
+- time: '40:10'
+  t_s: 2410.35
   title: Why hurricane scientists use polar coordinates
   scene: s25_why_polar_storm
-- time: '40:47'
-  t_s: 2447.15
+- time: '42:19'
+  t_s: 2539.6
   title: The inflow angle and four angles
   scene: s26_inflow_angle
-- time: '42:05'
-  t_s: 2525.225
+- time: '43:37'
+  t_s: 2617.675
   title: Recap
   scene: s27_recap
-- time: '43:29'
-  t_s: 2609.8
+- time: '45:14'
+  t_s: 2714.875
   title: End
   scene: s28_end

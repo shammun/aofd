@@ -1074,7 +1074,7 @@ const S19: React.FC = () => {
         <Keyword f={f} text="same two lines" at={[1080, 730]} appear={tSame} out={tFlip - 18} />
         <Keyword f={f} text="flipped over its diagonal" at={[1080, 730]} appear={tFlip} out={tTen - 18} />
         <Lbl x={1080} y={790} t="same four numbers," c={C.key} s={T.floor} o={win(f, tRd, tTen - 18)} /><Lbl x={1080} y={840} t="read down the columns" c={C.key} s={T.floor} o={win(f, tRd, tTen - 18)} />
-        <Keyword f={f} text="more: Tensors made easy" at={[1080, 730]} appear={tTen} />
+        <Keyword f={f} text="more: our tensors movie" at={[1080, 730]} appear={Math.max(tTen, AT(k, 21, "tensors movie") - 10)} />
       </Svg>
       <TeX s={f < tE ? String.raw`\hat{\mathbf x}` : String.raw`\mathbf e_1`} x={O[0] + L + 40} y={O[1]} size={52} c={C.second} o={oOld(0) * (f < tE - 10 ? 1 : lbl)} />
       <TeX s={f < tE ? String.raw`\hat{\mathbf y}` : String.raw`\mathbf e_2`} x={O[0] - 20} y={O[1] - L - 40} size={52} ax={0.5} c={C.second} o={oOld(1) * (f < tE - 10 ? 1 : lbl)} />

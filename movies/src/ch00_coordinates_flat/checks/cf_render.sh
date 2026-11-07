@@ -10,7 +10,7 @@ K6TAG="${K6TAG:-k6r4}"
 cd "$R" || exit 1
 mkdir -p "$S/tmp" "$O"; export TEMP="$S/tmp" TMP="$S/tmp"
 "$PY" tools/disk_guard.py --report | tail -2
-SND="${SND:-sound7}"   # fix 2: the re-mix on the fix2 narration (s11 S20 + S23 re-voiced) lives in build1/sound7
+SND="${SND:-sound9}"   # feedback 2026-11-06/07: the re-mix on the final fb1106 narration lives in build1/sound9
 cp "$S/$SND/narration_music_cf.wav" "$S/bundle/public/" || exit 1
 "$PY" movies/src/ch00_coordinates_flat/checks/cf_run.py render --conc 2 "$@" 2>&1 | tee -a "$S/render.log" || exit 1
 "$PY" movies/src/ch00_coordinates_flat/checks/cf_run.py join --mb 150 2>&1 | tee -a "$S/render.log" || exit 1
