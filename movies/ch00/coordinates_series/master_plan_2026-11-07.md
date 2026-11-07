@@ -48,6 +48,14 @@ So **5a changes are minimal.** Priorities:
 3. R7/R8: tight additions inside the existing scenes.
 4. Consistency fixes.
 
+**User, 2026-11-07, firm: the minimum for 5a.** Keep the frames, which are already approved. Do only these:
+- the start: title and first sentence;
+- the end: links to 5b, saying wind-driven water will be shown over maps with gauges and satellite images;
+- R7/R8 as small additions;
+- optionally, borrow a clarifying animation from the original single movie.
+
+The C5 maths-font sweep and the storyboard-text reconciliation are dropped for 5a.
+
 **5b, in turn,** must recall 5a's equations at the right moment, right before each tide-water or flood before/after, and show a few calculations with them there. Each recall comes in where the story needs it, so nothing feels forced.
 
 ## B. Is the seven-part design right? (orchestrator's assessment)
