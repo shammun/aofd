@@ -39,7 +39,7 @@ const unitV = (a: number): Pt => [Math.cos(a * D2R), -Math.sin(a * D2R)];
 // ================================================================ s00 title
 const S00: React.FC = () => {
   const f = useCurrentFrame(), k = K("s00_title");
-  const tMet = AT(k, 0, "meteorology"), tEasy = AT(k, 0, "cylindrical coordinates");   // user notes 2026-11-06 item 12: the pulse on the concept words
+  const tMet = AT(k, 0, "they're used"), tEasy = AT(k, 0, "cylindrical coordinates");   // user notes 2026-11-06 item 12: the pulse on the concept words
   // Part A: a parcel gliding round a ring (one lap ≈ 4 s, time compressed), its velocity v θ̂ turning; faint copies every 0.5 s;
   // the inward acceleration (rose) grows at the parcel
   const O: Pt = [1485, 400], R = 170;
@@ -263,11 +263,11 @@ const S04: React.FC = () => {
         { rhs: String.raw`0.01\times57.3^\circ\approx0.57^\circ`, at: AT(k, 11, "about half"), c: C.gold, cont: true },
         { rhs: String.raw`\theta+\Delta\theta=53.13^\circ+0.57^\circ=53.70^\circ`, at: AT(k, 11, "to fifty three point seven"), c: C.gold, cont: true },
         { rhs: String.raw`\cos53.70^\circ=0.592`, at: tCd },
-        { rhs: String.raw`0.592-0.600=-0.008`, at: AT(k, 12, "a change of"), cont: true },
-        { rhs: String.raw`\dfrac{-0.008}{0.01}=-0.8=-\sin\theta`, at: tCr },
+        { rhs: String.raw`0.592-0.600=-0.008`, at: AT(k, 13, "Its change"), cont: true },   // r8: subtraction shown, not voiced
+        { rhs: String.raw`\dfrac{-0.008}{0.01}=-0.8=-\sin\theta`, at: AT(k, 13, "divided by") },
         { rhs: String.raw`\sin53.70^\circ=0.806`, at: tSd },
-        { rhs: String.raw`0.806-0.800=+0.006`, at: AT(k, 14, "a change of"), cont: true },
-        { rhs: String.raw`\dfrac{0.006}{0.01}=0.6=\cos\theta`, at: tSr },
+        { rhs: String.raw`0.806-0.800=+0.006`, at: AT(k, 15, "Its change"), cont: true },
+        { rhs: String.raw`\dfrac{0.006}{0.01}=0.6=\cos\theta`, at: AT(k, 15, "divided by") },
       ]} />
     </Scene>
   );
@@ -582,9 +582,9 @@ const S08: React.FC = () => {
         { rhs: String.raw`(10.945,\ 1.1)-(10,\ 0)=(0.945,\ 1.1)`, at: tChg },
         { rhs: String.raw`1\,(1,\ 0)=(1,\ 0)`, at: tP1, c: C.local },
         // K6 round 1: ran to x 1922: the result on the next line, on its words
-        { rhs: String.raw`\Delta\hat{\mathbf d}=(0.995,\ 0.1)-(1,\ 0)`, at: AT(k, 16, "which went from") },
-        { rhs: String.raw`\phantom{\Delta\hat{\mathbf d}}=(-0.005,\ 0.1)`, at: AT(k, 16, "a change of"), cont: true },
-        { rhs: String.raw`10\,(-0.005,\ 0.1)=(-0.05,\ 1)`, at: AT(k, 16, "ten times that"), c: C.second },
+        { rhs: String.raw`\Delta\hat{\mathbf d}=(0.995,\ 0.1)-(1,\ 0)`, at: AT(k, 16, "the change in the arrow") },
+        { rhs: String.raw`\phantom{\Delta\hat{\mathbf d}}=(-0.005,\ 0.1)`, at: AT(k, 16, "the arrow changed by"), cont: true },
+        { rhs: String.raw`10\,(-0.005,\ 0.1)=(-0.05,\ 1)`, at: AT(k, 16, "so this piece"), c: C.second },
         { rhs: String.raw`1\,(-0.005,\ 0.1)=(-0.005,\ 0.1)`, at: tP3, c: C.neg },
         // #5b r1 M3(a): the addition written out, component by component
         { rhs: String.raw`(1,\ 0)+(-0.05,\ 1)+(-0.005,\ 0.1)`, at: tAdd },

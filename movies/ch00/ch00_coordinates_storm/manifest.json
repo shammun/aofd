@@ -13612,5 +13612,13 @@
   }
  ],
  "notes2_patch": "2026-11-06: build_ch00_coordinates_storm.py --notes2-patch (same functions as the full build)",
- "remake1107_patch": "2026-11-07: build_ch00_coordinates_storm.py --remake1107-patch (fluidpy.data.movie_shore; DS40-DS47)"
+ "remake1107_patch": "2026-11-07: build_ch00_coordinates_storm.py --remake1107-patch (fluidpy.data.movie_shore; DS40-DS47)",
+ "narration_r8_2026_11_07": {
+  "what": "pass r8 (show it, do not voice it): 52 narration sentences shortened (checks/r8_script.py); voice relates the numbers, the screen keeps every operation",
+  "data_changed": false,
+  "numbers_changed": false,
+  "tts": "G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_storm/r8/tts (cst_r8_splice.py; 52 new clips, 480 re-used)",
+  "audio_s": 3657.55,
+  "reveals": "movies/src/ch00_coordinates_storm/at_words.json (Kokoro word timestamps, 78 entries)"
+ }
 }

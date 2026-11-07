@@ -11,6 +11,8 @@ const SRC = path.resolve(HERE, "..");
 const ROOT = path.resolve(SRC, "../../..");
 const tm = JSON.parse(fs.readFileSync(path.join(ROOT, "movies/ch00/ch00_coordinates_storm/timing.json"), "utf8"));
 const FPS = 30, HOLD = 75;
+const ATW = JSON.parse(fs.readFileSync(path.join(SRC, "at_words.json"), "utf8"));   // pass r8: measured word times (= cs_lib AT)
+let nW = 0;
 const sc = tm.scenes, IDS = sc.map((s) => s.id);
 const CUT = sc.map((s, i) => (i === 0 ? 0 : Math.round(s.start * FPS)));
 const END = [...CUT.slice(1), tm.total_frames + HOLD];
@@ -35,7 +37,9 @@ for (const file of files) {
       if (jj >= ns) { console.log(`FAIL ${id}: AT sentence ${jj} (scene has ${ns})`); bad++; continue; }
       const s = sc[k].sentences[jj], idx = s.text.indexOf(ph);
       if (idx < 0) { console.log(`FAIL ${id}: phrase "${ph}" not in S${jj}: ${s.text}`); bad++; continue; }
-      const fr = Math.round((s.start + ((s.end - s.start) * idx) / s.text.length) * FPS) - CUT[k];
+      const w = ATW[`${id}|${jj}|${ph}`];
+      if (w && w.text === s.text) nW++;
+      const fr = (w && w.text === s.text ? Math.round((s.start + w.dt) * FPS) : Math.round((s.start + ((s.end - s.start) * idx) / s.text.length) * FPS)) - CUT[k];
       if (fr < 0 || fr > len) { console.log(`FAIL ${id}: AT "${ph}" at frame ${fr} outside 0..${len}`); bad++; }
     }
     for (const a of body.matchAll(/\b(SS|SE)\(k,\s*(\d+)\)/g)) {
@@ -45,5 +49,5 @@ for (const file of files) {
 }
 const miss = IDS.filter((id) => !seen.has(id));
 if (miss.length) { console.log(`FAIL scenes without a component: ${miss.join(", ")}`); bad++; }
-console.log(`${n} timing references in ${seen.size} scene components; ${bad} failure(s)`);
+console.log(`${n} timing references in ${seen.size} scene components (${nW} AT from measured word times); ${bad} failure(s)`);
 process.exitCode = bad ? 1 : 0;

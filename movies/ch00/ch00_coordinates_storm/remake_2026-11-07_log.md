@@ -162,3 +162,148 @@ mkdir -p "G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinate
 ## Disk
 Before: C: 107.7 GB free, G: 456.0 GB free (project data 131.61 GB of 150; `disk_guard --report`). After: C: 105 GB, G: 440 GB free (`df`; the
 K6 stills k6y1–k6y5 and the r7 TTS/mix on G: scratch, kept — nothing deleted, per instruction and the user's no-G:-cleanup rule).
+
+## Pass r8 — "show it, don't voice it" (2026-11-07, 11:45–16:40 EST)
+Rules applied (user 2026-11-07, in the order they arrived): (1) simple arithmetic stays on screen, the voice does not read it; (1a) the voice
+RELATES the numbers (what is combined, where each number comes from) and gives the result; (1b) squares, roots and lengths likewise
+("we square …, add them, and take the square root, which gives …"); (2) opening: "see how they're used to …", not "how meteorology uses
+them"; (3) every number in an on-screen calculation says what it is and every result carries its symbol, but only where not obvious
+(balance rule: never clutter); (4) inputs a viewer can't see at a glance (cos α, sin α, α, 1 cm per hPa, u, v, v and r) are said and
+highlighted (gold glow) on their word, and the scene's answer is highlighted; (5) reveals timed from Kokoro word timestamps (±0.5 s), and
+no caption cue splits a number. Tools: `checks/r8_script.py` (table below; scene sentence counts unchanged so SS/SE stay valid),
+`checks/r8_storyboard.py`, `checks/cst_r8_splice.py` (OLD = r7 narration; saves word timestamps), `checks/r8_words_extra.py`
+(word timestamps of re-used sentences that carry a reveal in s09, s13, s27–s30, s33, s36, s39; re-synthesis length = clip length ±0.05 s,
+39 / 39 accepted), `checks/r8_words.py` → `movies/src/ch00_coordinates_storm/at_words.json` (189 entries; cs_lib `AT()` and
+`at_check.mjs` use an entry only while its sentence text is unchanged), `make_timing.py --recue` (new: no cue boundary inside a spoken
+number; the sentence is re-split with each boundary as near as possible to where it was).
+
+### Result
+- **Length**: narration 3755.750 → **3670.000 s** (−85.75 s); movie 62:38.25 → **61:12.50** (110 100 + 75 frames). 532 sentences (unchanged),
+  9090 → 8867 words; 53 sentences re-voiced (Kokoro af_bella × 1.0, loudness-matched to neighbours, all within 0.5 LU, TP ≤ −1.5 dBTP;
+  resynth correlation 0.9951), 479 re-used. One clip (s13 S2) failed the level gate by 0.05 LU on the first run; "and divide" → "then
+  divide" re-voiced and passed (−16.03 vs −16.01 target).
+- **Captions**: 888 cues, 0 above 17 cps, ≤ 2 × 42, text = script, 0 cue boundaries inside a number (26 cues re-split; the r7 track had
+  ~20 such splits, e.g. "nine hundred and | seventy five").
+- **Reveal timing**: 189 word-timed entries; 24 of them were > 0.5 s off with the character share (worst s08 S16 "zero point" 1.00 s,
+  s36 S0 "eleven" 0.90 s, s09 S13 "divided by" 0.88 s).
+- **Per-scene change (s)**: s00 −1.07 · s03 −2.25 · s04 −7.45 · s07 −1.80 · s08 −12.08 · s09 −3.27 · s13 +0.25 · s14 −4.83 · s20 −0.47 ·
+  s23 +0.45 · s27 −5.32 · s28 −8.48 · s29 −6.32 · s33 −9.35 · s34 −4.25 · s36 −8.43 · s38 −1.15 · s39 −9.93.
+- **Chapter marks** (final): 0:00 · 1:13 s03 · 10:21 s08 · 19:40 s13 · 22:45 s15 · 24:48 s17 · 26:02 s18 · 28:33 s20 · 31:00 s21 · 35:57 s25 ·
+  36:48 s26 · 40:27 s28 · 43:38 s30 · 45:51 s32 · 50:05 s35 · 55:03 s38 · 58:40 s41; skip chips B1 → 10:21, B2 → 19:40.
+
+### Sentences changed (old → new)
+| Scene | S | Old | New | Why |
+|---|---|---|---|---|
+| s00_title | 0 | In this video, we'll learn how turning arrows and cylindrical coordinates work, and see how meteorology uses them to look inside a tropical cyclone, and to measure how its winds push the sea onto the coast. | In this video, we'll learn how turning arrows and cylindrical coordinates work, and see how they're used to look inside a tropical cyclone, and to measure how its winds push the sea onto the coast. | user rule for openings 2026-11-07: 'see how they're used to …', not 'how meteorology uses them' |
+| s03_tip_on_circle | 14 | So the tip slides a distance of one times delta theta, which is just delta theta. | So the tip slides a distance of just delta theta. | one × Δθ not read out (radius one said in S13) |
+| s04_slopes_sin_cos | 12 | The cosine drops from zero point six zero zero to zero point five nine two, a change of minus zero point zero zero eight. | The cosine drops from zero point six zero zero to zero point five nine two. | the subtraction stays on screen |
+| s04_slopes_sin_cos | 13 | Divided by zero point zero one, that's minus zero point eight: minus the sine. | Its change, divided by the turn, is minus zero point eight: minus the sine. | relates: change ÷ turn, then the result |
+| s04_slopes_sin_cos | 14 | The sine grows from zero point eight zero zero to zero point eight zero six, a change of zero point zero zero six. | The sine grows from zero point eight zero zero to zero point eight zero six. | the subtraction stays on screen |
+| s04_slopes_sin_cos | 15 | Divided by zero point zero one, that's zero point six: the cosine. | Its change, divided by the turn, is zero point six: the cosine. | relates: change ÷ turn, then the result |
+| s07_toward_centre | 15 | Now divide each number by delta theta, zero point zero one, and we get minus zero point six, minus zero point eight. | Now divide each number by delta theta, and we get minus zero point six, minus zero point eight. | Δθ = 0.01 named in S11; not repeated as a divisor |
+| s08_product_rule | 11 | The product is now eleven times that, which is ten point nine four five, one point one. | The new speed times the new arrow is about ten point nine four five, one point one. | relates the two factors; 11 × (0.995, 0.1) on screen |
+| s08_product_rule | 15 | First, the change in the number, times the old arrow: one times one, zero, which is one, zero. | First, the change in the number, times the old arrow, gives one, zero. | 1 × (1, 0) on screen |
+| s08_product_rule | 16 | Second, the old number times the change in the arrow, which went from one, zero to zero point nine nine five, zero point one, a change of minus zero point zero zero five, zero point one: ten times that is minus zero point zero five, one. | Second, the old number times the change in the arrow: the arrow changed by minus zero point zero zero five, zero point one, so this piece is minus zero point zero five, one. | subtraction and 10 × (…) on screen; the arrow's change and the piece named |
+| s08_product_rule | 17 | Third, the two changes multiplied together: one times minus zero point zero zero five, zero point one, which is minus zero point zero zero five, zero point one. | Third, the two changes multiplied together give minus zero point zero zero five, zero point one. | 1 × (…) on screen |
+| s09_dtheta_dt | 5 | Then u sub r is ten times zero point six, which is six, and u sub theta is minus ten times zero point eight, which is minus eight. | Multiplying the wind's parts by the cosine and the sine, as the two formulas say, u sub r is six, and u sub theta is minus eight. | the user's own example (−10 × 0.8): products on screen, voice relates and gives the results |
+| s09_dtheta_dt | 6 | Round Ian's ring, we did this at seventy two points, one every five degrees, and averaged them: the sum of the seventy two values of u sub theta, divided by seventy two, is about thirty four point eight metres per second. | Round Ian's ring, we did this at seventy two points, one every five degrees, and the average of the seventy two values of u sub theta is about thirty four point eight metres per second. | sum ÷ 72 on screen (the ring-average equation) |
+| s09_dtheta_dt | 17 | Thirty four point eight metres per second, divided by twenty five thousand metres, is about zero point zero zero one three nine radians per second. | The speed, thirty four point eight metres per second, divided by the radius, twenty five thousand metres, is about zero point zero zero one three nine radians per second. | v and r named with their numbers on screen (S16 rows) and in S0 / S6 |
+| s09_dtheta_dt | 20 | So one full lap, two pi radians, takes two pi divided by zero point zero zero one three nine. | So one full lap, two pi radians, takes two pi divided by this rate. | relates: lap angle ÷ rate |
+| s13_acceleration_numbers | 2 | Thirty four point eight squared is about twelve hundred and eleven. | For Ian's ring, we square the speed, thirty four point eight metres per second, then divide by the radius, twenty five thousand metres. | 34.8² and ÷ 25 000 on screen; voice says what is combined |
+| s13_acceleration_numbers | 3 | Divided by twenty five thousand metres, that's about zero point zero four eight metres per second squared. | That gives about zero point zero four eight metres per second squared. | result only |
+| s13_acceleration_numbers | 4 | With easy numbers, thirty five squared over twenty five thousand is about zero point zero four nine, almost the same. | Rounding the speed to thirty five gives about zero point zero four nine, almost the same. | 35² / 25 000 on screen; also drops 'easy' |
+| s14_steady_but_turning | 4 | In one minute, theta grows by zero point zero zero one three nine times sixty, which is about zero point zero eight four radians, or about five degrees. | In one minute, theta grows by its rate times sixty seconds: about zero point zero eight four radians, or about five degrees. | relates rate × 60 s; product on screen |
+| s14_steady_but_turning | 11 | So by the arc rule, it's about thirty four point eight times zero point zero eight four, which is about two point nine metres per second. | So by the arc rule, radius times angle, it's about two point nine metres per second. | 34.8 × 0.084 on screen |
+| s20_ian_curtain | 14 | All of it has to leave through the cylinder's lid, which is a much bigger area, so it rises more slowly: two times one thousand times sixteen, divided by thirty thousand, is about one metre per second. | All of it has to leave through the cylinder's lid, which is a much bigger area, so it rises more slowly: twice the depth times the inflow speed, divided by the radius, is about one metre per second. | 2 × 1000 × 16 / 30 000 on screen; voice names the quantities |
+| s23_amphan_ring | 11 | Six over twenty is zero point three, so Amphan's inflow angle is about seventeen degrees, close to Ian's twenty one. | The radial wind over the tangential wind gives Amphan an inflow angle of about seventeen degrees, close to Ian's twenty one. | 6 / 20 = 0.3 on screen; voice relates the two winds |
+| s27_coast_angle | 3 | So the coast leans west of north, by an angle whose tangent is the opposite side over the adjacent side: fifty five over ninety one point five. | So the coast leans west of north, by an angle whose tangent is the opposite side, the west leg, over the adjacent side, the north leg. | 55 / 91.5 on screen; voice says which leg goes where |
+| s27_coast_angle | 5 | So the coast runs thirty one degrees west of north: a compass bearing of three hundred and sixty minus thirty one, which is three hundred and twenty nine degrees. | So the coast runs thirty one degrees west of north: measured clockwise from north, that's a compass bearing of three hundred and twenty nine degrees. | 360 − 31 on screen |
+| s27_coast_angle | 7 | So alpha is ninety minus three hundred and twenty nine, which is minus two hundred and thirty nine degrees, and adding a full turn, three hundred and sixty, gives a hundred and twenty one degrees. | So alpha is ninety degrees minus the bearing, which comes out negative, and adding a full turn gives a hundred and twenty one degrees. | 90 − 329 = −239 and +360 on screen; the full-turn idea kept |
+| s28_fmb_calc | 3 | The part along the shore is u cosine alpha plus v sine alpha: twenty two point two times minus zero point five one five, plus twenty four point three times zero point eight five seven. | The part along the shore is u cosine alpha plus v sine alpha: we multiply the east part, u, by the cosine of alpha, minus zero point five one five, and the north part, v, by its sine, zero point eight five seven. | the user's clarification example: relate, don't read the products |
+| s28_fmb_calc | 4 | That's about minus eleven point four, plus twenty point eight, which is about nine point four metres per second. | Adding the two products gives about nine point four metres per second. | −11.4 + 20.8 on screen |
+| s28_fmb_calc | 5 | The part across the shore is minus u sine alpha plus v cosine alpha: minus twenty two point two times zero point eight five seven, plus twenty four point three times minus zero point five one five. | The part across the shore is minus u sine alpha plus v cosine alpha: now u goes with minus the sine, and v with the cosine. | relate, don't read the products |
+| s28_fmb_calc | 6 | That's about minus nineteen, minus twelve point five, which is about minus thirty one point five metres per second. | Adding these two products gives about minus thirty one point five metres per second. | −19 − 12.5 on screen |
+| s28_fmb_calc | 9 | Let's check that it's the same wind: nine point four squared plus thirty one point five squared is about a thousand and eighty one, and its square root is about thirty two point nine, the thirty three metres per second we started with. | Let's check that it's the same wind: we square the along and across parts, add them, and take the square root, which gives about thirty two point nine, the thirty three metres per second we started with. | 9.4² + 31.5² = 1081 and √ on screen; voice: square, add, root (user 2026-11-07 squares rule) |
+| s29_stp_calc | 2 | Six point eight over fifty five point seven is about zero point one two two, so the coast leans only about seven degrees west of north, a bearing of about three hundred and fifty three degrees. | With the same tangent rule, west leg over north leg, the coast leans only about seven degrees west of north, a bearing of about three hundred and fifty three degrees. | 6.8 / 55.7 on screen |
+| s29_stp_calc | 3 | So alpha is ninety minus three hundred and fifty three, plus three hundred and sixty, which is about ninety seven degrees, with a cosine of about minus zero point one two two and a sine of about zero point nine nine three. | So alpha, ninety degrees minus the bearing, plus a full turn, is about ninety seven degrees, with a cosine of about minus zero point one two two and a sine of about zero point nine nine three. | 90 − 353 + 360 on screen |
+| s29_stp_calc | 5 | Across the shore, minus u sine alpha is about ten point one, and v cosine alpha is about two. | Across the shore, we take minus u sine alpha, and v cosine alpha, and add them. | the two products on screen |
+| s29_stp_calc | 8 | Along the shore, u cosine alpha plus v sine alpha is about one point two, minus fifteen point nine, which is minus fourteen point seven, so it also ran down the coast, towards the south. | Along the shore, u cosine alpha plus v sine alpha comes to about minus fourteen point seven, so the wind also ran down the coast, towards the south. | 1.2 − 15.9 on screen |
+| s33_amphan_wind | 5 | Twenty one point nine over ninety two point nine is about zero point two three six, so the coast runs about thirteen degrees south of west. | The south leg over the west leg gives the tangent, so the coast runs about thirteen degrees south of west. | 21.9 / 92.9 on screen |
+| s33_amphan_wind | 6 | That's a bearing of two hundred and seventy minus thirteen, which is two hundred and fifty seven degrees. | Measured clockwise from north, that's a bearing of two hundred and fifty seven degrees. | 270 − 13 on screen |
+| s33_amphan_wind | 7 | So alpha is ninety minus two hundred and fifty seven, plus three hundred and sixty, which is about a hundred and ninety three degrees, with a cosine of about minus zero point nine seven four and a sine of about minus zero point two two five. | So alpha, ninety degrees minus the bearing, plus a full turn, is about a hundred and ninety three degrees, with a cosine of about minus zero point nine seven four and a sine of about minus zero point two two five. | 90 − 257 + 360 on screen |
+| s33_amphan_wind | 10 | Across the shore, minus u sine alpha is about minus one point nine, and v cosine alpha is about minus twenty point five. | Across the shore, we take minus u sine alpha, and v cosine alpha, and add them. | the two products on screen |
+| s33_amphan_wind | 12 | The official lowest pressure was about nine hundred and sixty hectopascals, fifty three below normal, so the sea under the eye rose about fifty three centimetres. | The official lowest pressure was about nine hundred and sixty hectopascals, so the sea under the eye rose about fifty three centimetres. | 1013 − 960 on screen; the cm-per-hPa rule was said in s30 |
+| s36_nargis_wind | 4 | Ten point eight over sixty nine point five is about zero point one five five, so the coast runs about nine degrees north of west. | The north leg over the west leg gives the tangent, so the coast runs about nine degrees north of west. | 10.8 / 69.5 on screen |
+| s36_nargis_wind | 5 | That's a bearing of two hundred and seventy plus nine, which is two hundred and seventy nine degrees. | Measured clockwise from north, that's a bearing of two hundred and seventy nine degrees. | 270 + 9 on screen |
+| s36_nargis_wind | 6 | So alpha is ninety minus two hundred and seventy nine, plus three hundred and sixty, which is about a hundred and seventy one degrees, with a cosine of about minus zero point nine eight eight and a sine of about zero point one five six. | So alpha, ninety degrees minus the bearing, plus a full turn, is about a hundred and seventy one degrees, with a cosine of about minus zero point nine eight eight and a sine of about zero point one five six. | 90 − 279 + 360 on screen |
+| s36_nargis_wind | 9 | Across the shore, minus u sine alpha is about minus one point five, and v cosine alpha is about minus sixteen point three. | Across the shore, we take minus u sine alpha, and v cosine alpha, and add them. | the two products on screen |
+| s36_nargis_wind | 11 | The official lowest pressure was about nine hundred and sixty two hectopascals, fifty one below normal, so the sea under the eye rose about fifty one centimetres. | The official lowest pressure was about nine hundred and sixty two hectopascals, so the sea under the eye rose about fifty one centimetres. | 1013 − 962 on screen |
+| s39_idai_wind | 5 | Thirty five point nine over fifty two point three is about zero point six eight six, so the coast runs about thirty four degrees south of west. | The south leg over the west leg gives the tangent, so the coast runs about thirty four degrees south of west. | 35.9 / 52.3 on screen |
+| s39_idai_wind | 6 | That's a bearing of two hundred and seventy minus thirty four, which is two hundred and thirty six degrees. | Measured clockwise from north, that's a bearing of two hundred and thirty six degrees. | 270 − 34 on screen |
+| s39_idai_wind | 7 | So alpha is ninety minus two hundred and thirty six, plus three hundred and sixty, which is about two hundred and fourteen degrees, with a cosine of about minus zero point eight two nine and a sine of about minus zero point five five nine. | So alpha, ninety degrees minus the bearing, plus a full turn, is about two hundred and fourteen degrees, with a cosine of about minus zero point eight two nine and a sine of about minus zero point five five nine. | 90 − 236 + 360 on screen |
+| s39_idai_wind | 10 | Across the shore, minus u sine alpha is about minus three point seven, and v cosine alpha is about minus seventeen point three. | Across the shore, we take minus u sine alpha, and v cosine alpha, and add them. | the two products on screen |
+| s39_idai_wind | 12 | The official lowest pressure was about nine hundred and fifty five hectopascals, fifty eight below normal, so the sea under the eye rose about fifty eight centimetres. | The official lowest pressure was about nine hundred and fifty five hectopascals, so the sea under the eye rose about fifty eight centimetres. | 1013 − 955 on screen |
+| s34_amphan_radar | 9 | Each pixel is a square sixty metres on each side, so it covers three thousand six hundred square metres, or zero point zero zero three six square kilometres. | Each pixel is a square sixty metres on each side, so it covers zero point zero zero three six square kilometres. | 60 × 60 = 3600 m² on screen |
+| s34_amphan_radar | 10 | Thirty four thousand seven hundred times zero point zero zero three six is about a hundred and twenty five square kilometres of new water. | The number of dark pixels times the area of one pixel is about a hundred and twenty five square kilometres of new water. | 34 700 × 0.0036 on screen; voice relates count × area |
+| s38_idai_intro | 5 | Times one point eight five two, that's about a hundred and fifty seven kilometres per hour. | With the knot converted as for Nargis, that's about a hundred and fifty seven kilometres per hour. | × 1.852 on screen (the conversion idea was said in s35) |
+| s38_idai_intro | 6 | Divided by three point six, it's about forty four metres per second. | And in metres per second, it's about forty four. | ÷ 3.6 on screen (said in s35) |
+
+### On screen (no content removed; placement / labels / highlights only)
+| Scene | Change |
+|---|---|
+| s00 | picture swap cue "meteorology" → "they're used" |
+| s04 | subtraction rows on "Its change", division rows on "divided by" (were on the voiced "a change of" / sentence start) |
+| s08 S16 | rows on "the change in the arrow", "the arrow changed by", "so this piece" |
+| s09 | r and v rows glow on their spoken words (S17); lap row labelled "lap =" |
+| s13 | lhs "v² = 34.8²", "v²/r = 1211/25 000", "v ≈ 35:"; ÷ row on "divide by the radius"; v glows on its word, answer 0.048 glows |
+| s14 | arc-rule numbers row on "radius times angle" |
+| s20 | numbers row on "twice the depth" |
+| s27 | "α = −239° + 360° = 121°" (was without α); α, cos α, sin α glow on their words |
+| s28 | "along ≈ …", "across ≈ …" results with symbols; check stack "speed = √(along² + across²) = √(9.4² + 31.5²) = √1081", "speed ≈ 32.9 ≈ 33 m/s"; u, v and cos α, sin α glow on their words; across = −31.5 glows; substituted rows on "we multiply" / "now u goes" |
+| s29 | "tan β = 6.8/55.7 ≈ 0.122 ⇒ β ≈ 7°" + "bearing ≈ 353°" row on "a bearing of about"; "across ≈ …"; α, cos/sin, u/v glow; +12.1 glows; coast-leg names fade before the across label (K6) |
+| s30 | "⇒ rise ≈ 72 cm" (44 px); the 1 cm/hPa row glows on "one centimetre", 72 cm on its word |
+| s33/36/39 | "tan β = … ⇒ β ≈ …°" + "bearing ≈ …°" row on "Measured clockwise"; "across ≈ …"; pressure row "⇒ rise ≈ … cm" at 44 px; α, cos/sin, u/v glow; across answer glows; "white circle" label y 625 → 690 (K6) |
+| s38 | ×1.852 / ÷3.6 rows on "With the knot" / "in metres per second" |
+Dropped under the balance rule after stills/SSR: "Δh =" on the s30 fraction (units say it; ran past x 1842), "dθ/dt =" on the s09 rate row
+(taller row touched the next), "1013_normal" subscript on the event pressure rows (below the 44-px floor and too wide; 1013 is labelled in s30).
+
+### Gates (final sources)
+tsc 0 · at_check 585 refs / 0 failures (74 literal AT refs from word times) · swap_check 448 elements, 0 overlaps, 0 swaps < 8 frames ·
+cam_speed 0 > 90°/s · eq_check 19 / 0 missing / 0 unused · stack_frame ok · SSR 13 000 scene-frames, 0 errors, NaN 0 · SSR --3d 0 errors
+(THREE guard 979) · movie_symbol_lint --strict 0 (13 pre-existing lint-ok) · script_wording_lint 0 (incl. the voiced-arithmetic,
+squares/roots and opening rules) · storyboard voiceovers = script (42 / 42) · manifest: `narration_r8_2026_11_07` note (no data or number
+changed; data hashes untouched).
+
+### K6 (house list, ONE tag folder `build1/stills/k6z1`, `cst_run.py stills … --jobs 2`, under HEAVY.lock)
+| Run | Frames | Hits | Fixed after it |
+|---|---|---|---|
+| k6z1 (whole list) | 6106 listed, 5863 shot | 13 (s30 edge 9, s09 text-text 3, s29 text-text 1) | 243 event frames had thrown on the 42-px pressure row (SSR caught it too) → 44 px, subscript dropped; s30 Δh / rise rows; s09 label; s29 coast-leg names fade |
+| k6z1 re-shoot s09 s29 s30 s33 s36 s39 (668 frames, same folder) | 6106 | 21 (events: "white circle" label × cos/sin row, the stack is one row taller) | label y 625 → 690 |
+| k6z1 re-shoot s33 s36 s39 (250 frames, same folder) | **6106** | **0** | — |
+
+### Stills looked at (half size, `build1/stills/k6z1/`)
+f00225 (s00), f08732 (s04 check), f21976 (s08 pieces), f27536 (s09 rate), f36512 (s13), f71861 (s27), f73978 / f74644 / f75510 (s28 along,
+across, speed check), f77676 / f78246 (s29), f80164 (s30), f85954 / f86080 / f87113 (s33), f100626 (s38), f103756 (s39). Seen, not
+changed: the s13 "v ≈ 35:" lhs is a little long but reads; the event "white circle" label now sits 30 px above the colour-bar title.
+
+### Mix (sound_r8)
+`tools/sound/mix.py` (cue sheet unchanged: eyewall-spiral seed 31, bed −28 LUFS, duck 5 dB; effects are scene-relative and s15 / s30 have no
+changed sentences) on the r8 narration, under VOICE.lock (HEAVY.lock free and 17 GB RAM free when it started): **−16.01 LUFS, true peak
+−3.37 dBTP → PASS**; `tools/sound/check.py --kind mix`: I −16.0, LRA 4.6, TP −3.4, verdict OK (clicks 7354, the narration's plosives; r7
+reported 7474). Output `G:/…/ch00_coordinates_storm/build1/sound_r8/narration_music.wav` (soundtrack 3672.5 s). Not installed into the bundle.
+
+### Render (not run; orchestrator)
+```
+# under HEAVY.lock; the bundle in build1/bundle is the final k6z1 bundle (current sources)
+cp "G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_storm/build1/sound_r8/narration_music.wav" "G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_storm/build1/bundle/public/narration_music_cst.wav"
+mkdir -p "G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_storm/build1/sound" && cp "G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_storm/build1/sound_r8/narration_music.wav" "G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_storm/build1/sound/narration_music_cst.wav"
+.venv/Scripts/python.exe movies/src/ch00_coordinates_storm/checks/cst_run.py render --conc 2      # 110 175 frames, 28 chunks of 4000
+.venv/Scripts/python.exe movies/src/ch00_coordinates_storm/checks/cst_run.py join --mb 150
+.venv/Scripts/python.exe tools/movie_qa.py "G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_storm/build1/build1_1080.mp4" --storyboard movies/ch00/ch00_coordinates_storm/storyboard.yaml
+```
+`build1/render/` is empty (r7-era chunks were moved to render_n2_old_20261107); the old `build1/build1_1080.mp4` from an earlier build
+is still there and is overwritten by the join.
+
+### Disk (pass r8)
+Before: C: 116.2 GB, G: 437.3 GB free (project data 148.87 GB of 150). After (`disk_guard --report`, 16:45): C: 112.0 GB, G: 430.6 GB free; **project data 155.51 GB of 150 — over the cap** (scratch 115.48 GB, all movies; this pass added the r8 TTS, the k6z1 stills and sound_r8, roughly 1–2 GB). Nothing deleted (K6 stills
+k6z1, r8 TTS, sound_r8 on G: scratch, kept per the no-G:-cleanup rule).

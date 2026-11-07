@@ -1,0 +1,758 @@
+{
+ "s00_title|0|cylindrical coordinates": {
+  "text": "In this video, we'll learn how turning arrows and cylindrical coordinates work, and see how they're used to look inside a tropical cyclone, and to measure how its winds push the sea onto the coast.",
+  "dt": 3.188
+ },
+ "s00_title|0|they're used": {
+  "text": "In this video, we'll learn how turning arrows and cylindrical coordinates work, and see how they're used to look inside a tropical cyclone, and to measure how its winds push the sea onto the coast.",
+  "dt": 5.65
+ },
+ "s00_title|0|tropical cyclone": {
+  "text": "In this video, we'll learn how turning arrows and cylindrical coordinates work, and see how they're used to look inside a tropical cyclone, and to measure how its winds push the sea onto the coast.",
+  "dt": 6.862
+ },
+ "s03_tip_on_circle|14|delta theta": {
+  "text": "So the tip slides a distance of just delta theta.",
+  "dt": 2.1
+ },
+ "s04_slopes_sin_cos|12|zero point": {
+  "text": "The cosine drops from zero point six zero zero to zero point five nine two.",
+  "dt": 1.425
+ },
+ "s04_slopes_sin_cos|13|Its change": {
+  "text": "Its change, divided by the turn, is minus zero point eight: minus the sine.",
+  "dt": 0.35
+ },
+ "s04_slopes_sin_cos|13|divided by": {
+  "text": "Its change, divided by the turn, is minus zero point eight: minus the sine.",
+  "dt": 1.05
+ },
+ "s04_slopes_sin_cos|13|zero point": {
+  "text": "Its change, divided by the turn, is minus zero point eight: minus the sine.",
+  "dt": 2.663
+ },
+ "s04_slopes_sin_cos|14|zero point": {
+  "text": "The sine grows from zero point eight zero zero to zero point eight zero six.",
+  "dt": 1.375
+ },
+ "s04_slopes_sin_cos|15|Its change": {
+  "text": "Its change, divided by the turn, is zero point six: the cosine.",
+  "dt": 0.35
+ },
+ "s04_slopes_sin_cos|15|divided by": {
+  "text": "Its change, divided by the turn, is zero point six: the cosine.",
+  "dt": 1.038
+ },
+ "s04_slopes_sin_cos|15|zero point": {
+  "text": "Its change, divided by the turn, is zero point six: the cosine.",
+  "dt": 2.175
+ },
+ "s07_toward_centre|15|and we get": {
+  "text": "Now divide each number by delta theta, and we get minus zero point six, minus zero point eight.",
+  "dt": 2.8
+ },
+ "s07_toward_centre|15|delta theta": {
+  "text": "Now divide each number by delta theta, and we get minus zero point six, minus zero point eight.",
+  "dt": 1.725
+ },
+ "s07_toward_centre|15|zero point": {
+  "text": "Now divide each number by delta theta, and we get minus zero point six, minus zero point eight.",
+  "dt": 3.587
+ },
+ "s08_product_rule|11|is about": {
+  "text": "The new speed times the new arrow is about ten point nine four five, one point one.",
+  "dt": 1.925
+ },
+ "s08_product_rule|16|so this piece": {
+  "text": "Second, the old number times the change in the arrow: the arrow changed by minus zero point zero zero five, zero point one, so this piece is minus zero point zero five, one.",
+  "dt": 8.738
+ },
+ "s08_product_rule|16|the arrow changed by": {
+  "text": "Second, the old number times the change in the arrow: the arrow changed by minus zero point zero zero five, zero point one, so this piece is minus zero point zero five, one.",
+  "dt": 3.587
+ },
+ "s08_product_rule|16|the change in the arrow": {
+  "text": "Second, the old number times the change in the arrow: the arrow changed by minus zero point zero zero five, zero point one, so this piece is minus zero point zero five, one.",
+  "dt": 1.863
+ },
+ "s08_product_rule|16|zero point": {
+  "text": "Second, the old number times the change in the arrow: the arrow changed by minus zero point zero zero five, zero point one, so this piece is minus zero point zero five, one.",
+  "dt": 5.037
+ },
+ "s08_product_rule|17|zero point": {
+  "text": "Third, the two changes multiplied together give minus zero point zero zero five, zero point one.",
+  "dt": 3.812
+ },
+ "s09_dtheta_dt|5|and u sub theta": {
+  "text": "Multiplying the wind's parts by the cosine and the sine, as the two formulas say, u sub r is six, and u sub theta is minus eight.",
+  "dt": 7.275
+ },
+ "s09_dtheta_dt|6|five degrees": {
+  "text": "Round Ian's ring, we did this at seventy two points, one every five degrees, and the average of the seventy two values of u sub theta is about thirty four point eight metres per second.",
+  "dt": 4.65
+ },
+ "s09_dtheta_dt|6|is about": {
+  "text": "Round Ian's ring, we did this at seventy two points, one every five degrees, and the average of the seventy two values of u sub theta is about thirty four point eight metres per second.",
+  "dt": 9.162
+ },
+ "s09_dtheta_dt|6|thirty four point eight": {
+  "text": "Round Ian's ring, we did this at seventy two points, one every five degrees, and the average of the seventy two values of u sub theta is about thirty four point eight metres per second.",
+  "dt": 9.637
+ },
+ "s09_dtheta_dt|17|divided by": {
+  "text": "The speed, thirty four point eight metres per second, divided by the radius, twenty five thousand metres, is about zero point zero zero one three nine radians per second.",
+  "dt": 3.7
+ },
+ "s09_dtheta_dt|17|is about": {
+  "text": "The speed, thirty four point eight metres per second, divided by the radius, twenty five thousand metres, is about zero point zero zero one three nine radians per second.",
+  "dt": 7.463
+ },
+ "s09_dtheta_dt|17|thirty four point eight": {
+  "text": "The speed, thirty four point eight metres per second, divided by the radius, twenty five thousand metres, is about zero point zero zero one three nine radians per second.",
+  "dt": 1.163
+ },
+ "s09_dtheta_dt|17|twenty five thousand": {
+  "text": "The speed, thirty four point eight metres per second, divided by the radius, twenty five thousand metres, is about zero point zero zero one three nine radians per second.",
+  "dt": 5.438
+ },
+ "s09_dtheta_dt|17|zero point": {
+  "text": "The speed, thirty four point eight metres per second, divided by the radius, twenty five thousand metres, is about zero point zero zero one three nine radians per second.",
+  "dt": 7.862
+ },
+ "s09_dtheta_dt|20|divided by": {
+  "text": "So one full lap, two pi radians, takes two pi divided by this rate.",
+  "dt": 3.675
+ },
+ "s13_acceleration_numbers|2|divide by the radius": {
+  "text": "For Ian's ring, we square the speed, thirty four point eight metres per second, then divide by the radius, twenty five thousand metres.",
+  "dt": 5.7
+ },
+ "s13_acceleration_numbers|2|thirty four point eight": {
+  "text": "For Ian's ring, we square the speed, thirty four point eight metres per second, then divide by the radius, twenty five thousand metres.",
+  "dt": 2.938
+ },
+ "s13_acceleration_numbers|2|twenty five thousand": {
+  "text": "For Ian's ring, we square the speed, thirty four point eight metres per second, then divide by the radius, twenty five thousand metres.",
+  "dt": 7.138
+ },
+ "s13_acceleration_numbers|3|zero point": {
+  "text": "That gives about zero point zero four eight metres per second squared.",
+  "dt": 1.087
+ },
+ "s13_acceleration_numbers|3|zero point zero four eight": {
+  "text": "That gives about zero point zero four eight metres per second squared.",
+  "dt": 1.087
+ },
+ "s13_acceleration_numbers|4|zero point": {
+  "text": "Rounding the speed to thirty five gives about zero point zero four nine, almost the same.",
+  "dt": 2.763
+ },
+ "s14_steady_but_turning|4|five degrees": {
+  "text": "In one minute, theta grows by its rate times sixty seconds: about zero point zero eight four radians, or about five degrees.",
+  "dt": 7.513
+ },
+ "s14_steady_but_turning|4|zero point": {
+  "text": "In one minute, theta grows by its rate times sixty seconds: about zero point zero eight four radians, or about five degrees.",
+  "dt": 4.862
+ },
+ "s14_steady_but_turning|4|zero point zero eight": {
+  "text": "In one minute, theta grows by its rate times sixty seconds: about zero point zero eight four radians, or about five degrees.",
+  "dt": 4.862
+ },
+ "s14_steady_but_turning|4|zero point zero eight four": {
+  "text": "In one minute, theta grows by its rate times sixty seconds: about zero point zero eight four radians, or about five degrees.",
+  "dt": 4.862
+ },
+ "s14_steady_but_turning|11|radius times": {
+  "text": "So by the arc rule, radius times angle, it's about two point nine metres per second.",
+  "dt": 1.837
+ },
+ "s14_steady_but_turning|11|radius times angle": {
+  "text": "So by the arc rule, radius times angle, it's about two point nine metres per second.",
+  "dt": 1.837
+ },
+ "s20_ian_curtain|14|All of it has to leave": {
+  "text": "All of it has to leave through the cylinder's lid, which is a much bigger area, so it rises more slowly: twice the depth times the inflow speed, divided by the radius, is about one metre per second.",
+  "dt": 0.4
+ },
+ "s20_ian_curtain|14|divided by": {
+  "text": "All of it has to leave through the cylinder's lid, which is a much bigger area, so it rises more slowly: twice the depth times the inflow speed, divided by the radius, is about one metre per second.",
+  "dt": 9.6
+ },
+ "s20_ian_curtain|14|is about": {
+  "text": "All of it has to leave through the cylinder's lid, which is a much bigger area, so it rises more slowly: twice the depth times the inflow speed, divided by the radius, is about one metre per second.",
+  "dt": 11.275
+ },
+ "s20_ian_curtain|14|is about one": {
+  "text": "All of it has to leave through the cylinder's lid, which is a much bigger area, so it rises more slowly: twice the depth times the inflow speed, divided by the radius, is about one metre per second.",
+  "dt": 11.275
+ },
+ "s20_ian_curtain|14|rises": {
+  "text": "All of it has to leave through the cylinder's lid, which is a much bigger area, so it rises more slowly: twice the depth times the inflow speed, divided by the radius, is about one metre per second.",
+  "dt": 5.175
+ },
+ "s20_ian_curtain|14|so it rises more slowly": {
+  "text": "All of it has to leave through the cylinder's lid, which is a much bigger area, so it rises more slowly: twice the depth times the inflow speed, divided by the radius, is about one metre per second.",
+  "dt": 4.888
+ },
+ "s20_ian_curtain|14|twice the depth": {
+  "text": "All of it has to leave through the cylinder's lid, which is a much bigger area, so it rises more slowly: twice the depth times the inflow speed, divided by the radius, is about one metre per second.",
+  "dt": 6.987
+ },
+ "s20_ian_curtain|14|which is a much bigger area": {
+  "text": "All of it has to leave through the cylinder's lid, which is a much bigger area, so it rises more slowly: twice the depth times the inflow speed, divided by the radius, is about one metre per second.",
+  "dt": 3.15
+ },
+ "s27_coast_angle|5|a compass bearing": {
+  "text": "So the coast runs thirty one degrees west of north: measured clockwise from north, that's a compass bearing of three hundred and twenty nine degrees.",
+  "dt": 5.888
+ },
+ "s27_coast_angle|7|a hundred and twenty one": {
+  "text": "So alpha is ninety degrees minus the bearing, which comes out negative, and adding a full turn gives a hundred and twenty one degrees.",
+  "dt": 6.412
+ },
+ "s27_coast_angle|7|adding a full turn": {
+  "text": "So alpha is ninety degrees minus the bearing, which comes out negative, and adding a full turn gives a hundred and twenty one degrees.",
+  "dt": 5.075
+ },
+ "s27_coast_angle|7|negative": {
+  "text": "So alpha is ninety degrees minus the bearing, which comes out negative, and adding a full turn gives a hundred and twenty one degrees.",
+  "dt": 4.05
+ },
+ "s28_fmb_calc|3|along the shore": {
+  "text": "The part along the shore is u cosine alpha plus v sine alpha: we multiply the east part, u, by the cosine of alpha, minus zero point five one five, and the north part, v, by its sine, zero point eight five seven.",
+  "dt": 0.688
+ },
+ "s28_fmb_calc|3|minus zero point five one five": {
+  "text": "The part along the shore is u cosine alpha plus v sine alpha: we multiply the east part, u, by the cosine of alpha, minus zero point five one five, and the north part, v, by its sine, zero point eight five seven.",
+  "dt": 8.387
+ },
+ "s28_fmb_calc|3|we multiply": {
+  "text": "The part along the shore is u cosine alpha plus v sine alpha: we multiply the east part, u, by the cosine of alpha, minus zero point five one five, and the north part, v, by its sine, zero point eight five seven.",
+  "dt": 4.562
+ },
+ "s28_fmb_calc|3|zero point": {
+  "text": "The part along the shore is u cosine alpha plus v sine alpha: we multiply the east part, u, by the cosine of alpha, minus zero point five one five, and the north part, v, by its sine, zero point eight five seven.",
+  "dt": 8.738
+ },
+ "s28_fmb_calc|3|zero point eight five seven": {
+  "text": "The part along the shore is u cosine alpha plus v sine alpha: we multiply the east part, u, by the cosine of alpha, minus zero point five one five, and the north part, v, by its sine, zero point eight five seven.",
+  "dt": 13.45
+ },
+ "s28_fmb_calc|5|across the shore": {
+  "text": "The part across the shore is minus u sine alpha plus v cosine alpha: now u goes with minus the sine, and v with the cosine.",
+  "dt": 0.662
+ },
+ "s28_fmb_calc|5|minus u sine alpha": {
+  "text": "The part across the shore is minus u sine alpha plus v cosine alpha: now u goes with minus the sine, and v with the cosine.",
+  "dt": 1.663
+ },
+ "s28_fmb_calc|5|now u goes": {
+  "text": "The part across the shore is minus u sine alpha plus v cosine alpha: now u goes with minus the sine, and v with the cosine.",
+  "dt": 5.15
+ },
+ "s28_fmb_calc|6|about minus": {
+  "text": "Adding these two products gives about minus thirty one point five metres per second.",
+  "dt": 1.887
+ },
+ "s28_fmb_calc|6|minus thirty one point five": {
+  "text": "Adding these two products gives about minus thirty one point five metres per second.",
+  "dt": 2.15
+ },
+ "s28_fmb_calc|9|square root": {
+  "text": "Let's check that it's the same wind: we square the along and across parts, add them, and take the square root, which gives about thirty two point nine, the thirty three metres per second we started with.",
+  "dt": 6.263
+ },
+ "s29_stp_calc|2|a bearing of about": {
+  "text": "With the same tangent rule, west leg over north leg, the coast leans only about seven degrees west of north, a bearing of about three hundred and fifty three degrees.",
+  "dt": 7.838
+ },
+ "s29_stp_calc|3|about minus": {
+  "text": "So alpha, ninety degrees minus the bearing, plus a full turn, is about ninety seven degrees, with a cosine of about minus zero point one two two and a sine of about zero point nine nine three.",
+  "dt": 7.862
+ },
+ "s29_stp_calc|3|is about": {
+  "text": "So alpha, ninety degrees minus the bearing, plus a full turn, is about ninety seven degrees, with a cosine of about minus zero point one two two and a sine of about zero point nine nine three.",
+  "dt": 4.8
+ },
+ "s29_stp_calc|3|ninety seven": {
+  "text": "So alpha, ninety degrees minus the bearing, plus a full turn, is about ninety seven degrees, with a cosine of about minus zero point one two two and a sine of about zero point nine nine three.",
+  "dt": 5.237
+ },
+ "s29_stp_calc|3|with a cosine": {
+  "text": "So alpha, ninety degrees minus the bearing, plus a full turn, is about ninety seven degrees, with a cosine of about minus zero point one two two and a sine of about zero point nine nine three.",
+  "dt": 7.0
+ },
+ "s29_stp_calc|3|zero point": {
+  "text": "So alpha, ninety degrees minus the bearing, plus a full turn, is about ninety seven degrees, with a cosine of about minus zero point one two two and a sine of about zero point nine nine three.",
+  "dt": 8.588
+ },
+ "s29_stp_calc|5|and v cosine": {
+  "text": "Across the shore, we take minus u sine alpha, and v cosine alpha, and add them.",
+  "dt": 3.55
+ },
+ "s29_stp_calc|5|minus u sine alpha": {
+  "text": "Across the shore, we take minus u sine alpha, and v cosine alpha, and add them.",
+  "dt": 1.887
+ },
+ "s29_stp_calc|8|about minus": {
+  "text": "Along the shore, u cosine alpha plus v sine alpha comes to about minus fourteen point seven, so the wind also ran down the coast, towards the south.",
+  "dt": 4.475
+ },
+ "s33_amphan_wind|6|two hundred": {
+  "text": "Measured clockwise from north, that's a bearing of two hundred and fifty seven degrees.",
+  "dt": 3.138
+ },
+ "s33_amphan_wind|7|about minus": {
+  "text": "So alpha, ninety degrees minus the bearing, plus a full turn, is about a hundred and ninety three degrees, with a cosine of about minus zero point nine seven four and a sine of about minus zero point two two five.",
+  "dt": 8.512
+ },
+ "s33_amphan_wind|7|is about": {
+  "text": "So alpha, ninety degrees minus the bearing, plus a full turn, is about a hundred and ninety three degrees, with a cosine of about minus zero point nine seven four and a sine of about minus zero point two two five.",
+  "dt": 4.9
+ },
+ "s33_amphan_wind|7|with a cosine": {
+  "text": "So alpha, ninety degrees minus the bearing, plus a full turn, is about a hundred and ninety three degrees, with a cosine of about minus zero point nine seven four and a sine of about minus zero point two two five.",
+  "dt": 7.625
+ },
+ "s33_amphan_wind|7|zero point": {
+  "text": "So alpha, ninety degrees minus the bearing, plus a full turn, is about a hundred and ninety three degrees, with a cosine of about minus zero point nine seven four and a sine of about minus zero point two two five.",
+  "dt": 9.162
+ },
+ "s33_amphan_wind|10|and v cosine": {
+  "text": "Across the shore, we take minus u sine alpha, and v cosine alpha, and add them.",
+  "dt": 3.55
+ },
+ "s33_amphan_wind|10|minus u sine alpha": {
+  "text": "Across the shore, we take minus u sine alpha, and v cosine alpha, and add them.",
+  "dt": 1.887
+ },
+ "s33_amphan_wind|12|eye": {
+  "text": "The official lowest pressure was about nine hundred and sixty hectopascals, so the sea under the eye rose about fifty three centimetres.",
+  "dt": 6.138
+ },
+ "s33_amphan_wind|12|so the sea": {
+  "text": "The official lowest pressure was about nine hundred and sixty hectopascals, so the sea under the eye rose about fifty three centimetres.",
+  "dt": 5.112
+ },
+ "s34_amphan_radar|9|sixty metres": {
+  "text": "Each pixel is a square sixty metres on each side, so it covers zero point zero zero three six square kilometres.",
+  "dt": 1.75
+ },
+ "s34_amphan_radar|9|zero point": {
+  "text": "Each pixel is a square sixty metres on each side, so it covers zero point zero zero three six square kilometres.",
+  "dt": 4.312
+ },
+ "s34_amphan_radar|10|a hundred and twenty five": {
+  "text": "The number of dark pixels times the area of one pixel is about a hundred and twenty five square kilometres of new water.",
+  "dt": 4.487
+ },
+ "s34_amphan_radar|10|is about": {
+  "text": "The number of dark pixels times the area of one pixel is about a hundred and twenty five square kilometres of new water.",
+  "dt": 4.125
+ },
+ "s36_nargis_wind|5|two hundred": {
+  "text": "Measured clockwise from north, that's a bearing of two hundred and seventy nine degrees.",
+  "dt": 3.138
+ },
+ "s36_nargis_wind|6|about minus": {
+  "text": "So alpha, ninety degrees minus the bearing, plus a full turn, is about a hundred and seventy one degrees, with a cosine of about minus zero point nine eight eight and a sine of about zero point one five six.",
+  "dt": 8.363
+ },
+ "s36_nargis_wind|6|is about": {
+  "text": "So alpha, ninety degrees minus the bearing, plus a full turn, is about a hundred and seventy one degrees, with a cosine of about minus zero point nine eight eight and a sine of about zero point one five six.",
+  "dt": 4.85
+ },
+ "s36_nargis_wind|6|with a cosine": {
+  "text": "So alpha, ninety degrees minus the bearing, plus a full turn, is about a hundred and seventy one degrees, with a cosine of about minus zero point nine eight eight and a sine of about zero point one five six.",
+  "dt": 7.45
+ },
+ "s36_nargis_wind|6|zero point": {
+  "text": "So alpha, ninety degrees minus the bearing, plus a full turn, is about a hundred and seventy one degrees, with a cosine of about minus zero point nine eight eight and a sine of about zero point one five six.",
+  "dt": 8.988
+ },
+ "s36_nargis_wind|9|and v cosine": {
+  "text": "Across the shore, we take minus u sine alpha, and v cosine alpha, and add them.",
+  "dt": 3.55
+ },
+ "s36_nargis_wind|9|minus u sine alpha": {
+  "text": "Across the shore, we take minus u sine alpha, and v cosine alpha, and add them.",
+  "dt": 1.887
+ },
+ "s36_nargis_wind|11|eye": {
+  "text": "The official lowest pressure was about nine hundred and sixty two hectopascals, so the sea under the eye rose about fifty one centimetres.",
+  "dt": 6.388
+ },
+ "s36_nargis_wind|11|so the sea": {
+  "text": "The official lowest pressure was about nine hundred and sixty two hectopascals, so the sea under the eye rose about fifty one centimetres.",
+  "dt": 5.412
+ },
+ "s38_idai_intro|5|With the knot": {
+  "text": "With the knot converted as for Nargis, that's about a hundred and fifty seven kilometres per hour.",
+  "dt": 0.35
+ },
+ "s38_idai_intro|6|in metres per second": {
+  "text": "And in metres per second, it's about forty four.",
+  "dt": 0.487
+ },
+ "s39_idai_wind|6|two hundred": {
+  "text": "Measured clockwise from north, that's a bearing of two hundred and thirty six degrees.",
+  "dt": 3.038
+ },
+ "s39_idai_wind|7|about minus": {
+  "text": "So alpha, ninety degrees minus the bearing, plus a full turn, is about two hundred and fourteen degrees, with a cosine of about minus zero point eight two nine and a sine of about minus zero point five five nine.",
+  "dt": 8.338
+ },
+ "s39_idai_wind|7|is about": {
+  "text": "So alpha, ninety degrees minus the bearing, plus a full turn, is about two hundred and fourteen degrees, with a cosine of about minus zero point eight two nine and a sine of about minus zero point five five nine.",
+  "dt": 4.8
+ },
+ "s39_idai_wind|7|two hundred": {
+  "text": "So alpha, ninety degrees minus the bearing, plus a full turn, is about two hundred and fourteen degrees, with a cosine of about minus zero point eight two nine and a sine of about minus zero point five five nine.",
+  "dt": 5.237
+ },
+ "s39_idai_wind|7|with a cosine": {
+  "text": "So alpha, ninety degrees minus the bearing, plus a full turn, is about two hundred and fourteen degrees, with a cosine of about minus zero point eight two nine and a sine of about minus zero point five five nine.",
+  "dt": 7.475
+ },
+ "s39_idai_wind|7|zero point": {
+  "text": "So alpha, ninety degrees minus the bearing, plus a full turn, is about two hundred and fourteen degrees, with a cosine of about minus zero point eight two nine and a sine of about minus zero point five five nine.",
+  "dt": 9.012
+ },
+ "s39_idai_wind|10|and v cosine": {
+  "text": "Across the shore, we take minus u sine alpha, and v cosine alpha, and add them.",
+  "dt": 3.55
+ },
+ "s39_idai_wind|10|minus u sine alpha": {
+  "text": "Across the shore, we take minus u sine alpha, and v cosine alpha, and add them.",
+  "dt": 1.887
+ },
+ "s39_idai_wind|12|eye": {
+  "text": "The official lowest pressure was about nine hundred and fifty five hectopascals, so the sea under the eye rose about fifty eight centimetres.",
+  "dt": 6.463
+ },
+ "s39_idai_wind|12|so the sea": {
+  "text": "The official lowest pressure was about nine hundred and fifty five hectopascals, so the sea under the eye rose about fifty eight centimetres.",
+  "dt": 5.463
+ },
+ "s09_dtheta_dt|3|and u sub theta": {
+  "text": "At each point, we split the wind's east and north parts, u and v, into a radial and a tangential part: u sub r equals u cosine theta plus v sine theta, and u sub theta equals minus u sine theta plus v cosine theta.",
+  "dt": 11.675
+ },
+ "s09_dtheta_dt|4|so u is ten": {
+  "text": "For example, take an east wind of ten metres per second, so u is ten and v is zero, at the balloon's point from Part 1, where cosine theta is zero point six and sine theta is zero point eight.",
+  "dt": 3.812
+ },
+ "s09_dtheta_dt|4|where cosine theta": {
+  "text": "For example, take an east wind of ten metres per second, so u is ten and v is zero, at the balloon's point from Part 1, where cosine theta is zero point six and sine theta is zero point eight.",
+  "dt": 8.325
+ },
+ "s09_dtheta_dt|4|zero point": {
+  "text": "For example, take an east wind of ten metres per second, so u is ten and v is zero, at the balloon's point from Part 1, where cosine theta is zero point six and sine theta is zero point eight.",
+  "dt": 9.688
+ },
+ "s09_dtheta_dt|12|radius times": {
+  "text": "By the arc rule, a distance along a circle is the radius times the angle.",
+  "dt": 3.487
+ },
+ "s09_dtheta_dt|13|divided by": {
+  "text": "So the angle it turns through is that distance divided by the radius: v delta t over r.",
+  "dt": 2.85
+ },
+ "s09_dtheta_dt|14|and let it shrink": {
+  "text": "Now divide by delta t, and let it shrink.",
+  "dt": 2.075
+ },
+ "s09_dtheta_dt|19|five degrees": {
+  "text": "That's about zero point zero eight degrees every second, or about five degrees every minute.",
+  "dt": 4.162
+ },
+ "s09_dtheta_dt|19|zero point": {
+  "text": "That's about zero point zero eight degrees every second, or about five degrees every minute.",
+  "dt": 0.938
+ },
+ "s09_dtheta_dt|19|zero point zero eight": {
+  "text": "That's about zero point zero eight degrees every second, or about five degrees every minute.",
+  "dt": 0.938
+ },
+ "s13_acceleration_numbers|0|accelerating": {
+  "text": "If you skipped, here's what to keep: an air parcel going round a circle at a steady speed v is always accelerating towards the centre, by v squared over r.",
+  "dt": 6.75
+ },
+ "s13_acceleration_numbers|6|is about": {
+  "text": "Gravity is nine point eight one metres per second squared, so this is about two hundred times smaller.",
+  "dt": 4.7
+ },
+ "s13_acceleration_numbers|6|two hundred": {
+  "text": "Gravity is nine point eight one metres per second squared, so this is about two hundred times smaller.",
+  "dt": 5.112
+ },
+ "s13_acceleration_numbers|9|eye": {
+  "text": "Here, instead of making the parcel faster, all of it goes into turning the parcel round the eye.",
+  "dt": 5.088
+ },
+ "s27_coast_angle|0|Fort Myers Beach": {
+  "text": "Which way does the coast run near Fort Myers Beach?",
+  "dt": 1.85
+ },
+ "s27_coast_angle|2|kilometres north": {
+  "text": "Going up the coast from Naples to Englewood, we move about ninety one point five kilometres north, and fifty five kilometres west.",
+  "dt": 5.175
+ },
+ "s27_coast_angle|4|is about": {
+  "text": "That's about zero point six zero one, and the angle is about thirty one degrees.",
+  "dt": 3.55
+ },
+ "s27_coast_angle|4|the angle is": {
+  "text": "That's about zero point six zero one, and the angle is about thirty one degrees.",
+  "dt": 3.013
+ },
+ "s27_coast_angle|4|zero point": {
+  "text": "That's about zero point six zero one, and the angle is about thirty one degrees.",
+  "dt": 0.938
+ },
+ "s27_coast_angle|6|a compass bearing": {
+  "text": "In Part 1, we found that a compass bearing is ninety degrees minus the maths angle, so the maths angle is ninety degrees minus the bearing.",
+  "dt": 2.087
+ },
+ "s27_coast_angle|6|so the maths angle": {
+  "text": "In Part 1, we found that a compass bearing is ninety degrees minus the maths angle, so the maths angle is ninety degrees minus the bearing.",
+  "dt": 5.963
+ },
+ "s27_coast_angle|8|a hundred and twenty one": {
+  "text": "The cosine of a hundred and twenty one degrees is about minus zero point five one five, and its sine is about zero point eight five seven.",
+  "dt": 0.938
+ },
+ "s27_coast_angle|8|about minus": {
+  "text": "The cosine of a hundred and twenty one degrees is about minus zero point five one five, and its sine is about zero point eight five seven.",
+  "dt": 3.163
+ },
+ "s27_coast_angle|8|and its sine": {
+  "text": "The cosine of a hundred and twenty one degrees is about minus zero point five one five, and its sine is about zero point eight five seven.",
+  "dt": 6.175
+ },
+ "s27_coast_angle|8|is about": {
+  "text": "The cosine of a hundred and twenty one degrees is about minus zero point five one five, and its sine is about zero point eight five seven.",
+  "dt": 3.05
+ },
+ "s27_coast_angle|8|minus zero point five one five": {
+  "text": "The cosine of a hundred and twenty one degrees is about minus zero point five one five, and its sine is about zero point eight five seven.",
+  "dt": 3.45
+ },
+ "s27_coast_angle|8|zero point": {
+  "text": "The cosine of a hundred and twenty one degrees is about minus zero point five one five, and its sine is about zero point eight five seven.",
+  "dt": 3.95
+ },
+ "s27_coast_angle|8|zero point eight five seven": {
+  "text": "The cosine of a hundred and twenty one degrees is about minus zero point five one five, and its sine is about zero point eight five seven.",
+  "dt": 7.412
+ },
+ "s27_coast_angle|9|about minus": {
+  "text": "So x hat prime is about minus zero point five one five, zero point eight five seven: it points up the coast, towards the north-north-west.",
+  "dt": 1.538
+ },
+ "s27_coast_angle|9|is about": {
+  "text": "So x hat prime is about minus zero point five one five, zero point eight five seven: it points up the coast, towards the north-north-west.",
+  "dt": 1.425
+ },
+ "s27_coast_angle|9|minus zero point five one five": {
+  "text": "So x hat prime is about minus zero point five one five, zero point eight five seven: it points up the coast, towards the north-north-west.",
+  "dt": 1.8
+ },
+ "s27_coast_angle|9|zero point": {
+  "text": "So x hat prime is about minus zero point five one five, zero point eight five seven: it points up the coast, towards the north-north-west.",
+  "dt": 2.163
+ },
+ "s27_coast_angle|9|zero point eight five seven": {
+  "text": "So x hat prime is about minus zero point five one five, zero point eight five seven: it points up the coast, towards the north-north-west.",
+  "dt": 4.275
+ },
+ "s27_coast_angle|10|about minus": {
+  "text": "And y hat prime is about minus zero point eight five seven, minus zero point five one five: it points west-south-west, out into the Gulf of Mexico.",
+  "dt": 1.538
+ },
+ "s27_coast_angle|10|is about": {
+  "text": "And y hat prime is about minus zero point eight five seven, minus zero point five one five: it points west-south-west, out into the Gulf of Mexico.",
+  "dt": 1.425
+ },
+ "s27_coast_angle|10|minus zero point five one five": {
+  "text": "And y hat prime is about minus zero point eight five seven, minus zero point five one five: it points west-south-west, out into the Gulf of Mexico.",
+  "dt": 4.263
+ },
+ "s27_coast_angle|10|zero point": {
+  "text": "And y hat prime is about minus zero point eight five seven, minus zero point five one five: it points west-south-west, out into the Gulf of Mexico.",
+  "dt": 2.212
+ },
+ "s27_coast_angle|10|zero point eight five seven": {
+  "text": "And y hat prime is about minus zero point eight five seven, minus zero point five one five: it points west-south-west, out into the Gulf of Mexico.",
+  "dt": 2.212
+ },
+ "s28_fmb_calc|1|Fort Myers Beach": {
+  "text": "At eight in the evening, universal time, about an hour after landfall, the model's wind at Fort Myers Beach was about thirty three metres per second, from the south-west.",
+  "dt": 6.263
+ },
+ "s28_fmb_calc|2|twenty four point three": {
+  "text": "Its east part, u, was about twenty two point two metres per second, and its north part, v, was about twenty four point three.",
+  "dt": 6.85
+ },
+ "s28_fmb_calc|2|twenty two point two": {
+  "text": "Its east part, u, was about twenty two point two metres per second, and its north part, v, was about twenty four point three.",
+  "dt": 2.375
+ },
+ "s29_stp_calc|0|eye": {
+  "text": "Now go about a hundred and sixty kilometres north, to Saint Petersburg, on Tampa Bay, on the other side of the storm's eye.",
+  "dt": 7.537
+ },
+ "s29_stp_calc|0|kilometres north": {
+  "text": "Now go about a hundred and sixty kilometres north, to Saint Petersburg, on Tampa Bay, on the other side of the storm's eye.",
+  "dt": 2.05
+ },
+ "s29_stp_calc|1|kilometres north": {
+  "text": "Next to it, the Gulf coast runs almost due north: from Saint Pete Beach to Tarpon Springs, it moves about fifty five point seven kilometres north, and six point eight kilometres west.",
+  "dt": 8.525
+ },
+ "s29_stp_calc|4|about minus": {
+  "text": "The model's wind there, at the same hour, was about nineteen metres per second from the north-north-east: u about minus ten point two, and v about minus sixteen.",
+  "dt": 6.85
+ },
+ "s29_stp_calc|4|minus ten point two": {
+  "text": "The model's wind there, at the same hour, was about nineteen metres per second from the north-north-east: u about minus ten point two, and v about minus sixteen.",
+  "dt": 7.125
+ },
+ "s29_stp_calc|4|u about": {
+  "text": "The model's wind there, at the same hour, was about nineteen metres per second from the north-north-east: u about minus ten point two, and v about minus sixteen.",
+  "dt": 6.575
+ },
+ "s29_stp_calc|6|plus twelve point one": {
+  "text": "Together, that's about plus twelve point one metres per second.",
+  "dt": 1.675
+ },
+ "s29_stp_calc|9|Fort Myers Beach": {
+  "text": "So here's the same storm, on opposite sides of its eye: at Fort Myers Beach, the wind blew onto the land, and at Saint Petersburg, it blew out to sea.",
+  "dt": 4.525
+ },
+ "s29_stp_calc|9|at Saint Petersburg": {
+  "text": "So here's the same storm, on opposite sides of its eye: at Fort Myers Beach, the wind blew onto the land, and at Saint Petersburg, it blew out to sea.",
+  "dt": 7.725
+ },
+ "s29_stp_calc|9|eye": {
+  "text": "So here's the same storm, on opposite sides of its eye: at Fort Myers Beach, the wind blew onto the land, and at Saint Petersburg, it blew out to sea.",
+  "dt": 3.413
+ },
+ "s30_onshore_piles|3|rises": {
+  "text": "Where the water piles up, the sea rises far above the normal tide, and this rise is called a storm surge.",
+  "dt": 2.225
+ },
+ "s30_onshore_piles|5|for every hectopascal": {
+  "text": "The low pressure helps a little: the sea rises by about one centimetre for every hectopascal that the pressure drops.",
+  "dt": 4.625
+ },
+ "s30_onshore_piles|5|one centimetre": {
+  "text": "The low pressure helps a little: the sea rises by about one centimetre for every hectopascal that the pressure drops.",
+  "dt": 3.688
+ },
+ "s30_onshore_piles|5|rises": {
+  "text": "The low pressure helps a little: the sea rises by about one centimetre for every hectopascal that the pressure drops.",
+  "dt": 2.763
+ },
+ "s30_onshore_piles|6|eye": {
+  "text": "When Ian came ashore, its centre's pressure was about nine hundred and forty one hectopascals, seventy two below the normal one thousand and thirteen, so the sea under the eye rose by only about seventy two centimetres.",
+  "dt": 10.912
+ },
+ "s30_onshore_piles|6|normal one": {
+  "text": "When Ian came ashore, its centre's pressure was about nine hundred and forty one hectopascals, seventy two below the normal one thousand and thirteen, so the sea under the eye rose by only about seventy two centimetres.",
+  "dt": 7.65
+ },
+ "s30_onshore_piles|6|seventy two centimetres": {
+  "text": "When Ian came ashore, its centre's pressure was about nine hundred and forty one hectopascals, seventy two below the normal one thousand and thirteen, so the sea under the eye rose by only about seventy two centimetres.",
+  "dt": 12.463
+ },
+ "s30_onshore_piles|6|so the sea": {
+  "text": "When Ian came ashore, its centre's pressure was about nine hundred and forty one hectopascals, seventy two below the normal one thousand and thirteen, so the sea under the eye rose by only about seventy two centimetres.",
+  "dt": 9.938
+ },
+ "s33_amphan_wind|1|ERA5": {
+  "text": "We use ERA5 again, at nine in the morning, universal time, on the twentieth of May, as Amphan reached the coast.",
+  "dt": 0.762
+ },
+ "s33_amphan_wind|1|twentieth": {
+  "text": "We use ERA5 again, at nine in the morning, universal time, on the twentieth of May, as Amphan reached the coast.",
+  "dt": 4.9
+ },
+ "s33_amphan_wind|2|ERA5": {
+  "text": "Remember that ERA5 smooths the storm: its strongest wind near Amphan is only about six tenths of the official estimate, so we use it for the direction of the wind, not its full strength.",
+  "dt": 1.038
+ },
+ "s33_amphan_wind|9|ERA5": {
+  "text": "ERA5's wind there was about twenty two point six metres per second, from the south-south-east: u about minus eight point four, and v about plus twenty one.",
+  "dt": 0.4
+ },
+ "s33_amphan_wind|9|about minus": {
+  "text": "ERA5's wind there was about twenty two point six metres per second, from the south-south-east: u about minus eight point four, and v about plus twenty one.",
+  "dt": 6.85
+ },
+ "s33_amphan_wind|9|u about": {
+  "text": "ERA5's wind there was about twenty two point six metres per second, from the south-south-east: u about minus eight point four, and v about plus twenty one.",
+  "dt": 6.6
+ },
+ "s33_amphan_wind|11|about minus": {
+  "text": "Together, that's about minus twenty two point four metres per second: onto the land.",
+  "dt": 1.288
+ },
+ "s36_nargis_wind|0|ERA5": {
+  "text": "We use ERA5 again, at eleven in the morning, universal time, on the second of May, around the time of landfall.",
+  "dt": 0.762
+ },
+ "s36_nargis_wind|0|eleven": {
+  "text": "We use ERA5 again, at eleven in the morning, universal time, on the second of May, around the time of landfall.",
+  "dt": 2.575
+ },
+ "s36_nargis_wind|1|ERA5": {
+  "text": "Again, ERA5's storm is too weak, at only about half of the official wind, so we use it for the direction.",
+  "dt": 0.988
+ },
+ "s36_nargis_wind|1|about half": {
+  "text": "Again, ERA5's storm is too weak, at only about half of the official wind, so we use it for the direction.",
+  "dt": 3.938
+ },
+ "s36_nargis_wind|3|kilometres north": {
+  "text": "Going west along the coast there, we move about sixty nine point five kilometres west and ten point eight kilometres north.",
+  "dt": 6.725
+ },
+ "s36_nargis_wind|8|ERA5": {
+  "text": "ERA5's wind there was about nineteen metres per second, from the south-south-west: u about plus nine point six, and v about plus sixteen point five.",
+  "dt": 0.375
+ },
+ "s36_nargis_wind|8|u about": {
+  "text": "ERA5's wind there was about nineteen metres per second, from the south-south-west: u about plus nine point six, and v about plus sixteen point five.",
+  "dt": 6.025
+ },
+ "s36_nargis_wind|10|about minus": {
+  "text": "Together, that's about minus seventeen point eight metres per second: onto the land.",
+  "dt": 1.288
+ },
+ "s39_idai_wind|0|ERA5": {
+  "text": "Here's ERA5's wind at seven in the evening, universal time, on the fourteenth of March, a few hours before landfall.",
+  "dt": 0.688
+ },
+ "s39_idai_wind|1|is about": {
+  "text": "Its strongest wind is about two thirds of the official estimate, so once more we use it for the direction.",
+  "dt": 1.675
+ },
+ "s39_idai_wind|9|ERA5": {
+  "text": "ERA5's wind there was about twenty two metres per second, from the south-south-east: u about minus six point seven, and v about plus twenty point nine.",
+  "dt": 0.4
+ },
+ "s39_idai_wind|9|about minus": {
+  "text": "ERA5's wind there was about twenty two metres per second, from the south-south-east: u about minus six point seven, and v about plus twenty point nine.",
+  "dt": 6.3
+ },
+ "s39_idai_wind|9|u about": {
+  "text": "ERA5's wind there was about twenty two metres per second, from the south-south-east: u about minus six point seven, and v about plus twenty point nine.",
+  "dt": 6.0
+ },
+ "s39_idai_wind|11|about minus": {
+  "text": "Together, that's about minus twenty one metres per second: onto the land.",
+  "dt": 1.288
+ }
+}

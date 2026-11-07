@@ -149,6 +149,24 @@ def final(tts: Path) -> int:
     return 0
 
 
+NUMW = set("zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen "
+           "twenty thirty forty fifty sixty seventy eighty ninety hundred thousand".split())
+
+
+def splits_number(left: str, right: str) -> bool:
+    """True when the boundary between two cue texts falls inside one spoken number (pass r8): 'twenty | two', 'two | point four',
+    'minus | zero', 'a | hundred', 'hundred | and fifty', 'and | fifty' (after a number word). A comma, colon or full stop at the end of
+    the left cue ends the number ('zero point six, | zero point eight' is two numbers)."""
+    lw, rw = left.split(), right.split()
+    if not lw or not rw or re.search(r"[,.;:!?]$", lw[-1]):
+        return False
+    L, R = re.sub(r"[^a-z]", "", lw[-1].lower()), re.sub(r"[^a-z]", "", rw[0].lower())
+    prev = re.sub(r"[^a-z]", "", lw[-2].lower()) if len(lw) > 1 else ""
+    left_in = L in NUMW or L in ("point", "minus", "plus") or (L == "a" and R in ("hundred", "thousand")) or (L == "and" and prev in NUMW)
+    right_in = R in NUMW or R == "point" or (R == "and" and L in ("hundred", "thousand"))
+    return left_in and right_in
+
+
 def recue(write: bool) -> int:
     """RECUE mode (#5b fix 2, review 2 S11, 2026-11-06): re-segment the caption cues ONLY; the audio, timing.json's sentence times
     and the cue words stay exactly as they are.
@@ -178,6 +196,45 @@ def recue(write: bool) -> int:
             c1 = c0 + dur * len(p) / n
             mine.append([c0, c1, p, si])
             c0 = c1
+        # pass r8 (2026-11-07, user / Part 1 audit): no cue boundary inside a spoken number ("twenty two | point four"). If one
+        # does, the sentence's words are re-split into the same number of cues (one more if needed), each boundary as close as
+        # possible to where it was, none inside a number, every cue <= 2 x 42 characters; times stay character-proportional.
+        if len(mine) > 1 and any(splits_number(x[2], y[2]) for x, y in zip(mine, mine[1:])):
+            import itertools
+            words = sent.split()
+            orig, acc = [], 0
+            for x in mine[:-1]:
+                acc += len(x[2].split())
+                orig.append(acc)
+            best = None
+            for n_ in (len(mine), len(mine) + 1):
+                base = orig if n_ == len(mine) else sorted(set(orig + [len(words) // 2]))
+                if len(base) != n_ - 1:
+                    base = [round(len(words) * (q + 1) / n_) for q in range(n_ - 1)]
+                cands = [[c for c in range(max(1, b - 7), min(len(words), b + 8))] for b in base]
+                for combo in itertools.product(*cands):
+                    if list(combo) != sorted(set(combo)):
+                        continue
+                    cuts = [0, *combo, len(words)]
+                    segs = [" ".join(words[cuts[q]:cuts[q + 1]]) for q in range(len(cuts) - 1)]
+                    if any(len(T.wrap(g)) > T.MAX_LINES or any(len(ln) > T.MAX_LINE for ln in T.wrap(g)) for g in segs):
+                        continue
+                    if any(splits_number(x, y) for x, y in zip(segs, segs[1:])):
+                        continue
+                    cost = sum(abs(c - b) for c, b in zip(combo, base))
+                    if best is None or cost < best[0]:
+                        best = (cost, segs)
+                if best is not None:
+                    break
+            if best is None:
+                print(f"FAIL sentence {si}: cannot keep every number inside one cue: {sent!r}")
+                return 1
+            segs, n = best[1], sum(len(g) for g in best[1])
+            c0, mine = start, []
+            for g in segs:
+                c1 = c0 + dur * len(g) / n
+                mine.append([c0, c1, g, si])
+                c0 = c1
         # short cues: merge inside the sentence only
         i = 0
         while i < len(mine):
@@ -199,7 +256,7 @@ def recue(write: bool) -> int:
             best = None
             for kk in range(1, len(words)):
                 l, r = " ".join(words[:kk]), " ".join(words[kk:])
-                if len(T.wrap(l)) > T.MAX_LINES or len(T.wrap(r)) > T.MAX_LINES:
+                if len(T.wrap(l)) > T.MAX_LINES or len(T.wrap(r)) > T.MAX_LINES or splits_number(l, r):
                     continue
                 score = abs(len(l) - len(r)) - (10 if re.search(r"[,;:]$", l) else 0)
                 if best is None or score < best[0]:
@@ -214,6 +271,9 @@ def recue(write: bool) -> int:
         cues += mine
     # checks
     bad = []
+    nsplit = [(c[2], d[2]) for c, d in zip(cues, cues[1:]) if c[3] == d[3] and splits_number(c[2], d[2])]
+    if nsplit:
+        bad.append(f"cue boundaries inside a number: {nsplit[:3]}")
     if " ".join(c[2] for c in cues).split() != " ".join(x["text"] for x in sents).split():
         bad.append("cue words differ from the sentence words")
     for k_, c in enumerate(cues):

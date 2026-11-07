@@ -929,8 +929,8 @@ const S33: React.FC = () => {
       {/* notes 2 S2: every step said (S4 the knots, S5 × 1.852, S6 ÷ 3.6) and drawn in the normal text colour (was slate) */}
       <CalcStack f={f} x={1210} y={300} size={44} maxLines={4} o={fout(f, tBeira - 10)} rows={[
         { rhs: String.raw`\text{official (10-min): }${ID.lf_kt}\ \mathrm{kt}`, at: AT(k, 4, "eighty five knots") },
-        { rhs: String.raw`${ID.lf_kt}\times1.852\approx${SAY.i_kmh}\ \mathrm{km/h}`, at: AT(k, 5, "one point eight five two") },
-        { rhs: String.raw`${SAY.i_kmh}\div3.6\approx${SAY.i_ms}\ \mathrm{m/s}`, at: AT(k, 6, "three point six") },
+        { rhs: String.raw`${ID.lf_kt}\times1.852\approx${SAY.i_kmh}\ \mathrm{km/h}`, at: AT(k, 5, "With the knot") },
+        { rhs: String.raw`${SAY.i_kmh}\div3.6\approx${SAY.i_ms}\ \mathrm{m/s}`, at: AT(k, 6, "in metres per second") },
       ]} />
       <SourceBelow text={f < tPic ? "Data: IBTrACS v04r01 (NOAA NCEI) · Cyclone Idai, 9-16 Mar 2019 · NASA Blue Marble · Natural Earth"
         : f < tZoom ? "Image: NASA Worldview (VIIRS, Suomi NPP) · 14 Mar 2019 · IBTrACS v04r01 (NOAA NCEI) · NASA Blue Marble · Natural Earth"

@@ -146,13 +146,13 @@ const S09: React.FC = () => {
       {/* fix 0 B11: every conversion on screen, on its words */}
       <CalcStack f={f} x={MX + 20} y={230} size={50} maxLines={3} o={fin(f, tNum)} rows={[
         // K6 round 1: ran to x 2024: r and v on two lines
-        { rhs: String.raw`r=25\ \mathrm{km}=25\,000\ \mathrm m`, at: tN1, size: 46 },
-        { rhs: String.raw`v=34.8\ \mathrm{m/s}\ (\approx35)`, at: tN1 + 15, size: 46, cont: true },
+        { rhs: String.raw`r=25\ \mathrm{km}=25\,000\ \mathrm m`, at: tN1, size: 46, glow: pulse(f, AT(k, 17, "twenty five thousand"), 30) },
+        { rhs: String.raw`v=34.8\ \mathrm{m/s}\ (\approx35)`, at: tN1 + 15, size: 46, cont: true, glow: pulse(f, AT(k, 17, "thirty four point eight"), 30) },
         { rhs: String.raw`\dfrac{34.8\ \mathrm{m/s}}{25\,000\ \mathrm{m}}\approx0.00139\ \mathrm{rad/s}`, at: AT(k, 17, "divided by") },
         { rhs: String.raw`1\ \mathrm{rad}=\dfrac{180^\circ}{\pi}\approx57.3^\circ`, at: tDeg },
         { rhs: String.raw`0.00139\times57.3\approx0.08^\circ/\mathrm{s}`, at: AT(k, 19, "zero point zero eight") },
         { rhs: String.raw`0.08\times60\approx4.8\approx5^\circ/\mathrm{min}`, at: AT(k, 19, "five degrees") },
-        { rhs: String.raw`\dfrac{2\pi}{0.00139}=\dfrac{6.283}{0.00139}`, at: AT(k, 20, "divided by") },
+        { rhs: String.raw`\text{lap}=\dfrac{2\pi}{0.00139}=\dfrac{6.283}{0.00139}`, at: AT(k, 20, "divided by") },
         { rhs: String.raw`\approx4500\ \mathrm s,\qquad \dfrac{4500}{60}=75\ \mathrm{min}`, at: tLap2 },
       ]} />
       <Svg><Lbl x={MX} y={720} t="metres cancel: rad/s left" c={C.local} s={T.floor} o={win(f, tCancel, tLap - 20)} /></Svg>
@@ -330,9 +330,9 @@ const S13: React.FC = () => {
       </Svg>
       {/* K6 round 1: gone before the summary line comes in at the same place (they cross-faded on top of each other) */}
       <CalcStack f={f} x={MX + 230} y={220} size={50} maxLines={3} o={fout(f, tAll - 12)} rows={[
-        { lhs: String.raw`34.8^2`, rhs: String.raw`\approx1211`, at: tSq },
-        { lhs: String.raw`\dfrac{1211}{25\,000}`, rhs: String.raw`\approx0.048\ \mathrm{m/s^2}`, at: tDiv, h: 130 },   // K6 round 2: 116-118 px of ink at 50 px (superscripts)
-        { lhs: String.raw`\dfrac{35^2}{25\,000}`, rhs: String.raw`=\dfrac{1225}{25\,000}\approx0.049`, at: tEasy, c: C.local, h: 130 },   // #5b r1 S5: 35² = 1225 shown
+        { lhs: String.raw`v^2=34.8^2`, rhs: String.raw`\approx1211`, at: tSq, glow: pulse(f, AT(k, 2, "thirty four point eight"), 30) },   // r8 labels
+        { lhs: String.raw`\dfrac{v^2}{r}=\dfrac{1211}{25\,000}`, rhs: String.raw`\approx0.048\ \mathrm{m/s^2}`, at: AT(k, 2, "divide by the radius"), h: 130, glow: pulse(f, AT(k, 3, "zero point zero four eight"), 30) },   // K6 round 2: 116-118 px of ink at 50 px (superscripts)
+        { lhs: String.raw`v\approx35:\ \dfrac{35^2}{25\,000}`, rhs: String.raw`=\dfrac{1225}{25\,000}\approx0.049`, at: tEasy, c: C.local, h: 130 },   // #5b r1 S5: 35² = 1225 shown
         { lhs: String.raw`\dfrac{9.81}{0.048}`, rhs: String.raw`\approx200`, at: tG, h: 130 },
       ]} />
       <TeX s={EQ_S13} x={MX} y={250} size={60} o={win(f, tAll, LEN(k) + 20)} />
@@ -417,7 +417,7 @@ const S14: React.FC = () => {
         { rhs: String.raw`0.084\times57.3\approx4.8^\circ\approx5^\circ`, at: AT(k, 4, "five degrees"), size: 50, cont: true },
         // #5b r1 S10: the arc rule once (EQ_S14 in the stack; the separate 44-px copy under it is gone)
         { rhs: cutAt(EQ_S14, "=34.8")[0], at: tArc, size: 50 },
-        { rhs: "=34.8" + cutAt(EQ_S14, "=34.8")[1], at: AT(k, 11, "thirty four point eight times"), size: 50, cont: true },
+        { rhs: "=34.8" + cutAt(EQ_S14, "=34.8")[1], at: AT(k, 11, "radius times angle"), size: 50, cont: true },
         { rhs: String.raw`\dfrac{2.9\ \mathrm{m/s}}{60\ \mathrm s}\approx0.048\ \mathrm{m/s^2}`, at: tDiv, glow: pulse(f, tDiv + 30, 20) },
       ]} />
       {/* fix 0 B1: the balance in numbers on S16 (f v = 6.51e-5 × 34.8 ≈ 0.0023 m/s², ratio 21 from data/cs.json) */}
@@ -967,7 +967,7 @@ const S20: React.FC = () => {
         { rhs: String.raw`2\pi r\,h\,|u_r|=\pi r^2\,w`, at: AT(k, 14, "All of it has to leave") + 30 },
         { rhs: String.raw`w=\dfrac{2\cancel{\pi}\cancel{r}\,h\,|u_r|}{\cancel{\pi}\,r^{\cancel{2}}}`, at: AT(k, 14, "which is a much bigger area") },
         { rhs: String.raw`\phantom{w}=\dfrac{2h\,|u_r|}{r}`, at: AT(k, 14, "so it rises more slowly"), cont: true },
-        { rhs: String.raw`\phantom{w}=\dfrac{2\times${kSep(WB.h_m)}\times${WB.ur}}{${kSep(WB.r_m)}}`, at: AT(k, 14, "two times one thousand"), cont: true },
+        { rhs: String.raw`\phantom{w}=\dfrac{2\times${kSep(WB.h_m)}\times${WB.ur}}{${kSep(WB.r_m)}}`, at: AT(k, 14, "twice the depth"), cont: true },
       ]} />
       <CalcStack f={f} x={MX} y={450} size={46} maxLines={4} o={fout(f, tRadar - 10)} rows={[
         { rhs: String.raw`w=\dfrac{2\times${kSep(WB.h_m)}\times${WB.ur}}{${kSep(WB.r_m)}}`, at: AT(k, 14, "is about one") + 6 },

@@ -9,6 +9,8 @@ import { AbsoluteFill, staticFile, useCurrentFrame } from "remotion";
 import { ramp } from "../house";
 import timing from "../../ch00/ch00_coordinates_storm/timing.json";
 import csJ from "../../ch00/ch00_coordinates_storm/data/cs.json";
+// pass r8 (2026-11-07): reveal times measured from the Kokoro word timestamps of the re-voiced sentences (checks/r8_words.py)
+import atWords from "./at_words.json";
 import { C, T } from "../house/kit/type";
 import { Arrow, Lbl as HLbl, Pt, Svg, clamp, textW as hTextW } from "../house/kit/draw";
 import { Keyword as HKeyword } from "../house/kit/notes";
@@ -32,12 +34,16 @@ export const END = [...CUT.slice(1), CST_FRAMES];
 export const LEN = (k: number) => END[k] - CUT[k];
 export const SS = (k: number, j: number) => { const s = sc[k].sentences[j]; if (!s) throw new Error(`${sc[k].id} has no sentence ${j}`); return Math.round(s.start * FPS) - CUT[k]; };
 export const SE = (k: number, j: number) => { const s = sc[k].sentences[j]; if (!s) throw new Error(`${sc[k].id} has no sentence ${j}`); return Math.round(s.end * FPS) - CUT[k]; };
-/** frame (scene-relative) at which the quoted words are spoken inside sentence j (character-proportional) */
+const ATW = atWords as unknown as Record<string, { text: string; dt: number }>;
+/** frame (scene-relative) at which the quoted words are spoken inside sentence j: from the measured Kokoro word timestamp when the
+ * r8 word table has this (scene, sentence, phrase) for the same sentence text, else character-proportional */
 export const AT = (k: number, j: number, phrase: string) => {
   const s = sc[k].sentences[j];
   if (!s) throw new Error(`${sc[k].id} has no sentence ${j}`);
   const i = s.text.indexOf(phrase);
   if (i < 0) throw new Error(`phrase "${phrase}" not in ${sc[k].id} sentence ${j}: ${s.text}`);
+  const w = ATW[`${sc[k].id}|${j}|${phrase}`];
+  if (w && w.text === s.text) return Math.round((s.start + w.dt) * FPS) - CUT[k];
   return Math.round((s.start + ((s.end - s.start) * i) / s.text.length) * FPS) - CUT[k];
 };
 /** start frame of the FIRST sentence of scene k that contains `phrase` (for slot scenes that get re-voiced: survives an inserted

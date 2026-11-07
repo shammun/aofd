@@ -201,9 +201,9 @@ const S27: React.FC = () => {
       <Recall f={f} tex={EQ_S27} name="bearings" x={MX} y={235} appear={tP1} out={tAl - 10} />
       <CalcStack f={f} x={MX} y={230} size={46} maxLines={4} o={fin(f, tAl)} rows={[
         { rhs: String.raw`\alpha=90^\circ-${FS.bearing}^\circ=${FS.alpha_raw}^\circ`, at: tAl },
-        { rhs: String.raw`${FS.alpha_raw}^\circ+360^\circ=${FS.alpha}^\circ`, at: AT(k, 7, "adding a full turn") },
-        { rhs: String.raw`\cos${FS.alpha}^\circ\approx${tn(FS.cos, 3)}`, at: tCos },
-        { rhs: String.raw`\sin${FS.alpha}^\circ\approx${tn(FS.sin, 3)}`, at: AT(k, 8, "and its sine"), cont: true },
+        { rhs: String.raw`\alpha=${FS.alpha_raw}^\circ+360^\circ=${FS.alpha}^\circ`, at: AT(k, 7, "adding a full turn"), glow: pulse(f, AT(k, 7, "a hundred and twenty one"), 30) },   // r8 labels: result with its symbol
+        { rhs: String.raw`\cos${FS.alpha}^\circ\approx${tn(FS.cos, 3)}`, at: tCos, glow: pulse(f, AT(k, 8, "minus zero point five one five"), 30) },
+        { rhs: String.raw`\sin${FS.alpha}^\circ\approx${tn(FS.sin, 3)}`, at: AT(k, 8, "and its sine"), cont: true, glow: pulse(f, AT(k, 8, "zero point eight five seven"), 30) },
         { rhs: String.raw`\hat{\mathbf x}'\approx(${tn(FS.cos, 3)},\ ${tn(FS.sin, 3)})\ \text{NNW}`, at: tXh, c: C.second },
         { rhs: String.raw`\hat{\mathbf y}'\approx(${tn(-FS.sin, 3)},\ ${tn(FS.cos, 3)})\ \text{WSW}`, at: tYh, c: C.second },
       ]} />
@@ -245,22 +245,23 @@ const S28: React.FC = () => {
         <Keyword f={f} text="check: the same wind" at={[MX, 120]} s={T.key} appear={tChk} />
         <Lbl x={MX} y={198} t={`≈ ${Math.round(FS.speed)} m/s from the SW`} c={C.ink} s={T.floor} o={win(f, tWind, tUV - 10)} />
       </Svg>
-      <TeX s={String.raw`u=${tn(FS.u)},\ v=${tn(FS.v)}\ \mathrm{m/s}\ (\text{east, north})`} x={MX} y={200} size={46} o={fin(f, tUV)} />
-      <TeX s={String.raw`\cos${FS.alpha}^\circ\approx${tn(FS.cos, 3)},\ \sin${FS.alpha}^\circ\approx${tn(FS.sin, 3)}`} x={MX} y={262} size={44} c={C.second} o={fin(f, tAlF)} />
+      <TeX s={String.raw`u=${tn(FS.u)},\ v=${tn(FS.v)}\ \mathrm{m/s}\ (\text{east, north})`} x={MX} y={200} size={46} o={fin(f, tUV)} glow={pulse(f, AT(k, 2, "twenty two point two"), 30) + pulse(f, AT(k, 2, "twenty four point three"), 30)} />
+      <TeX s={String.raw`\cos${FS.alpha}^\circ\approx${tn(FS.cos, 3)},\ \sin${FS.alpha}^\circ\approx${tn(FS.sin, 3)}`} x={MX} y={262} size={44} c={C.second} o={fin(f, tAlF)} glow={pulse(f, AT(k, 3, "minus zero point five one five"), 30) + pulse(f, AT(k, 3, "zero point eight five seven"), 30)} />
       {/* K6 look (k6y1): the substituted rows ran past 1842 with an lhs column: formula, numbers and result on three rows each */}
       <CalcStack f={f} x={MX} y={330} size={44} maxLines={3} o={fout(f, tChk - 10)} rows={[
         { rhs: String.raw`\text{along}=u\cos\alpha+v\sin\alpha`, at: tAlF, c: ALONG_C },
-        { rhs: String.raw`=${tn(FS.u)}\times${tn(FS.cos, 3, true)}+${tn(FS.v)}\times${tn(FS.sin, 3)}`, at: AT(k, 3, "twenty two"), cont: true },
-        { rhs: String.raw`\approx${tn(FS.al_terms[0])}+${tn(FS.al_terms[1])}\approx${tn(FS.along)}\ \mathrm{m/s}`, at: tAlR, cont: true },
+        { rhs: String.raw`=${tn(FS.u)}\times${tn(FS.cos, 3, true)}+${tn(FS.v)}\times${tn(FS.sin, 3)}`, at: AT(k, 3, "we multiply"), cont: true },
+        { rhs: String.raw`\text{along}\approx${tn(FS.al_terms[0])}+${tn(FS.al_terms[1])}\approx${tn(FS.along)}\ \mathrm{m/s}`, at: tAlR, cont: true },
       ]} />
       <CalcStack f={f} x={MX} y={530} size={44} maxLines={3} o={fout(f, tChk - 10)} rows={[
         { rhs: String.raw`\text{across}=-u\sin\alpha+v\cos\alpha`, at: tAcF, c: C.neg },
-        { rhs: String.raw`=-${tn(FS.u)}\times${tn(FS.sin, 3)}+${tn(FS.v)}\times${tn(FS.cos, 3, true)}`, at: AT(k, 5, "minus twenty two"), cont: true },
-        { rhs: String.raw`\approx${tn(FS.ac_terms[0])}${tn(FS.ac_terms[1])}\approx${tn(FS.across)}\ \mathrm{m/s}`, at: tAcR, cont: true },
+        { rhs: String.raw`=-${tn(FS.u)}\times${tn(FS.sin, 3)}+${tn(FS.v)}\times${tn(FS.cos, 3, true)}`, at: AT(k, 5, "now u goes"), cont: true },
+        { rhs: String.raw`\text{across}\approx${tn(FS.ac_terms[0])}${tn(FS.ac_terms[1])}\approx${tn(FS.across)}\ \mathrm{m/s}`, at: tAcR, cont: true, glow: pulse(f, AT(k, 6, "minus thirty one point five"), 30) },
       ]} />
-      <CalcStack f={f} x={MX} y={350} size={46} maxLines={2} o={fin(f, tChk)} rows={[
-        { rhs: String.raw`\sqrt{${tn(FS.along)}^2+${tn(Math.abs(FS.across))}^2}=\sqrt{${FS.sq}}`, at: tChk + 10 },
-        { rhs: String.raw`\approx${FS.root.toFixed(1)}\approx${Math.round(FS.speed)}\ \mathrm{m/s}`, at: AT(k, 9, "square root"), cont: true },
+      <CalcStack f={f} x={MX} y={350} size={46} maxLines={3} o={fin(f, tChk)} rows={[
+        { rhs: String.raw`\text{speed}=\sqrt{\text{along}^2+\text{across}^2}`, at: tChk + 10 },
+        { rhs: String.raw`=\sqrt{${tn(FS.along)}^2+${tn(Math.abs(FS.across))}^2}=\sqrt{${FS.sq}}`, at: tChk + 24, cont: true },
+        { rhs: String.raw`\text{speed}\approx${FS.root.toFixed(1)}\approx${Math.round(FS.speed)}\ \mathrm{m/s}`, at: AT(k, 9, "square root"), cont: true },
       ]} />
       <SourceBelow text={SRC.hrrr20} pic={B} w={1400} name="s28 src" />
       <Svg><SpeedBar x={MX} y={790} w={300} hi={50} /></Svg>
@@ -287,7 +288,7 @@ const S29: React.FC = () => {
         <line x1={A0[0]} y1={A0[1]} x2={B0[0]} y2={B0[1]} stroke={C.second} strokeWidth={6} opacity={fin(f, tCoast) * zoom} />
         <Place p={sp} t="Saint Petersburg" dx={18} dy={-40} />
         <Place p={fm} t="Fort Myers Beach" dx={-20} dy={-44} a="end" o={fin(f, tBoth + 30)} />
-        <g opacity={fin(f, tCoast) * zoom}>
+        <g opacity={fin(f, tCoast) * zoom * fout(f, tSum - 12)}>{/* r8 K6 k6z1: the coast-leg names leave before the across label arrives */}
           <Lbl x={A0[0] - 20} y={A0[1] + 46} t="Saint Pete Beach" c={C.key} s={T.floor} a="end" />
           <Lbl x={B0[0] - 20} y={B0[1] - 10} t="Tarpon Springs" c={C.key} s={T.floor} a="end" />
         </g>
@@ -314,18 +315,19 @@ const S29: React.FC = () => {
         <Lbl x={MX} y={230} t="Fort Myers Beach: onto the land" c={C.neg} s={T.floor} o={fin(f, AT(k, 9, "Fort Myers Beach"))} />
         <Lbl x={MX} y={300} t="Saint Petersburg: out to sea" c={C.first} s={T.floor} o={fin(f, AT(k, 9, "at Saint Petersburg"))} />
       </Svg>
-      <CalcStack f={f} x={MX} y={230} size={44} maxLines={4} o={fout(f, tWind - 10)} rows={[
+      <CalcStack f={f} x={MX} y={230} size={44} maxLines={5} o={fout(f, tWind - 10)} rows={[
         { rhs: String.raw`\text{north}\ ${SP.dy.toFixed(1)}\ \mathrm{km},\quad \text{west}\ ${(-SP.dx).toFixed(1)}\ \mathrm{km}`, at: AT(k, 1, "kilometres north") },
-        { rhs: String.raw`\dfrac{${(-SP.dx).toFixed(1)}}{${SP.dy.toFixed(1)}}\approx${SP.tan.toFixed(3)}\ \Rightarrow\ ${SP.beta}^\circ,\ \text{bearing}\approx${SP.bearing}^\circ`, at: tTan },
-        { rhs: String.raw`\alpha=90^\circ-${SP.bearing}^\circ+360^\circ=${SP.alpha}^\circ`, at: tAl },
-        { rhs: String.raw`\cos\alpha\approx${tn(SP.cos, 3)},\quad \sin\alpha\approx${tn(SP.sin, 3)}`, at: AT(k, 3, "with a cosine") },
+        { rhs: String.raw`\tan\beta=\dfrac{${(-SP.dx).toFixed(1)}}{${SP.dy.toFixed(1)}}\approx${SP.tan.toFixed(3)}\ \Rightarrow\ \beta\approx${SP.beta}^\circ`, at: tTan },
+        { rhs: String.raw`\text{bearing}\approx${SP.bearing}^\circ`, at: AT(k, 2, "a bearing of about"), cont: true },
+        { rhs: String.raw`\alpha=90^\circ-${SP.bearing}^\circ+360^\circ=${SP.alpha}^\circ`, at: tAl, glow: pulse(f, AT(k, 3, "ninety seven"), 30) },
+        { rhs: String.raw`\cos\alpha\approx${tn(SP.cos, 3)},\quad \sin\alpha\approx${tn(SP.sin, 3)}`, at: AT(k, 3, "with a cosine"), glow: pulse(f, AT(k, 3, "with a cosine") + 10, 40) },
       ]} />
       <CalcStack f={f} x={MX} y={230} size={44} maxLines={4} o={fin(f, tWind) * fout(f, tBoth - 10)} rows={[
-        { rhs: String.raw`u=${tn(SP.u)},\ v=${tn(SP.v)}\ \mathrm{m/s}\ \ (\alpha=${SP.alpha}^\circ)`, at: tWind + 20 },
+        { rhs: String.raw`u=${tn(SP.u)},\ v=${tn(SP.v)}\ \mathrm{m/s}\ \ (\alpha=${SP.alpha}^\circ)`, at: tWind + 20, glow: pulse(f, AT(k, 4, "minus ten point two"), 40) },
         { rhs: String.raw`\text{across}=-u\sin\alpha+v\cos\alpha`, at: tAc },
         { rhs: String.raw`-u\sin\alpha=-${tn(SP.u, 1, true)}\times${tn(SP.sin, 3)}\approx${tn(SP.ac_terms[0])}`, at: AT(k, 5, "minus u sine alpha") + 10 },
         { rhs: String.raw`v\cos\alpha=${tn(SP.v, 1, true)}\times${tn(SP.cos, 3, true)}\approx${tn(SP.ac_terms[1])}`, at: AT(k, 5, "and v cosine"), cont: true },
-        { rhs: String.raw`\approx${tn(SP.ac_terms[0])}+${tn(SP.ac_terms[1])}\approx+${tn(SP.across)}\ \mathrm{m/s}`, at: tSum },
+        { rhs: String.raw`\text{across}\approx${tn(SP.ac_terms[0])}+${tn(SP.ac_terms[1])}\approx+${tn(SP.across)}\ \mathrm{m/s}`, at: tSum, glow: pulse(f, AT(k, 6, "plus twelve point one"), 30) },
         { rhs: String.raw`\text{along}\approx${tn(SP.al_terms[0])}${tn(SP.al_terms[1])}=${tn(SP.along)}\ \mathrm{m/s}`, at: tAlong },
       ]} />
       <SourceBelow text={SRC.hrrr20} pic={{ x: 80, y: 50, w: 920, h: 750 }} w={1400} name="s29 src" />
@@ -394,8 +396,8 @@ const S30: React.FC = () => {
         <Lbl x={MX} y={400} t={`Ian at landfall (19:05 UTC): ${SH.ian_ib.hpa} hPa`} c={C.local} s={T.floor} o={win(f, AT(k, 6, "its centre"), tQ - 10)} />
         <Keyword f={f} text="what did the water do?" at={[MX, 120]} s={T.key} c={C.gold} appear={tQ} />
       </Svg>
-      <TeX s={String.raw`\dfrac{100\ \mathrm{Pa}}{1025\ \mathrm{kg/m^3}\times9.81\ \mathrm{m/s^2}}\approx0.01\ \mathrm m`} x={MX} y={225} size={44} c={C.local} o={win(f, AT(k, 5, "for every hectopascal"), tQ - 10)} />
-      <TeX s={String.raw`1013-${SH.ian_ib.hpa}=${SH.ian_ib.deficit}\ \mathrm{hPa}\ \Rightarrow\ \approx${SH.ian_ib.cm_rule}\ \mathrm{cm}`} x={MX} y={480} size={50} c={C.local} o={win(f, AT(k, 6, "so the sea"), tQ - 10)} />
+      <TeX s={String.raw`\dfrac{100\ \mathrm{Pa}}{1025\ \mathrm{kg/m^3}\times9.81\ \mathrm{m/s^2}}\approx0.01\ \mathrm m`} x={MX} y={225} size={44} c={C.local} o={win(f, AT(k, 5, "for every hectopascal"), tQ - 10)} glow={pulse(f, AT(k, 5, "one centimetre"), 30)} />
+      <TeX s={String.raw`1013-${SH.ian_ib.hpa}=${SH.ian_ib.deficit}\ \mathrm{hPa}\ \Rightarrow\ \text{rise}\approx${SH.ian_ib.cm_rule}\ \mathrm{cm}`} x={MX} y={480} size={44} c={C.local} o={win(f, AT(k, 6, "so the sea"), tQ - 10)} glow={pulse(f, AT(k, 6, "seventy two centimetres"), 30)} />
       <SourceBelow text="Sea floor: NOAA ETOPO 2022 · Ian's pressure: IBTrACS v04r01 (NHC best track)" pic={{ x: 120, y: 80, w: 840, h: 690 }} w={1400} o={oShelf} name="s30 src" />
       <SourceBelow text="Coast: Natural Earth" pic={LB} w={700} o={fin(f, tQ)} name="s30 src 2" />
     </Scene>
@@ -544,23 +546,24 @@ const EventWind: React.FC<{ cfg: EvCfg }> = ({ cfg }) => {
         <Lbl x={MX} y={200} t={`ERA5 ≈ ${cfg.ratio} of official wind`} c={C.muted} s={T.floor} o={win(f, tRatio, tLegs - 10)} />
         <Lbl x={MX} y={200} t={cfg.place} c={C.key} s={T.floor} o={win(f, tLegs, tAl - 10)} />
         <Lbl x={MX} y={200} t={`$\\hat{\\mathbf y}'$ points out to sea`} c={C.second} s={T.floor} o={win(f, tY, tWind - 10)} />
-        <Lbl x={MX} y={625} t="white circle: ERA5's storm centre" c={C.ink} s={T.floor} o={win(f, tERA, tP - 14)} />
+        <Lbl x={MX} y={690} t="white circle: ERA5's storm centre" c={C.ink} s={T.floor} o={win(f, tERA, tP - 14)} />
         <Lbl x={MX} y={625} t={`official lowest pressure: ${E.ib.hpa} hPa`} c={C.local} s={T.floor} o={fin(f, tP)} />
       </Svg>
-      <CalcStack f={f} x={MX} y={300} size={44} maxLines={4} o={fout(f, tWind - 10)} rows={[
+      <CalcStack f={f} x={MX} y={300} size={44} maxLines={5} o={fout(f, tWind - 10)} rows={[
         { rhs: String.raw`\text{${ew}}\ ${Math.abs(S.dx).toFixed(1)}\ \mathrm{km},\quad \text{${ns}}\ ${Math.abs(S.dy).toFixed(1)}\ \mathrm{km}`, at: tLegs + 20 },
-        { rhs: String.raw`\dfrac{${Math.min(Math.abs(S.dx), Math.abs(S.dy)).toFixed(1)}}{${Math.max(Math.abs(S.dx), Math.abs(S.dy)).toFixed(1)}}\approx${S.tan.toFixed(3)}\ \Rightarrow\ ${S.beta}^\circ,\ \text{bearing}\approx${S.bearing}^\circ`, at: tTan },
-        { rhs: String.raw`\alpha=90^\circ-${S.bearing}^\circ+360^\circ=${S.alpha}^\circ`, at: tAl },
-        { rhs: String.raw`\cos\alpha\approx${tn(S.cos, 3)},\quad \sin\alpha\approx${tn(S.sin, 3)}`, at: AT(k, (sc_idx(k, tAl)), "with a cosine") },
+        { rhs: String.raw`\tan\beta=\dfrac{${Math.min(Math.abs(S.dx), Math.abs(S.dy)).toFixed(1)}}{${Math.max(Math.abs(S.dx), Math.abs(S.dy)).toFixed(1)}}\approx${S.tan.toFixed(3)}\ \Rightarrow\ \beta\approx${S.beta}^\circ`, at: tTan },
+        { rhs: String.raw`\text{bearing}\approx${S.bearing}^\circ`, at: SSP(k, "Measured clockwise"), cont: true },
+        { rhs: String.raw`\alpha=90^\circ-${S.bearing}^\circ+360^\circ=${S.alpha}^\circ`, at: tAl, glow: pulse(f, AT(k, sc_idx(k, tAl), "is about"), 30) },
+        { rhs: String.raw`\cos\alpha\approx${tn(S.cos, 3)},\quad \sin\alpha\approx${tn(S.sin, 3)}`, at: AT(k, (sc_idx(k, tAl)), "with a cosine"), glow: pulse(f, AT(k, sc_idx(k, tAl), "with a cosine") + 10, 40) },
       ]} />
       <CalcStack f={f} x={1076} y={300} size={44} maxLines={4} o={fin(f, tWind)} rows={[
-        { rhs: String.raw`u=${tn(S.u)},\ v=${tn(S.v)}\ \mathrm{m/s}\ \ (\alpha=${S.alpha}^\circ)`, at: tWind + 30 },
+        { rhs: String.raw`u=${tn(S.u)},\ v=${tn(S.v)}\ \mathrm{m/s}\ \ (\alpha=${S.alpha}^\circ)`, at: tWind + 30, glow: pulse(f, AT(k, sc_idx(k, tWind), "u about"), 40) },
         { rhs: String.raw`\text{across}=-u\sin\alpha+v\cos\alpha`, at: tTerms },
         { rhs: String.raw`-u\sin\alpha=-${tn(S.u, 1, true)}\times${tn(S.sin, 3, true)}\approx${tn(S.ac_terms[0])}`, at: tTerms + 10 },
         { rhs: String.raw`v\cos\alpha=${tn(S.v)}\times${tn(S.cos, 3, true)}\approx${tn(S.ac_terms[1])}`, at: AT(k, sc_idx(k, tTerms), "and v cosine"), cont: true },
-        { rhs: String.raw`\approx${tn(S.ac_terms[0])}${tn(S.ac_terms[1])}\approx${tn(S.across)}\ \mathrm{m/s}`, at: tSum },
+        { rhs: String.raw`\text{across}\approx${tn(S.ac_terms[0])}${tn(S.ac_terms[1])}\approx${tn(S.across)}\ \mathrm{m/s}`, at: tSum, glow: pulse(f, AT(k, sc_idx(k, tSum), "about minus"), 30) },
       ]} />
-      <TeX s={String.raw`1013-${E.ib.hpa}=${E.ib.deficit}\ \mathrm{hPa}\ \Rightarrow\ \approx${E.ib.cm_rule}\ \mathrm{cm}`} x={MX} y={690} size={46} c={C.local} o={fin(f, AT(k, sc_idx(k, tP), "so the sea"))} />
+      <TeX s={String.raw`1013-${E.ib.hpa}=${E.ib.deficit}\ \mathrm{hPa}\ \Rightarrow\ \text{rise}\approx${E.ib.cm_rule}\ \mathrm{cm}`} x={MX} y={690} size={44} c={C.local} o={fin(f, AT(k, sc_idx(k, tP), "so the sea"))} />
       <SourceBelow text={`Data: ERA5 (Copernicus C3S) · ${cfg.date} · Natural Earth`} x={80} pic={B} w={1000} name={`${cfg.id} src`} />
       <Svg><SpeedBar x={MX} y={800} w={300} hi={30} o={fout(f, tEnd2 + 200)} /></Svg>
     </Scene>
