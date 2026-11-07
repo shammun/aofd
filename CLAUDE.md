@@ -38,6 +38,13 @@ release fluidpy, or publish anything until the user has answered. After the answ
 (`setup.poc`, `knowledge/*_patterns.md` PoC records, PLANNING §15), apply the requested fixes through the owning
 agents, set `setup.s11_poc` to `approved` and remove `setup.awaiting_user`.
 
+## Knowledge base on G: (never lose context)
+After a compaction or in a new session, read `G:/Geophysical Fluid Dynamics/aofd-data/context_kb/README.md` →
+`STATE.md` → `CHANGELOG.md`; playbooks in `context_kb/howto/`; full transcripts in `context_kb/transcripts/`.
+After every major event (render/QA/review done, user decision, new rule, new method) update `context_kb/STATE.md`
+(and a `howto/` playbook when a new method was used), then run `.venv/Scripts/python.exe tools/kb_sync.py --drive --log "<what>"`.
+(A PreCompact hook running the same sync is proposed; it needs the user to add it.) Keep the repo lean: only rules and necessary files here.
+
 ## When the user says "update" (or asks where things stand)
 Run `.venv/Scripts/python.exe tools/update_report.py` (facts since the last update: commits, every file added /
 changed / deleted grouped by folder in both repos, uncommitted files, push state, disk on C:/G:). Then reply with:
