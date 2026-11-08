@@ -364,3 +364,38 @@ rebuilds the bundle from the current sources.
 
 ### Disk (1b)
 After (disk_guard --report): C: 110.6 GB, G: 419.1 GB free (project data 166.73 GB of 250). No before reading was taken (screen-only edit, nothing written to disk beyond the frame list).
+
+## Fix loop 1c (orchestrator 2026-11-08: the scenes left OPEN in 1b)
+Same rule (every data picture: event name + date, and what it shows). Screen-only: no re-voice, no timing change, nothing rendered, committed or deleted.
+RENDER2.lock held throughout, so no stills (the queued K6 checks them). No picture was shrunk: every one of these scenes already has a free row at
+y ≈ 50 above its keyword row (y 120), beside the picture, so the heading sits there (44 px, ink, level with the picture's top). In the globe scenes
+it sits on the right dark panel/top fade (x 1210), clear of the unzoomed disc (x 191-929). A darkened top band over the picture was not needed.
+
+### Headings added (x, appear)
+| Scene | Heading | Where / when |
+|---|---|---|
+| s15_cylinder, s16_three_parts (GOES picture under the 3-D cylinder) | "Ian from space · 28 Sep 2022" | MX + 20 = 1120, whole scene |
+| s17_ian_check (radar, then the HRRR map) | "Hurricane Ian · 28 Sep 2022" | MX 1100, whole scene |
+| s18_ian_stack, s19_ian_layers_lit (HRRR level stack) | "Hurricane Ian · 28 Sep 2022" | 1210 (dark right panel), whole scene |
+| s21_amphan_intro (globe tour, track) | "Cyclone Amphan · May 2020" | 1210, from t18 − 10 (after the keyword "storm 2: Cyclone Amphan" has gone) |
+| s22_amphan_eye (MODIS picture) | "Amphan from space · 18 May 2020" | MX 1100, whole scene |
+| s27_coast_angle (flat km coast map, no data) | "Ian's coast · flat map in km" | MX 1100, whole scene |
+| s32_flood_flight (3-D flight, sea depth, track) | "Cyclone Amphan · May 2020" | 1210, whole scene |
+| s34_amphan_radar (clouds, Sentinel-1 pair) | "Amphan's flood · May 2020" | MX + 40, whole scene |
+| s35_nargis_intro (globe, delta, MODIS) | "Cyclone Nargis · May 2008" | 1210, from tRiver − 10 (the keyword of the same text says it first) |
+| s37_nargis_swipe | "Nargis · Apr and May 2008" | MX + 40, whole scene |
+| s38_idai_intro (globe, track, picture) | "Cyclone Idai · March 2019" | 1210, from tCw − 10 (after the keyword "Cyclone Idai · March 2019") |
+| s40_idai_swipe | "Idai · 11 and 25 Mar 2019" | MX + 40, whole scene |
+| s41 beat 11 (three flood thumbnails) | no change: each thumbnail is already named ("Amphan · radar" …) and the keyword "floods from space" is the title | — |
+
+What each picture shows is carried by the keyword row under the heading, the colour-bar title or the source line. The 44-px heading has room for about 27-32
+characters (x 1100/1210 to 1840), so it holds the event and date plus a short "what" where it fits ("from space", "flood", "flat map in km").
+
+### Static gates (after 1c)
+tsc 0 · at_check 703 refs, 307 anchors on word times, char share 0, 0 failures · swap_check 587 text elements, 0 text-over-text, 0 swaps < 8 frames ·
+eq_check 19/19 · movie_symbol_lint --strict 0 (17 lint-ok).
+
+### Queued K6 frame list
+`build1/k6f1b_frames.txt` extended from 4487 to **7332 frames**: every 1 s, sentence starts + 15 / + 30, and every earlier k6f1 frame inside s15-s19, s21,
+s22, s27, s32, s34, s35, s37, s38, s40 and s41. The 1b list is backed up as the session scratchpad `fix1b/k6f1b_frames_after1b.txt`; the script is `fix1b/k6f1c_union.py`.
+Disk after: C: 110.6 GB, G: 419.1 GB free (project data 166.74 GB of 250).

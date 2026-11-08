@@ -92,6 +92,7 @@ const S21: React.FC = () => {
       }} />
       <GlobeFrame id="s21k" bottomAt={790} zoom={zoom} right={zoom} disc={{ c: G_PP0, r: G_DISC_R }} />
       <Svg>
+        <Lbl x={1210} y={50} t="Cyclone Amphan · May 2020" c={C.ink} s={T.floor} o={fin(f, t18 - 10)} />{/* fix 1c (user 2026-11-08): event + what heading, top of the right column */}
         <Keyword f={f} text="storm 2: Cyclone Amphan" at={[1210, 120]} s={T.floor} appear={0} out={t18 - 20} />
         <Lbl x={1210} y={210} t="cyclone = tropical cyclone" c={C.key} s={T.floor} o={win(f, tRem, t18 - 20)} />
         <Lbl x={1210} y={280} t="May 2020" c={C.key} s={T.floor} o={win(f, tMay, t18 - 20)} />
@@ -141,6 +142,7 @@ const S22: React.FC = () => {
             <line x1={e[0] - 110} y1={e[1]} x2={e[0] - 110} y2={e[1] - 230} /><line x1={e[0] + 110} y1={e[1]} x2={e[0] + 110} y2={e[1] - 230} />
           </g>)}
         </g>
+        <Lbl x={MX} y={50} t="Amphan from space · 18 May 2020" c={C.ink} s={T.floor} />{/* fix 1c (user 2026-11-08): event + what heading, top of the right column */}
         <Keyword f={f} text="18 May · two days before landfall" at={[MX, 120]} s={T.floor} appear={0} out={tEye - 20} />
         <SideCallout f={f} lines="pinhole eye" at={[MX, 300]} appear={tEye} target={[e[0] + 16, e[1]]} c={C.gold} />
         {/* Part 1 lessons B1: the zoom says what it magnifies (the frame's true width from the crop box, ÷ the zoom) */}
@@ -479,6 +481,7 @@ const S29: React.FC = () => {
         </g>} />
       <GlobeFrame id="s29k" bottomAt={790} zoom={zoom} right={zoom} disc={{ c: G_PP0, r: G_DISC_R }} />
       <Svg>
+        <Lbl x={1210} y={50} t="Cyclone Amphan · May 2020" c={C.ink} s={T.floor} />{/* fix 1c (user 2026-11-08): event + what heading, top of the right column */}
         <Keyword f={f} text="floods seen from space" at={[1210, 120]} s={T.key} appear={0} out={tBlue - 20} />
         <Keyword f={f} text="sea depth" at={[1210, 120]} s={T.key} appear={tBlue} out={tShelf - 20} />
         <g opacity={fin(f, tBlue)}>
@@ -648,6 +651,7 @@ const S30: React.FC = () => {
         </g>
       </SwipeFrame>
       <Svg>
+        <Lbl x={MX + 40} y={50} t="Amphan's flood · May 2020" c={C.ink} s={T.floor} />{/* fix 1c (user 2026-11-08): event + what heading, top of the right column */}
         <Keyword f={f} text="Amphan's flood from space?" at={[MX + 40, 120]} s={T.floor} appear={0} out={tCloud - 20} />
         <Keyword f={f} text="clouds for days" at={[MX + 40, 120]} s={T.key} appear={tCloud} out={tSmall - 20} />
         <Keyword f={f} text="small patches, 250-m pixels" at={[MX + 40, 120]} s={T.floor} appear={tSmall} out={tRadar - 20} />
@@ -762,6 +766,7 @@ const S31: React.FC = () => {
         <g data-lc-maplabel="1"><Lbl x={P(17.0, 95.3)[0]} y={P(17.0, 95.3)[1]} t="Irrawaddy delta" c={C.key} s={T.floor} a="middle" o={win(f, tPic + 20, tZoom + 10)} /></g>
       </>} />
       <Svg>
+        <Lbl x={1210} y={50} t="Cyclone Nargis · May 2008" c={C.ink} s={T.floor} o={fin(f, tRiver - 10)} />{/* fix 1c (user 2026-11-08): event + what heading, top of the right column */}
         <Keyword f={f} text="Cyclone Nargis · May 2008" at={[1210, 120]} s={T.floor} appear={AT(k, 0, "Cyclone Nargis") - 6} out={tRiver - 20} />{/* notes 2 C2: on its words */}
         <Keyword f={f} text="Irrawaddy (Ayeyarwady)" at={[1210, 120]} s={T.floor} appear={tRiver} out={tForm - 20} />
         <Lbl x={1210} y={210} t="many channels to the sea" c={C.key} s={T.floor} o={win(f, AT(k, 2, "fans out"), tForm - 20)} />
@@ -837,6 +842,7 @@ const S32: React.FC = () => {
         <Lbl x={PB.x + PB.w - hw} y={hy - 36} t={`after · ${NAR.AFTER}`} c={C.key} s={T.floor} o={fin(f, tR) * clamp(2 * oSplit - 1, 0, 1)} />
       </Svg>
       <Svg>
+        <Lbl x={MX + 40} y={50} t="Nargis · Apr and May 2008" c={C.ink} s={T.floor} />{/* fix 1c (user 2026-11-08): event + what heading, top of the right column */}
         <Keyword f={f} text="natural colour" at={[MX + 40, 120]} s={T.key} appear={0} out={tLook - 20} />
         <Lbl x={MX + 40} y={210} t="as our eyes would see it" c={C.key} s={T.floor} o={win(f, 10, tLook - 20)} />
         <Lbl x={MX + 40} y={290} t="landfall: 2 May 2008" c={C.key} s={T.floor} o={win(f, tL, tLook - 20)} />
@@ -926,6 +932,7 @@ const S33: React.FC = () => {
       <SwipeFrame f={f} PB={PBi} box={crop} sx={1} pairs={[["cst_idai_tc_before.jpg", "cst_idai_tc_after.jpg"]]} tags={["", ""]} places={ID.places as Place3[]}
         labelSide={{ Beira: [-16, -34, "end"], Buzi: [-16, 36, "end"], Dondo: [16, -30, "start"] }} km={25} oLine={0} o={oEndFlat} />
       <Svg>
+        <Lbl x={1210} y={50} t="Cyclone Idai · March 2019" c={C.ink} s={T.floor} o={fin(f, tCw - 10)} />{/* fix 1c (user 2026-11-08): event + what heading, top of the right column */}
         <Keyword f={f} text="south of the equator" at={[1210, 120]} s={T.key} appear={0} out={tYear - 20} />
         <Keyword f={f} text="Cyclone Idai · March 2019" at={[1210, 120]} s={T.floor} appear={tYear} out={tCw - 20} />
         <Lbl x={1210} y={210} t="the Mozambique Channel" c={C.key} s={T.floor} o={win(f, tYear + 30, tCw - 20)} />
@@ -981,6 +988,7 @@ const S34: React.FC = () => {
         tags={["before · 11 Mar", "after · 25 Mar"]} places={ID.places as Place3[]}
         labelSide={{ Beira: [-16, -34, "end"], Buzi: [-16, 36, "end"], Dondo: [16, -30, "start"] }} km={25} oLine={fin(f, tG1 - 8, 8)} />
       <Svg>
+        <Lbl x={MX + 40} y={50} t="Idai · 11 and 25 Mar 2019" c={C.ink} s={T.floor} />{/* fix 1c (user 2026-11-08): event + what heading, top of the right column */}
         <Keyword f={f} text="natural colour" at={[MX + 40, 120]} s={T.key} appear={0} out={tAgain - 20} />
         <Lbl x={MX + 40} y={210} t="11 Mar: 3.5 days before landfall" c={C.key} s={T.floor} o={win(f, AT(k, 0, "on the eleventh"), tSame - 20)} />
         <Lbl x={MX + 40} y={270} t="25 Mar: about 10 days after" c={C.key} s={T.floor} o={win(f, AT(k, 0, "twenty fifth"), tSame - 20)} />

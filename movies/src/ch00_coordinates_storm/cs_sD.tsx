@@ -199,6 +199,7 @@ const S27: React.FC = () => {
           <Lbl x={add(fm, unitV(FS.alpha + 90), 170)[0] - 10} y={add(fm, unitV(FS.alpha + 90), 170)[1] + 40} t="$\hat{\mathbf y}'$" c={C.second} s={T.key} a="end" />
           <Lbl x={B.x + 40} y={B.y + B.h - 60} t="Gulf of Mexico" c="#8db5e2" s={T.floor} />
         </g>
+        <Lbl x={MX} y={50} t="Ian's coast · flat map in km" c={C.ink} s={T.floor} />{/* fix 1c (user 2026-11-08): event + what heading, top of the right column */}
         <Keyword f={f} text="which way does the coast run?" at={[MX, 120]} s={T.floor} appear={0} out={tP1 - 20} />
         <Keyword f={f} text="the maths angle $\alpha$" at={[MX, 120]} s={T.key} appear={tP1} out={tWhy - 20} />
         <Keyword f={f} text="$\hat{\mathbf y}'$ must point out to sea" at={[MX, 120]} s={T.key} c={C.gold} appear={tWhy} />

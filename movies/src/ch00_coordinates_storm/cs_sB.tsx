@@ -522,6 +522,7 @@ const S15: React.FC = () => {
       </HView3D>
       <Svg>
         <Lbl x={pr.p([0, 0, 7.6])[0] + 20} y={pr.p([0, 0, 7.6])[1]} t="$z$" c={C.second} s={T.key} o={oZ} />
+        <Lbl x={MX + 20} y={50} t="Ian from space · 28 Sep 2022" c={C.ink} s={T.floor} />{/* fix 1c (user 2026-11-08): event + what heading, top of the right column */}
         <Keyword f={f} text="a tall storm" at={[MX + 20, 120]} s={T.key} appear={0} out={tEw - 20} />
         <Lbl x={MX + 20} y={230} t="in near the sea" c={C.neg} s={T.floor} o={win(f, tIn, tIan - 20)} />
         <Lbl x={MX + 20} y={300} t="up in the eyewall" c={C.local} s={T.floor} o={win(f, AT(k, 3, "rises"), tIan - 20)} />
@@ -574,6 +575,7 @@ const S16: React.FC = () => {
       <TeX s={String.raw`u_\theta`} x={pr.p([CYL_R, 2.4, P0[2]])[0] + 12} y={pr.p([CYL_R, 2.4, P0[2]])[1]} size={52} c={C.first} o={oT(tUt)} halo haloW={0.07} />
       <TeX s="w" x={pr.p([CYL_R, 0, P0[2] + 2.0])[0] + 12} y={pr.p([CYL_R, 0, P0[2] + 2.0])[1]} size={52} c={C.local} o={oT(tW)} halo haloW={0.07} />
       <Svg>
+        <Lbl x={MX + 20} y={50} t="Ian from space · 28 Sep 2022" c={C.ink} s={T.floor} />{/* fix 1c (user 2026-11-08): event + what heading, top of the right column */}
         <Keyword f={f} text="three parts" at={[MX + 20, 120]} s={T.key} appear={0} out={tZh - 20} />
         <Lbl x={MX + 20} y={210} t="in or out · round · up or down" c={C.key} s={T.floor} o={win(f, tW + 20, tZh - 20)} />
         {/* #5b r2 cosmetic: both s16 beats in the Keyword style (sans text, maths in $…$); the second was a serif orange TeX line */}
@@ -617,6 +619,7 @@ const S17: React.FC = () => {
         </>}
       </GeoMap>
       <Svg>
+        <Lbl x={MX} y={50} t="Hurricane Ian · 28 Sep 2022" c={C.ink} s={T.floor} />{/* fix 1c (user 2026-11-08): event + what heading, top of the right column */}
         <Keyword f={f} text="where was the eye?" at={[MX, 120]} s={T.key} appear={0} out={tRing - 20} />
         <ColourBar x={MX} y={250} w={420} lut={LUT_DBZ} lo={0} hi={60} unit="dBZ" title="radar echo strength" o={oR} ticks={[{ v: 0, t: "0" }, { v: 30, t: "30" }, { v: 60, t: "60" }]} />
         {/* #5b r2 S6: the unit dBZ said in plain words */}
@@ -749,6 +752,7 @@ const S18: React.FC = () => {
         {tags.map((t, i) => { const q = tagAt(i), y = tagY[i];
           return <g key={t} opacity={fin(f, tTag[i])}><Lbl x={1210} y={y} t={t} c={C.key} s={T.floor} />
             <line x1={1196} y1={y} x2={q[0] + 8} y2={q[1]} stroke={C.gold} strokeWidth={3} opacity={0.8} /></g>; })}
+        <Lbl x={1210} y={50} t="Hurricane Ian · 28 Sep 2022" c={C.ink} s={T.floor} />{/* fix 1c (user 2026-11-08): event + what heading, top of the right column */}
         <Keyword f={f} text="layer by layer" at={[1210, 120]} s={T.key} appear={0} out={tLev - 20} />
         <Keyword f={f} text="pressure levels" at={[1210, 120]} s={T.key} appear={tLev} out={tSq - 20} />
         <Keyword f={f} text="square ≈ 500 km" at={[1210, 120]} s={T.key} appear={tSq} out={tNo - 20} />
@@ -796,6 +800,7 @@ const S19: React.FC = () => {
       </HView3D>
       <GlobeFrame id="s19k" zoom={1} right={1} name="s19 stack" />
       <Svg>
+        <Lbl x={1210} y={50} t="Hurricane Ian · 28 Sep 2022" c={C.ink} s={T.floor} />{/* fix 1c (user 2026-11-08): event + what heading, top of the right column */}
         <Keyword f={f} text="read on the 100-km ring" at={[1210, 120]} s={T.floor} appear={0} out={tSo - 20} />
         {/* #5b r1 M7(b): the colour bar stays through the swing round and the close look */}
         {/* notes 2 M2: the layers run under the bar in the close side look: the bar steps out for it and comes back after */}
