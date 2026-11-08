@@ -56,3 +56,4 @@ Every calculation is shown in full on screen, but simple arithmetic is NOT read 
 Also: every number in an on-screen calculation is labelled with what it is (e.g. "cos 30° = 0.866, sin 30° = 0.5" written near the working) and every result carries its symbol ("x′ = 4.6"), so a viewer jumping to any frame understands it (user 2026-11-07).
 Also: inputs a viewer can't see at a glance (trig values like cos 30° ≈ 0.866, constants, data values, chosen angles) are said in the voice and highlighted on screen on their word; plain given numbers and routine results are not; the scene's answer is (user 2026-11-07).
 Balance: label a number only when its meaning isn't obvious from the frame; never clutter a frame with labels; drop the least-needed ones first (user 2026-11-07).
+Every data figure has a short title of what it shows and, for an event, its name and date — side-by-side panels each get their own event heading (user 2026-11-08).
