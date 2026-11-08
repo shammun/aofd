@@ -18,7 +18,7 @@ import {
   AT, Arrow, BREST, CalcStack, Chevron, D, D2R, Earth, GB, GFULL, H, K, KHULNA, KeepLine, Keyword, LEN, LYB, Layered, Lbl, PlaneIcon, SE, SING, SRC_G, SRC_BM, SS,
   Scene, SideCallout, SkipChip, Svg, TV3, TeX, VIOLET, XC, XZ, arcD, chipSpan, clamp, cutAt, discOf, e2g, eastAt, facePt, facing, faceArc, fin, fout, gdot, globeG,
   gseg, keepGone, keepTime, latFace, ll, merFace, merPath, mix, parPath, plab, poly, prog, splitVis, win, eqFace, Face, faceFlat, face3, spinPath,
-  RAD, Magnify, KeepPic,
+  RAD, Magnify, KeepPic, XF,
   Recall,
 } from "./cs_lib";
 import { CAM_TOP, DiscFlatBase, FItem, FLAT_C, FLAT_R, LON0, MerFlatBase, PHI, TOP_C, TOP_R, TwoView, camFace, merCut, ptOf } from "./cs_two";
@@ -256,8 +256,10 @@ const S16: React.FC = () => {
         extra3={(G) => disc3(G)} extraFlat={(P) => <line x1={P(-BU, BV)[0]} y1={P(-BU, BV)[1]} x2={P(BU, BV)[0]} y2={P(BU, BV)[1]} stroke={C.second} strokeWidth={4}
           strokeDasharray="12 8" opacity={fin(f, tDisc)} />} />
       <Svg>
-        <Keyword f={f} text="distance from" at={[KX3, 440]} appear={0} out={tDisc - 22} s={48} />
-        <Keyword f={f} text="the axis" at={[KX3, 500]} appear={0} out={tDisc - 22} s={48} />
+        {/* k6p2c f29790: s15's "south: z<0" (same spot, opaque until s15's sequence ends at XF) sat under these during the cross-fade;
+            they now enter 8 frames after the cross-fade ends (exit before entry, gap >= 8 frames) */}
+        <Keyword f={f} text="distance from" at={[KX3, 440]} appear={XF + 8} out={tDisc - 22} s={48} />
+        <Keyword f={f} text="the axis" at={[KX3, 500]} appear={XF + 8} out={tDisc - 22} s={48} />
         <Keyword f={f} text="= radius of" at={[KX3, 440]} appear={tDisc} s={48} />
         <Keyword f={f} text="Brest's parallel" at={[KX3, 500]} appear={tDisc} s={46} />
         <Lbl x={XC} y={660} t="next = long $\times\cos$" c={C.key} s={T.floor} o={win(f, tNext, tCos - 15)} />
@@ -266,7 +268,9 @@ const S16: React.FC = () => {
       {/* remake 2026-11-07 (R16, continuity plan §3): Part 2's cylindrical coordinates, round the Earth's axis, on the new S7; the rows leave first */}
       <Recall f={f} tex={String.raw`(r,\ \theta,\ z)`} name="cylindrical coordinates" verb="defined" part={2} x={XC} y={600} size={T.calc} appear={tCyl} />
       <CalcStack f={f} x={XC + 160} y={545} size={52} maxLines={2} o={fout(f, tCyl - 14)} rows={[   // K6 k6r1: y 600 put the fraction row into the caption band (y 920)
-        { lhs: String.raw`\cos48.4^\circ`, rhs: String.raw`\approx0.6639`, at: tCos, glow: pulse(f, AT(k, 2, "zero point six"), 30) },
+        // k6p2c f30682/3: the cos row faded while the stack slid up for the 4th row, into "the axis" keyword and the flat half-disc's edge
+        // (y 520); exit first: it is gone (out + 10) 2 frames before the slide starts at tEasy
+        { lhs: String.raw`\cos48.4^\circ`, rhs: String.raw`\approx0.6639`, at: tCos, glow: pulse(f, AT(k, 2, "zero point six"), 30), out: tEasy - 12 },
         { lhs: String.raw`a\cos\varphi`, rhs: String.raw`=6371\ \text{km}\times0.6639`, at: tRes - 30, glow: pulse(f, AT(k, 3, "six thousand three hundred") + 17, 30) },
         { lhs: "", rhs: String.raw`\approx4230\ \text{km}`, at: tRes, cont: true, glow: pulse(f, tRes, 30) },
         { lhs: "", rhs: String.raw`6400\times\dfrac23\approx4270`, at: tEasy, c: C.muted, out: tBoth - 15 },

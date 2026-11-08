@@ -264,3 +264,23 @@ the r7 mix (`build1/sound_r7/narration_music_cs.wav`, −16.01 LUFS / −3.32 dB
   `nohup bash movies/src/ch00_coordinates_sphere/checks/p2c_heavy.sh > "G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_sphere/build1/k6p2c_heavy_$(date +%Y%m%d_%H%M%S).log" 2>&1 &`
   Pass = `k6sum` "0 unique faults" over ≈ 6600 frames (4570 copied + 2055 re-shot); then look at f30625 / f31200 in `stills/k6p2c`.
 - Disk after: **C: 100.9 GB, G: 417.7 GB free**. No render, no commit, nothing deleted.
+
+## 2026-11-08 15:1x s16 fix 4 after k6p2c (source only; no SSR / K6 / render / TTS / mix; no lock taken)
+- k6p2c (orchestrator, `build1/k6p2c_heavy_20261108_144429.log`): 6624 frames, SSR 2-D/3-D 0 errors, **4 hits / 3 unique faults, all s16**; the
+  4230-km tag (fix 3) is clean. Read from the box files `stills/k6p2c/b29790.json`, `b30682.json`, `b30683.json`:
+  - f29790 text-text 153×37: s15's keyword "south: z<0" (opaque, KX3 1420, y 414–460, still drawn until s15's sequence ends XF = 10 frames into
+    s16) under s16's "distance from" (y 421–461, at 0.97, `appear={0}`) during the cross-fade.
+  - f30682 text-text 39×2 and f30683 text-fill 8×10: the CalcStack's first row "cos 48.4° ≈ 0.6639" (x 1058–≈1459) fades only while the stack
+    slides up for the 4th row (`tEasy`, 12 frames), so it rose to y 510–551, into "the axis" (x 1420–1594, y 481–521) and the flat half-disc's
+    lower edge (fill rgb 74,61,54, y ≤ 520).
+- **Fix 4** (`cs_sB.tsx` s16): "distance from" / "the axis" enter at `XF + 8` = 18 frames (8 frames after s15's keyword is gone: exit before
+  entry); the cos row gets `out: tEasy - 12` (fully gone 2 frames before the slide starts — exit first, as Part 1's `exitFirst`). The rows that
+  slide up end where the cos row sat before (y ≈ 556, 35 px under "the axis", 36 px under the half-disc). No narration, caption, timing change.
+- Static gates: **tsc 0 · at_check 512 / 0 · swap_check 327 elements, 0 overlaps, 0 swaps < 8 frames · cam_speed 0 > 90 °/s · symbol lint 0 ·
+  eq_check 24/24**.
+- Prepared, **not started**: `checks/p2d_heavy.sh` (tag **k6p2d**; same as p2c_heavy.sh: s16 −15 … +15 = 29766–31820, 2055 frames re-shot, every
+  other k6p2c still/box copied; waits for RENDER2, HEAVY, VOICE free and ≥ 9 GB RAM; HEAVY.lock mkdir + owner.txt; port 8200; never renders,
+  commits or deletes). Start (repo root, Git Bash):
+  `nohup bash movies/src/ch00_coordinates_sphere/checks/p2d_heavy.sh > "G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_sphere/build1/k6p2d_heavy_$(date +%Y%m%d_%H%M%S).log" 2>&1 &`
+  Pass = "0 unique faults" over 6624 frames; then look at f29790, f30682 (and the cos row's last frames before tEasy) in `stills/k6p2d`.
+- Disk: **C: 100.1 GB, G: 415.2 GB free** (before = after; GiB as disk_guard). No render, no commit, nothing deleted.
