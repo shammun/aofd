@@ -399,3 +399,45 @@ eq_check 19/19 · movie_symbol_lint --strict 0 (17 lint-ok).
 `build1/k6f1b_frames.txt` extended from 4487 to **7332 frames**: every 1 s, sentence starts + 15 / + 30, and every earlier k6f1 frame inside s15-s19, s21,
 s22, s27, s32, s34, s35, s37, s38, s40 and s41. The 1b list is backed up as the session scratchpad `fix1b/k6f1b_frames_after1b.txt`; the script is `fix1b/k6f1c_union.py`.
 Disk after: C: 110.6 GB, G: 419.1 GB free (project data 166.74 GB of 250).
+
+## Fix loop 2 (after "ch00_coordinates_storm — fix1 review (2026-11-08)": 1 Must, 6 Should, 6 Nit)
+Screen-only (TSX in cs_sB / cs_sC / cs_sD): no re-voice, no timing change, nothing rendered, committed or deleted. HEAVY.lock was held by Part 1's
+fix-3 K6 (k6z4) the whole time, so no SSR / stills here; the heavy pass is queued (below).
+
+### Changed
+| item | scene | change |
+|---|---|---|
+| Must 1 | s14 | ONE stack (x MX+40, y 432, 44 px, maxLines 3) keeps the f v rows on screen: line 1 "f v = 2Ω sin φ · v", "Ω = 7.29×10⁻⁵ s⁻¹: Earth's spin rate", "φ = 26.5°: Ian's latitude"; line 2 on "twenty six and a half degrees north" (+15 / +30 frames) "f v = 2 × 7.29×10⁻⁵ × sin 26.5° × 34.8", "≈ 0.0023 m/s² (outward)"; line 3 on "It's about twenty times weaker", BELOW them: "0.048 (turning) / 0.0023 (Earth's spin) ≈ 21" (21 on "twenty times weaker"); line 4 on "a little stronger": pressure push ≈ 0.048 + 0.0023 ≈ 0.050 m/s² (only then does line 1, the used inputs, slide out). The old second stack drawn in place of the first is gone. Bottom of lines 1-3 ≈ y 850 (fraction row at 2.4 × 44) |
+| S1 | s18, s19 | the radial-wind bar names its quantity ("radial wind" over the bar); s18 bar y 196 → 236 so the name clears the 54-px keyword row |
+| S1 | s25 | bar titled "radial wind"; heading over the two Ian minis "Ian · 28 Sep 2022 · radial wind" (x 150, y 120) |
+| S2 | s21 | "Satkhira" below-right of its own dot (offset 12, 50), east of the track, on the Bangladesh side; Kolkata unchanged beside its dot |
+| S3 | s22, s33/s36/s39, s34 | keywords no longer repeat the heading: "two days before landfall"; "the hour: 09 UTC" / "11 UTC" / "19 UTC"; "seen from space?" |
+| S3 | s35 | heading "Before Nargis · 21 Apr 2008" over the 21-Apr delta picture (tRiver+14 → tForm−20) and again at the end of the zoom (from tZoom+48, the picture cross-fades to the before image at tZoom+10…85); "Cyclone Nargis · May 2008" in between (tForm → tZoom+30); 8-frame gaps |
+| S4 | s33, s36, s39 | gold β arc (r 80) at the coast segment's end on the LONGER leg (the E-W leg in all three: Amphan 92.9, Nargis 69.5, Idai 52.3 km), between that leg and the coast, as in s27; "β" (54 px) on the bisector (Idai 34°) or just outside the wedge for thin angles (Amphan 13°, Nargis 9°); from the tan row (" over ") to ŷ′, the label on "<n> degrees" |
+| S5 | s36 (rule for all events) | "across …" label moves up when its box would reach ERA5's white circle: bottom 30 px above the circle (Nargis: y 345 → ≈ 304; Amphan / Idai unchanged) |
+| S6 | s09 | every rate row carries its symbol: "dθ/dt = 34.8 m/s / 25 000 m ≈ 0.00139 rad/s", "dθ/dt ≈ 0.00139 × 57.3 ≈ 0.08°/s", "dθ/dt ≈ 0.08 × 60 ≈ 4.8 ≈ 5°/min"; r, v, 1 rad and lap as left sides so every row aligns at = / ≈ |
+| Nit 1 | s37, s40 | the glide back from the middle stop to the right edge before the false-colour sweep 68 → 100 frames (3.3 s for half a width: slower than the sweep's own pace); s37 still starts at tSame, s40 at the same frame as before (middle hold unchanged) |
+| Nit 2 | s20 | a contour label within 50 × 38 px of one of the three marked dots fades out when the dot appears (the −16 dot covered the "4" of "40") |
+| Nit 3 | s24 | "Amphan: ≈ +6 m/s near the top" (and "Amphan: ≈ −… m/s, 100 km, ≈ 0.2 km up") |
+| Nit 4 | s41 | "10-m wind across the shore near landfall" (title and source line) |
+| Nit 5 | s18, s19 | the frame's gradient edge fades are dithered by the browser and read as a faint box (x ≈ 1865, y ≈ 765): s18 GlobeFrame zoom 0 + a local bottom fade of 35 flat bands (BandFade 760-830, solid below; stack_frame: s18 reaches y 876 in its close phase); s19 the same band fade always, the frame's fades only round the close look (win tLook−20 … tLook+140) |
+| Nit 6 | s26 | IanMap `avoid` box: background wind arrows with base, middle or tip within 10 px of the "Fort Myers Beach" label are not drawn |
+
+### Static gates (after fix loop 2)
+tsc 0 errors · at_check 703 refs, 307 AT/ATP anchors on word times, character share 0, 0 failures · swap_check 588 text elements, 0 text-over-text,
+0 swaps < 8 frames · cam_speed 0 cameras above 90 °/s (peak 43 °/s s21) · eq_check 19/19, no unused constants · movie_symbol_lint --strict 0 findings
+(17 lint-ok) · stack_frame all phases ok · script_wording_lint 0 · captions unchanged (en.vtt / en.srt / timing.json / script.md untouched: 910 cues as
+in fix1, QA-passed).
+
+### Queued K6 (not run here)
+- Frame list `build1/k6f2_frames.txt` (`checks/fix2_frames.py k6f2`): **8320 frames** = the whole house list 6160 + 2160 in the 18 changed scenes
+  (every 1 s; every sentence start +15 / +30 / +60; +15 / +45 after every spoken number / operation word).
+- `checks/fix2_heavy.sh k6f2`, started detached 2026-11-08 06:31:55 EST, log `G:/…/ch00_coordinates_storm/fix2_k6f2.log`: checks
+  `G:/…/ch00_coordinates_storm/CANCEL_FIX2` first and on every wait; waits for "released" in Part 1's `ch00_coordinates_flat/fix31108/heavy_run.log`
+  AND RENDER2.lock / HEAVY.lock / VOICE.lock free AND RAM ≥ 12 GB; then takes HEAVY.lock, SSR --step 10 and --3d, the frame list, all stills fresh
+  into ONE new folder `build1/stills/k6f2` (fresh bundle, --jobs 2; stops if the folder is not empty), k6_overlap + summary
+  (`stills/k6f2_overlap.json`, `k6f2_sum.txt`).
+
+### Render (after K6 k6f2 = 0 hits; not run)
+`K6TAG=k6f2 bash movies/src/ch00_coordinates_storm/checks/cst_render.sh` (bundle = the k6f2 bundle; sound = `build1/sound/narration_music_cst.wav`, the
+fix1 mix, unchanged since timing did not change), then `movie_qa.py` as in fix1.

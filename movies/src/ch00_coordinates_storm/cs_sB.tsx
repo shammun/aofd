@@ -153,13 +153,14 @@ const S09: React.FC = () => {
       <CalcStack f={f} x={MX + 20} y={230} size={50} maxLines={3} o={fin(f, tNum)} rows={[
         // K6 round 1: ran to x 2024: r and v on two lines
         // fix loop 1 (review 1 S8, review 2 S6): each input on its word, gold (was at the sentence start with a faint glow)
-        { rhs: String.raw`r=25\ \mathrm{km}=${goldAt(f, AT(k, 17, "twenty five thousand"), String.raw`25\,000\ \mathrm m`)}`, at: AT(k, 17, "twenty five thousand") - 8, size: 46 },
-        { rhs: String.raw`v=${goldAt(f, AT(k, 17, "thirty four point eight"), String.raw`34.8\ \mathrm{m/s}`)}\ (\approx35)`, at: AT(k, 17, "thirty four point eight") - 8, size: 46, cont: true },
-        { rhs: String.raw`\dfrac{34.8\ \mathrm{m/s}}{25\,000\ \mathrm{m}}${tailIn(f, tRad, C.ink, String.raw`\approx0.00139\ \mathrm{rad/s}`)}`, at: AT(k, 17, "divided by") },
-        { rhs: String.raw`1\ \mathrm{rad}=\dfrac{180^\circ}{\pi}\approx${goldAt(f, t573, String.raw`57.3^\circ`)}`, at: AT(k, 19, "One radian") },   // fix loop 1 (review 2 S8): said, gold on its word
-        { rhs: String.raw`0.00139\times57.3\approx0.08^\circ/\mathrm{s}`, at: AT(k, 19, "zero point zero eight") },
-        { rhs: String.raw`0.08\times60\approx4.8\approx5^\circ/\mathrm{min}`, at: AT(k, 19, "five degrees") },
-        { rhs: String.raw`\text{lap}=\dfrac{2\pi}{0.00139}=\dfrac{6.283}{0.00139}`, at: AT(k, 20, "divided by") },
+        // fix loop 2 (fix1 review S6): every rate row carries its symbol dθ/dt (r, v and 1 rad as left sides too: all rows align at = / ≈)
+        { lhs: "r", rhs: String.raw`=25\ \mathrm{km}=${goldAt(f, AT(k, 17, "twenty five thousand"), String.raw`25\,000\ \mathrm m`)}`, at: AT(k, 17, "twenty five thousand") - 8, size: 46 },
+        { lhs: "v", rhs: String.raw`=${goldAt(f, AT(k, 17, "thirty four point eight"), String.raw`34.8\ \mathrm{m/s}`)}\ (\approx35)`, at: AT(k, 17, "thirty four point eight") - 8, size: 46, cont: true },
+        { lhs: String.raw`d\theta/dt`, rhs: String.raw`=\dfrac{34.8\ \mathrm{m/s}}{25\,000\ \mathrm{m}}${tailIn(f, tRad, C.ink, String.raw`\approx0.00139\ \mathrm{rad/s}`)}`, at: AT(k, 17, "divided by") },
+        { lhs: String.raw`1\ \mathrm{rad}`, rhs: String.raw`=\dfrac{180^\circ}{\pi}\approx${goldAt(f, t573, String.raw`57.3^\circ`)}`, at: AT(k, 19, "One radian") },   // fix loop 1 (review 2 S8): said, gold on its word
+        { lhs: String.raw`d\theta/dt`, rhs: String.raw`\approx0.00139\times57.3\approx0.08^\circ/\mathrm{s}`, at: AT(k, 19, "zero point zero eight") },
+        { lhs: String.raw`d\theta/dt`, rhs: String.raw`\approx0.08\times60\approx4.8\approx5^\circ/\mathrm{min}`, at: AT(k, 19, "five degrees") },
+        { lhs: String.raw`\text{lap}`, rhs: String.raw`=\dfrac{2\pi}{0.00139}=\dfrac{6.283}{0.00139}`, at: AT(k, 20, "divided by") },
         { rhs: String.raw`\approx4500\ \mathrm s,\qquad \dfrac{4500}{60}=75\ \mathrm{min}`, at: AT(k, 21, "four thousand") - 4 },
       ]} />
       <Svg><Lbl x={MX} y={720} t="metres cancel: rad/s left" c={C.local} s={T.floor} o={win(f, tCancel, tLap - 20)} /></Svg>
@@ -441,15 +442,17 @@ const S14: React.FC = () => {
       {/* #5b r2 S4: two stacks, one after the other: (A) the inputs Ω (unit) and φ (Ian's latitude) and the product, to "twenty times
           weaker"; (B) the ratio and the sum, which restate 0.048 and 0.0023 (one stack of eight rows ran past the content area) */}
       {/* fix loop 1: the rows in the order the voice says them (the formula on "the speed times", Ω on "spin rate", φ on its value, gold) */}
-      <CalcStack f={f} x={MX} y={440} size={44} maxLines={4} o={fout(f, tWeak - 20)} rows={[
-        { rhs: String.raw`f\,v=2\Omega\sin\varphi\cdot v`, at: tFv },
-        { rhs: String.raw`\Omega=${goldAt(f, tOm, String.raw`7.29\times10^{-5}`)}\,\mathrm{s^{-1}}\text{: Earth's spin rate}`, at: tOm, cont: true, c: C.local },
-        { rhs: String.raw`\varphi=${goldAt(f, tPhi, `${nf(D.ian_c[0], 1)}^\\circ`)}\text{: Ian's latitude}`, at: tPhi, cont: true, c: C.local },
-        { rhs: String.raw`=2\times7.29\times10^{-5}\times\sin${nf(D.ian_c[0], 1)}^\circ\times${nf(RING.v, 1)}`, at: tPhi + 30, cont: true },
-        { rhs: String.raw`\approx${nf(RING.f * RING.v, 4)}\ \mathrm{m/s^2}\ \text{(out)}`, at: tPhi + 50, cont: true },
-      ]} />
-      <CalcStack f={f} x={MX} y={440} size={44} maxLines={4} o={fout(f, tM1 - 10)} rows={[
-        { rhs: String.raw`\dfrac{${nf(RING.acc, 3)}\ \text{(turning)}}{${nf(RING.f * RING.v, 4)}}${tailIn(f, t20, C.ink, String.raw`\approx${Math.round(RING.fratio)}`)}`, at: tWeak },
+      {/* fix loop 2 (fix1 review Must 1): ONE stack that keeps the f v rows on screen. Line 1 = the formula and its inputs (Ω, φ);
+          line 2 = the product with every number written, on "twenty six and a half degrees north", and its result with its symbol;
+          line 3 = the ratio on "twenty times weaker", both parts named, BELOW the rows (not in place of them); line 4 = the sum on
+          "a little stronger" (only then does line 1, the inputs already used, slide out: maxLines 3) */}
+      <CalcStack f={f} x={MX + 40} y={432} size={44} maxLines={3} o={fout(f, tM1 - 10)} rows={[
+        { lhs: String.raw`f\,v`, rhs: String.raw`=2\Omega\sin\varphi\cdot v`, at: tFv },
+        { lhs: String.raw`\Omega`, rhs: String.raw`=${goldAt(f, tOm, String.raw`7.29\times10^{-5}`)}\,\mathrm{s^{-1}}\text{: Earth's spin rate}`, at: tOm, cont: true, c: C.local },
+        { lhs: String.raw`\varphi`, rhs: String.raw`=${goldAt(f, tPhi, `${nf(D.ian_c[0], 1)}^\circ`)}\text{: Ian's latitude}`, at: tPhi, cont: true, c: C.local },
+        { lhs: String.raw`f\,v`, rhs: String.raw`=2\times7.29\times10^{-5}\times\sin${nf(D.ian_c[0], 1)}^\circ\times${nf(RING.v, 1)}`, at: tPhi + 15 },
+        { rhs: String.raw`\approx${nf(RING.f * RING.v, 4)}\ \mathrm{m/s^2}\ \text{(outward)}`, at: tPhi + 30, cont: true },
+        { rhs: String.raw`\dfrac{${nf(RING.acc, 3)}\ \text{(turning)}}{${nf(RING.f * RING.v, 4)}\ \text{(Earth's spin)}}${tailIn(f, t20, C.ink, String.raw`\approx${Math.round(RING.fratio)}`)}`, at: tWeak },
         { rhs: String.raw`\text{pressure push}\approx${nf(RING.acc, 3)}+${nf(RING.f * RING.v, 4)}`, at: tStr },
         { rhs: String.raw`\approx${(Number(nf(RING.acc, 3)) + Number(nf(RING.f * RING.v, 4))).toFixed(3)}\ \mathrm{m/s^2}`, at: tStr + 20, cont: true },
       ]} />
@@ -745,7 +748,11 @@ const S18: React.FC = () => {
       <HView3D st={st} x={0} y={0} w={1920} h={1080}>
         <StackBody f={f} lit={() => 0.92} ringO={0} dashO={1} />
       </HView3D>
-      <GlobeFrame id="s18k" zoom={1} right={1} name="s18 stack" />
+      {/* fix loop 2 (fix1 review Nit 5): the frame's gradient edge fades are dithered by the browser and read as a faint box edge (x ≈ 1865,
+          y ≈ 765) on the plain background. s18 needs only the bottom fade (checks/stack_frame.ts: x ≤ 1063, y up to 876 in the close phase):
+          that one as flat stepped bands (no dither), the frame without its gradient fades */}
+      <GlobeFrame id="s18k" zoom={0} right={1} name="s18 stack" />
+      <BandFade y0={760} y1={830} />
       <Svg>
         {/* notes 2 M1: the close camera clipped the end-anchored label above the tip ("nt"): now right of the tip, pinned ≥ 40 px inside the frame */}
         <g data-lc-maplabel="1"><Lbl x={Math.max(40, upTip[0] + 22)} y={Math.max(70, upTip[1] + 30)} t="height" c={C.second} s={T.floor} b={false} o={fin(f, tHt)} /></g>
@@ -758,7 +765,7 @@ const S18: React.FC = () => {
         <Keyword f={f} text="square ≈ 500 km" at={[1210, 120]} s={T.key} appear={tSq} out={tNo - 20} />
         <Keyword f={f} text="975 hPa: under the sea" at={[1210, 120]} s={T.floor} c={C.local} appear={tNo} out={tRest - 20} />
         <Keyword f={f} text="five levels, five heights" at={[1210, 120]} s={T.floor} appear={tRest} out={tCol - 20} />
-        <URBar x={1210} y={196} w={420} title={false} o={fin(f, 6) * fout(f, LEN(k) + 20)} />
+        <URBar x={1210} y={236} w={420} o={fin(f, 6) * fout(f, LEN(k) + 20)} />{/* fix loop 2 (fix1 review S1): the bar names its quantity ("radial wind"), 40 px lower so the name clears the keyword row */}
         <Keyword f={f} text="rose −: in · blue +: out" at={[1210, 120]} s={T.floor} appear={tRose} out={tPale - 20} />
         <Keyword f={f} text="dark line: zero" at={[1210, 120]} s={T.floor} appear={tPale} out={tTall - 20} />
         <Keyword f={f} text="spread out evenly" at={[1210, 120]} s={T.key} appear={tTall} />
@@ -767,6 +774,14 @@ const S18: React.FC = () => {
     </Scene>
   );
 };
+
+/** fix loop 2 (fix1 review Nit 5): a bottom fade to the background as 35 flat bands (smoothstep alpha) + solid below, without a gradient fill
+ * (gradients are dithered: on the plain background their start line showed as a faint edge) */
+const BandFade: React.FC<{ y0: number; y1: number }> = ({ y0, y1 }) => (
+  <Svg>{Array.from({ length: 35 }, (_, i) => { const t = (i + 0.5) / 35, a = t * t * (3 - 2 * t);
+    return <rect key={i} x={0} y={y0 + (i * (y1 - y0)) / 35} width={1920} height={(y1 - y0) / 35 + 0.5} fill={C.bg} fillOpacity={a} shapeRendering="crispEdges" />; })}
+    <rect x={0} y={y1} width={1920} height={1080 - y1} fill={C.bg} /></Svg>
+);
 
 // ================================================================ s19 the layers lit, bottom to top; orbit; one close look
 const S19: React.FC = () => {
@@ -798,13 +813,15 @@ const S19: React.FC = () => {
         {/* notes 2 S1: the radar's up arrows wait for s20, where the radar is introduced (wO 0) */}
         <StackBody f={f} lit={lit} ringO={fin(f, 6)} dashO={1} path={prog(f, tSo, tSo + 60)} wO={0} />
       </HView3D>
-      <GlobeFrame id="s19k" zoom={1} right={1} name="s19 stack" />
+      {/* fix loop 2 (fix1 review Nit 5): the edge fades only round the close look (the one phase where the stack leaves x 40-1068 / y 40-800) */}
+      <GlobeFrame id="s19k" zoom={win(f, tLook - 20, tLook + 45 + 40 + 45 + 10, 20)} right={1} name="s19 stack" />
+      <BandFade y0={760} y1={830} />
       <Svg>
         <Lbl x={1210} y={50} t="Hurricane Ian · 28 Sep 2022" c={C.ink} s={T.floor} />{/* fix 1c (user 2026-11-08): event + what heading, top of the right column */}
         <Keyword f={f} text="read on the 100-km ring" at={[1210, 120]} s={T.floor} appear={0} out={tSo - 20} />
         {/* #5b r1 M7(b): the colour bar stays through the swing round and the close look */}
         {/* notes 2 M2: the layers run under the bar in the close side look: the bar steps out for it and comes back after */}
-        <URBar x={1210} y={250} w={400} title={false} o={1 - win(f, tLook + 10, tLook + 45 + 40 + 30, 12)} />
+        <URBar x={1210} y={250} w={400} o={1 - win(f, tLook + 10, tLook + 45 + 40 + 30, 12)} />{/* fix loop 2 (fix1 review S1): "radial wind" over the bar */}
         <g opacity={colO}>
           <SideCallout f={f} lines={`14 km: ≈ +${(Math.round(vr[4] * 2) / 2).toFixed(1)} m/s`} at={[1210, 440]} appear={tTop} target={ringR[4]} s={T.floor} c="#8db5e2" bend={20} />
           <SideCallout f={f} lines={`12 km: ≈ +${Math.round(vr[3])}`} at={[1210, 520]} appear={t6} target={ringR[3]} s={T.floor} c="#8db5e2" bend={20} />
@@ -917,7 +934,11 @@ const S20: React.FC = () => {
             // #5b r1 S14: dark text on a PALE halo (the dark halo read as smudges at 640 px)
             // fix loop 1 (review 2 Nit 7): a line label within 34 px of the gold inflow arrow (z 0.5 km, r 31-170 km) steps aside while it is drawn
             const nearIn = Math.abs(q[1] - P(100, 0.5)[1]) < 34 && q[0] > P(25, 0)[0] && q[0] < P(175, 0)[0];
-            const oL = fin(f, tLines + 10) * oH * clamp(inB / 8, 0, 1) * (nearIn ? 1 - win(f, tSide - 12, tRadar - 6) : 1);
+            // fix loop 2 (fix1 review Nit 2, r8 R2 N7): a line label under one of the three marked points (gold / white dots) steps aside when the
+            // dot appears (the −16 dot covered the "4" of a "40")
+            const dotHide = ([[mn, tMin16], [mxp, tTop9], [vtp, tVt55]] as [Pt, number][]).reduce((m, [d, t]) =>
+              (Math.abs(q[0] - d[0]) < 50 && Math.abs(q[1] - d[1]) < 38 ? m * fout(f, t - 8, 8) : m), 1);
+            const oL = fin(f, tLines + 10) * oH * clamp(inB / 8, 0, 1) * (nearIn ? 1 - win(f, tSide - 12, tRadar - 6) : 1) * dotHide;
             return oL <= 0 ? null : <text key={i} x={q[0]} y={q[1]} fill="#1a1a24" fontSize={T.floor} fontFamily={FONT} fontWeight={650} textAnchor="middle"
               dominantBaseline="central" stroke="#f1ece0" strokeWidth={0.2 * T.floor} strokeLinejoin="round" paintOrder="stroke" opacity={oL}>{`${L.level}`}</text>; })}
           <rect x={SB.x} y={SB.y} width={SB.w} height={SB.h} fill="none" stroke={C.grid} strokeWidth={3} />

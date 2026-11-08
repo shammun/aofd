@@ -63,8 +63,9 @@ const S21: React.FC = () => {
   const nTr = Math.max(2, Math.round(trackLL.length * grow));
   const ipk = TR.findIndex((q) => q[0].startsWith(AMP.peak.t.slice(0, 13)));
   const places: [string, number, number, number, Pt][] = [["India", 22.5, 79.5, tBay + 20, [0, 0]], ["Myanmar", 21.0, 95.5, tBay + 30, [0, 0]], ["Bangladesh", 24.2, 90.2, tBay + 40, [0, 0]],
-    // fix loop 1 (r8 review 1 S11): Satkhira (west) labelled below-left of its dot, Khulna (east) above-right, so neither name runs over the other's dot
-    ["Kolkata", AMP.places.Kolkata[0], AMP.places.Kolkata[1], tKol, [-20, -34]], ["Satkhira", AMP.places.Satkhira[0], AMP.places.Satkhira[1], tSat, [-20, 36]],
+    // fix loop 1 (r8 review 1 S11): Khulna (east) above-right of its dot. fix loop 2 (fix1 review S2): Satkhira's dot is EAST of the track (inside
+    // the dashed circle): its name below-right of its own dot, on the Bangladesh side (it sat west of the track, under Kolkata, crossed by the line)
+    ["Kolkata", AMP.places.Kolkata[0], AMP.places.Kolkata[1], tKol, [-20, -34]], ["Satkhira", AMP.places.Satkhira[0], AMP.places.Satkhira[1], tSat, [12, 50]],
     ["Khulna", AMP.places.Khulna[0], AMP.places.Khulna[1], tKhu, [20, -34]]];
   const near = cam.dist < 1.6;
   return (
@@ -143,7 +144,7 @@ const S22: React.FC = () => {
           </g>)}
         </g>
         <Lbl x={MX} y={50} t="Amphan from space · 18 May 2020" c={C.ink} s={T.floor} />{/* fix 1c (user 2026-11-08): event + what heading, top of the right column */}
-        <Keyword f={f} text="18 May · two days before landfall" at={[MX, 120]} s={T.floor} appear={0} out={tEye - 20} />
+        <Keyword f={f} text="two days before landfall" at={[MX, 120]} s={T.floor} appear={0} out={tEye - 20} />
         <SideCallout f={f} lines="pinhole eye" at={[MX, 300]} appear={tEye} target={[e[0] + 16, e[1]]} c={C.gold} />
         {/* Part 1 lessons B1: the zoom says what it magnifies (the frame's true width from the crop box, ÷ the zoom) */}
         <Lbl x={MX} y={420} t={String.raw`zoomed $${z.toFixed(1)}\times$: frame ≈ ${Math.round(((cr[3] - cr[2]) * 111.32 * Math.cos(((cr[0] + cr[1]) / 2) * D2R)) / z / 10) * 10} km wide`}
@@ -334,8 +335,8 @@ const S24: React.FC = () => {
         {box(PA, 0, ZA.r_first, 0, 16, oF)}
         <InUpOut f={f} P={PI} rIn={[30, 170]} rUp={40} zTop={15.5} o={fin(f, tBlur)} />
         <InUpOut f={f} P={PA} rIn={[60, 260]} rUp={70} zTop={15.0} o={fin(f, tBlur)} />
-        <Keyword f={f} text={`≈ ${nf(am.min[0], 0)} m/s, 100 km, ≈ 0.2 km up`} at={[700, 118]} s={T.floor} appear={tIn} out={tOut - 20} />
-        <Keyword f={f} text={`≈ +${Math.round(am.max[0])} m/s near the top`} at={[700, 118]} s={T.floor} appear={tOut} out={tLines - 20} />
+        <Keyword f={f} text={`Amphan: ≈ ${nf(am.min[0], 0)} m/s, 100 km, ≈ 0.2 km up`} at={[700, 118]} s={T.floor} appear={tIn} out={tOut - 20} />
+        <Keyword f={f} text={`Amphan: ≈ +${Math.round(am.max[0])} m/s near the top`} at={[700, 118]} s={T.floor} appear={tOut} out={tLines - 20} />
         <Keyword f={f} text="dark line: $u_r$ = 0 m/s · in | out border" at={[560, 118]} s={T.floor} appear={tLines} out={tPock - 20} />
         <Keyword f={f} text="it wraps weak pockets" at={[560, 118]} s={T.floor} c={C.gold} appear={tPock} out={tDiff - 20} />
         <Keyword f={f} text="pockets differ · big pattern the same" at={[560, 118]} s={T.floor} appear={tDiff} out={tNoData - 20} />
@@ -396,7 +397,9 @@ const S25: React.FC = () => {
         <Keyword f={f} text="1 · shape" at={[MX, 230]} s={T.key} appear={tShape} />
         <Keyword f={f} text="2 · physics" at={[MX, 330]} s={T.key} appear={tPhys} />
         <Keyword f={f} text="3 · meaning" at={[MX, 560]} s={T.key} appear={tMean} />
-        <URBar x={MX} y={680} w={360} title={false} />
+        <URBar x={MX} y={680} w={360} />{/* fix loop 2 (fix1 review S1): the bar names its quantity */}
+        {/* fix loop 2 (fix1 review S1): what the mini pictures show and which event (they are Ian's 925-hPa map and section) */}
+        <Lbl x={c1[0] - 130} y={120} t="Ian · 28 Sep 2022 · radial wind" c={C.ink} s={T.floor} />
       </Svg>
       <TeX s={EQ_S25} x={MX} y={440} size={64} o={fin(f, AT(k, 5, "minus v squared"))} />
       <SourceBelow text="Data: NOAA HRRR analysis · 28 Sep 2022, 18 UTC (mini pictures)" pic={{ x: 150, y: 170, w: 740, h: 450 }} w={740} name="s25 src" />
@@ -519,7 +522,9 @@ const SWIPE_LEN = 2.5 * 135 + 2 * 45;
  * pictures change colouring); the second sweep from t2 */
 // fix loop 1 (r8 review 1 S7, user rule: slow full sweeps): the glide from the middle back to the right edge takes BACK_LEN frames (half a
 // width at the sweep's own pace, ≈ 2.3 s; it was a 1.3-s jump) and ends before the second sweep, so every false-colour sweep starts at the right edge
-const BACK_LEN = 68;
+// fix loop 2 (fix1 review Nit 1): the glide back read as a quick 2-s jump before the false-colour sweep: 68 → 100 frames (3.3 s for half a width,
+// slower than the sweep's own pace); s37 still glides from tSame, s40 from the same frame as before (its middle hold is unchanged)
+const BACK_LEN = 100;
 const swipe2 = (f: number, t1: number, tBack: number, t2: number) => { const b = Math.min(tBack, t2 - BACK_LEN - 6);
   return f < b ? swipeX(f, t1) : f < t2 ? 0.5 + 0.5 * prog(f, b, b + BACK_LEN) : swipeX(f, t2); };
 type Place3 = [string, number, number];
@@ -652,7 +657,7 @@ const S30: React.FC = () => {
       </SwipeFrame>
       <Svg>
         <Lbl x={MX + 40} y={50} t="Amphan's flood · May 2020" c={C.ink} s={T.floor} />{/* fix 1c (user 2026-11-08): event + what heading, top of the right column */}
-        <Keyword f={f} text="Amphan's flood from space?" at={[MX + 40, 120]} s={T.floor} appear={0} out={tCloud - 20} />
+        <Keyword f={f} text="seen from space?" at={[MX + 40, 120]} s={T.floor} appear={0} out={tCloud - 20} />
         <Keyword f={f} text="clouds for days" at={[MX + 40, 120]} s={T.key} appear={tCloud} out={tSmall - 20} />
         <Keyword f={f} text="small patches, 250-m pixels" at={[MX + 40, 120]} s={T.floor} appear={tSmall} out={tRadar - 20} />
         <Keyword f={f} text="radar sees through clouds" at={[MX + 40, 120]} s={T.key} c={C.gold} appear={tRadar} out={tHere - 20} />
@@ -766,7 +771,11 @@ const S31: React.FC = () => {
         <g data-lc-maplabel="1"><Lbl x={P(17.0, 95.3)[0]} y={P(17.0, 95.3)[1]} t="Irrawaddy delta" c={C.key} s={T.floor} a="middle" o={win(f, tPic + 20, tZoom + 10)} /></g>
       </>} />
       <Svg>
-        <Lbl x={1210} y={50} t="Cyclone Nargis · May 2008" c={C.ink} s={T.floor} o={fin(f, tRiver - 10)} />{/* fix 1c (user 2026-11-08): event + what heading, top of the right column */}
+        {/* fix 1c (user 2026-11-08): event + what heading, top of the right column. fix loop 2 (fix1 review S3): over the 21 Apr 2008 picture
+            of the delta (S2-S3, and again at the end of the zoom) the heading names that date, before the storm */}
+        <Lbl x={1210} y={50} t="Before Nargis · 21 Apr 2008" c={C.ink} s={T.floor} o={win(f, tRiver + 14, tForm - 20)} />
+        <Lbl x={1210} y={50} t="Cyclone Nargis · May 2008" c={C.ink} s={T.floor} o={win(f, tForm, tZoom + 30)} />
+        <Lbl x={1210} y={50} t="Before Nargis · 21 Apr 2008" c={C.ink} s={T.floor} o={fin(f, tZoom + 48)} />
         <Keyword f={f} text="Cyclone Nargis · May 2008" at={[1210, 120]} s={T.floor} appear={AT(k, 0, "Cyclone Nargis") - 6} out={tRiver - 20} />{/* notes 2 C2: on its words */}
         <Keyword f={f} text="Irrawaddy (Ayeyarwady)" at={[1210, 120]} s={T.floor} appear={tRiver} out={tForm - 20} />
         <Lbl x={1210} y={210} t="many channels to the sea" c={C.key} s={T.floor} o={win(f, AT(k, 2, "fans out"), tForm - 20)} />
@@ -1074,7 +1083,7 @@ const S35: React.FC = () => {
               {/* fix loop 1 (r8 review 1 S4): under the storm's name, clear of the arrow and the brown land block ("m/s" sat on the block) */}
               <Lbl x={140} y={y + 70} t={`across ${nf(v, 1)} m/s`} c={C.neg} s={T.floor} /></g>; })}
           <Lbl x={915} y={170} t="land" c="#c9b48a" s={T.floor} a="middle" />
-          <Lbl x={140} y={110} t="10-m wind across the shore at landfall" c={C.ink} s={46} o={fin(f, t(10) + 10, 8)} />{/* fix 1b: in after the gauge heading has gone */}
+          <Lbl x={140} y={110} t="10-m wind across the shore near landfall" c={C.ink} s={46} o={fin(f, t(10) + 10, 8)} />{/* fix 1b: in after the gauge heading has gone */}
         </g>
         {/* user notes 2026-11-06 item 12: the three flood events, in the order the movie showed them */}
         <g opacity={beat(11)}>
@@ -1111,7 +1120,7 @@ const S35: React.FC = () => {
       {/* K6 round 1: the picture box now includes the colour bar's "− in / + out" (the credit sat on them) */}
       <SourceBelow text="Data: NOAA HRRR · ERA5 (Copernicus C3S)" pic={{ x: 120, y: 200, w: 840, h: 510 }} w={840} o={beat(6)} name="s31 src 1" />
       <SourceBelow text="Data: NOAA CO-OPS gauges · 27-29 Sep 2022" pic={{ x: 120, y: 250, w: 840, h: 480 }} w={840} o={beat(8) + beat(9)} name="s31 src 2" />
-      <SourceBelow text="Data: ERA5 (Copernicus C3S) · 10-m wind at landfall" pic={{ x: 120, y: 160, w: 840, h: 600 }} w={840} o={beat(10)} name="s41 src era5" />
+      <SourceBelow text="Data: ERA5 (Copernicus C3S) · 10-m wind near landfall" pic={{ x: 120, y: 160, w: 840, h: 600 }} w={840} o={beat(10)} name="s41 src era5" />
       <SourceBelow text="Data: ESA Copernicus Sentinel-1 · NASA MODIS via Google Earth Engine" pic={{ x: 110, y: 150, w: 840, h: 580 }} w={840} o={beat(11)} name="s35 src 3" />
     </Scene>
   );

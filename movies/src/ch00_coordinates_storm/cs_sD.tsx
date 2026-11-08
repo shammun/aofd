@@ -51,10 +51,14 @@ const ALONG_C = C.local;                                       // along: slate
 // ================================================================ s26 Part 1's turned axes, recalled and applied to the wind (B1)
 const CB = CST.box as number[];
 const coastMapB = (latC: number, lonC: number, dlat: number): MapBox => boxAt(latC, lonC, dlat, 80, 50, 920, 750);
-const IanMap: React.FC<{ P: (la: number, lo: number) => Pt; f: number; speed?: boolean; arrows?: number }> = ({ P, f, speed = true, arrows = 0.75 }) => <>
+/** fix loop 2 (fix1 review Nit 6): `avoid` = a label box [x0, y0, x1, y1]: a background wind arrow with its base, middle or tip in it (+ 10 px) is
+ * not drawn (an arrowhead touched "Fort Myers Beach" in s26) */
+const IanMap: React.FC<{ P: (la: number, lo: number) => Pt; f: number; speed?: boolean; arrows?: number; avoid?: number[] }> = ({ P, f, speed = true, arrows = 0.75, avoid }) => <>
   {speed ? <GeoImg P={P} href={IMG("cst_ian_speed_20.png")} box={CB} o={0.95} /> : null}
   <path d={linesPath(P, CST.coast)} fill="none" stroke={C.key} strokeWidth={2.5} />
   {arrows > 0 ? (CST.arrows as number[][]).map(([la, lo, u, v], i) => { const q = P(la, lo), s2 = 2.0;
+    const inA = (x: number, y: number) => !!avoid && x > avoid[0] - 10 && x < avoid[2] + 10 && y > avoid[1] - 10 && y < avoid[3] + 10;
+    if ([0, 0.5, 1].some((t) => inA(q[0] + u * s2 * t, q[1] - v * s2 * t))) return null;
     return <AnimatedWindArrow key={i} from={q} to={[q[0] + u * s2, q[1] - v * s2]} speed={Math.hypot(u, v)} f={f} c={C.ink} px={4} head={16} o={arrows} />; }) : null}
 </>;
 const S26: React.FC = () => {
@@ -75,7 +79,7 @@ const S26: React.FC = () => {
   const [x1, x2] = cutAt(EQ_S26, String.raw`,\qquad `), [w1, w2] = cutAt(EQ_S26W, String.raw`,\qquad `);
   return (
     <Scene>
-      <GeoMap id="s26m" B={B} o={oMap}>{(Pp) => <IanMap P={Pp} f={f} />}</GeoMap>
+      <GeoMap id="s26m" B={B} o={oMap}>{(Pp) => <IanMap P={Pp} f={f} avoid={[fm[0] - 58 - textW("Fort Myers Beach", T.floor), fm[1] - 44 - 28, fm[0] - 58, fm[1] - 44 + 28]} />}</GeoMap>
       <Svg o={oMap}>
         {/* fix loop 1 (r8 review 1 S3): 38 px further left, clear of the orange "along" arrow (it crossed the "h") */}
         <Place p={fm} t="Fort Myers Beach" dx={-58} dy={-44} a="end" />
@@ -539,19 +543,19 @@ type EvCfg = { id: string; nm: "amphan" | "nargis" | "idai"; latC: number; lonC:
   legW: string; betaW: string; brgW: string; alW: string; cosW: string; sinW: string; spW: string; uW: string; vW: string; sumW: string; eraW: string;
   offW: string; cmW: string; ratioW: string };
 const EV_CFG: EvCfg[] = [
-  { id: "s33_amphan_wind", nm: "amphan", latC: 21.75, lonC: 89.0, dlat: 3.0, date: "20 May 2020, 09 UTC", when: "Amphan · 20 May 2020 · 09 UTC", ratio: "6/10",
+  { id: "s33_amphan_wind", nm: "amphan", latC: 21.75, lonC: 89.0, dlat: 3.0, date: "20 May 2020, 09 UTC", when: "the hour: 09 UTC", ratio: "6/10",
     place: "Sundarbans shore, Bangladesh", ptName: "our point", ptSide: 1, sea: [20.6, 88.1, "Bay of Bengal"], aName: "", bName: "",
     legW: "ninety two point nine", betaW: "thirteen degrees", brgW: "two hundred and fifty seven", alW: "a hundred and ninety three",
     cosW: "minus zero point nine seven four", sinW: "minus zero point two two five", spW: "twenty two point six", uW: "minus eight point four",
     vW: "plus twenty one", sumW: "minus twenty two point four", eraW: "nine hundred and sixty five", offW: "nine hundred and sixty hectopascals",
     cmW: "fifty three centimetres", ratioW: "six tenths" },
-  { id: "s36_nargis_wind", nm: "nargis", latC: 16.05, lonC: 95.0, dlat: 3.0, date: "2 May 2008, 11 UTC", when: "Nargis · 2 May 2008 · 11 UTC", ratio: "half",
+  { id: "s36_nargis_wind", nm: "nargis", latC: 16.05, lonC: 95.0, dlat: 3.0, date: "2 May 2008, 11 UTC", when: "the hour: 11 UTC", ratio: "half",
     place: "delta coast, south of Bogale", ptName: "our point", ptSide: 1, sea: [15.0, 94.0, "Andaman Sea"], aName: "", bName: "",
     legW: "sixty nine point five", betaW: "nine degrees", brgW: "two hundred and seventy nine", alW: "a hundred and seventy one",
     cosW: "minus zero point nine eight eight", sinW: "zero point one five six", spW: "nineteen metres", uW: "plus nine point six",
     vW: "plus sixteen point five", sumW: "minus seventeen point eight", eraW: "nine hundred and eighty two", offW: "nine hundred and sixty two",
     cmW: "fifty one centimetres", ratioW: "about half" },
-  { id: "s39_idai_wind", nm: "idai", latC: -19.8, lonC: 35.3, dlat: 2.5, date: "14 Mar 2019, 19 UTC", when: "Idai · 14 Mar 2019 · 19 UTC", ratio: "2/3",
+  { id: "s39_idai_wind", nm: "idai", latC: -19.8, lonC: 35.3, dlat: 2.5, date: "14 Mar 2019, 19 UTC", when: "the hour: 19 UTC", ratio: "2/3",
     place: "Beira's seafront", ptName: "Beira", ptSide: -1, sea: [-20.7, 35.9, "Mozambique Channel"], aName: "", bName: "",
     legW: "fifty two point three", betaW: "thirty four degrees", brgW: "two hundred and thirty six", alW: "two hundred and fourteen",
     cosW: "minus zero point eight two nine", sinW: "minus zero point five five nine", spW: "twenty two metres", uW: "minus six point seven",
@@ -582,6 +586,16 @@ const EventWind: React.FC<{ cfg: EvCfg }> = ({ cfg }) => {
   // fix loop 1 (r8 review 1 S3): the across label clear of BOTH arrowheads (the white wind head touched it), left of the two tips when it fits
   const acTxt = `across ${nf(S.across, 1)}`, xL = Math.min(Pac[0], W[0]) - 40;
   const acLeft = xL - textW(acTxt, T.floor) > B.x + 12;   // k6y3: Idai's label left the map
+  // fix loop 2 (fix1 review S5): the label never sits on ERA5's white storm-centre circle (Nargis: it did, and the next sentence points at
+  // the circle): when its box would reach the circle, it moves up until its bottom is 30 px above the circle's top
+  const acX0 = acLeft ? xL - textW(acTxt, T.floor) : Math.max(Pac[0], W[0]) + 30, acY0 = Math.min(Pac[1], W[1]) + 10;
+  const onCen = cen[0] > acX0 - 30 && cen[0] < acX0 + textW(acTxt, T.floor) + 30 && Math.abs(cen[1] - acY0) < 16 + 30 + 26;
+  const acY = onCen ? Math.min(acY0, cen[1] - 16 - 30 - 26) : acY0;
+  // fix loop 2 (fix1 review S4): β drawn where it is: at the coast segment's end on the LONGER leg, between that leg and the coast
+  // (tan β = short / long, as in s27); the label outside the wedge when the angle is thin (Amphan 13°, Nargis 9°), on the bisector otherwise
+  const ang = (p0: Pt, q: Pt) => Math.atan2(-(q[1] - p0[1]), q[0] - p0[0]) / D2R;
+  const ewLong = Math.abs(S.dx) >= Math.abs(S.dy), bV = ewLong ? A0 : B0, bD1 = ang(bV, corner), bDd = ((ang(bV, ewLong ? B0 : A0) - bD1 + 540) % 360) - 180;
+  const bLab = add(bV, unitV(Math.abs(bDd) >= 25 ? bD1 + bDd / 2 : bD1 - Math.sign(bDd) * 22), 112);
   const ns = S.dy >= 0 ? "north" : "south", ew = S.dx >= 0 ? "east" : "west";
   const hit = (q: Pt) => q[0] > B.x + 10 && q[0] < B.x + B.w - 10 && q[1] > B.y + 10 && q[1] < B.y + B.h - 10;
   const sea = P(cfg.sea[0], cfg.sea[1]);
@@ -607,6 +621,10 @@ const EventWind: React.FC<{ cfg: EvCfg }> = ({ cfg }) => {
           <line x1={A0[0]} y1={A0[1]} x2={corner[0]} y2={corner[1]} stroke={C.ink} strokeWidth={4} strokeDasharray="12 8" />
           <line x1={corner[0]} y1={corner[1]} x2={B0[0]} y2={B0[1]} stroke={C.ink} strokeWidth={4} strokeDasharray="12 8" />
         </g>
+        <g opacity={fin(f, tRule) * fout(f, tY)}>
+          <path d={arcD(bV, 80, bD1, bD1 + bDd)} fill="none" stroke={C.gold} strokeWidth={6} />
+          <Lbl x={bLab[0]} y={bLab[1]} t="$\beta$" c={C.gold} s={T.key} a="middle" o={fin(f, tBeta)} />
+        </g>
         {/* fix loop 1 (r8 review 1 S3): the point's name level with the dot, on the side no arrow takes (the wind and across arrows crossed it) */}
         <Place p={pt} t={cfg.ptName} dx={34} dy={4} a="start" o={fin(f, tPt)} />
         <g opacity={fin(f, tY)}>
@@ -617,7 +635,7 @@ const EventWind: React.FC<{ cfg: EvCfg }> = ({ cfg }) => {
         <AnimatedWindArrow from={pt} to={W} speed={S.speed} f={f} c={C.ink} px={10} head={36} o={fin(f, tWind)} />
         <g opacity={fin(f, tSum)}>
           <AnimatedWindArrow from={pt} to={Pac} speed={Math.abs(S.across)} f={f} c={ACROSS_C(S.across)} px={12} head={34} />
-          <Lbl x={acLeft ? xL : Math.max(Pac[0], W[0]) + 30} y={acLeft ? Math.min(Pac[1], W[1]) + 10 : Math.min(Pac[1], W[1]) + 10} a={acLeft ? "end" : "start"} t={acTxt}
+          <Lbl x={acLeft ? xL : Math.max(Pac[0], W[0]) + 30} y={acY} a={acLeft ? "end" : "start"} t={acTxt}
             c={hiOn(f, tSumW) ? C.gold : ACROSS_C(S.across)} s={T.floor} o={fin(f, tSumW)} />
         </g>
         <Keyword f={f} text="which way did the wind blow?" at={[MX, 120]} s={T.floor} appear={0} out={tERA - 20} />
