@@ -13,4 +13,4 @@ echo "== symbol lint (Part 1 lessons C1/C2/C4, --strict)"; "$PY" tools/movie_sym
 echo "== eq_check";   "$PY" movies/src/ch00_coordinates_frames/checks/eq_check.py
 echo "== ssr";        (cd movies && node src/ch00_coordinates_frames/checks/ssr/run.mjs --step 10 --public "$S/public" 2>&1 | grep -v "THREE_CJS\|Replace \`const\|trace-deprecation" | tail -30)
 echo "== ssr --3d";   (cd movies && node src/ch00_coordinates_frames/checks/ssr/run.mjs --step 15 --3d --public "$S/public" 2>&1 | grep -v "THREE_CJS\|Replace \`const\|trace-deprecation" | tail -10)
-echo "== timing";     "$PY" movies/src/ch00_coordinates_frames/checks/make_timing.py
+echo "== timing: final (remake 2026-11-07: checks/final_timing.py --final <tts dir>; make_timing.py is the old provisional path)"

@@ -3,6 +3,7 @@
 // circle, how big the metric term is next to Coriolis, the recap and the series end card. Numbers from data/fr.json only.
 import React from "react";
 import { useCurrentFrame } from "remotion";
+import { ramp } from "../house";
 import { C, T } from "../house/kit/type";
 import { Bracket, Pt } from "../house/kit/draw";
 import { GlobeFrame, SourceBelow } from "../house/kit/frame";
@@ -10,9 +11,10 @@ import { Notebook } from "../house/kit/icons";
 import { CurvedLink } from "../house/kit/extras";
 import { GlobeCam, llPath } from "./kit_fr/globe";
 import {
-  AT, Arrow, BREST, CalcStack, D, D2R, GB, Globe, H, K, KHULNA, Keyword, LEN, Lbl, SS, Scene, SideCallout, SkipChip, Svg, TeX, Tripod, VIOLET, XC, add, clamp, discOf, fin,
+  AT, Arrow, BREST, CalcStack, HOLD, Place, Recall, sc, D, D2R, GB, Globe, H, K, KHULNA, Keyword, LEN, Lbl, SS, Scene, SideCallout, SkipChip, Svg, TeX, Tripod, VIOLET, XC, add, clamp, discOf, fin,
   fout, gdot, globeG, keepTime, ll, mix, pieces, poly, prog, sang, texW, textW, win, SliceV, TopV, ParcelDot, linesPath, mapP, boxAt, chipSpan,
   SE,
+  HL,
 } from "./fr_lib";
 import { AngleArc, GRID, GridBase, MiniTick, MiniTripod, SliceBase, TopViewBase, TRI, TurnPic, gridCell, logX, sliceArrows, topArrows } from "./fr_dia";
 import { EQ_S03, EQ_S20, EQ_S21, EQ_S22, EQ_S23, EQ_S24, EQ_S25, EQ_S26, EQ_S27, cutAt } from "./fr_eq";
@@ -68,7 +70,7 @@ const S20: React.FC = () => {
       <TeX s={String.raw`\hat{\mathbf k}\ \text{plays}\ \hat{\mathbf r},\quad \hat{\mathbf j}\ \text{plays}\ \hat{\boldsymbol\theta}`} x={XC} y={120} size={50} o={fin(f, tKr)} />
       <TeX s={String.raw`\dfrac{D\varphi}{Dt}=\dfrac{v}{a}`} x={XC} y={250} size={56} o={fin(f, tRate)} />
       <TeX s={eq[0]} x={XC} y={400} size={54} o={fin(f, tK)} />
-      <TeX s={eq[1]} x={XC} y={530} size={54} o={fin(f, tJ)} />
+      <TeX s={eq[1]} x={XC} y={545} size={54} o={fin(f, tJ)} />
       <TeX s={String.raw`\dfrac{111.2\ \text{km}}{6371\ \text{km}}\approx0.0175\ \text{rad}=1^\circ`} x={XC} y={790} size={46} o={fin(f, tChk)} />
       {void tJt}
     </Scene>
@@ -110,7 +112,7 @@ const S21: React.FC = () => {
       <TeX s={H.j} x={S_.J[0] - 16} y={S_.J[1] - 24} size={50} c={C.second} ax={1} halo />
       <Svg>
 
-        <Lbl x={XC + 360} y={490} t="sin / cos = tan" c={C.gold} s={T.floor} o={win(f, tTan, tWords - 20)} />
+        <Lbl x={XC + 360} y={490} t="$\sin/\cos=\tan$" c={C.gold} s={T.floor} o={win(f, tTan, tWords - 20)} />
         <Keyword f={f} text="up leans east · north leans west" at={[XC, 830]} s={T.floor} appear={tWords} />
       </Svg>
       {/* Part 1 lessons C1: the hats set in KaTeX (the sans keyword drew the combining hat beside the letter) */}
@@ -125,7 +127,7 @@ const S21: React.FC = () => {
       <TeX s={String.raw`\dfrac{D\hat{\mathbf j}}{Dt}=-\sin\varphi\ \hat{\mathbf i}\,\dfrac{u}{a\cos\varphi}`} x={XC} y={380} size={46} o={win(f, tDj, tWords - 20)} />
       <TeX s={String.raw`=-\hat{\mathbf i}\,\dfrac{u}{a}\tan\varphi`} x={XC + 60} y={490} size={46} o={win(f, tTan, tWords - 20)} />
       <TeX s={eq[0]} x={XC} y={610} size={50} o={fin(f, tWords)} />
-      <TeX s={eq[1]} x={XC} y={730} size={50} o={fin(f, tWords)} />
+      <TeX s={eq[1]} x={XC} y={745} size={50} o={fin(f, tWords)} />
     </Scene>
   );
 };
@@ -171,7 +173,7 @@ const S22: React.FC = () => {
         <Lbl x={XC} y={745} t="no earlier movie derived these" c={C.muted} s={T.floor} o={win(f, tNew, tSame - 20)} />
         <Keyword f={f} text="what to keep" at={[XC, 800]} appear={tKeep} c={C.gold} />
       </Svg>
-      {lines.map((s, i) => <TeX key={i} s={f >= tSR ? gold(s) : s} x={XC} y={140 + i * 105} size={46} o={fin(f, [tDi, tDj, tDk][i])} />)}
+      {lines.map((s, i) => <TeX key={i} s={f >= tSR ? gold(s) : s} x={XC} y={140 + i * 118} size={46} o={fin(f, [tDi, tDj, tDk][i])} />)}
       <TeX s={String.raw`\hat{\mathbf i}\cdot\dfrac{D\hat{\mathbf i}}{Dt}=0`} x={XC} y={480} size={44} o={fin(f, tChk + 30)} />
       <TeX s={String.raw`\hat{\mathbf j}\cdot\dfrac{D\hat{\mathbf j}}{Dt}=0`} x={XC + 300} y={480} size={44} o={fin(f, AT(k, 9, "the change of j hat"))} />
       <TeX s={String.raw`\hat{\mathbf k}\cdot\dfrac{D\hat{\mathbf k}}{Dt}=0`} x={XC} y={595} size={44} o={fin(f, AT(k, 9, "the change of k hat"))} />
@@ -208,7 +210,7 @@ const S23: React.FC = () => {
         <Keyword f={f} text="Newton's law" at={[XC, 110]} appear={tNewton} out={tF - 20} />
         <SkipChip f={f} k={k} to={keepTime("s25_dot_i_b")} />
         <Lbl x={XC} y={300} t="number and arrow both change" c={C.muted} s={T.floor} o={win(f, tBoth, tPR - 20)} />
-        <Lbl x={XC} y={285} t="Part 2: the product rule" c={C.muted} s={T.floor} o={fin(f, tPR)} />
+        <Lbl x={XC} y={285} t="derived in Part 2: product rule" c={C.gold} s={T.floor} o={fin(f, tPR)} />
         <Keyword f={f} text="six terms" at={[XC, 480]} s={T.floor} appear={tSix} out={tP1 - 20} />
         <Lbl x={XC} y={805} t="number changes" c={C.local} s={T.floor} o={fin(f, tCol)} />
         <Lbl x={XC + 380} y={805} t="arrow changes" c={C.second} s={T.floor} o={fin(f, tCol)} />
@@ -252,12 +254,13 @@ const S24: React.FC = () => {
       <TeX s={why2[0]} x={520} y={720} size={48} o={fin(f, t3b)} />
       <Svg>
         <Keyword f={f} text="the eastward part" at={[XC, 110]} appear={0} out={tAll - 20} />
-        <Lbl x={XC} y={200} t="along î: the dot product (Part 1)" c={C.muted} s={T.floor} o={win(f, tDot, tAll - 20)} />
+        {/* remake 2026-11-07 (R16): the component rule recalled with its equation */}
         <Lbl x={120} y={120} t="dot all six terms with î" c={C.gold} s={T.floor} o={fin(f, tAll)} />
       </Svg>
+      <Recall f={f} tex={String.raw`\text{part along }\hat{\mathbf i}=\mathbf A\cdot\hat{\mathbf i}`} name="components" part={1} x={XC} y={215} size={50} appear={tDot} out={tAll - 20} />
       <TeX s={pr[0]} x={XC} y={110} size={44} o={fin(f, tAll)} />
-      <TeX s={pr[1]} x={XC + 120} y={215} size={44} o={fin(f, tAll)} />
-      <TeX s={pr[2]} x={XC + 120} y={320} size={44} o={fin(f, tAll)} />
+      <TeX s={pr[1]} x={XC + 120} y={222} size={44} o={fin(f, tAll)} />
+      <TeX s={pr[2]} x={XC + 120} y={334} size={44} o={fin(f, tAll)} />
       <TeX s={String.raw`\text{(1)}\ \dfrac{Du}{Dt}\,\hat{\mathbf i}\cdot\hat{\mathbf i}=\dfrac{Du}{Dt}`} x={XC} y={440} size={48} o={fin(f, t1)} />
       <TeX s={String.raw`\text{(2)}\ u\,\dfrac{D\hat{\mathbf i}}{Dt}\cdot\hat{\mathbf i}=0`} x={XC} y={550} size={48} o={fin(f, t2)} />
       <TeX s={String.raw`\text{(3)}\ \dfrac{Dv}{Dt}\,\hat{\mathbf j}\cdot\hat{\mathbf i}=0`} x={XC} y={660} size={48} o={fin(f, t3)} />
@@ -294,7 +297,7 @@ const S25: React.FC = () => {
         </g>
         <g opacity={fin(f, tTurn)}>
           <Bracket p={[xb + 10, y0 + 70]} q={[xc, y0 + 70]} c={C.second} off={0} />
-          <Lbl x={(xb + xc) / 2} y={y0 + 120} t="metric terms" c={C.second} s={T.floor} a="middle" o={fin(f, tName)} />
+          <Lbl x={(xb + xc) / 2} y={y0 + 175} t="metric terms" c={C.second} s={T.floor} a="middle" o={fin(f, tName)} />
         </g>
         <Keyword f={f} text="what to keep" at={[XC, 820]} appear={tKeep} c={C.gold} />
       </Svg>
@@ -302,7 +305,7 @@ const S25: React.FC = () => {
       <TeX s={String.raw`=v\left(-\dfrac{u}{a}\tan\varphi\right)=-\dfrac{uv\tan\varphi}{a}`} x={XC + 60} y={245} size={50} o={win(f, t4c, tAdd - 20)} />
       <TeX s={String.raw`\text{(6)}\ w\,\dfrac{D\hat{\mathbf k}}{Dt}\cdot\hat{\mathbf i}=w\,\dfrac{u}{a}=+\dfrac{uw}{a}`} x={XC} y={370} size={50} o={win(f, t6, tAdd - 20)} />
       <TeX s={EQ_S25} x={x0} y={y0} size={S} o={fin(f, tAdd)} />
-      {full.map((s, i) => <TeX key={i} s={s} x={XC + (i ? 90 : 0)} y={520 + i * 90} size={44} c={i ? C.muted : C.key} o={fin(f, tSame + 12 * i) * fout(f, tKeep - 12)} />)}
+      {full.map((s, i) => <TeX key={i} s={s} x={XC + (i ? 90 : 0)} y={520 + i * 100} size={44} c={i ? C.muted : C.key} o={fin(f, tSame + 12 * i) * fout(f, tKeep - 12)} />)}
       {/* Part 1 lessons B4: the keep line's own picture (the arrows turn, so the same push-free wind's east number changes) */}
       <TurnPic o={fin(f, tKeep, 14)} wind />
       {void [t6c]}
@@ -342,7 +345,7 @@ const S26: React.FC = () => {
         <Keyword f={f} text="a thought experiment" at={[XC, 110]} appear={tTh} out={tZero - 20} />
         <Lbl x={XC} y={200} t="no spin, no friction, no push" c={C.muted} s={T.floor} o={win(f, tImg, tZero - 20)} />
         <Keyword f={f} text="u changes, nothing pushes" at={[XC, 500]} s={T.floor} appear={tChg} out={tStart - 20} />
-        <SideCallout f={f} lines="u: 10.0 → 11.5 m/s" at={[XC, 470]} appear={AT(k, 8, "eleven and a half")} out={out1} target={[q1[0] + 8, q1[1]]} s={T.floor} bend={40} />
+        <SideCallout f={f} lines="u: 10.0 → 11.5 m/s" at={[XC, 470]} appear={AT(k, 8, "eleven and a half")} out={out1} target={null} s={T.floor} />
         <SideCallout f={f} lines="v: 10.0 → 8.2 m/s" at={[XC, 550]} appear={AT(k, 8, "eight point two")} out={out1} target={null} s={T.floor} />
         <Lbl x={XC} y={470} t="start: 45° N, 10 east, 10 north" c={C.key} s={T.floor} o={win(f, tStart, AT(k, 8, "eleven and a half") - 20)} />
         <Lbl x={XC} y={640} t="speed: 14.1 m/s, the same" c={C.gold} s={T.floor} o={win(f, tSp, out1)} />
@@ -357,11 +360,12 @@ const S26: React.FC = () => {
       <CalcStack f={f} x={XC} y={110} size={44} maxLines={4} rows={[
         { lhs: "", rhs: String.raw`\dfrac{uv\tan\varphi}{a}=\dfrac{10\times10\times1}{6\,371\,000}`, at: tDay, h: 96, out: out1 },
         { lhs: "", rhs: String.raw`\approx1.57\times10^{-5}\ \text{m/s}^2`, at: tDay + 20, out: out1 },
-        { lhs: "", rhs: String.raw`\times86\,400\ \text{s}\approx1.4\ \text{m/s}`, at: tDay + 40, out: out1 },
+        { lhs: "", rhs: String.raw`\Delta u:\ \times86\,400\ \text{s}\approx1.4\ \text{m/s}`, at: tDay + 40, out: out1 },
         { lhs: "", rhs: String.raw`u\approx10+1.4=11.4`, at: AT(k, 8, "eleven and a half") - 10, out: out1 },
         { lhs: "", rhs: String.raw`\text{full great-circle path: }11.5`, at: AT(k, 8, "eleven and a half") + 15, out: out1, c: C.muted },
       ]} />
-      <TeX s={String.raw`\sqrt{11.5^2+8.2^2}\approx14.1=\sqrt{10^2+10^2}`} x={XC} y={740} size={44} o={win(f, tSp, out1)} />
+      <TeX s={String.raw`|\mathbf v|=\sqrt{11.5^2+8.2^2}\approx14.1`} x={XC} y={740} size={44} o={win(f, tSp, out1)} />
+      <TeX s={String.raw`\text{at the start: }\sqrt{10^2+10^2}\approx14.1`} x={XC} y={800} size={44} c={C.muted} o={win(f, tSp, out1)} />
       {void [e[1], tShare]}
     </Scene>
   );
@@ -389,7 +393,7 @@ const S27: React.FC = () => {
           <line x1={X(MT.mx)} y1={yM + 40} x2={X(MT.fv)} y2={yM + 40} stroke={C.gold} strokeWidth={5} />
           <line x1={X(MT.mx)} y1={yM + 28} x2={X(MT.mx)} y2={yM + 52} stroke={C.gold} strokeWidth={5} />
           <line x1={X(MT.fv)} y1={yM + 28} x2={X(MT.fv)} y2={yM + 52} stroke={C.gold} strokeWidth={5} />
-          <Lbl x={(X(MT.mx) + X(MT.fv)) / 2} y={yM + 80} t="≈ 66 ×" c={C.gold} s={T.key} a="middle" />
+          <Lbl x={(X(MT.mx) + X(MT.fv)) / 2} y={yM + 80} t="$\approx 66\,\times$" c={C.gold} s={T.key} a="middle" />
         </g>
         <Lbl x={X(mx) + 20} y={yM} t="near the poles" c={C.key} s={T.floor} o={fin(f, tPole + 60)} />
         <Lbl x={140} y={720} t="log scale · m/s²" c={C.muted} s={T.floor} />
@@ -397,19 +401,23 @@ const S27: React.FC = () => {
       {[-6, -5, -4, -3, -2].map((p) => <TeX key={p} s={`10^{${p}}`} x={X(10 ** p)} y={620} size={52} c={C.muted} ax={0.5} />)}
       <Svg>
         <Keyword f={f} text="how big are they?" at={[XC, 110]} appear={0} out={tNum - 20} />
-        <Lbl x={XC} y={200} t="10 east, 10 north, at 45°: tan = 1" c={C.muted} s={T.floor} o={win(f, tSame, tNum - 20)} />
+        <Lbl x={XC} y={200} t="10 east, 10 north, at 45°: $\tan=1$" c={C.muted} s={T.floor} o={win(f, tSame, tNum - 20)} />
         <Keyword f={f} text="small in one weather system" at={[XC, 765]} s={T.floor} appear={tSmall} out={tPole - 20} />
         <Keyword f={f} text="climate models keep them" at={[XC, 765]} s={T.floor} appear={AT(k, 9, "so weather and climate")} out={tLater - 20} />
         <Keyword f={f} text="later: the equation of motion" at={[XC, 765]} s={T.floor} appear={tLater} />
       </Svg>
       <TeX s={e[0]} x={XC} y={130} size={50} o={fin(f, tNum)} />
       <TeX s={e[1]} x={XC + 100} y={225} size={50} c={C.second} o={fin(f, tRes)} />
-      <TeX s={String.raw`f=2\Omega\sin\varphi,\ \ \sin45^\circ\approx0.707`} x={XC} y={310} size={48} o={fin(f, tCor)} />
-      <TeX s={String.raw`=2\times7.29\times10^{-5}\times0.707`} x={XC + 100} y={375} size={44} o={fin(f, tF)} />
+      <TeX s={String.raw`f=2\Omega\sin\varphi`} x={XC} y={310} size={48} o={fin(f, tCor)} />
+      {/* house rule 2026-11-07: the two hidden inputs, said and highlighted on their words (top left, above the bars) */}
+      <TeX s={String.raw`\Omega=7.29\times10^{-5}\ \text{s}^{-1}`} x={140} y={130} size={44} o={fin(f, AT(k, 5, "seven point two nine"))}
+        glow={HL(f, AT(k, 5, "seven point two nine"))} />
+      <TeX s={String.raw`\sin45^\circ\approx0.707`} x={140} y={188} size={44} o={fin(f, AT(k, 5, "the sine of"))} glow={HL(f, AT(k, 5, "the sine of"))} />
+      <TeX s={String.raw`=2\times7.29\times10^{-5}\times0.707`} x={XC + 100} y={375} size={44} o={fin(f, AT(k, 5, "f is about"))} />
       <TeX s={String.raw`\approx1.03\times10^{-4}\ \text{s}^{-1}`} x={XC + 100} y={435} size={44} o={fin(f, AT(k, 5, "one point zero three"))} />
       <TeX s={String.raw`f\,v\approx1.03\times10^{-4}\times10`} x={XC} y={510} size={44} c={VIOLET} o={fin(f, tFv)} />
       <TeX s={String.raw`\approx1.0\times10^{-3}\ \text{m/s}^2`} x={XC + 100} y={570} size={44} c={VIOLET} o={fin(f, tFv)} />
-      <TeX s={String.raw`\dfrac{1.03\times10^{-3}}{1.57\times10^{-5}}\approx66`} x={XC} y={655} size={46} o={fin(f, t66)} />
+      <TeX s={String.raw`\text{ratio}=\dfrac{1.03\times10^{-3}}{1.57\times10^{-5}}\approx66`} x={XC} y={655} size={46} o={fin(f, t66)} glow={HL(f, t66 + 6)} />
     </Scene>
   );
 };
@@ -419,14 +427,17 @@ const S28: React.FC = () => {
   const f = useCurrentFrame(), k = K("s28_recap");
   // Part 1 lessons D3: each beat at full strength until ITS sentence ends (the 10-11-frame gaps made it fade early); the next beat
   // enters 8 frames after its sentence starts so the fade-out and the 8-frame swap gap fit
+  // remake 2026-11-07: the teaser is two sentences (S7, S8); its picture stays from S7 to the end of the scene
+  const nS = sc[k].sentences.length;
   const b = (i: number) => win(f, SS(k, i) + (i ? 8 : 0), i < 7 ? SE(k, i) : LEN(k) + 20, 10);
+  if (nS !== 9) throw new Error(`s28_recap: ${nS} sentences, the recap layout expects 9`);
   const cB: Pt = [520, 450];
   const V: TopV = { c: [300, 430], r: 170 }, S: SliceV = { c: [600, 600], r: 300 };
   const TA = topArrows(V, -4.5, 110), SA = sliceArrows(S, PHI, 110);
-  const MB = boxAt(26.5, -82.05, 1.3, 120, 90, 800, 640), P = mapP(MB), p0 = P(IAN.fmb[0], IAN.fmb[1]);
-  const XP: Pt = [CO.xp[0], -CO.xp[1]], YP: Pt = [CO.yp[0], -CO.yp[1]];
+  const MB = boxAt(26.52, -82.1, 1.3, 120, 90, 800, 640), P = mapP(MB);
+  const pA = P(CO.A[0], CO.A[1]), pB = P(CO.B[0], CO.B[1]), pC = P(CO.B[0], CO.A[1]);
   const X = logX(140, 180, -6);
-  const slide = (f - SS(k, 7)) * 2.2;
+  const slide = Math.min(Math.max(0, f - SS(k, 7)) * 2.2, 300);   // the storm ring stays in the picture half (K6)
   return (
     <Scene>
       <Svg>
@@ -446,11 +457,14 @@ const S28: React.FC = () => {
               <Lbl x={q[0] + (i ? 20 : -20)} y={q[1] + (i ? 40 : -40)} t={i ? "Khulna" : "Brest"} c={C.key} s={T.floor} a={i ? "start" : "end"} /></g>; })}
           <path d={poly(Array.from({ length: 21 }, (_, i) => { const a = (20 + (D.khulna.deg * i) / 20) * D2R; return [cB[0] + 90 * Math.cos(a), cB[1] - 90 * Math.sin(a)] as Pt; }))} fill="none" stroke={C.gold} strokeWidth={5} />
         </g>
+        {/* remake 2026-11-07 (continuity_plan §3 5d S4): the coast points' latitudes and longitudes -> the two legs behind Part 2's 329° */}
         <g opacity={b(3)}>
           <path d={linesPath(P, CO.lines)} fill="none" stroke={C.key} strokeWidth={2.4} />
-          <Arrow p={p0} q={add(p0, XP, IAN.along * 9)} color={C.first} w={10} head={34} />
-          <Arrow p={p0} q={add(p0, YP, IAN.across * 9)} color={C.neg} w={10} head={34} dash="14 8" />
-          <circle cx={p0[0]} cy={p0[1]} r={10} fill={C.gold} stroke={C.bg} strokeWidth={3} />
+          <line x1={pA[0]} y1={pA[1]} x2={pB[0]} y2={pB[1]} stroke={C.gold} strokeWidth={5} strokeDasharray="14 10" />
+          <Arrow p={pA} q={pC} color={C.second} w={9} head={30} />
+          <Arrow p={pC} q={pB} color={C.second} w={9} head={30} />
+          <Place p={pA} t="Naples" dx={-24} dy={-30} a="end" />
+          <Place p={pB} t="Englewood" dx={-24} dy={-30} a="end" />
         </g>
         <g opacity={b(4)}>
           <path d={`M ${cB[0] - 300} ${cB[1] + 120} Q ${cB[0]} ${cB[1] - 120} ${cB[0] + 300} ${cB[1] + 120}`} fill="none" stroke={C.gold} strokeWidth={5} />
@@ -474,21 +488,24 @@ const S28: React.FC = () => {
       <TeX s={H.i} x={cB[0] + 200} y={cB[1] + 90} size={50} c={C.second} o={b(0)} />
       <TeX s={H.j} x={cB[0] + 140} y={cB[1] - 130} size={50} c={C.second} o={b(0)} />
       <TeX s={H.k} x={cB[0] + 20} y={cB[1] - 230} size={50} c={C.first} o={b(0)} />
-      <SourceBelow text="Data: HRRR (NOAA) · 28 Sep 2022, 20 UTC · Natural Earth" pic={{ x: 120, y: 90, w: 800, h: 640 }} w={800} o={b(3)} name="s28 src" />
+      <SourceBelow text="Data: Natural Earth 10 m coastline" pic={{ x: 120, y: 90, w: 800, h: 640 }} w={800} o={b(3)} name="s28 src" />
       <Svg>
         <Lbl x={XC} y={300} t="east · north · up" c={C.key} s={T.floor} o={b(0)} />
         <Lbl x={XC} y={200} t="up: from the centre" c={C.key} s={T.floor} o={b(1)} />
         <Lbl x={XC} y={290} t="east: from above the pole" c={C.key} s={T.floor} o={b(1)} />
         <Lbl x={XC} y={380} t="north: in the meridian slice" c={C.key} s={T.floor} o={b(1)} />
         <Lbl x={XC} y={300} t="Brest and Khulna: ≈ 75.8° apart" c={C.key} s={T.floor} o={b(2)} />
-        <Lbl x={XC} y={200} t="coast at 329°" c={C.key} s={T.floor} o={b(3)} />
-        <Lbl x={XC} y={300} t="≈ 9 m/s along the shore" c={C.first} s={T.floor} o={b(3)} />
-        <Lbl x={XC} y={400} t="≈ 32 m/s onto the land" c={C.neg} s={T.floor} o={b(3)} />
+        <Lbl x={XC} y={200} t="latitude, longitude → km" c={C.key} s={T.floor} o={b(3)} />
+        <Lbl x={XC} y={300} t="91.5 km north · 55 km west" c={C.second} s={T.floor} o={b(3)} />
+        <Lbl x={XC} y={400} t="Part 2's coast: 329°" c={C.key} s={T.floor} o={b(3)} />
         <Lbl x={XC} y={300} t="arrows turn: speed / radius" c={C.gold} s={T.floor} o={b(4)} />
         <Lbl x={XC} y={520} t="metric terms: turning arrows" c={C.second} s={T.floor} o={b(5)} />
-        <Lbl x={XC} y={300} t="≈ 66 × smaller than Coriolis" c={C.key} s={T.floor} o={b(6)} />
+        <Lbl x={XC} y={300} t="≈ 66 $\times$ smaller than Coriolis" c={C.key} s={T.floor} o={b(6)} />
         <Lbl x={XC} y={400} t="climate models keep them" c={C.muted} s={T.floor} o={b(6)} />
         <Lbl x={XC} y={300} t="Part 5: frames that move" c={C.key} s={T.floor} o={b(7)} />
+        <Lbl x={XC} y={400} t="riding along with a storm" c={C.key} s={T.floor} o={b(7) * fin(f, AT(k, 7, "ride along"))} />
+        <Lbl x={XC} y={500} t="its own spin · its motion" c={C.key} s={T.floor} o={b(7) * fin(f, AT(k, 8, "its own spin"))} />
+        <Lbl x={XC} y={600} t="what a barometer sees" c={C.key} s={T.floor} o={b(7) * fin(f, AT(k, 8, "barometer"))} />
       </Svg>
       <TeX s={EQ_S03} x={XC} y={420} size={58} o={b(0)} />
       <TeX s={EQ_S25} x={XC} y={360} size={52} o={b(5)} />
@@ -519,7 +536,8 @@ const S29: React.FC = () => {
   rel.forEach((t, i) => { if (COLX[Math.floor(i / 5)] + textW(t, T.floor) > (COLX[Math.floor(i / 5) + 1] ?? 1840) - 10) throw new Error(`end card: "${t}" too wide`); });
   return (
     <Scene>
-      <Svg>
+      {/* remake 2026-11-07 (R3): the picture fades out with the music over the 2.5-s silent hold */}
+      <Svg o={1 - ramp(f, LEN(k) - HOLD, LEN(k) - 4)}>
         <g opacity={fin(f, 6)}>{[420, 760, 1100, 1440].map((x, i) => thumb(x, i))}</g>
         <Lbl x={960} y={315} t="a series of maths tutorials" c={C.key} s={T.calc} a="middle" o={fin(f, 10)} />
         <Lbl x={960} y={395} t="atmospheric science · meteorology · fluid dynamics" c={C.key} s={T.key} a="middle" o={fin(f, AT(k, 1, "atmospheric science"))} />

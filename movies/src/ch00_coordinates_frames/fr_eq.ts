@@ -1,7 +1,6 @@
 // Every on-screen equation of the storyboard (movies/ch00/ch00_coordinates_frames/storyboard.yaml), verbatim (String.raw
 // constants: the QA equations gate greps this file; provenance lives in the storyboard only and is never drawn).
 // Generated once from the storyboard by the motion-builder (2026-11-05); edit only together with the storyboard.
-export const EQ_S02 = String.raw`\hat{\mathbf r}=(\cos\varphi\cos\lambda,\ \cos\varphi\sin\lambda,\ \sin\varphi)`;
 export const EQ_S03 = String.raw`\mathbf v=u\,\hat{\mathbf i}+v\,\hat{\mathbf j}+w\,\hat{\mathbf k}`;
 export const EQ_S04 = String.raw`\hat{\mathbf k}=(\cos\varphi\cos\lambda,\ \cos\varphi\sin\lambda,\ \sin\varphi)`;
 export const EQ_S05 = String.raw`\hat{\mathbf i}=(-\sin\lambda,\ \cos\lambda,\ 0)`;
@@ -11,7 +10,6 @@ export const EQ_S10 = String.raw`\hat{\mathbf x}'=\cos\alpha\,\hat{\mathbf i}+\s
 export const EQ_S11 = String.raw`\Delta y=a\,\Delta\varphi,\qquad \Delta x=a\cos\varphi\,\Delta\lambda`;
 export const EQ_S12 = String.raw`\tan\beta=\dfrac{55.0}{91.5}=0.601,\qquad \text{bearing}=360^\circ-31^\circ=329^\circ`;
 export const EQ_S13 = String.raw`\alpha=90^\circ-329^\circ=-239^\circ\equiv121^\circ`;
-export const EQ_S14 = String.raw`\text{along}=\mathbf v\cdot\hat{\mathbf x}'=22.2\times(-0.515)+24.3\times0.857\approx9.4\ \text{m/s}`;
 export const EQ_S16 = String.raw`\dfrac{d\hat{\mathbf r}}{d\theta}=\hat{\boldsymbol\theta},\qquad \dfrac{d\hat{\boldsymbol\theta}}{d\theta}=-\hat{\mathbf r}`;
 export const EQ_S18 = String.raw`\dfrac{D\hat{\mathbf i}}{Dt}=\dfrac{d\hat{\mathbf i}}{d\lambda}\,\dfrac{D\lambda}{Dt}=-\hat{\mathbf R}\,\dfrac{u}{a\cos\varphi}`;
 export const EQ_S19 = String.raw`\dfrac{D\hat{\mathbf i}}{Dt}=\dfrac{u}{a\cos\varphi}\left(\hat{\mathbf j}\sin\varphi-\hat{\mathbf k}\cos\varphi\right)`;

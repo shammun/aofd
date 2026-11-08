@@ -5,20 +5,21 @@
 import React from "react";
 import { useCurrentFrame } from "remotion";
 import { C, T } from "../house/kit/type";
-import { Pt, RightTick, pulse } from "../house/kit/draw";
-import { RiseText, TitleGradient } from "../house/kit/title";
+import { Pt, RightTick } from "../house/kit/draw";
+import { SeriesTitle } from "./kit_fr/SeriesTitle";
 import { GlobeFrame, SourceBelow } from "../house/kit/frame";
 import { AnimatedWindArrow } from "../house/kit/wind";
 import { CurvedLink } from "../house/kit/extras";
 import { GlobeCam, LatCircle, globePath, llPath } from "./kit_fr/globe";
 import { V3 } from "./kit_fr/cam";
 import {
-  AT, ArcHead, Arrow, BREST, BROWN, CalcStack, D, D2R, GB, GFULL, GeoMap, Globe, H, KHULNA, Keyword, K, LEN, Lbl, SE, SING, SS, Scene, SideCallout, SkipChip,
+  AT, ArcHead, Arrow, BREST, Recall, BROWN, CalcStack, D, D2R, GB, GFULL, GeoMap, Globe, H, KHULNA, Keyword, K, LEN, Lbl, SE, SING, SS, Scene, SideCallout, SkipChip,
   Svg, TRAPPES, TeX, Tripod, TripodTips, XC, add, arcD, boxAt, clamp, discOf, e2g, facing, fin, fout, garrow, gdot, globeG, gseg, keepTime, linesPath, ll, mix,
   pieces, plab, poly, prog, sang, svNorth, svP, svUp, tvDir, tvEast, tvP, win, TopV, SliceV, GeoImg, IMGS, chipSpan, SpeedBar,
+  HL,
 } from "./fr_lib";
 import { AngleArc, SliceBase, TopViewBase, sliceArrows, topArrows, turned } from "./fr_dia";
-import { EQ_S02, EQ_S03, EQ_S04, EQ_S05, EQ_S06, EQ_S08 } from "./fr_eq";
+import { EQ_S03, EQ_S04, EQ_S05, EQ_S06, EQ_S08 } from "./fr_eq";
 
 const BR = D.brest, TR = D.trappes, SG = D.sing, KH = D.khulna, CO = D.coast, IAN = D.ian;
 // ---------------------------------------------------------------- numbers on screen = the data (the render fails otherwise)
@@ -60,30 +61,25 @@ const sliceFrom3D = (): SliceV => {
 };
 const SV: SliceV = sliceFrom3D();
 
-// ================================================================ s00 title
+// ================================================================ s00 title (remake 2026-11-07: series title layout, no "made easy" (R1);
+// Part A: four stations with their own tripods on a turning globe; Part B (on "meteorology"): from above the North Pole, a parcel moving east
+// along Brest's parallel, its east arrow swinging round with it (faint copies left behind) — the movie's second idea, frames that turn)
 const TB = { x: 1150, y: 150, w: 690, h: 480 };
 const S00: React.FC = () => {
   const f = useCurrentFrame(), k = K("s00_title");
-  const tMet = AT(k, 0, "meteorology"), tEasy = AT(k, 0, "local frames");
-  const pz = 1 + 0.06 * pulse(f, tEasy, 14);
+  const tMet = AT(k, 0, "they're used"), tCo = AT(k, 0, "coordinates");   // Part B on "they're used" (opening rule 2026-11-07)
   const oA = fout(f, tMet, 12), oB = fin(f, tMet, 12);
   const cam = globePath([{ f: 0, lat: 30, lon: 50, dist: 3.0 }, { f: 400, lat: 32, lon: 44, dist: 3.0 }], f);
   const lonP = BREST[1] + 26 * prog(f, 16, tMet);
-  const B = boxAt(26.5, -82.1, 1.0, TB.x, TB.y, TB.w, TB.h);
-  const turn = 121 * prog(f, tMet + 14, tMet + 70);
-  const split = fin(f, tMet + 76, 14);
+  const lonB = BREST[1] + 70 * prog(f, tMet + 10, LEN(k) - 10);
+  const camB: GlobeCam = { lat: 89.5, lon: BREST[1] + 20, dist: 3.0 };
+  const iTip = (G: ReturnType<typeof globeG>, lo: number, L = 0.3): Pt => { const e = [Math.cos(lo * D2R), 0, -Math.sin(lo * D2R)], b = ll(BREST[0], lo);
+    return G.pw([b[0] + e[0] * L, b[1] + e[1] * L, b[2] + e[2] * L]); };
+  const ghosts = [0, 1, 2, 3].map((q) => BREST[1] + 70 * prog(f - 24 * (q + 1), tMet + 10, LEN(k) - 10)).filter((lo) => lo > BREST[1] + 1);
   return (
     <Scene fadeIn={false}>
       <Svg>
-        <defs><TitleGradient id="ttl" x1={100} x2={1000} /></defs>
-        <RiseText f={f} t="Coordinates · Part 4" x={104} y={110} s={64} at={2} fill={C.key} />
-        <RiseText f={f} t="Turning" x={100} y={265} s={150} at={6} fill="url(#ttl)" />
-        <RiseText f={f} t="frames" x={100} y={410} s={150} at={16} fill="url(#ttl)" />
-        <g transform={`translate(104 515) scale(${pz}) translate(-104 -515)`}>
-          <RiseText f={f} t="made easy" x={104} y={525} s={88} at={24} fill={C.key} />
-        </g>
-        <RiseText f={f} t="local axes" x={106} y={660} s={68} at={34} fill={C.key} />
-        <RiseText f={f} t="and how they turn" x={106} y={750} s={68} at={40} fill={C.key} colors={(i) => (i >= 4 ? C.first : undefined)} />
+        <SeriesTitle f={f} concept="Coordinates" part="Part 4 · Turning frames" sub={["local axes and how they turn"]} pulseAt={tCo} />
       </Svg>
       <Globe cam={cam} box={TB} o={oA * fin(f, 4, 10)} grat={0.35} coast={0.4}
         over={(G) => <>
@@ -92,30 +88,16 @@ const S00: React.FC = () => {
           <Tripod G={G} la={BREST[0]} lo={lonP} L={0.2} w={6} head={20} o={fin(f, 16, 10)} />
           {gdot(G, BREST[0], lonP, C.key, 9, fin(f, 16, 10))}
         </>} />
-      <GeoMap id="s00m" B={B} o={oB} frame={0.6}>
-        {(P) => {
-          const p0 = P(IAN.fmb[0], IAN.fmb[1]), U = 120, s = 5.2;
-          const al = (121 * D2R) * (turn / 121), aT = turn * D2R;
-          const xp: Pt = [Math.cos(aT), -Math.sin(aT)], yp: Pt = [-Math.sin(aT), -Math.cos(aT)];
-          const w: Pt = [IAN.u[0] * s, -IAN.u[1] * s];
-          void al;
-          return <>
-            <GeoImg P={P} href={IMGS.ian} box={IAN.speed_box} o={0.85} />
-            <path d={linesPath(P, CO.lines)} fill="none" stroke={C.key} strokeOpacity={0.85} strokeWidth={2.2} />
-            <Arrow p={p0} q={add(p0, xp, U)} color={C.second} w={7} head={26} />
-            <Arrow p={p0} q={add(p0, yp, U)} color={C.second} w={7} head={26} />
-            {/* Part 1 lessons D1: the full wind is ink, never teal (teal = a round/along part) */}
-            <AnimatedWindArrow from={p0} to={add(p0, w)} speed={IAN.sp} f={f} c={C.ink} px={8} head={26} />
-            <line x1={p0[0]} y1={p0[1]} x2={p0[0] + xp[0] * IAN.along * s} y2={p0[1] + xp[1] * IAN.along * s} stroke={C.first} strokeWidth={16} opacity={0.6 * split} />
-            <line x1={p0[0]} y1={p0[1]} x2={p0[0] + yp[0] * IAN.across * s} y2={p0[1] + yp[1] * IAN.across * s} stroke={C.neg} strokeWidth={16} opacity={0.6 * split} strokeDasharray="12 8" />
-            <circle cx={p0[0]} cy={p0[1]} r={9} fill={C.gold} stroke={C.bg} strokeWidth={3} />
-          </>;
-        }}
-      </GeoMap>
-      <SourceBelow text="Image: NASA Blue Marble Next Generation" pic={TB} w={690} o={oA} name="s00 src a" />
-      <SourceBelow text="Data: HRRR (NOAA) · Natural Earth · 28 Sep 2022" pic={TB} w={690} o={oB} name="s00 src b" />
-      {/* Part 1 lessons D2: the title's wind-speed map has its colour bar too (Part 1 review 1, Must 3) */}
-      <Svg><SpeedBar x={TB.x} y={740} w={300} o={oB} /></Svg>
+      <Globe cam={camB} box={TB} o={oB} grat={0.3} coast={0.4}
+        over={(G) => <>
+          <LatCircle G={G} lat={BREST[0]} c={C.local} w={3} o={0.7} dash="8 8" />
+          <path d={llPath(G, Array.from({ length: 31 }, (_, i) => [BREST[0], BREST[1] + ((lonB - BREST[1]) * i) / 30] as [number, number]), 1.003)} fill="none" stroke={C.local} strokeWidth={6} />
+          {ghosts.map((lo, q) => <Arrow key={q} p={G.p(BREST[0], lo)} q={iTip(G, lo)} color={C.second} w={6} head={22} o={0.5 - 0.1 * q} />)}
+          <Arrow p={G.p(BREST[0], BREST[1])} q={iTip(G, BREST[1])} color={C.second} w={7} head={24} o={0.6} />
+          <Arrow p={G.p(BREST[0], lonB)} q={iTip(G, lonB)} color={C.second} w={8} head={28} />
+          {gdot(G, BREST[0], lonB, C.key, 10)}
+        </>} />
+      <SourceBelow text="Image: NASA Blue Marble Next Generation" pic={TB} w={690} name="s00 src a" />
     </Scene>
   );
 };
@@ -123,7 +105,7 @@ const S00: React.FC = () => {
 // ================================================================ s01 hook
 const S01: React.FC = () => {
   const f = useCurrentFrame(), k = K("s01_hook");
-  const tKh = AT(k, 1, "Khulna"), tMove = AT(k, 2, "as the air moves"), t4 = SS(k, 4), tLF = AT(k, 4, "local frames"), tCoast = AT(k, 4, "fit a coast"), tBy = AT(k, 4, "by themselves");
+  const tKh = AT(k, 1, "Khulna"), tMove = AT(k, 2, "as the air moves"), t4 = SS(k, 4), tLF = AT(k, 4, "local frames"), tPlace = AT(k, 4, "differ from place to place"), tBy = AT(k, 4, "by themselves");
   const cam = globePath([{ f: 0, lat: 36, lon: 40, dist: 3.4 }, { f: LEN(k) + 10, lat: 36, lon: 36, dist: 3.4 }], f);
   const lonP = BREST[1] + 30 * prog(f, tMove, tMove + 150);
   const G = globeG(cam);
@@ -144,13 +126,13 @@ const S01: React.FC = () => {
       <Svg>
         <Keyword f={f} text="east · north · up" at={[XC, 150]} appear={0} out={t4 - 18} />
         <Keyword f={f} text="local frames" at={[XC, 380]} appear={tLF} />
-        <Keyword f={f} text="turned to a coast" at={[XC, 500]} appear={tCoast} />
+        <Keyword f={f} text="different at every place" at={[XC, 500]} appear={tPlace} />
         <Keyword f={f} text="turning as you move" at={[XC, 620]} appear={tBy} />
-        {/* minis: a coast with turned axes; a tripod sliding along a parallel */}
-        <g opacity={fin(f, tCoast)}>
-          <path d="M 1700 540 Q 1730 500 1760 450" fill="none" stroke={C.key} strokeWidth={4} />
-          <Arrow p={[1740, 500]} q={[1708, 448]} color={C.second} w={5} head={16} />
-          <Arrow p={[1740, 500]} q={[1688, 532]} color={C.second} w={5} head={16} />
+        {/* minis (remake 2026-11-07): two tripods pointing different ways (no coast: the coast frame is Part 2's); a tripod sliding along a parallel */}
+        <g opacity={fin(f, tPlace)}>
+          {[[1700, 540, 0], [1790, 520, 38]].map(([x, y, a]) => <g key={x}>
+            <Arrow p={[x, y]} q={[x + 40 * Math.cos(a * D2R), y + 40 * Math.sin(a * D2R)]} color={C.second} w={5} head={14} />
+            <Arrow p={[x, y]} q={[x + 40 * Math.sin(a * D2R), y - 40 * Math.cos(a * D2R)]} color={C.first} w={5} head={14} /></g>)}
         </g>
         <g opacity={fin(f, tBy)}>
           <path d="M 1660 660 Q 1740 610 1820 660" fill="none" stroke={C.gold} strokeWidth={4} />
@@ -159,53 +141,6 @@ const S01: React.FC = () => {
               <Arrow p={[x, y]} q={[x + 40 * Math.sin(a * D2R), y - 40 * Math.cos(a * D2R)]} color={C.first} w={5} head={14} /></g>; })}
         </g>
       </Svg>
-    </Scene>
-  );
-};
-
-// ================================================================ s02 recap of Part 3 (quarter cut-away: the centre and the three fixed axes)
-const S02: React.FC = () => {
-  const f = useCurrentFrame(), k = K("s02_part3_recap");
-  const tLL = SS(k, 1), tAx = AT(k, 3, "X hat"), tY = AT(k, 3, "y hat"), tZ = AT(k, 3, "z hat"), tA = SS(k, 4), tR = SS(k, 6), tLeg = SS(k, 7), tD = SS(k, 8);
-  const cam: GlobeCam = { lat: 24, lon: 42, dist: 3.4 };
-  const G = globeG(cam);
-  const ax = (v: number[], L = 1.35): V3 => { const g = e2g(v); return [g[0] * L, g[1] * L, g[2] * L]; };
-  const rb = ll(BREST[0], BREST[1]), foot: V3 = [rb[0], 0, rb[2]], axisPt: V3 = [0, rb[1], 0];
-  const r2 = pieces(EQ_S02, [String.raw`\ \cos\varphi\sin`]);
-  const dR = fin(f, tR, 18);
-  return (
-    <Scene>
-      <Globe cam={cam} mesh="cut" grat={0.22}
-        over={(Gg) => <>
-          {garrow(Gg, [0, 0, 0], ax([1, 0, 0]), C.second, 8, 30, fin(f, tAx))}
-          {garrow(Gg, [0, 0, 0], ax([0, 1, 0]), C.second, 8, 30, fin(f, tY))}
-          {garrow(Gg, [0, 0, 0], ax([0, 0, 1]), C.second, 8, 30, fin(f, tZ))}
-          <path d={poly(Array.from({ length: 25 }, (_, i) => Gg.pw(ll((BREST[0] * i) / 24, BREST[1], 0.42))))} fill="none" stroke={C.gold} strokeWidth={6} opacity={fin(f, AT(k, 1, "Latitude"))} />
-          <path d={poly(Array.from({ length: 13 }, (_, i) => Gg.pw(ll(0, (BREST[1] * i) / 12, 0.62))))} fill="none" stroke={C.gold} strokeWidth={6} opacity={fin(f, AT(k, 1, "longitude"))} />
-          {garrow(Gg, [0, 0, 0], rb, C.first, 8, 30, dR)}
-          {gseg(Gg, rb, foot, C.second, 6, fin(f, tLeg), "12 8")}
-          {gseg(Gg, axisPt, rb, C.second, 6, fin(f, AT(k, 7, "from the axis")), "12 8")}
-          {gdot(Gg, BREST[0], BREST[1], C.gold, 10)}
-          {plab(Gg, BREST[0], BREST[1], "Brest", 1, -22, -30, "end")}
-        </>} />
-      <TeX s={H.x} x={G.pw(ax([1, 0, 0], 1.5))[0]} y={G.pw(ax([1, 0, 0], 1.5))[1]} size={54} c={C.second} ax={0.5} o={fin(f, tAx)} halo />
-      <TeX s={H.y} x={G.pw(ax([0, 1, 0], 1.5))[0]} y={G.pw(ax([0, 1, 0], 1.5))[1]} size={54} c={C.second} ax={0.5} o={fin(f, tY)} halo />
-      <TeX s={H.z} x={G.pw(ax([0, 0, 1], 1.5))[0] + 30} y={G.pw(ax([0, 0, 1], 1.5))[1]} size={54} c={C.second} ax={0.5} o={fin(f, tZ)} halo />
-      <GlobeFrame id="s02k" zoom={0} disc={discOf(cam)} />
-      <GSrc />
-      <Svg>
-        <Keyword f={f} text="Part 3: the round Earth" at={[XC, 110]} appear={0} out={tLL - 18} />
-      </Svg>
-      <TeX s={String.raw`\varphi:\ \text{latitude},\quad \lambda:\ \text{longitude}`} x={XC} y={110} size={54} o={fin(f, tLL)} />
-      <TeX s={String.raw`\hat{\mathbf x},\ \hat{\mathbf y},\ \hat{\mathbf z}:\ \text{fixed axes}`} x={XC} y={205} size={54} o={fin(f, tAx)} />
-      <TeX s={String.raw`a\approx 6400\ \text{km}\ \ (6371\ \text{km})`} x={XC} y={305} size={56} o={fin(f, tA)} />
-      <TeX s={r2[0]} x={XC} y={420} size={54} o={fin(f, tR)} />
-      <TeX s={r2[1]} x={XC + 120} y={490} size={54} o={fin(f, tR)} />
-      <TeX s={String.raw`a\sin\varphi\ \text{above the equator}`} x={XC} y={600} size={50} o={win(f, tLeg, SE(k, 7) - 12)} />
-      <TeX s={String.raw`a\cos\varphi\ \text{from the axis}`} x={XC} y={680} size={50} o={win(f, AT(k, 7, "from the axis"), SE(k, 7) - 12)} />
-      <TeX s={String.raw`\Delta y=a\,\Delta\varphi\approx 111\ \text{km per }1^\circ`} x={XC} y={600} size={50} o={fin(f, AT(k, 8, "one degree north"))} />
-      <TeX s={String.raw`\Delta x=a\cos\varphi\,\Delta\lambda`} x={XC} y={690} size={50} o={fin(f, AT(k, 8, "one degree east"))} />
-      <TeX s={String.raw`\approx 74\ \text{km per }1^\circ\ \text{at Brest}`} x={XC + 40} y={770} size={50} o={fin(f, AT(k, 8, "about seventy four"))} />
     </Scene>
   );
 };
@@ -241,7 +176,6 @@ const S03: React.FC = () => {
           {plab(Gg, BREST[0], BREST[1], "Atlantic Ocean", fin(f, tAtl), -60, 170, "end", true)}
         </>} />
       <TripodTips G={G} la={BREST[0]} lo={BREST[1]} L={L} size={58} o={fin(f, tK)} />
-      <TeX s={String.raw`-\hat{\mathbf k}`} x={G.pw(up)[0] - 20} y={G.pw(up)[1] + 40} size={52} c={BROWN} ax={1} o={fin(f, tGr)} halo />
       <GlobeFrame id="s03k" zoom={1} right={1} />
       <SourceBelow text={SRC_G} pic={{ x: 80, y: 40, w: 960, h: 772 }} w={960} name="s03 src" />
       <Svg>
@@ -265,7 +199,8 @@ const S03: React.FC = () => {
 // ================================================================ s04 up = the position arrow (half-Earth face through Brest's meridian)
 const S04: React.FC = () => {
   const f = useCurrentFrame(), k = K("s04_k_up");
-  const tAx = SS(k, 3), tUp = SS(k, 4), tOut = SS(k, 5), tPos = SS(k, 6), tK = SS(k, 7), tNum = SS(k, 8), [, chipEnd] = chipSpan(k);
+  const tAx = AT(k, 3, "x hat points"), tAy = AT(k, 3, "y hat to"), tAz = AT(k, 3, "z hat to"), tUp = SS(k, 4), tOut = SS(k, 5), tPos = SS(k, 6), tK = SS(k, 7),
+    tPhi = AT(k, 7, "where phi"), tNum = SS(k, 8), [, chipEnd] = chipSpan(k);
   const G = globeG(CAM_FACE);
   const rb = ll(BREST[0], BREST[1]), kTip = ll(BREST[0], BREST[1], 1.38);
   const ax = (v: number[], L = 1.3): V3 => { const g = e2g(v); return [g[0] * L, g[1] * L, g[2] * L]; };
@@ -277,17 +212,17 @@ const S04: React.FC = () => {
         over={(Gg) => <>
           {gseg(Gg, [0, -1.15, 0], [0, 1.25, 0], C.local, 3, 1, "10 8")}
           {garrow(Gg, [0, 0, 0], ax([1, 0, 0]), C.second, 7, 26, 0.85 * fin(f, tAx))}
-          {garrow(Gg, [0, 0, 0], ax([0, 1, 0]), C.second, 7, 26, 0.85 * fin(f, tAx + 8))}
-          {garrow(Gg, [0, 0, 0], ax([0, 0, 1]), C.second, 7, 26, 0.85 * fin(f, tAx + 16))}
+          {garrow(Gg, [0, 0, 0], ax([0, 1, 0]), C.second, 7, 26, 0.85 * fin(f, tAy))}
+          {garrow(Gg, [0, 0, 0], ax([0, 0, 1]), C.second, 7, 26, 0.85 * fin(f, tAz))}
           {garrow(Gg, [0, 0, 0], rb, C.first, 8, 30, fin(f, tPos, 18))}
           {garrow(Gg, rb, kTip, C.first, 10, 38, fin(f, tOut))}
           {gdot(Gg, BREST[0], BREST[1], C.gold, 10)}
           <circle cx={Gg.pw([0, 0, 0])[0]} cy={Gg.pw([0, 0, 0])[1]} r={9} fill={C.local} />
         </>} />
       <TeX s={H.k} x={kp[0] + 30} y={kp[1] - 10} size={58} c={C.first} o={fin(f, tOut)} halo />
-      <TeX s={H.x} x={G.pw(ax([1, 0, 0], 1.45))[0]} y={G.pw(ax([1, 0, 0], 1.45))[1]} size={50} c={C.second} ax={0.5} o={0.85 * fin(f, tAx)} halo />
-      <TeX s={H.y} x={G.pw(ax([0, 1, 0], 1.45))[0]} y={G.pw(ax([0, 1, 0], 1.45))[1]} size={50} c={C.second} ax={0.5} o={0.85 * fin(f, tAx + 8)} halo />
-      <TeX s={H.z} x={G.pw(ax([0, 0, 1], 1.4))[0] + 34} y={G.pw(ax([0, 0, 1], 1.4))[1]} size={50} c={C.second} ax={0.5} o={0.85 * fin(f, tAx + 16)} halo />
+      <TeX s={H.x} x={G.pw(ax([1, 0, 0], 1.45))[0]} y={G.pw(ax([1, 0, 0], 1.45))[1]} size={50} c={C.second} ax={0.5} o={0.85 * fin(f, tAx) * fout(f, AT(k, 9, "forty eight") - 12)} halo />
+      <TeX s={H.y} x={G.pw(ax([0, 1, 0], 1.45))[0]} y={G.pw(ax([0, 1, 0], 1.45))[1]} size={50} c={C.second} ax={0.5} o={0.85 * fin(f, tAy) * fout(f, AT(k, 9, "forty eight") - 12)} halo />
+      <TeX s={H.z} x={G.pw(ax([0, 0, 1], 1.4))[0] + 34} y={G.pw(ax([0, 0, 1], 1.4))[1]} size={50} c={C.second} ax={0.5} o={0.85 * fin(f, tAz) * fout(f, AT(k, 9, "forty eight") - 12)} halo />
       <GlobeFrame id="s04k" zoom={0} disc={discOf(CAM_FACE)} />
       <GSrc />
       <Svg>
@@ -296,17 +231,21 @@ const S04: React.FC = () => {
         <SideCallout f={f} lines="same direction" at={[XC, 230]} appear={tPos + 30} out={tK - 20} target={[kp[0] + 4, kp[1] + 50]} c={C.gold} s={T.floor} />
         <SkipChip f={f} k={k} to={keepTime("s07_enu_checks")} />
       </Svg>
-      <TeX s={String.raw`\text{Earth's axes: }\hat{\mathbf x},\ \hat{\mathbf y},\ \hat{\mathbf z}`} x={XC} y={110} size={54} o={win(f, tAx, tUp - 20)} />
+      {/* remake 2026-11-07 (R16): Part 3's Earth axes and position arrow recalled at their point of use (the cut s02 carried them) */}
+      <TeX s={String.raw`\hat{\mathbf x}\to(0^\circ,\ 0^\circ),\quad \hat{\mathbf y}\to(0^\circ,\ 90^\circ\text{E})`} x={XC} y={120} size={50} o={win(f, tAx, tUp - 20)} />
+      <Recall f={f} tex={String.raw`\hat{\mathbf z}\to\text{North Pole}`} name="Earth axes" part={3} x={XC} y={195} size={50} appear={tAz} out={tUp - 20} />
       <TeX s={eq[0]} x={XC} y={120} size={54} o={fin(f, tK)} />
       <TeX s={eq[1]} x={XC + 120} y={190} size={54} o={fin(f, tK)} />
-      <CalcStack f={f} x={1220} y={290} size={44} maxLines={4} rows={[
-        { lhs: String.raw`\varphi`, rhs: String.raw`=48.4^\circ,\ \ \lambda=-4.5^\circ`, at: AT(k, 9, "forty eight") },
-        { lhs: String.raw`\cos\varphi`, rhs: String.raw`=0.664,\ \ \sin\varphi=0.748`, at: AT(k, 10, "Cosine phi") },
-        { lhs: String.raw`\cos\lambda`, rhs: String.raw`=0.997,\ \ \sin\lambda=-0.078`, at: AT(k, 11, "Cosine lambda") },
-        { lhs: String.raw`\text{1st}`, rhs: String.raw`=0.664\times0.997\approx0.662`, at: AT(k, 12, "which is") },
-        { lhs: String.raw`\text{2nd}`, rhs: String.raw`=0.664\times(-0.078)`, at: SS(k, 13) },
-        { rhs: String.raw`\approx-0.052`, at: AT(k, 13, "which is"), cont: true },
-        { lhs: H.k, rhs: String.raw`\approx(0.662,\ -0.052,\ 0.748)`, at: SS(k, 14) },
+      <Recall f={f} tex="" name="position vector" part={3} x={XC} y={258} appear={tK + 10} />
+      <TeX s={String.raw`\varphi:\ \text{latitude},\quad \lambda:\ \text{longitude}`} x={XC} y={325} size={44} c={C.muted} o={fin(f, tPhi)} />
+      <CalcStack f={f} x={1220} y={390} size={44} maxLines={4} rows={[
+        { lhs: String.raw`\text{Brest: }\varphi`, rhs: String.raw`=48.4^\circ,\ \ \lambda=-4.5^\circ`, at: AT(k, 9, "forty eight") },
+        { lhs: String.raw`\cos\varphi`, rhs: String.raw`=0.664,\ \ \sin\varphi=0.748`, at: AT(k, 10, "Cosine phi"), glow: HL(f, AT(k, 10, "Cosine phi")) },
+        { lhs: String.raw`\cos\lambda`, rhs: String.raw`=0.997,\ \ \sin\lambda=-0.078`, at: AT(k, 11, "Cosine lambda"), glow: HL(f, AT(k, 11, "Cosine lambda")) },
+        { lhs: String.raw`k_x`, rhs: String.raw`=0.664\times0.997\approx0.662`, at: AT(k, 12, "zero point six six two") },
+        { lhs: String.raw`k_y`, rhs: String.raw`=0.664\times(-0.078)`, at: SS(k, 13) },
+        { rhs: String.raw`\approx-0.052`, at: AT(k, 13, "minus zero point"), cont: true },
+        { lhs: H.k, rhs: String.raw`\approx(0.662,\ -0.052,\ 0.748)`, at: SS(k, 14), glow: HL(f, SS(k, 14) + 6) },
         { lhs: String.raw`|\hat{\mathbf k}|^2`, rhs: String.raw`=0.662^2+0.052^2`, at: SS(k, 15) },
         { rhs: String.raw`\ \ +0.748^2\approx1`, at: SS(k, 15) + 10, cont: true },
       ]} />
@@ -352,17 +291,18 @@ const S05: React.FC = () => {
       <TeX s={H.y} x={TV.c[0] + TV.r * 0.58} y={TV.c[1] - 40} size={50} c={C.second} o={0.7 * flat} />
       <TeX s={H.R} x={mix(TV.c[0], tvP(TV, BREST[1])[0], 0.5) - 60} y={mix(TV.c[1], tvP(TV, BREST[1])[1], 0.55)} size={52} c={C.second} ax={1} o={flat * fin(f, tRh)} halo />
       <TeX s={H.i} x={A.I[0] + 24} y={A.I[1] - 30} size={56} c={C.second} o={fin(f, tI, 8)} halo />
-      <TeX s={String.raw`\lambda=-4.5^\circ`} x={TV.c[0] - 30} y={TV.c[1] + TV.r * 0.42} size={46} c={C.local} ax={1} o={flat * fin(f, tLam)} />
+      <TeX s={String.raw`\lambda=-4.5^\circ`} x={TV.c[0] + 30} y={TV.c[1] + TV.r * 0.22} size={46} c={C.local} ax={0} o={flat * fin(f, tLam)} />
       <Svg>
         <Keyword f={f} text="now east" at={[XC, 110]} appear={0} out={tP1 - 20} />
         <Keyword f={f} text="from above the North Pole" at={[XC, 210]} appear={tAbove} out={tP1 - 20} />
         <Keyword f={f} text="the picture from Part 1" at={[XC, 110]} appear={tP1} out={tRdef - 20} />
-        <Lbl x={XC} y={420} t="Part 1:" c={C.muted} s={T.floor} o={fin(f, tTurn)} />
+        {/* remake 2026-11-07 (R16): the quarter-turn rule with its gold recall keyword (leaves before î's line comes in below it) */}
+        <Lbl x={XC} y={478} t="derived in Part 1: quarter turn" c={C.gold} s={T.floor} o={win(f, tTurn, tI - 20)} />
         <Keyword f={f} text="no part along the axis" at={[XC, 620]} s={T.floor} appear={tZero} out={tNum - 20} />
       </Svg>
       <TeX s={String.raw`\hat{\mathbf R}=(\cos\lambda,\ \sin\lambda,\ 0)`} x={XC} y={110} size={56} o={fin(f, tRdef)} />
       <TeX s={String.raw`\hat{\mathbf i}\ \text{plays}\ \hat{\boldsymbol\theta}`} x={XC} y={215} size={56} o={fin(f, tPlays)} />
-      <TeX s={String.raw`(p,\ q)\ \to\ (-q,\ p)`} x={XC + 170} y={420} size={56} o={fin(f, tTurn)} />
+      <TeX s={String.raw`(p,\ q)\ \to\ (-q,\ p)`} x={XC} y={420} size={56} o={fin(f, tTurn)} />
       <TeX s={EQ_S05} x={XC} y={520} size={64} o={fin(f, tI)} />
       <TeX s={r[0]} x={XC} y={620} size={50} o={fin(f, tNum)} />
       <TeX s={r[1]} x={XC + 60} y={700} size={50} o={fin(f, tNum + 20)} />
@@ -416,12 +356,12 @@ const S06: React.FC = () => {
       <TeX s={String.raw`\varphi=48.4^\circ`} x={SV.c[0] + 100} y={SV.c[1] - 40} size={46} c={C.gold} o={flat * fin(f, tPhi)} />
       <TeX s={H.k} x={A.K[0] + 18} y={A.K[1] - 24} size={56} c={C.first} o={flat} halo />
       <TeX s={H.j} x={A.J[0] - 20} y={A.J[1] - 30} size={56} c={C.second} ax={1} o={fin(f, tJ, 8)} halo />
-      <TeX s={String.raw`\text{up the axis}`} x={legUp[0] + 18} y={mix(A.p[1], legUp[1], 0.5)} size={44} c={C.second} o={fin(f, tLegs)} />
-      <TeX s={String.raw`\text{in towards it}`} x={mix(legUp[0], legIn[0], 0.5)} y={legUp[1] - 36} size={44} c={C.second} ax={0.5} o={fin(f, tLegs)} />
+      <TeX s={String.raw`\text{dashed: up the axis,}`} x={XC} y={715} size={44} c={C.second} o={fin(f, tLegs + 12)} />
+      <TeX s={String.raw`\text{and in towards it}`} x={XC + 40} y={770} size={44} c={C.second} o={fin(f, tLegs + 12)} />
       <Svg>
         <Keyword f={f} text="now north" at={[XC, 110]} appear={0} out={tK - 20} />
-        <Keyword f={f} text="north = the way φ grows" at={[XC, 210]} appear={tN} out={tPlays - 20} />
-        <Lbl x={XC} y={300} t="Part 1:" c={C.muted} s={T.floor} o={win(f, tTurn, SE(k, 8))} />
+        <Keyword f={f} text="north = the way $\varphi$ grows" at={[XC, 210]} appear={tN} out={tPlays - 20} />
+        <Lbl x={XC} y={300} t="Part 1:" c={C.gold} s={T.floor} o={win(f, tTurn, SE(k, 8))} />
       </Svg>
       <TeX s={String.raw`\hat{\mathbf k}=\cos\varphi\,\hat{\mathbf R}+\sin\varphi\,\hat{\mathbf z}`} x={XC} y={110} size={56} o={fin(f, tK)} />
       <TeX s={String.raw`\hat{\mathbf j}\ \text{plays}\ \hat{\boldsymbol\theta}`} x={XC} y={210} size={54} o={win(f, tPlays, SE(k, 8))} />
@@ -430,8 +370,8 @@ const S06: React.FC = () => {
       <TeX s={String.raw`\hat{\mathbf R}=(\cos\lambda,\ \sin\lambda,\ 0)`} x={XC} y={490} size={52} o={fin(f, tR)} />
       <TeX s={eq[0]} x={XC} y={590} size={50} o={fin(f, tJf)} />
       <TeX s={eq[1]} x={XC + 140} y={655} size={50} o={fin(f, tJf)} />
-      <TeX s={String.raw`\hat{\mathbf j}=(-0.7478\times0.9969,`} x={XC} y={715} size={44} o={fin(f, SS(k, 11))} />
-      <TeX s={String.raw`-0.7478\times(-0.0785),\ 0.6639)`} x={XC + 40} y={770} size={44} o={fin(f, SS(k, 11) + 15)} />
+      <TeX s={String.raw`\hat{\mathbf j}=(-0.7478\times0.9969,`} x={XC} y={715} size={44} o={fin(f, SS(k, 11)) * fout(f, tLegs - 10)} />
+      <TeX s={String.raw`-0.7478\times(-0.0785),\ 0.6639)`} x={XC + 40} y={770} size={44} o={fin(f, SS(k, 11) + 15) * fout(f, tLegs - 10)} />
       <TeX s={String.raw`\approx(-0.745,\ 0.059,\ 0.664)`} x={XC + 100} y={825} size={46} o={fin(f, AT(k, 11, "that's minus"))} />
     </Scene>
   );
@@ -469,13 +409,13 @@ const S07: React.FC = () => {
       <SourceBelow text={SRC_G} pic={{ x: 80, y: 40, w: 960, h: 772 }} w={960} name="s07 src" />
       <Svg>
         <Keyword f={f} text="length one? right angles?" at={[XZ, 110]} s={T.floor} appear={0} out={t1 - 20} />
-        <Keyword f={f} text="right-handed at Brest" at={[XZ, 700]} s={T.floor} appear={tRH} out={tKeep - 20} />
+        <Keyword f={f} text="right-handed at Brest" at={[XZ, 770]} s={T.floor} appear={tRH} out={tKeep - 20} />
         <Keyword f={f} text="what to keep" at={[XZ, 700]} appear={tKeep} c={C.gold} />
       </Svg>
       <CalcStack f={f} x={1270} y={150} size={44} maxLines={3} o={fout(f, tKeep - 12)} rows={[
-        { lhs: String.raw`|\hat{\mathbf i}|^2`, rhs: String.raw`=0.078^2+0.997^2\approx1`, at: AT(k, 1, "zero point zero seven eight") },
-        { lhs: String.raw`\hat{\mathbf i}\cdot\hat{\mathbf j}`, rhs: String.raw`=0.078\times(-0.745)`, at: AT(k, 2, "zero point zero seven eight") },
-        { rhs: String.raw`+0.997\times0.059+0`, at: AT(k, 2, "plus zero point nine"), cont: true },
+        { lhs: String.raw`|\hat{\mathbf i}|^2`, rhs: String.raw`=0.078^2+0.997^2\approx1`, at: AT(k, 1, "the squares") },
+        { lhs: String.raw`\hat{\mathbf i}\cdot\hat{\mathbf j}`, rhs: String.raw`=0.078\times(-0.745)`, at: AT(k, 2, "we multiply") },
+        { rhs: String.raw`+0.997\times0.059+0`, at: AT(k, 2, "and add them"), cont: true },
         { rhs: String.raw`\approx-0.058+0.059\approx0`, at: t3 },
         { lhs: String.raw`\hat{\mathbf j}\cdot\hat{\mathbf k}`, rhs: String.raw`=-0.493-0.003`, at: SS(k, 5), c: C.muted },
         { rhs: String.raw`+0.497\approx0`, at: SS(k, 5) + 15, c: C.muted, cont: true },
@@ -486,8 +426,8 @@ const S07: React.FC = () => {
         { rhs: String.raw`\ \ \ \ -0.997\times(-0.745))`, at: tCr + 30, cont: true },
         { rhs: String.raw`\approx(0.662,\ -0.052,\ 0.748)`, at: AT(k, 6, "gives zero point six"), cont: true },
       ]} />
-      <TeX s={String.raw`=\hat{\mathbf k}`} x={1270} y={610} size={56} c={C.first} o={fin(f, tK) * fout(f, tKeep - 12)} />
-      <Svg><Lbl x={XZ} y={610} t="so" c={C.muted} s={T.floor} o={fin(f, tK) * fout(f, tKeep - 12)} /></Svg>
+      <TeX s={String.raw`=\hat{\mathbf k}`} x={1270} y={680} size={56} c={C.first} o={fin(f, tK) * fout(f, tKeep - 20)} />
+      <Svg><Lbl x={XZ} y={680} t="so" c={C.muted} s={T.floor} o={fin(f, tK) * fout(f, tKeep - 20)} /></Svg>
       <Svg>
         <Lbl x={XZ} y={775} t="each place: its own arrows" c={C.key} s={T.floor} o={fin(f, tKeep + 20)} />
         <Lbl x={XZ} y={830} t="up: away from the centre" c={C.key} s={T.floor} o={fin(f, tKeep + 30)} />
@@ -539,19 +479,21 @@ const S08: React.FC = () => {
       <Svg>
         <Keyword f={f} text="each station: its own frame" at={[XZ, 110]} s={T.floor} appear={0} out={tTr - 20} />
         <Lbl x={XZ} y={110} t="Trappes: 480 km east" c={C.key} s={T.floor} o={fin(f, tTr)} />
-        <Lbl x={XZ} y={190} t="ups' angle = centre angle" c={C.muted} s={T.floor} o={fin(f, SS(k, 4))} />
+        <Lbl x={XZ} y={190} t="ups' angle $\theta$ = centre angle" c={C.muted} s={T.floor} o={fin(f, SS(k, 4))} />
         <Keyword f={f} text="more than a right angle" at={[XZ, 822]} s={T.floor} appear={tMore} />
       </Svg>
-      <TeX s={String.raw`2.01^\circ-(-4.49^\circ)=6.50^\circ`} x={XZ} y={190} size={44} c={C.muted} o={win(f, AT(k, 2, "four hundred"), SS(k, 4) - 22)} />
-      <TeX s={String.raw`6.50\times73.8\ \text{km}\approx480\ \text{km}`} x={XZ} y={250} size={44} c={C.muted} o={win(f, AT(k, 2, "four hundred") + 25, SS(k, 4) - 22)} />
-      <TeX s={String.raw`\dfrac{480}{6371}\approx0.075\ \text{rad}\approx4.3^\circ`} x={XZ} y={300} size={50} o={fin(f, tArc)} />
+      <TeX s={String.raw`\Delta\lambda=2.01^\circ+4.49^\circ=6.50^\circ`} x={XZ} y={190} size={44} c={C.muted} o={win(f, AT(k, 2, "four hundred"), SS(k, 4) - 22)} />
+      <TeX s={String.raw`\Delta x=6.50\times73.8\ \text{km}\approx480\ \text{km}`} x={XZ} y={250} size={44} c={C.muted} o={win(f, AT(k, 2, "four hundred") + 25, SS(k, 4) - 22)} />
+      <TeX s={String.raw`\theta=\dfrac{480}{6371}\approx0.075\ \text{rad}\approx4.3^\circ`} x={XZ} y={300} size={46} o={fin(f, tArc)} />
+      {/* remake 2026-11-07 (R16): the arc rule is Part 1's (s = r × angle); the step per degree east (73.8 km at Brest) is Part 3's */}
+      <Recall f={f} tex="" name="arc length" part={1} x={XZ} y={385} appear={tArc + 10} out={tDot - 12} />
       <TeX s={EQ_S08} x={XZ} y={430} size={52} o={fin(f, tDot)} />
       <TeX s={String.raw`\hat{\mathbf k}_S=(-0.239,\ 0.971,\ 0.024)`} x={XZ} y={515} size={44} o={fin(f, tKs)} />
       <TeX s={String.raw`\hat{\mathbf k}_B\cdot\hat{\mathbf k}_S=0.662\times(-0.239)`} x={XZ} y={600} size={44} o={fin(f, tMul)} />
       <TeX s={String.raw`+(-0.052)\times0.971`} x={XZ + 150} y={655} size={44} o={fin(f, tMul + 15)} />
       <TeX s={String.raw`+0.748\times0.024`} x={XZ + 150} y={710} size={44} o={fin(f, tMul + 30)} />
       <TeX s={String.raw`=-0.158-0.050+0.018`} x={XZ + 40} y={765} size={44} o={fin(f, tSum)} />
-      <TeX s={f < t101 ? String.raw`=-0.191` : String.raw`=-0.191\ \Rightarrow\ \approx101^\circ`} x={XZ + 40} y={822} size={44} o={win(f, AT(k, 12, "which is minus"), tMore - 20)} />
+      <TeX s={f < t101 ? String.raw`=-0.191` : String.raw`=-0.191\ \Rightarrow\ \approx101^\circ`} x={XZ + 40} y={822} size={44} o={win(f, AT(k, 12, "minus zero point"), tMore - 20)} glow={HL(f, AT(k, 13, "about a hundred and one"))} />
       {void t43}
     </Scene>
   );
@@ -563,7 +505,7 @@ const S09: React.FC = () => {
   const tKh = AT(k, 0, "Khulna"), tBd = AT(k, 0, "Bangladesh"), tGa = AT(k, 1, "Ganges delta"), tSu = AT(k, 1, "Sundarbans"), tBay = AT(k, 2, "Bay of Bengal"),
     tKo = AT(k, 2, "Kolkata"), tIn = AT(k, 2, "in India"), tAm = AT(k, 3, "Cyclone Amphan"), t78 = AT(k, 3, "seventy nine"), tLL = SS(k, 4), tKk = SS(k, 5), tDot = SS(k, 6),
     t76 = SS(k, 7), tEast = SS(k, 8), tIk = SS(k, 9), t94 = SS(k, 10), tMean = SS(k, 11), tZo = AT(k, 12, "zoom back out");
-  const Z: GlobeCam = { lat: KHULNA[0] - 1.2, lon: KHULNA[1] - 0.5, dist: 1.55, pp: [560, 450] };
+  const Z: GlobeCam = { lat: KHULNA[0] - 1.0, lon: KHULNA[1] - 0.3, dist: 1.25, pp: [560, 430] };
   const cam = globePath([{ f: 0, ...UN, lat: 30, lon: 50 }, { f: 6, ...UN, lat: 30, lon: 50 }, { f: tKh + 20, ...Z }, { f: tZo, ...Z }, { f: tZo + 50, ...UN, lat: 35, lon: 42 },
     { f: LEN(k) + 10, ...UN, lat: 35, lon: 42 }], f);
   const zf = clamp((4.3 - cam.dist) / (4.3 - 1.55), 0, 1), G0 = discOf(cam, GFULL);
@@ -609,18 +551,18 @@ const S09: React.FC = () => {
       </Svg>
       <TeX s={String.raw`22.8^\circ\text{N},\ \ 89.6^\circ\text{E}`} x={XZ} y={110} size={54} o={fin(f, tLL) * fout(f, tEast - 22)} />
       <Svg><Keyword f={f} text="even east is different" at={[XZ, 110]} s={T.floor} appear={tEast} /></Svg>
-      <CalcStack f={f} x={XZ + 20} y={190} size={44} maxLines={3} rows={[
-        { lhs: "", rhs: String.raw`\cos\varphi=0.922,\ \ \sin\varphi=0.388`, at: tKk, c: C.muted },
-        { lhs: "", rhs: String.raw`\cos\lambda=0.007,\ \ \sin\lambda=1.000`, at: tKk + 15, c: C.muted },
-        { lhs: String.raw`\hat{\mathbf k}_K`, rhs: String.raw`=(0.922\times0.007,`, at: tKk + 30 },
-        { lhs: "", rhs: String.raw`\ \ 0.922\times1.000,\ 0.388)`, at: tKk + 45, cont: true },
+      <CalcStack f={f} x={1235} y={190} size={44} maxLines={3} rows={[
+        { lhs: "", rhs: String.raw`\cos\varphi=0.922,\ \ \sin\varphi=0.388`, at: AT(k, 5, "cosine phi"), c: C.muted, glow: HL(f, AT(k, 5, "cosine phi")) },
+        { lhs: "", rhs: String.raw`\cos\lambda=0.007,\ \ \sin\lambda=1.000`, at: AT(k, 5, "cosine lambda"), c: C.muted, glow: HL(f, AT(k, 5, "cosine lambda")) },
+        { lhs: String.raw`\hat{\mathbf k}_K`, rhs: String.raw`=(0.922\times0.007,`, at: AT(k, 5, "so its up arrow") },
+        { lhs: "", rhs: String.raw`\ \ 0.922\times1.000,\ 0.388)`, at: AT(k, 5, "so its up arrow") + 12, cont: true },
         { lhs: "", rhs: String.raw`\approx(0.006,\ 0.922,\ 0.388)`, at: AT(k, 5, "zero point zero zero six"), cont: true },
         { lhs: String.raw`\hat{\mathbf k}_B\cdot\hat{\mathbf k}_K`, rhs: String.raw`=0.662\times0.006`, at: tDot },
         { lhs: "", rhs: String.raw`\ \ +(-0.052)\times0.922`, at: tDot + 15, cont: true },
         { lhs: "", rhs: String.raw`\ \ +0.748\times0.388`, at: tDot + 30, cont: true },
-        { lhs: "", rhs: String.raw`=0.004-0.048+0.290`, at: AT(k, 6, "that's zero"), cont: true },
+        { lhs: "", rhs: String.raw`=0.004-0.048+0.290`, at: AT(k, 6, "that gives"), cont: true },
         { lhs: "", rhs: String.raw`=0.246`, at: AT(k, 6, "zero point two four six"), cont: true },
-        { lhs: "", rhs: String.raw`\cos^{-1}0.246\approx75.8^\circ`, at: t76 },
+        { lhs: "", rhs: String.raw`\cos^{-1}0.246\approx75.8^\circ`, at: t76, glow: HL(f, AT(k, 7, "seventy five point eight")) },
         { lhs: String.raw`\hat{\mathbf i}_K`, rhs: String.raw`=(-\sin89.6^\circ,\ \cos89.6^\circ,\ 0)`, at: tIk },
         { lhs: "", rhs: String.raw`=(-1.000,\ 0.007,\ 0)`, at: AT(k, 9, "minus one"), cont: true },
         { lhs: "", rhs: String.raw`\approx-\hat{\mathbf x}`, at: AT(k, 9, "almost exactly"), cont: true },
@@ -628,7 +570,7 @@ const S09: React.FC = () => {
         { lhs: "", rhs: String.raw`\ \ +0.997\times0.007`, at: t94 + 15, cont: true },
         { lhs: "", rhs: String.raw`=-0.078+0.007`, at: t94 + 30, cont: true },
         { lhs: "", rhs: String.raw`=-0.071`, at: t94 + 40, cont: true },
-        { lhs: "", rhs: String.raw`\cos^{-1}(-0.071)\approx94^\circ`, at: t94 + 55 },
+        { lhs: "", rhs: String.raw`\cos^{-1}(-0.071)\approx94^\circ`, at: t94 + 55, glow: HL(f, AT(k, 10, "ninety four")) },
       ]} />
     </Scene>
   );
@@ -636,7 +578,7 @@ const S09: React.FC = () => {
 const r3 = (G: ReturnType<typeof globeG>, p: [number, number]) => G.pw(ll(p[0], p[1], 1.25));
 
 export const SCENES_A: Record<string, React.FC> = {
-  s00_title: S00, s01_hook: S01, s02_part3_recap: S02, s03_enu: S03, s04_k_up: S04, s05_i_east: S05, s06_j_north: S06, s07_enu_checks: S07,
+  s00_title: S00, s01_hook: S01, s03_enu: S03, s04_k_up: S04, s05_i_east: S05, s06_j_north: S06, s07_enu_checks: S07,
   s08_other_stations: S08, s09_khulna: S09,
 };
 void [ArcHead, CurvedLink, arcD, svNorth, svP, svUp, tvDir, tvEast, fout, SE];

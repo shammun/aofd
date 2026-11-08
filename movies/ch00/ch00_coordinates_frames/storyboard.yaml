@@ -17,7 +17,7 @@ concepts:
 - 'a local frame turned on purpose: the coast frame; the coast bearing 329 deg from two coastline points (Part 3''s km); along/across components'
 - 'how the local arrows turn as a parcel moves: Di/Dt, Dj/Dt, Dk/Dt from Part 2''s turning rules (Vallis (2.39a)-(2.39c), r = a)'
 - 'Dv/Dt in spherical coordinates: product rule, the eastward part, metric terms (Vallis (2.44a), (2.45))'
-target_duration_s: 2363.5504
+target_duration_s: 2079.075
 fps: 30
 size:
 - 1920
@@ -50,11 +50,7 @@ audio:
     level: bed -28 LUFS, ducked 5 dB under speech; mix -16 LUFS, true peak <= -1.5 dBTP; 2.5-s tail on the silent end-card hold
     runner_up: 'ice-polar is taken by build 1 / Part 1 runner-up; second choice: tidal-glass (if it exists unused)'
     distinct_from: compass-orbit (Part 1); Parts 2, 3 and 5 pick their own (HOUSE_STYLE §8)
-  effects_candidates:
-  - scene: s14_along_across
-    kind: waves_breaking
-    intensity: 0.12
-    shows: water pushed onto Fort Myers Beach (S12-S13 only)
+  effects_candidates: []  # remake 2026-11-07: s14 (the only candidate) is cut
   effects_rules: 'HOUSE_STYLE §8: only where the picture shows the thing; -30...-24 LUFS short-term, ducked; never over a word; one at a time'
 dry_run:
   tool: tools/tts.py (Kokoro af_bella x 1.0, movies/lexicon.yaml as of HEAD, not edited)
@@ -73,6 +69,39 @@ dry_run:
   words_per_minute_overall: 145.1
   words_per_minute_speaking: 159.3
   warnings: none in any of the three runs
+remake_2026_11_07:
+  log: movies/ch00/ch00_coordinates_frames/remake_2026-11-07_log.md
+  plan: movies/ch00/coordinates_series/master_plan_2026-11-07.md (R1, R3, R15, R16, R19, §C); continuity_plan.md §2c, §3, §5-§7
+  cut:
+  - s02_part3_recap (no opening recap; its facts recalled at s04, s08, s11, s15)
+  - s12_coast_angle, s13_alpha, s14_along_across (the worked calculation lives in Part 2 s26-s28; s10 recalls it, s11 S14 keeps one sentence)
+  narration: re-voiced only new/changed sentences (checks/fr_r7_splice.py; OLD = the three measured dry runs)
+final_tts:
+  tool: movies/src/ch00_coordinates_frames/checks/fr_r7_splice.py
+  run: G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_frames/r8/tts
+  voice: af_bella
+  speed: 1.0
+  audio_s: 2076.575
+  with_hold_s: 2079.075
+  total_frames: 62298
+  cues: 488
+  warnings: []
+  sentences: 304
+  words: 5066
+  words_per_minute_overall: 146.2
+  self_check:
+    expected_s: 2076.575
+    audio_s: 2076.575
+    diff_ms: 0.0
+    len_ok: true
+    cues_ok: true
+  splice:
+    method: sentence matching against the three measured dry runs (dryrun1/splice2/splice3); new clips BS.1770-4 loudness-matched to the nearest re-used
+      clips + look-ahead limiter (-1.5 dBTP)
+    corr_resynth:
+      r7/tts: 0.9884
+    reused: 283
+    new: 21
 conventions:
   latitude: phi (Vallis writes a theta variant); longitude lambda, east positive
   local arrows: i-hat east, j-hat north, k-hat up (Vallis writes bold i, j, k; hats here, as in Parts 1-3; spoken 'i hat')
@@ -88,8 +117,8 @@ colour_contract: unit arrows orange (i, j, R, x', y', z) except up k-hat teal (a
   terms orange; gold for pointers, links, angle arcs, 'same' ticks, speed/radius braces
 data_block:
   status: data report READ (reports/data/ch00_coordinates_research.md, 2026-11-05)
-  ian: 'kept (§0, §1): s14 uses the HRRR 20 UTC 10-m wind at Fort Myers Beach (unchanged by the centre question)'
-  khulna: 22.8419 N, 89.5581 E (Natural Earth); Amphan 78 km W (IBTrACS NI)
+  ian: 'remake 2026-11-07: s10 recalls Part 2''s HRRR 20 UTC 10-m wind at Fort Myers Beach (fr.json ian; = Part 2 cs.json shore.fmb)'
+  khulna: 22.8419 N, 89.5581 E (Natural Earth); Amphan 79 km W (IBTrACS NI, 79.4; fact check 2026-11-07 row 12)
   pending: none
 cross_part:
   from_part1:
@@ -145,7 +174,7 @@ cross_part:
     - 24.3
   handed_to_part5:
   - the local frame and bold v (recapped in Part 5 s02)
-  - 'teaser: In Part 5, we''ll let the frame itself move, and see what a storm''s winds look like to someone riding along with it.'
+  - 'teaser (remake 2026-11-07): In Part 5, we''ll let the frame itself move, and ride along with a storm as it crosses the English Channel. That shows which parts of the storm''s winds come from its own spin, and which come only from its motion, and what a barometer sees as the storm passes.'
   handed_to_6_gradient:
   - 'i-hat, j-hat, k-hat derived here (split plan §3b item 3: #6 recaps them in <= 30 s)'
   handed_to_part6:
@@ -172,7 +201,7 @@ honesty_notes:
 - 's04-s09: unit vectors on a sphere (geocentric = geodetic here; the WGS-84 difference is < 0.2°). Screen values rounded to 3 decimals; CHECK rows at 1e-4.'
 - 's08: the Trappes angle uses the arc rule (480 km / 6371 km) because a 3-decimal dot product is too coarse for 4°; the library dot product gives 4.32°.'
 - 's09: Khulna at the split plan''s rounded 22.8 N, 89.6 E gives 75.76°; the Natural Earth point (22.8419, 89.5581) gives 75.7°; spoken ''about seventy five point eight'' (Part 3 README: 75.8°, coordinator 2026-11-05).
-  Amphan''s centre passed ≈ 78 km W of Khulna (data report §3, IBTrACS NI).'
+  Amphan''s centre passed ≈ 79 km W of Khulna (data report §3, IBTrACS NI).'
 - 's11-s12: the 329° comes from the NE 10 m coastline vertices nearest Naples and Englewood (build-1 manifest pN, pV); flat triangle 329.0°, sphere 329.1° (DC42 329.13°).
   Coastline direction depends on the segment chosen; said as ''the coast between Naples and Englewood''.'
 - 's14: HRRR 3-km analysis wind at Fort Myers Beach, 20 UTC (a model analysis, said ''a weather model''); the data report (§1c) finds HRRR''s vortex ≈ 11-16 km SW
@@ -189,65 +218,66 @@ quiz_hook: 'A parcel at 60 deg N moves due east at 20 m/s. Which way, and how fa
   = 20 / 6.371e6 x 1.732 = 5.4e-6 s^-1, about 31 deg a day.) And what is the bearing of a coast that runs 40 km north and 40 km east? (45 deg.)'
 headings_exception: s00_title only
 skip_guidance:
-  rule: 'series-wide (user via coordinator, 2026-11-05): before each step-by-step block one friendly spoken line + an on-screen chip; after it one line "If you skipped,
-    here''s what to keep: ..."; encouraging, not apologetic; timestamps from the measured TTS, re-filled after the final TTS'
+  rule: 'series-wide (user via coordinator, 2026-11-05): before each step-by-step block one friendly spoken line + an on-screen chip; after it one line
+    "If you skipped, here''s what to keep: ..."; encouraging, not apologetic; timestamps from the measured TTS, re-filled after the final TTS'
   chapter_marks:
   - block: A
     what: the local arrows in numbers (D33)
     chip_scene: s04_k_up
-    chip_sentence: 3
-    chip_at_s: 198.9659
-    chip_at: '3:18'
+    chip_sentence: 2
+    chip_at_s: 127.65
+    chip_at: '2:07'
     skip_to_scene: s07_enu_checks
-    skip_to_sentence: 10
-    skip_to_s: 542.3409
-    skip_to: '9:02'
-    chip_text: every step · optional · skip to 9:02
-    takeaway: 'If you skipped, here''s what to keep: every place has its own three arrows, east, north and up, and up always points straight away from the Earth''s
-      centre.'
+    skip_to_sentence: 9
+    skip_to_s: 467.225
+    skip_to: '7:47'
+    chip_text: every step · optional · skip to 7:47
+    takeaway: 'If you skipped, here''s what to keep: every place has its own three arrows, east, north and up, and up always points straight away from the
+      Earth''s centre.'
   - block: B
     what: how fast the arrows turn (D35-D38)
     chip_scene: s16_toolkit
-    chip_sentence: 3
-    chip_at_s: 1273.8783
-    chip_at: '21:13'
+    chip_sentence: 2
+    chip_at_s: 966.45
+    chip_at: '16:06'
     skip_to_scene: s22_add_motions
-    skip_to_sentence: 16
-    skip_to_s: 1838.8783
-    skip_to: '30:38'
-    chip_text: every step · optional · skip to 30:38
-    takeaway: 'If you skipped, here''s what to keep: as air moves over the round Earth, its east, north and up arrows turn, at about its speed divided by the Earth''s
-      radius.'
+    skip_to_sentence: 15
+    skip_to_s: 1528.55
+    skip_to: '25:28'
+    chip_text: every step · optional · skip to 25:28
+    takeaway: 'If you skipped, here''s what to keep: as air moves over the round Earth, its east, north and up arrows turn, at about its speed divided by
+      the Earth''s radius.'
   - block: C
     what: Dv/Dt and the metric terms (D39)
     chip_scene: s23_whole_vector
-    chip_sentence: 4
-    chip_at_s: 1859.3783
-    chip_at: '30:59'
+    chip_sentence: 3
+    chip_at_s: 1549.05
+    chip_at: '25:49'
     skip_to_scene: s25_dot_i_b
-    skip_to_sentence: 13
-    skip_to_s: 2084.3754
-    skip_to: '34:43'
-    chip_text: every step · optional · skip to 34:43
-    takeaway: 'If you skipped, here''s what to keep: because the arrows turn, the wind''s numbers can change even when nothing pushes the air, and the extra terms
-      that say so are called metric terms.'
+    skip_to_sentence: 12
+    skip_to_s: 1774.175
+    skip_to: '29:34'
+    chip_text: every step · optional · skip to 29:34
+    takeaway: 'If you skipped, here''s what to keep: because the arrows turn, the wind''s numbers can change even when nothing pushes the air, and the extra
+      terms that say so are called metric terms.'
 scenes:
 - id: s00_title
   t:
   - 0.3
-  - 11.1909
+  - 11.775
   sentence_times:
   - - 0.3
-    - 10.3909
+    - 10.975
   beat: opening title (HOUSE_STYLE §3)
-  visual: 'TITLE FRAME (house/kit/title.tsx). Left x 100-1075: line 1 ''Coordinates · Part 4'' (RiseText, 150 px, weight 800, TitleGradient teal -> gold; letters
-    rise 24 px over 8 frames, 2-frame stagger); line 2 ''Turning frames'' (96 px, warm white) pulsing x1.06 on AT(1, ''local frames''); subtitle ''local axes and how
-    they turn'' (68 px, ''how they turn'' teal), >= 50 px clear of the animation. Right x 1130-1840, y 180-636: Part A (frame 0 -> AT(1,''meteorology'')): a small
-    globe turning slowly with four stations (Brest, Trappes, Singapore, Khulna), each with its own orange i, j, k tripod; a parcel glides east along Brest''s parallel
-    and its tripod visibly turns. Part B (12-frame cross-fade on ''meteorology''): the SW Florida coast with the coast frame turning to 329° and Ian''s wind arrow
-    split into along and across; its source line below the column (y <= 860). Poster = frame 200.'
-  voiceover: In this video, we'll learn local frames and how they turn, and see how meteorology uses them to measure the winds on a coast and over the round
-    Earth.
+  visual: "TITLE FRAME (remake 2026-11-07, series layout of Parts 1-2, kit_fr/SeriesTitle = Part 2's kit_cs/SeriesTitle): left x 100-1075, line 1 'Coordinates'\
+    \ (RiseText 150 px, weight 800, TitleGradient teal -> gold) pulsing x1.06 on AT(0, 'coordinates'); line 2 'Part 4 \xB7 Turning frames' (warm white, <=\
+    \ 80 px); subtitle 'local axes and how they turn' (68 px). No 'made easy' (R1). Right x 1150-1840, y 150-630: Part A (frame 0 -> AT(0, \"they're used\"\
+    ): a small globe turning slowly with four stations (Brest, Trappes, Singapore, Khulna), each with its own tripod, a tripod gliding east along Brest's\
+    \ parallel. Part B (12-frame cross-fade on \"they're used\"): from above the North Pole, a parcel moving east along Brest's parallel, its east arrow swinging\
+    \ round with it (four faint copies left behind) - frames that turn as the air moves. One source line 'Image: NASA Blue Marble Next Generation' below the\
+    \ column. Poster = frame 200."
+  voiceover: In this video, we'll learn local frames, the coordinates every weather station uses, and see how they're used to follow the wind as the air moves
+    over the round Earth.
   on_screen_eq: null
   calc_rows: []
   physics_source:
@@ -277,40 +307,41 @@ scenes:
   data: BMNG globe texture; HRRR Ian 20 UTC point wind; Natural Earth coast
   tool: house title kit + three.js globe + Remotion SVG
   runner_up: —
-  why: the movie's three ideas (local frames, turned to a coast, turning as the air moves) on frame 0
+  why: the movie's ideas (local frames at every place, frames that turn as the air moves) on frame 0; the coast frame is Part 2's (remake 2026-11-07)
   related: []
   feedback:
   - U-CO-101
   pending_data: false
-  layout: 'Title frame; the coast mini-map has ''Data: HRRR (NOAA) · Natural Earth · 28 Sep 2022'' below it (>= 28 px, y <= 860). No other text.'
+  layout: 'Title frame; ''Image: NASA Blue Marble Next Generation'' below the animation (SourceBelow, y <= 860). No other text.'
   measured:
-    seconds: 11.9
-    words: 32
+    seconds: 11.475
+    words: 30
     sentences: 1
     beats: 0
-    timing_source: splice3
+    timing_source: r7 (final splice)
 - id: s01_hook
   t:
-  - 11.1909
-  - 39.4909
+  - 11.775
+  - 40.975
   sentence_times:
-  - - 11.1909
-    - 17.7659
-  - - 18.1159
-    - 22.0159
-  - - 22.3659
-    - 25.3159
-  - - 25.6659
-    - 29.1909
-  - - 29.5409
-    - 38.6909
+  - - 11.775
+    - 18.35
+  - - 18.7
+    - 22.6
+  - - 22.95
+    - 25.9
+  - - 26.25
+    - 29.775
+  - - 30.125
+    - 40.175
   beat: hook question
-  visual: 'Picture zone: the globe (unzoomed, left) with Brest and Khulna marked, each with its own east (orange), north (orange) and up (teal) arrows, the two tripods
-    visibly pointing different ways; on AT(3,''as the air moves'') a parcel starts moving east from Brest and its tripod turns. Column: keywords ''east · north ·
-    up'' (54 px) from frame 0, then ''local frames'', ''turned to a coast'' and ''turning as you move'' (54 px) on S5, each with a small mini (a coast with turned axes; a tripod sliding along a parallel).'
+  visual: "Picture zone: the globe (unzoomed, left) with Brest and Khulna, each with its own east (orange), north (orange) and up (teal) arrows, the two tripods\
+    \ visibly pointing different ways; on AT(2,'as the air moves') a parcel moves east from Brest and its tripod turns. Column: 'east \xB7 north \xB7 up'\
+    \ from frame 0, then 'local frames', 'different at every place' (mini: two tripods pointing different ways) and 'turning as you move' (mini: a tripod\
+    \ sliding along a parallel) on S4 (remake 2026-11-07: no coast mini)."
   voiceover: 'A forecaster at Brest, in France, measures the wind with three arrows: east, north and up. Are those the same three arrows at Khulna, in Bangladesh?
-    And what happens to them as the air moves? This is the fourth of seven parts on coordinates. Let''s see what local frames are, how to turn them to fit a coast,
-    how they turn by themselves as the air moves, and why that matters for the wind.'
+    And what happens to them as the air moves? This is the fourth of seven parts on coordinates. Now let''s dive into local frames: how they differ from place
+    to place, how they turn by themselves as the air moves, and why that matters for the wind.'
   on_screen_eq: null
   calc_rows: []
   physics_source:
@@ -342,129 +373,57 @@ scenes:
     fade y 760-830; text only on the darkened part; every zoom ends with a zoom back out; places centred and labelled within 1 s of being spoken. SourceBelow ''Image:
     NASA Blue Marble Next Generation · Natural Earth'' fully below the globe (y <= 860).'
   measured:
-    seconds: 28.3
-    words: 74
+    seconds: 29.2
+    words: 73
     sentences: 5
     beats: 0
-    timing_source: splice3
-- id: s02_part3_recap
-  t:
-  - 39.4909
-  - 112.2909
-  sentence_times:
-  - - 39.4909
-    - 43.3909
-  - - 43.7409
-    - 51.9659
-  - - 52.3159
-    - 56.6659
-  - - 57.0159
-    - 67.7909
-  - - 68.1409
-    - 76.4159
-  - - 76.7659
-    - 79.6659
-  - - 80.0159
-    - 88.0659
-  - - 88.4159
-    - 97.1159
-  - - 97.4659
-    - 110.7909
-  beat: recap of Part 3 (<= 60 s, split plan §2g)
-  visual: 'Reuse Part 3''s sliced globe (TwoViewSlice) on the left: the Earth''s axes x-hat (to 0 N 0 E), y-hat (to 0 N 90 E), z-hat (to the North Pole), orange,
-    appear on S3-S4; Brest''s latitude arc phi (gold) and longitude arc lambda (gold) on S2; the radius ''a ≈ 6400 km (6371 km)'' on S5-S6. Column builds one line
-    per sentence: r-hat = (cos phi cos lambda, cos phi sin lambda, sin phi); ''height a sin phi'', ''from the axis a cos phi'' with the two legs highlighted on the
-    slice; then ''1° north ≈ 111 km'', ''1° east = a cos phi Δλ ≈ 74 km at Brest'' with the meridian and parallel arcs lit.'
-  voiceover: 'In Part 3, we took coordinates to our round Earth. Latitude, phi, is the angle north of the equator, and longitude, lambda, is the angle east of the
-    prime meridian. We put the origin at the Earth''s centre, with three fixed axes. X hat points to latitude zero and longitude zero, y hat to latitude zero and
-    ninety degrees east, and z hat along the spin axis to the North Pole. The Earth''s radius is about six thousand four hundred kilometres, or more exactly six thousand
-    three hundred and seventy one. On screen, it has its own symbol. The arrow of length one from the centre to a place is cosine phi cosine lambda, cosine phi sine
-    lambda, sine phi. A place sits at the radius times sine phi above the equator''s plane, and at the radius times cosine phi from the axis. And one degree north
-    is always about a hundred and eleven kilometres, while one degree east is the radius, times cosine phi, times the angle in radians: about seventy four kilometres
-    at Brest. [beat]'
-  on_screen_eq:
-    latex: \hat{\mathbf r}=(\cos\varphi\cos\lambda,\ \cos\varphi\sin\lambda,\ \sin\varphi)
-    vallis_eq: 'none: Part 3''s position arrow divided by a (Vallis §2.2.1 coordinates; Fig. 2.3 geometry)'
-    page_png: chapters/pages/ch02/p082.png
-  calc_rows:
-  - a\approx 6400\ \text{km}\ \ (6371\ \text{km})
-  - \Delta y=a\,\Delta\varphi\approx 111\ \text{km per }1^\circ
-  - \Delta x=a\cos\varphi\,\Delta\lambda\approx 74\ \text{km per }1^\circ\ \text{at Brest}
-  physics_source:
-    fn: fluidpy.geo.sphere.unit_vector; fluidpy.geo.sphere.arc_lengths; fluidpy.geo.constants.EARTH_RADIUS
-    params:
-      Brest:
-      - 48.39
-      - -4.49
-      dlat: 1.0
-      dlon: 1.0
-    test: ../Fluid Dynamics/tests/geo/test_sphere.py (unit_vector, arc_lengths V1)
-  exaggeration:
-  - slice view of the globe (schematic cut, as Part 3)
-  kind: recap with 3-D slice
-  data: BMNG (slice faces code-drawn)
-  tool: TwoViewSlice (Part 3 component) + Layered TeX
-  runner_up: —
-  why: the four Part 3 results this movie needs (split plan §2g row P3 -> P4)
-  related: []
-  feedback:
-  - U-CO-101
-  pending_data: false
-  layout: 'House globe (HOUSE_STYLE §5b, cross-product v5 s33 look; GlobeFrame + Vignette from kit_cp): unzoomed, the whole globe in the picture zone (>= 760 px across),
-    separate from the text column; zoomed, full-bleed with the right side darkened 0 -> 82 % over x 980-1160, flat 82 % beyond, 60-px fades top/left/right, bottom
-    fade y 760-830; text only on the darkened part; every zoom ends with a zoom back out; places centred and labelled within 1 s of being spoken. SourceBelow ''Image:
-    NASA Blue Marble Next Generation · Natural Earth'' fully below the globe (y <= 860). Equation and the three rows in the column, never on the globe.'
-  measured:
-    seconds: 72.8
-    words: 176
-    sentences: 9
-    beats: 1
-    timing_source: dryrun1
+    timing_source: r7 (final splice)
 - id: s03_enu
   t:
-  - 112.2909
-  - 190.2159
+  - 40.975
+  - 118.9
   sentence_times:
-  - - 112.2909
-    - 115.4409
-  - - 115.7909
-    - 122.4909
-  - - 122.8409
-    - 127.1659
-  - - 127.5159
-    - 131.7659
-  - - 132.1159
-    - 138.8159
-  - - 139.1659
-    - 142.9159
-  - - 143.2659
-    - 146.8159
-  - - 147.1659
-    - 154.1159
-  - - 154.4659
-    - 160.6409
-  - - 160.9909
-    - 167.2909
-  - - 167.6409
-    - 174.6909
-  - - 175.0409
-    - 176.8659
-  - - 177.2159
-    - 185.8909
-  - - 186.2409
-    - 189.4159
+  - - 40.975
+    - 44.125
+  - - 44.475
+    - 51.175
+  - - 51.525
+    - 55.85
+  - - 56.2
+    - 60.45
+  - - 60.8
+    - 67.5
+  - - 67.85
+    - 71.6
+  - - 71.95
+    - 75.5
+  - - 75.85
+    - 82.8
+  - - 83.15
+    - 89.325
+  - - 89.675
+    - 95.975
+  - - 96.325
+    - 103.375
+  - - 103.725
+    - 105.55
+  - - 105.9
+    - 114.575
+  - - 114.925
+    - 118.1
   beat: 'building block: the local east-north-up frame'
   visual: 'Opens ZOOMED at Brest (Cesium drape of BMNG on ETOPO relief, as build-1 s24; zoom-reveal): ''Brest'' labelled after the camera settles (Should 17), area
     labels ''Brittany'' and ''Atlantic Ocean'' (italic) on S2. S5: three arrows grow from the station: i-hat (orange, east), j-hat (orange, north), k-hat (teal, up),
     KaTeX tip labels, each on its word. S8-S10: column: bold v = u i-hat + v j-hat + w k-hat (96 px), u, v, w coloured as their arrows, with gold underbraces ''east'',
     ''north'', ''up''; a faint ''Part 1: bold u'' tag crossed to ''bold v'' on S7. S11: ''i-hat × j-hat = k-hat'' with a right-hand glyph. S12-S13: a gravity arrow
     (brown, ''−k-hat'') and a wind-vane icon reading ''from north''.'
-  voiceover: Now let's stand at a weather station at Brest. Brest sits at the western tip of Brittany, in France, with the Atlantic Ocean on three sides. A forecaster
-    there doesn't use axes from the Earth's centre. She uses three arrows of length one, fixed to her own spot. I hat points east, j hat points north, and k hat points
-    straight up, away from the Earth's centre. This is called the local east, north, up frame. In Part 1, we called the wind arrow bold u. With three parts, it's
-    usual to call it bold v, and to keep small u, v and w for its parts. So the wind is u times i hat, plus v times j hat, plus w times k hat. Here, u is the eastward
-    wind, v the northward wind, and w the upward wind. And i hat cross j hat is k hat, so the frame is right-handed, as in the cross product movie. Why these arrows?
-    Gravity pulls along minus k hat, the ground lies along i hat and j hat, and wind directions are measured from north. So every weather report uses this frame.
+  voiceover: Now let's stand at a weather station at Brest. Brest sits at the western tip of Brittany, in France, with the Atlantic Ocean on three sides.
+    A forecaster there doesn't use axes from the Earth's centre. She uses three arrows of length one, fixed to her own spot. I hat points east, j hat points
+    north, and k hat points straight up, away from the Earth's centre. This is called the local east, north, up frame. In Part 1, we called the wind arrow
+    bold u. With three parts, it's usual to call it bold v, and to keep small u, v and w for its parts. So the wind is u times i hat, plus v times j hat,
+    plus w times k hat. Here, u is the eastward wind, v the northward wind, and w the upward wind. And i hat cross j hat is k hat, so the frame is right-handed,
+    as in the cross product movie. Why these arrows? Gravity pulls along minus k hat, the ground lies along i hat and j hat, and wind directions are measured
+    from north. So every weather report uses this frame.
   on_screen_eq:
     latex: \mathbf v=u\,\hat{\mathbf i}+v\,\hat{\mathbf j}+w\,\hat{\mathbf k}
     vallis_eq: (2.29) v = iu + jv + kw (Vallis writes bold i, j, k without hats; hats here match Parts 1-3)
@@ -499,58 +458,59 @@ scenes:
     words: 192
     sentences: 14
     beats: 0
-    timing_source: dryrun1
+    timing_source: r7 (final splice)
 - id: s04_k_up
   t:
-  - 190.2159
-  - 291.6909
+  - 118.9
+  - 228.25
   sentence_times:
-  - - 190.2159
-    - 195.2159
-  - - 195.5659
-    - 198.6159
-  - - 198.9659
-    - 206.7909
-  - - 207.1409
-    - 213.9409
-  - - 214.2909
-    - 217.5409
-  - - 217.8909
-    - 220.7159
-  - - 221.0659
-    - 227.8409
-  - - 228.1909
-    - 234.1659
-  - - 235.6659
-    - 237.9909
-  - - 238.3409
-    - 247.1659
-  - - 247.5159
-    - 253.8159
-  - - 254.1659
-    - 261.4409
-  - - 261.7909
-    - 270.5659
-  - - 270.9159
-    - 279.9159
-  - - 280.2659
-    - 283.4409
-  - - 284.9409
-    - 290.8909
+  - - 118.9
+    - 123.9
+  - - 124.25
+    - 127.3
+  - - 127.65
+    - 135.475
+  - - 135.825
+    - 150.275
+  - - 150.625
+    - 153.875
+  - - 154.225
+    - 157.05
+  - - 157.4
+    - 164.175
+  - - 164.525
+    - 174.125
+  - - 175.625
+    - 177.95
+  - - 178.3
+    - 187.125
+  - - 187.475
+    - 193.775
+  - - 194.125
+    - 201.4
+  - - 201.75
+    - 209.35
+  - - 209.7
+    - 216.475
+  - - 216.825
+    - 220.0
+  - - 221.5
+    - 227.45
   beat: 'derivation D33 (1): up = the position arrow''s direction'
-  visual: 'Globe (unzoomed, left) with the centre-to-Brest arrow (teal) drawn from the Earth''s centre through the surface (half-Earth slice from kit_cp so the centre
-    is visible, as Part 3); k-hat at Brest lies along it (gold ''same direction'' tick). Column: inputs row first ''φ = 48.4°, λ = −4.5°'', then ''cos φ = 0.664,
-    sin φ = 0.748, cos λ = 0.997, sin λ = −0.078'' (each value appears on its words), then the CalcStack building k-hat part by part, each product gold-linked to
-    its factor.'
-  voiceover: The next few steps write these three arrows as numbers, one move at a time. They're here for anyone who wants every step. You don't need them to follow
-    the weather, the climate or maps, so if it feels like a lot, skip ahead to the time on screen. Each of the three arrows can be written with the Earth's fixed
-    axes, x hat, y hat and z hat. Let's start with up, because it's the easiest. Up points straight out from the Earth's centre. That's exactly the direction of the
-    arrow from the centre to the station, the one we found in Part 3. So k hat is cosine phi cosine lambda, cosine phi sine lambda, sine phi. [beat] Let's put in
-    Brest's numbers. Brest is at forty eight point four degrees north, and four point five degrees west, so lambda is minus four point five degrees. Cosine phi is
-    zero point six six four, and sine phi is zero point seven four eight. Cosine lambda is zero point nine nine seven, and sine lambda is minus zero point zero seven
-    eight. So the first part of k hat is zero point six six four times zero point nine nine seven, which is zero point six six two. The second is zero point six six
-    four times minus zero point zero seven eight, which is minus zero point zero five two. And the third is zero point seven four eight. [beat] Its length is one,
-    because it's still the arrow from Part 3, divided by the radius.
+  visual: "Half-Earth face through Brest's meridian. S3: x-hat, y-hat, z-hat from the centre, each on its word; column 'x\u0302 \u2192 (0\xB0, 0\xB0), \u0177\
+    \ \u2192 (0\xB0, 90\xB0 E)', '\u1E91 \u2192 North Pole' + gold 'derived in Part 3: Earth axes' (recall, remake 2026-11-07). S5-S6: up from the centre,\
+    \ 'same direction' link. S7: k-hat = (cos \u03C6 cos \u03BB, cos \u03C6 sin \u03BB, sin \u03C6) + gold 'derived in Part 3: position vector'; '\u03C6:\
+    \ latitude, \u03BB: longitude' on 'where phi'. S9-S15: the CalcStack (y 390) with Brest's numbers. Skip chip on S2."
+  voiceover: 'The next few steps write these three arrows as numbers, one move at a time. They''re here for anyone who wants every step. You don''t need them
+    to follow the weather, the climate or maps, so if it feels like a lot, skip ahead to the time on screen. Each of the three arrows can be written with
+    the Earth''s fixed axes from Part 3: x hat points to latitude zero and longitude zero, y hat to latitude zero and ninety degrees east, and z hat to the
+    North Pole. Let''s start with up, because it''s the easiest. Up points straight out from the Earth''s centre. That''s exactly the direction of the arrow
+    from the centre to the station, the one we found in Part 3. So k hat is cosine phi cosine lambda, cosine phi sine lambda, sine phi, where phi is the latitude
+    and lambda the longitude. [beat] Let''s put in Brest''s numbers. Brest is at forty eight point four degrees north, and four point five degrees west, so
+    lambda is minus four point five degrees. Cosine phi is zero point six six four, and sine phi is zero point seven four eight. Cosine lambda is zero point
+    nine nine seven, and sine lambda is minus zero point zero seven eight. The first part of k hat is cosine phi times cosine lambda, which comes to about
+    zero point six six two. The second, cosine phi times sine lambda, comes to about minus zero point zero five two. And the third is zero point seven four
+    eight. [beat] Its length is one, because it''s still the arrow from Part 3, divided by the radius.'
   on_screen_eq:
     latex: \hat{\mathbf k}=(\cos\varphi\cos\lambda,\ \cos\varphi\sin\lambda,\ \sin\varphi)
     vallis_eq: 'none as a numbered line: the radial unit vector of Fig. 2.3 (k points in the direction of increasing r)'
@@ -609,60 +569,61 @@ scenes:
     text: every step · optional · skip to 9:03
     look: small warm-white keyword chip at the top of the column (54 px, gold outline), fades after 6 s; timestamp re-filled after the final TTS
   measured:
-    seconds: 101.475
-    words: 256
+    seconds: 109.35
+    words: 274
     sentences: 16
     beats: 2
-    timing_source: splice2
+    timing_source: r7 (final splice)
 - id: s05_i_east
   t:
-  - 291.6909
-  - 386.6659
+  - 228.25
+  - 323.225
   sentence_times:
-  - - 291.6909
-    - 293.2659
-  - - 293.6159
-    - 297.4909
-  - - 297.8409
-    - 304.5659
-  - - 304.9159
-    - 312.7409
-  - - 313.0909
-    - 319.0659
-  - - 319.4159
-    - 322.6159
-  - - 322.9659
-    - 328.3409
-  - - 328.6909
-    - 338.1409
-  - - 338.4909
-    - 343.6409
-  - - 343.9909
-    - 353.5659
-  - - 353.9159
-    - 357.6909
-  - - 358.0409
-    - 365.0409
-  - - 366.5409
-    - 372.2909
-  - - 373.7909
-    - 378.1909
-  - - 378.5409
-    - 385.8659
+  - - 228.25
+    - 229.825
+  - - 230.175
+    - 234.05
+  - - 234.4
+    - 241.125
+  - - 241.475
+    - 249.3
+  - - 249.65
+    - 255.625
+  - - 255.975
+    - 259.175
+  - - 259.525
+    - 264.9
+  - - 265.25
+    - 274.7
+  - - 275.05
+    - 280.2
+  - - 280.55
+    - 290.125
+  - - 290.475
+    - 294.25
+  - - 294.6
+    - 301.6
+  - - 303.1
+    - 308.85
+  - - 310.35
+    - 314.75
+  - - 315.1
+    - 322.425
   beat: 'derivation D33 (2): east from the top view (Part 1''s 90° rule)'
   visual: 'Camera rises over the North Pole (<= 90°/s, eased): the globe seen from above, Brest''s parallel drawn as a gold circle round the axis, Brest''s foot at
     angle λ from x-hat (slate arc, ''−4.5°''). The view flattens into a 2-D top-view diagram (cross-fade into an SVG copy, same positions): the circle, x-hat and
     y-hat (orange, faint), capital R-hat (orange) from the axis to Brest labelled ''R-hat = (cos λ, sin λ, 0)'', then the TurnRule90 animation from Part 1 turning
     R-hat by +90° into i-hat (a real rigid rotation with a gold quarter arc). Column: the rule ''(p, q) -> (−q, p)'' recalled (54 px, from Part 1), then i-hat = (−sin
     λ, cos λ, 0), the Brest numbers, and ''i-hat ≈ y-hat'' keyword with a gold tick between i-hat and y-hat.'
-  voiceover: 'Now east. Let''s look down on the Earth from far above the North Pole. From there, the circle of latitude through Brest, the parallel, is a circle round
-    the Earth''s axis. Brest sits on it at the angle lambda from the x axis, measured anticlockwise as seen from above the North Pole. Going east means lambda grows,
-    so Brest slides anticlockwise round this circle. This is exactly the picture from Part 1. The arrow pointing from the circle''s centre out to Brest plays the
-    role of r hat. We''ll call it capital R hat: it points straight away from the Earth''s axis, level with the equator, and it''s cosine lambda, sine lambda, zero.
-    East is the way the angle grows, so east plays the role of theta hat. In Part 1, we found theta hat by turning r hat by ninety degrees anticlockwise: swap the
-    two numbers, and put a minus on the first. So i hat is minus sine lambda, cosine lambda. Its third part is zero, because east runs level, round the circle, with
-    no part along the axis. [beat] At Brest, that''s zero point zero seven eight, zero point nine nine seven, zero. [beat] So east at Brest points almost exactly
-    along y hat. That makes sense: Brest is close to longitude zero, and there, east points towards ninety degrees east.'
+  voiceover: 'Now east. Let''s look down on the Earth from far above the North Pole. From there, the circle of latitude through Brest, the parallel, is a
+    circle round the Earth''s axis. Brest sits on it at the angle lambda from the x axis, measured anticlockwise as seen from above the North Pole. Going
+    east means lambda grows, so Brest slides anticlockwise round this circle. This is exactly the picture from Part 1. The arrow pointing from the circle''s
+    centre out to Brest plays the role of r hat. We''ll call it capital R hat: it points straight away from the Earth''s axis, level with the equator, and
+    it''s cosine lambda, sine lambda, zero. East is the way the angle grows, so east plays the role of theta hat. In Part 1, we found theta hat by turning
+    r hat by ninety degrees anticlockwise: swap the two numbers, and put a minus on the first. So i hat is minus sine lambda, cosine lambda. Its third part
+    is zero, because east runs level, round the circle, with no part along the axis. [beat] At Brest, that''s zero point zero seven eight, zero point nine
+    nine seven, zero. [beat] So east at Brest points almost exactly along y hat. That makes sense: Brest is close to longitude zero, and there, east points
+    towards ninety degrees east.'
   on_screen_eq:
     latex: \hat{\mathbf i}=(-\sin\lambda,\ \cos\lambda,\ 0)
     vallis_eq: 'none as a numbered line: the eastward unit vector of Fig. 2.3 (direction of increasing λ)'
@@ -726,52 +687,52 @@ scenes:
     words: 222
     sentences: 15
     beats: 2
-    timing_source: dryrun1
+    timing_source: r7 (final splice)
 - id: s06_j_north
   t:
-  - 386.6659
-  - 477.3159
+  - 323.225
+  - 413.875
   sentence_times:
-  - - 386.6659
-    - 388.1909
-  - - 388.5409
-    - 397.4409
-  - - 397.7909
-    - 406.2909
-  - - 406.6409
-    - 411.3659
-  - - 411.7159
-    - 419.6409
-  - - 421.1409
-    - 426.9659
-  - - 427.3159
-    - 430.8409
-  - - 431.1909
-    - 439.4409
-  - - 439.7909
-    - 447.0159
-  - - 447.3659
-    - 452.8409
-  - - 453.1909
-    - 459.7659
-  - - 461.2659
-    - 469.4909
-  - - 470.9909
-    - 476.5159
+  - - 323.225
+    - 324.75
+  - - 325.1
+    - 334.0
+  - - 334.35
+    - 342.85
+  - - 343.2
+    - 347.925
+  - - 348.275
+    - 356.2
+  - - 357.7
+    - 363.525
+  - - 363.875
+    - 367.4
+  - - 367.75
+    - 376.0
+  - - 376.35
+    - 383.575
+  - - 383.925
+    - 389.4
+  - - 389.75
+    - 396.325
+  - - 397.825
+    - 406.05
+  - - 407.55
+    - 413.075
   beat: 'derivation D33 (3): north from the meridian slice'
   visual: 'Camera returns to the side and the globe is sliced along Brest''s meridian (half-Earth face, kit_cp, as Part 3 s05); on the face: the axis (z-hat, orange,
     up), capital R-hat (orange, level), Brest on the rim at angle φ (gold arc at the centre ''48.4°''). k-hat drawn at Brest along the radius; TurnRule90 turns it
     +90° towards the pole into j-hat (orange). The face flattens into a 2-D diagram with axes ''R-hat'' and ''z-hat''. Column: k-hat = cos φ R-hat + sin φ z-hat,
     then j-hat = −sin φ R-hat + cos φ z-hat, then R-hat put in (gold link from R-hat''s formula), then the Brest numbers; S12: j-hat split into a ''up the axis''
     leg and an ''in towards the axis'' leg (orange dashed), labelled.'
-  voiceover: 'Now north. This time, let''s slice the Earth along Brest''s meridian, the half circle from pole to pole through Brest, as we did in Part 3. In this
-    slice, there are two fixed directions: capital R hat, pointing away from the axis, and z hat, pointing up the axis. Up, k hat, sits at the angle phi above capital
-    R hat. So, just like r hat in Part 1, k hat is cosine phi times capital R hat, plus sine phi times z hat. [beat] North is the way phi grows: Brest sliding round
-    the meridian towards the North Pole. So north plays the role of theta hat in this slice. Let''s turn k hat by ninety degrees towards the pole, with the same rule:
-    swap the two numbers, and put a minus on the first. That gives j hat equals minus sine phi times capital R hat, plus cosine phi times z hat. Now put in capital
-    R hat, which is cosine lambda, sine lambda, zero. So j hat is minus sine phi cosine lambda, minus sine phi sine lambda, cosine phi. [beat] At Brest, that''s minus
-    zero point seven four five, zero point zero five nine, and zero point six six four. [beat] So north at Brest points partly up the Earth''s axis, and partly in
-    towards it.'
+  voiceover: 'Now north. This time, let''s slice the Earth along Brest''s meridian, the half circle from pole to pole through Brest, as we did in Part 3.
+    In this slice, there are two fixed directions: capital R hat, pointing away from the axis, and z hat, pointing up the axis. Up, k hat, sits at the angle
+    phi above capital R hat. So, just like r hat in Part 1, k hat is cosine phi times capital R hat, plus sine phi times z hat. [beat] North is the way phi
+    grows: Brest sliding round the meridian towards the North Pole. So north plays the role of theta hat in this slice. Let''s turn k hat by ninety degrees
+    towards the pole, with the same rule: swap the two numbers, and put a minus on the first. That gives j hat equals minus sine phi times capital R hat,
+    plus cosine phi times z hat. Now put in capital R hat, which is cosine lambda, sine lambda, zero. So j hat is minus sine phi cosine lambda, minus sine
+    phi sine lambda, cosine phi. [beat] At Brest, that''s minus zero point seven four five, zero point zero five nine, and zero point six six four. [beat]
+    So north at Brest points partly up the Earth''s axis, and partly in towards it.'
   on_screen_eq:
     latex: \hat{\mathbf j}=(-\sin\varphi\cos\lambda,\ -\sin\varphi\sin\lambda,\ \cos\varphi)
     vallis_eq: 'none as a numbered line: the northward unit vector of Fig. 2.3 (direction of increasing latitude)'
@@ -839,43 +800,42 @@ scenes:
     words: 217
     sentences: 13
     beats: 3
-    timing_source: dryrun1
+    timing_source: r7 (final splice)
 - id: s07_enu_checks
   t:
-  - 477.3159
-  - 553.0409
+  - 413.875
+  - 477.925
   sentence_times:
-  - - 477.3159
-    - 482.4409
-  - - 482.7909
-    - 489.8659
-  - - 491.3659
-    - 505.1659
-  - - 505.5159
-    - 512.6909
-  - - 513.0409
-    - 515.1159
-  - - 516.6159
-    - 519.3159
-  - - 519.6659
-    - 530.6909
-  - - 531.0409
-    - 532.7909
-  - - 534.2909
-    - 541.9909
-  - - 542.3409
-    - 552.2409
+  - - 413.875
+    - 419.0
+  - - 419.35
+    - 424.0
+  - - 425.5
+    - 434.45
+  - - 434.8
+    - 437.575
+  - - 437.925
+    - 440.0
+  - - 441.5
+    - 444.2
+  - - 444.55
+    - 455.575
+  - - 455.925
+    - 457.675
+  - - 459.175
+    - 466.875
+  - - 467.225
+    - 477.125
   beat: 'check: unit length, right angles, right-handed'
   visual: 'Brest''s three arrows from s03 at the station (zoomed globe, left). Column CalcStack (<= 3 lines visible, older dim to 60 %): |i-hat|², i-hat·j-hat with
     the three products written, then i-hat × j-hat with the cross-product recipe (component rows from the cross product movie), its result gold-linked to k-hat from
     s04 with a ''same'' tick. RightTick glyphs appear between the arrow pairs at the station on S3-S5.'
-  voiceover: 'Let''s check that these really are three arrows of length one, at right angles. For i hat, zero point zero seven eight squared, plus zero point nine
-    nine seven squared, is one. [beat] The dot product of i hat and j hat is zero point zero seven eight times minus zero point seven four five, plus zero point nine
-    nine seven times zero point zero five nine, plus zero. That''s minus zero point zero five eight, plus zero point zero five nine: zero, up to rounding. So they''re
-    at right angles. [beat] The other pairs work out the same way. And with the cross product recipe, i hat cross j hat gives zero point six six two, minus zero point
-    zero five two, and zero point seven four eight. That''s k hat. [beat] So the three local arrows are right-handed, just like x hat, y hat and z hat, only turned
-    to fit Brest. If you skipped, here''s what to keep: every place has its own three arrows, east, north and up, and up always points straight away from the Earth''s
-    centre.'
+  voiceover: 'Let''s check that these really are three arrows of length one, at right angles. For i hat, the squares of its east and north parts add up to
+    one. [beat] Next, the dot product of i hat and j hat: we multiply their first parts, their second parts and their third parts, and add them. That gives
+    zero, up to rounding. So they''re at right angles. [beat] The other pairs work out the same way. And with the cross product recipe, i hat cross j hat
+    gives zero point six six two, minus zero point zero five two, and zero point seven four eight. That''s k hat. [beat] So the three local arrows are right-handed,
+    just like x hat, y hat and z hat, only turned to fit Brest. If you skipped, here''s what to keep: every place has its own three arrows, east, north and
+    up, and up always points straight away from the Earth''s centre.'
   on_screen_eq: null
   calc_rows:
   - '|\hat{\mathbf i}|^2=0.078^2+0.997^2\approx1'
@@ -910,59 +870,58 @@ scenes:
     spoken: 'If you skipped, here''s what to keep: every place has its own three arrows, east, north and up, and up always points straight away from the Earth''s
       centre.'
   measured:
-    seconds: 75.725
-    words: 179
+    seconds: 64.05
+    words: 154
     sentences: 10
     beats: 3
-    timing_source: splice2
+    timing_source: r7 (final splice)
 - id: s08_other_stations
   t:
-  - 553.0409
-  - 640.1159
+  - 477.925
+  - 554.925
   sentence_times:
-  - - 553.0409
-    - 555.5659
-  - - 555.9159
-    - 558.6659
-  - - 559.0159
-    - 564.0909
-  - - 564.4409
-    - 566.4159
-  - - 566.7659
-    - 572.4659
-  - - 572.8159
-    - 581.5659
-  - - 581.9159
-    - 587.4159
-  - - 588.9159
-    - 591.5659
-  - - 591.9159
-    - 595.7659
-  - - 596.1159
-    - 601.8159
-  - - 602.1659
-    - 609.8409
-  - - 610.1909
-    - 614.0409
-  - - 614.3909
-    - 625.0159
-  - - 626.5159
-    - 633.4409
-  - - 634.9409
-    - 639.3159
+  - - 477.925
+    - 480.45
+  - - 480.8
+    - 483.55
+  - - 483.9
+    - 488.975
+  - - 489.325
+    - 491.3
+  - - 491.65
+    - 497.35
+  - - 497.7
+    - 502.475
+  - - 502.825
+    - 508.325
+  - - 509.825
+    - 512.475
+  - - 512.825
+    - 516.675
+  - - 517.025
+    - 522.725
+  - - 523.075
+    - 530.75
+  - - 531.1
+    - 534.95
+  - - 535.3
+    - 539.825
+  - - 541.325
+    - 548.25
+  - - 549.75
+    - 554.125
   beat: 'intuition: every place has its own frame (Trappes, Singapore)'
   visual: 'Zoom back out to the whole globe (Should 17: labels only after the camera stops). Trappes turned to the centre and labelled within 1 s, with its tripod;
     the arc Brest-Trappes on the surface (gold, ''480 km'') and the angle at the centre (gold, ''4.3°'') drawn on a slice through both places and the centre. Then
     Singapore turned to the centre with its tripod; the two up arrows drawn from the centre (teal) with the ''101°'' arc between them. Column: CalcStack ''480 / 6371
     = 0.075 rad ≈ 4.3°''; then k_S = (−0.239, 0.971, 0.024) and the dot product with each product written.'
-  voiceover: 'Each station has its own frame. Let''s zoom back out to the whole globe. Trappes, near Paris, is four hundred and eighty kilometres east of Brest. How
-    different is its up? The angle between two ups is the angle at the Earth''s centre between the two places. By the arc rule, that''s the distance divided by the
-    radius: four hundred and eighty over six thousand three hundred and seventy one. That''s zero point zero seven five radians, about four point three degrees. [beat]
-    Now Singapore, near the equator. For places far apart, the dot product is easier. The dot product of two arrows of length one is the cosine of the angle between
-    them. Singapore''s up is minus zero point two three nine, zero point nine seven one, zero point zero two four. Multiply the matching parts of the two ups, and
-    add. That''s minus zero point one five eight, minus zero point zero five zero, plus zero point zero one eight, which is minus zero point one nine one. [beat]
-    The angle whose cosine is minus zero point one nine one is about a hundred and one degrees. [beat] So Singapore''s up points more than a right angle away from
-    Brest''s up.'
+  voiceover: Each station has its own frame. Let's zoom back out to the whole globe. Trappes, near Paris, is four hundred and eighty kilometres east of Brest.
+    How different is its up? The angle between two ups is the angle at the Earth's centre between the two places. By the arc rule, that's the distance divided
+    by the Earth's radius. That's zero point zero seven five radians, about four point three degrees. [beat] Now Singapore, near the equator. For places far
+    apart, the dot product is easier. The dot product of two arrows of length one is the cosine of the angle between them. Singapore's up is minus zero point
+    two three nine, zero point nine seven one, zero point zero two four. Multiply the matching parts of the two ups, and add. Those three products add up
+    to minus zero point one nine one. [beat] The angle whose cosine is minus zero point one nine one is about a hundred and one degrees. [beat] So Singapore's
+    up points more than a right angle away from Brest's up.
   on_screen_eq:
     latex: \cos(\text{angle})=\hat{\mathbf k}_1\cdot\hat{\mathbf k}_2
     vallis_eq: 'none: dot product of unit vectors (the dot product movie)'
@@ -1000,56 +959,57 @@ scenes:
     fade y 760-830; text only on the darkened part; every zoom ends with a zoom back out; places centred and labelled within 1 s of being spoken. SourceBelow ''Image:
     NASA Blue Marble Next Generation · Natural Earth'' fully below the globe (y <= 860).'
   measured:
-    seconds: 87.075
-    words: 200
+    seconds: 77.0
+    words: 174
     sentences: 15
     beats: 3
-    timing_source: dryrun1
+    timing_source: r7 (final splice)
 - id: s09_khulna
   t:
-  - 640.1159
-  - 729.1262
+  - 554.925
+  - 652.25
   sentence_times:
-  - - 640.1159
-    - 644.0659
-  - - 644.4159
-    - 652.5159
-  - - 652.8659
-    - 659.4659
-  - - 659.8159
-    - 669.3262
-  - - 669.6762
-    - 675.5762
-  - - 675.9262
-    - 682.8512
-  - - 684.3512
-    - 695.1762
-  - - 695.5262
-    - 701.6262
-  - - 703.1262
-    - 705.2762
-  - - 705.6262
-    - 713.6012
-  - - 713.9512
-    - 717.4262
-  - - 718.9262
-    - 725.9512
-  - - 726.3012
-    - 728.3262
+  - - 554.925
+    - 558.875
+  - - 559.225
+    - 567.325
+  - - 567.675
+    - 574.275
+  - - 574.625
+    - 586.225
+  - - 586.575
+    - 592.475
+  - - 592.825
+    - 611.075
+  - - 612.575
+    - 617.775
+  - - 618.125
+    - 624.75
+  - - 626.25
+    - 628.4
+  - - 628.75
+    - 636.725
+  - - 637.075
+    - 640.55
+  - - 642.05
+    - 649.075
+  - - 649.425
+    - 651.45
   beat: 'intuition: Khulna (U-CO-060), the Bay of Bengal seen from the globe'
   visual: 'Zoom tour (HOUSE_STYLE §5b): the globe turns and zooms to the Bay of Bengal; labels on their words: ''Khulna'' (centred within 1 s), ''Ganges delta'',
     ''Sundarbans'' (green-tinted forest outline from Natural Earth / ESA WorldCover if available, else a label only), ''Bay of Bengal'' (italic), ''Kolkata'', ''India'',
-    ''Bangladesh''; Amphan''s IBTrACS track (gold dots, 18-21 May 2020) with ''≈ 78 km'' bracket west of Khulna. Khulna''s tripod grows. Column: ''22.8° N, 89.6°
+    ''Bangladesh''; Amphan''s IBTrACS track (gold dots, 18-21 May 2020) with ''≈ 79 km'' bracket west of Khulna. Khulna''s tripod grows. Column: ''22.8° N, 89.6°
     E'', k_K = (0.006, 0.922, 0.388), the dot product with each product written, ''≈ 75.8°''; then i_K = (−1.000, 0.007, 0) and ''≈ 94° from Brest''s east''. S8: zoom
     back out to the starting view, Brest''s and Khulna''s tripods both visible, the 75.8° arc between the two ups drawn at the centre (slice).'
-  voiceover: 'Now let''s fly to Khulna, in south-west Bangladesh. Khulna lies on the rivers of the Ganges delta, just north of the Sundarbans, the largest
-    mangrove forest in the world. To the south is the Bay of Bengal, and to the west, across the border, is Kolkata, in India. In May twenty twenty, the centre
-    of Cyclone Amphan passed about seventy nine kilometres west of Khulna, and the sea flooded the coast to its south. Khulna is at twenty two point eight
-    degrees north, and eighty nine point six degrees east. Its up arrow is zero point zero zero six, zero point nine two two, zero point three eight eight.
-    [beat] Dotted with Brest''s up, that''s zero point zero zero four, minus zero point zero four eight, plus zero point two nine zero: zero point two four
-    six. The angle whose cosine is zero point two four six is about seventy five point eight degrees. [beat] Even east is different. Khulna''s i hat is minus
-    one, zero point zero zero seven, zero, almost exactly opposite to x hat. It''s about ninety four degrees away from Brest''s east. [beat] So forecasters
-    in Khulna and in Brest both say east, north and up, but they mean different arrows. Let''s zoom back out.'
+  voiceover: Now let's fly to Khulna, in south-west Bangladesh. Khulna lies on the rivers of the Ganges delta, just north of the Sundarbans, the largest mangrove
+    forest in the world. To the south is the Bay of Bengal, and to the west, across the border, is Kolkata, in India. In May twenty twenty, the centre of
+    Cyclone Amphan, which we met in Part 2, passed about seventy nine kilometres west of Khulna, and the sea flooded the coast to its south. Khulna is at
+    twenty two point eight degrees north, and eighty nine point six degrees east. There, cosine phi is zero point nine two two, sine phi zero point three
+    eight eight, cosine lambda zero point zero zero seven and sine lambda almost exactly one, so its up arrow is zero point zero zero six, zero point nine
+    two two, zero point three eight eight. [beat] Dotted with Brest's up, part by part, that gives zero point two four six. The angle whose cosine is zero
+    point two four six is about seventy five point eight degrees. [beat] Even east is different. Khulna's i hat is minus one, zero point zero zero seven,
+    zero, almost exactly opposite to x hat. It's about ninety four degrees away from Brest's east. [beat] So forecasters in Khulna and in Brest both say east,
+    north and up, but they mean different arrows. Let's zoom back out.
   on_screen_eq: null
   calc_rows:
   - \hat{\mathbf k}_K=(0.922\times0.007,\ 0.922\times1.000,\ 0.388)\approx(0.006,\ 0.922,\ 0.388)
@@ -1069,7 +1029,7 @@ scenes:
       - 89.5581
     test: ../Fluid Dynamics/tests/geo/test_sphere_enu_band.py::test_enu_basis_V1_closed_form_known_points_and_k_is_unit_vector; ::test_enu_basis_V2_derivation_from_position_vector;
       ::test_enu_basis_V1_orthonormal_right_handed_1e4_points; new CHECK DP09 angle(k_B, k_K) = 75.76° (22.8/89.6) and 75.7° (NE coords) screen and voice 75.8° (Part 3); i_B·i_K
-      = -0.071 -> 94.1°; Amphan closest approach to Khulna 78 km W (data report §3)
+      = -0.071 -> 94.1°; Amphan closest approach to Khulna 79 km W (data report §3)
   exaggeration:
   - tripod arrows about 800 km long (illustrative size)
   kind: 3-D globe zoom tour
@@ -1087,51 +1047,66 @@ scenes:
     NASA Blue Marble Next Generation · Natural Earth'' fully below the globe (y <= 860). Source line: ''Image: NASA Blue Marble NG · Natural Earth · Track: IBTrACS
     (NOAA NCEI), Amphan, May 2020''.'
   measured:
-    seconds: 89.075
-    words: 204
+    seconds: 97.325
+    words: 229
     sentences: 13
     beats: 3
-    timing_source: dryrun1
+    timing_source: r7 (final splice)
 - id: s10_coast_frame
   t:
-  - 729.1262
-  - 791.8012
+  - 652.25
+  - 746.425
   sentence_times:
-  - - 729.1262
-    - 733.9762
-  - - 734.3262
-    - 743.3762
-  - - 743.7262
-    - 747.2512
-  - - 747.6012
-    - 756.3512
-  - - 756.7012
-    - 764.1762
-  - - 764.5262
-    - 775.2512
-  - - 775.6012
-    - 779.0762
-  - - 779.4262
-    - 783.5762
-  - - 783.9262
-    - 791.0012
-  beat: 'frames we turn on purpose: the coast frame (recap of Part 1''s turned axes, not re-derived)'
-  visual: 'Picture zone: a small local map of SW Florida (NE 10 m coast, land muted, Gulf of Mexico labelled) with Brest-style i-hat, j-hat at a coast point (orange);
-    on S4 the pair turns rigidly by α (orange arc) into x-hat'' (along) and y-hat'' (across, out to sea), tip labels. Column: the two Part 1 lines recalled at 68
-    px (not re-derived; a faint ''Part 1'' keyword), then ''along = v·x̂′, across = v·ŷ′''. S7: a question mark on the angle α.'
-  voiceover: 'Sometimes a forecaster turns her east and north arrows on purpose. On a coast, what matters is the part of the wind blowing along the shore, and the
-    part blowing across it, onto the land or out to sea. In Part 1, we learned how to turn axes. We keep up, k hat, as it is, and turn i hat and j hat by an angle
-    alpha, anticlockwise as seen from above. The new along arrow, x hat prime, is cosine alpha times i hat, plus sine alpha times j hat. The new across arrow, y hat
-    prime, is that one turned by ninety degrees: minus sine alpha times i hat, plus cosine alpha times j hat. And the wind''s parts along them are dot products. So
-    everything hangs on one number: the angle of the coast. Let''s find it for the south-west coast of Florida, where Hurricane Ian came ashore in September twenty
-    twenty two.'
+  - - 652.25
+    - 657.1
+  - - 657.45
+    - 666.5
+  - - 666.85
+    - 676.975
+  - - 677.325
+    - 684.8
+  - - 685.15
+    - 695.875
+  - - 696.225
+    - 706.3
+  - - 706.65
+    - 717.025
+  - - 717.375
+    - 729.075
+  - - 729.425
+    - 741.275
+  - - 741.625
+    - 745.625
+  beat: "the coast frame RECALLED from Part 2 (equations derived in Part 1, result found in Part 2) + the 3-D point new here; the question for s11 (continuity_plan\
+    \ \xA72c item 1; remake 2026-11-07)"
+  visual: "Phase 1 (S0-S6): SW Florida coast map (NE 10 m), Fort Myers Beach, Gulf of Mexico, Florida labelled; i-hat, j-hat at Fort Myers Beach turn by \u03B1\
+    \ = 121\xB0 on S3 into x-hat' (along, NNW) and y-hat' (across, out to sea); on S6 Ian's HRRR 20 UTC wind (ink, moving dashes) with its along part (teal\
+    \ band) and across part (rose band). Column: 'Part 2: Ian at Fort Myers Beach'; x\u0302\u2032 (S3) and \u0177\u2032 (S4) + gold 'derived in Part 1: turned\
+    \ axes'; 'coast: bearing 329\xB0' and \u03B1 = 90\xB0 \u2212 329\xB0 = \u2212239\xB0 \u2261 121\xB0 (S5); 'along \u2248 9.4 m/s', 'across \u2248 \u2212\
+    31.5 m/s' + 'onto the land' and gold 'found in Part 2: Fort Myers Beach' (S6). Phase 2 (S7): zoomed globe at Fort Myers Beach (house GlobeFrame, darkened\
+    \ right panel): the local tripod, k-hat (teal) stays, i-hat and j-hat turn about it by 121\xB0 into x-hat', y-hat'; column 'in three dimensions', the\
+    \ two equations, 'k\u0302 unchanged', 'anticlockwise, seen from above'. Phase 3 (S8-S9): s11's map with Naples, Englewood, the dashed coast segment and\
+    \ the two legs '91.5 km ?' / '55 km ?'; column 'Part 2: read off a km map', '91.5 km north \xB7 55 km west', 'from latitude and longitude'."
+  voiceover: 'Sometimes a forecaster turns her east and north arrows on purpose. On a coast, what matters is the part of the wind blowing along the shore,
+    and the part blowing across it, onto the land or out to sea. We did exactly this in Part 2, for Hurricane Ian at Fort Myers Beach, on the south-west coast
+    of Florida, with the turned axes from Part 1. The new along arrow, x hat prime, is cosine alpha times i hat, plus sine alpha times j hat. The new across
+    arrow, y hat prime, is that one turned by ninety degrees: minus sine alpha times i hat, plus cosine alpha times j hat. The coast there runs at a bearing
+    of three hundred and twenty nine degrees, so alpha was a hundred and twenty one degrees, and y hat prime pointed out to sea. Then Ian''s wind split into
+    about nine point four metres per second along the shore, and about minus thirty one and a half across it, which means onto the land. In three dimensions,
+    there''s one more arrow: we keep up, k hat, as it is, and turn only i hat and j hat, by the angle alpha, anticlockwise as seen from above. One question
+    was left open in Part 2: the coast''s two legs, ninety one and a half kilometres north and fifty five kilometres west, were read off a flat map in kilometres.
+    Now we can work them out from latitude and longitude.'
   on_screen_eq:
     latex: \hat{\mathbf x}'=\cos\alpha\,\hat{\mathbf i}+\sin\alpha\,\hat{\mathbf j},\qquad \hat{\mathbf y}'=-\sin\alpha\,\hat{\mathbf i}+\cos\alpha\,\hat{\mathbf
       j}
     vallis_eq: 'none: Part 1''s turned axes (Kundu (2.4)-(2.5) family; recap only)'
     page_png: null
   calc_rows:
-  - \text{along}=\mathbf v\cdot\hat{\mathbf x}',\qquad \text{across}=\mathbf v\cdot\hat{\mathbf y}'
+  - '\text{coast: bearing }329^\circ'
+  - \alpha=90^\circ-329^\circ=-239^\circ\equiv121^\circ
+  - \text{along}\approx9.4\ \text{m/s}
+  - \text{across}\approx-31.5\ \text{m/s}
+  - \hat{\mathbf k}\ \text{unchanged}
   physics_source:
     fn: fluidpy.core.tensors.rotation_matrix_2d; fluidpy.geo.vectors.components_in_axes
     params:
@@ -1140,76 +1115,82 @@ scenes:
   exaggeration:
   - coast-frame arrows not to map scale
   kind: map + diagram
-  data: Natural Earth 10 m coastline (public domain)
+  data: Natural Earth 10 m coastline (public domain); HRRR analysis (NOAA) 28 Sep 2022 20 UTC wind at Fort Myers Beach (fr.json ian.u); BMNG globe
   tool: Remotion SVG (d3-geo, local equirectangular)
   runner_up: —
-  why: Part 1 built turned axes; here they meet a real coast. Short recap, no re-derivation (coordinator 2026-11-05)
+  why: "R15/\xA72c: the worked coast calculation lives in Part 2; Part 4 recalls it at its use (R16) and adds what only Part 4 can: the 3-D local frame (k-hat\
+    \ kept) and, in s11, where Part 2's km legs come from"
   related: []
   feedback:
   - U-CO-084
   - U-CO-085
   - U-CO-087
   pending_data: false
-  layout: 'Map x 80-1000 with ''Data: Natural Earth (coastline)'' below it (SourceBelow, y <= 860). Equations in the column x >= 1100. No text over the map except
-    place labels.'
+  layout: 'Phase 1 / 3: map x 80-1000 with its source line below (SourceBelow, y <= 860); column x >= 1100. Phase 2: full-bleed zoomed globe, text from x
+    1190 on the darkened panel, source line below the picture.'
   measured:
-    seconds: 62.675
-    words: 156
-    sentences: 9
+    seconds: 94.175
+    words: 246
+    sentences: 10
     beats: 0
-    timing_source: dryrun1
+    timing_source: r7 (final splice)
 - id: s11_coast_points
   t:
-  - 791.8012
-  - 900.9846
+  - 746.425
+  - 873.325
   sentence_times:
-  - - 791.8012
-    - 795.0262
-  - - 795.3762
-    - 804.1512
-  - - 804.5012
-    - 813.4004
-  - - 813.7504
-    - 816.8254
-  - - 817.1754
-    - 823.4364
-  - - 824.9364
-    - 829.8614
-  - - 830.2114
-    - 832.8614
-  - - 834.3614
-    - 839.5364
-  - - 839.8864
-    - 845.5864
-  - - 845.9364
-    - 861.7846
-  - - 863.2846
-    - 870.1096
-  - - 870.4596
-    - 878.1096
-  - - 878.4596
-    - 891.2596
-  - - 892.7596
-    - 900.1846
+  - - 746.425
+    - 749.65
+  - - 750.0
+    - 758.775
+  - - 759.125
+    - 768.025
+  - - 768.375
+    - 771.45
+  - - 771.8
+    - 778.0
+  - - 779.5
+    - 784.425
+  - - 784.775
+    - 787.425
+  - - 788.925
+    - 794.1
+  - - 794.45
+    - 800.15
+  - - 800.5
+    - 816.5
+  - - 818.0
+    - 824.825
+  - - 825.175
+    - 832.825
+  - - 833.175
+    - 846.35
+  - - 847.85
+    - 855.275
+  - - 855.625
+    - 871.825
   beat: 'derivation D21 (1)-(3): two coast points, the steps north and east in km (Part 3''s rules)'
-  visual: 'Map zoomed to the SW Florida coast between Naples and Englewood (NE 10 m coastline in white); two gold dots labelled ''Naples'' and ''Englewood'' with their
-    lat/lon written beside them (left of the dots, never on the coastline); the straight chord between them (gold dashed). Column CalcStack with inputs next to every
-    row: Δφ, Δλ, then Δy = a Δφ (rad conversion written), then Δx = a cos φ_mid Δλ. S8: on the map, the chord''s north leg (orange) and west leg (orange) drawn with
-    their km labels, each gold-linked to its CalcStack row.'
+  visual: "Map of the SW Florida coast (NE 10 m): Naples and Englewood with their latitude/longitude; dashed gold coast segment; the north leg (S9) and west\
+    \ leg (S12) drawn as they are computed; side callouts 'north leg: 91.5 km', 'west leg: 55 km'. Column: \u0394y = a \u0394\u03C6, \u0394x = a cos \u03C6\
+    \ \u0394\u03BB + gold 'derived in Part 3: distances' (S7), the CalcStack of S4-S12 (y 250). S14 (remake 2026-11-07, replaces the cut s12): the stack and\
+    \ callouts leave; a north arrow and the gold \u03B2 arc at Naples; column 'Part 2's coast bearing', tan \u03B2 = 55.0/91.5 = 0.601, \u03B2 \u2248 31\xB0\
+    , bearing = 360\xB0 \u2212 31\xB0 = 329\xB0, gold 'found in Part 2: the coast's bearing'."
   voiceover: 'First, we need two points on the coastline. Let''s take one near Naples, in Florida, at twenty six point one zero degrees north and eighty one
     point eight zero degrees west. And one near Englewood, further up the coast, at twenty six point nine two degrees north and eighty two point three five
     degrees west. Both come from a world map of coastlines. Going from Naples to Englewood, the latitude grows by zero point eight two three degrees. [beat]
     The longitude changes by minus zero point five five three degrees. It''s minus because we go west. [beat] Now let''s turn these angles into kilometres,
-    with the rules from Part 3. The step north is the Earth''s radius times the change in latitude, in radians. Zero point eight two three degrees is zero
-    point zero one four three six radians, so the step north is six thousand three hundred and seventy one times zero point zero one four three six: about
+    with the rules from Part 3. The step north is the Earth''s radius times the change in latitude, in radians. One degree is zero point zero one seven four
+    five radians, so zero point eight two three degrees is zero point zero one four three six radians, and the step north is the radius times that: about
     ninety one and a half kilometres. [beat] The step east is the radius, times cosine phi, times the change in longitude in radians. For phi, we use the
-    middle latitude, twenty six and a half degrees, whose cosine is zero point eight nine five. So the step east is six thousand three hundred and seventy
-    one, times zero point eight nine five, times minus zero point zero zero nine six five: about minus fifty five kilometres. [beat] So going up the coast,
-    we move about ninety one and a half kilometres north, and fifty five kilometres west.'
+    middle latitude, twenty six and a half degrees, whose cosine is zero point eight nine five. With the change in longitude, minus zero point zero zero nine
+    six five radians, the step east, the radius times cosine phi times that, comes to about minus fifty five kilometres. [beat] So going up the coast, we
+    move about ninety one and a half kilometres north, and fifty five kilometres west. These are the two legs Part 2 used for the coast''s bearing: their
+    ratio, zero point six zero one, is the tangent of thirty one degrees, so the coast runs thirty one degrees west of north, a bearing of three hundred and
+    twenty nine degrees. [beat]'
   on_screen_eq:
     latex: \Delta y=a\,\Delta\varphi,\qquad \Delta x=a\cos\varphi\,\Delta\lambda
-    vallis_eq: 'none: Part 3''s arc rules (Vallis §2.2.1 metric, δy = a δϑ, δx = a cos ϑ δλ)'
-    page_png: chapters/pages/ch02/p081.png
+    vallis_eq: 'none: Part 3''s distances (recall)'
+    page_png: null
   calc_rows:
   - A=(26.10^\circ\text{N},\ 81.80^\circ\text{W}),\ \ B=(26.92^\circ\text{N},\ 82.35^\circ\text{W})
   - \Delta\varphi=0.823^\circ=0.0144\ \text{rad},\qquad \Delta\lambda=-0.553^\circ=-0.00965\ \text{rad}
@@ -1265,370 +1246,55 @@ scenes:
   layout: 'Map x 80-1000, ''Data: Natural Earth 10 m coastline'' below it; CalcStack x >= 1100; links leave from the left edge of their row and never cross (Should
     12).'
   measured:
-    seconds: 108.075
-    words: 251
-    sentences: 14
-    beats: 4
-    timing_source: dryrun1
-- id: s12_coast_angle
-  t:
-  - 900.9846
-  - 999.1346
-  sentence_times:
-  - - 900.9846
-    - 909.5846
-  - - 909.9346
-    - 912.2346
-  - - 912.5846
-    - 917.3596
-  - - 917.7096
-    - 925.0596
-  - - 925.4096
-    - 932.3596
-  - - 933.8596
-    - 939.6096
-  - - 941.1096
-    - 944.7596
-  - - 945.1096
-    - 952.0096
-  - - 952.3596
-    - 962.9346
-  - - 964.4346
-    - 968.1596
-  - - 968.5096
-    - 975.7846
-  - - 976.1346
-    - 983.8596
-  - - 984.2096
-    - 989.3096
-  - - 989.6596
-    - 998.3346
-  beat: 'derivation D21 (4)-(6): the triangle, the angle from north, the bearing 329°'
-  visual: 'The two legs from s11 slide out of the map into a clean right triangle in the picture zone (north leg 91.5 km up, west leg 55.0 km left, the coast as the
-    long side, orange). A local north arrow j-hat (orange) at A; the angle between j-hat and the coast marked (gold arc ''31°''). S6-S8: a compass rose (slate) behind
-    A: bearings run clockwise from N; a gold arc sweeps clockwise from N round to the coast direction, ''329°''; a short rose arc ''−31°'' anticlockwise for comparison.
-    S11-S12: the across arrow (the along arrow turned anticlockwise) points into the ''Gulf of Mexico'' (italic).'
-  voiceover: 'Let''s draw that as a triangle on a small flat map in kilometres: ninety one and a half to the north, and fifty five to the west. The coast is the long
-    side. We want its angle measured from north, because that''s how compasses work. The angle between north and the coast has fifty five kilometres opposite it,
-    and ninety one and a half next to it. So its tangent is fifty five divided by ninety one and a half, which is zero point six zero one. [beat] The angle whose
-    tangent is zero point six zero one is thirty one degrees. [beat] So the coast runs thirty one degrees west of north. In Part 1, we met compass bearings: they''re
-    measured from north, turning clockwise as seen from above. Thirty one degrees anticlockwise from north is the same as three hundred and sixty minus thirty one
-    degrees clockwise: three hundred and twenty nine degrees. [beat] That''s where three hundred and twenty nine comes from. It''s measured from the local north arrow,
-    j hat, at the coast, turning clockwise, and it points north-north-west. Worked out on the round Earth instead of a flat map, the bearing comes out the same, three
-    hundred and twenty nine degrees. Why north-north-west, and not the other way along the coast, south-south-east? Because then the across arrow, which is the along
-    arrow turned anticlockwise, points out to sea, into the Gulf of Mexico.'
-  on_screen_eq:
-    latex: \tan\beta=\dfrac{55.0}{91.5}=0.601,\qquad \text{bearing}=360^\circ-31^\circ=329^\circ
-    vallis_eq: 'none: arithmetic (compass bearing rule from Part 1)'
-    page_png: null
-  calc_rows:
-  - \tan\beta=\dfrac{\text{opposite}}{\text{next to}}=\dfrac{55.0}{91.5}\approx0.601
-  - \beta\approx31^\circ\ \text{west of north}
-  - '\text{bearing}=360^\circ-31^\circ=329^\circ\ \ (\text{sphere: }329.1^\circ)'
-  physics_source:
-    fn: fluidpy.geo.sphere.initial_bearing; plain numpy arctan
-    params:
-      A:
-      - 26.099
-      - -81.801
-      B:
-      - 26.922
-      - -82.354
-    test: ../Fluid Dynamics/tests/geo/test_sphere.py::test_initial_bearing_V5_vs_pyproj_and_V1_cardinals; ../Fluid Dynamics/tests/geo/test_sphere.py::test_central_angle_V1_quarter_antipode_and_tiny;
-      CHECK DC42 329.13° (build 1, kept as DP12; flat-triangle value 329.0°)
-  exaggeration:
-  - triangle drawn larger than the map (diagram)
-  derivation:
-    id: D21b
-    goal: the coast's direction as a compass bearing
-    steps:
-    - - draw the triangle
-      - 91.5\ \text{km N},\ 55.0\ \text{km W}
-      - over 100 km the local map is flat to well under 1 % (Part 3)
-      - the coast is the long side
-    - - angle from north
-      - \tan\beta=55.0/91.5
-      - tangent = opposite / next to (Part 1 s04)
-      - β is measured from the local north arrow j-hat
-    - - undo the tangent
-      - \beta\approx31^\circ
-      - the angle whose tangent is 0.601
-      - 31° west of north
-    - - convert to a bearing
-      - 360^\circ-31^\circ=329^\circ
-      - bearings run clockwise from north (Part 1 s06); 31° anticlockwise = 329° clockwise
-      - north-north-west
-    - - check on the sphere
-      - 329.1^\circ
-      - fluidpy.geo.sphere.initial_bearing between the same two points
-      - the flat map was good enough
-    - - choose the direction
-      - \text{NNW, not SSE}
-      - so that the across arrow (along turned +90°) points out to sea
-      - 'the convention: sea on the left'
-    step_format: '[what we did, the new line, why we can do this, in words]'
-  kind: diagram
-  data: from s11
-  tool: Remotion SVG
-  runner_up: —
-  why: '''329°: measured from what, computed how'' (U-CO-090)'
-  related: []
-  feedback:
-  - U-CO-090
-  pending_data: false
-  layout: 'No real-data picture: no source line. No text over the drawing or over other text; links never cross text or each other. No headings. Opening keyword from
-    frame 0 (Should 18).'
-  measured:
-    seconds: 98.15
-    words: 235
-    sentences: 14
-    beats: 3
-    timing_source: dryrun1
-- id: s13_alpha
-  t:
-  - 999.1346
-  - 1071.7846
-  sentence_times:
-  - - 999.1346
-    - 1003.9346
-  - - 1004.2846
-    - 1009.8846
-  - - 1010.2346
-    - 1016.4346
-  - - 1017.9346
-    - 1027.0596
-  - - 1028.5596
-    - 1037.0346
-  - - 1037.3846
-    - 1039.0846
-  - - 1040.5846
-    - 1055.1846
-  - - 1056.6846
-    - 1066.8096
-  - - 1067.1596
-    - 1070.2846
-  beat: 'derivation D22 (1)-(2): α = 90° − 329° ≡ 121°; the along and across arrows'
-  visual: 'Local coast diagram: east and north (i-hat, j-hat, faint orange), a slate arc from east anticlockwise to the coast direction labelled ''α = 121°'' built
-    as ''90°'' (to north) + ''31°'' (on to the coast). x-hat'' (orange) along the coast and y-hat'' (orange) turned +90° from it, pointing WSW out to sea (''Gulf
-    of Mexico''). Column CalcStack: 90 − 329 = −239, + 360 = 121; then x-hat'' and y-hat'' with their numbers.'
-  voiceover: 'Now we need alpha, which is measured from east, anticlockwise. In Part 1, we found that the maths angle is ninety degrees minus the bearing. Ninety
-    minus three hundred and twenty nine is minus two hundred and thirty nine degrees. [beat] Adding a full turn of three hundred and sixty degrees doesn''t change
-    a direction, so that''s the same as a hundred and twenty one degrees. [beat] Let''s check: a hundred and twenty one degrees from east is ninety degrees round
-    to north, plus thirty one more towards the west. That''s the coast. [beat] So the along arrow, x hat prime, is cosine a hundred and twenty one degrees, sine a
-    hundred and twenty one degrees: minus zero point five one five, zero point eight five seven, in east and north parts. [beat] The across arrow, y hat prime, is
-    minus the sine, then the cosine: minus zero point eight five seven, minus zero point five one five. It points west-south-west, out to sea. [beat]'
-  on_screen_eq:
-    latex: \alpha=90^\circ-329^\circ=-239^\circ\equiv121^\circ
-    vallis_eq: 'none: arithmetic (maths angle = 90° − bearing, Part 1 s06)'
-    page_png: null
-  calc_rows:
-  - \hat{\mathbf x}'=(\cos121^\circ,\ \sin121^\circ)=(-0.515,\ 0.857)
-  - \hat{\mathbf y}'=(-\sin121^\circ,\ \cos121^\circ)=(-0.857,\ -0.515)
-  physics_source:
-    fn: fluidpy.geo.vectors.components_in_axes (axes from a compass bearing)
-    params:
-      bearing_deg: 329.0
-    test: ../Fluid Dynamics/tests/geo/test_vectors_1a1b.py::test_components_in_axes_V1_cardinals_and_movie_number; ::test_components_in_axes_V2_axes_are_compass_and_left_turn
-  exaggeration: []
-  derivation:
-    id: D22a
-    goal: the turning angle α and the two coast arrows
-    steps:
-    - - maths angle from bearing
-      - \alpha=90^\circ-329^\circ=-239^\circ
-      - 'Part 1 s06: θ = 90° − bearing'
-      - measured from east, anticlockwise
-    - - add a full turn
-      - -239^\circ+360^\circ=121^\circ
-      - a full turn does not change a direction
-      - 121° from east
-    - - check
-      - 121^\circ=90^\circ+31^\circ
-      - 90° to north, 31° more to the west
-      - it is the coast
-    - - the along arrow
-      - (\cos121^\circ,\sin121^\circ)=(-0.515,0.857)
-      - 'Part 1: x-hat'' = (cos α, sin α)'
-      - north-north-west
-    - - the across arrow
-      - (-\sin121^\circ,\cos121^\circ)=(-0.857,-0.515)
-      - 'Part 1 D05: y-hat'' = x-hat'' turned +90°'
-      - west-south-west, out to sea
-    step_format: '[what we did, the new line, why we can do this, in words]'
-  kind: diagram + CalcStack
-  data: —
-  tool: Remotion SVG
-  runner_up: —
-  why: 'U-CO-091: the along/across calculation explained'
-  related: []
-  feedback:
-  - U-CO-091
-  - U-CO-084
-  pending_data: false
-  layout: 'No real-data picture: no source line. No text over the drawing or over other text; links never cross text or each other. No headings. Opening keyword from
-    frame 0 (Should 18).'
-  measured:
-    seconds: 72.65
-    words: 160
-    sentences: 9
+    seconds: 126.9
+    words: 298
+    sentences: 15
     beats: 5
-    timing_source: dryrun1
-- id: s14_along_across
-  t:
-  - 1071.7846
-  - 1178.5783
-  sentence_times:
-  - - 1071.7846
-    - 1073.6346
-  - - 1073.9846
-    - 1088.3096
-  - - 1088.6596
-    - 1095.2096
-  - - 1096.7096
-    - 1101.1846
-  - - 1101.5346
-    - 1110.4096
-  - - 1110.7596
-    - 1118.4596
-  - - 1119.9596
-    - 1132.2846
-  - - 1132.6346
-    - 1141.9346
-  - - 1143.4346
-    - 1148.8596
-  - - 1149.2096
-    - 1160.2783
-  - - 1161.7783
-    - 1165.7783
-  - - 1166.1283
-    - 1173.5033
-  - - 1173.8533
-    - 1177.7783
-  beat: 'application D22 (3)-(5): Ian''s wind at Fort Myers Beach, along 9.4 and across −31.6 m/s'
-  visual: 'Real map (HRRR local frame as build-1 s39, Fix: drop the GOES underlay if it fights the arrows) of the SW Florida coast, HRRR 10-m wind speed shaded (perceptual
-    LUT, 0-50 m/s) with animated streaks; ''Fort Myers Beach'' labelled at the spot on its word; the eye (gold dot, HRRR wind centre at 20 UTC) north of it. The wind
-    arrow at Fort Myers Beach (teal, moving dashes, ''33 m/s from the SW''). S3-S5: shadows on x-hat'' (''9.4 along'', teal band) and on y-hat'' (rose band with hatch
-    and ''−'' glyph, ''−31.6 -> onto the land''). Column: inputs row ''u = 22.2, v = 24.3 m/s'' then the two dot products with every product written; the length check.
-    S9: a water-colour arrow pushing onto the beach. Colour bar beside the map in the column (m/s, 52-px ticks). Sound: waves breaking, −28 LUFS, under S9 only.'
-  voiceover: 'Now Ian''s wind. At eight in the evening, universal time, on the twenty eighth of September, about an hour after Ian came ashore, a weather
-    model gave the wind at Fort Myers Beach as about thirty three metres per second, from the south-west. Its east part was twenty two point two, and its
-    north part twenty four point three metres per second. [beat] The part along the coast is the dot product with x hat prime. That''s twenty two point two
-    times minus zero point five one five, plus twenty four point three times zero point eight five seven. That''s minus eleven point four, plus twenty point
-    eight: about nine point four metres per second along the shore. [beat] The part across is the dot product with y hat prime: twenty two point two times
-    minus zero point eight five seven, plus twenty four point three times minus zero point five one five. That''s minus nineteen point zero, minus twelve
-    point five: about minus thirty one and a half, roughly minus thirty two metres per second. [beat] Minus means against y hat prime: not out to sea, but
-    onto the land. A check: nine point four squared, plus thirty one point five squared, is about one thousand and eighty, and its square root is about thirty
-    three, the full wind. [beat] So almost the whole wind was pushing the sea onto the coast. That push piles the water up against the shore: the storm surge
-    that flooded Fort Myers Beach that afternoon. Storm surges get their own movie later in this series.'
-  on_screen_eq:
-    latex: \text{along}=\mathbf v\cdot\hat{\mathbf x}'=22.2\times(-0.515)+24.3\times0.857\approx9.4\ \text{m/s}
-    vallis_eq: 'none: dot product (Part 1)'
-    page_png: null
-  calc_rows:
-  - u=22.2,\ \ v=24.3\ \text{m/s}\ \ (33\ \text{m/s from }222^\circ)
-  - \text{across}=\mathbf v\cdot\hat{\mathbf y}'=22.2\times(-0.857)+24.3\times(-0.515)\approx-19.0-12.5\approx-31.6\ \text{m/s}
-  - 9.4^2+31.6^2\approx1087,\ \ \sqrt{1087}\approx33
-  physics_source:
-    fn: fluidpy.geo.vectors.components_in_axes
-    params:
-      time: 2022-09-28T20
-      point:
-      - 26.45
-      - -81.95
-      u: 22.232
-      v: 24.293
-      bearing_deg: 329.0
-    test: ../Fluid Dynamics/tests/geo/test_vectors_1a1b.py::test_components_in_axes_V1_cardinals_and_movie_number; ::test_components_in_axes_V2_axes_are_compass_and_left_turn;
-      CHECK DC42 speed 32.9, from 222°, along 9.4, across −31.6 (build 1, kept as DP14)
-  exaggeration:
-  - wind arrow length scaled for the map (scale in the manifest)
-  derivation:
-    id: D22b
-    goal: the parts of Ian's wind along and across the coast
-    steps:
-    - - the wind in east and north parts
-      - \mathbf v=(22.2,\ 24.3)\ \text{m/s}
-      - HRRR 10-m wind at Fort Myers Beach, 20 UTC 28 Sep 2022
-      - 33 m/s from the south-west
-    - - along = dot with x-hat'
-      - 22.2(-0.515)+24.3(0.857)\approx9.4
-      - a component along a unit arrow is a dot product (Part 1 D06)
-      - 9.4 m/s along the shore, towards NNW
-    - - across = dot with y-hat'
-      - 22.2(-0.857)+24.3(-0.515)\approx-31.6
-      - the same with the across arrow
-      - '−31.6: against y-hat'', onto the land'
-    - - check the length
-      - \sqrt{9.4^2+31.6^2}\approx33
-      - turning axes never changes an arrow's length (Part 1 s17)
-      - the same wind
-    step_format: '[what we did, the new line, why we can do this, in words]'
-  kind: real data map + shadows
-  data: HRRR-zarr-ian2022 sfc (20 UTC 28 Sep 2022); Natural Earth 10 m coast
-  tool: 'Remotion SVG/canvas map (d3-geo local frame) + house shadows; mpl texture for the speed field (data report §5: mpl wins on determinism)'
-  runner_up: three.js drape (no gain on flat terrain)
-  why: the turned frame on a real, consequential coast; the surge pointer (F19)
-  related: []
-  feedback:
-  - U-CO-091
-  - U-CO-054
-  data_note: 'Data report (reports/data/ch00_coordinates_research.md §1a, §1c) read 2026-11-05: Ian KEPT. The 20 UTC HRRR wind at a fixed point is unaffected by the
-    centre question; the eye marker, if drawn, uses HRRR''s own wind centre (calm), never the MSLP minimum, and the source line says the model vortex lies ≈ 15 km
-    from the radar eye. If Part 2 keeps Ian''s coast scenes, this scene and s10-s13 move or shrink (open question 1).'
-  pending_data: false
-  layout: 'Map x 80-1000 with the colour bar beside it in the column (Must 15), never on the map; ''Data: HRRR analysis (NOAA) · 28 Sep 2022, 20 UTC · Natural Earth''
-    fully below the map (SourceBelow, y <= 860); labels ''Fort Myers Beach'' and ''Gulf of Mexico'' only on the map; links end on their own targets (Should 12); ''minus
-    thirty two'' voiced (Should 13); manifest coast_segment kept (Should 15). Arrows animated (moving dashes).'
-  measured:
-    seconds: 106.725
-    words: 258
-    sentences: 13
-    beats: 4
-    timing_source: dryrun1
+    timing_source: r7 (final splice)
 - id: s15_arrows_turn
   t:
-  - 1178.5783
-  - 1266.0283
+  - 873.325
+  - 958.6
   sentence_times:
-  - - 1178.5783
-    - 1180.9533
-  - - 1181.3033
-    - 1186.1533
-  - - 1186.5033
-    - 1193.4283
-  - - 1193.7783
-    - 1201.4783
-  - - 1202.9783
-    - 1213.2283
-  - - 1214.7283
-    - 1227.2783
-  - - 1227.6283
-    - 1230.1783
-  - - 1230.5283
-    - 1238.6783
-  - - 1239.0283
-    - 1244.4533
-  - - 1244.8033
-    - 1250.0533
-  - - 1250.4033
-    - 1258.1533
-  - - 1258.5033
-    - 1261.8033
-  - - 1262.1533
-    - 1265.2283
+  - - 873.325
+    - 875.7
+  - - 876.05
+    - 880.9
+  - - 881.25
+    - 888.175
+  - - 888.525
+    - 895.025
+  - - 896.525
+    - 905.8
+  - - 907.3
+    - 919.85
+  - - 920.2
+    - 922.75
+  - - 923.1
+    - 931.25
+  - - 931.6
+    - 937.025
+  - - 937.375
+    - 942.625
+  - - 942.975
+    - 950.725
+  - - 951.075
+    - 954.375
+  - - 954.725
+    - 957.8
   beat: 'intuition: the local arrows turn by themselves as you move (build-1 s25, kept and re-voiced)'
-  visual: 'Globe from above the North Pole (unzoomed); a plane glyph flies east along Brest''s parallel (slate trail) for one hour (time compressed); its i-hat (orange)
-    and k-hat (teal) drawn at start and end; the angle swept round the axis ''≈ 12°'' (gold arc at the axis). Column CalcStack: ''250 × 3600 = 900 km'', ''900 / 74
-    ≈ 12°''. S5: θ-hat-on-a-circle mini picture from Part 2 beside it (same motion). S6: a north step of 111 km in the meridian slice with k-hat tilting ''1°''. S8-S9:
-    keyword ''D/Dt: following the air parcel'' (54 px).'
-  voiceover: 'Now a second kind of turning. Our arrows also turn by themselves, as you move over the round Earth. Suppose a plane flies due east along the parallel
-    through Brest, at two hundred and fifty metres per second. In one hour, it covers two hundred and fifty times three thousand six hundred metres: nine hundred
-    kilometres. [beat] At Brest, one degree of longitude is about seventy four kilometres, so that''s nine hundred divided by seventy four: about twelve degrees of
-    longitude. [beat] Seen from above the North Pole, the plane has gone twelve degrees round the axis, and its east arrow has swung round by the same twelve degrees,
-    just like theta hat swinging round a circle. Going north tips the arrows too. After a hundred and eleven kilometres north, which is one degree of latitude, the
-    up arrow has tilted by one degree. So for a moving air parcel, i hat, j hat and k hat keep changing. We write their rates of change as capital D i hat by D t,
-    and so on. Capital D by D t means the rate of change as we follow the air parcel, as in the derivatives movie. How fast do the arrows turn, and which way? Let''s
-    work it out, one motion at a time.'
+  visual: "Globe from above the North Pole: a plane flies due east along Brest's parallel for one hour (thought experiment), its east arrow swinging round\
+    \ with it by 12\xB0, gold radii from the axis and the 12\xB0 arc. Column: 'plane: 250 m/s due east, 1 hour'; 250 m/s \xD7 3600 s = 900 km; 900 km / 74\
+    \ km per degree \u2248 12\xB0; Recall '\u0394x = a cos \u03C6 \u0394\u03BB \u2248 74 km per 1\xB0' + gold 'derived in Part 3: distances' on 'As we found'\
+    \ (remake 2026-11-07); '111 km north \u21D2 k\u0302 tilts 1\xB0'; Di/Dt, Dj/Dt, Dk/Dt."
+  voiceover: Now a second kind of turning. Our arrows also turn by themselves, as you move over the round Earth. Suppose a plane flies due east along the
+    parallel through Brest, at two hundred and fifty metres per second. In one hour, which is three thousand six hundred seconds, it covers nine hundred kilometres.
+    [beat] As we found in Part 3, at Brest one degree of longitude is about seventy four kilometres, so that's about twelve degrees of longitude. [beat] Seen
+    from above the North Pole, the plane has gone twelve degrees round the axis, and its east arrow has swung round by the same twelve degrees, just like
+    theta hat swinging round a circle. Going north tips the arrows too. After a hundred and eleven kilometres north, which is one degree of latitude, the
+    up arrow has tilted by one degree. So for a moving air parcel, i hat, j hat and k hat keep changing. We write their rates of change as capital D i hat
+    by D t, and so on. Capital D by D t means the rate of change as we follow the air parcel, as in the derivatives movie. How fast do the arrows turn, and
+    which way? Let's work it out, one motion at a time.
   on_screen_eq: null
   calc_rows:
   - 250\ \text{m/s}\times3600\ \text{s}=900\ \text{km}
@@ -1658,51 +1324,52 @@ scenes:
     fade y 760-830; text only on the darkened part; every zoom ends with a zoom back out; places centred and labelled within 1 s of being spoken. SourceBelow ''Image:
     NASA Blue Marble Next Generation · Natural Earth'' fully below the globe (y <= 860).'
   measured:
-    seconds: 87.45
-    words: 213
+    seconds: 85.275
+    words: 210
     sentences: 13
     beats: 2
-    timing_source: dryrun1
+    timing_source: r7 (final splice)
 - id: s16_toolkit
   t:
-  - 1266.0283
-  - 1348.3283
+  - 958.6
+  - 1040.9
   sentence_times:
-  - - 1266.0283
-    - 1269.8033
-  - - 1270.1533
-    - 1273.5283
-  - - 1273.8783
-    - 1280.4783
-  - - 1280.8283
-    - 1283.6533
-  - - 1284.0033
-    - 1292.1283
-  - - 1292.4783
-    - 1300.4783
-  - - 1300.8283
-    - 1309.1783
-  - - 1310.6783
-    - 1320.6033
-  - - 1320.9533
-    - 1330.1783
-  - - 1330.5283
-    - 1335.3783
-  - - 1336.8783
-    - 1339.0533
-  - - 1339.4033
-    - 1347.5283
+  - - 958.6
+    - 962.375
+  - - 962.725
+    - 966.1
+  - - 966.45
+    - 973.05
+  - - 973.4
+    - 976.225
+  - - 976.575
+    - 984.7
+  - - 985.05
+    - 993.05
+  - - 993.4
+    - 1001.75
+  - - 1003.25
+    - 1013.175
+  - - 1013.525
+    - 1022.75
+  - - 1023.1
+    - 1027.95
+  - - 1029.45
+    - 1031.625
+  - - 1031.975
+    - 1040.1
   beat: recap of Part 2's turning rules (the only tools D35-D38 need)
   visual: 'Picture zone: Part 2''s circle with a point, r-hat and θ-hat (orange) at the point; the point slides a little round the circle and the two arrows turn:
     r-hat''s tip moves towards θ-hat (gold short arrow), θ-hat''s tip towards −r-hat (gold short arrow). A small speed arrow ''v'' (teal) and the radius ''r'' (slate)
     on S4. Column: the two Part 2 lines, then ''dθ/dt = v/r'', then the two chain-rule lines; keyword ''speed / radius'' (gold) on S7.'
-  voiceover: Now let's work out exactly how fast the arrows turn. This part is for those who enjoy every step. It isn't needed for the weather, the climate or maps,
-    so skip ahead to the time on screen if you like. We need just two results from Part 2. Take a point going round a circle, with r hat pointing out from the centre,
-    and theta hat pointing the way the angle grows. First, as the angle grows, r hat changes towards theta hat, and theta hat changes towards minus r hat. We wrote
-    that as d r hat by d theta equals theta hat, and d theta hat by d theta equals minus r hat. [beat] Second, if the point moves along the circle at a speed v, its
-    angle grows at v divided by the circle's radius, in radians per second. Putting the two together with the chain rule from the derivatives movie, theta hat changes
-    at minus r hat, times the speed over the radius. And r hat changes at theta hat, times the speed over the radius. [beat] So here's the recipe. Find the circle,
-    find which arrow plays r hat and which plays theta hat, and divide the speed by the circle's radius.
+  voiceover: Now let's work out exactly how fast the arrows turn. This part is for those who enjoy every step. It isn't needed for the weather, the climate
+    or maps, so skip ahead to the time on screen if you like. We need just two results from Part 2. Take a point going round a circle, with r hat pointing
+    out from the centre, and theta hat pointing the way the angle grows. First, as the angle grows, r hat changes towards theta hat, and theta hat changes
+    towards minus r hat. We wrote that as d r hat by d theta equals theta hat, and d theta hat by d theta equals minus r hat. [beat] Second, if the point
+    moves along the circle at a speed v, its angle grows at v divided by the circle's radius, in radians per second. Putting the two together with the chain
+    rule from the derivatives movie, theta hat changes at minus r hat, times the speed over the radius. And r hat changes at theta hat, times the speed over
+    the radius. [beat] So here's the recipe. Find the circle, find which arrow plays r hat and which plays theta hat, and divide the speed by the circle's
+    radius.
   on_screen_eq:
     latex: \dfrac{d\hat{\mathbf r}}{d\theta}=\hat{\boldsymbol\theta},\qquad \dfrac{d\hat{\boldsymbol\theta}}{d\theta}=-\hat{\mathbf r}
     vallis_eq: none in Vallis (Kundu App. B §B.5 polar unit vectors; derived in Part 2)
@@ -1738,38 +1405,39 @@ scenes:
     words: 205
     sentences: 12
     beats: 2
-    timing_source: splice2
+    timing_source: r7 (final splice)
 - id: s17_which_moves
   t:
-  - 1348.3283
-  - 1400.1783
+  - 1040.9
+  - 1092.75
   sentence_times:
-  - - 1348.3283
-    - 1352.9783
-  - - 1353.3283
-    - 1357.3033
-  - - 1357.6533
-    - 1360.1283
-  - - 1360.4783
-    - 1369.1283
-  - - 1369.4783
-    - 1373.9283
-  - - 1375.4283
-    - 1378.7783
-  - - 1379.1283
-    - 1384.3033
-  - - 1384.6533
-    - 1387.4283
-  - - 1388.9283
-    - 1399.3783
+  - - 1040.9
+    - 1045.55
+  - - 1045.9
+    - 1049.875
+  - - 1050.225
+    - 1052.7
+  - - 1053.05
+    - 1061.7
+  - - 1062.05
+    - 1066.5
+  - - 1068.0
+    - 1071.35
+  - - 1071.7
+    - 1076.875
+  - - 1077.225
+    - 1080.0
+  - - 1081.5
+    - 1091.95
   beat: 'plan of the derivation: three motions, what each one leaves alone'
   visual: 'Column: the three formulas of s04-s06 at 68 px with φ and λ highlighted (gold) wherever they appear; S3-S4 an ''up'' arrow (teal) with a strike over ''turns
     nothing''; S5-S6 the i-hat formula with no φ, gold tick ''north leaves i-hat alone''. Picture zone: a 3 × 3 grid of small icons (rows i-hat, j-hat, k-hat; columns
     east, north, up) that fills as each case is settled: up column ''none'', i-hat north ''none'', the four remaining cells with question marks, to be filled in s18-s21.'
-  voiceover: 'An air parcel can move in three ways: east, north and up. Let''s take them one at a time, and add them up at the end. Going straight up is the easiest.
-    Look at our three formulas: i hat, j hat and k hat depend only on phi and lambda, the latitude and the longitude. Going up changes neither, so going up turns
-    none of the arrows. [beat] Going north changes phi, but not lambda. And i hat, minus sine lambda, cosine lambda, zero, has no phi in it. So going north leaves
-    i hat alone. [beat] That leaves four things to find: how going east turns i hat, how going north turns j hat and k hat, and how going east turns j hat and k hat.'
+  voiceover: 'An air parcel can move in three ways: east, north and up. Let''s take them one at a time, and add them up at the end. Going straight up is the
+    easiest. Look at our three formulas: i hat, j hat and k hat depend only on phi and lambda, the latitude and the longitude. Going up changes neither, so
+    going up turns none of the arrows. [beat] Going north changes phi, but not lambda. And i hat, minus sine lambda, cosine lambda, zero, has no phi in it.
+    So going north leaves i hat alone. [beat] That leaves four things to find: how going east turns i hat, how going north turns j hat and k hat, and how
+    going east turns j hat and k hat.'
   on_screen_eq: null
   calc_rows: []
   physics_source:
@@ -1794,45 +1462,45 @@ scenes:
     words: 126
     sentences: 9
     beats: 2
-    timing_source: dryrun1
+    timing_source: r7 (final splice)
 - id: s18_i_east_a
   t:
-  - 1400.1783
-  - 1476.8533
+  - 1092.75
+  - 1168.35
   sentence_times:
-  - - 1400.1783
-    - 1402.9783
-  - - 1403.3283
-    - 1414.8533
-  - - 1415.2033
-    - 1423.7033
-  - - 1424.0533
-    - 1427.3283
-  - - 1427.6783
-    - 1435.0533
-  - - 1435.4033
-    - 1439.3033
-  - - 1440.8033
-    - 1445.9283
-  - - 1446.2783
-    - 1455.0783
-  - - 1456.5783
-    - 1460.2783
-  - - 1460.6283
-    - 1469.1533
-  - - 1470.6533
-    - 1476.0533
+  - - 1092.75
+    - 1095.55
+  - - 1095.9
+    - 1107.425
+  - - 1107.775
+    - 1116.275
+  - - 1116.625
+    - 1119.6
+  - - 1119.95
+    - 1127.325
+  - - 1127.675
+    - 1131.575
+  - - 1133.075
+    - 1137.925
+  - - 1138.275
+    - 1147.075
+  - - 1148.575
+    - 1151.775
+  - - 1152.125
+    - 1160.65
+  - - 1162.15
+    - 1167.55
   beat: 'derivation D35 (1)-(3): going east turns i-hat towards −R-hat'
   visual: 'Top view from above the North Pole (SVG, as s05): the parallel (gold circle, radius ''a cos φ'' labelled outside the stroke), the parcel at angle λ with
     R-hat and i-hat (orange); the parcel slides east by Δλ (magnified) and both arrows turn; i-hat''s tip moves towards −R-hat (gold short arrow). Column CalcStack:
     step 1 ''Dλ/Dt = u / (a cos φ)'', step 2 ''di-hat/dλ = −R-hat'', step 3 the chain rule product. Role tags ''R-hat plays r-hat'', ''i-hat plays θ-hat'' (54 px)
     beside the picture on S2.'
-  voiceover: 'First, going east, and i hat. Going east, the parcel moves round its parallel: a circle round the Earth''s axis, whose radius is the distance from the
-    axis, the Earth''s radius times cosine phi. In the view from above the North Pole, capital R hat plays r hat, i hat plays theta hat, and lambda plays the angle.
-    Step one: how fast does lambda grow? The parcel moves east at the speed u, round a circle whose radius is the Earth''s radius times cosine phi. So lambda grows
-    at u divided by that radius. [beat] Step two: Part 2''s rule says theta hat changes towards minus r hat. So as lambda grows, i hat changes towards minus capital
-    R hat: d i hat by d lambda equals minus capital R hat. [beat] Step three: multiply the two, by the chain rule. Capital D i hat by D t equals minus capital R hat,
-    times u, over the Earth''s radius times cosine phi. [beat] In words: going east, the east arrow swings in towards the Earth''s axis.'
+  voiceover: 'First, going east, and i hat. Going east, the parcel moves round its parallel: a circle round the Earth''s axis, whose radius is the distance
+    from the axis, the Earth''s radius times cosine phi. In the view from above the North Pole, capital R hat plays r hat, i hat plays theta hat, and lambda
+    plays the angle. First, how fast does lambda grow? The parcel moves east at the speed u, round a circle whose radius is the Earth''s radius times cosine
+    phi. So lambda grows at u divided by that radius. [beat] Next, Part 2''s rule says theta hat changes towards minus r hat. So as lambda grows, i hat changes
+    towards minus capital R hat: d i hat by d lambda equals minus capital R hat. [beat] Now multiply the two, by the chain rule. Capital D i hat by D t equals
+    minus capital R hat, times u, over the Earth''s radius times cosine phi. [beat] In words: going east, the east arrow swings in towards the Earth''s axis.'
   on_screen_eq:
     latex: \dfrac{D\hat{\mathbf i}}{Dt}=\dfrac{d\hat{\mathbf i}}{d\lambda}\,\dfrac{D\lambda}{Dt}=-\hat{\mathbf R}\,\dfrac{u}{a\cos\varphi}
     vallis_eq: intermediate step toward (2.39a) (Vallis reaches it via (2.36)-(2.38)); u = a cos ϑ Dλ/Dt is (2.28)
@@ -1889,66 +1557,66 @@ scenes:
   layout: 'No real-data picture: no source line. No text over the drawing or over other text; links never cross text or each other. No headings. Opening keyword from
     frame 0 (Should 18).'
   measured:
-    seconds: 76.675
-    words: 173
+    seconds: 75.6
+    words: 170
     sentences: 11
     beats: 3
-    timing_source: dryrun1
+    timing_source: r7 (final splice)
 - id: s19_i_east_b
   t:
-  - 1476.8533
-  - 1584.0033
+  - 1168.35
+  - 1276.025
   sentence_times:
-  - - 1476.8533
-    - 1480.4783
-  - - 1480.8283
-    - 1483.5533
-  - - 1483.9033
-    - 1486.9533
-  - - 1487.3033
-    - 1492.9533
-  - - 1493.3033
-    - 1498.8283
-  - - 1499.1783
-    - 1505.5283
-  - - 1505.8783
-    - 1509.6783
-  - - 1510.0283
-    - 1516.8783
-  - - 1517.2283
-    - 1523.4283
-  - - 1523.7783
-    - 1529.3283
-  - - 1530.8283
-    - 1536.0533
-  - - 1536.4033
-    - 1540.6783
-  - - 1541.0283
-    - 1553.7033
-  - - 1555.2033
-    - 1560.6783
-  - - 1561.0283
-    - 1562.6033
-  - - 1562.9533
-    - 1573.4283
-  - - 1573.7783
-    - 1579.0033
-  - - 1580.5033
-    - 1583.2033
+  - - 1168.35
+    - 1171.975
+  - - 1172.325
+    - 1175.05
+  - - 1175.4
+    - 1178.45
+  - - 1178.8
+    - 1184.45
+  - - 1184.8
+    - 1190.325
+  - - 1190.675
+    - 1196.725
+  - - 1197.075
+    - 1200.275
+  - - 1200.625
+    - 1207.475
+  - - 1207.825
+    - 1214.025
+  - - 1214.375
+    - 1219.925
+  - - 1221.425
+    - 1226.65
+  - - 1227.0
+    - 1232.7
+  - - 1233.05
+    - 1245.725
+  - - 1247.225
+    - 1252.7
+  - - 1253.05
+    - 1254.625
+  - - 1254.975
+    - 1265.45
+  - - 1265.8
+    - 1271.025
+  - - 1272.525
+    - 1275.225
   beat: 'derivation D35 (4)-(7): R-hat in local arrows; Di/Dt; the Brest number'
   visual: 'Meridian slice diagram (SVG, as s06): k-hat and j-hat at Brest, and R-hat drawn at Brest too (orange dashed), split into a ''cos φ k-hat'' leg (up) and
     a ''−sin φ j-hat'' leg (south), gold-linked to the CalcStack. Column: the two s06 lines, multiplied (step 4, the multipliers in gold), subtracted (step 5, the
     z-hat terms struck with Strike, ''cos²φ + sin²φ = 1'' brace), result R-hat = cos φ k-hat − sin φ j-hat; then step 6 the substitution and the final line (96 px).
     S10-S11: CalcStack ''10 / 4 230 000 ≈ 2.4 × 10⁻⁶ rad/s'', ''× 86 400 s ≈ 0.20 rad ≈ 12° per day''.'
-  voiceover: 'But a forecaster doesn''t use capital R hat. She wants the answer in her own arrows. Let''s go back to Brest''s meridian slice. There, we wrote k hat
-    as cosine phi capital R hat, plus sine phi z hat. And j hat as minus sine phi capital R hat, plus cosine phi z hat. Step four: multiply the first line by cosine
-    phi, and the second line by sine phi. Step five: take the second line away from the first. The z hat parts cancel, because cosine phi sine phi minus sine phi
-    cosine phi is zero. The capital R hat parts give cosine squared phi plus sine squared phi, which is one. So capital R hat equals cosine phi k hat, minus sine
-    phi j hat. [beat] In words: pointing away from the axis is partly up, and partly south. Step six: put minus capital R hat into step three. Capital D i hat by
-    D t equals u over the Earth''s radius times cosine phi, times, open bracket, j hat sine phi, minus k hat cosine phi, close bracket. [beat] So going east, the
-    east arrow tips a little towards the north, and a little downwards. How fast? For a wind of ten metres per second towards the east at Brest, divide ten by the
-    distance from the axis, four million two hundred and thirty thousand metres. That''s about two point four times ten to the minus six radians per second. [beat]
-    That''s about twelve degrees in a day.'
+  voiceover: 'But a forecaster doesn''t use capital R hat. She wants the answer in her own arrows. Let''s go back to Brest''s meridian slice. There, we wrote
+    k hat as cosine phi capital R hat, plus sine phi z hat. And j hat as minus sine phi capital R hat, plus cosine phi z hat. Next, multiply the first line
+    by cosine phi, and the second line by sine phi. Then take the second line away from the first. The z hat parts cancel, because cosine phi sine phi minus
+    sine phi cosine phi is zero. The capital R hat parts give cosine squared phi plus sine squared phi, which is one. So capital R hat equals cosine phi k
+    hat, minus sine phi j hat. [beat] In words: pointing away from the axis is partly up, and partly south. Now put minus capital R hat into the chain-rule
+    result we found a moment ago. Capital D i hat by D t equals u over the Earth''s radius times cosine phi, times, open bracket, j hat sine phi, minus k
+    hat cosine phi, close bracket. [beat] So going east, the east arrow tips a little towards the north, and a little downwards. How fast? For a wind of ten
+    metres per second towards the east at Brest, divide ten by the distance from the axis, four million two hundred and thirty thousand metres. That''s about
+    two point four times ten to the minus six radians per second. [beat] That''s about twelve degrees in a day.'
   on_screen_eq:
     latex: \dfrac{D\hat{\mathbf i}}{Dt}=\dfrac{u}{a\cos\varphi}\left(\hat{\mathbf j}\sin\varphi-\hat{\mathbf k}\cos\varphi\right)
     vallis_eq: (2.39a) with r = a and ϑ -> φ
@@ -2010,47 +1678,47 @@ scenes:
   layout: 'No real-data picture: no source line. No text over the drawing or over other text; links never cross text or each other. No headings. Opening keyword from
     frame 0 (Should 18).'
   measured:
-    seconds: 107.15
-    words: 248
+    seconds: 107.675
+    words: 251
     sentences: 18
     beats: 3
-    timing_source: dryrun1
+    timing_source: r7 (final splice)
 - id: s20_jk_north
   t:
-  - 1584.0033
-  - 1657.2533
+  - 1276.025
+  - 1346.925
   sentence_times:
-  - - 1584.0033
-    - 1587.9533
-  - - 1588.3033
-    - 1597.0533
-  - - 1597.4033
-    - 1602.7783
-  - - 1603.1283
-    - 1607.5533
-  - - 1607.9033
-    - 1613.4033
-  - - 1614.9033
-    - 1618.4283
-  - - 1618.7783
-    - 1626.0283
-  - - 1626.3783
-    - 1635.1033
-  - - 1636.6033
-    - 1641.8533
-  - - 1642.2033
-    - 1655.7533
+  - - 1276.025
+    - 1279.975
+  - - 1280.325
+    - 1289.075
+  - - 1289.425
+    - 1294.8
+  - - 1295.15
+    - 1299.575
+  - - 1299.925
+    - 1305.425
+  - - 1306.925
+    - 1310.45
+  - - 1310.8
+    - 1318.05
+  - - 1318.4
+    - 1327.125
+  - - 1328.625
+    - 1333.875
+  - - 1334.225
+    - 1345.425
   beat: 'derivation D36: going north turns k-hat towards j-hat and j-hat towards −k-hat'
   visual: 'Meridian slice (half-Earth face, kit_cp, then the SVG copy): the meridian circle of radius ''a'' round the centre (gold), the parcel at angle φ with k-hat
     (teal) and j-hat (orange); it slides north by Δφ (magnified) and both arrows turn (gold short arrows: k-hat towards j-hat, j-hat towards −k-hat). Role tags ''k-hat
     plays r-hat'', ''j-hat plays θ-hat''. Column: ''Dφ/Dt = v/a'', then the two results (84 px), then the 111-km check CalcStack. The s17 icon grid gets its two ''north''
     cells filled.'
-  voiceover: 'Next, going north, which turns j hat and k hat. Going north, the parcel moves round its meridian: a circle round the Earth''s centre, whose radius is
-    the Earth''s radius itself. In the meridian slice, k hat points out from the centre, so it plays r hat. And j hat points the way phi grows, so it plays theta
-    hat. The parcel moves north at the speed v, so phi grows at v over the radius. [beat] Part 2''s rules then give the answer at once. K hat changes towards j hat:
-    capital D k hat by D t equals j hat, v over the radius. And j hat changes towards minus k hat: capital D j hat by D t equals minus k hat, v over the radius. [beat]
-    In words: going north, up tips towards the north, and north tips downwards. A hundred and eleven kilometres north, divided by six thousand three hundred and seventy
-    one kilometres, is zero point zero one seven five radians: the one-degree tilt of up that we saw before. [beat]'
+  voiceover: 'Next, going north, which turns j hat and k hat. Going north, the parcel moves round its meridian: a circle round the Earth''s centre, whose
+    radius is the Earth''s radius itself. In the meridian slice, k hat points out from the centre, so it plays r hat. And j hat points the way phi grows,
+    so it plays theta hat. The parcel moves north at the speed v, so phi grows at v over the radius. [beat] Part 2''s rules then give the answer at once.
+    K hat changes towards j hat: capital D k hat by D t equals j hat, v over the radius. And j hat changes towards minus k hat: capital D j hat by D t equals
+    minus k hat, v over the radius. [beat] In words: going north, up tips towards the north, and north tips downwards. A hundred and eleven kilometres north,
+    over the Earth''s radius, is about zero point zero one seven five radians: the one-degree tilt of up that we saw before. [beat]'
   on_screen_eq:
     latex: \dfrac{D\hat{\mathbf k}}{Dt}\Big|_{\rm north}=\hat{\mathbf j}\,\dfrac{v}{a},\qquad \dfrac{D\hat{\mathbf j}}{Dt}\Big|_{\rm north}=-\hat{\mathbf k}\,\dfrac{v}{a}
     vallis_eq: the v parts of (2.39b), (2.39c) with r = a
@@ -2109,51 +1777,51 @@ scenes:
     fade y 760-830; text only on the darkened part; every zoom ends with a zoom back out; places centred and labelled within 1 s of being spoken. SourceBelow ''Image:
     NASA Blue Marble Next Generation · Natural Earth'' fully below the globe (y <= 860).'
   measured:
-    seconds: 73.25
-    words: 174
+    seconds: 70.9
+    words: 169
     sentences: 10
     beats: 3
-    timing_source: dryrun1
+    timing_source: r7 (final splice)
 - id: s21_jk_east
   t:
-  - 1657.2533
-  - 1741.5283
+  - 1346.925
+  - 1431.2
   sentence_times:
-  - - 1657.2533
-    - 1661.2283
-  - - 1661.5783
-    - 1673.7283
-  - - 1674.0783
-    - 1679.3283
-  - - 1679.6783
-    - 1683.8283
-  - - 1684.1783
-    - 1686.6783
-  - - 1687.0283
-    - 1694.5283
-  - - 1694.8783
-    - 1702.8533
-  - - 1704.3533
-    - 1708.8033
-  - - 1709.1533
-    - 1713.6283
-  - - 1715.1283
-    - 1726.2033
-  - - 1726.5533
-    - 1733.4283
-  - - 1734.9283
-    - 1740.7283
+  - - 1346.925
+    - 1350.9
+  - - 1351.25
+    - 1363.4
+  - - 1363.75
+    - 1369.0
+  - - 1369.35
+    - 1373.5
+  - - 1373.85
+    - 1376.35
+  - - 1376.7
+    - 1384.2
+  - - 1384.55
+    - 1392.525
+  - - 1394.025
+    - 1398.475
+  - - 1398.825
+    - 1403.3
+  - - 1404.8
+    - 1415.875
+  - - 1416.225
+    - 1423.1
+  - - 1424.6
+    - 1430.4
   beat: 'derivation D37: going east also tilts k-hat (towards east) and j-hat (towards west)'
   visual: 'Side-by-side: left, the top view (s18) with R-hat turning towards i-hat (gold short arrow) as the parcel goes east; right, the meridian slice with k-hat
     and j-hat written as R-hat and z-hat legs (z-hat pinned, a small padlock-free ''never turns'' tag in slate). Column CalcStack: DR/Dt = i-hat u/(a cos φ), Dk/Dt
     = cos φ × that (the cos φ pair struck as they cancel), Dj/Dt = −sin φ × that, ''sin/cos = tan'' brace. The s17 grid''s two ''east'' cells fill.'
-  voiceover: 'Last, going east also tilts j hat and k hat. Look again at how they''re built: k hat is cosine phi capital R hat, plus sine phi z hat, and j hat is
-    minus sine phi capital R hat, plus cosine phi z hat. Going east, phi stays the same, so the sines and cosines don''t change. Z hat lies along the Earth''s axis,
-    and never turns. Only capital R hat turns. In the view from above, capital R hat plays r hat, so it changes towards i hat, which plays theta hat. Capital D capital
-    R hat by D t equals i hat, times u over the Earth''s radius times cosine phi. [beat] So capital D k hat by D t is cosine phi times that. The cosines cancel, leaving
-    i hat, u over the radius. [beat] And capital D j hat by D t is minus sine phi times the same thing: minus i hat, times u over the radius, times sine phi over
-    cosine phi. Sine over cosine is the tangent, so that''s minus i hat, u over the radius, tangent phi. [beat] In words: going east, up leans towards the east, and
-    north leans towards the west.'
+  voiceover: 'Last, going east also tilts j hat and k hat. Look again at how they''re built: k hat is cosine phi capital R hat, plus sine phi z hat, and j
+    hat is minus sine phi capital R hat, plus cosine phi z hat. Going east, phi stays the same, so the sines and cosines don''t change. Z hat lies along the
+    Earth''s axis, and never turns. Only capital R hat turns. In the view from above, capital R hat plays r hat, so it changes towards i hat, which plays
+    theta hat. Capital D capital R hat by D t equals i hat, times u over the Earth''s radius times cosine phi. [beat] So capital D k hat by D t is cosine
+    phi times that. The cosines cancel, leaving i hat, u over the radius. [beat] And capital D j hat by D t is minus sine phi times the same thing: minus
+    i hat, times u over the radius, times sine phi over cosine phi. Sine over cosine is the tangent, so that''s minus i hat, u over the radius, tangent phi.
+    [beat] In words: going east, up leans towards the east, and north leans towards the west.'
   on_screen_eq:
     latex: \dfrac{D\hat{\mathbf k}}{Dt}\Big|_{\rm east}=\hat{\mathbf i}\,\dfrac{u}{a},\qquad \dfrac{D\hat{\mathbf j}}{Dt}\Big|_{\rm east}=-\hat{\mathbf i}\,\dfrac{u}{a}\tan\varphi
     vallis_eq: the u parts of (2.39b), (2.39c) with r = a
@@ -2214,58 +1882,58 @@ scenes:
     words: 198
     sentences: 12
     beats: 3
-    timing_source: dryrun1
+    timing_source: r7 (final splice)
 - id: s22_add_motions
   t:
-  - 1741.5283
-  - 1850.1783
+  - 1431.2
+  - 1539.85
   sentence_times:
-  - - 1741.5283
-    - 1743.7533
-  - - 1744.1033
-    - 1748.5533
-  - - 1748.9033
-    - 1755.2283
-  - - 1755.5783
-    - 1767.9783
-  - - 1768.3283
-    - 1777.6033
-  - - 1777.9533
-    - 1785.7533
-  - - 1787.2533
-    - 1793.5033
-  - - 1793.8533
-    - 1797.4033
-  - - 1797.7533
-    - 1799.5533
-  - - 1799.9033
-    - 1809.1533
-  - - 1809.5033
-    - 1811.4033
-  - - 1811.7533
-    - 1818.9283
-  - - 1820.4283
-    - 1823.8283
-  - - 1824.1783
-    - 1832.0283
-  - - 1832.3783
-    - 1838.5283
-  - - 1838.8783
-    - 1849.3783
+  - - 1431.2
+    - 1433.425
+  - - 1433.775
+    - 1438.225
+  - - 1438.575
+    - 1444.9
+  - - 1445.25
+    - 1457.65
+  - - 1458.0
+    - 1467.275
+  - - 1467.625
+    - 1475.425
+  - - 1476.925
+    - 1483.175
+  - - 1483.525
+    - 1487.075
+  - - 1487.425
+    - 1489.225
+  - - 1489.575
+    - 1498.825
+  - - 1499.175
+    - 1501.075
+  - - 1501.425
+    - 1508.6
+  - - 1510.1
+    - 1513.5
+  - - 1513.85
+    - 1521.7
+  - - 1522.05
+    - 1528.2
+  - - 1528.55
+    - 1539.05
   beat: 'derivation D38: add the motions -> the three rates; check; the link to Ω × B'
   visual: 'The s17 icon grid now full; its cells slide into the column and stack into the three final lines (84 px), each term coloured by its motion (east terms
     teal-outlined, north terms slate-outlined), every ''speed / radius'' fragment underbraced gold. S6-S8: a check per line: a strike-through ''no i-hat part'', ''no
     j-hat part'', ''no k-hat part'' and a RightTick between each arrow and its change in a small 3-D inset. S9-S10: a thumbnail of the cross product movie''s merry-go-round
     with ''Ω × B'' (keyword, 54 px).'
-  voiceover: 'Now let''s add the motions. In a short time, the parcel moves a little east and a little north. As in the total differential from the derivatives movie,
-    the small changes from each move add up. So capital D i hat by D t equals u over the radius times cosine phi, times, open bracket, j hat sine phi, minus k hat
-    cosine phi, close bracket. Capital D j hat by D t equals minus i hat, u over the radius, tangent phi, minus k hat, v over the radius. And capital D k hat by D
-    t equals i hat, u over the radius, plus j hat, v over the radius. [beat] Every piece is a speed divided by a radius, just as round the hurricane in Part 2. Speed
-    over radius is how fast the arrows turn. And here''s a check. The change of i hat has no i hat part, the change of j hat has no j hat part, and the change of
-    k hat has no k hat part. That has to be so. An arrow of length one can only turn, never grow, so its change is always at right angles to itself. [beat] No earlier
-    movie derived these three lines. The cross product at work met a close cousin: an arrow carried round by a spin changes at Omega cross the arrow. These three
-    lines follow the same rule, with the flow''s own turning in place of the Earth''s spin. If you skipped, here''s what to keep: as air moves over the round Earth,
-    its east, north and up arrows turn, at about its speed divided by the Earth''s radius.'
+  voiceover: 'Now let''s add the motions. In a short time, the parcel moves a little east and a little north. As in the total differential from the derivatives
+    movie, the small changes from each move add up. So capital D i hat by D t equals u over the radius times cosine phi, times, open bracket, j hat sine phi,
+    minus k hat cosine phi, close bracket. Capital D j hat by D t equals minus i hat, u over the radius, tangent phi, minus k hat, v over the radius. And
+    capital D k hat by D t equals i hat, u over the radius, plus j hat, v over the radius. [beat] Every piece is a speed divided by a radius, just as round
+    the hurricane in Part 2. Speed over radius is how fast the arrows turn. And here''s a check. The change of i hat has no i hat part, the change of j hat
+    has no j hat part, and the change of k hat has no k hat part. That has to be so. An arrow of length one can only turn, never grow, so its change is always
+    at right angles to itself. [beat] No earlier movie derived these three lines. The cross product at work met a close cousin: an arrow carried round by
+    a spin changes at Omega cross the arrow. These three lines follow the same rule, with the flow''s own turning in place of the Earth''s spin. If you skipped,
+    here''s what to keep: as air moves over the round Earth, its east, north and up arrows turn, at about its speed divided by the Earth''s radius.'
   on_screen_eq:
     latex: \dfrac{D\hat{\mathbf i}}{Dt}=\dfrac{u}{a\cos\varphi}(\hat{\mathbf j}\sin\varphi-\hat{\mathbf k}\cos\varphi),\quad \dfrac{D\hat{\mathbf j}}{Dt}=-\hat{\mathbf
       i}\,\dfrac{u}{a}\tan\varphi-\hat{\mathbf k}\,\dfrac{v}{a},\quad \dfrac{D\hat{\mathbf k}}{Dt}=\hat{\mathbf i}\,\dfrac{u}{a}+\hat{\mathbf j}\,\dfrac{v}{a}
@@ -2327,50 +1995,52 @@ scenes:
     words: 275
     sentences: 16
     beats: 2
-    timing_source: splice2
+    timing_source: r7 (final splice)
 - id: s23_whole_vector
   t:
-  - 1850.1783
-  - 1940.9754
+  - 1539.85
+  - 1630.775
   sentence_times:
-  - - 1850.1783
-    - 1852.1033
-  - - 1852.4533
-    - 1854.5533
-  - - 1854.9033
-    - 1859.0283
-  - - 1859.3783
-    - 1869.0254
-  - - 1869.3754
-    - 1879.6504
-  - - 1880.0004
-    - 1884.9754
-  - - 1885.3254
-    - 1891.4504
-  - - 1891.8004
-    - 1894.8004
-  - - 1895.1504
-    - 1903.2004
-  - - 1904.7004
-    - 1908.0504
-  - - 1908.4004
-    - 1917.7504
-  - - 1918.1004
-    - 1924.6254
-  - - 1924.9754
-    - 1932.1754
-  - - 1933.6754
-    - 1940.1754
+  - - 1539.85
+    - 1541.775
+  - - 1542.125
+    - 1544.225
+  - - 1544.575
+    - 1548.7
+  - - 1549.05
+    - 1558.825
+  - - 1559.175
+    - 1569.45
+  - - 1569.8
+    - 1574.775
+  - - 1575.125
+    - 1581.25
+  - - 1581.6
+    - 1584.6
+  - - 1584.95
+    - 1593.0
+  - - 1594.5
+    - 1597.85
+  - - 1598.2
+    - 1607.55
+  - - 1607.9
+    - 1614.425
+  - - 1614.775
+    - 1621.975
+  - - 1623.475
+    - 1629.975
   beat: 'why it matters: Newton''s law needs D(bold v)/Dt; the product rule gives six terms (D39 (1)-(2))'
   visual: 'Column: ''F = m a'' keyword, then bold v = u i-hat + v j-hat + w k-hat (u, v, w coloured as their arrows), then the product rule recalled from Part 2 (68
     px, faint ''Part 2''), then the six-term line built pair by pair (84 px), each pair underbraced: ''change of the number'' (slate) / ''change of the arrow'' (orange).
     Picture zone: a small parcel on the globe moving north-east with its tripod turning, and its wind arrow (teal) drawn on it.'
-  voiceover: Why does all this matter? Because of Newton's law. The next three steps show where the turning arrows end up in it. They're for anyone who wants every step, and you don't need them for the intuition of weather, climate or maps, so skip ahead to the time on screen if you like. Force equals mass times acceleration, and the acceleration is the rate of
-    change of the whole wind arrow, bold v, as we follow the air parcel. Bold v is u i hat, plus v j hat, plus w k hat. Each of those is a number times an arrow,
-    and as the parcel moves, both of them change. So we need the product rule from Part 2. The change of a number times an arrow is the change of the number times
-    the arrow, plus the number times the change of the arrow. [beat] Using it on all three pieces gives six terms. Capital D bold v by D t equals capital D u by D
-    t times i hat, plus u times capital D i hat by D t. Plus capital D v by D t times j hat, plus v times capital D j hat by D t. Plus capital D w by D t times k
-    hat, plus w times capital D k hat by D t. [beat] In each pair, the first term is the change of the number, and the second is the change of the arrow.
+  voiceover: Why does all this matter? Because of Newton's law. The next three steps show where the turning arrows end up in it. They're for anyone who wants
+    every step, and you don't need them for the intuition of weather, climate or maps, so skip ahead to the time on screen if you like. Force equals mass
+    times acceleration, and the acceleration is the rate of change of the whole wind arrow, bold v, as we follow the air parcel. Bold v is u i hat, plus v
+    j hat, plus w k hat. Each of those is a number times an arrow, and as the parcel moves, both of them change. So we need the product rule from Part 2.
+    The change of a number times an arrow is the change of the number times the arrow, plus the number times the change of the arrow. [beat] Using it on all
+    three pieces gives six terms. Capital D bold v by D t equals capital D u by D t times i hat, plus u times capital D i hat by D t. Plus capital D v by
+    D t times j hat, plus v times capital D j hat by D t. Plus capital D w by D t times k hat, plus w times capital D k hat by D t. [beat] In each pair, the
+    first term is the change of the number, and the second is the change of the arrow.
   on_screen_eq:
     latex: \dfrac{D\mathbf v}{Dt}=\dfrac{Du}{Dt}\hat{\mathbf i}+u\dfrac{D\hat{\mathbf i}}{Dt}+\dfrac{Dv}{Dt}\hat{\mathbf j}+v\dfrac{D\hat{\mathbf j}}{Dt}+\dfrac{Dw}{Dt}\hat{\mathbf
       k}+w\dfrac{D\hat{\mathbf k}}{Dt}
@@ -2407,49 +2077,49 @@ scenes:
     text: every step · optional · skip to 34:41
     look: small warm-white keyword chip at the top of the column (54 px, gold outline), fades after 6 s; timestamp re-filled after the final TTS
   measured:
-    seconds: 88.325
-    words: 234
+    seconds: 90.925
+    words: 243
     sentences: 14
     beats: 2
-    timing_source: splice2
+    timing_source: r7 (final splice)
 - id: s24_dot_i_a
   t:
-  - 1940.9754
-  - 2003.8004
+  - 1630.775
+  - 1693.6
   sentence_times:
-  - - 1940.9754
-    - 1944.6004
-  - - 1944.9504
-    - 1948.2504
-  - - 1948.6004
-    - 1951.7004
-  - - 1952.0504
-    - 1956.0754
-  - - 1956.4254
-    - 1961.3004
-  - - 1961.6504
-    - 1966.0754
-  - - 1967.5754
-    - 1972.6754
-  - - 1973.0254
-    - 1980.0254
-  - - 1980.3754
-    - 1982.4254
-  - - 1983.9254
-    - 1988.9254
-  - - 1989.2754
-    - 1993.7004
-  - - 1995.2004
-    - 2002.3004
+  - - 1630.775
+    - 1634.4
+  - - 1634.75
+    - 1638.05
+  - - 1638.4
+    - 1641.5
+  - - 1641.85
+    - 1645.875
+  - - 1646.225
+    - 1651.1
+  - - 1651.45
+    - 1655.875
+  - - 1657.375
+    - 1662.475
+  - - 1662.825
+    - 1669.825
+  - - 1670.175
+    - 1672.225
+  - - 1673.725
+    - 1678.725
+  - - 1679.075
+    - 1683.5
+  - - 1685.0
+    - 1692.1
   beat: 'derivation D39 (3)-(4): dot with i-hat; terms 1, 2, 3, 5'
   visual: 'The six-term line stays at the top of the column; a gold ''dot i-hat'' tag slides along it, stopping at each term in turn. Term 1 -> ''Du/Dt'' (kept, warm
     white). Terms 2, 3, 5 -> ''0'' (each struck with Strike as its reason appears: ''D i-hat/Dt has only j-hat, k-hat parts'', ''j-hat ⟂ i-hat'', ''k-hat ⟂ i-hat'').
     Picture zone: the local tripod at a parcel with RightTicks lighting for each zero, and Di/Dt drawn (orange dashed) lying in the j-k plane.'
-  voiceover: 'Let''s find the eastward part of this acceleration. How do we get the part of any arrow along i hat? With the dot product, as in Part 1. So we dot all
-    six terms with i hat, one at a time. First term: capital D u by D t, times i hat dot i hat. I hat dot i hat is one, so it''s capital D u by D t. [beat] Second
-    term: u times capital D i hat by D t, dot i hat. The change of i hat has only j hat and k hat parts, and both are at right angles to i hat. So this term is zero.
-    [beat] Third term: capital D v by D t, times j hat dot i hat. J hat is at right angles to i hat, so that''s zero too. [beat] Fifth term, in the same way: capital
-    D w by D t, times k hat dot i hat, is zero. [beat]'
+  voiceover: 'Let''s find the eastward part of this acceleration. How do we get the part of any arrow along i hat? With the dot product, as in Part 1. So
+    we dot all six terms with i hat, one at a time. First term: capital D u by D t, times i hat dot i hat. I hat dot i hat is one, so it''s capital D u by
+    D t. [beat] Second term: u times capital D i hat by D t, dot i hat. The change of i hat has only j hat and k hat parts, and both are at right angles to
+    i hat. So this term is zero. [beat] Third term: capital D v by D t, times j hat dot i hat. J hat is at right angles to i hat, so that''s zero too. [beat]
+    Fifth term, in the same way: capital D w by D t, times k hat dot i hat, is zero. [beat]'
   on_screen_eq:
     latex: \hat{\mathbf i}\cdot\hat{\mathbf i}=1,\qquad \hat{\mathbf j}\cdot\hat{\mathbf i}=\hat{\mathbf k}\cdot\hat{\mathbf i}=0,\qquad \dfrac{D\hat{\mathbf i}}{Dt}\cdot\hat{\mathbf
       i}=0
@@ -2506,50 +2176,51 @@ scenes:
     words: 158
     sentences: 12
     beats: 4
-    timing_source: dryrun1
+    timing_source: r7 (final splice)
 - id: s25_dot_i_b
   t:
-  - 2003.8004
-  - 2097.2504
+  - 1693.6
+  - 1787.05
   sentence_times:
-  - - 2003.8004
-    - 2006.2754
-  - - 2006.6254
-    - 2011.5754
-  - - 2011.9254
-    - 2022.0754
-  - - 2022.4254
-    - 2030.4754
-  - - 2031.9754
-    - 2037.2504
-  - - 2037.6004
-    - 2042.7254
-  - - 2043.0754
-    - 2046.6254
-  - - 2048.1254
-    - 2061.0004
-  - - 2062.5004
-    - 2066.1004
-  - - 2066.4504
-    - 2071.0254
-  - - 2071.3754
-    - 2073.5504
-  - - 2073.9004
-    - 2082.8754
-  - - 2084.3754
-    - 2096.4504
+  - - 1693.6
+    - 1696.075
+  - - 1696.425
+    - 1701.375
+  - - 1701.725
+    - 1711.875
+  - - 1712.225
+    - 1720.275
+  - - 1721.775
+    - 1727.05
+  - - 1727.4
+    - 1732.525
+  - - 1732.875
+    - 1736.425
+  - - 1737.925
+    - 1750.8
+  - - 1752.3
+    - 1755.9
+  - - 1756.25
+    - 1760.825
+  - - 1761.175
+    - 1763.35
+  - - 1763.7
+    - 1772.675
+  - - 1774.175
+    - 1786.25
   beat: 'derivation D39 (5)-(7): terms 4 and 6; the result; metric terms named'
   visual: 'The gold ''dot i-hat'' tag stops on term 4: Dj/Dt from s22 slides in, its i-hat part highlighted (gold band) and its k-hat part struck; the product ''v
     × (−(u/a) tan φ)'' builds to ''−uv tan φ / a''. Term 6: Dk/Dt slides in, i-hat part highlighted, j-hat part struck; ''+uw/a''. Then the result (96 px) with underbraces
     ''change of the number'' (slate) and ''metric terms: turning arrows'' (orange, keyword). S9: the full (2.45) shown at 54 px for the north and up parts (faint),
     the i-row highlighted.'
-  voiceover: 'Now the two terms that survive. Fourth term: v times capital D j hat by D t, dot i hat. Capital D j hat by D t has an i hat part, minus u over the radius
-    tangent phi, and a k hat part, which the dot product drops. So this term is v times minus u over the radius tangent phi: minus u v tangent phi over the radius.
-    [beat] Sixth term: w times capital D k hat by D t, dot i hat. Capital D k hat by D t has the i hat part, u over the radius. So this term is plus u w over the
-    radius. [beat] Adding the six terms, capital D bold v by D t dot i hat equals capital D u by D t, minus u v tangent phi over the radius, plus u w over the radius.
-    [beat] The first term is the change of the number u. The other two come only from the turning arrows of our coordinates. They''re called metric terms. With the
-    same recipe, dotting with j hat and with k hat, we get the northward and upward parts, each with metric terms of its own. [beat] If you skipped, here''s what
-    to keep: because the arrows turn, the wind''s numbers can change even when nothing pushes the air, and the extra terms that say so are called metric terms.'
+  voiceover: 'Now the two terms that survive. Fourth term: v times capital D j hat by D t, dot i hat. Capital D j hat by D t has an i hat part, minus u over
+    the radius tangent phi, and a k hat part, which the dot product drops. So this term is v times minus u over the radius tangent phi: minus u v tangent
+    phi over the radius. [beat] Sixth term: w times capital D k hat by D t, dot i hat. Capital D k hat by D t has the i hat part, u over the radius. So this
+    term is plus u w over the radius. [beat] Adding the six terms, capital D bold v by D t dot i hat equals capital D u by D t, minus u v tangent phi over
+    the radius, plus u w over the radius. [beat] The first term is the change of the number u. The other two come only from the turning arrows of our coordinates.
+    They''re called metric terms. With the same recipe, dotting with j hat and with k hat, we get the northward and upward parts, each with metric terms of
+    its own. [beat] If you skipped, here''s what to keep: because the arrows turn, the wind''s numbers can change even when nothing pushes the air, and the
+    extra terms that say so are called metric terms.'
   on_screen_eq:
     latex: \dfrac{D\mathbf v}{Dt}\cdot\hat{\mathbf i}=\dfrac{Du}{Dt}-\dfrac{uv\tan\varphi}{a}+\dfrac{uw}{a}
     vallis_eq: (2.45), i component, r = a, ϑ -> φ
@@ -2615,53 +2286,54 @@ scenes:
     words: 230
     sentences: 13
     beats: 4
-    timing_source: splice2
+    timing_source: r7 (final splice)
 - id: s26_glider
   t:
-  - 2097.2504
-  - 2181.3254
+  - 1787.05
+  - 1871.125
   sentence_times:
-  - - 2097.2504
-    - 2099.5754
-  - - 2099.9254
-    - 2102.3504
-  - - 2102.7004
-    - 2109.4504
-  - - 2109.8004
-    - 2117.0504
-  - - 2117.4004
-    - 2126.0754
-  - - 2126.4254
-    - 2134.6504
-  - - 2135.0004
-    - 2139.5504
-  - - 2139.9004
-    - 2147.1254
-  - - 2147.4754
-    - 2155.5004
-  - - 2157.0004
-    - 2161.0504
-  - - 2162.5504
-    - 2167.4254
-  - - 2167.7754
-    - 2170.4504
-  - - 2170.8004
-    - 2174.9254
-  - - 2175.2754
-    - 2180.5254
+  - - 1787.05
+    - 1789.375
+  - - 1789.725
+    - 1792.15
+  - - 1792.5
+    - 1799.25
+  - - 1799.6
+    - 1806.85
+  - - 1807.2
+    - 1815.875
+  - - 1816.225
+    - 1824.45
+  - - 1824.8
+    - 1829.35
+  - - 1829.7
+    - 1836.925
+  - - 1837.275
+    - 1845.3
+  - - 1846.8
+    - 1850.85
+  - - 1852.35
+    - 1857.225
+  - - 1857.575
+    - 1860.25
+  - - 1860.6
+    - 1864.725
+  - - 1865.075
+    - 1870.325
   beat: 'intuition: the force-free puck (Must 16, re-voiced): numbers change, speed does not'
   visual: 'Globe (non-spinning, unzoomed): a puck glides from 45° N, 0° E heading north-east along its great circle (gold path, 1 day, time compressed); at start
     and after one day its local tripod and its velocity arrow (teal) are drawn; readouts in the column (never on the globe), gold-linked to the puck: ''u = 10.0 ->
     11.5'', ''v = 10.0 -> 8.2'', ''speed 14.1 -> 14.1'' (the speed row with a gold ''same'' tick). S2-S5: ''(D bold v/Dt) · i-hat = 0 (nothing pushes along the ground)'',
     then ''Du/Dt = uv tan φ / a − uw/a'', ''w = 0 (stays on the ground)'', ''≠ 0''. Not on screen (honesty note): the ground''s upward push keeps the puck on the
     surface, so only the horizontal parts of D bold v/Dt vanish.'
-  voiceover: What do the metric terms mean? Let's try a thought experiment. Imagine a puck gliding over a smooth Earth that doesn't spin, with nothing pushing it
-    along the ground. Then the eastward part of its acceleration, capital D bold v by D t dot i hat, is zero. So capital D u by D t must equal u v tangent phi over
-    the radius, minus u w over the radius. The puck stays on the ground, so w is zero, and that leaves u v tangent phi over the radius, which isn't zero. So the puck's
-    eastward number changes, even though nothing pushes it. Let's start it at forty five degrees north, going north-east, at ten metres per second east and ten north.
-    After one day, its east part has grown to about eleven and a half, and its north part has shrunk to about eight point two. [beat] But its speed is still fourteen
-    point one metres per second. [beat] The puck goes straight, along a great circle, which we'll meet in Part 6. It's our arrows that turned under it. Metric terms
-    never speed anything up or slow it down. They only share the same speed out between east and north, as the arrows turn.
+  voiceover: What do the metric terms mean? Let's try a thought experiment. Imagine a puck gliding over a smooth Earth that doesn't spin, with nothing pushing
+    it along the ground. Then the eastward part of its acceleration, capital D bold v by D t dot i hat, is zero. So capital D u by D t must equal u v tangent
+    phi over the radius, minus u w over the radius. The puck stays on the ground, so w is zero, and that leaves u v tangent phi over the radius, which isn't
+    zero. So the puck's eastward number changes, even though nothing pushes it. Let's start it at forty five degrees north, going north-east, at ten metres
+    per second east and ten north. After one day, its east part has grown to about eleven and a half, and its north part has shrunk to about eight point two.
+    [beat] But its speed is still fourteen point one metres per second. [beat] The puck goes straight, along a great circle, which we'll meet in Part 6. It's
+    our arrows that turned under it. Metric terms never speed anything up or slow it down. They only share the same speed out between east and north, as the
+    arrows turn.
   on_screen_eq:
     latex: \dfrac{D\mathbf v}{Dt}\cdot\hat{\mathbf i}=0\ \Rightarrow\ \dfrac{Du}{Dt}=\dfrac{uv\tan\varphi}{a}-\dfrac{uw}{a}=\dfrac{uv\tan\varphi}{a}\neq0\quad(w=0)
     vallis_eq: '(2.45) i row with Dv/Dt = 0 (the f = 0, ∇p = 0 case of (2.50a,b): great circles)'
@@ -2702,45 +2374,46 @@ scenes:
     words: 205
     sentences: 14
     beats: 2
-    timing_source: splice3
+    timing_source: r7 (final splice)
 - id: s27_metric_size
   t:
-  - 2181.3254
-  - 2263.3504
+  - 1871.125
+  - 1961.2
   sentence_times:
-  - - 2181.3254
-    - 2183.0254
-  - - 2183.3754
-    - 2191.3754
-  - - 2191.7254
-    - 2200.2504
-  - - 2200.6004
-    - 2206.2504
-  - - 2207.7504
-    - 2215.8254
-  - - 2216.1754
-    - 2227.5504
-  - - 2227.9004
-    - 2233.8254
-  - - 2235.3254
-    - 2239.2504
-  - - 2240.7504
-    - 2244.2254
-  - - 2244.5754
-    - 2254.6754
-  - - 2255.0254
-    - 2262.5504
+  - - 1871.125
+    - 1872.825
+  - - 1873.175
+    - 1881.175
+  - - 1881.525
+    - 1890.575
+  - - 1890.925
+    - 1896.825
+  - - 1898.325
+    - 1906.4
+  - - 1906.75
+    - 1923.2
+  - - 1923.55
+    - 1931.675
+  - - 1933.175
+    - 1937.1
+  - - 1938.6
+    - 1942.075
+  - - 1942.425
+    - 1952.525
+  - - 1952.875
+    - 1960.4
   beat: 'why it matters: size of the metric term vs Coriolis (log bars)'
   visual: 'Column CalcStack: ''10 × 10 × 1 / 6.371 × 10⁶ ≈ 1.6 × 10⁻⁵ m/s²''; ''f = 2 Ω sin φ = 2 × 7.29 × 10⁻⁵ × 0.707 ≈ 1.03 × 10⁻⁴ s⁻¹''; ''f v ≈ 1.0 × 10⁻³ m/s²''.
     Picture zone: two horizontal log-scale bars (house Balance style): metric (orange) and Coriolis (violet), tick labels 10⁻⁶ … 10⁻² at 52 px, a gold bracket ''≈
     66×'' between them. S8: a small polar-cap glyph where ''tan φ'' grows (bar lengthening as φ -> 80°, illustrative).'
-  voiceover: 'How big are they? Take the same wind, ten metres per second east and ten north, at forty five degrees, where the tangent is one. U v tangent phi over
-    the radius is ten times ten times one, divided by six point three seven one million metres. That''s about one point six times ten to the minus five metres per
-    second squared. [beat] Let''s compare the Coriolis effect, from the cross product movies: f times v, where f is two Omega sine phi. Two times seven point two
-    nine times ten to the minus five, times zero point seven zero seven, is one point zero three times ten to the minus four per second. Times ten metres per second,
-    that''s about one point zero times ten to the minus three. [beat] So the metric term is about sixty six times smaller. [beat] In one weather system, metric terms
-    are small. But they grow near the poles, where the tangent gets large, and over flows that span whole oceans or the whole globe, so weather and climate models
-    keep them. We''ll meet them again in a later movie: From F equals mass times acceleration, to the equation of motion.'
+  voiceover: 'How big are they? Take the same wind, ten metres per second east and ten north, at forty five degrees, where the tangent is one. Let''s put
+    these numbers into u v tangent phi over the radius, with the Earth''s radius, six point three seven one million metres. That gives about one point six
+    times ten to the minus five metres per second squared. [beat] Let''s compare the Coriolis effect, from the cross product movies: f times v, where f is
+    two Omega sine phi. With the Earth''s spin rate, Omega, seven point two nine times ten to the minus five per second, and the sine of forty five degrees,
+    about zero point seven zero seven, f is about one point zero three times ten to the minus four per second. Multiplying by the northward wind, ten metres
+    per second, gives about one point zero times ten to the minus three. [beat] So the metric term is about sixty six times smaller. [beat] In one weather
+    system, metric terms are small. But they grow near the poles, where the tangent gets large, and over flows that span whole oceans or the whole globe,
+    so weather and climate models keep them. We''ll meet them again in a later movie: From F equals mass times acceleration, to the equation of motion.'
   on_screen_eq:
     latex: \dfrac{uv\tan\varphi}{a}=\dfrac{10\times10\times1}{6.371\times10^{6}}\approx1.6\times10^{-5}\ \text{m/s}^2
     vallis_eq: (2.45) i-row metric term, numbers
@@ -2773,44 +2446,49 @@ scenes:
   layout: 'No real-data picture: no source line. No text over the drawing or over other text; links never cross text or each other. No headings. Opening keyword from
     frame 0 (Should 18).'
   measured:
-    seconds: 82.025
-    words: 195
+    seconds: 90.075
+    words: 216
     sentences: 11
     beats: 3
-    timing_source: dryrun1
+    timing_source: r7 (final splice)
 - id: s28_recap
   t:
-  - 2263.3504
-  - 2340.6504
+  - 1961.2
+  - 2053.675
   sentence_times:
-  - - 2263.3504
-    - 2275.3754
-  - - 2275.7254
-    - 2284.6754
-  - - 2285.0254
-    - 2291.3504
-  - - 2291.7004
-    - 2303.6254
-  - - 2303.9754
-    - 2309.7254
-  - - 2310.0754
-    - 2323.2254
-  - - 2323.5754
-    - 2332.0004
-  - - 2332.3504
-    - 2339.8504
-  beat: recap ('To sum up'); last sentence the teaser to Part 5, Moving frames (seven-part series)
-  visual: 'One beat per sentence, mini pictures reused (no headings): Brest''s tripod with ''v = u i + v j + w k''; the top view and the meridian slice side by side;
-    Brest and Khulna ups with ''75.8°''; the coast with ''329°'', ''9 along'', ''−32 onto the land''; the turning tripod with ''speed / radius''; the i-row of (2.45)
-    with ''metric terms'' brace; the log bars ''≈ 66×''; a storm ring sliding with a rider icon (Part 5 teaser). Each spoken number on screen at its words; small
-    source lines under the data minis.'
-  voiceover: 'To sum up, a forecaster''s local frame has three arrows: i hat east, j hat north and k hat up, and the wind is u i hat, plus v j hat, plus w k hat.
-    Up is the arrow from the Earth''s centre, east comes from turning in the view from above the pole, and north from turning in the meridian slice. Every place has
-    its own frame: Brest''s up and Khulna''s up are about seventy five point eight degrees apart. Turning the frame to a coast, at a bearing of three hundred and twenty nine degrees,
-    split Ian''s wind into about nine metres per second along the shore, and about thirty two onto the land. As the air moves, the arrows turn by themselves, at speeds
-    divided by radii. So the eastward acceleration is capital D u by D t, minus u v tangent phi over the radius, plus u w over the radius: two metric terms that come
-    only from the turning arrows. For an ordinary wind, they''re about sixty six times smaller than the Coriolis effect, but weather and climate models keep them.
-    In Part 5, we''ll let the frame itself move, and see what a storm''s winds look like to someone riding along with it.'
+  - - 1961.2
+    - 1973.225
+  - - 1973.575
+    - 1982.525
+  - - 1982.875
+    - 1990.0
+  - - 1990.35
+    - 2006.65
+  - - 2007.0
+    - 2012.75
+  - - 2013.1
+    - 2026.25
+  - - 2026.6
+    - 2035.025
+  - - 2035.375
+    - 2042.65
+  - - 2043.0
+    - 2052.875
+  beat: recap ('To sum up') with numbers; S3 = where Part 2's coast legs come from; two-sentence teaser to Part 5 (R3)
+  visual: "One beat per sentence, each picture at full strength until its sentence ends (the teaser picture from S7 to the end): tripod; top view + slice;\
+    \ Brest and Khulna ups 75.8\xB0 apart; S3 (remake 2026-11-07) the SW Florida coast with Naples -> Englewood and the two legs, column 'latitude, longitude\
+    \ \u2192 km', '91.5 km north \xB7 55 km west', 'Part 2's coast: 329\xB0'; arrows turning (speed / radius); EQ_S25 'metric terms: turning arrows'; log\
+    \ bars metric vs Coriolis '\u2248 66 \xD7 smaller'; S7-S8 a storm ring sliding east (Part 5: frames that move), 'riding along with a storm', 'its own\
+    \ spin \xB7 its motion', 'what a barometer sees'."
+  voiceover: 'To sum up, a forecaster''s local frame has three arrows: i hat east, j hat north and k hat up, and the wind is u i hat, plus v j hat, plus w
+    k hat. Up is the arrow from the Earth''s centre, east comes from turning in the view from above the pole, and north from turning in the meridian slice.
+    Every place has its own frame: Brest''s up and Khulna''s up are about seventy five point eight degrees apart. With Part 3''s rules, the latitudes and
+    longitudes of Naples and Englewood gave the coast''s two legs, ninety one and a half kilometres north and fifty five west: the legs behind the coast''s
+    bearing of three hundred and twenty nine degrees in Part 2. As the air moves, the arrows turn by themselves, at speeds divided by radii. So the eastward
+    acceleration is capital D u by D t, minus u v tangent phi over the radius, plus u w over the radius: two metric terms that come only from the turning
+    arrows. For an ordinary wind, they''re about sixty six times smaller than the Coriolis effect, but weather and climate models keep them. In Part 5, we''ll
+    let the frame itself move, and ride along with a storm as it crosses the English Channel. That shows which parts of the storm''s winds come from its own
+    spin, and which come only from its motion, and what a barometer sees as the storm passes.'
   on_screen_eq: null
   calc_rows: []
   physics_source: null
@@ -2827,29 +2505,28 @@ scenes:
   pending_data: false
   layout: Mini pictures one per sentence; a small source line under each real-data mini. No headings.
   measured:
-    seconds: 77.3
-    words: 207
-    sentences: 8
+    seconds: 92.475
+    words: 245
+    sentences: 9
     beats: 0
-    timing_source: splice3
+    timing_source: r7 (final splice)
 - id: s29_end
   t:
-  - 2340.6504
-  - 2363.5504
+  - 2053.675
+  - 2076.575
   sentence_times:
-  - - 2340.6504
-    - 2346.8504
-  - - 2347.2004
-    - 2355.2504
-  - - 2355.6004
-    - 2363.2504
+  - - 2053.675
+    - 2059.875
+  - - 2060.225
+    - 2068.275
+  - - 2068.625
+    - 2076.275
   beat: 'series end card (maths ending, HOUSE_STYLE §3, word for word; decision: maths end card)'
-  visual: 'END CARD (house EndCard): four faint topic thumbnails along the top (Brest''s tripod, the turning tripod on a parallel, the coast frame, the metric-term log bars); keyword lines ''a series of maths tutorials'' (68 px) and ''atmospheric science · meteorology · fluid dynamics'' (54 px); notebook icon ''coordinates
-    notebook''; stacked notebook icons ''notebooks for the other maths concepts'' with a 24-px gap under the icon row (Should 14). Then a 2.5-s silent hold while
-    the music fades.'
+  visual: "Series end card (maths ending, HOUSE_STYLE \xA73, word for word): four topic thumbnails, keyword lines, notebook icons, related-movies list. Remake\
+    \ 2026-11-07 (R3): the whole picture fades out over the 75-frame silent hold together with the music's 2.5-s tail."
   voiceover: This video is one of a series of related maths tutorials, so watch out for the others. They're made for students of atmospheric science, meteorology
-    and fluid dynamics, and anyone else who needs these ideas. The notebook for coordinates, and the notebooks for the other maths concepts, are on the website that
-    goes with this video.
+    and fluid dynamics, and anyone else who needs these ideas. The notebook for coordinates, and the notebooks for the other maths concepts, are on the website
+    that goes with this video.
   on_screen_eq: null
   calc_rows: []
   physics_source: null
@@ -2869,4 +2546,4 @@ scenes:
     words: 56
     sentences: 3
     beats: 0
-    timing_source: dryrun1
+    timing_source: r7 (final splice)

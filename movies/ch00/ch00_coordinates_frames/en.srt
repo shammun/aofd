@@ -1,0 +1,2310 @@
+1
+00:00:00,300 --> 00:00:02,904
+In this video, we'll learn local frames,
+
+2
+00:00:02,904 --> 00:00:05,703
+the coordinates every
+weather station uses,
+
+3
+00:00:05,703 --> 00:00:08,502
+and see how they're
+used to follow the wind
+
+4
+00:00:08,502 --> 00:00:10,975
+as the air moves over the round Earth.
+
+5
+00:00:11,775 --> 00:00:14,213
+A forecaster at Brest, in France,
+
+6
+00:00:14,213 --> 00:00:18,350
+measures the wind with three
+arrows: east, north and up.
+
+7
+00:00:18,700 --> 00:00:22,600
+Are those the same three arrows
+at Khulna, in Bangladesh?
+
+8
+00:00:22,950 --> 00:00:25,900
+And what happens to them as the air moves?
+
+9
+00:00:26,250 --> 00:00:29,775
+This is the fourth of seven
+parts on coordinates.
+
+10
+00:00:30,125 --> 00:00:34,815
+Now let's dive into local frames:
+how they differ from place to place,
+
+11
+00:00:34,815 --> 00:00:40,175
+how they turn by themselves as the air
+moves, and why that matters for the wind.
+
+12
+00:00:40,975 --> 00:00:44,125
+Now let's stand at a weather
+station at Brest.
+
+13
+00:00:44,475 --> 00:00:47,534
+Brest sits at the western tip of Brittany,
+
+14
+00:00:47,534 --> 00:00:51,175
+in France, with the Atlantic
+Ocean on three sides.
+
+15
+00:00:51,525 --> 00:00:55,850
+A forecaster there doesn't use
+axes from the Earth's centre.
+
+16
+00:00:56,200 --> 00:01:00,450
+She uses three arrows of length
+one, fixed to her own spot.
+
+17
+00:01:00,800 --> 00:01:03,425
+I hat points east, j hat points north,
+
+18
+00:01:03,425 --> 00:01:07,500
+and k hat points straight
+up, away from the Earth's centre.
+
+19
+00:01:07,850 --> 00:01:11,600
+This is called the local
+east, north, up frame.
+
+20
+00:01:11,950 --> 00:01:15,500
+In Part 1, we called
+the wind arrow bold u.
+
+21
+00:01:15,850 --> 00:01:19,479
+With three parts, it's usual
+to call it bold v,
+
+22
+00:01:19,479 --> 00:01:22,800
+and to keep
+small u, v and w for its parts.
+
+23
+00:01:23,150 --> 00:01:29,325
+So the wind is u times i hat, plus
+v times j hat, plus w times k hat.
+
+24
+00:01:29,675 --> 00:01:35,975
+Here, u is the eastward wind, v the
+northward wind, and w the upward wind.
+
+25
+00:01:36,325 --> 00:01:38,727
+And i hat cross j hat is k hat,
+
+26
+00:01:38,727 --> 00:01:43,375
+so the frame is right-handed,
+as in the cross product movie.
+
+27
+00:01:43,725 --> 00:01:45,550
+Why these arrows?
+
+28
+00:01:45,900 --> 00:01:50,728
+Gravity pulls along minus k hat, the
+ground lies along i hat and
+
+29
+00:01:50,728 --> 00:01:54,575
+j hat, and wind directions
+are measured from north.
+
+30
+00:01:54,925 --> 00:01:58,100
+So every weather report uses this frame.
+
+31
+00:01:58,900 --> 00:02:03,900
+The next few steps write these three
+arrows as numbers, one move at a time.
+
+32
+00:02:04,250 --> 00:02:07,300
+They're here for anyone
+who wants every step.
+
+33
+00:02:07,650 --> 00:02:11,658
+You don't need them to follow
+the weather, the climate or maps,
+
+34
+00:02:11,658 --> 00:02:15,475
+so if it feels like a lot, skip
+ahead to the time on screen.
+
+35
+00:02:15,825 --> 00:02:21,492
+Each of the three arrows can be written
+with the Earth's fixed axes from Part 3:
+
+36
+00:02:21,492 --> 00:02:23,829
+x hat points to latitude zero and
+
+37
+00:02:23,829 --> 00:02:26,167
+longitude zero, y hat to latitude
+
+38
+00:02:26,167 --> 00:02:30,275
+zero and ninety degrees
+east, and z hat to the North Pole.
+
+39
+00:02:30,625 --> 00:02:33,875
+Let's start with up,
+because it's the easiest.
+
+40
+00:02:34,225 --> 00:02:37,050
+Up points straight out
+from the Earth's centre.
+
+41
+00:02:37,400 --> 00:02:42,346
+That's exactly the direction of the arrow
+from the centre to the station,
+
+42
+00:02:42,346 --> 00:02:44,175
+the one we found in Part 3.
+
+43
+00:02:44,525 --> 00:02:49,325
+So k hat is cosine phi cosine
+lambda, cosine phi sine lambda,
+
+44
+00:02:49,325 --> 00:02:54,125
+sine phi, where phi is the latitude
+and lambda the longitude.
+
+45
+00:02:55,625 --> 00:02:57,950
+Let's put in Brest's numbers.
+
+46
+00:02:58,300 --> 00:03:01,732
+Brest is at forty
+eight point four degrees north,
+
+47
+00:03:01,732 --> 00:03:07,125
+and four point five degrees west, so
+lambda is minus four point five degrees.
+
+48
+00:03:07,475 --> 00:03:13,775
+Cosine phi is zero point six six four, and
+sine phi is zero point seven four eight.
+
+49
+00:03:14,125 --> 00:03:17,425
+Cosine lambda
+is zero point nine nine seven,
+
+50
+00:03:17,425 --> 00:03:21,400
+and sine lambda is minus
+zero point zero seven eight.
+
+51
+00:03:21,750 --> 00:03:26,072
+The first part of k hat is cosine
+phi times cosine lambda,
+
+52
+00:03:26,072 --> 00:03:29,350
+which comes to about
+zero point six six two.
+
+53
+00:03:29,700 --> 00:03:32,893
+The second, cosine phi times sine lambda,
+
+54
+00:03:32,893 --> 00:03:36,475
+comes to about
+minus zero point zero five two.
+
+55
+00:03:36,825 --> 00:03:40,000
+And the third
+is zero point seven four eight.
+
+56
+00:03:41,500 --> 00:03:47,450
+Its length is one, because it's still the
+arrow from Part 3, divided by the radius.
+
+57
+00:03:48,250 --> 00:03:49,825
+Now east.
+
+58
+00:03:50,175 --> 00:03:54,050
+Let's look down on the Earth
+from far above the North Pole.
+
+59
+00:03:54,400 --> 00:03:57,763
+From there, the circle
+of latitude through Brest,
+
+60
+00:03:57,763 --> 00:04:01,125
+the parallel, is a circle
+round the Earth's axis.
+
+61
+00:04:01,475 --> 00:04:05,245
+Brest sits on it at the angle
+lambda from the x axis,
+
+62
+00:04:05,245 --> 00:04:09,300
+measured anticlockwise as seen
+from above the North Pole.
+
+63
+00:04:09,650 --> 00:04:15,625
+Going east means lambda grows, so Brest
+slides anticlockwise round this circle.
+
+64
+00:04:15,975 --> 00:04:19,175
+This is exactly the picture from Part 1.
+
+65
+00:04:19,525 --> 00:04:22,414
+The arrow pointing
+from the circle's centre
+
+66
+00:04:22,414 --> 00:04:24,900
+out to Brest plays the role of r hat.
+
+67
+00:04:25,250 --> 00:04:30,277
+We'll call it capital R hat: it points
+straight away from the Earth's axis,
+
+68
+00:04:30,277 --> 00:04:34,700
+level with the equator,
+and it's cosine lambda, sine lambda, zero.
+
+69
+00:04:35,050 --> 00:04:40,200
+East is the way the angle grows, so
+east plays the role of theta hat.
+
+70
+00:04:40,550 --> 00:04:46,369
+In Part 1, we found theta hat by turning
+r hat by ninety degrees anticlockwise:
+
+71
+00:04:46,369 --> 00:04:50,125
+swap the two numbers,
+and put a minus on the first.
+
+72
+00:04:50,475 --> 00:04:54,250
+So i hat is minus sine
+lambda, cosine lambda.
+
+73
+00:04:54,600 --> 00:04:58,174
+Its third part is zero,
+because east runs level,
+
+74
+00:04:58,174 --> 00:05:01,600
+round the circle, with no
+part along the axis.
+
+75
+00:05:03,100 --> 00:05:08,850
+At Brest, that's zero point zero seven
+eight, zero point nine nine seven, zero.
+
+76
+00:05:10,350 --> 00:05:14,750
+So east at Brest points
+almost exactly along y hat.
+
+77
+00:05:15,100 --> 00:05:18,763
+That makes sense: Brest
+is close to longitude zero,
+
+78
+00:05:18,763 --> 00:05:22,425
+and there, east points
+towards ninety degrees east.
+
+79
+00:05:23,225 --> 00:05:24,750
+Now north.
+
+80
+00:05:25,100 --> 00:05:29,087
+This time, let's slice the Earth
+along Brest's meridian,
+
+81
+00:05:29,087 --> 00:05:34,000
+the half circle from pole to pole
+through Brest, as we did in Part 3.
+
+82
+00:05:34,350 --> 00:05:38,600
+In this slice, there are two
+fixed directions: capital R hat,
+
+83
+00:05:38,600 --> 00:05:42,850
+pointing away from the axis, and z hat,
+pointing up the axis.
+
+84
+00:05:43,200 --> 00:05:47,925
+Up, k hat, sits at the angle
+phi above capital R hat.
+
+85
+00:05:48,275 --> 00:05:50,726
+So, just like r hat in Part 1,
+
+86
+00:05:50,726 --> 00:05:56,200
+k hat is cosine phi times
+capital R hat, plus sine phi times z hat.
+
+87
+00:05:57,700 --> 00:06:03,525
+North is the way phi grows: Brest sliding
+round the meridian towards the North Pole.
+
+88
+00:06:03,875 --> 00:06:07,400
+So north plays the role
+of theta hat in this slice.
+
+89
+00:06:07,750 --> 00:06:11,238
+Let's turn k hat by ninety
+degrees towards the pole,
+
+90
+00:06:11,238 --> 00:06:16,000
+with the same rule: swap the two numbers,
+and put a minus on the first.
+
+91
+00:06:16,350 --> 00:06:21,250
+That gives j hat equals minus sine
+phi times capital R hat,
+
+92
+00:06:21,250 --> 00:06:23,575
+plus cosine phi times z hat.
+
+93
+00:06:23,925 --> 00:06:29,400
+Now put in capital R hat, which
+is cosine lambda, sine lambda, zero.
+
+94
+00:06:29,750 --> 00:06:36,325
+So j hat is minus sine phi cosine lambda,
+minus sine phi sine lambda, cosine phi.
+
+95
+00:06:37,825 --> 00:06:41,742
+At Brest, that's
+minus zero point seven four five,
+
+96
+00:06:41,742 --> 00:06:46,050
+zero point zero five nine, and
+zero point six six four.
+
+97
+00:06:47,550 --> 00:06:53,075
+So north at Brest points partly up the
+Earth's axis, and partly in towards it.
+
+98
+00:06:53,875 --> 00:06:59,000
+Let's check that these really are three
+arrows of length one, at right angles.
+
+99
+00:06:59,350 --> 00:07:04,000
+For i hat, the squares of its east
+and north parts add up to one.
+
+100
+00:07:05,500 --> 00:07:10,574
+Next, the dot product of i hat and j hat:
+we multiply their first parts,
+
+101
+00:07:10,574 --> 00:07:14,450
+their second parts and their
+third parts, and add them.
+
+102
+00:07:14,800 --> 00:07:17,575
+That gives zero, up to rounding.
+
+103
+00:07:17,925 --> 00:07:20,000
+So they're at right angles.
+
+104
+00:07:21,500 --> 00:07:24,200
+The other pairs work out the same way.
+
+105
+00:07:24,550 --> 00:07:30,742
+And with the cross product recipe, i hat
+cross j hat gives zero point six six two,
+
+106
+00:07:30,742 --> 00:07:35,575
+minus zero point zero five two, and
+zero point seven four eight.
+
+107
+00:07:35,925 --> 00:07:37,675
+That's k hat.
+
+108
+00:07:39,175 --> 00:07:42,421
+So the three local
+arrows are right-handed,
+
+109
+00:07:42,421 --> 00:07:46,875
+just like x hat, y hat
+and z hat, only turned to fit Brest.
+
+110
+00:07:47,225 --> 00:07:52,013
+If you skipped, here's what to keep:
+every place has its own three arrows,
+
+111
+00:07:52,013 --> 00:07:57,125
+east, north and up, and up always points
+straight away from the Earth's centre.
+
+112
+00:07:57,925 --> 00:08:00,450
+Each station has its own frame.
+
+113
+00:08:00,800 --> 00:08:03,550
+Let's zoom back out to the whole globe.
+
+114
+00:08:03,900 --> 00:08:08,975
+Trappes, near Paris, is four hundred
+and eighty kilometres east of Brest.
+
+115
+00:08:09,325 --> 00:08:11,300
+How different is its up?
+
+116
+00:08:11,650 --> 00:08:17,350
+The angle between two ups is the angle at
+the Earth's centre between the two places.
+
+117
+00:08:17,700 --> 00:08:22,475
+By the arc rule, that's the distance
+divided by the Earth's radius.
+
+118
+00:08:22,825 --> 00:08:28,325
+That's zero point zero seven five radians,
+about four point three degrees.
+
+119
+00:08:29,825 --> 00:08:32,475
+Now Singapore, near the equator.
+
+120
+00:08:32,825 --> 00:08:36,675
+For places far apart, the
+dot product is easier.
+
+121
+00:08:37,025 --> 00:08:39,978
+The dot product of two
+arrows of length one
+
+122
+00:08:39,978 --> 00:08:42,725
+is the cosine of the angle between them.
+
+123
+00:08:43,075 --> 00:08:46,837
+Singapore's up is minus
+zero point two three nine,
+
+124
+00:08:46,837 --> 00:08:50,750
+zero point nine seven
+one, zero point zero two four.
+
+125
+00:08:51,100 --> 00:08:54,950
+Multiply the matching parts
+of the two ups, and add.
+
+126
+00:08:55,300 --> 00:08:59,825
+Those three products add up
+to minus zero point one nine one.
+
+127
+00:09:01,325 --> 00:09:03,249
+The angle whose cosine is
+
+128
+00:09:03,249 --> 00:09:08,250
+minus zero point one nine one
+is about a hundred and one degrees.
+
+129
+00:09:09,750 --> 00:09:14,125
+So Singapore's up points more
+than a right angle away from Brest's up.
+
+130
+00:09:14,925 --> 00:09:18,875
+Now let's fly to Khulna, in
+south-west Bangladesh.
+
+131
+00:09:19,225 --> 00:09:22,410
+Khulna lies on the rivers
+of the Ganges delta,
+
+132
+00:09:22,410 --> 00:09:27,325
+just north of the Sundarbans,
+the largest mangrove forest in the world.
+
+133
+00:09:27,675 --> 00:09:31,374
+To the south is the Bay
+of Bengal, and to the west,
+
+134
+00:09:31,374 --> 00:09:34,275
+across the border, is Kolkata, in India.
+
+135
+00:09:34,625 --> 00:09:39,743
+In May twenty twenty, the centre
+of Cyclone Amphan, which we met in Part 2,
+
+136
+00:09:39,743 --> 00:09:43,291
+passed about seventy nine
+kilometres west of Khulna,
+
+137
+00:09:43,291 --> 00:09:46,225
+and the sea flooded
+the coast to its south.
+
+138
+00:09:46,575 --> 00:09:49,890
+Khulna is at twenty
+two point eight degrees north,
+
+139
+00:09:49,890 --> 00:09:52,475
+and eighty nine point six degrees east.
+
+140
+00:09:52,825 --> 00:09:56,021
+There, cosine phi
+is zero point nine two two,
+
+141
+00:09:56,021 --> 00:09:58,719
+sine phi zero point three eight eight,
+
+142
+00:09:58,719 --> 00:10:01,843
+cosine lambda
+zero point zero zero seven and
+
+143
+00:10:01,843 --> 00:10:07,240
+sine lambda almost exactly one, so
+its up arrow is zero point zero zero six,
+
+144
+00:10:07,240 --> 00:10:11,075
+zero point nine two
+two, zero point three eight eight.
+
+145
+00:10:12,575 --> 00:10:17,775
+Dotted with Brest's up, part by part, that
+gives zero point two four six.
+
+146
+00:10:18,125 --> 00:10:19,945
+The angle whose cosine is
+
+147
+00:10:19,945 --> 00:10:24,750
+zero point two four six is about
+seventy five point eight degrees.
+
+148
+00:10:26,250 --> 00:10:28,400
+Even east is different.
+
+149
+00:10:28,750 --> 00:10:33,451
+Khulna's i hat is minus
+one, zero point zero zero seven,
+
+150
+00:10:33,451 --> 00:10:36,725
+zero, almost exactly opposite to x hat.
+
+151
+00:10:37,075 --> 00:10:40,550
+It's about ninety four degrees
+away from Brest's east.
+
+152
+00:10:42,050 --> 00:10:45,816
+So forecasters in Khulna
+and in Brest both say east,
+
+153
+00:10:45,816 --> 00:10:49,075
+north and up, but they
+mean different arrows.
+
+154
+00:10:49,425 --> 00:10:51,450
+Let's zoom back out.
+
+155
+00:10:52,250 --> 00:10:57,100
+Sometimes a forecaster turns her
+east and north arrows on purpose.
+
+156
+00:10:57,450 --> 00:11:02,417
+On a coast, what matters is the part
+of the wind blowing along the shore,
+
+157
+00:11:02,417 --> 00:11:06,500
+and the part blowing across
+it, onto the land or out to sea.
+
+158
+00:11:06,850 --> 00:11:11,912
+We did exactly this in Part 2, for
+Hurricane Ian at Fort Myers Beach,
+
+159
+00:11:11,912 --> 00:11:16,975
+on the south-west coast of Florida,
+with the turned axes from Part 1.
+
+160
+00:11:17,325 --> 00:11:20,066
+The new along arrow, x hat prime,
+
+161
+00:11:20,066 --> 00:11:24,800
+is cosine alpha times i hat, plus sine
+alpha times j hat.
+
+162
+00:11:25,150 --> 00:11:31,000
+The new across arrow, y hat prime, is that
+one turned by ninety degrees:
+
+163
+00:11:31,000 --> 00:11:35,875
+minus sine alpha times i hat, plus cosine
+alpha times j hat.
+
+164
+00:11:36,225 --> 00:11:41,069
+The coast there runs at a bearing
+of three hundred and twenty nine degrees,
+
+165
+00:11:41,069 --> 00:11:44,040
+so alpha was a hundred
+and twenty one degrees,
+
+166
+00:11:44,040 --> 00:11:46,300
+and y hat prime pointed out to sea.
+
+167
+00:11:46,650 --> 00:11:48,765
+Then Ian's wind split into about
+
+168
+00:11:48,765 --> 00:11:52,069
+nine point four metres
+per second along the shore,
+
+169
+00:11:52,069 --> 00:11:57,025
+and about minus thirty one and a half
+across it, which means onto the land.
+
+170
+00:11:57,375 --> 00:12:02,850
+In three dimensions, there's one more
+arrow: we keep up, k hat, as it is,
+
+171
+00:12:02,850 --> 00:12:06,600
+and turn only i hat
+and j hat, by the angle alpha,
+
+172
+00:12:06,600 --> 00:12:09,075
+anticlockwise as seen from above.
+
+173
+00:12:09,425 --> 00:12:14,645
+One question was left open in Part 2:
+the coast's two legs, ninety one and
+
+174
+00:12:14,645 --> 00:12:18,524
+a half kilometres north
+and fifty five kilometres west,
+
+175
+00:12:18,524 --> 00:12:21,275
+were read off a flat map in kilometres.
+
+176
+00:12:21,625 --> 00:12:25,625
+Now we can work them out
+from latitude and longitude.
+
+177
+00:12:26,425 --> 00:12:29,650
+First, we need two
+points on the coastline.
+
+178
+00:12:30,000 --> 00:12:32,716
+Let's take one near Naples, in Florida,
+
+179
+00:12:32,716 --> 00:12:35,920
+at twenty six point one zero
+degrees north and
+
+180
+00:12:35,920 --> 00:12:38,775
+eighty one point eight zero degrees west.
+
+181
+00:12:39,125 --> 00:12:42,159
+And one near Englewood,
+further up the coast,
+
+182
+00:12:42,159 --> 00:12:45,261
+at twenty six point nine two
+degrees north and
+
+183
+00:12:45,261 --> 00:12:48,025
+eighty two point three five degrees west.
+
+184
+00:12:48,375 --> 00:12:51,450
+Both come from a world map of coastlines.
+
+185
+00:12:51,800 --> 00:12:53,984
+Going from Naples to Englewood,
+
+186
+00:12:53,984 --> 00:12:58,000
+the latitude grows by
+zero point eight two three degrees.
+
+187
+00:12:59,500 --> 00:13:04,425
+The longitude changes by minus
+zero point five five three degrees.
+
+188
+00:13:04,775 --> 00:13:07,425
+It's minus because we go west.
+
+189
+00:13:08,925 --> 00:13:14,100
+Now let's turn these angles into
+kilometres, with the rules from Part 3.
+
+190
+00:13:14,450 --> 00:13:20,150
+The step north is the Earth's radius
+times the change in latitude, in radians.
+
+191
+00:13:20,500 --> 00:13:24,643
+One degree is zero point zero
+one seven four five radians,
+
+192
+00:13:24,643 --> 00:13:27,500
+so zero point eight two three degrees is
+
+193
+00:13:27,500 --> 00:13:30,571
+zero point zero one
+four three six radians,
+
+194
+00:13:30,571 --> 00:13:33,714
+and the step north
+is the radius times that:
+
+195
+00:13:33,714 --> 00:13:36,500
+about ninety one and a half kilometres.
+
+196
+00:13:38,000 --> 00:13:41,609
+The step east
+is the radius, times cosine phi,
+
+197
+00:13:41,609 --> 00:13:44,825
+times the change in longitude in radians.
+
+198
+00:13:45,175 --> 00:13:48,722
+For phi, we use the middle
+latitude, twenty six and
+
+199
+00:13:48,722 --> 00:13:52,825
+a half degrees, whose cosine
+is zero point eight nine five.
+
+200
+00:13:53,175 --> 00:13:55,358
+With the change in longitude,
+
+201
+00:13:55,358 --> 00:14:00,177
+minus zero point zero zero nine six five
+radians, the step east,
+
+202
+00:14:00,177 --> 00:14:03,113
+the radius times cosine phi times that,
+
+203
+00:14:03,113 --> 00:14:06,350
+comes to about minus fifty
+five kilometres.
+
+204
+00:14:07,850 --> 00:14:11,389
+So going up the coast, we
+move about ninety one and
+
+205
+00:14:11,389 --> 00:14:15,275
+a half kilometres north, and fifty
+five kilometres west.
+
+206
+00:14:15,625 --> 00:14:20,567
+These are the two legs Part 2 used
+for the coast's bearing: their ratio,
+
+207
+00:14:20,567 --> 00:14:24,823
+zero point six zero one, is the
+tangent of thirty one degrees,
+
+208
+00:14:24,823 --> 00:14:28,324
+so the coast runs thirty
+one degrees west of north,
+
+209
+00:14:28,324 --> 00:14:31,825
+a bearing of three hundred
+and twenty nine degrees.
+
+210
+00:14:33,325 --> 00:14:35,700
+Now a second kind of turning.
+
+211
+00:14:36,050 --> 00:14:40,900
+Our arrows also turn by themselves,
+as you move over the round Earth.
+
+212
+00:14:41,250 --> 00:14:45,392
+Suppose a plane flies due east
+along the parallel through Brest,
+
+213
+00:14:45,392 --> 00:14:48,175
+at two hundred and fifty
+metres per second.
+
+214
+00:14:48,525 --> 00:14:52,596
+In one hour, which is three
+thousand six hundred seconds,
+
+215
+00:14:52,596 --> 00:14:55,025
+it covers nine hundred kilometres.
+
+216
+00:14:56,525 --> 00:14:58,071
+As we found in Part 3,
+
+217
+00:14:58,071 --> 00:15:02,708
+at Brest one degree of longitude
+is about seventy four kilometres,
+
+218
+00:15:02,708 --> 00:15:05,800
+so that's about twelve
+degrees of longitude.
+
+219
+00:15:07,300 --> 00:15:12,736
+Seen from above the North Pole, the plane
+has gone twelve degrees round the axis,
+
+220
+00:15:12,736 --> 00:15:16,897
+and its east arrow has swung
+round by the same twelve degrees,
+
+221
+00:15:16,897 --> 00:15:19,850
+just like theta hat
+swinging round a circle.
+
+222
+00:15:20,200 --> 00:15:22,750
+Going north tips the arrows too.
+
+223
+00:15:23,100 --> 00:15:26,218
+After a hundred and eleven
+kilometres north,
+
+224
+00:15:26,218 --> 00:15:31,250
+which is one degree of latitude,
+the up arrow has tilted by one degree.
+
+225
+00:15:31,600 --> 00:15:37,025
+So for a moving air parcel, i hat, j hat
+and k hat keep changing.
+
+226
+00:15:37,375 --> 00:15:42,625
+We write their rates of change
+as capital D i hat by D t, and so on.
+
+227
+00:15:42,975 --> 00:15:48,511
+Capital D by D t means the rate
+of change as we follow the air parcel,
+
+228
+00:15:48,511 --> 00:15:50,725
+as in the derivatives movie.
+
+229
+00:15:51,075 --> 00:15:54,375
+How fast do the arrows
+turn, and which way?
+
+230
+00:15:54,725 --> 00:15:57,800
+Let's work it out, one motion at a time.
+
+231
+00:15:58,600 --> 00:16:02,375
+Now let's work out exactly
+how fast the arrows turn.
+
+232
+00:16:02,725 --> 00:16:06,100
+This part is for those
+who enjoy every step.
+
+233
+00:16:06,450 --> 00:16:09,913
+It isn't needed for the weather,
+the climate or maps,
+
+234
+00:16:09,913 --> 00:16:13,050
+so skip ahead to the time
+on screen if you like.
+
+235
+00:16:13,400 --> 00:16:16,225
+We need just two results from Part 2.
+
+236
+00:16:16,575 --> 00:16:21,570
+Take a point going round a circle, with
+r hat pointing out from the centre,
+
+237
+00:16:21,570 --> 00:16:24,700
+and theta hat pointing
+the way the angle grows.
+
+238
+00:16:25,050 --> 00:16:29,723
+First, as the angle grows, r hat
+changes towards theta hat,
+
+239
+00:16:29,723 --> 00:16:33,050
+and theta hat changes towards minus r hat.
+
+240
+00:16:33,400 --> 00:16:37,870
+We wrote that as d r hat by d theta
+equals theta hat,
+
+241
+00:16:37,870 --> 00:16:41,750
+and d theta hat by d theta
+equals minus r hat.
+
+242
+00:16:43,250 --> 00:16:47,536
+Second, if the point moves
+along the circle at a speed v,
+
+243
+00:16:47,536 --> 00:16:53,175
+its angle grows at v divided by the
+circle's radius, in radians per second.
+
+244
+00:16:53,525 --> 00:16:58,338
+Putting the two together with the chain
+rule from the derivatives movie,
+
+245
+00:16:58,338 --> 00:17:02,750
+theta hat changes at minus r hat, times
+the speed over the radius.
+
+246
+00:17:03,100 --> 00:17:07,950
+And r hat changes at theta
+hat, times the speed over the radius.
+
+247
+00:17:09,450 --> 00:17:11,625
+So here's the recipe.
+
+248
+00:17:11,975 --> 00:17:15,407
+Find the circle, find
+which arrow plays r hat and
+
+249
+00:17:15,407 --> 00:17:20,100
+which plays theta hat, and divide
+the speed by the circle's radius.
+
+250
+00:17:20,900 --> 00:17:25,550
+An air parcel can move in three
+ways: east, north and up.
+
+251
+00:17:25,900 --> 00:17:29,875
+Let's take them one
+at a time, and add them up at the end.
+
+252
+00:17:30,225 --> 00:17:32,700
+Going straight up is the easiest.
+
+253
+00:17:33,050 --> 00:17:36,448
+Look at our three formulas:
+i hat, j hat and
+
+254
+00:17:36,448 --> 00:17:41,700
+k hat depend only on phi and
+lambda, the latitude and the longitude.
+
+255
+00:17:42,050 --> 00:17:46,500
+Going up changes neither,
+so going up turns none of the arrows.
+
+256
+00:17:48,000 --> 00:17:51,350
+Going north changes phi, but not lambda.
+
+257
+00:17:51,700 --> 00:17:56,875
+And i hat, minus sine lambda, cosine
+lambda, zero, has no phi in it.
+
+258
+00:17:57,225 --> 00:18:00,000
+So going north leaves i hat alone.
+
+259
+00:18:01,500 --> 00:18:05,979
+That leaves four things to find:
+how going east turns i hat,
+
+260
+00:18:05,979 --> 00:18:11,950
+how going north turns j hat and k hat, and
+how going east turns j hat and k hat.
+
+261
+00:18:12,750 --> 00:18:15,550
+First, going east, and i hat.
+
+262
+00:18:15,900 --> 00:18:21,698
+Going east, the parcel moves round its
+parallel: a circle round the Earth's axis,
+
+263
+00:18:21,698 --> 00:18:27,425
+whose radius is the distance from the
+axis, the Earth's radius times cosine phi.
+
+264
+00:18:27,775 --> 00:18:32,579
+In the view from above the North
+Pole, capital R hat plays r hat,
+
+265
+00:18:32,579 --> 00:18:36,275
+i hat plays theta hat, and lambda
+plays the angle.
+
+266
+00:18:36,625 --> 00:18:39,600
+First, how fast does lambda grow?
+
+267
+00:18:39,950 --> 00:18:42,574
+The parcel moves east at the speed u,
+
+268
+00:18:42,574 --> 00:18:47,325
+round a circle whose radius
+is the Earth's radius times cosine phi.
+
+269
+00:18:47,675 --> 00:18:51,575
+So lambda grows
+at u divided by that radius.
+
+270
+00:18:53,075 --> 00:18:57,925
+Next, Part 2's rule says theta hat
+changes towards minus r hat.
+
+271
+00:18:58,275 --> 00:19:03,281
+So as lambda grows, i hat changes
+towards minus capital R hat:
+
+272
+00:19:03,281 --> 00:19:07,075
+d i hat by d lambda equals
+minus capital R hat.
+
+273
+00:19:08,575 --> 00:19:11,775
+Now multiply the two, by the chain rule.
+
+274
+00:19:12,125 --> 00:19:16,388
+Capital D i hat by D t equals
+minus capital R hat,
+
+275
+00:19:16,388 --> 00:19:20,650
+times u, over the Earth's
+radius times cosine phi.
+
+276
+00:19:22,150 --> 00:19:27,550
+In words: going east, the east arrow
+swings in towards the Earth's axis.
+
+277
+00:19:28,350 --> 00:19:31,975
+But a forecaster doesn't
+use capital R hat.
+
+278
+00:19:32,325 --> 00:19:35,050
+She wants the answer in her own arrows.
+
+279
+00:19:35,400 --> 00:19:38,450
+Let's go back to Brest's meridian slice.
+
+280
+00:19:38,800 --> 00:19:44,450
+There, we wrote k hat as cosine phi
+capital R hat, plus sine phi z hat.
+
+281
+00:19:44,800 --> 00:19:50,325
+And j hat as minus sine phi
+capital R hat, plus cosine phi z hat.
+
+282
+00:19:50,675 --> 00:19:56,725
+Next, multiply the first line by cosine
+phi, and the second line by sine phi.
+
+283
+00:19:57,075 --> 00:20:00,275
+Then take the second
+line away from the first.
+
+284
+00:20:00,625 --> 00:20:02,479
+The z hat parts cancel,
+
+285
+00:20:02,479 --> 00:20:07,475
+because cosine phi sine phi
+minus sine phi cosine phi is zero.
+
+286
+00:20:07,825 --> 00:20:11,037
+The capital R hat parts
+give cosine squared
+
+287
+00:20:11,037 --> 00:20:14,025
+phi plus sine squared phi, which is one.
+
+288
+00:20:14,375 --> 00:20:19,925
+So capital R hat equals cosine
+phi k hat, minus sine phi j hat.
+
+289
+00:20:21,425 --> 00:20:26,650
+In words: pointing away from the axis
+is partly up, and partly south.
+
+290
+00:20:27,000 --> 00:20:32,700
+Now put minus capital R hat into the
+chain-rule result we found a moment ago.
+
+291
+00:20:33,050 --> 00:20:39,302
+Capital D i hat by D t equals u over
+the Earth's radius times cosine phi,
+
+292
+00:20:39,302 --> 00:20:45,725
+times, open bracket, j hat sine phi, minus
+k hat cosine phi, close bracket.
+
+293
+00:20:47,225 --> 00:20:51,219
+So going east, the east arrow
+tips a little towards the north,
+
+294
+00:20:51,219 --> 00:20:52,700
+and a little downwards.
+
+295
+00:20:53,050 --> 00:20:54,625
+How fast?
+
+296
+00:20:54,975 --> 00:20:59,165
+For a wind of ten metres per second
+towards the east at Brest,
+
+297
+00:20:59,165 --> 00:21:01,936
+divide ten by the distance from the axis,
+
+298
+00:21:01,936 --> 00:21:05,450
+four million two hundred
+and thirty thousand metres.
+
+299
+00:21:05,800 --> 00:21:11,025
+That's about two point four times ten
+to the minus six radians per second.
+
+300
+00:21:12,525 --> 00:21:15,225
+That's about twelve degrees in a day.
+
+301
+00:21:16,025 --> 00:21:19,975
+Next, going north, which
+turns j hat and k hat.
+
+302
+00:21:20,325 --> 00:21:23,728
+Going north, the parcel
+moves round its meridian:
+
+303
+00:21:23,728 --> 00:21:29,075
+a circle round the Earth's centre, whose
+radius is the Earth's radius itself.
+
+304
+00:21:29,425 --> 00:21:34,800
+In the meridian slice, k hat points
+out from the centre, so it plays r hat.
+
+305
+00:21:35,150 --> 00:21:39,575
+And j hat points the way phi
+grows, so it plays theta hat.
+
+306
+00:21:39,925 --> 00:21:45,425
+The parcel moves north at the speed v, so
+phi grows at v over the radius.
+
+307
+00:21:46,925 --> 00:21:50,450
+Part 2's rules then
+give the answer at once.
+
+308
+00:21:50,800 --> 00:21:53,246
+K hat changes towards j hat:
+
+309
+00:21:53,246 --> 00:21:58,050
+capital D k hat
+by D t equals j hat, v over the radius.
+
+310
+00:21:58,400 --> 00:22:01,749
+And j hat changes towards minus k hat:
+
+311
+00:22:01,749 --> 00:22:07,125
+capital D j hat by D t equals
+minus k hat, v over the radius.
+
+312
+00:22:08,625 --> 00:22:13,875
+In words: going north, up tips towards
+the north, and north tips downwards.
+
+313
+00:22:14,225 --> 00:22:18,748
+A hundred and eleven kilometres
+north, over the Earth's radius,
+
+314
+00:22:18,748 --> 00:22:22,194
+is about
+zero point zero one seven five radians:
+
+315
+00:22:22,194 --> 00:22:25,425
+the one-degree tilt
+of up that we saw before.
+
+316
+00:22:26,925 --> 00:22:30,900
+Last, going east also
+tilts j hat and k hat.
+
+317
+00:22:31,250 --> 00:22:36,606
+Look again at how they're built:
+k hat is cosine phi capital R hat,
+
+318
+00:22:36,606 --> 00:22:41,641
+plus sine phi z hat, and j hat
+is minus sine phi capital R hat,
+
+319
+00:22:41,641 --> 00:22:43,400
+plus cosine phi z hat.
+
+320
+00:22:43,750 --> 00:22:49,000
+Going east, phi stays the same, so
+the sines and cosines don't change.
+
+321
+00:22:49,350 --> 00:22:53,500
+Z hat lies along the Earth's
+axis, and never turns.
+
+322
+00:22:53,850 --> 00:22:56,350
+Only capital R hat turns.
+
+323
+00:22:56,700 --> 00:23:00,413
+In the view from above,
+capital R hat plays r hat,
+
+324
+00:23:00,413 --> 00:23:04,200
+so it changes towards i hat, which
+plays theta hat.
+
+325
+00:23:04,550 --> 00:23:08,323
+Capital D capital R hat
+by D t equals i hat,
+
+326
+00:23:08,323 --> 00:23:12,525
+times u over the Earth's
+radius times cosine phi.
+
+327
+00:23:14,025 --> 00:23:18,475
+So capital D k hat by D t is cosine
+phi times that.
+
+328
+00:23:18,825 --> 00:23:23,300
+The cosines cancel,
+leaving i hat, u over the radius.
+
+329
+00:23:24,800 --> 00:23:30,214
+And capital D j hat by D t is minus sine
+phi times the same thing:
+
+330
+00:23:30,214 --> 00:23:35,875
+minus i hat, times u over the
+radius, times sine phi over cosine phi.
+
+331
+00:23:36,225 --> 00:23:38,783
+Sine over cosine is the tangent,
+
+332
+00:23:38,783 --> 00:23:43,100
+so that's minus i hat, u over the radius,
+tangent phi.
+
+333
+00:23:44,600 --> 00:23:50,400
+In words: going east, up leans towards the
+east, and north leans towards the west.
+
+334
+00:23:51,200 --> 00:23:53,425
+Now let's add the motions.
+
+335
+00:23:53,775 --> 00:23:58,225
+In a short time, the parcel
+moves a little east and a little north.
+
+336
+00:23:58,575 --> 00:24:02,265
+As in the total differential
+from the derivatives movie,
+
+337
+00:24:02,265 --> 00:24:04,900
+the small changes from each move add up.
+
+338
+00:24:05,250 --> 00:24:11,147
+So capital D i hat by D t equals u over
+the radius times cosine phi,
+
+339
+00:24:11,147 --> 00:24:17,650
+times, open bracket, j hat sine phi, minus
+k hat cosine phi, close bracket.
+
+340
+00:24:18,000 --> 00:24:23,388
+Capital D j hat by D t equals
+minus i hat, u over the radius,
+
+341
+00:24:23,388 --> 00:24:27,275
+tangent phi, minus k hat, v over
+the radius.
+
+342
+00:24:27,625 --> 00:24:31,131
+And capital D k hat by D t equals i hat,
+
+343
+00:24:31,131 --> 00:24:35,425
+u over the radius, plus j hat, v over
+the radius.
+
+344
+00:24:36,925 --> 00:24:40,243
+Every piece is a speed
+divided by a radius,
+
+345
+00:24:40,243 --> 00:24:43,175
+just as round the hurricane in Part 2.
+
+346
+00:24:43,525 --> 00:24:47,075
+Speed over radius
+is how fast the arrows turn.
+
+347
+00:24:47,425 --> 00:24:49,225
+And here's a check.
+
+348
+00:24:49,575 --> 00:24:55,560
+The change of i hat has no i hat part, the
+change of j hat has no j hat part,
+
+349
+00:24:55,560 --> 00:24:58,825
+and the change of k hat has no k hat part.
+
+350
+00:24:59,175 --> 00:25:01,075
+That has to be so.
+
+351
+00:25:01,425 --> 00:25:04,976
+An arrow of length one
+can only turn, never grow,
+
+352
+00:25:04,976 --> 00:25:08,600
+so its change is always
+at right angles to itself.
+
+353
+00:25:10,100 --> 00:25:13,500
+No earlier movie derived
+these three lines.
+
+354
+00:25:13,850 --> 00:25:17,032
+The cross product at work
+met a close cousin:
+
+355
+00:25:17,032 --> 00:25:21,700
+an arrow carried round by a spin
+changes at Omega cross the arrow.
+
+356
+00:25:22,050 --> 00:25:24,548
+These three lines follow the same rule,
+
+357
+00:25:24,548 --> 00:25:28,200
+with the flow's own turning
+in place of the Earth's spin.
+
+358
+00:25:28,550 --> 00:25:34,002
+If you skipped, here's what to keep: as
+air moves over the round Earth, its east,
+
+359
+00:25:34,002 --> 00:25:39,050
+north and up arrows turn, at about
+its speed divided by the Earth's radius.
+
+360
+00:25:39,850 --> 00:25:41,775
+Why does all this matter?
+
+361
+00:25:42,125 --> 00:25:44,225
+Because of Newton's law.
+
+362
+00:25:44,575 --> 00:25:48,700
+The next three steps show where
+the turning arrows end up in it.
+
+363
+00:25:49,050 --> 00:25:51,525
+They're for anyone who wants every step,
+
+364
+00:25:51,525 --> 00:25:54,804
+and you don't need them
+for the intuition of weather,
+
+365
+00:25:54,804 --> 00:25:58,825
+climate or maps, so skip ahead
+to the time on screen if you like.
+
+366
+00:25:59,175 --> 00:26:01,891
+Force equals mass times acceleration,
+
+367
+00:26:01,891 --> 00:26:06,808
+and the acceleration is the rate
+of change of the whole wind arrow,
+
+368
+00:26:06,808 --> 00:26:09,450
+bold v, as we follow the air parcel.
+
+369
+00:26:09,800 --> 00:26:14,775
+Bold v is u i hat, plus v
+j hat, plus w k hat.
+
+370
+00:26:15,125 --> 00:26:18,045
+Each of those is a number times an arrow,
+
+371
+00:26:18,045 --> 00:26:21,250
+and as the parcel
+moves, both of them change.
+
+372
+00:26:21,600 --> 00:26:24,600
+So we need the product rule from Part 2.
+
+373
+00:26:24,950 --> 00:26:30,107
+The change of a number times an arrow is
+the change of the number times the arrow,
+
+374
+00:26:30,107 --> 00:26:33,000
+plus the number times
+the change of the arrow.
+
+375
+00:26:34,500 --> 00:26:37,850
+Using it on all three
+pieces gives six terms.
+
+376
+00:26:38,200 --> 00:26:44,115
+Capital D bold v by D t equals
+capital D u by D t times i hat,
+
+377
+00:26:44,115 --> 00:26:47,550
+plus u times capital D i hat by D t.
+
+378
+00:26:47,900 --> 00:26:54,425
+Plus capital D v by D t times j
+hat, plus v times capital D j hat by D t.
+
+379
+00:26:54,775 --> 00:26:58,375
+Plus capital D w by D t times k hat,
+
+380
+00:26:58,375 --> 00:27:01,975
+plus w times capital D k hat by D t.
+
+381
+00:27:03,475 --> 00:27:07,217
+In each pair, the first term
+is the change of the number,
+
+382
+00:27:07,217 --> 00:27:09,975
+and the second is the change of the arrow.
+
+383
+00:27:10,775 --> 00:27:14,400
+Let's find the eastward
+part of this acceleration.
+
+384
+00:27:14,750 --> 00:27:18,050
+How do we get the part
+of any arrow along i hat?
+
+385
+00:27:18,400 --> 00:27:21,500
+With the dot product, as in Part 1.
+
+386
+00:27:21,850 --> 00:27:25,875
+So we dot all six terms
+with i hat, one at a time.
+
+387
+00:27:26,225 --> 00:27:31,100
+First term:
+capital D u by D t, times i hat dot i hat.
+
+388
+00:27:31,450 --> 00:27:35,875
+I hat dot i hat is one, so
+it's capital D u by D t.
+
+389
+00:27:37,375 --> 00:27:42,475
+Second term:
+u times capital D i hat by D t, dot i hat.
+
+390
+00:27:42,825 --> 00:27:45,814
+The change of i hat has only j hat and
+
+391
+00:27:45,814 --> 00:27:49,825
+k hat parts, and both are
+at right angles to i hat.
+
+392
+00:27:50,175 --> 00:27:52,225
+So this term is zero.
+
+393
+00:27:53,725 --> 00:27:58,725
+Third term:
+capital D v by D t, times j hat dot i hat.
+
+394
+00:27:59,075 --> 00:28:03,500
+J hat is at right angles
+to i hat, so that's zero too.
+
+395
+00:28:05,000 --> 00:28:09,314
+Fifth term, in the same way:
+capital D w by D t,
+
+396
+00:28:09,314 --> 00:28:12,100
+times k hat dot i hat, is zero.
+
+397
+00:28:13,600 --> 00:28:16,075
+Now the two terms that survive.
+
+398
+00:28:16,425 --> 00:28:21,375
+Fourth term:
+v times capital D j hat by D t, dot i hat.
+
+399
+00:28:21,725 --> 00:28:28,110
+Capital D j hat by D t has an i hat
+part, minus u over the radius tangent phi,
+
+400
+00:28:28,110 --> 00:28:31,875
+and a k hat part, which
+the dot product drops.
+
+401
+00:28:32,225 --> 00:28:37,154
+So this term is v times
+minus u over the radius tangent phi:
+
+402
+00:28:37,154 --> 00:28:40,275
+minus u v tangent phi over the radius.
+
+403
+00:28:41,775 --> 00:28:47,050
+Sixth term:
+w times capital D k hat by D t, dot i hat.
+
+404
+00:28:47,400 --> 00:28:52,525
+Capital D k hat by D t has
+the i hat part, u over the radius.
+
+405
+00:28:52,875 --> 00:28:56,425
+So this term is plus u w over the radius.
+
+406
+00:28:57,925 --> 00:28:59,790
+Adding the six terms,
+
+407
+00:28:59,790 --> 00:29:05,117
+capital D bold v by D t dot i hat
+equals capital D u by D t,
+
+408
+00:29:05,117 --> 00:29:10,800
+minus u v tangent phi over the
+radius, plus u w over the radius.
+
+409
+00:29:12,300 --> 00:29:15,900
+The first term is the change
+of the number u.
+
+410
+00:29:16,250 --> 00:29:20,825
+The other two come only from the turning
+arrows of our coordinates.
+
+411
+00:29:21,175 --> 00:29:23,350
+They're called metric terms.
+
+412
+00:29:23,700 --> 00:29:27,596
+With the same recipe,
+dotting with j hat and with k hat,
+
+413
+00:29:27,596 --> 00:29:32,675
+we get the northward and upward
+parts, each with metric terms of its own.
+
+414
+00:29:34,175 --> 00:29:38,267
+If you skipped, here's what to keep:
+because the arrows turn,
+
+415
+00:29:38,267 --> 00:29:42,493
+the wind's numbers can change
+even when nothing pushes the air,
+
+416
+00:29:42,493 --> 00:29:46,250
+and the extra terms that say
+so are called metric terms.
+
+417
+00:29:47,050 --> 00:29:49,375
+What do the metric terms mean?
+
+418
+00:29:49,725 --> 00:29:52,150
+Let's try a thought experiment.
+
+419
+00:29:52,500 --> 00:29:56,537
+Imagine a puck gliding over a smooth
+Earth that doesn't spin,
+
+420
+00:29:56,537 --> 00:29:59,250
+with nothing pushing it along the ground.
+
+421
+00:29:59,600 --> 00:30:03,225
+Then the eastward part
+of its acceleration,
+
+422
+00:30:03,225 --> 00:30:06,850
+capital D bold v by D
+t dot i hat, is zero.
+
+423
+00:30:07,200 --> 00:30:13,396
+So capital D u by D t must
+equal u v tangent phi over the radius,
+
+424
+00:30:13,396 --> 00:30:15,875
+minus u w over the radius.
+
+425
+00:30:16,225 --> 00:30:19,470
+The puck stays
+on the ground, so w is zero,
+
+426
+00:30:19,470 --> 00:30:24,450
+and that leaves u v tangent
+phi over the radius, which isn't zero.
+
+427
+00:30:24,800 --> 00:30:29,350
+So the puck's eastward number changes,
+even though nothing pushes it.
+
+428
+00:30:29,700 --> 00:30:32,659
+Let's start it at forty
+five degrees north,
+
+429
+00:30:32,659 --> 00:30:36,925
+going north-east, at ten metres
+per second east and ten north.
+
+430
+00:30:37,275 --> 00:30:41,122
+After one day, its east part
+has grown to about eleven and
+
+431
+00:30:41,122 --> 00:30:45,300
+a half, and its north part has
+shrunk to about eight point two.
+
+432
+00:30:46,800 --> 00:30:50,850
+But its speed is still
+fourteen point one metres per second.
+
+433
+00:30:52,350 --> 00:30:57,225
+The puck goes straight, along a great
+circle, which we'll meet in Part 6.
+
+434
+00:30:57,575 --> 00:31:00,250
+It's our arrows that turned under it.
+
+435
+00:31:00,600 --> 00:31:04,725
+Metric terms never speed
+anything up or slow it down.
+
+436
+00:31:05,075 --> 00:31:10,325
+They only share the same speed out between
+east and north, as the arrows turn.
+
+437
+00:31:11,125 --> 00:31:12,825
+How big are they?
+
+438
+00:31:13,175 --> 00:31:16,845
+Take the same wind, ten
+metres per second east and
+
+439
+00:31:16,845 --> 00:31:21,175
+ten north, at forty five degrees,
+where the tangent is one.
+
+440
+00:31:21,525 --> 00:31:25,872
+Let's put these numbers
+into u v tangent phi over the radius,
+
+441
+00:31:25,872 --> 00:31:30,575
+with the Earth's radius, six point three
+seven one million metres.
+
+442
+00:31:30,925 --> 00:31:33,945
+That gives about
+one point six times ten to
+
+443
+00:31:33,945 --> 00:31:36,825
+the minus five metres per second squared.
+
+444
+00:31:38,325 --> 00:31:43,277
+Let's compare the Coriolis
+effect, from the cross product movies:
+
+445
+00:31:43,277 --> 00:31:46,400
+f times v, where f is two Omega sine phi.
+
+446
+00:31:46,750 --> 00:31:49,140
+With the Earth's spin rate, Omega,
+
+447
+00:31:49,140 --> 00:31:53,358
+seven point two nine times ten
+to the minus five per second,
+
+448
+00:31:53,358 --> 00:31:55,819
+and the sine of forty five degrees,
+
+449
+00:31:55,819 --> 00:31:58,209
+about zero point seven zero seven,
+
+450
+00:31:58,209 --> 00:32:03,200
+f is about one point zero three times ten
+to the minus four per second.
+
+451
+00:32:03,550 --> 00:32:07,648
+Multiplying by the northward
+wind, ten metres per second,
+
+452
+00:32:07,648 --> 00:32:11,675
+gives about one point zero times ten
+to the minus three.
+
+453
+00:32:13,175 --> 00:32:17,100
+So the metric term is about
+sixty six times smaller.
+
+454
+00:32:18,600 --> 00:32:22,075
+In one weather system, metric
+terms are small.
+
+455
+00:32:22,425 --> 00:32:26,245
+But they grow near the poles, where
+the tangent gets large,
+
+456
+00:32:26,245 --> 00:32:29,935
+and over flows that span whole
+oceans or the whole globe,
+
+457
+00:32:29,935 --> 00:32:32,525
+so weather and climate models keep them.
+
+458
+00:32:32,875 --> 00:32:35,697
+We'll meet them again in a later movie:
+
+459
+00:32:35,697 --> 00:32:40,400
+From F equals mass times acceleration,
+to the equation of motion.
+
+460
+00:32:41,200 --> 00:32:46,756
+To sum up, a forecaster's local
+frame has three arrows: i hat east,
+
+461
+00:32:46,756 --> 00:32:53,225
+j hat north and k hat up, and the wind
+is u i hat, plus v j hat, plus w k hat.
+
+462
+00:32:53,575 --> 00:32:56,114
+Up is the arrow from the Earth's centre,
+
+463
+00:32:56,114 --> 00:32:59,669
+east comes from turning
+in the view from above the pole,
+
+464
+00:32:59,669 --> 00:33:02,525
+and north from turning
+in the meridian slice.
+
+465
+00:33:02,875 --> 00:33:05,900
+Every place has its own
+frame: Brest's up and
+
+466
+00:33:05,900 --> 00:33:10,000
+Khulna's up are about seventy
+five point eight degrees apart.
+
+467
+00:33:10,350 --> 00:33:14,559
+With Part 3's rules, the latitudes
+and longitudes of Naples and
+
+468
+00:33:14,559 --> 00:33:17,966
+Englewood gave the coast's
+two legs, ninety one and
+
+469
+00:33:17,966 --> 00:33:20,905
+a half kilometres north
+and fifty five west:
+
+470
+00:33:20,905 --> 00:33:23,443
+the legs behind the coast's bearing of
+
+471
+00:33:23,443 --> 00:33:26,650
+three hundred and twenty
+nine degrees in Part 2.
+
+472
+00:33:27,000 --> 00:33:32,750
+As the air moves, the arrows turn by
+themselves, at speeds divided by radii.
+
+473
+00:33:33,100 --> 00:33:37,022
+So the eastward acceleration
+is capital D u by D t,
+
+474
+00:33:37,022 --> 00:33:39,944
+minus u v tangent phi over the radius,
+
+475
+00:33:39,944 --> 00:33:46,250
+plus u w over the radius: two metric terms
+that come only from the turning arrows.
+
+476
+00:33:46,600 --> 00:33:48,015
+For an ordinary wind,
+
+477
+00:33:48,015 --> 00:33:52,262
+they're about sixty six times smaller
+than the Coriolis effect,
+
+478
+00:33:52,262 --> 00:33:55,025
+but weather and climate models keep them.
+
+479
+00:33:55,375 --> 00:33:58,354
+In Part 5, we'll let
+the frame itself move,
+
+480
+00:33:58,354 --> 00:34:02,650
+and ride along with a storm as it
+crosses the English Channel.
+
+481
+00:34:03,000 --> 00:34:08,069
+That shows which parts of the storm's
+winds come from its own spin, and which
+
+482
+00:34:08,069 --> 00:34:12,875
+come only from its motion, and
+what a barometer sees as the storm passes.
+
+483
+00:34:13,675 --> 00:34:17,833
+This video is one of a series
+of related maths tutorials,
+
+484
+00:34:17,833 --> 00:34:19,875
+so watch out for the others.
+
+485
+00:34:20,225 --> 00:34:24,622
+They're made for students
+of atmospheric science, meteorology and
+
+486
+00:34:24,622 --> 00:34:28,275
+fluid dynamics, and anyone
+else who needs these ideas.
+
+487
+00:34:28,625 --> 00:34:33,453
+The notebook for coordinates, and the
+notebooks for the other maths concepts,
+
+488
+00:34:33,453 --> 00:34:36,275
+are on the website that
+goes with this video.

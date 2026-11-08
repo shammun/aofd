@@ -1,0 +1,10 @@
+# ch00_coordinates_frames (#5d, Part 4): sound cue sheet for tools/sound/mix.py (remake 2026-11-07, final spliced TTS timing).
+# Score: the storyboard's own style 'frame-drift' (tools/sound/styles.py), seed 41 (D Dorian, 6/8 at 72, marimba cell over a bowed pad).
+# Two layers of that style (an airy noise texture and a slow bowed pulse) enter "from s28 on"; styles.py holds the OLD s28 start
+# (2260.8 s, before the remake cut s02 and s12-s14). checks/fr_mix.py sets those layers' enter_s to the s28 start of the final
+# timing.json before it calls tools/sound/mix.py's build() (the shared tool is not edited; proposed to the orchestrator).
+# Effects: none. The only candidate (s14 waves at Fort Myers Beach) left with s14 (HOUSE_STYLE §8: effects only where the picture shows it).
+music: {style: frame-drift, seed: 41, bed_lufs: -28, duck_db: 5, tail_s: 2.5}
+timing: timing.json
+sfx_duck_db: 5
+effects: []
