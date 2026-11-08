@@ -518,7 +518,8 @@ const S07: React.FC = () => {
         { rhs: String.raw`=\dfrac{360^\circ}{6.283}\approx57.3^\circ`, at: AT(k, 5, "about fifty seven"), out: tEasy - 18, cont: true, h: 135 },
       ]} />
       {/* fix 1c C6: the turn in degrees, then the two rings, then the ratio */}
-      <CalcStack f={f} x={1300} y={300} size={56} maxLines={3} rows={[
+      {/* K6 k6z4: "=" column 40 px left (the "s = 50 km × 0.2 = 10 km" row ended at x 1866) */}
+      <CalcStack f={f} x={1260} y={300} size={56} maxLines={3} rows={[
         { lhs: String.raw`0.2\ \mathrm{rad}`, rhs: String.raw`\approx0.2\times57.3^\circ\approx11.5^\circ`, at: AT(k, 7, "eleven and a half") },
         // fix 2 (fix1 review 2 Should 4, review 1 C4): each product's left side on the words that name it, "= …" on the spoken result
         // fix 3 (fix2 review C3): both arcs as "s = radius × angle" (the result carries its symbol: s as on the circle and in s = rθ),

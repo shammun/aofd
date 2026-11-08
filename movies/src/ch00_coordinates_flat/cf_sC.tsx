@@ -124,10 +124,13 @@ const S21: React.FC = () => {
           <line x1={q0[0]} y1={q0[1]} x2={uEnd[0]} y2={uEnd[1]} stroke={C.second} strokeWidth={6} />
           <line x1={uEnd[0]} y1={uEnd[1]} x2={vEnd[0]} y2={vEnd[1]} stroke={C.second} strokeWidth={6} strokeDasharray="12 8" opacity={fin(f, tV)} />
         </g>
-        {/* fix 3 (fix2 review Must 1, HOUSE_STYLE 2026-11-08): the event heading at the top of the column beside the map (as Part 2),
-            and the colour bar title says what the map shows; the bar 24 px lower to make the row */}
+        {/* fix 3 (fix2 review Must 1, HOUSE_STYLE 2026-11-08): the event heading at the top of the column beside the map (as Part 2);
+            K6 k6z4: the bar's own title made its box reach the heading, so the what-title is two lines LEFT of a title-less bar
+            (x 1580, y 110 as in fix 2: its box ends above everything below it) */}
         <Lbl x={CX} y={44} t="Hurricane Ian · 28 Sep 2022" c={C.ink} s={T.floor} />
-        <SpeedBar x={CX} y={134} w={300} title="wind speed near the ground" />
+        <Lbl x={CX} y={104} t="wind speed" c={C.muted} s={T.floor} b={false} />
+        <Lbl x={CX} y={156} t="near the ground" c={C.muted} s={T.floor} b={false} />
+        <SpeedBar x={1580} y={110} w={160} title="" />
         <Keyword f={f} text="a real storm" at={[CX, 260]} appear={0} out={tEye - 18} />
         <Keyword f={f} text="the eye" at={[CX, 260]} appear={tEye} out={tStr - 18} />
         <Keyword f={f} text="strongest winds" at={[CX, 260]} appear={tStr} out={tPol - 18} />
@@ -205,10 +208,13 @@ const S22: React.FC = () => {
         </g>
         <path d={arcD(cE, Rpx * 1.5, 200, 290)} fill="none" stroke={C.gold} strokeWidth={5} opacity={fin(f, tAnti)} />
         <ArcHead c={cE} r={Rpx * 1.5} a={290} dir={1} col={C.gold} o={fin(f, tAnti)} />
-        {/* fix 3 (fix2 review Must 1, HOUSE_STYLE 2026-11-08): the event heading at the top of the column beside the map (as Part 2),
-            and the colour bar title says what the map shows; the bar 24 px lower to make the row */}
+        {/* fix 3 (fix2 review Must 1, HOUSE_STYLE 2026-11-08): the event heading at the top of the column beside the map (as Part 2);
+            K6 k6z4: the bar's own title made its box reach the heading, so the what-title is two lines LEFT of a title-less bar
+            (x 1580, y 110 as in fix 2: its box ends above everything below it) */}
         <Lbl x={CX} y={44} t="Hurricane Ian · 28 Sep 2022" c={C.ink} s={T.floor} />
-        <SpeedBar x={CX} y={134} w={300} title="wind speed near the ground" />
+        <Lbl x={CX} y={104} t="wind speed" c={C.muted} s={T.floor} b={false} />
+        <Lbl x={CX} y={156} t="near the ground" c={C.muted} s={T.floor} b={false} />
+        <SpeedBar x={1580} y={110} w={160} title="" />
         <Keyword f={f} text="two polar parts" at={[CX, 260]} appear={0} out={tAvg - 18} />
         {/* fix 3 (review 3 Must 5): no `out`: "our thirty five" in S15 has its 35 on screen beside 69 and 49 */}
         <SideCallout f={f} lines="≈ 35 m/s" at={[CX + 20, 340]} appear={t35c} target={[(mean.p0[0] + mean.tp[0]) / 2, (mean.p0[1] + mean.tp[1]) / 2 - 8]} c={C.first} bend={-20} />
@@ -388,7 +394,8 @@ const S23: React.FC = () => {
 const lab24 = (az: number, cE: Pt, q: Pt): { ur: Pt; ut: Pt } => {
   void q;
   // fix 3 (fix2 review Should 1): the 0° u_θ label 26 px left, off the orange dashed v line of the 0° point
-  if (az === 0) return { ur: [cE[0] + 10, cE[1] + 62], ut: [cE[0] - 24, cE[1] - 80] };
+  // K6 k6z4: the 0° u_θ chip above the ring (inside it, it crossed the ring), clear of the v line top (cE.y − 152)
+  if (az === 0) return { ur: [cE[0] + 10, cE[1] + 62], ut: [cE[0] - 20, cE[1] - 205] };
   if (az === 90) return { ur: [cE[0], cE[1] + 62], ut: [cE[0] - 202, cE[1] - 165] };
   return { ur: [cE[0] - 200, cE[1] - 195], ut: [cE[0] - 318, cE[1] + 100] };
 };
@@ -455,10 +462,13 @@ const S24: React.FC = () => {
             </g>
           );
         })}
-        {/* fix 3 (fix2 review Must 1, HOUSE_STYLE 2026-11-08): the event heading at the top of the column beside the map (as Part 2),
-            and the colour bar title says what the map shows; the bar 24 px lower to make the row */}
+        {/* fix 3 (fix2 review Must 1, HOUSE_STYLE 2026-11-08): the event heading at the top of the column beside the map (as Part 2);
+            K6 k6z4: the bar's own title made its box reach the heading, so the what-title is two lines LEFT of a title-less bar
+            (x 1580, y 110 as in fix 2: its box ends above everything below it) */}
         <Lbl x={CX} y={44} t="Hurricane Ian · 28 Sep 2022" c={C.ink} s={T.floor} />
-        <SpeedBar x={CX} y={134} w={300} title="wind speed near the ground" />
+        <Lbl x={CX} y={104} t="wind speed" c={C.muted} s={T.floor} b={false} />
+        <Lbl x={CX} y={156} t="near the ground" c={C.muted} s={T.floor} b={false} />
+        <SpeedBar x={1580} y={110} w={160} title="" />
         <Keyword f={f} text="three points by hand" at={[CX, 260]} appear={0} out={tRem - 18} />
         <SkipChip f={f} k={k} to={keepTime("s24_ring_points")} x0={1210} />
         <Lbl x={CX} y={800} t="all 72, then average" c={C.key} s={T.floor} o={win(f, tComp, tLink - 18, 10)} />
@@ -660,7 +670,9 @@ const S25: React.FC = () => {
         <line x1={1180} y1={805} x2={1240} y2={805} stroke={C.first} strokeWidth={7} opacity={fin(f, tTeal) * legO} />
         <line x1={1500} y1={805} x2={1560} y2={805} stroke={C.neg} strokeWidth={7} strokeDasharray="14 8" opacity={fin(f, tRose) * legO} />
         {/* fix 3 (fix2 review Must 1): the map's colour bar under the chart heading, 60 px right (clear of "47") */}
-        <SpeedBar x={1540} y={248} w={200} />
+        {/* K6 k6z4: no bar title (its box reached the chart heading); "wind speed" left of the bar on the same row */}
+        <SpeedBar x={1540} y={248} w={200} title="" />
+        <Lbl x={1180} y={260} t="wind speed" c={C.muted} s={T.floor} b={false} />
         <Lbl x={960} y={40} t="Winds round the 25-km ring" c={C.ink} s={46} a="middle" />
         <Lbl x={80} y={160} t="Hurricane Ian · 28 Sep 2022" c={C.ink} s={T.floor} />
         <Lbl x={1180} y={160} t="Hurricane Ian · 28 Sep 2022" c={C.ink} s={T.floor} />

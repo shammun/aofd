@@ -3,7 +3,7 @@
 # (s14 f v rows, colour-bar names, headings, labels, beta arcs, swipes); no re-voice, no timing change. Never renders the movie, never commits,
 # never deletes.
 # Order: the CANCEL file is checked first (and on every wait); then waits until ALL of: Part 1's queued heavy pass has released HEAVY.lock
-# ("released" in ch00_coordinates_flat/fix31108/heavy_run.log); RENDER2.lock, HEAVY.lock and VOICE.lock are free; RAM >= 12 GB.
+# ("released" in ch00_coordinates_flat/fix31108/heavy_run.log); RENDER2.lock, HEAVY.lock and VOICE.lock are free; RAM >= 9 GB.
 # Then takes HEAVY.lock (mkdir, atomic; given back if a render or voice job started in between) and runs: SSR --step 10 and --3d · the K6
 # frame plan (fix2_frames.py: the whole house list + every 1 s, sentence starts and number words of the 18 changed scenes) · all stills rendered
 # fresh into build1/stills/<TAG> (--jobs 2, fresh bundle from the current sources) · tools/k6_overlap.py on the whole folder · the hit summary.
@@ -21,9 +21,9 @@ cd "$R" || exit 1
 cancelled() { if [ -e "$CANCEL" ]; then echo "CANCEL_FIX2 found $(date): not run"; return 0; fi; return 1; }
 ram() { "$PY" -c "import psutil;print(int(psutil.virtual_memory().available/1e9))"; }
 p1_done() { [ -f "$P1LOG" ] && grep -q "released" "$P1LOG"; }
-ready() { p1_done && [ ! -d "$R2" ] && [ ! -d "$L" ] && [ ! -d "$V" ] && [ "$(ram)" -ge 12 ]; }
+ready() { p1_done && [ ! -d "$R2" ] && [ ! -d "$L" ] && [ ! -d "$V" ] && [ "$(ram)" -ge 9 ]; }
 cancelled && exit 0
-echo "queued $(date) (tag $TAG): waiting for Part 1's heavy pass to release HEAVY.lock + RENDER2/HEAVY/VOICE locks free + RAM >= 12 GB"
+echo "queued $(date) (tag $TAG): waiting for Part 1's heavy pass to release HEAVY.lock + RENDER2/HEAVY/VOICE locks free + RAM >= 9 GB"
 while true; do
   until ready; do cancelled && exit 0; sleep 60; done
   cancelled && exit 0
