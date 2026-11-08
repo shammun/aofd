@@ -17,6 +17,11 @@ own = (H / "owner.txt").read_text(encoding="utf-8", errors="replace") if H.exist
 ok_heavy = (not H.exists()) or ("render" in own.lower() and not any(w in own.lower() for w in ("k6", "still", "ssr")))
 R2 = H.parent / "RENDER2.lock"
 if "--heavy" in sys.argv:   # K6 / stills / SSR: >= 12 GB free while a full render (RENDER2.lock) runs
+    # fix 2026-11-07 22:10: cs_run.py render calls guard() between chunks; when the RENDER2 holder is this movie's own render,
+    # the check must pass (it deadlocked at chunk 9 with 11 GB free).
+    r2own = (R2 / "owner.txt").read_text(encoding="utf-8", errors="replace") if R2.exists() else ""
+    if "5c" in r2own and "render" in r2own.lower():
+        sys.exit(0)
     sys.exit(0 if (not R2.exists() or free >= 12) else 1)
 if "--mix" in sys.argv:   # memory rule 2026-11-07: a mix needs HEAVY.lock free and >= 14 GB free at start (it peaks near 11.5 GB)
     sys.exit(0 if free >= 14 and not H.exists() and not R2.exists() else 1)   # no mix while a render runs
