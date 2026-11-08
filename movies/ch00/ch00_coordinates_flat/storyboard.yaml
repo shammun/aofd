@@ -5,7 +5,7 @@
 # drawn in the scene (CalcStack rows). Times MEASURED (tools/tts.py dry run, af_bella x 1.0). s21-s26: PENDING the
 # data report (data_block + swap_rules).
 id: ch00_coordinates_flat
-title: 'Coordinates, Part 1 — Arrows on a flat map: polar coordinates and rotated axes'
+title: 'Coordinates, Part 1 — Arrows on a flat map: polar coordinates and turned axes'
 version: 1
 concepts:
 - origin, axes, Cartesian coordinates and constant unit vectors x-hat, y-hat
@@ -21,7 +21,7 @@ concepts:
 - polar components = axes turned by the local angle theta
 - 'application: a hurricane''s ring-mean tangential and radial winds, their meaning, three ring points by hand, the inflow angle (pending data
   report)'
-target_duration_s: 2610.425
+target_duration_s: 2611.325
 fps: 30
 size:
 - 1920
@@ -257,12 +257,12 @@ scenes:
   beat: opening title (HOUSE_STYLE §3)
   visual: 'TITLE FRAME (house/kit/title.tsx). Left x 100-1075, the series title layout (kit_cf/SeriesTitle.tsx, feedback 2026-11-06 R1/R2): RiseText
     ''Coordinates'' (150 px, weight 800, TitleGradient teal -> gold, letters rise 24 px over 8 frames, 2-frame stagger; pulses x1.06 on AT(0,''coordinates'')),
-    ''Part 1 · Arrows on a flat map'' (warm white, size fitted to the 975-px column), subtitle ''polar coordinates'' / ''and rotated axes'' (68
-    px); >= 50 px clear of the animation. Right x 1130-1840, y 180-636: Part A (frame 0 -> AT(1,''meteorology'')): a polar grid (rings 1-5 km,
-    spokes every 30 deg, slate) round a station; the balloon at (3, 4) km with r-hat and theta-hat (orange, KaTeX tip labels) glides once round
-    the 5-km circle, both arrows turning, while a ghost x-hat, y-hat pair stays fixed in the corner; then the square grid turns by 30 deg (x'',
-    y''). Part B (12-frame cross-fade on ''meteorology''): Ian''s 10-m wind speed round the eye (data_block), the 25-km ring with teal tangential
-    and rose inward arrows with moving dashes; its source line below the column (y <= 860). Poster = frame 200.'
+    ''Part 1 · Arrows on a flat map'' (warm white, size fitted to the 975-px column), subtitle ''polar coordinates'' / ''and turned axes'' (fix
+    2: the word the voice uses) (68 px); >= 50 px clear of the animation. Right x 1130-1840, y 180-636: Part A (frame 0 -> AT(1,''meteorology'')):
+    a polar grid (rings 1-5 km, spokes every 30 deg, slate) round a station; the balloon at (3, 4) km with r-hat and theta-hat (orange, KaTeX
+    tip labels) glides once round the 5-km circle, both arrows turning, while a ghost x-hat, y-hat pair stays fixed in the corner; then the square
+    grid turns by 30 deg (x'', y''). Part B (12-frame cross-fade on ''meteorology''): Ian''s 10-m wind speed round the eye (data_block), the 25-km
+    ring with teal tangential and rose inward arrows with moving dashes; its source line below the column (y <= 860). Poster = frame 200.'
   voiceover: In this video, we'll learn coordinates on a flat map, and see how they're used to measure the winds around a hurricane's eye.
   on_screen_eq: null
   physics_source:
@@ -293,7 +293,7 @@ scenes:
     y <= 860); ring arrows animated with moving dashes. No other text.'
   feedback_2026_11_06: 'R1/R2: ''made easy'' and its pulse removed; the series title layout (kit_cf/SeriesTitle.tsx): ''Coordinates'' 150 px house
     gradient, pulsing x1.06 on AT(0,''coordinates''); ''Part 1 · Arrows on a flat map'' (size fitted to the 975-px column by textW); subtitle
-    ''polar coordinates'' / ''and rotated axes'' 68 px. Voice: no ''the easy way''.'
+    ''polar coordinates'' / ''and turned axes'' 68 px. Voice: no ''the easy way''.'
 - id: s01_hook
   t:
   - 8.9
@@ -2335,7 +2335,7 @@ scenes:
 - id: s23_what_numbers_mean
   t:
   - 1954.75
-  - 2089.5
+  - 2090.4
   sentence_times:
   - - 1954.75
     - 1958.6
@@ -2350,25 +2350,25 @@ scenes:
   - - 1983.975
     - 1987.2
   - - 1987.55
-    - 1995.375
-  - - 1996.875
-    - 2000.6
-  - - 2000.95
-    - 2008.775
-  - - 2009.125
-    - 2023.825
-  - - 2025.325
-    - 2042.475
-  - - 2043.975
-    - 2048.225
-  - - 2048.575
-    - 2063.0
-  - - 2064.5
-    - 2068.5
-  - - 2068.85
-    - 2078.125
-  - - 2078.475
-    - 2088.7
+    - 1995.95
+  - - 1997.45
+    - 2001.175
+  - - 2001.525
+    - 2009.35
+  - - 2009.7
+    - 2024.4
+  - - 2025.9
+    - 2043.05
+  - - 2044.55
+    - 2048.8
+  - - 2049.15
+    - 2063.9
+  - - 2065.4
+    - 2069.4
+  - - 2069.75
+    - 2079.025
+  - - 2079.375
+    - 2089.6
   beat: 'D10: what 35 and 13 mean'
   visual: 'PENDING DATA REPORT (reports/data/ch00_coordinates_research.md, not written on 2026-11-05). Picture zone: a clean top view of the 25-km
     ring round the eye drawn from the data (ring, centre dot, the zoomed map at 30 % underneath, colour bar removed while the map is faded; source
@@ -2383,17 +2383,17 @@ scenes:
   voiceover: 'So what do these two numbers mean, and how are they different? Thirty five is how fast the air goes round the eye. Thirteen is how
     fast it moves towards the eye. They''re two parts of the same wind, at right angles to each other. By Pythagoras, we square the two parts,
     thirty five and thirteen, add them, and take the square root, and we get an arrow of about thirty seven metres per second. [beat] It points
-    mostly round, and a little in. Thirteen metres per second, times three point six, is about forty seven kilometres per hour, towards the centre.
-    [beat] Now imagine, just for a moment, that nothing changed. An air parcel, a small volume of air that moves with the flow, starts on this
-    ring, twenty five kilometres out. Moving in at thirteen metres per second, it would have to cover twenty five kilometres. Time is distance
-    divided by speed, so that takes about nineteen hundred and twenty three seconds, or about thirty two minutes. [beat] Going round at thirty
-    five metres per second, one lap of this ring, two pi times twenty five kilometres, is about a hundred and fifty seven kilometres. That takes
-    about four thousand four hundred and ninety seconds, which is about seventy five minutes. [beat] So the air is moving round and moving in
-    at the same time. In any stretch of time, it goes thirty five metres round for every thirteen in, and thirty five over thirteen is about two
-    point seven. So for every metre it moves in, it moves almost three metres round. [beat] The air doesn''t fall straight into the eye: it spirals
-    in. In the real storm, the inflow slows down near the ring of strongest winds, and the air rises there instead, in towering clouds. We''ll
-    look at that rising air in Part 2, and the whole story of how hurricanes work has its own movie later in this series: How tropical cyclones
-    form.'
+    mostly round, and a little in. Converted with the same factor of three point six, the inflow is about forty seven kilometres per hour, towards
+    the centre. [beat] Now imagine, just for a moment, that nothing changed. An air parcel, a small volume of air that moves with the flow, starts
+    on this ring, twenty five kilometres out. Moving in at thirteen metres per second, it would have to cover twenty five kilometres. Time is
+    distance divided by speed, so that takes about nineteen hundred and twenty three seconds, or about thirty two minutes. [beat] Going round
+    at thirty five metres per second, one lap of this ring, two pi times twenty five kilometres, is about a hundred and fifty seven kilometres.
+    That takes about four thousand four hundred and ninety seconds, which is about seventy five minutes. [beat] So the air is moving round and
+    moving in at the same time. In any stretch of time, it goes thirty five metres round for every thirteen in, so it goes about two point seven
+    times as far round as in. So for every metre it moves in, it moves almost three metres round. [beat] The air doesn''t fall straight into the
+    eye: it spirals in. In the real storm, the inflow slows down near the ring of strongest winds, and the air rises there instead, in towering
+    clouds. We''ll look at that rising air in Part 2, and the whole story of how hurricanes work has its own movie later in this series: How tropical
+    cyclones form.'
   on_screen_eq:
     latex: \sqrt{35^2+13^2}\approx37\ \mathrm{m/s}
     vallis_eq: 'none: arithmetic or a definition (no book equation)'
@@ -2466,59 +2466,59 @@ scenes:
     stays on screen, re-cued on Kokoro word times (words.json); see fix1_2026-11-07_log.md'
 - id: s24_ring_points
   t:
-  - 2089.5
-  - 2283.0
+  - 2090.4
+  - 2283.9
   sentence_times:
-  - - 2089.5
-    - 2095.575
-  - - 2095.925
-    - 2105.375
-  - - 2105.725
-    - 2108.275
-  - - 2108.625
-    - 2112.25
-  - - 2112.6
-    - 2117.9
-  - - 2118.25
-    - 2122.55
-  - - 2122.9
-    - 2129.8
-  - - 2131.3
-    - 2136.75
-  - - 2137.1
-    - 2142.6
-  - - 2142.95
-    - 2147.375
-  - - 2147.725
-    - 2150.675
-  - - 2152.175
-    - 2156.3
-  - - 2156.65
-    - 2166.5
-  - - 2168.0
-    - 2171.6
-  - - 2171.95
-    - 2177.675
-  - - 2178.025
-    - 2186.65
-  - - 2188.15
-    - 2193.325
-  - - 2193.675
-    - 2199.175
-  - - 2200.675
-    - 2216.325
-  - - 2216.675
-    - 2221.525
-  - - 2221.875
-    - 2225.75
-  - - 2227.25
-    - 2232.7
-  - - 2233.05
-    - 2236.7
-  - - 2238.2
-    - 2271.2
-  - - 2271.55
-    - 2282.2
+  - - 2090.4
+    - 2096.475
+  - - 2096.825
+    - 2106.275
+  - - 2106.625
+    - 2109.175
+  - - 2109.525
+    - 2113.15
+  - - 2113.5
+    - 2118.8
+  - - 2119.15
+    - 2123.45
+  - - 2123.8
+    - 2130.7
+  - - 2132.2
+    - 2137.65
+  - - 2138.0
+    - 2143.5
+  - - 2143.85
+    - 2148.275
+  - - 2148.625
+    - 2151.575
+  - - 2153.075
+    - 2157.2
+  - - 2157.55
+    - 2167.4
+  - - 2168.9
+    - 2172.5
+  - - 2172.85
+    - 2178.575
+  - - 2178.925
+    - 2187.55
+  - - 2189.05
+    - 2194.225
+  - - 2194.575
+    - 2200.075
+  - - 2201.575
+    - 2217.225
+  - - 2217.575
+    - 2222.425
+  - - 2222.775
+    - 2226.65
+  - - 2228.15
+    - 2233.6
+  - - 2233.95
+    - 2237.6
+  - - 2239.1
+    - 2272.1
+  - - 2272.45
+    - 2283.1
   beat: 'D11: three ring points by hand (PENDING DATA REPORT)'
   visual: 'PENDING DATA REPORT (reports/data/ch00_coordinates_research.md, not written on 2026-11-05). Picture: the zoomed ring (map at 60 %,
     colour bar beside, source below) with three gold dots at theta = 0, 90 and 135 deg, each tagged with its angle. Column top, pinned all scene:
@@ -2616,39 +2616,39 @@ scenes:
     stays on screen, re-cued on Kokoro word times (words.json); see fix1_2026-11-07_log.md'
 - id: s25_why_polar_storm
   t:
-  - 2283.0
-  - 2412.25
+  - 2283.9
+  - 2413.15
   sentence_times:
-  - - 2283.0
-    - 2285.825
-  - - 2286.175
-    - 2291.35
-  - - 2291.7
-    - 2299.2
-  - - 2299.55
-    - 2302.1
-  - - 2302.45
-    - 2308.325
-  - - 2308.675
-    - 2313.3
-  - - 2313.65
-    - 2321.75
-  - - 2322.1
-    - 2325.775
-  - - 2326.125
-    - 2333.725
-  - - 2334.075
-    - 2343.0
-  - - 2343.35
-    - 2351.5
-  - - 2351.85
-    - 2361.375
-  - - 2361.725
-    - 2364.725
-  - - 2365.075
-    - 2375.425
-  - - 2375.775
-    - 2411.45
+  - - 2283.9
+    - 2286.725
+  - - 2287.075
+    - 2292.25
+  - - 2292.6
+    - 2300.1
+  - - 2300.45
+    - 2303.0
+  - - 2303.35
+    - 2309.225
+  - - 2309.575
+    - 2314.2
+  - - 2314.55
+    - 2322.65
+  - - 2323.0
+    - 2326.675
+  - - 2327.025
+    - 2334.625
+  - - 2334.975
+    - 2343.9
+  - - 2344.25
+    - 2352.4
+  - - 2352.75
+    - 2362.275
+  - - 2362.625
+    - 2365.625
+  - - 2365.975
+    - 2376.325
+  - - 2376.675
+    - 2412.35
   beat: 'intuition: why polar helps; labelled curves (PENDING DATA REPORT)'
   visual: 'PENDING DATA REPORT (reports/data/ch00_coordinates_research.md, not written on 2026-11-05). On frame 0 the map zooms back out to s21''s
     start view (1 s) and settles into the left picture zone (ring view, x 80-1000) with a gold marker that goes round the ring as the curves draw.
@@ -2705,33 +2705,33 @@ scenes:
     stays on screen, re-cued on Kokoro word times (words.json); see fix1_2026-11-07_log.md'
 - id: s26_inflow_angle
   t:
-  - 2412.25
-  - 2490.325
+  - 2413.15
+  - 2491.225
   sentence_times:
-  - - 2412.25
-    - 2415.9
-  - - 2416.25
-    - 2420.25
-  - - 2420.6
-    - 2427.15
-  - - 2427.5
-    - 2439.4
-  - - 2439.75
-    - 2445.45
-  - - 2446.95
-    - 2451.575
-  - - 2451.925
-    - 2457.9
-  - - 2458.25
-    - 2465.05
-  - - 2465.4
-    - 2468.5
-  - - 2468.85
-    - 2473.825
-  - - 2474.175
-    - 2479.95
-  - - 2480.3
-    - 2489.525
+  - - 2413.15
+    - 2416.8
+  - - 2417.15
+    - 2421.15
+  - - 2421.5
+    - 2428.05
+  - - 2428.4
+    - 2440.3
+  - - 2440.65
+    - 2446.35
+  - - 2447.85
+    - 2452.475
+  - - 2452.825
+    - 2458.8
+  - - 2459.15
+    - 2465.95
+  - - 2466.3
+    - 2469.4
+  - - 2469.75
+    - 2474.725
+  - - 2475.075
+    - 2480.85
+  - - 2481.2
+    - 2490.425
   beat: the inflow angle, and four angles side by side (PENDING DATA REPORT for the numbers)
   visual: 'PENDING DATA REPORT (reports/data/ch00_coordinates_research.md, not written on 2026-11-05) (numbers). Picture: one ring point enlarged:
     the ring''s tangent direction theta-hat (orange) and the ring-mean wind arrow (teal), a rose wedge between them labelled ''inflow angle''
@@ -2784,31 +2784,31 @@ scenes:
     stays on screen, re-cued on Kokoro word times (words.json); see fix1_2026-11-07_log.md'
 - id: s27_recap
   t:
-  - 2490.325
-  - 2587.525
+  - 2491.225
+  - 2588.425
   sentence_times:
-  - - 2490.325
-    - 2497.55
-  - - 2497.9
-    - 2505.45
-  - - 2505.8
-    - 2514.825
-  - - 2515.175
-    - 2519.475
-  - - 2519.825
-    - 2522.475
-  - - 2522.825
-    - 2530.85
-  - - 2531.2
-    - 2537.825
-  - - 2538.175
-    - 2547.325
-  - - 2547.675
-    - 2553.375
-  - - 2553.725
-    - 2565.325
-  - - 2565.675
-    - 2586.725
+  - - 2491.225
+    - 2498.45
+  - - 2498.8
+    - 2506.35
+  - - 2506.7
+    - 2515.725
+  - - 2516.075
+    - 2520.375
+  - - 2520.725
+    - 2523.375
+  - - 2523.725
+    - 2531.75
+  - - 2532.1
+    - 2538.725
+  - - 2539.075
+    - 2548.225
+  - - 2548.575
+    - 2554.275
+  - - 2554.625
+    - 2566.225
+  - - 2566.575
+    - 2587.625
   beat: recap ('To sum up'); last sentence the teaser to Part 2
   visual: 'One beat per sentence, mini pictures reused (no headings): grid + origin; fixed x-hat, y-hat; r and theta with x = r cos theta, y =
     r sin theta; the arc rule; r-hat and theta-hat with the +90 deg arc and (-sin theta, cos theta); the wind''s two shadow bands; turned axes
@@ -2846,15 +2846,15 @@ scenes:
     stays on screen, re-cued on Kokoro word times (words.json); see fix1_2026-11-07_log.md'
 - id: s28_end
   t:
-  - 2587.525
-  - 2610.425
+  - 2588.425
+  - 2611.325
   sentence_times:
-  - - 2587.525
-    - 2593.725
-  - - 2594.075
-    - 2602.125
-  - - 2602.475
-    - 2610.125
+  - - 2588.425
+    - 2594.625
+  - - 2594.975
+    - 2603.025
+  - - 2603.375
+    - 2611.025
   beat: series end card (maths ending, HOUSE_STYLE §3, word for word)
   visual: 'END CARD (house EndCard): four faint topic thumbnails along the top (a square grid, polar rings with r-hat and theta-hat, turned axes,
     a storm ring); keyword lines ''a series of maths tutorials'' (68 px) and ''atmospheric science · meteorology · fluid dynamics'' (54 px); notebook
@@ -2886,8 +2886,8 @@ build_1:
     sentences: 376
   fix1_tts:
     tool: movies/src/ch00_coordinates_flat/checks/cf_fix1_splice.py (six sentences re-voiced, af_bella x1.0, spliced)
-    run: G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_flat/fix1107/tts
-    audio_s: 2610.425
+    run: G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_flat/fix21107/tts
+    audio_s: 2611.325
     cues: 622
     warnings: []
     sentences: 381
@@ -2996,6 +2996,8 @@ build_1:
     - s24_ring_points S21 (show it, don't voice it, 2026-11-07)
     - s24_ring_points S22 (show it, don't voice it, 2026-11-07)
     - s24_ring_points S23 (show it, don't voice it, 2026-11-07)
+    - s23_what_numbers_mean S7 (fix 2 after the fix1 reviews, 2026-11-07)
+    - s23_what_numbers_mean S13 (fix 2 after the fix1 reviews, 2026-11-07)
     - s11_theta_hat S16-S19 -> 9 sentences (user note U1, cf_fix1b_splice.py)
 maths_skip:
   rule: 'user 2026-11-05: before each step-by-step block a friendly spoken line + an on-screen chip (''every step · optional'' / ''skip to mm:ss'');
@@ -3020,9 +3022,9 @@ maths_skip:
     keep_line: 'If you skipped, here''s what to keep: turning the axes by an angle alpha changes the numbers that describe an arrow, but not the
       arrow itself, and polar parts are just axes turned by theta.'
   - block_from: s24_ring_points
-    skip_line_s: 2089.5
-    skip_to: '37:51'
-    skip_to_s: 2271.55
+    skip_line_s: 2090.4
+    skip_to: '37:52'
+    skip_to_s: 2272.45
     keep_line: 'If you skipped, here''s what to keep: at every point round the ring, the wind''s east and north parts turn into an in or out part
       and a round part, and then we average them.'
 chapters:
@@ -3078,23 +3080,42 @@ chapters:
   t_s: 1954.75
   title: What 35 and 13 mean
   scene: s23_what_numbers_mean
-- time: '34:49'
-  t_s: 2089.5
+- time: '34:50'
+  t_s: 2090.4
   title: 'Every step: three ring points by hand'
   scene: s24_ring_points
 - time: '38:03'
-  t_s: 2283.0
+  t_s: 2283.9
   title: Why hurricane scientists use polar coordinates
   scene: s25_why_polar_storm
-- time: '40:12'
-  t_s: 2412.25
+- time: '40:13'
+  t_s: 2413.15
   title: The inflow angle and four angles
   scene: s26_inflow_angle
-- time: '41:30'
-  t_s: 2490.325
+- time: '41:31'
+  t_s: 2491.225
   title: Recap
   scene: s27_recap
-- time: '43:07'
-  t_s: 2587.525
+- time: '43:08'
+  t_s: 2588.425
   title: End
   scene: s28_end
+fix_2_2026_11_07:
+  inputs: fix1 review 1 (4 Should + cosmetics) and fix1 review 2 calc & sync audit (14 Should), reports/ch00_movies.md
+  voice: 's23 S7 and S13 re-voiced (no plain product / quotient read out): ''Converted with the same factor of three point six, the inflow is
+    about forty seven kilometres per hour, towards the centre.'' / ''... so it goes about two point seven times as far round as in.'''
+  timing: 'every AT() on Kokoro word times (words.json: the auditor''s times for the 142 entries not re-voiced in fix 1 merged)'
+  visual:
+  - s00 subtitle 'and turned axes' (the voice's word); s01 three keywords 'x and y' / 'polar r, θ' / 'turned axes' on their words
+  - s04 θ = tan⁻¹(1.333) on 'The angle with that tangent', ≈ 53.13° on 'fifty three point one'
+  - s07 '5 km × 0.2' / '50 km × 0.2' on the words that name them, '= 1 km' / '= 10 km' and the 10-km label on the spoken results
+  - s14 rebuild rule u = 6 r̂ + (−8) θ̂ written on 'We rebuild it'; |u| = √(6² + (−8)²) = √(36 + 64) = √100 = 10 m/s on its words
+  - 's17 / s23 CalcStack lines that leave fade before the stack slides (cf_lib exitFirst): no row passes over the text above'
+  - s19 C_ij working and table cell on 'which is …'
+  - s21 '10 m above the ground' and '3-km grid' on their words
+  - s22 'm/s × 3.6 → km/h' (3.6 gold) → '1 m/s = 3600 m/h' → '= 3.6 km/h'; '35 m/s × 3.6' → '= 126 km/h'; '× 1.85 km/h per kt' (1.85 gold) → '≈
+    250 km/h' → '÷ 3.6 ≈ 69 m/s', each on its word
+  - s23 'wind speed = √(35² + 13²)'; '13 m/s × 3.6' (3.6 gold) before '≈ 47 km/h'; 't = distance ÷ speed' → fraction → ≈ 1923 s → 32 min, same
+    for the lap (fraction, ≈ 4490 s, 75 min); clock back to 0 on 'one lap', then 0 → 75 min
+  - s24 data values u, v of each point and cos/sin 135° gold (+8 %) on their words; map results and arrows on the spoken values
+  - s25 '72 − 14 out = 58 points in' on 'fifty eight'; s26 fraction on 'thirteen point three over', ≈ 0.38 on its word

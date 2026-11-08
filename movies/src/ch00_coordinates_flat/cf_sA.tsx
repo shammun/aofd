@@ -15,6 +15,7 @@ import { AnimatedWindArrow, FlowParticles } from "../house/kit/wind";
 import {
   AT, ArcHead, Arrow, AxesEN, BAL, BDot, Balloon, D2R, GeoImg, GeoMap, Ground, IAN, IAN_SRC, IMGS, K, KmTicks, Lbl, PL, PO, PU, SE, SS, Scene, SpeedBar,
   SpeedBarCompact, Station, Svg, arcD, boxAt, clamp, fin, fout, kmPx, linesPath, mix, poly, pp, prog, rotS, win,
+  Keyword as MKeyword,
 } from "./cf_lib";
 import { EQ_S02, EQ_S03, EQ_S04, EQ_S05, EQ_S06, EQ_S07, cutAt } from "./cf_eq";
 
@@ -66,7 +67,7 @@ const S00: React.FC = () => {
     <Scene fadeIn={false}>
       <Svg>
         {/* the series title layout (feedback 2026-11-06 R1/R2; kit_cf/SeriesTitle.tsx, proposed for the house kit): concept / part / subtitle */}
-        <SeriesTitle f={f} concept="Coordinates" part="Part 1 · Arrows on a flat map" sub={["polar coordinates", "and rotated axes"]} pulseAt={tCo} />
+        <SeriesTitle f={f} concept="Coordinates" part="Part 1 · Arrows on a flat map" sub={["polar coordinates", "and turned axes"]}  /* fix 2: the voice's word "turned" (review 1 C10) */ pulseAt={tCo} />
         <g opacity={oA * fin(f, 4, 10)}>
           {[1, 2, 3, 4, 5].map((r) => <circle key={r} cx={O[0]} cy={O[1]} r={r * u} fill="none" stroke={C.local} strokeWidth={2} opacity={0.6} />)}
           {Array.from({ length: 12 }, (_, i) => i * 30).map((a) => <line key={a} x1={O[0]} y1={O[1]} x2={O[0] + 5.6 * u * Math.cos(a * D2R)} y2={O[1] - 5.6 * u * Math.sin(a * D2R)} stroke={C.local} strokeWidth={1.6} opacity={0.45} />)}
@@ -105,6 +106,8 @@ const S00: React.FC = () => {
 const S01: React.FC = () => {
   const f = useCurrentFrame(), k = K("s01_hook");
   const tCo = AT(k, 0, "coordinates"), tFive = AT(k, 1, "seven parts"), tBuilt = SS(k, 2), tHur = AT(k, 3, "hurricane");
+  // fix 2 (fix1 review 1 Should 3): the three pieces of the lead-in, each on its word, in a column under "coordinates" (moved up to y 130)
+  const tXY = AT(k, 2, "x and y"), tRT = AT(k, 2, "polar coordinates with"), tTA = AT(k, 2, "turned axes");
   const O: Pt = [440, 360], u = 44;
   const th = PL.th;
   const b: Pt = [O[0] + 5 * u * Math.cos(th * D2R), O[1] - 5 * u * Math.sin(th * D2R)];
@@ -152,7 +155,10 @@ const S01: React.FC = () => {
         <Arrow p={b} q={[b[0] + et[0] * 110, b[1] + et[1] * 110]} color={C.second} />
         <BDot p={b} />
         {[0, 1, 2, 3, 4, 5, 6].map(thumb)}
-        <Keyword f={f} text="coordinates" at={[960, 300]} a="middle" appear={tCo} />
+        <Keyword f={f} text="coordinates" at={[960, 130]} a="middle" appear={tCo} />
+        <MKeyword f={f} text="$x$ and $y$" at={[960, 215]} a="middle" appear={tXY} />
+        <MKeyword f={f} text="polar $r$, $\theta$" at={[960, 290]} a="middle" appear={tRT} />
+        <MKeyword f={f} text="turned axes" at={[960, 365]} a="middle" appear={tTA} />
         <SpeedBar x={810} y={470} w={200} />
       </Svg>
       <TeX s={String.raw`\hat{\mathbf r}`} x={b[0] + er[0] * 150} y={b[1] + er[1] * 150} size={56} ax={0.5} c={C.second} />
@@ -295,7 +301,8 @@ const S04: React.FC = () => {
   // fix 1 after fb1 ("show it, don't voice it"): the squares are no longer read out; 9 + 16 and √25 come between "four squared" and
   // "five kilometres", one row every half second
   const tR = AT(k, 1, "called r"), tPy = AT(k, 2, "Pythagoras"), t5 = AT(k, 2, "five kilometres"), t916 = AT(k, 2, "add them"), t25 = Math.max(t916 + 12, AT(k, 2, "take the square root"));
-  const tTh = AT(k, 3, "called theta"), tAnti = AT(k, 4, "anticlockwise"), tTan = AT(k, 5, "tangent"), t53 = AT(k, 5, "fifty three"), tPair = SS(k, 6);
+  const tTh = AT(k, 3, "called theta"), tAnti = AT(k, 4, "anticlockwise"), tTan = AT(k, 5, "tangent"), t53 = AT(k, 5, "fifty three"), tPair = SS(k, 6),
+    tAng = AT(k, 5, "The angle with that tangent");
   const tPol = AT(k, 7, "polar coordinates"), tRad = AT(k, 8, "weather radar");
   const th = PL.th;
   const mid: Pt = [(PO[0] + BAL[0]) / 2, (PO[1] + BAL[1]) / 2];
@@ -332,7 +339,7 @@ const S04: React.FC = () => {
       </Svg>
       {/* K6 after fix 1c: the r formula leaves with the r rows (just before "fifty three"), so the rows sliding out above the stack
           never pass through it */}
-      <TeX s={String.raw`r=${cutAt(EQ_S04, String.raw`,\qquad r=`)[1]}`} x={1100} y={85} size={50} c={C.local} o={win(f, tPy, t53 - 12)} />
+      <TeX s={String.raw`r=${cutAt(EQ_S04, String.raw`,\qquad r=`)[1]}`} x={1100} y={85} size={50} c={C.local} o={win(f, tPy, tAng - 12)} />
       <CalcStack f={f} x={1240} y={150} size={54} maxLines={2} rows={[
         { lhs: "r", rhs: String.raw`=\sqrt{3^2+4^2}`, at: tPy },
         { rhs: String.raw`=\sqrt{9+16}`, at: t916, cont: true },
@@ -340,8 +347,9 @@ const S04: React.FC = () => {
         { rhs: String.raw`=5\ \mathrm{km}`, at: t5, cont: true },
         { lhs: String.raw`\tan\theta`, rhs: String.raw`=\dfrac{\text{north side}}{\text{east side}}`, at: tTan, h: 132 },
         { rhs: String.raw`=\dfrac{4}{3}\approx1.333`, at: AT(k, 5, "four over three"), cont: true, h: 128 },
-        { lhs: String.raw`\theta`, rhs: String.raw`=\tan^{-1}(1.333)`, at: t53 },
-        { rhs: String.raw`\approx53.13^\circ\approx53^{\circ}`, at: t53 + 20, cont: true },
+        // fix 2 (fix1 review 2 Should 10): the inverse on "The angle with that tangent", the result on "fifty three point one"
+        { lhs: String.raw`\theta`, rhs: String.raw`=\tan^{-1}(1.333)`, at: tAng },
+        { rhs: String.raw`\approx53.13^\circ\approx53^{\circ}`, at: t53, cont: true },
         { lhs: String.raw`(r,\ \theta)`, rhs: String.raw`=(5\ \mathrm{km},\ 53^{\circ})`, at: tPair },
       ]} />
     </Scene>
@@ -444,7 +452,7 @@ const S06: React.FC = () => {
 const S07: React.FC = () => {
   const f = useCurrentFrame(), k = K("s07_radians");
   const tCir = SS(k, 1), tDiv = SS(k, 2), tArc = AT(k, 3, "arc length"), tFull = SS(k, 4), t57 = SS(k, 5), tEasy = SS(k, 6), t1 = AT(k, 7, "one kilometre"),
-    t10 = SS(k, 8), tSame = SS(k, 9), tKeep = SS(k, 10);
+    t10 = SS(k, 8), tSame = SS(k, 9), tKeep = SS(k, 10), t10km = AT(k, 8, "ten kilometres");
   const O1: Pt = [460, 440], R1 = 280;
   const walk = prog(f, tCir + 10, tDiv + 60);
   const full = prog(f, tFull, tFull + 60);
@@ -478,7 +486,7 @@ const S07: React.FC = () => {
           <Lbl x={O2[0] + 120} y={O2[1] - 10} t="5 km" c={C.ink} s={T.floor} o={fin(f, tEasy)} />
           <Lbl x={O2[0] + 460} y={O2[1] - 60} t="50 km" c={C.ink} s={T.floor} o={fin(f, tEasy + 20)} />
           <Lbl x={O2[0] + 40} y={O2[1] - 155} t="1 km" c={C.second} s={T.key} o={fin(f, t1)} />
-          <Lbl x={O2[0] + 700 * Math.cos(27 * D2R) + 30} y={O2[1] - 700 * Math.sin(27 * D2R) - 30} t="10 km" c={C.second} s={T.key} o={fin(f, t10 + 20)} />
+          <Lbl x={O2[0] + 700 * Math.cos(27 * D2R) + 30} y={O2[1] - 700 * Math.sin(27 * D2R) - 30} t="10 km" c={C.second} s={T.key} o={fin(f, t10km)} />
         </g>
         <Keyword f={f} text="radians" at={[1100, 420]} appear={0} out={tArc - 18} />
         <Keyword f={f} text="arc length" at={[1100, 420]} appear={tArc} out={tEasy - 18} />
@@ -495,8 +503,10 @@ const S07: React.FC = () => {
       {/* fix 1c C6: the turn in degrees, then the two rings, then the ratio */}
       <CalcStack f={f} x={1300} y={300} size={56} maxLines={3} rows={[
         { lhs: String.raw`0.2\ \mathrm{rad}`, rhs: String.raw`\approx0.2\times57.3^\circ\approx11.5^\circ`, at: AT(k, 7, "eleven and a half") },
-        { lhs: String.raw`5\ \mathrm{km}\times0.2`, rhs: String.raw`=1\ \mathrm{km}`, at: t1 },
-        { lhs: String.raw`50\ \mathrm{km}\times0.2`, rhs: String.raw`=10\ \mathrm{km}`, at: t10 + 10 },
+        // fix 2 (fix1 review 2 Should 4, review 1 C4): each product's left side on the words that name it, "= …" on the spoken result
+        { lhs: String.raw`5\ \mathrm{km}\times0.2`, rhs: { raw: [{ s: String.raw`\textcolor{#e8ecf4}{=1\ \mathrm{km}}`, o: fin(f, t1) }] }, at: AT(k, 7, "the radius times the angle") },
+        // (raw layers carry no colour of their own: ink, as the row's C.ink)
+        { lhs: String.raw`50\ \mathrm{km}\times0.2`, rhs: { raw: [{ s: String.raw`\textcolor{#e8ecf4}{=10\ \mathrm{km}}`, o: fin(f, t10km) }] }, at: AT(k, 8, "fifty kilometres") },
         { lhs: String.raw`\dfrac{10\ \mathrm{km}}{1\ \mathrm{km}}`, rhs: String.raw`=\dfrac{50\ \mathrm{km}}{5\ \mathrm{km}}=10`, at: tSame, h: 130 },
       ]} />
     </Scene>

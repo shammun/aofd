@@ -12,7 +12,7 @@ import { Check } from "../house/kit/icons";
 import { AnimatedWindArrow } from "../house/kit/wind";
 import { CurvedLink } from "../house/kit/extras";
 import {
-  AT, ArcHead, Arrow, BDot, D2R, K, LEN, Lbl, PL, SE, SS, Scene, SkipChip, keepTime, Station, Svg, arcD, clamp, fin, fout, hiOn, hiSize, mix, prog, rotP, rotS, win,
+  AT, ArcHead, Arrow, BDot, D2R, K, LEN, Lbl, PL, SE, SS, Scene, SkipChip, keepTime, Station, Svg, arcD, clamp, exitFirst, fin, fout, hiOn, hiSize, mix, prog, rotP, rotS, win,
 } from "./cf_lib";
 import { EQ_S08, EQ_S09, EQ_S10, EQ_S11, EQ_S13, EQ_S14, EQ_S15, EQ_S16, EQ_S17, EQ_S18, EQ_S19, EQ_S20, cutAt } from "./cf_eq";
 
@@ -701,7 +701,8 @@ const S14: React.FC = () => {
         </g>
         <BDot p={B13} />
         <Check x={W[0] + 30} y={W[1] - 50} o={fin(f, tBack) * kOut} />
-        <Keyword f={f} text="same wind?" at={[1080, 110]} appear={0} out={t6 - 18} />
+        {/* fix 2 (fix1 review 2 Should 5): "same wind?" leaves before the rebuild rule takes the stack's top row */}
+        <Keyword f={f} text="same wind?" at={[1080, 110]} appear={0} out={tRb - 12} />
         <Keyword f={f} text="used on a hurricane soon" at={[1080, 820]} s={T.floor} appear={tSoon} />
       </Svg>
       <TeX s={String.raw`6\,\hat{\mathbf r}`} x={at(B13, ER13, 6 * MS)[0] - 40} y={at(B13, ER13, 6 * MS)[1] - 30} size={52} ax={1} c={C.neg} o={fin(f, t6 + 20) * fout(f, tKIn - 10)} />
@@ -717,6 +718,8 @@ const S14: React.FC = () => {
       <TeX s={String.raw`\mathbf u`} x={W[0] + 50} y={W[1] + 10} size={56} c={C.ink} o={0.7} />
       {/* fix 1c C19/C20: scalar × vector part by part, the double minus, and the lengths with their squares */}
       <CalcStack f={f} x={1270} y={110} size={46} maxLines={2} o={old * kOut} rows={[
+        // fix 2 (fix1 review 2 Should 5): the rebuild rule is written on "We rebuild it"
+        { lhs: String.raw`\mathbf u`, rhs: String.raw`=6\,\hat{\mathbf r}+(-8)\,\hat{\boldsymbol\theta}`, at: AT(k, 1, "We rebuild it") },
         { lhs: String.raw`6\,\hat{\mathbf r}`, rhs: String.raw`=6\,(0.6,\ 0.8)`, at: t6 + 10 },
         { rhs: String.raw`=(6\times0.6,\ 6\times0.8)`, at: AT(k, 2, "r hat gives"), cont: true },
         { rhs: String.raw`=(3.6,\ 4.8)`, at: Math.max(AT(k, 2, "r hat gives") + 12, AT(k, 2, "three point six")), cont: true },
@@ -729,7 +732,9 @@ const S14: React.FC = () => {
         { lhs: String.raw`-8\,\hat{\boldsymbol\theta}`, rhs: String.raw`=(6.4,\ -4.8)`, at: r3c + 20, cont: true },
         { lhs: "\\text{sum}", rhs: String.raw`=(3.6+6.4,\ 4.8-4.8)`, at: tE },
         { rhs: String.raw`=(10,\ 0)`, at: AT(k, 4, "give ten"), cont: true },
-        { lhs: String.raw`\sqrt{6^2+8^2}`, rhs: String.raw`=\sqrt{36+64}`, at: tLen },
+        // fix 2 (fix1 review 1 Should 4, review 2 Should 11): the length row has its symbol and the voice's sign, (−8)²
+        { lhs: String.raw`|\mathbf u|`, rhs: String.raw`=\sqrt{6^2+(-8)^2}`, at: AT(k, 7, "six and minus eight") },
+        { rhs: String.raw`=\sqrt{36+64}`, at: AT(k, 7, "add them"), cont: true },
         { rhs: String.raw`=\sqrt{100}=10\ \mathrm{m/s}`, at: AT(k, 7, "we get ten"), cont: true },
         { lhs: String.raw`|(10,\ 0)|`, rhs: String.raw`=\sqrt{10^2+0^2}=10\ \mathrm{m/s}`, at: AT(k, 7, "wind's own length") },
       ]} />
@@ -944,7 +949,8 @@ const S17: React.FC = () => {
       <TeX s={String.raw`\alpha=30^\circ`} x={1440} y={200} size={hiSize(f, tA30, 52)} c={hiOn(f, tA30) ? C.gold : C.local} o={fin(f, tA30)} />
       <TeX s={String.raw`\cos30^\circ\approx0.866,`} x={1080} y={292} size={hiSize(f, tC30, 52)} c={hiOn(f, tC30) ? C.gold : C.local} o={fin(f, tC30)} />
       <TeX s={String.raw`\sin30^\circ=0.5`} x={1560} y={292} size={hiSize(f, tS30, 52)} c={hiOn(f, tS30) ? C.gold : C.local} o={fin(f, tS30)} />
-      <CalcStack f={f} x={1160} y={380} size={52} maxLines={2} rows={[
+      {/* fix 2 (fix1 review 1 Should 2): the x′ rows fade before the stack slides, so they never pass over the cos/sin line */}
+      <CalcStack f={f} x={1160} y={380} size={52} maxLines={2} rows={exitFirst([
         { lhs: "x'", rhs: String.raw`=3\times0.866+4\times0.5`, at: tX1 },
         { rhs: String.raw`=2.60+2\approx4.60`, at: tX46, cont: true },
         { lhs: "y'", rhs: String.raw`=-3\times0.5+4\times0.866`, at: tY1 },
@@ -952,7 +958,7 @@ const S17: React.FC = () => {
         { lhs: String.raw`\text{length}`, rhs: String.raw`=\sqrt{4.6^2+1.96^2}`, at: tL1 },
         { rhs: String.raw`=\sqrt{21.16+3.84}`, at: AT(k, 13, "add them"), cont: true },
         { rhs: String.raw`\approx\sqrt{25}=5\ \mathrm{km}`, at: AT(k, 14, "five kilometres"), cont: true },
-      ]} />
+      ], 2)} />
     </Scene>
   );
 };
@@ -1057,7 +1063,9 @@ const S19: React.FC = () => {
   const flip = prog(f, tFlip + 20, tFlip + 50);
   const vals = [[String.raw`\cos\alpha`, String.raw`-\sin\alpha`], [String.raw`\sin\alpha`, String.raw`\cos\alpha`]];
   const cellAt = (i: number, j: number): Pt => { const a: Pt = [GX + j * CW + CW / 2, GY + i * CH + CH / 2], b: Pt = [GX + i * CW + CW / 2, GY + j * CH + CH / 2]; return [mix(a[0], b[0], flip), mix(a[1], b[1], flip)]; };
-  const cellO = (i: number, j: number) => fin(f, [t11, t12, t21, t22][i * 2 + j] + 20);
+  // fix 2 (fix1 review 2 Should 6): the working "= … = cos α" and the table cell arrive on "which is …", not at the sentence start
+  const tWhich = [8, 9, 10, 11].map((j) => AT(k, j, "which is"));
+  const cellO = (i: number, j: number) => fin(f, tWhich[i * 2 + j]);
   const colHi = (j: number) => (j === 0 ? win(f, tJ1, tJ2 - 12) : win(f, tJ2, tSame - 12));
   const dots = [
     [String.raw`C_{11}=\hat{\mathbf x}\cdot\hat{\mathbf x}'=(1,0)\cdot(\cos\alpha,\sin\alpha)`, String.raw`=1\cdot\cos\alpha+0\cdot\sin\alpha=\cos\alpha`],
@@ -1108,7 +1116,7 @@ const S19: React.FC = () => {
         return <TeX key={`${i}${j}`} s={vals[i][j]} x={p[0]} y={p[1]} size={56} ax={0.5} o={cellO(i, j)} />; }))}
       {dots.map((d, i) => <React.Fragment key={i}>
         <TeX s={d[0]} x={1080} y={730} size={46} o={inCells * win(f, cellStart[i], (cellStart[i + 1] ?? tRule) - 20, 10)} />
-        <TeX s={d[1]} x={1130} y={805} size={46} o={inCells * win(f, cellStart[i] + (i === 0 ? 0 : 40), (cellStart[i + 1] ?? tRule) - 20, 10)} />
+        <TeX s={d[1]} x={1130} y={805} size={46} o={inCells * win(f, tWhich[i], (cellStart[i + 1] ?? tRule) - 20, 10)} />
       </React.Fragment>)}
       <TeX s={String.raw`x'_j=x_i\,C_{ij}\ \text{means}\ x'_j=\sum_{i=1}^{2}x_i\,C_{ij}`} x={1080} y={755} size={50} o={win(f, tRep, tJ1 - 12)} />
       {/* fix 2 (review 2 Should 4): "x′₁ =" / "x′₂ =" stay pinned on the first line while the rows under it page (2 visible) */}

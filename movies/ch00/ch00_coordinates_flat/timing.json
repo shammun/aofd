@@ -3022,754 +3022,754 @@
      "end_frame": 59616
     },
     {
-     "text": "Thirteen metres per second, times three point six, is about forty seven kilometres per hour, towards the centre.",
+     "text": "Converted with the same factor of three point six, the inflow is about forty seven kilometres per hour, towards the centre.",
      "audio_text": null,
      "start": 1987.55,
-     "end": 1995.375,
-     "dur": 7.825,
+     "end": 1995.95,
+     "dur": 8.4,
      "start_frame": 59626,
-     "end_frame": 59861,
+     "end_frame": 59878,
      "beat": true
     },
     {
      "text": "Now imagine, just for a moment, that nothing changed.",
      "audio_text": null,
-     "start": 1996.875,
-     "end": 2000.6,
+     "start": 1997.45,
+     "end": 2001.175,
      "dur": 3.725,
-     "start_frame": 59906,
-     "end_frame": 60018
+     "start_frame": 59924,
+     "end_frame": 60035
     },
     {
      "text": "An air parcel, a small volume of air that moves with the flow, starts on this ring, twenty five kilometres out.",
      "audio_text": null,
-     "start": 2000.95,
-     "end": 2008.775,
+     "start": 2001.525,
+     "end": 2009.35,
      "dur": 7.825,
-     "start_frame": 60028,
-     "end_frame": 60263
+     "start_frame": 60046,
+     "end_frame": 60280
     },
     {
      "text": "Moving in at thirteen metres per second, it would have to cover twenty five kilometres. Time is distance divided by speed, so that takes about nineteen hundred and twenty three seconds, or about thirty two minutes.",
      "audio_text": null,
-     "start": 2009.125,
-     "end": 2023.825,
+     "start": 2009.7,
+     "end": 2024.4,
      "dur": 14.7,
-     "start_frame": 60274,
-     "end_frame": 60715,
+     "start_frame": 60291,
+     "end_frame": 60732,
      "beat": true
     },
     {
      "text": "Going round at thirty five metres per second, one lap of this ring, two pi times twenty five kilometres, is about a hundred and fifty seven kilometres. That takes about four thousand four hundred and ninety seconds, which is about seventy five minutes.",
      "audio_text": null,
-     "start": 2025.325,
-     "end": 2042.475,
+     "start": 2025.9,
+     "end": 2043.05,
      "dur": 17.15,
-     "start_frame": 60760,
-     "end_frame": 61274,
+     "start_frame": 60777,
+     "end_frame": 61292,
      "beat": true
     },
     {
      "text": "So the air is moving round and moving in at the same time.",
      "audio_text": null,
-     "start": 2043.975,
-     "end": 2048.225,
+     "start": 2044.55,
+     "end": 2048.8,
      "dur": 4.25,
-     "start_frame": 61319,
-     "end_frame": 61447
+     "start_frame": 61336,
+     "end_frame": 61464
     },
     {
-     "text": "In any stretch of time, it goes thirty five metres round for every thirteen in, and thirty five over thirteen is about two point seven. So for every metre it moves in, it moves almost three metres round.",
+     "text": "In any stretch of time, it goes thirty five metres round for every thirteen in, so it goes about two point seven times as far round as in. So for every metre it moves in, it moves almost three metres round.",
      "audio_text": null,
-     "start": 2048.575,
-     "end": 2063.0,
-     "dur": 14.425,
-     "start_frame": 61457,
-     "end_frame": 61890,
+     "start": 2049.15,
+     "end": 2063.9,
+     "dur": 14.75,
+     "start_frame": 61474,
+     "end_frame": 61917,
      "beat": true
     },
     {
      "text": "The air doesn't fall straight into the eye: it spirals in.",
      "audio_text": null,
-     "start": 2064.5,
-     "end": 2068.5,
+     "start": 2065.4,
+     "end": 2069.4,
      "dur": 4.0,
-     "start_frame": 61935,
-     "end_frame": 62055
+     "start_frame": 61962,
+     "end_frame": 62082
     },
     {
      "text": "In the real storm, the inflow slows down near the ring of strongest winds, and the air rises there instead, in towering clouds.",
      "audio_text": null,
-     "start": 2068.85,
-     "end": 2078.125,
+     "start": 2069.75,
+     "end": 2079.025,
      "dur": 9.275,
-     "start_frame": 62066,
-     "end_frame": 62344
+     "start_frame": 62092,
+     "end_frame": 62371
     },
     {
      "text": "We'll look at that rising air in Part 2, and the whole story of how hurricanes work has its own movie later in this series: How tropical cyclones form.",
      "audio_text": null,
-     "start": 2078.475,
-     "end": 2088.7,
+     "start": 2079.375,
+     "end": 2089.6,
      "dur": 10.225,
-     "start_frame": 62354,
-     "end_frame": 62661
+     "start_frame": 62381,
+     "end_frame": 62688
     }
    ],
-   "end": 2089.5,
+   "end": 2090.4,
    "start_frame": 58642,
-   "end_frame": 62685
+   "end_frame": 62712
   },
   {
    "id": "s24_ring_points",
-   "start": 2089.5,
+   "start": 2090.4,
    "sentences": [
     {
      "text": "Next, we work out three ring points by hand, for anyone who wants to see every number.",
      "audio_text": null,
-     "start": 2089.5,
-     "end": 2095.575,
+     "start": 2090.4,
+     "end": 2096.475,
      "dur": 6.075,
-     "start_frame": 62685,
-     "end_frame": 62867
+     "start_frame": 62712,
+     "end_frame": 62894
     },
     {
      "text": "You don't need these steps for the intuition of weather, climate science or maps, so if that feels like too much, skip ahead to the time on screen.",
      "audio_text": null,
-     "start": 2095.925,
-     "end": 2105.375,
+     "start": 2096.825,
+     "end": 2106.275,
      "dur": 9.45,
-     "start_frame": 62878,
-     "end_frame": 63161
+     "start_frame": 62905,
+     "end_frame": 63188
     },
     {
      "text": "Where do those averages come from?",
      "audio_text": null,
-     "start": 2105.725,
-     "end": 2108.275,
+     "start": 2106.625,
+     "end": 2109.175,
      "dur": 2.55,
-     "start_frame": 63172,
-     "end_frame": 63248
+     "start_frame": 63199,
+     "end_frame": 63275
     },
     {
      "text": "Let's work out three of the seventy two points by hand.",
      "audio_text": null,
-     "start": 2108.625,
-     "end": 2112.25,
+     "start": 2109.525,
+     "end": 2113.15,
      "dur": 3.625,
-     "start_frame": 63259,
-     "end_frame": 63368
+     "start_frame": 63286,
+     "end_frame": 63394
     },
     {
      "text": "Remember, the data give us u and v, the eastward and northward parts.",
      "audio_text": null,
-     "start": 2112.6,
-     "end": 2117.9,
+     "start": 2113.5,
+     "end": 2118.8,
      "dur": 5.3,
-     "start_frame": 63378,
-     "end_frame": 63537
+     "start_frame": 63405,
+     "end_frame": 63564
     },
     {
      "text": "First, the point due east of the eye, at theta equals zero.",
      "audio_text": null,
-     "start": 2118.25,
-     "end": 2122.55,
+     "start": 2119.15,
+     "end": 2123.45,
      "dur": 4.3,
-     "start_frame": 63548,
-     "end_frame": 63677
+     "start_frame": 63574,
+     "end_frame": 63703
     },
     {
      "text": "There, u is minus eight point seven, and v is thirty eight: the wind blows north, and a little west.",
      "audio_text": null,
-     "start": 2122.9,
-     "end": 2129.8,
+     "start": 2123.8,
+     "end": 2130.7,
      "dur": 6.9,
-     "start_frame": 63687,
-     "end_frame": 63894,
+     "start_frame": 63714,
+     "end_frame": 63921,
      "beat": true
     },
     {
      "text": "Our rule has cosine of zero, which is one, and sine of zero, which is zero.",
      "audio_text": null,
-     "start": 2131.3,
-     "end": 2136.75,
+     "start": 2132.2,
+     "end": 2137.65,
      "dur": 5.45,
-     "start_frame": 63939,
-     "end_frame": 64102
+     "start_frame": 63966,
+     "end_frame": 64130
     },
     {
      "text": "So u sub r equals u, which is minus eight point seven: a little in.",
      "audio_text": null,
-     "start": 2137.1,
-     "end": 2142.6,
+     "start": 2138.0,
+     "end": 2143.5,
      "dur": 5.5,
-     "start_frame": 64113,
-     "end_frame": 64278
+     "start_frame": 64140,
+     "end_frame": 64305
     },
     {
      "text": "And u sub theta equals v, which is thirty eight: round.",
      "audio_text": null,
-     "start": 2142.95,
-     "end": 2147.375,
+     "start": 2143.85,
+     "end": 2148.275,
      "dur": 4.425,
-     "start_frame": 64288,
-     "end_frame": 64421
+     "start_frame": 64316,
+     "end_frame": 64448
     },
     {
      "text": "Here, the wind blows mostly round.",
      "audio_text": null,
-     "start": 2147.725,
-     "end": 2150.675,
+     "start": 2148.625,
+     "end": 2151.575,
      "dur": 2.95,
-     "start_frame": 64432,
-     "end_frame": 64520,
+     "start_frame": 64459,
+     "end_frame": 64547,
      "beat": true
     },
     {
      "text": "Next, the point due north of the eye, at ninety degrees.",
      "audio_text": null,
-     "start": 2152.175,
-     "end": 2156.3,
+     "start": 2153.075,
+     "end": 2157.2,
      "dur": 4.125,
-     "start_frame": 64565,
-     "end_frame": 64689
+     "start_frame": 64592,
+     "end_frame": 64716
     },
     {
      "text": "There, u is minus sixteen point nine, and v is minus thirty seven point four: the wind blows mostly towards the south, and a little west.",
      "audio_text": null,
-     "start": 2156.65,
-     "end": 2166.5,
+     "start": 2157.55,
+     "end": 2167.4,
      "dur": 9.85,
-     "start_frame": 64700,
-     "end_frame": 64995,
+     "start_frame": 64727,
+     "end_frame": 65022,
      "beat": true
     },
     {
      "text": "Now the cosine is zero and the sine is one.",
      "audio_text": null,
-     "start": 2168.0,
-     "end": 2171.6,
+     "start": 2168.9,
+     "end": 2172.5,
      "dur": 3.6,
-     "start_frame": 65040,
-     "end_frame": 65148
+     "start_frame": 65067,
+     "end_frame": 65175
     },
     {
      "text": "So u sub r equals v, which is minus thirty seven point four: in.",
      "audio_text": null,
-     "start": 2171.95,
-     "end": 2177.675,
+     "start": 2172.85,
+     "end": 2178.575,
      "dur": 5.725,
-     "start_frame": 65158,
-     "end_frame": 65330
+     "start_frame": 65186,
+     "end_frame": 65357
     },
     {
      "text": "And u sub theta is minus u times one, plus v times zero, which leaves minus u: plus sixteen point nine, round.",
      "audio_text": null,
-     "start": 2178.025,
-     "end": 2186.65,
+     "start": 2178.925,
+     "end": 2187.55,
      "dur": 8.625,
-     "start_frame": 65341,
-     "end_frame": 65600,
+     "start_frame": 65368,
+     "end_frame": 65626,
      "beat": true
     },
     {
      "text": "Last, the point to the northwest, at a hundred and thirty five degrees.",
      "audio_text": null,
-     "start": 2188.15,
-     "end": 2193.325,
+     "start": 2189.05,
+     "end": 2194.225,
      "dur": 5.175,
-     "start_frame": 65644,
-     "end_frame": 65800
+     "start_frame": 65672,
+     "end_frame": 65827
     },
     {
      "text": "There, u is minus ten point one, and v is minus forty four point five.",
      "audio_text": null,
-     "start": 2193.675,
-     "end": 2199.175,
+     "start": 2194.575,
+     "end": 2200.075,
      "dur": 5.5,
-     "start_frame": 65810,
-     "end_frame": 65975,
+     "start_frame": 65837,
+     "end_frame": 66002,
      "beat": true
     },
     {
      "text": "A hundred and thirty five degrees is forty five degrees short of due west, so its cosine is minus the cosine of forty five degrees, about minus zero point seven zero seven, and its sine is plus zero point seven zero seven.",
      "audio_text": null,
-     "start": 2200.675,
-     "end": 2216.325,
+     "start": 2201.575,
+     "end": 2217.225,
      "dur": 15.65,
-     "start_frame": 66020,
-     "end_frame": 66490
+     "start_frame": 66047,
+     "end_frame": 66517
     },
     {
      "text": "So u sub r is u times the cosine, plus v times the sine.",
      "audio_text": null,
-     "start": 2216.675,
-     "end": 2221.525,
+     "start": 2217.575,
+     "end": 2222.425,
      "dur": 4.85,
-     "start_frame": 66500,
-     "end_frame": 66646
+     "start_frame": 66527,
+     "end_frame": 66673
     },
     {
      "text": "That gives about minus twenty four point three: in.",
      "audio_text": null,
-     "start": 2221.875,
-     "end": 2225.75,
+     "start": 2222.775,
+     "end": 2226.65,
      "dur": 3.875,
-     "start_frame": 66656,
-     "end_frame": 66772,
+     "start_frame": 66683,
+     "end_frame": 66800,
      "beat": true
     },
     {
      "text": "And u sub theta is minus u times the sine, plus v times the cosine.",
      "audio_text": null,
-     "start": 2227.25,
-     "end": 2232.7,
+     "start": 2228.15,
+     "end": 2233.6,
      "dur": 5.45,
-     "start_frame": 66818,
-     "end_frame": 66981
+     "start_frame": 66844,
+     "end_frame": 67008
     },
     {
      "text": "That gives about thirty eight point six: round.",
      "audio_text": null,
-     "start": 2233.05,
-     "end": 2236.7,
+     "start": 2233.95,
+     "end": 2237.6,
      "dur": 3.65,
-     "start_frame": 66992,
-     "end_frame": 67101,
+     "start_frame": 67018,
+     "end_frame": 67128,
      "beat": true
     },
     {
      "text": "The other points work the same way, so here are five more, without the arithmetic. With all eight points, every forty five degrees round the ring, the in or out arrows point inward at seven of them, and outward only at two hundred and twenty five degrees, on the southwest side. The computer does exactly this at all seventy two points, and then takes the averages. And our first point, minus eight point seven at theta equals zero, is the very first term of the radial sum.",
      "audio_text": null,
-     "start": 2238.2,
-     "end": 2271.2,
+     "start": 2239.1,
+     "end": 2272.1,
      "dur": 33.0,
-     "start_frame": 67146,
-     "end_frame": 68136
+     "start_frame": 67173,
+     "end_frame": 68163
     },
     {
      "text": "If you skipped, here's what to keep: at every point round the ring, the wind's east and north parts turn into an in or out part and a round part, and then we average them.",
      "audio_text": null,
-     "start": 2271.55,
-     "end": 2282.2,
+     "start": 2272.45,
+     "end": 2283.1,
      "dur": 10.65,
-     "start_frame": 68146,
-     "end_frame": 68466
+     "start_frame": 68174,
+     "end_frame": 68493
     }
    ],
-   "end": 2283.0,
-   "start_frame": 62685,
-   "end_frame": 68490
+   "end": 2283.9,
+   "start_frame": 62712,
+   "end_frame": 68517
   },
   {
    "id": "s25_why_polar_storm",
-   "start": 2283.0,
+   "start": 2283.9,
    "sentences": [
     {
      "text": "Why bother with polar coordinates here?",
      "audio_text": null,
-     "start": 2283.0,
-     "end": 2285.825,
+     "start": 2283.9,
+     "end": 2286.725,
      "dur": 2.825,
-     "start_frame": 68490,
-     "end_frame": 68575
+     "start_frame": 68517,
+     "end_frame": 68602
     },
     {
      "text": "Let's go all the way round the ring, and plot the winds against the angle theta.",
      "audio_text": null,
-     "start": 2286.175,
-     "end": 2291.35,
+     "start": 2287.075,
+     "end": 2292.25,
      "dur": 5.175,
-     "start_frame": 68585,
-     "end_frame": 68740
+     "start_frame": 68612,
+     "end_frame": 68768
     },
     {
      "text": "First, the eastward wind u, the solid orange line, and the northward wind v, the dashed orange line.",
      "audio_text": null,
-     "start": 2291.7,
-     "end": 2299.2,
+     "start": 2292.6,
+     "end": 2300.1,
      "dur": 7.5,
-     "start_frame": 68751,
-     "end_frame": 68976
+     "start_frame": 68778,
+     "end_frame": 69003
     },
     {
      "text": "Our three points sit on these lines.",
      "audio_text": null,
-     "start": 2299.55,
-     "end": 2302.1,
+     "start": 2300.45,
+     "end": 2303.0,
      "dur": 2.55,
-     "start_frame": 68986,
-     "end_frame": 69063
+     "start_frame": 69014,
+     "end_frame": 69090
     },
     {
      "text": "Both lines swing up and down, from plus to minus, by tens of metres per second.",
      "audio_text": null,
-     "start": 2302.45,
-     "end": 2308.325,
+     "start": 2303.35,
+     "end": 2309.225,
      "dur": 5.875,
-     "start_frame": 69074,
-     "end_frame": 69250
+     "start_frame": 69100,
+     "end_frame": 69277
     },
     {
      "text": "They swing because the wind keeps turning as we go round the eye.",
      "audio_text": null,
-     "start": 2308.675,
-     "end": 2313.3,
+     "start": 2309.575,
+     "end": 2314.2,
      "dur": 4.625,
-     "start_frame": 69260,
-     "end_frame": 69399
+     "start_frame": 69287,
+     "end_frame": 69426
     },
     {
      "text": "On the east side it blows north, on the west side it blows south, and on the south side it blows east, all the way round.",
      "audio_text": null,
-     "start": 2313.65,
-     "end": 2321.75,
+     "start": 2314.55,
+     "end": 2322.65,
      "dur": 8.1,
-     "start_frame": 69410,
-     "end_frame": 69652
+     "start_frame": 69436,
+     "end_frame": 69680
     },
     {
      "text": "Now let's plot the two polar parts round the same ring.",
      "audio_text": null,
-     "start": 2322.1,
-     "end": 2325.775,
+     "start": 2323.0,
+     "end": 2326.675,
      "dur": 3.675,
-     "start_frame": 69663,
-     "end_frame": 69773
+     "start_frame": 69690,
+     "end_frame": 69800
     },
     {
      "text": "The tangential wind, u sub theta, is the teal line, and the radial wind, u sub r, is the rose line.",
      "audio_text": null,
-     "start": 2326.125,
-     "end": 2333.725,
+     "start": 2327.025,
+     "end": 2334.625,
      "dur": 7.6,
-     "start_frame": 69784,
-     "end_frame": 70012
+     "start_frame": 69811,
+     "end_frame": 70039
     },
     {
      "text": "The tangential wind stays positive all the way round, between about seventeen and forty seven, with an average of thirty five.",
      "audio_text": null,
-     "start": 2334.075,
-     "end": 2343.0,
+     "start": 2334.975,
+     "end": 2343.9,
      "dur": 8.925,
-     "start_frame": 70022,
-     "end_frame": 70290
+     "start_frame": 70049,
+     "end_frame": 70317
     },
     {
      "text": "The radial wind wobbles more, between about minus forty and plus fourteen, because the storm isn't perfectly round.",
      "audio_text": null,
-     "start": 2343.35,
-     "end": 2351.5,
+     "start": 2344.25,
+     "end": 2352.4,
      "dur": 8.15,
-     "start_frame": 70300,
-     "end_frame": 70545
+     "start_frame": 70328,
+     "end_frame": 70572
     },
     {
      "text": "It's negative at fifty eight of the seventy two points, and only on the southwest side does it blow outward, by up to about fourteen metres per second.",
      "audio_text": null,
-     "start": 2351.85,
-     "end": 2361.375,
+     "start": 2352.75,
+     "end": 2362.275,
      "dur": 9.525,
-     "start_frame": 70556,
-     "end_frame": 70841
+     "start_frame": 70582,
+     "end_frame": 70868
     },
     {
      "text": "So, on average, the air flows in.",
      "audio_text": null,
-     "start": 2361.725,
-     "end": 2364.725,
+     "start": 2362.625,
+     "end": 2365.625,
      "dur": 3.0,
-     "start_frame": 70852,
-     "end_frame": 70942
+     "start_frame": 70879,
+     "end_frame": 70969
     },
     {
      "text": "Instead of two lines that swing from plus to minus, we get two numbers that mean something: how fast the storm spins, and how fast the air flows in.",
      "audio_text": null,
-     "start": 2365.075,
-     "end": 2375.425,
+     "start": 2365.975,
+     "end": 2376.325,
      "dur": 10.35,
-     "start_frame": 70952,
-     "end_frame": 71263
+     "start_frame": 70979,
+     "end_frame": 71290
     },
     {
      "text": "That's why hurricane scientists use polar coordinates. The same idea works on a coast, where we turn the axes to split the wind into a part along the shore and a part across it. Wind blowing across the shore, towards the land, pushes sea water onto the coast. In Part 2, we'll use these same equations on real storms. We'll measure how much of the wind blew onto the land, see on tide gauges how high the water rose, and then look at the flooded land in satellite pictures taken before and after the storm.",
      "audio_text": null,
-     "start": 2375.775,
-     "end": 2411.45,
+     "start": 2376.675,
+     "end": 2412.35,
      "dur": 35.675,
-     "start_frame": 71273,
-     "end_frame": 72344
+     "start_frame": 71300,
+     "end_frame": 72370
     }
    ],
-   "end": 2412.25,
-   "start_frame": 68490,
-   "end_frame": 72368
+   "end": 2413.15,
+   "start_frame": 68517,
+   "end_frame": 72394
   },
   {
    "id": "s26_inflow_angle",
-   "start": 2412.25,
+   "start": 2413.15,
    "sentences": [
     {
      "text": "There's one more angle that hurricane scientists use.",
      "audio_text": null,
-     "start": 2412.25,
-     "end": 2415.9,
+     "start": 2413.15,
+     "end": 2416.8,
      "dur": 3.65,
-     "start_frame": 72368,
-     "end_frame": 72477
+     "start_frame": 72394,
+     "end_frame": 72504
     },
     {
      "text": "The wind crosses each ring at a slant, a little inward.",
      "audio_text": null,
-     "start": 2416.25,
-     "end": 2420.25,
+     "start": 2417.15,
+     "end": 2421.15,
      "dur": 4.0,
-     "start_frame": 72488,
-     "end_frame": 72608
+     "start_frame": 72514,
+     "end_frame": 72634
     },
     {
      "text": "The angle between the wind and the ring's own direction, theta hat, is called the inflow angle.",
      "audio_text": null,
-     "start": 2420.6,
-     "end": 2427.15,
+     "start": 2421.5,
+     "end": 2428.05,
      "dur": 6.55,
-     "start_frame": 72618,
-     "end_frame": 72814
+     "start_frame": 72645,
+     "end_frame": 72842
     },
     {
      "text": "Its tangent is the side opposite the angle over the side next to it: the inward part over the round part, thirteen point three over thirty four point eight, about zero point three eight.",
      "audio_text": null,
-     "start": 2427.5,
-     "end": 2439.4,
+     "start": 2428.4,
+     "end": 2440.3,
      "dur": 11.9,
-     "start_frame": 72825,
-     "end_frame": 73182
+     "start_frame": 72852,
+     "end_frame": 73209
     },
     {
      "text": "So the inflow angle, the angle with that tangent, is about twenty one degrees.",
      "audio_text": null,
-     "start": 2439.75,
-     "end": 2445.45,
+     "start": 2440.65,
+     "end": 2446.35,
      "dur": 5.7,
-     "start_frame": 73192,
-     "end_frame": 73364,
+     "start_frame": 73220,
+     "end_frame": 73390,
      "beat": true
     },
     {
      "text": "We've now met four different angles, so let's put them side by side.",
      "audio_text": null,
-     "start": 2446.95,
-     "end": 2451.575,
+     "start": 2447.85,
+     "end": 2452.475,
      "dur": 4.625,
-     "start_frame": 73408,
-     "end_frame": 73547
+     "start_frame": 73436,
+     "end_frame": 73574
     },
     {
      "text": "Theta says where a point is, measured from east, anticlockwise as seen from above.",
      "audio_text": null,
-     "start": 2451.925,
-     "end": 2457.9,
+     "start": 2452.825,
+     "end": 2458.8,
      "dur": 5.975,
-     "start_frame": 73558,
-     "end_frame": 73737
+     "start_frame": 73585,
+     "end_frame": 73764
     },
     {
      "text": "The compass bearing says which way something points, measured from north, clockwise as seen from above.",
      "audio_text": null,
-     "start": 2458.25,
-     "end": 2465.05,
+     "start": 2459.15,
+     "end": 2465.95,
      "dur": 6.8,
-     "start_frame": 73748,
-     "end_frame": 73952
+     "start_frame": 73774,
+     "end_frame": 73978
     },
     {
      "text": "Alpha says how far we turned our axes.",
      "audio_text": null,
-     "start": 2465.4,
-     "end": 2468.5,
+     "start": 2466.3,
+     "end": 2469.4,
      "dur": 3.1,
-     "start_frame": 73962,
-     "end_frame": 74055
+     "start_frame": 73989,
+     "end_frame": 74082
     },
     {
      "text": "And the inflow angle says how far the wind leans inward from the ring.",
      "audio_text": null,
-     "start": 2468.85,
-     "end": 2473.825,
+     "start": 2469.75,
+     "end": 2474.725,
      "dur": 4.975,
-     "start_frame": 74066,
-     "end_frame": 74215
+     "start_frame": 74092,
+     "end_frame": 74242
     },
     {
      "text": "They answer four different questions, so it's always worth checking which angle you're looking at.",
      "audio_text": null,
-     "start": 2474.175,
-     "end": 2479.95,
+     "start": 2475.075,
+     "end": 2480.85,
      "dur": 5.775,
-     "start_frame": 74225,
-     "end_frame": 74398
+     "start_frame": 74252,
+     "end_frame": 74426
     },
     {
      "text": "The storm's spin also has its own measure, called vorticity, which has its own movie later in this series: Vorticity in plain words.",
      "audio_text": null,
-     "start": 2480.3,
-     "end": 2489.525,
+     "start": 2481.2,
+     "end": 2490.425,
      "dur": 9.225,
-     "start_frame": 74409,
-     "end_frame": 74686
+     "start_frame": 74436,
+     "end_frame": 74713
     }
    ],
-   "end": 2490.325,
-   "start_frame": 72368,
-   "end_frame": 74710
+   "end": 2491.225,
+   "start_frame": 72394,
+   "end_frame": 74737
   },
   {
    "id": "s27_recap",
-   "start": 2490.325,
+   "start": 2491.225,
    "sentences": [
     {
      "text": "To sum up, coordinates are numbers that pin down a place, measured from an origin along chosen directions.",
      "audio_text": null,
-     "start": 2490.325,
-     "end": 2497.55,
+     "start": 2491.225,
+     "end": 2498.45,
      "dur": 7.225,
-     "start_frame": 74710,
-     "end_frame": 74926
+     "start_frame": 74737,
+     "end_frame": 74954
     },
     {
      "text": "Cartesian coordinates use x and y, and their unit vectors, x hat and y hat, are the same everywhere.",
      "audio_text": null,
-     "start": 2497.9,
-     "end": 2505.45,
+     "start": 2498.8,
+     "end": 2506.35,
      "dur": 7.55,
-     "start_frame": 74937,
-     "end_frame": 75164
+     "start_frame": 74964,
+     "end_frame": 75190
     },
     {
      "text": "Polar coordinates use the distance r and the angle theta, with x equals r cosine theta, and y equals r sine theta.",
      "audio_text": null,
-     "start": 2505.8,
-     "end": 2514.825,
+     "start": 2506.7,
+     "end": 2515.725,
      "dur": 9.025,
-     "start_frame": 75174,
-     "end_frame": 75445
+     "start_frame": 75201,
+     "end_frame": 75472
     },
     {
      "text": "The arc length is the radius times the angle, in radians.",
      "audio_text": null,
-     "start": 2515.175,
-     "end": 2519.475,
+     "start": 2516.075,
+     "end": 2520.375,
      "dur": 4.3,
-     "start_frame": 75455,
-     "end_frame": 75584
+     "start_frame": 75482,
+     "end_frame": 75611
     },
     {
      "text": "R hat points the way r grows.",
      "audio_text": null,
-     "start": 2519.825,
-     "end": 2522.475,
+     "start": 2520.725,
+     "end": 2523.375,
      "dur": 2.65,
-     "start_frame": 75595,
-     "end_frame": 75674
+     "start_frame": 75622,
+     "end_frame": 75701
     },
     {
      "text": "Theta hat points the way theta grows: it's r hat turned by ninety degrees, minus sine theta, cosine theta.",
      "audio_text": null,
-     "start": 2522.825,
-     "end": 2530.85,
+     "start": 2523.725,
+     "end": 2531.75,
      "dur": 8.025,
-     "start_frame": 75685,
-     "end_frame": 75926
+     "start_frame": 75712,
+     "end_frame": 75952
     },
     {
      "text": "The parts of a wind along these two arrows are dot products: the radial and the tangential wind.",
      "audio_text": null,
-     "start": 2531.2,
-     "end": 2537.825,
+     "start": 2532.1,
+     "end": 2538.725,
      "dur": 6.625,
-     "start_frame": 75936,
-     "end_frame": 76135
+     "start_frame": 75963,
+     "end_frame": 76162
     },
     {
      "text": "Turning the axes by an angle alpha gives new coordinates for the same arrow, and the four direction cosines make the rotation matrix.",
      "audio_text": null,
-     "start": 2538.175,
-     "end": 2547.325,
+     "start": 2539.075,
+     "end": 2548.225,
      "dur": 9.15,
-     "start_frame": 76145,
-     "end_frame": 76420
+     "start_frame": 76172,
+     "end_frame": 76447
     },
     {
      "text": "Polar parts are just turned axes, with an angle that changes from place to place.",
      "audio_text": null,
-     "start": 2547.675,
-     "end": 2553.375,
+     "start": 2548.575,
+     "end": 2554.275,
      "dur": 5.7,
-     "start_frame": 76430,
-     "end_frame": 76601
+     "start_frame": 76457,
+     "end_frame": 76628
     },
     {
      "text": "Round Hurricane Ian's eye, they split the wind into about thirty five metres per second of spin and thirteen of inflow, so the air spirals in at about twenty one degrees.",
      "audio_text": null,
-     "start": 2553.725,
-     "end": 2565.325,
+     "start": 2554.625,
+     "end": 2566.225,
      "dur": 11.6,
-     "start_frame": 76612,
-     "end_frame": 76960
+     "start_frame": 76639,
+     "end_frame": 76987
     },
     {
      "text": "In Part 2, we'll find out how fast r hat and theta hat turn as we go round, and add height to get cylindrical coordinates. Then we'll use these same turned axes on real storms: how much wind blew onto the land, how high the water rose, and what the flooding looked like from space, before and after.",
      "audio_text": null,
-     "start": 2565.675,
-     "end": 2586.725,
+     "start": 2566.575,
+     "end": 2587.625,
      "dur": 21.05,
-     "start_frame": 76970,
-     "end_frame": 77602
+     "start_frame": 76997,
+     "end_frame": 77629
     }
    ],
-   "end": 2587.525,
-   "start_frame": 74710,
-   "end_frame": 77626
+   "end": 2588.425,
+   "start_frame": 74737,
+   "end_frame": 77653
   },
   {
    "id": "s28_end",
-   "start": 2587.525,
+   "start": 2588.425,
    "sentences": [
     {
      "text": "This video is one of a series of related maths tutorials, so watch out for the others.",
      "audio_text": null,
-     "start": 2587.525,
-     "end": 2593.725,
+     "start": 2588.425,
+     "end": 2594.625,
      "dur": 6.2,
-     "start_frame": 77626,
-     "end_frame": 77812
+     "start_frame": 77653,
+     "end_frame": 77839
     },
     {
      "text": "They're made for students of atmospheric science, meteorology and fluid dynamics, and anyone else who needs these ideas.",
      "audio_text": null,
-     "start": 2594.075,
-     "end": 2602.125,
+     "start": 2594.975,
+     "end": 2603.025,
      "dur": 8.05,
-     "start_frame": 77822,
-     "end_frame": 78064
+     "start_frame": 77849,
+     "end_frame": 78091
     },
     {
      "text": "The notebook for coordinates, and the notebooks for the other maths concepts, are on the website that goes with this video.",
      "audio_text": null,
-     "start": 2602.475,
-     "end": 2610.125,
+     "start": 2603.375,
+     "end": 2611.025,
      "dur": 7.65,
-     "start_frame": 78074,
-     "end_frame": 78304
+     "start_frame": 78101,
+     "end_frame": 78331
     }
    ],
-   "end": 2610.425,
-   "start_frame": 77626,
-   "end_frame": 78313
+   "end": 2611.325,
+   "start_frame": 77653,
+   "end_frame": 78340
   }
  ],
- "total_s": 2610.425,
- "total_frames": 78313,
+ "total_s": 2611.325,
+ "total_frames": 78340,
  "render_s": 1317.7,
  "loudnorm_input": {
   "input_i": "-24.83",
@@ -5388,11 +5388,65 @@
     }
    ]
   },
-  "expected_s": 2610.425,
-  "audio_s": 2610.425,
+  "expected_s": 2611.325,
+  "audio_s": 2611.325,
   "diff_ms": 0.0,
   "len_ok": true,
   "cues_ok": true,
+  "spliced_fix2_1107": {
+   "method": "show it, don't voice it (user 2026-11-07): compound replacement, one Kokoro clip per spoken sentence, 0.35-s house gap inside an entry; BS.1770-4 match to the nearest unchanged neighbours + limiter (-1.5 dBTP); cues never split a number",
+   "replaced": [
+    {
+     "scene": "s23_what_numbers_mean",
+     "sentence": 7,
+     "old": "Thirteen metres per second, times three point six, is about forty seven kilometres per hour, towards the centre.",
+     "new": "Converted with the same factor of three point six, the inflow is about forty seven kilometres per hour, towards the centre.",
+     "neighbours_lufs": [
+      -16.6,
+      -16.04
+     ],
+     "dur_s": 8.4,
+     "old_dur_s": 7.825,
+     "parts": [
+      {
+       "text": "Converted with the same factor of three point six, the inflow is about forty seven kilometres per hour, towards the centre.",
+       "gain_db": 8.6,
+       "limiter_gr_db": -2.78,
+       "final_lufs": -16.33,
+       "true_peak_dbtp": -1.82
+      }
+     ]
+    },
+    {
+     "scene": "s23_what_numbers_mean",
+     "sentence": 13,
+     "old": "In any stretch of time, it goes thirty five metres round for every thirteen in, and thirty five over thirteen is about two point seven. So for every metre it moves in, it moves almost three metres round.",
+     "new": "In any stretch of time, it goes thirty five metres round for every thirteen in, so it goes about two point seven times as far round as in. So for every metre it moves in, it moves almost three metres round.",
+     "neighbours_lufs": [
+      -16.12,
+      -16.61
+     ],
+     "dur_s": 14.75,
+     "old_dur_s": 14.425,
+     "parts": [
+      {
+       "text": "In any stretch of time, it goes thirty five metres round for every thirteen in, so it goes about two point seven times as far round as in.",
+       "gain_db": 8.66,
+       "limiter_gr_db": -3.11,
+       "final_lufs": -16.39,
+       "true_peak_dbtp": -1.74
+      },
+      {
+       "text": "So for every metre it moves in, it moves almost three metres round.",
+       "gain_db": 8.99,
+       "limiter_gr_db": -3.12,
+       "final_lufs": -16.37,
+       "true_peak_dbtp": -1.83
+      }
+     ]
+    }
+   ]
+  },
   "spliced_fix1107": {
    "method": "show it, don't voice it (user 2026-11-07): compound replacement, one Kokoro clip per spoken sentence, 0.35-s house gap inside an entry; BS.1770-4 match to the nearest unchanged neighbours + limiter (-1.5 dBTP); cues never split a number",
    "replaced": [

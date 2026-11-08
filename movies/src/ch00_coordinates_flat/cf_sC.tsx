@@ -14,11 +14,18 @@ import { AnimatedWindArrow } from "../house/kit/wind";
 import { CurvedLink } from "../house/kit/extras";
 import {
   AT, Keyword, HOLD, ArcHead, Arrow, Ax, Axes, BDot, ClockText, Curve, D2R, GeoMap, IAN, IAN_SRC, K, LEN, Lbl, MapBox, Place, SAY, SE, SS, Scene, SkipChip, keepTime, SideCallout, SpeedBar, Svg,
-  arcD, axP, axY, boxAt, clamp, fin, fout, kmPx, mapP, mix, nf, poly, prog, rotS, win, zoomBox,
+  arcD, axP, axY, boxAt, clamp, exitFirst, fin, fout, kmPx, mapP, mix, nf, poly, prog, rotS, win, zoomBox,
 } from "./cf_lib";
 import { IanBody, RING, ringArrows, ringPath } from "./cf_sA";
 import { EQ_S21, EQ_S22, EQ_S23, EQ_S24, EQ_S26, cutAt } from "./cf_eq";
 
+// fix 2 (2026-11-07): single-line helpers (checks/swap_check.mjs evaluates module consts). goldAt / hiSz = cf_lib hiOn / hiSize for a
+// part of a TeX string (a non-obvious input gold and +8 % on its spoken word); tailIn = the end of a TeX row fading in by colour on its word
+// (same string on every frame, so the row never jumps and is one text block for K6)
+const goldAt = (f: number, t: number, s: string) => (f >= t - 2 && f <= t + 45 ? "\\textcolor{#d8b23a}{" + s + "}" : s);
+const hiSz = (f: number, ts: number[], s: number) => s * (1 + 0.08 * Math.max(...ts.map((t) => Math.sin(Math.PI * Math.min(1, Math.max(0, (f - t + 2) / 47))))));
+const hexMix = (a: string, b: string, u: number) => "#" + [1, 3, 5].map((i) => Math.round(parseInt(a.slice(i, i + 2), 16) * (1 - u) + parseInt(b.slice(i, i + 2), 16) * u).toString(16).padStart(2, "0")).join("");
+const tailIn = (f: number, t: number, c: string, s: string) => "\\textcolor{" + hexMix("#171f33", c, Math.min(1, Math.max(0, (f - t) / 8))) + "}{" + s + "}";
 const P0 = IAN.pts["0"], P90 = IAN.pts["90"], P135 = IAN.pts["135"];
 const CHECK_C: [string, number, number, number][] = [
   ["vt", IAN.vt, SAY.vt, 0.5], ["vr", IAN.vr, SAY.vr, 0.5], ["kmh", SAY.vt * 3.6, SAY.kmh, 0], ["res", Math.hypot(35, 13), SAY.res, 0.5],
@@ -114,6 +121,9 @@ const S21: React.FC = () => {
         <Keyword f={f} text="strongest winds" at={[CX, 260]} appear={tStr} out={tPol - 18} />
         <SideCallout f={f} lines="≈ 25 km out" at={[CX, 340]} appear={tStr + 10} out={tPol - 18} target={z > 0.9 ? [cE[0] + kmPx(B, 25) * Math.cos(-20 * D2R), cE[1] - kmPx(B, 25) * Math.sin(-20 * D2R)] : null} s={T.floor} bend={20} />
         <Lbl x={CX} y={460} t="u: east part · v: north part" c={C.second} s={T.floor} o={win(f, tU, tPol - 18)} />
+        {/* fix 2 (fix1 review 2 Should 12): what the colours are, as short labels on their words */}
+        <Lbl x={CX} y={340} t="10 m above the ground" c={C.key} s={T.floor} o={win(f, AT(k, 2, "ten metres above the ground"), tStr - 18)} />
+        <Lbl x={CX} y={400} t="3-km grid" c={C.key} s={T.floor} o={win(f, AT(k, 2, "every three kilometres"), tStr - 18)} />
       </Svg>
       <TeX s="u" x={(q0[0] + uEnd[0]) / 2} y={q0[1] + 34} size={52} ax={0.5} c={C.second} o={uvO} />
       <TeX s="v" x={uEnd[0] + 16} y={(uEnd[1] + vEnd[1]) / 2} size={52} c={C.second} o={uvO * fin(f, tV)} />
@@ -145,6 +155,9 @@ const S22: React.FC = () => {
   const tAddT = SS(k, 5), tSumT = AT(k, 5, "two thousand five hundred"), tDivT = AT(k, 5, "So their average"), t35c = AT(k, 5, "or about thirty five"),
     tAddR = AT(k, 9, "at theta equals zero"), tSumR = AT(k, 9, "minus nine hundred"), tDivR = AT(k, 9, "So their average"),
     t13c = AT(k, 9, "or about minus thirteen"), t69 = AT(k, 13, "sixty nine"), t49 = AT(k, 14, "forty nine"), tSmW = AT(k, 14, "The model analysis");
+  // fix 2 (fix1 review 2 Should 2): the conversion constants on their words, gold (non-obvious inputs, user 2026-11-07)
+  const tMul = AT(k, 6, "we multiply by"), t36 = AT(k, 6, "three point six"), t3600 = AT(k, 6, "three thousand six hundred"), t1000 = AT(k, 6, "a thousand metres"),
+    t126 = AT(k, 7, "a hundred and twenty six"), t185 = AT(k, 13, "one point eight five"), t250 = AT(k, 13, "two hundred and fifty");
   // feedback 2026-11-06 (R8): the averaging rule in symbols, N = 72, the first terms of each sum
   const tSym = AT(k, 4, "In symbols"), tN = AT(k, 4, "Here N is"), tThS = AT(k, 4, "The average tangential wind"),
     // the voice names the first term (−8.7 at θ = 0); −10.3, −11.2 and "…" follow on screen, half a second apart
@@ -222,12 +235,18 @@ const S22: React.FC = () => {
           result row is self-contained and stays to the end of the scene */}
       <TeX s={String.raw`\overline{u_r}=\dfrac{-957.2\ \mathrm{m/s}}{72}`} x={CX} y={688} size={44} o={win(f, tDivR, tBest - 24, 12)} />
       <TeX s={String.raw`\overline{u_r}\approx-13.3\approx-13\ \mathrm{m/s}`} x={CX} y={780} size={44} c={C.neg} o={fin(f, AT(k, 9, "about minus thirteen point three"))} />
-      <TeX s={String.raw`250\ \mathrm{km/h}\div3.6\approx69\ \mathrm{m/s}`} x={CX} y={630} size={46} c={C.local} o={fin(f, t69)} />
+      {/* fix 2 (fix1 review 2 Should 2): the knots chain reads top-down: "official estimate: 135 kt" / "× 1.85 km/h per kt" (1.85 gold on
+          its word) / "≈ 250 km/h" on "two hundred and fifty", then "÷ 3.6 ≈ 69 m/s" on "sixty nine" (the 250 row grows to the right) */}
+      <TeX s={String.raw`\approx250\ \mathrm{km/h}${tailIn(f, t69, C.local, "\\div3.6\\approx69\\ \\mathrm{m/s}")}`} x={CX} y={630} size={46} c={C.local} o={fin(f, t250)} />
       <TeX s={String.raw`\text{strongest on our ring}\approx49\ \mathrm{m/s}`} x={CX} y={695} size={46} o={fin(f, t49)} />
-      <TeX s={String.raw`35\times3.6=126\ \mathrm{km/h}`} x={CX} y={420} size={52} o={win(f, tKmh, tSm - 22)} />
-      {/* fix 1 Must 5: a dimensionally right conversion line, ≥ 44 px */}
-      <TeX s={String.raw`1\ \mathrm{m/s}=3600\ \mathrm{m/h}=3.6\ \mathrm{km/h}`} x={CX} y={420} size={44} c={C.muted} o={win(f, tConv + 40, tKmh - 18)} />
-      <TeX s={String.raw`135\ \mathrm{kt}\times1.85\approx250\ \mathrm{km/h}`} x={CX} y={565} size={44} c={C.local} o={fin(f, tKt)} />
+      {/* fix 2 (fix1 review 2 Should 2): "35 m/s × 3.6" at the sentence start, "= 126 km/h" on "a hundred and twenty six" (the full row
+          fades in over the left part, which is the same string's prefix) */}
+      <TeX s={String.raw`35\ \mathrm{m/s}\times3.6${tailIn(f, t126, C.ink, "=126\\ \\mathrm{km/h}")}`} x={CX} y={420} size={52} o={fin(f, tKmh) * fout(f, tSm - 22)} />
+      {/* fix 2 (fix1 review 2 Should 2): the conversion is built as it is said: "m/s × 3.6 → km/h" on "we multiply by" (3.6 gold on
+          "three point six"), then "1 m/s = 3600 m/h" on "three thousand six hundred" and "= 3.6 km/h" on "a thousand metres" */}
+      <TeX s={String.raw`\mathrm{m/s}\times${goldAt(f, t36, "3.6")}\ \to\ \mathrm{km/h}`} x={CX} y={420} size={hiSz(f, [t36], 48)} c={C.local} o={fin(f, tMul) * fout(f, tKmh - 20)} />
+      <TeX s={String.raw`1\ \mathrm{m/s}=3600\ \mathrm{m/h}${tailIn(f, t1000, C.muted, "=3.6\\ \\mathrm{km/h}")}`} x={CX} y={500} size={44} c={C.muted} o={fin(f, t3600) * fout(f, tAnti - 20)} />
+      <TeX s={String.raw`\times${goldAt(f, t185, "1.85")}\ \mathrm{km/h\ per\ kt}`} x={CX} y={565} size={hiSz(f, [t185], 44)} c={C.local} o={fin(f, tKt)} />
       <SourceBelow text={IAN_SRC} pic={MB} w={1100} name="s22 src" />
       {void [tReal]}
     </Scene>
@@ -255,7 +274,13 @@ const S23: React.FC = () => {
   const s = 6;
   const tip: Pt = [pr[0] + et[0] * 35 * s - er[0] * 13 * s, pr[1] + et[1] * 35 * s - er[1] * 13 * s];
   const lapO = fin(f, tLap);
-  const minNow = f < t32 ? 0 : f < t75 ? 32 * prog(f, t32, t32 + 18) : 32 + 43 * prog(f, t75, t75 + 18);
+  // fix 2 (fix1 review 2 Should 1): the lap is its own "imagine" case, so the clock goes back to 0 on "one lap" and sweeps 0 -> 75 min
+  const tLapW = AT(k, 10, "one lap");
+  const minNow = f < t32 ? 0 : f < tLapW ? 32 * prog(f, t32, t32 + 18) : f < t75 ? 0 : 75 * prog(f, t75, t75 + 18);
+  // fix 2 (fix1 review 2 Should 3): inputs before results; the 3.6 gold on its word (S7 re-voiced: "Converted with the same factor of
+  // three point six, the inflow is about forty seven kilometres per hour")
+  const tCv = AT(k, 6, "Converted"), t36 = AT(k, 6, "three point six"), t47 = AT(k, 6, "forty seven"), tTd = AT(k, 9, "Time is distance"),
+    tTk = AT(k, 9, "so that takes"), tLt = AT(k, 10, "That takes");
   // the spiral segment (constant inflow angle ≈ 21°): r = R exp(−tan(21°) φ) for a quarter turn
   const sp = prog(f, tSp, tSp + 40), spiral: Pt[] = [];
   for (let i = 0; i <= 40 * sp; i++) { const ph = (i / 40) * (Math.PI / 2), rr = R * Math.exp(-Math.tan(SAY.angle * D2R) * ph); spiral.push([cE[0] + rr * Math.cos(a0 * D2R + ph), cE[1] - rr * Math.sin(a0 * D2R + ph)]); }
@@ -301,26 +326,33 @@ const S23: React.FC = () => {
         <Keyword f={f} text="spirals in" at={[1080, 110]} appear={tSp} out={tMore - 18} />
         <Keyword f={f} text="rises (Part 2)" at={[1080, 720]} s={T.floor} appear={tRise} />
         <Keyword f={f} text="more: How tropical cyclones form" at={[1080, 800]} s={T.floor} appear={tMore} />
-        <ClockText x={1110} y={720} t={`${Math.round(minNow)} min`} min={minNow} o={win(f, tT, tRat - 18)} />
+        {/* fix 2 (K6 k6z2): under the stack (y 845), so a row entering at the stack foot (top ≤ 686, ink ≤ 800) never meets it */}
+        <ClockText x={1110} y={845} t={`${Math.round(minNow)} min`} min={minNow} o={win(f, tT, tRat - 18)} />
       </Svg>
       {/* fix 1c C34-C37: squares, unit changes, divisions by 60 and why a speed ratio is a distance ratio, one move per line */}
       {/* fix 3 (review 3 Must 3): the column leaves at tRise − 10, so the ⊙ label never reads into "= 35/13 ≈ 2.7" */}
-      <CalcStack f={f} x={1260} y={190} size={52} maxLines={2} o={fout(f, tRise - 12, 10)} rows={[
-        { lhs: cutAt(EQ_S23, String.raw`\approx`)[0], rhs: String.raw`\phantom{\approx}`, at: tRoot, h: 90 },
+      {/* fix 2 (fix1 review 1 Should 2): exitFirst - outgoing rows fade before the stack slides, never over the keyword at y 110 */}
+      <CalcStack f={f} x={1260} y={190} size={52} maxLines={2} o={fout(f, tRise - 12, 10)} rows={exitFirst([
+        // fix 2 (fix1 review 2 Should 11): the result row has its name
+        { lhs: String.raw`\text{wind speed}`, rhs: `=${cutAt(EQ_S23, String.raw`\approx`)[0]}`, at: tRoot, h: 90 },
         { rhs: String.raw`=\sqrt{1225+169}`, at: tSq, cont: true },
         { rhs: String.raw`=\sqrt{1394}\approx37.3`, at: tRt, cont: true },
         { rhs: String.raw`\approx${cutAt(EQ_S23, String.raw`\approx`)[1]}`, at: t37, cont: true },
-        { lhs: String.raw`13\times3.6`, rhs: String.raw`\approx47\ \mathrm{km/h}`, at: AT(k, 6, "forty seven") },
+        { lhs: String.raw`13\ \mathrm{m/s}\times${goldAt(f, t36, "3.6")}`, rhs: String.raw`\phantom{\approx}`, at: tCv, h: 74 },
+        { rhs: String.raw`\approx47\ \mathrm{km/h}`, at: t47, cont: true },
         { lhs: String.raw`25\ \mathrm{km}`, rhs: String.raw`=25\,000\ \mathrm{m}`, at: AT(k, 9, "twenty five kilometres") },
-        { lhs: "t", rhs: String.raw`=\dfrac{25\,000\ \mathrm{m}}{13\ \mathrm{m/s}}\approx1923\ \mathrm{s}`, at: AT(k, 9, "nineteen hundred and twenty three"), h: 120 },
+        { lhs: "t", rhs: String.raw`=\text{distance}\div\text{speed}`, at: tTd },
+        { rhs: String.raw`=\dfrac{25\,000\ \mathrm{m}}{13\ \mathrm{m/s}}`, at: tTk, cont: true, h: 120 },
+        { rhs: String.raw`\approx1923\ \mathrm{s}`, at: AT(k, 9, "nineteen hundred and twenty three"), cont: true, h: 74 },
         { rhs: String.raw`\approx1923\div60\approx32\ \mathrm{min}`, at: AT(k, 9, "thirty two minutes"), cont: true, h: 80 },
         { lhs: String.raw`2\pi\times25\ \mathrm{km}`, rhs: String.raw`=2\times3.1416\times25`, at: AT(k, 10, "two pi times") },
         { rhs: String.raw`\approx157\ \mathrm{km}=157\,000\ \mathrm{m}`, at: AT(k, 10, "a hundred and fifty seven"), cont: true },
-        { lhs: "t", rhs: String.raw`=\dfrac{157\,000\ \mathrm{m}}{35\ \mathrm{m/s}}\approx4490\ \mathrm{s}`, at: AT(k, 10, "four thousand four hundred"), h: 120 },
+        { lhs: "t", rhs: String.raw`=\dfrac{157\,000\ \mathrm{m}}{35\ \mathrm{m/s}}`, at: tLt, h: 120 },
+        { rhs: String.raw`\approx4490\ \mathrm{s}`, at: AT(k, 10, "four thousand four hundred"), cont: true, h: 74 },
         { rhs: String.raw`\approx4490\div60\approx75\ \mathrm{min}`, at: AT(k, 10, "seventy five minutes"), cont: true, h: 80 },
         { lhs: String.raw`\dfrac{\text{distance round}}{\text{distance in}}`, rhs: String.raw`=\dfrac{35\,t}{13\,t}`, at: AT(k, 12, "In any stretch"), h: 120 },
         { rhs: String.raw`=\dfrac{35}{13}\approx2.7`, at: AT(k, 12, "two point seven"), cont: true, h: 110 },
-      ]} />
+      ], 2)} />
       <TeX s={String.raw`\text{almost 3 m round per 1 m in}`} x={1080} y={720} size={46} o={win(f, AT(k, 12, "almost three"), tRise - 18)} />
       <SourceBelow text={IAN_SRC} pic={PB} w={900} name="s23 src" />
       {void [tMost, tKmh, tBoth, tPy]}
@@ -355,7 +387,14 @@ const S24: React.FC = () => {
   const B24 = zoomBox(ZOOM, Z8, z8);
   const P = mapP(B24);
   const cE = P(IAN.c[0], IAN.c[1]);
-  const pts = [{ az: 0, d: P0, t0: tA, tuv: tAuv, tr: tAr, tt: tAt, end: tB }, { az: 90, d: P90, t0: tB, tuv: tBuv, tr: tBr, tt: tB16, end: tC }, { az: 135, d: P135, t0: tC, tuv: tCuv, tr: tCr2, tt: tCt2, end: tAll }];
+  // fix 2 (fix1 review 2 Should 7): the map results and their arrows grow on the spoken values, not at the sentence starts
+  const pts = [{ az: 0, d: P0, t0: tA, tuv: tAuv, tr: AT(k, 8, "minus eight point seven"), tt: AT(k, 9, "thirty eight"), end: tB },
+    { az: 90, d: P90, t0: tB, tuv: tBuv, tr: AT(k, 14, "minus thirty seven point four"), tt: tB16, end: tC }, { az: 135, d: P135, t0: tC, tuv: tCuv, tr: tCr2, tt: tCt2, end: tAll }];
+  // fix 2 (fix1 review 1 Should 1, user 2026-11-07): the data values u, v of each point and the 135° cosine and sine are non-obvious
+  // inputs: gold (+8 %) on their spoken words. cos/sin of 0° and 90° (1 and 0) are left plain (obvious; no clutter).
+  const wU = [AT(k, 6, "minus eight point seven"), AT(k, 12, "minus sixteen point nine"), AT(k, 17, "minus ten point one")],
+    wV = [AT(k, 6, "thirty eight"), AT(k, 12, "minus thirty seven point four"), AT(k, 17, "minus forty four point five")],
+    wC135 = AT(k, 18, "about minus zero point seven zero seven"), wS135 = AT(k, 18, "plus zero point seven zero seven");
   const cur = f < tB ? 0 : f < tC ? 1 : 2;
   const su = 4, LUa = 90;
   const sweep = Math.round(72 * prog(f, tAll + 10, tAll + 70));
@@ -450,20 +489,20 @@ const S24: React.FC = () => {
       })}
       <TeX s={eqA} x={CX} y={262} size={46} o={fin(f, tRem)} />
       <TeX s={eqB} x={CX} y={322} size={46} o={fin(f, tRem)} />
-      <TeX s={String.raw`0^\circ:\ u=-8.7,\ v=38.0`} x={CX} y={395} size={44} c={C.local} o={win(f, tAuv, tB - 18)} />
+      <TeX s={String.raw`0^\circ:\ u=${goldAt(f, wU[0], "-8.7")},\ v=${goldAt(f, wV[0], "38.0")}`} x={CX} y={395} size={hiSz(f, [wU[0], wV[0]], 44)} c={C.local} o={win(f, tAuv, tB - 18)} />
       <TeX s={String.raw`\cos0^\circ=1,\ \sin0^\circ=0`} x={CX} y={450} size={44} c={C.local} o={win(f, tAcs, tB - 18)} />
-      <TeX s={String.raw`90^\circ:\ u=-16.9,\ v=-37.4`} x={CX} y={395} size={44} c={C.local} o={win(f, tBuv, tC - 18)} />
+      <TeX s={String.raw`90^\circ:\ u=${goldAt(f, wU[1], "-16.9")},\ v=${goldAt(f, wV[1], "-37.4")}`} x={CX} y={395} size={hiSz(f, [wU[1], wV[1]], 44)} c={C.local} o={win(f, tBuv, tC - 18)} />
       <TeX s={String.raw`\cos90^\circ=0,\ \sin90^\circ=1`} x={CX} y={450} size={44} c={C.local} o={win(f, tBcs, tC - 18)} />
-      <TeX s={String.raw`135^\circ:\ u=-10.1,\ v=-44.5`} x={CX} y={395} size={44} c={C.local} o={win(f, tCuv, tAll - 18)} />
+      <TeX s={String.raw`135^\circ:\ u=${goldAt(f, wU[2], "-10.1")},\ v=${goldAt(f, wV[2], "-44.5")}`} x={CX} y={395} size={hiSz(f, [wU[2], wV[2]], 44)} c={C.local} o={win(f, tCuv, tAll - 18)} />
       {/* K6 after fix 1c: cos 135° on two lines (it ran to x 1845); the 135° stack starts under it (y 590, it met the cosine line) */}
       <TeX s={String.raw`\cos135^\circ=-\cos45^\circ`} x={CX} y={455} size={44} c={C.local} o={win(f, AT(k, 18, "its cosine"), tCr - 16)} />
-      <TeX s={String.raw`=-\dfrac{1}{\sqrt2}\approx-0.707`} x={CX + 112} y={540} size={44} c={C.local} o={win(f, AT(k, 18, "about minus zero point"), tCr - 16)} />
+      <TeX s={String.raw`=-\dfrac{1}{\sqrt2}\approx${goldAt(f, wC135, "-0.707")}`} x={CX + 112} y={540} size={hiSz(f, [wC135], 44)} c={C.local} o={win(f, AT(k, 18, "about minus zero point"), tCr - 16)} />
       {/* fix 3 (review 3 cosmetic + Should 4): both values stay up, compact, while the two sums use them */}
       <TeX s={String.raw`\cos135^\circ\approx-0.707`} x={CX} y={450} size={44} c={C.local} o={win(f, tCr + 4, tAll - 18)} />
       <TeX s={String.raw`\sin135^\circ\approx0.707`} x={CX} y={504} size={44} c={C.local} o={win(f, tCr + 4, tAll - 18)} />
       {/* fix 2: the sine on two lines too (with the display-size 1/√2 it would end at x 1859) */}
       <TeX s={String.raw`\sin135^\circ=\sin45^\circ`} x={CX} y={622} size={44} c={C.local} o={win(f, AT(k, 18, "and its sine"), tCr - 16)} />
-      <TeX s={String.raw`=\dfrac{1}{\sqrt2}\approx0.707`} x={CX + 112} y={708} size={44} c={C.local} o={win(f, AT(k, 18, "and its sine") + 15, tCr - 16)} />
+      <TeX s={String.raw`=\dfrac{1}{\sqrt2}\approx${goldAt(f, wS135, "0.707")}`} x={CX + 112} y={708} size={hiSz(f, [wS135], 44)} c={C.local} o={win(f, Math.min(AT(k, 18, "and its sine") + 15, wS135), tCr - 16)} />
       {/* R7: the eight points' legend and summary; R8 link: the θ = 0° point is the first term of the radial sum */}
       <Svg><Lbl x={CX} y={410} t="$u_r$ (m/s): in ($-$) or out ($+$)" c={C.neg} s={T.floor} o={win(f, tFive, tKeep - 12)} />
       <Lbl x={CX} y={465} t="$u_\theta$ (m/s): round" c={C.first} s={T.floor} o={win(f, tFive, tKeep - 12)} /></Svg>
@@ -590,7 +629,8 @@ const S25: React.FC = () => {
         <SpeedBar x={1480} y={200} w={240} />
         <Keyword f={f} text="why polar here?" at={[1180, 96]} appear={0} out={tSw - 18} />
         <Keyword f={f} text="u, v swing: the wind turns" at={[1180, 96]} s={T.floor} appear={tSw} out={tNeg - 18} />
-        <Keyword f={f} text="72 − 14 = 58 points in" at={[1180, 96]} s={T.floor} c={C.neg} appear={tNeg} out={tTwo - 18} />
+        {/* fix 2 (fix1 review 2 Should 9): the 14 is named in the line itself ("14 out"), and the line comes on "fifty eight" */}
+        <Keyword f={f} text="72 − 14 out = 58 points in" at={[1180, 96]} s={T.floor} c={C.neg} appear={AT(k, 11, "fifty eight")} out={tTwo - 18} />
         <Keyword f={f} text="spin 35 · inflow −13" at={[1180, 96]} s={T.floor} appear={tTwo} out={tCoast - 18} />
         <Keyword f={f} text="next, in Part 2: winds at a coast" at={[1180, 96]} s={T.floor} appear={tCoast} />
         {/* R9: at Fort Myers Beach (26.45 N, 81.95 W; the shore runs about 329°, so the axes are turned to it): x′ along the shore (NNW),
@@ -696,7 +736,9 @@ const S26: React.FC = () => {
       <TeX s={tl} x={1080} y={160} size={56} o={win(f, tTan, tFour - 18)} />
       <TeX s={String.raw`=\dfrac{\text{opposite}}{\text{next to it}}=\dfrac{\text{in}}{\text{round}}`} x={1200} y={260} size={52} o={win(f, AT(k, 3, "the side opposite"), tFour - 18)} />
       {/* K6 after fix 1c: 30 px lower (the two fractions touched); the inverse on two lines (it ran to x 1880) */}
-      <TeX s={`=${tr}`} x={1200} y={400} size={56} o={win(f, AT(k, 3, "thirteen point three over"), tFour - 18)} />
+      {/* fix 2 (fix1 review 2 Should 8): the fraction on "thirteen point three over", "≈ 0.38" on "zero point three eight" (the full row
+          fades in over the fraction, which is its prefix) */}
+      <TeX s={`=${cutAt(tr, "\\approx")[0]}${tailIn(f, AT(k, 3, "zero point three eight"), C.ink, "\\approx" + cutAt(tr, "\\approx")[1])}`} x={1200} y={400} size={56} o={win(f, AT(k, 3, "thirteen point three over"), tFour - 18)} />
       <TeX s={String.raw`\text{inflow angle}=\tan^{-1}(0.38)`} x={1080} y={510} size={50} c={C.neg} o={win(f, AT(k, 4, "the angle with that tangent"), tFour - 18)} />
       <TeX s={String.raw`\approx20.8^\circ\approx21^\circ`} x={1340} y={580} size={50} c={C.neg} o={win(f, AT(k, 4, "twenty one degrees"), tFour - 18)} />
 

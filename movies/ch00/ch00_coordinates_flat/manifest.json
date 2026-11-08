@@ -1,6 +1,6 @@
 {
  "id": "ch00_coordinates_flat",
- "title": "Coordinates, Part 1 — Arrows on a flat map: polar coordinates and rotated axes",
+ "title": "Coordinates, Part 1 — Arrows on a flat map: polar coordinates and turned axes",
  "storyboard": "movies/ch00/ch00_coordinates_flat/storyboard.yaml",
  "builder": "movies/data/build_ch00_coordinates_flat.py",
  "fluidpy": {
@@ -165,32 +165,32 @@
    "scene": "s23_what_numbers_mean"
   },
   {
-   "time": "34:49",
-   "t_s": 2089.5,
+   "time": "34:50",
+   "t_s": 2090.4,
    "title": "Every step: three ring points by hand",
    "scene": "s24_ring_points"
   },
   {
    "time": "38:03",
-   "t_s": 2283.0,
+   "t_s": 2283.9,
    "title": "Why hurricane scientists use polar coordinates",
    "scene": "s25_why_polar_storm"
   },
   {
-   "time": "40:12",
-   "t_s": 2412.25,
+   "time": "40:13",
+   "t_s": 2413.15,
    "title": "The inflow angle and four angles",
    "scene": "s26_inflow_angle"
   },
   {
-   "time": "41:30",
-   "t_s": 2490.325,
+   "time": "41:31",
+   "t_s": 2491.225,
    "title": "Recap",
    "scene": "s27_recap"
   },
   {
-   "time": "43:07",
-   "t_s": 2587.525,
+   "time": "43:08",
+   "t_s": 2588.425,
    "title": "End",
    "scene": "s28_end"
   }
@@ -219,9 +219,9 @@
   },
   {
    "block_from": "s24_ring_points",
-   "skip_line_s": 2089.5,
-   "skip_to": "37:51",
-   "skip_to_s": 2271.55,
+   "skip_line_s": 2090.4,
+   "skip_to": "37:52",
+   "skip_to_s": 2272.45,
    "keep_line": "If you skipped, here's what to keep: at every point round the ring, the wind's east and north parts turn into an in or out part and a round part, and then we average them."
   }
  ],

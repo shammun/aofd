@@ -14,6 +14,7 @@ import { Arrow, Lbl as HLbl, Pt, Svg, clamp } from "../house/kit/draw";
 import { Keyword as HKeyword } from "../house/kit/notes";
 import { CurvedLink } from "../house/kit/extras";
 import { KX, texHtml } from "../house/kit/tex";
+import type { CalcRow } from "../house/kit/tex";
 
 export const FPS = 30;
 type Snt = { text: string; start: number; end: number };
@@ -59,6 +60,21 @@ export const fin = (f: number, a: number, n = 12) => ramp(f, a, a + n);
 export const hiOn = (f: number, t: number) => f >= t - 2 && f <= t + 45;
 export const hiSize = (f: number, t: number, s: number) => s * (1 + 0.08 * Math.sin(Math.PI * clamp((f - t + 2) / 47, 0, 1)));
 export const fout = (f: number, a: number, n = 10) => 1 - ramp(f, a, a + n);
+/** fix 2 (fix1 review 1 Should 2): the rows of a CalcStack line that a later line pushes out (maxLines) fade to 0 BEFORE the stack
+ *  slides, so no outgoing row passes over the text above the stack (HOUSE_STYLE §5b: no text over text on any frame). The house
+ *  CalcStack fades and slides together over 12 frames; this only adds an `out` that ends on the slide's first frame. */
+export const exitFirst = (rows: CalcRow[], maxLines: number): CalcRow[] => {
+  const lineOf: number[] = [];
+  let L = -1;
+  rows.forEach((r) => { if (!r.cont) L++; lineOf.push(L); });
+  const lineAt = Array.from({ length: L + 1 }, (_, j) => rows[lineOf.indexOf(j)].at);
+  return rows.map((r, i) => {
+    const j = lineOf[i] + maxLines;
+    if (j > L) return r;
+    const t = lineAt[j] - 10;
+    return { ...r, out: r.out !== undefined ? Math.min(r.out, t) : t };
+  });
+};
 export const win = (f: number, a: number, b: number, n = 10) => fin(f, a, n) * fout(f, b, n);
 export const mix = (a: number, b: number, t: number) => a + (b - a) * t;
 export const ease = (t: number) => { const x = clamp(t, 0, 1); return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
