@@ -143,7 +143,7 @@ const S26: React.FC = () => {
       <TeX s={w1} x={MX} y={300} size={52} c={ALONG_C} o={fin(f, AT(k, 9, "along the shore"))} />
       <TeX s={w2} x={MX} y={375} size={52} c={C.first} o={fin(f, AT(k, 9, "across the shore"))} />
       <SourceBelow text={SRC.hrrr20} pic={B} w={1400} o={oMap} name="s26 src" />
-      <Svg o={oMap}><SpeedBar x={MX} y={790} w={300} hi={50} /></Svg>
+      <Svg o={oMap}><SpeedBar x={MX} y={790} w={300} hi={50} /><Lbl x={MX} y={50} t="Hurricane Ian · 28 Sep 2022" c={C.ink} s={T.floor} /></Svg>{/* fix 1b (user 2026-11-08): the event heading at the top of the right column, level with the picture's top */}
     </Scene>
   );
 };
@@ -284,7 +284,7 @@ const S28: React.FC = () => {
         { rhs: String.raw`\text{speed}\approx` + tailIn(f, t329, C.ink, String.raw`${FS.root.toFixed(1)}\approx${Math.round(FS.speed)}\ \mathrm{m/s}`), at: AT(k, 9, "square root"), cont: true },
       ]} />
       <SourceBelow text={SRC.hrrr20} pic={B} w={1400} name="s28 src" />
-      <Svg><SpeedBar x={MX} y={790} w={300} hi={50} /></Svg>
+      <Svg><SpeedBar x={MX} y={790} w={300} hi={50} /><Lbl x={MX} y={50} t="Hurricane Ian · 28 Sep 2022" c={C.ink} s={T.floor} /></Svg>{/* fix 1b (user 2026-11-08): the event heading at the top of the right column, level with the picture's top */}
     </Scene>
   );
 };
@@ -370,7 +370,7 @@ const S29: React.FC = () => {
         { rhs: String.raw`\text{along}\approx${tn(SP.al_terms[0])}${tn(SP.al_terms[1])}` + tailIn(f, t147, C.ink, String.raw`\approx${tn(SP.along)}\ \mathrm{m/s}`), at: Math.min(tAlong + 42, t147 - 4), cont: true },
       ]} />
       <SourceBelow text={SRC.hrrr20} pic={{ x: 80, y: 50, w: 920, h: 750 }} w={1400} name="s29 src" />
-      <Svg><SpeedBar x={MX} y={790} w={300} hi={50} /></Svg>
+      <Svg><SpeedBar x={MX} y={790} w={300} hi={50} /><Lbl x={MX} y={50} t="Hurricane Ian · 28 Sep 2022" c={C.ink} s={T.floor} /></Svg>{/* fix 1b (user 2026-11-08): the event heading at the top of the right column, level with the picture's top */}
     </Scene>
   );
 };
@@ -443,6 +443,7 @@ const S30: React.FC = () => {
       <TeX s={String.raw`\dfrac{${goldAt(f, tPa, String.raw`100\ \mathrm{Pa}`)}}{${goldAt(f, tDen, String.raw`1025\ \mathrm{kg/m^3}`)}\times${goldAt(f, tG, String.raw`9.81\ \mathrm{m/s^2}`)}}` + tailIn(f, tG + 30, C.local, String.raw`\approx0.01\ \mathrm m`)}
         x={MX} y={250} size={44} c={C.local} o={win(f, AT(k, 6, "by dividing"), tQ - 10)} />
       <TeX s={String.raw`1013-${SH.ian_ib.hpa}=${SH.ian_ib.deficit}\ \mathrm{hPa}` + tailIn(f, t72, C.local, String.raw`\ \Rightarrow\ \text{rise}\approx${SH.ian_ib.cm_rule}\ \mathrm{cm}`, true)} x={MX} y={545} size={44} c={C.local} o={win(f, tSea, tQ - 10)} />
+      <Svg o={oShelf}><Lbl x={MX} y={50} t="Sea floor off Fort Myers Beach" c={C.ink} s={T.floor} /></Svg>{/* fix 1b (user 2026-11-08): the event heading at the top of the right column, level with the picture's top */}
       <SourceBelow text="Sea floor: NOAA ETOPO 2022 · Ian's pressure: IBTrACS v04r01 (NHC best track)" pic={{ x: 120, y: 80, w: 840, h: 690 }} w={1400} o={oShelf} name="s30 src" />
       <SourceBelow text="Coast: Natural Earth" pic={LB} w={700} o={fin(f, tQ)} name="s30 src 2" />
     </Scene>
@@ -523,6 +524,7 @@ const S31: React.FC = () => {
       </Svg>
       <TeX s={String.raw`10\ \mathrm{ft}\times0.3048\ \mathrm{m/ft}\approx3.0\ \mathrm m`} x={A.x - 60} y={A.y + A.h + 160} size={44} c={C.local} o={win(f, AT(k, 4, "ten to fifteen feet"), tSat - 10)} />
       <TeX s={String.raw`15\ \mathrm{ft}\times0.3048\ \mathrm{m/ft}\approx4.57\ \mathrm m`} x={A.x - 60} y={A.y + A.h + 215} size={44} c={C.local} o={win(f, AT(k, 4, "ten to fifteen feet") + 14, tSat - 10)} />
+      <Svg><Lbl x={MX} y={50} t="Hurricane Ian · 28 Sep 2022" c={C.ink} s={T.floor} /></Svg>{/* fix 1b (user 2026-11-08): the event heading at the top of the right column, level with the picture's top */}
       <SourceBelow text="Data: NOAA CO-OPS tide gauges · HRRR (NOAA) · NHC report" pic={B} w={920} name="s31 src" />
     </Scene>
   );
@@ -652,7 +654,7 @@ const EventWind: React.FC<{ cfg: EvCfg }> = ({ cfg }) => {
         x={MX} y={580} size={44} c={C.local} o={fin(f, tSea)} />
       <SourceBelow text={`Data: ERA5 (Copernicus C3S) · ${cfg.date} · Natural Earth`} x={80} pic={B} w={1000} name={`${cfg.id} src`} />
       {/* fix loop 1 (r8 review 1 Must 2): the colour bar stays to the scene's last frame (the coloured map stays; no zoom here) */}
-      <Svg><SpeedBar x={MX} y={800} w={300} hi={30} /></Svg>
+      <Svg><SpeedBar x={MX} y={800} w={300} hi={30} /><Lbl x={MX} y={50} t={`Cyclone ${cfg.nm[0].toUpperCase()}${cfg.nm.slice(1)} · ${cfg.date.split(",")[0]}`} c={C.ink} s={T.floor} /></Svg>{/* fix 1b (user 2026-11-08): the event heading at the top of the right column, level with the picture's top */}
     </Scene>
   );
 };

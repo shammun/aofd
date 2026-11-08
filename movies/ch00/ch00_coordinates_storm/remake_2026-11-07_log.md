@@ -324,3 +324,43 @@ renders first. Nothing rendered, committed or deleted.
 - 2026-11-07 22:45 · heavy pass queued (`checks/fix1_heavy.sh k6f1`: HEAVY.lock when VOICE free + RAM ≥ 12 GB; SSR, SSR --3d, bundle, `fix1_frames.py` = whole house list 6160 + 1637 frames in the changed scenes = 7797 stills into ONE tag folder k6f1, k6_overlap). Mix queued (`checks/fix1_voice.sh mix` → build1/sound_fix1 when RENDER2.lock and HEAVY.lock are both free, RAM ≥ 14 GB).
 - 2026-11-07 23:45 · heavy pass k6f1 (HEAVY.lock 22:26–23:45): SSR 13 224 scene-frames, 0 errors, NaN 0; SSR --3d 0 errors (THREE guard 988); **7856 stills** in ONE folder `build1/stills/k6f1` (6160 house list + 1696 changed-scene frames incl. 63 look frames). K6: FAIL, 948 hits in 9 unique faults: the event "white circle" legend at y 712 on the colour-bar title (779, s33/s36/s39); the event working rows at x 1100 past the right edge (57) and s29 "u, v … (east, north)" past the edge (108); s30 941-hPa label growing past the edge on its gold pulse (2); s14 stack A / stack B overlap at the swap (2). Fixed: legend back to y 690 with the second event stack at x 1076, y 276 (6 rows end ≈ 650); s29 "(east, north)" dropped; the 941 label keeps its size (gold only); s14 stack A fades 20 frames before stack B. tsc 0, at_check 0 char share / 0 failures, swap_check 0 / 0 after the fixes. Look sheets `reports/movies/ch00_coordinates_storm/fix1/look_00–15.jpg` read (s09, s13, s14, s20, s21, s23, s26–s31, s37, s40, s41 as intended; the event scenes' sheets show the pre-fix legend).
 - 2026-11-08 00:0x · the re-shoot of s14/s29/s30/s33/s36/s39 (`fix1_heavy.sh k6f1 build1/k6f1b_frames.txt`, 1652 frames into the same folder) and the queued mix were **stopped by Claude Code's low-memory reaper while still waiting for their locks** (neither had started: no lock was taken, no output written). Not restarted (instruction). OPEN: re-shoot + K6 on the whole k6f1 folder → 0 hits; the mix sound_fix1.
+
+## Fix loop 1b (user 2026-11-08: figure titles + event names)
+User (2026-11-08, r8 ~35:09, s24): the two radius-height sections side by side had no event names and no title saying what they show. Rule now in
+HOUSE_STYLE (calculations block): every data figure says what it shows and which event it is. Screen-only: no re-voice, no timing change, nothing
+rendered, committed or deleted. RENDER2.lock held (Part 1 render) the whole time, so no stills were shot; the queued K6 re-shoot checks the frames.
+
+### Changed (sources)
+- **s24_amphan_curtain** (the user's frame): shared figure title "Ring-averaged wind in (−) and out (+), by height and distance from the centre"
+  (46 px, centred, y 46); event headings "Hurricane Ian · 28 Sep 2022" / "Cyclone Amphan · 20 May 2020" (44 px, warm white, y 184, left-aligned with
+  each panel's "height (km)"); the keyword row ("it wraps weak pockets" …) moved y 68 → 118; both panels y 150 → 270, h 500 → 430 (axis titles end
+  y ≈ 784, source lines kept, last line ≈ 835 < 866); the colour bar y 244/h 380 → 372/300 ("m/s" at 276, clear of the headings); the keyword
+  "Ian (left) · Amphan (right)" dropped (the headings say it).
+- **s41_recap**: beat 6 (the two mini sections): title "Ring-averaged wind in and out" + headings "Ian · Sep 2022" / "Amphan · May 2020"; beats 8-9
+  (gauge chart): "Ian · tide gauges, Sep 2022"; beat 10 (three across-shore winds, names already on the rows): title "10-m wind across the shore at
+  landfall" (fades in 10 frames into the beat, after the gauge heading has gone: swap_check gap ≥ 8 frames).
+- Event heading at the top of the right column (x 1100, y 50, 44 px, level with the picture's top; the colour bar title already says what the map
+  shows): **s20** Ian section + TDR ("Hurricane Ian · 28 Sep 2022"), **s23** Amphan ERA5 wind map ("Cyclone Amphan · 20 May 2020"), **s26 / s28 /
+  s29** HRRR wind maps ("Hurricane Ian · 28 Sep 2022"), **s31** gauges ("Hurricane Ian · 28 Sep 2022"), **s30** shelf chart ("Sea floor off Fort Myers
+  Beach", while the chart shows), **s33 / s36 / s39** EventWind ("Cyclone Amphan · 20 May 2020", "Cyclone Nargis · 2 May 2008", "Cyclone Idai · 14 Mar
+  2019", from cfg.date).
+
+### Not changed in 1b (data figures still without an explicit event heading / what-title; need a layout pass)
+s15 / s16 (GOES picture of Ian; source line names the date), s17 (radar + HRRR map of Ian), s18 / s19 (Ian's layer stack), s21 (Amphan's track; the source
+line and "ashore: 20 May" name it), s22 (MODIS picture of Amphan), s27 (flat coast map in km, no data), s32 (3-D flood flight, Amphan), s34 (Amphan
+clouds + Sentinel-1 pair), s35 / s37 (Nargis intro, swipe), s38 / s40 (Idai intro, swipe), s41 beat 11 (three flood thumbnails, already named). Most
+name the storm in the source line or a keyword, but not as a heading at the top: OPEN.
+
+### Static gates (after 1b)
+tsc 0 · at_check 703 refs, 307 AT/ATP anchors on word times, char share 0, 0 failures · swap_check 577 text elements, 0 text-over-text, 0 swaps
+< 8 frames (first run found the s41 gauge heading × beat-10 title/"land" on the 1-frame cross-fade: heading shortened, title delayed) · eq_check 19/19 ·
+movie_symbol_lint --strict 0 (17 lint-ok). SSR / K6 not run (RENDER2.lock; one heavy job at a time).
+
+### Queued K6 frame list
+`build1/k6f1b_frames.txt` rewritten (the old file copied to the session scratchpad `fix1b/k6f1b_frames_before.txt`): old 1652 frames ∪ every 1 s through
+s20, s23, s24, s26, s28-s31, s33, s36, s39, s41 ∪ every sentence start +15 / +30 frames there ∪ every k6f1 frame (house list, k6f1_frames, look list)
+inside those scenes, so no pre-1b still of a changed scene stays in the k6f1 folder → **4487 frames**. The queued job's `cst_run.py stills --bundle`
+rebuilds the bundle from the current sources.
+
+### Disk (1b)
+After (disk_guard --report): C: 110.6 GB, G: 419.1 GB free (project data 166.73 GB of 250). No before reading was taken (screen-only edit, nothing written to disk beyond the frame list).

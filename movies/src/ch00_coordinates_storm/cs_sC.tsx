@@ -207,6 +207,7 @@ const S23: React.FC = () => {
         <path d={arcD(c, rpx + 40, 30, 120)} fill="none" stroke={C.gold} strokeWidth={5} opacity={fin(f, tACW)} />
         <polyline points={`${polar(c, rpx + 40, 120)[0] + 4},${polar(c, rpx + 40, 120)[1] + 22} ${polar(c, rpx + 40, 120)[0]},${polar(c, rpx + 40, 120)[1]} ${polar(c, rpx + 40, 120)[0] + 24},${polar(c, rpx + 40, 120)[1] - 2}`}
           fill="none" stroke={C.gold} strokeWidth={5} opacity={fin(f, tACW)} />
+        <Lbl x={MX} y={50} t="Cyclone Amphan · 20 May 2020" c={C.ink} s={T.floor} />{/* fix 1b (user 2026-11-08): the event heading at the top of the right column, level with the picture's top */}
         <Keyword f={f} text="same way as Ian's" at={[MX, 120]} s={T.key} appear={0} out={tERA - 20} />
         <Keyword f={f} text="ERA5: a reanalysis" at={[MX, 120]} s={T.key} appear={tERA} out={tHere - 20} />
         <Lbl x={MX} y={210} t="observations + a weather model" c={C.key} s={T.floor} o={win(f, tRe, tHere - 20)} />
@@ -292,7 +293,9 @@ const S24: React.FC = () => {
   const tSame = SS(k, 1), tIn = SS(k, 2), tOut = SS(k, 3), tLines = SS(k, 4), tPock = SS(k, 5), tDiff = SS(k, 6), tNoData = SS(k, 7), tCorner = SS(k, 8),
     tTopE = AT(k, 8, "along the top"), tFirst = SS(k, 9), tBlur = SS(k, 10), tFit = SS(k, 11);
   // K6 round 1: both panels and the bar 40 px lower: the keywords at y 50 sat on the "height (km)" titles and 4 px from the bar
-  const BI = { x: 150, y: 150, w: 640, h: 500 }, BA = { x: 1160, y: 150, w: 640, h: 500 };
+  // fix 1b (user 2026-11-08, ~35:09): a shared figure title (y 46), the keyword row (y 118) and an event heading over each panel (y 184);
+  // both panels 120 px lower and 70 px shorter so the axis titles and the source lines still end above the caption band
+  const BI = { x: 150, y: 270, w: 640, h: 430 }, BA = { x: 1160, y: 270, w: 640, h: 430 };
   const PI = (r: number, z: number) => secP(r, z, BI, 200), PA = (r: number, z: number) => secP(r, z, BA, 300);
   const am = AMP.sec, mn = PA(am.min[1], am.min[2]), mx = PA(am.max[1], am.max[2]);
   const ZI = SEC.zero as { line_pt: number[]; pocket: number[]; z_top: number; r_first: number; corner: number[] };
@@ -314,7 +317,10 @@ const S24: React.FC = () => {
         <SecAxes B={BI} rMax={200} />
         <image href={IMG("cst_sec_amphan.png")} x={BA.x} y={BA.y} width={BA.w} height={BA.h} preserveAspectRatio="none" />
         <SecAxes B={BA} rMax={300} rt={[0, 100, 200, 300]} />
-        <VBar x={935} y={244} h={380} />{/* #5b r2: 24 px lower, clear of the tags at y 68 (also while they rise in) */}
+        <VBar x={935} y={372} h={300} />{/* fix 1b: under the event headings ("m/s" at y 276) */}
+        <Lbl x={960} y={46} t="Ring-averaged wind in (−) and out (+), by height and distance from the centre" c={C.ink} s={46} a="middle" />
+        <Lbl x={BI.x - 70} y={184} t="Hurricane Ian · 28 Sep 2022" c={C.key} s={T.floor} />
+        <Lbl x={BA.x - 70} y={184} t="Cyclone Amphan · 20 May 2020" c={C.key} s={T.floor} />
         <circle cx={mn[0]} cy={mn[1]} r={12} fill={C.gold} stroke={C.bg} strokeWidth={3} opacity={fin(f, tIn)} />
         <circle cx={mx[0]} cy={mx[1]} r={12} fill={C.gold} stroke={C.bg} strokeWidth={3} opacity={fin(f, tOut)} />
         {/* the u_r = 0 lines named on the pictures: a contour label "0" on each, the pockets ringed */}
@@ -326,16 +332,15 @@ const S24: React.FC = () => {
         {box(PA, 0, ZA.r_first, 0, 16, oF)}
         <InUpOut f={f} P={PI} rIn={[30, 170]} rUp={40} zTop={15.5} o={fin(f, tBlur)} />
         <InUpOut f={f} P={PA} rIn={[60, 260]} rUp={70} zTop={15.0} o={fin(f, tBlur)} />
-        <Keyword f={f} text="Ian (left) · Amphan (right)" at={[150, 68]} s={T.floor} appear={0} out={tIn - 20} />
-        <Keyword f={f} text={`≈ ${nf(am.min[0], 0)} m/s, 100 km, ≈ 0.2 km up`} at={[700, 68]} s={T.floor} appear={tIn} out={tOut - 20} />
-        <Keyword f={f} text={`≈ +${Math.round(am.max[0])} m/s near the top`} at={[700, 68]} s={T.floor} appear={tOut} out={tLines - 20} />
-        <Keyword f={f} text="dark line: $u_r$ = 0 m/s · in | out border" at={[560, 68]} s={T.floor} appear={tLines} out={tPock - 20} />
-        <Keyword f={f} text="it wraps weak pockets" at={[560, 68]} s={T.floor} c={C.gold} appear={tPock} out={tDiff - 20} />
-        <Keyword f={f} text="pockets differ · big pattern the same" at={[560, 68]} s={T.floor} appear={tDiff} out={tNoData - 20} />
-        <Keyword f={f} text="no colour: no data" at={[560, 68]} s={T.floor} appear={tNoData} out={tCorner - 20} />
-        <Keyword f={f} text="below the sea surface · above the top level" at={[560, 68]} s={T.floor} c={C.gold} appear={tCorner} out={tFirst - 20} />
-        <Keyword f={f} text={`Amphan: starts ${Math.round(ZA.r_first)} km out`} at={[560, 68]} s={T.floor} c={C.gold} appear={tFirst} out={tBlur - 20} />
-        <Keyword f={f} text="in, up and out · same picture" at={[700, 68]} s={T.floor} c={C.gold} appear={tFit} />
+        <Keyword f={f} text={`≈ ${nf(am.min[0], 0)} m/s, 100 km, ≈ 0.2 km up`} at={[700, 118]} s={T.floor} appear={tIn} out={tOut - 20} />
+        <Keyword f={f} text={`≈ +${Math.round(am.max[0])} m/s near the top`} at={[700, 118]} s={T.floor} appear={tOut} out={tLines - 20} />
+        <Keyword f={f} text="dark line: $u_r$ = 0 m/s · in | out border" at={[560, 118]} s={T.floor} appear={tLines} out={tPock - 20} />
+        <Keyword f={f} text="it wraps weak pockets" at={[560, 118]} s={T.floor} c={C.gold} appear={tPock} out={tDiff - 20} />
+        <Keyword f={f} text="pockets differ · big pattern the same" at={[560, 118]} s={T.floor} appear={tDiff} out={tNoData - 20} />
+        <Keyword f={f} text="no colour: no data" at={[560, 118]} s={T.floor} appear={tNoData} out={tCorner - 20} />
+        <Keyword f={f} text="below the sea surface · above the top level" at={[560, 118]} s={T.floor} c={C.gold} appear={tCorner} out={tFirst - 20} />
+        <Keyword f={f} text={`Amphan: starts ${Math.round(ZA.r_first)} km out`} at={[560, 118]} s={T.floor} c={C.gold} appear={tFirst} out={tBlur - 20} />
+        <Keyword f={f} text="in, up and out · same picture" at={[700, 118]} s={T.floor} c={C.gold} appear={tFit} />
       </Svg>
       <SourceBelow text="Data: NOAA HRRR analysis · 28 Sep 2022, 18 UTC" pic={{ x: BI.x - 70, y: BI.y, w: BI.w + 70, h: BI.h + 100 }} w={700} name="s24 src i" />
       <SourceBelow text="Data: ERA5 (Copernicus C3S) · 20 May 2020, 06 UTC" pic={{ x: BA.x - 70, y: BA.y, w: BA.w + 70, h: BA.h + 100 }} w={700} name="s24 src a" />
@@ -1033,6 +1038,10 @@ const S35: React.FC = () => {
           <image href={IMG("cst_sec_ian.png")} x={120} y={200} width={400} height={300} preserveAspectRatio="none" />
           <image href={IMG("cst_sec_amphan.png")} x={560} y={200} width={400} height={300} preserveAspectRatio="none" />
           <URBar x={300} y={560} w={420} title={false} />
+          {/* fix 1b (user 2026-11-08): what the two sections show and which storm each is */}
+          <Lbl x={120} y={90} t="Ring-averaged wind in and out" c={C.ink} s={46} />
+          <Lbl x={120} y={160} t="Ian · Sep 2022" c={C.key} s={T.floor} />
+          <Lbl x={560} y={160} t="Amphan · May 2020" c={C.key} s={T.floor} />
         </g>
         {/* remake 2026-11-07 (R3): the coast block's numbers in the recap: turned axes (S7), the two stations and their gauges (S8-S9),
             the three events' across-shore winds (S10), the floods (S11), Part 3 (S12-S13) */}
@@ -1047,6 +1056,7 @@ const S35: React.FC = () => {
         </g>
         <g opacity={beat(8) + beat(9)}>
           <Gauges A={GA(200, 250, 720, 380)} f={f} tF={t(8)} tS={t(9)} land={false} labels={false} />
+          <Lbl x={140} y={140} t="Ian · tide gauges, Sep 2022" c={C.key} s={T.floor} />{/* fix 1b */}
         </g>
         <g opacity={beat(10)}>
           {(["amphan", "nargis", "idai"] as const).map((n, i) => { const v = (D.shore[n].shown.across as number), y = 230 + i * 190;
@@ -1056,6 +1066,7 @@ const S35: React.FC = () => {
               {/* fix loop 1 (r8 review 1 S4): under the storm's name, clear of the arrow and the brown land block ("m/s" sat on the block) */}
               <Lbl x={140} y={y + 70} t={`across ${nf(v, 1)} m/s`} c={C.neg} s={T.floor} /></g>; })}
           <Lbl x={915} y={170} t="land" c="#c9b48a" s={T.floor} a="middle" />
+          <Lbl x={140} y={110} t="10-m wind across the shore at landfall" c={C.ink} s={46} o={fin(f, t(10) + 10, 8)} />{/* fix 1b: in after the gauge heading has gone */}
         </g>
         {/* user notes 2026-11-06 item 12: the three flood events, in the order the movie showed them */}
         <g opacity={beat(11)}>

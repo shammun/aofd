@@ -958,6 +958,7 @@ const S20: React.FC = () => {
         <SideCallout f={f} lines={`≈ +${Math.round(SEC.max[0])} m/s, 125 km, 15 km up`} at={[MX, 434]} appear={tTop9} out={tMust - 20} target={[mxp[0] + 14, mxp[1]]} s={T.floor} c="#8db5e2" />
         <SideCallout f={f} lines={`$u_\\theta$ ≈ ${Math.round(SEC.vtmax[0])} m/s, 30 km, 1.4 km up`} at={[MX, 494]} appear={tVt55} out={tMust - 20} target={[vtp[0] + 14, vtp[1] + 6]} s={T.floor} c={C.key} />
         <Lbl x={MX} y={630} t={`at the sea: ${nf(SEC.vt10_25, 1)} m/s (25 km, 10 m)`} c={C.first} s={T.floor} o={win(f, tWeak, tMust - 20)} />
+        <Lbl x={MX} y={50} t="Hurricane Ian · 28 Sep 2022" c={C.ink} s={T.floor} />{/* fix 1b (user 2026-11-08): the event heading at the top of the right column, level with the picture's top */}
         <Keyword f={f} text="a quick check" at={[MX, 120]} s={T.key} c={C.gold} appear={tMust} out={tLid - 20} />
         <Keyword f={f} text="how fast must it rise?" at={[MX, 120]} s={T.key} appear={tLid} out={tOne - 20} />
         <Keyword f={f} text={`inflow ⇒ rise ≈ ${SAY.w_cont} m/s`} at={[MX, 120]} s={T.key} c={C.gold} appear={tOne} out={tRadar - 20} />
