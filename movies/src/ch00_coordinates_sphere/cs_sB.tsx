@@ -234,7 +234,10 @@ const S16: React.FC = () => {
     { k: "tex", p: [BU, BV / 2], t: String.raw`4764\ \text{km}`, c: C.second, size: 44, dx: 70, ax: 0, dx3: 22, ax3: 0, at: 0, same: false },
     { k: "band", a: [0, 0], b: [BU, 0], c: C.second, w: 16, at: 4 },
     { k: "lbl", p: [BU / 2, 0], t: String.raw`next to $\varphi$`, c: C.gold, dx: 30, dy: 44, a: "middle", at: tNext, out: tRes - 20, only: "2" },
-    { k: "tex", p: [BU / 2, 0], t: String.raw`${EQ_S16}\approx4230\ \text{km}`, t2: EQ_S16, c: C.second, size: 48, dx: 16, dx3: 80, dy: 50, dy3: 50, at: tRes },
+    { k: "tex", p: [BU / 2, 0], t: String.raw`${EQ_S16}\approx4230\ \text{km}`, t2: EQ_S16, c: C.second, size: 44, dx: 16, dx3: -50, ax3: 0, dy: 50, dy3: 115, at: tRes },   // pass 2 K6 k6p2b: under the (now sloping) equator line, starting right of the axis (both crossed it).
+    // 3-D geometry from k6p2b b30625 (1080p px): axis x 490 (y −37…807), equator line (490,430)→(802,507), leg middle (584,453), drop line ends y 477.
+    // Tag: left end x ≈ 534 (44 px right of the axis), right end ≈ 878 (size 44), rows y ≈ 551–586 (44 px under the equator line's end, 74 under the leg);
+    // the house rule has no chips, so it is moved (k6p2c): 20 px further left than fix 2 to shorten the run over the globe's textured rim (x ≈ 796–840)
   ];
   const disc3 = (G: GProj) => {
     const o = fin(f, tDisc);

@@ -8,9 +8,9 @@ S="G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_spher
 TAG="$1"; FF="${2:-$S/k6p2_frames.txt}"
 cd "$R" || exit 1
 mkdir -p "$S/tmp"; export TEMP="$S/tmp" TMP="$S/tmp"
-# orchestrator 2026-11-07 23:5x (renders first): start only once Part 1's full render holds RENDER2.lock ("orchestrator 5a fix2 full render")
+# orchestrator 2026-11-08 (no overlap, user: after Parts 1 and 2 are rendered): start only when no render holds RENDER2.lock
 R2="G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/RENDER2.lock"
-until grep -qi "5a fix2 full render" "$R2/owner.txt" 2>/dev/null && [ ! -d "G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/VOICE.lock" ] && .venv/Scripts/python.exe movies/src/ch00_coordinates_sphere/checks/voice_ok.py --heavy && mkdir "$L" 2>/dev/null; do sleep 20; done
+until [ ! -d "$R2" ] && [ ! -d "G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/VOICE.lock" ] && .venv/Scripts/python.exe movies/src/ch00_coordinates_sphere/checks/voice_ok.py --heavy && mkdir "$L" 2>/dev/null; do sleep 20; done
 echo "#5c pass2 SSR + K6 $TAG $(date)" > "$L/owner.txt"; echo "LOCK $(date)"
 echo "== ssr 2-D"; (cd movies && node src/ch00_coordinates_sphere/checks/ssr/run.mjs --step 10 --public "$S/public" 2>&1 | tail -8)
 echo "== ssr 3-D"; (cd movies && node src/ch00_coordinates_sphere/checks/ssr/run.mjs --step 15 --3d 2>&1 | tail -6)

@@ -227,3 +227,40 @@ the r7 mix (`build1/sound_r7/narration_music_cs.wav`, −16.01 LUFS / −3.32 dB
 - 00:0x (11-08) the queued `p2_heavy.sh k6p2b` was **killed by the session's memory-pressure reaper while it was still waiting** for RENDER2 (it
   never took HEAVY.lock, shot nothing, left no lock). Not restarted (reaper rule): the orchestrator re-runs it (command in the hand-off).
   Disk after: **C: 111 GB, G: 424 GB free**. No render, no commit, nothing deleted.
+- 11-08 06:2x orchestrator: **k6p2b** (whole list, 4618 frames): SSR 2-D/3-D 0 errors; K6 **1 fault** s16 text-stroke ×23 (f30625: the 3-D tag
+  "a cos φ ≈ 4230 km" on the now-sloping equator line). Fix 1 (tag 115 px lower) → fill 1 (06:48, s16 frames re-shot into k6p2b, new bundle):
+  still 23 hits — I looked at f30625: the tag now cleared the equator line but its left end crossed the **vertical axis** (same muted colour).
+  Fix 2: tag size 44, anchored at its left end 30 px left of the leg's middle (starts right of the axis), 115 px down. Static gates: tsc 0,
+  at_check 512/0, swap_check 0/0, symbol lint 0, eq_check 24/24.
+- 07:36 fill 2 could not run: **G: refuses new files and folders** (mkdir "Permission denied", Python "OSError 22 Invalid argument") anywhere
+  under `aofd-data/scratch` (C: fine; free space G: 418 GB). The bundle step had already moved `build1/bundle` aside to
+  `bundle_prev_20261108_073636` (the render needs a fresh bundle). Stopped; no lock left held. Fill 1 outputs moved aside
+  (`stills/k6p2b/_logs_fill1/`, `stills/k6p2b_overlap_fill1.json`).
+
+## 2026-11-08 11:4x–12:05 s16 tag fix 3 (source only; no SSR / K6 / render / TTS / mix; no lock taken)
+- Disk before: **C: 100.8 GB, G: 417.8 GB free** (disk_guard; project data 167.94 of 250 GB). G: healthy again (writes work).
+- Uncommitted state checked: `cs_sB.tsx` differs from 524b3c9 only in the s16 tag line (fix 2: size 44, `ax3: 0`, `dx3: -30`, `dy3: 115`) — intact,
+  compiles; `checks/p2_heavy.sh` waits for "no RENDER2" instead of the old 5a-render owner string — sensible; `checks/p2_fill.sh` is untracked.
+- Why fill 1 failed (`build1/k6p2b_fill1.log`, `stills/k6p2b_overlap_fill1.json`, box file `stills/k6p2b/b30625.json`): fill 1 shot the
+  **fix-1** source (tag only moved 115 px down, still centred near the leg's middle, size 48). The tag's glyph runs spanned x 419–794, y 546–584,
+  and the 3-D **vertical axis** (rgb 170,180,200, w 4, x = 490, y −37…807) went right through it at (490, 565): same 23 hits as k6p2b, only
+  the culprit changed (equator line → axis). Fill 2 (fix 2) never ran (G: refused writes at 07:36); the `bundle_prev_20261108_073636` move did
+  not happen — `build1/bundle` is still the 06:48 (fix-1) bundle, so the next run must rebuild the bundle (the script does).
+- 3-D geometry read from `b30625.json` (1080p px): centre (490, 430); equator line (490, 430)→(802, 507); leg (band) (490, 430)→(678, 477), its
+  middle (584, 453); dashed drop line ends at y 477; SameMark ring ≤ r 40 round the leg middle (y ≤ 493); no picture mask in s16 (only the
+  source line), 3-D view box x 40–940.
+- **Fix 3** (`cs_sB.tsx` s16): the tag stays a halo'd KaTeX tag, no chip (HOUSE_STYLE §5: no boxes / chips), moved: left-anchored (`ax3: 0`),
+  `dx3: -50`, `dy3: 115`, size 44 → glyphs ≈ x 534–878, y 551–586: **44 px right of the axis, 44 px under the equator line's end, 74 px under
+  the leg, inside the 3-D box**; 20 px further left than fix 2 to shorten its run over the textured rim of the cut globe (x ≈ 796–840). The
+  flat-view tag, narration, captions, timing unchanged; s16 is a geometry diagram (Blue Marble credit present), not a data/event figure.
+- Static gates (final source): **tsc 0 · at_check 512 refs / 0 failures · swap_check 327 elements, 0 overlaps, 0 tight swaps · cam_speed 0 > 90 °/s
+  · symbol lint --strict 0 · eq_check 24/24**. Captions / wording lint not re-run (script, vtt, srt, timing untouched).
+- Prepared, **not started**: `movies/src/ch00_coordinates_sphere/checks/p2c_heavy.sh` (tag **k6p2c**). Before the lock it writes
+  `build1/k6p2c_s16.txt` = every frame of s16 −15 … end +15 = **29766–31820 (2055 frames)** and copies (cp, nothing moved/deleted) every k6p2b
+  still + box file outside that range into `stills/k6p2c`; then waits until RENDER2, HEAVY and VOICE are all free and ≥ 9 GB RAM is free,
+  takes HEAVY.lock (mkdir + owner.txt "#5c pass2 SSR + K6 k6p2c …"), runs SSR 2-D + 3-D, a fresh bundle (old one moved aside) and the s16
+  stills (port 8100, 3 jobs), releases HEAVY.lock (also on exit via trap), then k6_overlap + k6sum over the whole k6p2c folder. Never renders,
+  commits or deletes. Start (repo root, Git Bash):
+  `nohup bash movies/src/ch00_coordinates_sphere/checks/p2c_heavy.sh > "G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_sphere/build1/k6p2c_heavy_$(date +%Y%m%d_%H%M%S).log" 2>&1 &`
+  Pass = `k6sum` "0 unique faults" over ≈ 6600 frames (4570 copied + 2055 re-shot); then look at f30625 / f31200 in `stills/k6p2c`.
+- Disk after: **C: 100.9 GB, G: 417.7 GB free**. No render, no commit, nothing deleted.
