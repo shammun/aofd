@@ -9,8 +9,9 @@ import { AbsoluteFill, staticFile, useCurrentFrame } from "remotion";
 import { ramp } from "../house";
 import timing from "../../ch00/ch00_coordinates_storm/timing.json";
 import csJ from "../../ch00/ch00_coordinates_storm/data/cs.json";
-// pass r8 (2026-11-07): reveal times measured from the Kokoro word timestamps of the re-voiced sentences (checks/r8_words.py)
-import atWords from "./at_words.json";
+// fix loop 1 (2026-11-07, r8 review 2 S13; = Part 1 fix 2): the Kokoro token start times of EVERY sentence (checks/fix1_words.py from
+// G:/.../fix1/tts/words_all.json); AT() finds the phrase among the tokens, so no reveal is timed by the character share any more
+import wordsJ from "./words.json";
 import { C, T } from "../house/kit/type";
 import { Arrow, Lbl as HLbl, Pt, Svg, clamp, textW as hTextW } from "../house/kit/draw";
 import { Keyword as HKeyword } from "../house/kit/notes";
@@ -19,6 +20,7 @@ import { CurvedLink } from "../house/kit/extras";
 import { Drape, GProj, GlobeCam, GlobeMesh, Graticule, coastPath, globeCam, globeProj, useTex } from "./kit_cs/globe";
 import { View3D } from "./kit_cs/three3d";
 import { CalcStack as HouseCalcStack, KX, TeX as TeXR, texHtml } from "../house/kit/tex";
+import type { CalcRow } from "../house/kit/tex";
 
 export const FPS = 30;
 type Snt = { text: string; start: number; end: number };
@@ -34,17 +36,39 @@ export const END = [...CUT.slice(1), CST_FRAMES];
 export const LEN = (k: number) => END[k] - CUT[k];
 export const SS = (k: number, j: number) => { const s = sc[k].sentences[j]; if (!s) throw new Error(`${sc[k].id} has no sentence ${j}`); return Math.round(s.start * FPS) - CUT[k]; };
 export const SE = (k: number, j: number) => { const s = sc[k].sentences[j]; if (!s) throw new Error(`${sc[k].id} has no sentence ${j}`); return Math.round(s.end * FPS) - CUT[k]; };
-const ATW = atWords as unknown as Record<string, { text: string; dt: number }>;
-/** frame (scene-relative) at which the quoted words are spoken inside sentence j: from the measured Kokoro word timestamp when the
- * r8 word table has this (scene, sentence, phrase) for the same sentence text, else character-proportional */
+type WEnt = { text: string; w: [number, string][] };
+const WORDS = (wordsJ as unknown as { scenes: Record<string, Record<string, WEnt>> }).scenes;
+const wnorm = (x: string) => x.toLowerCase().replace(/[^a-z0-9']/g, "");
+/** seconds from the sentence start at which `phrase` is spoken (the Kokoro token start time of its first word); null if this sentence
+ * text has no word times or the tokens do not contain the phrase. The n-th text occurrence maps to the n-th token match. */
+export const wordTime = (k: number, j: number, phrase: string): number | null => {
+  const e = WORDS[sc[k].id]?.[String(j)];
+  const s = sc[k].sentences[j];
+  if (!e || e.text !== s.text) return null;
+  const toks = e.w.map(([t, x]) => [t, wnorm(x)] as [number, string]).filter(([, x]) => x);
+  const ph = phrase.split(/\s+/).map(wnorm).filter((x) => x);
+  const hits: number[] = [];
+  for (let i = 0; i + ph.length <= toks.length; i++) if (ph.every((x, q) => toks[i + q][1] === x)) hits.push(toks[i][0]);
+  if (!hits.length) return null;
+  const nBefore = s.text.slice(0, s.text.indexOf(phrase)).toLowerCase().split(phrase.toLowerCase()).length - 1;
+  return hits[Math.min(nBefore, hits.length - 1)];
+};
+/** frame (scene-relative) at which the quoted words are spoken inside sentence j: the measured Kokoro word time (fix loop 1: every
+ * sentence has them); the character share only if a phrase is missing from the tokens (at_check.mjs reports any such case) */
 export const AT = (k: number, j: number, phrase: string) => {
   const s = sc[k].sentences[j];
   if (!s) throw new Error(`${sc[k].id} has no sentence ${j}`);
   const i = s.text.indexOf(phrase);
   if (i < 0) throw new Error(`phrase "${phrase}" not in ${sc[k].id} sentence ${j}: ${s.text}`);
-  const w = ATW[`${sc[k].id}|${j}|${phrase}`];
-  if (w && w.text === s.text) return Math.round((s.start + w.dt) * FPS) - CUT[k];
+  const w = wordTime(k, j, phrase);
+  if (w !== null) return Math.round((s.start + w) * FPS) - CUT[k];
   return Math.round((s.start + ((s.end - s.start) * i) / s.text.length) * FPS) - CUT[k];
+};
+/** AT in the FIRST sentence of scene k that contains `phrase` (for scenes located by phrase, e.g. the three event scenes) */
+export const ATP = (k: number, phrase: string) => {
+  const j = sc[k].sentences.findIndex((q) => q.text.includes(phrase));
+  if (j < 0) throw new Error(`no sentence of ${sc[k].id} contains "${phrase}"`);
+  return AT(k, j, phrase);
 };
 /** start frame of the FIRST sentence of scene k that contains `phrase` (for slot scenes that get re-voiced: survives an inserted
  * bridging sentence; throws if the phrase is gone, so a re-voice that drops it fails the render) */
@@ -54,6 +78,26 @@ export const SSP = (k: number, phrase: string) => {
   return SS(k, j);
 };
 export const fin = (f: number, a: number, n = 12) => ramp(f, a, a + n);
+// fix loop 1 (2026-11-07, = Part 1 fix 2 helpers, cf_lib / cf_sC): a non-obvious input or the scene's answer is gold (and +8 % at the peak)
+// for 47 frames from its spoken word; goldAt colours one PART of a TeX string; tailIn fades the end of a TeX row in (by colour) on its
+// word, so the row never jumps and stays one text block for K6; exitFirst fades the rows a later line pushes out BEFORE the stack slides
+export const hiOn = (f: number, t: number) => f >= t - 2 && f <= t + 45;
+export const hiSize = (f: number, t: number, s: number) => s * (1 + 0.08 * Math.sin(Math.PI * clamp((f - t + 2) / 47, 0, 1)));
+export const goldAt = (f: number, t: number, s: string) => (f >= t - 2 && f <= t + 45 ? "\\textcolor{#d8b23a}{" + s + "}" : s);
+const hexMix = (a: string, b: string, u: number) => "#" + [1, 3, 5].map((i) => Math.round(parseInt(a.slice(i, i + 2), 16) * (1 - u) + parseInt(b.slice(i, i + 2), 16) * u).toString(16).padStart(2, "0")).join("");
+export const tailIn = (f: number, t: number, c: string, s: string, gold = false) => "\\textcolor{" + (gold && f >= t - 2 && f <= t + 45 ? "#d8b23a" : hexMix(C.bg, c, Math.min(1, Math.max(0, (f - t) / 8)))) + "}{" + s + "}";
+export const exitFirst = (rows: CalcRow[], maxLines: number): CalcRow[] => {
+  const lineOf: number[] = [];
+  let L = -1;
+  rows.forEach((r) => { if (!r.cont) L++; lineOf.push(L); });
+  const lineAt = Array.from({ length: L + 1 }, (_, j) => rows[lineOf.indexOf(j)].at);
+  return rows.map((r, i) => {
+    const j = lineOf[i] + maxLines;
+    if (j > L) return r;
+    const t = lineAt[j] - 10;
+    return { ...r, out: r.out !== undefined ? Math.min(r.out, t) : t };
+  });
+};
 export const fout = (f: number, a: number, n = 10) => 1 - ramp(f, a, a + n);
 export const win = (f: number, a: number, b: number, n = 10) => fin(f, a, n) * fout(f, b, n);
 export const mix = (a: number, b: number, t: number) => a + (b - a) * t;

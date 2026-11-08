@@ -15,8 +15,11 @@ import { SourceBelow } from "../house/kit/frame";
 import { AnimatedWindArrow } from "../house/kit/wind";
 import {
   AT, Arrow, Ax, Axes, CST, CalcStack, Curve, D, D2R, GeoImg, GeoMap, IMG, K, Keyword, LEN, Lbl, MapBox, Place, Recall, SE, SRC, SS, SSP, Scene, SpeedBar, Svg,
-  arcD, axP, boxAt, clamp, fin, fout, lerpBox, linesPath, mapP, mix, nf, prog, win,
+  arcD, axP, boxAt, clamp, fin, fout, lerpBox, linesPath, mapP, mix, nf, prog, win, goldAt, tailIn, hiOn, hiSize, exitFirst, ATP,
 } from "./cs_lib";
+/** fix loop 1 (r8 review 2 S5): a "from" bearing (degrees clockwise from north) as a 16-point compass name */
+const COMPASS = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];   // lint-ok: compass point names, not maths letters
+const compass = (deg: number) => COMPASS[Math.round((((deg % 360) + 360) % 360) / 22.5) % 16];
 import { EQ_S26, EQ_S26M, EQ_S26W, EQ_S27, cutAt } from "./cs_eq";
 
 type Shown = { dy: number; dx: number; tan: number; beta: number; bearing: number; alpha: number; alpha_raw: number; cos: number; sin: number; u: number; v: number;
@@ -74,7 +77,8 @@ const S26: React.FC = () => {
     <Scene>
       <GeoMap id="s26m" B={B} o={oMap}>{(Pp) => <IanMap P={Pp} f={f} />}</GeoMap>
       <Svg o={oMap}>
-        <Place p={fm} t="Fort Myers Beach" dx={-20} dy={-44} a="end" />
+        {/* fix loop 1 (r8 review 1 S3): 38 px further left, clear of the orange "along" arrow (it crossed the "h") */}
+        <Place p={fm} t="Fort Myers Beach" dx={-58} dy={-44} a="end" />
         <AnimatedWindArrow from={fm} to={[fm[0] + u[0] * 6, fm[1] - u[1] * 6]} speed={CST.spF} f={f} c={C.ink} px={10} head={36} />
         <g opacity={fin(f, t2)}>
           <Arrow p={fm} q={add(fm, unitV(121), 170)} color={C.second} w={8} head={28} />
@@ -87,7 +91,7 @@ const S26: React.FC = () => {
         <clipPath id="s26dia"><rect x={80} y={40} width={920} height={800} /></clipPath>
         <path d={poly(sea)} fill="#2b4f7a" opacity={0.35 * fin(f, tCoast)} clipPath="url(#s26dia)" />
         <path d={poly(land)} fill="#6b5a3e" opacity={0.35 * fin(f, tCoast)} clipPath="url(#s26dia)" />
-        <g opacity={fout(f, tCoast - 12)}><line x1={O[0] - 330} y1={O[1]} x2={O[0] + 330} y2={O[1]} stroke={C.muted} strokeWidth={4} />
+        <g opacity={fout(f, tCoast - 20)}><line x1={O[0] - 330} y1={O[1]} x2={O[0] + 330} y2={O[1]} stroke={C.muted} strokeWidth={4} />
         <line x1={O[0]} y1={O[1] + 330} x2={O[0]} y2={O[1] - 330} stroke={C.muted} strokeWidth={4} />
         <Lbl x={O[0] + 340} y={O[1] + 50} t="$x$ (east)" c={C.muted} s={T.floor} a="end" />
         <Lbl x={O[0] - 20} y={O[1] - 340} t="$y$ (north)" c={C.muted} s={T.floor} a="end" /></g>
@@ -101,7 +105,8 @@ const S26: React.FC = () => {
         <path d={arcD(O, 110, 0, A)} fill="none" stroke={C.gold} strokeWidth={6} opacity={fin(f, tAl)} />
         <Lbl x={add(O, unitV(A / 2), 140)[0]} y={add(O, unitV(A / 2), 140)[1]} t="$\alpha$" c={C.gold} s={T.key} o={fin(f, tAl)} />
         {/* the wind (u, v) and its two parts in the turned axes (S8-S9) */}
-        <g opacity={win(f, tWind, tCoast - 14)}>
+        {/* fix loop 1 (swap_check now covers cs_sD): the s26 swaps get >= 8 frames of gap */}
+        <g opacity={win(f, tWind, tCoast - 20)}>
           <AnimatedWindArrow from={O} to={W} speed={20} f={f} c={C.ink} px={10} head={36} />
           <Lbl x={W[0] + 14} y={W[1] - 16} t="wind $(u,\ v)$" c={C.ink} s={T.floor} />
           <line x1={W[0]} y1={W[1]} x2={Pal[0]} y2={Pal[1]} stroke={C.muted} strokeWidth={3} strokeDasharray="10 8" opacity={fin(f, tForm)} />
@@ -130,8 +135,8 @@ const S26: React.FC = () => {
         <Lbl x={MX} y={765} t="across > 0: out to sea" c={C.first} s={T.floor} o={fin(f, tSign)} />
         <Lbl x={MX} y={825} t="across < 0: onto the land" c={C.neg} s={T.floor} o={fin(f, AT(k, 11, "negative"))} />
       </Svg>
-      <TeX s={String.raw`\hat{\mathbf x}'=(\cos\alpha,\ \sin\alpha)`} x={MX} y={300} size={54} c={C.second} o={win(f, tHat, tMat - 12)} />
-      <TeX s={String.raw`\hat{\mathbf y}'=(-\sin\alpha,\ \cos\alpha)`} x={MX} y={375} size={54} c={C.second} o={win(f, tHat + 20, tMat - 12)} />
+      <TeX s={String.raw`\hat{\mathbf x}'=(\cos\alpha,\ \sin\alpha)`} x={MX} y={300} size={54} c={C.second} o={win(f, tHat, tMat - 20)} />
+      <TeX s={String.raw`\hat{\mathbf y}'=(-\sin\alpha,\ \cos\alpha)`} x={MX} y={375} size={54} c={C.second} o={win(f, tHat + 20, tMat - 20)} />
       <TeX s={EQ_S26M} x={MX} y={340} size={50} o={win(f, tMat, tForm - 12)} />
       <TeX s={x1} x={MX} y={470} size={54} o={fin(f, tDer)} />
       <Recall f={f} tex={x2} name="turned axes" x={MX} y={540} appear={AT(k, 6, "and y prime")} />
@@ -156,6 +161,12 @@ const S27: React.FC = () => {
   const fm = P(CST.fmb[0], CST.fmb[1]);
   const xs = [-125, -100, -75, -50, -25, 0, 25], ys = [-25, 0, 25, 50, 75, 100, 125];
   const aC = Math.atan2(-(Ep[1] - Np[1]), Ep[0] - Np[0]) / D2R;   // the coast direction, anticlockwise from east on screen (north = 90°)
+  // fix loop 1 (r8 review 2 S1, S6, S7, S9): every number on its spoken word; inputs and the answer gold; the arc labelled beta
+  const t915 = AT(k, 2, "ninety one point five"), t55 = AT(k, 2, "fifty five kilometres"), tTg = AT(k, 3, "whose tangent"), tBeta = AT(k, 3, "by an angle"),
+    t601 = AT(k, 4, "zero point six zero one"), t31 = AT(k, 4, "thirty one degrees"), tCB = AT(k, 5, "a compass bearing"), t329 = AT(k, 5, "three hundred and twenty nine"),
+    tNeg = AT(k, 7, "comes out negative"), tFull = AT(k, 7, "adding a full turn"), t121 = AT(k, 7, "a hundred and twenty one"),
+    tCv = AT(k, 8, "minus zero point five one five"), tSn = AT(k, 8, "and its sine"), tSv = AT(k, 8, "zero point eight five seven");
+  const bL = add(Np, unitV((90 + aC) / 2), 158);
   return (
     <Scene>
       <GeoMap id="s27m" B={B}>{(Pp) => <IanMap P={Pp} f={f} speed={false} arrows={0} />}</GeoMap>
@@ -174,10 +185,11 @@ const S27: React.FC = () => {
         <g opacity={fin(f, tLegs)}>
           <line x1={Np[0]} y1={Np[1]} x2={corner[0]} y2={corner[1]} stroke={C.ink} strokeWidth={5} strokeDasharray="14 9" />
           <line x1={corner[0]} y1={corner[1]} x2={Ep[0]} y2={Ep[1]} stroke={C.ink} strokeWidth={5} strokeDasharray="14 9" />
-          <Lbl x={Np[0] + 20} y={(Np[1] + corner[1]) / 2} t={`${FS.dy.toFixed(1)} km N`} c={C.ink} s={T.floor} />
-          <Lbl x={(corner[0] + Ep[0]) / 2} y={corner[1] - 46} t={`${(-FS.dx).toFixed(1)} km W`} c={C.ink} s={T.floor} a="middle" />
+          <Lbl x={Np[0] + 20} y={(Np[1] + corner[1]) / 2} t={`${FS.dy.toFixed(1)} km N`} c={C.ink} s={T.floor} o={fin(f, t915)} />
+          <Lbl x={(corner[0] + Ep[0]) / 2} y={corner[1] - 46} t={`${(-FS.dx).toFixed(1)} km W`} c={C.ink} s={T.floor} a="middle" o={fin(f, t55)} />
         </g>
         <path d={arcD(Np, 120, 90, aC)} fill="none" stroke={C.gold} strokeWidth={6} opacity={fin(f, tTan)} />
+        <Lbl x={bL[0]} y={bL[1]} t="$\beta$" c={C.gold} s={T.key} a="middle" o={fin(f, tBeta)} />
         <g opacity={fin(f, tXh)}>
           <Arrow p={fm} q={add(fm, unitV(FS.alpha), 150)} color={C.second} w={9} head={32} />
           <Lbl x={add(fm, unitV(FS.alpha), 170)[0] + 40} y={add(fm, unitV(FS.alpha), 170)[1] - 10} t="$\hat{\mathbf x}'$" c={C.second} s={T.key} />
@@ -193,17 +205,18 @@ const S27: React.FC = () => {
         <Lbl x={MX} y={365} t="so $\alpha = 90^\circ -$ bearing" c={C.key} s={T.floor} o={win(f, AT(k, 6, "so the maths angle"), tAl - 10)} />
       </Svg>
       <CalcStack f={f} x={MX} y={230} size={50} maxLines={4} o={fout(f, tP1 - 10)} rows={[
-        { rhs: String.raw`\text{north}\ ${FS.dy.toFixed(1)}\ \mathrm{km},\quad \text{west}\ ${(-FS.dx).toFixed(1)}\ \mathrm{km}`, at: tLegs, size: 46 },
-        { rhs: String.raw`\tan\beta=\dfrac{\text{opposite}}{\text{adjacent}}=\dfrac{${(-FS.dx).toFixed(1)}}{${FS.dy.toFixed(1)}}`, at: tTan, size: 46 },
-        { rhs: String.raw`\approx${FS.tan.toFixed(3)}\ \Rightarrow\ \beta\approx${FS.beta}^\circ`, at: AT(k, 4, "the angle is"), size: 46 },
-        { rhs: String.raw`\text{bearing}=360^\circ-${FS.beta}^\circ=${FS.bearing}^\circ`, at: AT(k, 5, "a compass bearing"), size: 46 },
+        { rhs: String.raw`\text{north}\ ${FS.dy.toFixed(1)}\ \mathrm{km}` + tailIn(f, t55, C.ink, String.raw`,\quad \text{west}\ ${(-FS.dx).toFixed(1)}\ \mathrm{km}`), at: t915, size: 46 },
+        { rhs: String.raw`\tan\beta=\dfrac{\text{opposite}}{\text{adjacent}}=\dfrac{${(-FS.dx).toFixed(1)}}{${FS.dy.toFixed(1)}}`, at: tTg, size: 46 },
+        { rhs: String.raw`\approx${FS.tan.toFixed(3)}` + tailIn(f, t31, C.ink, String.raw`\ \Rightarrow\ \beta\approx${FS.beta}^\circ`), at: t601, size: 46 },
+        { rhs: String.raw`\text{bearing}=360^\circ-${FS.beta}^\circ` + tailIn(f, t329, C.ink, String.raw`=${FS.bearing}^\circ`), at: tCB, size: 46 },
       ]} />
       <Recall f={f} tex={EQ_S27} name="bearings" x={MX} y={235} appear={tP1} out={tAl - 10} />
       <CalcStack f={f} x={MX} y={230} size={46} maxLines={4} o={fin(f, tAl)} rows={[
-        { rhs: String.raw`\alpha=90^\circ-${FS.bearing}^\circ=${FS.alpha_raw}^\circ`, at: tAl },
-        { rhs: String.raw`\alpha=${FS.alpha_raw}^\circ+360^\circ=${FS.alpha}^\circ`, at: AT(k, 7, "adding a full turn"), glow: pulse(f, AT(k, 7, "a hundred and twenty one"), 30) },   // r8 labels: result with its symbol
-        { rhs: String.raw`\cos${FS.alpha}^\circ\approx${tn(FS.cos, 3)}`, at: tCos, glow: pulse(f, AT(k, 8, "minus zero point five one five"), 30) },
-        { rhs: String.raw`\sin${FS.alpha}^\circ\approx${tn(FS.sin, 3)}`, at: AT(k, 8, "and its sine"), cont: true, glow: pulse(f, AT(k, 8, "zero point eight five seven"), 30) },
+        { rhs: String.raw`\alpha=90^\circ-${FS.bearing}^\circ` + tailIn(f, tNeg, C.ink, String.raw`=${FS.alpha_raw}^\circ`), at: tAl },
+        // fix loop 1 (review 1 S8): gold text on the word (the drop-shadow glow was too faint to see)
+        { rhs: String.raw`\alpha=${FS.alpha_raw}^\circ+360^\circ` + tailIn(f, t121, C.ink, String.raw`=${FS.alpha}^\circ`, true), at: tFull },
+        { rhs: String.raw`\cos${FS.alpha}^\circ\approx${goldAt(f, tCv, tn(FS.cos, 3))}`, at: tCv - 8 },
+        { rhs: String.raw`\sin${FS.alpha}^\circ\approx${goldAt(f, tSv, tn(FS.sin, 3))}`, at: tSv - 8, cont: true },
         { rhs: String.raw`\hat{\mathbf x}'\approx(${tn(FS.cos, 3)},\ ${tn(FS.sin, 3)})\ \text{NNW}`, at: tXh, c: C.second },
         { rhs: String.raw`\hat{\mathbf y}'\approx(${tn(-FS.sin, 3)},\ ${tn(FS.cos, 3)})\ \text{WSW}`, at: tYh, c: C.second },
       ]} />
@@ -220,6 +233,11 @@ const S28: React.FC = () => {
   const s = 6.5, a = FS.alpha;
   const W = add(fm, [FS.u / Math.hypot(FS.u, FS.v), -FS.v / Math.hypot(FS.u, FS.v)], s * FS.speed);
   const Pal = add(fm, unitV(a), s * FS.along), Pac = add(fm, unitV(a + 90), s * FS.across);
+  // fix loop 1 (r8 review 1 S8, review 2 S6, S7): inputs gold on their words (33 m/s, u, v, cos α, sin α), results on their words, the
+  // answer (across) gold
+  const t33 = AT(k, 1, "thirty three metres"), tU = AT(k, 2, "twenty two point two"), tV = AT(k, 2, "twenty four point three"),
+    tCv = AT(k, 3, "minus zero point five one five"), tSv = AT(k, 3, "zero point eight five seven"), t94 = AT(k, 4, "nine point four"),
+    t315 = AT(k, 6, "minus thirty one point five"), t329 = AT(k, 9, "thirty two point nine");
   return (
     <Scene>
       <GeoMap id="s28m" B={B}>{(Pp) => <IanMap P={Pp} f={f} arrows={0.45} />}</GeoMap>
@@ -227,15 +245,16 @@ const S28: React.FC = () => {
         <Place p={fm} t="Fort Myers Beach" dx={-24} dy={60} a="end" />
         <Arrow p={fm} q={add(fm, unitV(a), 110)} color={C.second} w={6} head={24} o={0.8} />
         <Arrow p={fm} q={add(fm, unitV(a + 90), 110)} color={C.second} w={6} head={24} o={0.8} />
-        <Lbl x={W[0] - 20} y={W[1] - 24} a="end" t={`wind ≈ ${Math.round(FS.speed)} m/s`} c={C.ink} s={T.floor} o={fin(f, tWind)} />
+        <Lbl x={W[0] - 20} y={W[1] - 24} a="end" t={`wind ≈ ${Math.round(FS.speed)} m/s`} c={C.ink} s={T.floor} o={fin(f, t33)} />
         <AnimatedWindArrow from={fm} to={W} speed={FS.speed} f={f} c={C.ink} px={10} head={36} o={fin(f, tWind)} />
         <g opacity={fin(f, tAlR)}>
           <AnimatedWindArrow from={fm} to={Pal} speed={Math.abs(FS.along)} f={f} c={ALONG_C} px={12} head={34} />
-          <Lbl x={Pal[0] - 14} y={Pal[1] - 20} t={`along ${nf(FS.along, 1)}`} c={ALONG_C} s={T.floor} a="end" />
+          {/* fix loop 1 (r8 review 1 S3): left of the arrowhead with a gap (it touched the label) */}
+          <Lbl x={Pal[0] - 50} y={Pal[1] + 6} t={`along ${nf(FS.along, 1)}`} c={ALONG_C} s={T.floor} a="end" o={fin(f, t94)} />
         </g>
         <g opacity={fin(f, tAcR)}>
           <AnimatedWindArrow from={fm} to={Pac} speed={Math.abs(FS.across)} f={f} c={ACROSS_C(FS.across)} px={12} head={34} />
-          <Lbl x={fm[0] - 24} y={fm[1] + 112} t={`across ${nf(FS.across, 1)}`} c={ACROSS_C(FS.across)} s={T.floor} a="end" />
+          <Lbl x={fm[0] - 24} y={fm[1] + 112} t={`across ${nf(FS.across, 1)}`} c={hiOn(f, t315) ? C.gold : ACROSS_C(FS.across)} s={T.floor} a="end" o={fin(f, t315)} />
         </g>
         <Lbl x={fm[0] + 10} y={fm[1] + 230} t="onto the land" c={C.neg} s={T.floor} o={fin(f, tMin)} />
         <Keyword f={f} text="now the wind" at={[MX, 120]} s={T.key} appear={0} out={tWind - 20} />
@@ -243,25 +262,26 @@ const S28: React.FC = () => {
         <Keyword f={f} text="minus: onto the land" at={[MX, 120]} s={T.key} c={C.neg} appear={tMin} out={tSo - 20} />
         <Keyword f={f} text={`≈ ${Math.abs(FS.across).toFixed(1)} onto the land, ≈ ${FS.along.toFixed(1)} along`} at={[MX, 120]} s={T.floor} c={C.neg} appear={tSo} out={tChk - 20} />
         <Keyword f={f} text="check: the same wind" at={[MX, 120]} s={T.key} appear={tChk} />
-        <Lbl x={MX} y={198} t={`≈ ${Math.round(FS.speed)} m/s from the SW`} c={C.ink} s={T.floor} o={win(f, tWind, tUV - 10)} />
+        <Lbl x={MX} y={198} t={`≈ ${Math.round(FS.speed)} m/s from the ${compass(CST.fromF)}`} c={hiOn(f, t33) ? C.gold : C.ink} s={hiSize(f, t33, T.floor)} o={win(f, t33, tUV - 10)} />
       </Svg>
-      <TeX s={String.raw`u=${tn(FS.u)},\ v=${tn(FS.v)}\ \mathrm{m/s}\ (\text{east, north})`} x={MX} y={200} size={46} o={fin(f, tUV)} glow={pulse(f, AT(k, 2, "twenty two point two"), 30) + pulse(f, AT(k, 2, "twenty four point three"), 30)} />
-      <TeX s={String.raw`\cos${FS.alpha}^\circ\approx${tn(FS.cos, 3)},\ \sin${FS.alpha}^\circ\approx${tn(FS.sin, 3)}`} x={MX} y={262} size={44} c={C.second} o={fin(f, tAlF)} glow={pulse(f, AT(k, 3, "minus zero point five one five"), 30) + pulse(f, AT(k, 3, "zero point eight five seven"), 30)} />
+      <TeX s={String.raw`u=${goldAt(f, tU, tn(FS.u))},\ v=${goldAt(f, tV, tn(FS.v))}\ \mathrm{m/s}\ (\text{east, north})`} x={MX} y={200} size={46} o={fin(f, tU - 8)} />
+      <TeX s={String.raw`\cos${FS.alpha}^\circ\approx${goldAt(f, tCv, tn(FS.cos, 3))},\ \sin${FS.alpha}^\circ\approx${goldAt(f, tSv, tn(FS.sin, 3))}`} x={MX} y={262} size={44} c={C.second} o={fin(f, tCv - 8)} />
       {/* K6 look (k6y1): the substituted rows ran past 1842 with an lhs column: formula, numbers and result on three rows each */}
       <CalcStack f={f} x={MX} y={330} size={44} maxLines={3} o={fout(f, tChk - 10)} rows={[
         { rhs: String.raw`\text{along}=u\cos\alpha+v\sin\alpha`, at: tAlF, c: ALONG_C },
         { rhs: String.raw`=${tn(FS.u)}\times${tn(FS.cos, 3, true)}+${tn(FS.v)}\times${tn(FS.sin, 3)}`, at: AT(k, 3, "we multiply"), cont: true },
-        { rhs: String.raw`\text{along}\approx${tn(FS.al_terms[0])}+${tn(FS.al_terms[1])}\approx${tn(FS.along)}\ \mathrm{m/s}`, at: tAlR, cont: true },
+        { rhs: String.raw`\text{along}\approx${tn(FS.al_terms[0])}+${tn(FS.al_terms[1])}` + tailIn(f, t94, C.ink, String.raw`\approx${tn(FS.along)}\ \mathrm{m/s}`), at: tAlR, cont: true },
       ]} />
       <CalcStack f={f} x={MX} y={530} size={44} maxLines={3} o={fout(f, tChk - 10)} rows={[
         { rhs: String.raw`\text{across}=-u\sin\alpha+v\cos\alpha`, at: tAcF, c: C.neg },
         { rhs: String.raw`=-${tn(FS.u)}\times${tn(FS.sin, 3)}+${tn(FS.v)}\times${tn(FS.cos, 3, true)}`, at: AT(k, 5, "now u goes"), cont: true },
-        { rhs: String.raw`\text{across}\approx${tn(FS.ac_terms[0])}${tn(FS.ac_terms[1])}\approx${tn(FS.across)}\ \mathrm{m/s}`, at: tAcR, cont: true, glow: pulse(f, AT(k, 6, "minus thirty one point five"), 30) },
+        { rhs: String.raw`\text{across}\approx${tn(FS.ac_terms[0])}${tn(FS.ac_terms[1])}` + tailIn(f, t315, C.ink, String.raw`\approx${tn(FS.across)}\ \mathrm{m/s}`, true), at: tAcR, cont: true },
       ]} />
+      {/* fix loop 1 (r8 review 1 S1): the two radical rows 1.9 × size tall (the second row's bar ran through the first row's baseline) */}
       <CalcStack f={f} x={MX} y={350} size={46} maxLines={3} o={fin(f, tChk)} rows={[
-        { rhs: String.raw`\text{speed}=\sqrt{\text{along}^2+\text{across}^2}`, at: tChk + 10 },
-        { rhs: String.raw`=\sqrt{${tn(FS.along)}^2+${tn(Math.abs(FS.across))}^2}=\sqrt{${FS.sq}}`, at: tChk + 24, cont: true },
-        { rhs: String.raw`\text{speed}\approx${FS.root.toFixed(1)}\approx${Math.round(FS.speed)}\ \mathrm{m/s}`, at: AT(k, 9, "square root"), cont: true },
+        { rhs: String.raw`\text{speed}=\sqrt{\text{along}^2+\text{across}^2}`, at: tChk + 10, h: 46 * 1.9 },
+        { rhs: String.raw`=\sqrt{${tn(FS.along)}^2+${tn(Math.abs(FS.across))}^2}=\sqrt{${FS.sq}}`, at: tChk + 24, cont: true, h: 46 * 1.9 },
+        { rhs: String.raw`\text{speed}\approx` + tailIn(f, t329, C.ink, String.raw`${FS.root.toFixed(1)}\approx${Math.round(FS.speed)}\ \mathrm{m/s}`), at: AT(k, 9, "square root"), cont: true },
       ]} />
       <SourceBelow text={SRC.hrrr20} pic={B} w={1400} name="s28 src" />
       <Svg><SpeedBar x={MX} y={790} w={300} hi={50} /></Svg>
@@ -273,6 +293,13 @@ const S28: React.FC = () => {
 const S29: React.FC = () => {
   const f = useCurrentFrame(), k = K("s29_stp_calc");
   const tCoast = SS(k, 1), tTan = SS(k, 2), tAl = SS(k, 3), tWind = SS(k, 4), tAc = SS(k, 5), tSum = SS(k, 6), tPlus = SS(k, 7), tAlong = SS(k, 8), tBoth = SS(k, 9);
+  // fix loop 1 (r8 review 1 S3, S8, S10, S12; review 2 S3, S5, S6, S7, S10): "≈ 160 km" on screen; every number on its word; inputs gold
+  // (cos α, sin α, the wind's speed and direction, u, v); cos / sin and u, v stay on screen while they are used; the along part gets its
+  // formula and its two products, as the across part
+  const t160 = AT(k, 0, "a hundred and sixty"), tLeg = AT(k, 1, "it moves about"), tRule = AT(k, 2, "west leg over north leg"), t7 = AT(k, 2, "seven degrees"),
+    t353 = AT(k, 2, "three hundred and fifty three"), t97 = AT(k, 3, "ninety seven"), tCv = AT(k, 3, "minus zero point one two two"), tSv = AT(k, 3, "zero point nine nine three"),
+    t19 = AT(k, 4, "nineteen metres"), tUa = AT(k, 4, "u about"), tU = AT(k, 4, "minus ten point two"), tV = AT(k, 4, "minus sixteen"),
+    t121 = AT(k, 6, "plus twelve point one"), t147 = AT(k, 8, "minus fourteen point seven");
   const Bz = boxAt(27.85, -82.72, 1.0, 80, 50, 920, 750), Bf = boxAt(27.1, -82.4, 1.72, 80, 50, 920, 750);
   const B = lerpBox(Bz, Bf, prog(f, tBoth, tBoth + 50)), P = mapP(B);
   const sp = P(CST.stp[0], CST.stp[1]), fm = P(CST.fmb[0], CST.fmb[1]);
@@ -281,6 +308,7 @@ const S29: React.FC = () => {
   const s = mix(6, 9, zoom), a = SP.alpha;
   const W = add(sp, [SP.u / Math.hypot(SP.u, SP.v), -SP.v / Math.hypot(SP.u, SP.v)], s * SP.speed);
   const Pal = add(sp, unitV(a), s * SP.along), Pac = add(sp, unitV(a + 90), s * SP.across), PacF = add(fm, unitV(FS.alpha + 90), s * FS.across);
+  const oP2 = fin(f, tWind) * fout(f, tBoth - 10);
   return (
     <Scene>
       <GeoMap id="s29m" B={B}>{(Pp) => <IanMap P={Pp} f={f} arrows={0.45} />}</GeoMap>
@@ -288,7 +316,8 @@ const S29: React.FC = () => {
         <line x1={A0[0]} y1={A0[1]} x2={B0[0]} y2={B0[1]} stroke={C.second} strokeWidth={6} opacity={fin(f, tCoast) * zoom} />
         <Place p={sp} t="Saint Petersburg" dx={18} dy={-40} />
         <Place p={fm} t="Fort Myers Beach" dx={-20} dy={-44} a="end" o={fin(f, tBoth + 30)} />
-        <g opacity={fin(f, tCoast) * zoom * fout(f, tSum - 12)}>{/* r8 K6 k6z1: the coast-leg names leave before the across label arrives */}
+        {/* fix loop 1 (r8 review 1 S3): the coast-leg names leave before the wind arrow comes in (its head sat on "Saint Pete Beach") */}
+        <g opacity={fin(f, tCoast) * zoom * fout(f, tWind - 12)}>
           <Lbl x={A0[0] - 20} y={A0[1] + 46} t="Saint Pete Beach" c={C.key} s={T.floor} a="end" />
           <Lbl x={B0[0] - 20} y={B0[1] - 10} t="Tarpon Springs" c={C.key} s={T.floor} a="end" />
         </g>
@@ -299,36 +328,46 @@ const S29: React.FC = () => {
         </g>
         <g opacity={fin(f, tSum)}>
           <AnimatedWindArrow from={sp} to={Pac} speed={Math.abs(SP.across)} f={f} c={ACROSS_C(SP.across)} px={12} head={34} />
-          <Lbl x={Pac[0] - 12} y={Pac[1] + 50} t={`across ${nf(SP.across, 1, true)}`} c={ACROSS_C(SP.across)} s={T.floor} a="end" />
+          <Lbl x={Pac[0] - 12} y={Pac[1] + 50} t={`across ${nf(SP.across, 1, true)}`} c={hiOn(f, t121) ? C.gold : ACROSS_C(SP.across)} s={T.floor} a="end" o={fin(f, t121)} />
         </g>
         <g opacity={fin(f, tAlong) * zoom}>
           <AnimatedWindArrow from={sp} to={Pal} speed={Math.abs(SP.along)} f={f} c={ALONG_C} px={12} head={34} />
-          <Lbl x={Pal[0] + 16} y={Pal[1]} t={`along ${nf(SP.along, 1)}`} c={ALONG_C} s={T.floor} />
+          <Lbl x={Pal[0] + 16} y={Pal[1]} t={`along ${nf(SP.along, 1)}`} c={ALONG_C} s={T.floor} o={fin(f, t147)} />
         </g>
         <g opacity={fin(f, tBoth + 30)}>
           <AnimatedWindArrow from={fm} to={PacF} speed={Math.abs(FS.across)} f={f} c={ACROSS_C(FS.across)} px={12} head={34} />
           <Lbl x={fm[0] - 20} y={fm[1] + 54} t={`across ${nf(FS.across, 1)}`} c={ACROSS_C(FS.across)} s={T.floor} a="end" />
         </g>
-        <Keyword f={f} text="Saint Petersburg · 20 UTC" at={[MX, 120]} s={T.floor} appear={0} out={tPlus - 20} />
+        <Keyword f={f} text={`Saint Petersburg: ≈ ${Math.round(CST.d_fs / 10) * 10} km N`} at={[MX, 120]} s={T.floor} appear={t160 - 4} out={tCoast - 20} />
+        <Keyword f={f} text="Saint Petersburg · 20 UTC" at={[MX, 120]} s={T.floor} appear={tCoast} out={tPlus - 20} />
         <Keyword f={f} text="plus: out to sea" at={[MX, 120]} s={T.key} c={C.first} appear={tPlus} out={tBoth - 20} />
         <Keyword f={f} text="opposite sides of the eye" at={[MX, 120]} s={T.floor} c={C.gold} appear={tBoth} />
         <Lbl x={MX} y={230} t="Fort Myers Beach: onto the land" c={C.neg} s={T.floor} o={fin(f, AT(k, 9, "Fort Myers Beach"))} />
         <Lbl x={MX} y={300} t="Saint Petersburg: out to sea" c={C.first} s={T.floor} o={fin(f, AT(k, 9, "at Saint Petersburg"))} />
+        <Lbl x={MX} y={198} t={`≈ ${Math.round(SP.speed)} m/s from the ${compass(SH.stp.wind.from_deg)}`} c={hiOn(f, t19) ? C.gold : C.ink} s={hiSize(f, t19, T.floor)}
+          o={win(f, t19, tBoth - 20)} />
       </Svg>
       <CalcStack f={f} x={MX} y={230} size={44} maxLines={5} o={fout(f, tWind - 10)} rows={[
-        { rhs: String.raw`\text{north}\ ${SP.dy.toFixed(1)}\ \mathrm{km},\quad \text{west}\ ${(-SP.dx).toFixed(1)}\ \mathrm{km}`, at: AT(k, 1, "kilometres north") },
-        { rhs: String.raw`\tan\beta=\dfrac{${(-SP.dx).toFixed(1)}}{${SP.dy.toFixed(1)}}\approx${SP.tan.toFixed(3)}\ \Rightarrow\ \beta\approx${SP.beta}^\circ`, at: tTan },
-        { rhs: String.raw`\text{bearing}\approx${SP.bearing}^\circ`, at: AT(k, 2, "a bearing of about"), cont: true },
-        { rhs: String.raw`\alpha=90^\circ-${SP.bearing}^\circ+360^\circ=${SP.alpha}^\circ`, at: tAl, glow: pulse(f, AT(k, 3, "ninety seven"), 30) },
-        { rhs: String.raw`\cos\alpha\approx${tn(SP.cos, 3)},\quad \sin\alpha\approx${tn(SP.sin, 3)}`, at: AT(k, 3, "with a cosine"), glow: pulse(f, AT(k, 3, "with a cosine") + 10, 40) },
+        { rhs: String.raw`\text{north}\ ${SP.dy.toFixed(1)}\ \mathrm{km},\quad \text{west}\ ${(-SP.dx).toFixed(1)}\ \mathrm{km}`, at: tLeg },
+        { rhs: String.raw`\tan\beta=\dfrac{${(-SP.dx).toFixed(1)}}{${SP.dy.toFixed(1)}}` + tailIn(f, t7, C.ink, String.raw`\approx${SP.tan.toFixed(3)}\ \Rightarrow\ \beta\approx${SP.beta}^\circ`), at: tRule },
+        { rhs: String.raw`\text{bearing}\approx${SP.bearing}^\circ`, at: t353, cont: true },
+        { rhs: String.raw`\alpha=90^\circ-${SP.bearing}^\circ+360^\circ` + tailIn(f, t97, C.ink, String.raw`=${SP.alpha}^\circ`, true), at: tAl },
+        { rhs: String.raw`\cos\alpha\approx${goldAt(f, tCv, tn(SP.cos, 3))},\quad \sin\alpha\approx${goldAt(f, tSv, tn(SP.sin, 3))}`, at: AT(k, 3, "with a cosine") },
       ]} />
-      <CalcStack f={f} x={MX} y={230} size={44} maxLines={4} o={fin(f, tWind) * fout(f, tBoth - 10)} rows={[
-        { rhs: String.raw`u=${tn(SP.u)},\ v=${tn(SP.v)}\ \mathrm{m/s}\ \ (\alpha=${SP.alpha}^\circ)`, at: tWind + 20, glow: pulse(f, AT(k, 4, "minus ten point two"), 40) },
-        { rhs: String.raw`\text{across}=-u\sin\alpha+v\cos\alpha`, at: tAc },
-        { rhs: String.raw`-u\sin\alpha=-${tn(SP.u, 1, true)}\times${tn(SP.sin, 3)}\approx${tn(SP.ac_terms[0])}`, at: AT(k, 5, "minus u sine alpha") + 10 },
+      {/* the inputs stay on screen while the two parts are worked out */}
+      <TeX s={String.raw`u=${goldAt(f, tU, tn(SP.u))},\ v=${goldAt(f, tV, tn(SP.v))}\ \mathrm{m/s}`} x={MX} y={262} size={46} o={fin(f, tU - 8) * oP2} />
+      <TeX s={String.raw`\cos${SP.alpha}^\circ\approx${tn(SP.cos, 3)},\ \sin${SP.alpha}^\circ\approx${tn(SP.sin, 3)}`} x={MX} y={324} size={44} c={C.second} o={oP2} />
+      <CalcStack f={f} x={MX} y={390} size={44} maxLines={4} o={fin(f, tAc) * fout(f, tAlong - 10)} rows={[
+        { rhs: String.raw`\text{across}=-u\sin\alpha+v\cos\alpha`, at: tAc, c: C.first },
+        { rhs: String.raw`-u\sin\alpha=-${tn(SP.u, 1, true)}\times${tn(SP.sin, 3)}\approx${tn(SP.ac_terms[0])}`, at: AT(k, 5, "minus u sine alpha") + 10, cont: true },
         { rhs: String.raw`v\cos\alpha=${tn(SP.v, 1, true)}\times${tn(SP.cos, 3, true)}\approx${tn(SP.ac_terms[1])}`, at: AT(k, 5, "and v cosine"), cont: true },
-        { rhs: String.raw`\text{across}\approx${tn(SP.ac_terms[0])}+${tn(SP.ac_terms[1])}\approx+${tn(SP.across)}\ \mathrm{m/s}`, at: tSum, glow: pulse(f, AT(k, 6, "plus twelve point one"), 30) },
-        { rhs: String.raw`\text{along}\approx${tn(SP.al_terms[0])}${tn(SP.al_terms[1])}=${tn(SP.along)}\ \mathrm{m/s}`, at: tAlong },
+        { rhs: String.raw`\text{across}\approx${tn(SP.ac_terms[0])}+${tn(SP.ac_terms[1])}` + tailIn(f, t121, C.ink, String.raw`\approx+${tn(SP.across)}\ \mathrm{m/s}`, true), at: tSum, cont: true },
+      ]} />
+      <CalcStack f={f} x={MX} y={390} size={44} maxLines={4} o={fin(f, tAlong) * fout(f, tBoth - 10)} rows={[
+        { rhs: String.raw`\text{along}=u\cos\alpha+v\sin\alpha`, at: tAlong, c: ALONG_C },
+        { rhs: String.raw`u\cos\alpha=${tn(SP.u, 1, true)}\times${tn(SP.cos, 3, true)}\approx${tn(SP.al_terms[0])}`, at: tAlong + 14, cont: true },
+        { rhs: String.raw`v\sin\alpha=${tn(SP.v, 1, true)}\times${tn(SP.sin, 3)}\approx${tn(SP.al_terms[1])}`, at: tAlong + 28, cont: true },
+        { rhs: String.raw`\text{along}\approx${tn(SP.al_terms[0])}${tn(SP.al_terms[1])}` + tailIn(f, t147, C.ink, String.raw`\approx${tn(SP.along)}\ \mathrm{m/s}`), at: Math.min(tAlong + 42, t147 - 4), cont: true },
       ]} />
       <SourceBelow text={SRC.hrrr20} pic={{ x: 80, y: 50, w: 920, h: 750 }} w={1400} name="s29 src" />
       <Svg><SpeedBar x={MX} y={790} w={300} hi={50} /></Svg>
@@ -339,7 +378,11 @@ const S29: React.FC = () => {
 // ================================================================ s30 the reasoning, before the evidence (B5)
 const S30: React.FC = () => {
   const f = useCurrentFrame(), k = K("s30_onshore_piles");
-  const tOn = SS(k, 1), tOff = SS(k, 2), tSurge = SS(k, 3), tShelf = SS(k, 4), tCm = SS(k, 5), tIan = SS(k, 6), tQ = SS(k, 7);
+  // fix loop 1 (r8 review 1 S5, review 2 S2): S6 is new (the inputs of 100 Pa / (ρ g), each gold on its word); S7 no longer reads the
+  // subtraction aloud: 941 and the normal 1013 are said, the subtraction is shown on "so the sea", the rise (gold) on its word
+  const tOn = SS(k, 1), tOff = SS(k, 2), tSurge = SS(k, 3), tShelf = SS(k, 4), tCm = SS(k, 5), tRho = SS(k, 6), tIan = SS(k, 7), tQ = SS(k, 8);
+  const tPa = AT(k, 6, "a hundred pascals"), tDen = AT(k, 6, "one thousand and twenty five"), tG = AT(k, 6, "nine point eight one"),
+    t941 = AT(k, 7, "nine hundred and forty one"), t1013 = AT(k, 7, "one thousand and thirteen"), tSea = AT(k, 7, "so the sea"), t72 = AT(k, 7, "seventy two centimetres");
   const panel = (y0: number, dir: 1 | -1, t0: number) => {
     const x0 = 120, x1 = 960, coast = 760, sea0 = y0 + 150;
     const r = prog(f, t0 + 10, t0 + 100) * 46 * dir;
@@ -392,12 +435,14 @@ const S30: React.FC = () => {
         <Lbl x={MX} y={210} t="far above the normal tide" c={C.key} s={T.floor} o={win(f, tSurge + 20, tCm - 20)} />
         <Lbl x={MX} y={270} t="the wind's push does most of it" c={C.key} s={T.floor} o={win(f, tShelf, tCm - 20)} />
         <Keyword f={f} text="low pressure: ≈ 1 cm per hPa" at={[MX, 120]} s={T.floor} c={C.local} appear={tCm} out={tQ - 20} />
-        <Lbl x={MX} y={330} t="1013 hPa: normal at sea level" c={C.local} s={T.floor} o={win(f, AT(k, 6, "normal one"), tQ - 10)} />
-        <Lbl x={MX} y={400} t={`Ian at landfall (19:05 UTC): ${SH.ian_ib.hpa} hPa`} c={C.local} s={T.floor} o={win(f, AT(k, 6, "its centre"), tQ - 10)} />
+        <Lbl x={MX} y={400} t={`Ian at landfall (19:05 UTC): ${SH.ian_ib.hpa} hPa`} c={hiOn(f, t941) ? C.gold : C.local} s={T.floor} o={win(f, t941 - 8, tQ - 10)} />
+        <Lbl x={MX} y={470} t="1013 hPa: normal at sea level" c={hiOn(f, t1013) ? C.gold : C.local} s={hiSize(f, t1013, T.floor)} o={win(f, t1013 - 8, tQ - 10)} />
         <Keyword f={f} text="what did the water do?" at={[MX, 120]} s={T.key} c={C.gold} appear={tQ} />
       </Svg>
-      <TeX s={String.raw`\dfrac{100\ \mathrm{Pa}}{1025\ \mathrm{kg/m^3}\times9.81\ \mathrm{m/s^2}}\approx0.01\ \mathrm m`} x={MX} y={225} size={44} c={C.local} o={win(f, AT(k, 5, "for every hectopascal"), tQ - 10)} glow={pulse(f, AT(k, 5, "one centimetre"), 30)} />
-      <TeX s={String.raw`1013-${SH.ian_ib.hpa}=${SH.ian_ib.deficit}\ \mathrm{hPa}\ \Rightarrow\ \text{rise}\approx${SH.ian_ib.cm_rule}\ \mathrm{cm}`} x={MX} y={480} size={44} c={C.local} o={win(f, AT(k, 6, "so the sea"), tQ - 10)} glow={pulse(f, AT(k, 6, "seventy two centimetres"), 30)} />
+      {/* fix loop 1: the fraction on S6, each input gold on its word; the 1-cm result restated at the end (said in S5) */}
+      <TeX s={String.raw`\dfrac{${goldAt(f, tPa, String.raw`100\ \mathrm{Pa}`)}}{${goldAt(f, tDen, String.raw`1025\ \mathrm{kg/m^3}`)}\times${goldAt(f, tG, String.raw`9.81\ \mathrm{m/s^2}`)}}` + tailIn(f, tG + 30, C.local, String.raw`\approx0.01\ \mathrm m`)}
+        x={MX} y={250} size={44} c={C.local} o={win(f, AT(k, 6, "by dividing"), tQ - 10)} />
+      <TeX s={String.raw`1013-${SH.ian_ib.hpa}=${SH.ian_ib.deficit}\ \mathrm{hPa}` + tailIn(f, t72, C.local, String.raw`\ \Rightarrow\ \text{rise}\approx${SH.ian_ib.cm_rule}\ \mathrm{cm}`, true)} x={MX} y={545} size={44} c={C.local} o={win(f, tSea, tQ - 10)} />
       <SourceBelow text="Sea floor: NOAA ETOPO 2022 · Ian's pressure: IBTrACS v04r01 (NHC best track)" pic={{ x: 120, y: 80, w: 840, h: 690 }} w={1400} o={oShelf} name="s30 src" />
       <SourceBelow text="Coast: Natural Earth" pic={LB} w={700} o={fin(f, tQ)} name="s30 src 2" />
     </Scene>
@@ -456,8 +501,8 @@ const S31: React.FC = () => {
         <Lbl x={Pa(CST.land_h, 0)[0] - 10} y={Pa(0, 1.1)[1]} t="landfall" c={C.gold} s={T.floor} a="end" />
         <Curve A={A} xs={G1.h} ys={G1.res} c={C.neg} w={6} upto={prog(f, tFM, tFM + 60)} />
         <Curve A={A} xs={G2.h} ys={G2.res} c={C.first} w={6} upto={prog(f, tStP, tStP + 60)} />
-        <Lbl x={pk[0] + 12} y={pk[1] + 30} t={`+${G1.ext.toFixed(1)}`} c={C.neg} s={T.floor} o={fin(f, tFM + 50)} />
-        <Lbl x={tr[0] + 12} y={tr[1] - 30} t={nf(G2.ext, 1)} c={C.first} s={T.floor} o={fin(f, tStP + 50)} />
+        <Lbl x={pk[0] + 12} y={pk[1] + 30} t={`+${G1.ext.toFixed(1)}`} c={C.neg} s={T.floor} o={fin(f, AT(k, 1, "two point two") - 4)} />
+        <Lbl x={tr[0] + 12} y={tr[1] - 30} t={nf(G2.ext, 1)} c={C.first} s={T.floor} o={fin(f, AT(k, 2, "one point eight") - 4)} />
         <g opacity={oLeg}>
           <Lbl x={A.x - 60} y={A.y + A.h + 160} t="Saint Petersburg gauge" c={C.first} s={T.floor} />
           <Lbl x={A.x - 60} y={A.y + A.h + 215} t="Fort Myers gauge (up the river)" c={C.neg} s={T.floor} />
@@ -468,7 +513,7 @@ const S31: React.FC = () => {
         <CurvedLink f={f} from={[A.x - 74, A.y + A.h + 215]} to={[mix(fmb[0], aF[0], 0.75) + 6, mix(fmb[1], aF[1], 0.75) + 12]} start={tFlip} end={tNHC - 24} bend={-20} />
         <Keyword f={f} text="the answer: tide gauges" at={[MX, 120]} s={T.key} appear={0} out={tFlip - 20} />
         <Keyword f={f} text="wind flipped, water flipped" at={[MX, 120]} s={T.floor} c={C.gold} appear={tFlip} out={tNHC - 20} />
-        <Keyword f={f} text="3-4.5 m above the ground" at={[MX, 120]} s={T.floor} c={C.local} appear={tNHC} out={tSat - 20} />
+        <Keyword f={f} text="3-4.5 m above the ground" at={[MX, 120]} s={T.floor} c={C.local} appear={AT(k, 4, "three to four")} out={tSat - 20} />{/* fix loop 1 (review 2 S6): on its words */}
         <Keyword f={f} text="what did satellites see?" at={[MX, 120]} s={T.key} appear={tSat} out={tNo - 20} />
         <Keyword f={f} text="almost nothing" at={[MX, 120]} s={T.key} appear={tNo} out={tMeas - 20} />
         <Lbl x={MX} y={830} t="peak in the evening, under cloud" c={C.key} s={T.floor} o={win(f, tWhy, tMeas - 20)} />
@@ -476,8 +521,8 @@ const S31: React.FC = () => {
         <Keyword f={f} text="more: Friction and Ekman layers" at={[MX, 120]} s={T.floor} appear={tEk} out={tMore - 20} />
         <Keyword f={f} text="more: Storm surge" at={[MX, 120]} s={T.floor} appear={tMore} />
       </Svg>
-      <TeX s={String.raw`10\ \mathrm{ft}\times0.3048\ \mathrm{m/ft}\approx3.0\ \mathrm m`} x={A.x - 60} y={A.y + A.h + 160} size={44} c={C.local} o={win(f, tNHC + 10, tSat - 10)} />
-      <TeX s={String.raw`15\ \mathrm{ft}\times0.3048\ \mathrm{m/ft}\approx4.57\ \mathrm m`} x={A.x - 60} y={A.y + A.h + 215} size={44} c={C.local} o={win(f, tNHC + 25, tSat - 10)} />
+      <TeX s={String.raw`10\ \mathrm{ft}\times0.3048\ \mathrm{m/ft}\approx3.0\ \mathrm m`} x={A.x - 60} y={A.y + A.h + 160} size={44} c={C.local} o={win(f, AT(k, 4, "ten to fifteen feet"), tSat - 10)} />
+      <TeX s={String.raw`15\ \mathrm{ft}\times0.3048\ \mathrm{m/ft}\approx4.57\ \mathrm m`} x={A.x - 60} y={A.y + A.h + 215} size={44} c={C.local} o={win(f, AT(k, 4, "ten to fifteen feet") + 14, tSat - 10)} />
       <SourceBelow text="Data: NOAA CO-OPS tide gauges · HRRR (NOAA) · NHC report" pic={B} w={920} name="s31 src" />
     </Scene>
   );
@@ -485,22 +530,45 @@ const S31: React.FC = () => {
 
 // ================================================================ s33 / s36 / s39 the across-shore wind before each flood (R14, R14b)
 type EvCfg = { id: string; nm: "amphan" | "nargis" | "idai"; latC: number; lonC: number; dlat: number; date: string; when: string; ratio: string; place: string;
-  ptName: string; ptSide: -1 | 1; sea: [number, number, string]; aName: string; bName: string };
+  ptName: string; ptSide: -1 | 1; sea: [number, number, string]; aName: string; bName: string;
+  // fix loop 1: the spoken words of each number (AT on Kokoro word times): leg, beta, bearing, alpha, cos, sin, speed, u, v, across sum,
+  // ERA5's lowest pressure, the official pressure, the rise
+  legW: string; betaW: string; brgW: string; alW: string; cosW: string; sinW: string; spW: string; uW: string; vW: string; sumW: string; eraW: string;
+  offW: string; cmW: string; ratioW: string };
 const EV_CFG: EvCfg[] = [
   { id: "s33_amphan_wind", nm: "amphan", latC: 21.75, lonC: 89.0, dlat: 3.0, date: "20 May 2020, 09 UTC", when: "Amphan · 20 May 2020 · 09 UTC", ratio: "6/10",
-    place: "Sundarbans shore, Bangladesh", ptName: "our point", ptSide: 1, sea: [20.6, 88.1, "Bay of Bengal"], aName: "", bName: "" },
+    place: "Sundarbans shore, Bangladesh", ptName: "our point", ptSide: 1, sea: [20.6, 88.1, "Bay of Bengal"], aName: "", bName: "",
+    legW: "ninety two point nine", betaW: "thirteen degrees", brgW: "two hundred and fifty seven", alW: "a hundred and ninety three",
+    cosW: "minus zero point nine seven four", sinW: "minus zero point two two five", spW: "twenty two point six", uW: "minus eight point four",
+    vW: "plus twenty one", sumW: "minus twenty two point four", eraW: "nine hundred and sixty five", offW: "nine hundred and sixty hectopascals",
+    cmW: "fifty three centimetres", ratioW: "six tenths" },
   { id: "s36_nargis_wind", nm: "nargis", latC: 16.05, lonC: 95.0, dlat: 3.0, date: "2 May 2008, 11 UTC", when: "Nargis · 2 May 2008 · 11 UTC", ratio: "half",
-    place: "delta coast, south of Bogale", ptName: "our point", ptSide: 1, sea: [15.0, 94.0, "Andaman Sea"], aName: "", bName: "" },
+    place: "delta coast, south of Bogale", ptName: "our point", ptSide: 1, sea: [15.0, 94.0, "Andaman Sea"], aName: "", bName: "",
+    legW: "sixty nine point five", betaW: "nine degrees", brgW: "two hundred and seventy nine", alW: "a hundred and seventy one",
+    cosW: "minus zero point nine eight eight", sinW: "zero point one five six", spW: "nineteen metres", uW: "plus nine point six",
+    vW: "plus sixteen point five", sumW: "minus seventeen point eight", eraW: "nine hundred and eighty two", offW: "nine hundred and sixty two",
+    cmW: "fifty one centimetres", ratioW: "about half" },
   { id: "s39_idai_wind", nm: "idai", latC: -19.8, lonC: 35.3, dlat: 2.5, date: "14 Mar 2019, 19 UTC", when: "Idai · 14 Mar 2019 · 19 UTC", ratio: "2/3",
-    place: "Beira's seafront", ptName: "Beira", ptSide: -1, sea: [-20.7, 35.9, "Mozambique Channel"], aName: "", bName: "" },
+    place: "Beira's seafront", ptName: "Beira", ptSide: -1, sea: [-20.7, 35.9, "Mozambique Channel"], aName: "", bName: "",
+    legW: "fifty two point three", betaW: "thirty four degrees", brgW: "two hundred and thirty six", alW: "two hundred and fourteen",
+    cosW: "minus zero point eight two nine", sinW: "minus zero point five five nine", spW: "twenty two metres", uW: "minus six point seven",
+    vW: "plus twenty point nine", sumW: "minus twenty one", eraW: "nine hundred and eighty one", offW: "nine hundred and fifty five",
+    cmW: "fifty eight centimetres", ratioW: "two thirds" },
 ];
 const EventWind: React.FC<{ cfg: EvCfg }> = ({ cfg }) => {
   const f = useCurrentFrame(), k = K(cfg.id);
   const E = SH[cfg.nm], S = EVS[cfg.nm];
+  // fix loop 1: the pressure is said in two sentences (ERA5's own lowest pressure at the white circle, then the official centre pressure at
+  // that hour), so the scene's sentences are found by phrase as before; "official centre" marks the official one
   const tERA = SSP(k, "universal time"), tRatio = SSP(k, "official"), tPt = SSP(k, cfg.nm === "idai" ? "seafront" : "point"), tLegs = SSP(k, "along the coast there"),
     tTan = SSP(k, " over "), tAl = SSP(k, "So alpha"), tY = SSP(k, "Then y hat prime"), tWind = SSP(k, "wind there was"), tTerms = SSP(k, "Across the shore"),
-    tSum = SSP(k, "Together"), tP = SSP(k, "lowest pressure"), tEnd = SSP(k, { amphan: "So Amphan", nargis: "So Nargis", idai: "So Idai" }[cfg.nm]);
-  const tEnd2 = tEnd > tP ? tEnd : LEN(k) - 40;
+    tSum = SSP(k, "Together"), tPE = SSP(k, "At the white circle"), tP = SSP(k, "official centre pressure");
+  // fix loop 1 (r8 review 1 S8, S9; review 2 S5, S6, S7, S12): every number on its spoken word; inputs gold (cos α, sin α, u, v, the wind's
+  // speed and direction, the pressures); the answer (across) gold
+  const tLegW = ATP(k, cfg.legW), tRule = ATP(k, " over "), tBeta = ATP(k, cfg.betaW), tBrg = ATP(k, cfg.brgW), tAlW = ATP(k, cfg.alW), tCos = ATP(k, "with a cosine"),
+    tCv = ATP(k, cfg.cosW), tSv = ATP(k, cfg.sinW), tSp = ATP(k, cfg.spW), tUa = ATP(k, "u about"), tU = ATP(k, cfg.uW), tV = ATP(k, cfg.vW),
+    tSumW = ATP(k, cfg.sumW), tEra = ATP(k, cfg.eraW), tOff = ATP(k, cfg.offW), tSea = ATP(k, "so the sea under the eye"), tCm = ATP(k, cfg.cmW),
+    tMinus = ATP(k, "minus u sine alpha"), tVcos = ATP(k, "and v cosine");
   const B = boxAt(cfg.latC, cfg.lonC, cfg.dlat, 80, 50, 920, 750), P = mapP(B);
   const pt = P(E.pt[0], E.pt[1]), A0 = P(E.A[0], E.A[1]), B0 = P(E.B[0], E.B[1]);
   const corner = P(E.A[0] + (E.B[0] - E.A[0]) * 0, E.B[1]);          // leg 1 along the parallel (east-west), leg 2 north-south
@@ -508,10 +576,17 @@ const EventWind: React.FC<{ cfg: EvCfg }> = ({ cfg }) => {
   const s = 9, a = S.alpha;
   const W = add(pt, [S.u / Math.hypot(S.u, S.v), -S.v / Math.hypot(S.u, S.v)], s * S.speed);
   const Pac = add(pt, unitV(a + 90), s * S.across);
-  const acLeft = Pac[0] - 34 - textW(`across ${nf(S.across, 1)}`, T.floor) > B.x + 12;   // k6y3: Idai's label left the map
+  // fix loop 1 (r8 review 1 S3): the across label clear of BOTH arrowheads (the white wind head touched it), left of the two tips when it fits
+  const acTxt = `across ${nf(S.across, 1)}`, xL = Math.min(Pac[0], W[0]) - 40;
+  const acLeft = xL - textW(acTxt, T.floor) > B.x + 12;   // k6y3: Idai's label left the map
   const ns = S.dy >= 0 ? "north" : "south", ew = S.dx >= 0 ? "east" : "west";
   const hit = (q: Pt) => q[0] > B.x + 10 && q[0] < B.x + B.w - 10 && q[1] > B.y + 10 && q[1] < B.y + B.h - 10;
   const sea = P(cfg.sea[0], cfg.sea[1]);
+  const spTxt = Number.isInteger(S.speed) ? S.speed.toFixed(0) : S.speed.toFixed(1);
+  const pEra = Math.round(E.pmin as number);
+  // the data behind the spoken pressures and wind (the render fails otherwise)
+  [[`${cfg.nm} ERA5 pmin`, pEra, E.hour.pmin_hpa, 0.5], [`${cfg.nm} speed`, Number(spTxt), E.hour.speed, 0.06]].forEach(([n, v, r, tol]) => {
+    if (!(Math.abs((v as number) - (r as number)) <= (tol as number))) throw new Error(`CHECK ${n}: ${v} vs ${r}`); });
   return (
     <Scene>
       <GeoMap id={`${cfg.nm}w`} B={B}>{(Pp) => <>
@@ -521,7 +596,7 @@ const EventWind: React.FC<{ cfg: EvCfg }> = ({ cfg }) => {
           return <AnimatedWindArrow key={i} from={q} to={[q[0] + u * s2, q[1] - v * s2]} speed={Math.hypot(u, v)} f={f} c={C.ink} px={4} head={16} o={0.7} />; })}
       </>}</GeoMap>
       <Svg>
-        {hit(cen) ? <g opacity={fin(f, tERA)}><circle cx={cen[0]} cy={cen[1]} r={16} fill="none" stroke={C.ink} strokeWidth={5} />
+        {hit(cen) ? <g opacity={fin(f, tERA)}><circle cx={cen[0]} cy={cen[1]} r={16 + 4 * pulse(f, tEra, 40)} fill="none" stroke={hiOn(f, tEra) ? C.gold : C.ink} strokeWidth={5} />
           </g> : null}
         <Lbl x={sea[0]} y={sea[1]} t={cfg.sea[2]} c="#8db5e2" s={T.floor} a="middle" o={fin(f, tPt)} />
         <line x1={A0[0]} y1={A0[1]} x2={B0[0]} y2={B0[1]} stroke={C.second} strokeWidth={6} opacity={fin(f, tLegs)} />
@@ -529,7 +604,8 @@ const EventWind: React.FC<{ cfg: EvCfg }> = ({ cfg }) => {
           <line x1={A0[0]} y1={A0[1]} x2={corner[0]} y2={corner[1]} stroke={C.ink} strokeWidth={4} strokeDasharray="12 8" />
           <line x1={corner[0]} y1={corner[1]} x2={B0[0]} y2={B0[1]} stroke={C.ink} strokeWidth={4} strokeDasharray="12 8" />
         </g>
-        <Place p={pt} t={cfg.ptName} dx={cfg.ptSide * 22} dy={-38} a={cfg.ptSide < 0 ? "end" : "start"} o={fin(f, tPt)} />
+        {/* fix loop 1 (r8 review 1 S3): the point's name level with the dot, on the side no arrow takes (the wind and across arrows crossed it) */}
+        <Place p={pt} t={cfg.ptName} dx={34} dy={4} a="start" o={fin(f, tPt)} />
         <g opacity={fin(f, tY)}>
           <Arrow p={pt} q={add(pt, unitV(a), 100)} color={C.second} w={6} head={24} />
           <Arrow p={pt} q={add(pt, unitV(a + 90), 100)} color={C.second} w={6} head={24} />
@@ -538,34 +614,45 @@ const EventWind: React.FC<{ cfg: EvCfg }> = ({ cfg }) => {
         <AnimatedWindArrow from={pt} to={W} speed={S.speed} f={f} c={C.ink} px={10} head={36} o={fin(f, tWind)} />
         <g opacity={fin(f, tSum)}>
           <AnimatedWindArrow from={pt} to={Pac} speed={Math.abs(S.across)} f={f} c={ACROSS_C(S.across)} px={12} head={34} />
-          <Lbl x={acLeft ? Pac[0] - 34 : Math.max(Pac[0], W[0]) + 30} y={acLeft ? Pac[1] + 34 : Math.min(Pac[1], W[1]) + 10} a={acLeft ? "end" : "start"} t={`across ${nf(S.across, 1)}`} c={ACROSS_C(S.across)} s={T.floor} />
+          <Lbl x={acLeft ? xL : Math.max(Pac[0], W[0]) + 30} y={acLeft ? Math.min(Pac[1], W[1]) + 10 : Math.min(Pac[1], W[1]) + 10} a={acLeft ? "end" : "start"} t={acTxt}
+            c={hiOn(f, tSumW) ? C.gold : ACROSS_C(S.across)} s={T.floor} o={fin(f, tSumW)} />
         </g>
         <Keyword f={f} text="which way did the wind blow?" at={[MX, 120]} s={T.floor} appear={0} out={tERA - 20} />
         <Keyword f={f} text={cfg.when} at={[MX, 120]} s={T.floor} appear={tERA} out={tSum - 20} />
         <Keyword f={f} text="onto the land" at={[MX, 120]} s={T.key} c={C.neg} appear={tSum} />
-        <Lbl x={MX} y={200} t={`ERA5 ≈ ${cfg.ratio} of official wind`} c={C.muted} s={T.floor} o={win(f, tRatio, tLegs - 10)} />
+        <Lbl x={MX} y={200} t={`ERA5 ≈ ${cfg.ratio} of official wind`} c={C.muted} s={T.floor} o={win(f, ATP(k, cfg.ratioW) - 6, tLegs - 10)} />
         <Lbl x={MX} y={200} t={cfg.place} c={C.key} s={T.floor} o={win(f, tLegs, tAl - 10)} />
         <Lbl x={MX} y={200} t={`$\\hat{\\mathbf y}'$ points out to sea`} c={C.second} s={T.floor} o={win(f, tY, tWind - 10)} />
-        <Lbl x={MX} y={690} t="white circle: ERA5's storm centre" c={C.ink} s={T.floor} o={win(f, tERA, tP - 14)} />
-        <Lbl x={MX} y={625} t={`official lowest pressure: ${E.ib.hpa} hPa`} c={C.local} s={T.floor} o={fin(f, tP)} />
+        {/* fix loop 1 (review 2 S5): the wind's speed and direction as said, gold on its word */}
+        <Lbl x={MX} y={200} t={`wind ≈ ${spTxt} m/s from the ${compass(E.hour.from_deg)}`} c={hiOn(f, tSp) ? C.gold : C.ink} s={hiSize(f, tSp, T.floor)} o={win(f, tSp, tPE - 10)} />
+        <Lbl x={MX} y={690} t="white circle: ERA5's storm centre" c={C.ink} s={T.floor} o={fin(f, tERA)} />
+        {/* fix loop 1 (review 1 S9 + review 2 S12, R14b): ERA5's own lowest pressure, then the official centre pressure at that hour */}
+        <Lbl x={MX} y={300} t="ERA5's lowest pressure" c={C.local} s={T.floor} o={fin(f, tPE)} />
+        <Lbl x={MX} y={356} t={`(white circle): ≈ ${pEra} hPa`} c={hiOn(f, tEra) ? C.gold : C.local} s={hiSize(f, tEra, T.floor)} o={fin(f, tEra - 6)} />
+        <Lbl x={MX} y={440} t="official centre pressure" c={C.local} s={T.floor} o={fin(f, tP)} />
+        <Lbl x={MX} y={496} t={`at that hour: ${E.ib.hpa} hPa`} c={hiOn(f, tOff) ? C.gold : C.local} s={hiSize(f, tOff, T.floor)} o={fin(f, tOff - 6)} />
       </Svg>
       <CalcStack f={f} x={MX} y={300} size={44} maxLines={5} o={fout(f, tWind - 10)} rows={[
-        { rhs: String.raw`\text{${ew}}\ ${Math.abs(S.dx).toFixed(1)}\ \mathrm{km},\quad \text{${ns}}\ ${Math.abs(S.dy).toFixed(1)}\ \mathrm{km}`, at: tLegs + 20 },
-        { rhs: String.raw`\tan\beta=\dfrac{${Math.min(Math.abs(S.dx), Math.abs(S.dy)).toFixed(1)}}{${Math.max(Math.abs(S.dx), Math.abs(S.dy)).toFixed(1)}}\approx${S.tan.toFixed(3)}\ \Rightarrow\ \beta\approx${S.beta}^\circ`, at: tTan },
-        { rhs: String.raw`\text{bearing}\approx${S.bearing}^\circ`, at: SSP(k, "Measured clockwise"), cont: true },
-        { rhs: String.raw`\alpha=90^\circ-${S.bearing}^\circ+360^\circ=${S.alpha}^\circ`, at: tAl, glow: pulse(f, AT(k, sc_idx(k, tAl), "is about"), 30) },
-        { rhs: String.raw`\cos\alpha\approx${tn(S.cos, 3)},\quad \sin\alpha\approx${tn(S.sin, 3)}`, at: AT(k, (sc_idx(k, tAl)), "with a cosine"), glow: pulse(f, AT(k, sc_idx(k, tAl), "with a cosine") + 10, 40) },
+        { rhs: String.raw`\text{${ew}}\ ${Math.abs(S.dx).toFixed(1)}\ \mathrm{km},\quad \text{${ns}}\ ${Math.abs(S.dy).toFixed(1)}\ \mathrm{km}`, at: tLegW },
+        { rhs: String.raw`\tan\beta=\dfrac{${Math.min(Math.abs(S.dx), Math.abs(S.dy)).toFixed(1)}}{${Math.max(Math.abs(S.dx), Math.abs(S.dy)).toFixed(1)}}` +
+          tailIn(f, tBeta, C.ink, String.raw`\approx${S.tan.toFixed(3)}\ \Rightarrow\ \beta\approx${S.beta}^\circ`), at: tRule },
+        { rhs: String.raw`\text{bearing}\approx${S.bearing}^\circ`, at: tBrg, cont: true },
+        { rhs: String.raw`\alpha=90^\circ-${S.bearing}^\circ+360^\circ` + tailIn(f, tAlW, C.ink, String.raw`=${S.alpha}^\circ`, true), at: tAl },
+        { rhs: String.raw`\cos\alpha\approx${goldAt(f, tCv, tn(S.cos, 3))},\quad \sin\alpha\approx${goldAt(f, tSv, tn(S.sin, 3))}`, at: tCos },
       ]} />
-      <CalcStack f={f} x={1076} y={300} size={44} maxLines={4} o={fin(f, tWind)} rows={[
-        { rhs: String.raw`u=${tn(S.u)},\ v=${tn(S.v)}\ \mathrm{m/s}\ \ (\alpha=${S.alpha}^\circ)`, at: tWind + 30, glow: pulse(f, AT(k, sc_idx(k, tWind), "u about"), 40) },
+      <CalcStack f={f} x={1076} y={276} size={44} maxLines={5} o={fin(f, tWind) * fout(f, tPE - 10)} rows={[
+        { rhs: String.raw`u=${goldAt(f, tU, tn(S.u))},\ v=${goldAt(f, tV, tn(S.v))}\ \mathrm{m/s}\ \ (\alpha=${S.alpha}^\circ)`, at: tU - 8 },
+        { rhs: String.raw`\cos\alpha\approx${tn(S.cos, 3)},\ \sin\alpha\approx${tn(S.sin, 3)}`, at: tU + 4, c: C.second, cont: true },
         { rhs: String.raw`\text{across}=-u\sin\alpha+v\cos\alpha`, at: tTerms },
-        { rhs: String.raw`-u\sin\alpha=-${tn(S.u, 1, true)}\times${tn(S.sin, 3, true)}\approx${tn(S.ac_terms[0])}`, at: tTerms + 10 },
-        { rhs: String.raw`v\cos\alpha=${tn(S.v)}\times${tn(S.cos, 3, true)}\approx${tn(S.ac_terms[1])}`, at: AT(k, sc_idx(k, tTerms), "and v cosine"), cont: true },
-        { rhs: String.raw`\text{across}\approx${tn(S.ac_terms[0])}${tn(S.ac_terms[1])}\approx${tn(S.across)}\ \mathrm{m/s}`, at: tSum, glow: pulse(f, AT(k, sc_idx(k, tSum), "about minus"), 30) },
+        { rhs: String.raw`-u\sin\alpha=-${tn(S.u, 1, true)}\times${tn(S.sin, 3, true)}\approx${tn(S.ac_terms[0])}`, at: tMinus + 10, cont: true },
+        { rhs: String.raw`v\cos\alpha=${tn(S.v)}\times${tn(S.cos, 3, true)}\approx${tn(S.ac_terms[1])}`, at: tVcos, cont: true },
+        { rhs: String.raw`\text{across}\approx${tn(S.ac_terms[0])}${tn(S.ac_terms[1])}` + tailIn(f, tSumW, C.ink, String.raw`\approx${tn(S.across)}\ \mathrm{m/s}`, true), at: tSum, cont: true },
       ]} />
-      <TeX s={String.raw`1013-${E.ib.hpa}=${E.ib.deficit}\ \mathrm{hPa}\ \Rightarrow\ \text{rise}\approx${E.ib.cm_rule}\ \mathrm{cm}`} x={MX} y={690} size={44} c={C.local} o={fin(f, AT(k, sc_idx(k, tP), "so the sea"))} />
+      <TeX s={String.raw`1013-${E.ib.hpa}=${E.ib.deficit}\ \mathrm{hPa}` + tailIn(f, tCm, C.local, String.raw`\ \Rightarrow\ \text{rise}\approx${E.ib.cm_rule}\ \mathrm{cm}`, true)}
+        x={MX} y={580} size={44} c={C.local} o={fin(f, tSea)} />
       <SourceBelow text={`Data: ERA5 (Copernicus C3S) · ${cfg.date} · Natural Earth`} x={80} pic={B} w={1000} name={`${cfg.id} src`} />
-      <Svg><SpeedBar x={MX} y={800} w={300} hi={30} o={fout(f, tEnd2 + 200)} /></Svg>
+      {/* fix loop 1 (r8 review 1 Must 2): the colour bar stays to the scene's last frame (the coloured map stays; no zoom here) */}
+      <Svg><SpeedBar x={MX} y={800} w={300} hi={30} /></Svg>
     </Scene>
   );
 };

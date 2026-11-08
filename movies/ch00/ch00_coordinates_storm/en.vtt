@@ -239,31 +239,37 @@ at the balloon's angle
 from Part 1, about fifty three degrees,
 
 00:04:15.311 --> 00:04:19.950
-where the cosine is zero point six
-and the sine is zero point eight.
+where the cosine is zero point six and
+the sine is zero point eight.
 
 00:04:20.300 --> 00:04:23.078
 Turn by zero point zero one radians,
 
 00:04:23.078 --> 00:04:27.400
-about half a degree, to fifty
-three point seven degrees.
+about half a degree, to
+fifty three point seven degrees.
 
-00:04:27.750 --> 00:04:33.375
-The cosine drops from zero point six
-zero zero to zero point five nine two.
+00:04:27.750 --> 00:04:31.247
+The cosine drops
+from zero point six zero zero
+
+00:04:31.247 --> 00:04:33.375
+to zero point five nine two.
 
 00:04:33.725 --> 00:04:39.225
 Its change, divided by the turn, is
 minus zero point eight: minus the sine.
 
-00:04:40.725 --> 00:04:46.125
-The sine grows from zero point eight
-zero zero to zero point eight zero six.
+00:04:40.725 --> 00:04:44.037
+The sine grows
+from zero point eight zero zero
+
+00:04:44.037 --> 00:04:46.125
+to zero point eight zero six.
 
 00:04:46.475 --> 00:04:51.275
-Its change, divided by the turn, is
-zero point six: the cosine.
+Its change, divided by the turn,
+is zero point six: the cosine.
 
 00:04:52.775 --> 00:04:54.600
 So the rule works.
@@ -346,8 +352,8 @@ First, theta hat is also
 an arrow of length one.
 
 00:06:22.975 --> 00:06:28.175
-So let's draw it from the origin too, from
-the same starting point as r hat.
+So let's draw it from the origin too,
+from the same starting point as r hat.
 
 00:06:28.525 --> 00:06:31.450
 Its tip sits on the same unit circle.
@@ -420,8 +426,8 @@ So, for a small turn, theta hat changes
 by about minus r hat times delta theta.
 
 00:07:55.300 --> 00:08:01.200
-And its rate of change with theta, d theta
-hat by d theta, is minus r hat.
+And its rate of change with theta,
+d theta hat by d theta, is minus r hat.
 
 00:08:02.000 --> 00:08:05.200
 So what does minus r hat
@@ -491,19 +497,22 @@ After a turn
 of zero point zero one radians,
 
 00:09:15.519 --> 00:09:20.450
-it's minus zero point eight zero
-six, zero point five nine two.
+it's minus zero point eight zero six,
+zero point five nine two.
 
-00:09:20.800 --> 00:09:26.575
-The change is minus zero point zero zero
-six, minus zero point zero zero eight.
+00:09:20.800 --> 00:09:24.132
+The change
+is minus zero point zero zero six,
+
+00:09:24.132 --> 00:09:26.575
+minus zero point zero zero eight.
 
 00:09:26.925 --> 00:09:29.735
 Now divide each number by delta theta,
 
 00:09:29.735 --> 00:09:33.875
-and we get minus zero point six, minus
-zero point eight.
+and we get minus zero point six,
+minus zero point eight.
 
 00:09:35.375 --> 00:09:40.575
 Now put it next to r hat, which
@@ -529,8 +538,8 @@ and the slope of cosine
 theta is minus sine theta.
 
 00:10:01.300 --> 00:10:07.175
-Together, that's minus cosine theta, minus
-sine theta: minus r hat again.
+Together, that's minus cosine theta,
+minus sine theta: minus r hat again.
 
 00:10:08.675 --> 00:10:12.026
 So here's the whole rule
@@ -633,8 +642,8 @@ Second, the old number times
 the change in the arrow:
 
 00:11:55.773 --> 00:11:59.771
-the arrow changed by minus
-zero point zero zero five,
+the arrow changed by
+minus zero point zero zero five,
 
 00:11:59.771 --> 00:12:04.675
 zero point one, so this piece
@@ -737,8 +746,8 @@ so u is ten and v is zero,
 at the balloon's point from Part 1,
 
 00:13:42.890 --> 00:13:48.100
-where cosine theta is zero point six
-and sine theta is zero point eight.
+where cosine theta is zero point six and
+sine theta is zero point eight.
 
 00:13:48.450 --> 00:13:52.683
 Multiplying the wind's
@@ -748,13 +757,13 @@ parts by the cosine and the sine,
 as the two formulas say, u sub r is
 six, and u sub theta is minus eight.
 
-00:13:59.625 --> 00:14:04.827
-Round Ian's ring, we did this at seventy
-two points, one every five degrees,
+00:13:59.625 --> 00:14:04.211
+Round Ian's ring, we did this
+at seventy two points, one every five
 
-00:14:04.827 --> 00:14:08.659
-and the average of the seventy
-two values of u sub theta
+00:14:04.211 --> 00:14:08.659
+degrees, and the average
+of the seventy two values of u sub theta
 
 00:14:08.659 --> 00:14:12.150
 is about thirty four point eight
@@ -807,2508 +816,2580 @@ Now let's put in the numbers.
 The speed, thirty four point eight
 metres per second, divided by the radius,
 
-00:15:11.504 --> 00:15:13.504
-twenty five thousand metres,
+00:15:11.504 --> 00:15:13.718
+twenty five thousand metres, is
 
-00:15:13.504 --> 00:15:18.075
-is about zero point zero zero one
-three nine radians per second.
+00:15:13.718 --> 00:15:18.075
+about zero point zero zero one three nine
+radians per second.
 
 00:15:19.575 --> 00:15:23.425
 The metres cancel, and radians
 per second are left.
 
-00:15:23.775 --> 00:15:27.621
-That's about zero point zero eight
+00:15:23.775 --> 00:15:27.292
+One radian is about
+fifty seven point three degrees,
+
+00:15:27.292 --> 00:15:31.283
+so that's about zero point zero eight
 degrees every second,
 
-00:15:27.621 --> 00:15:30.025
+00:15:31.283 --> 00:15:33.650
 or about five degrees every minute.
 
-00:15:31.525 --> 00:15:36.875
+00:15:35.150 --> 00:15:40.500
 So one full lap, two pi radians,
 takes two pi divided by this rate.
 
-00:15:37.225 --> 00:15:42.350
+00:15:40.850 --> 00:15:45.975
 That's about four thousand five hundred
 seconds, or about seventy five minutes.
 
-00:15:43.850 --> 00:15:46.575
+00:15:47.475 --> 00:15:50.200
 Next, the parcel's velocity.
 
-00:15:46.925 --> 00:15:48.575
+00:15:50.550 --> 00:15:52.200
 Why do we need it?
 
-00:15:48.925 --> 00:15:52.872
+00:15:52.550 --> 00:15:56.497
 Because acceleration is the rate
 of change of velocity,
 
-00:15:52.872 --> 00:15:55.025
+00:15:56.497 --> 00:15:58.650
 so we need the velocity first.
 
-00:15:55.375 --> 00:15:59.382
+00:15:59.000 --> 00:16:03.007
 And velocity is the rate
 of change of position: how far,
 
-00:15:59.382 --> 00:16:03.175
+00:16:03.007 --> 00:16:06.800
 and in which direction,
 the parcel moves each second.
 
-00:16:03.525 --> 00:16:08.550
+00:16:07.150 --> 00:16:12.175
 So let's write the parcel's position
 as an arrow from the centre of the eye.
 
-00:16:08.900 --> 00:16:13.325
-Its length is the distance r, and
-its direction is r hat.
+00:16:12.525 --> 00:16:16.950
+Its length is the distance r,
+and its direction is r hat.
 
-00:16:13.675 --> 00:16:16.950
+00:16:17.300 --> 00:16:20.575
 So the position arrow is r times r hat.
 
-00:16:18.450 --> 00:16:21.250
+00:16:22.075 --> 00:16:24.875
 That's just Part 1 read backwards.
 
-00:16:21.600 --> 00:16:27.575
+00:16:25.225 --> 00:16:31.200
 R hat is the arrow divided by its length,
 so the arrow is its length times r hat.
 
-00:16:27.925 --> 00:16:32.425
-For Ian's parcel, that's twenty
-five kilometres times r hat.
+00:16:31.550 --> 00:16:36.050
+For Ian's parcel, that's
+twenty five kilometres times r hat.
 
-00:16:32.775 --> 00:16:36.175
+00:16:36.400 --> 00:16:39.800
 Velocity is the rate
 of change of this arrow.
 
-00:16:36.525 --> 00:16:41.775
-It's a number, r, times an
-arrow, r hat, so we use the product rule.
+00:16:40.150 --> 00:16:45.400
+It's a number, r, times an arrow,
+r hat, so we use the product rule.
 
-00:16:42.125 --> 00:16:47.739
+00:16:45.750 --> 00:16:51.364
 The rate of change of r times r hat
 is d r by d t times r hat,
 
-00:16:47.739 --> 00:16:50.275
+00:16:51.364 --> 00:16:53.900
 plus r times d r hat by d t.
 
-00:16:51.775 --> 00:16:55.100
+00:16:55.400 --> 00:16:58.725
 Now let's simplify, one term at a time.
 
-00:16:55.450 --> 00:16:58.689
+00:16:59.075 --> 00:17:02.314
 On a ring, the distance r never changes,
 
-00:16:58.689 --> 00:17:02.900
+00:17:02.314 --> 00:17:06.525
 so d r by d t is zero, and
 the first term drops out.
 
-00:17:04.400 --> 00:17:09.050
+00:17:08.025 --> 00:17:12.675
 For the second term, we need
 how fast r hat changes in time.
 
-00:17:09.400 --> 00:17:13.625
+00:17:13.025 --> 00:17:17.250
 R hat depends on theta, and theta
 depends on time.
 
-00:17:13.975 --> 00:17:18.700
+00:17:17.600 --> 00:17:22.325
 That's a chain, so we use the chain
 rule from the derivatives movie.
 
-00:17:19.050 --> 00:17:25.075
+00:17:22.675 --> 00:17:28.700
 D r hat by d t equals d r hat
 by d theta, times d theta by d t.
 
-00:17:25.425 --> 00:17:28.875
+00:17:29.050 --> 00:17:32.500
 We've found both: theta hat, and v over r.
 
-00:17:29.225 --> 00:17:33.650
+00:17:32.850 --> 00:17:37.275
 So d r hat by d t is
 theta hat times v over r.
 
-00:17:35.150 --> 00:17:37.225
+00:17:38.775 --> 00:17:40.850
 Now multiply by r.
 
-00:17:37.575 --> 00:17:42.200
+00:17:41.200 --> 00:17:45.825
 The two r's cancel, and the velocity
 is v times theta hat.
 
-00:17:43.700 --> 00:17:47.875
+00:17:47.325 --> 00:17:51.500
 So yes: v theta hat
 is the parcel's velocity.
 
-00:17:48.225 --> 00:17:53.800
+00:17:51.850 --> 00:17:57.425
 Its size is the speed v, and its direction
 is theta hat, along the ring.
 
-00:17:54.150 --> 00:17:58.828
-For Ian's parcel, that's thirty
-four point eight metres per second,
+00:17:57.775 --> 00:18:02.453
+For Ian's parcel, that's
+thirty four point eight metres per second,
 
-00:17:58.828 --> 00:18:02.250
+00:18:02.453 --> 00:18:05.875
 along the ring,
 anticlockwise as seen from above.
 
-00:18:03.050 --> 00:18:06.000
+00:18:06.675 --> 00:18:09.625
 Now we can answer the opening question.
 
-00:18:06.350 --> 00:18:10.250
+00:18:09.975 --> 00:18:13.875
 Acceleration is the rate
 of change of velocity.
 
-00:18:10.600 --> 00:18:13.761
+00:18:14.225 --> 00:18:17.386
 So we need the rate
 of change of v theta hat,
 
-00:18:13.761 --> 00:18:16.500
+00:18:17.386 --> 00:18:20.125
 which is a number times an arrow again.
 
-00:18:16.850 --> 00:18:21.339
+00:18:20.475 --> 00:18:24.964
 By the product
 rule, it's d v by d t times theta hat,
 
-00:18:21.339 --> 00:18:24.050
+00:18:24.964 --> 00:18:27.675
 plus v times d theta hat by d t.
 
-00:18:25.550 --> 00:18:28.604
+00:18:29.175 --> 00:18:32.229
 The parcel goes round at a steady speed,
 
-00:18:28.604 --> 00:18:32.575
+00:18:32.229 --> 00:18:36.200
 so d v by d t is zero, and
 the first term drops out.
 
-00:18:34.075 --> 00:18:37.675
+00:18:37.700 --> 00:18:41.300
 For the second term, we
 use the chain rule again.
 
-00:18:38.025 --> 00:18:44.275
+00:18:41.650 --> 00:18:47.900
 D theta hat by d t equals d theta
 hat by d theta, times d theta by d t.
 
-00:18:44.625 --> 00:18:49.695
+00:18:48.250 --> 00:18:53.320
 Remember the turning arrows:
 d theta hat by d theta is minus r hat,
 
-00:18:49.695 --> 00:18:53.100
+00:18:53.320 --> 00:18:56.725
 because theta hat swings
 towards minus r hat.
 
-00:18:53.450 --> 00:18:56.525
+00:18:57.075 --> 00:19:00.150
 And d theta by d t is v over r.
 
-00:18:56.875 --> 00:19:01.775
+00:19:00.500 --> 00:19:05.400
 So d theta hat by d t is
 minus r hat, times v over r.
 
-00:19:03.275 --> 00:19:05.250
+00:19:06.900 --> 00:19:08.875
 Now multiply by v.
 
-00:19:05.600 --> 00:19:10.425
+00:19:09.225 --> 00:19:14.050
 The acceleration
 is minus v squared over r, times r hat.
 
-00:19:11.925 --> 00:19:15.801
+00:19:15.550 --> 00:19:19.426
 The minus sign means that
 it points along minus r hat:
 
-00:19:15.801 --> 00:19:18.600
+00:19:19.426 --> 00:19:22.225
 inward, towards the centre of the ring.
 
-00:19:18.950 --> 00:19:22.006
+00:19:22.575 --> 00:19:25.631
 An acceleration that
 points to the centre of
 
-00:19:22.006 --> 00:19:25.200
+00:19:25.631 --> 00:19:28.825
 a circle
 is called a centripetal acceleration.
 
-00:19:25.550 --> 00:19:27.575
+00:19:29.175 --> 00:19:31.200
 Let's check the units.
 
-00:19:27.925 --> 00:19:31.675
+00:19:31.550 --> 00:19:35.300
 V squared is in metres
 squared per second squared.
 
-00:19:32.025 --> 00:19:36.375
+00:19:35.650 --> 00:19:40.000
 Dividing by r, in metres, leaves
 metres per second squared,
 
-00:19:36.375 --> 00:19:39.250
+00:19:40.000 --> 00:19:42.875
 which are the units of an acceleration.
 
-00:19:40.750 --> 00:19:43.355
+00:19:44.375 --> 00:19:46.980
 If you skipped, here's what to keep:
 
-00:19:43.355 --> 00:19:46.684
+00:19:46.980 --> 00:19:50.309
 an air parcel going
 round a circle at a steady
 
-00:19:46.684 --> 00:19:50.303
+00:19:50.309 --> 00:19:53.928
 speed v is always accelerating
 towards the centre,
 
-00:19:50.303 --> 00:19:51.750
+00:19:53.928 --> 00:19:55.375
 by v squared over r.
 
-00:19:52.100 --> 00:19:54.650
+00:19:55.725 --> 00:19:58.275
 So how big is it for Ian's parcel?
 
-00:19:55.000 --> 00:20:00.483
+00:19:58.625 --> 00:20:04.108
 For Ian's ring, we square the speed,
 thirty four point eight metres per second,
 
-00:20:00.483 --> 00:20:04.300
-then divide by the radius, twenty
-five thousand metres.
+00:20:04.108 --> 00:20:07.925
+then divide by the radius,
+twenty five thousand metres.
 
-00:20:04.650 --> 00:20:09.525
-That gives about zero point zero
-four eight metres per second squared.
+00:20:08.275 --> 00:20:11.313
+That gives about
+zero point zero four eight
 
-00:20:11.025 --> 00:20:16.139
+00:20:11.313 --> 00:20:13.150
+metres per second squared.
+
+00:20:14.650 --> 00:20:19.764
 Rounding the speed to thirty five
 gives about zero point zero four nine,
 
-00:20:16.139 --> 00:20:17.275
+00:20:19.764 --> 00:20:20.900
 almost the same.
 
-00:20:18.775 --> 00:20:20.475
+00:20:22.400 --> 00:20:24.100
 Is that big?
 
-00:20:20.825 --> 00:20:24.945
+00:20:24.450 --> 00:20:28.570
 Gravity is nine point eight one
 metres per second squared,
 
-00:20:24.945 --> 00:20:28.000
-so this is about two
-hundred times smaller.
+00:20:28.570 --> 00:20:31.625
+so this is about
+two hundred times smaller.
 
-00:20:29.500 --> 00:20:31.550
+00:20:33.125 --> 00:20:35.175
 But it acts all the time.
 
-00:20:31.900 --> 00:20:35.090
+00:20:35.525 --> 00:20:38.715
 A car with this acceleration
 would take about ten
 
-00:20:35.090 --> 00:20:38.150
+00:20:38.715 --> 00:20:41.775
 minutes to reach a hundred
 kilometres per hour.
 
-00:20:39.650 --> 00:20:42.336
+00:20:43.275 --> 00:20:45.961
 Here, instead of making the parcel faster,
 
-00:20:42.336 --> 00:20:45.725
+00:20:45.961 --> 00:20:49.350
 all of it goes into turning
 the parcel round the eye.
 
-00:20:46.525 --> 00:20:50.325
+00:20:50.150 --> 00:20:53.950
 So how can a steady speed
 still mean an acceleration?
 
-00:20:50.675 --> 00:20:54.250
+00:20:54.300 --> 00:20:57.875
 The answer is that velocity
 is more than speed.
 
-00:20:54.600 --> 00:20:57.925
+00:20:58.225 --> 00:21:01.550
 Velocity is speed and direction together.
 
-00:20:58.275 --> 00:21:02.325
+00:21:01.900 --> 00:21:05.950
 Let's see it with two velocity
 arrows, one minute apart.
 
-00:21:02.675 --> 00:21:06.980
+00:21:06.300 --> 00:21:10.605
 In one minute, theta grows by
 its rate times sixty seconds:
 
-00:21:06.980 --> 00:21:11.650
+00:21:10.605 --> 00:21:15.275
 about zero point zero eight four
 radians, or about five degrees.
 
-00:21:13.150 --> 00:21:17.194
+00:21:16.775 --> 00:21:20.819
 Both arrows are thirty four point eight
 metres per second long,
 
-00:21:17.194 --> 00:21:20.275
+00:21:20.819 --> 00:21:23.900
 but they point in slightly
 different directions.
 
-00:21:20.625 --> 00:21:23.425
+00:21:24.250 --> 00:21:27.050
 Now slide them so that their tails touch.
 
-00:21:23.775 --> 00:21:28.775
+00:21:27.400 --> 00:21:32.400
 The short arrow from the first tip
 to the second is the change in velocity.
 
-00:21:29.125 --> 00:21:31.275
+00:21:32.750 --> 00:21:34.900
 It points towards the eye.
 
-00:21:32.775 --> 00:21:34.500
+00:21:36.400 --> 00:21:38.125
 How long is it?
 
-00:21:34.850 --> 00:21:39.345
+00:21:38.475 --> 00:21:42.970
 Its two ends lie on a circle
 of radius thirty four point eight,
 
-00:21:39.345 --> 00:21:40.700
+00:21:42.970 --> 00:21:44.325
 a small turn apart.
 
-00:21:41.050 --> 00:21:43.963
+00:21:44.675 --> 00:21:47.588
 So by the arc rule, radius times angle,
 
-00:21:43.963 --> 00:21:47.250
+00:21:47.588 --> 00:21:50.875
 it's about two point nine
 metres per second.
 
-00:21:48.750 --> 00:21:50.497
-Divide by sixty seconds,
+00:21:52.375 --> 00:21:54.413
+Divide by sixty seconds, and
 
-00:21:50.497 --> 00:21:55.591
-and we get about zero point zero
-four eight metres per second squared:
+00:21:54.413 --> 00:21:59.216
+we get about zero point zero four eight
+metres per second squared:
 
-00:21:55.591 --> 00:21:59.375
+00:21:59.216 --> 00:22:03.000
 the same acceleration,
 found with no formula at all.
 
-00:22:00.875 --> 00:22:03.729
+00:22:04.500 --> 00:22:07.354
 So a steady speed means no acceleration
 
-00:22:03.729 --> 00:22:06.875
+00:22:07.354 --> 00:22:10.500
 only when the direction
 stays the same too.
 
-00:22:07.225 --> 00:22:10.625
+00:22:10.850 --> 00:22:14.250
 Something must push the parcel
 inward all the time.
 
-00:22:10.975 --> 00:22:14.760
+00:22:14.600 --> 00:22:18.385
 In a tropical cyclone,
 that push is the pressure force,
 
-00:22:14.760 --> 00:22:17.650
+00:22:18.385 --> 00:22:21.275
 because the pressure is lowest in the eye.
 
-00:22:18.000 --> 00:22:23.226
-The Earth's spin pushes the other way, a
-little outward, about twenty times weaker,
+00:22:21.625 --> 00:22:25.365
+The Earth's spin pushes
+the other way, a little outward:
 
-00:22:23.226 --> 00:22:28.200
+00:22:25.365 --> 00:22:28.971
+that push is the speed times
+the Coriolis parameter f,
+
+00:22:28.971 --> 00:22:31.776
+which comes from the Earth's spin rate and
+
+00:22:31.776 --> 00:22:35.650
+Ian's latitude, about
+twenty six and a half degrees north.
+
+00:22:36.000 --> 00:22:37.895
+It's about twenty times weaker,
+
+00:22:37.895 --> 00:22:42.725
 so the pressure force has to be a little
 stronger than the turning alone needs.
 
-00:22:28.550 --> 00:22:33.537
+00:22:43.075 --> 00:22:48.062
 How winds balance these pushes has
 its own movie later in this series:
 
-00:22:33.537 --> 00:22:35.175
+00:22:48.062 --> 00:22:49.700
 Wind on weather charts.
 
-00:22:35.525 --> 00:22:40.046
+00:22:50.050 --> 00:22:54.571
 And if you rode with the parcel, you'd
 feel this as a push outward,
 
-00:22:40.046 --> 00:22:45.175
+00:22:54.571 --> 00:22:59.700
 called the centrifugal force, which
 also has its own movie: Circular motion.
 
-00:22:45.975 --> 00:22:48.750
+00:23:00.500 --> 00:23:03.275
 So far, our storm has been flat.
 
-00:22:49.100 --> 00:22:52.075
+00:23:03.625 --> 00:23:06.600
 But a real tropical cyclone is tall.
 
-00:22:52.425 --> 00:22:55.400
+00:23:06.950 --> 00:23:09.925
 Near the sea, the air spirals in.
 
-00:22:55.750 --> 00:23:00.925
+00:23:10.275 --> 00:23:15.450
 Close to the eye, it rises in a ring
 of towering clouds called the eyewall.
 
-00:23:01.275 --> 00:23:06.750
+00:23:15.800 --> 00:23:21.275
 And near the top, about twelve to fifteen
 kilometres up, it flows out again.
 
-00:23:07.100 --> 00:23:08.669
+00:23:21.625 --> 00:23:23.194
 Here's Ian from above,
 
-00:23:08.669 --> 00:23:13.375
+00:23:23.194 --> 00:23:27.900
 seen by a weather satellite at six
 in the evening, universal time.
 
-00:23:13.725 --> 00:23:16.252
+00:23:28.250 --> 00:23:30.777
 The clear hole in the middle is the eye,
 
-00:23:16.252 --> 00:23:19.600
+00:23:30.777 --> 00:23:34.125
 and the ring of bright cloud
 round it is the eyewall.
 
-00:23:19.950 --> 00:23:23.834
+00:23:34.475 --> 00:23:38.359
 On the flat map, polar
 coordinates use two numbers:
 
-00:23:23.834 --> 00:23:26.500
+00:23:38.359 --> 00:23:41.025
 the distance r and the angle theta.
 
-00:23:26.850 --> 00:23:30.075
+00:23:41.375 --> 00:23:44.600
 To describe a tall storm, we
 add a third number:
 
-00:23:30.075 --> 00:23:33.300
+00:23:44.600 --> 00:23:47.825
 the height z, measured
 straight up from the sea.
 
-00:23:33.650 --> 00:23:38.941
+00:23:48.175 --> 00:23:53.466
 Polar coordinates plus this height
 are called cylindrical coordinates:
 
-00:23:38.941 --> 00:23:40.075
+00:23:53.466 --> 00:23:54.600
 r, theta and z.
 
-00:23:40.425 --> 00:23:45.924
+00:23:54.950 --> 00:24:00.449
 Nothing else changes: r and theta mean
 exactly what they meant in Part 1,
 
-00:23:45.924 --> 00:23:52.100
+00:24:00.449 --> 00:24:06.625
 so x is still r cosine theta, y is still
 r sine theta, and z is simply the height.
 
-00:23:52.450 --> 00:23:53.459
-That's because
+00:24:06.975 --> 00:24:09.317
+They're called cylindrical because
 
-00:23:53.459 --> 00:23:58.650
+00:24:09.317 --> 00:24:14.275
 all the places at one distance r form
 a cylinder round the storm's axis.
 
-00:23:59.450 --> 00:24:03.525
+00:24:15.075 --> 00:24:19.150
 In cylindrical coordinates,
 the wind has three parts.
 
-00:24:03.875 --> 00:24:08.725
+00:24:19.500 --> 00:24:24.350
 The radial wind, u sub r, points
 along r hat: in or out.
 
-00:24:09.075 --> 00:24:14.575
+00:24:24.700 --> 00:24:30.200
 The tangential wind, u sub theta, points
 along theta hat: round the eye.
 
-00:24:14.925 --> 00:24:19.625
+00:24:30.550 --> 00:24:35.250
 And the vertical wind, w, points
 along z hat: up or down.
 
-00:24:19.975 --> 00:24:24.643
+00:24:35.600 --> 00:24:40.268
 Written as one arrow, the wind
 is u sub r times r hat,
 
-00:24:24.643 --> 00:24:29.225
+00:24:40.268 --> 00:24:44.850
 plus u sub theta times theta
 hat, plus w times z hat.
 
-00:24:29.575 --> 00:24:32.117
+00:24:45.200 --> 00:24:47.742
 Z hat points straight up everywhere,
 
-00:24:32.117 --> 00:24:36.425
+00:24:47.742 --> 00:24:52.050
 just like x hat points east
 everywhere, so z hat never turns.
 
-00:24:36.775 --> 00:24:42.800
+00:24:52.400 --> 00:24:58.425
 Only r hat and theta hat turn as we go
 round, by the same rules we found today.
 
-00:24:43.150 --> 00:24:48.050
+00:24:58.775 --> 00:25:03.675
 So everything we've learned about turning
 arrows works in three dimensions too.
 
-00:24:48.850 --> 00:24:52.857
+00:25:04.475 --> 00:25:08.482
 Before we look inside Ian, let's
 check where its eye really was,
 
-00:24:52.857 --> 00:24:55.925
+00:25:08.482 --> 00:25:11.550
 because different instruments
 see it differently.
 
-00:24:56.275 --> 00:25:01.350
+00:25:11.900 --> 00:25:16.975
 A weather radar on the coast near Tampa
 measures the rain round the storm.
 
-00:25:01.700 --> 00:25:07.050
+00:25:17.325 --> 00:25:22.675
 At six in the evening, its picture
 shows a ring of heavy rain, the eyewall,
 
-00:25:07.050 --> 00:25:11.900
+00:25:22.675 --> 00:25:27.525
 about thirty kilometres in radius, round
 an eye with almost no rain.
 
-00:25:12.250 --> 00:25:15.275
+00:25:27.875 --> 00:25:30.900
 This is the best picture
 of where the eye was.
 
-00:25:16.775 --> 00:25:22.264
+00:25:32.400 --> 00:25:37.889
 The weather model analysis that gives us
 Ian's winds in three dimensions puts its
 
-00:25:22.264 --> 00:25:27.550
+00:25:37.889 --> 00:25:43.175
 own calm centre about seventeen kilometres
 west-south-west of the radar's eye.
 
-00:25:27.900 --> 00:25:32.053
-And its lowest pressure is nine
-hundred and sixty hectopascals,
+00:25:43.525 --> 00:25:47.678
+And its lowest pressure
+is nine hundred and sixty hectopascals,
 
-00:25:32.053 --> 00:25:36.075
+00:25:47.678 --> 00:25:51.700
 while the official estimate
 is nine hundred and thirty eight.
 
-00:25:37.575 --> 00:25:41.675
+00:25:53.200 --> 00:25:57.300
 So the model is close, but a little
 off, and a little too weak.
 
-00:25:42.025 --> 00:25:46.320
+00:25:57.650 --> 00:26:01.945
 That's normal: a model with grid
 points every three kilometres
 
-00:25:46.320 --> 00:25:49.700
+00:26:01.945 --> 00:26:05.325
 can't hold the sharpest
 part of a storm exactly.
 
-00:25:50.050 --> 00:25:51.900
+00:26:05.675 --> 00:26:07.525
 So here's our rule.
 
-00:25:52.250 --> 00:25:56.200
+00:26:07.875 --> 00:26:11.825
 For where the eye is, we use
 the radar and the satellite.
 
-00:25:56.550 --> 00:26:01.575
+00:26:12.175 --> 00:26:17.200
 For the winds, we use the model,
 measured round the model's own centre.
 
-00:26:02.375 --> 00:26:05.900
+00:26:18.000 --> 00:26:21.525
 Now let's look inside Ian, layer by layer.
 
-00:26:06.250 --> 00:26:09.606
+00:26:21.875 --> 00:26:25.231
 Weather models store
 the wind on pressure levels:
 
-00:26:09.606 --> 00:26:12.756
+00:26:25.231 --> 00:26:28.381
 surfaces where the air
 pressure has one value,
 
-00:26:12.756 --> 00:26:15.975
-like nine hundred and twenty
-five hectopascals.
+00:26:28.381 --> 00:26:31.600
+like nine hundred and twenty five
+hectopascals.
 
-00:26:16.325 --> 00:26:18.629
+00:26:31.950 --> 00:26:34.254
 Since the pressure drops as we go up,
 
-00:26:18.629 --> 00:26:22.800
+00:26:34.254 --> 00:26:38.425
 each level sits at a height, and we'll
 write that height beside it.
 
-00:26:23.150 --> 00:26:28.575
-Here are five layers round Ian's eye, from
-the model, at six in the evening.
+00:26:38.775 --> 00:26:44.200
+Here are five layers round Ian's eye,
+from the model, at six in the evening.
 
-00:26:28.925 --> 00:26:33.200
+00:26:44.550 --> 00:26:48.825
 Each layer is a square about
 five hundred kilometres across.
 
-00:26:33.550 --> 00:26:37.827
-The lowest is at nine hundred
-and twenty five hectopascals,
+00:26:49.175 --> 00:26:53.452
+The lowest is at
+nine hundred and twenty five hectopascals,
 
-00:26:37.827 --> 00:26:40.800
+00:26:53.452 --> 00:26:56.425
 about seven hundred metres above the sea.
 
-00:26:41.150 --> 00:26:43.613
+00:26:56.775 --> 00:26:59.238
 We don't use a lower level, because near
 
-00:26:43.613 --> 00:26:48.478
+00:26:59.238 --> 00:27:04.103
 the eye the pressure at the sea surface
 was below nine hundred and seventy five
 
-00:26:48.478 --> 00:26:52.050
+00:27:04.103 --> 00:27:07.675
 hectopascals, so that level
 would lie under the sea there.
 
-00:26:52.400 --> 00:26:55.620
-Then come eight hundred
-and fifty hectopascals,
+00:27:08.025 --> 00:27:11.245
+Then come
+eight hundred and fifty hectopascals,
 
-00:26:55.620 --> 00:26:58.977
+00:27:11.245 --> 00:27:14.602
 about one point four
 kilometres up, five hundred,
 
-00:26:58.977 --> 00:27:03.019
+00:27:14.602 --> 00:27:18.644
 about six kilometres, two hundred,
 about twelve kilometres,
 
-00:27:03.019 --> 00:27:06.650
+00:27:18.644 --> 00:27:22.275
 and one hundred and fifty, about
 fourteen kilometres.
 
-00:27:08.150 --> 00:27:12.425
+00:27:23.775 --> 00:27:28.050
 The colour on each layer
 is the radial wind, u sub r.
 
-00:27:12.775 --> 00:27:17.800
+00:27:28.400 --> 00:27:33.425
 Rose, with a minus sign, means that
 the air flows in, towards the eye.
 
-00:27:18.150 --> 00:27:21.775
+00:27:33.775 --> 00:27:37.400
 Blue, with a plus sign, means
 that it flows out.
 
-00:27:22.125 --> 00:27:27.975
+00:27:37.750 --> 00:27:43.600
 Pale means neither, and a dark line marks
 where the radial wind is exactly zero.
 
-00:27:28.325 --> 00:27:30.438
+00:27:43.950 --> 00:27:46.063
 We drew the layers evenly spaced,
 
-00:27:30.438 --> 00:27:35.175
+00:27:46.063 --> 00:27:50.800
 and much farther apart than they really
 are, so that we can read each one.
 
-00:27:35.975 --> 00:27:39.561
+00:27:51.600 --> 00:27:55.186
 Let's light the layers one
 at a time, from the bottom up,
 
-00:27:39.561 --> 00:27:43.650
+00:27:55.186 --> 00:27:59.275
 and read each one on a ring a hundred
 kilometres from the centre.
 
-00:27:44.000 --> 00:27:47.593
+00:27:59.625 --> 00:28:03.218
 On the lowest layer, about
 seven hundred metres up,
 
-00:27:47.593 --> 00:27:50.200
+00:28:03.218 --> 00:28:05.825
 the air flows in on most of the ring.
 
-00:27:50.550 --> 00:27:54.838
+00:28:06.175 --> 00:28:10.463
 Round the ring, the radial wind
 averages about minus six and
 
-00:27:54.838 --> 00:27:56.625
+00:28:10.463 --> 00:28:12.250
 a half metres per second.
 
-00:27:58.125 --> 00:28:01.700
+00:28:13.750 --> 00:28:17.325
 At one point four kilometres,
 it's almost zero.
 
-00:28:02.050 --> 00:28:07.375
+00:28:17.675 --> 00:28:23.000
 At six and at twelve kilometres,
 it's a little positive, about plus one.
 
-00:28:07.725 --> 00:28:11.102
+00:28:23.350 --> 00:28:26.727
 And at fourteen kilometres,
 the sign has flipped:
 
-00:28:11.102 --> 00:28:15.650
-the air flows out, at about plus six
-and a half metres per second.
+00:28:26.727 --> 00:28:31.275
+the air flows out, at about
+plus six and a half metres per second.
 
-00:28:17.150 --> 00:28:21.350
+00:28:32.775 --> 00:28:36.975
 So the air comes in near
 the bottom, and goes out near the top.
 
-00:28:21.700 --> 00:28:25.850
+00:28:37.325 --> 00:28:41.475
 Now let's swing round
 the stack, to see it from another side.
 
-00:28:26.200 --> 00:28:29.434
+00:28:41.825 --> 00:28:45.059
 And here's one short, closer
 look from the side,
 
-00:28:29.434 --> 00:28:32.600
+00:28:45.059 --> 00:28:48.225
 just above the sea,
 looking up past the layers.
 
-00:28:33.400 --> 00:28:35.389
+00:28:49.025 --> 00:28:51.014
 Five layers still leave gaps,
 
-00:28:35.389 --> 00:28:39.025
+00:28:51.014 --> 00:28:54.650
 and cylindrical coordinates
 give us a neater picture.
 
-00:28:39.375 --> 00:28:43.002
+00:28:55.000 --> 00:28:58.627
 On every level, we can
 average round each ring,
 
-00:28:43.002 --> 00:28:46.475
+00:28:58.627 --> 00:29:02.100
 just as we averaged
 round one ring in Part 1.
 
-00:28:46.825 --> 00:28:51.003
+00:29:02.450 --> 00:29:06.628
 An average round a ring depends
 only on the distance r and
 
-00:28:51.003 --> 00:28:55.325
+00:29:06.628 --> 00:29:10.950
 the height z, because going all
 the way round removes theta.
 
-00:28:56.825 --> 00:28:59.630
+00:29:12.450 --> 00:29:15.255
 So we can draw the whole
 storm on one slice,
 
-00:28:59.630 --> 00:29:04.475
+00:29:15.255 --> 00:29:20.100
 with the distance from the centre along
 the bottom, and the height going up.
 
-00:29:04.825 --> 00:29:07.925
+00:29:20.450 --> 00:29:23.550
 This picture
 is called a radius-height section.
 
-00:29:08.275 --> 00:29:11.753
+00:29:23.900 --> 00:29:27.378
 Each colour is a ring
 average of the radial wind,
 
-00:29:11.753 --> 00:29:14.450
+00:29:27.378 --> 00:29:30.075
 now from all nine levels of the model.
 
-00:29:14.800 --> 00:29:18.625
+00:29:30.425 --> 00:29:34.250
 Near the sea, there's a thin
 layer of strong inflow.
 
-00:29:18.975 --> 00:29:23.692
+00:29:34.600 --> 00:29:39.317
 Its strongest ring average is about
 minus sixteen metres per second,
 
-00:29:23.692 --> 00:29:28.200
+00:29:39.317 --> 00:29:43.825
 thirty kilometres from the centre, about
 seven hundred metres up.
 
-00:29:29.700 --> 00:29:32.884
+00:29:45.325 --> 00:29:48.509
 Near the top, from about
 twelve kilometres up,
 
-00:29:32.884 --> 00:29:37.175
+00:29:48.509 --> 00:29:52.800
 the air flows out, at up to about
 plus nine metres per second.
 
-00:29:38.675 --> 00:29:41.725
+00:29:54.300 --> 00:29:57.350
 The dark lines show the tangential wind.
 
-00:29:42.075 --> 00:29:46.625
+00:29:57.700 --> 00:30:02.250
 Its strongest ring average is about
 fifty five metres per second,
 
-00:29:46.625 --> 00:29:51.875
+00:30:02.250 --> 00:30:07.500
 also thirty kilometres from the centre,
 about one point four kilometres up.
 
-00:29:53.375 --> 00:29:55.809
+00:30:09.000 --> 00:30:11.434
 It's weaker right at the sea surface,
 
-00:29:55.809 --> 00:29:59.625
+00:30:11.434 --> 00:30:15.250
 where the sea slows the air, and it
 gets weaker higher up.
 
-00:29:59.975 --> 00:30:01.850
+00:30:15.600 --> 00:30:17.475
 Here's a quick check.
 
-00:30:02.200 --> 00:30:07.288
+00:30:17.825 --> 00:30:22.913
 Air flows in through the side
 of a cylinder thirty kilometres in radius,
 
-00:30:07.288 --> 00:30:12.375
+00:30:22.913 --> 00:30:28.000
 in a layer about one kilometre
 deep, at about sixteen metres per second.
 
-00:30:12.725 --> 00:30:16.193
+00:30:28.350 --> 00:30:31.818
 All of it has to leave
 through the cylinder's lid,
 
-00:30:16.193 --> 00:30:19.869
+00:30:31.818 --> 00:30:35.494
 which is a much bigger
 area, so it rises more slowly:
 
-00:30:19.869 --> 00:30:22.574
+00:30:35.494 --> 00:30:38.199
 twice the depth times the inflow speed,
 
-00:30:22.574 --> 00:30:26.250
+00:30:38.199 --> 00:30:41.875
 divided by the radius, is about
 one metre per second.
 
-00:30:27.750 --> 00:30:31.354
+00:30:43.375 --> 00:30:46.951
 And radar on a hurricane-hunter
 aircraft measured it:
 
-00:30:31.354 --> 00:30:33.395
+00:30:46.951 --> 00:30:48.975
 about three metres per second,
 
-00:30:33.395 --> 00:30:37.475
+00:30:48.975 --> 00:30:53.225
 eight and a half kilometres
-up, with single towers near ten.
+up, with single towers near twelve.
 
-00:30:38.975 --> 00:30:42.175
+00:30:54.725 --> 00:30:57.925
 It rises in the eyewall, close to the eye.
 
-00:30:42.525 --> 00:30:47.382
+00:30:58.275 --> 00:31:03.132
 In, up and out: that's a tropical
 cyclone's overturning circulation,
 
-00:30:47.382 --> 00:30:51.025
+00:31:03.132 --> 00:31:06.775
 and cylindrical coordinates
 show it in one picture.
 
-00:30:51.375 --> 00:30:54.252
+00:31:07.125 --> 00:31:10.002
 How a tropical cyclone keeps this engine
 
-00:30:54.252 --> 00:30:57.633
+00:31:10.002 --> 00:31:13.383
 running has its own movie
 later in this series:
 
-00:30:57.633 --> 00:30:59.575
+00:31:13.383 --> 00:31:15.325
 How tropical cyclones form.
 
-00:31:00.375 --> 00:31:04.732
+00:31:16.125 --> 00:31:20.482
 Now let's meet our second
 storm, on the other side of the world,
 
-00:31:04.732 --> 00:31:07.387
+00:31:20.482 --> 00:31:23.137
 in the Bay of Bengal, between India and
 
-00:31:07.387 --> 00:31:10.450
+00:31:23.137 --> 00:31:26.200
 Myanmar, with Bangladesh
 at its northern end.
 
-00:31:10.800 --> 00:31:15.325
+00:31:26.550 --> 00:31:31.075
 Remember, here a tropical cyclone
 is simply called a cyclone.
 
-00:31:15.675 --> 00:31:20.500
+00:31:31.425 --> 00:31:36.250
 In May twenty twenty, Cyclone Amphan
 formed in the south of the Bay.
 
-00:31:20.850 --> 00:31:22.562
+00:31:36.600 --> 00:31:38.312
 On the eighteenth of May,
 
-00:31:22.562 --> 00:31:27.971
+00:31:38.312 --> 00:31:43.721
 its winds reached the top class on the
 India Meteorological Department's scale,
 
-00:31:27.971 --> 00:31:30.025
+00:31:43.721 --> 00:31:45.775
 called a super cyclonic storm.
 
-00:31:30.375 --> 00:31:36.075
+00:31:46.125 --> 00:31:51.825
 No storm in the Bay of Bengal had reached
 that class since nineteen ninety nine.
 
-00:31:36.425 --> 00:31:42.050
+00:31:52.175 --> 00:31:57.800
 That class measures only the strongest
 wind over the sea, not the harm on land.
 
-00:31:42.400 --> 00:31:46.134
+00:31:58.150 --> 00:32:01.884
 In between, weaker storms
 hit Bangladesh very hard:
 
-00:31:46.134 --> 00:31:48.917
+00:32:01.884 --> 00:32:04.667
 Cyclone Sidr in two thousand and seven
 
-00:31:48.917 --> 00:31:53.969
+00:32:04.667 --> 00:32:09.719
 killed thousands of people, and Cyclone
 Aila in two thousand and nine
 
-00:31:53.969 --> 00:31:56.825
+00:32:09.719 --> 00:32:12.575
 flooded Khulna and Satkhira for months.
 
-00:31:57.175 --> 00:32:00.620
-On the twentieth, it came
-ashore in the Sundarbans,
+00:32:12.925 --> 00:32:17.126
+On the twentieth of May, Amphan
+came ashore in the Sundarbans,
 
-00:32:00.620 --> 00:32:03.728
+00:32:17.126 --> 00:32:20.243
 the huge mangrove forest
 on the border between
 
-00:32:03.728 --> 00:32:06.700
+00:32:20.243 --> 00:32:23.225
 India's state of West
 Bengal and Bangladesh.
 
-00:32:07.050 --> 00:32:10.300
+00:32:23.575 --> 00:32:26.825
 Its centre then passed close to Kolkata.
 
-00:32:10.650 --> 00:32:14.542
+00:32:27.175 --> 00:32:31.067
 It passed about forty five
 kilometres west of Satkhira,
 
-00:32:14.542 --> 00:32:19.425
+00:32:31.067 --> 00:32:35.950
 and about seventy nine kilometres
 west of Khulna, both in Bangladesh.
 
-00:32:19.775 --> 00:32:25.000
+00:32:36.300 --> 00:32:41.525
 So the Khulna and Satkhira districts
 of Bangladesh took much of its flooding.
 
-00:32:25.800 --> 00:32:28.562
+00:32:42.325 --> 00:32:45.088
 Here's Amphan on the eighteenth of May,
 
-00:32:28.562 --> 00:32:32.175
+00:32:45.088 --> 00:32:48.700
 two days before landfall,
 seen by a NASA satellite.
 
-00:32:32.525 --> 00:32:37.275
+00:32:49.050 --> 00:32:53.800
 In the middle of its clouds
 is a tiny clear dot: a pinhole eye.
 
-00:32:37.625 --> 00:32:42.283
+00:32:54.150 --> 00:32:58.808
 It's the same shape as Ian, a round
 storm turning round a calm eye,
 
-00:32:42.283 --> 00:32:45.550
+00:32:58.808 --> 00:33:02.075
 so the same cylindrical
 coordinates fit it too.
 
-00:32:46.350 --> 00:32:50.225
+00:33:02.875 --> 00:33:06.750
 Let's measure Amphan's winds
 the same way we did Ian's.
 
-00:32:50.575 --> 00:32:54.848
+00:33:07.100 --> 00:33:11.373
 There's no fine model like
 Ian's over the Bay of Bengal,
 
-00:32:54.848 --> 00:32:57.900
+00:33:11.373 --> 00:33:14.425
 so we use a global data set called ERA5.
 
-00:32:58.250 --> 00:33:01.862
+00:33:14.775 --> 00:33:18.388
 It's a reanalysis: a best
 estimate of past weather,
 
-00:33:01.862 --> 00:33:05.475
+00:33:18.388 --> 00:33:22.000
 made by blending observations
 with a weather model.
 
-00:33:05.825 --> 00:33:09.702
+00:33:22.350 --> 00:33:26.227
 Its grid boxes are about
 twenty eight kilometres wide,
 
-00:33:09.702 --> 00:33:13.650
+00:33:26.227 --> 00:33:30.175
 wider than Amphan's eye, so
 it smooths the storm a lot.
 
-00:33:14.000 --> 00:33:17.829
+00:33:30.525 --> 00:33:34.354
 Here's Amphan at six
 in the morning, universal time,
 
-00:33:17.829 --> 00:33:22.100
+00:33:34.354 --> 00:33:38.625
 on the twentieth of May, about
 four hours before landfall.
 
-00:33:22.450 --> 00:33:25.565
+00:33:38.975 --> 00:33:42.090
 We put the origin at ERA5's own centre,
 
-00:33:25.565 --> 00:33:31.075
+00:33:42.090 --> 00:33:47.600
 and draw a ring fifty kilometres
 out, where ERA5's spin is strongest.
 
-00:33:31.425 --> 00:33:33.223
+00:33:47.950 --> 00:33:49.748
 Ten metres above the sea,
 
-00:33:33.223 --> 00:33:37.537
+00:33:49.748 --> 00:33:54.062
 the tangential wind averages
 about twenty metres per second,
 
-00:33:37.537 --> 00:33:40.125
+00:33:54.062 --> 00:33:56.650
 and the radial wind about minus six.
 
-00:33:41.625 --> 00:33:45.189
+00:33:58.150 --> 00:34:01.714
 The air goes round anticlockwise
 as seen from above,
 
-00:33:45.189 --> 00:33:49.850
+00:34:01.714 --> 00:34:06.375
 just like Ian's, because both storms
 are in the northern hemisphere.
 
-00:33:50.200 --> 00:33:52.569
+00:34:06.725 --> 00:34:09.094
 The official estimate at that hour,
 
-00:33:52.569 --> 00:33:56.089
+00:34:09.094 --> 00:34:12.614
 averaged over three minutes,
 was about ninety knots,
 
-00:33:56.089 --> 00:33:59.000
-which is about forty
-six metres per second,
+00:34:12.614 --> 00:34:15.525
+which is about forty six
+metres per second,
 
-00:33:59.000 --> 00:34:03.400
-and a lowest pressure of nine
-hundred and fifty six hectopascals.
+00:34:15.525 --> 00:34:19.925
+and a lowest pressure of
+nine hundred and fifty six hectopascals.
 
-00:34:03.750 --> 00:34:08.715
+00:34:20.275 --> 00:34:25.240
 ERA5's lowest pressure is only
 about nine hundred and sixty seven,
 
-00:34:08.715 --> 00:34:11.800
+00:34:25.240 --> 00:34:28.325
 so the reanalysis storm is much too weak.
 
-00:34:13.300 --> 00:34:15.275
+00:34:29.825 --> 00:34:31.800
 But the shape is right.
 
-00:34:15.625 --> 00:34:19.122
+00:34:32.150 --> 00:34:35.647
 The radial wind over the
 tangential wind gives
 
-00:34:19.122 --> 00:34:22.923
+00:34:35.647 --> 00:34:39.448
 Amphan an inflow angle
 of about seventeen degrees,
 
-00:34:22.923 --> 00:34:24.900
+00:34:39.448 --> 00:34:41.425
 close to Ian's twenty one.
 
-00:34:26.400 --> 00:34:32.000
+00:34:42.925 --> 00:34:48.525
 Two storms, in two different oceans, both
 spiral in at a similar angle.
 
-00:34:32.800 --> 00:34:37.850
+00:34:49.325 --> 00:34:54.375
 Here's Amphan's radius-height
 section from ERA5, next to Ian's.
 
-00:34:38.200 --> 00:34:40.350
+00:34:54.725 --> 00:34:56.875
 The same pattern appears.
 
-00:34:40.700 --> 00:34:46.347
+00:34:57.225 --> 00:35:02.872
 Near the sea, the air flows in, at up
 to about minus eleven metres per second,
 
-00:34:46.347 --> 00:34:49.025
+00:35:02.872 --> 00:35:05.550
 a hundred kilometres from the centre.
 
-00:34:50.525 --> 00:34:54.450
+00:35:07.050 --> 00:35:10.975
 Near the top, it flows
 out, at up to about plus six.
 
-00:34:55.950 --> 00:34:59.658
+00:35:12.475 --> 00:35:16.183
 The thin dark lines on both
 pictures mark where the
 
-00:34:59.658 --> 00:35:03.948
+00:35:16.183 --> 00:35:20.473
 ring-average radial wind
 is exactly zero metres per second:
 
-00:35:03.948 --> 00:35:07.875
+00:35:20.473 --> 00:35:24.400
 the border between air flowing
 in and air flowing out.
 
-00:35:08.225 --> 00:35:12.348
+00:35:24.750 --> 00:35:28.873
 In the middle of the storm, the air
 hardly moves in or out,
 
-00:35:12.348 --> 00:35:16.750
+00:35:28.873 --> 00:35:33.275
 so this border wanders, and it
 wraps round small, weak pockets.
 
-00:35:17.100 --> 00:35:21.571
+00:35:33.625 --> 00:35:38.096
 Those pockets differ between the two
 storms and the two data sets,
 
-00:35:21.571 --> 00:35:25.025
+00:35:38.096 --> 00:35:41.550
 so the lines don't match, but
 the big pattern does.
 
-00:35:25.375 --> 00:35:29.125
+00:35:41.900 --> 00:35:45.650
 Where a picture has no colour
 at all, there's no data.
 
-00:35:29.475 --> 00:35:33.908
+00:35:46.000 --> 00:35:50.433
 Close to the centre, the lowest
 levels lie below the sea surface,
 
-00:35:33.908 --> 00:35:37.250
+00:35:50.433 --> 00:35:53.775
 and along the top, we're
 above the highest level.
 
-00:35:37.600 --> 00:35:42.975
-Amphan's picture also starts twenty
-five kilometres out, at its first ring.
+00:35:54.125 --> 00:35:59.500
+Amphan's picture also starts twenty five
+kilometres out, at its first ring.
 
-00:35:43.325 --> 00:35:49.450
+00:35:59.850 --> 00:36:05.975
 It's blurred, because ERA5's boxes are
 wide, but it's the same in, up and out.
 
-00:35:49.800 --> 00:35:53.184
+00:36:06.325 --> 00:36:09.709
 With cylindrical coordinates,
 two different storms,
 
-00:35:53.184 --> 00:35:56.900
+00:36:09.709 --> 00:36:13.425
 from two different data
 sets, fit into the same picture.
 
-00:35:57.700 --> 00:36:03.600
+00:36:14.225 --> 00:36:20.125
 So why do scientists who study tropical
 cyclones use cylindrical coordinates?
 
-00:36:03.950 --> 00:36:06.125
+00:36:20.475 --> 00:36:22.650
 There are three good reasons.
 
-00:36:06.475 --> 00:36:08.300
+00:36:23.000 --> 00:36:24.825
 The first is shape.
 
-00:36:08.650 --> 00:36:11.190
+00:36:25.175 --> 00:36:27.715
 A tropical cyclone is nearly round,
 
-00:36:11.190 --> 00:36:14.239
+00:36:27.715 --> 00:36:30.764
 so averaging round the rings turns a messy
 
-00:36:14.239 --> 00:36:17.650
+00:36:30.764 --> 00:36:34.175
 storm in three dimensions
 into one clear slice.
 
-00:36:18.000 --> 00:36:20.050
+00:36:34.525 --> 00:36:36.575
 The second is physics.
 
-00:36:20.400 --> 00:36:23.716
-With turning arrows, the
-inward acceleration,
+00:36:36.925 --> 00:36:40.241
+With turning arrows,
+the inward acceleration,
 
-00:36:23.716 --> 00:36:28.875
+00:36:40.241 --> 00:36:45.400
 minus v squared over r, appears
 the moment we write the velocity down.
 
-00:36:29.225 --> 00:36:31.186
+00:36:45.750 --> 00:36:47.711
 With east and north arrows,
 
-00:36:31.186 --> 00:36:35.325
+00:36:47.711 --> 00:36:51.850
 the same acceleration hides
 inside changes of both parts.
 
-00:36:35.675 --> 00:36:37.600
+00:36:52.200 --> 00:36:54.125
 The third is meaning.
 
-00:36:37.950 --> 00:36:42.778
+00:36:54.475 --> 00:36:59.303
 The three parts, in, round and up, are
 exactly what we want to know:
 
-00:36:42.778 --> 00:36:48.175
+00:36:59.303 --> 00:37:04.700
 how fast the storm draws air in, how fast
 it spins, and where the air rises.
 
-00:36:48.975 --> 00:36:54.085
-Now let's come back down to the
-ground, to the landfall of Hurricane Ian,
+00:37:05.500 --> 00:37:10.610
+Now let's come back down to the ground,
+to the landfall of Hurricane Ian,
 
-00:36:54.085 --> 00:36:58.075
+00:37:10.610 --> 00:37:14.600
 the storm we measured
 in Part 1, on the coast of Florida.
 
-00:36:58.425 --> 00:37:02.900
+00:37:14.950 --> 00:37:19.425
 On a coast, east and north are
 not the most useful directions.
 
-00:37:03.250 --> 00:37:07.385
+00:37:19.775 --> 00:37:23.910
 What matters is how much
 of the wind blows along the shore,
 
-00:37:07.385 --> 00:37:11.450
+00:37:23.910 --> 00:37:27.975
 and how much blows across
 it, onto the land or out to sea.
 
-00:37:11.800 --> 00:37:16.887
+00:37:28.325 --> 00:37:33.412
 To split a wind that way, we turn
 our axes to line up with the coast,
 
-00:37:16.887 --> 00:37:19.025
+00:37:33.412 --> 00:37:35.550
 just as we learned in Part 1.
 
-00:37:19.375 --> 00:37:22.918
+00:37:35.900 --> 00:37:39.443
 There, we turned
 the x axis by an angle alpha,
 
-00:37:22.918 --> 00:37:27.000
+00:37:39.443 --> 00:37:43.525
 measured anticlockwise
 from east, as seen from above.
 
-00:37:27.350 --> 00:37:32.987
+00:37:43.875 --> 00:37:49.512
 The new axis, x hat prime, is cosine
 alpha, sine alpha, and y hat prime,
 
-00:37:32.987 --> 00:37:38.625
-a quarter turn anticlockwise from
-it, is minus sine alpha, cosine alpha.
+00:37:49.512 --> 00:37:55.150
+a quarter turn anticlockwise from it,
+is minus sine alpha, cosine alpha.
 
-00:37:38.975 --> 00:37:43.054
+00:37:55.500 --> 00:37:59.579
 And we derived the coordinates
 in the turned axes:
 
-00:37:43.054 --> 00:37:46.969
+00:37:59.579 --> 00:38:03.494
 x prime equals x cosine
 alpha plus y sine alpha,
 
-00:37:46.969 --> 00:37:51.700
+00:38:03.494 --> 00:38:08.225
 and y prime equals minus x sine
 alpha plus y cosine alpha.
 
-00:37:52.050 --> 00:37:57.550
+00:38:08.575 --> 00:38:14.075
 In matrix form, that's one rotation
 matrix times the column x, y.
 
-00:37:57.900 --> 00:38:01.939
+00:38:14.425 --> 00:38:18.464
 A wind is an arrow too, so
 the same rule works for it,
 
-00:38:01.939 --> 00:38:06.875
+00:38:18.464 --> 00:38:23.400
 with x and y replaced by the wind's
 east and north parts, u and v.
 
-00:38:07.225 --> 00:38:12.562
+00:38:23.750 --> 00:38:29.087
 So the wind's part along the shore
 is u cosine alpha plus v sine alpha,
 
-00:38:12.562 --> 00:38:17.975
+00:38:29.087 --> 00:38:34.500
 and its part across the shore
 is minus u sine alpha plus v cosine alpha.
 
-00:38:18.325 --> 00:38:23.750
+00:38:34.850 --> 00:38:40.275
 We'll point x hat prime along the coast,
 so that y hat prime points out to sea.
 
-00:38:24.100 --> 00:38:27.656
+00:38:40.625 --> 00:38:44.181
 Then a positive across-shore
 part blows out to sea,
 
-00:38:27.656 --> 00:38:30.375
+00:38:44.181 --> 00:38:46.900
 and a negative one blows onto the land.
 
-00:38:30.725 --> 00:38:34.975
+00:38:47.250 --> 00:38:51.500
 So everything hangs on one number:
 the coast's angle, alpha.
 
-00:38:35.775 --> 00:38:39.200
+00:38:52.300 --> 00:38:55.725
 Which way does the coast
 run near Fort Myers Beach?
 
-00:38:39.550 --> 00:38:42.953
+00:38:56.075 --> 00:38:59.478
 Here's the coast on a flat
 map marked in kilometres,
 
-00:38:42.953 --> 00:38:47.600
+00:38:59.478 --> 00:39:04.125
 with two points on it: Naples
 in the south, and Englewood in the north.
 
-00:38:47.950 --> 00:38:51.052
+00:39:04.475 --> 00:39:07.577
 Going up the coast
 from Naples to Englewood,
 
-00:38:51.052 --> 00:38:54.789
-we move about ninety
-one point five kilometres north,
+00:39:07.577 --> 00:39:11.314
+we move about ninety one point five
+kilometres north,
 
-00:38:54.789 --> 00:38:56.975
+00:39:11.314 --> 00:39:13.500
 and fifty five kilometres west.
 
-00:38:57.325 --> 00:39:03.156
+00:39:13.850 --> 00:39:19.681
 So the coast leans west of north, by an
 angle whose tangent is the opposite side,
 
-00:39:03.156 --> 00:39:06.900
+00:39:19.681 --> 00:39:23.425
 the west leg, over the adjacent
 side, the north leg.
 
-00:39:07.250 --> 00:39:13.000
+00:39:23.775 --> 00:39:29.525
 That's about zero point six zero one, and
 the angle is about thirty one degrees.
 
-00:39:14.500 --> 00:39:19.764
+00:39:31.025 --> 00:39:36.289
 So the coast runs thirty one degrees west
 of north: measured clockwise from north,
 
-00:39:19.764 --> 00:39:24.000
-that's a compass bearing of three
-hundred and twenty nine degrees.
+00:39:36.289 --> 00:39:40.525
+that's a compass bearing
+of three hundred and twenty nine degrees.
 
-00:39:25.500 --> 00:39:31.274
+00:39:42.025 --> 00:39:47.799
 In Part 1, we found that a compass bearing
 is ninety degrees minus the maths angle,
 
-00:39:31.274 --> 00:39:35.100
+00:39:47.799 --> 00:39:51.625
 so the maths angle is ninety
 degrees minus the bearing.
 
-00:39:35.450 --> 00:39:40.148
+00:39:51.975 --> 00:39:56.673
 So alpha is ninety degrees minus the
 bearing, which comes out negative,
 
-00:39:40.148 --> 00:39:44.250
-and adding a full turn gives a hundred
-and twenty one degrees.
+00:39:56.673 --> 00:40:00.775
+and adding a full turn
+gives a hundred and twenty one degrees.
 
-00:39:45.750 --> 00:39:48.495
+00:40:02.275 --> 00:40:05.020
 The cosine of a hundred and twenty one
 
-00:39:48.495 --> 00:39:51.963
+00:40:05.020 --> 00:40:08.488
 degrees is about
 minus zero point five one five,
 
-00:39:51.963 --> 00:39:55.575
+00:40:08.488 --> 00:40:12.100
 and its sine is about
 zero point eight five seven.
 
-00:39:55.925 --> 00:39:59.859
+00:40:12.450 --> 00:40:16.384
 So x hat prime is about
 minus zero point five one five,
 
-00:39:59.859 --> 00:40:05.725
+00:40:16.384 --> 00:40:22.250
 zero point eight five seven: it points up
 the coast, towards the north-north-west.
 
-00:40:06.075 --> 00:40:10.500
+00:40:22.600 --> 00:40:27.025
 And y hat prime is about
 minus zero point eight five seven,
 
-00:40:10.500 --> 00:40:12.825
+00:40:27.025 --> 00:40:29.350
 minus zero point five one five:
 
-00:40:12.825 --> 00:40:16.950
+00:40:29.350 --> 00:40:33.475
 it points west-south-west,
 out into the Gulf of Mexico.
 
-00:40:18.450 --> 00:40:22.414
+00:40:34.975 --> 00:40:38.939
 That's why we picked
 the north-north-west way along the coast,
 
-00:40:22.414 --> 00:40:26.825
+00:40:38.939 --> 00:40:43.350
 and not the south-south-east way:
 then y hat prime points out to sea.
 
-00:40:27.625 --> 00:40:29.250
+00:40:44.150 --> 00:40:45.775
 Now the wind.
 
-00:40:29.600 --> 00:40:34.340
+00:40:46.125 --> 00:40:50.865
 At eight in the evening, universal
 time, about an hour after landfall,
 
-00:40:34.340 --> 00:40:39.621
+00:40:50.865 --> 00:40:56.146
 the model's wind at Fort Myers Beach was
 about thirty three metres per second,
 
-00:40:39.621 --> 00:40:40.975
+00:40:56.146 --> 00:40:57.500
 from the south-west.
 
-00:40:41.325 --> 00:40:46.026
-Its east part, u, was about twenty
-two point two metres per second,
+00:40:57.850 --> 00:41:02.551
+Its east part, u, was about
+twenty two point two metres per second,
 
-00:40:46.026 --> 00:40:50.025
+00:41:02.551 --> 00:41:06.550
 and its north part, v, was
 about twenty four point three.
 
-00:40:50.375 --> 00:40:54.972
+00:41:06.900 --> 00:41:11.497
 The part along the shore
 is u cosine alpha plus v sine alpha:
 
-00:40:54.972 --> 00:40:58.966
+00:41:11.497 --> 00:41:15.491
 we multiply the east
 part, u, by the cosine of alpha,
 
-00:40:58.966 --> 00:41:02.809
-minus zero point five one five, and
-the north part,
+00:41:15.491 --> 00:41:19.334
+minus zero point five one five,
+and the north part,
 
-00:41:02.809 --> 00:41:06.125
-v, by its
-sine, zero point eight five seven.
+00:41:19.334 --> 00:41:22.650
+v, by its sine,
+zero point eight five seven.
 
-00:41:06.475 --> 00:41:11.200
+00:41:23.000 --> 00:41:27.725
 Adding the two products gives about
 nine point four metres per second.
 
-00:41:12.700 --> 00:41:17.911
+00:41:29.225 --> 00:41:34.436
 The part across the shore is minus u sine
 alpha plus v cosine alpha:
 
-00:41:17.911 --> 00:41:22.050
+00:41:34.436 --> 00:41:38.575
 now u goes with minus the
 sine, and v with the cosine.
 
-00:41:22.400 --> 00:41:25.041
+00:41:38.925 --> 00:41:41.566
 Adding these two products gives about
 
-00:41:25.041 --> 00:41:28.325
+00:41:41.566 --> 00:41:44.850
 minus thirty one point five
 metres per second.
 
-00:41:29.825 --> 00:41:35.525
+00:41:46.350 --> 00:41:52.050
 The minus sign means against y hat prime:
 not out to sea, but onto the land.
 
-00:41:35.875 --> 00:41:40.967
+00:41:52.400 --> 00:41:57.492
 So about thirty one point five metres
 per second blew straight onto the land,
 
-00:41:40.967 --> 00:41:44.075
+00:41:57.492 --> 00:42:00.600
 and only about nine point four
 along the coast.
 
-00:41:44.425 --> 00:41:48.258
+00:42:00.950 --> 00:42:04.782
 Let's check that it's the same
 wind: we square the along and
 
-00:41:48.258 --> 00:41:51.387
+00:42:04.782 --> 00:42:07.912
 across parts, add
 them, and take the square root,
 
-00:41:51.387 --> 00:41:53.942
+00:42:07.912 --> 00:42:10.467
 which gives about thirty two point nine,
 
-00:41:53.942 --> 00:41:57.200
+00:42:10.467 --> 00:42:13.725
 the thirty three metres
 per second we started with.
 
-00:41:58.700 --> 00:42:02.184
-Now go about a hundred
-and sixty kilometres north,
+00:42:15.225 --> 00:42:18.709
+Now go about a hundred and sixty
+kilometres north,
 
-00:42:02.184 --> 00:42:07.200
+00:42:18.709 --> 00:42:23.725
 to Saint Petersburg, on Tampa
 Bay, on the other side of the storm's eye.
 
-00:42:07.550 --> 00:42:10.973
+00:42:24.075 --> 00:42:27.498
 Next to it, the Gulf coast
 runs almost due north:
 
-00:42:10.973 --> 00:42:13.768
+00:42:27.498 --> 00:42:30.293
 from Saint Pete Beach to Tarpon Springs,
 
-00:42:13.768 --> 00:42:17.610
-it moves about fifty
-five point seven kilometres north,
+00:42:30.293 --> 00:42:34.135
+it moves about fifty five point seven
+kilometres north,
 
-00:42:17.610 --> 00:42:20.125
+00:42:34.135 --> 00:42:36.650
 and six point eight kilometres west.
 
-00:42:20.475 --> 00:42:24.082
+00:42:37.000 --> 00:42:40.607
 With the same tangent
 rule, west leg over north leg,
 
-00:42:24.082 --> 00:42:27.896
+00:42:40.607 --> 00:42:44.421
 the coast leans only about
 seven degrees west of north,
 
-00:42:27.896 --> 00:42:31.850
-a bearing of about three
-hundred and fifty three degrees.
+00:42:44.421 --> 00:42:48.375
+a bearing of about
+three hundred and fifty three degrees.
 
-00:42:32.200 --> 00:42:35.283
+00:42:48.725 --> 00:42:51.808
 So alpha, ninety degrees
 minus the bearing,
 
-00:42:35.283 --> 00:42:38.724
+00:42:51.808 --> 00:42:55.249
 plus a full turn, is about
 ninety seven degrees,
 
-00:42:38.724 --> 00:42:42.667
+00:42:55.249 --> 00:42:59.192
 with a cosine of about
 minus zero point one two two and
 
-00:42:42.667 --> 00:42:45.750
+00:42:59.192 --> 00:43:02.275
 a sine of about
 zero point nine nine three.
 
-00:42:47.250 --> 00:42:50.093
+00:43:03.775 --> 00:43:06.618
 The model's wind there, at the same hour,
 
-00:42:50.093 --> 00:42:54.461
+00:43:06.618 --> 00:43:10.986
 was about nineteen metres per second
 from the north-north-east:
 
-00:42:54.461 --> 00:42:58.275
-u about minus ten point two, and v about
-minus sixteen.
+00:43:10.986 --> 00:43:14.800
+u about minus ten point two,
+and v about minus sixteen.
 
-00:42:58.625 --> 00:43:04.825
+00:43:15.150 --> 00:43:21.350
 Across the shore, we take minus u sine
 alpha, and v cosine alpha, and add them.
 
-00:43:05.175 --> 00:43:09.550
+00:43:21.700 --> 00:43:26.075
 Together, that's about
 plus twelve point one metres per second.
 
-00:43:11.050 --> 00:43:14.700
+00:43:27.575 --> 00:43:31.225
 Plus means along y hat prime: out to sea.
 
-00:43:15.050 --> 00:43:16.225
+00:43:31.575 --> 00:43:32.750
 Along the shore,
 
-00:43:16.225 --> 00:43:21.735
+00:43:32.750 --> 00:43:38.260
 u cosine alpha plus v sine alpha comes
 to about minus fourteen point seven,
 
-00:43:21.735 --> 00:43:25.775
+00:43:38.260 --> 00:43:42.300
 so the wind also ran down
 the coast, towards the south.
 
-00:43:27.275 --> 00:43:32.656
+00:43:43.800 --> 00:43:49.181
 So here's the same storm, on opposite
 sides of its eye: at Fort Myers Beach,
 
-00:43:32.656 --> 00:43:37.825
+00:43:49.181 --> 00:43:54.350
 the wind blew onto the land, and at Saint
 Petersburg, it blew out to sea.
 
-00:43:38.625 --> 00:43:40.700
+00:43:55.150 --> 00:43:57.225
 What does that do to the sea?
 
-00:43:41.050 --> 00:43:44.918
+00:43:57.575 --> 00:44:01.443
 Wind blowing onto the land
 drags the sea surface with it,
 
-00:43:44.918 --> 00:43:47.700
+00:44:01.443 --> 00:44:04.225
 and the water piles up against the coast.
 
-00:43:48.050 --> 00:43:53.650
+00:44:04.575 --> 00:44:10.175
 Wind blowing out to sea drags the water
 away from the coast, and the level drops.
 
-00:43:54.000 --> 00:43:58.649
+00:44:10.525 --> 00:44:15.174
 Where the water piles up, the sea
 rises far above the normal tide,
 
-00:43:58.649 --> 00:44:01.325
+00:44:15.174 --> 00:44:17.850
 and this rise is called a storm surge.
 
-00:44:01.675 --> 00:44:05.907
+00:44:18.200 --> 00:44:22.432
 The wind's push does most of the work,
 especially over a wide,
 
-00:44:05.907 --> 00:44:09.525
+00:44:22.432 --> 00:44:26.050
 shallow sea floor like
 the one off southwest Florida.
 
-00:44:09.875 --> 00:44:11.978
+00:44:26.400 --> 00:44:28.503
 The low pressure helps a little:
 
-00:44:11.978 --> 00:44:17.500
+00:44:28.503 --> 00:44:34.025
 the sea rises by about one centimetre for
 every hectopascal that the pressure drops.
 
-00:44:17.850 --> 00:44:21.402
+00:44:34.375 --> 00:44:37.957
+We get that centimetre by
+dividing one hectopascal,
+
+00:44:37.957 --> 00:44:41.608
+a hundred pascals, by the sea
+water's density, about
+
+00:44:41.608 --> 00:44:46.524
+one thousand and twenty five kilograms
+per cubic metre, times gravity,
+
+00:44:46.524 --> 00:44:49.825
+nine point eight one
+metres per second squared.
+
+00:44:50.175 --> 00:44:53.734
 When Ian came ashore, its centre's
 pressure was about
 
-00:44:21.402 --> 00:44:24.082
+00:44:53.734 --> 00:44:56.421
 nine hundred and forty one hectopascals,
 
-00:44:24.082 --> 00:44:27.768
-seventy two below the normal
+00:44:56.421 --> 00:44:59.308
+against a normal
 one thousand and thirteen,
 
-00:44:27.768 --> 00:44:32.325
+00:44:59.308 --> 00:45:03.875
 so the sea under the eye rose by only
 about seventy two centimetres.
 
-00:44:32.675 --> 00:44:36.100
+00:45:04.225 --> 00:45:07.650
 So what should the water have
 done at our two stations?
 
-00:44:36.900 --> 00:44:42.300
+00:45:08.450 --> 00:45:13.850
 Tide gauges, which measure the water
 level every few minutes, give the answer.
 
-00:44:42.650 --> 00:44:44.674
+00:45:14.200 --> 00:45:16.224
 At Fort Myers, up the river,
 
-00:44:44.674 --> 00:44:49.300
+00:45:16.224 --> 00:45:20.850
 the water rose about two point two
 metres above the normal tide.
 
-00:44:49.650 --> 00:44:55.098
-At Saint Petersburg, it fell about one
-point eight metres below the normal tide,
+00:45:21.200 --> 00:45:26.240
+At Saint Petersburg, it fell about
+one point eight metres below the normal
 
-00:44:55.098 --> 00:44:57.550
-both within a few hours of landfall.
+00:45:26.240 --> 00:45:29.100
+tide, both within a few hours of landfall.
 
-00:44:57.900 --> 00:45:02.200
+00:45:29.450 --> 00:45:33.750
 The across-shore wind flipped
 its sign, and so did the water.
 
-00:45:02.550 --> 00:45:03.944
+00:45:34.100 --> 00:45:35.494
 At Fort Myers Beach,
 
-00:45:03.944 --> 00:45:08.752
+00:45:35.494 --> 00:45:40.302
 the official report found water ten
 to fifteen feet above the ground:
 
-00:45:08.752 --> 00:45:11.400
+00:45:40.302 --> 00:45:42.950
 about three to four and a half metres.
 
-00:45:12.900 --> 00:45:15.700
+00:45:44.450 --> 00:45:47.250
 What did satellites see of Ian's surge?
 
-00:45:16.050 --> 00:45:17.850
+00:45:47.600 --> 00:45:49.400
 Almost nothing.
 
-00:45:18.200 --> 00:45:21.981
+00:45:49.750 --> 00:45:53.531
 The surge peaked in the evening,
 under the storm's clouds,
 
-00:45:21.981 --> 00:45:24.654
+00:45:53.531 --> 00:45:56.204
 and drained back to the sea within hours,
 
-00:45:24.654 --> 00:45:27.001
+00:45:56.204 --> 00:45:58.551
 so the pictures taken from space and
 
-00:45:27.001 --> 00:45:31.825
+00:45:58.551 --> 00:46:03.375
 from survey planes in the next days
 show the damage, not the surge itself.
 
-00:45:32.175 --> 00:45:35.425
+00:46:03.725 --> 00:46:06.975
 So the two gauge lines
 are the surge, measured.
 
-00:45:35.775 --> 00:45:38.189
+00:46:07.325 --> 00:46:09.739
 The wind along a coast matters too,
 
-00:45:38.189 --> 00:45:41.362
+00:46:09.739 --> 00:46:12.912
 because it can bring
 cold water up from below,
 
-00:45:41.362 --> 00:45:45.500
+00:46:12.912 --> 00:46:17.050
 which is a story for the movie
 on Friction and Ekman layers.
 
-00:45:45.850 --> 00:45:50.675
+00:46:17.400 --> 00:46:22.225
 And the full story of storm surge has
 its own movie later in this series.
 
-00:45:51.475 --> 00:45:55.025
+00:46:23.025 --> 00:46:26.575
 Floods that last longer
 can be seen from space.
 
-00:45:55.375 --> 00:46:01.075
+00:46:26.925 --> 00:46:32.625
 Let's fly to one: the Bay of Bengal, after
 Cyclone Amphan in twenty twenty.
 
-00:46:01.425 --> 00:46:04.550
+00:46:32.975 --> 00:46:36.100
 The blue gets darker
 where the sea gets deeper.
 
-00:46:04.900 --> 00:46:08.566
+00:46:36.450 --> 00:46:40.116
 The white line marks where
 the sea is twenty metres deep,
 
-00:46:08.566 --> 00:46:11.075
+00:46:40.116 --> 00:46:42.625
 and the darker line two hundred metres.
 
-00:46:11.425 --> 00:46:12.682
+00:46:42.975 --> 00:46:44.232
 Off the Sundarbans,
 
-00:46:12.682 --> 00:46:15.724
+00:46:44.232 --> 00:46:47.274
 the sea stays shallower
 than twenty metres for
 
-00:46:15.724 --> 00:46:18.700
+00:46:47.274 --> 00:46:50.250
 about thirty three
 kilometres from the coast.
 
-00:46:20.200 --> 00:46:25.165
+00:46:51.750 --> 00:46:56.715
 A wide, shallow shelf like this
 lets a storm pile the water up high,
 
-00:46:25.165 --> 00:46:26.625
+00:46:56.715 --> 00:46:58.175
 just as off Florida.
 
-00:46:26.975 --> 00:46:30.496
+00:46:58.525 --> 00:47:02.046
 Here's Amphan's track, coming
 up from the south of the Bay,
 
-00:46:30.496 --> 00:46:34.375
+00:47:02.046 --> 00:47:05.925
 and crossing the coast in the Sundarbans
 on the twentieth of May.
 
-00:46:35.175 --> 00:46:40.475
+00:47:06.725 --> 00:47:12.025
 Before we look for Amphan's flood, let's
 see which way its wind blew on the coast.
 
-00:46:40.825 --> 00:46:45.123
+00:47:12.375 --> 00:47:16.673
 We use ERA5 again, at nine
 in the morning, universal time,
 
-00:46:45.123 --> 00:46:49.050
+00:47:16.673 --> 00:47:20.600
 on the twentieth of May, as Amphan
 reached the coast.
 
-00:46:49.400 --> 00:46:52.024
+00:47:20.950 --> 00:47:23.574
 Remember that ERA5 smooths the storm:
 
-00:46:52.024 --> 00:46:57.769
+00:47:23.574 --> 00:47:29.319
 its strongest wind near Amphan is only
 about six tenths of the official estimate,
 
-00:46:57.769 --> 00:47:02.450
+00:47:29.319 --> 00:47:34.000
 so we use it for the direction
 of the wind, not its full strength.
 
-00:47:02.800 --> 00:47:07.775
+00:47:34.350 --> 00:47:39.325
 We pick a point on the Sundarbans shore
 of Bangladesh, east of the centre.
 
-00:47:08.125 --> 00:47:10.360
+00:47:39.675 --> 00:47:41.910
 Going west along the coast there,
 
-00:47:10.360 --> 00:47:14.084
-we move about ninety
-two point nine kilometres west and
+00:47:41.910 --> 00:47:45.363
+we move about ninety two point nine
+kilometres west
 
-00:47:14.084 --> 00:47:16.725
-twenty one point nine kilometres south.
+00:47:45.363 --> 00:47:48.275
+and twenty one point nine
+kilometres south.
 
-00:47:17.075 --> 00:47:20.539
+00:47:48.625 --> 00:47:52.089
 The south leg over the west
 leg gives the tangent,
 
-00:47:20.539 --> 00:47:24.350
+00:47:52.089 --> 00:47:55.900
 so the coast runs about
 thirteen degrees south of west.
 
-00:47:24.700 --> 00:47:26.671
+00:47:56.250 --> 00:47:58.221
 Measured clockwise from north,
 
-00:47:26.671 --> 00:47:30.350
-that's a bearing of two hundred
-and fifty seven degrees.
+00:47:58.221 --> 00:48:01.900
+that's a bearing
+of two hundred and fifty seven degrees.
 
-00:47:30.700 --> 00:47:33.700
+00:48:02.250 --> 00:48:05.250
 So alpha, ninety degrees
 minus the bearing,
 
-00:47:33.700 --> 00:47:38.025
-plus a full turn, is about a hundred
-and ninety three degrees,
+00:48:05.250 --> 00:48:09.575
+plus a full turn, is
+about a hundred and ninety three degrees,
 
-00:47:38.025 --> 00:47:42.141
+00:48:09.575 --> 00:48:13.691
 with a cosine of about
 minus zero point nine seven four and
 
-00:47:42.141 --> 00:47:45.350
+00:48:13.691 --> 00:48:16.900
 a sine of about
 minus zero point two two five.
 
-00:47:45.700 --> 00:47:49.100
+00:48:17.250 --> 00:48:20.650
 Then y hat prime points south, out to sea.
 
-00:47:49.450 --> 00:47:54.355
-ERA5's wind there was about twenty
-two point six metres per second,
+00:48:21.000 --> 00:48:25.905
+ERA5's wind there was about
+twenty two point six metres per second,
 
-00:47:54.355 --> 00:47:56.258
+00:48:25.905 --> 00:48:27.808
 from the south-south-east:
 
-00:47:56.258 --> 00:48:00.650
-u about minus eight point four, and v
-about plus twenty one.
+00:48:27.808 --> 00:48:32.200
+u about minus eight point four,
+and v about plus twenty one.
 
-00:48:01.000 --> 00:48:07.200
+00:48:32.550 --> 00:48:38.750
 Across the shore, we take minus u sine
 alpha, and v cosine alpha, and add them.
 
-00:48:07.550 --> 00:48:11.089
+00:48:39.100 --> 00:48:43.418
 Together, that's about
-minus twenty two point four
+minus twenty two point four metres per
 
-00:48:11.089 --> 00:48:13.425
-metres per second: onto the land.
+00:48:43.418 --> 00:48:44.975
+second: onto the land.
 
-00:48:14.925 --> 00:48:19.953
-The official lowest pressure was about
-nine hundred and sixty hectopascals,
+00:48:46.475 --> 00:48:50.236
+At the white circle, ERA5's
+lowest pressure is about
 
-00:48:19.953 --> 00:48:23.975
-so the sea under the eye rose
-about fifty three centimetres.
+00:48:50.236 --> 00:48:52.189
+nine hundred and sixty five
 
-00:48:24.325 --> 00:48:28.461
+00:48:52.189 --> 00:48:57.325
+hectopascals, but its storm is too
+weak, so we take the official value.
+
+00:48:57.675 --> 00:49:02.700
+The official centre pressure at that
+hour was about nine hundred and sixty
+
+00:49:02.700 --> 00:49:07.725
+hectopascals, so the sea under the eye
+rose about fifty three centimetres.
+
+00:49:08.075 --> 00:49:12.211
 So Amphan's wind pushed the sea
 onto the Sundarbans coast,
 
-00:48:28.461 --> 00:48:30.600
+00:49:12.211 --> 00:49:14.350
 over that wide, shallow shelf.
 
-00:48:30.950 --> 00:48:34.785
+00:49:14.700 --> 00:49:18.535
 There's no tide-gauge record
 of the water there in our data,
 
-00:48:34.785 --> 00:48:37.150
+00:49:18.535 --> 00:49:20.900
 so next come the pictures from space.
 
-00:48:37.950 --> 00:48:41.125
+00:49:21.700 --> 00:49:24.875
 So what did satellites
 see of Amphan's flood?
 
-00:48:41.475 --> 00:48:45.556
+00:49:25.225 --> 00:49:29.306
 For days after landfall,
 thick clouds covered the ground,
 
-00:48:45.556 --> 00:48:48.850
+00:49:29.306 --> 00:49:32.600
 so ordinary pictures
 from space can't show it.
 
-00:48:49.200 --> 00:48:53.946
+00:49:32.950 --> 00:49:37.696
 And the flooded patches are small, so
 the coarse pixels of those pictures,
 
-00:48:53.946 --> 00:48:58.500
+00:49:37.696 --> 00:49:42.250
 two hundred and fifty metres wide, blur
 them into the land around them.
 
-00:48:58.850 --> 00:49:01.300
+00:49:42.600 --> 00:49:45.050
 But radar sees through clouds.
 
-00:49:01.650 --> 00:49:05.673
+00:49:45.400 --> 00:49:49.423
 The Sentinel-1 radar satellite
 sends out microwaves and
 
-00:49:05.673 --> 00:49:08.525
+00:49:49.423 --> 00:49:52.275
 measures how much of them bounces back.
 
-00:49:08.875 --> 00:49:11.854
+00:49:52.625 --> 00:49:55.604
 Calm water reflects the microwaves away,
 
-00:49:11.854 --> 00:49:15.950
+00:49:55.604 --> 00:49:59.700
 like a mirror, so in a radar
 picture, water looks dark.
 
-00:49:16.300 --> 00:49:21.147
+00:50:00.050 --> 00:50:04.897
 Here's the coast near Satkhira and the
 Sundarbans on the sixteenth of May,
 
-00:49:21.147 --> 00:49:26.125
+00:50:04.897 --> 00:50:09.875
 before Amphan, and on the twenty second,
 two and a half days after landfall.
 
-00:49:27.625 --> 00:49:33.400
+00:50:11.375 --> 00:50:17.150
 As the line moves across, new dark patches
 appear where the fields were dry before.
 
-00:49:33.750 --> 00:49:37.775
+00:50:17.500 --> 00:50:21.525
 We count the pixels that turned
 dark, marked here in cyan:
 
-00:49:37.775 --> 00:49:41.175
-about thirty four thousand
-seven hundred of them.
+00:50:21.525 --> 00:50:24.925
+about thirty four thousand seven hundred
+of them.
 
-00:49:41.525 --> 00:49:45.090
-Each pixel is a square
-sixty metres on each side,
+00:50:25.275 --> 00:50:29.058
+Each pixel is a square sixty
+metres on each side, so
 
-00:49:45.090 --> 00:49:49.600
-so it covers zero point zero
-zero three six square kilometres.
+00:50:29.058 --> 00:50:33.350
+it covers zero point zero zero three six
+square kilometres.
 
-00:49:49.950 --> 00:49:54.287
+00:50:33.700 --> 00:50:38.037
 The number of dark pixels times
 the area of one pixel is about
 
-00:49:54.287 --> 00:49:58.275
+00:50:38.037 --> 00:50:42.025
 a hundred and twenty five
 square kilometres of new water.
 
-00:49:59.775 --> 00:50:04.100
+00:50:43.525 --> 00:50:47.850
 That's about the size of a square
 eleven kilometres on each side.
 
-00:50:05.600 --> 00:50:09.082
+00:50:49.350 --> 00:50:52.832
 Some of the best-known
 flood pictures from space of
 
-00:50:09.082 --> 00:50:12.427
+00:50:52.832 --> 00:50:56.177
 a Bay of Bengal cyclone
 come from Cyclone Nargis,
 
-00:50:12.427 --> 00:50:14.475
+00:50:56.177 --> 00:50:58.225
 in May two thousand and eight.
 
-00:50:14.825 --> 00:50:18.775
+00:50:58.575 --> 00:51:02.525
 Let's go to Myanmar,
 on the eastern side of the Bay.
 
-00:50:19.125 --> 00:50:23.508
+00:51:02.875 --> 00:51:07.258
 Here, the Irrawaddy River, which
 Myanmar calls the Ayeyarwady,
 
-00:50:23.508 --> 00:50:27.325
+00:51:07.258 --> 00:51:11.075
 fans out into many channels
 before it reaches the sea.
 
-00:50:27.675 --> 00:50:32.311
+00:51:11.425 --> 00:51:16.061
 This is the Irrawaddy delta:
 a huge, flat plain of rice fields,
 
-00:50:32.311 --> 00:50:35.475
+00:51:16.061 --> 00:51:19.225
 most of it only a few
 metres above the sea.
 
-00:50:35.825 --> 00:50:39.675
+00:51:19.575 --> 00:51:23.425
 Nargis formed in the south
 of the Bay in late April.
 
-00:50:40.025 --> 00:50:45.250
+00:51:23.775 --> 00:51:29.000
 It moved west, then north, then turned
 east, straight towards the delta.
 
-00:50:45.600 --> 00:50:50.413
+00:51:29.350 --> 00:51:34.163
 On the second of May, it came ashore
 at the delta's south-western corner,
 
-00:50:50.413 --> 00:50:54.500
+00:51:34.163 --> 00:51:38.250
 with winds of about ninety knots,
 averaged over three minutes.
 
-00:50:54.850 --> 00:50:58.626
+00:51:38.600 --> 00:51:43.062
 A knot is one point eight five two
-kilometres per hour,
+kilometres per hour, so ninety
 
-00:50:58.626 --> 00:51:03.500
-so ninety knots is about a hundred
-and sixty seven kilometres per hour.
+00:51:43.062 --> 00:51:47.250
+knots is about a hundred and sixty seven
+kilometres per hour.
 
-00:51:03.850 --> 00:51:09.360
+00:51:47.600 --> 00:51:53.110
 A kilometre per hour is a thousand metres
 in three thousand six hundred seconds,
 
-00:51:09.360 --> 00:51:14.525
+00:51:53.110 --> 00:51:58.275
 so we divide by three point six, and get
 about forty six metres per second.
 
-00:51:16.025 --> 00:51:19.014
+00:51:59.775 --> 00:52:02.764
 Then it crossed the whole delta, eastward,
 
-00:51:19.014 --> 00:51:22.075
+00:52:02.764 --> 00:52:05.825
 towards Yangon, the country's
 largest city.
 
-00:51:22.425 --> 00:51:27.847
+00:52:06.175 --> 00:52:11.597
 Here's Nargis that day, seen by a NASA
 satellite a few hours before landfall,
 
-00:51:27.847 --> 00:51:30.100
+00:52:11.597 --> 00:52:13.850
 with its eye just off the coast.
 
-00:51:30.450 --> 00:51:35.400
+00:52:14.200 --> 00:52:19.150
 Its storm surge and heavy rain
 flooded the low delta, far inland.
 
-00:51:35.750 --> 00:51:38.626
+00:52:19.500 --> 00:52:22.376
 Before we look
 at the flood, let's see which
 
-00:51:38.626 --> 00:51:41.175
+00:52:22.376 --> 00:52:24.925
 way its wind blew on the delta's coast.
 
-00:51:41.975 --> 00:51:46.584
+00:52:25.725 --> 00:52:30.334
 We use ERA5 again, at eleven
 in the morning, universal time,
 
-00:51:46.584 --> 00:51:50.425
+00:52:30.334 --> 00:52:34.175
 on the second of May, around
 the time of landfall.
 
-00:51:50.775 --> 00:51:53.252
+00:52:34.525 --> 00:52:37.002
 Again, ERA5's storm is too weak,
 
-00:51:53.252 --> 00:51:58.825
+00:52:37.002 --> 00:52:42.575
 at only about half of the official
 wind, so we use it for the direction.
 
-00:51:59.175 --> 00:52:03.550
+00:52:42.925 --> 00:52:47.300
 Our point is on the delta's
 coast, south of the town of Bogale.
 
-00:52:03.900 --> 00:52:06.164
+00:52:47.650 --> 00:52:49.914
 Going west along the coast there,
 
-00:52:06.164 --> 00:52:09.936
-we move about sixty
-nine point five kilometres west and
+00:52:49.914 --> 00:52:53.412
+we move about sixty nine point five
+kilometres west
 
-00:52:09.936 --> 00:52:12.200
-ten point eight kilometres north.
+00:52:53.412 --> 00:52:55.950
+and ten point eight kilometres north.
 
-00:52:12.550 --> 00:52:16.127
+00:52:56.300 --> 00:52:59.877
 The north leg over the west
 leg gives the tangent,
 
-00:52:16.127 --> 00:52:19.775
+00:52:59.877 --> 00:53:03.525
 so the coast runs about
 nine degrees north of west.
 
-00:52:20.125 --> 00:52:22.065
+00:53:03.875 --> 00:53:05.815
 Measured clockwise from north,
 
-00:52:22.065 --> 00:52:25.750
-that's a bearing of two hundred
-and seventy nine degrees.
+00:53:05.815 --> 00:53:09.500
+that's a bearing
+of two hundred and seventy nine degrees.
 
-00:52:26.100 --> 00:52:29.056
+00:53:09.850 --> 00:53:12.806
 So alpha, ninety degrees
 minus the bearing,
 
-00:52:29.056 --> 00:52:33.250
-plus a full turn, is about a hundred
-and seventy one degrees,
+00:53:12.806 --> 00:53:17.000
+plus a full turn, is
+about a hundred and seventy one degrees,
 
-00:52:33.250 --> 00:52:37.375
+00:53:17.000 --> 00:53:21.125
 with a cosine of about
 minus zero point nine eight eight and
 
-00:52:37.375 --> 00:52:40.125
+00:53:21.125 --> 00:53:23.875
 a sine of about zero point one five six.
 
-00:52:40.475 --> 00:52:43.875
+00:53:24.225 --> 00:53:27.625
 Then y hat prime points south, out to sea.
 
-00:52:44.225 --> 00:52:48.425
+00:53:27.975 --> 00:53:32.175
 ERA5's wind there was about
 nineteen metres per second,
 
-00:52:48.425 --> 00:52:50.411
+00:53:32.175 --> 00:53:34.161
 from the south-south-west:
 
-00:52:50.411 --> 00:52:55.375
+00:53:34.161 --> 00:53:39.125
 u about plus nine point six, and v about
 plus sixteen point five.
 
-00:52:55.725 --> 00:53:01.925
+00:53:39.475 --> 00:53:45.675
 Across the shore, we take minus u sine
 alpha, and v cosine alpha, and add them.
 
-00:53:02.275 --> 00:53:05.784
+00:53:46.025 --> 00:53:50.306
 Together, that's about
-minus seventeen point eight
+minus seventeen point eight metres per
 
-00:53:05.784 --> 00:53:08.100
-metres per second: onto the land.
+00:53:50.306 --> 00:53:51.850
+second: onto the land.
 
-00:53:09.600 --> 00:53:14.963
-The official lowest pressure was about
-nine hundred and sixty two hectopascals,
+00:53:53.350 --> 00:53:57.068
+At the white circle, ERA5's
+lowest pressure is about
 
-00:53:14.963 --> 00:53:18.900
-so the sea under the eye rose
-about fifty one centimetres.
+00:53:57.068 --> 00:53:58.998
+nine hundred and eighty two
 
-00:53:19.250 --> 00:53:21.885
+00:53:58.998 --> 00:54:04.075
+hectopascals, but its storm is too
+weak, so we take the official value.
+
+00:54:04.425 --> 00:54:09.729
+The official centre pressure at that
+hour was about nine hundred and sixty two
+
+00:54:09.729 --> 00:54:14.625
+hectopascals, so the sea under the eye
+rose about fifty one centimetres.
+
+00:54:14.975 --> 00:54:17.610
 So Nargis drove the sea onto the delta,
 
-00:53:21.885 --> 00:53:25.600
+00:54:17.610 --> 00:54:21.325
 where most of the land lies
 only a few metres above it.
 
-00:53:25.950 --> 00:53:29.785
+00:54:21.675 --> 00:54:25.510
 There's no tide-gauge record
 of the water there in our data,
 
-00:53:29.785 --> 00:53:32.150
+00:54:25.510 --> 00:54:27.875
 so next come the pictures from space.
 
-00:53:32.500 --> 00:53:36.800
+00:54:28.225 --> 00:54:32.525
 Let's zoom in, to see the delta
 before and after the storm.
 
-00:53:37.600 --> 00:53:43.350
+00:54:33.325 --> 00:54:39.075
 First, here's the delta in natural colour,
 the way our eyes would see it from space.
 
-00:53:43.700 --> 00:53:49.000
+00:54:39.425 --> 00:54:44.725
 On the left is the twenty first
 of April, eleven days before landfall.
 
-00:53:49.350 --> 00:53:53.375
+00:54:45.075 --> 00:54:49.100
 On the right is the fifth
 of May, about three days after.
 
-00:53:54.875 --> 00:53:58.300
+00:54:50.600 --> 00:54:54.025
 As the line glides
 across, look for the flood.
 
-00:53:58.650 --> 00:54:04.700
+00:54:54.375 --> 00:55:00.425
 In natural colour, it's hard to see: muddy
 floodwater and wet soil both look brown.
 
-00:54:05.050 --> 00:54:07.825
+00:55:00.775 --> 00:55:03.550
 So flood mappers use false colour.
 
-00:54:08.175 --> 00:54:13.293
+00:55:03.900 --> 00:55:09.018
 The satellite measures light that our
 eyes can't see, shortwave infrared and
 
-00:54:13.293 --> 00:54:15.987
+00:55:09.018 --> 00:55:11.712
 near infrared, and we paint them red and
 
-00:54:15.987 --> 00:54:18.950
+00:55:11.712 --> 00:55:14.675
 green, with ordinary
 red light painted blue.
 
-00:54:19.300 --> 00:54:23.349
+00:55:15.025 --> 00:55:19.074
 In these colours, plants look
 bright green, dry fields and
 
-00:54:23.349 --> 00:54:28.725
+00:55:19.074 --> 00:55:24.450
 bare ground look pink, clouds look
 white, and water looks dark blue or black.
 
-00:54:29.075 --> 00:54:32.282
+00:55:24.800 --> 00:55:28.007
 Water soaks up both
 kinds of infrared light,
 
-00:54:32.282 --> 00:54:35.125
+00:55:28.007 --> 00:55:30.850
 so it stays dark, even when it's muddy.
 
-00:54:35.475 --> 00:54:37.925
+00:55:31.200 --> 00:55:33.650
 That makes water easy to spot.
 
-00:54:38.275 --> 00:54:41.275
+00:55:34.000 --> 00:55:37.000
 Here are the same two
 days in false colour.
 
-00:54:41.625 --> 00:54:43.530
+00:55:37.350 --> 00:55:39.255
 As the line glides across,
 
-00:54:43.530 --> 00:54:47.925
+00:55:39.255 --> 00:55:43.650
 dark water spreads over land
 that was pink and green before.
 
-00:54:49.425 --> 00:54:52.792
+00:55:45.150 --> 00:55:48.517
 Both pictures are pinned
 to the same latitudes and
 
-00:54:52.792 --> 00:54:56.900
+00:55:48.517 --> 00:55:52.625
 longitudes, so every pixel
 compares the same patch of ground.
 
-00:54:57.250 --> 00:55:03.050
+00:55:52.975 --> 00:55:58.775
 Even so, the picture shows what the surge
 left behind, not the surge itself.
 
-00:55:03.850 --> 00:55:09.100
+00:55:59.575 --> 00:56:04.825
 Our last flood is on the other side
 of the Indian Ocean, south of the equator.
 
-00:55:09.450 --> 00:55:14.930
+00:56:05.175 --> 00:56:10.655
 In March twenty nineteen, Cyclone Idai
 grew strong in the Mozambique Channel,
 
-00:55:14.930 --> 00:55:17.350
+00:56:10.655 --> 00:56:13.075
 between Madagascar and Mozambique.
 
-00:55:17.700 --> 00:55:22.990
+00:56:13.425 --> 00:56:18.715
 South of the equator, a tropical cyclone
 turns clockwise as seen from above,
 
-00:55:22.990 --> 00:55:26.400
+00:56:18.715 --> 00:56:22.125
 the opposite way to the storms
 we've seen so far.
 
-00:55:26.750 --> 00:55:29.476
+00:56:22.475 --> 00:56:25.201
 Here's Idai on the fourteenth of March,
 
-00:55:29.476 --> 00:55:32.900
-the day it came
-ashore, seen by a NASA satellite.
+00:56:25.201 --> 00:56:28.625
+the day it came ashore,
+seen by a NASA satellite.
 
-00:55:33.250 --> 00:55:37.018
+00:56:28.975 --> 00:56:32.743
 It reached the coast near
 the city of Beira around midnight,
 
-00:55:37.018 --> 00:55:38.651
-between the fourteenth and
+00:56:32.743 --> 00:56:34.627
+between the fourteenth and the
 
-00:55:38.651 --> 00:55:43.675
-the fifteenth, with winds of about eighty
-five knots, averaged over ten minutes.
+00:56:34.627 --> 00:56:39.400
+fifteenth, with winds of about eighty five
+knots, averaged over ten minutes.
 
-00:55:44.025 --> 00:55:46.542
+00:56:39.750 --> 00:56:42.267
 With the knot converted as for Nargis,
 
-00:55:46.542 --> 00:55:50.450
-that's about a hundred and fifty
-seven kilometres per hour.
+00:56:42.267 --> 00:56:46.175
+that's about a hundred and fifty seven
+kilometres per hour.
 
-00:55:50.800 --> 00:55:54.400
-And in metres
-per second, it's about forty four.
+00:56:46.525 --> 00:56:50.125
+And in metres per second,
+it's about forty four.
 
-00:55:55.900 --> 00:55:58.853
+00:56:51.625 --> 00:56:54.578
 Beira and the town of Buzi sit on low,
 
-00:55:58.853 --> 00:56:02.350
+00:56:54.578 --> 00:56:58.075
 flat land where two big
 rivers reach the sea.
 
-00:56:02.700 --> 00:56:04.450
+00:56:58.425 --> 00:57:00.175
 Let's zoom in.
 
-00:56:05.250 --> 00:56:09.893
+00:57:00.975 --> 00:57:05.618
 Here's ERA5's wind at seven
 in the evening, universal time,
 
-00:56:09.893 --> 00:56:14.300
+00:57:05.618 --> 00:57:10.025
 on the fourteenth of March, a few
 hours before landfall.
 
-00:56:14.650 --> 00:56:18.886
+00:57:10.375 --> 00:57:14.611
 Its strongest wind is about two
 thirds of the official estimate,
 
-00:56:18.886 --> 00:56:21.600
+00:57:14.611 --> 00:57:17.325
 so once more we use it for the direction.
 
-00:56:21.950 --> 00:56:26.883
+00:57:17.675 --> 00:57:22.608
 Idai turns clockwise, as seen
 from above, so on its western side,
 
-00:56:26.883 --> 00:56:30.450
+00:57:22.608 --> 00:57:26.175
 where Beira was, the wind
 blew in from the sea.
 
-00:56:30.800 --> 00:56:33.275
+00:57:26.525 --> 00:57:29.000
 Our point is Beira's seafront.
 
-00:56:33.625 --> 00:56:36.215
+00:57:29.350 --> 00:57:31.940
 Going south-west along the coast there,
 
-00:56:36.215 --> 00:56:39.868
-we move about fifty
-two point three kilometres west and
+00:57:31.940 --> 00:57:35.328
+we move about fifty two point three
+kilometres west
 
-00:56:39.868 --> 00:56:42.525
-thirty five point nine kilometres south.
+00:57:35.328 --> 00:57:38.250
+and thirty five point nine
+kilometres south.
 
-00:56:42.875 --> 00:56:46.301
+00:57:38.600 --> 00:57:42.026
 The south leg over the west
 leg gives the tangent,
 
-00:56:46.301 --> 00:56:50.275
-so the coast runs about thirty
-four degrees south of west.
+00:57:42.026 --> 00:57:46.000
+so the coast runs about
+thirty four degrees south of west.
 
-00:56:50.625 --> 00:56:52.601
+00:57:46.350 --> 00:57:48.326
 Measured clockwise from north,
 
-00:56:52.601 --> 00:56:56.225
-that's a bearing of two
-hundred and thirty six degrees.
+00:57:48.326 --> 00:57:51.950
+that's a bearing
+of two hundred and thirty six degrees.
 
-00:56:56.575 --> 00:56:59.584
+00:57:52.300 --> 00:57:55.309
 So alpha, ninety degrees
 minus the bearing,
 
-00:56:59.584 --> 00:57:03.783
-plus a full turn, is about two
-hundred and fourteen degrees,
+00:57:55.309 --> 00:57:59.508
+plus a full turn, is about
+two hundred and fourteen degrees,
 
-00:57:03.783 --> 00:57:07.841
+00:57:59.508 --> 00:58:03.566
 with a cosine of about
 minus zero point eight two nine and
 
-00:57:07.841 --> 00:57:11.200
+00:58:03.566 --> 00:58:06.925
 a sine of about
 minus zero point five five nine.
 
-00:57:11.550 --> 00:57:15.250
+00:58:07.275 --> 00:58:10.975
 Then y hat prime points
 south-east, out to sea.
 
-00:57:15.600 --> 00:57:19.798
+00:58:11.325 --> 00:58:15.523
 ERA5's wind there was about
 twenty two metres per second,
 
-00:57:19.798 --> 00:57:21.714
+00:58:15.523 --> 00:58:17.439
 from the south-south-east:
 
-00:57:21.714 --> 00:57:26.575
+00:58:17.439 --> 00:58:22.300
 u about minus six point seven, and v about
 plus twenty point nine.
 
-00:57:26.925 --> 00:57:33.125
+00:58:22.650 --> 00:58:28.850
 Across the shore, we take minus u sine
 alpha, and v cosine alpha, and add them.
 
-00:57:33.475 --> 00:57:38.725
-Together, that's about minus twenty
-one metres per second: onto the land.
+00:58:29.200 --> 00:58:34.450
+Together, that's about minus twenty one
+metres per second: onto the land.
 
-00:57:40.225 --> 00:57:45.596
-The official lowest pressure was about
-nine hundred and fifty five hectopascals,
+00:58:35.950 --> 00:58:39.694
+At the white circle, ERA5's
+lowest pressure is about
 
-00:57:45.596 --> 00:57:49.625
-so the sea under the eye rose
-about fifty eight centimetres.
+00:58:39.694 --> 00:58:41.638
+nine hundred and eighty one
 
-00:57:49.975 --> 00:57:55.950
+00:58:41.638 --> 00:58:46.750
+hectopascals, but its storm is too
+weak, so we take the official value.
+
+00:58:47.100 --> 00:58:52.466
+The official centre pressure at that hour
+was about nine hundred and fifty five
+
+00:58:52.466 --> 00:58:57.425
+hectopascals, so the sea under the eye
+rose about fifty eight centimetres.
+
+00:58:57.775 --> 00:59:03.750
 So Idai's wind pushed the sea onto Beira's
 coast, and into the mouths of its rivers.
 
-00:57:56.300 --> 00:58:00.135
+00:59:04.100 --> 00:59:07.935
 There's no tide-gauge record
 of the water there in our data,
 
-00:58:00.135 --> 00:58:02.500
+00:59:07.935 --> 00:59:10.300
 so next come the pictures from space.
 
-00:58:03.300 --> 00:58:06.396
+00:59:11.100 --> 00:59:14.196
 Here's the land round
 Beira in natural colour,
 
-00:58:06.396 --> 00:58:08.752
+00:59:14.196 --> 00:59:16.552
 on the eleventh of March, three and
 
-00:58:08.752 --> 00:58:13.800
+00:59:16.552 --> 00:59:21.600
 a half days before landfall, and on
 the twenty fifth, about ten days after.
 
-00:58:15.300 --> 00:58:19.150
+00:59:23.100 --> 00:59:26.950
 Again, the flood is hard
 to see in natural colour.
 
-00:58:19.500 --> 00:58:22.400
+00:59:27.300 --> 00:59:30.200
 Now the same two days in false colour.
 
-00:58:22.750 --> 00:58:27.201
+00:59:30.550 --> 00:59:35.001
 Dark blue water covers wide plains
 along the rivers round Beira,
 
-00:58:27.201 --> 00:58:29.775
+00:59:35.001 --> 00:59:37.575
 where there were green fields before.
 
-00:58:31.275 --> 00:58:34.200
+00:59:39.075 --> 00:59:42.000
 On the left, the white blobs are clouds.
 
-00:58:34.550 --> 00:58:39.350
+00:59:42.350 --> 00:59:47.150
 How to map floods from space has
 its own movie later in this series.
 
-00:58:40.150 --> 00:58:44.839
+00:59:47.950 --> 00:59:52.639
 To sum up, the tip of r hat moves
 along a circle of radius one,
 
-00:58:44.839 --> 00:58:50.050
+00:59:52.639 --> 00:59:57.850
 so for a small turn delta theta, it
 moves delta theta along theta hat.
 
-00:58:50.400 --> 00:58:55.675
+00:59:58.200 --> 01:00:03.475
 That gave us the slopes of cosine
 and sine: minus sine, and cosine.
 
-00:58:56.025 --> 00:59:02.305
-So d r hat by d theta is theta hat, and d
-theta hat by d theta is minus r hat:
+01:00:03.825 --> 01:00:10.105
+So d r hat by d theta is theta hat,
+and d theta hat by d theta is minus r hat:
 
-00:59:02.305 --> 00:59:05.525
+01:00:10.105 --> 01:00:13.325
 each arrow swings towards the other one.
 
-00:59:05.875 --> 00:59:11.050
+01:00:13.675 --> 01:00:18.850
 The product rule says that a number times
 an arrow changes through both of them.
 
-00:59:11.400 --> 00:59:16.992
+01:00:19.200 --> 01:00:24.792
 On a ring, the angle grows
 at v over r, the velocity is v theta hat,
 
-00:59:16.992 --> 00:59:20.857
+01:00:24.792 --> 01:00:28.657
 and the acceleration
 is minus v squared over r,
 
-00:59:20.857 --> 00:59:24.475
+01:00:28.657 --> 01:00:32.275
 times r hat: inward, even
 at a steady speed.
 
-00:59:24.825 --> 00:59:30.442
-For Ian's ring, that's about zero point
-zero four eight metres per second squared,
+01:00:32.625 --> 01:00:37.146
+For Ian's ring, that's about
+zero point zero four eight metres per
 
-00:59:30.442 --> 00:59:33.525
-about two hundred times
-smaller than gravity.
+01:00:37.146 --> 01:00:41.325
+second squared, about
+two hundred times smaller than gravity.
 
-00:59:33.875 --> 00:59:37.415
+01:00:41.675 --> 01:00:45.215
 Adding the height z gives
 cylindrical coordinates,
 
-00:59:37.415 --> 00:59:41.664
+01:00:45.215 --> 01:00:49.464
 and averaging round the rings
 shows a tropical cyclone's in,
 
-00:59:41.664 --> 00:59:44.425
+01:00:49.464 --> 01:00:52.225
 up and out, in Ian and in Amphan alike.
 
-00:59:44.775 --> 00:59:50.074
+01:00:52.575 --> 01:00:57.874
 Turning the axes to fit the coast split
 Ian's wind into its parts along and
 
-00:59:50.074 --> 00:59:51.275
+01:00:57.874 --> 01:00:59.075
 across the shore.
 
-00:59:51.625 --> 00:59:53.011
+01:00:59.425 --> 01:01:00.811
 At Fort Myers Beach,
 
-00:59:53.011 --> 00:59:57.516
+01:01:00.811 --> 01:01:05.316
 about thirty one point five metres
 per second blew onto the land,
 
-00:59:57.516 --> 01:00:02.575
+01:01:05.316 --> 01:01:10.375
 and the gauge up the river at Fort
 Myers rose about two point two metres.
 
-01:00:02.925 --> 01:00:06.925
+01:01:10.725 --> 01:01:14.725
 At Saint Petersburg, about
 twelve point one blew out to sea,
 
-01:00:06.925 --> 01:00:10.125
+01:01:14.725 --> 01:01:17.925
 and the water fell about
 one point eight metres.
 
-01:00:10.475 --> 01:00:13.977
+01:01:18.275 --> 01:01:21.777
 Before the floods after
 Amphan, Nargis and Idai,
 
-01:00:13.977 --> 01:00:17.260
+01:01:21.777 --> 01:01:25.060
 the across-shore wind
 blew onto the land too:
 
-01:00:17.260 --> 01:00:20.909
+01:01:25.060 --> 01:01:29.803
 about twenty two point four,
-seventeen point eight
+seventeen point eight and twenty one
 
-01:00:20.909 --> 01:00:23.900
-and twenty one metres per second in ERA5.
+01:01:29.803 --> 01:01:31.700
+metres per second in ERA5.
 
-01:00:24.250 --> 01:00:27.212
+01:01:32.050 --> 01:01:35.012
 Radar saw Amphan's flood
 through the clouds,
 
-01:00:27.212 --> 01:00:31.050
+01:01:35.012 --> 01:01:38.850
 and false colour showed
 the floods after Nargis and Idai.
 
-01:00:31.400 --> 01:00:37.025
+01:01:39.200 --> 01:01:44.825
 In Part 3, we'll take these ideas to the
 biggest round shape of all: the Earth.
 
-01:00:37.375 --> 01:00:42.043
+01:01:45.175 --> 01:01:49.843
 There, we'll learn to turn latitudes
 and longitudes into kilometres,
 
-01:00:42.043 --> 01:00:46.300
+01:01:49.843 --> 01:01:54.100
 the rule behind the kilometre
 maps we used for today's coasts.
 
-01:00:47.100 --> 01:00:51.258
+01:01:54.900 --> 01:01:59.058
 This video is one of a series
 of related maths tutorials,
 
-01:00:51.258 --> 01:00:53.300
+01:01:59.058 --> 01:02:01.100
 so watch out for the others.
 
-01:00:53.650 --> 01:00:58.047
+01:02:01.450 --> 01:02:05.847
 They're made for students
 of atmospheric science, meteorology and
 
-01:00:58.047 --> 01:01:01.700
+01:02:05.847 --> 01:02:09.500
 fluid dynamics, and anyone
 else who needs these ideas.
 
-01:01:02.050 --> 01:01:06.878
+01:02:09.850 --> 01:02:14.678
 The notebook for coordinates, and the
 notebooks for the other maths concepts,
 
-01:01:06.878 --> 01:01:09.700
+01:02:14.678 --> 01:02:17.500
 are on the website that
 goes with this video.

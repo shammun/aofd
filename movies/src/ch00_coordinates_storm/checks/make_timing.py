@@ -81,8 +81,11 @@ def final(tts: Path) -> int:
     sb = yaml.safe_load(sbp.read_text(encoding="utf-8"))
     tm = json.loads((tts / "timing.json").read_text(encoding="utf-8"))
     bad = []
-    if tm.get("warnings"):
-        bad.append(f"TTS warnings: {tm['warnings']}")
+    # fix loop 1 (2026-11-07): cue-layout warnings of the splice's provisional cues are superseded by --recue (its own checks: <= 2 x 42,
+    # 1-7 s, words = script); any other warning (cps of a sentence, length) still stops
+    warn = [w for w in tm.get("warnings", []) if not (w.startswith("cue ") and "out of house limits" in w)]
+    if warn:
+        bad.append(f"TTS warnings: {warn}")
     sc_ = tm.get("self_check", {})
     if not (sc_.get("len_ok") and sc_.get("cues_ok")):
         bad.append(f"TTS self-check: {sc_}")
@@ -162,8 +165,11 @@ def splits_number(left: str, right: str) -> bool:
         return False
     L, R = re.sub(r"[^a-z]", "", lw[-1].lower()), re.sub(r"[^a-z]", "", rw[0].lower())
     prev = re.sub(r"[^a-z]", "", lw[-2].lower()) if len(lw) > 1 else ""
-    left_in = L in NUMW or L in ("point", "minus", "plus") or (L == "a" and R in ("hundred", "thousand")) or (L == "and" and prev in NUMW)
-    right_in = R in NUMW or R == "point" or (R == "and" and L in ("hundred", "thousand"))
+    # fix loop 1 (2026-11-07): as strict as the r8 auditor's capcheck.py: "and" on either side of a number word also counts ('twenty six |
+    # and a half', 'west and | twenty one point nine', 'zero point six | and the sine'), so no boundary sits next to a number's "and"
+    left_in = L in NUMW or L in ("point", "minus", "plus", "and") or (L == "a" and R in ("hundred", "thousand"))
+    right_in = R in NUMW or R in ("point", "minus", "plus") or (R == "and" and L in NUMW | {"point", "minus", "plus"})
+    del prev
     return left_in and right_in
 
 
@@ -184,6 +190,32 @@ def recue(write: bool) -> int:
     sys.modules.setdefault("soundfile", types.ModuleType("soundfile"))   # tts.py imports it at the top; not needed for cues
     sys.path.insert(0, str(ROOT / "tools"))
     import tts as T  # noqa: N812
+    # fix loop 1 (2026-11-07, r8 review 2 S11): the two-line wrap never breaks a line inside a spoken number ("seventy / two points");
+    # = tools/tts.py wrap with one more rule (splits_number); tts.py's own module global is rebound so split_for_cues uses it too
+    _wrap0 = T.wrap
+
+    def wrap_num(text: str) -> list[str]:
+        words = text.split()
+        greedy = T._greedy(words)
+        if len(greedy) != 2:
+            return greedy
+        best, best_score = None, None
+        for i in range(1, len(words)):
+            l1, l2 = " ".join(words[:i]), " ".join(words[i:])
+            if len(l1) > T.MAX_LINE or len(l2) > T.MAX_LINE or splits_number(l1, l2):
+                continue
+            short = i < 2 or i > len(words) - 2
+            score = (abs(len(l1) - len(l2)) - (10 if re.search(r"[,;:—–]$", l1) else 0) + (30 if short else 0)
+                     + (25 if T._pair_split(words[i - 1], words[i]) else 0) + T._break_cost(words[i - 1], words[i]))
+            if best_score is None or score < best_score:
+                best, best_score = [l1, l2], score
+        return best or _wrap0(text)
+    T.wrap = wrap_num
+
+    def clean(text: str) -> bool:
+        """the cue fits 2 x 42 and its line break (if any) is not inside a number"""
+        L = wrap_num(text)
+        return len(L) <= T.MAX_LINES and all(len(x) <= T.MAX_LINE for x in L) and not (len(L) == 2 and splits_number(L[0], L[1]))
     tm = json.loads((OUT / "timing.json").read_text(encoding="utf-8"))
     cues: list[list] = []                       # [t0, t1, text, sentence index]
     sents = [x for s in tm["scenes"] for x in s["sentences"]]
@@ -199,7 +231,8 @@ def recue(write: bool) -> int:
         # pass r8 (2026-11-07, user / Part 1 audit): no cue boundary inside a spoken number ("twenty two | point four"). If one
         # does, the sentence's words are re-split into the same number of cues (one more if needed), each boundary as close as
         # possible to where it was, none inside a number, every cue <= 2 x 42 characters; times stay character-proportional.
-        if len(mine) > 1 and any(splits_number(x[2], y[2]) for x, y in zip(mine, mine[1:])):
+        # fix loop 1: also when a cue's two lines can only be broken inside a number (clean() below): re-split the sentence
+        if any(splits_number(x[2], y[2]) for x, y in zip(mine, mine[1:])) or any(not clean(x[2]) for x in mine):
             import itertools
             words = sent.split()
             orig, acc = [], 0
@@ -207,7 +240,7 @@ def recue(write: bool) -> int:
                 acc += len(x[2].split())
                 orig.append(acc)
             best = None
-            for n_ in (len(mine), len(mine) + 1):
+            for n_ in (len(mine), len(mine) + 1, len(mine) + 2):
                 base = orig if n_ == len(mine) else sorted(set(orig + [len(words) // 2]))
                 if len(base) != n_ - 1:
                     base = [round(len(words) * (q + 1) / n_) for q in range(n_ - 1)]
@@ -219,7 +252,7 @@ def recue(write: bool) -> int:
                     segs = [" ".join(words[cuts[q]:cuts[q + 1]]) for q in range(len(cuts) - 1)]
                     if any(len(T.wrap(g)) > T.MAX_LINES or any(len(ln) > T.MAX_LINE for ln in T.wrap(g)) for g in segs):
                         continue
-                    if any(splits_number(x, y) for x, y in zip(segs, segs[1:])):
+                    if any(splits_number(x, y) for x, y in zip(segs, segs[1:])) or any(not clean(g) for g in segs):
                         continue
                     cost = sum(abs(c - b) for c, b in zip(combo, base))
                     if best is None or cost < best[0]:
@@ -242,10 +275,10 @@ def recue(write: bool) -> int:
             if a[1] - a[0] >= T.CUE_MIN or len(mine) == 1:
                 i += 1
                 continue
-            if i + 1 < len(mine) and len(T.wrap(a[2] + " " + mine[i + 1][2])) <= T.MAX_LINES:
+            if i + 1 < len(mine) and len(T.wrap(a[2] + " " + mine[i + 1][2])) <= T.MAX_LINES and clean(a[2] + " " + mine[i + 1][2]):
                 mine[i:i + 2] = [[a[0], mine[i + 1][1], a[2] + " " + mine[i + 1][2], si]]
                 continue
-            if i > 0 and len(T.wrap(mine[i - 1][2] + " " + a[2])) <= T.MAX_LINES:
+            if i > 0 and len(T.wrap(mine[i - 1][2] + " " + a[2])) <= T.MAX_LINES and clean(mine[i - 1][2] + " " + a[2]):
                 mine[i - 1:i + 1] = [[mine[i - 1][0], a[1], mine[i - 1][2] + " " + a[2], si]]
                 i -= 1
                 continue
@@ -256,7 +289,7 @@ def recue(write: bool) -> int:
             best = None
             for kk in range(1, len(words)):
                 l, r = " ".join(words[:kk]), " ".join(words[kk:])
-                if len(T.wrap(l)) > T.MAX_LINES or len(T.wrap(r)) > T.MAX_LINES or splits_number(l, r):
+                if len(T.wrap(l)) > T.MAX_LINES or len(T.wrap(r)) > T.MAX_LINES or splits_number(l, r) or not clean(l) or not clean(r):
                     continue
                 score = abs(len(l) - len(r)) - (10 if re.search(r"[,;:]$", l) else 0)
                 if best is None or score < best[0]:
@@ -270,7 +303,7 @@ def recue(write: bool) -> int:
             i = lo + 2
         cues += mine
     # checks
-    bad = []
+    bad, inline = [], []
     nsplit = [(c[2], d[2]) for c, d in zip(cues, cues[1:]) if c[3] == d[3] and splits_number(c[2], d[2])]
     if nsplit:
         bad.append(f"cue boundaries inside a number: {nsplit[:3]}")
@@ -283,6 +316,8 @@ def recue(write: bool) -> int:
         lines = T.wrap(c[2])
         if len(lines) > T.MAX_LINES or any(len(ln) > T.MAX_LINE for ln in lines):
             bad.append(f"cue {k_ + 1}: {lines}")
+        if len(lines) == 2 and splits_number(lines[0], lines[1]):
+            inline.append(f"{T.fmt_ts(c[0], '.')} {lines}")
         d = c[1] - c[0]
         if d > T.CUE_MAX + 1e-6 or (d < T.CUE_MIN - 1e-6 and len([q for q in cues if q[3] == c[3]]) > 1):
             bad.append(f"cue {k_ + 1}: {d:.2f} s")
@@ -303,6 +338,7 @@ def recue(write: bool) -> int:
             print("  + ", c[0], "|", c[1])
     cps = [(c[2], len(c[2]) / (c[1] - c[0])) for c in cues if len(c[2]) / (c[1] - c[0]) > T.MAX_CPS]
     print(f"  cues above {T.MAX_CPS} cps: {len(cps)}", *[f"{v:.1f} cps {t!r}" for t, v in cps[:8]], sep="\n    ")
+    print(f"  line breaks inside a number (within a cue): {len(inline)}", *inline[:12], sep="\n    ")
     if write:
         vtt, srt = ["WEBVTT", ""], []
         for i, (c0, c1, txt, _) in enumerate(cues, 1):

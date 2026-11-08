@@ -27,7 +27,7 @@ concepts:
 - the wind onshore at a coast (numbers in Part 4); storm surge and its sign flip; tide gauges as the record of Ian's surge
 - 'floods seen from space: Amphan by radar (Sentinel-1, through cloud), Nargis 2008 and Idai 2019 in natural colour then false colour 7-2-1 (why flood mappers
   use it)'
-target_duration_s: 3672.5
+target_duration_s: 3740.3
 fps: 30
 size:
 - 1920
@@ -85,1028 +85,306 @@ dry_run:
 build_1:
   tts:
     tool: tools/tts.py
-    run: G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_storm/r8/tts
+    run: G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_storm/fix1/tts
     voice: af_bella
     speed: 1.0
-    audio_s: 3670.0
-    total_frames: 110100
-    cues: 887
-    warnings: []
-    sentences: 532
-    words: 8867
+    audio_s: 3737.8
+    total_frames: 112134
+    cues: 901
+    warnings:
+    - 'cue 707: 7.4 s / 2 lines out of house limits'
+    - 'cue 780: 7.4 s / 2 lines out of house limits'
+    sentences: 537
+    words: 9034
     render_s: null
     self_check:
-      expected_s: 3670.0
-      audio_s: 3670.0
+      expected_s: 3737.8
+      audio_s: 3737.8
       diff_ms: 0.0
       len_ok: true
       cues_ok: true
-      spliced_r8:
-        method: sentence matching against the r7 narration (pass r8, show it don't voice it); new clips BS.1770-4 loudness-matched to the nearest re-used
+      spliced_fix1:
+        method: sentence matching against the r8 narration (fix loop 1 after the r8 reviews); new clips BS.1770-4 loudness-matched to the nearest re-used
           clips + look-ahead limiter (-1.5 dBTP)
-        corr_resynth: 0.9951
-        reused: 479
-        new: 53
+        corr_resynth: 0.9948
+        reused: 523
+        new: 14
         dropped:
-        - 's00_title S0: In this video, we''ll learn how turning arrows and cylindrical coordinates work, and see how meteorology uses them to look inside
-          a tropical cyclone, and to measure how its winds push the sea onto the coast.'
-        - 's03_tip_on_circle S14: So the tip slides a distance of one times delta theta, which is just delta theta.'
-        - 's04_slopes_sin_cos S12: The cosine drops from zero point six zero zero to zero point five nine two, a change of minus zero point zero zero eight.'
-        - 's04_slopes_sin_cos S13: Divided by zero point zero one, that''s minus zero point eight: minus the sine.'
-        - 's04_slopes_sin_cos S14: The sine grows from zero point eight zero zero to zero point eight zero six, a change of zero point zero zero six.'
-        - 's04_slopes_sin_cos S15: Divided by zero point zero one, that''s zero point six: the cosine.'
-        - 's07_toward_centre S15: Now divide each number by delta theta, zero point zero one, and we get minus zero point six, minus zero point eight.'
-        - 's08_product_rule S11: The product is now eleven times that, which is ten point nine four five, one point one.'
-        - 's08_product_rule S15: First, the change in the number, times the old arrow: one times one, zero, which is one, zero.'
-        - 's08_product_rule S16: Second, the old number times the change in the arrow, which went from one, zero to zero point nine nine five, zero point
-          one, a change of minus zero point zero zero five, zero point one: ten times that is minus zero point zero five, one.'
-        - 's08_product_rule S17: Third, the two changes multiplied together: one times minus zero point zero zero five, zero point one, which is minus zero
-          point zero zero five, zero point one.'
-        - 's09_dtheta_dt S5: Then u sub r is ten times zero point six, which is six, and u sub theta is minus ten times zero point eight, which is minus
-          eight.'
-        - 's09_dtheta_dt S6: Round Ian''s ring, we did this at seventy two points, one every five degrees, and averaged them: the sum of the seventy two
-          values of u sub theta, divided by seventy two, is about thirty four point eight metres per second.'
-        - 's09_dtheta_dt S17: Thirty four point eight metres per second, divided by twenty five thousand metres, is about zero point zero zero one three
-          nine radians per second.'
-        - 's09_dtheta_dt S20: So one full lap, two pi radians, takes two pi divided by zero point zero zero one three nine.'
-        - 's13_acceleration_numbers S2: Thirty four point eight squared is about twelve hundred and eleven.'
-        - 's13_acceleration_numbers S3: Divided by twenty five thousand metres, that''s about zero point zero four eight metres per second squared.'
-        - 's13_acceleration_numbers S4: With easy numbers, thirty five squared over twenty five thousand is about zero point zero four nine, almost the
-          same.'
-        - 's14_steady_but_turning S4: In one minute, theta grows by zero point zero zero one three nine times sixty, which is about zero point zero eight
-          four radians, or about five degrees.'
-        - 's14_steady_but_turning S11: So by the arc rule, it''s about thirty four point eight times zero point zero eight four, which is about two point
-          nine metres per second.'
-        - 's20_ian_curtain S14: All of it has to leave through the cylinder''s lid, which is a much bigger area, so it rises more slowly: two times one
-          thousand times sixteen, divided by thirty thousand, is about one metre per second.'
-        - 's23_amphan_ring S11: Six over twenty is zero point three, so Amphan''s inflow angle is about seventeen degrees, close to Ian''s twenty one.'
-        - 's27_coast_angle S3: So the coast leans west of north, by an angle whose tangent is the opposite side over the adjacent side: fifty five over
-          ninety one point five.'
-        - 's27_coast_angle S5: So the coast runs thirty one degrees west of north: a compass bearing of three hundred and sixty minus thirty one, which
-          is three hundred and twenty nine degrees.'
-        - 's27_coast_angle S7: So alpha is ninety minus three hundred and twenty nine, which is minus two hundred and thirty nine degrees, and adding a
-          full turn, three hundred and sixty, gives a hundred and twenty one degrees.'
-        - 's28_fmb_calc S3: The part along the shore is u cosine alpha plus v sine alpha: twenty two point two times minus zero point five one five, plus
-          twenty four point three times zero point eight five seven.'
-        - 's28_fmb_calc S4: That''s about minus eleven point four, plus twenty point eight, which is about nine point four metres per second.'
-        - 's28_fmb_calc S5: The part across the shore is minus u sine alpha plus v cosine alpha: minus twenty two point two times zero point eight five
-          seven, plus twenty four point three times minus zero point five one five.'
-        - 's28_fmb_calc S6: That''s about minus nineteen, minus twelve point five, which is about minus thirty one point five metres per second.'
-        - 's28_fmb_calc S9: Let''s check that it''s the same wind: nine point four squared plus thirty one point five squared is about a thousand and eighty
-          one, and its square root is about thirty two point nine, the thirty three metres per second we started with.'
-        - 's29_stp_calc S2: Six point eight over fifty five point seven is about zero point one two two, so the coast leans only about seven degrees west
-          of north, a bearing of about three hundred and fifty three degrees.'
-        - 's29_stp_calc S3: So alpha is ninety minus three hundred and fifty three, plus three hundred and sixty, which is about ninety seven degrees, with
-          a cosine of about minus zero point one two two and a sine of about zero point nine nine three.'
-        - 's29_stp_calc S5: Across the shore, minus u sine alpha is about ten point one, and v cosine alpha is about two.'
-        - 's29_stp_calc S8: Along the shore, u cosine alpha plus v sine alpha is about one point two, minus fifteen point nine, which is minus fourteen
-          point seven, so it also ran down the coast, towards the south.'
-        - 's33_amphan_wind S5: Twenty one point nine over ninety two point nine is about zero point two three six, so the coast runs about thirteen degrees
-          south of west.'
-        - 's33_amphan_wind S6: That''s a bearing of two hundred and seventy minus thirteen, which is two hundred and fifty seven degrees.'
-        - 's33_amphan_wind S7: So alpha is ninety minus two hundred and fifty seven, plus three hundred and sixty, which is about a hundred and ninety three
-          degrees, with a cosine of about minus zero point nine seven four and a sine of about minus zero point two two five.'
-        - 's33_amphan_wind S10: Across the shore, minus u sine alpha is about minus one point nine, and v cosine alpha is about minus twenty point five.'
-        - 's33_amphan_wind S12: The official lowest pressure was about nine hundred and sixty hectopascals, fifty three below normal, so the sea under the
-          eye rose about fifty three centimetres.'
-        - 's34_amphan_radar S9: Each pixel is a square sixty metres on each side, so it covers three thousand six hundred square metres, or zero point zero
-          zero three six square kilometres.'
-        - 's34_amphan_radar S10: Thirty four thousand seven hundred times zero point zero zero three six is about a hundred and twenty five square kilometres
-          of new water.'
-        - 's36_nargis_wind S4: Ten point eight over sixty nine point five is about zero point one five five, so the coast runs about nine degrees north
-          of west.'
-        - 's36_nargis_wind S5: That''s a bearing of two hundred and seventy plus nine, which is two hundred and seventy nine degrees.'
-        - 's36_nargis_wind S6: So alpha is ninety minus two hundred and seventy nine, plus three hundred and sixty, which is about a hundred and seventy
-          one degrees, with a cosine of about minus zero point nine eight eight and a sine of about zero point one five six.'
-        - 's36_nargis_wind S9: Across the shore, minus u sine alpha is about minus one point five, and v cosine alpha is about minus sixteen point three.'
-        - 's36_nargis_wind S11: The official lowest pressure was about nine hundred and sixty two hectopascals, fifty one below normal, so the sea under
-          the eye rose about fifty one centimetres.'
-        - 's38_idai_intro S5: Times one point eight five two, that''s about a hundred and fifty seven kilometres per hour.'
-        - 's38_idai_intro S6: Divided by three point six, it''s about forty four metres per second.'
-        - 's39_idai_wind S5: Thirty five point nine over fifty two point three is about zero point six eight six, so the coast runs about thirty four degrees
-          south of west.'
-        - 's39_idai_wind S6: That''s a bearing of two hundred and seventy minus thirty four, which is two hundred and thirty six degrees.'
-        - 's39_idai_wind S7: So alpha is ninety minus two hundred and thirty six, plus three hundred and sixty, which is about two hundred and fourteen
-          degrees, with a cosine of about minus zero point eight two nine and a sine of about minus zero point five five nine.'
-        - 's39_idai_wind S10: Across the shore, minus u sine alpha is about minus three point seven, and v cosine alpha is about minus seventeen point three.'
-        - 's39_idai_wind S12: The official lowest pressure was about nine hundred and fifty five hectopascals, fifty eight below normal, so the sea under
-          the eye rose about fifty eight centimetres.'
+        - 's09_dtheta_dt S19: That''s about zero point zero eight degrees every second, or about five degrees every minute.'
+        - 's14_steady_but_turning S16: The Earth''s spin pushes the other way, a little outward, about twenty times weaker, so the pressure force has to
+          be a little stronger than the turning alone needs.'
+        - 's15_cylinder S11: That''s because all the places at one distance r form a cylinder round the storm''s axis.'
+        - 's20_ian_curtain S15: And radar on a hurricane-hunter aircraft measured it: about three metres per second, eight and a half kilometres up, with
+          single towers near ten.'
+        - 's21_amphan_intro S7: On the twentieth, it came ashore in the Sundarbans, the huge mangrove forest on the border between India''s state of West
+          Bengal and Bangladesh.'
+        - 's30_onshore_piles S6: When Ian came ashore, its centre''s pressure was about nine hundred and forty one hectopascals, seventy two below the normal
+          one thousand and thirteen, so the sea under the eye rose by only about seventy two centimetres.'
+        - 's33_amphan_wind S12: The official lowest pressure was about nine hundred and sixty hectopascals, so the sea under the eye rose about fifty three
+          centimetres.'
+        - 's36_nargis_wind S11: The official lowest pressure was about nine hundred and sixty two hectopascals, so the sea under the eye rose about fifty
+          one centimetres.'
+        - 's39_idai_wind S12: The official lowest pressure was about nine hundred and fifty five hectopascals, so the sea under the eye rose about fifty
+          eight centimetres.'
         replaced:
-        - scene: s00_title
-          sentence: 0
-          text: In this video, we'll learn how turning arrows and cylindrical coordinates work, and see how they're used to look inside a tropical cyclone,
-            and to measure how its winds push the sea onto the coast.
+        - scene: s09_dtheta_dt
+          sentence: 19
+          text: One radian is about fifty seven point three degrees, so that's about zero point zero eight degrees every second, or about five degrees every
+            minute.
           audio_text: null
           neighbours_lufs:
-          - -16.07
-          - -16.25
-          target_lufs: -16.16
-          raw_lufs: -23.92
-          gain_db: 8.15
-          limiter_gr_db: -2.54
-          final_lufs: -16.18
-          true_peak_dbtp: -1.71
-          dur_s: 12.05
-          beat: false
-        - scene: s03_tip_on_circle
-          sentence: 14
-          text: So the tip slides a distance of just delta theta.
-          audio_text: null
-          neighbours_lufs:
-          - -16.64
-          - -16.29
-          - -16.33
-          - -16.43
-          target_lufs: -16.42
-          raw_lufs: -25.78
-          gain_db: 10.49
-          limiter_gr_db: -6.56
-          final_lufs: -16.51
-          true_peak_dbtp: -1.99
-          dur_s: 3.475
-          beat: true
-        - scene: s04_slopes_sin_cos
-          sentence: 12
-          text: The cosine drops from zero point six zero zero to zero point five nine two.
-          audio_text: null
-          neighbours_lufs:
-          - -16.18
-          - -16.18
-          - -16.46
-          - -17.0
-          target_lufs: -16.44
-          raw_lufs: -25.64
-          gain_db: 9.8
-          limiter_gr_db: -4.23
-          final_lufs: -16.48
-          true_peak_dbtp: -2.08
-          dur_s: 5.625
-          beat: false
-        - scene: s04_slopes_sin_cos
-          sentence: 13
-          text: 'Its change, divided by the turn, is minus zero point eight: minus the sine.'
-          audio_text: null
-          neighbours_lufs:
-          - -16.18
-          - -16.18
-          - -16.46
-          - -17.0
-          target_lufs: -16.44
-          raw_lufs: -24.7
-          gain_db: 8.79
-          limiter_gr_db: -4.95
-          final_lufs: -16.57
-          true_peak_dbtp: -1.86
-          dur_s: 5.5
-          beat: true
-        - scene: s04_slopes_sin_cos
-          sentence: 14
-          text: The sine grows from zero point eight zero zero to zero point eight zero six.
-          audio_text: null
-          neighbours_lufs:
-          - -16.18
-          - -16.18
-          - -16.46
-          - -17.0
-          target_lufs: -16.44
-          raw_lufs: -25.51
-          gain_db: 9.48
-          limiter_gr_db: -3.78
-          final_lufs: -16.46
-          true_peak_dbtp: -1.86
-          dur_s: 5.4
-          beat: false
-        - scene: s04_slopes_sin_cos
-          sentence: 15
-          text: 'Its change, divided by the turn, is zero point six: the cosine.'
-          audio_text: null
-          neighbours_lufs:
-          - -16.18
-          - -16.18
-          - -16.46
-          - -17.0
-          target_lufs: -16.44
-          raw_lufs: -25.39
-          gain_db: 9.42
-          limiter_gr_db: -3.86
-          final_lufs: -16.47
-          true_peak_dbtp: -2.02
-          dur_s: 4.8
-          beat: true
-        - scene: s07_toward_centre
-          sentence: 15
-          text: Now divide each number by delta theta, and we get minus zero point six, minus zero point eight.
-          audio_text: null
-          neighbours_lufs:
-          - -16.9
-          - -16.36
-          - -16.73
-          - -16.74
-          target_lufs: -16.68
-          raw_lufs: -24.47
-          gain_db: 8.17
-          limiter_gr_db: -4.13
-          final_lufs: -16.69
-          true_peak_dbtp: -1.99
-          dur_s: 6.95
-          beat: true
-        - scene: s08_product_rule
-          sentence: 11
-          text: The new speed times the new arrow is about ten point nine four five, one point one.
-          audio_text: null
-          neighbours_lufs:
-          - -16.03
-          - -16.22
+          - -16.28
           - -16.5
-          - -15.55
-          target_lufs: -16.06
-          raw_lufs: -24.48
-          gain_db: 9.34
-          limiter_gr_db: -6.18
-          final_lufs: -16.37
-          true_peak_dbtp: -1.53
-          dur_s: 5.7
-          beat: false
-        - scene: s08_product_rule
-          sentence: 15
-          text: First, the change in the number, times the old arrow, gives one, zero.
-          audio_text: null
-          neighbours_lufs:
-          - -17.13
-          - -15.55
-          - -16.66
-          - -14.72
-          target_lufs: -15.91
-          raw_lufs: -25.02
-          gain_db: 9.81
-          limiter_gr_db: -5.65
-          final_lufs: -15.94
-          true_peak_dbtp: -1.83
-          dur_s: 4.675
-          beat: false
-        - scene: s08_product_rule
-          sentence: 16
-          text: 'Second, the old number times the change in the arrow: the arrow changed by minus zero point zero zero five, zero point one, so this piece
-            is minus zero point zero five, one.'
-          audio_text: null
-          neighbours_lufs:
-          - -17.13
-          - -15.55
-          - -16.66
-          - -14.72
-          target_lufs: -15.91
-          raw_lufs: -24.37
-          gain_db: 8.7
-          limiter_gr_db: -4.82
-          final_lufs: -15.92
-          true_peak_dbtp: -1.73
-          dur_s: 12.9
-          beat: false
-        - scene: s08_product_rule
-          sentence: 17
-          text: Third, the two changes multiplied together give minus zero point zero zero five, zero point one.
-          audio_text: null
-          neighbours_lufs:
-          - -17.13
-          - -15.55
-          - -16.66
-          - -14.72
-          target_lufs: -15.91
-          raw_lufs: -24.49
-          gain_db: 8.82
-          limiter_gr_db: -2.33
-          final_lufs: -15.92
-          true_peak_dbtp: -1.64
-          dur_s: 7.725
-          beat: true
-        - scene: s09_dtheta_dt
-          sentence: 5
-          text: Multiplying the wind's parts by the cosine and the sine, as the two formulas say, u sub r is six, and u sub theta is minus eight.
-          audio_text: null
-          neighbours_lufs:
-          - -16.46
-          - -16.47
-          - -16.47
-          - -17.04
-          target_lufs: -16.6
-          raw_lufs: -24.3
-          gain_db: 8.15
-          limiter_gr_db: -3.64
-          final_lufs: -16.63
-          true_peak_dbtp: -1.74
-          dur_s: 9.675
-          beat: true
-        - scene: s09_dtheta_dt
-          sentence: 6
-          text: Round Ian's ring, we did this at seventy two points, one every five degrees, and the average of the seventy two values of u sub theta is
-            about thirty four point eight metres per second.
-          audio_text: null
-          neighbours_lufs:
-          - -16.46
-          - -16.47
-          - -16.47
-          - -17.04
-          target_lufs: -16.6
-          raw_lufs: -24.42
-          gain_db: 8.46
-          limiter_gr_db: -8.29
-          final_lufs: -16.63
-          true_peak_dbtp: -1.79
-          dur_s: 12.525
-          beat: false
-        - scene: s09_dtheta_dt
-          sentence: 17
-          text: The speed, thirty four point eight metres per second, divided by the radius, twenty five thousand metres, is about zero point zero zero
-            one three nine radians per second.
-          audio_text: null
-          neighbours_lufs:
-          - -16.23
-          - -16.72
-          - -16.28
-          - -16.72
-          target_lufs: -16.48
-          raw_lufs: -24.48
-          gain_db: 8.61
-          limiter_gr_db: -6.23
-          final_lufs: -16.5
-          true_peak_dbtp: -1.86
-          dur_s: 12.0
-          beat: true
-        - scene: s09_dtheta_dt
-          sentence: 20
-          text: So one full lap, two pi radians, takes two pi divided by this rate.
-          audio_text: null
-          neighbours_lufs:
-          - -16.72
-          - -16.28
+          - -16.48
           - -16.61
-          - -16.25
-          target_lufs: -16.46
-          raw_lufs: -25.27
-          gain_db: 9.13
-          limiter_gr_db: -2.37
+          target_lufs: -16.47
+          raw_lufs: -24.71
+          gain_db: 8.77
+          limiter_gr_db: -5.43
           final_lufs: -16.48
-          true_peak_dbtp: -1.76
-          dur_s: 5.35
-          beat: false
-        - scene: s13_acceleration_numbers
-          sentence: 2
-          text: For Ian's ring, we square the speed, thirty four point eight metres per second, then divide by the radius, twenty five thousand metres.
-          audio_text: null
-          neighbours_lufs:
-          - -16.31
-          - -15.91
-          - -15.87
-          - -15.98
-          target_lufs: -16.01
-          raw_lufs: -24.46
-          gain_db: 8.85
-          limiter_gr_db: -4.23
-          final_lufs: -16.03
-          true_peak_dbtp: -2.0
-          dur_s: 9.3
-          beat: false
-        - scene: s13_acceleration_numbers
-          sentence: 3
-          text: That gives about zero point zero four eight metres per second squared.
-          audio_text: null
-          neighbours_lufs:
-          - -16.31
-          - -15.91
-          - -15.87
-          - -15.98
-          target_lufs: -16.01
-          raw_lufs: -24.94
-          gain_db: 9.29
-          limiter_gr_db: -3.24
-          final_lufs: -16.03
-          true_peak_dbtp: -1.58
-          dur_s: 4.875
-          beat: true
-        - scene: s13_acceleration_numbers
-          sentence: 4
-          text: Rounding the speed to thirty five gives about zero point zero four nine, almost the same.
-          audio_text: null
-          neighbours_lufs:
-          - -16.31
-          - -15.91
-          - -15.87
-          - -15.98
-          target_lufs: -16.01
-          raw_lufs: -24.98
-          gain_db: 9.65
-          limiter_gr_db: -5.98
-          final_lufs: -16.03
-          true_peak_dbtp: -1.9
-          dur_s: 6.25
-          beat: true
-        - scene: s14_steady_but_turning
-          sentence: 4
-          text: 'In one minute, theta grows by its rate times sixty seconds: about zero point zero eight four radians, or about five degrees.'
-          audio_text: null
-          neighbours_lufs:
-          - -16.08
-          - -18.04
-          - -16.52
-          - -16.82
-          target_lufs: -16.81
-          raw_lufs: -24.7
-          gain_db: 8.35
-          limiter_gr_db: -4.26
-          final_lufs: -16.82
-          true_peak_dbtp: -1.79
-          dur_s: 8.975
-          beat: true
-        - scene: s14_steady_but_turning
-          sentence: 11
-          text: So by the arc rule, radius times angle, it's about two point nine metres per second.
-          audio_text: null
-          neighbours_lufs:
-          - -15.98
-          - -15.63
-          - -15.68
-          - -16.44
-          target_lufs: -15.92
-          raw_lufs: -24.6
-          gain_db: 9.16
-          limiter_gr_db: -3.96
-          final_lufs: -15.94
-          true_peak_dbtp: -1.93
-          dur_s: 6.2
-          beat: true
-        - scene: s20_ian_curtain
-          sentence: 14
-          text: 'All of it has to leave through the cylinder''s lid, which is a much bigger area, so it rises more slowly: twice the depth times the inflow
-            speed, divided by the radius, is about one metre per second.'
-          audio_text: null
-          neighbours_lufs:
-          - -16.51
-          - -16.51
-          - -16.52
-          - -16.56
-          target_lufs: -16.52
-          raw_lufs: -24.0
-          gain_db: 7.87
-          limiter_gr_db: -4.58
-          final_lufs: -16.53
-          true_peak_dbtp: -2.0
-          dur_s: 13.525
-          beat: true
-        - scene: s23_amphan_ring
-          sentence: 11
-          text: The radial wind over the tangential wind gives Amphan an inflow angle of about seventeen degrees, close to Ian's twenty one.
-          audio_text: null
-          neighbours_lufs:
-          - -16.91
-          - -16.42
-          - -16.33
-          - -16.49
-          target_lufs: -16.53
-          raw_lufs: -24.8
-          gain_db: 8.74
-          limiter_gr_db: -5.31
-          final_lufs: -16.54
-          true_peak_dbtp: -1.89
-          dur_s: 9.275
-          beat: true
-        - scene: s27_coast_angle
-          sentence: 3
-          text: So the coast leans west of north, by an angle whose tangent is the opposite side, the west leg, over the adjacent side, the north leg.
-          audio_text: null
-          neighbours_lufs:
-          - -15.93
-          - -15.97
-          - -16.0
-          - -15.92
-          target_lufs: -15.96
-          raw_lufs: -24.02
-          gain_db: 8.73
-          limiter_gr_db: -4.79
-          final_lufs: -15.99
-          true_peak_dbtp: -1.71
-          dur_s: 9.575
-          beat: false
-        - scene: s27_coast_angle
-          sentence: 5
-          text: 'So the coast runs thirty one degrees west of north: measured clockwise from north, that''s a compass bearing of three hundred and twenty
-            nine degrees.'
-          audio_text: null
-          neighbours_lufs:
-          - -16.0
-          - -15.93
-          - -15.92
-          - -15.94
-          target_lufs: -15.95
-          raw_lufs: -24.58
-          gain_db: 9.3
-          limiter_gr_db: -4.93
-          final_lufs: -15.98
-          true_peak_dbtp: -1.85
-          dur_s: 9.5
-          beat: true
-        - scene: s27_coast_angle
-          sentence: 7
-          text: So alpha is ninety degrees minus the bearing, which comes out negative, and adding a full turn gives a hundred and twenty one degrees.
-          audio_text: null
-          neighbours_lufs:
-          - -15.92
-          - -16.0
-          - -15.94
-          - -15.93
-          target_lufs: -15.95
-          raw_lufs: -24.84
-          gain_db: 9.41
-          limiter_gr_db: -6.83
-          final_lufs: -15.96
-          true_peak_dbtp: -1.82
-          dur_s: 8.8
-          beat: true
-        - scene: s28_fmb_calc
-          sentence: 3
-          text: 'The part along the shore is u cosine alpha plus v sine alpha: we multiply the east part, u, by the cosine of alpha, minus zero point five
-            one five, and the north part, v, by its sine, zero point eight five seven.'
-          audio_text: null
-          neighbours_lufs:
-          - -15.98
-          - -15.71
-          - -16.29
-          - -15.93
-          target_lufs: -15.97
-          raw_lufs: -24.06
-          gain_db: 8.56
-          limiter_gr_db: -5.17
-          final_lufs: -15.99
-          true_peak_dbtp: -1.77
-          dur_s: 15.75
-          beat: false
-        - scene: s28_fmb_calc
-          sentence: 4
-          text: Adding the two products gives about nine point four metres per second.
-          audio_text: null
-          neighbours_lufs:
-          - -15.98
-          - -15.71
-          - -16.29
-          - -15.93
-          target_lufs: -15.97
-          raw_lufs: -25.1
-          gain_db: 9.63
-          limiter_gr_db: -3.55
-          final_lufs: -16.0
-          true_peak_dbtp: -1.86
-          dur_s: 4.725
-          beat: true
-        - scene: s28_fmb_calc
-          sentence: 5
-          text: 'The part across the shore is minus u sine alpha plus v cosine alpha: now u goes with minus the sine, and v with the cosine.'
-          audio_text: null
-          neighbours_lufs:
-          - -15.98
-          - -15.71
-          - -16.29
-          - -15.93
-          target_lufs: -15.97
-          raw_lufs: -24.55
-          gain_db: 9.21
-          limiter_gr_db: -5.88
-          final_lufs: -16.01
           true_peak_dbtp: -1.98
-          dur_s: 9.35
-          beat: false
-        - scene: s28_fmb_calc
-          sentence: 6
-          text: Adding these two products gives about minus thirty one point five metres per second.
-          audio_text: null
-          neighbours_lufs:
-          - -15.98
-          - -15.71
-          - -16.29
-          - -15.93
-          target_lufs: -15.97
-          raw_lufs: -25.17
-          gain_db: 9.43
-          limiter_gr_db: -3.5
-          final_lufs: -15.98
-          true_peak_dbtp: -1.95
-          dur_s: 5.925
+          dur_s: 9.875
           beat: true
-        - scene: s28_fmb_calc
-          sentence: 9
-          text: 'Let''s check that it''s the same wind: we square the along and across parts, add them, and take the square root, which gives about thirty
-            two point nine, the thirty three metres per second we started with.'
-          audio_text: null
+        - scene: s14_steady_but_turning
+          sentence: 16
+          text: 'The Earth''s spin pushes the other way, a little outward: that push is the speed times the Coriolis parameter f, which comes from the Earth''s
+            spin rate and Ian''s latitude, about twenty six and a half degrees north.'
+          audio_text: 'The Earth''s spin pushes the other way, a little outward: that push is the speed times the [Coriolis](/kˌɔɹiˈOlɪs/) parameter f,
+            which comes from the Earth''s spin rate and Ian''s latitude, about twenty six and a half degrees north.'
           neighbours_lufs:
-          - -15.93
-          - -16.29
-          - -16.0
-          - -15.93
-          target_lufs: -16.03
-          raw_lufs: -24.14
-          gain_db: 8.5
-          limiter_gr_db: -8.05
-          final_lufs: -16.05
-          true_peak_dbtp: -1.74
-          dur_s: 12.775
-          beat: true
-        - scene: s29_stp_calc
-          sentence: 2
-          text: With the same tangent rule, west leg over north leg, the coast leans only about seven degrees west of north, a bearing of about three hundred
-            and fifty three degrees.
-          audio_text: null
-          neighbours_lufs:
-          - -15.93
-          - -16.0
-          - -15.97
-          - -15.95
+          - -16.11
+          - -16.21
+          - -15.9
+          - -15.65
           target_lufs: -15.96
-          raw_lufs: -24.56
-          gain_db: 9.17
-          limiter_gr_db: -6.71
-          final_lufs: -15.98
-          true_peak_dbtp: -1.83
-          dur_s: 11.375
-          beat: false
-        - scene: s29_stp_calc
-          sentence: 3
-          text: So alpha, ninety degrees minus the bearing, plus a full turn, is about ninety seven degrees, with a cosine of about minus zero point one
-            two two and a sine of about zero point nine nine three.
-          audio_text: null
-          neighbours_lufs:
-          - -15.93
-          - -16.0
-          - -15.97
-          - -15.95
-          target_lufs: -15.96
-          raw_lufs: -24.51
-          gain_db: 9.1
-          limiter_gr_db: -7.99
-          final_lufs: -15.98
-          true_peak_dbtp: -1.82
-          dur_s: 13.55
-          beat: true
-        - scene: s29_stp_calc
-          sentence: 5
-          text: Across the shore, we take minus u sine alpha, and v cosine alpha, and add them.
-          audio_text: null
-          neighbours_lufs:
-          - -15.97
-          - -15.93
-          - -15.95
-          - -15.92
-          target_lufs: -15.94
-          raw_lufs: -24.71
-          gain_db: 9.25
-          limiter_gr_db: -3.55
-          final_lufs: -15.96
-          true_peak_dbtp: -1.52
-          dur_s: 6.2
-          beat: false
-        - scene: s29_stp_calc
-          sentence: 8
-          text: Along the shore, u cosine alpha plus v sine alpha comes to about minus fourteen point seven, so the wind also ran down the coast, towards
-            the south.
-          audio_text: null
-          neighbours_lufs:
-          - -15.92
-          - -15.95
-          - -15.93
-          - -15.98
-          target_lufs: -15.94
-          raw_lufs: -24.43
-          gain_db: 8.9
-          limiter_gr_db: -6.66
-          final_lufs: -15.96
-          true_peak_dbtp: -1.89
-          dur_s: 10.725
-          beat: true
-        - scene: s33_amphan_wind
-          sentence: 5
-          text: The south leg over the west leg gives the tangent, so the coast runs about thirteen degrees south of west.
-          audio_text: null
-          neighbours_lufs:
-          - -16.22
-          - -16.25
-          - -16.27
-          - -16.22
-          target_lufs: -16.24
-          raw_lufs: -24.69
-          gain_db: 8.8
-          limiter_gr_db: -1.74
-          final_lufs: -16.26
-          true_peak_dbtp: -1.91
-          dur_s: 7.275
-          beat: false
-        - scene: s33_amphan_wind
-          sentence: 6
-          text: Measured clockwise from north, that's a bearing of two hundred and fifty seven degrees.
-          audio_text: null
-          neighbours_lufs:
-          - -16.22
-          - -16.25
-          - -16.27
-          - -16.22
-          target_lufs: -16.24
-          raw_lufs: -25.21
-          gain_db: 9.55
-          limiter_gr_db: -3.67
-          final_lufs: -16.27
-          true_peak_dbtp: -1.86
-          dur_s: 5.65
-          beat: false
-        - scene: s33_amphan_wind
-          sentence: 7
-          text: So alpha, ninety degrees minus the bearing, plus a full turn, is about a hundred and ninety three degrees, with a cosine of about minus
-            zero point nine seven four and a sine of about minus zero point two two five.
-          audio_text: null
-          neighbours_lufs:
-          - -16.22
-          - -16.25
-          - -16.27
-          - -16.22
-          target_lufs: -16.24
-          raw_lufs: -24.46
-          gain_db: 8.64
-          limiter_gr_db: -6.35
-          final_lufs: -16.25
-          true_peak_dbtp: -1.73
-          dur_s: 14.65
-          beat: false
-        - scene: s33_amphan_wind
-          sentence: 10
-          text: Across the shore, we take minus u sine alpha, and v cosine alpha, and add them.
-          audio_text: null
-          neighbours_lufs:
-          - -16.22
-          - -16.27
-          - -16.22
-          - -16.22
-          target_lufs: -16.23
-          raw_lufs: -24.71
-          gain_db: 8.91
-          limiter_gr_db: -3.2
-          final_lufs: -16.24
-          true_peak_dbtp: -1.77
-          dur_s: 6.2
-          beat: false
-        - scene: s33_amphan_wind
-          sentence: 12
-          text: The official lowest pressure was about nine hundred and sixty hectopascals, so the sea under the eye rose about fifty three centimetres.
-          audio_text: The official lowest pressure was about nine hundred and sixty [hectopascals](/hˈɛktəpˌæskᵊlz/), so the sea under the eye rose about
-            fifty three centimetres.
-          neighbours_lufs:
-          - -16.22
-          - -16.22
-          - -16.22
-          - -16.23
-          target_lufs: -16.22
-          raw_lufs: -25.13
-          gain_db: 9.66
-          limiter_gr_db: -5.42
-          final_lufs: -16.26
-          true_peak_dbtp: -1.97
-          dur_s: 9.05
-          beat: false
-        - scene: s34_amphan_radar
-          sentence: 9
-          text: Each pixel is a square sixty metres on each side, so it covers zero point zero zero three six square kilometres.
-          audio_text: null
-          neighbours_lufs:
-          - -16.36
-          - -16.37
-          - -16.37
-          - -16.4
-          target_lufs: -16.38
-          raw_lufs: -24.88
-          gain_db: 8.98
-          limiter_gr_db: -4.02
-          final_lufs: -16.39
-          true_peak_dbtp: -1.99
-          dur_s: 8.075
-          beat: false
-        - scene: s34_amphan_radar
-          sentence: 10
-          text: The number of dark pixels times the area of one pixel is about a hundred and twenty five square kilometres of new water.
-          audio_text: null
-          neighbours_lufs:
-          - -16.36
-          - -16.37
-          - -16.37
-          - -16.4
-          target_lufs: -16.38
-          raw_lufs: -24.73
-          gain_db: 8.83
-          limiter_gr_db: -4.78
-          final_lufs: -16.46
-          true_peak_dbtp: -1.53
-          dur_s: 8.325
-          beat: true
-        - scene: s36_nargis_wind
-          sentence: 4
-          text: The north leg over the west leg gives the tangent, so the coast runs about nine degrees north of west.
-          audio_text: null
-          neighbours_lufs:
-          - -16.34
-          - -16.37
-          - -16.38
-          - -16.34
-          target_lufs: -16.36
-          raw_lufs: -24.6
-          gain_db: 8.56
-          limiter_gr_db: -2.35
-          final_lufs: -16.37
-          true_peak_dbtp: -1.9
-          dur_s: 7.225
-          beat: false
-        - scene: s36_nargis_wind
-          sentence: 5
-          text: Measured clockwise from north, that's a bearing of two hundred and seventy nine degrees.
-          audio_text: null
-          neighbours_lufs:
-          - -16.34
-          - -16.37
-          - -16.38
-          - -16.34
-          target_lufs: -16.36
-          raw_lufs: -25.19
-          gain_db: 9.31
-          limiter_gr_db: -3.48
-          final_lufs: -16.38
-          true_peak_dbtp: -1.96
-          dur_s: 5.625
-          beat: false
-        - scene: s36_nargis_wind
-          sentence: 6
-          text: So alpha, ninety degrees minus the bearing, plus a full turn, is about a hundred and seventy one degrees, with a cosine of about minus zero
-            point nine eight eight and a sine of about zero point one five six.
-          audio_text: null
-          neighbours_lufs:
-          - -16.34
-          - -16.37
-          - -16.38
-          - -16.34
-          target_lufs: -16.36
-          raw_lufs: -24.72
-          gain_db: 8.84
-          limiter_gr_db: -7.65
-          final_lufs: -16.37
-          true_peak_dbtp: -1.77
+          raw_lufs: -24.01
+          gain_db: 8.39
+          limiter_gr_db: -5.08
+          final_lufs: -15.97
+          true_peak_dbtp: -1.71
           dur_s: 14.025
           beat: false
-        - scene: s36_nargis_wind
-          sentence: 9
-          text: Across the shore, we take minus u sine alpha, and v cosine alpha, and add them.
+        - scene: s14_steady_but_turning
+          sentence: 17
+          text: It's about twenty times weaker, so the pressure force has to be a little stronger than the turning alone needs.
           audio_text: null
           neighbours_lufs:
-          - -16.34
-          - -16.38
-          - -16.34
-          - -16.35
+          - -16.11
+          - -16.21
+          - -15.9
+          - -15.65
+          target_lufs: -15.96
+          raw_lufs: -25.33
+          gain_db: 10.0
+          limiter_gr_db: -4.52
+          final_lufs: -15.99
+          true_peak_dbtp: -1.8
+          dur_s: 6.725
+          beat: false
+        - scene: s15_cylinder
+          sentence: 11
+          text: They're called cylindrical because all the places at one distance r form a cylinder round the storm's axis.
+          audio_text: null
+          neighbours_lufs:
+          - -16.24
+          - -16.24
+          - -16.17
+          - -16.44
+          target_lufs: -16.27
+          raw_lufs: -25.01
+          gain_db: 9.03
+          limiter_gr_db: -5.52
+          final_lufs: -16.28
+          true_peak_dbtp: -1.86
+          dur_s: 7.3
+          beat: false
+        - scene: s20_ian_curtain
+          sentence: 15
+          text: 'And radar on a hurricane-hunter aircraft measured it: about three metres per second, eight and a half kilometres up, with single towers
+            near twelve.'
+          audio_text: null
+          neighbours_lufs:
+          - -16.53
+          - -16.51
+          - -16.56
+          - -15.84
           target_lufs: -16.35
-          raw_lufs: -24.71
-          gain_db: 8.76
-          limiter_gr_db: -3.06
+          raw_lufs: -24.23
+          gain_db: 8.28
+          limiter_gr_db: -5.14
           final_lufs: -16.36
-          true_peak_dbtp: -1.92
-          dur_s: 6.2
+          true_peak_dbtp: -1.86
+          dur_s: 9.85
+          beat: true
+        - scene: s21_amphan_intro
+          sentence: 7
+          text: On the twentieth of May, Amphan came ashore in the Sundarbans, the huge mangrove forest on the border between India's state of West Bengal
+            and Bangladesh.
+          audio_text: null
+          neighbours_lufs:
+          - -16.1
+          - -16.1
+          - -16.1
+          - -16.0
+          target_lufs: -16.07
+          raw_lufs: -25.01
+          gain_db: 9.4
+          limiter_gr_db: -5.1
+          final_lufs: -16.09
+          true_peak_dbtp: -1.81
+          dur_s: 10.3
+          beat: false
+        - scene: s30_onshore_piles
+          sentence: 6
+          text: We get that centimetre by dividing one hectopascal, a hundred pascals, by the sea water's density, about one thousand and twenty five kilograms
+            per cubic metre, times gravity, nine point eight one metres per second squared.
+          audio_text: We get that centimetre by dividing one [hectopascal](/hˈɛktəpˌæskᵊl/), a hundred pascals, by the sea water's density, about one thousand
+            and twenty five kilograms per cubic metre, times gravity, nine point eight one metres per second squared.
+          neighbours_lufs:
+          - -16.24
+          - -15.87
+          - -16.29
+          - -16.26
+          target_lufs: -16.16
+          raw_lufs: -24.24
+          gain_db: 8.48
+          limiter_gr_db: -6.2
+          final_lufs: -16.17
+          true_peak_dbtp: -1.83
+          dur_s: 15.45
+          beat: false
+        - scene: s30_onshore_piles
+          sentence: 7
+          text: When Ian came ashore, its centre's pressure was about nine hundred and forty one hectopascals, against a normal one thousand and thirteen,
+            so the sea under the eye rose by only about seventy two centimetres.
+          audio_text: When Ian came ashore, its centre's pressure was about nine hundred and forty one [hectopascals](/hˈɛktəpˌæskᵊlz/), against a normal
+            one thousand and thirteen, so the sea under the eye rose by only about seventy two centimetres.
+          neighbours_lufs:
+          - -16.24
+          - -15.87
+          - -16.29
+          - -16.26
+          target_lufs: -16.16
+          raw_lufs: -24.57
+          gain_db: 8.75
+          limiter_gr_db: -5.82
+          final_lufs: -16.17
+          true_peak_dbtp: -1.72
+          dur_s: 13.7
+          beat: false
+        - scene: s33_amphan_wind
+          sentence: 12
+          text: At the white circle, ERA5's lowest pressure is about nine hundred and sixty five hectopascals, but its storm is too weak, so we take the
+            official value.
+          audio_text: At the white circle, [ERA5](/ˌiˌɑɹˈA fˈIv/)'s lowest pressure is about nine hundred and sixty five [hectopascals](/hˈɛktəpˌæskᵊlz/),
+            but its storm is too weak, so we take the official value.
+          neighbours_lufs:
+          - -16.22
+          - -16.24
+          - -16.22
+          - -16.23
+          target_lufs: -16.23
+          raw_lufs: -24.52
+          gain_db: 8.62
+          limiter_gr_db: -3.15
+          final_lufs: -16.24
+          true_peak_dbtp: -1.84
+          dur_s: 10.85
+          beat: false
+        - scene: s33_amphan_wind
+          sentence: 13
+          text: The official centre pressure at that hour was about nine hundred and sixty hectopascals, so the sea under the eye rose about fifty three
+            centimetres.
+          audio_text: The official centre pressure at that hour was about nine hundred and sixty [hectopascals](/hˈɛktəpˌæskᵊlz/), so the sea under the
+            eye rose about fifty three centimetres.
+          neighbours_lufs:
+          - -16.22
+          - -16.24
+          - -16.22
+          - -16.23
+          target_lufs: -16.23
+          raw_lufs: -24.83
+          gain_db: 9.42
+          limiter_gr_db: -5.85
+          final_lufs: -16.28
+          true_peak_dbtp: -1.97
+          dur_s: 10.05
           beat: false
         - scene: s36_nargis_wind
           sentence: 11
-          text: The official lowest pressure was about nine hundred and sixty two hectopascals, so the sea under the eye rose about fifty one centimetres.
-          audio_text: The official lowest pressure was about nine hundred and sixty two [hectopascals](/hˈɛktəpˌæskᵊlz/), so the sea under the eye rose
-            about fifty one centimetres.
+          text: At the white circle, ERA5's lowest pressure is about nine hundred and eighty two hectopascals, but its storm is too weak, so we take the
+            official value.
+          audio_text: At the white circle, [ERA5](/ˌiˌɑɹˈA fˈIv/)'s lowest pressure is about nine hundred and eighty two [hectopascals](/hˈɛktəpˌæskᵊlz/),
+            but its storm is too weak, so we take the official value.
           neighbours_lufs:
           - -16.34
-          - -16.34
+          - -16.36
           - -16.35
           - -16.36
           target_lufs: -16.35
-          raw_lufs: -25.14
-          gain_db: 9.55
-          limiter_gr_db: -5.14
-          final_lufs: -16.4
-          true_peak_dbtp: -1.84
-          dur_s: 9.3
-          beat: false
-        - scene: s38_idai_intro
-          sentence: 5
-          text: With the knot converted as for Nargis, that's about a hundred and fifty seven kilometres per hour.
-          audio_text: null
-          neighbours_lufs:
-          - -16.36
-          - -15.93
-          - -15.97
-          - -15.92
-          target_lufs: -16.04
-          raw_lufs: -25.11
-          gain_db: 9.49
-          limiter_gr_db: -2.74
-          final_lufs: -16.06
+          raw_lufs: -24.53
+          gain_db: 8.48
+          limiter_gr_db: -3.0
+          final_lufs: -16.36
           true_peak_dbtp: -1.68
-          dur_s: 6.425
+          dur_s: 10.725
           beat: false
-        - scene: s38_idai_intro
-          sentence: 6
-          text: And in metres per second, it's about forty four.
-          audio_text: null
+        - scene: s36_nargis_wind
+          sentence: 12
+          text: The official centre pressure at that hour was about nine hundred and sixty two hectopascals, so the sea under the eye rose about fifty one
+            centimetres.
+          audio_text: The official centre pressure at that hour was about nine hundred and sixty two [hectopascals](/hˈɛktəpˌæskᵊlz/), so the sea under
+            the eye rose about fifty one centimetres.
           neighbours_lufs:
+          - -16.34
           - -16.36
-          - -15.93
-          - -15.97
-          - -15.92
-          target_lufs: -16.04
-          raw_lufs: -23.73
-          gain_db: 7.81
-          limiter_gr_db: -1.85
-          final_lufs: -16.04
-          true_peak_dbtp: -2.03
-          dur_s: 3.6
-          beat: true
-        - scene: s39_idai_wind
-          sentence: 5
-          text: The south leg over the west leg gives the tangent, so the coast runs about thirty four degrees south of west.
-          audio_text: null
-          neighbours_lufs:
-          - -16.01
-          - -15.98
-          - -16.08
-          - -15.97
-          target_lufs: -16.01
-          raw_lufs: -24.91
-          gain_db: 9.36
-          limiter_gr_db: -2.32
-          final_lufs: -16.11
-          true_peak_dbtp: -1.87
-          dur_s: 7.4
-          beat: false
-        - scene: s39_idai_wind
-          sentence: 6
-          text: Measured clockwise from north, that's a bearing of two hundred and thirty six degrees.
-          audio_text: null
-          neighbours_lufs:
-          - -16.01
-          - -15.98
-          - -16.08
-          - -15.97
-          target_lufs: -16.01
-          raw_lufs: -25.09
-          gain_db: 9.68
-          limiter_gr_db: -3.6
-          final_lufs: -16.05
-          true_peak_dbtp: -1.89
-          dur_s: 5.6
-          beat: false
-        - scene: s39_idai_wind
-          sentence: 7
-          text: So alpha, ninety degrees minus the bearing, plus a full turn, is about two hundred and fourteen degrees, with a cosine of about minus zero
-            point eight two nine and a sine of about minus zero point five five nine.
-          audio_text: null
-          neighbours_lufs:
-          - -16.01
-          - -15.98
-          - -16.08
-          - -15.97
-          target_lufs: -16.01
-          raw_lufs: -24.41
-          gain_db: 8.92
-          limiter_gr_db: -7.04
-          final_lufs: -16.03
-          true_peak_dbtp: -1.75
-          dur_s: 14.625
-          beat: false
-        - scene: s39_idai_wind
-          sentence: 10
-          text: Across the shore, we take minus u sine alpha, and v cosine alpha, and add them.
-          audio_text: null
-          neighbours_lufs:
-          - -15.97
-          - -16.08
-          - -15.97
-          - -16.02
-          target_lufs: -16.01
-          raw_lufs: -24.71
-          gain_db: 9.17
-          limiter_gr_db: -3.47
-          final_lufs: -16.02
-          true_peak_dbtp: -1.52
-          dur_s: 6.2
+          - -16.35
+          - -16.36
+          target_lufs: -16.35
+          raw_lufs: -24.87
+          gain_db: 9.21
+          limiter_gr_db: -5.45
+          final_lufs: -16.38
+          true_peak_dbtp: -1.71
+          dur_s: 10.2
           beat: false
         - scene: s39_idai_wind
           sentence: 12
-          text: The official lowest pressure was about nine hundred and fifty five hectopascals, so the sea under the eye rose about fifty eight centimetres.
-          audio_text: The official lowest pressure was about nine hundred and fifty five [hectopascals](/hˈɛktəpˌæskᵊlz/), so the sea under the eye rose
-            about fifty eight centimetres.
+          text: At the white circle, ERA5's lowest pressure is about nine hundred and eighty one hectopascals, but its storm is too weak, so we take the
+            official value.
+          audio_text: At the white circle, [ERA5](/ˌiˌɑɹˈA fˈIv/)'s lowest pressure is about nine hundred and eighty one [hectopascals](/hˈɛktəpˌæskᵊlz/),
+            but its storm is too weak, so we take the official value.
           neighbours_lufs:
           - -15.97
-          - -15.97
+          - -16.02
           - -16.02
           - -15.99
-          target_lufs: -15.99
-          raw_lufs: -25.25
-          gain_db: 10.0
-          limiter_gr_db: -5.82
-          final_lufs: -16.03
-          true_peak_dbtp: -1.72
-          dur_s: 9.4
+          target_lufs: -16.0
+          raw_lufs: -24.53
+          gain_db: 8.82
+          limiter_gr_db: -3.09
+          final_lufs: -16.01
+          true_peak_dbtp: -1.82
+          dur_s: 10.8
+          beat: false
+        - scene: s39_idai_wind
+          sentence: 13
+          text: The official centre pressure at that hour was about nine hundred and fifty five hectopascals, so the sea under the eye rose about fifty
+            eight centimetres.
+          audio_text: The official centre pressure at that hour was about nine hundred and fifty five [hectopascals](/hˈɛktəpˌæskᵊlz/), so the sea under
+            the eye rose about fifty eight centimetres.
+          neighbours_lufs:
+          - -15.97
+          - -16.02
+          - -16.02
+          - -15.99
+          target_lufs: -16.0
+          raw_lufs: -24.93
+          gain_db: 9.6
+          limiter_gr_db: -5.86
+          final_lufs: -16.04
+          true_peak_dbtp: -1.91
+          dur_s: 10.325
           beat: false
 pass_r8_2026_11_07:
   rule: 'user 2026-11-07 ''show it, don''t voice it'' + clarification: the arithmetic stays on screen in full; the voice relates the numbers (what is combined,
@@ -1132,6 +410,23 @@ pass_r8_2026_11_07:
   - s38_idai_intro
   - s39_idai_wind
   on_screen: unchanged; reveals re-pointed to the new words (Kokoro word timestamps, r8 word table)
+fix_loop_1_2026_11_07:
+  inputs: 'reports/ch00_movies.md: r8 review 1 (3 Must, 12 Should) and r8 review 2 calc & sync audit (1 Must, 13 Should, 7 Nit); Must 1 of both (physics
+    gate SKIP) resolved by the orchestrator''s QA re-run with --manifest'
+  re_voiced:
+  - s09_dtheta_dt
+  - s14_steady_but_turning
+  - s15_cylinder
+  - s20_ian_curtain
+  - s21_amphan_intro
+  - s30_onshore_piles
+  - s33_amphan_wind
+  - s36_nargis_wind
+  - s39_idai_wind
+  voice: 14 clips (Kokoro af_bella x 1.0, loudness-matched), checks/fix1_splice.py; s14, s30 and the three event scenes gain one sentence
+  timing: every AT() on Kokoro word times (words.json from checks/fix1_words.py; 537 / 537 sentences)
+  facts: IBTrACS v04r01 agency pressures (Amphan 09 UTC 960, Nargis 09-12 UTC 962, Idai 18 UTC 955 hPa); ERA5 grid minimum msl at the white circle 965 /
+    982 / 981 hPa (cs.json shore.*.pmin); 100 Pa / (1025 kg/m3 x 9.81 m/s2) = 0.0099 m; TDR towers 11.6 m/s
 conventions:
   polar angle: theta from east, anticlockwise as seen from above; compass bearing from north, clockwise as seen from above; wind direction = 'from'
   spoken symbols: '''r hat'', ''theta hat'', ''delta theta'', ''d r hat by d theta'', ''d theta by d t'', ''v squared over r'', ''u sub r'', ''u sub theta'',
@@ -1514,11 +809,11 @@ maths_skip:
 - block: B2
   what: product rule -> velocity -> acceleration (D15-D18)
   intro: s08_product_rule S1-S2
-  chip: every step · optional / skip to 19:40
+  chip: every step · optional / skip to 19:44
   chip_on: 632.825
   chip_off: end of the intro sentence + 4 s
-  skip_to_s: 1180.75
-  skip_to: 19:40 (final TTS)
+  skip_to_s: 1184.375
+  skip_to: 19:44 (final TTS)
   takeaway: 's13_acceleration_numbers S0: ''If you skipped, here''s what to keep: a parcel going round at a steady speed v always accelerates towards the
     centre by v squared over r'''
 chapter_marks:
@@ -1536,60 +831,60 @@ chapter_marks:
   t_s: 621.725
 - name: how big, and why a steady speed accelerates
   scene: s13_acceleration_numbers
-  t: '19:40'
-  t_s: 1180.75
+  t: '19:44'
+  t_s: 1184.375
 - name: 'a tall storm: cylindrical coordinates'
   scene: s15_cylinder
-  t: '22:45'
-  t_s: 1365.975
+  t: '23:00'
+  t_s: 1380.5
 - name: is Ian shown right?
   scene: s17_ian_check
-  t: '24:48'
-  t_s: 1488.85
+  t: '25:04'
+  t_s: 1504.475
 - name: Ian layer by layer
   scene: s18_ian_stack
-  t: '26:02'
-  t_s: 1562.375
+  t: '26:18'
+  t_s: 1578.0
 - name: in, up and out
   scene: s20_ian_curtain
-  t: '28:33'
-  t_s: 1713.4
+  t: '28:49'
+  t_s: 1729.025
 - name: 'second storm: Cyclone Amphan'
   scene: s21_amphan_intro
-  t: '31:00'
-  t_s: 1860.375
+  t: '31:16'
+  t_s: 1876.125
 - name: why cylindrical coordinates
   scene: s25_why_cylindrical
-  t: '35:57'
-  t_s: 2157.7
+  t: '36:14'
+  t_s: 2174.225
 - name: turned axes on the coast
   scene: s26_coast_axes
-  t: '36:48'
-  t_s: 2208.975
+  t: '37:05'
+  t_s: 2225.5
 - name: Fort Myers Beach and Saint Petersburg
   scene: s28_fmb_calc
-  t: '40:27'
-  t_s: 2427.625
+  t: '40:44'
+  t_s: 2444.15
 - name: storm surge and the tide gauges
   scene: s30_onshore_piles
-  t: '43:38'
-  t_s: 2618.625
+  t: '43:55'
+  t_s: 2635.15
 - name: 'floods seen from space: Amphan'
   scene: s32_flood_flight
-  t: '45:51'
-  t_s: 2751.475
+  t: '46:23'
+  t_s: 2783.025
 - name: Cyclone Nargis
   scene: s35_nargis_intro
-  t: '50:05'
-  t_s: 3005.6
+  t: '50:49'
+  t_s: 3049.35
 - name: Cyclone Idai
   scene: s38_idai_intro
-  t: '55:03'
-  t_s: 3303.85
+  t: '55:59'
+  t_s: 3359.575
 - name: to sum up
   scene: s41_recap
-  t: '58:40'
-  t_s: 3520.15
+  t: '59:47'
+  t_s: 3587.95
 scenes:
 - id: s00_title
   t:
@@ -2211,7 +1506,7 @@ scenes:
 - id: s09_dtheta_dt
   t:
   - 783.025
-  - 943.85
+  - 947.475
   sentence_times:
   - - 783.025
     - 791.025
@@ -2252,11 +1547,11 @@ scenes:
   - - 919.575
     - 923.425
   - - 923.775
-    - 930.025
-  - - 931.525
-    - 936.875
-  - - 937.225
-    - 942.35
+    - 933.65
+  - - 935.15
+    - 940.5
+  - - 940.85
+    - 945.975
   beat: 'D16: d theta / dt = v / r from the arc rule'
   visual: '(unchanged ring) + S1-S7 recall: u_r = u cos θ + v sin θ, u_θ = −u sin θ + v cos θ ''derived in Part 1: radial and tangential wind''; Part 1''s
     worked point (east wind 10 m/s at θ ≈ 53°: u_r = 6, u_θ = −8) drawn at the ring point; the 72-point ring average ≈ 34.8 m/s; v = that speed.'
@@ -2271,9 +1566,9 @@ scenes:
     t along the ring. [beat] By the arc rule, a distance along a circle is the radius times the angle. So the angle it turns through is that distance divided
     by the radius: v delta t over r. [beat] Now divide by delta t, and let it shrink. The rate at which theta grows, d theta by d t, is v over r. [beat] Now
     let''s put in the numbers. The speed, thirty four point eight metres per second, divided by the radius, twenty five thousand metres, is about zero point
-    zero zero one three nine radians per second. [beat] The metres cancel, and radians per second are left. That''s about zero point zero eight degrees every
-    second, or about five degrees every minute. [beat] So one full lap, two pi radians, takes two pi divided by this rate. That''s about four thousand five
-    hundred seconds, or about seventy five minutes. [beat]'
+    zero zero one three nine radians per second. [beat] The metres cancel, and radians per second are left. One radian is about fifty seven point three degrees,
+    so that''s about zero point zero eight degrees every second, or about five degrees every minute. [beat] So one full lap, two pi radians, takes two pi
+    divided by this rate. That''s about four thousand five hundred seconds, or about seventy five minutes. [beat]'
   on_screen_eq:
     latex: \dfrac{d\theta}{dt}=\dfrac{v}{r}
     vallis_eq: none in Vallis (derived on screen from s = r theta, D16)
@@ -2300,35 +1595,35 @@ scenes:
   layout: No data field drawn, so no colour bar; the numbers' source is said in s02 and written in the manifest. Clock glyph at one constant rate.
 - id: s10_position_arrow
   t:
-  - 943.85
-  - 1011.775
+  - 947.475
+  - 1015.4
   sentence_times:
-  - - 943.85
-    - 946.575
-  - - 946.925
-    - 948.575
-  - - 948.925
-    - 955.025
-  - - 955.375
-    - 963.175
-  - - 963.525
-    - 968.55
-  - - 968.9
-    - 973.325
-  - - 973.675
+  - - 947.475
+    - 950.2
+  - - 950.55
+    - 952.2
+  - - 952.55
+    - 958.65
+  - - 959.0
+    - 966.8
+  - - 967.15
+    - 972.175
+  - - 972.525
     - 976.95
-  - - 978.45
-    - 981.25
-  - - 981.6
-    - 987.575
-  - - 987.925
-    - 992.425
-  - - 992.775
-    - 996.175
-  - - 996.525
-    - 1001.775
-  - - 1002.125
-    - 1010.275
+  - - 977.3
+    - 980.575
+  - - 982.075
+    - 984.875
+  - - 985.225
+    - 991.2
+  - - 991.55
+    - 996.05
+  - - 996.4
+    - 999.8
+  - - 1000.15
+    - 1005.4
+  - - 1005.75
+    - 1013.9
   beat: 'D17 (steps 1-2): velocity = rate of change of position; position = r r-hat'
   visual: 'Left: the ring and the parcel; the position arrow from the centre to the parcel (teal) grows on AT(5,''position arrow'') with a length tag ''r
     = 25 km'' and its direction r-hat (orange unit arrow on it). S1-S3: keyword chain in the maths zone ''acceleration ← velocity ← position'' (gold arrows,
@@ -2365,35 +1660,35 @@ scenes:
   layout: Keyword chain in the maths zone, >= 40 px above the equation.
 - id: s11_velocity_on_ring
   t:
-  - 1011.775
-  - 1083.05
+  - 1015.4
+  - 1086.675
   sentence_times:
-  - - 1011.775
-    - 1015.1
-  - - 1015.45
-    - 1022.9
-  - - 1024.4
-    - 1029.05
-  - - 1029.4
-    - 1033.625
-  - - 1033.975
-    - 1038.7
-  - - 1039.05
-    - 1045.075
-  - - 1045.425
-    - 1048.875
-  - - 1049.225
-    - 1053.65
-  - - 1055.15
-    - 1057.225
-  - - 1057.575
-    - 1062.2
-  - - 1063.7
-    - 1067.875
-  - - 1068.225
-    - 1073.8
-  - - 1074.15
-    - 1082.25
+  - - 1015.4
+    - 1018.725
+  - - 1019.075
+    - 1026.525
+  - - 1028.025
+    - 1032.675
+  - - 1033.025
+    - 1037.25
+  - - 1037.6
+    - 1042.325
+  - - 1042.675
+    - 1048.7
+  - - 1049.05
+    - 1052.5
+  - - 1052.85
+    - 1057.275
+  - - 1058.775
+    - 1060.85
+  - - 1061.2
+    - 1065.825
+  - - 1067.325
+    - 1071.5
+  - - 1071.85
+    - 1077.425
+  - - 1077.775
+    - 1085.875
   beat: 'D17 (steps 3-5): on a ring the velocity is v theta-hat'
   visual: 'Same picture. S1-S2: the first term struck (Strike, slate) with the tag ''r fixed: dr/dt = 0''. S3-S6: the chain rule as Layered TeX with gold
     underbraces ''θ̂ (s05)'' and ''v/r (s09)'', each linked to a mini picture of its scene. S7: the two r''s struck; result ''v θ̂'' (96 px). S8-S10: at
@@ -2428,43 +1723,43 @@ scenes:
   layout: Struck terms stay visible at 60 % for 2 s, then fade.
 - id: s12_acceleration
   t:
-  - 1083.05
-  - 1180.75
+  - 1086.675
+  - 1184.375
   sentence_times:
-  - - 1083.05
-    - 1086.0
-  - - 1086.35
-    - 1090.25
-  - - 1090.6
-    - 1096.5
-  - - 1096.85
-    - 1104.05
-  - - 1105.55
-    - 1112.575
-  - - 1114.075
-    - 1117.675
-  - - 1118.025
-    - 1124.275
-  - - 1124.625
-    - 1133.1
-  - - 1133.45
-    - 1136.525
-  - - 1136.875
-    - 1141.775
-  - - 1143.275
-    - 1145.25
-  - - 1145.6
-    - 1150.425
-  - - 1151.925
-    - 1158.6
-  - - 1158.95
-    - 1165.2
-  - - 1165.55
-    - 1167.575
-  - - 1167.925
-    - 1171.675
-  - - 1172.025
-    - 1179.25
+  - - 1086.675
+    - 1089.625
+  - - 1089.975
+    - 1093.875
+  - - 1094.225
+    - 1100.125
+  - - 1100.475
+    - 1107.675
+  - - 1109.175
+    - 1116.2
+  - - 1117.7
+    - 1121.3
+  - - 1121.65
+    - 1127.9
+  - - 1128.25
+    - 1136.725
+  - - 1137.075
+    - 1140.15
+  - - 1140.5
+    - 1145.4
+  - - 1146.9
+    - 1148.875
+  - - 1149.225
+    - 1154.05
+  - - 1155.55
+    - 1162.225
+  - - 1162.575
+    - 1168.825
+  - - 1169.175
+    - 1171.2
+  - - 1171.55
+    - 1175.3
+  - - 1175.65
+    - 1182.875
   beat: 'D18: acceleration = −(v²/r) r-hat'
   visual: 'Same ring. Maths zone, one move per sentence: S1-S3 the product rule on v theta-hat (Layered TeX, gold underbraces); S4 ''steady speed: dv/dt
     = 0'' strikes the first term; S5-S8 chain rule with underbraces ''−r̂ (s06)'' and ''v/r (s09)'', the s06 mini picture (theta-hat''s tip swinging to
@@ -2507,29 +1802,29 @@ scenes:
   layout: Inward arrow >= 90 px, rose, pointing at the centre.
 - id: s13_acceleration_numbers
   t:
-  - 1180.75
-  - 1246.525
+  - 1184.375
+  - 1250.15
   sentence_times:
-  - - 1180.75
-    - 1191.75
-  - - 1192.1
-    - 1194.65
-  - - 1195.0
-    - 1204.3
-  - - 1204.65
-    - 1209.525
-  - - 1211.025
-    - 1217.275
-  - - 1218.775
-    - 1220.475
-  - - 1220.825
-    - 1228.0
-  - - 1229.5
-    - 1231.55
-  - - 1231.9
-    - 1238.15
-  - - 1239.65
-    - 1245.725
+  - - 1184.375
+    - 1195.375
+  - - 1195.725
+    - 1198.275
+  - - 1198.625
+    - 1207.925
+  - - 1208.275
+    - 1213.15
+  - - 1214.65
+    - 1220.9
+  - - 1222.4
+    - 1224.1
+  - - 1224.45
+    - 1231.625
+  - - 1233.125
+    - 1235.175
+  - - 1235.525
+    - 1241.775
+  - - 1243.275
+    - 1249.35
   beat: 'D18 numbers: 0.048 m/s², 200× smaller than gravity, ''that is like'''
   visual: 'S0 = block B2 takeaway: keyword ''what to keep: steady speed on a circle → acceleration v²/r, inward''. Left: the ring with the inward rose arrow.
     Maths zone CalcStack with inputs row ''v = 34.8 m/s, r = 25 000 m'': ''34.8² ≈ 1211'', ''1211 ÷ 25 000 ≈ 0.048 m/s²'' (S2-S3); easy row ''35² ÷ 25 000
@@ -2566,47 +1861,49 @@ scenes:
   layout: Bars beside the CalcStack, ticks >= 44 px.
 - id: s14_steady_but_turning
   t:
-  - 1246.525
-  - 1365.975
+  - 1250.15
+  - 1380.5
   sentence_times:
-  - - 1246.525
-    - 1250.325
-  - - 1250.675
-    - 1254.25
-  - - 1254.6
-    - 1257.925
-  - - 1258.275
-    - 1262.325
-  - - 1262.675
-    - 1271.65
-  - - 1273.15
-    - 1280.275
-  - - 1280.625
-    - 1283.425
-  - - 1283.775
-    - 1288.775
-  - - 1289.125
-    - 1291.275
-  - - 1292.775
-    - 1294.5
-  - - 1294.85
-    - 1300.7
-  - - 1301.05
-    - 1307.25
-  - - 1308.75
-    - 1319.375
-  - - 1320.875
-    - 1326.875
-  - - 1327.225
-    - 1330.625
-  - - 1330.975
-    - 1337.65
-  - - 1338.0
-    - 1348.2
-  - - 1348.55
-    - 1355.175
-  - - 1355.525
-    - 1365.175
+  - - 1250.15
+    - 1253.95
+  - - 1254.3
+    - 1257.875
+  - - 1258.225
+    - 1261.55
+  - - 1261.9
+    - 1265.95
+  - - 1266.3
+    - 1275.275
+  - - 1276.775
+    - 1283.9
+  - - 1284.25
+    - 1287.05
+  - - 1287.4
+    - 1292.4
+  - - 1292.75
+    - 1294.9
+  - - 1296.4
+    - 1298.125
+  - - 1298.475
+    - 1304.325
+  - - 1304.675
+    - 1310.875
+  - - 1312.375
+    - 1323.0
+  - - 1324.5
+    - 1330.5
+  - - 1330.85
+    - 1334.25
+  - - 1334.6
+    - 1341.275
+  - - 1341.625
+    - 1355.65
+  - - 1356.0
+    - 1362.725
+  - - 1363.075
+    - 1369.7
+  - - 1370.05
+    - 1379.7
   beat: 'D19: steady speed, changing velocity; what supplies the push (pointers M03, R01)'
   visual: 'Left: two velocity arrows one minute apart on the ring (teal), the turn ''≈ 0.084 rad ≈ 5°'' as a gold wedge at the centre (drawn ×3 so it is
     visible, listed). S4-S5: both arrows lift off and slide tail to tail (one common tail beside the ring); the short difference arrow (rose) from tip to
@@ -2626,9 +1923,10 @@ scenes:
     two point nine metres per second. [beat] Divide by sixty seconds, and we get about zero point zero four eight metres per second squared: the same acceleration,
     found with no formula at all. [beat] So a steady speed means no acceleration only when the direction stays the same too. Something must push the parcel
     inward all the time. In a tropical cyclone, that push is the pressure force, because the pressure is lowest in the eye. The Earth''s spin pushes the other
-    way, a little outward, about twenty times weaker, so the pressure force has to be a little stronger than the turning alone needs. How winds balance these
-    pushes has its own movie later in this series: Wind on weather charts. And if you rode with the parcel, you''d feel this as a push outward, called the
-    centrifugal force, which also has its own movie: Circular motion.'
+    way, a little outward: that push is the speed times the Coriolis parameter f, which comes from the Earth''s spin rate and Ian''s latitude, about twenty
+    six and a half degrees north. It''s about twenty times weaker, so the pressure force has to be a little stronger than the turning alone needs. How winds
+    balance these pushes has its own movie later in this series: Wind on weather charts. And if you rode with the parcel, you''d feel this as a push outward,
+    called the centrifugal force, which also has its own movie: Circular motion.'
   on_screen_eq:
     latex: '|\Delta\mathbf v|\approx v\,\Delta\theta=34.8\times0.084\approx2.9\ \mathrm{m/s}'
     vallis_eq: 'none: arithmetic or a definition (no book equation)'
@@ -2659,43 +1957,43 @@ scenes:
   layout: 'Later-movie names as keywords (''more: …''), each <= 1 line, out before the next scene; no box.'
 - id: s15_cylinder
   t:
-  - 1365.975
-  - 1439.45
+  - 1380.5
+  - 1455.075
   sentence_times:
-  - - 1365.975
-    - 1368.75
-  - - 1369.1
-    - 1372.075
-  - - 1372.425
-    - 1375.4
-  - - 1375.75
-    - 1380.925
-  - - 1381.275
-    - 1386.75
-  - - 1387.1
-    - 1393.375
-  - - 1393.725
-    - 1399.6
-  - - 1399.95
-    - 1406.5
-  - - 1406.85
-    - 1413.3
-  - - 1413.65
-    - 1420.075
-  - - 1420.425
-    - 1432.1
-  - - 1432.45
-    - 1438.65
+  - - 1380.5
+    - 1383.275
+  - - 1383.625
+    - 1386.6
+  - - 1386.95
+    - 1389.925
+  - - 1390.275
+    - 1395.45
+  - - 1395.8
+    - 1401.275
+  - - 1401.625
+    - 1407.9
+  - - 1408.25
+    - 1414.125
+  - - 1414.475
+    - 1421.025
+  - - 1421.375
+    - 1427.825
+  - - 1428.175
+    - 1434.6
+  - - 1434.95
+    - 1446.625
+  - - 1446.975
+    - 1454.275
   beat: 'intuition: a tall storm needs height; cylindrical coordinates; the eyewall (Must 1, 2 guards)'
   visual: '(GOES plate, in/up/out) + R11: the flat polar grid on the sea (S7), a point (r, θ) lifted by z (S8), the grid copies lifted to heights, ''polar
     + height = cylindrical'' (S9), x = r cos θ, y = r sin θ, z = z ''derived in Part 1: polar coordinates'' (S10), the cylinder (S11).'
   voiceover: 'So far, our storm has been flat. But a real tropical cyclone is tall. Near the sea, the air spirals in. Close to the eye, it rises in a ring
-    of towering clouds called the eyewall. And near the top, about twelve to fifteen kilometres up, it flows out again. Here''s Ian from above, seen by
-    a weather satellite at six in the evening, universal time. The clear hole in the middle is the eye, and the ring of bright cloud round it is the eyewall.
-    On the flat map, polar coordinates use two numbers: the distance r and the angle theta. To describe a tall storm, we add a third number: the height
-    z, measured straight up from the sea. Polar coordinates plus this height are called cylindrical coordinates: r, theta and z. Nothing else changes: r
-    and theta mean exactly what they meant in Part 1, so x is still r cosine theta, y is still r sine theta, and z is simply the height. That''s because
-    all the places at one distance r form a cylinder round the storm''s axis.'
+    of towering clouds called the eyewall. And near the top, about twelve to fifteen kilometres up, it flows out again. Here''s Ian from above, seen by a
+    weather satellite at six in the evening, universal time. The clear hole in the middle is the eye, and the ring of bright cloud round it is the eyewall.
+    On the flat map, polar coordinates use two numbers: the distance r and the angle theta. To describe a tall storm, we add a third number: the height z,
+    measured straight up from the sea. Polar coordinates plus this height are called cylindrical coordinates: r, theta and z. Nothing else changes: r and
+    theta mean exactly what they meant in Part 1, so x is still r cosine theta, y is still r sine theta, and z is simply the height. They''re called cylindrical
+    because all the places at one distance r form a cylinder round the storm''s axis.'
   on_screen_eq:
     latex: (r,\ \theta,\ z)
     vallis_eq: 'none in Vallis; Kundu App. B §B.5 (cylindrical coordinates, printed p. 865, page image read 2026-11-05): e_R = e_x cos φ + e_y sin φ, e_φ
@@ -2735,25 +2033,25 @@ scenes:
   layout: 'SourceBelow under the 3-D picture (never on it); the eyewall callout''s link from its own left edge; Must 2: KaTeX only.'
 - id: s16_three_parts
   t:
-  - 1439.45
-  - 1488.85
+  - 1455.075
+  - 1504.475
   sentence_times:
-  - - 1439.45
-    - 1443.525
-  - - 1443.875
-    - 1448.725
-  - - 1449.075
-    - 1454.575
-  - - 1454.925
-    - 1459.625
-  - - 1459.975
-    - 1469.225
-  - - 1469.575
-    - 1476.425
-  - - 1476.775
-    - 1482.8
-  - - 1483.15
-    - 1488.05
+  - - 1455.075
+    - 1459.15
+  - - 1459.5
+    - 1464.35
+  - - 1464.7
+    - 1470.2
+  - - 1470.55
+    - 1475.25
+  - - 1475.6
+    - 1484.85
+  - - 1485.2
+    - 1492.05
+  - - 1492.4
+    - 1498.425
+  - - 1498.775
+    - 1503.675
   beat: the wind's three parts; only r-hat and theta-hat turn
   visual: '(unchanged) + u_r, u_θ lines ''derived in Part 1: radial and tangential wind'' on S1-S4.'
   voiceover: 'In cylindrical coordinates, the wind has three parts. The radial wind, u sub r, points along r hat: in or out. The tangential wind, u sub
@@ -2788,31 +2086,31 @@ scenes:
   layout: Tags in KaTeX (Must 2); the equation in the column at x >= 1100.
 - id: s17_ian_check
   t:
-  - 1488.85
-  - 1562.375
+  - 1504.475
+  - 1578.0
   sentence_times:
-  - - 1488.85
-    - 1495.925
-  - - 1496.275
-    - 1501.35
-  - - 1501.7
-    - 1511.9
-  - - 1512.25
-    - 1515.275
-  - - 1516.775
-    - 1527.55
-  - - 1527.9
-    - 1536.075
-  - - 1537.575
-    - 1541.675
-  - - 1542.025
-    - 1549.7
-  - - 1550.05
-    - 1551.9
-  - - 1552.25
-    - 1556.2
-  - - 1556.55
-    - 1561.575
+  - - 1504.475
+    - 1511.55
+  - - 1511.9
+    - 1516.975
+  - - 1517.325
+    - 1527.525
+  - - 1527.875
+    - 1530.9
+  - - 1532.4
+    - 1543.175
+  - - 1543.525
+    - 1551.7
+  - - 1553.2
+    - 1557.3
+  - - 1557.65
+    - 1565.325
+  - - 1565.675
+    - 1567.525
+  - - 1567.875
+    - 1571.825
+  - - 1572.175
+    - 1577.2
   beat: is Ian shown correctly? radar eye vs model centre (U-CO-022, -025, -027)
   visual: 'Left: the NEXRAD KTBW 0.5-deg reflectivity map (dBZ, a perceptual rain colour map, not rainbow; colour bar ''radar echo (dBZ)'' beside it, 0-60)
     on a Natural Earth coast, 160 × 160 km round the radar eye; S2-S3 a gold eyewall circle fitted to the >= 35 dBZ ring (radius ''≈ 30 km'', gold link),
@@ -2863,35 +2161,35 @@ scenes:
   layout: One colour bar per picture, beside it (never on it); each picture its own SourceBelow; the locator inset is a drawing (no data colours).
 - id: s18_ian_stack
   t:
-  - 1562.375
-  - 1655.975
+  - 1578.0
+  - 1671.6
   sentence_times:
-  - - 1562.375
-    - 1565.9
-  - - 1566.25
-    - 1575.975
-  - - 1576.325
-    - 1582.8
-  - - 1583.15
-    - 1588.575
-  - - 1588.925
-    - 1593.2
-  - - 1593.55
-    - 1600.8
-  - - 1601.15
-    - 1612.05
-  - - 1612.4
-    - 1626.65
-  - - 1628.15
-    - 1632.425
-  - - 1632.775
-    - 1637.8
-  - - 1638.15
-    - 1641.775
-  - - 1642.125
-    - 1647.975
-  - - 1648.325
-    - 1655.175
+  - - 1578.0
+    - 1581.525
+  - - 1581.875
+    - 1591.6
+  - - 1591.95
+    - 1598.425
+  - - 1598.775
+    - 1604.2
+  - - 1604.55
+    - 1608.825
+  - - 1609.175
+    - 1616.425
+  - - 1616.775
+    - 1627.675
+  - - 1628.025
+    - 1642.275
+  - - 1643.775
+    - 1648.05
+  - - 1648.4
+    - 1653.425
+  - - 1653.775
+    - 1657.4
+  - - 1657.75
+    - 1663.6
+  - - 1663.95
+    - 1670.8
   beat: 'the layer stack, redesigned (U-CO-029-032): what pressure levels are; heights; colours'
   visual: 'HOUSE K5 LayerStack3D (copy the derivatives s09b / weather-basics stack look), full width minus the column, from frame 0 seen from the side at
     20 deg elevation, OUTSIDE the stack. FIVE HRRR 3-km layers of u_r round the model''s calm centre (26.506 N, 82.441 W, one centre for all levels): 925,
@@ -2962,27 +2260,27 @@ scenes:
     tag; SourceBelow.
 - id: s19_ian_layers_lit
   t:
-  - 1655.975
-  - 1713.4
+  - 1671.6
+  - 1729.025
   sentence_times:
-  - - 1655.975
-    - 1663.65
-  - - 1664.0
-    - 1670.2
-  - - 1670.55
-    - 1676.625
-  - - 1678.125
-    - 1681.7
-  - - 1682.05
-    - 1687.375
-  - - 1687.725
-    - 1695.65
-  - - 1697.15
-    - 1701.35
-  - - 1701.7
-    - 1705.85
-  - - 1706.2
-    - 1712.6
+  - - 1671.6
+    - 1679.275
+  - - 1679.625
+    - 1685.825
+  - - 1686.175
+    - 1692.25
+  - - 1693.75
+    - 1697.325
+  - - 1697.675
+    - 1703.0
+  - - 1703.35
+    - 1711.275
+  - - 1712.775
+    - 1716.975
+  - - 1717.325
+    - 1721.475
+  - - 1721.825
+    - 1728.225
   beat: layers lit bottom to top with readouts; orbit; one close look (<= 6 s)
   visual: 'Same stack. S1: all layers dim to 40 %; the 100-km ring (teal, 3 px) on every layer. S2-S3: the 925 layer lights (100 %); its ring-mean readout
     ''0.7 km: ≈ −6.5 m/s'' (rose, ''−'') appears in the column as a SideCallout with a gold link to that layer''s ring (link from the text''s left edge).
@@ -3038,47 +2336,47 @@ scenes:
   layout: Cameras <= 90 deg/s, eased (fix-loop rule 7); stack never under the column (build-1 K6 lesson); colour bar visible except during the close look.
 - id: s20_ian_curtain
   t:
-  - 1713.4
-  - 1860.375
+  - 1729.025
+  - 1876.125
   sentence_times:
-  - - 1713.4
-    - 1719.025
-  - - 1719.375
-    - 1726.475
-  - - 1726.825
-    - 1735.325
-  - - 1736.825
-    - 1744.475
-  - - 1744.825
-    - 1747.925
-  - - 1748.275
-    - 1754.45
-  - - 1754.8
-    - 1758.625
-  - - 1758.975
-    - 1768.2
-  - - 1769.7
-    - 1777.175
-  - - 1778.675
-    - 1781.725
-  - - 1782.075
-    - 1791.875
-  - - 1793.375
-    - 1799.625
-  - - 1799.975
-    - 1801.85
-  - - 1802.2
-    - 1812.375
-  - - 1812.725
-    - 1826.25
-  - - 1827.75
-    - 1837.475
-  - - 1838.975
-    - 1842.175
-  - - 1842.525
-    - 1851.025
-  - - 1851.375
-    - 1859.575
+  - - 1729.025
+    - 1734.65
+  - - 1735.0
+    - 1742.1
+  - - 1742.45
+    - 1750.95
+  - - 1752.45
+    - 1760.1
+  - - 1760.45
+    - 1763.55
+  - - 1763.9
+    - 1770.075
+  - - 1770.425
+    - 1774.25
+  - - 1774.6
+    - 1783.825
+  - - 1785.325
+    - 1792.8
+  - - 1794.3
+    - 1797.35
+  - - 1797.7
+    - 1807.5
+  - - 1809.0
+    - 1815.25
+  - - 1815.6
+    - 1817.475
+  - - 1817.825
+    - 1828.0
+  - - 1828.35
+    - 1841.875
+  - - 1843.375
+    - 1853.225
+  - - 1854.725
+    - 1857.925
+  - - 1858.275
+    - 1866.775
+  - - 1867.125
+    - 1875.325
   beat: 'D20: the ring average → radius-height section (in, up, out); pointer U15'
   visual: '(unchanged) + ''derived in Part 1: ring average'' under the ring-average equation.'
   voiceover: 'Five layers still leave gaps, and cylindrical coordinates give us a neater picture. On every level, we can average round each ring, just as
@@ -3092,7 +2390,7 @@ scenes:
     the side of a cylinder thirty kilometres in radius, in a layer about one kilometre deep, at about sixteen metres per second. All of it has to leave through
     the cylinder''s lid, which is a much bigger area, so it rises more slowly: twice the depth times the inflow speed, divided by the radius, is about one
     metre per second. [beat] And radar on a hurricane-hunter aircraft measured it: about three metres per second, eight and a half kilometres up, with single
-    towers near ten. [beat] It rises in the eyewall, close to the eye. In, up and out: that''s a tropical cyclone''s overturning circulation, and cylindrical
+    towers near twelve. [beat] It rises in the eyewall, close to the eye. In, up and out: that''s a tropical cyclone''s overturning circulation, and cylindrical
     coordinates show it in one picture. How a tropical cyclone keeps this engine running has its own movie later in this series: How tropical cyclones form.'
   on_screen_eq:
     latex: \overline{u_r}(r,z)=\dfrac{1}{72}\sum_{k=1}^{72}u_r(r,\theta_k,z)
@@ -3142,42 +2440,42 @@ scenes:
     (km)' >= 44 px.
 - id: s21_amphan_intro
   t:
-  - 1860.375
-  - 1945.8
+  - 1876.125
+  - 1962.325
   sentence_times:
-  - - 1860.375
-    - 1870.45
-  - - 1870.8
-    - 1875.325
-  - - 1875.675
-    - 1880.5
-  - - 1880.85
-    - 1890.025
-  - - 1890.375
-    - 1896.075
-  - - 1896.425
-    - 1902.05
-  - - 1902.4
-    - 1916.825
-  - - 1917.175
-    - 1926.7
-  - - 1927.05
-    - 1930.3
-  - - 1930.65
-    - 1939.425
-  - - 1939.775
-    - 1945.0
+  - - 1876.125
+    - 1886.2
+  - - 1886.55
+    - 1891.075
+  - - 1891.425
+    - 1896.25
+  - - 1896.6
+    - 1905.775
+  - - 1906.125
+    - 1911.825
+  - - 1912.175
+    - 1917.8
+  - - 1918.15
+    - 1932.575
+  - - 1932.925
+    - 1943.225
+  - - 1943.575
+    - 1946.825
+  - - 1947.175
+    - 1955.95
+  - - 1956.3
+    - 1961.525
   beat: 'application 2: the Bay of Bengal, Cyclone Amphan (globe zoom tour, zoom back out)'
   visual: '(globe tour unchanged) + fact rows 1-2: ''IMD''s top wind class: super cyclonic storm'', ''the first in the Bay since 1999'', ''wind over the
     sea, not harm on land'', ''Sidr 2007 · Aila 2009''; the Kolkata line split.'
-  voiceover: 'Now let''s meet our second storm, on the other side of the world, in the Bay of Bengal, between India and Myanmar, with Bangladesh at its
-    northern end. Remember, here a tropical cyclone is simply called a cyclone. In May twenty twenty, Cyclone Amphan formed in the south of the Bay. On
-    the eighteenth of May, its winds reached the top class on the India Meteorological Department''s scale, called a super cyclonic storm. No storm in the
-    Bay of Bengal had reached that class since nineteen ninety nine. That class measures only the strongest wind over the sea, not the harm on land. In
-    between, weaker storms hit Bangladesh very hard: Cyclone Sidr in two thousand and seven killed thousands of people, and Cyclone Aila in two thousand
-    and nine flooded Khulna and Satkhira for months. On the twentieth, it came ashore in the Sundarbans, the huge mangrove forest on the border between
-    India''s state of West Bengal and Bangladesh. Its centre then passed close to Kolkata. It passed about forty five kilometres west of Satkhira, and about
-    seventy nine kilometres west of Khulna, both in Bangladesh. So the Khulna and Satkhira districts of Bangladesh took much of its flooding.'
+  voiceover: 'Now let''s meet our second storm, on the other side of the world, in the Bay of Bengal, between India and Myanmar, with Bangladesh at its northern
+    end. Remember, here a tropical cyclone is simply called a cyclone. In May twenty twenty, Cyclone Amphan formed in the south of the Bay. On the eighteenth
+    of May, its winds reached the top class on the India Meteorological Department''s scale, called a super cyclonic storm. No storm in the Bay of Bengal
+    had reached that class since nineteen ninety nine. That class measures only the strongest wind over the sea, not the harm on land. In between, weaker
+    storms hit Bangladesh very hard: Cyclone Sidr in two thousand and seven killed thousands of people, and Cyclone Aila in two thousand and nine flooded
+    Khulna and Satkhira for months. On the twentieth of May, Amphan came ashore in the Sundarbans, the huge mangrove forest on the border between India''s
+    state of West Bengal and Bangladesh. Its centre then passed close to Kolkata. It passed about forty five kilometres west of Satkhira, and about seventy
+    nine kilometres west of Khulna, both in Bangladesh. So the Khulna and Satkhira districts of Bangladesh took much of its flooding.'
   on_screen_eq: null
   physics_source:
     fn: fluidpy.data.ibtracs.storm_table (NI basin, sid 2020136N10088); fluidpy.geo.sphere.central_angle (closest approaches); fluidpy.data.naturalearth
@@ -3212,15 +2510,15 @@ scenes:
   layout: '§5b: text only on the faded part; names centred within 1 s; zoom back out before the scene ends; source line below the globe.'
 - id: s22_amphan_eye
   t:
-  - 1945.8
-  - 1966.35
+  - 1962.325
+  - 1982.875
   sentence_times:
-  - - 1945.8
-    - 1952.175
-  - - 1952.525
-    - 1957.275
-  - - 1957.625
-    - 1965.55
+  - - 1962.325
+    - 1968.7
+  - - 1969.05
+    - 1973.8
+  - - 1974.15
+    - 1982.075
   beat: Amphan's pinhole eye (MODIS 18 May)
   visual: 'Picture zone: the MODIS Terra true-colour image of 18 May 2020 (GIBS, 250 m), cropped round the eye (≈ 600 × 600 km, then a slow zoom to ≈ 150
     km), the pinhole eye marked by a thin gold ring on ''pinhole eye'' (S2); S3: a ghost of s15''s cylinder (outline only) settles over the eye; keyword
@@ -3253,35 +2551,35 @@ scenes:
   layout: SourceBelow; the ring thin enough to leave the eye visible.
 - id: s23_amphan_ring
   t:
-  - 1966.35
-  - 2072.8
+  - 1982.875
+  - 2089.325
   sentence_times:
-  - - 1966.35
-    - 1970.225
-  - - 1970.575
-    - 1977.9
-  - - 1978.25
-    - 1985.475
-  - - 1985.825
-    - 1993.65
-  - - 1994.0
-    - 2002.1
-  - - 2002.45
-    - 2011.075
-  - - 2011.425
-    - 2020.125
-  - - 2021.625
-    - 2029.85
-  - - 2030.2
-    - 2043.4
-  - - 2043.75
-    - 2051.8
-  - - 2053.3
-    - 2055.275
-  - - 2055.625
-    - 2064.9
-  - - 2066.4
-    - 2072.0
+  - - 1982.875
+    - 1986.75
+  - - 1987.1
+    - 1994.425
+  - - 1994.775
+    - 2002.0
+  - - 2002.35
+    - 2010.175
+  - - 2010.525
+    - 2018.625
+  - - 2018.975
+    - 2027.6
+  - - 2027.95
+    - 2036.65
+  - - 2038.15
+    - 2046.375
+  - - 2046.725
+    - 2059.925
+  - - 2060.275
+    - 2068.325
+  - - 2069.825
+    - 2071.8
+  - - 2072.15
+    - 2081.425
+  - - 2082.925
+    - 2088.525
   beat: Amphan's spin and inflow on a ring, beside Ian's
   visual: '(unchanged) + ''derived in Part 1: inflow angle'' under tan(inflow) = |u_r| / u_θ.'
   voiceover: 'Let''s measure Amphan''s winds the same way we did Ian''s. There''s no fine model like Ian''s over the Bay of Bengal, so we use a global data
@@ -3330,33 +2628,33 @@ scenes:
   layout: Colour bar beside the map; comparison rows aligned in two columns in the maths zone; no box.
 - id: s24_amphan_curtain
   t:
-  - 2072.8
-  - 2157.7
+  - 2089.325
+  - 2174.225
   sentence_times:
-  - - 2072.8
-    - 2077.85
-  - - 2078.2
-    - 2080.35
-  - - 2080.7
-    - 2089.025
-  - - 2090.525
-    - 2094.45
-  - - 2095.95
-    - 2107.875
-  - - 2108.225
-    - 2116.75
-  - - 2117.1
-    - 2125.025
-  - - 2125.375
-    - 2129.125
-  - - 2129.475
-    - 2137.25
-  - - 2137.6
-    - 2142.975
-  - - 2143.325
-    - 2149.45
-  - - 2149.8
-    - 2156.9
+  - - 2089.325
+    - 2094.375
+  - - 2094.725
+    - 2096.875
+  - - 2097.225
+    - 2105.55
+  - - 2107.05
+    - 2110.975
+  - - 2112.475
+    - 2124.4
+  - - 2124.75
+    - 2133.275
+  - - 2133.625
+    - 2141.55
+  - - 2141.9
+    - 2145.65
+  - - 2146.0
+    - 2153.775
+  - - 2154.125
+    - 2159.5
+  - - 2159.85
+    - 2165.975
+  - - 2166.325
+    - 2173.425
   beat: Amphan's radius-height section beside Ian's
   visual: 'Two radius-height sections side by side across the full width (each x-range 0-300 km linear for Amphan, 0-200 km for Ian, both 0-16 km high),
     the same diverging colour map and ONE shared colour bar between them in a gap >= 40 px (never on a picture). Ian left (from s20, shrunk), Amphan right:
@@ -3414,27 +2712,27 @@ scenes:
   layout: One shared colour bar between the two (it is the same scale); two SourceBelow lines, one under each; no text over either picture.
 - id: s25_why_cylindrical
   t:
-  - 2157.7
-  - 2208.975
+  - 2174.225
+  - 2225.5
   sentence_times:
-  - - 2157.7
-    - 2163.6
-  - - 2163.95
-    - 2166.125
-  - - 2166.475
-    - 2168.3
-  - - 2168.65
-    - 2177.65
-  - - 2178.0
-    - 2180.05
-  - - 2180.4
-    - 2188.875
-  - - 2189.225
-    - 2195.325
-  - - 2195.675
-    - 2197.6
-  - - 2197.95
-    - 2208.175
+  - - 2174.225
+    - 2180.125
+  - - 2180.475
+    - 2182.65
+  - - 2183.0
+    - 2184.825
+  - - 2185.175
+    - 2194.175
+  - - 2194.525
+    - 2196.575
+  - - 2196.925
+    - 2205.4
+  - - 2205.75
+    - 2211.85
+  - - 2212.2
+    - 2214.125
+  - - 2214.475
+    - 2224.7
   beat: 'why: ''There are three good reasons'''
   visual: 'Three mini pictures built one per reason across the picture zone (no boxes): (1) a messy plan-view u_r layer (s18 925 hPa) folding round its
     axis into the s20 slice (''shape''); (2) the ring with v theta-hat and the inward rose arrow next to an east/north pair whose u, v both wiggle on two
@@ -3467,35 +2765,35 @@ scenes:
   layout: One small source line under the data minis; keywords only.
 - id: s26_coast_axes
   t:
-  - 2208.975
-  - 2315.775
+  - 2225.5
+  - 2332.3
   sentence_times:
-  - - 2208.975
-    - 2218.075
-  - - 2218.425
-    - 2222.9
-  - - 2223.25
-    - 2231.45
-  - - 2231.8
-    - 2239.025
-  - - 2239.375
-    - 2247.0
-  - - 2247.35
-    - 2258.625
-  - - 2258.975
-    - 2271.7
-  - - 2272.05
-    - 2277.55
-  - - 2277.9
-    - 2286.875
-  - - 2287.225
-    - 2297.975
-  - - 2298.325
-    - 2303.75
-  - - 2304.1
-    - 2310.375
-  - - 2310.725
-    - 2314.975
+  - - 2225.5
+    - 2234.6
+  - - 2234.95
+    - 2239.425
+  - - 2239.775
+    - 2247.975
+  - - 2248.325
+    - 2255.55
+  - - 2255.9
+    - 2263.525
+  - - 2263.875
+    - 2275.15
+  - - 2275.5
+    - 2288.225
+  - - 2288.575
+    - 2294.075
+  - - 2294.425
+    - 2303.4
+  - - 2303.75
+    - 2314.5
+  - - 2314.85
+    - 2320.275
+  - - 2320.625
+    - 2326.9
+  - - 2327.25
+    - 2331.5
   beat: 'B1: back to Ian''s coast; Part 1''s turned axes recalled exactly (''derived in Part 1: turned axes''), the matrix form, then the same rule for
     the wind (along / across tags); x̂′ along the coast so ŷ′ points out to sea; sign meaning'
   visual: 'S0-S2 the HRRR 20 UTC speed map with the FMB wind and the along / across arrows; S3 on the Part 1 diagram (east / north axes, x̂′, ŷ′ at α =
@@ -3532,33 +2830,33 @@ scenes:
   layout: picture zone x 80-1000 (map 920 × 750); maths column x 1100; source line under the map; speed bar in the column
 - id: s27_coast_angle
   t:
-  - 2315.775
-  - 2427.625
+  - 2332.3
+  - 2444.15
   sentence_times:
-  - - 2315.775
-    - 2319.2
-  - - 2319.55
-    - 2327.6
-  - - 2327.95
-    - 2336.975
-  - - 2337.325
-    - 2346.9
-  - - 2347.25
-    - 2353.0
-  - - 2354.5
-    - 2364.0
-  - - 2365.5
-    - 2375.1
-  - - 2375.45
-    - 2384.25
-  - - 2385.75
-    - 2395.575
-  - - 2395.925
-    - 2405.725
-  - - 2406.075
-    - 2416.95
-  - - 2418.45
-    - 2426.825
+  - - 2332.3
+    - 2335.725
+  - - 2336.075
+    - 2344.125
+  - - 2344.475
+    - 2353.5
+  - - 2353.85
+    - 2363.425
+  - - 2363.775
+    - 2369.525
+  - - 2371.025
+    - 2380.525
+  - - 2382.025
+    - 2391.625
+  - - 2391.975
+    - 2400.775
+  - - 2402.275
+    - 2412.1
+  - - 2412.45
+    - 2422.25
+  - - 2422.6
+    - 2433.475
+  - - 2434.975
+    - 2443.35
   beat: 'B2: the coast''s angle on a local flat km map: Naples -> Englewood 91.5 km N, 55.0 km W; tan β = 55.0 / 91.5 ≈ 0.601, β ≈ 31°, bearing 329°; ''derived
     in Part 1: bearings''; α = 90° − 329° = −239° + 360° = 121°; cos ≈ −0.515, sin ≈ 0.857; x̂′ NNW, ŷ′ WSW out to sea'
   visual: Natural Earth coast on a local flat map with a 25-km grid (origin Naples); the two legs dashed with their km; the gold β arc; x̂′ and ŷ′ at Fort
@@ -3601,29 +2899,29 @@ scenes:
   layout: picture zone x 80-1000 (map 920 × 750); maths column x 1100; source line under the map; speed bar in the column
 - id: s28_fmb_calc
   t:
-  - 2427.625
-  - 2518.7
+  - 2444.15
+  - 2535.225
   sentence_times:
-  - - 2427.625
-    - 2429.25
-  - - 2429.6
-    - 2440.975
-  - - 2441.325
-    - 2450.025
-  - - 2450.375
-    - 2466.125
-  - - 2466.475
-    - 2471.2
-  - - 2472.7
-    - 2482.05
-  - - 2482.4
-    - 2488.325
-  - - 2489.825
-    - 2495.525
-  - - 2495.875
-    - 2504.075
-  - - 2504.425
-    - 2517.2
+  - - 2444.15
+    - 2445.775
+  - - 2446.125
+    - 2457.5
+  - - 2457.85
+    - 2466.55
+  - - 2466.9
+    - 2482.65
+  - - 2483.0
+    - 2487.725
+  - - 2489.225
+    - 2498.575
+  - - 2498.925
+    - 2504.85
+  - - 2506.35
+    - 2512.05
+  - - 2512.4
+    - 2520.6
+  - - 2520.95
+    - 2533.725
   beat: 'B3: Fort Myers Beach, HRRR 20 UTC: u 22.2, v 24.3; along = 22.2 × (−0.515) + 24.3 × 0.857 ≈ −11.4 + 20.8 ≈ 9.4; across = −22.2 × 0.857 + 24.3 ×
     (−0.515) ≈ −19.0 − 12.5 ≈ −31.5: onto the land; check √(9.4² + 31.5²) = √1081 ≈ 32.9 ≈ 33'
   visual: HRRR speed map; FMB with x̂′ / ŷ′; the wind (ink) and its along (slate) and across (rose, −) parts as animated arrows from one tail; gold link
@@ -3657,29 +2955,29 @@ scenes:
   layout: picture zone x 80-1000 (map 920 × 750); maths column x 1100; source line under the map; speed bar in the column
 - id: s29_stp_calc
   t:
-  - 2518.7
-  - 2618.625
+  - 2535.225
+  - 2635.15
   sentence_times:
-  - - 2518.7
-    - 2527.2
-  - - 2527.55
-    - 2540.125
-  - - 2540.475
-    - 2551.85
-  - - 2552.2
-    - 2565.75
-  - - 2567.25
-    - 2578.275
-  - - 2578.625
-    - 2584.825
-  - - 2585.175
-    - 2589.55
-  - - 2591.05
-    - 2594.7
-  - - 2595.05
-    - 2605.775
-  - - 2607.275
-    - 2617.825
+  - - 2535.225
+    - 2543.725
+  - - 2544.075
+    - 2556.65
+  - - 2557.0
+    - 2568.375
+  - - 2568.725
+    - 2582.275
+  - - 2583.775
+    - 2594.8
+  - - 2595.15
+    - 2601.35
+  - - 2601.7
+    - 2606.075
+  - - 2607.575
+    - 2611.225
+  - - 2611.575
+    - 2622.3
+  - - 2623.8
+    - 2634.35
   beat: 'B4: Saint Petersburg (St Pete Beach -> Tarpon Springs 55.7 km N, 6.8 km W, 7°, bearing 353°, α 97°): u −10.2, v −16.0; across ≈ 10.1 + 2.0 ≈ +12.1
     out to sea; along ≈ 1.2 − 15.9 = −14.7; then the opposing arrows (rose onto the land at FMB, teal out to sea at StP)'
   visual: zoomed HRRR map of Pinellas / Tampa Bay, the Gulf-coast segment, the wind and its parts; S9 the map widens to both stations with their across-shore
@@ -3713,25 +3011,27 @@ scenes:
   layout: picture zone x 80-1000 (map 920 × 750); maths column x 1100; source line under the map; speed bar in the column
 - id: s30_onshore_piles
   t:
-  - 2618.625
-  - 2676.9
+  - 2635.15
+  - 2708.45
   sentence_times:
-  - - 2618.625
-    - 2620.7
-  - - 2621.05
-    - 2627.7
-  - - 2628.05
-    - 2633.65
-  - - 2634.0
-    - 2641.325
-  - - 2641.675
-    - 2649.525
-  - - 2649.875
-    - 2657.5
-  - - 2657.85
-    - 2672.325
-  - - 2672.675
-    - 2676.1
+  - - 2635.15
+    - 2637.225
+  - - 2637.575
+    - 2644.225
+  - - 2644.575
+    - 2650.175
+  - - 2650.525
+    - 2657.85
+  - - 2658.2
+    - 2666.05
+  - - 2666.4
+    - 2674.025
+  - - 2674.375
+    - 2689.825
+  - - 2690.175
+    - 2703.875
+  - - 2704.225
+    - 2707.65
   beat: 'B5: the reasoning BEFORE the evidence: onshore wind piles the water up, offshore wind drags it away; storm surge; the shallow shelf; the low pressure''s
     small share (≈ 1 cm per hPa; Ian 941 hPa at the 19:05 UTC landfall: 72 hPa → ≈ 72 cm); the prediction'
   visual: 'two schematic cross-sections (onto the land: surface tilts up to the coast; out to sea: tilts down), then the ETOPO shelf profile with a rising
@@ -3739,9 +3039,10 @@ scenes:
   voiceover: 'What does that do to the sea? Wind blowing onto the land drags the sea surface with it, and the water piles up against the coast. Wind blowing
     out to sea drags the water away from the coast, and the level drops. Where the water piles up, the sea rises far above the normal tide, and this rise
     is called a storm surge. The wind''s push does most of the work, especially over a wide, shallow sea floor like the one off southwest Florida. The low
-    pressure helps a little: the sea rises by about one centimetre for every hectopascal that the pressure drops. When Ian came ashore, its centre''s pressure
-    was about nine hundred and forty one hectopascals, seventy two below the normal one thousand and thirteen, so the sea under the eye rose by only about
-    seventy two centimetres. So what should the water have done at our two stations?'
+    pressure helps a little: the sea rises by about one centimetre for every hectopascal that the pressure drops. We get that centimetre by dividing one hectopascal,
+    a hundred pascals, by the sea water''s density, about one thousand and twenty five kilograms per cubic metre, times gravity, nine point eight one metres
+    per second squared. When Ian came ashore, its centre''s pressure was about nine hundred and forty one hectopascals, against a normal one thousand and
+    thirteen, so the sea under the eye rose by only about seventy two centimetres. So what should the water have done at our two stations?'
   on_screen_eq: null
   physics_source:
     fn: fluidpy.data.movie_shore.inverse_barometer
@@ -3762,31 +3063,31 @@ scenes:
   layout: picture zone x 80-1000 (map 920 × 750); maths column x 1100; source line under the map; speed bar in the column
 - id: s31_gauges
   t:
-  - 2676.9
-  - 2751.475
+  - 2708.45
+  - 2783.025
   sentence_times:
-  - - 2676.9
-    - 2682.3
-  - - 2682.65
-    - 2689.3
-  - - 2689.65
-    - 2697.55
-  - - 2697.9
-    - 2702.2
-  - - 2702.55
-    - 2711.4
-  - - 2712.9
-    - 2715.7
-  - - 2716.05
-    - 2717.85
-  - - 2718.2
-    - 2731.825
-  - - 2732.175
-    - 2735.425
-  - - 2735.775
-    - 2745.5
-  - - 2745.85
-    - 2750.675
+  - - 2708.45
+    - 2713.85
+  - - 2714.2
+    - 2720.85
+  - - 2721.2
+    - 2729.1
+  - - 2729.45
+    - 2733.75
+  - - 2734.1
+    - 2742.95
+  - - 2744.45
+    - 2747.25
+  - - 2747.6
+    - 2749.4
+  - - 2749.75
+    - 2763.375
+  - - 2763.725
+    - 2766.975
+  - - 2767.325
+    - 2777.05
+  - - 2777.4
+    - 2782.225
   beat: 'B6: the gauges answer: Fort Myers +2.2 m, Saint Petersburg −1.8 m; the across-shore sign flipped and so did the water; FMB 3-4.5 m above the ground;
     satellites saw almost nothing (fact row 9); the two lines are the surge; Ekman and storm-surge pointers'
   visual: 'laid out like the original single coordinates movie (build 1, 41:00-41:20; user 2026-11-07): the map with both stations and their across-shore
@@ -3817,23 +3118,23 @@ scenes:
   layout: picture zone x 80-1000 (map 920 × 750); maths column x 1100; source line under the map; speed bar in the column
 - id: s32_flood_flight
   t:
-  - 2751.475
-  - 2795.175
+  - 2783.025
+  - 2826.725
   sentence_times:
-  - - 2751.475
-    - 2755.025
-  - - 2755.375
-    - 2761.075
-  - - 2761.425
-    - 2764.55
-  - - 2764.9
-    - 2771.075
-  - - 2771.425
-    - 2778.7
-  - - 2780.2
-    - 2786.625
-  - - 2786.975
-    - 2794.375
+  - - 2783.025
+    - 2786.575
+  - - 2786.925
+    - 2792.625
+  - - 2792.975
+    - 2796.1
+  - - 2796.45
+    - 2802.625
+  - - 2802.975
+    - 2810.25
+  - - 2811.75
+    - 2818.175
+  - - 2818.525
+    - 2825.925
   beat: zoom flight to the chosen flood event (provisional Amphan, Bay of Bengal) (PENDING flood_visuals v3 (reports/data/ch00_coordinates_flood_visuals.md
     §v3))
   visual: 'three.js in Remotion (flight() + Patch from movies/src/captests/flights.tsx; v2 prototype V2/clips/amphan_zoom_flight_threejs.mp4 re-timed):
@@ -3874,39 +3175,41 @@ scenes:
   layout: Depth colour bar in the column (never on the globe); §5b edge fades; the last frame matches s30.
 - id: s33_amphan_wind
   t:
-  - 2795.175
-  - 2917.95
+  - 2826.725
+  - 2961.7
   sentence_times:
-  - - 2795.175
-    - 2800.475
-  - - 2800.825
-    - 2809.05
-  - - 2809.4
-    - 2822.45
-  - - 2822.8
-    - 2827.775
-  - - 2828.125
-    - 2836.725
-  - - 2837.075
-    - 2844.35
-  - - 2844.7
-    - 2850.35
-  - - 2850.7
-    - 2865.35
-  - - 2865.7
-    - 2869.1
-  - - 2869.45
-    - 2880.65
-  - - 2881.0
-    - 2887.2
-  - - 2887.55
-    - 2893.425
-  - - 2894.925
-    - 2903.975
-  - - 2904.325
-    - 2910.6
-  - - 2910.95
-    - 2917.15
+  - - 2826.725
+    - 2832.025
+  - - 2832.375
+    - 2840.6
+  - - 2840.95
+    - 2854.0
+  - - 2854.35
+    - 2859.325
+  - - 2859.675
+    - 2868.275
+  - - 2868.625
+    - 2875.9
+  - - 2876.25
+    - 2881.9
+  - - 2882.25
+    - 2896.9
+  - - 2897.25
+    - 2900.65
+  - - 2901.0
+    - 2912.2
+  - - 2912.55
+    - 2918.75
+  - - 2919.1
+    - 2924.975
+  - - 2926.475
+    - 2937.325
+  - - 2937.675
+    - 2947.725
+  - - 2948.075
+    - 2954.35
+  - - 2954.7
+    - 2960.9
   beat: 'R14/R14b: Amphan''s across-shore wind from ERA5 at 2020-05-20T09:00 UTC, before its before/after: Sundarbans shore 21.644 N 89.229 E; coast 92.9
     km W, 21.9 km S, 13°, 257°, α 193°; u −8.4, v 21.0 → across ≈ −1.9 − 20.5 ≈ −22.4 (onto the land); IMD 960 hPa → ≈ 53 cm; ERA5 ≈ 0.59 of the IMD wind'
   visual: ERA5 10-m speed map (cmocean speed 0-30 m/s, bar in the column) with animated ERA5 arrows, Natural Earth coast, the ERA5 centre, the coast segment
@@ -3921,9 +3224,10 @@ scenes:
     of about minus zero point nine seven four and a sine of about minus zero point two two five. Then y hat prime points south, out to sea. ERA5''s wind there
     was about twenty two point six metres per second, from the south-south-east: u about minus eight point four, and v about plus twenty one. Across the shore,
     we take minus u sine alpha, and v cosine alpha, and add them. Together, that''s about minus twenty two point four metres per second: onto the land. [beat]
-    The official lowest pressure was about nine hundred and sixty hectopascals, so the sea under the eye rose about fifty three centimetres. So Amphan''s
-    wind pushed the sea onto the Sundarbans coast, over that wide, shallow shelf. There''s no tide-gauge record of the water there in our data, so next come
-    the pictures from space.'
+    At the white circle, ERA5''s lowest pressure is about nine hundred and sixty five hectopascals, but its storm is too weak, so we take the official value.
+    The official centre pressure at that hour was about nine hundred and sixty hectopascals, so the sea under the eye rose about fifty three centimetres.
+    So Amphan''s wind pushed the sea onto the Sundarbans coast, over that wide, shallow shelf. There''s no tide-gauge record of the water there in our data,
+    so next come the pictures from space.'
   on_screen_eq: null
   physics_source:
     fn: fluidpy.data.movie_shore.era5_event + coast_axes + inverse_barometer
@@ -3944,33 +3248,33 @@ scenes:
   layout: picture zone x 80-1000 (map 920 × 750); maths column x 1100; source line under the map; speed bar in the column
 - id: s34_amphan_radar
   t:
-  - 2917.95
-  - 3005.6
+  - 2961.7
+  - 3049.35
   sentence_times:
-  - - 2917.95
-    - 2921.125
-  - - 2921.475
-    - 2928.85
-  - - 2929.2
-    - 2938.5
-  - - 2938.85
-    - 2941.3
-  - - 2941.65
-    - 2948.525
-  - - 2948.875
-    - 2955.95
-  - - 2956.3
-    - 2966.125
-  - - 2967.625
-    - 2973.4
-  - - 2973.75
-    - 2981.175
-  - - 2981.525
-    - 2989.6
-  - - 2989.95
-    - 2998.275
-  - - 2999.775
-    - 3004.1
+  - - 2961.7
+    - 2964.875
+  - - 2965.225
+    - 2972.6
+  - - 2972.95
+    - 2982.25
+  - - 2982.6
+    - 2985.05
+  - - 2985.4
+    - 2992.275
+  - - 2992.625
+    - 2999.7
+  - - 3000.05
+    - 3009.875
+  - - 3011.375
+    - 3017.15
+  - - 3017.5
+    - 3024.925
+  - - 3025.275
+    - 3033.35
+  - - 3033.7
+    - 3042.025
+  - - 3043.525
+    - 3047.85
   beat: 'Amphan''s flood: why no ordinary before/after (cloud for days, small flooded patches at 250 m), then the Sentinel-1 radar pair'
   visual: 'S0-S2: two MODIS Terra natural-colour pictures of the radar box (88.80-89.92 E, 22.12-22.75 N), 21 and 22 May 2020, side by side with their dates
     (cloud over the coast), Natural Earth coast in white; S2 a 250-m pixel grid zoom note. S3-S5: a code-drawn satellite sends microwave pulses; over rough
@@ -4014,35 +3318,35 @@ scenes:
   layout: Picture zone x 80-1080; keys and numbers in the column; source line under the picture.
 - id: s35_nargis_intro
   t:
-  - 3005.6
-  - 3101.975
+  - 3049.35
+  - 3145.725
   sentence_times:
-  - - 3005.6
-    - 3014.475
-  - - 3014.825
-    - 3018.775
-  - - 3019.125
-    - 3027.325
-  - - 3027.675
-    - 3035.475
-  - - 3035.825
-    - 3039.675
-  - - 3040.025
-    - 3045.25
-  - - 3045.6
-    - 3054.5
-  - - 3054.85
-    - 3063.5
-  - - 3063.85
-    - 3074.525
-  - - 3076.025
-    - 3082.075
-  - - 3082.425
-    - 3090.1
-  - - 3090.45
-    - 3095.4
-  - - 3095.75
-    - 3101.175
+  - - 3049.35
+    - 3058.225
+  - - 3058.575
+    - 3062.525
+  - - 3062.875
+    - 3071.075
+  - - 3071.425
+    - 3079.225
+  - - 3079.575
+    - 3083.425
+  - - 3083.775
+    - 3089.0
+  - - 3089.35
+    - 3098.25
+  - - 3098.6
+    - 3107.25
+  - - 3107.6
+    - 3118.275
+  - - 3119.775
+    - 3125.825
+  - - 3126.175
+    - 3133.85
+  - - 3134.2
+    - 3139.15
+  - - 3139.5
+    - 3144.925
   beat: 'Cyclone Nargis as a case study: globe → Myanmar, the Irrawaddy delta, the track and dates, the eye, the zoom into the delta'
   visual: (unchanged) S0 fact row 10 ('some of the best-known'); S12 leads into the wind scene.
   voiceover: 'Some of the best-known flood pictures from space of a Bay of Bengal cyclone come from Cyclone Nargis, in May two thousand and eight. Let''s
@@ -4077,39 +3381,41 @@ scenes:
   layout: Globe left (zoom-reveal), keywords on the faded rim / column; source line below the globe.
 - id: s36_nargis_wind
   t:
-  - 3101.975
-  - 3217.6
+  - 3145.725
+  - 3273.325
   sentence_times:
-  - - 3101.975
-    - 3110.425
-  - - 3110.775
-    - 3118.825
-  - - 3119.175
-    - 3123.55
-  - - 3123.9
-    - 3132.2
-  - - 3132.55
-    - 3139.775
-  - - 3140.125
-    - 3145.75
-  - - 3146.1
-    - 3160.125
-  - - 3160.475
-    - 3163.875
-  - - 3164.225
-    - 3175.375
-  - - 3175.725
-    - 3181.925
-  - - 3182.275
-    - 3188.1
-  - - 3189.6
-    - 3198.9
-  - - 3199.25
-    - 3205.6
-  - - 3205.95
-    - 3212.15
-  - - 3212.5
-    - 3216.8
+  - - 3145.725
+    - 3154.175
+  - - 3154.525
+    - 3162.575
+  - - 3162.925
+    - 3167.3
+  - - 3167.65
+    - 3175.95
+  - - 3176.3
+    - 3183.525
+  - - 3183.875
+    - 3189.5
+  - - 3189.85
+    - 3203.875
+  - - 3204.225
+    - 3207.625
+  - - 3207.975
+    - 3219.125
+  - - 3219.475
+    - 3225.675
+  - - 3226.025
+    - 3231.85
+  - - 3233.35
+    - 3244.075
+  - - 3244.425
+    - 3254.625
+  - - 3254.975
+    - 3261.325
+  - - 3261.675
+    - 3267.875
+  - - 3268.225
+    - 3272.525
   beat: 'R14/R14b: Nargis''s across-shore wind from ERA5 at 2008-05-02T11:00 UTC, before its before/after: delta coast S of Bogale 15.778 N 95.174 E; coast
     69.5 km W, 10.8 km N, 9°, 279°, α 171°; u 9.6, v 16.5 → across ≈ −1.5 − 16.3 ≈ −17.8; IMD 962 hPa → ≈ 51 cm; ERA5 ≈ 0.55'
   visual: ERA5 10-m speed map (cmocean speed 0-30 m/s, bar in the column) with animated ERA5 arrows, Natural Earth coast, the ERA5 centre, the coast segment
@@ -4122,10 +3428,11 @@ scenes:
     degrees. So alpha, ninety degrees minus the bearing, plus a full turn, is about a hundred and seventy one degrees, with a cosine of about minus zero point
     nine eight eight and a sine of about zero point one five six. Then y hat prime points south, out to sea. ERA5''s wind there was about nineteen metres
     per second, from the south-south-west: u about plus nine point six, and v about plus sixteen point five. Across the shore, we take minus u sine alpha,
-    and v cosine alpha, and add them. Together, that''s about minus seventeen point eight metres per second: onto the land. [beat] The official lowest pressure
-    was about nine hundred and sixty two hectopascals, so the sea under the eye rose about fifty one centimetres. So Nargis drove the sea onto the delta,
-    where most of the land lies only a few metres above it. There''s no tide-gauge record of the water there in our data, so next come the pictures from space.
-    Let''s zoom in, to see the delta before and after the storm.'
+    and v cosine alpha, and add them. Together, that''s about minus seventeen point eight metres per second: onto the land. [beat] At the white circle, ERA5''s
+    lowest pressure is about nine hundred and eighty two hectopascals, but its storm is too weak, so we take the official value. The official centre pressure
+    at that hour was about nine hundred and sixty two hectopascals, so the sea under the eye rose about fifty one centimetres. So Nargis drove the sea onto
+    the delta, where most of the land lies only a few metres above it. There''s no tide-gauge record of the water there in our data, so next come the pictures
+    from space. Let''s zoom in, to see the delta before and after the storm.'
   on_screen_eq: null
   physics_source:
     fn: fluidpy.data.movie_shore.era5_event + coast_axes + inverse_barometer
@@ -4146,37 +3453,37 @@ scenes:
   layout: picture zone x 80-1000 (map 920 × 750); maths column x 1100; source line under the map; speed bar in the column
 - id: s37_nargis_swipe
   t:
-  - 3217.6
-  - 3303.85
+  - 3273.325
+  - 3359.575
   sentence_times:
-  - - 3217.6
-    - 3223.35
-  - - 3223.7
-    - 3229.0
-  - - 3229.35
-    - 3233.375
-  - - 3234.875
-    - 3238.3
-  - - 3238.65
-    - 3244.7
-  - - 3245.05
-    - 3247.825
-  - - 3248.175
-    - 3258.95
-  - - 3259.3
-    - 3268.725
-  - - 3269.075
-    - 3275.125
-  - - 3275.475
-    - 3277.925
-  - - 3278.275
-    - 3281.275
-  - - 3281.625
-    - 3287.925
-  - - 3289.425
-    - 3296.9
-  - - 3297.25
-    - 3303.05
+  - - 3273.325
+    - 3279.075
+  - - 3279.425
+    - 3284.725
+  - - 3285.075
+    - 3289.1
+  - - 3290.6
+    - 3294.025
+  - - 3294.375
+    - 3300.425
+  - - 3300.775
+    - 3303.55
+  - - 3303.9
+    - 3314.675
+  - - 3315.025
+    - 3324.45
+  - - 3324.8
+    - 3330.85
+  - - 3331.2
+    - 3333.65
+  - - 3334.0
+    - 3337.0
+  - - 3337.35
+    - 3343.65
+  - - 3345.15
+    - 3352.625
+  - - 3352.975
+    - 3358.775
   beat: 'ONE plain false-colour before/after swipe (captests A5 look), no overlay: Cyclone Nargis 2008 (flood_visuals v3 DECIDED by the user 2026-11-05);
     pointer F32'
   visual: 'Swipe as captests/A5_before_after/swipe_offline_capture.mp4: a wide false-colour pair in one frame, the gold vertical line GLIDING across at
@@ -4228,27 +3535,27 @@ scenes:
   layout: Legend and colour key under the image beside the source line; nothing on the image but place dots, names and pointers.
 - id: s38_idai_intro
   t:
-  - 3303.85
-  - 3365.25
+  - 3359.575
+  - 3420.975
   sentence_times:
-  - - 3303.85
-    - 3309.1
-  - - 3309.45
-    - 3317.35
-  - - 3317.7
-    - 3326.4
-  - - 3326.75
-    - 3332.9
-  - - 3333.25
-    - 3343.675
-  - - 3344.025
-    - 3350.45
-  - - 3350.8
-    - 3354.4
-  - - 3355.9
-    - 3362.35
-  - - 3362.7
-    - 3364.45
+  - - 3359.575
+    - 3364.825
+  - - 3365.175
+    - 3373.075
+  - - 3373.425
+    - 3382.125
+  - - 3382.475
+    - 3388.625
+  - - 3388.975
+    - 3399.4
+  - - 3399.75
+    - 3406.175
+  - - 3406.525
+    - 3410.125
+  - - 3411.625
+    - 3418.075
+  - - 3418.425
+    - 3420.175
   beat: 'Cyclone Idai, shorter: globe → Mozambique Channel, south of the equator (clockwise), the VIIRS picture, landfall near Beira, the zoom'
   visual: House globe turns from the Bay of Bengal across the Indian Ocean to the Mozambique Channel (S0-S1), labels Madagascar, Mozambique; the IBTrACS
     track 9-16 Mar draws on; S2 a gold clockwise arc round the storm with 'clockwise (seen from above)' beside an anticlockwise mini for the northern storms;
@@ -4281,39 +3588,41 @@ scenes:
   layout: Globe left (zoom-reveal), keywords in the column; source line below the globe.
 - id: s39_idai_wind
   t:
-  - 3365.25
-  - 3483.3
+  - 3420.975
+  - 3551.1
   sentence_times:
-  - - 3365.25
-    - 3374.3
-  - - 3374.65
-    - 3381.6
-  - - 3381.95
-    - 3390.45
-  - - 3390.8
-    - 3393.275
-  - - 3393.625
-    - 3402.525
-  - - 3402.875
-    - 3410.275
-  - - 3410.625
-    - 3416.225
-  - - 3416.575
-    - 3431.2
-  - - 3431.55
-    - 3435.25
-  - - 3435.6
-    - 3446.575
-  - - 3446.925
-    - 3453.125
-  - - 3453.475
-    - 3458.725
-  - - 3460.225
-    - 3469.625
-  - - 3469.975
-    - 3475.95
-  - - 3476.3
-    - 3482.5
+  - - 3420.975
+    - 3430.025
+  - - 3430.375
+    - 3437.325
+  - - 3437.675
+    - 3446.175
+  - - 3446.525
+    - 3449.0
+  - - 3449.35
+    - 3458.25
+  - - 3458.6
+    - 3466.0
+  - - 3466.35
+    - 3471.95
+  - - 3472.3
+    - 3486.925
+  - - 3487.275
+    - 3490.975
+  - - 3491.325
+    - 3502.3
+  - - 3502.65
+    - 3508.85
+  - - 3509.2
+    - 3514.45
+  - - 3515.95
+    - 3526.75
+  - - 3527.1
+    - 3537.425
+  - - 3537.775
+    - 3543.75
+  - - 3544.1
+    - 3550.3
   beat: 'R14/R14b: Idai''s across-shore wind from ERA5 at 2019-03-14T19:00 UTC, before its before/after: Beira seafront 19.829 S 34.935 E; coast 52.3 km
     W, 35.9 km S, 34°, 236°, α 214°; u −6.7, v 20.9 → across ≈ −3.7 − 17.3 ≈ −21.0; RSMC La Réunion 955 hPa → ≈ 58 cm; ERA5 ≈ 0.66'
   visual: ERA5 10-m speed map (cmocean speed 0-30 m/s, bar in the column) with animated ERA5 arrows, Natural Earth coast, the ERA5 centre, the coast segment
@@ -4327,9 +3636,10 @@ scenes:
     plus a full turn, is about two hundred and fourteen degrees, with a cosine of about minus zero point eight two nine and a sine of about minus zero point
     five five nine. Then y hat prime points south-east, out to sea. ERA5''s wind there was about twenty two metres per second, from the south-south-east:
     u about minus six point seven, and v about plus twenty point nine. Across the shore, we take minus u sine alpha, and v cosine alpha, and add them. Together,
-    that''s about minus twenty one metres per second: onto the land. [beat] The official lowest pressure was about nine hundred and fifty five hectopascals,
-    so the sea under the eye rose about fifty eight centimetres. So Idai''s wind pushed the sea onto Beira''s coast, and into the mouths of its rivers. There''s
-    no tide-gauge record of the water there in our data, so next come the pictures from space.'
+    that''s about minus twenty one metres per second: onto the land. [beat] At the white circle, ERA5''s lowest pressure is about nine hundred and eighty
+    one hectopascals, but its storm is too weak, so we take the official value. The official centre pressure at that hour was about nine hundred and fifty
+    five hectopascals, so the sea under the eye rose about fifty eight centimetres. So Idai''s wind pushed the sea onto Beira''s coast, and into the mouths
+    of its rivers. There''s no tide-gauge record of the water there in our data, so next come the pictures from space.'
   on_screen_eq: null
   physics_source:
     fn: fluidpy.data.movie_shore.era5_event + coast_axes + inverse_barometer
@@ -4350,21 +3660,21 @@ scenes:
   layout: picture zone x 80-1000 (map 920 × 750); maths column x 1100; source line under the map; speed bar in the column
 - id: s40_idai_swipe
   t:
-  - 3483.3
-  - 3520.15
+  - 3551.1
+  - 3587.95
   sentence_times:
-  - - 3483.3
-    - 3493.8
-  - - 3495.3
-    - 3499.15
-  - - 3499.5
-    - 3502.4
-  - - 3502.75
-    - 3509.775
-  - - 3511.275
-    - 3514.2
-  - - 3514.55
-    - 3519.35
+  - - 3551.1
+    - 3561.6
+  - - 3563.1
+    - 3566.95
+  - - 3567.3
+    - 3570.2
+  - - 3570.55
+    - 3577.575
+  - - 3579.075
+    - 3582.0
+  - - 3582.35
+    - 3587.15
   beat: 'The Idai before/after: natural colour, then false colour 7-2-1 (the key from s32)'
   visual: 'One frame 33.80-34.95 E, 20.20-19.35 S: MODIS Aqua 11 Mar | Terra 25 Mar 2019; S0 natural-colour swipe right → left → right → middle with date
     tags; Beira (label left-above its dot), Buzi (label left-below), Dondo; scale bar 25 km, north arrow; S2 cross-fade to 7-2-1, the same swipe; S3 ''dark
@@ -4399,37 +3709,37 @@ scenes:
   layout: Picture zone x 80-1080; key in the column; source line under the picture.
 - id: s41_recap
   t:
-  - 3520.15
-  - 3647.1
+  - 3587.95
+  - 3714.9
   sentence_times:
-  - - 3520.15
-    - 3530.05
-  - - 3530.4
-    - 3535.675
-  - - 3536.025
-    - 3545.525
-  - - 3545.875
-    - 3551.05
-  - - 3551.4
-    - 3564.475
-  - - 3564.825
-    - 3573.525
-  - - 3573.875
-    - 3584.425
-  - - 3584.775
-    - 3591.275
-  - - 3591.625
-    - 3602.575
-  - - 3602.925
-    - 3610.125
-  - - 3610.475
-    - 3623.9
-  - - 3624.25
-    - 3631.05
-  - - 3631.4
-    - 3637.025
-  - - 3637.375
-    - 3646.3
+  - - 3587.95
+    - 3597.85
+  - - 3598.2
+    - 3603.475
+  - - 3603.825
+    - 3613.325
+  - - 3613.675
+    - 3618.85
+  - - 3619.2
+    - 3632.275
+  - - 3632.625
+    - 3641.325
+  - - 3641.675
+    - 3652.225
+  - - 3652.575
+    - 3659.075
+  - - 3659.425
+    - 3670.375
+  - - 3670.725
+    - 3677.925
+  - - 3678.275
+    - 3691.7
+  - - 3692.05
+    - 3698.85
+  - - 3699.2
+    - 3704.825
+  - - 3705.175
+    - 3714.1
   beat: recap ('To sum up'); last sentence the teaser to Part 3
   visual: 'S0-S6 unchanged; S7 the coast with along / across; S8-S9 the gauges with the two across-shore numbers; S10 the three events'' across-shore arrows
     onto the land; S11 the flood pictures; S12-S13 the teaser (Part 3: the Earth; latitude, longitude → km).'
@@ -4462,15 +3772,15 @@ scenes:
   layout: Mini pictures one per sentence; small source lines under the data minis. No headings.
 - id: s42_end
   t:
-  - 3647.1
-  - 3670.0
+  - 3714.9
+  - 3737.8
   sentence_times:
-  - - 3647.1
-    - 3653.3
-  - - 3653.65
-    - 3661.7
-  - - 3662.05
-    - 3669.7
+  - - 3714.9
+    - 3721.1
+  - - 3721.45
+    - 3729.5
+  - - 3729.85
+    - 3737.5
   beat: 'series end card (maths ending, word for word; decision: maths end card)'
   visual: (unchanged card) the picture fades out with the music over the 2.5-s hold (R3).
   voiceover: This video is one of a series of related maths tutorials, so watch out for the others. They're made for students of atmospheric science, meteorology

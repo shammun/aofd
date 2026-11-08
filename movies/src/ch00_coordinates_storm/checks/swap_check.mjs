@@ -27,8 +27,16 @@ const K = (id) => { const k = IDS.indexOf(id); if (k < 0) throw new Error(`no sc
 const LEN = (k) => END[k] - CUT[k];
 const SS = (k, j) => Math.round(sc[k].sentences[j].start * FPS) - CUT[k];
 const SE = (k, j) => Math.round(sc[k].sentences[j].end * FPS) - CUT[k];
+// fix loop 1: AT on the Kokoro word times of words.json (= cs_lib.tsx), ATP = AT in the first sentence that contains the phrase
+const WORDS = JSON.parse(fs.readFileSync(path.join(ROOT, "movies/src/ch00_coordinates_storm/words.json"), "utf8")).scenes;
+const wnorm = (x) => x.toLowerCase().replace(/[^a-z0-9']/g, "");
+const wordTime = (k, j, phrase) => { const e = (WORDS[sc[k].id] || {})[String(j)]; if (!e || e.text !== sc[k].sentences[j].text) return null;
+  const toks = e.w.map(([t, x]) => [t, wnorm(x)]).filter(([, x]) => x), ph = phrase.split(/\s+/).map(wnorm).filter((x) => x);
+  for (let i = 0; i + ph.length <= toks.length; i++) if (ph.every((x, q) => toks[i + q][1] === x)) return toks[i][0]; return null; };
 const AT = (k, j, phrase) => { const s = sc[k].sentences[j]; const i = s.text.indexOf(phrase); if (i < 0) throw new Error(`phrase ${phrase}`);
+  const w = wordTime(k, j, phrase); if (w !== null) return Math.round((s.start + w) * FPS) - CUT[k];
   return Math.round((s.start + ((s.end - s.start) * i) / s.text.length) * FPS) - CUT[k]; };
+const ATP = (k, phrase) => { const j = sc[k].sentences.findIndex((q) => q.text.includes(phrase)); if (j < 0) throw new Error(`no sentence with ${phrase}`); return AT(k, j, phrase); };
 const clamp = (x, a, b) => Math.min(b, Math.max(a, x));
 const SSP = (k, ph) => { const j = sc[k].sentences.findIndex((q) => q.text.includes(ph)); if (j < 0) throw new Error(`no sentence with ${ph}`); return SS(k, j); };
 const easeIO = (t) => (t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
@@ -36,7 +44,7 @@ const textW = (t, s) => [...t].reduce((w, ch) => w + s * (/[ .,:;()|'·]/.test(c
 const T = { hero: 128, eq: 84, calc: 68, key: 54, floor: 44 };
 const swarp = (x, segs) => segs.reduce((v, [a, b]) => { if (v <= a || v >= b) return v;
   const y = 0.5 - 0.5 * Math.cos((Math.PI * (v - a)) / (b - a)), u = y < 0.5 ? Math.cbrt(y / 4) : 1 - Math.cbrt(2 * (1 - y)) / 2; return a + (b - a) * u; }, x); // = the TSX helper
-const BASE = { swarp, SS, SSP, SE, AT, LEN, K, CUT, END, FPS, XF: 10, clamp, easeIO, Math, T, Number, String, f: 0, fin: () => 1, fout: () => 1, win: () => 1, pulse: () => 0, ramp: () => 1 };
+const BASE = { swarp, SS, SSP, SE, AT, ATP, hiOn: () => false, hiSize: (f, t, s) => s, goldAt: (f, t, x) => x, tailIn: (f, t, c, x) => x, LEN, K, CUT, END, FPS, XF: 10, clamp, easeIO, Math, T, Number, String, f: 0, fin: () => 1, fout: () => 1, win: () => 1, pulse: () => 0, ramp: () => 1 };
 
 // ---------- tiny lexer helpers ----------
 const matchClose = (s, i) => { // s[i] is an opening bracket; returns index of its partner (strings/templates skipped)
@@ -59,7 +67,7 @@ const stripTS = (e) => e.replace(/\s+as\s+unknown\s+as\s+[\w.<>\[\]|, ]+?(?=[),;
 const evalIn = (scope, e) => { try { return Function("scope", `with (scope) { return (${stripTS(e)}); }`)(scope); } catch { return undefined; } };
 
 // ---------- components ----------
-const byid = {}; for (const m of src.matchAll(/export const SCENES_[ABC]: Record<string, React\.FC> = \{([\s\S]*?)\};/g)) for (const p of splitTop(m[1])) { const [a, b] = p.split(":").map((x) => x.trim()); byid[a] = b; }
+const byid = {}; for (const m of src.matchAll(/export const SCENES_[ABCD]: Record<string, React\.FC> = \{([\s\S]*?)\};/g)) for (const p of splitTop(m[1])) { const [a, b] = p.split(":").map((x) => x.trim()); byid[a] = b; }
 // ---------- ch00_coordinates adaptation (build 1): three scene files, BYID = SCENES_A/B/C, module constants and helpers ----------
 const CO_FILES = ["cs_sA.tsx", "cs_sB.tsx", "cs_sC.tsx", "cs_sD.tsx"].map((f) => path.join(ROOT, "movies/src/ch00_coordinates_storm", f));
 const CO_D = JSON.parse(fs.readFileSync(path.join(ROOT, "movies/ch00/ch00_coordinates_storm/data/cs.json"), "utf8"));

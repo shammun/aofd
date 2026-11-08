@@ -13620,5 +13620,23 @@
   "tts": "G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_storm/r8/tts (cst_r8_splice.py; 52 new clips, 480 re-used)",
   "audio_s": 3657.55,
   "reveals": "movies/src/ch00_coordinates_storm/at_words.json (Kokoro word timestamps, 78 entries)"
+ },
+ "fix_loop_1_2026_11_07": {
+  "what": "fix loop 1 after the r8 reviews: 14 narration clips (checks/fix1_script.py: s09 one radian said, s14 f / Omega / phi named (2 sentences), s15 'They're called cylindrical because', s20 towers near twelve, s21 'On the twentieth of May, Amphan came ashore', s30 the inputs of 100 Pa/(rho g) said and no voiced subtraction (2 sentences), events: ERA5's lowest pressure at the white circle + 'official centre pressure at that hour' (2 sentences each))",
+  "data_changed": false,
+  "numbers_changed": false,
+  "numbers_now_said_or_shown": {
+   "ERA5 pmin at the white circle (cs.json shore.*.pmin, already in the data)": {
+    "amphan": 965,
+    "nargis": 982,
+    "idai": 981
+   },
+   "TDR single-tower max (cs.json w.tdr.point_max)": 12,
+   "event wind speed / from (cs.json shore.*.hour)": "22.6 SSE, 19 SSW, 22 SSE; StP 19 NNE"
+  },
+  "facts_checked": "IBTrACS v04r01 on G: (agency pressure columns): Amphan 2020-05-20 09 UTC newdelhi 960; Nargis 2008-05-02 09/12 UTC newdelhi 962; Idai 2019-03-14 18 UTC reunion 955 (21 UTC 958)",
+  "tts": "G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_storm/fix1/tts (checks/fix1_splice.py; 14 new clips, 523 re-used)",
+  "audio_s": 3737.8,
+  "reveals": "movies/src/ch00_coordinates_storm/words.json (Kokoro token times of all 537 sentences, checks/fix1_words_all.py + fix1_words.py); 0 AT anchors on the character share"
  }
 }

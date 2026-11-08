@@ -19,7 +19,7 @@ import { LayerStack3D, StackLayer } from "../house/kit/stack3d";
 import { useTex } from "./kit_cs/globe";
 import {
   AT, ArcHead, Arrow, ColourBar, Cross, D, D2R, DashArrow, GeoImg, GeoMap, IMG, K, LEN, LUT_DBZ, LUT_W, Lbl, Parcel, RING, RTick, SAY, SEC, SRC, SS, STK, Scene, WV,
-  SideCallout, SpeedBar, Svg, URBar, Wedge, arcD, boxAt, clamp, fin, fout, linesPath, mix, nf, polar, poly, prog, win, Recall,
+  SideCallout, SpeedBar, Svg, URBar, Wedge, arcD, boxAt, clamp, fin, fout, linesPath, mix, nf, polar, poly, prog, win, Recall, goldAt, tailIn, hiOn, hiSize,
 } from "./cs_lib";
 import { EQ_S09, EQ_S09R, EQ_URUT, EQ_S15C, EQ_S10, EQ_S11, EQ_S12, EQ_S13, EQ_S14, EQ_S15, EQ_S16, EQ_S20, cutAt } from "./cs_eq";
 
@@ -39,7 +39,7 @@ const CHECK_B: [string, number, number, number][] = [
   ["w p999", WV.tdr.p999, 8.9, 0.1], ["w cont", WV.cont.mean_18_26, 1.0, 0.1], ["w cont r", WV.cont.slanted[0][2], 18, 0], ["eye", WV.tdr.eye_km, 20, 0],
   // #5b r1 M10: the spin row's inputs (Ω from f = 2Ω sin φ at the ring's latitude; φ printed to 0.1°; the sum with one rounding)
   ["Omega", RING.f / (2 * Math.sin(D.ian_c[0] * D2R)), 7.29e-5, 5e-8], ["phi", D.ian_c[0], 26.5, 0.05], ["fv", RING.f * RING.v, 0.0023, 5e-5], ["push (shown values)", Number(nf(RING.acc, 3)) + Number(nf(RING.f * RING.v, 4)), 0.050, 5e-4],
-  ["dt h", WV.tdr.dt_h, 7.6, 0.05], ["say w", SAY.w_ring, 3, 0], ["say tower", SAY.w_tower, 10, 0], ["say cont", SAY.w_cont, 1, 0],
+  ["dt h", WV.tdr.dt_h, 7.6, 0.05], ["say w", SAY.w_ring, 3, 0], ["said tower (fix loop 1: near twelve)", Math.round(WV.tdr.point_max[0]), 12, 0], ["say cont", SAY.w_cont, 1, 0],
 ];
 CHECK_B.forEach(([n, v, r, tol]) => { if (!(Math.abs(v - r) <= tol)) throw new Error(`CHECK ${n}: data ${v} vs screen ${r}`); });
 
@@ -82,6 +82,10 @@ const S09: React.FC = () => {
     tN1 = SS(k, 17), tCancel = SS(k, 18), tDeg = SS(k, 19), tLap = SS(k, 20), tLap2 = SS(k, 21);
   const [u1, u2] = cutAt(EQ_URUT, String.raw`,\qquad `);
   const oRec = fout(f, tGrow - 10);
+  // fix loop 1 (r8 review 2 S6, S7, S8): word times of the inputs (gold) and of each result
+  const tC6 = AT(k, 4, "zero point six"), tS8 = AT(k, 4, "zero point eight"), tUr6 = AT(k, 5, "is six"), tUt8 = AT(k, 5, "minus eight"),
+    t348 = AT(k, 6, "thirty four point eight"), tRad = AT(k, 17, "zero point zero zero one"), t573 = AT(k, 19, "fifty seven point three");
+  const [avgL, avgR] = cutAt(EQ_S09R, String.raw`\approx`);
   const Pb = polar(RC, RR, 53.13), er = unitV(53.13), et = unitV(143.13);
   const a0 = 30, aW = 30;                                     // the short time Δt drawn as a 30° step
   const P0 = polar(RC, RR, a0), P1 = polar(RC, RR, a0 + aW);
@@ -113,10 +117,11 @@ const S09: React.FC = () => {
           <circle cx={Pb[0]} cy={Pb[1]} r={12} fill={C.key} />
           <Arrow p={Pb} q={[Pb[0] + 200, Pb[1]]} color={C.ink} w={9} head={32} />
           <Lbl x={Pb[0] + 100} y={Pb[1] - 46} t="10 m/s east" c={C.ink} s={T.floor} />
-          <Arrow p={Pb} q={[Pb[0] + er[0] * 120, Pb[1] + er[1] * 120]} color={C.neg} w={9} head={30} o={fin(f, tExR)} />
-          <Arrow p={Pb} q={[Pb[0] - et[0] * 160, Pb[1] - et[1] * 160]} color={C.first} w={9} head={30} o={fin(f, tExR)} />
-          <Lbl x={Pb[0] + er[0] * 130 + 10} y={Pb[1] + er[1] * 130 - 10} t="$u_r=6$" c={C.neg} s={T.floor} o={fin(f, tExR)} />
-          <Lbl x={Pb[0] - et[0] * 170 + 10} y={Pb[1] - et[1] * 170 + 40} t="$u_\theta=-8$" c={C.first} s={T.floor} o={fin(f, tExR)} />
+          {/* fix loop 1 (r8 review 2 S6): each part on its spoken result ("is six", "minus eight"), not at the sentence start */}
+          <Arrow p={Pb} q={[Pb[0] + er[0] * 120, Pb[1] + er[1] * 120]} color={C.neg} w={9} head={30} o={fin(f, tUr6)} />
+          <Arrow p={Pb} q={[Pb[0] - et[0] * 160, Pb[1] - et[1] * 160]} color={C.first} w={9} head={30} o={fin(f, tUt8)} />
+          <Lbl x={Pb[0] + er[0] * 130 + 10} y={Pb[1] + er[1] * 130 - 10} t="$u_r=6$" c={C.neg} s={T.floor} o={fin(f, tUr6)} />
+          <Lbl x={Pb[0] - et[0] * 170 + 10} y={Pb[1] - et[1] * 170 + 40} t="$u_\theta=-8$" c={C.first} s={T.floor} o={fin(f, tUt8)} />
         </g>
         <Keyword f={f} text="the numbers" at={[MX, 120]} s={T.key} appear={tNum} out={tLap - 20} />
         <Keyword f={f} text="one full lap" at={[MX, 120]} s={T.key} appear={tLap} />
@@ -127,11 +132,12 @@ const S09: React.FC = () => {
       <Recall f={f} tex={u2} name="radial and tangential wind" x={MX} y={330} appear={AT(k, 3, "and u sub theta")} out={tGrow - 10} />
       <CalcStack f={f} x={MX} y={500} size={44} maxLines={4} o={oRec * fout(f, tAvg - 10)} rows={[
         { rhs: String.raw`u=10,\ v=0`, at: AT(k, 4, "so u is ten") },
-        { rhs: String.raw`\cos\theta=0.6,\ \sin\theta=0.8`, at: AT(k, 4, "where cosine theta"), cont: true },
-        { rhs: String.raw`u_r=10\times0.6+0\times0.8=6`, at: tExR },
-        { rhs: String.raw`u_\theta=-10\times0.8+0\times0.6=-8`, at: AT(k, 5, "and u sub theta") },
+        { rhs: String.raw`\cos\theta=${goldAt(f, tC6, "0.6")},\ \sin\theta=${goldAt(f, tS8, "0.8")}`, at: tC6 - 8, cont: true },
+        { rhs: String.raw`u_r=10\times0.6+0\times0.8${tailIn(f, tUr6, C.ink, "=6")}`, at: tExR },
+        { rhs: String.raw`u_\theta=-10\times0.8+0\times0.6${tailIn(f, tUt8, C.ink, "=-8")}`, at: AT(k, 5, "and u sub theta") },
       ]} />
-      <TeX s={EQ_S09R} x={MX} y={560} size={50} o={win(f, tAvg + 8, tGrow - 10)} />
+      {/* fix loop 1 (r8 review 2 S6): the ring average's working on "the average", its value on "thirty four point eight" (gold) */}
+      <TeX s={avgL + tailIn(f, t348, C.ink, String.raw`\approx` + avgR, true)} x={MX} y={560} size={50} o={win(f, AT(k, 6, "the average"), tGrow - 10)} />
       {/* fix 0 B10: the arc rule written (S7) and the division by Δt shown (S9), one row per sentence */}
       <CalcStack f={f} x={MX + 330} y={250} size={56} maxLines={3} o={fout(f, tNum - 6)} rows={[
         { lhs: String.raw`\Delta s`, rhs: String.raw`=v\,\Delta t`, at: tDt },
@@ -146,14 +152,15 @@ const S09: React.FC = () => {
       {/* fix 0 B11: every conversion on screen, on its words */}
       <CalcStack f={f} x={MX + 20} y={230} size={50} maxLines={3} o={fin(f, tNum)} rows={[
         // K6 round 1: ran to x 2024: r and v on two lines
-        { rhs: String.raw`r=25\ \mathrm{km}=25\,000\ \mathrm m`, at: tN1, size: 46, glow: pulse(f, AT(k, 17, "twenty five thousand"), 30) },
-        { rhs: String.raw`v=34.8\ \mathrm{m/s}\ (\approx35)`, at: tN1 + 15, size: 46, cont: true, glow: pulse(f, AT(k, 17, "thirty four point eight"), 30) },
-        { rhs: String.raw`\dfrac{34.8\ \mathrm{m/s}}{25\,000\ \mathrm{m}}\approx0.00139\ \mathrm{rad/s}`, at: AT(k, 17, "divided by") },
-        { rhs: String.raw`1\ \mathrm{rad}=\dfrac{180^\circ}{\pi}\approx57.3^\circ`, at: tDeg },
+        // fix loop 1 (review 1 S8, review 2 S6): each input on its word, gold (was at the sentence start with a faint glow)
+        { rhs: String.raw`r=25\ \mathrm{km}=${goldAt(f, AT(k, 17, "twenty five thousand"), String.raw`25\,000\ \mathrm m`)}`, at: AT(k, 17, "twenty five thousand") - 8, size: 46 },
+        { rhs: String.raw`v=${goldAt(f, AT(k, 17, "thirty four point eight"), String.raw`34.8\ \mathrm{m/s}`)}\ (\approx35)`, at: AT(k, 17, "thirty four point eight") - 8, size: 46, cont: true },
+        { rhs: String.raw`\dfrac{34.8\ \mathrm{m/s}}{25\,000\ \mathrm{m}}${tailIn(f, tRad, C.ink, String.raw`\approx0.00139\ \mathrm{rad/s}`)}`, at: AT(k, 17, "divided by") },
+        { rhs: String.raw`1\ \mathrm{rad}=\dfrac{180^\circ}{\pi}\approx${goldAt(f, t573, String.raw`57.3^\circ`)}`, at: AT(k, 19, "One radian") },   // fix loop 1 (review 2 S8): said, gold on its word
         { rhs: String.raw`0.00139\times57.3\approx0.08^\circ/\mathrm{s}`, at: AT(k, 19, "zero point zero eight") },
         { rhs: String.raw`0.08\times60\approx4.8\approx5^\circ/\mathrm{min}`, at: AT(k, 19, "five degrees") },
         { rhs: String.raw`\text{lap}=\dfrac{2\pi}{0.00139}=\dfrac{6.283}{0.00139}`, at: AT(k, 20, "divided by") },
-        { rhs: String.raw`\approx4500\ \mathrm s,\qquad \dfrac{4500}{60}=75\ \mathrm{min}`, at: tLap2 },
+        { rhs: String.raw`\approx4500\ \mathrm s,\qquad \dfrac{4500}{60}=75\ \mathrm{min}`, at: AT(k, 21, "four thousand") - 4 },
       ]} />
       <Svg><Lbl x={MX} y={720} t="metres cancel: rad/s left" c={C.local} s={T.floor} o={win(f, tCancel, tLap - 20)} /></Svg>
       <Svg><Lbl x={MX} y={800} t={String.raw`${nf(RING.v, 1)} m/s $\div$ 25 000 m`} c={C.muted} s={T.floor} o={0 * tGrow} /></Svg>
@@ -311,7 +318,7 @@ const S13: React.FC = () => {
         <Parcel p={p} />
         <Keyword f={f} text="keep: $v^2/r$, towards the centre" at={[MX, 120]} s={T.floor} appear={0} out={tHow - 20} />
         <Keyword f={f} text="how big?" at={[MX, 120]} s={T.key} appear={tHow} out={tBig - 20} />
-        <Keyword f={f} text="≈ 200 $\times$ smaller than gravity" at={[MX, 120]} s={T.floor} appear={tG} out={tCar - 20} />
+        <Keyword f={f} text="≈ 200 $\times$ smaller than gravity" at={[MX, 120]} s={T.floor} appear={AT(k, 6, "two hundred")} out={tCar - 20} />
         <Keyword f={f} text="all of it turns the parcel" at={[MX, 120]} s={T.key} appear={tTurn} />
         <g opacity={win(f, tG + 14, tCar - 20)}>{/* K6 round 2: in after the stack has slid up for its 9.81 / 0.048 row (the new row crossed the bars while sliding) */}
           {/* K6 r0: 50 px lower, clear of the (taller) fraction rows; K6 round 1: 15 px more (the fraction rows are 2.4 × size now) */}
@@ -330,10 +337,11 @@ const S13: React.FC = () => {
       </Svg>
       {/* K6 round 1: gone before the summary line comes in at the same place (they cross-faded on top of each other) */}
       <CalcStack f={f} x={MX + 230} y={220} size={50} maxLines={3} o={fout(f, tAll - 12)} rows={[
-        { lhs: String.raw`v^2=34.8^2`, rhs: String.raw`\approx1211`, at: tSq, glow: pulse(f, AT(k, 2, "thirty four point eight"), 30) },   // r8 labels
-        { lhs: String.raw`\dfrac{v^2}{r}=\dfrac{1211}{25\,000}`, rhs: String.raw`\approx0.048\ \mathrm{m/s^2}`, at: AT(k, 2, "divide by the radius"), h: 130, glow: pulse(f, AT(k, 3, "zero point zero four eight"), 30) },   // K6 round 2: 116-118 px of ink at 50 px (superscripts)
-        { lhs: String.raw`v\approx35:\ \dfrac{35^2}{25\,000}`, rhs: String.raw`=\dfrac{1225}{25\,000}\approx0.049`, at: tEasy, c: C.local, h: 130 },   // #5b r1 S5: 35² = 1225 shown
-        { lhs: String.raw`\dfrac{9.81}{0.048}`, rhs: String.raw`\approx200`, at: tG, h: 130 },
+        // fix loop 1 (review 2 S6, S7): v gold on its word; each result on its word (0.048 gold: the scene's answer)
+        { lhs: String.raw`v^2=${goldAt(f, AT(k, 2, "thirty four point eight"), "34.8")}^2`, rhs: String.raw`\approx1211`, at: AT(k, 2, "thirty four point eight") - 8 },
+        { lhs: String.raw`\dfrac{v^2}{r}=\dfrac{1211}{25\,000}`, rhs: tailIn(f, AT(k, 3, "zero point zero four eight"), C.ink, String.raw`\approx0.048\ \mathrm{m/s^2}`, true), at: AT(k, 2, "divide by the radius"), h: 130 },   // K6 round 2: 116-118 px of ink at 50 px (superscripts)
+        { lhs: String.raw`v\approx35:\ \dfrac{35^2}{25\,000}`, rhs: String.raw`=\dfrac{1225}{25\,000}` + tailIn(f, AT(k, 4, "zero point zero four nine"), C.local, String.raw`\approx0.049`), at: AT(k, 4, "thirty five"), c: C.local, h: 130 },   // #5b r1 S5: 35² = 1225 shown
+        { lhs: String.raw`\dfrac{9.81}{0.048}`, rhs: tailIn(f, AT(k, 6, "two hundred"), C.ink, String.raw`\approx200`, true), at: tG, h: 130 },   // fix loop 1 (review 2 S6): the result on its word
       ]} />
       <TeX s={EQ_S13} x={MX} y={250} size={60} o={win(f, tAll, LEN(k) + 20)} />
       {/* fix 0 B22: the car's conversions, one row at a time */}
@@ -352,7 +360,13 @@ const S13: React.FC = () => {
 const S14: React.FC = () => {
   const f = useCurrentFrame(), k = K("s14_steady_but_turning");
   const tMore = SS(k, 1), tSD = SS(k, 2), tTwo = SS(k, 3), tMin = SS(k, 4), tLen = SS(k, 5), tSlide = SS(k, 6), tShort = SS(k, 7), tEye = SS(k, 8), tHow = SS(k, 9),
-    tEnds = SS(k, 10), tArc = SS(k, 11), tDiv = SS(k, 12), tOnly = SS(k, 13), tPush = SS(k, 14), tP = SS(k, 15), tEarth = SS(k, 16), tM1 = SS(k, 17), tM2 = SS(k, 18);
+    tEnds = SS(k, 10), tArc = SS(k, 11), tDiv = SS(k, 12), tOnly = SS(k, 13), tPush = SS(k, 14), tP = SS(k, 15), tEarth = SS(k, 16), tM1 = SS(k, 18), tM2 = SS(k, 19);
+  // fix loop 1 (review 1 S6, review 2 S6/S8): S16 re-voiced in two sentences (S16 names f, Ω and φ; S17 "twenty times weaker"); the
+  // results on their words (2.9, 0.048), the inputs gold on their words (Ω "spin rate", φ "twenty six and a half")
+  const tWeak = SS(k, 17), t29 = AT(k, 11, "two point nine"), t048 = AT(k, 12, "zero point zero four eight"), tFv = AT(k, 16, "the speed times"),
+    tCor = AT(k, 16, "Coriolis parameter f"), tOm = AT(k, 16, "spin rate"), tPhi = AT(k, 16, "twenty six and a half"), t20 = AT(k, 17, "twenty times weaker"),
+    tStr = AT(k, 17, "a little stronger");
+  const [e14a, e14b] = cutAt(EQ_S14, "=34.8"), [e14c, e14d] = cutAt(e14b, String.raw`\approx`);
   const DT = 15;                                               // the 5° turn drawn at 15° (listed)
   const a0 = 60, a1 = a0 + DT, p0 = polar(RC, RR, a0), p1 = polar(RC, RR, a1);
   const L = 200, v0 = unitV(a0 + 90), v1 = unitV(a1 + 90);
@@ -398,45 +412,48 @@ const S14: React.FC = () => {
         <Keyword f={f} text="yes: it turns" at={[MX, 120]} s={T.key} appear={tOnly} out={tM1 - 20} />
         <Keyword f={f} text="more: Wind on weather charts" at={[MX, 120]} s={T.floor} appear={tM1} out={tM2 - 20} />
         <Keyword f={f} text="more: Circular motion" at={[MX, 120]} s={T.floor} appear={tM2} />
-        <Lbl x={MX} y={220} t={`both ${nf(RING.v, 1)} m/s long`} c={C.first} s={T.floor} o={win(f, tLen, tOnly - 20)} />
+        <Lbl x={MX} y={220} t={`both ${nf(RING.v, 1)} m/s long`} c={C.first} s={T.floor} o={win(f, AT(k, 5, "thirty four point eight"), tOnly - 20)} />
         <Lbl x={MX} y={220} t="something pushes inward" c={C.key} s={T.floor} o={win(f, tPush, tP - 22)} />
         {/* fix 0 B1: the two pushes keyed by colour beside the picture (the ring leaves no room for labels at the parcel).
             #5b r1 S12 / M10: the key 80 px higher; the spin push named as seen on the turning Earth; Ω and φ named for the f row */}
         <Lbl x={MX} y={220} t="pressure force: inward" c={C.second} s={T.floor} o={win(f, tP, tM1 - 20)} />
-        <Lbl x={MX} y={280} t="Earth's spin: ≈ $1/20$, outward" c="#b49cf0" s={T.floor} o={win(f, tEarth, tM1 - 20)} />
+        {/* fix loop 1: the "≈ 1/20" is said in S17 now; its number is the ratio row of the stack below (on "twenty times weaker") */}
+        <Lbl x={MX} y={280} t="Earth's spin: outward" c="#b49cf0" s={T.floor} o={win(f, tEarth, tM1 - 20)} />
         <Lbl x={MX} y={335} t="(as seen on the turning Earth)" c="#b49cf0" s={T.floor} b={false} o={win(f, tEarth, tM1 - 20)} />
         {/* #5b r2 S4: f named here; Ω (with its unit) and φ (Ian's latitude) as rows of the stack below */}
-        <Lbl x={MX} y={390} t="$f$: Coriolis parameter" c={C.local} s={T.floor} o={win(f, AT(k, 16, "pushes the other way"), tM1 - 20)} />
+        <Lbl x={MX} y={390} t="$f$: Coriolis parameter" c={C.local} s={T.floor} o={win(f, tCor, tM1 - 20)} />
         <Lbl x={RC[0]} y={790} t="(violet arrow drawn $6\times$ longer)" c={C.muted} s={T.floor} a="middle" o={win(f, tEarth, tM1 - 20)} />
         {/* K6 round 1: under the ring (the balance rows now reach y 840 in the text column) */}
-        <Lbl x={RC[0]} y={845} t="why: Coriolis movie" c={C.muted} s={T.floor} a="middle" o={win(f, AT(k, 16, "a little stronger"), tM1 - 20)} />
+        <Lbl x={RC[0]} y={845} t="why: Coriolis movie" c={C.muted} s={T.floor} a="middle" o={win(f, tStr, tM1 - 20)} />
       </Svg>
       <CalcStack f={f} x={MX + 20} y={262} size={56} maxLines={3} o={fout(f, tOnly - 6)} rows={[
-        { rhs: String.raw`\Delta\theta=0.00139\times60`, at: tMin, size: 50 },
+        // fix loop 1 (review 2 Nit 1): the rate to four figures, so that the product rounds to the 0.084 that is said (0.00139 × 60 = 0.0834)
+        { rhs: String.raw`\Delta\theta=0.001392\times60`, at: AT(k, 4, "its rate times sixty"), size: 50 },
         { rhs: String.raw`\approx0.084\ \mathrm{rad}`, at: AT(k, 4, "zero point zero eight four"), size: 50, cont: true },
         { rhs: String.raw`0.084\times57.3\approx4.8^\circ\approx5^\circ`, at: AT(k, 4, "five degrees"), size: 50, cont: true },
         // #5b r1 S10: the arc rule once (EQ_S14 in the stack; the separate 44-px copy under it is gone)
-        { rhs: cutAt(EQ_S14, "=34.8")[0], at: tArc, size: 50 },
-        { rhs: "=34.8" + cutAt(EQ_S14, "=34.8")[1], at: AT(k, 11, "radius times angle"), size: 50, cont: true },
-        { rhs: String.raw`\dfrac{2.9\ \mathrm{m/s}}{60\ \mathrm s}\approx0.048\ \mathrm{m/s^2}`, at: tDiv, glow: pulse(f, tDiv + 30, 20) },
+        { rhs: e14a, at: tArc, size: 50 },
+        { rhs: "=34.8" + e14c + tailIn(f, t29, C.ink, String.raw`\approx` + e14d), at: AT(k, 11, "radius times angle"), size: 50, cont: true },
+        { rhs: String.raw`\dfrac{2.9\ \mathrm{m/s}}{60\ \mathrm s}${tailIn(f, t048, C.ink, String.raw`\approx0.048\ \mathrm{m/s^2}`, true)}`, at: tDiv },
       ]} />
       {/* fix 0 B1: the balance in numbers on S16 (f v = 6.51e-5 × 34.8 ≈ 0.0023 m/s², ratio 21 from data/cs.json) */}
       {/* #5b r1 M10 (A1, A6): the inputs of 0.0023 on screen (f = 2Ω sin φ with Ω and Ian's latitude), and one rounding in the sum */}
       {/* #5b r2 S4: two stacks, one after the other: (A) the inputs Ω (unit) and φ (Ian's latitude) and the product, to "twenty times
           weaker"; (B) the ratio and the sum, which restate 0.048 and 0.0023 (one stack of eight rows ran past the content area) */}
-      <CalcStack f={f} x={MX} y={440} size={44} maxLines={4} o={fout(f, AT(k, 16, "twenty times weaker") - 6)} rows={[
-        { rhs: String.raw`\Omega=7.29\times10^{-5}\,\mathrm{s^{-1}}\text{: Earth's spin rate}`, at: tEarth + 12, c: C.local },  // #5b r3 C2: on "Earth's spin", rows ≥ 12 frames apart
-        { rhs: String.raw`\varphi=${nf(D.ian_c[0], 1)}^\circ\text{: Ian's latitude}`, at: tEarth + 28, cont: true, c: C.local },
-        { rhs: String.raw`f\,v=2\Omega\sin\varphi\cdot v`, at: AT(k, 16, "pushes the other way") + 8, cont: true },
-        { rhs: String.raw`=2\times7.29\times10^{-5}\times\sin${nf(D.ian_c[0], 1)}^\circ\times${nf(RING.v, 1)}`, at: AT(k, 16, "pushes the other way") + 24, cont: true },
-        { rhs: String.raw`\approx${nf(RING.f * RING.v, 4)}\ \mathrm{m/s^2}\ \text{(out)}`, at: AT(k, 16, "a little outward"), cont: true },
+      {/* fix loop 1: the rows in the order the voice says them (the formula on "the speed times", Ω on "spin rate", φ on its value, gold) */}
+      <CalcStack f={f} x={MX} y={440} size={44} maxLines={4} o={fout(f, tWeak - 20)} rows={[
+        { rhs: String.raw`f\,v=2\Omega\sin\varphi\cdot v`, at: tFv },
+        { rhs: String.raw`\Omega=${goldAt(f, tOm, String.raw`7.29\times10^{-5}`)}\,\mathrm{s^{-1}}\text{: Earth's spin rate}`, at: tOm, cont: true, c: C.local },
+        { rhs: String.raw`\varphi=${goldAt(f, tPhi, `${nf(D.ian_c[0], 1)}^\\circ`)}\text{: Ian's latitude}`, at: tPhi, cont: true, c: C.local },
+        { rhs: String.raw`=2\times7.29\times10^{-5}\times\sin${nf(D.ian_c[0], 1)}^\circ\times${nf(RING.v, 1)}`, at: tPhi + 30, cont: true },
+        { rhs: String.raw`\approx${nf(RING.f * RING.v, 4)}\ \mathrm{m/s^2}\ \text{(out)}`, at: tPhi + 50, cont: true },
       ]} />
       <CalcStack f={f} x={MX} y={440} size={44} maxLines={4} o={fout(f, tM1 - 10)} rows={[
-        { rhs: String.raw`\dfrac{${nf(RING.acc, 3)}\ \text{(turning)}}{${nf(RING.f * RING.v, 4)}}\approx${Math.round(RING.fratio)}`, at: AT(k, 16, "twenty times weaker") + 6 },
-        { rhs: String.raw`\text{pressure push}\approx${nf(RING.acc, 3)}+${nf(RING.f * RING.v, 4)}`, at: AT(k, 16, "a little stronger") },
-        { rhs: String.raw`\approx${(Number(nf(RING.acc, 3)) + Number(nf(RING.f * RING.v, 4))).toFixed(3)}\ \mathrm{m/s^2}`, at: AT(k, 16, "a little stronger") + 20, cont: true },
+        { rhs: String.raw`\dfrac{${nf(RING.acc, 3)}\ \text{(turning)}}{${nf(RING.f * RING.v, 4)}}${tailIn(f, t20, C.ink, String.raw`\approx${Math.round(RING.fratio)}`)}`, at: tWeak },
+        { rhs: String.raw`\text{pressure push}\approx${nf(RING.acc, 3)}+${nf(RING.f * RING.v, 4)}`, at: tStr },
+        { rhs: String.raw`\approx${(Number(nf(RING.acc, 3)) + Number(nf(RING.f * RING.v, 4))).toFixed(3)}\ \mathrm{m/s^2}`, at: tStr + 20, cont: true },
       ]} />
-      <Svg><Lbl x={MX} y={832} t="same as $v^2/r$" c={C.gold} s={T.floor} o={win(f, tDiv + 20, tOnly - 20)} /></Svg>
+      <Svg><Lbl x={MX} y={832} t="same as $v^2/r$" c={C.gold} s={T.floor} o={win(f, t048 + 10, tOnly - 20)} /></Svg>
     </Scene>
   );
 };
@@ -834,6 +851,9 @@ const S20: React.FC = () => {
     // fix 0 B13: S12 became four sentences (quick check · in through the side · up through the lid · the radar): later indices +3
     tWeak = SS(k, 11), tMust = SS(k, 12), tSide = SS(k, 13), tLid = SS(k, 14), tRadar = SS(k, 15), tThree = AT(k, 15, "about three metres"),
     tTower = AT(k, 15, "single towers"), tEw = SS(k, 16), tIUO = SS(k, 17), tMore = SS(k, 18);
+  // fix loop 1 (r8 review 2 S4, S6, S7): the callouts on their numbers; the quick check asks first and answers on "is about one"; |u_r| gold
+  const tMin16 = AT(k, 7, "minus sixteen"), tTop9 = AT(k, 8, "plus nine"), tVt55 = AT(k, 10, "fifty five"), t16 = AT(k, 13, "sixteen metres"),
+    tDivR = AT(k, 14, "divided by the radius"), tOne = AT(k, 14, "is about one");
   const oSec = fin(f, tSlice);
   const ringE = 1 - prog(f, tDep, tDep + 70);                 // #5b r1 S13: shrinks on S2 ("going all the way round removes theta")
   const RB = { x: 230, y: 60, w: 500, h: 500 }, ringPx = (100 / (2 * STK.half_km)) * RB.w;   // the 925-hPa layer square, the 100-km ring
@@ -890,7 +910,9 @@ const S20: React.FC = () => {
           {vlab.map((L, i) => { const q = P(L.r, L.z);
             const inB = Math.min(q[0] - 30 - SB.x, SB.x + SB.w - 30 - q[0], q[1] - 18 - SB.y, SB.y + SB.h - 18 - q[1]);
             // #5b r1 S14: dark text on a PALE halo (the dark halo read as smudges at 640 px)
-            const oL = fin(f, tLines + 10) * oH * clamp(inB / 8, 0, 1);
+            // fix loop 1 (review 2 Nit 7): a line label within 34 px of the gold inflow arrow (z 0.5 km, r 31-170 km) steps aside while it is drawn
+            const nearIn = Math.abs(q[1] - P(100, 0.5)[1]) < 34 && q[0] > P(25, 0)[0] && q[0] < P(175, 0)[0];
+            const oL = fin(f, tLines + 10) * oH * clamp(inB / 8, 0, 1) * (nearIn ? 1 - win(f, tSide - 12, tRadar - 6) : 1);
             return oL <= 0 ? null : <text key={i} x={q[0]} y={q[1]} fill="#1a1a24" fontSize={T.floor} fontFamily={FONT} fontWeight={650} textAnchor="middle"
               dominantBaseline="central" stroke="#f1ece0" strokeWidth={0.2 * T.floor} strokeLinejoin="round" paintOrder="stroke" opacity={oL}>{`${L.level}`}</text>; })}
           <rect x={SB.x} y={SB.y} width={SB.w} height={SB.h} fill="none" stroke={C.grid} strokeWidth={3} />
@@ -902,9 +924,9 @@ const S20: React.FC = () => {
           <Lbl x={SB.x - 14} y={SB.y - 30} t="height (km)" c={C.muted} s={T.floor} a="start" b={false} o={1 - win(f, tRadar - 12, tRadar + 52, 8)} />
           <g data-lc-own="s20eye"><Lbl x={(SB.x + P(eye, 0)[0]) / 2} y={SB.y + SB.h * 0.45} t="no echoes" c={C.key} s={T.floor} a="middle" rot={-90} o={xf} /></g>
           <line x1={P(25, 0)[0]} y1={SB.y + SB.h - 4} x2={P(25, 0)[0]} y2={SB.y + SB.h - 40} stroke={C.first} strokeWidth={8} opacity={fin(f, tWeak) * oH} />
-          <circle cx={mn[0]} cy={mn[1]} r={12} fill={C.gold} stroke={C.bg} strokeWidth={3} opacity={fin(f, tMin) * oH} />
-          <circle cx={mxp[0]} cy={mxp[1]} r={12} fill={C.gold} stroke={C.bg} strokeWidth={3} opacity={fin(f, tTop) * oH} />
-          <circle cx={vtp[0]} cy={vtp[1]} r={12} fill={C.key} stroke={C.bg} strokeWidth={3} opacity={fin(f, tVt) * oH} />
+          <circle cx={mn[0]} cy={mn[1]} r={12} fill={C.gold} stroke={C.bg} strokeWidth={3} opacity={fin(f, tMin16) * oH} />
+          <circle cx={mxp[0]} cy={mxp[1]} r={12} fill={C.gold} stroke={C.bg} strokeWidth={3} opacity={fin(f, tTop9) * oH} />
+          <circle cx={vtp[0]} cy={vtp[1]} r={12} fill={C.key} stroke={C.bg} strokeWidth={3} opacity={fin(f, tVt55) * oH} />
           {/* the inflow says the air must rise: the continuity w (≈ 1 m/s at r ≈ 18-26 km), dashed, on the HRRR section */}
           {/* fix 0 B13: the box estimate on the section: a cylinder r 0-30 km, h 0-1 km (gold outline); in through its side, up
               through its lid (three short dashed up arrows) */}
@@ -932,16 +954,17 @@ const S20: React.FC = () => {
         <ColourBar x={MX} y={250} w={420} lut={LUT_W} lo={0} hi={WV.tdr.lim} unit="m/s" title="rising air (radar)" o={xf}
           ticks={[{ v: 0, t: "≤ 0" }, { v: 2, t: "2" }, { v: 4, t: "4" }]} />
         {/* K6 round 1: the three callouts 14 px lower (the top one sat 12 px under the colour bar's "+ out") */}
-        <SideCallout f={f} lines={`≈ ${nf(SEC.min[0], 0)} m/s, 30 km, 0.7 km up`} at={[MX, 554]} appear={tMin} out={tMust - 20} target={[mn[0] + 14, mn[1] - 10]} s={T.floor} c={C.neg} />
-        <SideCallout f={f} lines={`≈ +${Math.round(SEC.max[0])} m/s, 125 km, 15 km up`} at={[MX, 434]} appear={tTop} out={tMust - 20} target={[mxp[0] + 14, mxp[1]]} s={T.floor} c="#8db5e2" />
-        <SideCallout f={f} lines={`$u_\\theta$ ≈ ${Math.round(SEC.vtmax[0])} m/s, 30 km, 1.4 km up`} at={[MX, 494]} appear={tVt} out={tMust - 20} target={[vtp[0] + 14, vtp[1] + 6]} s={T.floor} c={C.key} />
+        <SideCallout f={f} lines={`≈ ${nf(SEC.min[0], 0)} m/s, 30 km, 0.7 km up`} at={[MX, 554]} appear={tMin16} out={tMust - 20} target={[mn[0] + 14, mn[1] - 10]} s={T.floor} c={C.neg} />
+        <SideCallout f={f} lines={`≈ +${Math.round(SEC.max[0])} m/s, 125 km, 15 km up`} at={[MX, 434]} appear={tTop9} out={tMust - 20} target={[mxp[0] + 14, mxp[1]]} s={T.floor} c="#8db5e2" />
+        <SideCallout f={f} lines={`$u_\\theta$ ≈ ${Math.round(SEC.vtmax[0])} m/s, 30 km, 1.4 km up`} at={[MX, 494]} appear={tVt55} out={tMust - 20} target={[vtp[0] + 14, vtp[1] + 6]} s={T.floor} c={C.key} />
         <Lbl x={MX} y={630} t={`at the sea: ${nf(SEC.vt10_25, 1)} m/s (25 km, 10 m)`} c={C.first} s={T.floor} o={win(f, tWeak, tMust - 20)} />
         <Keyword f={f} text="a quick check" at={[MX, 120]} s={T.key} c={C.gold} appear={tMust} out={tLid - 20} />
-        <Keyword f={f} text={`inflow ⇒ rise ≈ ${SAY.w_cont} m/s`} at={[MX, 120]} s={T.key} c={C.gold} appear={tLid} out={tRadar - 20} />
+        <Keyword f={f} text="how fast must it rise?" at={[MX, 120]} s={T.key} appear={tLid} out={tOne - 20} />
+        <Keyword f={f} text={`inflow ⇒ rise ≈ ${SAY.w_cont} m/s`} at={[MX, 120]} s={T.key} c={C.gold} appear={tOne} out={tRadar - 20} />
         {/* K6 round 1: under the (now taller) box rows */}
         <Keyword f={f} text="measured: aircraft radar" at={[MX, 120]} s={T.key} appear={tRadar} out={tIUO - 20} />
         <SideCallout f={f} lines={`≈ ${nf(pk[0], 1)} m/s, ${nf(pk[1], 1)} km up`} at={[MX, 440]} appear={tThree} out={tIUO - 20} target={[pkP[0] + 16, pkP[1]]} s={T.floor} c={C.gold} />
-        <Lbl x={MX} y={520} t="single towers ≈ 10 m/s" c={C.key} s={T.floor} o={win(f, tTower, tIUO - 20)} />{/* #5b r2 cosmetic (A6): as the voice says ("near ten") */}
+        <Lbl x={MX} y={520} t={`single towers ≈ ${Math.round(WV.tdr.point_max[0])} m/s`} c={C.key} s={T.floor} o={win(f, tTower, tIUO - 20)} />{/* fix loop 1 (review 2 Nit 3): 11.6 m/s, said "near twelve" */}
         <Lbl x={MX} y={600} t="rises in the eyewall" c={C.key} s={T.floor} o={fin(f, tEw)} />
         <Lbl x={MX} y={660} t="leaning outward" c={C.local} s={T.floor} o={fin(f, tEw + 15)} />
         <Keyword f={f} text="in, up and out" at={[MX, 120]} s={T.key} c={C.gold} appear={tIUO} out={tMore - 20} />
@@ -955,14 +978,14 @@ const S20: React.FC = () => {
         { rhs: String.raw`\text{in through the side: }2\pi r\,h\,|u_r|`, at: tSide + 30 },
         // #5b r1 S15: the inputs in metres, on their words
         { rhs: String.raw`r=30\ \mathrm{km}=30\,000\ \mathrm m`, at: AT(k, 13, "thirty kilometres"), cont: true, size: 44 },
-        { rhs: String.raw`h=1\ \mathrm{km}=1000\ \mathrm m,\ \ |u_r|\approx${SAY.w_box.ur}\ \mathrm{m/s}`, at: AT(k, 13, "one kilometre deep"), cont: true, size: 44 },
+        { rhs: String.raw`h=1\ \mathrm{km}=1000\ \mathrm m,\ \ |u_r|\approx${goldAt(f, t16, String(SAY.w_box.ur))}\ \mathrm{m/s}`, at: AT(k, 13, "one kilometre deep"), cont: true, size: 44 },
         { rhs: String.raw`\text{up through the lid: }\pi r^2\,w`, at: tLid },
       ]} />
       {/* #5b r3 S2 (A1, "never skip a calculation"): the division is no longer skipped. The derivation stack is as before (four
           rows, no paging: K6 r8 found a paging stack slid its top row up into the colour bar); on "is about one" it hands over to a
           short stack 45 px lower (its first row is a fraction; at 405 it touched the colour bar): the numbers restated with "w =", then 2 × 1000 × 16 = 32 000 on its own row, then
           32 000 / 30 000 ≈ 1.07 ≈ 1 m/s. All numbers come from SAY.w_box (cs.json), checked above. */}
-      <CalcStack f={f} x={MX} y={405} size={46} maxLines={4} o={fout(f, AT(k, 14, "is about one") - 4, 8)} rows={[
+      <CalcStack f={f} x={MX} y={405} size={46} maxLines={4} o={fout(f, tDivR - 2, 8)} rows={[
         // #5b r1 S15: one move per step: in = out, divide by πr², cancel π and one r, then the numbers
         { rhs: String.raw`2\pi r\,h\,|u_r|=\pi r^2\,w`, at: AT(k, 14, "All of it has to leave") + 30 },
         { rhs: String.raw`w=\dfrac{2\cancel{\pi}\cancel{r}\,h\,|u_r|}{\cancel{\pi}\,r^{\cancel{2}}}`, at: AT(k, 14, "which is a much bigger area") },
@@ -970,9 +993,9 @@ const S20: React.FC = () => {
         { rhs: String.raw`\phantom{w}=\dfrac{2\times${kSep(WB.h_m)}\times${WB.ur}}{${kSep(WB.r_m)}}`, at: AT(k, 14, "twice the depth"), cont: true },
       ]} />
       <CalcStack f={f} x={MX} y={450} size={46} maxLines={4} o={fout(f, tRadar - 10)} rows={[
-        { rhs: String.raw`w=\dfrac{2\times${kSep(WB.h_m)}\times${WB.ur}}{${kSep(WB.r_m)}}`, at: AT(k, 14, "is about one") + 6 },
-        { rhs: String.raw`2\times${kSep(WB.h_m)}\times${WB.ur}=${kSep(WB_PROD)}`, at: AT(k, 14, "is about one") + 20, c: C.gold },
-        { rhs: String.raw`w=\dfrac{${kSep(WB_PROD)}}{${kSep(WB.r_m)}}\approx${WB_Q.toFixed(2)}\approx${SAY.w_cont}\ \mathrm{m/s}`, at: AT(k, 14, "is about one") + 36 },
+        { rhs: String.raw`w=\dfrac{2\times${kSep(WB.h_m)}\times${WB.ur}}{${kSep(WB.r_m)}}`, at: tDivR + 8 },
+        { rhs: String.raw`2\times${kSep(WB.h_m)}\times${WB.ur}=${kSep(WB_PROD)}`, at: tDivR + 20 },
+        { rhs: String.raw`w=\dfrac{${kSep(WB_PROD)}}{${kSep(WB.r_m)}}${tailIn(f, tOne, C.ink, String.raw`\approx${WB_Q.toFixed(2)}\approx${SAY.w_cont}\ \mathrm{m/s}`, true)}`, at: Math.min(tDivR + 32, tOne - 4) },
       ]} />
       {/* K6 round 1: one credit after the other (they cross-faded on top of each other for 30 frames) */}
       <SourceBelow text={SRC.hrrrPl} pic={{ x: RB.x, y: RB.y, w: RB.w, h: RB.h + 200 }} w={1300} o={oRing} name="s20 src ring" />
