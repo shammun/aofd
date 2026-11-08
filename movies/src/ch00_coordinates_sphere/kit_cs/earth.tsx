@@ -13,7 +13,8 @@ import { V3 } from "./cam";
 import { faceDisc, ll, sphereGeo } from "./globe";
 
 const D2R = Math.PI / 180;
-export type Cut = { kind: "whole" } | { kind: "mer"; lon0: number; slide: number; dir: V3 } | { kind: "lat"; lat0: number; lift: number; capO: number; polar?: boolean };
+export type Cut = { kind: "whole" } | { kind: "mer"; lon0: number; slide: number; dir: V3 } | { kind: "lat"; lat0: number; lift: number; capO: number; polar?: boolean }
+  | { kind: "oct"; gap: number; out: number };
 const FACE = "#4a3d36";   // warm dark-grey section (storyboard s04)
 
 /** a horizontal disc at height y (normal +Y), radius r */
@@ -50,7 +51,67 @@ const polarDisc = (y: number, lat0: number) => {
 };
 const POLAR_DIM = 0.4;   // the polar face is darkened so the overlays (axes, spokes, labels) read on it
 
-export const EarthMesh: React.FC<{ tex: THREE.Texture | null; alpha?: number; cut?: Cut; faceO?: number }> = ({ tex, alpha = 1, cut = { kind: "whole" }, faceO = 0.97 }) => {
+export const EarthMesh: React.FC<{ tex: THREE.Texture | null; alpha?: number; cut?: Cut; faceO?: number }> = ({ tex, alpha = 1, cut = { kind: "whole" }, faceO = 0.97 }) =>
+  cut.kind === "oct" ? <OctantEarth tex={tex} gap={cut.gap} out={cut.out} /> : <CutEarth tex={tex} alpha={alpha} cut={cut} faceO={faceO} />;
+
+// ------------------------------------------------------------------------------------------------ pass 2: the Earth in eight pieces
+// User 2026-11-07 (old 14:13): "slice the Earth along the x, y and z axes … a little hollow between them, so people understand that x, y
+// and z start at the middle of the globe". The three coordinate planes (equator plane, the 0°/180° meridian plane, the 90° E/W meridian
+// plane) cut the Earth into eight pieces. Each piece is pushed `gap` radii out along its own diagonal (thin gaps where the axes run), and the
+// piece between the +x, +y and +z axes (0-90° E, northern half) lifts out along its diagonal by `out` × 0.9 radii and fades, leaving a
+// corner hollow at the centre where the three axes meet. Every piece shows its three flat cut faces (quarter discs, the section colour).
+const quarterFan = (pts: V3[]) => {
+  const pos: number[] = [0, 0, 0];
+  for (const q of pts) pos.push(...q);
+  const idx: number[] = [];
+  for (let i = 1; i < pts.length; i++) idx.push(0, i, i + 1);
+  const g = new THREE.BufferGeometry();
+  g.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3));
+  g.setIndex(idx);
+  return g;
+};
+const OCT = [-180, -90, 0, 90].flatMap((L) => [-90, 0].map((B) => ({ L, B })));
+/** the diagonal (unit) of the piece lon L..L+90, lat B..B+90 */
+export const octDiag = (L: number, B: number): V3 => ll(B < 0 ? -35.264 : 35.264, L + 45);
+/** where a surface point (lat, lon) ends up when its piece is pushed out by `gap` (the arrow to a place follows its piece) */
+export const octShift = (lat: number, lon: number, gap: number): V3 => {
+  const L = Math.floor((((lon + 180) % 360) + 360) % 360 / 90) * 90 - 180, B = lat < 0 ? -90 : 0;
+  const d = octDiag(L, B), p = ll(lat, lon);
+  return [p[0] + d[0] * gap, p[1] + d[1] * gap, p[2] + d[2] * gap];
+};
+const OctantEarth: React.FC<{ tex: THREE.Texture | null; gap: number; out: number }> = ({ tex, gap, out }) => {
+  const geos = useMemo(() => OCT.map(({ L, B }) => ({
+    skin: sphereGeo(L, L + 90, 90, 90, 1, B, B + 90),
+    faces: [
+      quarterFan(Array.from({ length: 49 }, (_, i) => ll(B + (90 * i) / 48, L, 0.999))),
+      quarterFan(Array.from({ length: 49 }, (_, i) => ll(B + (90 * i) / 48, L + 90, 0.999))),
+      quarterFan(Array.from({ length: 49 }, (_, i) => ll(0, L + (90 * i) / 48, 0.999))),
+    ],
+  })), []);
+  const mats = useMemo(() => OCT.map(() => ({ skin: new THREE.MeshBasicMaterial({ side: THREE.FrontSide, transparent: true }),
+    face: new THREE.MeshBasicMaterial({ color: FACE, side: THREE.DoubleSide, transparent: true }) })), []);
+  return (
+    <group>
+      {OCT.map(({ L, B }, i) => {
+        const lifted = L === 0 && B === 0;
+        const o = lifted ? Math.max(0, 1 - out) : 1;
+        if (o <= 0.01) return null;
+        const m = mats[i];
+        if (m.skin.map !== tex) { m.skin.map = tex; m.skin.needsUpdate = true; }
+        m.skin.opacity = o; m.skin.depthWrite = o > 0.98; m.face.opacity = o; m.face.depthWrite = o > 0.98;
+        const d = octDiag(L, B), s = gap + (lifted ? 0.9 * out : 0);
+        return (
+          <group key={i} position={[d[0] * s, d[1] * s, d[2] * s]}>
+            <mesh geometry={geos[i].skin} material={m.skin} renderOrder={lifted ? 4 : 1} />
+            {geos[i].faces.map((g, j) => <mesh key={j} geometry={g} material={m.face} renderOrder={lifted ? 4 : 1} />)}
+          </group>
+        );
+      })}
+    </group>
+  );
+};
+
+const CutEarth: React.FC<{ tex: THREE.Texture | null; alpha: number; cut: Exclude<Cut, { kind: "oct" }>; faceO: number }> = ({ tex, alpha, cut, faceO }) => {
   const kind = cut.kind;
   const lon0 = cut.kind === "mer" ? cut.lon0 : 0, lat0 = cut.kind === "lat" ? cut.lat0 : 0;
   const geoA = useMemo(() => (kind === "mer" ? sphereGeo(lon0, lon0 + 180, 180, 180) : kind === "lat" ? sphereGeo(-180, 180, 360, 180, 1, -90, lat0) : sphereGeo(-180, 180, 360, 180)),
@@ -70,8 +131,10 @@ export const EarthMesh: React.FC<{ tex: THREE.Texture | null; alpha?: number; cu
   let offB: V3 = [0, 0, 0], oB = 0, oF = 0;
   if (cut.kind === "mer") {
     const s = Math.max(0, Math.min(1, cut.slide));
-    offB = [cut.dir[0] * 2.2 * s, cut.dir[1] * 2.2 * s, cut.dir[2] * 2.2 * s];
-    oB = alpha * (1 - s);
+    // pass 2 (user 2026-11-07, old 15:22): the removed half no longer travels 2.2 radii out of the 3-D frame (its edge was cut by the
+    // frame); it moves 0.2 radii along `dir` (inside the frame's spare room) while it fades out.
+    offB = [cut.dir[0] * 0.2 * s, cut.dir[1] * 0.2 * s, cut.dir[2] * 0.2 * s];
+    oB = alpha * (1 - s) * (1 - s);
     oF = s > 0.002 ? faceO * Math.min(1, s * 6) : 0;
   } else if (cut.kind === "lat") {
     offB = [0, cut.lift, 0];

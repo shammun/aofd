@@ -79,6 +79,8 @@ export const H = { x: String.raw`\hat{\mathbf x}`, y: String.raw`\hat{\mathbf y}
 /** Earth axes (x̂ to 0 N 0 E, ŷ to 0 N 90 E, ẑ to the North Pole) → the kit's Y-up globe coordinates */
 export const e2g = (v: number[]): V3 => [v[1], v[2], v[0]];
 export const SRC_G = "Image: NASA Blue Marble Next Generation · Natural Earth";
+/** pass 2 (user 2026-11-07): a cut Earth shows no Natural Earth coastline, so its credit names only the image */
+export const SRC_BM = "Image: NASA Blue Marble Next Generation";
 
 // ---------------------------------------------------------------- text width guard (text ends before x 1842)
 /** a rough, slightly generous width of a KaTeX string at effective size s; used only as a layout guard */
@@ -226,7 +228,8 @@ export const Earth: React.FC<{ cam: GlobeCam; box?: Box; cut?: Cut; alpha?: numb
   const G = globeProj(st, box.w, box.h, box.x, box.y);
   if (o <= 0) return null;
   const id = `ec${box.x}_${box.y}_${box.w}_${box.h}`;
-  const whole = cut.kind === "whole";
+  // pass 2: a meridian cut that has not opened yet (slide 0) is still the whole Earth (its coastline is drawn, as the credit says)
+  const whole = cut.kind === "whole" || (cut.kind === "mer" && cut.slide <= 0.001);
   return (
     <AbsoluteFill>
       <View3D st={st} x={box.x} y={box.y} w={box.w} h={box.h} o={tex || (globalThis as { __R3?: number }).__R3 ? o : 0} key3={st.pos} amb={1.6} dir={1.4}>
@@ -249,7 +252,7 @@ export const Grat: React.FC<{ G: GProj; step?: number; o?: number; c?: string; w
   if (o <= 0) return null;
   let d = "";
   for (let la = -90 + step; la < 90; la += step) { const pts: [number, number][] = []; for (let lo = -180; lo <= 180; lo += 3) pts.push([la, lo]); d += llPath(G, pts); }
-  for (let lo = -180; lo < 180; lo += step) { const pts: [number, number][] = []; for (let la = -88; la <= 88; la += 2) pts.push([la, lo]); d += llPath(G, pts); }
+  for (let lo = -180; lo < 180; lo += step) { const pts: [number, number][] = []; for (let la = -90; la <= 90; la += 2) pts.push([la, lo]); d += llPath(G, pts); }   // pass 2 (user): meridians end at both poles
   return <path d={d} fill="none" stroke={c} strokeOpacity={o} strokeWidth={w} />;
 };
 /** a parallel (front part only) */

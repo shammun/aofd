@@ -507,10 +507,27 @@ def main() -> int:
     B1.rgba_png(np.concatenate([pc[:, -1:], pc], 1)[:, :360], lut, -60, 40, IMG / "t2m_pc_polar.png", alpha=1.0, up=4)
     truth("DS29", "colour range −60 … +40 °C covers 99 % of the boxes (Antarctic interior colder: clipped)", np.mean((TC >= -60) & (TC <= 40)) >= 0.99, float(np.mean((TC >= -60) & (TC <= 40))))
     coast_ee = []
+    # pass 2 (user 2026-11-07, old 45:22: "straight horizontal lines" across the ERA5 map). Cause: Natural Earth ends the lines that meet
+    # the antimeridian (Chukotka, Wrangel Island, Fiji, Antarctica) with a point at exactly lon = +180°, and mapproj.forward wraps +180° to
+    # −180°, so that one point lands on the far-left edge and its segment ran right across the map. Fix: a point at ±180° keeps the side of
+    # its own line (sign of its nearest neighbour) and is pulled 1e-6° inside; any real ±180° step would also split the line.
+    n_wrap = n_split = 0
     for ln in ne110["coastline"]:
-        arr = np.asarray(ln, float).reshape(-1, 2)
-        ex_, ey_ = MP.forward("equalearth", arr[:, 1], arr[:, 0], a=1.0)
-        coast_ee.append(np.round(np.stack([ex_ / xee, ey_ / yee], -1), 4).ravel().tolist())
+        arr = np.asarray(ln, float).reshape(-1, 2).copy()
+        for i in np.where(np.abs(arr[:, 0]) >= 180.0)[0]:
+            nb = [arr[j, 0] for j in (i - 1, i + 1) if 0 <= j < len(arr) and abs(arr[j, 0]) < 180.0]
+            arr[i, 0] = np.sign(nb[0] if nb else arr[i, 0]) * (180.0 - 1e-6)
+            n_wrap += 1
+        cut = np.where(np.abs(np.diff(arr[:, 0])) > 180.0)[0] + 1
+        n_split += len(cut)
+        for part in np.split(arr, cut):
+            if len(part) < 2:
+                continue
+            ex_, ey_ = MP.forward("equalearth", part[:, 1], part[:, 0], a=1.0)
+            coast_ee.append(np.round(np.stack([ex_ / xee, ey_ / yee], -1), 4).ravel().tolist())
+    jump = max(float(np.max(np.abs(np.diff(np.asarray(c[0::2]))))) for c in coast_ee if len(c) >= 4)
+    truth("DS29", f"Equal Earth coast: {n_wrap} points at ±180° kept on their own side, {n_split} lines split; no step wider than 0.3 of the half-width",
+          jump < 0.3, jump)
     V["t2m"] = {"weighted": gw, "plain": gp, "range": [-60, 40], "ee_ext": [xee, yee], "coast_ee": coast_ee, "polar_rows": int(pc.shape[0])}
     V["luts"] = {"thermal": B1.lut_hex("cmocean.thermal")}
 

@@ -5,7 +5,7 @@
  "builder": "movies/data/build_ch00_coordinates_sphere.py",
  "fluidpy": {
   "repo": "../Fluid Dynamics",
-  "commit": "8cab62ebf6f6fb3ab1979fdbf5d404c2c77400b2",
+  "commit": "1823b5f34b8951a56202762a02d9027567bcda0f",
   "dirty_tracked": true,
   "sphere_py_sha256": "49866e7d01f39d2c4ee3fe963d0c8730b69ea867c8c7a00a402a878d68436207",
   "constants_py_sha256": "b4c5cf36188cca8c78ba9e72f8e54cf5717e3d17e363247645129bd1e6bd5aa8",
@@ -104,80 +104,80 @@
    "scene": "s00_title"
   },
   {
-   "time": "1:37",
-   "t_s": 97.875,
+   "time": "0:37",
+   "t_s": 37.15,
    "title": "the sphere, latitude and the parallel",
    "scene": "s03_sphere"
   },
   {
-   "time": "5:50",
-   "t_s": 350.65,
+   "time": "4:57",
+   "t_s": 297.95,
    "title": "colatitude and the sine-cosine swap",
    "scene": "s07_colatitude"
   },
   {
-   "time": "8:49",
-   "t_s": 529.375,
+   "time": "7:57",
+   "t_s": 477.0,
    "title": "meridians, the prime meridian, longitude",
    "scene": "s09_meridians"
   },
   {
-   "time": "13:45",
-   "t_s": 825.875,
+   "time": "12:52",
+   "t_s": 772.0,
    "title": "Earth-centred x, y, z",
    "scene": "s13_earth_axes"
   },
   {
-   "time": "14:58",
-   "t_s": 898.675,
+   "time": "14:04",
+   "t_s": 844.8,
    "title": "Brest's position, step by step",
    "scene": "s14_brest_side"
   },
   {
-   "time": "22:06",
-   "t_s": 1326.475,
+   "time": "21:05",
+   "t_s": 1265.725,
    "title": "Khulna",
    "scene": "s19_khulna"
   },
   {
-   "time": "23:45",
-   "t_s": 1425.05,
+   "time": "22:45",
+   "t_s": 1365.5,
    "title": "the spinning ground",
    "scene": "s20_spin_rate"
   },
   {
-   "time": "28:00",
-   "t_s": 1680.3,
+   "time": "27:51",
+   "t_s": 1671.475,
    "title": "distances north and east",
    "scene": "s22_distance_north"
   },
   {
-   "time": "33:10",
-   "t_s": 1990.6,
+   "time": "32:52",
+   "t_s": 1972.25,
    "title": "ERA5 grid boxes",
    "scene": "s26_grid_boxes"
   },
   {
-   "time": "34:55",
-   "t_s": 2095.35,
+   "time": "34:37",
+   "t_s": 2077.0,
    "title": "areas, step by step",
    "scene": "s27_area_patch"
   },
   {
-   "time": "42:52",
-   "t_s": 2572.575,
+   "time": "42:18",
+   "t_s": 2538.425,
    "title": "Archimedes",
    "scene": "s33_archimedes"
   },
   {
-   "time": "44:13",
-   "t_s": 2653.15,
+   "time": "43:39",
+   "t_s": 2619.625,
    "title": "global averages",
    "scene": "s34_global_mean"
   },
   {
-   "time": "45:58",
-   "t_s": 2758.6,
+   "time": "45:43",
+   "t_s": 2743.15,
    "title": "to sum up",
    "scene": "s35_recap"
   }
@@ -187,9 +187,9 @@
    "block": "K1",
    "chip_scene": "s08_sin_cos_swap",
    "chip_sentence": 3,
-   "chip_at_s": 414.925,
-   "skip_to": "8:49",
-   "skip_to_s": 529.375,
+   "chip_at_s": 362.55,
+   "skip_to": "7:57",
+   "skip_to_s": 477.0,
    "keep_scene": "s09_meridians",
    "keep_line": "If you skipped, here's what to keep. The colatitude is measured down from the pole, so a book that uses it has a cosine wherever we have a sine of the latitude, and the other way round."
   },
@@ -197,9 +197,9 @@
    "block": "K2",
    "chip_scene": "s14_brest_side",
    "chip_sentence": 2,
-   "chip_at_s": 913.775,
-   "skip_to": "25:31",
-   "skip_to_s": 1531.05,
+   "chip_at_s": 859.9,
+   "skip_to": "24:54",
+   "skip_to_s": 1494.75,
    "keep_scene": "s21_ground_speeds",
    "keep_line": "If you skipped, here's what to keep. A place at latitude phi sits the Earth's radius times sine phi above the equator plane, and the radius times cosine phi from the Earth's axis."
   },
@@ -207,9 +207,9 @@
    "block": "K3",
    "chip_scene": "s22_distance_north",
    "chip_sentence": 1,
-   "chip_at_s": 1684.9,
-   "skip_to": "31:49",
-   "skip_to_s": 1909.55,
+   "chip_at_s": 1676.075,
+   "skip_to": "31:31",
+   "skip_to_s": 1891.2,
    "keep_scene": "s25_degree_east",
    "keep_line": "If you skipped, here's what to keep. A degree of latitude is always about a hundred and eleven kilometres, but a degree of longitude is that times cosine phi, so it shrinks towards the poles."
   },
@@ -217,9 +217,9 @@
    "block": "K4",
    "chip_scene": "s27_area_patch",
    "chip_sentence": 4,
-   "chip_at_s": 2116.1,
-   "skip_to": "44:13",
-   "skip_to_s": 2653.15,
+   "chip_at_s": 2097.75,
+   "skip_to": "43:39",
+   "skip_to_s": 2619.625,
    "keep_scene": "s34_global_mean",
    "keep_line": "If you skipped, here's what to keep. Grid boxes shrink towards the poles by cosine phi, so the tropics are huge and the polar caps are small: half of the whole Earth lies between thirty degrees south and thirty degrees north."
   }
@@ -235,17 +235,9 @@
   "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\BMNG-2004\\world.topo.bathy.200409.3x21600x10800.jpg": "863036b622ba3dab4eb4ffb7149730b02cfa433ce49672e9b7267022051e04a2",
   "data/derived/ch00/era5_t2m_anom_2026-09_1deg.nc": "c5335076dfdf761c47fa71e8ec1129cb08a8047a3a907c662104328ee2d18824"
  },
- "render_assets": {
-  "cs_bmng.jpg": "39e1e08c0edeffca2ee04b030e689733b494eed018e4f5c357b4b982e5c130d8",
-  "cs_panel_brest.jpg": "8f6d9495c0c2eece67ebc5d8717b3123672feda59ee4809f73817b92c996fb32",
-  "cs_panel_khulna.jpg": "0b247a68d0ab9830607ee0c25a8eff15dd1703998229e96e018b69d0a0e9e159",
-  "cs_panel_lyb.jpg": "1e650089f0c04494cacf04eadaa93f2cc922ad4b10750f852f350229ea89d7b0",
-  "cs_panel_sing.jpg": "505938614bd1ffe4063567055a6af18771dbe72e5ee106995dd2d78983ddfe11",
-  "cs_t2m_ee.png": "8a74899c2dd05b8668b22360a732dac250894f6a98a34f2d53121a2aacb9d022",
-  "cs_t2m_pc_polar.png": "7e9b6cea4a4c7fc759aa18fef88293eb1a0bdce3400d0b85ee79f2d22ea5b6f2"
- },
+ "render_assets": {},
  "data_files": {
-  "cs.json": "9f45126c8f8bcecf73734a5ed0f096f38f00f05f6feca8ac5f47558ead496e7c",
+  "cs.json": "acbbf288774673033feedb80a6adc7c772aa1c85719aa7e83359b802f2c6af2f",
   "img/panel_brest.jpg": "8f6d9495c0c2eece67ebc5d8717b3123672feda59ee4809f73817b92c996fb32",
   "img/panel_khulna.jpg": "0b247a68d0ab9830607ee0c25a8eff15dd1703998229e96e018b69d0a0e9e159",
   "img/panel_lyb.jpg": "1e650089f0c04494cacf04eadaa93f2cc922ad4b10750f852f350229ea89d7b0",
@@ -1738,6 +1730,14 @@
    "id": "DS29",
    "name": "colour range −60 … +40 °C covers 99 % of the boxes (Antarctic interior colder: clipped)",
    "value": 0.9928790669122161,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DS29",
+   "name": "Equal Earth coast: 15 points at ±180° kept on their own side, 0 lines split; no step wider than 0.3 of the half-width",
+   "value": 0.036699999999999955,
    "ref": true,
    "tol": 0,
    "pass": true

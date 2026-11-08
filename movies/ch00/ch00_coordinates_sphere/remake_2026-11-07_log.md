@@ -189,3 +189,41 @@ width guards checked by the SSR after the second TTS pass.
 - Final: 48:29.2 (2906.700 s + 2.5-s hold), 36 scenes, 449 sentences, 712 cues; mix −16.01 LUFS / −3.32 dBTP.
 - Disk after: C: 111.7 GB, G: 429.4 GB free; project data 156.53 GB (scratch 116.48; the guard now reports a 250-GB cap).
 - Render dir `build1/render/` still holds 31 old chunk files (rf1 / build 1): **move aside before rendering**.
+
+## Pass 2 (user feedback 2026-11-07 22:20)
+Brief: `user_feedback_2026-11-07.md` (verbatim) + orchestrator notes (the old frames, 31:40/28:23 judgement, meridians end at both poles).
+The user watched `5c_coordinates_sphere_build1.mp4` = 2902.87 s = the **d27c24f** timing (48:22.9), not fix1; old times mapped with that
+timing.json (`git show d27c24f:…/timing.json`). Narration unchanged (no re-voice): timing.json, en.vtt / en.srt, script.md identical to HEAD;
+the r7 mix (`build1/sound_r7/narration_music_cs.wav`, −16.01 LUFS / −3.32 dBTP) stays valid.
+
+### 22:40–23:50 source (no lock)
+- Disk before: **C: 110.5 GB, G: 423.5 GB free** (project data 162.4 of 250 GB).
+- `cs_run.py`: the render path no longer calls `guard()` (no lock / memory gate between chunks; the r7 render deadlocked there). New
+  `disk_only()` (C: ≥ 45 GB, G: ≥ 50 GB, TEMP on G:) once before render / join; `guard()` only for stills.
+- Backups (moved copies, nothing deleted): `G:/…/ch00_coordinates_sphere/p2_backup/` (cs.json, manifest.json, img/, script, storyboard, timing, vtt, srt).
+
+| User point (old time, d27c24f) | Scene → r7 time | Cause seen in the old frame | Change |
+|---|---|---|---|
+| 5:59–8:49 "not the Earth, a blank circle" + wrong credit | s07 4:57.9, s08 5:49.3 (and s05, s14–s16, s19, s22, s23) | `camFace` looked at the cut face 15° from frontal; the kept textured half lies BEHIND the face, so only the brown section showed; the credit named Natural Earth but no coastline is drawn on a cut Earth | `camFace` 50° from frontal, 12° up (cross-product Part 2 half-Earth: 38°/12°); Europe/Africa show as a crescent beside Brest's rim. First look (40°/18°) gave a thin sliver → 50°/12°. Title, s04, s06 cameras the same. Credits: `SRC_BM` "Image: NASA Blue Marble Next Generation" on cut Earths (TwoView, s05, s07, s13); s04/s06 swap credits with the coastline (8-frame gaps) |
+| 15:22 slide-away | s14 14:04.8 S4 | the removed half travelled 2.2 radii and was cut by the 3-D frame's edge | it moves 0.2 radii (inside the frame's spare room) and fades (`(1−s)²`) |
+| 14:13–16:00 "slice along x, y, z … a little hollow … x, y, z start at the middle" | s13 12:52.0 | translucent globe, axes as SVG lines | `kit_cs/earth.tsx` `OctantEarth`: three coordinate planes cut the Earth into 8 textured pieces with their quarter-disc faces, 0.05-radius gaps opening on S2 "all starting at the Earth's centre"; the 0–90° E northern piece lifts out and fades → a corner hollow where the 3-D axis rods meet at the gold centre; Brest's arrow (S10, `octShift`) follows its piece. Labels: Gulf of Guinea under its dot, Indian Ocean above-left, "Bay of Bengal" dropped (said, least needed); axis letters leave before the camera swings back (they sat on the column); return swing 56 °/s |
+| 24:55–25:20 "straight line … going inside the Earth" | s20 22:45.5 | the spin axis an SVG dashed line across an opaque globe; the far half of the parallel drawn over the globe | `Axis3D` (depth-tested rod: visible outside, hidden inside); during S1–S12 (the parallel and its radius a cos φ, which runs inside) the Earth is half see-through (alpha 0.5) and the radius is a 3-D rod; far half of the ring only while see-through; "axis" label at its top end on "round its axis" |
+| 26:03 "middle line … inside the globe" | s21 24:54.8 | same SVG axis | `Axis3D` hidden inside the opaque Earth |
+| (same class, not named) | s25, s29, s06 | SVG axis / strip radius over the globe; s06 centre/axis marks stayed on the closed globe | s25 `Axis3D` through its translucent globe; s29 axis + strip radius as 3-D rods, Earth half see-through from S7; s06 inside marks + their callouts leave when the cap closes (`tSoon`) |
+| 28:23 (consider 3-D) | s22 27:51.5 S4 | the face-on disc | covered by the new `camFace`: the meridian circle is drawn on a visibly cut 3-D Earth |
+| 29:39–29:46 blank circle + credit | s22 S14–S15 | as 5:59 | as 5:59 |
+| 31:40 (user unsure) | s24 30:25.0 S8 | already a 3-D slice: the cap lifted off Brest's parallel and its disc seen from above | **kept** (a first-time learner sees the parallel's own disc and centre on the axis; a different view would add nothing); look still f52939 |
+| meridians end at both poles (orchestrator) | s09, s10, s12, graticule | graticule meridians −88…88°; s10's gold prime meridian shrank back with the camera's latitude (to ≈ 50° S) during the zoom-out | graticule −90…90°; s10 line stays at the South Pole once reached. No continuation / opposite meridian drawn or voiced (user cancel) |
+| 45:22 horizontal lines on the ERA5 map | s34 43:39.6 S11 | **cause:** Natural Earth ends the lines that meet the antimeridian (Chukotka, Wrangel Island, Fiji, Antarctica) with a point at exactly lon = +180°; `fluidpy.geo.mapproj.forward("equalearth", …)` wraps +180° to −180°, so that one point landed on the far-left edge and its segment ran across the whole map (7 such steps: y ≈ +0.91, +0.87, −0.25, −0.99 of the half-height) | fixed at the source in `movies/data/build_ch00_coordinates_sphere.py`: every ±180° point keeps the side of its own line (sign of its neighbour, 1e-6° inside) and any real ±180° step would split the line; new CHECK DS29 "15 points at ±180° kept on their own side, 0 lines split; max step 0.037 < 0.3" (76/76 PASS). The dashed lines at ±60° are the labelled polar-cap marks ("60–90° N and S"), kept |
+
+- Data rebuild: only `t2m.coast_ee` lines 93/94/98/101/102 changed, plus `skips` (now the r7 times; the TSX reads timing.json anyway); images
+  byte-identical; manifest rehashed.
+- Fact check: no new claim (no voice change).
+- 23:45 look 1 (`stills/p2look1`, 39 frames) → 40°/18° sliver, s13 labels, s00 title still face-on, s06 end → fixed; 23:49 look 2 (`stills/p2look2`, 24 frames): clean.
+- Static gates (final source): tsc 0 · at_check 512 refs / 0 failures · swap_check 327 elements, 0 overlaps, 0 tight swaps · cam_speed 0 > 90 °/s
+  (s00 camA 43, s04 31, s13 56, s21 26 °/s) · symbol lint --strict 0 · eq_check 24/24 · wording lint 0.
+- 23:51 SSR + K6 `k6p2a` started under HEAVY; **stopped at the orchestrator's request (renders first)** during SSR, HEAVY released, nothing
+  shot. Re-queued as `checks/p2_heavy.sh k6p2b` (waits for RENDER2 = "orchestrator 5a fix2 full render", HEAVY + VOICE free, ≥ 12 GB).
+- 00:0x (11-08) the queued `p2_heavy.sh k6p2b` was **killed by the session's memory-pressure reaper while it was still waiting** for RENDER2 (it
+  never took HEAVY.lock, shot nothing, left no lock). Not restarted (reaper rule): the orchestrator re-runs it (command in the hand-off).
+  Disk after: **C: 111 GB, G: 424 GB free**. No render, no commit, nothing deleted.

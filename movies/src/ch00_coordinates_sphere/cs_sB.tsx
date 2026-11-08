@@ -10,10 +10,12 @@ import { ClockGlyph } from "../house/kit/icons";
 import { SunGlyph, CurvedLink } from "../house/kit/extras";
 import { GlobeFrame, SourceBelow } from "../house/kit/frame";
 import { AnimatedWindArrow } from "../house/kit/wind";
-import { GProj, globePath, llPath } from "./kit_cs/globe";
+import { Axis3D, GProj, globePath, llPath } from "./kit_cs/globe";
 import { V3 } from "./kit_cs/cam";
+import { Arrow3D, Ball3D, Rod3D } from "./kit_cs/three3d";
+import { octShift } from "./kit_cs/earth";
 import {
-  AT, Arrow, BREST, CalcStack, Chevron, D, D2R, Earth, GB, GFULL, H, K, KHULNA, KeepLine, Keyword, LEN, LYB, Layered, Lbl, PlaneIcon, SE, SING, SRC_G, SS,
+  AT, Arrow, BREST, CalcStack, Chevron, D, D2R, Earth, GB, GFULL, H, K, KHULNA, KeepLine, Keyword, LEN, LYB, Layered, Lbl, PlaneIcon, SE, SING, SRC_G, SRC_BM, SS,
   Scene, SideCallout, SkipChip, Svg, TV3, TeX, VIOLET, XC, XZ, arcD, chipSpan, clamp, cutAt, discOf, e2g, eastAt, facePt, facing, faceArc, fin, fout, gdot, globeG,
   gseg, keepGone, keepTime, latFace, ll, merFace, merPath, mix, parPath, plab, poly, prog, splitVis, win, eqFace, Face, faceFlat, face3, spinPath,
   RAD, Magnify, KeepPic,
@@ -36,7 +38,7 @@ const CHECK_B: [string, number, number, number][] = [
   ["circ", 2 * Math.PI * 6400, 40000, 300], ["jet", 1670 / 900, 1.9, 0.05], ["U36", SP.U[0] * 3.6, 1670, 5],
 ];
 CHECK_B.forEach(([n, v, r, tol]) => { if (!(Math.abs(v - r) <= tol)) throw new Error(`CHECK ${n}: data ${v} vs screen ${r}`); });
-const GSrc: React.FC<{ o?: number }> = ({ o = 1 }) => <SourceBelow text={SRC_G} pic={GB} w={960} o={o} name="globe src" />;
+const GSrc: React.FC<{ o?: number; cut?: boolean }> = ({ o = 1, cut = false }) => <SourceBelow text={cut ? SRC_BM : SRC_G} pic={GB} w={960} o={o} name="globe src" />;
 const CB = PHI * D2R, BU = Math.cos(CB), BV = Math.sin(CB);
 const KX3 = 1420;   // keyword column right of the flat diagram (TwoViewSlice scenes): rows y 440 / 505 (above: the legs' tags)
 
@@ -45,9 +47,15 @@ const S13: React.FC = () => {
   const f = useCurrentFrame(), k = K("s13_earth_axes");
   const tAx = SS(k, 2), tZ = AT(k, 3, "The z axis"), tX = AT(k, 4, "The x axis"), tGG = AT(k, 4, "Gulf of Guinea"), tY = AT(k, 5, "The y axis"), tIO = AT(k, 5, "Indian Ocean"),
     tHat = AT(k, 6, "x hat, y hat and z hat"), tRA = SS(k, 7), tCross = SS(k, 8), tTurn = SS(k, 9), tGoal = SS(k, 10), tTwo = SS(k, 11);
-  const cam = spinPath([{ f: 0, lat: 22, lon: 40, dist: 3.5 }, { f: tX - 10, lat: 15, lon: 40, dist: 3.5 }, { f: tX + 50, lat: 12, lon: 18, dist: 3.5 },
-    { f: tY - 10, lat: 12, lon: 25, dist: 3.5 }, { f: tY + 60, lat: 12, lon: 68, dist: 3.5 }, { f: tHat, lat: 22, lon: 45, dist: 3.5 },
-    { f: tTurn, lat: 22, lon: 45, dist: 3.5 }, { f: SE(k, 9), lat: 22, lon: 95, dist: 3.5 }, { f: LEN(k) + 10, lat: 22, lon: 100, dist: 3.5 }], f);
+  // pass 2: the camera stays on the corner hollow (0-90° E, north); after "they turn with the Earth" it comes back over Brest for the goal
+  const cam = spinPath([{ f: 0, lat: 22, lon: 40, dist: 3.5 }, { f: tX - 10, lat: 20, lon: 40, dist: 3.5 }, { f: tX + 50, lat: 18, lon: 22, dist: 3.5 },
+    { f: tY - 10, lat: 18, lon: 25, dist: 3.5 }, { f: tY + 60, lat: 18, lon: 62, dist: 3.5 }, { f: tHat, lat: 24, lon: 45, dist: 3.5 },
+    { f: tTurn, lat: 24, lon: 45, dist: 3.5 }, { f: SE(k, 9), lat: 24, lon: 68, dist: 3.5 }, { f: tGoal + 50, lat: 28, lon: 25, dist: 3.5 },
+    { f: LEN(k) + 10, lat: 28, lon: 22, dist: 3.5 }], f);
+  // pass 2 (user 2026-11-07, old 14:13): the Earth cut along the three coordinate planes into eight pieces with thin gaps, the piece between
+  // +x, +y and +z lifted out: a corner hollow at the centre where the three axes (3-D rods, hidden where a piece covers them) meet
+  const gap = 0.05 * prog(f, tAx, tAx + 40), out = prog(f, tAx + 10, tAx + 55);
+  const pB = octShift(BREST[0], BREST[1], gap);
   const G = globeG(cam);
   const c0 = G.pw([0, 0, 0]);
   const ex = e2g([1, 0, 0]), ey = e2g([0, 1, 0]), ez = e2g([0, 0, 1]);
@@ -57,16 +65,22 @@ const S13: React.FC = () => {
   const rows = cutAt(EQ_S13, "=");
   return (
     <Scene>
-      <Earth cam={cam} alpha={0.42} coast={0.4}
+      <Earth cam={cam} cut={{ kind: "oct", gap, out }} coast={0.4}
+        three={<>
+          <Ball3D at={[0, 0, 0]} px={22} color={C.gold} o={fin(f, tAx)} />
+          <Rod3D a={[0, 0, 0]} b={[ez[0] * 1.4, ez[1] * 1.4, ez[2] * 1.4]} px={6} color={C.second} o={fin(f, tZ)} />
+          <Rod3D a={[0, 0, 0]} b={[ex[0] * 1.4, ex[1] * 1.4, ex[2] * 1.4]} px={6} color={C.second} o={fin(f, tX)} />
+          <Rod3D a={[0, 0, 0]} b={[ey[0] * 1.4, ey[1] * 1.4, ey[2] * 1.4]} px={6} color={C.second} o={fin(f, tY)} />
+          {/* the goal: the arrow from the centre to Brest, whose piece is pushed out by the gap (the arrow follows it) */}
+          <Arrow3D from={[0, 0, 0]} to={pB} color={RAD} px={9} head={32} grow={prog(f, tGoal + 10, tGoal + 40)} o={fin(f, tGoal + 10)} onTop />
+          <Ball3D at={pB} px={20} color={C.gold} o={fin(f, tGoal + 30)} />
+        </>}
         over={(Gg) => <>
-          <circle cx={c0[0]} cy={c0[1]} r={11} fill={C.gold} stroke={C.bg} strokeWidth={3} opacity={fin(f, tAx)} />
-          {gseg(Gg, [0, 0, 0], [ez[0] * 1.4, ez[1] * 1.4, ez[2] * 1.4], C.second, 5, fin(f, tZ))}
-          {gseg(Gg, [0, 0, 0], [ex[0] * 1.4, ex[1] * 1.4, ex[2] * 1.4], C.second, 5, fin(f, tX))}
-          {gseg(Gg, [0, 0, 0], [ey[0] * 1.4, ey[1] * 1.4, ey[2] * 1.4], C.second, 5, fin(f, tY))}
           {gdot(Gg, 0, 0, C.second, 9, fin(f, tX))}{gdot(Gg, 0, 90, C.second, 9, fin(f, tY))}
-          {plab(Gg, 0, 0, "Gulf of Guinea", win(f, tGG, tHat) * facing(Gg, 0, 0), 20, 36, "start", true)}
-          {plab(Gg, 0, 90, "Indian Ocean", win(f, tIO, tHat) * facing(Gg, 0, 90), -20, 40, "end", true)}{/* K6 k6r1: below-left of its dot (it ran over the y axis and its tag) */}
-          {plab(Gg, 15, 89, "Bay of Bengal", win(f, tIO + 20, tHat) * facing(Gg, 15, 89), 20, -30, "start", true)}
+          {/* pass 2: with the cut faces the two names sat side by side on one row (and "Bay of Bengal" ran out of the frame): Gulf of Guinea
+              goes under its dot, Indian Ocean above-left of its dot on the section; "Bay of Bengal" dropped (said in the voice, least needed) */}
+          {plab(Gg, 0, 0, "Gulf of Guinea", win(f, tGG, tHat) * facing(Gg, 0, 0), -10, 70, "start", true)}
+          {plab(Gg, 0, 90, "Indian Ocean", win(f, tIO, tHat) * facing(Gg, 0, 90), -24, -44, "end", true)}
           <g opacity={fin(f, tHat)}>
             <Arrow p={c0} q={xh} color={C.second} w={9} head={30} />
             <Arrow p={c0} q={yh} color={C.second} w={9} head={30} />
@@ -96,13 +110,14 @@ const S13: React.FC = () => {
       <TeX s={String.raw`${H.z}\to\text{North Pole}`} x={XC} y={430} size={56} c={C.ink} o={fin(f, tHat + 40)} />
       <TeX s={EQ_S13} x={XC} y={560} size={T.eq} c={C.ink} o={fin(f, tCross)} />
       {/* checklist "all maths is TeX": the axis names x, y, z are KaTeX */}
-      <TeX s="z" x={tip(ez, 1.48)[0] + 20} y={tip(ez, 1.48)[1] - 16} size={T.key} c={C.second} ax={0} o={fin(f, tZ)} halo />
-      <TeX s="x" x={Math.max(80, tip(ex, 1.5)[0])} y={tip(ex, 1.5)[1] - 46} size={T.key} c={C.second} ax={0.5} o={fin(f, tX)} halo />
-      <TeX s="y" x={tip(ey, 1.5)[0]} y={tip(ey, 1.5)[1] - 46} size={T.key} c={C.second} ax={0.5} o={fin(f, tY)} halo />
+      <TeX s="z" x={tip(ez, 1.48)[0] + 20} y={tip(ez, 1.48)[1] - 16} size={T.key} c={C.second} ax={0} o={fout(f, SE(k, 9) - 10) * fin(f, tZ)} halo />
+      <TeX s="x" x={Math.max(80, tip(ex, 1.5)[0])} y={tip(ex, 1.5)[1] - 46} size={T.key} c={C.second} ax={0.5} o={fout(f, SE(k, 9) - 10) * fin(f, tX)} halo />
+      <TeX s="y" x={tip(ey, 1.5)[0]} y={tip(ey, 1.5)[1] - 46} size={T.key} c={C.second} ax={0.5} o={fout(f, SE(k, 9) - 10) * fin(f, tY)} halo />
       <TeX s={H.x} x={xh[0] + 10} y={xh[1] + 34} size={48} c={C.second} ax={0.5} o={fin(f, tHat)} halo />
       <TeX s={H.y} x={yh[0] + 10} y={yh[1] + 34} size={48} c={C.second} ax={0.5} o={fin(f, tHat)} halo />
       <TeX s={H.z} x={zh[0] + 34} y={zh[1]} size={48} c={C.second} ax={0} o={fin(f, tHat)} halo />
-      <GSrc />
+      <GSrc cut />
+      <Svg><g data-lc-maplabel="1"><Lbl x={G.pw(pB)[0] + 24} y={G.pw(pB)[1] - 26} t="Brest" c={C.key} s={T.floor} o={fin(f, tGoal + 30)} /></g></Svg>
       {void rows}
     </Scene>
   );
@@ -516,19 +531,25 @@ const S20: React.FC = () => {
   const G = globeG(cam);
   const pc = G.pw([0, BV, 0]), pb = G.pw(ll(PHI, LON0));
   const A = cutAt(EQ_S20, String.raw`,\qquad `), A1 = cutAt(A[0], String.raw`=\Omega`);
+  // pass 2 (user 2026-11-07, old 24:55-25:20): the axis is a 3-D rod, seen outside the Earth and hidden inside it; while the radius of the
+  // parallel (from the axis out to Brest, INSIDE the Earth) is drawn, the Earth turns half see-through so both inside lines show through it
+  const glass = win(f, tCircle, tDist - 10, 15), alpha = 1 - 0.5 * glass;
   return (
     <Scene>
-      <Earth cam={cam} coast={0.45}
+      <Earth cam={cam} coast={0.45} alpha={alpha}
+        three={<>
+          <Axis3D L={1.35} r={0.007} color={C.local} />
+          <Rod3D a={[0, BV, 0]} b={ll(PHI, LON0)} px={5} color={C.second} o={fin(f, tRad) * fout(f, tDist - 10)} />
+        </>}
         over={(Gg) => {
           const ring = Array.from({ length: 121 }, (_, i) => ll(PHI, (360 * i) / 120, 1.002));
           const sv = splitVis(Gg, ring);
           const nT = Math.max(2, Math.round(120 * trip)), trail = Array.from({ length: nT + 1 }, (_, i) => ll(PHI, LON0 + (360 * trip * i) / nT, 1.004));
           const tv = splitVis(Gg, trail);
           return <>
-            {gseg(Gg, [0, -1.3, 0], [0, 1.35, 0], C.local, 4, 1, "12 8")}
             {sv.front.map((s, i) => <path key={i} d={poly(s)} fill="none" stroke={C.second} strokeWidth={5} opacity={fin(f, tCircle)} />)}
-            {sv.back.map((s, i) => <path key={`b${i}`} d={poly(s)} fill="none" stroke={C.second} strokeWidth={3} strokeDasharray="8 8" opacity={0.5 * fin(f, tCircle)} />)}
-            <line x1={pc[0]} y1={pc[1]} x2={pb[0]} y2={pb[1]} stroke={C.second} strokeWidth={5} opacity={fin(f, tRad) * fout(f, tDist - 10)} />
+            {/* the far half of the parallel only while the Earth is see-through (it is behind the globe) */}
+            {sv.back.map((s, i) => <path key={`b${i}`} d={poly(s)} fill="none" stroke={C.second} strokeWidth={3} strokeDasharray="8 8" opacity={0.7 * glass * fin(f, tCircle)} />)}
             {tv.front.map((s, i) => <path key={`t${i}`} d={poly(s)} fill="none" stroke={C.gold} strokeWidth={7} opacity={fin(f, tDist)} />)}
             {gdot(Gg, PHI, lonD, C.gold, 12, 1)}
           </>;
@@ -538,6 +559,7 @@ const S20: React.FC = () => {
       <TeX s={String.raw`a\cos\varphi`} x={Math.max(pc[0], pb[0]) + 18} y={pb[1] + 44} size={48} c={C.second} ax={0} o={fin(f, tRad) * fout(f, tDist - 10)} halo />
       <GSrc />
       <Svg>
+        <g data-lc-maplabel="1"><Lbl x={G.pw([0, 1.3, 0])[0] + 22} y={G.pw([0, 1.3, 0])[1] + 6} t="axis" c={C.key} s={T.floor} o={win(f, AT(k, 1, "round its axis"), tHow)} /></g>
         <Keyword f={f} text="a second meaning" at={[XC, 140]} appear={0} out={tHow - 20} />
         <Keyword f={f} text="how fast is the ground moving?" at={[XC, 140]} appear={tHow} s={T.floor + 4} />
         <ClockGlyph x={1130} y={250} r={30} h={11.9} o={win(f, tT, tRes - 22)} />
@@ -595,9 +617,9 @@ const S21: React.FC = () => {
   };
   return (
     <Scene>
-      <Earth cam={cam} coast={0.45}
+      <Earth cam={cam} coast={0.45} three={<Axis3D L={1.35} r={0.007} color={C.local} />}
         over={(Gg) => <>
-          {gseg(Gg, [0, -1.3, 0], [0, 1.35, 0], C.local, 4, 1, "12 8")}
+          {/* pass 2 (old 26:03): the axis is a 3-D rod, hidden inside the opaque Earth (it was an SVG line drawn across the globe) */}
           {[0, KHULNA[0], BREST[0], LYB[0]].map((la) => <path key={la} d={parPath(Gg, la)} fill="none" stroke={C.second} strokeWidth={3} opacity={0.7} />)}
           {places.map((p) => { const [a, b] = tipOf(p.la, p.lo, p.U); const o = fin(f, p.at) * facing(Gg, p.la, p.lo);
             return o > 0 ? <AnimatedWindArrow key={p.name} from={a} to={b} speed={p.U / 20} f={f} c={C.first} px={8} head={28} o={o} /> : null; })}
@@ -826,9 +848,8 @@ const S25: React.FC = () => {
   const eqs = cutAt(EQ_S25, String.raw`\quad`);
   return (
     <Scene>
-      <Earth cam={cam} alpha={0.55} coast={0.4}
+      <Earth cam={cam} alpha={0.55} coast={0.4} three={<Axis3D L={1.3} r={0.006} color={C.local} />}
         over={(Gg) => <>
-          {gseg(Gg, [0, -1.25, 0], [0, 1.3, 0], C.local, 3, 0.9, "10 8")}
           {P4.map((p) => { const o = 0.35 + 0.65 * fin(f, p.at); const s = Math.sin(p.la * D2R);
             const ring = Array.from({ length: 97 }, (_, i) => Gg.pw(ll(p.la, (360 * i) / 96, 1.001)));
             return <g key={p.n} opacity={o}>

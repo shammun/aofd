@@ -31,6 +31,19 @@ DENSE = {"s00_title", "s01_hook", "s04_slice_radius", "s06_parallel", "s09_merid
 sys.path.insert(0, str(ROOT / "tools"))
 
 
+def disk_only(min_gb: float = 45.0) -> None:
+    """pass 2 (2026-11-07 22:20): the render path checks only the disk floors and sets TEMP; it never waits on a lock or a memory gate
+    (guard() between chunks deadlocked the r7 render between chunks 8 and 9). The caller takes RENDER2.lock before starting."""
+    free = shutil.disk_usage("C:/").free / 1e9
+    if free < min_gb:
+        sys.exit(f"STOP: C: {free:.1f} GB free < {min_gb}")
+    gfree = shutil.disk_usage("G:/").free / 1e9
+    if gfree < 50:
+        sys.exit(f"STOP: G: {gfree:.1f} GB free < 50")
+    (S / "tmp").mkdir(parents=True, exist_ok=True)
+    os.environ["TEMP"] = os.environ["TMP"] = str(S / "tmp")
+
+
 def guard(min_gb: float = 45.0) -> None:
     # lock protocol 2026-11-07 (tightened): K6 / stills / SSR wait until VOICE.lock (TTS / mixes) is free
     v = Path("G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/VOICE.lock")
@@ -111,8 +124,8 @@ def main() -> int:
         (S / "k6_frames.txt").write_text(",".join(map(str, fr)))
         print(len(fr), "K6 frames ->", S / "k6_frames.txt")
         return 0
-    guard()
     if a.cmd == "stills":
+        guard()
         tool = MOVIES / "src/ch00_coordinates_sphere/checks/label_stills_cs.mjs"
         bdir = S / "bundle"
         if a.bundle or not bdir.exists():
@@ -137,6 +150,7 @@ def main() -> int:
             p.wait()
         print("done", len(list(out.glob("f*.jpg"))), "stills", flush=True)
         return 0
+    disk_only()   # render / join: disk floors only, no lock or memory gate (pass 2)
     import render_chunks as rc
     n_fr = total_frames()
     n = (n_fr + CHUNK - 1) // CHUNK
@@ -152,7 +166,6 @@ def main() -> int:
         print(f"{n_fr} frames, {n} chunks", flush=True)
         t0 = time.time()
         for i in todo:
-            guard()
             t1 = time.time()
             f0 = i * CHUNK
             rc.render_chunk(ns, i, f0, min(f0 + CHUNK, n_fr) - 1, rd)

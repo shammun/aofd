@@ -11,7 +11,7 @@ import { GlobeCam, GProj } from "./kit_cs/globe";
 import { V3 } from "./kit_cs/cam";
 import { Cut } from "./kit_cs/earth";
 import {
-  BREST, Box, D2R, Earth, FP, Face, Lbl, SRC_G, SameMark, TV3, TeX, face3, faceArc, faceFlat, faceTick, faceWedge, fin, fout, globeG, ll, merFace,
+  BREST, Box, D2R, Earth, FP, Face, Lbl, SRC_BM, SameMark, TV3, TeX, face3, faceArc, faceFlat, faceTick, faceWedge, fin, fout, globeG, ll, merFace,
 } from "./cs_lib";
 import { SourceBelow } from "../house/kit/frame";
 
@@ -96,7 +96,7 @@ export const TwoView: React.FC<{ f: number; cam: GlobeCam; cut: Cut; face: Face;
   const R3 = Math.hypot(P3(1, 0)[0] - P3(0, 0)[0], P3(1, 0)[1] - P3(0, 0)[1]);
   return (
     <>
-      <Earth cam={cam} box={box} cut={cut} alpha={alpha} o={o3} coast={0.4} three={three}
+      <Earth cam={cam} box={box} cut={cut} alpha={alpha} o={o3} coast={0} three={three}
         over={(Gg) => <>
           {base3 ? base3(Gg, P3) : null}
           <FaceSvg f={f} P={P3} items={items} which="3" R={R3} />
@@ -110,7 +110,7 @@ export const TwoView: React.FC<{ f: number; cam: GlobeCam; cut: Cut; face: Face;
       </Svg>
       {/* K6 k6r1: the flat face's labels own its half-disc fill (labels drawn on their own diagram's ground); its rim, axis and legs stay checked */}
       {flatO > 0 ? <div data-lc-own="face2" style={{ position: "absolute", inset: 0, opacity: flatO }}><FaceTex f={f} P={P2} items={items} which="2" /></div> : null}
-      <SourceBelow text={SRC_G} pic={box} x={Math.max(60, box.x)} w={880} o={src * o3} name="two-view src" />{/* still review: inside the x 60 margin */}
+      <SourceBelow text={SRC_BM} pic={box} x={Math.max(60, box.x)} w={880} o={src * o3} name="two-view src" />{/* still review: inside the x 60 margin */}
     </>
   );
 };
@@ -119,11 +119,15 @@ export const TwoView: React.FC<{ f: number; cam: GlobeCam; cut: Cut; face: Face;
 export const LON0 = BREST[1];
 export const PHI = BREST[0];
 const nrm = (v: V3): V3 => { const n = Math.hypot(...v) || 1; return [v[0] / n, v[1] / n, v[2] / n]; };
-/** the removed half leaves to the right of the frame (and a little towards the camera), not straight at the viewer */
-export const slideDir = (lon0: number): V3 => { const r = ll(0, lon0 + 15), t = ll(0, lon0 - 90); return nrm([0.9 * r[0] + 0.3 * t[0], 0.12, 0.9 * r[2] + 0.3 * t[2]]); };
+/** pass 2: the removed half moves a little to the right (0.2 radii, inside the frame's spare room) while it fades out in place */
+export const slideDir = (lon0: number): V3 => nrm(ll(0, lon0));
 export const merCut = (slide: number, lon0 = LON0): Cut => ({ kind: "mer", lon0, slide, dir: slideDir(lon0) });
-/** the meridian face seen from its west side, 15° from frontal (never edge-on: U-CO-034); M (the equator line) to the right */
-export const camFace = (lon0 = LON0, dist = 3.3): GlobeCam => ({ lat: 8, lon: lon0 - 75, dist });
+/** the meridian face seen from its west side, M (the equator line) to the right. Pass 2 (user 2026-11-07, old 5:59-8:49, 15:22-16:00, 28:23,
+ * 29:39): 15° from frontal showed only the flat section, "a blank circle, not the Earth". Now 50° from frontal and 12° above the equator
+ * (the cross-product Part 2 half-Earth used 38° / 12°): the Blue Marble outside of the kept half shows as a crescent right of the section
+ * (Europe and Africa next to Brest's rim), about a third of a radius wide, so it reads as an Earth cut open (40° gave a thin sliver in the
+ * first look stills); the flat twin keeps the true angles. */
+export const camFace = (lon0 = LON0, dist = 3.3): GlobeCam => ({ lat: 12, lon: lon0 - 40, dist });
 export const FACE_B = merFace(LON0);
 /** the top view: from above the North Pole (x̂ to the right, ŷ up the screen), the face tilted 20° so it reads as a disc */
 export const CAM_TOP: GlobeCam = { lat: 70, lon: -90, dist: 3.3 };

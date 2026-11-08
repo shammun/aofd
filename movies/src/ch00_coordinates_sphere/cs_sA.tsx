@@ -14,7 +14,7 @@ import { GProj, globePath, llPath } from "./kit_cs/globe";
 import { Quad3D } from "./kit_cs/three3d";
 import { V3 } from "./kit_cs/cam";
 import {
-  AT, Arrow, BREST, Balloon, BandTint, CalcStack, Chevron, D, D2R, Earth, GB, GFULL, Grat, K, KHULNA, KeepLine, Keyword, LEN, LYB, Layered, Lbl, SE, SING, SRC_G,
+  AT, Arrow, BREST, Balloon, BandTint, CalcStack, Chevron, D, D2R, Earth, GB, GFULL, Grat, K, KHULNA, KeepLine, Keyword, LEN, LYB, Layered, Lbl, SE, SING, SRC_G, SRC_BM,
   SS, Scene, SideCallout, SkipChip, Svg, TeX, XC, XZ, add, arcD, chipSpan, clamp, cutAt, discOf, e2g, eastAt, facing, fin, fout, gdot, globeG, gseg, keepGone,
   keepTime, ll, merPath, splitVis, mix, parPath, plab, poly, prog, rep, spinPath, win, faceArc, faceFlat, lin,
   RAD, Magnify, KeepPic, Recall,
@@ -30,7 +30,7 @@ const CHECK_A: [string, number, number, number][] = [
   ["pmUK", D.pm.cross["United Kingdom"][0], 53.76, 0.01], ["pmGhana", D.pm.cross.Ghana[1], 5.62, 0.01], ["pmAnt", D.pm.cross.Antarctica[0], -71.5, 0.01],
 ];
 CHECK_A.forEach(([n, v, r, tol]) => { if (!(Math.abs(v - r) <= tol)) throw new Error(`CHECK ${n}: data ${v} vs screen ${r}`); });
-const GSrc: React.FC<{ o?: number }> = ({ o = 1 }) => <SourceBelow text={SRC_G} pic={GB} w={960} o={o} name="globe src" />;
+const GSrc: React.FC<{ o?: number; cut?: boolean }> = ({ o = 1, cut = false }) => <SourceBelow text={cut ? SRC_BM : SRC_G} pic={GB} w={960} o={o} name="globe src" />;
 const CB = PHI * D2R, BU = Math.cos(CB), BV = Math.sin(CB);   // Brest on the meridian face (unit radius)
 /** a point on the meridian face through LON0 (u along the equator line under Brest, v up the axis) */
 const fpt = (u: number, v: number): V3 => { const m = ll(0, LON0); return [u * m[0], v, u * m[2]]; };
@@ -42,7 +42,7 @@ const S00: React.FC = () => {
   const f = useCurrentFrame(), k = K("s00_title");
   const tMet = AT(k, 0, "to measure"), tCo = AT(k, 0, "coordinates");   // HOUSE_STYLE §3 (2026-11-06): the concept name pulses on its word
   const oA = fout(f, tMet, 12), oB = fin(f, tMet, 12);
-  const camA = globePath([{ f: 0, lat: 14, lon: LON0 - 40, dist: 3.2 }, { f: 60, lat: 8, lon: LON0 - 75, dist: 3.2 }], f);
+  const camA = globePath([{ f: 0, lat: 20, lon: LON0 - 10, dist: 3.2 }, { f: 60, lat: 12, lon: LON0 - 40, dist: 3.2 }], f);
   const slide = prog(f, 40, 95);
   const tArrow = 96, tWedge = 124;
   const camB = globePath([{ f: tMet, lat: 56, lon: 8, dist: 3.0 }, { f: LEN(k) + 10, lat: 58, lon: 12, dist: 3.0 }], f);
@@ -186,7 +186,7 @@ const S04: React.FC = () => {
   const f = useCurrentFrame(), k = K("s04_slice_radius");
   const tSlice = AT(k, 0, "slicing the Earth in half"), tBrest = AT(k, 0, "Brest"), tFace = SS(k, 1), tArrow = SS(k, 2), tR = SS(k, 3), tRad = AT(k, 4, "the Earth's radius"),
     t6400 = AT(k, 5, "six thousand four hundred"), tExact = AT(k, 5, "more exactly"), tA = AT(k, 7, "We call it a"), tGround = SS(k, 8), tBal = SS(k, 9);
-  const cam = globePath([{ f: 0, lat: 22, lon: -12, dist: 3.4 }, { f: 95, lat: 8, lon: LON0 - 75, dist: 3.3 }, { f: LEN(k) + 10, lat: 8, lon: LON0 - 75, dist: 3.3 }], f);
+  const cam = globePath([{ f: 0, lat: 22, lon: -12, dist: 3.4 }, { f: 95, lat: 12, lon: LON0 - 40, dist: 3.3 }, { f: LEN(k) + 10, lat: 12, lon: LON0 - 40, dist: 3.3 }], f);
   const slide = prog(f, Math.max(tSlice + 30, 100), Math.max(tSlice + 75, 145));
   const part1 = cutAt(EQ_S04, String.raw`\quad`)[0], part2 = cutAt(EQ_S04, String.raw`\quad`)[1];
 
@@ -209,7 +209,7 @@ const S04: React.FC = () => {
             {plab(Gg, -90, 0, "South Pole", 1, 22, 10, "start", false, 1.25)}
           </g>;
         }} />
-      <GSrc />
+      <GSrc o={fout(f, Math.max(tSlice + 30, 100) - 10, 8)} /><GSrc cut o={fin(f, Math.max(tSlice + 30, 100), 8)} />{/* pass 2: the coastline goes with the cut */}
       <Svg>
         <g data-lc-maplabel="1"><Lbl x={pb[0] + 22} y={pb[1] - 28} t="Brest" c={C.key} s={T.floor} o={fin(f, tBrest)} /></g>
         {/* K6 k6r1: r fades out over the 8 frames before "We call it a", a fades in 8 frames after (no cross-fade on one spot) */}
@@ -258,7 +258,7 @@ const S05: React.FC = () => {
           <circle cx={pb[0]} cy={pb[1]} r={10} fill={C.gold} stroke={C.bg} strokeWidth={3} />
         </>} />
       <TeX s={String.raw`\varphi`} x={wedgeMid[0]} y={wedgeMid[1]} size={T.key} c={C.gold} ax={0.5} o={fin(f, tPhi)} halo />
-      <GSrc />
+      <GSrc cut />
       <Svg>
         <g data-lc-maplabel="1">
           <Lbl x={P(0.97, 0)[0]} y={P(0.97, 0)[1] + 44} t="equator" c={C.key} s={T.floor} a="end" o={fin(f, tEq)} />{/* K6 k6r1: inside the face, under the line end (it sat on the range row) */}
@@ -303,7 +303,7 @@ const S06: React.FC = () => {
   const at = LAB48.map((l) => AT(k, l.say[0], l.say[1]));
   const lonU = (lo: number) => (lo < LON0 ? lo + 360 : lo);
   const cam = spinPath([
-    { f: 0, lat: 8, lon: LON0 - 75, dist: 3.3 }, { f: tJoin + 40, lat: 30, lon: -40, dist: 3.4 }, { f: t5 - 20, lat: 34, lon: -10, dist: 3.4 },
+    { f: 0, lat: 12, lon: LON0 - 40, dist: 3.3 }, { f: tJoin + 40, lat: 30, lon: -40, dist: 3.4 }, { f: t5 - 20, lat: 34, lon: -10, dist: 3.4 },
     ...LAB48.map((l, i) => ({ f: at[i] - 10, lat: 34, lon: lonU(l.lon), dist: 3.4 })),
     { f: SE(k, 6) + 10, lat: 34, lon: 355.5, dist: 3.4 }, { f: tAcross + 30, lat: 46, lon: 340, dist: 3.5 }, { f: LEN(k) + 10, lat: 46, lon: 345, dist: 3.5 },
   ], f);
@@ -340,7 +340,8 @@ const S06: React.FC = () => {
             {LAB48.map((l, i) => { const up = i % 2 === 0, nx = at[i + 2];
               return plab(Gg, up ? PHI + 3.2 : PHI - 3.2, l.lon, l.t, win(f, at[i], nx !== undefined ? Math.min(at[i] + 75, nx - 18) : at[i] + 75) * facing(Gg, PHI, l.lon),
                 0, up ? -26 : 44, "middle", SEA48.has(l.t)); })}
-            {f >= tAcross ? <g opacity={fin(f, tDisc)}>
+            {/* pass 2: the inside lines (axis piece, the two centres) leave when the cap closes over them (they would sit on the opaque globe) */}
+            {f >= tAcross ? <g opacity={fin(f, tDisc) * fout(f, tSoon)}>
               {gseg(Gg, [0, -0.05, 0], [0, Math.sin(CB), 0], C.local, 4, 1, "10 8")}
               <circle cx={dc[0]} cy={dc[1]} r={10} fill={C.local} stroke={C.bg} strokeWidth={3} />
               <circle cx={c0[0]} cy={c0[1]} r={10} fill={C.gold} stroke={C.bg} strokeWidth={3} opacity={fin(f, tNot)} />
@@ -348,13 +349,13 @@ const S06: React.FC = () => {
             {[0, 15, 30, 45, 60, 75].map((la, i) => <path key={la} d={parPath(Gg, la)} fill="none" stroke={C.second} strokeWidth={3} opacity={0.8 * fin(f, tRings + i * 8)} />)}
           </>;
         }} />
-      <GSrc />
+      <GSrc cut o={1 - win(f, tJoin + 30, tAcross - 8, 8)} /><GSrc o={win(f, tJoin + 38, tAcross - 20, 8)} />{/* pass 2: Natural Earth only while the joined Earth shows its coastline */}
       <Svg>
         <Keyword f={f} text="same latitude?" at={[XC, 150]} appear={0} out={tSame - 20} />
         <Keyword f={f} text="same latitude 48.4°" at={[XC, 150]} appear={tSame} />
         <Keyword f={f} text="parallel" at={[XC, 250]} appear={tPar} />
-        <SideCallout f={f} lines={["not the same centre"]} at={[XC + 4, 470]} appear={tNot} target={[(dc[0] + c0[0]) / 2 + 14, (dc[1] + c0[1]) / 2]} bend={40} />
-        <SideCallout f={f} lines={["on the axis"]} at={[XC + 4, 380]} appear={tAxis} target={[dc[0] + 16, dc[1] - 6]} bend={30} />
+        <SideCallout f={f} lines={["not the same centre"]} at={[XC + 4, 470]} out={tSoon} appear={tNot} target={[(dc[0] + c0[0]) / 2 + 14, (dc[1] + c0[1]) / 2]} bend={40} />
+        <SideCallout f={f} lines={["on the axis"]} at={[XC + 4, 380]} out={tSoon} appear={tAxis} target={[dc[0] + 16, dc[1] - 6]} bend={30} />
         <Keyword f={f} text="parallel = circle round the axis" at={[XC, 580]} appear={tRound} s={T.floor + 4} />
         <Keyword f={f} text="smaller towards the poles" at={[XC, 680]} appear={tRings} />
       </Svg>
@@ -389,7 +390,7 @@ const S07: React.FC = () => {
           <circle cx={c0[0]} cy={c0[1]} r={11} fill={C.gold} stroke={C.bg} strokeWidth={3} />
           <circle cx={pb[0]} cy={pb[1]} r={10} fill={C.gold} stroke={C.bg} strokeWidth={3} />
         </>} />
-      <GSrc />
+      <GSrc cut />
       <Svg>
         <Keyword f={f} text="a second way" at={[XC, 150]} appear={0} out={tCo - 30} />
         <SideCallout f={f} lines={["colatitude"]} at={[XC + 4, 150]} appear={tCo} target={coMid} c={C.local} bend={40} />
@@ -561,7 +562,10 @@ const S10: React.FC = () => {
   // caption band / each other); the source line steps aside while the growing disc covers it (zoom < 50 %: disc mask)
   const zoom = clamp((4.6 - cam.dist) / (4.6 - 2.4), 0, 1);
   const dk = discOf(cam, GFULL), srcO = zoom >= 0.5 ? 1 : clamp((814 - (dk.c[1] + dk.r)) / 12, 0, 1);
-  const drawTo = f < tPole ? 90 : Math.max(-90, cam.lat - 22);
+  // pass 2 (user 2026-11-07: every meridian ends at both poles): the gold line follows the camera down and, once it has reached the South
+  // Pole, stays there while the camera zooms back out (it used to shrink back with the camera's latitude, ending near 50° S)
+  const tSP = tOf("South Pole");
+  const drawTo = f < tPole ? 90 : f >= tSP ? -90 : Math.max(-90, cam.lat - 22);
   const latTxt = `${Math.abs(Math.round(cam.lat))}° ${cam.lat >= 0.5 ? "N" : cam.lat <= -0.5 ? "S" : ""}`;
   return (
     <Scene>

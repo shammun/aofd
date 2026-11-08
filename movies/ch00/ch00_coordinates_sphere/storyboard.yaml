@@ -1133,6 +1133,22 @@ remake_2026_11_07:
   R16: recalls in s08, s11, s16 (voiced S7), s17, s18 (S12 re-voiced), s20, s22, s24, s30 (see each scene's `recalls`)
   R19: s06 Brest parallel list (row 5); s19 Khulna wording (row 6)
   R3: 's35: recap with numbers (S10 74 km per degree at Brest; S13 ERA5 7.1 -> 16.3 °C), two-sentence teaser (S14-S15); s36 picture fades with the music'
+pass2_2026_11_07:
+  brief: movies/ch00/ch00_coordinates_sphere/user_feedback_2026-11-07.md (user watched build 1 = d27c24f timing, 48:22.9); log remake_2026-11-07_log.md "Pass 2"
+  cut_face_camera: "s04, s05, s07, s08, s14-s16, s19 side view, s22, s23 (old 5:59-8:49, 15:22-16:00, 28:23, 29:39): camFace 15° -> 50° from frontal, 12° up,
+    so the Blue Marble outside of the kept half shows beside the section (no more 'blank circle'); the removed half fades in place (0.2 radii) instead of
+    leaving the 3-D frame; title and s04/s06 cameras the same"
+  credits: "cut Earths (no Natural Earth coastline drawn) credit 'Image: NASA Blue Marble Next Generation' only; s04/s06 swap credits with the coastline"
+  s13_octants: "old 14:13: the Earth cut by the three coordinate planes into eight pieces with 0.05-radius gaps, the 0-90° E northern piece lifted out (corner
+    hollow at the centre where x, y, z meet); axes are 3-D rods (depth-tested); Brest's arrow from the centre follows its piece (octShift)"
+  inside_lines: "s20, s21, s25, s29 (old 24:55-25:20, 26:03): the spin axis is a 3-D rod hidden inside an opaque Earth; while an inside line (the radius
+    of the parallel, the strip radius) is drawn the Earth turns half see-through (s20 S1-S12, s29 from S7); s06 inside lines leave when the cap closes"
+  meridians: "every drawn meridian ends at both poles: graticule meridians -88..88 -> -90..90; s10 prime meridian stays drawn to the South Pole while the
+    camera zooms out (it shrank back to ~50° S)"
+  s34_era5_lines: "old 45:22: Natural Earth lines ending at lon +180° were wrapped to -180° by mapproj.forward, drawing a line across the map (Chukotka,
+    Wrangel I., Fiji, Antarctica); fixed in build_ch00_coordinates_sphere.py (15 points kept on their side; CHECK DS29 max step 0.037)"
+  kept_as_is: "s24 (old 31:40): already a 3-D slice (cap lifted off Brest's parallel, its disc seen from above); no change"
+  narration: unchanged (no re-voice); timing.json, captions and the r7 mix unchanged
 scenes:
 - id: s00_title
   remake_2026_11_07: "R1/R2: series title layout (kit_cs/SeriesTitle.tsx = Parts 1-2): 'Coordinates' 150 px gradient, pulsing on AT(0,'coordinates'); 'Part\

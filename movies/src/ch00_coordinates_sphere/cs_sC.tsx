@@ -9,7 +9,8 @@ import { Pt, pulse } from "../house/kit/draw";
 import { Check, Notebook } from "../house/kit/icons";
 import { CurvedLink } from "../house/kit/extras";
 import { GlobeFrame, SourceBelow } from "../house/kit/frame";
-import { GProj, globePath } from "./kit_cs/globe";
+import { Axis3D, GProj, globePath } from "./kit_cs/globe";
+import { Rod3D } from "./kit_cs/three3d";
 import { orbitCam, projector, V3 } from "./kit_cs/cam";
 import {
   AT, Arrow, BREST, BandTint, CalcStack, ColourBar, D, D2R, Earth, GB, GFULL, IMGS, K, KHULNA, KeepLine, Keyword, LEN, LUT_T, LYB, Layered, Lbl, SE, SING, SRC_G, SS,
@@ -273,16 +274,20 @@ const S29: React.FC = () => {
   const pts = Array.from({ length: N + 1 }, (_, i) => { const lo = L + 180 - (360 * i) / N, q = ll(27.5, lo, 1.003), c = G.camPos;
     const vis = q[0] * (c[0] - q[0]) + q[1] * (c[1] - q[1]) + q[2] * (c[2] - q[2]) > 0; const s = G.pw(q); const t: Pt = [100 + (860 * i) / N, 760];
     return { p: [mix(s[0], t[0], un), mix(s[1], t[1], un)] as Pt, w: vis ? 1 : un }; });
-  const axP = G.pw([0, Math.sin(27.5 * D2R), 0]), rimP = G.pw(ll(27.5, L - 60, 1.003));
+
   const parts = cutAt(EQ_S29, "=2");
   return (
     <Scene>
-      <Earth cam={cam} box={GB29} coast={0.45}
+      {/* pass 2 (user 2026-11-07): the axis and the strip's radius run INSIDE the Earth: 3-D rods, and the Earth turns half see-through on
+          "the length" (S7) so they show through it (they were SVG lines drawn across an opaque globe) */}
+      <Earth cam={cam} box={GB29} coast={0.45} alpha={1 - 0.45 * fin(f, tLen, 15)}
+        three={<>
+          <Axis3D L={1.25} r={0.006} color={C.local} o={fin(f, tLen)} />
+          <Rod3D a={[0, Math.sin(27.5 * D2R), 0]} b={ll(27.5, L - 60, 1.003)} px={5} color={C.second} o={fin(f, tLen)} />
+        </>}
         over={(Gg) => <>
           <BandTint G={Gg} a={0} b={30} c={C.first} o={0.35 * fin(f, tQ) * fout(f, tOne)} />
           <BandTint G={Gg} a={25} b={30} c={C.gold} o={0.75 * fin(f, tOne) * (1 - un)} />
-          {gseg(Gg, [0, -1.2, 0], [0, 1.25, 0], C.local, 3, fin(f, tLen), "10 8")}
-          <line x1={axP[0]} y1={axP[1]} x2={rimP[0]} y2={rimP[1]} stroke={C.second} strokeWidth={5} opacity={fin(f, tLen)} />
         </>} />
       <SourceBelow text={SRC_G} pic={{ x: 60, y: 28, w: 960, h: 650 }} w={960} name="globe src" o={fout(f, tUn - 10)} />
       <Svg>
