@@ -156,7 +156,7 @@ const S09: React.FC = () => {
         // fix loop 2 (fix1 review S6): every rate row carries its symbol dθ/dt (r, v and 1 rad as left sides too: all rows align at = / ≈)
         { lhs: "r", rhs: String.raw`=25\ \mathrm{km}=${goldAt(f, AT(k, 17, "twenty five thousand"), String.raw`25\,000\ \mathrm m`)}`, at: AT(k, 17, "twenty five thousand") - 8, size: 46 },
         { lhs: "v", rhs: String.raw`=${goldAt(f, AT(k, 17, "thirty four point eight"), String.raw`34.8\ \mathrm{m/s}`)}\ (\approx35)`, at: AT(k, 17, "thirty four point eight") - 8, size: 46, cont: true },
-        { lhs: String.raw`d\theta/dt`, rhs: String.raw`=\dfrac{34.8\ \mathrm{m/s}}{25\,000\ \mathrm{m}}${tailIn(f, tRad, C.ink, String.raw`\approx0.00139\ \mathrm{rad/s}`)}`, at: AT(k, 17, "divided by") },
+        { lhs: String.raw`d\theta/dt`, rhs: String.raw`=\dfrac{34.8\ \mathrm{m/s}}{25\,000\ \mathrm{m}}${tailIn(f, tRad, C.ink, String.raw`\approx0.00139\ \mathrm{rad/s}`)}`, at: AT(k, 17, "divided by"), h: 140 },   // fix2 K6 k6f3: its denominator touched the "1 rad" row's 180° (text-text, 23 frames)
         { lhs: String.raw`1\ \mathrm{rad}`, rhs: String.raw`=\dfrac{180^\circ}{\pi}\approx${goldAt(f, t573, String.raw`57.3^\circ`)}`, at: AT(k, 19, "One radian") },   // fix loop 1 (review 2 S8): said, gold on its word
         { lhs: String.raw`d\theta/dt`, rhs: String.raw`\approx0.00139\times57.3\approx0.08^\circ/\mathrm{s}`, at: AT(k, 19, "zero point zero eight") },
         { lhs: String.raw`d\theta/dt`, rhs: String.raw`\approx0.08\times60\approx4.8\approx5^\circ/\mathrm{min}`, at: AT(k, 19, "five degrees") },
