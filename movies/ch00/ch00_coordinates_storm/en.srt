@@ -634,12 +634,12 @@ it's minus zero point eight zero six,
 zero point five nine two.
 
 136
-00:09:20,800 --> 00:09:24,132
+00:09:20,540 --> 00:09:21,540
 The change
-is minus zero point zero zero six,
 
 137
-00:09:24,132 --> 00:09:26,575
+00:09:21,540 --> 00:09:26,575
+is minus zero point zero zero six,
 minus zero point zero zero eight.
 
 138
@@ -808,37 +808,38 @@ First, the change in the number, times
 the old arrow, gives one, zero.
 
 173
-00:11:51,775 --> 00:11:55,773
-Second, the old number times
-the change in the arrow:
+00:11:51,775 --> 00:11:57,357
+Second, the old number times the change
+in the arrow: the arrow changed by
 
 174
-00:11:55,773 --> 00:11:59,771
-the arrow changed by
+00:11:57,357 --> 00:12:00,979
 minus zero point zero zero five,
+zero point one,
 
 175
-00:11:59,771 --> 00:12:04,675
-zero point one, so this piece
+00:12:00,979 --> 00:12:04,675
+so this piece
 is minus zero point zero five, one.
 
 176
-00:12:05,025 --> 00:12:11,530
-Third, the two changes multiplied together
-give minus zero point zero zero five,
+00:12:05,025 --> 00:12:08,847
+Third, the two changes
+multiplied together give
 
 177
-00:12:11,530 --> 00:12:12,750
+00:12:08,847 --> 00:12:12,750
+minus zero point zero zero five,
 zero point one.
 
 178
-00:12:14,250 --> 00:12:18,399
-Add the three pieces, and we
-get zero point nine four five,
+00:12:14,250 --> 00:12:16,501
+Add the three pieces, and we get
 
 179
-00:12:18,399 --> 00:12:20,650
-one point one: the whole change.
+00:12:16,501 --> 00:12:20,650
+zero point nine four five, one point one:
+the whole change.
 
 180
 00:12:22,150 --> 00:12:23,925
@@ -2750,1554 +2751,1558 @@ and its sine is about
 zero point eight five seven.
 
 584
-00:40:12,450 --> 00:40:16,384
+00:40:12,450 --> 00:40:14,107
 So x hat prime is about
-minus zero point five one five,
 
 585
-00:40:16,384 --> 00:40:22,250
-zero point eight five seven: it points up
-the coast, towards the north-north-west.
+00:40:14,107 --> 00:40:18,431
+minus zero point five one five,
+zero point eight five seven:
 
 586
-00:40:22,600 --> 00:40:27,025
-And y hat prime is about
-minus zero point eight five seven,
+00:40:18,431 --> 00:40:22,250
+it points up the coast,
+towards the north-north-west.
 
 587
-00:40:27,025 --> 00:40:29,350
-minus zero point five one five:
+00:40:22,600 --> 00:40:24,400
+And y hat prime is about
 
 588
+00:40:24,400 --> 00:40:29,350
+minus zero point eight five seven,
+minus zero point five one five:
+
+589
 00:40:29,350 --> 00:40:33,475
 it points west-south-west,
 out into the Gulf of Mexico.
 
-589
+590
 00:40:34,975 --> 00:40:38,939
 That's why we picked
 the north-north-west way along the coast,
 
-590
+591
 00:40:38,939 --> 00:40:43,350
 and not the south-south-east way:
 then y hat prime points out to sea.
 
-591
+592
 00:40:44,150 --> 00:40:45,775
 Now the wind.
 
-592
+593
 00:40:46,125 --> 00:40:50,865
 At eight in the evening, universal
 time, about an hour after landfall,
 
-593
+594
 00:40:50,865 --> 00:40:56,146
 the model's wind at Fort Myers Beach was
 about thirty three metres per second,
 
-594
+595
 00:40:56,146 --> 00:40:57,500
 from the south-west.
 
-595
+596
 00:40:57,850 --> 00:41:02,551
 Its east part, u, was about
 twenty two point two metres per second,
 
-596
+597
 00:41:02,551 --> 00:41:06,550
 and its north part, v, was
 about twenty four point three.
 
-597
+598
 00:41:06,900 --> 00:41:11,497
 The part along the shore
 is u cosine alpha plus v sine alpha:
 
-598
+599
 00:41:11,497 --> 00:41:15,491
 we multiply the east
 part, u, by the cosine of alpha,
 
-599
+600
 00:41:15,491 --> 00:41:19,334
 minus zero point five one five,
 and the north part,
 
-600
+601
 00:41:19,334 --> 00:41:22,650
 v, by its sine,
 zero point eight five seven.
 
-601
+602
 00:41:23,000 --> 00:41:27,725
 Adding the two products gives about
 nine point four metres per second.
 
-602
+603
 00:41:29,225 --> 00:41:34,436
 The part across the shore is minus u sine
 alpha plus v cosine alpha:
 
-603
+604
 00:41:34,436 --> 00:41:38,575
 now u goes with minus the
 sine, and v with the cosine.
 
-604
+605
 00:41:38,925 --> 00:41:41,566
 Adding these two products gives about
 
-605
+606
 00:41:41,566 --> 00:41:44,850
 minus thirty one point five
 metres per second.
 
-606
+607
 00:41:46,350 --> 00:41:52,050
 The minus sign means against y hat prime:
 not out to sea, but onto the land.
 
-607
+608
 00:41:52,400 --> 00:41:57,492
 So about thirty one point five metres
 per second blew straight onto the land,
 
-608
+609
 00:41:57,492 --> 00:42:00,600
 and only about nine point four
 along the coast.
 
-609
+610
 00:42:00,950 --> 00:42:04,782
 Let's check that it's the same
 wind: we square the along and
 
-610
+611
 00:42:04,782 --> 00:42:07,912
 across parts, add
 them, and take the square root,
 
-611
+612
 00:42:07,912 --> 00:42:10,467
 which gives about thirty two point nine,
 
-612
+613
 00:42:10,467 --> 00:42:13,725
 the thirty three metres
 per second we started with.
 
-613
+614
 00:42:15,225 --> 00:42:18,709
 Now go about a hundred and sixty
 kilometres north,
 
-614
+615
 00:42:18,709 --> 00:42:23,725
 to Saint Petersburg, on Tampa
 Bay, on the other side of the storm's eye.
 
-615
+616
 00:42:24,075 --> 00:42:27,498
 Next to it, the Gulf coast
 runs almost due north:
 
-616
+617
 00:42:27,498 --> 00:42:30,293
 from Saint Pete Beach to Tarpon Springs,
 
-617
+618
 00:42:30,293 --> 00:42:34,135
 it moves about fifty five point seven
 kilometres north,
 
-618
+619
 00:42:34,135 --> 00:42:36,650
 and six point eight kilometres west.
 
-619
+620
 00:42:37,000 --> 00:42:40,607
 With the same tangent
 rule, west leg over north leg,
 
-620
+621
 00:42:40,607 --> 00:42:44,421
 the coast leans only about
 seven degrees west of north,
 
-621
+622
 00:42:44,421 --> 00:42:48,375
 a bearing of about
 three hundred and fifty three degrees.
 
-622
+623
 00:42:48,725 --> 00:42:51,808
 So alpha, ninety degrees
 minus the bearing,
 
-623
+624
 00:42:51,808 --> 00:42:55,249
 plus a full turn, is about
 ninety seven degrees,
 
-624
+625
 00:42:55,249 --> 00:42:59,192
 with a cosine of about
 minus zero point one two two and
 
-625
+626
 00:42:59,192 --> 00:43:02,275
 a sine of about
 zero point nine nine three.
 
-626
+627
 00:43:03,775 --> 00:43:06,618
 The model's wind there, at the same hour,
 
-627
+628
 00:43:06,618 --> 00:43:10,986
 was about nineteen metres per second
 from the north-north-east:
 
-628
+629
 00:43:10,986 --> 00:43:14,800
 u about minus ten point two,
 and v about minus sixteen.
 
-629
+630
 00:43:15,150 --> 00:43:21,350
 Across the shore, we take minus u sine
 alpha, and v cosine alpha, and add them.
 
-630
+631
 00:43:21,700 --> 00:43:26,075
 Together, that's about
 plus twelve point one metres per second.
 
-631
+632
 00:43:27,575 --> 00:43:31,225
 Plus means along y hat prime: out to sea.
 
-632
+633
 00:43:31,575 --> 00:43:32,750
 Along the shore,
 
-633
+634
 00:43:32,750 --> 00:43:38,260
 u cosine alpha plus v sine alpha comes
 to about minus fourteen point seven,
 
-634
+635
 00:43:38,260 --> 00:43:42,300
 so the wind also ran down
 the coast, towards the south.
 
-635
+636
 00:43:43,800 --> 00:43:49,181
 So here's the same storm, on opposite
 sides of its eye: at Fort Myers Beach,
 
-636
+637
 00:43:49,181 --> 00:43:54,350
 the wind blew onto the land, and at Saint
 Petersburg, it blew out to sea.
 
-637
+638
 00:43:55,150 --> 00:43:57,225
 What does that do to the sea?
 
-638
+639
 00:43:57,575 --> 00:44:01,443
 Wind blowing onto the land
 drags the sea surface with it,
 
-639
+640
 00:44:01,443 --> 00:44:04,225
 and the water piles up against the coast.
 
-640
+641
 00:44:04,575 --> 00:44:10,175
 Wind blowing out to sea drags the water
 away from the coast, and the level drops.
 
-641
+642
 00:44:10,525 --> 00:44:15,174
 Where the water piles up, the sea
 rises far above the normal tide,
 
-642
+643
 00:44:15,174 --> 00:44:17,850
 and this rise is called a storm surge.
 
-643
+644
 00:44:18,200 --> 00:44:22,432
 The wind's push does most of the work,
 especially over a wide,
 
-644
+645
 00:44:22,432 --> 00:44:26,050
 shallow sea floor like
 the one off southwest Florida.
 
-645
+646
 00:44:26,400 --> 00:44:28,503
 The low pressure helps a little:
 
-646
+647
 00:44:28,503 --> 00:44:34,025
 the sea rises by about one centimetre for
 every hectopascal that the pressure drops.
 
-647
+648
 00:44:34,375 --> 00:44:37,957
 We get that centimetre by
 dividing one hectopascal,
 
-648
+649
 00:44:37,957 --> 00:44:41,608
 a hundred pascals, by the sea
 water's density, about
 
-649
+650
 00:44:41,608 --> 00:44:46,524
 one thousand and twenty five kilograms
 per cubic metre, times gravity,
 
-650
+651
 00:44:46,524 --> 00:44:49,825
 nine point eight one
 metres per second squared.
 
-651
+652
 00:44:50,175 --> 00:44:53,734
 When Ian came ashore, its centre's
 pressure was about
 
-652
+653
 00:44:53,734 --> 00:44:56,421
 nine hundred and forty one hectopascals,
 
-653
+654
 00:44:56,421 --> 00:44:59,308
 against a normal
 one thousand and thirteen,
 
-654
+655
 00:44:59,308 --> 00:45:03,875
 so the sea under the eye rose by only
 about seventy two centimetres.
 
-655
+656
 00:45:04,225 --> 00:45:07,650
 So what should the water have
 done at our two stations?
 
-656
+657
 00:45:08,450 --> 00:45:13,850
 Tide gauges, which measure the water
 level every few minutes, give the answer.
 
-657
+658
 00:45:14,200 --> 00:45:16,224
 At Fort Myers, up the river,
 
-658
+659
 00:45:16,224 --> 00:45:20,850
 the water rose about two point two
 metres above the normal tide.
 
-659
+660
 00:45:21,200 --> 00:45:26,240
 At Saint Petersburg, it fell about
 one point eight metres below the normal
 
-660
+661
 00:45:26,240 --> 00:45:29,100
 tide, both within a few hours of landfall.
 
-661
+662
 00:45:29,450 --> 00:45:33,750
 The across-shore wind flipped
 its sign, and so did the water.
 
-662
+663
 00:45:34,100 --> 00:45:35,494
 At Fort Myers Beach,
 
-663
+664
 00:45:35,494 --> 00:45:40,302
 the official report found water ten
 to fifteen feet above the ground:
 
-664
+665
 00:45:40,302 --> 00:45:42,950
 about three to four and a half metres.
 
-665
+666
 00:45:44,450 --> 00:45:47,250
 What did satellites see of Ian's surge?
 
-666
+667
 00:45:47,600 --> 00:45:49,400
 Almost nothing.
 
-667
+668
 00:45:49,750 --> 00:45:53,531
 The surge peaked in the evening,
 under the storm's clouds,
 
-668
+669
 00:45:53,531 --> 00:45:56,204
 and drained back to the sea within hours,
 
-669
+670
 00:45:56,204 --> 00:45:58,551
 so the pictures taken from space and
 
-670
+671
 00:45:58,551 --> 00:46:03,375
 from survey planes in the next days
 show the damage, not the surge itself.
 
-671
+672
 00:46:03,725 --> 00:46:06,975
 So the two gauge lines
 are the surge, measured.
 
-672
+673
 00:46:07,325 --> 00:46:09,739
 The wind along a coast matters too,
 
-673
+674
 00:46:09,739 --> 00:46:12,912
 because it can bring
 cold water up from below,
 
-674
+675
 00:46:12,912 --> 00:46:17,050
 which is a story for the movie
 on Friction and Ekman layers.
 
-675
+676
 00:46:17,400 --> 00:46:22,225
 And the full story of storm surge has
 its own movie later in this series.
 
-676
+677
 00:46:23,025 --> 00:46:26,575
 Floods that last longer
 can be seen from space.
 
-677
+678
 00:46:26,925 --> 00:46:32,625
 Let's fly to one: the Bay of Bengal, after
 Cyclone Amphan in twenty twenty.
 
-678
+679
 00:46:32,975 --> 00:46:36,100
 The blue gets darker
 where the sea gets deeper.
 
-679
+680
 00:46:36,450 --> 00:46:40,116
 The white line marks where
 the sea is twenty metres deep,
 
-680
+681
 00:46:40,116 --> 00:46:42,625
 and the darker line two hundred metres.
 
-681
+682
 00:46:42,975 --> 00:46:44,232
 Off the Sundarbans,
 
-682
+683
 00:46:44,232 --> 00:46:47,274
 the sea stays shallower
 than twenty metres for
 
-683
+684
 00:46:47,274 --> 00:46:50,250
 about thirty three
 kilometres from the coast.
 
-684
+685
 00:46:51,750 --> 00:46:56,715
 A wide, shallow shelf like this
 lets a storm pile the water up high,
 
-685
+686
 00:46:56,715 --> 00:46:58,175
 just as off Florida.
 
-686
+687
 00:46:58,525 --> 00:47:02,046
 Here's Amphan's track, coming
 up from the south of the Bay,
 
-687
+688
 00:47:02,046 --> 00:47:05,925
 and crossing the coast in the Sundarbans
 on the twentieth of May.
 
-688
+689
 00:47:06,725 --> 00:47:12,025
 Before we look for Amphan's flood, let's
 see which way its wind blew on the coast.
 
-689
+690
 00:47:12,375 --> 00:47:16,673
 We use ERA5 again, at nine
 in the morning, universal time,
 
-690
+691
 00:47:16,673 --> 00:47:20,600
 on the twentieth of May, as Amphan
 reached the coast.
 
-691
+692
 00:47:20,950 --> 00:47:23,574
 Remember that ERA5 smooths the storm:
 
-692
+693
 00:47:23,574 --> 00:47:29,319
 its strongest wind near Amphan is only
 about six tenths of the official estimate,
 
-693
+694
 00:47:29,319 --> 00:47:34,000
 so we use it for the direction
 of the wind, not its full strength.
 
-694
+695
 00:47:34,350 --> 00:47:39,325
 We pick a point on the Sundarbans shore
 of Bangladesh, east of the centre.
 
-695
+696
 00:47:39,675 --> 00:47:41,910
 Going west along the coast there,
 
-696
+697
 00:47:41,910 --> 00:47:45,363
 we move about ninety two point nine
 kilometres west
 
-697
+698
 00:47:45,363 --> 00:47:48,275
 and twenty one point nine
 kilometres south.
 
-698
+699
 00:47:48,625 --> 00:47:52,089
 The south leg over the west
 leg gives the tangent,
 
-699
+700
 00:47:52,089 --> 00:47:55,900
 so the coast runs about
 thirteen degrees south of west.
 
-700
+701
 00:47:56,250 --> 00:47:58,221
 Measured clockwise from north,
 
-701
+702
 00:47:58,221 --> 00:48:01,900
 that's a bearing
 of two hundred and fifty seven degrees.
 
-702
+703
 00:48:02,250 --> 00:48:05,250
 So alpha, ninety degrees
 minus the bearing,
 
-703
+704
 00:48:05,250 --> 00:48:09,575
 plus a full turn, is
 about a hundred and ninety three degrees,
 
-704
+705
 00:48:09,575 --> 00:48:13,691
 with a cosine of about
 minus zero point nine seven four and
 
-705
+706
 00:48:13,691 --> 00:48:16,900
 a sine of about
 minus zero point two two five.
 
-706
+707
 00:48:17,250 --> 00:48:20,650
 Then y hat prime points south, out to sea.
 
-707
+708
 00:48:21,000 --> 00:48:25,905
 ERA5's wind there was about
 twenty two point six metres per second,
 
-708
+709
 00:48:25,905 --> 00:48:27,808
 from the south-south-east:
 
-709
+710
 00:48:27,808 --> 00:48:32,200
 u about minus eight point four,
 and v about plus twenty one.
 
-710
+711
 00:48:32,550 --> 00:48:38,750
 Across the shore, we take minus u sine
 alpha, and v cosine alpha, and add them.
 
-711
+712
 00:48:39,100 --> 00:48:43,418
 Together, that's about
 minus twenty two point four metres per
 
-712
+713
 00:48:43,418 --> 00:48:44,975
 second: onto the land.
 
-713
+714
 00:48:46,475 --> 00:48:50,236
 At the white circle, ERA5's
 lowest pressure is about
 
-714
+715
 00:48:50,236 --> 00:48:52,189
 nine hundred and sixty five
 
-715
+716
 00:48:52,189 --> 00:48:57,325
 hectopascals, but its storm is too
 weak, so we take the official value.
 
-716
+717
 00:48:57,675 --> 00:49:02,700
 The official centre pressure at that
 hour was about nine hundred and sixty
 
-717
+718
 00:49:02,700 --> 00:49:07,725
 hectopascals, so the sea under the eye
 rose about fifty three centimetres.
 
-718
+719
 00:49:08,075 --> 00:49:12,211
 So Amphan's wind pushed the sea
 onto the Sundarbans coast,
 
-719
+720
 00:49:12,211 --> 00:49:14,350
 over that wide, shallow shelf.
 
-720
+721
 00:49:14,700 --> 00:49:18,535
 There's no tide-gauge record
 of the water there in our data,
 
-721
+722
 00:49:18,535 --> 00:49:20,900
 so next come the pictures from space.
 
-722
+723
 00:49:21,700 --> 00:49:24,875
 So what did satellites
 see of Amphan's flood?
 
-723
+724
 00:49:25,225 --> 00:49:29,306
 For days after landfall,
 thick clouds covered the ground,
 
-724
+725
 00:49:29,306 --> 00:49:32,600
 so ordinary pictures
 from space can't show it.
 
-725
+726
 00:49:32,950 --> 00:49:37,696
 And the flooded patches are small, so
 the coarse pixels of those pictures,
 
-726
+727
 00:49:37,696 --> 00:49:42,250
 two hundred and fifty metres wide, blur
 them into the land around them.
 
-727
+728
 00:49:42,600 --> 00:49:45,050
 But radar sees through clouds.
 
-728
+729
 00:49:45,400 --> 00:49:49,423
 The Sentinel-1 radar satellite
 sends out microwaves and
 
-729
+730
 00:49:49,423 --> 00:49:52,275
 measures how much of them bounces back.
 
-730
+731
 00:49:52,625 --> 00:49:55,604
 Calm water reflects the microwaves away,
 
-731
+732
 00:49:55,604 --> 00:49:59,700
 like a mirror, so in a radar
 picture, water looks dark.
 
-732
+733
 00:50:00,050 --> 00:50:04,897
 Here's the coast near Satkhira and the
 Sundarbans on the sixteenth of May,
 
-733
+734
 00:50:04,897 --> 00:50:09,875
 before Amphan, and on the twenty second,
 two and a half days after landfall.
 
-734
+735
 00:50:11,375 --> 00:50:17,150
 As the line moves across, new dark patches
 appear where the fields were dry before.
 
-735
+736
 00:50:17,500 --> 00:50:21,525
 We count the pixels that turned
 dark, marked here in cyan:
 
-736
+737
 00:50:21,525 --> 00:50:24,925
 about thirty four thousand seven hundred
 of them.
 
-737
+738
 00:50:25,275 --> 00:50:29,058
 Each pixel is a square sixty
 metres on each side, so
 
-738
+739
 00:50:29,058 --> 00:50:33,350
 it covers zero point zero zero three six
 square kilometres.
 
-739
+740
 00:50:33,700 --> 00:50:38,037
 The number of dark pixels times
 the area of one pixel is about
 
-740
+741
 00:50:38,037 --> 00:50:42,025
 a hundred and twenty five
 square kilometres of new water.
 
-741
+742
 00:50:43,525 --> 00:50:47,850
 That's about the size of a square
 eleven kilometres on each side.
 
-742
+743
 00:50:49,350 --> 00:50:52,832
 Some of the best-known
 flood pictures from space of
 
-743
+744
 00:50:52,832 --> 00:50:56,177
 a Bay of Bengal cyclone
 come from Cyclone Nargis,
 
-744
+745
 00:50:56,177 --> 00:50:58,225
 in May two thousand and eight.
 
-745
+746
 00:50:58,575 --> 00:51:02,525
 Let's go to Myanmar,
 on the eastern side of the Bay.
 
-746
+747
 00:51:02,875 --> 00:51:07,258
 Here, the Irrawaddy River, which
 Myanmar calls the Ayeyarwady,
 
-747
+748
 00:51:07,258 --> 00:51:11,075
 fans out into many channels
 before it reaches the sea.
 
-748
+749
 00:51:11,425 --> 00:51:16,061
 This is the Irrawaddy delta:
 a huge, flat plain of rice fields,
 
-749
+750
 00:51:16,061 --> 00:51:19,225
 most of it only a few
 metres above the sea.
 
-750
+751
 00:51:19,575 --> 00:51:23,425
 Nargis formed in the south
 of the Bay in late April.
 
-751
+752
 00:51:23,775 --> 00:51:29,000
 It moved west, then north, then turned
 east, straight towards the delta.
 
-752
+753
 00:51:29,350 --> 00:51:34,163
 On the second of May, it came ashore
 at the delta's south-western corner,
 
-753
+754
 00:51:34,163 --> 00:51:38,250
 with winds of about ninety knots,
 averaged over three minutes.
 
-754
+755
 00:51:38,600 --> 00:51:43,062
 A knot is one point eight five two
 kilometres per hour, so ninety
 
-755
+756
 00:51:43,062 --> 00:51:47,250
 knots is about a hundred and sixty seven
 kilometres per hour.
 
-756
+757
 00:51:47,600 --> 00:51:53,110
 A kilometre per hour is a thousand metres
 in three thousand six hundred seconds,
 
-757
+758
 00:51:53,110 --> 00:51:58,275
 so we divide by three point six, and get
 about forty six metres per second.
 
-758
+759
 00:51:59,775 --> 00:52:02,764
 Then it crossed the whole delta, eastward,
 
-759
+760
 00:52:02,764 --> 00:52:05,825
 towards Yangon, the country's
 largest city.
 
-760
+761
 00:52:06,175 --> 00:52:11,597
 Here's Nargis that day, seen by a NASA
 satellite a few hours before landfall,
 
-761
+762
 00:52:11,597 --> 00:52:13,850
 with its eye just off the coast.
 
-762
+763
 00:52:14,200 --> 00:52:19,150
 Its storm surge and heavy rain
 flooded the low delta, far inland.
 
-763
+764
 00:52:19,500 --> 00:52:22,376
 Before we look
 at the flood, let's see which
 
-764
+765
 00:52:22,376 --> 00:52:24,925
 way its wind blew on the delta's coast.
 
-765
+766
 00:52:25,725 --> 00:52:30,334
 We use ERA5 again, at eleven
 in the morning, universal time,
 
-766
+767
 00:52:30,334 --> 00:52:34,175
 on the second of May, around
 the time of landfall.
 
-767
+768
 00:52:34,525 --> 00:52:37,002
 Again, ERA5's storm is too weak,
 
-768
+769
 00:52:37,002 --> 00:52:42,575
 at only about half of the official
 wind, so we use it for the direction.
 
-769
+770
 00:52:42,925 --> 00:52:47,300
 Our point is on the delta's
 coast, south of the town of Bogale.
 
-770
+771
 00:52:47,650 --> 00:52:49,914
 Going west along the coast there,
 
-771
+772
 00:52:49,914 --> 00:52:53,412
 we move about sixty nine point five
 kilometres west
 
-772
+773
 00:52:53,412 --> 00:52:55,950
 and ten point eight kilometres north.
 
-773
+774
 00:52:56,300 --> 00:52:59,877
 The north leg over the west
 leg gives the tangent,
 
-774
+775
 00:52:59,877 --> 00:53:03,525
 so the coast runs about
 nine degrees north of west.
 
-775
+776
 00:53:03,875 --> 00:53:05,815
 Measured clockwise from north,
 
-776
+777
 00:53:05,815 --> 00:53:09,500
 that's a bearing
 of two hundred and seventy nine degrees.
 
-777
+778
 00:53:09,850 --> 00:53:12,806
 So alpha, ninety degrees
 minus the bearing,
 
-778
+779
 00:53:12,806 --> 00:53:17,000
 plus a full turn, is
 about a hundred and seventy one degrees,
 
-779
+780
 00:53:17,000 --> 00:53:21,125
 with a cosine of about
 minus zero point nine eight eight and
 
-780
+781
 00:53:21,125 --> 00:53:23,875
 a sine of about zero point one five six.
 
-781
+782
 00:53:24,225 --> 00:53:27,625
 Then y hat prime points south, out to sea.
 
-782
+783
 00:53:27,975 --> 00:53:32,175
 ERA5's wind there was about
 nineteen metres per second,
 
-783
+784
 00:53:32,175 --> 00:53:34,161
 from the south-south-west:
 
-784
+785
 00:53:34,161 --> 00:53:39,125
 u about plus nine point six, and v about
 plus sixteen point five.
 
-785
+786
 00:53:39,475 --> 00:53:45,675
 Across the shore, we take minus u sine
 alpha, and v cosine alpha, and add them.
 
-786
+787
 00:53:46,025 --> 00:53:50,306
 Together, that's about
 minus seventeen point eight metres per
 
-787
+788
 00:53:50,306 --> 00:53:51,850
 second: onto the land.
 
-788
+789
 00:53:53,350 --> 00:53:57,068
 At the white circle, ERA5's
 lowest pressure is about
 
-789
+790
 00:53:57,068 --> 00:53:58,998
 nine hundred and eighty two
 
-790
+791
 00:53:58,998 --> 00:54:04,075
 hectopascals, but its storm is too
 weak, so we take the official value.
 
-791
+792
 00:54:04,425 --> 00:54:09,729
 The official centre pressure at that
 hour was about nine hundred and sixty two
 
-792
+793
 00:54:09,729 --> 00:54:14,625
 hectopascals, so the sea under the eye
 rose about fifty one centimetres.
 
-793
+794
 00:54:14,975 --> 00:54:17,610
 So Nargis drove the sea onto the delta,
 
-794
+795
 00:54:17,610 --> 00:54:21,325
 where most of the land lies
 only a few metres above it.
 
-795
+796
 00:54:21,675 --> 00:54:25,510
 There's no tide-gauge record
 of the water there in our data,
 
-796
+797
 00:54:25,510 --> 00:54:27,875
 so next come the pictures from space.
 
-797
+798
 00:54:28,225 --> 00:54:32,525
 Let's zoom in, to see the delta
 before and after the storm.
 
-798
+799
 00:54:33,325 --> 00:54:39,075
 First, here's the delta in natural colour,
 the way our eyes would see it from space.
 
-799
+800
 00:54:39,425 --> 00:54:44,725
 On the left is the twenty first
 of April, eleven days before landfall.
 
-800
+801
 00:54:45,075 --> 00:54:49,100
 On the right is the fifth
 of May, about three days after.
 
-801
+802
 00:54:50,600 --> 00:54:54,025
 As the line glides
 across, look for the flood.
 
-802
+803
 00:54:54,375 --> 00:55:00,425
 In natural colour, it's hard to see: muddy
 floodwater and wet soil both look brown.
 
-803
+804
 00:55:00,775 --> 00:55:03,550
 So flood mappers use false colour.
 
-804
+805
 00:55:03,900 --> 00:55:09,018
 The satellite measures light that our
 eyes can't see, shortwave infrared and
 
-805
+806
 00:55:09,018 --> 00:55:11,712
 near infrared, and we paint them red and
 
-806
+807
 00:55:11,712 --> 00:55:14,675
 green, with ordinary
 red light painted blue.
 
-807
+808
 00:55:15,025 --> 00:55:19,074
 In these colours, plants look
 bright green, dry fields and
 
-808
+809
 00:55:19,074 --> 00:55:24,450
 bare ground look pink, clouds look
 white, and water looks dark blue or black.
 
-809
+810
 00:55:24,800 --> 00:55:28,007
 Water soaks up both
 kinds of infrared light,
 
-810
+811
 00:55:28,007 --> 00:55:30,850
 so it stays dark, even when it's muddy.
 
-811
+812
 00:55:31,200 --> 00:55:33,650
 That makes water easy to spot.
 
-812
+813
 00:55:34,000 --> 00:55:37,000
 Here are the same two
 days in false colour.
 
-813
+814
 00:55:37,350 --> 00:55:39,255
 As the line glides across,
 
-814
+815
 00:55:39,255 --> 00:55:43,650
 dark water spreads over land
 that was pink and green before.
 
-815
+816
 00:55:45,150 --> 00:55:48,517
 Both pictures are pinned
 to the same latitudes and
 
-816
+817
 00:55:48,517 --> 00:55:52,625
 longitudes, so every pixel
 compares the same patch of ground.
 
-817
+818
 00:55:52,975 --> 00:55:58,775
 Even so, the picture shows what the surge
 left behind, not the surge itself.
 
-818
+819
 00:55:59,575 --> 00:56:04,825
 Our last flood is on the other side
 of the Indian Ocean, south of the equator.
 
-819
+820
 00:56:05,175 --> 00:56:10,655
 In March twenty nineteen, Cyclone Idai
 grew strong in the Mozambique Channel,
 
-820
+821
 00:56:10,655 --> 00:56:13,075
 between Madagascar and Mozambique.
 
-821
+822
 00:56:13,425 --> 00:56:18,715
 South of the equator, a tropical cyclone
 turns clockwise as seen from above,
 
-822
+823
 00:56:18,715 --> 00:56:22,125
 the opposite way to the storms
 we've seen so far.
 
-823
+824
 00:56:22,475 --> 00:56:25,201
 Here's Idai on the fourteenth of March,
 
-824
+825
 00:56:25,201 --> 00:56:28,625
 the day it came ashore,
 seen by a NASA satellite.
 
-825
+826
 00:56:28,975 --> 00:56:32,743
 It reached the coast near
 the city of Beira around midnight,
 
-826
+827
 00:56:32,743 --> 00:56:34,627
 between the fourteenth and the
 
-827
+828
 00:56:34,627 --> 00:56:39,400
 fifteenth, with winds of about eighty five
 knots, averaged over ten minutes.
 
-828
+829
 00:56:39,750 --> 00:56:42,267
 With the knot converted as for Nargis,
 
-829
+830
 00:56:42,267 --> 00:56:46,175
 that's about a hundred and fifty seven
 kilometres per hour.
 
-830
+831
 00:56:46,525 --> 00:56:50,125
 And in metres per second,
 it's about forty four.
 
-831
+832
 00:56:51,625 --> 00:56:54,578
 Beira and the town of Buzi sit on low,
 
-832
+833
 00:56:54,578 --> 00:56:58,075
 flat land where two big
 rivers reach the sea.
 
-833
+834
 00:56:58,425 --> 00:57:00,175
 Let's zoom in.
 
-834
+835
 00:57:00,975 --> 00:57:05,618
 Here's ERA5's wind at seven
 in the evening, universal time,
 
-835
+836
 00:57:05,618 --> 00:57:10,025
 on the fourteenth of March, a few
 hours before landfall.
 
-836
+837
 00:57:10,375 --> 00:57:14,611
 Its strongest wind is about two
 thirds of the official estimate,
 
-837
+838
 00:57:14,611 --> 00:57:17,325
 so once more we use it for the direction.
 
-838
+839
 00:57:17,675 --> 00:57:22,608
 Idai turns clockwise, as seen
 from above, so on its western side,
 
-839
+840
 00:57:22,608 --> 00:57:26,175
 where Beira was, the wind
 blew in from the sea.
 
-840
+841
 00:57:26,525 --> 00:57:29,000
 Our point is Beira's seafront.
 
-841
+842
 00:57:29,350 --> 00:57:31,940
 Going south-west along the coast there,
 
-842
+843
 00:57:31,940 --> 00:57:35,328
 we move about fifty two point three
 kilometres west
 
-843
+844
 00:57:35,328 --> 00:57:38,250
 and thirty five point nine
 kilometres south.
 
-844
+845
 00:57:38,600 --> 00:57:42,026
 The south leg over the west
 leg gives the tangent,
 
-845
+846
 00:57:42,026 --> 00:57:46,000
 so the coast runs about
 thirty four degrees south of west.
 
-846
+847
 00:57:46,350 --> 00:57:48,326
 Measured clockwise from north,
 
-847
+848
 00:57:48,326 --> 00:57:51,950
 that's a bearing
 of two hundred and thirty six degrees.
 
-848
+849
 00:57:52,300 --> 00:57:55,309
 So alpha, ninety degrees
 minus the bearing,
 
-849
+850
 00:57:55,309 --> 00:57:59,508
 plus a full turn, is about
 two hundred and fourteen degrees,
 
-850
+851
 00:57:59,508 --> 00:58:03,566
 with a cosine of about
 minus zero point eight two nine and
 
-851
+852
 00:58:03,566 --> 00:58:06,925
 a sine of about
 minus zero point five five nine.
 
-852
+853
 00:58:07,275 --> 00:58:10,975
 Then y hat prime points
 south-east, out to sea.
 
-853
+854
 00:58:11,325 --> 00:58:15,523
 ERA5's wind there was about
 twenty two metres per second,
 
-854
+855
 00:58:15,523 --> 00:58:17,439
 from the south-south-east:
 
-855
+856
 00:58:17,439 --> 00:58:22,300
 u about minus six point seven, and v about
 plus twenty point nine.
 
-856
+857
 00:58:22,650 --> 00:58:28,850
 Across the shore, we take minus u sine
 alpha, and v cosine alpha, and add them.
 
-857
+858
 00:58:29,200 --> 00:58:34,450
 Together, that's about minus twenty one
 metres per second: onto the land.
 
-858
+859
 00:58:35,950 --> 00:58:39,694
 At the white circle, ERA5's
 lowest pressure is about
 
-859
+860
 00:58:39,694 --> 00:58:41,638
 nine hundred and eighty one
 
-860
+861
 00:58:41,638 --> 00:58:46,750
 hectopascals, but its storm is too
 weak, so we take the official value.
 
-861
+862
 00:58:47,100 --> 00:58:52,466
 The official centre pressure at that hour
 was about nine hundred and fifty five
 
-862
+863
 00:58:52,466 --> 00:58:57,425
 hectopascals, so the sea under the eye
 rose about fifty eight centimetres.
 
-863
+864
 00:58:57,775 --> 00:59:03,750
 So Idai's wind pushed the sea onto Beira's
 coast, and into the mouths of its rivers.
 
-864
+865
 00:59:04,100 --> 00:59:07,935
 There's no tide-gauge record
 of the water there in our data,
 
-865
+866
 00:59:07,935 --> 00:59:10,300
 so next come the pictures from space.
 
-866
+867
 00:59:11,100 --> 00:59:14,196
 Here's the land round
 Beira in natural colour,
 
-867
+868
 00:59:14,196 --> 00:59:16,552
 on the eleventh of March, three and
 
-868
+869
 00:59:16,552 --> 00:59:21,600
 a half days before landfall, and on
 the twenty fifth, about ten days after.
 
-869
+870
 00:59:23,100 --> 00:59:26,950
 Again, the flood is hard
 to see in natural colour.
 
-870
+871
 00:59:27,300 --> 00:59:30,200
 Now the same two days in false colour.
 
-871
+872
 00:59:30,550 --> 00:59:35,001
 Dark blue water covers wide plains
 along the rivers round Beira,
 
-872
+873
 00:59:35,001 --> 00:59:37,575
 where there were green fields before.
 
-873
+874
 00:59:39,075 --> 00:59:42,000
 On the left, the white blobs are clouds.
 
-874
+875
 00:59:42,350 --> 00:59:47,150
 How to map floods from space has
 its own movie later in this series.
 
-875
+876
 00:59:47,950 --> 00:59:52,639
 To sum up, the tip of r hat moves
 along a circle of radius one,
 
-876
+877
 00:59:52,639 --> 00:59:57,850
 so for a small turn delta theta, it
 moves delta theta along theta hat.
 
-877
+878
 00:59:58,200 --> 01:00:03,475
 That gave us the slopes of cosine
 and sine: minus sine, and cosine.
 
-878
+879
 01:00:03,825 --> 01:00:10,105
 So d r hat by d theta is theta hat,
 and d theta hat by d theta is minus r hat:
 
-879
+880
 01:00:10,105 --> 01:00:13,325
 each arrow swings towards the other one.
 
-880
+881
 01:00:13,675 --> 01:00:18,850
 The product rule says that a number times
 an arrow changes through both of them.
 
-881
+882
 01:00:19,200 --> 01:00:24,792
 On a ring, the angle grows
 at v over r, the velocity is v theta hat,
 
-882
+883
 01:00:24,792 --> 01:00:28,657
 and the acceleration
 is minus v squared over r,
 
-883
+884
 01:00:28,657 --> 01:00:32,275
 times r hat: inward, even
 at a steady speed.
 
-884
+885
 01:00:32,625 --> 01:00:37,146
 For Ian's ring, that's about
 zero point zero four eight metres per
 
-885
+886
 01:00:37,146 --> 01:00:41,325
 second squared, about
 two hundred times smaller than gravity.
 
-886
+887
 01:00:41,675 --> 01:00:45,215
 Adding the height z gives
 cylindrical coordinates,
 
-887
+888
 01:00:45,215 --> 01:00:49,464
 and averaging round the rings
 shows a tropical cyclone's in,
 
-888
+889
 01:00:49,464 --> 01:00:52,225
 up and out, in Ian and in Amphan alike.
 
-889
+890
 01:00:52,575 --> 01:00:57,874
 Turning the axes to fit the coast split
 Ian's wind into its parts along and
 
-890
+891
 01:00:57,874 --> 01:00:59,075
 across the shore.
 
-891
+892
 01:00:59,425 --> 01:01:00,811
 At Fort Myers Beach,
 
-892
+893
 01:01:00,811 --> 01:01:05,316
 about thirty one point five metres
 per second blew onto the land,
 
-893
+894
 01:01:05,316 --> 01:01:10,375
 and the gauge up the river at Fort
 Myers rose about two point two metres.
 
-894
+895
 01:01:10,725 --> 01:01:14,725
 At Saint Petersburg, about
 twelve point one blew out to sea,
 
-895
+896
 01:01:14,725 --> 01:01:17,925
 and the water fell about
 one point eight metres.
 
-896
+897
 01:01:18,275 --> 01:01:21,777
 Before the floods after
 Amphan, Nargis and Idai,
 
-897
+898
 01:01:21,777 --> 01:01:25,060
 the across-shore wind
 blew onto the land too:
 
-898
+899
 01:01:25,060 --> 01:01:29,803
 about twenty two point four,
 seventeen point eight and twenty one
 
-899
+900
 01:01:29,803 --> 01:01:31,700
 metres per second in ERA5.
 
-900
+901
 01:01:32,050 --> 01:01:35,012
 Radar saw Amphan's flood
 through the clouds,
 
-901
+902
 01:01:35,012 --> 01:01:38,850
 and false colour showed
 the floods after Nargis and Idai.
 
-902
+903
 01:01:39,200 --> 01:01:44,825
 In Part 3, we'll take these ideas to the
 biggest round shape of all: the Earth.
 
-903
+904
 01:01:45,175 --> 01:01:49,843
 There, we'll learn to turn latitudes
 and longitudes into kilometres,
 
-904
+905
 01:01:49,843 --> 01:01:54,100
 the rule behind the kilometre
 maps we used for today's coasts.
 
-905
+906
 01:01:54,900 --> 01:01:59,058
 This video is one of a series
 of related maths tutorials,
 
-906
+907
 01:01:59,058 --> 01:02:01,100
 so watch out for the others.
 
-907
+908
 01:02:01,450 --> 01:02:05,847
 They're made for students
 of atmospheric science, meteorology and
 
-908
+909
 01:02:05,847 --> 01:02:09,500
 fluid dynamics, and anyone
 else who needs these ideas.
 
-909
+910
 01:02:09,850 --> 01:02:14,678
 The notebook for coordinates, and the
 notebooks for the other maths concepts,
 
-910
+911
 01:02:14,678 --> 01:02:17,500
 are on the website that
 goes with this video.

@@ -441,3 +441,57 @@ in fix1, QA-passed).
 ### Render (after K6 k6f2 = 0 hits; not run)
 `K6TAG=k6f2 bash movies/src/ch00_coordinates_storm/checks/cst_render.sh` (bundle = the k6f2 bundle; sound = `build1/sound/narration_music_cst.wav`, the
 fix1 mix, unchanged since timing did not change), then `movie_qa.py` as in fix1.
+
+## Fix loop 3 (2026-11-08, the last; after "5b fix2 — review 1/2" in reports/ch00_movies.md)
+Source and captions only: no re-voice, no timing change (sentence / scene times, words.json, script.md, storyboard untouched), no SSR / K6 / stills /
+render / TTS / mix (other heavy jobs held the machine; RENDER2.lock was held throughout). Nothing committed or deleted. Review 1 M1 (s14 "26.5ᶜirc")
+was already fixed in 84e006f. Inputs: both fix2 reviews, frames in reports/movies/ch00_coordinates_storm/{review_fix2, calc_fix2}/.
+
+### Captions (review 2 M2 + Should 1 + Nit 5): `checks/fix3_recue.py --write`
+Part 1's approach (cf_fix31108_recue.py fix 4) on this movie's own predicate (make_timing.splits_number: never inside a spoken number) plus the pair
+rule: a comma between two number words is inside a pair / list. Cue boundaries: never inside a number, pair or list. Line breaks: never inside a number;
+inside a pair only at its comma and only when the pair itself is longer than a line (42 characters). Only sentences whose cues broke a rule were
+re-segmented (every other cue keeps its text, times and wrap); a re-cut sentence keeps character-proportional times; a first cue under 1 s may start in
+the silence before its sentence (only 9:20, 0.26 s early).
+- Before: 6 cue boundaries inside a pair (9:24, 11:59, 12:11, 12:18, 40:16, 40:27 = the review's list). After: 0. **910 → 911 cues**, 6 sentences re-cued.
+- 9:15 / 9:29 (and the optional 61:25 list): the pairs are 57 / 44 characters and the list 59, longer than one 42-character line, so the comma
+  break (one component per line, the whole pair in one cue) is the only legal layout; left as it is. 12:16 now carries "zero point nine four five, one
+  point one:" on one line (40 characters).
+- Checks: `fix3_recue.py --check` 0 rule breaks, text = script; movie_qa captions gate on en.vtt and en.srt: **PASS** (911 cues match the script);
+  durations 1.00-6.70 s, max 16.76 cps, ≤ 2 × 42. timing.json: "cues" 911 + note `recue_fix3_1108`.
+
+### Screen (cs_sB / cs_sC / cs_sD)
+| item | scene | change |
+|---|---|---|
+| 2 | s29, s33, s36, s39 | the second coast leg tails in on its own word (as s27): s29 "6.8 km W" on "six point eight"; events on "twenty one point nine" / "ten point eight" / "thirty five point nine" (new cfg field leg2W) |
+| 3 | s30 | "low pressure: ≈ 1 cm per hPa" on "one centimetre" (was the sentence start, 2.8 s early); "storm surge" holds until then |
+| 4 | s29, s33, s36, s39 | bearing worked in full, row in on "a bearing of" / "that's a bearing", result on the spoken number: 360° − 7° = 353°, 270° − 13° = 257°, 270° + 9° = 279°, 270° − 34° = 236°. Checked against cs.json shore.*.shown (bearing, beta): all four exact; the TSX throws if base ± β ≠ the data bearing (also fmb 360 − 31 = 329) |
+| 5 | s29 | the dashed legs (north from Saint Pete Beach, west to Tarpon Springs), "55.7 km N" / "6.8 km W" on their words, the gold β arc (radius 200, β = 7°) with "β" just outside the wedge on the sea side, from "west leg over north leg"; fade before "So alpha" |
+| 6 | s23 | u_θ ≈ 20, u_r ≈ −6 gold on their words (colour only: the second label's x hangs on the first's width); 90 kt, 956 hPa, 967 hPa gold on their words; ≈ 17° (the answer) gold on "seventeen degrees"; "official lowest pressure: 956 hPa" → "official centre pressure" / "at that hour: 956 hPa" (two rows: one would end at x ≈ 2110) |
+| 7 | s33, s36, s39 | ERA5 / official ratio worked under its keyword: 27.5 m/s ÷ 46.3 m/s ≈ 0.59, 25.2 ÷ 46.3 ≈ 0.54, 29.1 ÷ 44.2 ≈ 0.66 (muted, y 262, with the keyword). Values = coord_storm_shore_winds.json → era5_vs_best_track (era5_box_max_wind 27.50 / 25.24 / 29.10 m/s; best_newdelhi / best_reunion max 46.30 / 46.30 / 44.24 m/s); the TSX checks a/b against cs.json ratio (≤ 0.01) and 46.3 against ib.kt × 0.514444 (Amphan, Nargis). They are typed in the TSX, not read from cs.json (proposal: the builder adds them to cs.json shore.*.ratio_num at the next data build) |
+| 8 | s33, s36 (thin β) | arc radius = min(190, leg − 20 px) on angles < 25° (Amphan ≈ 189, Nargis ≈ 136; Idai 34° keeps 80); "β" 44 px outside the leg with a short gold leader to the arc's middle |
+| 9 | s41 | beat-10 title "10-m wind across the shore near landfall" y 110 → 56 (it ended at x ≈ 1088, on the keyword's row at 1100); gauge values "≈ +2.2 m" / "≈ −1.8 m" on "two point two" / "one point eight" |
+| 10 | s20, s13, s21 | s20 "single towers ≈ 12 m/s" on "near twelve"; s13 the 9.81 / 0.048 row in on "nine point eight one", 9.81 gold; s21 "Satkhira ≈ 45 km W" → "track ≈ 45 km W of Satkhira" (and "track ≈ 79 km W of Khulna"; ends x ≈ 1816) |
+
+### Deferred (need a re-voice)
+- Ω's value (7.29 × 10⁻⁵ s⁻¹) is on screen in s14 but not said.
+- s23: the conversion factors 1.852 km/h per knot and 3.6 (km/h per m/s) are on screen but not said.
+
+### Static gates (after fix 3)
+tsc 0 errors · at_check **716 refs, 320 AT/ATP anchors on Kokoro word times, character share 0, 0 failures** (the event-config parser needs ratioW
+last in each EV_CFG entry: kept) · swap_check 594 text elements, 0 text-over-text, 0 swaps < 8 frames · cam_speed 0 above 90 °/s (peak 43 °/s s21) ·
+eq_check 19/19, no unused constants · stack_frame all phases ok · movie_symbol_lint --strict 0 (17 lint-ok) · script_wording_lint 0 · tex_escape_lint 0 ·
+captions as above. cs_static.sh's two SSR steps were NOT run (instruction).
+
+### Queued K6 (not started): `checks/fix3_k6f5.sh`
+Modelled on fix2_k6f4.sh (k6f4: 0 unique faults). Tag k6f5 from k6f4: every k6f4 still outside s13 s14 s20 s21 s23 s29 s30 s33 s36 s39 s41 (±15 frames)
+copied; every k6f4 frame inside them re-shot from a fresh bundle, plus 295 frames at the new word-timed reveals (word −2 / +8 / +20 / +47 / +60 for
+56 phrases from words.json, and the s41 beat 8-10 cross-fades). Lock gate as k6f4: RENDER2 / HEAVY / VOICE free and RAM ≥ 9 GB, holds HEAVY.lock;
+stops on `ch00_coordinates_storm/CANCEL_FIX3` and if stills/k6f5 is not empty; log `G:/…/ch00_coordinates_storm/fix3_k6f5.log`. The frame
+plan was dry-run on a mock folder (copy / re-shoot split and the 295 reveal frames correct). Then k6_overlap + k6sum on the whole folder.
+Run: `bash movies/src/ch00_coordinates_storm/checks/fix3_k6f5.sh` (detached). After 0 hits: `K6TAG=k6f5 bash …/checks/cst_render.sh` (sound
+unchanged: the fix1 mix; the captions are the new en.vtt / en.srt).
+
+### Disk (fix 3)
+After (disk_guard --report): C: 97.0 GB, G: 413.3 GB free (project data 172.27 GB of 250). No before reading was taken; this pass wrote only source,
+captions and two small check scripts (nothing on G: but the stack_frame bundle and the TEMP of the static gates).

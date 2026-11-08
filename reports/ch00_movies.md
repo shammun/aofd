@@ -10470,3 +10470,15 @@ All arithmetic recomputed from data/cf.json: correct (s04–s27). 104 words chec
 - **M1** cue 10:24.225/10:30.220 splits the pair (−q, 0). **M2** cue 31:17.475/31:20.538 splits "a hundred and twenty six".
 - **Should:** s05 x/y rows' results 1.9/1.7 s early (split row, tailIn on "three"/"four"); s26 "≈ 21°" label 3.8 s early; s23 "≈ 37.3" 2.2 s early; s20 "= 5"/"= 0" 0.8 s early; s22 mean 0.64 s early; gold missing on cos 30° ≈ 0.866 / sin 30° = 0.5 (s15), "135 kt" (s22), "0.1°" (s11); 6 caption line wraps split a number or end on "minus" (8:43, 13:09, 20:23, 34:09, 36:53, 40:35); s24 voiced "minus u times one, plus v times zero" (re-voice later).
 - Info: s23 "≈ 4490 s" (4486); s25 "47" next to bar "0 25 50".
+
+## 5b fix2 — review 1 (movie), 2026-11-08 — FIX
+5b_coordinates_storm_fix2.mp4, 62:20.3, 159.35 MB, QA 15/15 (duration window 120–3900). All fix-2 and 1b/1c items landed (titles + event names on every data figure incl. the ~35:09 pair). Coast axes right-handed (ŷ′ = x̂′ turned anticlockwise, out to sea) on every map — consistent with Part 1's fix. Frames: reports/movies/ch00_coordinates_storm/review_fix2/.
+- **M1** 22:33 s14 "φ = 26.5ᶜirc" (non-raw template literal dropped `\c`) — FIXED 84e006f + tools/tex_escape_lint.py (all movies 0).
+- S1 thin β arcs (Amphan 13°, Nargis 9°) hard to read; S2 s41 title and keyword on one row; S3 s23 "official lowest pressure: 956 hPa" → "…at that hour".
+- Info: Ω value not voiced; "easy numbers"/"easy to spot" kept; "track ≈ 45 km W of Satkhira"; N arrow 8 px from "before" label.
+
+## 5b fix2 — review 2 (calc & sync), 2026-11-08 — FIX
+160 numbers recomputed: 0 mismatches; coast signs right on all 5 maps; 129/139 reveals on their word; wording lint 0. Frames: reports/movies/ch00_coordinates_storm/calc_fix2/.
+- **M1** = review 1 M1. **M2** 6 vector pairs split across cues (9:24, 11:59, 12:11, 12:18, 40:16, 40:27).
+- Should: 2 line breaks inside pairs (9:15, 9:29); second coast leg 2–3.4 s early (s29/s33/s36/s39); s30 "≈ 1 cm per hPa" 2.8 s early; bearing working shown only in s27 (add 360°−7° etc.); s29 map lacks legs + β; s23 data values not gold; ERA5/official ratio not worked; Ω value not voiced (re-voice later).
+- Nits: s20 "12 m/s" 1.2 s early; s13 9.81 row early and not gold; s23 1.852/3.6 not said; s41 gauge values early; 61:25 line break in a 3-number list.

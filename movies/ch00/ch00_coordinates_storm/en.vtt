@@ -500,11 +500,11 @@ of zero point zero one radians,
 it's minus zero point eight zero six,
 zero point five nine two.
 
-00:09:20.800 --> 00:09:24.132
+00:09:20.540 --> 00:09:21.540
 The change
-is minus zero point zero zero six,
 
-00:09:24.132 --> 00:09:26.575
+00:09:21.540 --> 00:09:26.575
+is minus zero point zero zero six,
 minus zero point zero zero eight.
 
 00:09:26.925 --> 00:09:29.735
@@ -637,31 +637,32 @@ There are three pieces.
 First, the change in the number, times
 the old arrow, gives one, zero.
 
-00:11:51.775 --> 00:11:55.773
-Second, the old number times
-the change in the arrow:
+00:11:51.775 --> 00:11:57.357
+Second, the old number times the change
+in the arrow: the arrow changed by
 
-00:11:55.773 --> 00:11:59.771
-the arrow changed by
+00:11:57.357 --> 00:12:00.979
 minus zero point zero zero five,
+zero point one,
 
-00:11:59.771 --> 00:12:04.675
-zero point one, so this piece
+00:12:00.979 --> 00:12:04.675
+so this piece
 is minus zero point zero five, one.
 
-00:12:05.025 --> 00:12:11.530
-Third, the two changes multiplied together
-give minus zero point zero zero five,
+00:12:05.025 --> 00:12:08.847
+Third, the two changes
+multiplied together give
 
-00:12:11.530 --> 00:12:12.750
+00:12:08.847 --> 00:12:12.750
+minus zero point zero zero five,
 zero point one.
 
-00:12:14.250 --> 00:12:18.399
-Add the three pieces, and we
-get zero point nine four five,
+00:12:14.250 --> 00:12:16.501
+Add the three pieces, and we get
 
-00:12:18.399 --> 00:12:20.650
-one point one: the whole change.
+00:12:16.501 --> 00:12:20.650
+zero point nine four five, one point one:
+the whole change.
 
 00:12:22.150 --> 00:12:23.925
 Now the key step.
@@ -2168,19 +2169,22 @@ minus zero point five one five,
 and its sine is about
 zero point eight five seven.
 
-00:40:12.450 --> 00:40:16.384
+00:40:12.450 --> 00:40:14.107
 So x hat prime is about
+
+00:40:14.107 --> 00:40:18.431
 minus zero point five one five,
+zero point eight five seven:
 
-00:40:16.384 --> 00:40:22.250
-zero point eight five seven: it points up
-the coast, towards the north-north-west.
+00:40:18.431 --> 00:40:22.250
+it points up the coast,
+towards the north-north-west.
 
-00:40:22.600 --> 00:40:27.025
+00:40:22.600 --> 00:40:24.400
 And y hat prime is about
-minus zero point eight five seven,
 
-00:40:27.025 --> 00:40:29.350
+00:40:24.400 --> 00:40:29.350
+minus zero point eight five seven,
 minus zero point five one five:
 
 00:40:29.350 --> 00:40:33.475

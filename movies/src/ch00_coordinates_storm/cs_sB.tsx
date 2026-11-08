@@ -342,7 +342,8 @@ const S13: React.FC = () => {
         { lhs: String.raw`v^2=${goldAt(f, AT(k, 2, "thirty four point eight"), "34.8")}^2`, rhs: String.raw`\approx1211`, at: AT(k, 2, "thirty four point eight") - 8 },
         { lhs: String.raw`\dfrac{v^2}{r}=\dfrac{1211}{25\,000}`, rhs: tailIn(f, AT(k, 3, "zero point zero four eight"), C.ink, String.raw`\approx0.048\ \mathrm{m/s^2}`, true), at: AT(k, 2, "divide by the radius"), h: 130 },   // K6 round 2: 116-118 px of ink at 50 px (superscripts)
         { lhs: String.raw`v\approx35:\ \dfrac{35^2}{25\,000}`, rhs: String.raw`=\dfrac{1225}{25\,000}` + tailIn(f, AT(k, 4, "zero point zero four nine"), C.local, String.raw`\approx0.049`), at: AT(k, 4, "thirty five"), c: C.local, h: 130 },   // #5b r1 S5: 35² = 1225 shown
-        { lhs: String.raw`\dfrac{9.81}{0.048}`, rhs: tailIn(f, AT(k, 6, "two hundred"), C.ink, String.raw`\approx200`, true), at: tG, h: 130 },   // fix loop 1 (review 2 S6): the result on its word
+        // fix 3 (fix2 review 2 Nit): the row in on "nine point eight one", gravity's 9.81 gold on its word (a constant the viewer cannot see)
+        { lhs: String.raw`\dfrac{${goldAt(f, AT(k, 6, "nine point eight one"), "9.81")}}{0.048}`, rhs: tailIn(f, AT(k, 6, "two hundred"), C.ink, String.raw`\approx200`, true), at: AT(k, 6, "nine point eight one") - 4, h: 130 },   // fix loop 1 (review 2 S6): the result on its word
       ]} />
       <TeX s={EQ_S13} x={MX} y={250} size={60} o={win(f, tAll, LEN(k) + 20)} />
       {/* fix 0 B22: the car's conversions, one row at a time */}
@@ -872,7 +873,8 @@ const S20: React.FC = () => {
   const tAvg = SS(k, 1), tDep = SS(k, 2), tSlice = SS(k, 3), tName = SS(k, 4), tMin = SS(k, 7), tTop = SS(k, 8), tLines = SS(k, 9), tVt = SS(k, 10),
     // fix 0 B13: S12 became four sentences (quick check · in through the side · up through the lid · the radar): later indices +3
     tWeak = SS(k, 11), tMust = SS(k, 12), tSide = SS(k, 13), tLid = SS(k, 14), tRadar = SS(k, 15), tThree = AT(k, 15, "about three metres"),
-    tTower = AT(k, 15, "single towers"), tEw = SS(k, 16), tIUO = SS(k, 17), tMore = SS(k, 18);
+    tTower = AT(k, 15, "near twelve"),   // fix 3 (fix2 review 2 Nit): "≈ 12 m/s" on its number (was on "single towers", 1.2 s early)
+    tEw = SS(k, 16), tIUO = SS(k, 17), tMore = SS(k, 18);
   // fix loop 1 (r8 review 2 S4, S6, S7): the callouts on their numbers; the quick check asks first and answers on "is about one"; |u_r| gold
   const tMin16 = AT(k, 7, "minus sixteen"), tTop9 = AT(k, 8, "plus nine"), tVt55 = AT(k, 10, "fifty five"), t16 = AT(k, 13, "sixteen metres"),
     tDivR = AT(k, 14, "divided by the radius"), tOne = AT(k, 14, "is about one");

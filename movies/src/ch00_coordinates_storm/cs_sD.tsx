@@ -15,7 +15,7 @@ import { SourceBelow } from "../house/kit/frame";
 import { AnimatedWindArrow } from "../house/kit/wind";
 import {
   AT, Arrow, Ax, Axes, CST, CalcStack, Curve, D, D2R, GeoImg, GeoMap, IMG, K, Keyword, LEN, Lbl, MapBox, Place, Recall, SE, SRC, SS, SSP, Scene, SpeedBar, Svg,
-  arcD, axP, boxAt, clamp, fin, fout, lerpBox, linesPath, mapP, mix, nf, prog, win, goldAt, tailIn, hiOn, hiSize, exitFirst, ATP,
+  arcD, axP, boxAt, clamp, fin, fout, lerpBox, linesPath, mapP, mix, nf, prog, win, goldAt, tailIn, hiOn, hiSize, exitFirst, ATP, polar,
 } from "./cs_lib";
 /** fix loop 1 (r8 review 2 S5): a "from" bearing (degrees clockwise from north) as a 16-point compass name */
 const COMPASS = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];   // lint-ok: compass point names, not maths letters
@@ -33,6 +33,7 @@ const CHECK_D: [string, number, number, number][] = [
   ["fmb legs", FS.dy, 91.5, 0], ["fmb legs W", -FS.dx, 55.0, 0], ["fmb tan", FS.tan, 0.601, 0], ["fmb beta", FS.beta, 31, 0], ["fmb brg", FS.bearing, 329, 0], ["fmb alpha", FS.alpha, 121, 0],
   ["fmb along", FS.along, 9.4, 1e-9], ["fmb across", FS.across, -31.5, 1e-9], ["fmb along sum", r1(FS.al_terms[0] + FS.al_terms[1]), FS.along, 1e-9],
   ["fmb across sum", r1(FS.ac_terms[0] + FS.ac_terms[1]), FS.across, 1e-9], ["fmb lib across", SH.fmb.wind.across, FS.across, 0.15], ["fmb sq", FS.sq, Math.round(FS.along ** 2 + FS.across ** 2), 0],
+  ["stp brg = 360 - beta (fix 3: shown in full)", 360 - SP.beta, SP.bearing, 0], ["fmb brg = 360 - beta", 360 - FS.beta, FS.bearing, 0],
   ["stp across", SP.across, 12.1, 1e-9], ["stp along", SP.along, -14.7, 1e-9], ["stp lib across", SH.stp.wind.across, SP.across, 0.15], ["stp alpha", SP.alpha, 97, 0],
   ["ian ib", SH.ian_ib.deficit, 72, 0], ["ian hpa", SH.ian_ib.hpa, 941, 0], ["fm res", CST.gauges["8725520"].ext, 2.2, 0.01], ["stp res", CST.gauges["8726520"].ext, -1.8, 0.05],
   ...(["amphan", "nargis", "idai"] as const).flatMap((n) => [[`${n} across sum`, r1(EVS[n].ac_terms[0] + EVS[n].ac_terms[1]), EVS[n].across, 1e-9],
@@ -301,7 +302,10 @@ const S29: React.FC = () => {
   // fix loop 1 (r8 review 1 S3, S8, S10, S12; review 2 S3, S5, S6, S7, S10): "≈ 160 km" on screen; every number on its word; inputs gold
   // (cos α, sin α, the wind's speed and direction, u, v); cos / sin and u, v stay on screen while they are used; the along part gets its
   // formula and its two products, as the across part
-  const t160 = AT(k, 0, "a hundred and sixty"), tLeg = AT(k, 1, "it moves about"), tRule = AT(k, 2, "west leg over north leg"), t7 = AT(k, 2, "seven degrees"),
+  // fix 3 (fix2 review 2 S): the second coast leg on its own word (as s27); the bearing worked out in full (360° − β, as s27); the map gets
+  // the dashed legs, their lengths and the β arc, as on the other coast maps (arc radius 200: β is only 7°)
+  const t557 = AT(k, 1, "fifty five point seven"), t68 = AT(k, 1, "six point eight"), tBrgS = AT(k, 2, "a bearing of");
+  const t160 = AT(k, 0, "a hundred and sixty"), tRule = AT(k, 2, "west leg over north leg"), t7 = AT(k, 2, "seven degrees"),
     t353 = AT(k, 2, "three hundred and fifty three"), t97 = AT(k, 3, "ninety seven"), tCv = AT(k, 3, "minus zero point one two two"), tSv = AT(k, 3, "zero point nine nine three"),
     t19 = AT(k, 4, "nineteen metres"), tUa = AT(k, 4, "u about"), tU = AT(k, 4, "minus ten point two"), tV = AT(k, 4, "minus sixteen"),
     t121 = AT(k, 6, "plus twelve point one"), t147 = AT(k, 8, "minus fourteen point seven");
@@ -309,6 +313,8 @@ const S29: React.FC = () => {
   const B = lerpBox(Bz, Bf, prog(f, tBoth, tBoth + 50)), P = mapP(B);
   const sp = P(CST.stp[0], CST.stp[1]), fm = P(CST.fmb[0], CST.fmb[1]);
   const A0 = P(SH.stp.A[0], SH.stp.A[1]), B0 = P(SH.stp.B[0], SH.stp.B[1]);
+  const cS = P(SH.stp.B[0], SH.stp.A[1]);                                           // the legs' corner: north first, then west
+  const aS = Math.atan2(-(B0[1] - A0[1]), B0[0] - A0[0]) / D2R;                    // the coast's screen angle (north = 90°)
   const zoom = 1 - prog(f, tBoth, tBoth + 50);
   const s = mix(6, 9, zoom), a = SP.alpha;
   const W = add(sp, [SP.u / Math.hypot(SP.u, SP.v), -SP.v / Math.hypot(SP.u, SP.v)], s * SP.speed);
@@ -321,6 +327,16 @@ const S29: React.FC = () => {
         <line x1={A0[0]} y1={A0[1]} x2={B0[0]} y2={B0[1]} stroke={C.second} strokeWidth={6} opacity={fin(f, tCoast) * zoom} />
         <Place p={sp} t="Saint Petersburg" dx={18} dy={-40} />
         <Place p={fm} t="Fort Myers Beach" dx={-20} dy={-44} a="end" o={fin(f, tBoth + 30)} />
+        {/* fix 3 (fix2 review 2 S): the two legs (north from Saint Pete Beach, then west to Tarpon Springs), each length on its word, and the
+            β arc between the north leg and the coast (radius 200: the angle is only 7°), "β" just outside the wedge on the sea side */}
+        <g opacity={fin(f, t557 - 8) * fout(f, tAl - 6, 12) * zoom}>
+          <line x1={A0[0]} y1={A0[1]} x2={cS[0]} y2={cS[1]} stroke={C.ink} strokeWidth={4} strokeDasharray="12 8" />
+          <line x1={cS[0]} y1={cS[1]} x2={B0[0]} y2={B0[1]} stroke={C.ink} strokeWidth={4} strokeDasharray="12 8" />
+          <Lbl x={A0[0] + 20} y={(A0[1] + cS[1]) / 2} t={`${SP.dy.toFixed(1)} km N`} c={C.ink} s={T.floor} o={fin(f, t557)} />
+          <Lbl x={cS[0] + 18} y={cS[1] + 14} t={`${(-SP.dx).toFixed(1)} km W`} c={C.ink} s={T.floor} o={fin(f, t68)} />
+          <path d={arcD(A0, 200, 90, aS)} fill="none" stroke={C.gold} strokeWidth={6} opacity={fin(f, tRule)} />
+          <Lbl x={polar(A0, 205, aS + 9)[0]} y={polar(A0, 205, aS + 9)[1]} t="$\beta$" c={C.gold} s={T.key} a="middle" o={fin(f, t7)} />
+        </g>
         {/* fix loop 1 (r8 review 1 S3): the coast-leg names leave before the wind arrow comes in (its head sat on "Saint Pete Beach") */}
         <g opacity={fin(f, tCoast) * zoom * fout(f, tWind - 12)}>
           <Lbl x={A0[0] - 20} y={A0[1] + 46} t="Saint Pete Beach" c={C.key} s={T.floor} a="end" />
@@ -353,9 +369,9 @@ const S29: React.FC = () => {
           o={win(f, t19, tBoth - 20)} />
       </Svg>
       <CalcStack f={f} x={MX} y={230} size={44} maxLines={5} o={fout(f, tWind - 10)} rows={[
-        { rhs: String.raw`\text{north}\ ${SP.dy.toFixed(1)}\ \mathrm{km},\quad \text{west}\ ${(-SP.dx).toFixed(1)}\ \mathrm{km}`, at: tLeg },
+        { rhs: String.raw`\text{north}\ ${SP.dy.toFixed(1)}\ \mathrm{km}` + tailIn(f, t68, C.ink, String.raw`,\quad \text{west}\ ${(-SP.dx).toFixed(1)}\ \mathrm{km}`), at: t557 },
         { rhs: String.raw`\tan\beta=\dfrac{${(-SP.dx).toFixed(1)}}{${SP.dy.toFixed(1)}}` + tailIn(f, t7, C.ink, String.raw`\approx${SP.tan.toFixed(3)}\ \Rightarrow\ \beta\approx${SP.beta}^\circ`), at: tRule },
-        { rhs: String.raw`\text{bearing}\approx${SP.bearing}^\circ`, at: t353, cont: true },
+        { rhs: String.raw`\text{bearing}=360^\circ-${SP.beta}^\circ` + tailIn(f, t353, C.ink, String.raw`=${SP.bearing}^\circ`), at: tBrgS, cont: true },
         { rhs: String.raw`\alpha=90^\circ-${SP.bearing}^\circ+360^\circ` + tailIn(f, t97, C.ink, String.raw`=${SP.alpha}^\circ`, true), at: tAl },
         { rhs: String.raw`\cos\alpha\approx${goldAt(f, tCv, tn(SP.cos, 3))},\quad \sin\alpha\approx${goldAt(f, tSv, tn(SP.sin, 3))}`, at: AT(k, 3, "with a cosine") },
       ]} />
@@ -387,7 +403,7 @@ const S30: React.FC = () => {
   // subtraction aloud: 941 and the normal 1013 are said, the subtraction is shown on "so the sea", the rise (gold) on its word
   const tOn = SS(k, 1), tOff = SS(k, 2), tSurge = SS(k, 3), tShelf = SS(k, 4), tCm = SS(k, 5), tRho = SS(k, 6), tIan = SS(k, 7), tQ = SS(k, 8);
   const tPa = AT(k, 6, "a hundred pascals"), tDen = AT(k, 6, "one thousand and twenty five"), tG = AT(k, 6, "nine point eight one"),
-    t941 = AT(k, 7, "nine hundred and forty one"), t1013 = AT(k, 7, "one thousand and thirteen"), tSea = AT(k, 7, "so the sea"), t72 = AT(k, 7, "seventy two centimetres");
+    t1cm = AT(k, 5, "one centimetre"), t941 = AT(k, 7, "nine hundred and forty one"), t1013 = AT(k, 7, "one thousand and thirteen"), tSea = AT(k, 7, "so the sea"), t72 = AT(k, 7, "seventy two centimetres");
   const panel = (y0: number, dir: 1 | -1, t0: number) => {
     const x0 = 120, x1 = 960, coast = 760, sea0 = y0 + 150;
     const r = prog(f, t0 + 10, t0 + 100) * 46 * dir;
@@ -436,10 +452,11 @@ const S30: React.FC = () => {
         <Keyword f={f} text="wind drags the sea surface" at={[MX, 120]} s={T.floor} appear={0} out={tSurge - 20} />
         <Lbl x={MX} y={210} t="onto the land: the water piles up" c={C.key} s={T.floor} o={win(f, tOn + 20, tSurge - 20)} />
         <Lbl x={MX} y={270} t="out to sea: the level drops" c={C.key} s={T.floor} o={win(f, tOff + 20, tSurge - 20)} />
-        <Keyword f={f} text="storm surge" at={[MX, 120]} s={T.key} appear={tSurge} out={tCm - 20} />
+        {/* fix 3 (fix2 review 2 S): "≈ 1 cm per hPa" in on "one centimetre" (it came 2.8 s early); "storm surge" holds until then */}
+        <Keyword f={f} text="storm surge" at={[MX, 120]} s={T.key} appear={tSurge} out={t1cm - 20} />
         <Lbl x={MX} y={210} t="far above the normal tide" c={C.key} s={T.floor} o={win(f, tSurge + 20, tCm - 20)} />
         <Lbl x={MX} y={270} t="the wind's push does most of it" c={C.key} s={T.floor} o={win(f, tShelf, tCm - 20)} />
-        <Keyword f={f} text="low pressure: ≈ 1 cm per hPa" at={[MX, 120]} s={T.floor} c={C.local} appear={tCm} out={tQ - 20} />
+        <Keyword f={f} text="low pressure: ≈ 1 cm per hPa" at={[MX, 120]} s={T.floor} c={C.local} appear={t1cm} out={tQ - 20} />
         <Lbl x={MX} y={400} t={`Ian at landfall (19:05 UTC): ${SH.ian_ib.hpa} hPa`} c={hiOn(f, t941) ? C.gold : C.local} s={T.floor} o={win(f, t941 - 8, tQ - 10)} />
         <Lbl x={MX} y={470} t="1013 hPa: normal at sea level" c={hiOn(f, t1013) ? C.gold : C.local} s={hiSize(f, t1013, T.floor)} o={win(f, t1013 - 8, tQ - 10)} />
         <Keyword f={f} text="what did the water do?" at={[MX, 120]} s={T.key} c={C.gold} appear={tQ} />
@@ -541,26 +558,30 @@ type EvCfg = { id: string; nm: "amphan" | "nargis" | "idai"; latC: number; lonC:
   // fix loop 1: the spoken words of each number (AT on Kokoro word times): leg, beta, bearing, alpha, cos, sin, speed, u, v, across sum,
   // ERA5's lowest pressure, the official pressure, the rise
   legW: string; betaW: string; brgW: string; alW: string; cosW: string; sinW: string; spW: string; uW: string; vW: string; sumW: string; eraW: string;
-  offW: string; cmW: string; ratioW: string };
+  offW: string; cmW: string; ratioW: string;
+  // fix 3 (fix2 review 2 S): the second leg's spoken words (its value tails in on them, as s27), and the ERA5 / official wind ratio's two
+  // numbers [ERA5 box maximum, official maximum] (m/s; coord_storm_shore_winds.json → era5_vs_best_track: era5_box_max_wind,
+  // best_<agency>_max_ms; checked below against cs.json's ratio and, where the hour's official wind is the maximum, against ib.kt)
+  leg2W: string; ratioNum: [number, number] };
 const EV_CFG: EvCfg[] = [
   { id: "s33_amphan_wind", nm: "amphan", latC: 21.75, lonC: 89.0, dlat: 3.0, date: "20 May 2020, 09 UTC", when: "the hour: 09 UTC", ratio: "6/10",
     place: "Sundarbans shore, Bangladesh", ptName: "our point", ptSide: 1, sea: [20.6, 88.1, "Bay of Bengal"], aName: "", bName: "",
     legW: "ninety two point nine", betaW: "thirteen degrees", brgW: "two hundred and fifty seven", alW: "a hundred and ninety three",
     cosW: "minus zero point nine seven four", sinW: "minus zero point two two five", spW: "twenty two point six", uW: "minus eight point four",
     vW: "plus twenty one", sumW: "minus twenty two point four", eraW: "nine hundred and sixty five", offW: "nine hundred and sixty hectopascals",
-    cmW: "fifty three centimetres", ratioW: "six tenths" },
+    cmW: "fifty three centimetres", leg2W: "twenty one point nine", ratioNum: [27.5, 46.3], ratioW: "six tenths" },
   { id: "s36_nargis_wind", nm: "nargis", latC: 16.05, lonC: 95.0, dlat: 3.0, date: "2 May 2008, 11 UTC", when: "the hour: 11 UTC", ratio: "half",
     place: "delta coast, south of Bogale", ptName: "our point", ptSide: 1, sea: [15.0, 94.0, "Andaman Sea"], aName: "", bName: "",
     legW: "sixty nine point five", betaW: "nine degrees", brgW: "two hundred and seventy nine", alW: "a hundred and seventy one",
     cosW: "minus zero point nine eight eight", sinW: "zero point one five six", spW: "nineteen metres", uW: "plus nine point six",
     vW: "plus sixteen point five", sumW: "minus seventeen point eight", eraW: "nine hundred and eighty two", offW: "nine hundred and sixty two",
-    cmW: "fifty one centimetres", ratioW: "about half" },
+    cmW: "fifty one centimetres", leg2W: "ten point eight", ratioNum: [25.2, 46.3], ratioW: "about half" },
   { id: "s39_idai_wind", nm: "idai", latC: -19.8, lonC: 35.3, dlat: 2.5, date: "14 Mar 2019, 19 UTC", when: "the hour: 19 UTC", ratio: "2/3",
     place: "Beira's seafront", ptName: "Beira", ptSide: -1, sea: [-20.7, 35.9, "Mozambique Channel"], aName: "", bName: "",
     legW: "fifty two point three", betaW: "thirty four degrees", brgW: "two hundred and thirty six", alW: "two hundred and fourteen",
     cosW: "minus zero point eight two nine", sinW: "minus zero point five five nine", spW: "twenty two metres", uW: "minus six point seven",
     vW: "plus twenty point nine", sumW: "minus twenty one", eraW: "nine hundred and eighty one", offW: "nine hundred and fifty five",
-    cmW: "fifty eight centimetres", ratioW: "two thirds" },
+    cmW: "fifty eight centimetres", leg2W: "thirty five point nine", ratioNum: [29.1, 44.2], ratioW: "two thirds" },
 ];
 const EventWind: React.FC<{ cfg: EvCfg }> = ({ cfg }) => {
   const f = useCurrentFrame(), k = K(cfg.id);
@@ -576,6 +597,15 @@ const EventWind: React.FC<{ cfg: EvCfg }> = ({ cfg }) => {
     tCv = ATP(k, cfg.cosW), tSv = ATP(k, cfg.sinW), tSp = ATP(k, cfg.spW), tUa = ATP(k, "u about"), tU = ATP(k, cfg.uW), tV = ATP(k, cfg.vW),
     tSumW = ATP(k, cfg.sumW), tEra = ATP(k, cfg.eraW), tOff = ATP(k, cfg.offW), tSea = ATP(k, "so the sea under the eye"), tCm = ATP(k, cfg.cmW),
     tMinus = ATP(k, "minus u sine alpha"), tVcos = ATP(k, "and v cosine");
+  // fix 3 (fix2 review 2 S): the second leg on its word; the bearing worked out in full from the long leg's compass direction (as s27:
+  // 270° − 13°, 270° + 9°, 270° − 34°), the row in on "that's a bearing", its result on the spoken number
+  const tLeg2 = ATP(k, cfg.leg2W), tMeas = ATP(k, "that's a bearing");
+  const brgBase = Math.abs(S.dx) >= Math.abs(S.dy) ? (S.dx < 0 ? 270 : 90) : (S.dy > 0 ? 360 : 180);
+  const brgOp = S.bearing === brgBase - S.beta ? "-" : S.bearing === brgBase + S.beta ? "+" : null;
+  if (!brgOp) throw new Error(`CHECK ${cfg.nm} bearing: ${brgBase} ± ${S.beta} is not ${S.bearing}`);
+  const [rE, rO] = cfg.ratioNum, rTxt = (rE / rO).toFixed(2);
+  if (!(Math.abs(rE / rO - E.ratio) <= 0.01)) throw new Error(`CHECK ${cfg.nm} ratio: ${rE}/${rO} vs ${E.ratio}`);
+  if (cfg.nm !== "idai" && !(Math.abs(rO - E.ib.kt * 0.514444) <= 0.05)) throw new Error(`CHECK ${cfg.nm} official m/s: ${rO} vs ${E.ib.kt} kt`);
   const B = boxAt(cfg.latC, cfg.lonC, cfg.dlat, 80, 50, 920, 750), P = mapP(B);
   const pt = P(E.pt[0], E.pt[1]), A0 = P(E.A[0], E.A[1]), B0 = P(E.B[0], E.B[1]);
   const corner = P(E.A[0] + (E.B[0] - E.A[0]) * 0, E.B[1]);          // leg 1 along the parallel (east-west), leg 2 north-south
@@ -595,7 +625,12 @@ const EventWind: React.FC<{ cfg: EvCfg }> = ({ cfg }) => {
   // (tan β = short / long, as in s27); the label outside the wedge when the angle is thin (Amphan 13°, Nargis 9°), on the bisector otherwise
   const ang = (p0: Pt, q: Pt) => Math.atan2(-(q[1] - p0[1]), q[0] - p0[0]) / D2R;
   const ewLong = Math.abs(S.dx) >= Math.abs(S.dy), bV = ewLong ? A0 : B0, bD1 = ang(bV, corner), bDd = ((ang(bV, ewLong ? B0 : A0) - bD1 + 540) % 360) - 180;
-  const bLab = add(bV, unitV(Math.abs(bDd) >= 25 ? bD1 + bDd / 2 : bD1 - Math.sign(bDd) * 22), 112);
+  // fix 3 (fix2 review 1 S1): on a thin angle (Amphan 13°, Nargis 9°) the arc is drawn far out (radius up to 190, 20 px short of the leg's
+  // end) so the wedge is wide enough to see; "β" sits just outside it (44 px from the leg) with a short gold leader to the arc's middle
+  const thin = Math.abs(bDd) < 25, legPx = Math.hypot(corner[0] - bV[0], corner[1] - bV[1]);
+  const arcR = thin ? Math.max(80, Math.min(190, legPx - 20)) : 80, rLab = thin ? arcR - 20 : 112;
+  const bLab = add(bV, unitV(thin ? bD1 - Math.sign(bDd) * (Math.asin(Math.min(1, 44 / rLab)) / D2R) : bD1 + bDd / 2), rLab);
+  const bMid = add(bV, unitV(bD1 + bDd / 2), arcR), bC: Pt = [bLab[0], bLab[1] - 18];
   const ns = S.dy >= 0 ? "north" : "south", ew = S.dx >= 0 ? "east" : "west";
   const hit = (q: Pt) => q[0] > B.x + 10 && q[0] < B.x + B.w - 10 && q[1] > B.y + 10 && q[1] < B.y + B.h - 10;
   const sea = P(cfg.sea[0], cfg.sea[1]);
@@ -622,8 +657,10 @@ const EventWind: React.FC<{ cfg: EvCfg }> = ({ cfg }) => {
           <line x1={corner[0]} y1={corner[1]} x2={B0[0]} y2={B0[1]} stroke={C.ink} strokeWidth={4} strokeDasharray="12 8" />
         </g>
         <g opacity={fin(f, tRule) * fout(f, tY)}>
-          <path d={arcD(bV, 80, bD1, bD1 + bDd)} fill="none" stroke={C.gold} strokeWidth={6} />
+          <path d={arcD(bV, arcR, bD1, bD1 + bDd)} fill="none" stroke={C.gold} strokeWidth={6} />
           <Lbl x={bLab[0]} y={bLab[1]} t="$\beta$" c={C.gold} s={T.key} a="middle" o={fin(f, tBeta)} />
+          {thin ? <line x1={mix(bC[0], bMid[0], 0.5)} y1={mix(bC[1], bMid[1], 0.5)} x2={mix(bC[0], bMid[0], 0.9)} y2={mix(bC[1], bMid[1], 0.9)}
+            stroke={C.gold} strokeWidth={3} opacity={fin(f, tBeta)} /> : null}
         </g>
         {/* fix loop 1 (r8 review 1 S3): the point's name level with the dot, on the side no arrow takes (the wind and across arrows crossed it) */}
         <Place p={pt} t={cfg.ptName} dx={34} dy={4} a="start" o={fin(f, tPt)} />
@@ -654,10 +691,10 @@ const EventWind: React.FC<{ cfg: EvCfg }> = ({ cfg }) => {
         <Lbl x={MX} y={496} t={`at that hour: ${E.ib.hpa} hPa`} c={hiOn(f, tOff) ? C.gold : C.local} s={hiSize(f, tOff, T.floor)} o={fin(f, tOff - 6)} />
       </Svg>
       <CalcStack f={f} x={MX} y={300} size={44} maxLines={5} o={fout(f, tWind - 10)} rows={[
-        { rhs: String.raw`\text{${ew}}\ ${Math.abs(S.dx).toFixed(1)}\ \mathrm{km},\quad \text{${ns}}\ ${Math.abs(S.dy).toFixed(1)}\ \mathrm{km}`, at: tLegW },
+        { rhs: String.raw`\text{${ew}}\ ${Math.abs(S.dx).toFixed(1)}\ \mathrm{km}` + tailIn(f, tLeg2, C.ink, String.raw`,\quad \text{${ns}}\ ${Math.abs(S.dy).toFixed(1)}\ \mathrm{km}`), at: tLegW },
         { rhs: String.raw`\tan\beta=\dfrac{${Math.min(Math.abs(S.dx), Math.abs(S.dy)).toFixed(1)}}{${Math.max(Math.abs(S.dx), Math.abs(S.dy)).toFixed(1)}}` +
           tailIn(f, tBeta, C.ink, String.raw`\approx${S.tan.toFixed(3)}\ \Rightarrow\ \beta\approx${S.beta}^\circ`), at: tRule },
-        { rhs: String.raw`\text{bearing}\approx${S.bearing}^\circ`, at: tBrg, cont: true },
+        { rhs: String.raw`\text{bearing}=${brgBase}^\circ${brgOp}${S.beta}^\circ` + tailIn(f, tBrg, C.ink, String.raw`=${S.bearing}^\circ`), at: tMeas, cont: true },
         { rhs: String.raw`\alpha=90^\circ-${S.bearing}^\circ+360^\circ` + tailIn(f, tAlW, C.ink, String.raw`=${S.alpha}^\circ`, true), at: tAl },
         { rhs: String.raw`\cos\alpha\approx${goldAt(f, tCv, tn(S.cos, 3))},\quad \sin\alpha\approx${goldAt(f, tSv, tn(S.sin, 3))}`, at: tCos },
       ]} />
@@ -669,6 +706,9 @@ const EventWind: React.FC<{ cfg: EvCfg }> = ({ cfg }) => {
         { rhs: String.raw`v\cos\alpha=${tn(S.v)}\times${tn(S.cos, 3, true)}\approx${tn(S.ac_terms[1])}`, at: tVcos, cont: true },
         { rhs: String.raw`\text{across}\approx${tn(S.ac_terms[0])}${tn(S.ac_terms[1])}` + tailIn(f, tSumW, C.ink, String.raw`\approx${tn(S.across)}\ \mathrm{m/s}`, true), at: tSum, cont: true },
       ]} />
+      {/* fix 3 (fix2 review 2 S): the ERA5 / official ratio worked, under its keyword, while the keyword shows */}
+      <TeX s={String.raw`${rE.toFixed(1)}\ \mathrm{m/s}\div${rO.toFixed(1)}\ \mathrm{m/s}\approx${rTxt}`} x={MX} y={262} size={44} c={C.muted}
+        o={win(f, ATP(k, cfg.ratioW) + 4, tLegs - 10)} />
       <TeX s={String.raw`1013-${E.ib.hpa}=${E.ib.deficit}\ \mathrm{hPa}` + tailIn(f, tCm, C.local, String.raw`\ \Rightarrow\ \text{rise}\approx${E.ib.cm_rule}\ \mathrm{cm}`, true)}
         x={MX} y={580} size={44} c={C.local} o={fin(f, tSea)} />
       <SourceBelow text={`Data: ERA5 (Copernicus C3S) · ${cfg.date} · Natural Earth`} x={80} pic={B} w={1000} name={`${cfg.id} src`} />

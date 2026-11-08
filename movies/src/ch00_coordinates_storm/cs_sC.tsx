@@ -17,6 +17,7 @@ import { globePath, llPath, useTex } from "./kit_cs/globe";
 import {
   AMP, ASSET_NAMES, AT, ArcHead, Arrow, HOLD, SE, Ax, Proj, lerpBox, Axes, CST, ColourBar, Cross, Curve, D, D2R, FLD, Globe, GeoImg, GeoMap, IMG, K, LEN, LUT_DEPTH, LUT_UR, Lbl, MapBox, NAR, Place, RING, SAY, SEC, SRC, SS,
   SSP, STK, Scene, SideCallout, SpeedBar, Svg, URBar, arcD, axP, boxAt, clamp, fin, fout, linesPath, lutCss, mapP, mix, nf, poly, polar, prog, win, tailIn, LUT_SPEED,
+  goldAt, hiOn,
 } from "./cs_lib";
 import { InUpOut, SecAxes, secP } from "./cs_sB";
 import { EQ_S23, EQ_S25, cutAt } from "./cs_eq";
@@ -106,8 +107,8 @@ const S21: React.FC = () => {
         <Lbl x={1210} y={560} t="weaker, but very harmful" c={C.key} s={T.floor} o={win(f, tSidr + 20, t20 - 20)} />
         <Keyword f={f} text="ashore: 20 May" at={[1210, 120]} s={T.key} appear={t20} out={LEN(k) - 14} />
         <Lbl x={1210} y={300} t={`closest to Kolkata ≈ ${Math.round(AMP.close.Kolkata.km)} km`} c={C.key} s={T.floor} o={win(f, tKol, LEN(k) - 14)} />
-        <Lbl x={1210} y={370} t={`Satkhira ≈ ${Math.round(AMP.close.Satkhira.km)} km W`} c={C.key} s={T.floor} o={win(f, tSat, LEN(k) - 14)} />
-        <Lbl x={1210} y={440} t={`Khulna ≈ ${Math.round(AMP.close.Khulna.km)} km W`} c={C.key} s={T.floor} o={win(f, tKhu, LEN(k) - 14)} />
+        <Lbl x={1210} y={370} t={`track ≈ ${Math.round(AMP.close.Satkhira.km)} km W of Satkhira`} c={C.key} s={T.floor} o={win(f, tSat, LEN(k) - 14)} />
+        <Lbl x={1210} y={440} t={`track ≈ ${Math.round(AMP.close.Khulna.km)} km W of Khulna`} c={C.key} s={T.floor} o={win(f, tKhu, LEN(k) - 14)} />
         <Lbl x={1210} y={530} t="Khulna, Satkhira districts" c={C.gold} s={T.floor} o={win(f, tDis, LEN(k) - 14)} />
       </Svg>
       <SourceBelow text={SRC.ibtAmp} pic={{ x: 80, y: 40, w: 1000, h: 755 }} w={1740} name="s21 src" />{/* K6 r0: one line (two ran into the caption band) */}
@@ -163,6 +164,7 @@ const S23: React.FC = () => {
     tShape = SS(k, 10), tTan = SS(k, 11), tTwo = SS(k, 12);
   // fix loop 1 (r8 review 2 S6, S13): every number on its spoken word (all AT now on Kokoro word times)
   const t28 = AT(k, 3, "twenty eight"), t20v = AT(k, 6, "about twenty"), t6v = AT(k, 6, "minus six"), t967 = AT(k, 9, "nine hundred and sixty seven"),
+    t90 = AT(k, 8, "ninety knots"), t956 = AT(k, 8, "nine hundred and fifty six"),
     tOver = AT(k, 11, "over the tangential wind"), t17 = AT(k, 11, "seventeen degrees"), tIan = AT(k, 11, "close to Ian's"), t21 = AT(k, 11, "twenty one");
   const PB = { x: 110, y: 50, w: 700, h: 760 };
   const B: MapBox = boxAt(21.0, 88.5, 7.0, PB.x, PB.y, PB.w, PB.h);
@@ -179,6 +181,10 @@ const S23: React.FC = () => {
   const angLbl = polar(rp, 150, (angT + angW) / 2 / D2R);
   const oMap = fin(f, tHere - 10, 14) + (f < tHere ? 0.0 : 0);
   const [EQ23a, EQ23b] = cutAt(EQ_S23, String.raw`\ \Rightarrow\ `);   // K6 round 1: two lines
+  // fix 3 (fix2 review 2 S): the inflow angle (the scene's answer, ≈ 17°) gold on "seventeen degrees"
+  const A17 = String.raw`17^\circ`;
+  if (!EQ23b.endsWith(A17)) throw new Error("EQ_S23 no longer ends with 17°");
+  const EQ23bG = EQ23b.slice(0, -A17.length) + goldAt(f, t17, A17);
   return (
     <Scene>
       <GeoMap id="s23m" B={B} o={1}>
@@ -220,8 +226,9 @@ const S23: React.FC = () => {
         {/* fix loop 1 (review 2 Nit 5): the 120-px bar keeps its two end ticks only (0 15 30 were ≈ 10 px apart at 640 px) */}
         <ColourBar x={836} y={90} w={120} lut={LUT_SPEED} lo={0} hi={30} unit="m/s" title="wind speed" ticks={[{ v: 0, t: "0" }, { v: 30, t: "30" }]} />{/* K6 r0: its "m/s" touched the keyword column; #5b r1 S16: 120 px wide, "m/s" ends ≈ 50 px before the keyword */}
         {/* fix loop 1 (r8 review 2 S6): each ring mean on its spoken number */}
-        <Lbl x={MX} y={470} t={`$u_\\theta$ ≈ ${SAY.a_vt} m/s ·`} c={C.key} s={T.floor} o={win(f, t20v, tOff - 10)} />
-        <Lbl x={MX + 24 + textW(`uθ ≈ ${SAY.a_vt} m/s ·`, T.floor)} y={470} t={`$u_r$ ≈ −${Math.abs(SAY.a_vr)} m/s`} c={C.key} s={T.floor} o={win(f, t6v, tOff - 10)} />
+        {/* fix 3 (fix2 review 2 S): the ring means are data values: gold on their words (colour only: the second label's x hangs on the first's width) */}
+        <Lbl x={MX} y={470} t={`$u_\\theta$ ≈ ${SAY.a_vt} m/s ·`} c={hiOn(f, t20v) ? C.gold : C.key} s={T.floor} o={win(f, t20v, tOff - 10)} />
+        <Lbl x={MX + 24 + textW(`uθ ≈ ${SAY.a_vt} m/s ·`, T.floor)} y={470} t={`$u_r$ ≈ −${Math.abs(SAY.a_vr)} m/s`} c={hiOn(f, t6v) ? C.gold : C.key} s={T.floor} o={win(f, t6v, tOff - 10)} />
         <Lbl x={MX} y={540} t="anticlockwise, like Ian" c={C.key} s={T.floor} o={win(f, tACW, tOff - 10)} />
         <Lbl x={MX} y={600} t="both: northern hemisphere" c={C.key} s={T.floor} o={win(f, tACW + 20, tOff - 10)} />
         <Lbl x={MX} y={734} t="ERA5's storm: much too weak" c={C.local} s={T.floor} o={win(f, AT(k, 9, "so the reanalysis"), tShape - 20)} />{/* K6 round 1: under the taller rows */}
@@ -242,7 +249,7 @@ const S23: React.FC = () => {
       <TeX s={String.raw`0.25^\circ\times111\ \mathrm{km}\approx28\ \mathrm{km}`} x={MX} y={370} size={44} c={C.gold} o={win(f, t28, tHere - 20)} />
       <TeX s={String.raw`\tan(\text{inflow angle})=\dfrac{|u_r|}{u_\theta}`} x={MX} y={215} size={46} o={fin(f, tTan)} />
       <TeX s={EQ23a} x={MX} y={440} size={44} o={fin(f, tOver)} />
-      <TeX s={String.raw`\Rightarrow\ ` + EQ23b} x={MX + 40} y={518} size={44} o={fin(f, t17)} glow={0} c={C.ink} />
+      <TeX s={String.raw`\Rightarrow\ ` + EQ23bG} x={MX + 40} y={518} size={44} o={fin(f, t17)} glow={0} c={C.ink} />
       {/* #5b r1 S16: three decimals, so that the arctan values hold (arctan 0.38 = 20.8°, arctan 0.382 = 20.9°) */}
       <TeX s={String.raw`\dfrac{13.3}{34.8}\approx0.382`} x={MX} y={720} size={44} o={fin(f, tIan)} />
       <TeX s={String.raw`\Rightarrow\ \arctan0.382\approx20.9^\circ\approx21^\circ`} x={MX + 40} y={798} size={44} o={fin(f, t21)} />
@@ -263,14 +270,17 @@ const S23: React.FC = () => {
       </Svg>
       {/* fix 0 B14: like with like: the official 90 kt in m/s, and the two lowest pressures; K6 round 1: the first row (to x 1897) split */}
       <CalcStack f={f} x={MX} y={440} size={44} maxLines={3} o={fout(f, tShape - 10)} rows={[
-        { rhs: String.raw`\text{official (3-min): }90\ \mathrm{kt}`, at: AT(k, 8, "ninety knots") - 8, c: C.local },   // fix loop 1: on its words
+        { rhs: String.raw`\text{official (3-min): }` + goldAt(f, t90, String.raw`90\ \mathrm{kt}`), at: t90 - 8, c: C.local },   // fix loop 1: on its words; fix 3: gold
         // #5b r2 S7: the factor with its unit, and "kt" named, before it is used
         { rhs: String.raw`1\ \mathrm{kt}=1.852\ \mathrm{km/h}\quad(\text{kt: knot})`, at: AT(k, 8, "ninety knots") + 10, c: C.local, cont: true },
         { rhs: String.raw`90\times1.852\approx167\ \mathrm{km/h}`, at: AT(k, 8, "ninety knots") + 28, c: C.local, cont: true },
         { rhs: String.raw`167\div3.6\approx${SAY.a_ms}\ \mathrm{m/s}`, at: AT(k, 8, "forty six"), c: C.local },
         // #5b r1 S16: the official 956 hPa on S8, where it is spoken; ERA5's 967 on S9
-        { rhs: String.raw`\text{official lowest pressure: }${AMP.best06.hpa}\ \mathrm{hPa}`, at: AT(k, 8, "nine hundred and fifty six"), c: C.local },
-        { rhs: String.raw`\text{ERA5's lowest pressure: }\approx${SAY.a_msl}\ \mathrm{hPa}`, at: t967, c: C.local },
+        // fix 3 (fix2 review 1 S3): "official centre pressure at that hour" (956 hPa is the 06-UTC fix, not Amphan's lowest, 920 hPa on
+        // 18 May), on two rows (one row would run past the right edge); 956 and 967 gold on their words
+        { rhs: String.raw`\text{official centre pressure}`, at: t956 - 8, c: C.local },
+        { rhs: String.raw`\text{at that hour: }` + goldAt(f, t956, String.raw`${AMP.best06.hpa}\ \mathrm{hPa}`), at: t956 - 8, c: C.local, cont: true },
+        { rhs: String.raw`\text{ERA5's lowest pressure: }` + goldAt(f, t967, String.raw`\approx${SAY.a_msl}\ \mathrm{hPa}`), at: t967, c: C.local },
       ]} />
       <SourceBelow text={SRC.era5} pic={PB} w={1400} o={oMap + 1} name="s23 src" />
     </Scene>
@@ -1083,7 +1093,8 @@ const S35: React.FC = () => {
               {/* fix loop 1 (r8 review 1 S4): under the storm's name, clear of the arrow and the brown land block ("m/s" sat on the block) */}
               <Lbl x={140} y={y + 70} t={`across ${nf(v, 1)} m/s`} c={C.neg} s={T.floor} /></g>; })}
           <Lbl x={915} y={170} t="land" c="#c9b48a" s={T.floor} a="middle" />
-          <Lbl x={140} y={110} t="10-m wind across the shore near landfall" c={C.ink} s={46} o={fin(f, t(10) + 10, 8)} />{/* fix 1b: in after the gauge heading has gone */}
+          {/* fix 3 (fix2 review 1 S2): the title on its own row above the keyword's (it ran into "onto the land before each flood" at y 110-120) */}
+          <Lbl x={140} y={56} t="10-m wind across the shore near landfall" c={C.ink} s={46} o={fin(f, t(10) + 10, 8)} />{/* fix 1b: in after the gauge heading has gone */}
         </g>
         {/* user notes 2026-11-06 item 12: the three flood events, in the order the movie showed them */}
         <g opacity={beat(11)}>
@@ -1106,9 +1117,9 @@ const S35: React.FC = () => {
         <Keyword f={f} text="$(r,\ \theta,\ z)$: in, up and out" at={[MX, 120]} s={T.key} appear={kIn(6)} out={kOut(6)} />
         <Keyword f={f} text="turned axes: along · across" at={[MX, 120]} s={T.key} appear={kIn(7)} out={kOut(7)} />
         <Keyword f={f} text={`Fort Myers Beach: ${nf(D.shore.fmb.shown.across, 1)} m/s`} at={[MX, 120]} s={T.floor} c={C.neg} appear={kIn(8)} out={kOut(8)} />
-        <Lbl x={MX} y={200} t={`gauge: ≈ +${CST.gauges["8725520"].ext.toFixed(1)} m`} c={C.neg} s={T.floor} o={win(f, kIn(8) + 10, kOut(8))} />{/* lint-ok: m is the unit metre */}
+        <Lbl x={MX} y={200} t={`gauge: ≈ +${CST.gauges["8725520"].ext.toFixed(1)} m`} c={C.neg} s={T.floor} o={win(f, AT(k, 8, "two point two") - 4, kOut(8))} />{/* lint-ok: m is the unit metre */}{/* fix 3 (fix2 review 2 Nit): on its number */}
         <Keyword f={f} text={`Saint Petersburg: ${nf(D.shore.stp.shown.across, 1, true)} m/s`} at={[MX, 120]} s={T.floor} c={C.first} appear={kIn(9)} out={kOut(9)} />
-        <Lbl x={MX} y={200} t={`gauge: ≈ ${nf(CST.gauges["8726520"].ext, 1)} m`} c={C.first} s={T.floor} o={win(f, kIn(9) + 10, kOut(9))} />{/* lint-ok: m is the unit metre */}
+        <Lbl x={MX} y={200} t={`gauge: ≈ ${nf(CST.gauges["8726520"].ext, 1)} m`} c={C.first} s={T.floor} o={win(f, AT(k, 9, "one point eight") - 4, kOut(9))} />{/* lint-ok: m is the unit metre */}{/* fix 3 (fix2 review 2 Nit): on its number */}
         <Keyword f={f} text="onto the land before each flood" at={[MX, 120]} s={T.floor} appear={kIn(10)} out={kOut(10)} />
         <Keyword f={f} text="floods from space" at={[MX, 120]} s={T.key} appear={kIn(11)} out={kOut(11)} />
         <Keyword f={f} text="Part 3: the Earth" at={[MX, 120]} s={T.key} appear={kIn(12)} />

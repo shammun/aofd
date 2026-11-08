@@ -5310,7 +5310,7 @@
  ],
  "total_s": 3737.8,
  "total_frames": 112134,
- "cues": 910,
+ "cues": 911,
  "warnings": [
   "cue 707: 7.4 s / 2 lines out of house limits",
   "cue 780: 7.4 s / 2 lines out of house limits"
@@ -5621,5 +5621,6 @@
    ]
   }
  },
- "recue": "make_timing.py --recue (2026-11-06, #5b fix 2 S11): short cues merged within their sentence only; audio and words unchanged"
+ "recue": "make_timing.py --recue (2026-11-06, #5b fix 2 S11): short cues merged within their sentence only; audio and words unchanged",
+ "recue_fix3_1108": "checks/fix3_recue.py (2026-11-08, fix2 review 2 M2/S1/N5): no cue boundary inside a spoken number or a vector pair / list; no line break inside a number, nor inside a pair that fits one line (a longer pair breaks only at its comma); a first / last cue under 1 s may start / end in the silence beside its sentence; audio and words unchanged"
 }
