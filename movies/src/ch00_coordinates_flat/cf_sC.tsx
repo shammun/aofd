@@ -6,7 +6,7 @@ import React from "react";
 import { AbsoluteFill, useCurrentFrame } from "remotion";
 import { C, T } from "../house/kit/type";
 import { Dash, Pt, RightTick, pulse, textW } from "../house/kit/draw";
-import { CalcStack, TeX } from "../house/kit/tex";
+import { CalcStack, KX, TeX, texHtml } from "../house/kit/tex";
 // Keyword: from ./cf_lib (maths in $…$ is KaTeX)
 import { Notebook } from "../house/kit/icons";
 import { SourceBelow } from "../house/kit/frame";
@@ -26,6 +26,15 @@ const goldAt = (f: number, t: number, s: string) => (f >= t - 2 && f <= t + 45 ?
 const hiSz = (f: number, ts: number[], s: number) => s * (1 + 0.08 * Math.max(...ts.map((t) => Math.sin(Math.PI * Math.min(1, Math.max(0, (f - t + 2) / 47))))));
 const hexMix = (a: string, b: string, u: number) => "#" + [1, 3, 5].map((i) => Math.round(parseInt(a.slice(i, i + 2), 16) * (1 - u) + parseInt(b.slice(i, i + 2), 16) * u).toString(16).padStart(2, "0")).join("");
 const tailIn = (f: number, t: number, c: string, s: string) => "\\textcolor{" + hexMix("#171f33", c, Math.min(1, Math.max(0, (f - t) / 8))) + "}{" + s + "}";
+// fix 3 (fix2 review Should 1): a lighter teal for u_θ values on the dark-green map (the house teal #2aa198 was low-contrast at 640 px),
+// and a KaTeX label on a small dark chip (no halo: the halo thickened "=" and "−" into bars). Centred at (x, y) like TeX ax/ay 0.5.
+const TEAL_L = "#5fd3c6";
+const ChipTeX: React.FC<{ s: string; x: number; y: number; size: number; c: string; o?: number }> = ({ s, x, y, size, c, o = 1 }) => {
+  if (size < 44) throw new Error(`chip "${s}" below 44 px`);
+  if (o <= 0) return null;
+  return <div style={{ position: "absolute", left: x, top: y, transform: "translate(-50%, -50%)", fontSize: size / KX, color: c, opacity: o, whiteSpace: "nowrap",
+    lineHeight: 1.2, background: "rgba(23, 31, 51, 0.82)", borderRadius: 12, padding: "2px 12px" }} dangerouslySetInnerHTML={{ __html: texHtml(s) }} />;
+};
 const P0 = IAN.pts["0"], P90 = IAN.pts["90"], P135 = IAN.pts["135"];
 const CHECK_C: [string, number, number, number][] = [
   ["vt", IAN.vt, SAY.vt, 0.5], ["vr", IAN.vr, SAY.vr, 0.5], ["kmh", SAY.vt * 3.6, SAY.kmh, 0], ["res", Math.hypot(35, 13), SAY.res, 0.5],
@@ -115,7 +124,10 @@ const S21: React.FC = () => {
           <line x1={q0[0]} y1={q0[1]} x2={uEnd[0]} y2={uEnd[1]} stroke={C.second} strokeWidth={6} />
           <line x1={uEnd[0]} y1={uEnd[1]} x2={vEnd[0]} y2={vEnd[1]} stroke={C.second} strokeWidth={6} strokeDasharray="12 8" opacity={fin(f, tV)} />
         </g>
-        <SpeedBar x={CX} y={110} w={300} />
+        {/* fix 3 (fix2 review Must 1, HOUSE_STYLE 2026-11-08): the event heading at the top of the column beside the map (as Part 2),
+            and the colour bar title says what the map shows; the bar 24 px lower to make the row */}
+        <Lbl x={CX} y={44} t="Hurricane Ian · 28 Sep 2022" c={C.ink} s={T.floor} />
+        <SpeedBar x={CX} y={134} w={300} title="wind speed near the ground" />
         <Keyword f={f} text="a real storm" at={[CX, 260]} appear={0} out={tEye - 18} />
         <Keyword f={f} text="the eye" at={[CX, 260]} appear={tEye} out={tStr - 18} />
         <Keyword f={f} text="strongest winds" at={[CX, 260]} appear={tStr} out={tPol - 18} />
@@ -193,7 +205,10 @@ const S22: React.FC = () => {
         </g>
         <path d={arcD(cE, Rpx * 1.5, 200, 290)} fill="none" stroke={C.gold} strokeWidth={5} opacity={fin(f, tAnti)} />
         <ArcHead c={cE} r={Rpx * 1.5} a={290} dir={1} col={C.gold} o={fin(f, tAnti)} />
-        <SpeedBar x={CX} y={110} w={300} />
+        {/* fix 3 (fix2 review Must 1, HOUSE_STYLE 2026-11-08): the event heading at the top of the column beside the map (as Part 2),
+            and the colour bar title says what the map shows; the bar 24 px lower to make the row */}
+        <Lbl x={CX} y={44} t="Hurricane Ian · 28 Sep 2022" c={C.ink} s={T.floor} />
+        <SpeedBar x={CX} y={134} w={300} title="wind speed near the ground" />
         <Keyword f={f} text="two polar parts" at={[CX, 260]} appear={0} out={tAvg - 18} />
         {/* fix 3 (review 3 Must 5): no `out`: "our thirty five" in S15 has its 35 on screen beside 69 and 49 */}
         <SideCallout f={f} lines="≈ 35 m/s" at={[CX + 20, 340]} appear={t35c} target={[(mean.p0[0] + mean.tp[0]) / 2, (mean.p0[1] + mean.tp[1]) / 2 - 8]} c={C.first} bend={-20} />
@@ -338,7 +353,9 @@ const S23: React.FC = () => {
         { rhs: String.raw`=\sqrt{1225+169}`, at: tSq, cont: true },
         { rhs: String.raw`=\sqrt{1394}\approx37.3`, at: tRt, cont: true },
         { rhs: String.raw`\approx${cutAt(EQ_S23, String.raw`\approx`)[1]}`, at: t37, cont: true },
-        { lhs: String.raw`13\ \mathrm{m/s}\times${goldAt(f, t36, "3.6")}`, rhs: String.raw`\phantom{\approx}`, at: tCv, h: 74 },
+        // fix 3 (fix2 review Should 2): the conversion is a stack row with its name ("inflow ="), on the "=" column; it no longer
+        // starts beside the picture label "35 round"
+        { lhs: String.raw`\text{inflow}`, rhs: String.raw`=13\ \mathrm{m/s}\times${goldAt(f, t36, "3.6")}`, at: tCv, h: 74 },
         { rhs: String.raw`\approx47\ \mathrm{km/h}`, at: t47, cont: true },
         { lhs: String.raw`25\ \mathrm{km}`, rhs: String.raw`=25\,000\ \mathrm{m}`, at: AT(k, 9, "twenty five kilometres") },
         { lhs: "t", rhs: String.raw`=\text{distance}\div\text{speed}`, at: tTd },
@@ -350,10 +367,14 @@ const S23: React.FC = () => {
         { lhs: "t", rhs: String.raw`=\dfrac{157\,000\ \mathrm{m}}{35\ \mathrm{m/s}}`, at: tLt, h: 120 },
         { rhs: String.raw`\approx4490\ \mathrm{s}`, at: AT(k, 10, "four thousand four hundred"), cont: true, h: 74 },
         { rhs: String.raw`\approx4490\div60\approx75\ \mathrm{min}`, at: AT(k, 10, "seventy five minutes"), cont: true, h: 80 },
-        { lhs: String.raw`\dfrac{\text{distance round}}{\text{distance in}}`, rhs: String.raw`=\dfrac{35\,t}{13\,t}`, at: AT(k, 12, "In any stretch"), h: 120 },
+        // fix 3 (fix2 review C5): 14 px more under the first fraction ("13 t" sat ~10 px above the next row's "35")
+        { lhs: String.raw`\dfrac{\text{distance round}}{\text{distance in}}`, rhs: String.raw`=\dfrac{35\,t}{13\,t}`, at: AT(k, 12, "In any stretch"), h: 134 },
         { rhs: String.raw`=\dfrac{35}{13}\approx2.7`, at: AT(k, 12, "two point seven"), cont: true, h: 110 },
       ], 2)} />
-      <TeX s={String.raw`\text{almost 3 m round per 1 m in}`} x={1080} y={720} size={46} o={win(f, AT(k, 12, "almost three"), tRise - 18)} />
+      {/* fix 3: 24 px lower, under the taller ratio rows */}
+      <TeX s={String.raw`\text{almost 3 m round per 1 m in}`} x={1080} y={744} size={46} o={win(f, AT(k, 12, "almost three"), tRise - 18)} />
+      {/* fix 3 (HOUSE_STYLE 2026-11-08): the ring and its arrows are Ian's ring means: event heading at the top of the right column */}
+      <Svg><Lbl x={1080} y={40} t="Hurricane Ian · 28 Sep 2022" c={C.ink} s={T.floor} /></Svg>
       <SourceBelow text={IAN_SRC} pic={PB} w={900} name="s23 src" />
       {void [tMost, tKmh, tBoth, tPy]}
     </Scene>
@@ -366,7 +387,8 @@ const S23: React.FC = () => {
  * u_r just beyond its tip below the eye; 135° u_r outward (up-left), u_θ beyond its tip (down-left); all in open water. */
 const lab24 = (az: number, cE: Pt, q: Pt): { ur: Pt; ut: Pt } => {
   void q;
-  if (az === 0) return { ur: [cE[0] + 10, cE[1] + 62], ut: [cE[0] + 2, cE[1] - 80] };
+  // fix 3 (fix2 review Should 1): the 0° u_θ label 26 px left, off the orange dashed v line of the 0° point
+  if (az === 0) return { ur: [cE[0] + 10, cE[1] + 62], ut: [cE[0] - 24, cE[1] - 80] };
   if (az === 90) return { ur: [cE[0], cE[1] + 62], ut: [cE[0] - 202, cE[1] - 165] };
   return { ur: [cE[0] - 200, cE[1] - 195], ut: [cE[0] - 318, cE[1] + 100] };
 };
@@ -433,7 +455,10 @@ const S24: React.FC = () => {
             </g>
           );
         })}
-        <SpeedBar x={CX} y={110} w={300} />
+        {/* fix 3 (fix2 review Must 1, HOUSE_STYLE 2026-11-08): the event heading at the top of the column beside the map (as Part 2),
+            and the colour bar title says what the map shows; the bar 24 px lower to make the row */}
+        <Lbl x={CX} y={44} t="Hurricane Ian · 28 Sep 2022" c={C.ink} s={T.floor} />
+        <SpeedBar x={CX} y={134} w={300} title="wind speed near the ground" />
         <Keyword f={f} text="three points by hand" at={[CX, 260]} appear={0} out={tRem - 18} />
         <SkipChip f={f} k={k} to={keepTime("s24_ring_points")} x0={1210} />
         <Lbl x={CX} y={800} t="all 72, then average" c={C.key} s={T.floor} o={win(f, tComp, tLink - 18, 10)} />
@@ -469,8 +494,10 @@ const S24: React.FC = () => {
         const live = win(f, p.t0, p.end - 12, 12);
         return <React.Fragment key={n}>
           <TeX s={`${p.az}^\\circ`} x={q[0] + er[0] * (p.az === 0 ? -50 : 52)} y={q[1] + er[1] * (p.az === 0 ? -50 : 52)} size={46} ax={0.5} c={C.gold} halo o={win(f, p.end, tAll, 10)} />
-          <TeX s={String.raw`\boldsymbol{u_r=${LAB24[p.az].ur}}`} x={lab24(p.az, cE, q).ur[0]} y={lab24(p.az, cE, q).ur[1]} size={50} ax={0.5} c={C.neg} halo haloW={0.12} o={live * fin(f, p.tr + 10)} />
-          <TeX s={String.raw`\boldsymbol{u_\theta=${LAB24[p.az].ut}}`} x={lab24(p.az, cE, q).ut[0]} y={lab24(p.az, cE, q).ut[1]} size={50} ax={0.5} c={C.first} halo haloW={0.12} o={live * fin(f, p.tt + 10)} />
+          {/* fix 3 (fix2 review Should 1): on a small dark chip instead of the thick halo (it turned "=" and "−" into bars), the
+              teal lighter; the minus is the physics (in, not out) */}
+          <ChipTeX s={String.raw`\boldsymbol{u_r=${LAB24[p.az].ur}}`} x={lab24(p.az, cE, q).ur[0]} y={lab24(p.az, cE, q).ur[1]} size={50} c={C.neg} o={live * fin(f, p.tr + 10)} />
+          <ChipTeX s={String.raw`\boldsymbol{u_\theta=${LAB24[p.az].ut}}`} x={lab24(p.az, cE, q).ut[0]} y={lab24(p.az, cE, q).ut[1]} size={50} c={TEAL_L} o={live * fin(f, p.tt + 10)} />
         </React.Fragment>;
       })}
       {/* R7: the values of the eight points on the map, outside the ring (rose u_r above, teal u_θ below), shifted clockwise off the u_θ arrow */}
@@ -483,8 +510,9 @@ const S24: React.FC = () => {
         const off = az === 225 ? 122 : 92;   // fix 1 after fb1 (review 1 C2): the one outward arrow (+13.5) no longer points into its label
         const c: Pt = [q[0] + er[0] * off - et[0] * 40, q[1] + er[1] * off - et[1] * 40];
         return <React.Fragment key={`l8${az}`}>
-          <TeX s={String.raw`\boldsymbol{${LAB8[az][0]}}`} x={c[0]} y={c[1] - 25} size={44} ax={0.5} c={C.neg} halo haloW={0.12} o={o} />
-          <TeX s={String.raw`\boldsymbol{${LAB8[az][1]}}`} x={c[0]} y={c[1] + 25} size={44} ax={0.5} c={C.first} halo haloW={0.12} o={o} />
+          {/* fix 3 (fix2 review Should 1): a thinner halo (0.12 -> 0.06: the minus signs stay thin) and the lighter teal */}
+          <TeX s={String.raw`\boldsymbol{${LAB8[az][0]}}`} x={c[0]} y={c[1] - 25} size={44} ax={0.5} c={C.neg} halo haloW={0.06} o={o} />
+          <TeX s={String.raw`\boldsymbol{${LAB8[az][1]}}`} x={c[0]} y={c[1] + 25} size={44} ax={0.5} c={TEAL_L} halo haloW={0.06} o={o} />
         </React.Fragment>;
       })}
       <TeX s={eqA} x={CX} y={262} size={46} o={fin(f, tRem)} />
@@ -562,11 +590,13 @@ const S25: React.FC = () => {
   // user 2026-11-07: Part 2 shows the IMPACT: wind onto the land -> water level (tide gauges) -> flood maps (satellite before / after)
   const tP2 = AT(k, 14, "In Part 2"), tOnto = AT(k, 14, "how much of the wind blew onto the land"), tGauge = AT(k, 14, "how high the water rose"),
     tFlood = AT(k, 14, "the flooded land");
-  const PB = { x: 80, y: 40, w: 920, h: 740 };
+  // fix 3 (fix2 review Must 1, HOUSE_STYLE 2026-11-08): two panels, each with its event heading (level, y 160), one shared title on top;
+  // the map 155 px shorter (top 195, bottom unchanged at 780)
+  const PB = { x: 80, y: 195, w: 920, h: 585 };
   const Bend = boxAt(26.6, -82.3, 3.5, PB.x, PB.y, PB.w, PB.h);
   const B = zoomBox(boxAt(IAN.c[0], IAN.c[1], 1.08, PB.x, PB.y, PB.w, PB.h), Bend, prog(f, 0, 30));
   const P = mapP(B);
-  const A: Ax = { x: 1180, y: 340, w: 440, h: 260, xr: [0, 360], yr: [-50, 50] };   // K6 k6f2: 30 px lower, the colour bar (y 200) clear of the keywords and "47"   // fix 1 Must 3: room for the speed bar above
+  const A: Ax = { x: 1180, y: 340, w: 440, h: 260, xr: [0, 360], yr: [-75, 50] };   // fix 3 (fix2 review Should 3): the axis runs to -75, so a free band under the lowest curve (v -45.6) holds "14 points out"   // K6 k6f2: 30 px lower, the colour bar (y 200) clear of the keywords and "47"   // fix 1 Must 3: room for the speed bar above
   const az = RING.az as number[];
   const runUV = prog(f, tUV, tV + 30), runP = prog(f, tTeal - 10, tRose + 40);
   const mi = Math.min(71, Math.floor(prog(f, tUV, SE(k, 12)) * 72));
@@ -585,7 +615,7 @@ const S25: React.FC = () => {
       </GeoMap>
       <Svg>
         <rect x={A.x} y={Y(47)} width={A.w} height={Y(17) - Y(47)} fill={C.first} opacity={0.1 * fin(f, tRange)} />
-        <Axes A={A} xt={[0, 90, 180, 270, 360]} yt={[-50, -25, 0, 25, 50]} xl="θ round the eye (°)" zero o={fin(f, tPlot - 20)} />
+        <Axes A={A} xt={[0, 90, 180, 270, 360]} yt={[-75, -50, -25, 0, 25, 50]} xl="θ round the eye (°)" zero o={fin(f, tPlot - 20)} />
         <Lbl x={A.x - 14} y={A.y - 48} t="m/s" c={C.muted} s={44} a="end" b={false} o={fin(f, tPlot - 20)} />
         <Curve A={A} xs={az} ys={RING.u} c={C.second} upto={runUV} o={dim} />
         <Curve A={A} xs={az} ys={RING.v} c={C.second} dash="14 10" upto={prog(f, tV - 10, tV + 30)} o={dim} />
@@ -598,16 +628,19 @@ const S25: React.FC = () => {
         {/* fix 1c C41: the spoken numbers on the graph, each on its words; the 14 outward points shaded */}
         <rect x={PA(185, 0)[0]} y={A.y} width={PA(250, 0)[0] - PA(185, 0)[0]} height={A.h} fill={C.neg} opacity={0.12 * fin(f, tNeg)} />
         {/* fix 3 (review 3 Should 11): "14 points out" (a count, not m/s) in the free lower-right of the plot, under the rose curve */}
-        <Lbl x={PA(138, 0)[0]} y={Y(-40)} t="14 points out" c={C.neg} s={T.floor} o={fin(f, AT(k, 11, "blow outward"))} />
+        {/* fix 3 (fix2 review Should 3): in the free band under every curve, centred under the shaded 14 points (it lay on the v curve and the 135° dot) */}
+        <Lbl x={PA(217.5, 0)[0]} y={Y(-62.5)} t="14 points out" c={C.neg} s={T.floor} a="middle" o={fin(f, AT(k, 11, "blow outward"))} />
         <Lbl x={PA(90, 0)[0]} y={Y(16.9) + 26} t="17" c={C.first} s={T.floor} a="middle" o={fin(f, AT(k, 9, "seventeen"))} />
         {/* fix 2 (review 2 Should 6): "47" above its peak (clear of the curves), "mean 35" above the mean line where the teal curve is
             below it (θ 20°-130°), clear of the θ = 0 dots */}
         <Lbl x={PA(215, 0)[0] - 2} y={Y(46.8) - 26} t="47" c={C.first} s={T.floor} o={fin(f, AT(k, 9, "forty seven"))} />
-        <Lbl x={PA(22, 0)[0]} y={Y(IAN.vt) - 40} t="mean 35" c={C.first} s={T.floor} o={fin(f, AT(k, 9, "average of thirty five"))} />
+        {/* fix 3 (fix2 review Should 3): lifted above the teal curve (its right end ran into it near θ 150°) */}
+        <Lbl x={PA(6, 0)[0] + 1} y={Y(IAN.vt) - 44} t="mean 35" c={C.first} s={T.floor} o={fin(f, AT(k, 9, "average of thirty five"))} />
         <Lbl x={PA(100, 0)[0] - 18} y={Y(-40.1)} t="−40" c={C.neg} s={T.floor} a="end" o={fin(f, AT(k, 10, "minus forty"))} />
         {/* fix 2: "+14" left of its peak with a leader tick (it sat on the u curve) */}
-        <Lbl x={PA(185, 0)[0] - 8} y={Y(14.15) - 2} t="+14" c={C.neg} s={T.floor} a="end" o={fin(f, AT(k, 10, "plus fourteen"))} />
-        <line x1={PA(185, 0)[0]} y1={Y(14.15)} x2={PA(214, 0)[0]} y2={Y(14.15)} stroke={C.neg} strokeWidth={3} opacity={fin(f, AT(k, 10, "plus fourteen"))} />
+        {/* fix 3 (fix2 review Should 3): label and leader 12 px higher, the leader stops short of the peak (it lay along the rose curve) */}
+        <Lbl x={PA(185, 0)[0] - 8} y={Y(14.15) - 14} t="+14" c={C.neg} s={T.floor} a="end" o={fin(f, AT(k, 10, "plus fourteen"))} />
+        <line x1={PA(185, 0)[0]} y1={Y(14.15) - 12} x2={PA(210, 0)[0]} y2={Y(14.15) - 12} stroke={C.neg} strokeWidth={3} opacity={fin(f, AT(k, 10, "plus fourteen"))} />
         {/* K6 after fix 1c: under the rose curve, right of "14 out" (it sat on the curve and on "14 out") */}
         {/* fix 3 (review 3 Should 11): at the right end of the dotted −13 line, off the plot's bottom frame */}
         <Lbl x={A.x + A.w + 8} y={Y(IAN.vr) + 44} t="mean −13" c={C.neg} s={T.floor} o={fin(f, tAvg)} />
@@ -626,7 +659,11 @@ const S25: React.FC = () => {
         <Lbl x={1572} y={745} t="northward v" c={C.second} s={T.floor} o={fin(f, tV) * dim * legO} />
         <line x1={1180} y1={805} x2={1240} y2={805} stroke={C.first} strokeWidth={7} opacity={fin(f, tTeal) * legO} />
         <line x1={1500} y1={805} x2={1560} y2={805} stroke={C.neg} strokeWidth={7} strokeDasharray="14 8" opacity={fin(f, tRose) * legO} />
-        <SpeedBar x={1480} y={200} w={240} />
+        {/* fix 3 (fix2 review Must 1): the map's colour bar under the chart heading, 60 px right (clear of "47") */}
+        <SpeedBar x={1540} y={248} w={200} />
+        <Lbl x={960} y={40} t="Winds round the 25-km ring" c={C.ink} s={46} a="middle" />
+        <Lbl x={80} y={160} t="Hurricane Ian · 28 Sep 2022" c={C.ink} s={T.floor} />
+        <Lbl x={1180} y={160} t="Hurricane Ian · 28 Sep 2022" c={C.ink} s={T.floor} />
         <Keyword f={f} text="why polar here?" at={[1180, 96]} appear={0} out={tSw - 18} />
         <Keyword f={f} text="u, v swing: the wind turns" at={[1180, 96]} s={T.floor} appear={tSw} out={tNeg - 18} />
         {/* fix 2 (fix1 review 2 Should 9): the 14 is named in the line itself ("14 out"), and the line comes on "fifty eight" */}
@@ -845,7 +882,9 @@ const S27: React.FC = () => {
           </>; }}
       </GeoMap>
       <SourceBelow text={IAN_SRC} pic={PB} w={720} o={beat(9)} name="s27 src" />
-      <Svg><SpeedBar x={1080} y={600} w={300} o={beat(9)} /></Svg>
+      {/* fix 3 (fix2 review Must 1, HOUSE_STYLE 2026-11-08): the recap mini-map's event heading above it; the bar title says what it shows */}
+      <Svg><SpeedBar x={1080} y={600} w={300} o={beat(9)} title="wind speed near the ground" />
+        <Lbl x={PB.x} y={74} t="Hurricane Ian · 28 Sep 2022" c={C.ink} s={T.floor} o={beat(9)} /></Svg>
       {keys.map((s, j) => (s ? <TeX key={j} s={s} x={1080} y={430} size={j === 7 ? 64 : 54} c={C.key} o={beat(j)} /> : null))}
       {/* R3: the teaser to Part 2, one line per phrase: turning r̂ and θ̂, height (cylindrical), the turned axes on a coast */}
       <TeX s={String.raw`\text{Part 2: how fast }\hat{\mathbf r},\ \hat{\boldsymbol\theta}\text{ turn}`} x={1080} y={360} size={50} c={C.key} o={beat(10)} />

@@ -14,10 +14,14 @@ import { SourceBelow } from "../house/kit/frame";
 import { AnimatedWindArrow, FlowParticles } from "../house/kit/wind";
 import {
   AT, ArcHead, Arrow, AxesEN, BAL, BDot, Balloon, D2R, GeoImg, GeoMap, Ground, IAN, IAN_SRC, IMGS, K, KmTicks, Lbl, PL, PO, PU, SE, SS, Scene, SpeedBar,
-  SpeedBarCompact, Station, Svg, arcD, boxAt, clamp, fin, fout, kmPx, linesPath, mix, poly, pp, prog, rotS, win,
+  SpeedBarCompact, Station, Svg, arcD, boxAt, clamp, exitFirst, fin, fout, kmPx, linesPath, mix, poly, pp, prog, rotS, win,
   Keyword as MKeyword,
 } from "./cf_lib";
 import { EQ_S02, EQ_S03, EQ_S04, EQ_S05, EQ_S06, EQ_S07, cutAt } from "./cf_eq";
+
+// fix 3: the end of a TeX row fading in by colour on its word (same string on every frame, so the row never jumps): cf_sC.tsx tailIn
+const hexMix = (a: string, b: string, u: number) => "#" + [1, 3, 5].map((i) => Math.round(parseInt(a.slice(i, i + 2), 16) * (1 - u) + parseInt(b.slice(i, i + 2), 16) * u).toString(16).padStart(2, "0")).join("");
+const tailIn = (f: number, t: number, c: string, s: string) => "\\textcolor{" + hexMix("#171f33", c, Math.min(1, Math.max(0, (f - t) / 8))) + "}{" + s + "}";
 
 // ---------------------------------------------------------------- numbers on screen = the data
 const CHECK_A: [string, number, number, number][] = [
@@ -97,7 +101,11 @@ const S00: React.FC = () => {
         }}
       </GeoMap>
       <SourceBelow text={IAN_SRC} pic={TB} w={690} o={oB} name="s00 src" />
-      <Svg><SpeedBarCompact x={TB.x} y={770} o={oB} /></Svg>
+      {/* fix 3 (fix2 review Must 1, HOUSE_STYLE 2026-11-08): the event heading and what the map shows, above the picture; the bar
+          keeps only its unit (the title says "wind speed") */}
+      <Svg><SpeedBarCompact x={TB.x} y={770} o={oB} label="m/s" />
+        <Lbl x={TB.x} y={62} t="Hurricane Ian · 28 Sep 2022" c={C.ink} s={T.floor} o={oB} />
+        <Lbl x={TB.x} y={116} t="wind speed near the ground" c={C.muted} s={T.floor} b={false} o={oB} /></Svg>
     </Scene>
   );
 };
@@ -112,7 +120,8 @@ const S01: React.FC = () => {
   const th = PL.th;
   const b: Pt = [O[0] + 5 * u * Math.cos(th * D2R), O[1] - 5 * u * Math.sin(th * D2R)];
   const er: Pt = [Math.cos(th * D2R), -Math.sin(th * D2R)], et = rotS(er, 90);
-  const MB = { x: 1130, y: 50, w: 710, h: 440 };
+  // fix 3 (fix2 review Must 1): the map 86 px lower and 50 px shorter, so the event heading and the title sit above it
+  const MB = { x: 1130, y: 136, w: 710, h: 390 };
   const B = boxAt(IAN.c[0], IAN.c[1], 1.0, MB.x, MB.y, MB.w, MB.h);
   const bright = 0.55 + 0.45 * fin(f, tBuilt, 20);
   const moving = f >= tHur ? f - tHur : 0;
@@ -155,11 +164,16 @@ const S01: React.FC = () => {
         <Arrow p={b} q={[b[0] + et[0] * 110, b[1] + et[1] * 110]} color={C.second} />
         <BDot p={b} />
         {[0, 1, 2, 3, 4, 5, 6].map(thumb)}
-        <Keyword f={f} text="coordinates" at={[960, 130]} a="middle" appear={tCo} />
-        <MKeyword f={f} text="$x$ and $y$" at={[960, 215]} a="middle" appear={tXY} />
-        <MKeyword f={f} text="polar $r$, $\theta$" at={[960, 290]} a="middle" appear={tRT} />
-        <MKeyword f={f} text="turned axes" at={[960, 365]} a="middle" appear={tTA} />
-        <SpeedBar x={810} y={470} w={200} />
+        {/* fix 3 (fix2 review C6): the keyword list 10-15 px higher and the colour bar 22 px lower, so "turned axes" and "wind speed"
+            no longer read as one block */}
+        <Keyword f={f} text="coordinates" at={[960, 120]} a="middle" appear={tCo} />
+        <MKeyword f={f} text="$x$ and $y$" at={[960, 200]} a="middle" appear={tXY} />
+        <MKeyword f={f} text="polar $r$, $\theta$" at={[960, 276]} a="middle" appear={tRT} />
+        <MKeyword f={f} text="turned axes" at={[960, 352]} a="middle" appear={tTA} />
+        <SpeedBar x={810} y={492} w={200} />
+        {/* fix 3 (fix2 review Must 1, HOUSE_STYLE 2026-11-08): event heading + what the map shows, above the picture */}
+        <Lbl x={1130} y={44} t="Hurricane Ian · 28 Sep 2022" c={C.ink} s={T.floor} />
+        <Lbl x={1130} y={98} t="wind speed near the ground" c={C.muted} s={T.floor} b={false} />
       </Svg>
       <TeX s={String.raw`\hat{\mathbf r}`} x={b[0] + er[0] * 150} y={b[1] + er[1] * 150} size={56} ax={0.5} c={C.second} />
       <TeX s={String.raw`\hat{\boldsymbol\theta}`} x={b[0] + et[0] * 150} y={b[1] + et[1] * 150} size={56} ax={0.5} c={C.second} />
@@ -289,6 +303,8 @@ const S03: React.FC = () => {
         </g>
         <Lbl x={1645} y={720} t="radar rings" c={C.muted} s={T.floor} a="middle" o={fin(f, tRing)} />
         <SpeedBarCompact x={IB.x} y={796} o={fin(f, tIns)} />
+        {/* fix 3 (HOUSE_STYLE 2026-11-08): the thumbnail's event heading (its colour bar says what it shows) */}
+        <Lbl x={IB.x} y={390} t="Ian · 28 Sep 2022" c={C.ink} s={T.floor} o={fin(f, tIns)} />
       </Svg>
       <SourceBelow text="Data: HRRR (NOAA) · Ian, 28 Sep 2022" pic={IB} w={360} o={fin(f, tIns)} name="s03 src" />
     </Scene>
@@ -340,7 +356,8 @@ const S04: React.FC = () => {
       {/* K6 after fix 1c: the r formula leaves with the r rows (just before "fifty three"), so the rows sliding out above the stack
           never pass through it */}
       <TeX s={String.raw`r=${cutAt(EQ_S04, String.raw`,\qquad r=`)[1]}`} x={1100} y={85} size={50} c={C.local} o={win(f, tPy, tAng - 12)} />
-      <CalcStack f={f} x={1240} y={150} size={54} maxLines={2} rows={[
+      {/* fix 3 (fix2 review C1): exitFirst - outgoing rows fade before the stack slides (as s17 / s23) */}
+      <CalcStack f={f} x={1240} y={150} size={54} maxLines={2} rows={exitFirst([
         { lhs: "r", rhs: String.raw`=\sqrt{3^2+4^2}`, at: tPy },
         { rhs: String.raw`=\sqrt{9+16}`, at: t916, cont: true },
         { rhs: String.raw`=\sqrt{25}`, at: t25, cont: true },
@@ -351,7 +368,7 @@ const S04: React.FC = () => {
         { lhs: String.raw`\theta`, rhs: String.raw`=\tan^{-1}(1.333)`, at: tAng },
         { rhs: String.raw`\approx53.13^\circ\approx53^{\circ}`, at: t53, cont: true },
         { lhs: String.raw`(r,\ \theta)`, rhs: String.raw`=(5\ \mathrm{km},\ 53^{\circ})`, at: tPair },
-      ]} />
+      ], 2)} />
     </Scene>
   );
 };
@@ -504,9 +521,10 @@ const S07: React.FC = () => {
       <CalcStack f={f} x={1300} y={300} size={56} maxLines={3} rows={[
         { lhs: String.raw`0.2\ \mathrm{rad}`, rhs: String.raw`\approx0.2\times57.3^\circ\approx11.5^\circ`, at: AT(k, 7, "eleven and a half") },
         // fix 2 (fix1 review 2 Should 4, review 1 C4): each product's left side on the words that name it, "= …" on the spoken result
-        { lhs: String.raw`5\ \mathrm{km}\times0.2`, rhs: { raw: [{ s: String.raw`\textcolor{#e8ecf4}{=1\ \mathrm{km}}`, o: fin(f, t1) }] }, at: AT(k, 7, "the radius times the angle") },
-        // (raw layers carry no colour of their own: ink, as the row's C.ink)
-        { lhs: String.raw`50\ \mathrm{km}\times0.2`, rhs: { raw: [{ s: String.raw`\textcolor{#e8ecf4}{=10\ \mathrm{km}}`, o: fin(f, t10km) }] }, at: AT(k, 8, "fifty kilometres") },
+        // fix 3 (fix2 review C3): both arcs as "s = radius × angle" (the result carries its symbol: s as on the circle and in s = rθ),
+        // so the two rows share a one-letter left side and line up; "= 1 km" / "= 10 km" fade in by colour on their spoken words
+        { lhs: "s", rhs: String.raw`=5\ \mathrm{km}\times0.2` + tailIn(f, t1, "#e8ecf4", String.raw`=1\ \mathrm{km}`), at: AT(k, 7, "the radius times the angle") },
+        { lhs: "s", rhs: String.raw`=50\ \mathrm{km}\times0.2` + tailIn(f, t10km, "#e8ecf4", String.raw`=10\ \mathrm{km}`), at: AT(k, 8, "fifty kilometres") },
         { lhs: String.raw`\dfrac{10\ \mathrm{km}}{1\ \mathrm{km}}`, rhs: String.raw`=\dfrac{50\ \mathrm{km}}{5\ \mathrm{km}}=10`, at: tSame, h: 130 },
       ]} />
     </Scene>

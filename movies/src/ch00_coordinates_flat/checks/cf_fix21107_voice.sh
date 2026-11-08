@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ch00_coordinates_flat (#5a) fix 2 (2026-11-07) voice steps under the lock protocol of 2026-11-07 (renders first):
 #   tts : re-voice s23 S7 + S13 (cf_fix21107_splice.py) under VOICE.lock, when HEAVY.lock is free or held by a render, RAM >= 8 GB
-#   mix : the sound mix (~11.5 GB) into build1/sound11 under VOICE.lock, only when RENDER2.lock AND HEAVY.lock are free, RAM >= 14 GB
+#   mix : the sound mix (~11.5 GB) into build1/sound11 under VOICE.lock, only when RENDER2.lock AND HEAVY.lock are free, RAM >= 8 GB (mix in float32 since 2026-11-08 ~00:00, about half the memory)
 # usage: cf_fix21107_voice.sh tts|mix
 set -o pipefail
 R="/c/Users/sislam27/Work/Climate Dynamics PHD/AOFD Vallis"
@@ -16,7 +16,7 @@ tts_ok() {
   if [ -d "$H" ]; then o=$(cat "$H/owner.txt" 2>/dev/null); echo "$o" | grep -qiE "k6|still|ssr" && return 1; echo "$o" | grep -qi "render" || return 1; fi
   [ "$(ram)" -ge 8 ]
 }
-mix_ok() { [ ! -d "$R2" ] && [ ! -d "$H" ] && [ "$(ram)" -ge 14 ]; }
+mix_ok() { [ ! -d "$R2" ] && [ ! -d "$H" ] && [ "$(ram)" -ge 8 ]; }
 mkdir -p "$S/build1/tmp"; export TEMP="$S/build1/tmp" TMP="$S/build1/tmp"
 case "$1" in
   tts)

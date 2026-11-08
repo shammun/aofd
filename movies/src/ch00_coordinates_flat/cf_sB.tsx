@@ -717,7 +717,8 @@ const S14: React.FC = () => {
       <Tip p={B13} v={ET13} L={L13} s={THAT} o={0.8} />
       <TeX s={String.raw`\mathbf u`} x={W[0] + 50} y={W[1] + 10} size={56} c={C.ink} o={0.7} />
       {/* fix 1c C19/C20: scalar × vector part by part, the double minus, and the lengths with their squares */}
-      <CalcStack f={f} x={1270} y={110} size={46} maxLines={2} o={old * kOut} rows={[
+      {/* fix 3 (fix2 review C1): exitFirst - outgoing rows fade before the stack slides (they slid past the frame top at 30-60 %) */}
+      <CalcStack f={f} x={1270} y={110} size={46} maxLines={2} o={old * kOut} rows={exitFirst([
         // fix 2 (fix1 review 2 Should 5): the rebuild rule is written on "We rebuild it"
         { lhs: String.raw`\mathbf u`, rhs: String.raw`=6\,\hat{\mathbf r}+(-8)\,\hat{\boldsymbol\theta}`, at: AT(k, 1, "We rebuild it") },
         { lhs: String.raw`6\,\hat{\mathbf r}`, rhs: String.raw`=6\,(0.6,\ 0.8)`, at: t6 + 10 },
@@ -730,14 +731,15 @@ const S14: React.FC = () => {
         { rhs: String.raw`\text{minus}\times\text{minus}=\text{plus}`, at: r3b, cont: true },
         { rhs: String.raw`(-8)(0.6)=-4.8`, at: r3c, cont: true },
         { lhs: String.raw`-8\,\hat{\boldsymbol\theta}`, rhs: String.raw`=(6.4,\ -4.8)`, at: r3c + 20, cont: true },
-        { lhs: "\\text{sum}", rhs: String.raw`=(3.6+6.4,\ 4.8-4.8)`, at: tE },
+        // fix 3 (fix2 review C7 / fix1 R1 C3): the sum is the wind itself, so the result carries its symbol u
+        { lhs: String.raw`\mathbf u`, rhs: String.raw`=(3.6+6.4,\ 4.8-4.8)`, at: tE },
         { rhs: String.raw`=(10,\ 0)`, at: AT(k, 4, "give ten"), cont: true },
         // fix 2 (fix1 review 1 Should 4, review 2 Should 11): the length row has its symbol and the voice's sign, (−8)²
         { lhs: String.raw`|\mathbf u|`, rhs: String.raw`=\sqrt{6^2+(-8)^2}`, at: AT(k, 7, "six and minus eight") },
         { rhs: String.raw`=\sqrt{36+64}`, at: AT(k, 7, "add them"), cont: true },
         { rhs: String.raw`=\sqrt{100}=10\ \mathrm{m/s}`, at: AT(k, 7, "we get ten"), cont: true },
         { lhs: String.raw`|(10,\ 0)|`, rhs: String.raw`=\sqrt{10^2+0^2}=10\ \mathrm{m/s}`, at: AT(k, 7, "wind's own length") },
-      ]} />
+      ], 2)} />
       <CalcStack f={f} x={1180} y={470} size={54} maxLines={4} rows={[
         { lhs: urL, rhs: String.raw`=(u,\ v)\cdot(\cos\theta,\ \sin\theta)`, at: AT(k, 9, "u sub r is") },
         { rhs: `=${urR}`, at: AT(k, 9, "u cosine theta"), cont: true },

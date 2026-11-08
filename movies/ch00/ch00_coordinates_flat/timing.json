@@ -6599,6 +6599,7 @@
      ]
     }
    ]
-  }
+  },
+  "recue_fix3_1108": "captions re-cued: a spoken vector pair never split across cues (fix2 review C4)"
  }
 }

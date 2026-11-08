@@ -268,20 +268,22 @@ export const ColourBar: React.FC<{ x: number; y: number; w: number; lut: string[
       {unit ? <Lbl x={x + w + 18} y={y + 12} t={unit} c={C.muted} s={48} b={false} /> : null}
     </g>
   );
-export const SpeedBar: React.FC<{ x: number; y: number; o?: number; w?: number }> = ({ x, y, o = 1, w = 300 }) =>
-  <ColourBar x={x} y={y} w={w} lut={LUT_SPEED} lo={0} hi={50} unit="m/s" o={o} title="wind speed"
+/** fix 3 (fix2 review Must 1, HOUSE_STYLE 2026-11-08): `title` = what the map shows (default "wind speed") */
+export const SpeedBar: React.FC<{ x: number; y: number; o?: number; w?: number; title?: string }> = ({ x, y, o = 1, w = 300, title = "wind speed" }) =>
+  <ColourBar x={x} y={y} w={w} lut={LUT_SPEED} lo={0} hi={50} unit="m/s" o={o} title={title}
     ticks={[{ v: 0, t: "0" }, { v: 25, t: "25" }, { v: 50, t: "50" }]} />;
 /** a compact wind-speed bar for small data pictures (fix 1, review 1 Must 3: the s00 title map, the s03 thumbnail): bar y-9..y+9,
  * ticks 0 / 25 / 50 below (44 px, centre y+42), "wind speed (m/s)" to the right of the bar. Height ≈ 70 px. Place inside <Svg>. */
-export const SpeedBarCompact: React.FC<{ x: number; y: number; o?: number; w?: number }> = ({ x, y, o = 1, w = 200 }) =>
+export const SpeedBarCompact: React.FC<{ x: number; y: number; o?: number; w?: number; label?: string }> = ({ x, y, o = 1, w = 200, label = "wind speed (m/s)" }) =>
   o <= 0 ? null : (
     <g opacity={o} data-k6-cbar="1">
       {Array.from({ length: 40 }, (_, i) => <rect key={i} x={x + (i * w) / 40} y={y - 9} width={w / 40 + 0.8} height={18} fill={lutCss(LUT_SPEED, (i + 0.5) / 40)} />)}
       <rect x={x} y={y - 9} width={w} height={18} fill="none" stroke={C.muted} strokeWidth={2} />
       {[0, 25, 50].map((v) => <Lbl key={v} x={x + (v / 50) * w} y={y + 42} t={`${v}`} c={C.muted} s={T.floor} a="middle" b={false} />)}
-      <Lbl x={x + w + 18} y={y} t="wind speed (m/s)" c={C.muted} s={T.floor} b={false} />
+      <Lbl x={x + w + 18} y={y} t={label} c={C.muted} s={T.floor} b={false} />
     </g>
   );
+
 
 // ---------------------------------------------------------------- x-y charts
 export type Ax = { x: number; y: number; w: number; h: number; xr: [number, number]; yr: [number, number] };
