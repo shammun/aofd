@@ -13,7 +13,7 @@ import { SeriesTitle } from "./kit_cf/SeriesTitle";
 import { SourceBelow } from "../house/kit/frame";
 import { AnimatedWindArrow, FlowParticles } from "../house/kit/wind";
 import {
-  AT, ArcHead, Arrow, AxesEN, BAL, BDot, Balloon, D2R, GeoImg, GeoMap, Ground, IAN, IAN_SRC, IMGS, K, KmTicks, Lbl, PL, PO, PU, SE, SS, Scene, SpeedBar,
+  AT, ATlast, ArcHead, Arrow, AxesEN, BAL, BDot, Balloon, D2R, GeoImg, GeoMap, Ground, IAN, IAN_SRC, IMGS, K, KmTicks, Lbl, PL, PO, PU, SE, SS, Scene, SpeedBar,
   SpeedBarCompact, Station, Svg, arcD, boxAt, clamp, exitFirst, fin, fout, kmPx, linesPath, mix, poly, pp, prog, rotS, win,
   Keyword as MKeyword,
 } from "./cf_lib";
@@ -379,6 +379,8 @@ const S05: React.FC = () => {
   const tTri = SS(k, 2), tSides = SS(k, 4), tC = SS(k, 6), t4 = SS(k, 7), tEq = SS(k, 8), tX5 = AT(k, 6, "So five kilometres times");
   // fix 1 after fb1: each product row lands on its result words ("gives back the east side: three")
   const tX5r = AT(k, 6, "gives back the east side"), t4r = AT(k, 7, "gives back the north side");
+  const t3w = ATlast(k, 6, "east side: three"), t4w = ATlast(k, 7, "north side: four");   // fix 4: the spoken results
+  void [tX5r, t4r];
   return (
     <Scene>
       <Svg>
@@ -410,8 +412,10 @@ const S05: React.FC = () => {
         { rhs: String.raw`=\dfrac{3}{5}=0.6`, at: AT(k, 6, "three fifths"), cont: true, h: 128 },
         { lhs: String.raw`\sin\theta`, rhs: String.raw`=\dfrac{\text{north side}}{r}`, at: AT(k, 6, "and sine theta"), h: 132 },
         { rhs: String.raw`=\dfrac{4}{5}=0.8`, at: AT(k, 6, "four fifths"), cont: true, h: 128 },
-        { lhs: String.raw`x=r\cos\theta`, rhs: String.raw`=5\times0.6=3`, at: tX5r },
-        { lhs: String.raw`y=r\sin\theta`, rhs: String.raw`=5\times0.8=4`, at: t4r },
+        // fix 4 (fix3 review 2): each product row on its inputs' words ("So five kilometres times" / "And five kilometres times"), its
+        // result fading in by colour on "three" / "four" (it came 1.9 / 1.7 s early)
+        { lhs: String.raw`x=r\cos\theta`, rhs: String.raw`=5\times0.6` + tailIn(f, t3w, "#e8ecf4", "=3"), at: tX5 },
+        { lhs: String.raw`y=r\sin\theta`, rhs: String.raw`=5\times0.8` + tailIn(f, t4w, "#e8ecf4", "=4"), at: SS(k, 7) },
       ]} />
       <TeX s={String.raw`(\theta\approx53.13^\circ)`} x={1100} y={190} size={46} c={C.local} o={win(f, tC, tEq - 10)} />
       <TeX s={EQ_S05} x={1100} y={770} size={60} o={fin(f, tEq)} />

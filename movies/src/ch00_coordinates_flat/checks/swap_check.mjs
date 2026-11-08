@@ -35,7 +35,7 @@ const textW = (t, s) => [...t].reduce((w, ch) => w + s * (/[ .,:;()|'·]/.test(c
 const T = { hero: 128, eq: 84, calc: 68, key: 54, floor: 44 };
 const swarp = (x, segs) => segs.reduce((v, [a, b]) => { if (v <= a || v >= b) return v;
   const y = 0.5 - 0.5 * Math.cos((Math.PI * (v - a)) / (b - a)), u = y < 0.5 ? Math.cbrt(y / 4) : 1 - Math.cbrt(2 * (1 - y)) / 2; return a + (b - a) * u; }, x); // = the TSX helper
-const BASE = { swarp, SS, SE, AT, LEN, K, CUT, END, FPS, XF: 10, clamp, easeIO, Math, T, Number, String, f: 0, fin: () => 1, fout: () => 1, win: () => 1, pulse: () => 0, ramp: () => 1 };
+const BASE = { swarp, SS, SE, AT, ATlast: AT, LEN, K, CUT, END, FPS, XF: 10, clamp, easeIO, Math, T, Number, String, f: 0, fin: () => 1, fout: () => 1, win: () => 1, pulse: () => 0, ramp: () => 1 };
 
 // ---------- tiny lexer helpers ----------
 const matchClose = (s, i) => { // s[i] is an opening bracket; returns index of its partner (strings/templates skipped)

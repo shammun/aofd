@@ -14,7 +14,7 @@ import { AnimatedWindArrow } from "../house/kit/wind";
 import { CurvedLink } from "../house/kit/extras";
 import {
   AT, Keyword, HOLD, ArcHead, Arrow, Ax, Axes, BDot, ClockText, Curve, D2R, GeoMap, IAN, IAN_SRC, K, LEN, Lbl, MapBox, Place, SAY, SE, SS, Scene, SkipChip, keepTime, SideCallout, SpeedBar, Svg,
-  arcD, axP, axY, boxAt, clamp, exitFirst, fin, fout, kmPx, mapP, mix, nf, poly, prog, rotS, win, zoomBox,
+  arcD, axP, axY, boxAt, clamp, exitFirst, rasterFit, fin, fout, kmPx, mapP, mix, nf, poly, prog, rotS, win, zoomBox,
 } from "./cf_lib";
 import { IanBody, RING, ringArrows, ringPath } from "./cf_sA";
 import { EQ_S21, EQ_S22, EQ_S23, EQ_S24, EQ_S26, cutAt } from "./cf_eq";
@@ -63,7 +63,8 @@ CHECK_C.forEach(([n, v, r, tol]) => { if (!(Math.abs(v - r) <= tol)) throw new E
 
 // ---------------------------------------------------------------- the Ian map frames (s21-s25)
 const MB = { x: 80, y: 40, w: 1100, h: 740 };
-const FULL: MapBox = boxAt(26.6, -82.3, 3.5, MB.x, MB.y, MB.w, MB.h);
+// fix 4 (fix3 review C2): fitted inside the HRRR raster's valid area (the top-left corner showed a dark notch)
+const FULL: MapBox = rasterFit(boxAt(26.6, -82.3, 3.5, MB.x, MB.y, MB.w, MB.h));
 const ZOOM: MapBox = boxAt(IAN.c[0], IAN.c[1], 1.08, MB.x, MB.y, MB.w, MB.h);
 const CX = 1230;   // the text column
 // feedback 2026-11-06 (R7): the eight-point picture of s24 (every 45°): the map zoomed so the 25-km ring is ≈ 230 px, arrows S8 px per m/s
@@ -172,7 +173,8 @@ const S22: React.FC = () => {
     t13c = AT(k, 9, "or about minus thirteen"), t69 = AT(k, 13, "sixty nine"), t49 = AT(k, 14, "forty nine"), tSmW = AT(k, 14, "The model analysis");
   // fix 2 (fix1 review 2 Should 2): the conversion constants on their words, gold (non-obvious inputs, user 2026-11-07)
   const tMul = AT(k, 6, "we multiply by"), t36 = AT(k, 6, "three point six"), t3600 = AT(k, 6, "three thousand six hundred"), t1000 = AT(k, 6, "a thousand metres"),
-    t126 = AT(k, 7, "a hundred and twenty six"), t185 = AT(k, 13, "one point eight five"), t250 = AT(k, 13, "two hundred and fifty");
+    t126 = AT(k, 7, "a hundred and twenty six"), t185 = AT(k, 13, "one point eight five"), t250 = AT(k, 13, "two hundred and fifty"),
+    t135 = AT(k, 12, "a hundred and thirty five");   // fix 4
   // feedback 2026-11-06 (R8): the averaging rule in symbols, N = 72, the first terms of each sum
   const tSym = AT(k, 4, "In symbols"), tN = AT(k, 4, "Here N is"), tThS = AT(k, 4, "The average tangential wind"),
     // the voice names the first term (−8.7 at θ = 0); −10.3, −11.2 and "…" follow on screen, half a second apart
@@ -228,7 +230,9 @@ const S22: React.FC = () => {
         {[0, 1, 2].map((i) => { const q = P(RING.lat[i], RING.lon[i]); const o = win(f, tFirst[i], tDivR, 8);
           return o > 0 ? <circle key={`ft${i}`} cx={q[0]} cy={q[1]} r={13} fill="none" stroke={C.gold} strokeWidth={5} opacity={o} /> : null; })}
         {/* the knots chain, top-down in spoken order: 135 kt → × 1.85 ≈ 250 km/h → ÷ 3.6 ≈ 69 m/s → ring max ≈ 49 m/s */}
-        <Lbl x={CX} y={500} t="official estimate: 135 kt" c={C.local} s={T.floor} o={fin(f, tBest)} />
+        {/* fix 4 (fix3 review 2): the official 135 kt is a non-obvious input: gold for 45 frames on "a hundred and thirty five" */}
+        <Lbl x={CX} y={500} t="official estimate:" c={C.local} s={T.floor} o={fin(f, tBest)} />
+        <Lbl x={CX + textW("official estimate:", T.floor) + 16} y={500} t="135 kt" c={f >= t135 - 2 && f <= t135 + 45 ? C.gold : C.local} s={T.floor} o={fin(f, tBest)} />
         <Keyword f={f} text="analysis smooths the peak" at={[CX, 420]} s={T.floor} appear={tSmW} />
         {/* fix 2 (review 2 Must 4): each running sum on two lines, inside x ≤ 1842 */}
         <Lbl x={CX} y={465} t={`${nT < 72 ? "sum so far" : "sum"}: ${nf(sumT, 1)} m/s`} c={C.gold} s={T.floor} o={win(f, tAddT, tDivT - 17)} />
@@ -251,7 +255,8 @@ const S22: React.FC = () => {
       <TeX s={String.raw`\overline{u_r}=\dfrac{${numR}}{72}`} x={CX} y={685} size={44} o={win(f, tFirst[0], tDivR - 8)} />
       {/* K6 after fix 1c: each mean on two lines (they ran to x 1878): the division, then its value under the "=" */}
       <TeX s={String.raw`\overline{u_\theta}=\dfrac{2505.9\ \mathrm{m/s}}{72}`} x={CX} y={470} size={44} o={win(f, tDivT, tConv + 20)} />
-      <TeX s={String.raw`\approx34.8\approx35\ \mathrm{m/s}`} x={CX + 52} y={560} size={44} o={win(f, tDivT + 20, tConv + 20)} />
+      {/* fix 4 (fix3 review 2): on "about thirty four point eight" (it came 0.64 s early) */}
+      <TeX s={String.raw`\approx34.8\approx35\ \mathrm{m/s}`} x={CX + 52} y={560} size={44} o={win(f, AT(k, 5, "about thirty four point eight"), tConv + 20)} />
       {/* fix 2 (review 2 Must 4): ū_r has its own slot (fraction top ≥ 24 px under "seen from above, NH"), stays through S10-S11; its
           result row is self-contained and stays to the end of the scene */}
       <TeX s={String.raw`\overline{u_r}=\dfrac{-957.2\ \mathrm{m/s}}{72}`} x={CX} y={688} size={44} o={win(f, tDivR, tBest - 24, 12)} />
@@ -329,7 +334,8 @@ const S23: React.FC = () => {
           <line x1={pr[0]} y1={pr[1]} x2={cE[0]} y2={cE[1]} stroke={C.neg} strokeWidth={4} strokeDasharray="12 8" opacity={fout(f, tSp)} />
           <circle cx={pr[0]} cy={pr[1]} r={15} fill={C.first} stroke={C.bg} strokeWidth={4} />
         </g>
-        <Lbl x={(pr[0] + cE[0]) / 2 + 30} y={(pr[1] + cE[1]) / 2 + 30} t="25 km" c={C.neg} s={T.floor} o={par * fout(f, tSp)} />
+        {/* fix 4 (fix3 review C4): on the other side of the dashed radius, away from the ring and its gold lap arc (it touched the arc) */}
+        <Lbl x={(pr[0] + cE[0]) / 2 - 40} y={(pr[1] + cE[1]) / 2 + 40} t="25 km" c={C.neg} s={T.floor} a="end" o={par * fout(f, tSp)} />
         <g opacity={win(f, tRat, tSp - 4)}>
           <Arrow p={pr} q={[pr[0] + et[0] * 2.7 * 50, pr[1] + et[1] * 2.7 * 50]} color={C.first} w={8} head={28} />
           <Arrow p={pr} q={[pr[0] - er[0] * 50, pr[1] - er[1] * 50]} color={C.neg} w={8} head={24} />
@@ -357,7 +363,8 @@ const S23: React.FC = () => {
         // fix 2 (fix1 review 2 Should 11): the result row has its name
         { lhs: String.raw`\text{wind speed}`, rhs: `=${cutAt(EQ_S23, String.raw`\approx`)[0]}`, at: tRoot, h: 90 },
         { rhs: String.raw`=\sqrt{1225+169}`, at: tSq, cont: true },
-        { rhs: String.raw`=\sqrt{1394}\approx37.3`, at: tRt, cont: true },
+        // fix 4 (fix3 review 2): "≈ 37.3" fades in by colour on "thirty seven" (it came 2.2 s early, with the root)
+        { rhs: String.raw`=\sqrt{1394}` + tailIn(f, t37, C.ink, String.raw`\approx37.3`), at: tRt, cont: true },
         { rhs: String.raw`\approx${cutAt(EQ_S23, String.raw`\approx`)[1]}`, at: t37, cont: true },
         // fix 3 (fix2 review Should 2): the conversion is a stack row with its name ("inflow ="), on the "=" column; it no longer
         // starts beside the picture label "35 round"
@@ -597,13 +604,16 @@ const S25: React.FC = () => {
     tRange = SS(k, 9), tWob = SS(k, 10), tNeg = SS(k, 11), tAvg = SS(k, 12), tTwo = SS(k, 13), tWhy = SS(k, 14);
   // feedback 2026-11-06 (R9, user 2026-11-07): the forward link to Part 2: turned axes on a coast, across-shore wind pushes water onto it
   const tCoast = AT(k, 14, "The same idea works on a coast"), tPush = AT(k, 14, "Wind blowing across the shore");
+  // fix 4 (M1): y′ (out to sea) on "a part across it", the onshore arrow on "towards the land"
+  const tAcross = AT(k, 14, "a part across it"), tLand = AT(k, 14, "towards the land");
   // user 2026-11-07: Part 2 shows the IMPACT: wind onto the land -> water level (tide gauges) -> flood maps (satellite before / after)
   const tP2 = AT(k, 14, "In Part 2"), tOnto = AT(k, 14, "how much of the wind blew onto the land"), tGauge = AT(k, 14, "how high the water rose"),
     tFlood = AT(k, 14, "the flooded land");
   // fix 3 (fix2 review Must 1, HOUSE_STYLE 2026-11-08): two panels, each with its event heading (level, y 160), one shared title on top;
   // the map 155 px shorter (top 195, bottom unchanged at 780)
   const PB = { x: 80, y: 195, w: 920, h: 585 };
-  const Bend = boxAt(26.6, -82.3, 3.5, PB.x, PB.y, PB.w, PB.h);
+  // fix 4 (fix3 review S1): fitted inside the HRRR raster's valid area (a ragged dark strip down the left edge, a notch bottom right)
+  const Bend = rasterFit(boxAt(26.6, -82.3, 3.5, PB.x, PB.y, PB.w, PB.h));
   const B = zoomBox(boxAt(IAN.c[0], IAN.c[1], 1.08, PB.x, PB.y, PB.w, PB.h), Bend, prog(f, 0, 30));
   const P = mapP(B);
   const A: Ax = { x: 1180, y: 340, w: 440, h: 260, xr: [0, 360], yr: [-75, 50] };   // fix 3 (fix2 review Should 3): the axis runs to -75, so a free band under the lowest curve (v -45.6) holds "14 points out"   // K6 k6f2: 30 px lower, the colour bar (y 200) clear of the keywords and "47"   // fix 1 Must 3: room for the speed bar above
@@ -640,13 +650,19 @@ const S25: React.FC = () => {
         {/* fix 3 (review 3 Should 11): "14 points out" (a count, not m/s) in the free lower-right of the plot, under the rose curve */}
         {/* fix 3 (fix2 review Should 3): in the free band under every curve, centred under the shaded 14 points (it lay on the v curve and the 135° dot) */}
         <Lbl x={PA(217.5, 0)[0]} y={Y(-62.5)} t="14 points out" c={C.neg} s={T.floor} a="middle" o={fin(f, AT(k, 11, "blow outward"))} />
-        <Lbl x={PA(90, 0)[0]} y={Y(16.9) + 26} t="17" c={C.first} s={T.floor} a="middle" o={fin(f, AT(k, 9, "seventeen"))} />
+        {/* fix 4 (fix3 review S2): "17" read as "−17−" with the 0 line through it: 4 px higher, on a background-coloured gap in the 0 line
+            (the gap starts under the teal minimum, so the curve is not cut) */}
+        <g opacity={fin(f, AT(k, 9, "seventeen"))} data-lc-own="s25 17">
+          <rect x={PA(90, 0)[0] - 28} y={Y(16.9) + 6} width={56} height={34} fill={C.bg} />
+          <Lbl x={PA(90, 0)[0]} y={Y(16.9) + 22} t="17" c={C.first} s={T.floor} a="middle" />
+        </g>
         {/* fix 2 (review 2 Should 6): "47" above its peak (clear of the curves), "mean 35" above the mean line where the teal curve is
             below it (θ 20°-130°), clear of the θ = 0 dots */}
         <Lbl x={PA(215, 0)[0] - 2} y={Y(46.8) - 26} t="47" c={C.first} s={T.floor} o={fin(f, AT(k, 9, "forty seven"))} />
         {/* fix 3 (fix2 review Should 3): lifted above the teal curve (its right end ran into it near θ 150°) */}
         <Lbl x={PA(6, 0)[0] + 1} y={Y(IAN.vt) - 44} t="mean 35" c={C.first} s={T.floor} o={fin(f, AT(k, 9, "average of thirty five"))} />
-        <Lbl x={PA(100, 0)[0] - 18} y={Y(-40.1)} t="−40" c={C.neg} s={T.floor} a="end" o={fin(f, AT(k, 10, "minus forty"))} />
+        {/* fix 4 (fix3 review S2): down-left of the minimum, under every curve there (the dashed u_r curve ran through it) */}
+        <Lbl x={PA(100, 0)[0] - 20} y={Y(-40.1) + 18} t="−40" c={C.neg} s={T.floor} a="end" o={fin(f, AT(k, 10, "minus forty"))} />
         {/* fix 2: "+14" left of its peak with a leader tick (it sat on the u curve) */}
         {/* fix 3 (fix2 review Should 3): label and leader 12 px higher, the leader stops short of the peak (it lay along the rose curve) */}
         <Lbl x={PA(185, 0)[0] - 8} y={Y(14.15) - 14} t="+14" c={C.neg} s={T.floor} a="end" o={fin(f, AT(k, 10, "plus fourteen"))} />
@@ -671,7 +687,8 @@ const S25: React.FC = () => {
         <line x1={1500} y1={805} x2={1560} y2={805} stroke={C.neg} strokeWidth={7} strokeDasharray="14 8" opacity={fin(f, tRose) * legO} />
         {/* fix 3 (fix2 review Must 1): the map's colour bar under the chart heading, 60 px right (clear of "47") */}
         {/* K6 k6z4: no bar title (its box reached the chart heading); "wind speed" left of the bar on the same row */}
-        <SpeedBar x={1540} y={248} w={200} title="" />
+        {/* fix 4 (fix3 review Info): 40 px further right and shorter, so "47" no longer reads with the bar's "0 25 50" */}
+        <SpeedBar x={1580} y={248} w={160} title="" />
         <Lbl x={1180} y={260} t="wind speed" c={C.muted} s={T.floor} b={false} />
         <Lbl x={960} y={40} t="Winds round the 25-km ring" c={C.ink} s={46} a="middle" />
         <Lbl x={80} y={160} t="Hurricane Ian · 28 Sep 2022" c={C.ink} s={T.floor} />
@@ -683,12 +700,16 @@ const S25: React.FC = () => {
         <Keyword f={f} text="spin 35 · inflow −13" at={[1180, 96]} s={T.floor} appear={tTwo} out={tCoast - 18} />
         <Keyword f={f} text="next, in Part 2: winds at a coast" at={[1180, 96]} s={T.floor} appear={tCoast} />
         {/* R9: at Fort Myers Beach (26.45 N, 81.95 W; the shore runs about 329°, so the axes are turned to it): x′ along the shore (NNW),
-            y′ across it, towards the land (ENE); a sketch of Part 2's use of the turned axes, not data */}
+            y′ across it; a sketch of Part 2's use of the turned axes, not data.
+            fix 4 (fix3 review 1 M1): y′ is x′ turned ANTICLOCKWISE (right-handed, as s16 ŷ′ = (−sin α, cos α) and Part 2 s26 "y′ points out
+            to sea"): WSW, out over the Gulf, on "a part across it". "Towards the land" is a separate dashed onshore arrow (warm white, no
+            label) on "towards the land"; its words are in the right column ("across the shore → land:") */}
         {(() => { const q = P(26.45, -81.95), o = fin(f, tCoast + 20, 12); if (o <= 0) return null;
-          const al: Pt = [-Math.sin(31 * D2R), -Math.cos(31 * D2R)], ac: Pt = [Math.cos(31 * D2R), -Math.sin(31 * D2R)];
+          const al: Pt = [-Math.sin(31 * D2R), -Math.cos(31 * D2R)], ay: Pt = [-Math.cos(31 * D2R), Math.sin(31 * D2R)], on: Pt = [-ay[0], -ay[1]];
           return <g opacity={o}>
             <Arrow p={q} q={[q[0] + al[0] * 100, q[1] + al[1] * 100]} color={C.second} w={7} head={24} />
-            <Arrow p={q} q={[q[0] + ac[0] * 100, q[1] + ac[1] * 100]} color={C.second} w={7} head={24} o={fin(f, tPush)} />
+            <Arrow p={q} q={[q[0] + ay[0] * 100, q[1] + ay[1] * 100]} color={C.second} w={7} head={24} o={fin(f, tAcross)} />
+            <Arrow p={[q[0] + on[0] * 22, q[1] + on[1] * 22]} q={[q[0] + on[0] * 112, q[1] + on[1] * 112]} color={C.key} w={6} head={22} dash="12 8" o={fin(f, tLand)} />
             <circle cx={q[0]} cy={q[1]} r={9} fill={C.gold} stroke={C.bg} strokeWidth={3} />
           </g>; })()}
         {/* fix 1 after fb1 (review 1 Must 1, HOUSE_STYLE §5b): the pointer lines left the HRRR map. The plot legend (its curves keep their
@@ -704,10 +725,10 @@ const S25: React.FC = () => {
       <TeX s={String.raw`\text{in-out }u_r`} x={1572} y={805} size={44} c={C.neg} o={fin(f, tRose) * legO} />
       <TeX s={String.raw`u_\theta`} x={A.x + A.w + 14} y={Y(RING.vt[71])} size={44} c={C.first} o={fin(f, tTeal + 30)} />
       <TeX s={String.raw`u_r`} x={A.x + A.w + 14} y={Y(RING.vr[71])} size={44} c={C.neg} o={fin(f, tRose + 30)} />
-      {(() => { const q = P(26.45, -81.95), al: Pt = [-Math.sin(31 * D2R), -Math.cos(31 * D2R)], ac: Pt = [Math.cos(31 * D2R), -Math.sin(31 * D2R)];
+      {(() => { const q = P(26.45, -81.95), al: Pt = [-Math.sin(31 * D2R), -Math.cos(31 * D2R)], ay: Pt = [-Math.cos(31 * D2R), Math.sin(31 * D2R)];
         return <>
           <TeX s="x'" x={q[0] + al[0] * 128} y={q[1] + al[1] * 128} size={48} ax={0.5} c={C.second} halo o={fin(f, tCoast + 20, 12)} />
-          <TeX s="y'" x={q[0] + ac[0] * 132} y={q[1] + ac[1] * 132} size={48} ax={0.5} c={C.second} halo o={fin(f, tPush)} />
+          <TeX s="y'" x={q[0] + ay[0] * 132} y={q[1] + ay[1] * 132} size={48} ax={0.5} c={C.second} halo o={fin(f, tAcross)} />
         </>; })()}
       <SourceBelow text={IAN_SRC} pic={PB} w={920} name="s25 src" />
       {void [tWob, tWhy, runP]}
@@ -744,8 +765,9 @@ const S26: React.FC = () => {
         </g>
         <path d={`M ${Pp[0]} ${Pp[1]} L ${Pp[0] + 200} ${Pp[1]} A 200 200 0 0 0 ${Pp[0] + 200 * Math.cos(ang * D2R)} ${Pp[1] - 200 * Math.sin(ang * D2R)} Z`} fill={C.neg} fillOpacity={0.35} stroke={C.neg} strokeWidth={4} opacity={fin(f, tName)} />
         <circle cx={Pp[0]} cy={Pp[1]} r={12} fill={C.key} />
-        <Lbl x={Pp[0] + 230} y={Pp[1] + 70} t="inflow angle" c={C.neg} s={T.floor} o={fin(f, tName) * fout(f, tAng - 14)} />
-        <Lbl x={Pp[0] + 230} y={Pp[1] + 70} t="≈ 21°" c={C.neg} s={T.key} o={fin(f, tAng + 6)} />
+        {/* fix 4 (fix3 review 2): "≈ 21°" on "twenty one degrees" (it came 3.8 s early); the name stays until just before it */}
+        <Lbl x={Pp[0] + 230} y={Pp[1] + 70} t="inflow angle" c={C.neg} s={T.floor} o={fin(f, tName) * fout(f, AT(k, 4, "twenty one degrees") - 22)} />
+        <Lbl x={Pp[0] + 230} y={Pp[1] + 70} t="≈ 21°" c={C.neg} s={T.key} o={fin(f, AT(k, 4, "twenty one degrees"))} />
         {/* four angles (S6-S9) */}
         <g opacity={mini(0)}>
           <line x1={MX[0]} y1={MY} x2={MX[0] + 140} y2={MY} stroke={C.muted} strokeWidth={3} />

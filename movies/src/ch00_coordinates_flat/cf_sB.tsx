@@ -16,6 +16,12 @@ import {
 } from "./cf_lib";
 import { EQ_S08, EQ_S09, EQ_S10, EQ_S11, EQ_S13, EQ_S14, EQ_S15, EQ_S16, EQ_S17, EQ_S18, EQ_S19, EQ_S20, cutAt } from "./cf_eq";
 
+// fix 4 (fix3 review 2): single-line helpers as in cf_sC.tsx - goldAt / hiSz: a non-obvious input gold and +8 % on its spoken word;
+// tailIn: the end of a TeX row fading in by colour on its word (same string on every frame, so the row never jumps)
+const goldAt = (f: number, t: number, s: string) => (f >= t - 2 && f <= t + 45 ? "\\textcolor{#d8b23a}{" + s + "}" : s);
+const hexMix = (a: string, b: string, u: number) => "#" + [1, 3, 5].map((i) => Math.round(parseInt(a.slice(i, i + 2), 16) * (1 - u) + parseInt(b.slice(i, i + 2), 16) * u).toString(16).padStart(2, "0")).join("");
+const tailIn = (f: number, t: number, c: string, s: string) => "\\textcolor{" + hexMix("#171f33", c, Math.min(1, Math.max(0, (f - t) / 8))) + "}{" + s + "}";
+
 const CHECK_B: [string, number, number, number][] = [
   ["rhat x", PL.rhat[0], 0.6, 1e-9], ["rhat y", PL.rhat[1], 0.8, 1e-9], ["thhat x", PL.thhat[0], -0.8, 1e-9], ["thhat y", PL.thhat[1], 0.6, 1e-9],
   ["ur", PL.ur, 6, 1e-9], ["ut", PL.ut, -8, 1e-9], ["slide x", PL.slide_m[0], -7.0, 0.02], ["slide y", PL.slide_m[1], 5.2, 0.04],
@@ -487,7 +493,8 @@ const S11: React.FC = () => {
       {/* K6 after fix 1c: "=" column 1250 → 1290 (the "before" label clears the inset), long rows split at their "≈"/"=", two lines
           visible (the tallest pair, x and y, is six rows: y 370-760) */}
       <CalcStack f={f} x={1290} y={390} size={46} maxLines={2} o={u1out * fout(f, tDiv - 14, 12)} rows={[   /* K6 k6f2: 20 px lower, clear of the keyword while rows slide out */
-        { lhs: String.raw`\Delta\theta`, rhs: String.raw`=0.1^\circ=0.1\times\pi/180`, at: tRadA },
+        // fix 4 (fix3 review 2): the turn 0.1° is a chosen input: gold for 45 frames as the row comes on "a tenth times pi"
+        { lhs: String.raw`\Delta\theta`, rhs: "=" + goldAt(f, tRadA, String.raw`0.1^\circ`) + String.raw`=0.1\times\pi/180`, at: tRadA },
         { rhs: String.raw`\approx0.001745\ \mathrm{rad}`, at: tRadB, cont: true },
         { lhs: "r", rhs: String.raw`=5\ \mathrm{km}=5000\ \mathrm{m}`, at: tArc },
         { lhs: "s", rhs: String.raw`=r\,\Delta\theta`, at: tArc + 40 },
@@ -834,8 +841,9 @@ const S15: React.FC = () => {
       <TeX s={EQ_S15} x={1080} y={652} size={68} o={fin(f, tCS)} />
       <CalcStack f={f} x={1260} y={230} size={50} maxLines={2} rows={[   /* K6 k6f2: ends above x̂′ = (cos α, sin α) */
         { lhs: String.raw`\cos30^\circ`, rhs: String.raw`=\dfrac{\sqrt3}{2}`, at: tCos, h: 132 },
-        { rhs: String.raw`=\dfrac{1.732}{2}\approx0.866`, at: AT(k, 13, "about zero point eight six six"), cont: true, h: 128 },
-        { lhs: String.raw`\sin30^\circ`, rhs: String.raw`=\dfrac12=0.5`, at: AT(k, 13, "exactly one half"), h: 110 },
+        // fix 4 (fix3 review 2): cos 30° ≈ 0.866 and sin 30° = 0.5 are non-obvious inputs: gold for 45 frames on their words
+        { rhs: String.raw`=\dfrac{1.732}{2}\approx` + goldAt(f, AT(k, 13, "about zero point eight six six"), "0.866"), at: AT(k, 13, "about zero point eight six six"), cont: true, h: 128 },
+        { lhs: String.raw`\sin30^\circ`, rhs: String.raw`=\dfrac12=` + goldAt(f, AT(k, 13, "exactly one half"), "0.5"), at: AT(k, 13, "exactly one half"), h: 110 },
       ]} />
       <TeX s={String.raw`\hat{\mathbf x}'=(0.866,\ 0.5)`} x={1120} y={750} size={60} o={fin(f, tNum)} />
     </Scene>
@@ -1268,9 +1276,10 @@ const S20: React.FC = () => {
       <TeX s={String.raw`\text{the position }(3,\ 4)`} x={1080} y={410} size={46} c={C.local} o={win(f, tPos, tOne - 18)} />
       <CalcStack f={f} x={1160} y={470} size={50} maxLines={2} o={fout(f, tOne - 18)} rows={[
         { lhs: "x'", rhs: String.raw`=3\times0.6+4\times0.8`, at: tPx },
-        { rhs: String.raw`=1.8+3.2=5`, at: tPx2, cont: true },
+        // fix 4 (fix3 review 2): "= 5" / "= 0" fade in by colour on "five" / "zero" (they came 0.8 s early, with the sums)
+        { rhs: String.raw`=1.8+3.2` + tailIn(f, AT(k, 12, "five"), "#e8ecf4", "=5"), at: tPx2, cont: true },
         { lhs: "y'", rhs: String.raw`=-3\times0.8+4\times0.6`, at: tPy },
-        { rhs: String.raw`=-2.4+2.4=0`, at: tPy2, cont: true },
+        { rhs: String.raw`=-2.4+2.4` + tailIn(f, AT(k, 14, "zero"), "#e8ecf4", "=0"), at: tPy2, cont: true },
       ]} />
       <TeX s={String.raw`5\text{ along }\hat{\mathbf r},\ 0\text{ along }\hat{\boldsymbol\theta}`} x={1080} y={770} size={48} o={win(f, tAlong, tOne - 18)} />
     </Scene>

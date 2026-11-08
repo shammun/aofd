@@ -55,6 +55,21 @@ export const AT = (k: number, j: number, phrase: string) => {
   if (w !== null) return Math.round((s.start + w) * FPS) - CUT[k];
   return Math.round((s.start + ((s.end - s.start) * i) / s.text.length) * FPS) - CUT[k];
 };
+/** fix 4 (fix3 review 2): the frame of the LAST word of `phrase` (Kokoro word time), e.g. ATlast(k, 6, "east side: three") = "three"
+ *  of the first place where the whole phrase is spoken. Character share when there are no word times. */
+export const ATlast = (k: number, j: number, phrase: string) => {
+  const s = sc[k].sentences[j];
+  const i = s.text.indexOf(phrase);
+  if (i < 0) throw new Error(`phrase "${phrase}" not in ${sc[k].id} sentence ${j}: ${s.text}`);
+  const e = WORDS[sc[k].id]?.[String(j)];
+  if (e && e.text === s.text) {
+    const toks = e.w.map(([t, x]) => [t, wnorm(x)] as [number, string]).filter(([, x]) => x);
+    const ph = phrase.split(/\s+/).map(wnorm).filter((x) => x);
+    for (let q = 0; q + ph.length <= toks.length; q++) if (ph.every((x, r) => toks[q + r][1] === x)) return Math.round((s.start + toks[q + ph.length - 1][0]) * FPS) - CUT[k];
+  }
+  const iEnd = i + phrase.length - phrase.split(/\s+/).pop()!.length;
+  return Math.round((s.start + ((s.end - s.start) * iEnd) / s.text.length) * FPS) - CUT[k];
+};
 export const fin = (f: number, a: number, n = 12) => ramp(f, a, a + n);
 /** fix 1 after fb1 (user 2026-11-07): a non-obvious input is highlighted on its spoken word: gold for 45 frames, size +8 % at the peak */
 export const hiOn = (f: number, t: number) => f >= t - 2 && f <= t + 45;
@@ -150,6 +165,25 @@ export const mapP = (B: MapBox): Proj => (lat, lon) => [B.x + ((lon - B.lon0) / 
 export const boxAt = (latC: number, lonC: number, dlat: number, x: number, y: number, w: number, h: number): MapBox => {
   const c = Math.cos(latC * D2R), dlon = (dlat * (w / h)) / c;
   return { lat0: latC - dlat / 2, lat1: latC + dlat / 2, lon0: lonC - dlon / 2, lon1: lonC + dlon / 2, x, y, w, h };
+};
+/** fix 4 (fix3 review S1/C2): the HRRR speed raster (Lambert grid in a lat/lon box) has no data on a slanted strip down its left edge
+ * and its lower right; boxes reaching there showed a ragged dark band. The valid edges, fitted to the PNG's alpha (max error 0.02°):
+ * west edge lon ≥ 0.14878·lat − 89.3761 (lat 25.2-29.3; −85.615 below), east edge lon ≤ 0.22647·lat − 84.9292 (lat ≤ 27.25; −78.685
+ * above), with a 0.03° margin. rasterFit shrinks a box about its centre (same aspect) until all four corners lie inside. The valid region
+ * is convex, so every zoomBox between two fitted boxes stays inside too. */
+const lonMinAt = (lat: number) => Math.max(-85.615, 0.14878 * lat - 89.3761) + 0.03;
+const lonMaxAt = (lat: number) => Math.min(-78.685, 0.22647 * lat - 84.9292) - 0.03;
+export const rasterFit = (B: MapBox): MapBox => {
+  const cLat = (B.lat0 + B.lat1) / 2, cLon = (B.lon0 + B.lon1) / 2;
+  let s = 1;
+  for (let n = 0; n < 200; n++) {
+    const hl = ((B.lat1 - B.lat0) / 2) * s, hn = ((B.lon1 - B.lon0) / 2) * s;
+    const lat0 = cLat - hl, lat1 = cLat + hl, lon0 = cLon - hn, lon1 = cLon + hn;
+    if (lon0 >= lonMinAt(lat1) && lon0 >= lonMinAt(lat0) && lon1 <= lonMaxAt(lat0) && lon1 <= lonMaxAt(lat1) && lat0 >= 23.8 && lat1 <= 29.3)
+      return { ...B, lat0, lat1, lon0, lon1 };
+    s *= 0.995;
+  }
+  throw new Error("rasterFit: no box inside the raster");
 };
 export const lerpBox = (A: MapBox, B: MapBox, t: number): MapBox => ({
   lat0: mix(A.lat0, B.lat0, t), lat1: mix(A.lat1, B.lat1, t), lon0: mix(A.lon0, B.lon0, t), lon1: mix(A.lon1, B.lon1, t),

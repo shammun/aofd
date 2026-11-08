@@ -19,15 +19,14 @@ parts on coordinates,
 00:00:16.573 --> 00:00:19.425
 and in this part, we stay on a flat map.
 
-00:00:19.775 --> 00:00:24.198
-Now let's dive into what coordinates
-are, how they're built and
+00:00:19.775 --> 00:00:22.654
+Now let's dive into what coordinates are,
 
-00:00:24.198 --> 00:00:26.024
-how they're used: x and y,
+00:00:22.654 --> 00:00:25.392
+how they're built and how they're used:
 
-00:00:26.024 --> 00:00:29.675
-polar coordinates
+00:00:25.392 --> 00:00:29.675
+x and y, polar coordinates
 with r and theta, and turned axes.
 
 00:00:30.025 --> 00:00:34.250
@@ -242,24 +241,22 @@ Let's check.
 Cosine theta is the east side
 divided by the long side,
 
-00:04:05.185 --> 00:04:08.740
+00:04:05.185 --> 00:04:09.118
 and sine theta is the north
-side divided by the
+side divided by the long
 
-00:04:08.740 --> 00:04:12.295
-long side. For our balloon
-that's three fifths,
+00:04:09.118 --> 00:04:12.295
+side. For our balloon that's three fifths,
 
 00:04:12.295 --> 00:04:14.715
 zero point six, and four fifths,
 
-00:04:14.715 --> 00:04:18.194
-zero point eight. So
-five kilometres times the
+00:04:14.715 --> 00:04:18.724
+zero point eight. So five
+kilometres times the cosine
 
-00:04:18.194 --> 00:04:21.825
-cosine of theta gives
-back the east side: three.
+00:04:18.724 --> 00:04:21.825
+of theta gives back the east side: three.
 
 00:04:22.175 --> 00:04:27.225
 And five kilometres times the sine
@@ -333,8 +330,8 @@ A full circle is two pi radians, because
 its edge is two pi times the radius.
 
 00:05:48.950 --> 00:05:54.083
-So one radian is three hundred
-and sixty degrees divided by two pi:
+So one radian is three hundred and sixty
+degrees divided by two pi:
 
 00:05:54.083 --> 00:05:56.075
 about fifty seven degrees.
@@ -492,13 +489,16 @@ station, or closer to it. For example,
 with a part of a tenth
 of a kilometre along r hat,
 
-00:08:43.585 --> 00:08:49.000
-it would end up five point one or four
-point nine kilometres from the station,
+00:08:43.585 --> 00:08:46.987
+it would end up five point one
+or four point nine
 
-00:08:49.000 --> 00:08:54.523
-not five. So a small slide along
-the circle has no part along r hat:
+00:08:46.987 --> 00:08:49.625
+kilometres from the station, not five.
+
+00:08:49.975 --> 00:08:54.523
+So a small slide along the circle
+has no part along r hat:
 
 00:08:54.523 --> 00:08:56.875
 it's at right angles to r hat.
@@ -570,22 +570,27 @@ drawing by ninety degrees,
 both pieces turn together,
 and they stay joined, tip to tail.
 
-00:10:13.175 --> 00:10:19.700
+00:10:13.175 --> 00:10:16.398
 So the p steps east become p steps north,
+
+00:10:16.398 --> 00:10:19.700
 and the q steps north become q steps west.
 
 00:10:20.050 --> 00:10:23.875
 Steps to the west count
 as minus in the east part.
 
-00:10:24.225 --> 00:10:30.220
-p times zero, one is zero, p, and q times
-minus one, zero is minus q,
+00:10:24.225 --> 00:10:26.758
+p times zero, one is zero, p,
 
-00:10:30.220 --> 00:10:33.869
-zero. Adding the east parts gives minus q,
+00:10:26.758 --> 00:10:30.690
+and q times minus one, zero
+is minus q, zero.
 
-00:10:33.869 --> 00:10:39.950
+00:10:30.690 --> 00:10:33.835
+Adding the east parts gives minus q,
+
+00:10:33.835 --> 00:10:39.950
 and adding the north parts gives p.
 So the turned arrow is minus q, p.
 
@@ -604,11 +609,13 @@ minus four, three.
 00:10:56.375 --> 00:10:58.725
 Is that really a quarter turn?
 
-00:10:59.075 --> 00:11:04.108
+00:10:59.075 --> 00:11:01.742
 For the turned arrow, minus four, three,
+
+00:11:01.742 --> 00:11:04.075
 we square each component, add them,
 
-00:11:04.108 --> 00:11:09.075
+00:11:04.075 --> 00:11:09.075
 and take the square root, and we get
 five, the same as the balloon's arrow.
 
@@ -718,8 +725,8 @@ In radians, that's a tenth times
 pi over one hundred and eighty,
 
 00:13:09.411 --> 00:13:12.925
-about zero point zero
-zero one seven four five.
+about
+zero point zero zero one seven four five.
 
 00:13:14.425 --> 00:13:18.350
 By the arc rule, s equals r times
@@ -754,12 +761,13 @@ That's about seven metres west,
 and five point two metres
 north. Squaring these two,
 
-00:13:49.813 --> 00:13:55.368
-adding them, and taking the square root
-gives about eight point seven metres:
+00:13:49.813 --> 00:13:53.059
+adding them, and taking
+the square root gives
 
-00:13:55.368 --> 00:13:56.450
-the same slide.
+00:13:53.059 --> 00:13:56.450
+about eight point seven
+metres: the same slide.
 
 00:13:57.950 --> 00:14:01.267
 Dividing each by eight point seven
@@ -929,8 +937,8 @@ Let's check that these two parts
 really make up the same wind.
 
 00:17:07.650 --> 00:17:12.700
-We rebuild it: six times r hat, plus
-minus eight times theta hat.
+We rebuild it: six times r
+hat, plus minus eight times theta hat.
 
 00:17:13.050 --> 00:17:17.175
 Six times r hat gives
@@ -1092,15 +1100,20 @@ and put a minus on the first.
 00:20:18.075 --> 00:20:21.725
 That gives minus sine alpha, cosine alpha.
 
-00:20:23.225 --> 00:20:29.625
-With thirty degrees, y hat prime is minus
-zero point five, zero point eight six six.
+00:20:23.225 --> 00:20:25.645
+With thirty degrees, y hat prime
+
+00:20:25.645 --> 00:20:29.625
+is minus zero point five,
+zero point eight six six.
 
 00:20:31.125 --> 00:20:32.775
 Let's check it.
 
-00:20:33.125 --> 00:20:38.450
+00:20:33.125 --> 00:20:35.924
 Squaring its two components, adding them,
+
+00:20:35.924 --> 00:20:38.450
 and taking the square root gives one.
 
 00:20:38.800 --> 00:20:41.952
@@ -1149,8 +1162,8 @@ is the dot product with y hat prime:
 minus x sine alpha, plus y cosine alpha.
 
 00:21:33.875 --> 00:21:38.879
-Now the numbers: x is three
-and y is four, alpha is thirty degrees,
+Now the numbers: x is three and y is
+four, alpha is thirty degrees,
 
 00:21:38.879 --> 00:21:43.585
 the cosine of thirty degrees
@@ -1391,13 +1404,13 @@ that's one point nine six.
 So the short line says exactly
 what our two long lines say.
 
-00:26:23.550 --> 00:26:27.518
-If we set the four C's
-in a square, with i for the row and
+00:26:23.550 --> 00:26:28.749
+If we set the four C's in a square, with i
+for the row and j for the column,
 
-00:26:27.518 --> 00:26:32.375
-j for the column, we get our rotation
-matrix flipped over its diagonal.
+00:26:28.749 --> 00:26:32.375
+we get our rotation matrix
+flipped over its diagonal.
 
 00:26:32.725 --> 00:26:37.689
 That's only because this form reads down
@@ -1433,24 +1446,25 @@ theta, sine theta, which is r hat.
 And y hat prime is minus sine
 theta, cosine theta, which is theta hat.
 
-00:27:13.375 --> 00:27:16.649
-So r hat and theta hat
-are just the east and
+00:27:13.375 --> 00:27:17.690
+So r hat and theta hat are
+just the east and north arrows,
 
-00:27:16.649 --> 00:27:19.625
-north arrows, turned by the angle theta.
+00:27:17.690 --> 00:27:19.625
+turned by the angle theta.
 
 00:27:19.975 --> 00:27:25.250
 That means the polar parts of any arrow
 are its coordinates in turned axes.
 
-00:27:25.600 --> 00:27:30.025
-Let's check with the east
-wind, ten, zero, and the cosine and
+00:27:25.600 --> 00:27:28.674
+Let's check with the east wind, ten, zero,
 
-00:27:30.025 --> 00:27:33.725
-sine of theta, zero point six
-and zero point eight.
+00:27:28.674 --> 00:27:31.090
+and the cosine and sine of theta,
+
+00:27:31.090 --> 00:27:33.725
+zero point six and zero point eight.
 
 00:27:34.075 --> 00:27:38.700
 X prime is the wind's dot product
@@ -1622,12 +1636,12 @@ u sub theta bar, is made in the same way.
 The seventy two tangential winds, starting
 with thirty eight at theta equals zero,
 
-00:30:52.687 --> 00:30:56.848
-add up to about two thousand five hundred
-and six metres per
+00:30:52.687 --> 00:30:56.571
+add up to about
+two thousand five hundred and six metres
 
-00:30:56.848 --> 00:31:00.870
-second. So their average
+00:30:56.571 --> 00:31:00.870
+per second. So their average
 is about thirty four point eight,
 
 00:31:00.870 --> 00:31:03.575
@@ -1644,12 +1658,11 @@ three thousand six hundred seconds,
 00:31:14.523 --> 00:31:17.125
 and a kilometre has a thousand metres.
 
-00:31:17.475 --> 00:31:20.538
-So thirty five metres
-per second is about a
+00:31:17.475 --> 00:31:20.395
+So thirty five metres per second is about
 
-00:31:20.538 --> 00:31:23.600
-hundred and twenty six
+00:31:20.395 --> 00:31:23.600
+a hundred and twenty six
 kilometres per hour.
 
 00:31:25.100 --> 00:31:29.131
@@ -1667,8 +1680,8 @@ starting with minus eight point seven
 at theta equals zero,
 
 00:31:38.833 --> 00:31:42.402
-add up to about minus nine hundred
-and fifty seven.
+add up to about
+minus nine hundred and fifty seven.
 
 00:31:42.402 --> 00:31:46.111
 So their average is about
@@ -1689,16 +1702,16 @@ The official estimate
 of its strongest wind at that hour,
 
 00:32:03.111 --> 00:32:07.400
-averaged over a minute, is about a hundred
-and thirty five knots.
+averaged over a minute, is
+about a hundred and thirty five knots.
 
 00:32:07.750 --> 00:32:11.652
 One knot is about one point eight five
 kilometres per hour,
 
 00:32:11.652 --> 00:32:15.487
-so that's about two hundred
-and fifty kilometres per hour,
+so that's about two hundred and fifty
+kilometres per hour,
 
 00:32:15.487 --> 00:32:18.000
 or about sixty nine metres per second.
@@ -1779,8 +1792,8 @@ kilometres. Time is distance
 divided by speed,
 
 00:33:38.100 --> 00:33:42.440
-so that takes about nineteen hundred
-and twenty three seconds,
+so that takes about
+nineteen hundred and twenty three seconds,
 
 00:33:42.440 --> 00:33:44.400
 or about thirty two minutes.
@@ -1790,8 +1803,8 @@ Going round at thirty five
 metres per second,
 
 00:33:49.012 --> 00:33:53.023
-one lap of this ring, two
-pi times twenty five kilometres,
+one lap of this ring, two pi
+times twenty five kilometres,
 
 00:33:53.023 --> 00:33:56.965
 is about a hundred and fifty seven
@@ -1808,19 +1821,22 @@ which is about seventy five minutes.
 So the air is moving round
 and moving in at the same time.
 
-00:34:09.150 --> 00:34:14.890
-In any stretch of time, it goes thirty
-five metres round for every thirteen in,
+00:34:09.150 --> 00:34:10.829
+In any stretch of time,
 
-00:34:14.890 --> 00:34:18.160
+00:34:10.829 --> 00:34:14.846
+it goes thirty five metres
+round for every thirteen in,
+
+00:34:14.846 --> 00:34:18.131
 so it goes about
 two point seven times as far
 
-00:34:18.160 --> 00:34:21.357
+00:34:18.131 --> 00:34:21.344
 round as in. So for every
 metre it moves in,
 
-00:34:21.357 --> 00:34:23.900
+00:34:21.344 --> 00:34:23.900
 it moves almost three metres round.
 
 00:34:25.400 --> 00:34:29.400
@@ -1913,8 +1929,8 @@ the wind blows mostly towards
 the south, and a little west.
 
 00:36:08.900 --> 00:36:12.500
-Now the cosine is zero
-and the sine is one.
+Now the cosine
+is zero and the sine is one.
 
 00:36:12.850 --> 00:36:18.575
 So u sub r equals v, which
@@ -1948,8 +1964,8 @@ of forty five degrees,
 about minus zero point seven zero seven,
 
 00:36:53.723 --> 00:36:57.225
-and its sine is plus
-zero point seven zero seven.
+and its sine
+is plus zero point seven zero seven.
 
 00:36:57.575 --> 00:37:02.425
 So u sub r is u times the
@@ -1983,16 +1999,18 @@ the in or out arrows point inward
 at seven of them,
 
 00:37:32.939 --> 00:37:36.913
-and outward only at two hundred
-and twenty five degrees,
+and outward only
+at two hundred and twenty five degrees,
 
-00:37:36.913 --> 00:37:42.590
+00:37:36.913 --> 00:37:39.752
 on the southwest side. The computer does
-exactly this at all seventy two points,
 
-00:37:42.590 --> 00:37:45.997
-and then takes the averages.
-And our first point,
+00:37:39.752 --> 00:37:43.158
+exactly this at all
+seventy two points, and then
+
+00:37:43.158 --> 00:37:45.997
+takes the averages. And our first point,
 
 00:37:45.997 --> 00:37:49.190
 minus eight point seven
@@ -2001,19 +2019,16 @@ at theta equals zero,
 00:37:49.190 --> 00:37:52.100
 is the very first term of the radial sum.
 
-00:37:52.450 --> 00:37:54.732
+00:37:52.450 --> 00:37:56.672
 If you skipped, here's what to keep:
+at every point round the ring,
 
-00:37:54.732 --> 00:37:57.902
-at every point round
-the ring, the wind's east and
+00:37:56.672 --> 00:38:01.525
+the wind's east and north parts turn
+into an in or out part and a round part,
 
-00:37:57.902 --> 00:38:00.628
-north parts turn into
-an in or out part and
-
-00:38:00.628 --> 00:38:03.100
-a round part, and then we average them.
+00:38:01.525 --> 00:38:03.100
+and then we average them.
 
 00:38:03.900 --> 00:38:06.725
 Why bother with polar coordinates here?
@@ -2034,8 +2049,8 @@ wind v, the dashed orange line.
 Our three points sit on these lines.
 
 00:38:23.350 --> 00:38:29.225
-Both lines swing up and down, from plus
-to minus, by tens of metres per second.
+Both lines swing up and down, from plus to
+minus, by tens of metres per second.
 
 00:38:29.575 --> 00:38:34.200
 They swing because the wind keeps
@@ -2061,21 +2076,22 @@ theta, is the teal line,
 and the radial
 wind, u sub r, is the rose line.
 
-00:38:54.975 --> 00:38:58.759
+00:38:54.975 --> 00:38:58.790
 The tangential wind stays
 positive all the way round,
 
-00:38:58.759 --> 00:39:03.900
+00:38:58.790 --> 00:39:01.669
 between about seventeen and forty seven,
+
+00:39:01.669 --> 00:39:03.900
 with an average of thirty five.
 
-00:39:04.250 --> 00:39:08.468
-The radial wind wobbles more,
-between about minus forty and
+00:39:04.250 --> 00:39:09.540
+The radial wind wobbles more, between
+about minus forty and plus fourteen,
 
-00:39:08.468 --> 00:39:12.400
-plus fourteen, because
-the storm isn't perfectly round.
+00:39:09.540 --> 00:39:12.400
+because the storm isn't perfectly round.
 
 00:39:12.750 --> 00:39:16.266
 It's negative at fifty eight
@@ -2152,16 +2168,19 @@ and the ring's own direction,
 00:40:25.402 --> 00:40:28.050
 theta hat, is called the inflow angle.
 
-00:40:28.400 --> 00:40:32.798
+00:40:28.400 --> 00:40:32.822
 Its tangent is the side opposite
 the angle over the side next to it:
 
-00:40:32.798 --> 00:40:35.126
+00:40:32.822 --> 00:40:35.163
 the inward part over the round part,
 
-00:40:35.126 --> 00:40:40.300
-thirteen point three over thirty four
-point eight, about zero point three eight.
+00:40:35.163 --> 00:40:38.414
+thirteen point three over
+thirty four point eight,
+
+00:40:38.414 --> 00:40:40.300
+about zero point three eight.
 
 00:40:40.650 --> 00:40:46.350
 So the inflow angle, the angle with that
@@ -2261,16 +2280,19 @@ make the rotation matrix.
 Polar parts are just turned axes, with an
 angle that changes from place to place.
 
-00:42:34.625 --> 00:42:36.420
+00:42:34.625 --> 00:42:36.431
 Round Hurricane Ian's eye,
 
-00:42:36.420 --> 00:42:41.392
+00:42:36.431 --> 00:42:41.432
 they split the wind into about
 thirty five metres per second of spin and
 
-00:42:41.392 --> 00:42:46.225
-thirteen of inflow, so the air spirals
-in at about twenty one degrees.
+00:42:41.432 --> 00:42:42.752
+thirteen of inflow,
+
+00:42:42.752 --> 00:42:46.225
+so the air spirals in at about
+twenty one degrees.
 
 00:42:46.575 --> 00:42:51.927
 In Part 2, we'll find out how fast r hat
@@ -2299,13 +2321,13 @@ of related maths tutorials,
 00:43:12.583 --> 00:43:14.625
 so watch out for the others.
 
-00:43:14.975 --> 00:43:19.372
+00:43:14.975 --> 00:43:18.290
 They're made for students
-of atmospheric science, meteorology and
+of atmospheric science,
 
-00:43:19.372 --> 00:43:23.025
-fluid dynamics, and anyone
-else who needs these ideas.
+00:43:18.290 --> 00:43:23.025
+meteorology and fluid dynamics,
+and anyone else who needs these ideas.
 
 00:43:23.375 --> 00:43:28.203
 The notebook for coordinates, and the

@@ -9357,3 +9357,1116 @@ A 10-fps pixel tracker followed the gold swipe line from 40:34 to 40:51. The cap
 - Hemisphere physics is right throughout: NH anticlockwise for Ian, Amphan and Nargis, and SH clockwise for Idai, shown with both icons.
 
 ### Verdict: FIX (#5b notes1 verification: 3 Must, 7 Should, 8 Cosmetic)
+
+## ch00_coordinates_flat — fb1 review 1 (2026-11-07)
+2026-11-07 · fresh eyes · movie `movies/out/ch00/ch00_coordinates_flat/1080.mp4` (153 442 727 bytes, 11:07; `qa.json` 11:18 measured this file) · source commit a3869b1 · scope: the minimum-change remake (master plan R1, R2, R3, R7, R8, R9 + paragraph 12); approved fix-3 frames were not re-judged.
+
+| movie | duration | size | qa gates | physics | equations | legibility | pacing | captions | access | badges | verdict |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| ch00_coordinates_flat (Part 1, fb1) | 45:40.3 (2740.30 s; narration 2737.78 s + 2.5-s hold) | 153.4 MB | **15/15 PASS** | PASS | PASS (23/23) | PASS with 1 Must (s25 keywords on the map) | PASS with notes | PASS (651 cues; my own pass: 0 cues > 42 chars/line, > 2 lines, > 17 cps, out of order or outside 1–7 s) | PASS (0 flashes) | n/a (retired) | **FIX (1 Must, 4 Should, 8 Cosmetic)** |
+
+**Method.**
+- 187 frames and crops in `reports/movies/ch00_coordinates_flat/fb1_review1/`. I looked at them as 640-px 2×2 tiles (`mont_f_*.jpg`, `mont_u_*.jpg`) and at full-resolution crops where it mattered.
+- Changed parts, scene starts from `timing.json`:
+  - title, 0:00.5–0:09.5: 5 frames;
+  - s22, 31:39–33:21: 20 frames, plus 0.5-s crops of both running sums (`sumrun_mont.jpg`);
+  - s24, 36:50–40:09: 43 frames, every 3–4 s;
+  - s25, 41:40–42:21: 14 frames;
+  - s27–s28, 44:48–45:40.2: 20 frames, including 0.4-s steps through the end fade;
+  - the s19 tensors pointer at 27:59.5;
+  - all four skip chips.
+- Audio: RMS every 0.54 s over the last 12 s.
+- Arithmetic: I recomputed every new number from `data/cf.json` (`ian.ring`, `pts`, `pts8`, `sum_vt`, `sum_vr`).
+- Regression spot-check: 22 unchanged scenes (0:20, 0:55, 3:00, 4:10, 7:12, 10:36, 13:20, 16:20, 18:20, 19:48, 21:10, 22:35, 24:30, 26:46, 29:05, 30:40, 35:15, 36:10, 41:10, 43:00, 43:20, 44:10) and the s23 calculation at 0.5–4-s steps. The voice and screen stay in step everywhere. Every scene is timed from `timing.json`, so the +6-s shift moved each picture with its narration.
+- Skip chips on screen: 14:25, 18:52, 29:55 and 39:58. These match the "If you skipped" cues at 14:25.12, 18:52.62, 29:55.40 and 39:58.90.
+
+### Brief items, checked on the frames
+| item | status | evidence |
+|---|---|---|
+| R1 title / first frame | **done** | 0:00.5–0:09.5: "Coordinates" (gradient), "Part 1 · Arrows on a flat map", "polar coordinates / and rotated axes". No "easy" in the title or the poster (`poster_640.png`). The first words are "In this video, we'll learn coordinates on a flat map, and see how meteorology uses them to measure the winds round a hurricane's eye." |
+| R2 series layout | **done** | `kit_cf/SeriesTitle.tsx` is the template that the storm, sphere and frames parts copy. The current Part 2 and 3 MP4s (6 Nov) still show the old layout and "made easy" (`cmp_titles.jpg`); that belongs to their own remakes. Line 2 fits the column at 67 px, and nothing overlaps the Ian map or its source line at 640 px. |
+| R8 ring average | **done** | Each step appears on its words: |
+| | | • 31:37 "average = sum of the 72 values / 72" with "360° ÷ 5° = 72 points"; |
+| | | • 31:43 the ū_r rule (1/N) Σ u_{r,i} in rose; |
+| | | • 31:53 "N = 360° ÷ 5° = 72 points" in gold, on "Here N is seventy two"; |
+| | | • 31:58 ū_θ in teal; |
+| | | • 32:03–32:12 the ū_θ first terms 38.0 + 37.8 + 38.3 + …, a running sum (4 → 48 → 71 of 72, 152.6 → 1689.9 → 2466.5), then 2505.9/72 ≈ 34.8 ≈ 35; |
+| | | • 32:49–32:59 −8.7, then −10.3, then −11.2, each on its words, with the 0°, 5° and 10° ring points ringed in gold; |
+| | | • 33:04 the running sum (7 of 72 = −78.4), then −957.2/72; |
+| | | • 33:07 ≈ −13.3 ≈ −13 m/s; |
+| | | • 33:16 "in: towards the eye". |
+| | | All numbers check against `cf.json`: ring vr[0:3] = −8.7, −10.3, −11.2; Σ vr[0:7] = −78.4; Σ vr = −957.22; ÷ 72 = −13.29. Ring vt[0:3] = 38.0, 37.8, 38.3; Σ vt = 2505.93; ÷ 72 = 34.80. Partial sums 152.6, 1689.9 and 2466.5 are exact. The "why negative" sentence was dropped under the minimum ruling: see C1. |
+| R7 three worked points + 5 more | **done** (within the minimum ruling) | 37:00–39:24: the three hand-worked points are unchanged and correct. |
+| | | • 0°: u_r = −8.7, u_θ = 38.0. |
+| | | • 90°: u_r = −37.4, u_θ = −(−16.9) = +16.9. |
+| | | • 135°: 7.14 − 31.46 = −24.32 → −24.3, and 7.14 + 31.46 = 38.60 → 38.6. Here (−10.1)(−0.707) = 7.1407 and (44.5)(0.707) = 31.4615. |
+| | | 39:25–39:56: the map zooms in, and all 8 points get rose u_r and teal u_θ arrows with value labels, on "here are five more, without the arithmetic". |
+| | | • Legend: "u_r: in (−) or out (+)" / "u_θ: round". |
+| | | • Keyword "in at 7 of 8 · out at 225°", on its words at 39:35–39:43. |
+| | | • 39:49: "all 72, then average". |
+| | | • 39:52: ū_r = (−8.7 − 10.3 − 11.2 − …)/72 ≈ −13.3, with −8.7 in gold and the 0° point ringed, on "our first point … is the very first term". |
+| | | Physics: every u_θ arrow points anticlockwise (N at 0°, W at 90°, SW at 135°, S at 180°, SE at 225°, E at 270°, NE at 315°). The u_r arrows point inward except at 225°. Seven labels match `pts8` to 0.1; the 270° label is off by one in the last digit (S1). The r̂ and θ̂ vectors are not written as numbers: see S4. |
+| R9 coast pointer (s25 S15) | **done**, with 1 Must on placement | 41:46–42:19: the keyword "next, in Part 2: winds at a coast", then x′ (along the shore, NNW) and y′ (across the shore, onto the land, ENE) arrows at Fort Myers Beach. |
+| | | • "across the shore, towards the land: / sea water pushed onto the coast" (41:56–42:02). |
+| | | • Then "Part 2: wind onto the land" (42:06), "→ water level" (42:09) and "→ flood maps" (42:13), each on its words. |
+| | | The physics wording is right: onshore wind piles water onto the coast. The placement breaks the house style: see Must 1. |
+| R3 teaser + ending | **done** | 44:53–45:14: the teaser lines come on their words. |
+| | | • "Part 2: how fast r̂, θ̂ turn" |
+| | | • "+ height: cylindrical coordinates" |
+| | | • "x′, y′: wind onto the land" |
+| | | • "water level, flooding before / after" (see S2) |
+| | | The balloon goes round beside them, with r̂ and θ̂ turning. |
+| | | Nothing new happens in the last minute: Ian recap, teaser, then the house end card. |
+| | | Picture fade: full at 45:37.5, dimmed at 45:38.5 and 45:39.2, near the background at 45:39.8, background at 45:40.2. |
+| | | Audio: speech ends at 45:37.47, then the music runs −52 → −55 → −59 → −65 → −74 → −95 dB RMS, so the music reaches silence together with the picture (see C5). |
+| No opening recap | **done** | s01 opens on the topic: "What are coordinates, and why do we need more than one kind? This is the first of seven parts…". |
+| Wording rules | **done** | No "easy way", "made easy" or "Step one" is spoken or on screen. Numbers are named, except the ū_θ first terms (S3). See C7 for two old "easy" sentences that are not in scope. |
+| s19 tensors pointer | **done** | 27:52–27:59: "…tensors, which we'll meet in our tensors movie, later in this series" with the keyword "more: our tensors movie". |
+
+### Must
+- **M1 · 41:56–42:19 (s25 S15) · the five pointer keywords sit on the sharp HRRR map.** HOUSE_STYLE §5b says: "No text over images or over other text, on any frame". Only short labels that point at a spot may sit on a map.
+  - "across the shore, towards the land: / sea water pushed onto the coast" sits at map y ≈ 640–720.
+  - Then "Part 2: wind onto the land / → water level / → flood maps" sits at y ≈ 580–720, over the Gulf part of the wind field, just SW of the storm's strong-wind ring (`crop_2534_map.png`, `w640_2534.png`).
+  - They read well at 640 px, but a viewer sees keywords painted on the data. These lines are new in this loop, not an approved frame.
+  - **Fix:** put the lines in the right column on their words. Two options:
+    - replace the top keyword slot ("next, in Part 2: winds at a coast", ≈ y 100) in turn: first the "across the shore…" pair, then the three impact lines;
+    - or shrink the u/v/u_r/u_θ plot about 15 % to free a 3-line slot under its legend.
+  - Keep the x′/y′ arrows and their letters on the map; these are point labels.
+
+### Should
+- **S1 · 39:31–39:56 (s24 S24) · the 270° (due south) u_θ label reads "24.6", but the data say 24.547 → 24.5.**
+  - `LAB8[270] = ["-11.2", "24.6"]` in `cf_sC.tsx`, whose own comment says "the library values to 0.1".
+  - The module-load check's 0.06 tolerance let the wrong digit through.
+  - **Fix:** change it to "24.5" (one string, no re-voice).
+- **S2 · 45:09.6–45:14.9 (s27 S11) · teaser line 4 stays muted grey for its whole life.** "water level, flooding before / after" is in the ticks-and-units colour (#9aa6bd-like). Lines 1–3 are warm white (`teaser_mont.jpg`), so the line the user asked for most looks greyed out. **Fix:** use the same ink as lines 1–3.
+- **S3 · 32:03–32:12 (s22 S6) · the ū_θ first terms "38.0 + 37.8 + 38.3 + …" are on screen but not spoken.**
+  - The voice goes straight to "add up to about two thousand five hundred and six".
+  - The ū_r terms are spoken, so the two sums are treated differently, against the "name every number" rule.
+  - **Fix:** add a clause to S6: "starting with thirty eight, thirty seven point eight and thirty eight point three". As a no-re-voice alternative, drop the first terms from the ū_θ row and show "2505.9 / 72" only.
+- **S4 · decision for the user · 37:00–39:24 (s24 worked points): the master plan R7 lists "θ, r̂, θ̂ … with numbers"; the screen shows cos θ and sin θ, not r̂ = (1, 0), θ̂ = (0, 1) and so on.**
+  - The r̂/θ̂ rows were built and then reverted under the user's "only the MINIMUM" ruling (log, scope changes).
+  - The worked points are approved fix-3 frames, and the cos/sin values are the components of r̂ and θ̂, so I recommend leaving them. I list this only so the user can confirm.
+
+### Cosmetic
+- **C1 · 33:15 (s22 S11) · the minus sign is called inflow, but the reason is not given here.**
+  - The reason is that r̂ points out, away from the eye.
+  - It was said at 14:25 ("r hat points away from the centre") and comes back on screen at 39:32 ("u_r: in (−) or out (+)").
+  - Paragraph 12 says the user already understands it.
+  - Optional fix: the keyword "r̂ points out → minus = in" under "in: towards the eye".
+- **C2 · 39:31–39:56 (s24) · at 225°, the one outward arrow (+13.5) is short and points into its own label.** Its head is about 10 px from the "5" (`crop_2377_225.png`). This is the point the keyword "out at 225°" names. Move the label about 30 px further out along r̂.
+- **C3 · 35:08–35:24 (s23, unchanged fix-3 code) · the clock reads "32 min" about 14 s before the voice says it (35:23.8).** The 25 000/13 ≈ 1923 s row appears at 35:17, and "÷ 60 ≈ 32 min" at 35:24. This is not a regression: the offset within the scene is the same as in fix 3.
+- **C4 · 36:31 and 36:50 (s24 S1/S3, unchanged) · "three points by hand" is said twice in 20 s.**
+- **C5 · 45:30–45:40 · the music fades over about 10 s, the picture over the last 2.5 s.** Both end together, and R3 "fade together" is met at the end. The music is already at about −52 dB RMS when the picture fade starts.
+- **C6 · 31:43–32:03 · the Σ limits (i = 1, N) and the subscript r,i are about 22 px at 1080 (about 7 px at 640).** This is normal KaTeX limit size, and the main line is ≥ 44 px.
+- **C7 · 2:04 and 5:56 (unchanged) · "so easy to work with" and "Let's try easy numbers".** Neither is the banned "the easy way", a title or a first frame. Leave them, unless the user wants every "easy" gone.
+- **C8 · `movies/ch00/ch00_coordinates_flat/script.md` line 86 (checklist, not spoken or shown) still says "*Tensors made easy* (s19)".** Update it to "our tensors movie" so the wording lint and check_public stay clean.
+
+### What works (keep)
+- The R8 build-up: the rule → N = 72 in gold → ū_θ alike → first terms on their words → a running sum → total ÷ 72. Every number checks against the library to the last digit.
+- The eight-point ring:
+  - the arrow directions and in/out signs are right at every point;
+  - "in at 7 of 8 · out at 225°" agrees with the s25 graph ("only on the southwest side does it blow outward");
+  - linking the first worked point to the first term of the radial sum (39:52) is exactly the bridge the user asked for.
+- The s25 voice and the s27 teaser name Part 2's impact chain (wind onto the land → tide gauges → before/after pictures) in plain words.
+- The ending is clean: no new idea in the last minute, and the picture and music finish together.
+- Hemisphere physics is right throughout: NH anticlockwise "seen from above, NH" at 32:39, and u_θ > 0 all round the ring (17–47).
+
+### Verdict: FIX (fb1 review 1: 1 Must, 4 Should, 8 Cosmetic)
+M1 is a placement-only TSX change (no re-voice, no timing change). S1 and S2 are one-line TSX edits. S3 needs one re-voiced clause, or a no-re-voice screen edit instead. After M1 (+ S1, S2), a K6 pass over s25 and a still at 42:13 are enough to move the movie to `qa_pass`.
+
+
+## ch00_coordinates_flat — fb1 review 2: calc & sync audit (2026-11-07)
+
+Movie `movies/out/ch00/ch00_coordinates_flat/1080.mp4` (build fb1, 2740.30 s = 45:40.3, 153.44 MB, rendered 2026-11-07 11:07). Rule audited: *show every calculation* (no skipped arithmetic; every input on screen before the result; on screen when the voice says it, ≤ 0.5 s; every number named with its unit). Fresh eyes, frames only; the movie was not edited.
+
+| movie | duration | size | qa gates | physics | equations | legibility | pacing | captions | access | badges | verdict |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| ch00_coordinates_flat fb1 | 45:40.3 | 153.4 MB | 15/15 PASS (qa.json 11:18) | PASS: every number recomputes; 8 arrows match their signs | PASS (no wrong value; 2 rounding slips) | PASS on the frames looked at | **FIX**: 3 reveal-timing faults (results 3–17 s off their words) | PASS limits; 2 cues split a number | PASS | n/a (retired) | **FIX** (3 Must, 11 Should) |
+
+**Method.**
+- **Numbers.** I recomputed every number in Python from `data/cf.json` and the spoken inputs (`scratchpad/r2/recalc.py`): the ring (72 points, 5° apart, maths angle from east, anticlockwise), u_r = u cos θ + v sin θ and u_θ = −u sin θ + v cos θ, the sums ÷ 72, and every unit change. Tolerance is half the last digit shown (± 0.05 for 1 dp), unless a row says otherwise.
+- **Real word times.** `AT()` in the TSX places a reveal by character share of the sentence, so it is not a real word time. To get real ones, I re-synthesised all 225 sentences of s13–s26 with Kokoro `af_bella` ×1.0 and the same lexicon and clip split. Every clip came out exactly as long as in `timing.json` (0 mismatches at 1 ms), so the token timestamps are the real word times in the movie.
+- **Anchor check.** I compared all 154 `AT(k, j, "…")` anchors of s13–s26 (`cf_sB.tsx`, `cf_sC.tsx`) with those word times:
+  - median +0.16 s (positive = the picture lags the voice);
+  - 126 within ± 0.5 s, 28 outside, 2 beyond ± 1 s.
+- **Frames.** I extracted 150 frames at the spoken-number times and a 0.5-s strip through each ring sum. They are in `reports/movies/ch00_coordinates_flat/fb1_review2/` (`s13…s27_*`, `e04…e11_*` for s04–s11, `q22t_strip.png`, `q22r_strip.png`, `s24w_eight_crop_map.jpg`).
+
+### Calculation & sync table (time = mm:ss in the fb1 MP4; sync = picture minus voice, measured)
+
+| time | scene | quantity | shown | recomputed | voice-sync | verdict |
+|---|---|---|---|---|---|---|
+| 2:47 · 3:19 | s04 | r, tan θ, θ | √(9+16) = √25 = 5 km; 4/3 ≈ 1.333; tan⁻¹ ≈ 53.13° ≈ 53° | 5; 1.3333; 53.130° | on words (frames e04a/b) | PASS |
+| 4:22 · 4:55 | s05 · s06 | cos, sin, x, y; bearing | 0.6, 0.8; 5×0.6 = 3, 5×0.8 = 4; 90° − 53° = 37° | exact; 36.87° → 37° | on words | PASS |
+| 5:56–6:19 | s07 | radian, arcs | 0.2 × 57.3° ≈ 11.5°; 5 × 0.2 = 1 km; 50 × 0.2 = 10 km | 57.296°, 11.459° | on words | PASS |
+| 13:25–14:24 | s11 | 0.1° slide | 0.001745 rad; 8.7 m; 2993.0 / 4005.2 m; (−7.0, +5.2); √76.04 ≈ 8.7; (−0.80, 0.60) | 0.0017453; 8.727; 2993.014 / 4005.230; 8.720; −0.805 / 0.598 | on words (e11a–e) | PASS |
+| 16:24–16:39 | s13 S13–S16 | inputs | u = (10, 0) m/s, θ = 53°, r̂ = (0.6, 0.8), θ̂ = (−0.8, 0.6) | exact (θ = 53.13°) | all four on screen before the sums | PASS |
+| 16:49 · 17:03 | s13 S19 · S21 | u_r, u_θ | 10×0.6 + 0×0.8 = 6 m/s; 10×(−0.8) + 0×0.6 = −8 m/s | 6.000, −8.000 | ≤ 0.5 s | PASS |
+| 17:33–18:21 | s14 | rebuild | 6 r̂ = (3.6, 4.8); (−8)(−0.8) = +6.4, (−8)(0.6) = −4.8; (10, 0); √(36+64) = 10 m/s | exact | ≤ 0.5 s | PASS |
+| 20:13–20:26 | s15 | cos 30°, sin 30° | √3/2 = 1.732/2 ≈ 0.866; 0.5 | 0.86603 | "1.732" row +0.59 s late | PASS (Should 11) |
+| 21:05–21:32 | s16 | ŷ′ check | (−0.5, 0.866); 0.25 + 0.75 = 1; −0.433 + 0.433 = 0 | exact | "−0.433" row 0.61 s early | PASS (Should 11) |
+| 22:33–23:21 | s17 | x′, y′, length | 2.60 + 2 ≈ 4.60; −1.5 + 3.46 ≈ 1.96; √(21.16 + 3.84) ≈ √25 = 5 km | 4.598, 1.964; 21.16 + 3.8416 = 25.002 | on words (s17a–d) | PASS |
+| 24:16–24:35 | s18 | matrix rows | 0.866×3 + 0.5×4 = 4.6; −0.5×3 + 0.866×4 = 1.96 | 4.598, 1.964 | "4.6 again" +0.53 s | PASS |
+| 26:11–27:29 | s19 | C₁₁…C₂₂, x′₁, x′₂ | cos α, −sin α, sin α, cos α; 3×0.866 + 4×0.5 ≈ 4.60 ✓; −3×0.5 + 4×0.866 ≈ 1.96 ✓ | C₁₂ = x̂·ŷ′ = −sin α ✓, C₂₁ = ŷ·x̂′ = sin α ✓ | "C two one/two" +0.55–0.62 s | PASS |
+| 28:41–29:30 | s20 | α = θ | 10×0.6 + 0 = 6; −10×0.8 + 0 = −8; 1.8 + 3.2 = 5; −2.4 + 2.4 = 0 | exact | on words | PASS |
+| 31:29.7 | s22 S4 | N | 360° ÷ 5° = 72 points | 72 | +0.54 s | PASS |
+| 31:41.8 · 31:52.7 · 31:57.9 | s22 S5 | rule | ū_r = (1/N) Σᵢ u_{r,i}; N = 360°÷5° = 72 (gold); ū_θ alike | — | ≤ 0.3 s | PASS |
+| 32:03.5 | s22 S6 | first u_θ terms | (38.0 + 37.8 + 38.3 + …)/72 | ring vt[0..2] = 38.01, 37.77, 38.28 | on the sentence start (written, not spoken) | PASS (Info 2) |
+| **32:06.99** | s22 S6 | Σu_θ | "sum so far" counter, then **2505.9 m/s / 72 only at 32:10.8** | Σ = 2505.89 (cf.json sum_vt 2505.93) | voice "two thousand five hundred and six" at 32:06.99 while the counter shows 152.6 (4 of 72); the counter fades at 71/72 = 2466.5 and the total appears **3.8 s late** | **FIX (Must 1)** |
+| 32:13.9 · 32:15.4 | s22 S6 | ū_θ | ≈ 34.8 ≈ 35 m/s, "≈ 35 m/s" callout | 34.804 | ≤ 0.1 s | PASS |
+| 32:25–32:35 | s22 S7–S8 | km/h | 1 m/s = 3600 m/h = 3.6 km/h; 35 × 3.6 = 126 km/h | 126.0 | on words | PASS |
+| 32:49.9–32:55.9 | s22 S10 | first u_r terms | −8.7, −10.3, −11.2 written one by one, points ringed in gold | vr[0..2] = −8.73, −10.32, −11.24 | ≤ 0.4 s each | PASS |
+| **33:03.73** | s22 S10 | Σu_r | counter, then **−957.2 m/s / 72 only at ≈ 33:06.9** | Σ = −957.23 (sum_vr −957.22) | voice "minus nine hundred and fifty seven" at 33:03.73 while the counter shows −78.4 (7 of 72); it fades at 71/72 = −949.2; the total is **3.2 s late** | **FIX (Must 2)** |
+| 33:09.4 | s22 S10 | ū_r | ≈ −13.3 ≈ −13 m/s, "in: towards the eye" | −13.295 | +0.2 s | PASS |
+| 33:30–33:41 | s22 S13–S14 | best track | 135 kt; 135 × 1.85 ≈ 250 km/h; 250 ÷ 3.6 ≈ 69 m/s | 249.75 (1.852: 250.02); 69.4 | on words | PASS |
+| 33:53.5 | s22 S15 | ring max | strongest on our ring ≈ 49 m/s | max \|u\| on ring 48.89 (215°) | **+1.23 s late** | PASS (Should 8) |
+| 34:20–34:36.7 | s23 S5 | resultant | √(35² + 13²) = √(1225 + 169) = √1394 ≈ 37.3 ≈ 37 m/s | 37.336 (data √(34.80² + 13.29²) = 37.26) | **169 shown 3.2 s before** "a hundred and sixty nine" (34:29.4; the row reveals on "twelve hundred" 34:26.1) | PASS (Should 1) |
+| 34:48.4 | s23 S7 | inflow km/h | 13 × 3.6 ≈ 47 km/h | 46.8 | 0.0 s | PASS |
+| 35:11.8–35:24.5 | s23 S10 | time in | 25 km = 25 000 m; 25 000 m / 13 m/s ≈ 1923 s; 1923 ÷ 60 ≈ 32 min | 1923.1 s, 32.05 min (data 31.3 min) | rows on words (+0.86 s on "25 000 m") — **but the clock glyph reads "32 min" from 35:07.8**, 16.7 s before "thirty two minutes" and before its inputs | **FIX (Must 3)** |
+| 35:32.5–35:43.0 | s23 S11 | lap | 2π × 25 km = 2 × 3.1416 × 25 ≈ 157 km = 157 000 m; / 35 m/s ≈ 4490 s; ÷ 60 ≈ 75 min | 157.08 km; 4488 s; 74.8 min (data 75.2) | rows on words — **the clock reads "75 min" from ≈ 35:29.6**, 13.4 s before "seventy five minutes" and before 157 km and 4490 s | **FIX (Must 3)** |
+| 35:51–36:03 | s23 S13 | ratio | (35 t)/(13 t) = 35/13 ≈ 2.7; "almost 3 m round per 1 m in" | 2.692 (data 2.618) | "2.7" +0.85 s late | PASS (Should 11) |
+| 37:05–37:28 | s24 S7–S11 | 0° point | u = −8.7, v = 38.0; cos 0° = 1, sin 0° = 0; u_r = (−8.7)(1) + (38.0)(0) = −8.7; u_θ = −(−8.7)(0) + (38.0)(1) = 38.0 | u −8.655, v 38.031; rule −8.66 / 38.03; library −8.73 / 38.01 (local r̂ (1.000, −0.002)); all → −8.7 / 38.0 | ≤ 0.4 s | PASS |
+| 37:38–38:11 | s24 S13–S16 | 90° point | u = −16.9, v = −37.4; cos 90° = 0, sin 90° = 1; u_r = −37.4; −(−16.9) = +16.9 | −16.885, −37.392 → −37.39 / 16.88 | "Minus times minus" row 0.84 s early | PASS (Should 11) |
+| 38:18–39:24 | s24 S18–S23 | 135° point | u = −10.1, v = −44.5; cos 135° = −cos 45° = −1/√2 ≈ −0.707, sin ≈ 0.707; (−10.1)(−0.707) = +7.14; (−44.5)(0.707) = −31.46; 7.14 − 31.46 ≈ −24.3; −(−10.1) = +10.1; 10.1 × 0.707 = 7.14; (−44.5)(−0.707) = +31.46; 7.14 + 31.46 ≈ 38.6 | 7.1407, −31.4615, −24.321, 38.602 (library −24.32 / 38.65) | results on words (−24.3 +0.59 s, 38.6 +0.66 s); **the second terms are written 5.2 s (u_r) and 10.2 s (u_θ) before they are said** | PASS (Should 7) |
+| 39:28–39:56 | s24 S24 | 5 more points + all 8 | arrows and values only (no arithmetic, as the user asked); legend "u_r: in (−) or out (+)", "u_θ: round" | see the eight-point table | **"in at 7 of 8 · out at 225°" shown 6.9 s / 9.0 s before** "seven of them" (39:38.2) and "two hundred and twenty five" (39:40.3) | PASS (Should 2, 4, 5, 6) |
+| 39:51.3 | s24 S24 | link to Σ | ū_r = (**−8.7** − 10.3 − 11.2 − …)/72 ≈ −13.3 m/s, 0° point ringed | first term = the hand point ✓; −957.23/72 = −13.295 | +0.2 s | PASS |
+| 41:06.9–41:20.4 | s25 S10–S12 | ranges, count | u_θ 17 … 47, mean 35; u_r −40 … +14; 72 − 14 = 58 points in; 14 points out | 16.88 … 46.84; −40.12 … +14.15; 58 negative, the positives at 185–250° | on words | PASS |
+| 42:39–42:51 | s26 S4–S5 | inflow angle | 13.3/34.8 ≈ 0.38; **tan⁻¹(0.38) ≈ 20.9° ≈ 21°** | 0.3822; tan⁻¹(0.3822) = 20.92°; **tan⁻¹(0.38) = 20.81°**; library 20.91° | on words | PASS (Should 3) |
+| 44:41–44:52 | s27 S10 | recap | 35 m/s round, 13 m/s in, ≈ 21° | consistent | on words | PASS |
+
+**s22–s23 consistency (brief item 4).** The ring numbers agree everywhere:
+- ū_θ = 2505.9 / 72 = 34.80 and ū_r = −957.2 / 72 = −13.29 (library `storm_relative_wind`: 34.805 / −13.295).
+- Said as 35 / −13 in s22, s23 and s27, and as 13.3 / 34.8 in s26.
+- The brief's "37 / −12.5" are the build-1 means about the HRRR pressure minimum. **No −12.5 appears in the movie, the captions or Parts 2–4.** The movie has only two 37s:
+  - the s06 bearing 90° − 53° = 37° (unrelated);
+  - the s23 resultant √(35² + 13²) ≈ 37 m/s (data √(34.8² + 13.3²) = 37.26).
+- The stale 37 / −12.5 survive only in the storyboard text (Should 10).
+
+**s24 eight points (brief item 3).** Values are recomputed with the rule (exact cos/sin) and taken from the library (local r̂ on the ring). Screen directions are read on the full-resolution crop `s24w_eight_crop_map.jpg`.
+
+| θ | u, v (m/s) | rule u_r / u_θ | library u_r / u_θ | label | rose u_r arrow | teal u_θ arrow | verdict |
+|---|---|---|---|---|---|---|---|
+| 0° | −8.66, 38.03 | −8.66 / 38.03 | −8.73 / 38.01 | −8.7 / 38.0 | inward (west), short | north | PASS |
+| 45° | −32.24, 9.55 | −16.04 / 29.55 | −16.08 / 29.53 | −16.1 / 29.5 | inward (down-left) | up-left (θ̂ = (−0.71, 0.71)) | PASS |
+| 90° | −16.88, −37.39 | −37.39 / 16.88 | −37.39 / 16.88 | −37.4 / 16.9 | inward (south) | west | PASS |
+| 135° | −10.07, −44.54 | −24.37 / 38.62 | −24.32 / 38.65 | −24.3 / 38.6 (hand 38.60) | inward (down-right) | down-left | PASS (Info 3) |
+| 180° | 2.01, −45.59 | −2.01 / 45.59 | −1.92 / 45.59 | −1.9 / 45.6 | **4.6 px, hidden under the 11-px dot** | south | Should 5 |
+| 225° | 21.41, −40.44 | **+13.45** / 43.73 | **+13.51** / 43.71 | +13.5 / 43.7 | **outward** (down-left) | down-right | PASS |
+| 270° | 24.55, 11.21 | −11.21 / 24.55 | −11.21 / 24.55 | −11.2 / **24.6** | inward (north) | east | **Should 2** (24.547 → 24.5) |
+| 315° | 8.12, 40.87 | −23.16 / 34.64 | −23.20 / 34.61 | −23.2 / 34.6 | inward (up-left) | up-right | PASS |
+
+Seven of the eight are inward and only 225° (south-west) is outward, as said. The worked points are the three hand-computed ones in full; the five extra points have arrows and values only, as the user asked. Fifteen of the 16 arrows are visible.
+
+### Must (a viewer following the arithmetic notices)
+
+**Must 1 · 32:06.99–32:11.2 · s22 S6 · Σu_θ said before it is on screen.**
+- **What happens.** The voice says "about two thousand five hundred and six" at 32:06.99. At that moment the gold counter reads "sum so far: 152.6 m/s · 4 of 72" (`q22t_strip.png`). It reaches 71 of 72 = 2466.5 and fades out, and the slot is empty at 32:10.5. The total 2505.9 appears only in ū_θ = 2505.9 m/s / 72, at 32:10.8, which is 3.8 s after it was spoken.
+- **Why.** In `cf_sC.tsx` S22, the count runs from `AT(k,5,"add up")` to `tDivT − 8`, and its label fades out at `tDivT − 20`.
+- **Fix.** End the count at 72 of 72 = 2505.9 exactly on "two thousand five hundred". Start it at the sentence start. Keep "sum: 2505.9 m/s · 72 of 72" until the fraction replaces it.
+
+**Must 2 · 33:03.73–33:07.0 · s22 S10 · Σu_r has the same fault.**
+- **What happens.** The voice says "minus nine hundred and fifty seven" at 33:03.73 while the counter shows −78.4 (7 of 72) (`q22r_strip.png`). The counter fades at −949.2 (71 of 72). The total −957.2 appears at about 33:06.9, 3.2 s late.
+- **Fix.** Run the count from "and they go on" (32:58.65) to "minus nine hundred" (33:03.73), and hold −957.2 until "Divided by".
+
+**Must 3 · 35:05.8–35:43.0 · s23 S10–S11 · the clock gives the answers before the arithmetic.**
+- **Time in.** The `ClockText` sweeps 0 → 32 min over the first 2 s of S10, so it reads "32 min" from 35:07.8. That is before "25 000 m" (35:11.8), "1923 s" (35:18.2) and "thirty two minutes" (35:24.5): 16.7 s early.
+- **Lap.** The clock sweeps to "75 min" by about 35:29.6, before "157 km" (35:35.5), "4490 s" (35:39.6) and "seventy five minutes" (35:42.95): 13.4 s early.
+- **Why.** `minNow` uses `prog(f, tT, tT + 60)` and `prog(f, tLap, tLap + 60)`.
+- **Fix.** Start the two sweeps at `AT(k, 9, "thirty two minutes")` and `AT(k, 10, "seventy five minutes")`, which are 35:24.46 and 35:42.95 measured. Until then, hold the clock at 0 min and 32 min.
+
+### Should
+
+1. **34:26.1 · s23 S5.** The row "= √(1225 + 169)" reveals on "twelve hundred", so 169 is on screen 3.2 s before "a hundred and sixty nine" (34:29.4). Reveal "+ 169" on its own words, or split the row into 35² = 1225 and 13² = 169.
+2. **39:30–39:56 · s24 eight-point map, 270°.** The u_θ label reads "24.6", but the library and the rule give 24.547, which is 24.5. `cf.json` already stores `ut1 = 24.5`.
+   - Fix `LAB8[270]` and the builder row DF24 "R7 … u_θ = …, 24.6, …".
+   - Tighten that row's tolerance from 0.06 to 0.05 (half the last digit), so it catches a mis-rounding.
+   - The same row lists 38.7 at 135°, while the screen shows 38.6 to match the hand sum 7.14 + 31.46 = 38.60. Make the builder text say 38.6 and give the reason.
+3. **42:51 · s26 S5.** "inflow angle = tan⁻¹(0.38) ≈ 20.9° ≈ 21°" is off: tan⁻¹(0.38) = 20.81°, and 20.9° is tan⁻¹(0.382). Write "tan⁻¹(0.382) ≈ 20.9°", or "tan⁻¹(0.38) ≈ 20.8° ≈ 21°". The CHECK row "atan .382" already uses 0.382.
+4. **39:31.3 · s24 S24.** The keyword "in at 7 of 8 · out at 225°" appears on "With all eight points". That is 6.9 s before "inward at seven of them" (39:38.2) and 9.0 s before "two hundred and twenty five degrees" (39:40.3). Reveal "in at 7 of 8" on "seven of them" and "out at 225°" on "two hundred and twenty five".
+5. **39:29 on · s24, 180°.** The u_r arrow for −1.9 m/s is 1.9 × 2.4 = 4.6 px long, hidden under the 11-px gold dot, so only 15 of the 16 arrows show. Give arrows a minimum drawn length of about 20 px (the label keeps the true value), or say on screen "≈ 0 at 180°".
+6. **39:29–39:56 · s24.** The 16 map values (−16.1, 29.5, …) carry no unit, and the legend reads only "u_r: in (−) or out (+)" and "u_θ: round". Add "(m/s)" to the legend.
+7. **38:41.7 and 39:01.2 · s24 S20, S22.** The second term of each 135° product appears before it is said:
+   - u_r: "+(−44.5) × 0.707" appears at `tCr + 30`, 5.2 s before "plus minus forty four point five" (38:46.9);
+   - u_θ: both terms appear at the sentence start, 10.2 s before the second term is said (39:11.4).
+
+   Reveal each term on its own words, as the product rows below them already do.
+8. **33:53.5 · s22 S15.** "strongest on our ring ≈ 49 m/s" appears 1.23 s after "forty nine", the largest lag in the movie. The character-share `AT` misjudges this compound sentence.
+9. **Captions split a number across two cues.** Keep a number inside one cue: `tools/tts.py split_for_cues` should never break a number phrase.
+   - Cue 32:03.47–32:09.15 ends "…two thousand five hundred and", and the next cue starts "six metres per second."
+   - Cue 33:02.64–33:05.72 ends "minus nine hundred and", and the next starts "fifty seven."
+10. **Storyboard (the contract) still carries the build-1 numbers.** The movie is correct; the contract is stale.
+    - s22 `beat` "ring means 37 round, −12.5 in" and the S7 note "37 × 3.6 = 133".
+    - s23 `derivation` D10 steps: 37 / 12.5, √(37² + 12.5²) ≈ 39, 45 km/h, 2000 s / 33 min, 71 min, 37/12.5 ≈ 3. Also `calc_rows` "≈ 1900 s", where the screen and voice say 1923 s.
+    - s25 visual note "dashed teal line at the mean 37".
+    - s26 `physics_source.test` "CHECK DF26 atan(12.5/37.1) = 18.6 deg".
+    - `data_block.spoken_in` (s22 "37, 130, −12.5", s26 "0.34, 19 degrees", s27 "37, 12.5, 19").
+
+    Sync them to `numbers_final` (34.8 / −13.3, 1923 s, 75 min, 2.7, 21°). Keep `numbers_build1_about_hrrr_minimum` as history only.
+11. **Word timing in general.**
+    - 28 of 154 measured anchors in s13–s26 are 0.5–1.23 s off their words. That covers the s15–s19 rows and s23 "25 000 m" and "2.7" (+0.86 s, +0.85 s). It also covers the s25 Part-2 keywords, which are up to 1.11 s early. All are listed in `scratchpad/r2/sync.txt`; I can hand the list over.
+    - Kokoro is deterministic here (the re-synthesis matched every clip to 1 ms). Build `AT()` from Kokoro token timestamps saved in `timing.json` instead of character share. That one change would remove this whole class of findings, Must 1–2 included, once the counters end on the word.
+
+### Info (no change needed)
+
+1. s23 uses the spoken, rounded 35 and 13 for the thought experiment: 32 min, 75 min, 2.7. s26 uses 13.3 / 34.8 for the angle. The data-exact values are 31.3 min, 75.2 min, 2.62 and 20.9°. Each step states its inputs, so this is consistent.
+2. The first u_θ terms (38.0 + 37.8 + 38.3 + …) are written but not spoken; the u_r terms are both written and spoken. This is acceptable.
+3. At 135°, u_θ = 38.6 comes from the hand sum with rounded inputs; the library gives 38.65. The screen uses 38.6 everywhere, which is consistent.
+4. At 0°, the rule with exact cos 0° gives u_r = −8.66, and the library gives −8.73 (its local r̂ is (1.000, −0.002)). Both round to −8.7, so "the very first term of the radial sum" is honest.
+5. Every one of the 15 qa.json gates is PASS (duration, av_length, size, codec, black, frozen, content, halves, overlap 3818 frames / 0 hits, loudness −16.3 LUFS / −3.6 dBTP, flashes 0, captions 651, subtitles, physics 19 hashes, equations 23). The captions have 651 cues and none breaks the 2-line, 42-character, 17-cps or 1–7-s limits.
+
+### Verdict: **FIX**
+
+Every number in the movie recomputes within tolerance, except two rounding slips: the 270° label 24.6 should be 24.5 (Should 2), and tan⁻¹(0.38) does not give 20.9° (Should 3). The eight arrows all match their u_r and u_θ signs.
+
+The fault is timing, in three places where the calculation is the point:
+- the two ring sums (Must 1–2), which are said 3–4 s before they are on screen while a counter shows a different number;
+- the s23 clock (Must 3), which shows 32 min and 75 min 13–17 s before their inputs and arithmetic.
+
+Fix the three Musts, re-render s22–s23 only (no re-voice needed), then re-check with this method.
+
+
+## ch00_coordinates_flat — fix1 review 1 (2026-11-07)
+2026-11-07 · fresh eyes, frames only · movie `movies/out/ch00/ch00_coordinates_flat/1080.mp4` (153 467 591 bytes, rendered 18:23; `qa.json` 18:31 measured this file) · source commit 98fe5b0 · timing from `timing.json` + Kokoro word times from `words.json` (all times below are fix-1 times).
+
+| movie | duration | size | qa gates | physics | equations | legibility | pacing | captions | access | badges | verdict |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| ch00_coordinates_flat (Part 1, fix1) | 43:32.9 (2612.93 s; narration ends 43:30.12 + 2.5-s hold) | 153.5 MB | **15/15 PASS** (loudness −16.3 LUFS / −4.4 dBTP, flashes 0, overlap 3757 frames / 0 hits, captions 622, physics 19 hashes, equations 23) | PASS (every number recomputes; NH anticlockwise; 7 of 8 inward) | PASS (23/23, no katex-error) | PASS with 2 Should (row-exit ghosts, s14 sign) | PASS with 1 Should (s01 lead-in) | PASS (622 cues; my own pass: 0 cues > 2 lines, > 42 chars/line, > 17 cps, outside 1–7 s or out of order; no number split) | PASS (0 flashes; palette unchanged) | n/a (retired) | **PASS → qa_pass** (0 Must, 4 Should, 11 Cosmetic) |
+
+**Method.**
+- 417 frames, crops and strips in `reports/movies/ch00_coordinates_flat/fix1_review1/`, read as 640-px 2×2 tiles (`mont_*.jpg`) and full-resolution crops (`crop_*`, `ghost_*`, `strip_*`).
+- Every one of the 52 changed sentences: frames on the key words (from `words.json`), plus 5–10-fps strips through every calculation-stack change in s14, s17, s20, s23, s24.
+- The user's spots: 17:25–17:32 (vector sum, was ~18:06), 10:59–11:16 (lengths, was ~11:12), 21:34–22:25 (x′/y′, was ~23:20).
+- Opening 0:00.5–0:34, ending 42:46–43:32.9 (0.5-s steps through the fade), and audio levels for the last 9 s.
+- `tools/script_wording_lint.py`: 0 findings. I also grepped `script.md` for voiced arithmetic myself.
+- Every on-screen number in the changed scenes recomputed by hand (as in fb1 review 2): x′ 4.598, y′ 1.964, 21.16 + 3.8416 = 25.00; 2505.9/72 = 34.80; −957.2/72 = −13.29; √(35² + 13²) = 37.34; 25 000/13 = 1923 s = 32.05 min; 2π × 25 = 157.08 km; 157 000/35 = 4486 s ≈ 4490 s = 74.8 min; 35/13 = 2.69; tan⁻¹(0.38) = 20.8°; 135° products 7.14, −31.46, +31.46.
+
+### (1) fb1 review 1 + review 2 items, checked on the frames
+| item | status | evidence (fix-1 time) |
+|---|---|---|
+| R1 M1 · s25 pointer lines on the map | **fixed** | 39:50–40:11: the legend fades. "across the shore → land: / sea water pushed ashore" (39:50, on "Wind blowing across the shore"), "Part 2: wind onto the land" (40:01, on "blew onto the land"), "→ water level" (40:05.2, on "how high the water rose") and "→ flood maps" (40:07.0, on "flooded land") all sit in the right column under the θ axis title. Nothing is on the HRRR map except the x′/y′ arrows and their letters. |
+| R1 S1 / R2 S2 · 270° label | **fixed** | 37:25: 270° reads −11.2 / **24.5**. |
+| R1 S2 · teaser line 4 colour | **fixed** | 43:04: "water level, flooding before / after" is in the same warm white as lines 1–3. |
+| R1 S3 · ū_θ first terms not spoken | **fixed** | S6 now says "starting with thirty eight at theta equals zero" (30:50.3). See C5 for timing. |
+| R1 S4 · r̂/θ̂ numbers at the worked points | **open, user decision** | Unchanged, as recommended. |
+| R1 C2 · 225° label on its arrow | **fixed** | `crop_s24_225_37m30.png`: "+13.5" now sits clear of the outward arrowhead. |
+| R1 C8 · script checklist "made easy" | **fixed** | `script.md` line 86 says "our tensors movie"; no "made easy" left. |
+| R1 C1, C4, C7 (optional) | **not done** | Still not done; leaving them is acceptable. "in: towards the eye" has no "r̂ points out" reason; "three … points by hand" is said at 34:51 and again at 35:09; "so easy to work with" (≈2:04) and "Let's try easy numbers" (5:56) remain. |
+| R2 Must 1 · Σu_θ said before shown | **fixed** | The counter starts at the sentence start (30:47.2, 0 of 72). It reaches "sum: 2505.9 m/s · 72 of 72" at 30:52.7, before "two thousand five hundred" (30:53.46), and holds until the fraction 2505.9/72 (30:58.3, "So their average" 30:57.9). "≈ 34.8 ≈ 35 m/s" appears on "thirty four point eight" (30:59.6). |
+| R2 Must 2 · Σu_r | **fixed** | The counter runs 31:37.3 → 72 of 72 = −957.2 at 31:39.8, on "minus nine hundred" (31:39.70), and holds until 31:42.2. "≈ −13.3 ≈ −13 m/s" appears at 31:44.4, on "minus thirteen point three" (31:44.30). |
+| R2 Must 3 · clock early | **fixed** | The clock holds at "0 min" from 33:30.4 to 33:42.0, sweeps on "thirty two minutes" (33:42.19) and reads 32 min at 33:43.2. It holds 32 min until it sweeps to 75 min on "seventy five minutes" (34:00.67), reading 75 min at 34:01.2. The 1923 s row comes on "nineteen hundred" (33:39.4), and the 157 km and 4490 s rows come on their words. |
+| R2 S1 · "169" early | **fixed by re-wording** | 169 is no longer voiced. "= √(1225 + 169)" comes on "add them" (32:56.4), "= √1394 ≈ 37.3" on "square root" (32:58.2), and "≈ 37 m/s" on "thirty seven" (33:00.0). |
+| R2 S3 · tan⁻¹(0.38) | **fixed** | 40:44.6: "inflow angle = tan⁻¹(0.38) ≈ 20.8° ≈ 21°". |
+| R2 S4 · "7 of 8 / 225°" early | **fixed** | "in at 7 of 8" fades in on "seven" (37:30.84 → visible 37:30.9–37:32.2). "· out at 225°" comes on "two hundred and twenty five" (37:34.2). |
+| R2 S5 · 180° arrow hidden | **fixed** | 37:25: the −1.9 rose arrow is visible beside the 180° dot. All 16 arrows show. |
+| R2 S6 · unit on the map values | **fixed** | The legend reads "u_r (m/s): in (−) or out (+)" and "u_θ (m/s): round". |
+| R2 S7 · 135° second terms early | **fixed** | "+(−44.5) × 0.707" appears on "v times the sine" (37:00.6). "+(−44.5)(−0.707)" appears on "v times the cosine" (37:11.6). |
+| R2 S8 · "≈ 49 m/s" late | **fixed** | It fades in at 32:28.5, on "forty nine" (32:28.37). |
+| R2 S9 · numbers split across cues | **fixed** | "add up to about two thousand / five hundred and six metres per" (one cue) and "add up to about minus nine / hundred and fifty seven." (one cue). See C9. |
+| R2 S10 · stale storyboard numbers | **fixed** | The old numbers survive only in `numbers_build1_about_hrrr_minimum`, kept as history. |
+| R2 S11 · character-share AT() | **fixed** | AT() now uses Kokoro word times. Every reveal I timed in s13–s26 is within ≈ 0.5 s of its word. |
+
+### (2) The 2026-11-07 house rules
+| rule | status | evidence |
+|---|---|---|
+| Natural opening, ~0:06 | **done** | 0:00.3: "In this video, we'll learn coordinates on a flat map, and see how they're used to measure the winds around a hurricane's eye." The word "meteorology" is gone. The picture switches from the polar/rotated grid to the HRRR Ian map on "how they're used" (0:04.47; grid at 0:04.3, map at 0:04.9). |
+| Natural lead-in, ~0:22 | **done in the voice, not on screen** (Should 3) | 0:19.8: "Now let's dive into what coordinates are, how they're built and how they're used: x and y, polar coordinates with r and theta, and turned axes." |
+| Show the arithmetic, voice the meaning | **done** | Lint 0; my grep found no voiced sums, products, squares or sign rules in the changed sentences. The screen keeps every step, for example "minus × minus = plus" at 17:21 and "(−8)(0.6) = −4.8". Two places where a plain operation is still said are borderline and are listed as C11. |
+| Non-obvious inputs said + gold on their word (s17) | **done** | "α = 30°" turns gold on "thirty degrees" (21:38.2 → 21:38.8). "cos 30° ≈ 0.866" fades in from 21:41.6 and is gold at 21:42.8 (spoken 21:41.4–42.7). "sin 30° = 0.5" is gold at 21:45.2 (spoken 21:44.2–45.0). Each is about 1.5 s of gold at +8 %, then dims to the stack grey. "x = 3, y = 4" are plain givens and are not highlighted, which is correct. |
+| Same (s20) | **done** | "cos θ = 0.6" is gold at 27:31.9 (spoken 27:30.96–31.67). "sin θ = 0.8" is gold at 27:33.0 (spoken 27:32.21–32.85). Both stay up, dimmed, through both position rows (28:17). |
+| Same (elsewhere) | **partly**: Should 1 | The s24 trig values and data inputs are said but not highlighted. |
+| Every number labelled, every result with its symbol | **done at the user's spots**; small gaps listed as C3 | s17 results carry their symbols on the picture ("x′ = 4.6", "y′ = 1.96", "(x′, y′) = (4.6, 1.96)", ≈ 44 px KaTeX, `crop_s17_labels_22m11.png`) and in the stack (lhs x′, y′). |
+| No clutter | **PASS** | No frame I looked at is crowded. The s17 input block takes 3 lines above a 2-row working, and the s25 right column has 3 short lines. |
+
+### (3) The user's three spots
+- **17:25.4–17:35 (s14 S5–S7; was ~18:06).**
+  - The voice says: "If we add those two arrows, the east parts give ten. And the north parts give zero."
+  - The screen, at 17:26.1 on "add": "sum = (3.6 + 6.4, 4.8 − 4.8)" with gold "3.6 | 6.4" bars along u.
+  - At 17:28.5, on "ten": "= (10, 0)".
+  - At 17:30.2, on "north parts": "4.8 up, 4.8 down".
+  - The check mark comes on "back to ten, zero" (17:35).
+  - **PASS.** C3 covers the result being labelled "sum" rather than u.
+- **10:59–11:16 (s10 S16–S17; was ~11:12).**
+  - The voice says: "…we square each component, add them, and take the square root, and we get five…".
+  - The screen: "|(−4, 3)| = √((−4)² + 3²)" from 11:00.6, then "= √(16 + 9) = √25 = 5" on "five" (11:06.0–11:06.3), then "|(3, 4)| = √(9 + 16) = 5" on "the balloon's arrow" (11:08).
+  - Dot product: "(3, 4)·(−4, 3) = 3 × (−4) + 4 × 3" on "dot product with three, four" (11:10.5), then "= −12 + 12 = 0" on "zero" (11:15.2).
+  - **PASS** (see C8).
+  - The same wording is used at 2:39–2:47 (s04, rows on "add" / "square root" / "five"), 7:11–7:17 (s08), 13:49–13:55 (s11), 20:33–20:38 (s16), 22:15–22:24 (s17), and 32:52–33:01 (s23), each on its words.
+- **21:34–22:25 (s17 S7–S15; was ~23:20).**
+  - The input lines "x = 3, y = 4, α = 30°" and "cos 30° ≈ 0.866, sin 30° = 0.5" are written above the working, and the gold highlights come on their words.
+  - "x′ = 3 × 0.866 + 4 × 0.5" appears on "For x prime" (21:46.4–21:48.7). The voice says "x times the cosine, plus y times the sine".
+  - "= 2.60 + 2 ≈ 4.60" and the "x′ = 4.6" axis label come on "four point six" (21:53.4).
+  - y′ follows the same pattern, at 21:58.9 and 22:03.9.
+  - "length = √(4.6² + 1.96²) = √(21.16 + 3.84) ≈ √25 = 5 km" comes on "square… add… square root" and on "five kilometres" (22:22.4).
+  - **PASS**, apart from the 0.1-s ghost at 22:15.1 (Should 2).
+
+### (4) Regressions
+- **Legibility at 640 px:** all changed text reads. The smallest new items are the s17/s20 input lines and labels (≈ 44 px at 1080). C1 and C2 are pre-existing or tight placements.
+- **Sync:** every reveal I timed in the changed sentences is within about 0.5 s of its word. The few exceptions are cosmetic (C4, C5, C8).
+- **Ending:** the voice ends at 43:30.12 and the end card is full at 43:30.3. The picture is dimmed at 43:31.0 and 43:31.6, close to the background at 43:32.2, and fully background at 43:32.7. Audio mean level: −26 dB at 43:29, −52 dB at 43:30, −58 dB at 43:31 and −73 dB at 43:32. Picture and music fade out together. **PASS.**
+- **s25 Part-2 pointer lines:** in the right column, each on its words, with no overlap with the graph, legend or source line. **PASS.**
+- **Static gates:** K6 k6y1 reports 0 hits, but K6 checks stills only. It cannot see the 2–3-frame row-exit overlaps below (Should 2).
+
+### Must
+None.
+
+### Should
+1. **s24 inputs are said but not highlighted (36:33–36:55), against the 2026-11-07 rule "inputs a viewer can't see at a glance (trig values, data values) are said and highlighted on their word".**
+   - Not highlighted:
+     - the data values u = −10.1, v = −44.5 (36:34–36:38);
+     - "cos 135° = −cos 45° = −1/√2 ≈ −0.707" (36:46.2–36:51.9);
+     - "sin 135° ≈ 0.707" (36:52.9–36:55.3);
+     - the 0° and 90° inputs (u, v and cos/sin 0°, 90°; 35:23–36:11).
+   - These rows only fade in as grey KaTeX. s17 and s20 do it right. The fix log judged s24 "already revealed on their words (no change)", but the rule asks for revealed **and** highlighted.
+   - **Fix:** the same 45-frame gold pulse (`hiOn/hiSize`) on −0.707 and 0.707 at 36:50.0 and 36:53.8, and on the u and v values at their words.
+     - The 0°/90° cos/sin are 1 and 0. These may be judged obvious; if so, skip them to avoid clutter.
+     - No re-voice is needed.
+2. **Row-exit ghosts: outgoing calculation rows slide up over the line above them for 2–3 frames.** This breaks HOUSE_STYLE §5b ("no text over other text, on any frame"), and K6 stills cannot catch it.
+   - 22:15.1–22:15.3 (s17): the fading "x′ = 3 × 0.866 + 4 × 0.5 / = 2.60 + 2 ≈ 4.60" passes over "cos 30° ≈ 0.866, sin 30° = 0.5" (`ghost_s17_22m15_strip.png`, `ghost_pair.png` top).
+   - 33:33.2–33:33.3 (s23): the "√(35² + 13²)…≈ 37 m/s" stack passes over the keyword "imagine: nothing changes" (`ghost_s23_33m33_strip.png`).
+   - 33:50.4 (s23): "25 km = 25 000 m" passes over the same keyword (`strip_s23_33m49_overlap.png`).
+   - The s14 (17:38.8–17:39.4), s20 and s24 stack changes are clean slides (`ghost_s14_strip2.png`, `strip_s20_27m50.png`, `strip_s24_37m05.png`).
+   - **Fix:** in the stack's exit, let rows reach opacity 0 before they move up, or clip the stack to its own top (y ≥ the input lines or keyword). Then add a 10-fps K6 pass over every stack change in s17 and s23.
+3. **0:19.8–0:29.7 (s01 S3): the new lead-in names three pieces ("x and y, polar coordinates with r and theta, and turned axes"), but the screen does not change from 0:13.5 to 0:34.** It shows the polar grid with r̂, θ̂, "coordinates", the HRRR map and the 7-part row. HOUSE_STYLE asks for reveals on their words.
+   - **Fix:** bring in three keywords on their words, at 0:24.65, 0:25.84 and 0:28.07 (e.g. "x, y" · "r, θ" · "turned axes"), in the free band under the map or under "coordinates". Alternatively, flash the matching glyphs on the polar diagram.
+   - Use the same word as the title ("rotated axes") or as the voice, not both (see C10).
+4. **17:41.0–17:45.9 (s14 S8): "√(6² + 8²) = √(36 + 64)" while the voice says "six and minus eight".** s10 writes "(−4)²" for the same move.
+   - **Fix:** write √(6² + (−8)²) (the value is unchanged). If it is cheap, give the row a left symbol, "|(6, −8)| =".
+
+### Cosmetic
+1. **27:26–28:25 (s20, pre-existing).**
+   - The x′ axis line runs through the "r̂" label (`crop_s20_28m17_left.png`).
+   - The "α = θ ≈ 53°" label sits on the ring line.
+   - Nudge both labels off the lines.
+2. **28:15–28:25 (s20).** "5 along r̂, 0 along θ̂" sits about 20 px under the last stack row and starts left of the stack (`crop_s20_28m17_right.png`). Give it the stack's row gap, or the keyword style one slot lower.
+3. **Results without a symbol.**
+   - s14 "sum = (10, 0)" (17:28.5): it could read "6r̂ − 8θ̂ = (10, 0) = u".
+   - s14 "√(6² + 8²) … = 10 m/s" (17:46) and s23 "√(35² + 13²) … ≈ 37 m/s" (32:53–33:00) have no left-hand side.
+   - The picture labels carry the meaning, so add symbols only if the frame stays calm.
+4. **6:08.4–6:10.4 (s07 S8).** "5 km × 0.2 = 1 km" appears on "one kilometre" (6:10.2), not on "the radius times the angle" (6:08.5). The row also starts about 30 px left of the row above it.
+5. **30:50.3 (s22 S6).** The voice names the first term "thirty eight at theta equals zero" while the counter is already at about 41 of 72. The "38.0" in the fraction is not pulsed; the u_r case rings its points.
+6. **33:45–34:01 (s23).** The clock still reads "32 min" while the lap rows (157 km, 4490 s) are built. That is acceptable, but a neutral "–" or a second clock would read more clearly.
+7. **Rounding differs between adjacent scenes.**
+   - s17 "2.60 + 2 ≈ 4.60", "−1.5 + 3.46 ≈ 1.96";
+   - s18 (23:22–23:25) "2.598 + 2 ≈ 4.60", "−1.5 + 3.464 ≈ 1.96".
+8. **11:01.9–11:06.0 (s10).** "= √(16 + 9) = √25 = 5" reveals as one row on "five", not the squares on "square each component". The arithmetic is not voiced, so this is acceptable.
+9. **Caption 30:52.7–30:56.8.** The cue ends "…metres per" and the next starts "second." The rule protects numbers, not units, but a unit pair could also be kept in one cue.
+10. **Title vs voice.** The title says "rotated axes"; the voice says "turned axes" (0:28) and the whole movie uses "turned". This is harmless, since s18 says "rotation matrix", but one phrase would be tidier.
+11. **Borderline voiced arithmetic (lint 0).**
+    - s23 S7 (33:07.6): "Thirteen metres per second, times three point six, is about forty seven kilometres per hour". The s22 S8 equivalent drops the "× 3.6".
+    - s23 S13 (34:14.3): "thirty five over thirteen is about two point seven".
+    - Both are a unit conversion and a ratio whose idea is new, so they are allowed under "the idea of a conversion". Leave them, unless the user wants s23 S7 to read like s22 S8.
+
+### What works (keep)
+- The user's three spots now follow the rule exactly: the voice says what is combined and where it comes from, the screen shows every step, and the result arrives on its word.
+- The s17 input block works: givens in grey, the three non-obvious inputs in gold on their words, and results labelled on the axes.
+- The s22 counters end on the spoken totals and hold until the division.
+- The s23 clock moves only on its answers.
+- The s25 pointer lines are in the right column, each on its words.
+- The ending fades picture and music together.
+- The physics is right throughout: NH anticlockwise; u_θ > 0 all round (17–47); inward at 7 of 8 points, outward only at 225° (SW); the u_θ = −8 sign at the balloon is called "clockwise, as seen from above" (17:00); and every number recomputes.
+
+### Verdict: **PASS → `qa_pass`** (fix1 review 1: 0 Must, 4 Should, 11 Cosmetic)
+Every Must and Should of fb1 reviews 1 and 2 is fixed on screen, except R1 S4 (a user decision) and the optional R1 C1/C4/C7. The 2026-11-07 rules hold at the user's spots.
+
+Should 1–4 are TSX-only edits: no re-voice, no timing change. If the next loop takes them, re-render s01, s14, s17, s23 and s24 only, then run a 10-fps K6 over the s17/s23 stack exits.
+
+Disk at review end: C: 112 GB free, G: 428 GB free; review frames 44 MB.
+
+
+## ch00_coordinates_flat — fix1 review 2: calc & sync audit (2026-11-07)
+
+Movie `movies/out/ch00/ch00_coordinates_flat/1080.mp4` (build fix1, commit 98fe5b0, rendered 2026-11-07 18:23): 2612.93 s = 43:32.9, 153.47 MB. Rules audited: *show every calculation*, *show the arithmetic, voice the meaning* (user 2026-11-07), labelled and highlighted inputs, results on their words. Fresh eyes, frames only; the movie was not edited.
+
+| movie | duration | size | qa gates | physics | equations | legibility | pacing | captions | access | badges | verdict |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| ch00_coordinates_flat fix1 | 43:32.9 | 153.5 MB | 15/15 PASS (qa.json 18:31) | PASS: every number recomputes; all 16 arrows of the eight points match their signs | PASS (no wrong value; the fb1 slips 24.6 and tan⁻¹(0.38) = 20.9° are fixed) | PASS on the 361 frames I looked at | PASS: fb1 Musts 1–3 fixed; 14 Should timing or label items | PASS: 622 cues, 0 limit breaks, no cue splits a number | PASS | n/a (retired) | **PASS** (0 Must, 14 Should) |
+
+**Method.**
+- **Numbers.** I recomputed every shown or spoken number in Python from `data/cf.json` and the spoken inputs (`scratchpad/r2/recalc.py`, re-run on the fix1 data: ring Σu_θ = 2505.89, Σu_r = −957.23, means 34.804 / −13.295, 58 negative points, ring max 48.89 m/s, eight points unchanged). The tolerance is half the last digit shown.
+- **Real word times.**
+  - The fix1 `words.json` holds Kokoro token times for 239 of 381 timing entries.
+  - I re-synthesised the other 142 entries (s00–s12, s27, s28) with Kokoro `af_bella` ×1.0, the same lexicon and the same clip split. I also re-synthesised 5 entries that `words.json` already covers (s13 S19, s22 S6, s22 S10, s23 S10, s24 S21).
+  - All 147 clips came out exactly as long as `timing.json` (0 mismatches at 2 ms). The 5 spot entries match `words.json` to ≤ 1 ms, so every word time below is a real time in the movie.
+- **Anchor audit.**
+  - All 274 `AT(k, j, "…")` anchors in `cf_sA/sB/sC.tsx` were compared with those word times.
+  - 194 anchors use Kokoro word times and are exact.
+  - 80 still use the character-share fallback (the sentences of s01–s12 and s27 that were not re-voiced): median +0.14 s, 19 of them 0.5–0.94 s off (Should 13).
+- **Frames.** I looked at 361 frames, extracted at w − 0.6 s and w + 0.5 s around every spoken number (w = the real word time), plus strips and crops. They are in `reports/movies/ch00_coordinates_flat/fix1_review2/`:
+  - single frames `sNN_<qty>_{a,b}_<t>.jpg`;
+  - contact montages `mont_*.jpg`;
+  - crops `s23_157km_clip_crop.png`, `s23_clock75_crop.png`, `s24_eight_top_crop.png`, `s24_m24_90_overlap_crop.png`;
+  - extra frames `x*.jpg`.
+
+### Calculation & sync table (time = mm:ss in the fix1 MP4; sync = picture minus voice, measured)
+
+| time | scene | quantity | shown | recomputed | sync | verdict |
+|---|---|---|---|---|---|---|
+| 2:42–2:47 | s04 | r | √(3²+4²) = √(9+16) = √25 = 5 km | 5 | each row on "add them", "take the square root", "five kilometres" | PASS |
+| 3:08–3:18 | s04 | tan θ, θ | 4/3 ≈ 1.333; tan⁻¹(1.333) ≈ 53.13° ≈ 53° | 1.3333; 53.130° | 4/3 row +0.64 s; ≈ 53.13° row **+0.67 s** after "fifty three point one" (3:14.44) | PASS (Should 13) |
+| 4:10–4:26 | s05 | cos, sin, x, y | 3/5 = 0.6, 4/5 = 0.8; 5 × 0.6 = 3; 5 × 0.8 = 4 | exact | on words | PASS |
+| 4:52–4:57 | s06 | bearing | 90° − 53° = 37° | 36.87° → 37° | on words | PASS |
+| 5:49–5:55 | s07 | 1 rad | 360°/2π = 360°/6.283 ≈ 57.3° | 57.296° | on "about fifty seven" | PASS |
+| 6:03–6:11 | s07 | 0.2 rad, arc | 0.2 × 57.3° ≈ 11.5°; 5 km × 0.2 = 1 km | 11.46°; 1 | on words | PASS |
+| **6:13.5** | s07 | arc at 50 km | 50 km × 0.2 = 10 km; arc label "10 km" | 10 | **row at 6:13.51 and label at 6:13.85; "ten kilometres" at 6:16.71: 3.2 s early** | Should 4 |
+| 6:47–7:17 | s08 | r̂, \|r̂\| | (3, 4)/5 = (3/5, 4/5) = (0.6, 0.8); √(0.36 + 0.64) = √1 = 1 | exact | "(3, 4)" label +0.89 s, "r = 5 km" +0.53 s (character share); the rest on words | PASS (Should 13) |
+| 8:44 | s09 | off the circle | 5 + 0.1 = 5.1 km ≠ 5 | — | on word | PASS |
+| 9:42–11:15 | s10 | 90° turn | (1,0)→(0,1); (0,1)→(−1,0); (−q, p); (3,4)→(−4,3); √(16+9) = 5; −12 + 12 = 0 | exact | on words ("Adding the east parts" row −0.87 s, character share) | PASS |
+| 12:14–12:49 | s11 | θ̂ checks | (0, 1); (−1, 0); (−0.8, 0.6); √(0.64 + 0.36) = 1; −0.48 + 0.48 = 0 | exact | ≤ 0.6 s | PASS |
+| 13:09–14:02 | s11 | 0.1° slide | 0.1 × π/180 ≈ 0.001745 rad; 5000 m × 0.001745 ≈ 8.7 m; 53.2301°; 5000 × 0.598603 ≈ 2993.0; 5000 × 0.801046 ≈ 4005.2; −7.0 (west), +5.2 (north); √(49 + 27.04) = √76.04 ≈ 8.7; −7.0/8.7 ≈ −0.80 | 0.0017453; 8.727; 2993.014; 4005.230; 8.720; −0.805 | on words ("four thousand and five" +0.58 s, character share) | PASS |
+| 15:22–16:47 | s13 | inputs, u_r, u_θ | u = (10, 0) m/s, θ = 53°, r̂ = (0.6, 0.8), θ̂ = (−0.8, 0.6); 10 × 0.6 + 0 × 0.8 = 6 + 0 = 6 m/s; 10 × (−0.8) + 0 × 0.6 = −8 m/s | exact | inputs on screen before the sums; results on "six metres", "minus eight metres" | PASS |
+| **17:07.7–17:13** | s14 | rebuild rule | **nothing written**; the voice says "six times r hat, plus minus eight times theta hat" | — | the rule 6 r̂ + (−8) θ̂ is never on screen (first row at 17:13.4) | Should 5 |
+| 17:13–17:46 | s14 | rebuild | 6 r̂ = (6 × 0.6, 6 × 0.8) = (3.6, 4.8); (−8)(−0.8) = +6.4; (−8)(0.6) = −4.8; sum = (3.6 + 6.4, 4.8 − 4.8) = (10, 0); √(6² + 8²) = √(36 + 64) = √100 = 10 m/s | exact | on words | PASS (Should 11: the length row has no symbol) |
+| 19:38–19:53 | s15 | cos 30°, sin 30°, x̂′ | √3/2 = 1.732/2 ≈ 0.866; 1/2 = 0.5; x̂′ = (0.866, 0.5) | 0.86603 | on words | PASS |
+| 20:25–20:42 | s16 | ŷ′ | (−0.5, 0.866); √(0.25 + 0.75) = 1 (0.866² ≈ 0.75, exactly 3/4); 0.866 × (−0.5) + 0.5 × 0.866 = −0.433 + 0.433 = 0 | 0.74996; exact | on words | PASS |
+| 21:36–21:45 | s17 | inputs (gold) | x = 3, y = 4, α = 30°; cos 30° ≈ 0.866, sin 30° = 0.5 | — | **each glows gold on its own word** (α 21:38, cos 21:41.4, sin 21:44.2) | PASS |
+| 21:47–22:23 | s17 | x′, y′, length | 3 × 0.866 + 4 × 0.5 = 2.60 + 2 ≈ 4.60; −3 × 0.5 + 4 × 0.866 = −1.5 + 3.46 ≈ 1.96; length = √(4.6² + 1.96²) = √(21.16 + 3.84) ≈ √25 = 5 km; picture x′ = 4.6, y′ = 1.96 | 4.598; 1.964; 25.0016 | rule rows on "x times the cosine" and "minus x times the sine"; results on "four point six", "one point nine six", "five kilometres" | PASS |
+| 23:21–23:25 | s18 | matrix rows | 0.866 × 3 + 0.5 × 4 = 2.598 + 2 ≈ 4.60; −0.5 × 3 + 0.866 × 4 = −1.5 + 3.464 ≈ 1.96 | exact | on words | PASS |
+| **25:03–25:27** | s19 | C₁₁…C₂₂ | C₁₁ = x̂·x̂′ = (1,0)·(cos α, sin α) = cos α, etc. | C₁₂ = −sin α, C₂₁ = sin α ✓ | **each C row and cell appears at its sentence start, 1.7–2.9 s before "which is cosine alpha" etc.** (C₁₁: 25:03.4 vs 25:06.25) | Should 6 |
+| 25:58–26:16 | s19 | x′₁, x′₂ | 3 × 0.866 + 4 × 0.5 ≈ 4.60 ✓; −3 × 0.5 + 4 × 0.866 ≈ 1.96 ✓ | exact | on words | PASS |
+| 27:28–28:16 | s20 | α = θ | cos θ = 0.6, sin θ = 0.8 (**gold on their words**); 10 × 0.6 + 0 × 0.8 = 6; −10 × 0.8 + 0 × 0.6 = −8; 3 × 0.6 + 4 × 0.8 = 1.8 + 3.2 = 5; −3 × 0.8 + 4 × 0.6 = −2.4 + 2.4 = 0 | exact | on words; "5 along r̂, 0 along θ̂" 1.3 s before "five, zero" | PASS |
+| 29:08–29:17 | s21 | data description | — ("ten metres above the ground", "grid points every three kilometres" are spoken only) | — | 10 m and 3 km never on screen | Should 12 |
+| 30:09–30:37 | s22 | ring, N | 25 km; 360° ÷ 5° = 72 points; ū_r = (1/N) Σ u_{r,i}; N = 360° ÷ 5° = 72 (gold) | 72 | on words | PASS |
+| **30:47–30:53.5** | s22 | Σu_θ (fb1 Must 1) | (38.0 + 37.8 + 38.3 + …)/72 from the sentence start; counter "sum so far … n of 72" → **"sum: 2505.9 m/s · 72 of 72"** | 2505.89 | **counter reaches 72 of 72 at 30:52.68**, 0.78 s before "two thousand five hundred" (30:53.46), because the count is eased; it then holds until the fraction (30:57.9) | **PASS (fixed)** |
+| 30:57.9–31:01 | s22 | ū_θ | 2505.9 m/s / 72 ≈ 34.8 ≈ 35 m/s; callout "≈ 35 m/s" | 34.804 | ≈ 34.8 fades in 0.6 s before "thirty four point eight"; callout on "or about thirty five" | PASS |
+| **31:06.4** | s22 | km/h factor | 1 m/s = 3600 m/h = 3.6 km/h | exact | **3.3 s before "three point six" (31:09.74) and 5.8 s before "three thousand six hundred" (31:12.23)**; the constant is not highlighted on its word | Should 2 |
+| **31:17.5** | s22 | 35 m/s in km/h | 35 × 3.6 = 126 km/h | 126.0 | **3.0 s before "a hundred and twenty six" (31:20.48)** | Should 2 |
+| **31:35.7–31:39.7** | s22 | Σu_r (fb1 Must 2) | −8.7 − 10.3 − 11.2 − … (gold rings on θ = 0°, 5°, 10°); counter → **"sum: −957.2 m/s · 72 of 72"** | −957.23 | count 31:37.22 → 72 of 72 at 31:39.40, **0.30 s before "minus nine hundred"** (31:39.70); holds until the fraction (31:42.95) | **PASS (fixed)** |
+| 31:43–31:47 | s22 | ū_r | −957.2 m/s / 72 ≈ −13.3 ≈ −13 m/s; "in: towards the eye" | −13.295 | on words | PASS |
+| **32:07.75** | s22 | best track | 135 kt × 1.85 ≈ 250 km/h ("× 1.85" has no unit) | 249.75 (1.852: 250.02) | **4.9 s before "two hundred and fifty" (32:12.68), 1.4 s before "one point eight five"** | Should 2, Should 11 |
+| 32:15.7 · 32:28.4 | s22 | 69, 49 | 250 km/h ÷ 3.6 ≈ 69 m/s; strongest on our ring ≈ 49 m/s | 69.4; 48.89 | on "sixty nine" and "forty nine" (fb1 Should 8 fixed) | PASS |
+| 32:52–33:00 | s23 | resultant | √(35² + 13²) = √(1225 + 169) = √1394 ≈ 37.3 ≈ 37 m/s (the rows have no symbol); picture "≈ 37 m/s" | 37.336 | rows on "By Pythagoras", "add them", "take the square root", "thirty seven" (fb1 Should 1 settled by the re-voice) | PASS (Should 11) |
+| **33:07.9–33:11.8** | s23 | inflow km/h | 13 × 3.6 ≈ 47 km/h | 46.8 | **the row (with 3.6) appears only on "forty seven" (33:11.76), 1.75 s after "three point six" was said**; the voice reads the product (Should 14) | Should 3 |
+| 33:26–33:42 | s23 | time in | 25 km = 25 000 m; t = 25 000 m / 13 m/s ≈ 1923 s; ≈ 1923 ÷ 60 ≈ 32 min | 1923.08 s; 32.05 min | 25 000 m on its word; **the fraction, with its input 13 m/s, appears only together with its result on "nineteen hundred" (33:39.33); "Time is distance divided by speed" (33:35.78) is never written** | Should 3 |
+| **33:29–33:42.8** | s23 | clock (fb1 Must 3) | clock 0 min from S10 → sweeps to **32 min on "thirty two minutes"** (33:42.19; 31 at +0.5 s) | 32 | on word | **PASS (fixed)** |
+| 33:48–34:01 | s23 | lap | 2π × 25 km = 2 × 3.1416 × 25 ≈ 157 km = 157 000 m; t = 157 000 m / 35 m/s ≈ 4490 s; ≈ 4490 ÷ 60 ≈ 75 min; gold lap sweep, "157 km" | 157.08; 4485.7 → 4490 (3 s.f.); 74.8 | rows on "two pi times", "a hundred and fifty seven", "four thousand four hundred", "seventy five minutes" | PASS (Info 1) |
+| **34:00.7** | s23 | clock (fb1 Must 3) | clock holds 32 min, **sweeps 32 → 75 min on "seventy five minutes"** | 75 | on word; **but the lap is a separate thought experiment and the clock does not restart at 0, so the dial reads as if the lap took 75 − 32 = 43 min** | PASS (Should 1) |
+| 34:08–34:21 | s23 | ratio | (distance round)/(distance in) = 35 t / 13 t = 35/13 ≈ 2.7; "almost 3 m round per 1 m in" | 2.692 | on words (fb1 "2.7" lag fixed) | PASS |
+| 35:24–35:46 | s24 | 0° point | u = −8.7, v = 38.0; cos 0° = 1, sin 0° = 0; (−8.7)(1) + (38.0)(0) = −8.7; −(−8.7)(0) + (38.0)(1) = 38.0 | −8.66 / 38.03 (library −8.73 / 38.01) | stack on words; **map labels "u_r = −8.7" at 35:37.4 and "u_θ = 38.0" at 35:43.3, 2.2 s and 2.1 s before their words** | Should 7 |
+| 35:58–36:25 | s24 | 90° point | u = −16.9, v = −37.4; cos 90° = 0, sin 90° = 1; = −37.4; −(−16.9) = +16.9; u_θ = +16.9 | −37.39 / 16.88 | stack on words; **map label "u_r = −37.4" at 36:12.3, 2.2 s before its word** (u_θ label on its word) | Should 7 |
+| 36:35–37:14 | s24 | 135° point | cos 135° = −cos 45° = −1/√2 ≈ −0.707, sin ≈ 0.707; (−10.1)(−0.707) = +7.14; (−44.5)(0.707) = −31.46; 7.14 − 31.46 ≈ −24.3; −(−10.1) = +10.1; 10.1 × 0.707 = 7.14; (−44.5)(−0.707) = +31.46; 7.14 + 31.46 ≈ 38.6 | 7.1407; −31.4615; −24.32; 38.60 | each term on its own words: second terms on "plus v times the sine" and "plus v times the cosine" (fb1 Should 7 fixed); results on "minus twenty four" and "thirty eight point six" | PASS |
+| 37:21–37:46 | s24 | eight points | 16 values and arrows; legend "(m/s)"; "in at 7 of 8" on "seven of them" (37:30.84); "· out at 225°" on "two hundred and twenty five" (37:32.99); ū_r = (−8.7 − 10.3 − 11.2 − …)/72 ≈ −13.3 m/s | see the fb1 eight-point table; 270° now 24.5 ✓; 180° arrow visible ✓ | on words (fb1 Should 2, 4, 5, 6 fixed) | PASS |
+| 38:58–39:20 | s25 | ranges, count | 17, 47, mean 35; −40, +14; "72 − 14 = 58 points in"; "14 points out" | 16.88 / 46.84 / 34.80; −40.12 / +14.15; 58 negative, 14 positive | ranges on words; **"72 − 14 = 58" at 39:11.85 uses the 14 out-points 5.3 s before "14 points out" appears (39:17.10)**, and the voice also says "fourteen metres per second", a different 14 | Should 9 |
+| **40:34.2** | s26 | tan | 13.3/34.8 ≈ 0.38 | 0.3822 | **the whole row, result included, appears on "thirteen point three over"; "zero point three eight" comes at 40:37.61: 3.4 s early** | Should 8 |
+| 40:43–40:44 | s26 | inflow angle | inflow angle = tan⁻¹(0.38) ≈ 20.8° ≈ 21°; picture "≈ 21°" | 20.81° (fb1 Should 3 fixed) | ≈ 20.8° on "twenty one degrees"; picture label 0.6 s early | PASS |
+| 42:33–42:44 | s27 | recap | 35 m/s round, 13 m/s in, ≈ 21° | consistent | one line at the sentence start (recap) | PASS |
+
+**fb1 audit items re-checked.**
+- **Must 1 (Σu_θ): fixed.** The counter shows 72 of 72 = 2505.9 from 30:52.68. The voice says "two thousand five hundred" at 30:53.46. The total holds until the fraction 2505.9 m/s / 72 replaces it.
+  - The eased count lands 0.78 s before the word. A linear `prog` over the last 20 % would land on the word; this is optional.
+- **Must 2 (Σu_r): fixed.** The counter reaches 72 of 72 = −957.2 at 31:39.40, and the voice says "minus nine hundred" at 31:39.70. The total holds until the fraction.
+- **Must 3 (clock): fixed for timing.** The clock holds 0 min until "thirty two minutes" and 32 min until "seventy five minutes", and each sweep happens on its word. See Should 1 for the 32 → 75 start.
+- **Shoulds 1–11 of fb1.**
+  - 1 (169 before its word): settled by the re-voice.
+  - 2 (270° label reads 24.5): fixed.
+  - 3 (20.8°): fixed.
+  - 4 (7 of 8 / 225° on their words): fixed.
+  - 5 (180° arrow visible): fixed.
+  - 6 ((m/s) in the legend): fixed.
+  - 7 (135° terms on their words): fixed.
+  - 8 (49 on its word): fixed.
+  - 9 (no caption splits a number): fixed; the only adjacent number words across a cue boundary are two separate numbers, "…three kilometres east and / four kilometres north" and "…spin and / thirteen of inflow".
+  - 10 (storyboard numbers): fixed; 37 / −12.5 / 18.6 survive only in `numbers_build1_about_hrrr_minimum`.
+  - 11 (word timing): mostly fixed; 194 of 274 anchors are now on Kokoro word times; see Should 13.
+
+**Narration rule ("show the arithmetic, voice the meaning").** `tools/script_wording_lint.py` reports 0 findings. I read all 381 sentences:
+- **No term-by-term arithmetic is voiced anywhere.** Every calculated result shown on screen is named by the voice, from s04 r = 5 km to the s26 21°. The only exceptions are the intermediate steps (9 + 16, 1394, 7.14, 31.46), which are shown and not voiced, as the rule asks.
+- Four sentences still read a plain product or quotient of numbers. Three are acceptable, because they name what each number is and say it as the formula's own words: s04 S6 "the north side over the east side, four over three", s23 S11 "two pi times twenty five kilometres", s26 S4 "the inward part over the round part, thirteen point three over thirty four point eight". s23 S7 is not (Should 14).
+
+### Must
+None. Every number recomputes, and every fb1 Must is fixed.
+
+### Should (timing or labels; no re-voice except 14)
+1. **34:00.7 · s23 · the lap clock starts at 32 min.**
+   - What happens: the clock sweeps 32 → 75 min on "seventy five minutes". The lap is a separate "imagine" case from the 32-minute trip in, so a viewer can read the dial as a 43-minute lap.
+   - Fix: reset the dial to 0 on "one lap" (33:48.73), then sweep 0 → 75 on "seventy five minutes". In `cf_sC.tsx` S23 `minNow`, use `75 * prog(f, t75, t75 + 18)` after `tLap`.
+2. **31:06.4 / 31:17.5 / 32:07.75 · s22 · conversion results appear 3–6 s before they are said.**
+   - "1 m/s = 3600 m/h = 3.6 km/h" is 3.3 s before "three point six" and 5.8 s before "three thousand six hundred".
+   - "35 × 3.6 = 126 km/h" is 3.0 s before "a hundred and twenty six".
+   - "135 kt × 1.85 ≈ 250 km/h" is 4.9 s before "two hundred and fifty".
+   - Fix: reveal each line's left side at the sentence start and its result (or the 3.6, 3600 and 250) on its word, as the ū rows do. 3.6 and 1.85 are constants a viewer can't check at a glance, so give them the gold `hiOn`/`hiSize` glow on "three point six" (31:09.74) and "one point eight five" (32:09.13), as in s17 and s20.
+3. **33:07.9–33:11.8 and 33:35.8–33:39.3 · s23 · inputs only arrive with their results.**
+   - "13 × 3.6 ≈ 47 km/h" appears on "forty seven", 1.75 s after "three point six" was said.
+   - "t = 25 000 m / 13 m/s ≈ 1923 s" appears in one go on "nineteen hundred". The voice says "Time is distance divided by speed" 3.6 s earlier with nothing on screen.
+   - Fix: put "13 × 3.6" on "Thirteen metres" and "≈ 47 km/h" on "forty seven". Add a row "t = distance ÷ speed" on "Time is distance", then the fraction, then "≈ 1923 s" on its word. Treat the 4490-s row the same way: its 35 m/s input arrives with the result.
+4. **6:13.5 · s07 · "50 km × 0.2 = 10 km" and the arc label "10 km" appear 3.2 s before "ten kilometres" (6:16.71).** Reveal the left side on "fifty kilometres" (6:13.96) and "= 10 km" and the label on "ten kilometres". The row's anchor is `t10 + 10`, which is the sentence start.
+5. **17:07.7–17:13 · s14 S2 · the rebuild rule is never written.** The voice says "six times r hat, plus minus eight times theta hat", and the screen shows only "same wind?" for 5 s. Add "u = 6 r̂ + (−8) θ̂" on "We rebuild it". It can be the top row of the existing stack.
+6. **25:03–25:27 · s19 · each C row, result included, appears at its sentence start**, 1.7–2.9 s before "which is cosine alpha", "minus sine alpha" and so on (C₁₁ row at 25:03.4, word at 25:06.25). Reveal "= cos α" (and the table cell) on "which is …".
+7. **35:37.4 / 35:43.3 / 36:12.3 · s24 · the map result labels for the 0° and 90° points lead their words by about 2.2 s.** These are "u_r = −8.7", "u_θ = 38.0" and "u_r = −37.4"; the stack rows are on time. They use `p.tr + 10` and `p.tt + 10`, where `tr`/`tt` are sentence starts. Anchor them, and the rose and teal arrow growth, on "minus eight point seven", "thirty eight" and "minus thirty seven point four", as the 135° point already is.
+8. **40:34.2 · s26 · "13.3/34.8 ≈ 0.38" appears whole on "thirteen point three over", 3.4 s before "zero point three eight".** Split the row: the fraction on "thirteen point three", "≈ 0.38" on "zero point three eight" (40:37.61).
+9. **39:11.85 · s25 · "72 − 14 = 58 points in" uses the 14 out-points 5.3 s before the label "14 points out" (39:17.10).**
+   - The voice never says "fourteen points" but does say "fourteen metres per second", a different 14.
+   - Fix: show "14 points out" first, or write "72 − 14 out = 58 in", so the input is on screen before the result and the two 14s are not confused.
+10. **3:14.4 · s04 · "≈ 53.13° ≈ 53°" lands 0.67 s after "fifty three point one".** It uses `t53 + 20` on a character-share anchor. Anchor it on the word.
+11. **Results without their symbol, and one unlabelled constant.**
+    - s23 32:52: the Pythagoras rows begin "√(35² + 13²)" with no left side, and the picture says only "≈ 37 m/s". Write "wind speed = √(35² + 13²)" and keep "≈ 37 m/s".
+    - s14 17:42: "√(6² + 8²)" should be "|u| = √(6² + (−8)²)".
+    - s22 32:07: "× 1.85" should read "× 1.85 km/h per kt".
+12. **29:08–29:17 · s21 S3 · "ten metres above the ground" and "grid points every three kilometres" are spoken and never shown.** Add "10-m wind · 3-km grid" to the keyword or the source line.
+13. **Word timing in the unchanged sentences.**
+    - 80 anchors in sentences that were not re-voiced still use character share. 19 of them are 0.5–0.94 s off, for example:
+      - s04 "east side" +0.94 s;
+      - s08 "three, four" +0.89 s;
+      - s10 "Adding the east parts" −0.87 s;
+      - s03 "Three steps" −0.82 s;
+      - s27 "Then we'll use" −0.82 s.
+    - Fix: merge `scratchpad/r3/words_missing.json` (the Kokoro times for all 142 missing entries, verified to the millisecond against `timing.json`) into `words.json`. Every `AT()` then lands on its word with no other code change.
+14. **Narration (next re-voice only, not worth a TTS pass on its own).**
+    - s23 S7 "Thirteen metres per second, times three point six, is about forty seven kilometres per hour" reads a plain product. Suggested: "In kilometres per hour, that's about forty seven, towards the centre."
+    - s23 S13 "thirty five over thirteen is about two point seven" reads a plain quotient. Suggested: "so the air goes about 2.7 times as far round as in".
+
+### Info
+1. s23 uses rounded inputs: 157 000 m / 35 m/s = 4485.7 s, shown and said as ≈ 4490 s (3 s.f.), while "1923 s" is given to 4 s.f. Both lead correctly to 75 min and 32 min, so this is consistent but uneven; "≈ 4486 s" would match "1923 s".
+2. The map labels' dark halo makes the "=" in "u_r = −24.3" look like "≡" at 640 px (crop `s24_m24_90_overlap_crop.png`). It is legible at 1080p. A thinner halo on the "=" would help.
+3. s11 S19 says "a tenth times pi over one hundred and eighty". It names the degree-to-radian rule, so it is acceptable, but "a tenth of a degree is about 0.0017 radians" would match the new voice better.
+4. Only s17 and s20 use the gold input glow. s15 (cos 30° first introduced), s22 (3.6, 1.85) and s24 (cos 135° ≈ −0.707) reveal their inputs on the word without the glow. Should 2 covers the two constants that also arrive early.
+5. qa.json (18:31): all 15 gates PASS. Duration 2612.93 s, av_length, size 153.47 MB, codec, black 0, frozen (220 narrated), content, halves, overlap (3757 frames, 0 hits), loudness −16.3 LUFS / −4.4 dBTP, flashes 0, captions 622, subtitles, physics (19 hashes), equations (23).
+
+### Verdict: **PASS** (calc & sync)
+- **Numbers.** Every number shown or spoken recomputes within half its last digit, and the eight-point arrows match their signs.
+- **fb1 Musts.** The three fb1 calc/sync Musts are fixed: both ring sums end on their spoken totals and hold until the fraction, and the clock sweeps on "thirty two minutes" and "seventy five minutes". Of the eleven fb1 Shoulds, ten are fixed and the eleventh (word timing) is mostly fixed (Should 13).
+- **What is left.** Fourteen Shoulds remain, all of the same kind: a result revealed at its sentence start, 2–6 s before its word (Should 2, 4, 6, 7, 8), or an input that arrives with its result (Should 3, 9).
+- **Fixing them.**
+  - Shoulds 1–13 are visual-only changes in `cf_sA/sB/sC.tsx` plus the `words.json` merge (Should 13), followed by a re-render; they need no re-voice.
+  - Should 14 waits for the next re-voice.
+  - None of the fourteen blocks `qa_pass`.
+
+## ch00_coordinates_storm — r8 review 1 (2026-11-07)
+2026-11-07 · fresh eyes, frames only · movie `movies/out/ch00/ch00_coordinates_storm/1080.mp4` (154 253 511 bytes, rendered 20:57; `qa.json` 21:05 measured this file) · source r8 (commit 0cc42d0) · times from `timing.json` / `en.vtt` (r8 times). Judged against the master plan rows R1, R3, R10–R14b, R16 and R19, user feedback paragraphs 8–12, `fact_check_2026-11-07.md` (5b rows), and HOUSE_STYLE incl. the 2026-11-07 calculation rules.
+
+| movie | duration | size | qa gates | physics | equations | legibility | pacing | captions | access | badges | verdict |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| ch00_coordinates_storm (Part 2, r8) | 61:12.5 (3672.5 s; narration ends 61:10.0 + 2.5-s hold) | 154.3 MB | **14 PASS + 1 SKIP**: `physics SKIP — no --manifest given` (Must 1). Others: loudness −16.3 LUFS / −3.0 dBTP, flashes 0, captions 888, equations 19, frozen 347 (all narrated), black 0, content, halves | PASS (every number recomputed; NH anticlockwise, Idai SH clockwise; across-shore signs and ŷ′ sea-ward at all 5 points; Coriolis outward and "as seen on the turning Earth") | PASS (19/19; Part 1 x′, y′ + matrix recalled exactly; no katex-error) | FIX: 1 Must (colour bar vanishes), 4 Should (overlaps) | PASS with Shoulds | PASS (own pass: 888 cues, 0 > 2 lines / 42 chars / 17 cps / outside 1–7 s, 0 overlaps, last cue ends 61:09.7) | PASS (0 flashes; signs carry ± and words, not hue alone) | n/a (retired) | **FIX** (3 Must, 12 Should) |
+
+**Method.**
+- 420 frames, tiles and crops in `reports/movies/ch00_coordinates_storm/r8_review1/`.
+  - 3 frames per scene for all 42 scenes, read at 640 px (`M_00…M_13.jpg`, 3 × 3 tiles).
+  - Dense frames on the cue times through every changed block: s01, s09, s15, s21, s26–s31, s33, s36, s39, s41–s42 (`s26a–c`, `s27a–b`, `s28a–b`, `s29a–c`, `s30a`, `s31a`, `s33a–c`, `ends*.jpg`, …).
+  - Full-resolution crops for every suspected overlap or glow (`s28_zoom.jpg`, `overlaps.jpg`, `s21_labels.jpg`, `endcard_list.jpg`).
+- Swipe line tracked at 4 fps by its gold colour (`swipe_track.py` in the session scratchpad) for s34, s37 and s40.
+- Every on-screen number in s26–s39 recomputed by hand, for example:
+  - FMB along = 22.2(−0.515) + 24.3(0.857) = 9.4, across = −31.5, √(9.4² + 31.5²) = 32.9;
+  - StP +12.1 / −14.7;
+  - Amphan −22.3 (shown −22.4 from unrounded inputs), Nargis −17.8, Idai −21.1 (shown −21.0);
+  - inverse barometer 72, 53, 51 and 58 cm.
+
+### The user's asks, checked on the frames
+| ask | status | evidence (r8 time) |
+|---|---|---|
+| R1 no "easy"; natural opening | **met** | 0:00–0:13: title "Coordinates / Part 2 · Inside a tropical cyclone / turning arrows and cylindrical coordinates"; one sentence "…see how they're used to look inside a tropical cyclone…" |
+| R10 / no recap: 1–2 sentences | **met** | 0:50.8 "Part 1 gave us polar coordinates…", 0:58.9 "In this part…"; keywords "Part 1: polar coordinates, r̂, θ̂" / "Part 2: how fast r̂, θ̂ turn · + height: cylindrical · turned axes: wind pushes the sea" |
+| R11 cylindrical = polar + height, how it differs | **met, one wording flaw** | 23:20 "polar: two numbers (r, θ)" → 23:42 "polar + height = cylindrical (r, θ, z)", lifted grid, z axis, the cylinder at r = 30 km; 23:50 "x = r cos θ, y = r sin θ, z = z · derived in Part 1: polar coordinates". The last sentence's "That's because" does not follow (Should 2) |
+| R12 u_r / u_θ recalled with a worked point | **met** | 13:25–14:20: both lines, "derived in Part 1: radial and tangential wind", 10 m/s east at the 53° point → u_r = 10 × 0.6 + 0 × 0.8 = 6, u_θ = −10 × 0.8 + 0 × 0.6 = −8 (arrows drawn: 6 r̂ − 8 θ̂ = east ✓), then ū_θ = (1/72) Σ u_θ,k ≈ 34.8 m/s. Recalled again at 24:11 (s16) |
+| R13 turned axes before the gauges; coast angle; FMB onto land; StP out to sea; opposing arrows | **met** | 37:25–38:32: x̂′, ŷ′, x′, y′ (37:43), matrix (37:52), "derived in Part 1: turned axes", then the wind form along/across with the sign meaning. 38:38–40:27: coast angle (55.0/91.5 → 31° → 329° → α 121°, x̂′ NNW, ŷ′ WSW to the Gulf). 40:27–42:00: FMB along 9.4 / across −31.5 "onto the land" with the √ check. 42:00–43:38: StP α 97°, across +12.1 "out to sea", along −14.7. 43:32: both arrows opposing on one map |
+| "onshore wind piles water" said before the evidence | **met** | 43:38–44:36 (s30), before the gauges (s31, 44:37) |
+| Ian gauge chart like the original | **met** | 44:41–45:50: map with both across arrows on the left; two lines over 36 h on the right, "water above the normal tide (m)", landfall marker, station legend; gold links from each legend entry to its station's arrow (45:00) |
+| R14 / R14b each event: wind + pressure + across calc, then before/after | **met, pressure thin** | Amphan s33 46:35 → radar s34 48:38; Nargis s36 51:42 → swipe s37 53:37; Idai s39 56:05 → swipe s40 58:03. Each has the coast legs, tan, bearing, α, cos α / sin α, u / v, two products, the sum, "onto the land", the official pressure and the rise. ERA5 pressure itself is not shown (Should 9) |
+| R16 point-of-use recalls | **met** | "derived in Part 1: …" at 2:07 (polar unit vectors), 7:39 (quarter turn), 13:46, 23:50, 24:11, 28:42 (ring average), 34:20 (inflow angle), 37:50 (turned axes), 39:35 (bearings) |
+| R19 facts | **met, one ambiguity** | 31:21–31:52: "IMD's top wind class · super cyclonic storm · 18 May · first since 1999 in the Bay · a wind class, not harm · Sidr 2007 · Aila 2009: weaker, but very harmful"; Kolkata split into its own sentence (32:07) with "closest to Kolkata ≈ 17 km"; "Almost nothing" (45:16); "Some of the best-known" (s35); manifest author order Fischer, Reasor, Rogers and Gamache. **New ambiguity** from the inserted rows: Must 3 |
+| R3 smooth ending + teaser | **met** | 58:40–60:31: recap with mini pictures and the coast numbers; 60:31–60:46: "Part 3: the Earth · latitude, longitude → km"; 60:47–61:12: end card, picture fades with the music (61:12 nearly black) |
+| House calc rules (2026-11-07) | **met in voice, Shoulds on screen** | No product or sum is read aloud in s26–s39. Every row has its symbol ("along ≈ …", "across ≈ …", "speed ≈ 32.9 ≈ 33 m/s"). Exception: s30 still voices a subtraction (Should 5). Glows: Should 8 |
+| Swipes right → left → right → middle, slow | **met except one** | Idai natural 58:04–58:17 R→L→R→M, ≈ 4 s per width ✓; Idai false 58:20–58:37 ✓; Nargis false 54:42–54:56 ✓; Amphan radar 49:28–49:44 R→L→R→M, then L to reveal the cyan ✓. **Nargis natural colour 53:56–54:05 ends at the right edge (no middle)**: Should 7 |
+| Source lines and colour bars | **met except event ends** | Every data frame has a source line below the picture. Colour bars are beside the maps, except on the event maps' last 7–12 s: Must 2 |
+
+### Must
+1. **qa.json: the physics gate did not run** (`"physics": SKIP — no --manifest given`).
+   - The brief's "15/15 PASS" is 14 PASS + 1 SKIP, so manifest hash parity (checklist 1, 9) is unproven for this render. Part 1 and Part 3 ran it (19 and 29 hashes PASS).
+   - Fix: re-run `tools/movie_qa.py movies/out/ch00/ch00_coordinates_storm/1080.mp4 --storyboard movies/ch00/ch00_coordinates_storm/storyboard.yaml --manifest movies/ch00/ch00_coordinates_storm/manifest.json`. No re-render is needed.
+2. **The wind-speed colour bar disappears while the coloured ERA5 map stays.**
+   - Times: Amphan 48:31–48:38 (s33 last sentence "There's no tide-gauge record…"), Nargis 53:26–53:37 and Idai 57:56–58:03. The "white circle" legend also goes.
+   - HOUSE §5: colour bar on every coloured field, hidden only during a zoom, and there is no zoom here. Nargis says "Let's zoom in", but the map does not move before the cut.
+   - Fix: keep the colour bar (and the white-circle label) to the scene's last frame in `EventWind` (`cs_sD.tsx`). Move the pressure rows if K6 needs the room.
+3. **31:57 · s21 · "On the twentieth, it came ashore in the Sundarbans" now follows the new Aila sentence**, so "it" reads as Aila: "…Cyclone Aila in two thousand and nine flooded Khulna and Satkhira for months. On the twentieth, it came ashore…".
+   - Under R19 ("nothing misleading") a first-time viewer cannot tell which storm landed on the twentieth of which month.
+   - Fix: re-voice one sentence: "On the twentieth of May, Amphan came ashore in the Sundarbans, …".
+
+### Should
+1. **41:48–42:00 · s28 check stack · the second row's radical bar runs through the first row.** It crosses the baseline of "speed = √along²", so "speed =" looks underlined or struck (`s28_zoom.jpg`). Add row spacing (or put the two radicals on one line).
+2. **23:52 · s15 S11 · "That's because all the places at one distance r form a cylinder…" follows "z is simply the height", so the "because" explains nothing.** This is the sentence that says why the system is called cylindrical (R11). Re-voice as "They're called cylindrical because all the places at one distance r form a cylinder round the storm's axis." Bundle it with Must 3.
+3. **Arrows drawn over labels** (HOUSE §5b: no text under other marks):
+   - 37:09 the white wind arrow covers the "h" of "Fort Myers Beach";
+   - 41:14–41:50 the grey along-arrowhead touches "along 9.4";
+   - 42:55–43:05 the wind arrowhead sits on "Saint Pete Beach";
+   - 47:58–48:38 the wind and across arrows cross "our point", and the white head touches "across −22.4";
+   - 52:55–53:37 the arrows cross "our point" (Nargis);
+   - 57:40–58:03 the across and wind arrows cross "Beira".
+
+   Fix: offset each label from the arrow bundle (`placeLabels`).
+4. **Recap 60:00–60:31.**
+   - The "across −22.4 / −17.8 / −21.0 m/s" labels run onto the brown "land" blocks: "m/s" sits on the block (`overlaps.jpg`).
+   - The gauge mini-chart uses orange (Fort Myers) and dashed blue (Saint Petersburg). s31 used rose and teal, and "a quantity keeps its colour through the whole movie".
+   - Its axis reads "vs predicted tide (m)" where s31 had "water above the normal tide (m)".
+
+   Fix: shorten or move the labels left, and reuse s31's colours and axis title.
+5. **s30 44:12–44:36 · inverse barometer.**
+   - (a) The voice still reads a subtraction: "seventy two below the normal one thousand and thirteen". The event scenes dropped the same phrase in r8.
+   - (b) "100 Pa / (1025 kg/m³ × 9.81 m/s²) ≈ 0.01 m" appears with none of its inputs said: 1 hPa = 100 Pa, the sea-water density, gravity.
+
+   Fix: voice "a hectopascal of pressure holds up about a centimetre of sea water: the pressure change divided by the water's density times gravity" and drop the subtraction from the voice, or drop the fraction and keep "≈ 1 cm per hPa".
+6. **22:18–22:38 · s14 · "f: Coriolis parameter" is on screen, but the voice never says f or Coriolis parameter.** That makes it an undefined term (HOUSE §4). Drop the row (the Coriolis movie owns it) or add a clause such as "…the Earth's spin, measured by the Coriolis parameter f…".
+7. **53:56–54:05 · s37 natural-colour swipe.**
+   - It goes right → left (≈ 4 s) → right (≈ 3 s), then cross-fades to false colour at the right edge. It never ends in the middle, unlike the user's rule and the other four swipes.
+   - Both false-colour swipes (54:38, 58:19) start from the middle with a 1-s jump to the right edge.
+
+   Fix: add the final glide to the middle in s37 natural (and the 4–5-s return), and start the false-colour swipes at the right edge.
+8. **Input and answer highlights are too faint to see.**
+   - 41:25–41:28: the answer "across ≈ −31.5 m/s" shows only two faint corner ticks (`s28_zoom.jpg`).
+   - 40:41–40:50: "u = 22.2, v = 24.3" do not glow on "u" or "v".
+   - 40:59–41:06: cos/sin glow in their own orange, not gold.
+
+   HOUSE §6 asks for a gold pulse or box on non-obvious inputs and on the scene's answer. Check the same on the event rows (u, v, cos α, sin α, the across answer).
+9. **R14b "wind vectors AND pressure" is only half on screen.**
+   - The events show wind vectors, but the pressure is a single official number ("official lowest pressure: 960 hPa").
+   - No ERA5 msl appears, and the white circle is not said to come from the pressure.
+
+   Fix: label it "white circle: ERA5's lowest pressure, ≈ 9xx hPa" (from the data), or add 2–3 isobars. Then the pressure data are on the map, as the user asked.
+10. **s29 42:52–43:30 · Saint Petersburg.**
+    - When the wind arrives, the "cos α ≈ −0.122, sin α ≈ 0.993" row (voiced 42:39–42:45) is removed, so 0.993 and −0.122 reappear only inside products.
+    - The along row "along ≈ 1.2 − 15.9 = −14.7 m/s" has no formula, and its two numbers are unlabelled.
+
+    Keep the cos/sin row as FMB does, and write "along = u cos α + v sin α ≈ 1.2 − 15.9 ≈ −14.7 m/s".
+11. **32:16–32:25 · s21 · the Khulna dot sits under the end of the "Satkhira" label, with the "Khulna" label well to the right of its dot**, so the two towns are hard to match (`s21_labels.jpg`; the log noted it as pre-existing). Put each label beside its own dot.
+12. **Spoken but not on screen: "about a hundred and sixty kilometres north" (41:59, s29 S0).** Add "≈ 160 km N" to the keyword "Saint Petersburg · 20 UTC".
+
+### Info
+1. The coloured component arrows use rose for u_r = +6 and teal for u_θ = −8 (13:52; also s16). The house sign colours are teal + and rose −, and the radial-wind colour bars use rose = in. This is consistent within the coordinates series (component colour, not sign), so no change.
+2. The caption cue at 0:38.3 breaks "and near India and / Bangladesh it's called a cyclone" across cues. This is cosmetic.
+3. Size: 154.3 MB passes the gate's 160-MB budget for this movie, but HOUSE §10.3 says 60 MB (hard 80) for long movies. That is a media-repo question for the orchestrator, not a viewer issue.
+4. The end card's topic list is about 44 px with line-height ≈ 1.0. It is legible but tight.
+5. Disk at review end: C: 112 GB free, G: 424 GB free (`df`).
+
+### Verdict: **FIX**
+- Fixing it takes no new data and no new visuals:
+  - Must 1 is a QA re-run with `--manifest`;
+  - Must 2 is a visual-only change in `EventWind`;
+  - Must 3 and Should 2 need one short re-voice: two sentences, splice and remix as in r8.
+- The user's content asks (R1, R3, R10–R14, R16, R19, paragraphs 9–12) are all on screen and in the right order.
+- Shoulds 1, 3, 4, 7, 8, 10 and 11 are visual-only and can ride the same render. Shoulds 5, 6, 9 and 12 are small and go into the same fix loop if the user agrees.
+
+## ch00_coordinates_storm — r8 review 2: calc & sync audit (2026-11-07)
+
+Movie `movies/out/ch00/ch00_coordinates_storm/1080.mp4`, remake r8 (commit 0cc42d0). It runs 3672.50 s (61:12.5); narration ends at 3670.00 s; 154.25 MB. I looked at frames only and did not edit the movie. I audited the user's 2026-11-07 rules: show every calculation, show the arithmetic but voice only its meaning, label and highlight inputs, put each result on its word, and never split a number across caption cues. Focus: s09, s13, s14, s20, s23, the coast block s26–s31, the events s33/s36/s39, and s34.
+
+| movie | duration | size | qa gates | physics | equations | legibility | pacing | captions | access | badges | verdict |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| ch00_coordinates_storm r8 | 61:12.5 | 154.3 MB | 13 of 14 PASS; **physics SKIP** ("no --manifest given"), Must 1, the same as review 1 Must 1 | PASS: every along/across recomputes; arrows point the right way (onto the land at Fort Myers Beach, Amphan, Nargis and Idai; out to sea at St Petersburg); NH anticlockwise, SH clockwise; Coriolis push outward | PASS: no wrong value; one rounding slip (N1) | PASS on the frames I looked at (N5–N7) | **FIX**: 2 results late by > 2 s, 4 spoken wind speeds never on screen, many results shown at sentence start | PASS: 888 cues, 0 limit breaks, **0 cues split a number**; 31 line breaks inside a number (S11) | PASS | n/a (retired) | **FIX** (1 Must, 13 Should, 7 Nit) |
+
+**Method.**
+- **Numbers.**
+  - I recomputed every number in the focus scenes in Python from `data/cs.json` (`shore`, `ring`, `sec`, `amphan`, `say`) and from the spoken inputs. The tolerance is half the last digit shown.
+  - along = u cos α + v sin α and across = −u sin α + v cos α, with α anticlockwise from east and α = 90° − bearing (mod 360). My own code gives the same five winds as `cs.json` (and so `fluidpy.data.movie_shore`) to 1 mm/s: FMB 9.363 / −31.572, StP −14.642 / 12.107, Amphan 3.352 / −22.320, Nargis −6.928 / −17.730, Idai −6.295 / −21.069.
+  - The derived file `G:/…/derived/ch00/coord_storm_shore_winds.json` (Ian best track 941 hPa at 19:05 UTC → 72 cm) agrees.
+  - Facts were checked against `coordinates_series/fact_check_2026-11-07.md` and the remake fact table. They are consistent, apart from S12.
+- **Real word times.**
+  - I re-synthesised all 204 sentences of the 15 focus scenes with Kokoro `af_bella` ×1.0, the same lexicon and the same local respellings (Beira, Buzi, Ayeyarwady), one clip per sentence.
+  - All 204 clips are exactly as long as `timing.json` (0 mismatches), so every word time below is a real time in the movie.
+- **Anchor audit.**
+  - There are 80 literal `AT(k, j, "…")` anchors in s09–s39.
+  - 55 use `at_words.json` and are exact. 25 use the character share: 2 of them are more than 0.5 s off (s23 S1 "ERA5" +1.20 s, s20 S15 "single towers" +0.60 s); the rest are within 0.48 s.
+  - Most timing faults are not anchor errors. Either the anchor points at the wrong phrase, or the row is timed to its sentence start (`SS`).
+- **Probes.** I checked 128 probes: each is (shown quantity, its reveal time in the code, the real time of its spoken word).
+  - Results: 25 on the word (±0.5 s); 93 early (mostly at the sentence start); 5 late; 4 spoken but never on screen; 1 shown but never voiced.
+  - Tool `scratchpad/r8s/sync.py`; table `sync.json`.
+- **Frames.**
+  - 254 frames, taken at w − 0.6 s (`_a_`) and w + 0.5 s (`_b_`) around every probe word.
+  - 29 montages `mont_<scene>_<n>.jpg`, 27 context frames `ctx_<t>.jpg` and 3 frames `s20_<t>.jpg`.
+  - All are in `reports/movies/ch00_coordinates_storm/r8_review2/`.
+- **Other checks.** `tools/script_wording_lint.py` on `script.md` reports **0 findings**: no simple arithmetic is read aloud anywhere. The VTT beside the movie is identical to `movies/ch00/ch00_coordinates_storm/en.vtt`.
+
+### Calculation & sync table (time = mm:ss in the r8 MP4; sync = picture minus voice, measured)
+
+| time | scene | quantity | shown | recomputed | sync | verdict |
+|---|---|---|---|---|---|---|
+| 13:38–13:57 | s09 | Part 1 example | u = 10, v = 0; cos θ = 0.6, sin θ = 0.8; u_r = 10 × 0.6 + 0 × 0.8 = 6; u_θ = −10 × 0.8 + 0 × 0.6 = −8 | 6, −8 | u, v on the word; cos/sin row 1.4 s early, **no gold** on "zero point six"; **u_r = 6 row 6.3 s before "is six"** (13:48.5 vs 13:54.8); u_θ row 1.1 s early | PASS (S6, S7) |
+| **13:59.9** | s09 | ring mean u_θ | (1/72) Σ u_θ,k ≈ 34.8 m/s | 34.805 (72 points, every 5°) | **9.4 s before "thirty four point eight"** (14:09.3) | Should S6 |
+| 15:06–15:14 | s09 | inputs, dθ/dt | r = 25 km = 25 000 m (gold on its word), v = 34.8 m/s (gold); 34.8 m/s / 25 000 m ≈ 0.00139 rad/s | 0.0013922 | inputs gold on their words; **result row at "divided by" (15:09.8), 4.2 s before "zero point zero zero one" (15:13.9)**; the result has no symbol (N4) | PASS (S6) |
+| **15:23.8** | s09 | 1 rad | 1 rad = 180°/π ≈ 57.3° | 57.296° | on screen, **never said** (the voice goes straight to "zero point zero eight degrees") | Should S8 |
+| 15:24.7–15:38 | s09 | °/s, °/min, lap | 0.00139 × 57.3 ≈ 0.08°/s; 0.08 × 60 ≈ 4.8 ≈ 5°/min; 2π/0.00139 = 6.283/0.00139 ≈ 4500 s; 4500/60 = 75 min | 0.0796; 4.78; 4513 s = 75.2 min | on words (0.0 s, 0.0 s, 0.0 s, −0.9 s) | PASS |
+| 19:55–20:26 | s13 | v²/r, scale | 34.8² ≈ 1211; 1211/25 000 ≈ 0.048 m/s² (gold on its word); 35²/25 000 = 1225/25 000 ≈ 0.049; 9.81/0.048 ≈ 200 | 1211.04; 0.04844; 0.049; 202.6 | 0.048 row 5.0 s early but **glows on "zero point zero four eight"**; 0.049 row −2.8 s; **≈ 200 row 5.1 s before "two hundred"** (20:20.8 vs 20:25.9) | PASS (S6) |
+| 20:34.9 | s13 | car | 100 km/h = 100 000 m / 3600 s ≈ 27.8 m/s; 27.8/0.048 ≈ 580 s; 580/60 ≈ 9.7 ≈ 10 min | 27.78; 579; 9.65 | on "ten minutes" | PASS |
+| 21:02–21:10 | s14 | Δθ in 1 min | Δθ = 0.00139 × 60 ≈ 0.084 rad; 0.084 × 57.3 ≈ 4.8° ≈ 5° | data 0.08353 → 0.084; **0.00139 × 60 = 0.0834 → 0.083** | on words | PASS (N1) |
+| 21:42.9–21:51.7 | s14 | \|Δv\|, a | \|Δv\| ≈ v Δθ = 34.8 × 0.084 ≈ 2.9 m/s; 2.9 m/s / 60 s ≈ 0.048 m/s² | 2.923 (chord 2.906); 0.0484 | 2.9 row 2.0 s early; **0.048 row 2.9 s before its word**, and its pulse fires at the sentence start + 1 s, not on the word | Should S6 |
+| 22:18–22:22 | s14 | Coriolis push | Ω = 7.29×10⁻⁵ s⁻¹; φ = Ian's latitude; f v = 2Ω sin φ · v ≈ 0.0023 m/s² (out); 0.048/0.0023 ≈ 21; pressure push ≈ 0.048 + 0.0023 ≈ 0.050 | f = 6.507×10⁻⁵; f v = 0.002265; ratio 21.39 | f v and 21 on their words (−0.5, −0.1 s); **Ω and φ are never said** | PASS (S8); physics: outward push in the NH (right of anticlockwise motion) ✓ |
+| 29:19–29:44 | s20 | section extremes | ≈ −16 m/s, 30 km, 0.7 km up; ≈ +9 m/s, 125 km, 15 km up; u_θ ≈ 55 m/s, 30 km, 1.4 km up | −15.67 @ 30 km, 0.70 km; +9.19 @ 125 km, 15.3 km; 54.99 @ 30 km, 1.43 km | callouts at sentence start: −2.4 s, **−5.2 s**, −2.3 s | PASS (S6) |
+| 30:05–30:20 | s20 | continuity inputs | 2πr h \|u_r\| (in through the side); r = 30 km = 30 000 m; h = 1 km = 1000 m, \|u_r\| ≈ 16 m/s; πr² w (up through the lid); w = 2πr h\|u_r\|/(πr²) = 2h\|u_r\|/r = 2 × 1000 × 16 / 30 000 | — | r on its word; the 16 m/s row 1.7 s before "sixteen", **not gold** | PASS (S7) |
+| **30:12.7 → 30:24.0** | s20 | the check's answer | keyword **"inflow ⇒ rise ≈ 1 m/s"** from the sentence start; then 2 × 1000 × 16 = 32 000; w = 32 000/30 000 ≈ 1.07 ≈ 1 m/s | 1.067 | **keyword 11.3 s before "is about one" (30:24.0)**, before any working; **result row 1.2 s after the word** (30:25.2; at 30:24.5 the stack shows only the substituted fraction) | Should S4 |
+| 30:31.4 | s20 | radar | ≈ 3.3 m/s, 8.5 km up; "single towers ≈ 10 m/s" | ring peak 3.3 m/s at 8.5 km; towers 11.6 m/s | on the word; towers label +0.6 s (character share) | PASS (N3, S13) |
+| 32:56–33:08 | s23 | ERA5, grid | keyword "ERA5: a reanalysis"; 0.25° × 111 km ≈ 28 km | 27.75 | **keyword +1.20 s after "ERA5"** (character share); 28 km 1.1 s early | Should S13 |
+| 33:31–34:07 | s23 | ring, official | u_θ ≈ 20 m/s · u_r ≈ −6 m/s; official (3-min) 90 kt; 1 kt = 1.852 km/h; 90 × 1.852 ≈ 167 km/h; 167 ÷ 3.6 ≈ 46 m/s; official lowest pressure 956 hPa; ERA5 ≈ 967 hPa | 20.08, −5.97; 166.7; 46.3; 966.9 | 46 and 956 on their words; u_θ/u_r label 3.9 s early; 967 row 3.2 s early | PASS (S6) |
+| 34:16–34:24 | s23 | inflow angles | tan = \|u_r\|/u_θ; 6.0/20.1 ≈ 0.299 ⇒ arctan ≈ 16.6° ≈ 17°; 13.3/34.8 ≈ 0.382 ⇒ 20.9° ≈ 21° | 0.2985 → 16.63° (data 16.55°); 0.3820 → 20.9° | all four rows within 1.7 s of the sentence start: **17° 4.8 s and 21° 6.3 s before their words** | Should S6 |
+| 37:47–38:14 | s26 | turned axes, wind rule | x′ = x cos α + y sin α, y′ = −x sin α + y cos α; along = u cos α + v sin α (slate), across = −u sin α + v cos α (teal); ŷ′ out to sea, across < 0 onto the land | — | on words (≤ 0.43 s) | PASS |
+| 38:47.9–39:21 | s27 | coast legs, β, bearing | north 91.5 km, west 55.0 km; tan β = opposite/adjacent = 55.0/91.5 ≈ 0.601 ⇒ β ≈ 31°; bearing = 360° − 31° = 329° | dy 91.513, dx −55.025; tan 0.6013 → 31.02°; 328.98° (great circle 329.1°) | legs 3.6 s early; **"≈ 0.601 ⇒ β ≈ 31°" appears at "the angle is" (39:10.27), 2.1 s AFTER "zero point six zero one" (39:08.19)**; at 39:08.8 nothing on screen matches the voice; **β is never named or labelled** | **Should S1, S9** |
+| 39:40–39:57 | s27 | α, cos, sin, axes | α = 90° − 329° = −239°; α = −239° + 360° = 121° (gold); cos 121° ≈ −0.515 (gold), sin 121° ≈ 0.857 (gold); x̂′ ≈ (−0.515, 0.857) NNW; ŷ′ ≈ (−0.857, −0.515) WSW | exact α 121.018°: −0.5153, 0.8570; 329° is NNW, 239° is WSW | each glows on its word | PASS |
+| **40:29.6** | s28 | wind | "≈ 33 m/s from the SW" and "wind ≈ 33 m/s" | 32.93 m/s from 222.5° | **7.8 s before "thirty three metres"**, not gold | Should S7 |
+| 40:41–41:24 | s28 | FMB along/across | u = 22.2, v = 24.3 m/s (east, north) (gold on each word); cos 121° ≈ −0.515, sin 121° ≈ 0.857 (gold); along = 22.2 × (−0.515) + 24.3 × 0.857 ≈ −11.4 + 20.8 ≈ 9.4 m/s; across = −22.2 × 0.857 + 24.3 × (−0.515) ≈ −19.0 − 12.5 ≈ −31.5 m/s | 9.392 (data 9.363); −31.540 (data −31.572) | substitutions on "we multiply" / "now u goes"; results 2.2 s early, **−31.5 glows on its word** | PASS (S6, N2) |
+| 41:45–41:52 | s28 | check | √(9.4² + 31.5²) = √1081; speed ≈ 32.9 ≈ 33 m/s | 1080.6 → 32.87 | within 1.8 s; on "square root" | PASS |
+| **42:14.7** | s29 | StP legs | north 55.7 km, west 6.8 km | 55.709, −6.780 | **row at "kilometres north" (42:16.07), 1.4 s after "fifty five point seven"** | Should S3 |
+| 42:20–42:44 | s29 | β, bearing, α, cos, sin | tan β = 6.8/55.7 ≈ 0.122 ⇒ β ≈ 7°; bearing ≈ 353°; α = 90° − 353° + 360° = 97° (gold); cos α ≈ −0.122, sin α ≈ 0.993 | 0.1217 → 6.94°; 353.06°; 96.94°: −0.1208, 0.9927 (cos 97° = −0.1219, sin 97° = 0.9925) | β row 5.9 s early; α glows on "ninety seven"; cos glows; **sin 0.993 not gold** (42:43.6) | PASS (S6, S7) |
+| **42:50.7** | s29 | wind | voice: "about nineteen metres per second from the north-north-east"; screen: u = −10.2, v = −16.0 m/s (α = 97°) only | 19.00 m/s from 32.6° (NNE) | **19 m/s and NNE never on screen**; u glows, **v −16.0 not gold** | **Should S5**, S7 |
+| 43:00–43:07 | s29 | across | −u sin α = −(−10.2) × 0.993 ≈ 10.1; v cos α = (−16.0) × (−0.122) ≈ 2.0; across ≈ 10.1 + 2.0 ≈ +12.1 m/s | 10.13, 1.95 → 12.08 (data 12.107) | terms on words; +12.1 glows on its word | PASS |
+| **43:15–43:20** | s29 | along | along ≈ 1.2 − 15.9 = −14.7 m/s | (−10.2)(−0.122) = 1.24, (−16.0)(0.993) = −15.89 → −14.65 (data −14.642) | 4.8 s early; **the working (u cos α, v sin α) is never shown**, and u, v, cos, sin have scrolled off by then | Should S10, N2 |
+| 44:13.6–44:30.3 | s30 | inverse barometer | keyword ≈ 1 cm per hPa; 100 Pa/(1025 kg/m³ × 9.81 m/s²) ≈ 0.01 m; 1013 hPa normal; Ian at landfall (19:05 UTC) 941 hPa; 1013 − 941 = 72 hPa ⇒ rise ≈ 72 cm | 0.00994 m; 72; 71.6 cm exact | 941 and 1013 on their words; **"1013 − 941 = 72 hPa" appears at "so the sea" (44:27.8), 3.5 s AFTER "seventy two below" (44:24.3)**; 72 cm glows on its word | **Should S2** |
+| 44:44–45:09 | s31 | gauges, NHC | +2.2 (Fort Myers), −1.8 (St Petersburg); 3–4.5 m; 10 ft × 0.3048 ≈ 3.0 m, 15 ft × 0.3048 ≈ 4.57 m | 2.209; −1.755; 3.05; 4.572 | +2.2 2.1 s early (the curve is still drawing); −1.8 −0.8 s; **3–4.5 m keyword 6.7 s before "three to four"** | PASS (S6) |
+| 46:49–47:43 | s33 | Amphan coast | ERA5 ≈ 6/10 of official wind; west 92.9 km, south 21.9 km; tan β = 21.9/92.9 ≈ 0.236 ⇒ β ≈ 13°; bearing ≈ 257°; α = 90° − 257° + 360° = 193°; cos α ≈ −0.974, sin α ≈ −0.225 | 27.5/46.3 = 0.594; 0.2358 → 13.27°; 256.7°; 193.3° (cos 193° = −0.9744, sin 193° = −0.2250; exact α: −0.9733, −0.2295) | ratio label 6.5 s early; β 4.9 s, α 5.2 s early (α glows on "is about"); **sin not gold** | PASS (S6, S7) |
+| **47:51.9** | s33 | wind | voice: "about 22.6 m/s from the south-south-east"; screen: u = −8.4, v = 21.0 only | 22.57 m/s from 158.2° (SSE) | **speed and direction never on screen**; **v 21.0 not gold** | **Should S5**, S7 |
+| 48:07–48:22 | s33 | across, IB | −u sin α = −(−8.4) × (−0.225) ≈ −1.9; v cos α = 21.0 × (−0.974) ≈ −20.5; across ≈ −1.9 − 20.5 ≈ −22.4 m/s; official lowest pressure 960 hPa; 1013 − 960 = 53 hPa ⇒ rise ≈ 53 cm | −1.89, −20.45 → −22.34 (data −22.320); 53 (52.7 exact) | sum glows on its word (row 1.6 s early); pressure 2.5 s early; IB row 2.0 s early | PASS (N2, S12) |
+| 51:50–52:38 | s36 | Nargis coast | ERA5 ≈ half; west 69.5, north 10.8 km; tan β = 10.8/69.5 ≈ 0.155 ⇒ β ≈ 9°; bearing ≈ 279°; α = 171°; cos ≈ −0.988, sin ≈ 0.156 | 0.545; 0.1553 → 8.83°; 278.8°; 171.2° (cos 171° = −0.9877, sin = 0.1564) | as s33 | PASS (S6, S7) |
+| **52:46.6** | s36 | wind | voice: "about 19 m/s from the south-south-west" | 19.04 m/s from 210.2° (SSW) | **never on screen**; v 16.5 not gold | **Should S5** |
+| 53:02–53:17 | s36 | across, IB | −u sin α = −9.6 × 0.156 ≈ −1.5; v cos α = 16.5 × (−0.988) ≈ −16.3; across ≈ −17.8 m/s; 962 hPa; 1013 − 962 = 51 hPa ⇒ 51 cm | −1.50 −16.30 = −17.80 (data −17.730); 50.7 exact | as s33 | PASS (N2) |
+| 56:14–57:09 | s39 | Idai coast | ERA5 ≈ 2/3; west 52.3, south 35.9 km; tan β = 35.9/52.3 ≈ 0.686 ⇒ β ≈ 34°; bearing ≈ 236°; α = 214°; cos ≈ −0.829, sin ≈ −0.559 | 0.658; 0.6864 → 34.46°; 235.5°; 214.5° (cos 214° = −0.8290, sin = −0.5592) | as s33 | PASS (S6, S7) |
+| **57:18.0** | s39 | wind | voice: "about 22 m/s from the south-south-east" | 21.99 m/s from 162.2° (SSE) | **never on screen**; v 20.9 not gold | **Should S5** |
+| 57:33–57:48 | s39 | across, IB | −u sin α = −(−6.7) × (−0.559) ≈ −3.7; v cos α = 20.9 × (−0.829) ≈ −17.3; across ≈ −21.0 m/s; 955 hPa; 1013 − 955 = 58 hPa ⇒ 58 cm | −3.745 − 17.326 = −21.07 (data −21.069); 57.7 exact | as s33 | PASS (S12) |
+| 49:38–50:02 | s34 | radar area | ≈ 34 700 pixels; 1 pixel: 60 m × 60 m = 3600 m² = 0.0036 km²; 34 700 × 0.0036 ≈ 125 km²; √125 ≈ 11.2 km; 11 × 11 = 121 ≈ 125 km² | 124.92/0.0036026 = 34 675; 124.92; 11.18 | inputs on words; product row 4.5 s early, keyword "new water ≈ 125 km²" on its word | PASS |
+| 59:51–60:24 | s41 | recap | 0.048 m/s², 200×; 31.5 / 2.2 m; 12.1 / 1.8 m; 22.4, 17.8, 21 m/s | as above | — | PASS (consistent with s13, s28–s31, s33–s39) |
+
+**Physics honesty (all PASS).**
+- **Directions on the maps.**
+  - The rose across arrows point onto the land at Fort Myers Beach (ENE; 41:22 and 45:11), on the Sundarbans shore (N), in the Irrawaddy delta (N) and at Beira (NW).
+  - The teal arrow at St Petersburg points W, out to sea.
+  - ŷ′ points out to sea on every map: WSW at FMB, S at Amphan and Nargis, SE at Beira.
+  - The wind arrows match their "from" directions: SW 222°, NNE 33°, SSE 158°, SSW 210°, SSE 162°.
+- **Rotation sense.** Amphan and Ian turn anticlockwise (NH); Idai turns clockwise (SH), and Beira lies west of ERA5's centre (34.9 °E vs 35.25 °E).
+- **Coriolis.** The push is outward and about 1/20 of the turning (ratio 21.4). It is drawn violet ×6 and labelled "as seen on the turning Earth".
+- **Gauges.**
+  - Peaks at 34.3 h and 35 h after 27 Sep 12 UTC, i.e. 3–4 h after the 19:05 UTC landfall.
+  - Residuals: +2.209 m (Fort Myers), −1.755 m (St Petersburg). The NHC range of 10–15 ft is 3.05–4.57 m.
+
+### FIX findings (Must / Should / Nit)
+
+**Must**
+1. **qa.json: the `physics` gate is SKIP ("no --manifest given").** The other 13 gates PASS (review 1 counted "14 PASS + 1 SKIP", but `qa.json` has 14 gates).
+   - My own along/across code reproduces all five `cs.json` winds exactly, but the manifest hash parity is still unrun for this render.
+   - Fix: re-run `tools/movie_qa.py` with `--manifest movies/ch00/ch00_coordinates_storm/manifest.json`. No re-render is needed. This is the same item as review 1 Must 1.
+
+Apart from Must 1, the arithmetic is right everywhere, and no number is wrong on screen or in the voice.
+
+**Should**
+1. **s27 39:08.2: "≈ 0.601 ⇒ β ≈ 31°" comes 2.1 s late.** It is anchored on "the angle is" (39:10.27), but the voice says "zero point six zero one" at 39:08.19. → anchor the row on `AT(k, 4, "zero point six zero one")`.
+2. **s30 44:24.3: "1013 − 941 = 72 hPa" comes 3.5 s late.** The voice says "seventy two below the normal one thousand and thirteen" at 44:24.3, but the row appears at "so the sea" (44:27.8). → split the row. Show "1013 − 941 = 72 hPa" on "seventy two below" (after the 1013 label) and "⇒ rise ≈ 72 cm" on "seventy two centimetres"; that one already glows there.
+3. **s29 42:14.7: the legs row comes 1.4 s late.** "north 55.7 km, west 6.8 km" appears at "kilometres north" (42:16.07). → anchor it on "it moves about".
+4. **s20 30:12.7–30:25.2: the quick check shows its answer first and its result late.**
+   - The keyword "inflow ⇒ rise ≈ 1 m/s" is on screen from the start of S14. That is 11.3 s before the voice reaches "is about one metre per second" (30:24.0), and before any working.
+   - The result row "w ≈ 1.07 ≈ 1 m/s" lands 1.2 s after the word (`AT(k, 14, "is about one") + 36`).
+   - → keep a question keyword ("how fast must it rise?") until the word, and show the answer keyword and the result row on "is about one" (offset ≤ 0).
+5. **Four spoken wind speeds and directions are never on screen.**
+   - The four: s29 42:50.7 "19 m/s from the NNE", s33 47:51.9 "22.6 m/s from the SSE", s36 52:46.6 "19 m/s from the SSW", s39 57:18.0 "22 m/s from the SSE". FMB (s28) has "≈ 33 m/s from the SW" on screen; the other four show only u, v.
+   - → add the same label ("≈ 19 m/s from the NNE", from `shown.speed` and `hour.from_deg`) by the wind arrow, on its word.
+6. **Results appear at the sentence start, well before their words, with no glow on the word.** The worst:
+   - s09 u_r = 6 (−6.3 s, 13:48.5) and the ring mean ≈ 34.8 (−9.4 s, 13:59.9);
+   - s13 ≈ 200 (−5.1 s, 20:20.8);
+   - s14 2.9/60 ≈ 0.048 (−2.9 s, 21:48.7; its pulse fires 1 s after the sentence start, not on the word);
+   - s20 callouts −16 / +9 / 55 (−2.4 / −5.2 / −2.3 s);
+   - s23 u_θ ≈ 20 · u_r ≈ −6 (−3.9 s), 17° (−4.8 s), 21° (−6.3 s);
+   - s29 β ≈ 7° (−5.9 s) and along −14.7 (−4.8 s);
+   - s31 "3–4.5 m" keyword (−6.7 s);
+   - s33/s36/s39 β (−4.9 s).
+   - Mitigated, because they glow on their word: s13 0.048, s28 9.4 and −31.5, s29 α and +12.1, the event α and across rows, s34 125 km².
+   - → split the working from the result, or time the result row with `AT` on its number.
+7. **Inputs that a viewer cannot see at a glance are not gold on their word.**
+   - s09 cos θ = 0.6, sin θ = 0.8 (13:44.1);
+   - s20 |u_r| ≈ 16 m/s (30:10.2);
+   - s28 "≈ 33 m/s" (label 7.8 s early, no glow);
+   - s29 sin α 0.993 (42:43.6) and v −16.0 (42:56.7);
+   - events: sin α (47:42.8, 52:37.9, 57:08.3) and v (47:59.0, 52:53.2, 57:24.6).
+   - The single glow per row covers only u and cos.
+   - → add a second pulse on each word.
+8. **On-screen inputs that are never said.**
+   - s09 15:23.8 "1 rad = 180°/π ≈ 57.3°".
+   - s14 22:18.4–22:19.0 "Ω = 7.29×10⁻⁵ s⁻¹: Earth's spin rate" and "φ = Ian's latitude"; the voice says only "about twenty times weaker".
+   - → name them in the voice ("one radian is about fifty seven point three degrees"; "from the Earth's spin rate and Ian's latitude"), or drop the rows (balance rule).
+9. **β is undefined.** s27 38:57 and the event stacks write "tan β", but the voice never says β and the gold arc at Naples (and at each event's leg corner) has no label. → label the arc "β" when the tan row appears.
+10. **s29 43:15: the along working is missing.** "along ≈ 1.2 − 15.9 = −14.7 m/s" gives two products whose factors are not on screen: the u, v and cos/sin rows have scrolled off. → add "u cos α = (−10.2) × (−0.122) ≈ 1.2" and "v sin α = (−16.0) × 0.993 ≈ −15.9", as for across.
+11. **Captions: 31 line breaks inside a number in the focus scenes.** No cue splits a number (the r8 rule holds). But within a cue, the line wrap splits these:
+    - "seventy / two points" 13:59.6, "seventy / two values" 14:04.8, "zero point zero zero one / three nine" 15:13.5;
+    - "twenty / five thousand" 20:00.5, "zero point zero / four eight" 20:04.7 and 21:50.5, "about two / hundred" 20:24.9;
+    - "forty / six" 33:56.1, "nine / hundred and fifty six" 33:59.0, "ninety / one point five" 38:51.1, "three / hundred and twenty nine" 39:19.8;
+    - "twenty / two point two" 40:41.3, "fifty / five point seven" 42:13.8, "one / point eight" 44:49.7, "twenty / two point six" 47:49.4;
+    - "thirty four thousand / seven hundred" 49:37.8, "minus twenty / one" 57:33.5, and the bearings and α in s33/s36/s39.
+    - → wrap before the number (`make_timing.py` line breaker).
+12. **"official lowest pressure" is ambiguous** (s33 48:14.9, s39 57:40.2; the voice says the same).
+    - s23 has just said Amphan's official pressure was 956 hPa at 06 UTC. Its lifetime minimum was 920 hPa (IMD, 18 May), and Idai's was ≈ 940 hPa (MFR). The 960 and 955 shown are the values at that hour.
+    - → "official centre pressure at that hour: 960 hPa" (Nargis 962 is also its lifetime minimum, so it is fine either way).
+13. **Character-share anchors more than 0.5 s off.** s23 32:57.5 keyword "ERA5: a reanalysis" comes +1.20 s after "ERA5" (32:56.3); s20 30:35.9 "single towers" +0.60 s. → add these phrases to `at_words.json` (`r8_words_extra.py`).
+
+**Nit**
+1. s14 21:02.7: "Δθ = 0.00139 × 60 ≈ 0.084 rad". The shown inputs give 0.0834 → 0.083; the data give 0.0835 → 0.084. → write 0.001392, or "≈ 0.0835".
+2. The rounded α and u, v make the shown sums differ from the unrounded data by ≤ 0.07 m/s. They are consistent on screen, in the voice and in the recap, so nothing needs to change:
+   - FMB across −31.5 (data −31.57); StP along −14.7 (−14.64);
+   - Amphan across −22.4 (−22.32); Nargis across −17.8 (−17.73).
+3. s20 30:35: "single towers ≈ 10 m/s" and "near ten", but the TDR value is 11.6 m/s. → "near twelve", or "over ten".
+4. s09 15:09.8: the result "≈ 0.00139 rad/s" has no symbol. → "dθ/dt ≈ 0.00139 rad/s".
+5. s23 33:00–34:24: the colour-bar ticks "0 15 30" are cramped (≈ 10 px apart at 640 px).
+6. s33/s36/s39: the label "official lowest pressure: … hPa" (x = 1100) sits about 10 px under the across row (x = 1076). The column is misaligned and the gap is tight.
+7. s20 30:05–30:25: the contour label "40" is crossed by the gold inflow arrow.
+
+**Overlap with review 1** (appended just above, same date):
+- My S10 is its Should 10.
+- My S7 extends its Should 8 (faint glows) with a list of the inputs that have no glow at all.
+- My S8 sits next to its Should 6 (f undefined) and Should 5b (the 100 Pa / ρg inputs are not said).
+- My S2 is a timing fix for the same s30 sentence whose voiced subtraction is its Should 5a. If the voice drops "seventy two below …", show the subtraction on "rose by only" instead.
+- I confirm its Should 12: "a hundred and sixty kilometres" (41:58.7) has no label in s29.
+
+**Overall: FIX** (1 Must, 13 Should, 7 Nit). Every number recomputes and every arrow is honest, so this pass needs no re-voicing (review 1's Must 3 and Should 2 do need one). The fixes are a QA re-run (Must 1), reveal anchors (S1–S4, S6, S13), four labels (S5), glows (S7), one working row (S10), the β label (S9), two short voice additions or dropped rows (S8), caption wrapping (S11) and one wording change (S12).
+
+## ch00_coordinates_flat — fix2 review (2026-11-08)
+2026-11-08 · fresh eyes, frames only · movie `movies/out/ch00/ch00_coordinates_flat/1080.mp4` (153 554 278 bytes, rendered 2026-11-08 02:38; `qa.json` 02:46 measured this file) · source commit b2dcf15 (fix loop 2) · all times are fix2 times from `timing.json` + `words.json` (381/381 sentences, Kokoro word times). Checked against both fix1 reviews (review 1: 4 Should; review 2 calc & sync: 14 Should), HOUSE_STYLE incl. the 2026-11-07 calculation rules and the 2026-11-08 figure-title rule.
+
+| movie | duration | size | qa gates | physics | equations | legibility | pacing | captions | access | badges | verdict |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| ch00_coordinates_flat (Part 1, fix2) | 43:33.8 (2613.83 s; narration ends 43:31.3 + 2.5-s hold) | 153.6 MB | **15/15 PASS** (loudness −16.3 LUFS / −4.7 dBTP, flashes 0, overlap 3926 frames / 0 hits, captions 622, physics 19 hashes, equations 23, frozen 214 all narrated) | PASS (every changed number recomputes; NH anticlockwise; in at 7 of 8, out only at 225°) | PASS (23/23, no katex-error; new rows correct) | PASS with 2 Should (s24 map-label signs, s23 conversion row) | PASS (every fix1 item on its word ±0.5 s) | PASS (own pass: 622 cues, 0 > 2 lines / 42 chars / 17 cps / outside 1–7 s; last cue ends 43:31.0; no cue splits a number) | PASS (0 flashes; signs carry ± and words) | n/a (retired) | **FIX** (1 Must — the new 2026-11-08 title rule; 3 Should, 7 Cosmetic) |
+
+**Method.**
+- 217 frames, montages, crops and 10-fps strips in `reports/movies/ch00_coordinates_flat/fix2_review/` (22 MB), read as 640-px tiles (`mont_*.jpg`) and full-resolution crops (`crop_*`).
+- 70 word-time probes (`probe_table.json`): results at w − 0.6 s and w + 0.5 s, inputs at w + 0.5 s and w + 1.2 s (gold peak), for every item the fix2 log lists (s00, s01, s04, s07, s14, s19, s21–s26).
+- 10-fps strips (crop of the maths zone) through every stack change near the fix1 ghosts and the new rows: s04 3:11.9, s14 17:41.6, s17 22:14.9, s23 33:33.0, 33:35.8, 33:50.2, 33:57.2, 34:14.6.
+- Five former character-share anchors (s03 "Three steps", s04 "the east side", s08 "three, four", s10 "Adding the east parts", s27 "Then we'll use") re-checked on frames.
+- Data frames sampled in s00, s01, s21–s27 for the 2026-11-08 title rule; ending 43:31–43:33.7 (frames + audio −27 → −52 → −60 → −75 dB, picture and music fade together).
+- `tools/script_wording_lint.py`: 0 findings. Caption pass in Python over `en.vtt`.
+
+### (1) Fix1 review items, checked on the frames (fix2 times)
+| item | status | evidence |
+|---|---|---|
+| R1 S1 · s24 inputs gold | **fixed** | u = −8.7 gold at 35:25.5 (word 35:24.95), v = 38.0 at 35:27.4; 90°: −16.9 at 35:59.1, −37.4 at 36:01.5; 135°: −10.1 at 36:36.3, −44.5 at 36:38.3; cos 135° "≈ −0.707" gold at 36:51.4 (word 36:50.88), sin "≈ 0.707" at 36:54.9 (word 36:54.40). 0°/90° cos/sin (1, 0) not glowed, as allowed. |
+| R1 S2 · row-exit ghosts s17/s23 | **fixed** | `strip_s17_1335.jpg`: the x′ rows reach 0 before the y′ rows slide; nothing crosses the input lines. `strip_s23_2013/2016/2030/2037.jpg`: every outgoing block fades out first, the keyword "imagine: nothing changes" is never crossed. |
+| R1 S3 · s01 lead-in keywords | **fixed** | "x and y" 0:25.15 (word 0:24.65), "polar r, θ" 0:26.3 (0:25.84), "turned axes" 0:28.6 (0:28.07), under "coordinates". The s00 subtitle now says "and turned axes" (R1 C10 settled). |
+| R1 S4 · s14 √(6² + (−8)²) | **fixed** | 17:42.8: "&#124;u&#124; = √(6² + (−8)²)" on "six and minus eight" (17:42.31), "= √(36 + 64)" on "take the square root", "= √100 = 10 m/s" on "we get ten" (17:45.54). |
+| R2 S1 · lap clock | **fixed** | Clock 32 min until "one lap" (33:49.31), 0 min at 33:49.8, holds 0 through the 157-km and 4490-s rows, 74 → 75 min on "seventy five minutes" (34:01.25). |
+| R2 S2 · s22 conversions | **fixed** | "m/s × 3.6 → km/h" on "we multiply by" (31:08.67), 3.6 gold on "three point six" (31:10.2); "1 m/s = 3600 m/h" on "three thousand six hundred" (31:12.7); "= 3.6 km/h" by 31:17.5; "35 m/s × 3.6" on "thirty five metres" (31:18.1), "= 126 km/h" on its word (31:20.98); "× 1.85 km/h per kt" with 1.85 gold on its word (32:09.6); "≈ 250 km/h" on "two hundred and fifty" (32:13.2); "÷ 3.6 ≈ 69 m/s" on "sixty nine" (32:16.2). |
+| R2 S3 · s23 inputs before results | **fixed** | "13 m/s × 3.6" on "Converted" (33:07.9), 3.6 gold on its word (33:10.1), "≈ 47 km/h" on "forty seven" (33:12.6); "t = distance ÷ speed" on "Time is distance" (33:36.85); fraction 25 000 m / 13 m/s by 33:39.3; "≈ 1923 s" on "nineteen hundred" (33:40.4); "≈ 1923 ÷ 60 ≈ 32 min" on "thirty two minutes". Lap: 157 000 m / 35 m/s on "That takes" (33:57.2), "≈ 4490 s" on its word (33:57.9), "≈ 75 min" on its word. |
+| R2 S4 · s07 arcs | **fixed** | "5 km × 0.2" on "the radius times the angle" (6:08.9), "= 1 km" + arc label on "one kilometre" (6:10.7); "50 km × 0.2" on "fifty kilometres" (6:14.5), "= 10 km" + "10 km" label on "ten kilometres" (6:17.2). Results now in ink. |
+| R2 S5 · s14 rule written | **fixed** | "u = 6 r̂ + (−8) θ̂" replaces "same wind?" on "We rebuild it" (17:08.5), ≈ 44-px KaTeX (`crop_s14_rule_1030.png`). |
+| R2 S6 · s19 C cells | **fixed** | Each "= … = cos α" working row and its table cell appear on "which is …": C₁₁ 25:06.75, C₁₂ 25:13.4, C₂₁ 25:20.2, C₂₂ 25:26.8 (0.6 s before: neither row nor cell). |
+| R2 S7 · s24 map labels | **fixed** | "u_r = −8.7" on its word (35:41.0), "u_θ = 38.0" + teal arrow on "thirty eight" (35:46.7), "u_r = −37.4" on its word (36:15.9), "u_θ = 16.9" on "plus sixteen point nine" (36:25.6), "u_r = −24.3" (37:04.3), "u_θ = 38.6" (37:15.5). |
+| R2 S8 · s26 tan | **fixed** | "= 13.3/34.8" on "thirteen point three" (40:35.6), "≈ 0.38" on "zero point three eight" (40:39.0), "≈ 20.8° ≈ 21°" on "twenty one degrees" (40:45.1). |
+| R2 S9 · s25 "72 − 14" | **fixed** | "72 − 14 out = 58 points in" on "fifty eight" (39:14.5); the two 14s are now told apart by "out". |
+| R2 S10 · s04 53.13° | **fixed** | "θ = tan⁻¹(1.333)" on "The angle with that tangent" (3:12.8), "≈ 53.13° ≈ 53°" on "fifty three point one" (3:14.9). |
+| R2 S11 · symbols | **fixed** | s23 "wind speed = √(35² + 13²)"; s14 "&#124;u&#124; = …"; s22 "× 1.85 km/h per kt". |
+| R2 S12 · s21 data description | **fixed** | "10 m above the ground" on "ten metres" (29:11.2), "3-km grid" on "three kilometres" (29:16.1). |
+| R2 S13 · character-share anchors | **fixed** | All five worst spots now land on their words: s03 "3 x̂ = 3(1, 0) = (3, 0)" (1:44.7), s04 east-side highlight (3:07.6), s08 "(3, 4)" tip label (6:48.4), s10 "= (0 − q, p + 0)" (10:32.1), s27 "x′, y′: wind onto the land" (42:56.5). |
+| R2 S14 · voiced product / quotient | **fixed** | s23 S7 "Converted with the same factor of three point six, the inflow is about forty seven kilometres per hour, towards the centre."; s23 S13 "…so it goes about two point seven times as far round as in." Lint 0. |
+
+**Numbers recomputed (every changed row):**
+- 1 m/s = 3600 m/h = 3.6 km/h; 35 × 3.6 = 126.0; 135 kt × 1.85 = 249.75 ≈ 250 (× 1.852 = 250.0); 250 ÷ 3.6 = 69.4 ≈ 69.
+- √(1225 + 169) = √1394 = 37.34; 13 × 3.6 = 46.8 ≈ 47; 25 000 / 13 = 1923.1 s; ÷ 60 = 32.05 min; 2π × 25 = 157.08 km; 157 000 / 35 = 4485.7 ≈ 4490 s (3 s.f.); ÷ 60 = 74.8 ≈ 75 min; 35/13 = 2.69.
+- √(36 + 64) = 10; 5 × 0.2 = 1, 50 × 0.2 = 10; tan⁻¹(4/3) = 53.13°; 72 − 14 = 58 (data: 58 negative, 14 positive points); 13.3/34.8 = 0.382, tan⁻¹(0.38) = 20.8°.
+- s24 rows unchanged and correct (7.14, −31.46, −24.3, +31.46, 38.6).
+
+### (2) House rules
+| rule | status | evidence |
+|---|---|---|
+| Show the arithmetic, voice the meaning | **met** | Lint 0; no voiced sum, product or quotient of plain numbers remains. |
+| Non-obvious inputs said + gold on their word | **met** | s17, s20 (fix1), s22 3.6 and 1.85, s23 3.6, s24 u/v and ±0.707: each glows on its word. |
+| Results carry their symbol, no clutter | **met with Should 2** | New rows have their left sides; the s23 "13 m/s × 3.6 / ≈ 47 km/h" pair does not, and sits outside the stack. |
+| Word-timed reveals ±0.5 s | **met** | All 70 probes: the item is absent 0.6 s before its word and present 0.5 s after (inputs glowing at +0.5 to +1.2 s). |
+| No caption splits a number | **met** | 17 cue boundaries fall between number words; each separates two different numbers. Cosmetic 4 lists three vector pairs split across cues. |
+| Natural opening, no recap | **met** | 0:00.3 "In this video, we'll learn coordinates on a flat map…"; s01 keywords on their words. |
+| Every data figure titled + event name and date (2026-11-08) | **not met**: Must 1 | No Ian map or chart has a what-it-shows title or a "Hurricane Ian · 28 Sep 2022" heading. |
+| No text over text, on any frame | **met** (strips) | s04 and s14 still slide exiting rows while fading (Cosmetic 1), but never over other text. |
+
+### Must
+1. **No figure title or event heading on any Hurricane Ian data frame** (HOUSE_STYLE, user 2026-11-08: "Each map, section, chart or panel has a short title of what it shows; when it shows a storm or event, a heading with the event name and date ('Hurricane Ian · 28 Sep 2022'), also when the event was named in earlier frames").
+   - The rule postdates this build (b2dcf15, 2026-11-07 19:48), but it is the exact defect the user flagged in Part 2 at ~35:09, and Part 2 already carries the fix (commits 421de92, e0e5cc7), so the series would be inconsistent.
+   - Where (only the colour bar "wind speed" and the source line "Data: HRRR analysis (NOAA) · 28 Sep 2022, 18 UTC" are on screen):
+     - s00 title thumbnail map 0:00–0:08 (`s00_6.0.jpg`);
+     - s01 map 0:04.5–0:34 (`crop_s01_bar_0029.5.png`);
+     - s21 Florida map 28:52–29:55, keyword "a real storm" only (`mont_dataA.jpg` 1741/1765);
+     - s21–s22 zoomed map with ring and polar grid 29:28–32:34 (`data_1790/1850.jpg`);
+     - s24 ring-points map 34:50–37:52 (`data_2100.jpg`, `mont_s24*.jpg`);
+     - s25 map + chart side by side 38:04–40:13 (`data_2290/2380.jpg`): two panels, so each needs its own event heading plus one shared title;
+     - s27 recap mini-map 42:3x (`data_2560.jpg`).
+   - Fix (TSX only, no re-voice): a heading "Hurricane Ian · 28 Sep 2022, 18 UTC" above each map, and a short title of what it shows, e.g. "wind speed 10 m above the ground", "winds round the 25-km ring", "u, v and u_r, u_θ round the ring (m/s)". Re-run K6 over the map scenes, because the s22/s24 right column and the s25 legend sit close to the top.
+
+### Should
+1. **35:41–37:52 · s24 map result labels: the dark halo turns the signs into bars** (`crop_s24_maplabels_2147.5.png`).
+   - "u_r = −8.7" reads as "u_r ≡ ═8.7" at full size and as "u_r = =8.7" at 640 px. The minus is the physics here (in, not out).
+   - The teal "u_θ = 38.0" on the dark-green map is low-contrast at 640 px.
+   - This was Info 2 of fix1 review 2; now that each label lands on its word it is the main thing the eye reads.
+   - Fix: thin the halo on "=" and "−" (or draw the labels on a small dark chip), use a lighter teal, and nudge "38.0" off the orange dashed v line it touches.
+2. **33:07.9–33:30 · s23 "13 m/s × 3.6 / ≈ 47 km/h"** (`crop_s23_conv_1990.5.png`).
+   - The row starts at x ≈ 935, 30 px right of and about 18 px below the picture label "35 round", outside the stack column (x ≈ 1255). It reads as part of that label ("35 round 13 m/s × 3.6").
+   - The result has no symbol, unlike "wind speed = …" above it.
+   - Fix: align it with the stack and write "inflow = 13 m/s × 3.6 ≈ 47 km/h", or move it under "≈ 37 m/s".
+3. **39:00–40:13 · s25 chart labels sit on curves** (`crop_s25_graph_2380.png`; pre-existing):
+   - "14 points out" lies on the dimmed dashed v curve and a ring-point dot near 135°;
+   - "mean 35" runs into the start of the teal u_θ curve;
+   - the "+14" leader touches the rose curve.
+   - Fix: move "14 points out" below the axis or beside "mean −13", and lift "mean 35" above the curve.
+
+### Cosmetic
+1. **3:12.4–3:12.6 (s04) and 17:42.4–17:42.6 (s14).** Exiting rows slide up while still 30–60 % visible, and in s14 they pass the frame's top edge (`strip_s04_192.jpg`, `strip_s14_1062.jpg`). No text crosses text. `exitFirst` (as in s17/s23) would make them match.
+2. **27:26–28:25 (s20, carried from fix1 R1 C1/C2).** The x′ axis still runs through the "r̂" label, "α = θ ≈ 53°" sits on the ring, and "5 along r̂, 0 along θ̂" is tight under the stack and starts left of it (`mont_charB.jpg`).
+3. **6:08–6:17 (s07, carried from fix1 R1 C4).** "5 km × 0.2" starts about 30 px left of the row above, and "50 km × 0.2" another 10 px further left.
+4. **Captions split vector pairs.** "…is three, / four, and its length…" (6:45.6), "…zero point six, / zero point eight." (6:58.5), "…zero point six, zero point eight, / and theta hat is…" (16:13.0). These are not single numbers, but a pair reads better in one cue.
+5. **34:15–34:25 (s23).** In the two stacked fraction rows, the "13 t" denominator sits about 10 px above the next row's "35" numerator (`crop_s23_ratio_2057.png`). Add a little row gap.
+6. **0:28–0:34 (s01).** "turned axes" sits right above the colour-bar title "wind speed", so the keyword list and the colour bar read as one block. Leave a slot of space, or lift the keyword list.
+7. **Info.** "≈ 1923 s" (4 s.f.) next to "≈ 4490 s" (3 s.f.) is still uneven (fix1 R2 Info 1). The s14 "sum = (10, 0)" row could read "u = (10, 0)" (fix1 R1 C3).
+
+### What works (keep)
+- All 4 Shoulds of fix1 review 1 and all 14 of fix1 review 2 are fixed on screen, each on its word.
+- The s22/s23 conversions now build input → constant (gold) → result in step with the voice.
+- The lap clock resets to 0 before the 75-minute sweep.
+- The exits in s17/s23 fade before they slide.
+- Every AT() lands on a Kokoro word time.
+- The two re-voiced s23 sentences sound natural and voice no arithmetic.
+
+### Verdict: **FIX** (fix2 review: 1 Must, 3 Should, 7 Cosmetic)
+Every item of both fix1 reviews is fixed and every changed number recomputes. The single Must is the 2026-11-08 figure-title rule, which this build predates. It is a TSX-only change (headings on the Ian maps and the s25 chart), as are Shoulds 1–3; none needs a re-voice. After the headings, re-render s00, s01, s21–s25 and s27, run K6 (10 fps over the s22/s24/s25 right columns), and the movie can go to `qa_pass`.
+
+Disk at review end: C: 111 GB free, G: 418 GB free; review frames 22 MB.
+
+## ch00_coordinates_storm — fix1 review (2026-11-08)
+2026-11-08 · fresh eyes, frames only · movie `movies/out/ch00/ch00_coordinates_storm/1080.mp4` (154 258 124 bytes, rendered 2026-11-08 05:37; `qa.json` measured this file) · source fix loop 1 + 1b + 1c (commits 7272c23, 421de92, e0e5cc7) · all times are fix1 times from `timing.json` + `words.json`. Checked against "r8 review 1" (3 Must, 12 Should) and "r8 review 2: calc & sync audit" (1 Must, 13 Should, 7 Nit), the user's 2026-11-08 figure-title request, HOUSE_STYLE (incl. the 2026-11-07 calculation rules) and the fact table in `remake_2026-11-07_log.md`.
+
+| movie | duration | size | qa gates | physics | equations | legibility | pacing | captions | access | badges | verdict |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| ch00_coordinates_storm (Part 2, fix1) | 62:20.3 (3740.30 s; narration ends 62:17.8 + 2.5-s hold) | 154.3 MB | **15/15 PASS** (physics 45 hashes, overlap 9342 frames / 0 hits, loudness −16.3 LUFS / −1.7 dBTP, flashes 0, captions 910, equations 19, frozen 342 all narrated, halves, content) | PASS (every changed number recomputes; NH anticlockwise, Idai SH clockwise; across arrows onto the land at FMB / Amphan / Nargis / Idai, out to sea at StP; ŷ′ sea-ward on every map) | PASS (19/19, no katex-error) | PASS with Shoulds (s21 town labels; s18/s19/s25 figures say no quantity or event) | **FIX**: s14 Coriolis result missing (Must 1); everything else on its word | PASS (910 cues; 0 > 2 lines / 42 chars / 17 cps / outside 1–7 s; 0 cue splits and 0 line breaks inside a number; VTT beside the movie = source) | PASS (0 flashes; signs carry ± and words) | n/a (retired) | **FIX** (1 Must, 6 Should, 6 Nit) |
+
+**Method.**
+- 326 probe frames at w − 0.6 s and w + 0.8 s around all 163 probe words (`fix1s/sync.json`), 32 montages `mont_<scene>_<n>.jpg` read at 640 px per tile.
+- 168 scene frames (start + 2 s, ⅓, ⅔, end − 1.5 s for all 42 scenes), sheets `scn_00…13.jpg`; strips `strip_s30a/s30b/s35end/s41.jpg`; full-resolution crops in `x/` for every suspected overlap (s14, s20, s21, s24 at the user's frame, s26, s28, s29, s30, s33, s36, s39) and the block-2 skip chip.
+- Swipe line tracked at 4 fps (gold column) through s34, s37 and s40.
+- Code-level sync re-run: `fix1s/sync.py` 163 probes, 163 within ±0.5 s, 0 character-share anchors. Frames confirm it on every probe I read (s09, s13, s14, s20, s23, s27–s30, s33).
+- `fix1s/capcheck.py` (VTT identical; 0/0/0/0) and `tools/script_wording_lint.py` (0 findings).
+- Every changed number recomputed from `data/cs.json` (`shore.*.shown`, `hour`, `ib`, `pmin`, `ian_ib`).
+- All frames are in `reports/movies/ch00_coordinates_storm/fix1_review/` (57 MB, not committed).
+
+### (1) r8 review items, checked on the frames (fix1 times)
+| item | status | evidence |
+|---|---|---|
+| R1 M1 / R2 M1 · physics gate | **fixed** | `qa.json`: physics PASS, 45 functions reproduce their hashes |
+| R1 M2 · colour bar to scene end | **fixed** | wind-speed bar + "white circle: ERA5's storm centre" still on at 49:20.2 (s33 ends 49:21.7), 54:31.8, 59:09.6 |
+| R1 M3 · Amphan "it" | **fixed** | 32:12.9 "On the twentieth of May, Amphan came ashore in the Sundarbans…" |
+| R1 S1 · s28 radicals | **fixed** | 42:09: "speed = √(along² + across²)", "= √(9.4² + 31.5²) = √1081", "speed ≈ 32.9 ≈ 33 m/s" on three separate rows, no bar crossing |
+| R1 S2 · "That's because" | **fixed** | 24:06.97 "They're called cylindrical because all the places at one distance r form a cylinder…" |
+| R1 S3 · arrows over labels | **fixed** (1 left: Should 5) | s28 "along 9.4" clear; StP 43:37 label right of the bundle; Amphan 49:20 "our point" right of the point; Idai "across −21.0" clear of the arrowheads (≈ 20 px). Nargis: the label sits on the ERA5 circle (Should 5) |
+| R1 S4 · recap | **fixed** | 61:00–61:18 gauge chart rose (Fort Myers) / teal (St Petersburg), axis "water above the normal tide (m)", heading "Ian · tide gauges, Sep 2022"; 61:22 event labels end before the land blocks |
+| R1 S5 · s30 inverse barometer | **fixed** | the voice no longer reads a subtraction (S7: "…941 hPa, against a normal 1013, so the sea under the eye rose by only about 72 cm"); 100 Pa, 1025 kg/m³ and 9.81 m/s² are said and turn gold on their words (44:38.0, 44:41.8, 44:46.6); "≈ 0.01 m" at 44:49 |
+| R1 S6 · f undefined | **fixed** | 22:21.6 "…the Coriolis parameter f, which comes from the Earth's spin rate and Ian's latitude…"; row "f: Coriolis parameter" at 22:27.6 |
+| R1 S7 · s37 natural swipe | **fixed** | R 54:51.3 → L 54:55.8 → R 55:02.0 → middle 55:05.5 (≈ 4.5 s per width). Nit 1 covers the false-colour starts |
+| R1 S8 · faint glows | **fixed** | the gold is clear on u, v, cos, sin and the answers (s28 41:00–41:41, s29, s33/s36/s39) |
+| R1 S9 · ERA5 pressure | **fixed** | "ERA5's lowest pressure (white circle): ≈ 965 / 982 / 981 hPa" (48:50, 53:57, 58:39.8), voiced |
+| R1 S10 · StP along | **fixed** | cos/sin row kept; 43:31.6 "along = u cos α + v sin α", "u cos α = (−10.2) × (−0.122) ≈ 1.2", "v sin α = (−16.0) × 0.993 ≈ −15.9", "along ≈ 1.2 − 15.9 ≈ −14.7 m/s" + map label |
+| R1 S11 · Khulna / Satkhira | **not fixed** | Should 2 |
+| R1 S12 · 160 km | **fixed** | 42:16.1 "Saint Petersburg: ≈ 160 km N" |
+| R2 S1 · 0.601 late | **fixed** | 39:24.7, on "zero point six zero one"; "⇒ β ≈ 31°" 39:27.7 |
+| R2 S2 · 72 hPa late | **fixed** | 44:59.3 "1013 − 941 = 72 hPa" after the 941 (44:53.3) and 1013 (44:57.1) rows; "⇒ rise ≈ 72 cm" gold on its word (45:01.9) |
+| R2 S3 · StP legs | **fixed** | 42:30.5 on its word |
+| R2 S4 · s20 answer first | **fixed** | the question "how fast must it rise?" stays until 30:39.6; then "inflow ⇒ rise ≈ 1 m/s" and "w = 32 000/30 000 ≈ 1.07 ≈ 1 m/s" (gold) come together on "is about one" |
+| R2 S5 · four wind labels | **fixed** | "≈ 19 m/s from the NNE" 43:07.2; "wind ≈ 22.6 m/s from the SSE" 48:23.4; "≈ 19 m/s from the SSW" 53:30.4; "≈ 22 m/s from the SSE" 58:13.7, gold on their words |
+| R2 S6 · results early | **fixed** | s09 u_r = 6 on "is six" (13:54.7), ring mean 34.8 on its word (14:09.3); s13 ≈ 200 (20:29.6); s14 0.048 (21:55.3); s20 callouts (29:37.0, 29:50.5, 30:00.0); s23 17° / 21° (34:37.6, 34:40.1); s29 β (42:42.9), along (43:36.4); events β on the word |
+| R2 S7 · inputs not gold | **fixed** | cos θ 0.6 (13:44.1), 34.8 in s13 (20:01.6), abs(u_r) 16 (30:25.8), 0.993 (43:00.1), v −16.0 (43:13.2), event sin α and v rows gold on their words |
+| R2 S8 · inputs never said | **fixed** | "One radian is about fifty seven point three degrees" (15:24.2, gold 57.3); Ω 7.29×10⁻⁵ (22:30.7) and φ 26.5° (22:33.3) voiced and gold |
+| R2 S9 · β undefined | **partly** | s27 arc labelled "β" at 39:16.2, on "tan β". The event maps still have no β at the leg corner (Should 4) |
+| R2 S10 | **fixed** | = R1 S10 |
+| R2 S11 · captions | **fixed** | 910 cues, 0 line breaks inside a number (was 31) |
+| R2 S12 · "official lowest pressure" | **fixed** | "official centre pressure at that hour: 960 / 962 / 955 hPa" (49:00.8, 54:07.6, 58:50.2), and the voice says the same |
+| R2 S13 · char-share anchors | **fixed** | 0 left; "ERA5: a reanalysis" on its word (33:12.9); "single towers ≈ 12 m/s" (30:50.9) |
+| R2 Nits | N1 fixed (21:08.6 "Δθ = 0.001392 × 60"); N3 fixed ("near twelve", "≈ 12 m/s"); N5 fixed (bar ticks "0 30"); N6 fixed (event rows aligned at x 1100); N2 accepted; **N4 open** (Should 6); **N7 open** (Nit 2) | |
+
+### (2) The user's 2026-11-08 request: titles and event names
+- **The ~35:09 frame (now s24, 34:49–36:13): delivered.** At 35:09 (`x/s24_3509.png`):
+  - The shared title "Ring-averaged wind in (−) and out (+), by height and distance from the centre" (≈ 46 px) runs across both panels.
+  - Each panel has its own heading: "Hurricane Ian · 28 Sep 2022" (left) and "Cyclone Amphan · 20 May 2020" (right), 44 px, aligned with the panel.
+  - The source lines are kept ("NOAA HRRR analysis · 28 Sep 2022, 18 UTC", "ERA5 · 20 May 2020, 06 UTC").
+  - Nothing overlaps; the gap between a heading and "height (km)" is ≈ 20 px. All of it reads at 640 px (heading ≈ 15 px tall).
+- **Headings on the other data scenes:**
+  - present, legible and clear of other marks: s15/s16 "Ian from space · 28 Sep 2022", s17–s20, s26, s28, s29, s31 "Hurricane Ian · 28 Sep 2022", s21/s32 "Cyclone Amphan · May 2020", s22 "Amphan from space · 18 May 2020", s23/s33 "Cyclone Amphan · 20 May 2020", s27 "Ian's coast · flat map in km", s30 "Sea floor off Fort Myers Beach", s34 "Amphan's flood · May 2020", s35 "Cyclone Nargis · May 2008", s36 "Cyclone Nargis · 2 May 2008", s37 "Nargis · Apr and May 2008", s38 "Cyclone Idai · March 2019", s39 "Cyclone Idai · 14 Mar 2019", s40 "Idai · 11 and 25 Mar 2019";
+  - in the recap: "Ring-averaged wind in and out" with "Ian · Sep 2022" and "Amphan · May 2020", "Ian · tide gauges, Sep 2022", "10-m wind across the shore at landfall".
+- **Gaps**, in Should 1 and Should 3:
+  - three figures say no quantity or no event;
+  - the event scenes repeat the heading in the keyword below it;
+  - one heading names the wrong date for its picture.
+
+### (3) House rules
+- **Show the arithmetic, voice the meaning:**
+  - wording lint 0 findings;
+  - no product, sum or subtraction is read aloud in s09–s39 (s30 and the event pressure sentences now voice only the inputs and the result);
+  - every row carries its symbol, except Should 6 and the s14 regression (Must 1).
+- **Inputs gold on their word:** yes, on every probe I read (see the table).
+- **Labels and clutter:** labels are balanced, apart from the repeated event lines (Should 3).
+- **Word-timed reveals ±0.5 s:** 163/163 in code, and confirmed on the frames I read.
+- **Captions:** no cue or line splits a number.
+- **Swipes:** right → left → right → middle at s34 (50:12–50:26), s37 natural (54:51–55:05.5), s37 false (55:34–55:52.5) and s40 natural and false (59:11.5–59:25.5, 59:29–59:44.5).
+- **Skip chips:** "skip to 10:21" (s08 starts 10:21.7) and "skip to 19:44" (s13 starts 19:44.4) are right after the +67.8-s re-voice.
+- **Facts:** checked against the fix-loop-1 fact rows (IBTrACS agency columns) and `fact_check_2026-11-07.md`. The new "Satkhira ≈ 45 km W / Khulna ≈ 79 km W" and "closest to Kolkata ≈ 17 km" rows are consistent with the log.
+
+### (4) Changed numbers, recomputed
+| quantity | shown / said | recomputed | verdict |
+|---|---|---|---|
+| Amphan: ERA5 min msl · official at that hour · rise | ≈ 965 · 960 hPa (IMD 09 UTC) · 1013 − 960 = 53 hPa ⇒ ≈ 53 cm | 965.38; 53 (exact 52.7 cm) | PASS |
+| Nargis | ≈ 982 · 962 hPa (09 and 12 UTC both 962, wind at 11 UTC) · 51 hPa ⇒ ≈ 51 cm | 982.06; 51 (50.7) | PASS |
+| Idai | ≈ 981 · 955 hPa (18 UTC; 958 at 21 UTC, wind at 19 UTC) · 58 hPa ⇒ ≈ 58 cm | 980.84; 58 (57.7) | PASS ("about" covers the ≈ 1 hPa drift to 19 UTC) |
+| Ian (s30) | 941 hPa at 19:05 UTC; 1013 − 941 = 72 hPa ⇒ ≈ 72 cm; 100 Pa/(1025 × 9.81) ≈ 0.01 m | 72 (71.6); 0.00994 m | PASS |
+| StP | u cos α = (−10.2)(−0.122) ≈ 1.2; v sin α = (−16.0)(0.993) ≈ −15.9; along ≈ −14.7; across 10.1 + 2.0 ≈ +12.1; ≈ 19 m/s from the NNE | 1.244, −15.888 → −14.64; 10.13 + 1.95 = 12.08; 19.00 m/s from 32.6° | PASS |
+| Amphan | cos 193° ≈ −0.974, sin ≈ −0.225; −1.9 − 20.5 ≈ −22.4; 22.6 m/s from the SSE | −1.89, −20.45 → −22.34 (data −22.32); 22.57 from 158° | PASS |
+| Nargis | cos 171° ≈ −0.988, sin ≈ 0.156; −1.5 − 16.3 ≈ −17.8; 19 m/s from the SSW | −1.50, −16.30 → −17.80 (−17.73); 19.04 from 210° | PASS |
+| Idai | cos 214° ≈ −0.829, sin ≈ −0.559; −3.7 − 17.3 ≈ −21.0; 22 m/s from the SSE | −3.75, −17.33 → −21.07 (−21.07); 21.99 from 162° | PASS |
+| Coast legs | Amphan 21.9/92.9 ≈ 0.236 ⇒ 13°, 257°, α 193°; Nargis 10.8/69.5 ≈ 0.155 ⇒ 9°, 279°, 171°; Idai 35.9/52.3 ≈ 0.686 ⇒ 34°, 236°, 214° | 13.27°, 8.83°, 34.46°; bearings and α as shown | PASS |
+| s14 | Δθ = 0.001392 × 60 ≈ 0.084 rad; 0.084 × 57.3 ≈ 4.8° ≈ 5°; 2.9/60 ≈ 0.048; Ω = 7.29×10⁻⁵, φ = 26.5°; 0.048/0.0023 ≈ 21 | 0.08352; 4.81°; 0.0483; f v = 2 × 7.29×10⁻⁵ × sin 26.5° × 34.8 = 0.002264; 21.4 | numbers PASS, but f v is never shown (Must 1) |
+| s20 | w = 2 × 1000 × 16/30 000 = 32 000/30 000 ≈ 1.07 ≈ 1 m/s; towers ≈ 12 m/s | 1.067; TDR 11.6 | PASS |
+
+### Must
+1. **22:26.6–22:43 · s14 · the Coriolis push is never computed on screen: a regression from r8.**
+   - "f v = 2Ω sin φ · v" (22:26.6), then "Ω = 7.29 × 10⁻⁵ s⁻¹: Earth's spin rate" (22:30.7) and "φ = 26.5°: Ian's latitude" (22:33.3) appear.
+   - All three rows fade out at 22:35.7 (`x_s14fv.jpg`). The next row is "0.048 (turning) / 0.0023 ≈ 21" (22:36.8).
+   - So 0.0023 appears from nowhere. Its working (2 × 7.29×10⁻⁵ × sin 26.5° × 34.8 ≈ 0.0023 m/s²) and its symbol are missing, and v = 34.8 is not on this stack. r8 had "f v = 2Ω sin φ · v ≈ 0.0023 m/s² (out)".
+   - This breaks "every calculation shown in full, every result carries its symbol". The voice can stay as it is.
+   - Fix (TSX only): keep the three rows, and on "twenty six and a half degrees north" add "f v = 2 × 7.29×10⁻⁵ × sin 26.5° × 34.8 ≈ 0.0023 m/s² (outward)". Then show the ratio row with both parts labelled ("0.048 (turning) / 0.0023 (Earth's spin) ≈ 21") on "twenty times weaker", below the rows rather than in place of them.
+
+### Should
+1. **Figures that still don't say what they show, or which event** (2026-11-08 rule):
+   - s18/s19 (26:18–28:48), the Ian layer stack: the colour bar has no quantity name, only "m/s, −16…+16, − in, + out". Add "radial wind" above the bar, as in s20 and s24.
+   - s25 (36:14–37:04): the mini section and map have no event name, and the colour bar has no name. Add "Ian · 28 Sep 2022 · radial wind".
+   - Info: the s00 title teaser (0:08–0:13) has a source line but no event name. Leave it if HOUSE_STYLE's opening title rules out an extra line.
+2. **32:27–32:41 · s21 · r8 R1 S11 not fixed** (`x/s21_khulna2.png`).
+   - The "Satkhira" label sits west of the track, directly under "Kolkata", and the track line runs through its last letters. Its dot is east of the track, inside the dashed circle.
+   - The Kolkata dot sits between the two labels.
+   - A first-time viewer reads Satkhira as an Indian town west of the track.
+   - Put "Satkhira" right of or below its own dot (east of the track), and keep "Kolkata" beside its own dot.
+3. **The heading is repeated in the keyword right under it** (balance rule: drop the least-needed label):
+   - s33 "Cyclone Amphan · 20 May 2020" / "Amphan · 20 May 2020 · 09 UTC" (47:07–48:23);
+   - s36 "Cyclone Nargis · 2 May 2008" / "Nargis · 2 May 2008 · 11 UTC";
+   - s39 "Cyclone Idai · 14 Mar 2019" / "Idai · 14 Mar 2019 · 19 UTC";
+   - s34 "Amphan's flood · May 2020" / "Amphan's flood from space?" (49:22–49:42);
+   - s22 "Amphan from space · 18 May 2020" / "18 May · two days before landfall".
+
+   Fix: shorten each keyword to what is new ("09 UTC · Sundarbans shore", "11 UTC", "19 UTC", "from space?", "two days before landfall").
+
+   Related: **52:21–52:25 · s35**. The heading "Cyclone Nargis · May 2008" stands over the 21 Apr 2008 picture of the delta, before the storm. Use "Irrawaddy delta · 21 Apr 2008" there, or "before Nargis".
+4. **The event maps have no β.**
+   - s33 47:42–47:54, s36 52:50–53:01 and s39 57:32–57:43 write "tan β = …", but the dashed leg box near "our point" has no arc, no "β" and no leg lengths. Only s27 labels β.
+   - Add the small arc and "β" at the leg corner when the tan row appears (r8 R2 S9, second half).
+5. **53:47–54:32 · s36 · "across −17.8" sits on top of the white ERA5 storm-centre circle** (`x/s36_mid.png`). The circle is the thing the next sentence points to (53:57, "at the white circle"). Move the label up-left, clear of the circle.
+6. **15:13.9 · s09 · the rate results have no symbol** (r8 R2 N4; house rule "every result carries its symbol").
+   - "≈ 0.00139 rad/s", "0.00139 × 57.3 ≈ 0.08°/s" and "0.08 × 60 ≈ 4.8 ≈ 5°/min" stand bare.
+   - Write "dθ/dt ≈ 0.00139 rad/s", and "dθ/dt ≈ 0.08°/s ≈ 5°/min" on the conversion rows.
+
+### Nit
+1. **False-colour swipes:** s37 (55:34–55:36) and s40 (59:26.8–59:29) start in the middle and glide to the right edge in ≈ 2 s, faster than the ≈ 4.5-s sweeps that follow. Start them at the right edge, or slow the first glide.
+2. **29:37–30:15 · s20:** the gold dot of the "≈ −16 m/s" callout covers the "4" of the contour label "40", so it reads ".0" (r8 R2 N7).
+3. **35:07–35:12 · s24:** the keyword "≈ +6 m/s near the top" sits above both panels, but its dots are only on Amphan. Write "Amphan: ≈ +6 m/s near the top".
+4. **61:22–61:32 · s41:** "10-m wind across the shore at landfall". The Idai hour is "a few hours before landfall" (s39). Write "near landfall".
+5. **26:18–28:48 · s18/s19:** the dark right panel shows a faint rectangle edge (bottom at y ≈ 765, right at x ≈ 1865), which reads as a box.
+6. **37:07 · s26:** a background wind-field arrowhead touches the top of "rs" in "Fort Myers Beach". The label is haloed and legible.
+
+### Overall: **FIX** (1 Must, 6 Should, 6 Nit)
+- Every r8 Must is closed, and 23 of the 25 r8 Shoulds are fixed on screen.
+- The user's 2026-11-08 request is delivered at the frame they named (s24, 35:09), with a shared title and one event heading per panel.
+- Every changed number recomputes: pressures "at that hour", the ERA5 minima, the inverse barometer, the four new wind labels, and the along/across products.
+- The one Must is a regression in s14: the Coriolis push 0.0023 is used but never computed.
+- All the fixes are TSX-only (no re-voice, no timing change). Re-render s14, s18–s19, s21, s22, s25, s33–s36 and s39, run K6 on them, and the movie can go to `qa_pass`.
+
+Disk at review end: C: 111 GB free, G: 418 GB free; review frames 57 MB.
+
+## 5a fix3 — review 1 (movie), 2026-11-08 — FIX
+5a_coordinates_flat_fix3.mp4, 43:33.8, 153.35 MB, QA 15/15. Every fix-3 item PASS (Ian titles on all figures, bar titles left of bars, s24 chips, s23 rows, s25 chart labels, s04/s14 exits, s07 stack, caption pairs). Frames: reports/movies/ch00_coordinates_flat/review_fix3/.
+- **M1** s25 40:00–40:13: y′ drawn ENE onto land = x′ turned clockwise (left-handed axes); contradicts s16 ŷ′ = (−sin α, cos α) and Part 2 s26 ("y′ points out to sea"). Fix: y′ WSW over the Gulf; onshore shown as a separate arrow. Screen only. (Orchestrator confirmed on f_2412_axes_zoom.)
+- **S1** s25 38:04–40:13 ragged dark strip at map left edge (HRRR raster ends inside the box) + notch bottom-right; C2 same at s21 top-left. Clip box to raster.
+- **S2** s25 chart: "17" sits on the 0 line (reads −17−); "−40" touched by the dashed u_r curve.
+- **S3** 2:08.9 voiced "so easy to work with" → "so convenient" at the next re-voice.
+- C1 s25 header stack / bar reads as chart key; C3 cue 20:23.225 line ends on "minus"; C4 s23 "25 km" touches gold arc, clock "0 min" while arc drawn.
+- House rules, openings, titles/event per panel, skip boxes, smooth end, physics elsewhere: PASS.
+
+## 5a fix3 — review 2 (calc & sync), 2026-11-08 — FIX (captions)
+All arithmetic recomputed from data/cf.json: correct (s04–s27). 104 words checked at −0.4/+0.5 s; wording lint 0. Frames: reports/movies/ch00_coordinates_flat/calc_fix3/.
+- **M1** cue 10:24.225/10:30.220 splits the pair (−q, 0). **M2** cue 31:17.475/31:20.538 splits "a hundred and twenty six".
+- **Should:** s05 x/y rows' results 1.9/1.7 s early (split row, tailIn on "three"/"four"); s26 "≈ 21°" label 3.8 s early; s23 "≈ 37.3" 2.2 s early; s20 "= 5"/"= 0" 0.8 s early; s22 mean 0.64 s early; gold missing on cos 30° ≈ 0.866 / sin 30° = 0.5 (s15), "135 kt" (s22), "0.1°" (s11); 6 caption line wraps split a number or end on "minus" (8:43, 13:09, 20:23, 34:09, 36:53, 40:35); s24 voiced "minus u times one, plus v times zero" (re-voice later).
+- Info: s23 "≈ 4490 s" (4486); s25 "47" next to bar "0 25 50".

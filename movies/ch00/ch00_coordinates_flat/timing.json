@@ -3783,7 +3783,7 @@
   "normalization_type": "dynamic",
   "target_offset": "0.46"
  },
- "cues": 622,
+ "cues": 633,
  "warnings": [],
  "self_check": {
   "spliced_fix1": {
@@ -6600,6 +6600,7 @@
     }
    ]
   },
-  "recue_fix3_1108": "captions re-cued: a spoken vector pair never split across cues (fix2 review C4)"
+  "recue_fix3_1108": "captions re-cued: a spoken vector pair never split across cues (fix2 review C4)",
+  "recue_fix4_1108": "captions re-cued: no cue boundary or line break inside a spoken number or vector pair, none right after 'minus' (fix3 review 2 M1/M2 + six wraps)"
  }
 }

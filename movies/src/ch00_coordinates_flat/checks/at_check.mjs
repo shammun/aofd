@@ -43,7 +43,7 @@ for (const file of files) {
     if (k < 0) { console.log(`FAIL ${path.basename(file)}:${i + 1} ${m[1]}: no scene ${id}`); bad++; continue; }
     seen.add(id);
     const ns = sc[k].sentences.length, len = END[k] - CUT[k];
-    for (const a of body.matchAll(/\bAT\(k,\s*(\d+),\s*"([^"]*)"\)/g)) {
+    for (const a of body.matchAll(/\b(?:AT|ATlast)\(k,\s*(\d+),\s*"([^"]*)"\)/g)) {   // fix 4: ATlast phrases checked too
       n++; const jj = +a[1], ph = a[2];
       if (jj >= ns) { console.log(`FAIL ${id}: AT sentence ${jj} (scene has ${ns})`); bad++; continue; }
       const s = sc[k].sentences[jj], idx = s.text.indexOf(ph);
