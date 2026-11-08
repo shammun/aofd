@@ -449,7 +449,7 @@ const S14: React.FC = () => {
       <CalcStack f={f} x={MX + 40} y={432} size={44} maxLines={3} o={fout(f, tM1 - 10)} rows={[
         { lhs: String.raw`f\,v`, rhs: String.raw`=2\Omega\sin\varphi\cdot v`, at: tFv },
         { lhs: String.raw`\Omega`, rhs: String.raw`=${goldAt(f, tOm, String.raw`7.29\times10^{-5}`)}\,\mathrm{s^{-1}}\text{: Earth's spin rate}`, at: tOm, cont: true, c: C.local },
-        { lhs: String.raw`\varphi`, rhs: String.raw`=${goldAt(f, tPhi, `${nf(D.ian_c[0], 1)}^\circ`)}\text{: Ian's latitude}`, at: tPhi, cont: true, c: C.local },
+        { lhs: String.raw`\varphi`, rhs: String.raw`=${goldAt(f, tPhi, String.raw`${nf(D.ian_c[0], 1)}^\circ`)}\text{: Ian's latitude}`, at: tPhi, cont: true, c: C.local },
         { lhs: String.raw`f\,v`, rhs: String.raw`=2\times7.29\times10^{-5}\times\sin${nf(D.ian_c[0], 1)}^\circ\times${nf(RING.v, 1)}`, at: tPhi + 15 },
         { rhs: String.raw`\approx${nf(RING.f * RING.v, 4)}\ \mathrm{m/s^2}\ \text{(outward)}`, at: tPhi + 30, cont: true },
         { rhs: String.raw`\dfrac{${nf(RING.acc, 3)}\ \text{(turning)}}{${nf(RING.f * RING.v, 4)}\ \text{(Earth's spin)}}${tailIn(f, t20, C.ink, String.raw`\approx${Math.round(RING.fratio)}`)}`, at: tWeak },
