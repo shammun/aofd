@@ -95,7 +95,7 @@ K6PORT="${K6PORT:-8417}" "$PY" movies/src/ch00_coordinates_sphere/checks/cs_run.
 echo "stills exit $?"
 release; trap - EXIT
 
-# ---- 4. light analysis over the whole k6p3a folder
+# ---- 4. light analysis over the whole k6p3b folder
 grep -c ERROR "$S"/stills/"$TAG"/log_*.txt
 ls "$S/stills/$TAG" | grep -c '^f.*jpg$'
 "$PY" tools/k6_overlap.py "$S/stills/$TAG" --timing movies/ch00/ch00_coordinates_sphere/timing.json --json "$S/stills/${TAG}_overlap.json" 2>&1 | tail -2

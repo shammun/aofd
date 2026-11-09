@@ -13,7 +13,7 @@ import { Cut } from "./kit_cs/earth";
 import {
   BREST, Box, D2R, Earth, FP, Face, Lbl, SRC_BM, SameMark, TV3, TeX, face3, faceArc, faceFlat, faceTick, faceWedge, fin, fout, globeG, ll, merFace,
 } from "./cs_lib";
-import { SourceBelow } from "../house/kit/frame";
+import { SourceBelow } from "./cs_lib";   // p3c: the gated source line
 
 export type UV = [number, number];
 type Base = { at: number; out?: number; o?: number; only?: "3" | "2"; same?: boolean; n?: number };

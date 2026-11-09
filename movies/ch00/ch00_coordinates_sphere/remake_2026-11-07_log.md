@@ -345,3 +345,31 @@ k6p3a (orchestrator, `build1/k6p3a_heavy_20261109_010755.log`): SSR 2-D 10 418 f
   (`${K6PORT:-8417}`, outside the excluded 8172–8371 and 8552–8984); same lock gate (RENDER2, HEAVY, VOICE free, ≥ 9 GB RAM). Start:
   `nohup bash movies/src/ch00_coordinates_sphere/checks/p3b_heavy.sh > "G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_sphere/build1/k6p3b_heavy_$(date +%Y%m%d_%H%M%S).log" 2>&1 &`
 - Disk after: C: 95.8 GB, G: 409.5 GB free. No render, no commit, nothing deleted.
+
+
+## 2026-11-09 fix loop p3c after k6p3b (source only; no SSR / K6 / render / TTS / mix; no lock taken)
+k6p3b (orchestrator, `build1/k6p3b_heavy_20261109_033635.log`): 13 424 frames, 16 hits, **12 unique faults**, all 1–3-frame cross-fade faults at the
+starts of s19 (f37981: credit × credit, "r̂ = (cos φ cos λ," × "another city"), s22 (f50153: credit × credit, "U = Ω a cos φ" × "distances on the
+ground") and s31 (f71618 / f71621: s30's rows × s31's graph ticks, "sin φ" and "stack the strips"). Every k6p3a fault stayed fixed.
+Disk before: C: 95.8 GB, G: 409.5 GB free.
+
+- **Cause, generally:** during the 10-frame cross-fade the previous scene's Sequence is still drawn at full strength under the new scene's veil;
+  any text of the new scene shown before it has gone (probe opacity 0.97 against 1) is not covered by k6_overlap's cross-fade exemption. p3b
+  fixed only the starts k6p3a had sampled; k6p3b sampled every frame of more starts and found three more.
+- **Fix, at every scene start at once (the scan the coordinator asked for, made structural):** `cs_lib.tsx` `SceneGate` context;
+  `CoordinatesSphere.tsx` wraps every scene after s00 in `{text: XIN, src: XF}`. Every text primitive of the movie reads it: TeX, Lbl (incl. $…$
+  labels), Keyword, Layered, CalcStack, Recall (its gold house label) and the KeepLine underline, and through them KeepLine, SideCallout, plab,
+  FaceTex (TwoView labels), ColourBar ticks, SkipChip, Magnify: none can be seen before XIN = XF + 8 (fade in over 8 frames). Every source
+  line (new gated `SourceBelow` in cs_lib; the three scene files and cs_two now import it instead of the house one; GSrc and TwoView's credit
+  use it) enters from XF, the frame the previous scene's credit has gone (held, not exempted). Pictures are not gated (house rule: the picture
+  is there from the first frame). Audit: no scene file draws text another way (no raw `<text>`, no HTML text; the house `SourceLine` is the
+  only house text reached, now gated; icons, GlobeFrame, wind arrows carry no text). s19, s22, s31 are covered by it ("another city",
+  "distances on the ground", the s31 axis ticks, "sin φ", "stack the strips", their credits). The p3b per-element XIN / fin(f, XF, 8) remain
+  (same start; harmless).
+- Static gates (final source): **tsc 0 · at_check 541 / 0 · swap_check 329 elements, 0 overlaps, 0 swaps < 8 frames · cam_speed 0 > 90 °/s ·
+  symbol lint --strict 0 · eq_check 24/24 · script_wording_lint 0 · tex_escape_lint 0 · captions 715 cues, 0 rule breaks, text = script**.
+- Prepared, **not started**: `checks/p3c_heavy.sh` (tag **k6p3c**): every frame of all 35 scene starts (start −15 … +30) + s19, s22, s31 (±15:
+  house K6 list and every 15th frame): **2 352 frames**; copies every k6p3b still / box file outside those ranges; K6 ports 8417 / 8447 / 8477
+  (`${K6PORT:-8417}`); same lock gate (RENDER2, HEAVY, VOICE free, ≥ 9 GB RAM). Start:
+  `nohup bash movies/src/ch00_coordinates_sphere/checks/p3c_heavy.sh > "G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_sphere/build1/k6p3c_heavy_$(date +%Y%m%d_%H%M%S).log" 2>&1 &`
+- Disk after: C: 95.5 GB, G: 408.6 GB free. No render, no commit, nothing deleted.

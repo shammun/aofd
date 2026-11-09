@@ -17,6 +17,7 @@ import { Keyword as HKeyword } from "../house/kit/notes";
 import { CurvedLink } from "../house/kit/extras";
 import { CalcRow, CalcStack as HCalcStack, Layered as HLayered, Part, Layer, TeX as HTeX, plainOf, texHtml, KX } from "../house/kit/tex";
 import { GlobeCam, GProj, coastPath, globeCam, globeProj, useTex, ll, llPath } from "./kit_cs/globe";
+import { SourceBelow as HSourceBelow } from "../house/kit/frame";
 import { View3D } from "./kit_cs/three3d";
 import { V3 } from "./kit_cs/cam";
 import { Cut, EarthMesh } from "./kit_cs/earth";
@@ -62,6 +63,27 @@ export const XZ = 1190;                   // text column on the darkened panel o
 export const Scene: React.FC<{ children: React.ReactNode; fadeIn?: boolean }> = ({ children, fadeIn = true }) => {
   const f = useCurrentFrame();
   return <AbsoluteFill style={{ background: C.bg, opacity: fadeIn ? ramp(f, 0, XF) : 1 }}>{children}</AbsoluteFill>;
+};
+
+// ---------------------------------------------------------------- p3c: the scene-start gate (exit before entry, every scene start)
+// k6p3a/k6p3b (2026-11-09): during the XF-frame cross-fade the previous scene's Sequence is still drawn at full strength under the new
+// scene's fading veil, so ANY text of the new scene shown before the old one has gone can sit on the old scene's text (the probe sees
+// the new text at 0.97 and the old at 1: no cross-fade exemption). CoordinatesSphere wraps every scene after s00 in SceneGate
+// {text: XIN, src: XF}: every text primitive of this movie (TeX, Lbl incl. $…$ labels, Keyword, Layered, CalcStack, Recall, and through
+// them KeepLine, SideCallout, plab, FaceTex, ColourBar, SkipChip) fades in from XIN = XF + 8 (8 frames after the old scene has gone), and
+// every source line (SourceBelow, GSrc, TwoView's credit) from XF (the old credit holds the line until then). Pictures are not gated
+// (HOUSE_STYLE §5: the picture is there from the scene's first frame). s00 has no previous scene: no gate.
+type Gate = { text: number; src: number };
+const GateCtx = React.createContext<Gate>({ text: 0, src: 0 });
+export const SceneGate = GateCtx.Provider;
+const useGate = (kind: keyof Gate) => {
+  const f = useCurrentFrame(), a = React.useContext(GateCtx)[kind];
+  return a <= 0 ? 1 : ramp(f, a, a + 8);
+};
+/** the house source line with the scene-start gate (enters at XF in every scene after s00) */
+export const SourceBelow: React.FC<React.ComponentProps<typeof HSourceBelow>> = (p) => {
+  const g = useGate("src");
+  return g <= 0 ? null : <HSourceBelow {...p} o={(p.o ?? 1) * g} />;
 };
 
 // ---------------------------------------------------------------- data and assets
@@ -124,14 +146,16 @@ export const texW = (src: string, s: number): number => {
 const guard = (what: string, x0: number, w: number) => { if (x0 + w > 1842) throw new Error(`text "${what.slice(0, 50)}" ends at x ${Math.round(x0 + w)} (> 1842)`); };
 /** house TeX with the right-edge guard */
 export const TeX: React.FC<React.ComponentProps<typeof HTeX>> = (p) => {
+  const g = useGate("text");
   const w = texW(p.s, p.size ?? 68), ax = p.ax ?? 0;
   guard(p.s, p.x - ax * w, w);
-  return <HTeX {...p} />;
+  return g <= 0 ? null : <HTeX {...p} o={(p.o ?? 1) * g} />;
 };
 export const Layered: React.FC<{ parts: Part[]; layers: Layer[]; x: number; y: number; size?: number; ax?: number; ay?: number; o?: number }> = (p) => {
+  const g = useGate("text");
   const w = texW(plainOf(p.parts), p.size ?? 84), ax = p.ax ?? 0;
   guard(plainOf(p.parts), p.x - ax * w, w);
-  return <HLayered {...p} />;
+  return g <= 0 ? null : <HLayered {...p} o={(p.o ?? 1) * g} />;
 };
 const sideStr = (s: CalcRow["rhs"]): string => (typeof s === "string" ? s : "raw" in s ? s.raw[0].s : plainOf(s.parts));
 // Part 1 lessons C2 (2026-11-05): every fraction is a \dfrac (display size, >= 44 px). A row whose TeX has a \dfrac and no explicit
@@ -149,11 +173,13 @@ const stackBottomGuard = (rows: CalcRow[], y: number, size: number, maxLines: nu
   }
 };
 /** house CalcStack with the right-edge guard (row rhs starts at x) */
-export const CalcStack: React.FC<React.ComponentProps<typeof HCalcStack>> = (p) => {
+export const CalcStack: React.FC<React.ComponentProps<typeof HCalcStack>> = (p0) => {
+  const g = useGate("text");
+  const p = { ...p0, o: (p0.o ?? 1) * g };
   p.rows.forEach((r) => guard(sideStr(r.rhs), p.x, texW(sideStr(r.rhs), r.size ?? p.size ?? 68)));
   const rows = withFracH(p.rows, p.size ?? 68);
   stackBottomGuard(rows, p.y, p.size ?? 68, p.maxLines ?? 3);
-  return <HCalcStack {...p} rows={rows} />;
+  return g <= 0 ? null : <HCalcStack {...p} rows={rows} />;
 };
 // ---------------------------------------------------------------- maths inside labels (fix loop 1, review 1 S13 / calc audit S6)
 // A label's maths goes in $…$ and is drawn by KaTeX (the sans font drew φ, λ, Ω, ×, cos as plain text); the words stay in the house
@@ -182,16 +208,22 @@ const MathLbl: React.FC<{ x: number; y: number; t: string; c?: string; s?: numbe
   );
 };
 /** the house SVG label with the right-edge guard; $…$ parts are KaTeX */
-export const Lbl: React.FC<React.ComponentProps<typeof HLbl>> = (p) => {
+export const Lbl: React.FC<React.ComponentProps<typeof HLbl>> = (p0) => {
+  const g = useGate("text");
+  const p = { ...p0, o: (p0.o ?? 1) * g };
   const s = p.s ?? 54, m = p.t.includes("$"), w = m ? mixW(p.t, s) : textW(p.t, s), a = p.a ?? "start";
   guard(p.t, a === "start" ? p.x : a === "end" ? p.x - w : p.x - w / 2, w * 0.97);
+  if (g <= 0) return null;
   return m ? <MathLbl {...p} /> : <HLbl {...p} />;
 };
 /** the house Keyword with the right-edge guard; with $…$ maths: the same rise / fade, gold target links as CurvedLinks */
-export const Keyword: React.FC<React.ComponentProps<typeof HKeyword>> = (p) => {
+export const Keyword: React.FC<React.ComponentProps<typeof HKeyword>> = (p0) => {
+  const g = useGate("text");
+  const p = { ...p0, o: (p0.o ?? 1) * g };
   const s = p.s ?? 54, m = p.text.includes("$"), w = m ? mixW(p.text, s) : textW(p.text, s), a = p.a ?? "start";
   const x0 = a === "start" ? p.at[0] : a === "end" ? p.at[0] - w : p.at[0] - w / 2;
   guard(p.text, x0, w * 0.97);
+  if (g <= 0) return null;
   if (!m) return <HKeyword {...p} />;
   const { f, text, at, c = C.key, appear, out, o = 1, targets = [] } = p;
   const oT = ramp(f, appear, appear + 8) * (out !== undefined ? 1 - ramp(f, out, out + 10) : 1) * o;
@@ -457,7 +489,7 @@ export const SkipChip: React.FC<{ f: number; k: number; to: string }> = ({ f, k,
  * next text in its slot). */
 export const KeepLine: React.FC<{ f: number; k: number; lines: string[]; last?: number; x?: number; y?: number; a0?: number }> = ({ f, k, lines, last = 1, x = XC, y = 110, a0 = 0 }) => {
   const a = a0, b = SE(k, last);   // p3b: a0 = XF + 8 where the previous scene's text sits in the same slot (exit before entry)
-  const o = ramp(f, a, a + 8) * (1 - ramp(f, b, b + 10));
+  const o = ramp(f, a, a + 8) * (1 - ramp(f, b, b + 10)) * useGate("text");   // p3c: the underline is gated with its words
   if (o <= 0) return null;
   const wl = mixW(lines[lines.length - 1], T.key);
   const yl = y + (lines.length - 1) * 68 + 36;
@@ -640,7 +672,8 @@ export const splitVis = (G: GProj, pts: V3[]): { front: Pt[][]; back: Pt[][] } =
  *  defined rather than derived. Label and equation share one data-lc-own group (K6 ownership). */
 export const Recall: React.FC<{ f: number; tex: string; name: string; x: number; y: number; appear: number; out?: number; size?: number; c?: string; part?: number;
   verb?: string; gap?: number; side?: boolean }> = ({ f, tex, name, x, y, appear, out, size = 50, c = C.ink, part = 1, verb = "derived", gap, side = false }) => {
-  const o = ramp(f, appear, appear + 10) * (out !== undefined ? 1 - ramp(f, out, out + 10) : 1);
+  const g = useGate("text");
+  const o = ramp(f, appear, appear + 10) * (out !== undefined ? 1 - ramp(f, out, out + 10) : 1) * g;
   const lab = `${verb} in Part ${part}: ${name}`;
   const two = x + textW(lab, T.floor) > 1842;
   if (side) {   // the gold keyword in two lines right of the equation (where there is no room below)

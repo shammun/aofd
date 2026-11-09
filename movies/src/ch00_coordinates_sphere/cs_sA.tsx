@@ -8,7 +8,8 @@ import { useCurrentFrame } from "remotion";
 import { C, T } from "../house/kit/type";
 import { Pt, RightTick, pulse } from "../house/kit/draw";
 import { SeriesTitle } from "./kit_cs/SeriesTitle";
-import { GlobeFrame, SourceBelow } from "../house/kit/frame";
+import { GlobeFrame } from "../house/kit/frame";
+import { SourceBelow } from "./cs_lib";   // p3c: the gated source line (enters at XF after a scene start)
 import { SunGlyph } from "../house/kit/extras";
 import { GProj, globePath, llPath } from "./kit_cs/globe";
 import { Quad3D } from "./kit_cs/three3d";

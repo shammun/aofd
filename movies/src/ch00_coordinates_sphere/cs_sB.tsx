@@ -8,7 +8,8 @@ import { C, T } from "../house/kit/type";
 import { Pt, RightTick, pulse, textW } from "../house/kit/draw";
 import { ClockGlyph } from "../house/kit/icons";
 import { SunGlyph, CurvedLink } from "../house/kit/extras";
-import { GlobeFrame, SourceBelow } from "../house/kit/frame";
+import { GlobeFrame } from "../house/kit/frame";
+import { SourceBelow } from "./cs_lib";   // p3c: the gated source line (enters at XF after a scene start)
 import { AnimatedWindArrow } from "../house/kit/wind";
 import { Axis3D, GProj, globePath, llPath } from "./kit_cs/globe";
 import { V3 } from "./kit_cs/cam";
