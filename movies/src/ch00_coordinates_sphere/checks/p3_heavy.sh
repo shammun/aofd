@@ -89,7 +89,7 @@ trap 'grep -q "K6 $TAG" "$L/owner.txt" 2>/dev/null && release' EXIT
 # ---- 3. SSR + bundle + K6 stills of the list
 echo "== ssr 2-D"; (cd movies && node src/ch00_coordinates_sphere/checks/ssr/run.mjs --step 10 --public "$S/public" 2>&1 | tail -8)
 echo "== ssr 3-D"; (cd movies && node src/ch00_coordinates_sphere/checks/ssr/run.mjs --step 15 --3d 2>&1 | tail -6)
-K6PORT=8300 "$PY" movies/src/ch00_coordinates_sphere/checks/cs_run.py stills "$TAG" --bundle --jobs 3 --frames-file "$S/${TAG}_frames.txt" > "$S/${TAG}_run.log" 2>&1
+K6PORT="${K6PORT:-8417}" "$PY" movies/src/ch00_coordinates_sphere/checks/cs_run.py stills "$TAG" --bundle --jobs 3 --frames-file "$S/${TAG}_frames.txt" > "$S/${TAG}_run.log" 2>&1
 echo "stills exit $?"
 release; trap - EXIT
 
