@@ -94,8 +94,9 @@ const S10: React.FC = () => {
         <g data-lc-maplabel="1"><Lbl x={140} y={700} t="Gulf of Mexico" c={C.key} s={T.floor} italic o={fin(f, AT(k, 2, "Florida"))} /></g>
         <g data-lc-maplabel="1"><Lbl x={760} y={250} t="Florida" c={C.key} s={T.floor} o={fin(f, AT(k, 2, "Florida"))} /></g>
       </Svg>
-      <TeX s={turnedNow ? H.xp : H.i} x={p0[0] + ex[0] * (U + 40)} y={p0[1] + ex[1] * (U + 40)} size={54} c={C.second} ax={0.5} o={o1} halo />
-      <TeX s={turnedNow ? H.yp : H.j} x={p0[0] + ny[0] * (U + 40)} y={p0[1] + ny[1] * (U + 40)} size={54} c={C.second} ax={0.5} o={o1} halo />
+      {/* r8e (k6r8d f21523-21526): the map tip labels leave before the globe picture starts to come in (t3D - 6) */}
+      <TeX s={turnedNow ? H.xp : H.i} x={p0[0] + ex[0] * (U + 40)} y={p0[1] + ex[1] * (U + 40)} size={54} c={C.second} ax={0.5} o={o1 * fout(f, t3D - 22, 12)} halo />
+      <TeX s={turnedNow ? H.yp : H.j} x={p0[0] + ny[0] * (U + 40)} y={p0[1] + ny[1] * (U + 40)} size={54} c={C.second} ax={0.5} o={o1 * fout(f, t3D - 22, 12)} halo />
       <TeX s={String.raw`\alpha`} x={p0[0] + 74} y={p0[1] - 70} size={50} c={C.second} o={fin(f, tX) * o1} />
       <SourceBelow text="Data: Natural Earth (coastline) · wind: HRRR (NOAA), 28 Sep 2022, 20 UTC" pic={MAPB} w={920} o={o1} name="s10 src" />
       <Svg o={o1}>
@@ -133,8 +134,9 @@ const S10: React.FC = () => {
         <TeX s={String.raw`\hat{\mathbf k}\ \text{unchanged}`} x={XZ} y={430} size={54} c={C.first} o={o2t * fin(f, AT(k, 7, "as it is"))} />
         <Svg o={o2t}>
           <Lbl x={XZ} y={520} t="anticlockwise, from above" c={C.muted} s={T.floor} o={fin(f, AT(k, 7, "anticlockwise"))} />
-          <SideCallout f={f} lines="$\hat{\mathbf x}'$ along the coast" at={[XZ, 630]} appear={tTurn3 + 62} target={G.pw(xq)} s={T.floor} c={C.second} bend={40} />
-          <SideCallout f={f} lines="$\hat{\mathbf y}'$ out to sea" at={[XZ, 720]} appear={tTurn3 + 70} target={G.pw(yq)} s={T.floor} c={C.second} bend={40} />
+          <SideCallout f={f} lines="$\hat{\mathbf x}'$ along the coast" at={[XZ, 630]} appear={tTurn3 + 62} out={tLegs - 22} target={G.pw(xq)} s={T.floor} c={C.second} bend={40} />
+          {/* r8e (k6r8d f21882-21888: "91.5 km ?" on the x̂′ link): the callouts and links leave at tLegs - 22, before phase 3; phase 3 labels enter with o3t */}
+          <SideCallout f={f} lines="$\hat{\mathbf y}'$ out to sea" at={[XZ, 720]} appear={tTurn3 + 70} out={tLegs - 22} target={G.pw(yq)} s={T.floor} c={C.second} bend={40} />
         </Svg>
       </> : null}
       {/* phase 3: Part 2's two legs, read off a km map: where do they come from? */}
@@ -145,11 +147,11 @@ const S10: React.FC = () => {
         <line x1={A3[0]} y1={A3[1]} x2={Bp3[0]} y2={Bp3[1]} stroke={C.gold} strokeWidth={5} strokeDasharray="14 10" />
         <Arrow p={A3} q={Cn3} color={C.second} w={9} head={30} dash="14 10" />
         <Arrow p={Cn3} q={Bp3} color={C.second} w={9} head={30} dash="14 10" />
-        <Place p={A3} t="Naples" dx={-24} dy={-30} a="end" />
-        <Place p={Bp3} t="Englewood" dx={-24} dy={-30} a="end" />
+        <Place p={A3} t="Naples" o={o3t} dx={-24} dy={-30} a="end" />
+        <Place p={Bp3} t="Englewood" o={o3t} dx={-24} dy={-30} a="end" />
         <g data-lc-maplabel="1">
-          <Lbl x={A3[0] + 26} y={mix(A3[1], Cn3[1], 0.5)} t="91.5 km ?" c={C.second} s={T.floor} />
-          <Lbl x={mix(Cn3[0], Bp3[0], 0.5)} y={Cn3[1] - 40} t="55 km ?" c={C.second} s={T.floor} a="middle" />
+          <Lbl x={A3[0] + 26} y={mix(A3[1], Cn3[1], 0.5)} t="91.5 km ?" c={C.second} s={T.floor} o={o3t} />
+          <Lbl x={mix(Cn3[0], Bp3[0], 0.5)} y={Cn3[1] - 40} t="55 km ?" c={C.second} s={T.floor} a="middle" o={o3t} />
         </g>
         <Keyword f={f} text="Part 2: read off a km map" at={[XC, 110]} s={T.floor} appear={tLegs + 18} />
         <Lbl x={XC} y={210} t="91.5 km north · 55 km west" c={C.key} s={T.floor} o={fin(f, AT(k, 8, "ninety one"))} />

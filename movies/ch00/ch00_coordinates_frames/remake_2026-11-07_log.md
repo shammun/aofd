@@ -279,3 +279,24 @@ fixes hold); 22 917 of 22 917 stills; K6 **FAIL, 436 hits** (text-text 52, text-
   ports 8447 / 8477 / 8507; then ONE Python pass prints "stills written: N of M" (re-shoot list) + whole-movie coverage (k6r8c ∪ k6r8d lists) —
   no per-file stat from bash; then k6_overlap and the summary ending "N unique faults". Own log `build1/k6r8d_heavy_<date>.log`. Never renders,
   mixes, commits or deletes. Start: `nohup bash movies/src/ch00_coordinates_frames/checks/r8d_heavy.sh > /dev/null 2>&1 &`.
+
+## 2026-11-09 fix loop r8e (source only; after k6r8d)
+**k6r8d** (`build1/k6r8d_heavy_20261109_075212.log`, lock until 08:16): SSR 0 / 0; 3960 of 3960 re-shot stills, whole movie 23 496 of 23 496;
+K6 **FAIL, 24 hits** (text-picture 17, text-link 7) = **12 unique faults**. The scene-start gate (r8d) worked: every remaining start fault is
+the OTHER side of the cross-fade.
+- **Old text under the new picture on the last overlap frame** (s01 f362 the s00 title ×3; s07 f12425 "φ = 48.4°" of s06; s23 f46205 "moving
+  east", "ĵ ⊙ (out of the screen)", "they turn at ≈ a speed" of s22's keep picture; s26 f53621 the same two of s25's): ported Part 3 p3d (commit
+  2cbc928): `Gate` gets `exit` = the scene's LEN; `useGate` returns 0 from frame exit + XF − 1 (the last overlap frame, where the new veil is
+  0.97); `CoordinatesFrames` passes `{text, src, exit: LEN(k)}` (0 for the last scene); `useTextGate()` exported; s00's SeriesTitle (house
+  RiseText, outside the wrappers) sits in `<Svg o={useTextGate()}>`.
+- **s10 f21523-21526** (phase-1 map tip labels x̂′ / ŷ′ over the incoming globe): they now leave at t3D − 22 (gone at t3D − 10, before the
+  globe starts at t3D − 6).
+- **s10 f21882-21888** ("91.5 km ?" on phase 2's gold callout link): the two SideCallouts leave at tLegs − 22; phase 3's place names and
+  "91.5 km ?" / "55 km ?" enter with o3t (tLegs + 12).
+- Static gates: tsc 0 · at_check 364 / 0 · swap_check 353, 0 / 0 · cam_speed 0 · symbol lint 0 · eq_check 18 / 0 / 0 · wording 0 ·
+  tex_escape 0. SSR not run.
+- **Re-shoot prepared, NOT started:** `checks/r8e_heavy.sh` (tag k6r8e): every frame of every scene end/start (start −15 … +30) + the movie's
+  last 15 + every frame of s10 ±15 (≈ 3975 frames); copies the rest from k6r8d (one scandir); same lock gate (RENDER2 / HEAVY / VOICE free,
+  ≥ 9 GB RAM, HEAVY.lock mkdir + owner.txt), SSR must be 0, ports 8447 / 8477 / 8507, one-pass "stills written: N of M" + whole-movie
+  coverage (k6r8c ∪ k6r8d ∪ k6r8e lists), k6_overlap + summary ending "N unique faults". Start:
+  `nohup bash movies/src/ch00_coordinates_frames/checks/r8e_heavy.sh > /dev/null 2>&1 &`.

@@ -33,7 +33,7 @@ export const CoordinatesFrames: React.FC<{ audio?: string; bbox?: boolean }> = (
       const S = BYID[s.id];
       // r8d (2026-11-09, Part 3 p3c): every scene after s00 gates its text (XIN) and its credit (XF): exit before entry at every scene start
       return <Sequence key={s.id} name={s.id} from={CUT[k]} durationInFrames={LEN(k) + (k < sc.length - 1 ? XF : 0)}>
-        <SceneGate value={k === 0 ? { text: 0, src: 0 } : { text: XIN, src: XF }}><S /></SceneGate></Sequence>;
+        <SceneGate value={{ text: k === 0 ? 0 : XIN, src: k === 0 ? 0 : XF, exit: k < sc.length - 1 ? LEN(k) : 0 }}><S /></SceneGate></Sequence>;   // r8e: old text and credits off on the last overlap frame
     })}
     {audio ? <Audio src={staticFile(audio)} /> : null}
   </AbsoluteFill>

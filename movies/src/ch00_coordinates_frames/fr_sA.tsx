@@ -17,7 +17,7 @@ import {
   Svg, TRAPPES, TeX, Tripod, TripodTips, XC, add, arcD, boxAt, clamp, discOf, e2g, facing, fin, fout, garrow, gdot, globeG, gseg, keepTime, linesPath, ll, mix,
   pieces, plab, poly, prog, sang, svNorth, svP, svUp, tvDir, tvEast, tvP, win, TopV, SliceV, GeoImg, IMGS, chipSpan, SpeedBar,
   HL,
-  SourceBelow,
+  SourceBelow, useTextGate,
 } from "./fr_lib";
 import { AngleArc, SliceBase, TopViewBase, sliceArrows, topArrows, turned } from "./fr_dia";
 import { EQ_S03, EQ_S04, EQ_S05, EQ_S06, EQ_S08 } from "./fr_eq";
@@ -70,6 +70,7 @@ const S00: React.FC = () => {
   const f = useCurrentFrame(), k = K("s00_title");
   const tMet = AT(k, 0, "they're used"), tCo = AT(k, 0, "coordinates");   // Part B on "they're used" (opening rule 2026-11-07)
   const oA = fout(f, tMet, 12), oB = fin(f, tMet, 12);
+  const gT = useTextGate();
   const cam = globePath([{ f: 0, lat: 30, lon: 50, dist: 3.0 }, { f: 400, lat: 32, lon: 44, dist: 3.0 }], f);
   const lonP = BREST[1] + 26 * prog(f, 16, tMet);
   const lonB = BREST[1] + 70 * prog(f, tMet + 10, LEN(k) - 10);
@@ -79,7 +80,8 @@ const S00: React.FC = () => {
   const ghosts = [0, 1, 2, 3].map((q) => BREST[1] + 70 * prog(f - 24 * (q + 1), tMet + 10, LEN(k) - 10)).filter((lo) => lo > BREST[1] + 1);
   return (
     <Scene fadeIn={false}>
-      <Svg>
+      {/* r8e (k6r8d s01 f362): the title is house RiseText (outside fr_lib's wrappers), so it takes the scene gate's exit here */}
+      <Svg o={gT}>
         <SeriesTitle f={f} concept="Coordinates" part="Part 4 · Turning frames" sub={["local axes and how they turn"]} pulseAt={tCo} />
       </Svg>
       <Globe cam={cam} box={TB} o={oA * fin(f, 4, 10)} grat={0.35} coast={0.4}

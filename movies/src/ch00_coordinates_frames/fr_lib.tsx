@@ -85,13 +85,21 @@ export const Scene: React.FC<{ children: React.ReactNode; fadeIn?: boolean }> = 
 // Layered, CalcStack, Recall, and through them Place, SideCallout, SkipChip, ColourBar, plab) fades in from XIN = XF + 8, and every
 // source line (SourceBelow, GSrc) from XF (the old credit holds the line until then). Pictures are not gated (HOUSE_STYLE §5: the
 // picture is there from the scene's first frame). s00 has no previous scene: no gate.
-type Gate = { text: number; src: number };
-const GateCtx = React.createContext<Gate>({ text: 0, src: 0 });
+// r8e (k6r8d, ported from Part 3 p3d, commit 2cbc928): the OTHER side of the cross-fade. A scene's text stays at full strength until its
+// Sequence ends, under the next scene's picture, which is there from the next scene's first frame (pictures are never gated) and at 0.97
+// on its frame 9 (s01 f362 title, s07 f12425 "φ = 48.4°", s23 f46205 / s26 f53621 the keep pictures' labels). `exit` = the scene's own
+// length: its text and credits are dropped on the LAST overlap frame (exit + XF − 1, where the new veil is at 0.97 and hides them anyway).
+// A gradual fade would not do: k6_overlap exempts an old/new pair only while exactly one side is >= 0.95 (text-picture) or one side
+// <= 0.55 (text-text), so the old text must be full until frame 8 of the overlap and gone on frame 9.
+type Gate = { text: number; src: number; exit: number };
+const GateCtx = React.createContext<Gate>({ text: 0, src: 0, exit: 0 });
 export const SceneGate = GateCtx.Provider;
-const useGate = (kind: keyof Gate) => {
-  const f = useCurrentFrame(), a = React.useContext(GateCtx)[kind];
-  return a <= 0 ? 1 : ramp(f, a, a + 8);
+const useGate = (kind: "text" | "src") => {
+  const f = useCurrentFrame(), g = React.useContext(GateCtx), a = g[kind];
+  return (a <= 0 ? 1 : ramp(f, a, a + 8)) * (g.exit > 0 && f >= g.exit + XF - 1 ? 0 : 1);
 };
+/** r8e: the gate for text drawn outside the wrappers (s00's SeriesTitle / RiseText: no entry gate, but its exit on the last overlap frame) */
+export const useTextGate = () => useGate("text");
 /** the house source line with the scene-start gate (enters at XF in every scene after s00) */
 export const SourceBelow: React.FC<React.ComponentProps<typeof HSourceBelow>> = (p) => {
   const g = useGate("src");
