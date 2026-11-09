@@ -373,3 +373,26 @@ Disk before: C: 95.8 GB, G: 409.5 GB free.
   (`${K6PORT:-8417}`); same lock gate (RENDER2, HEAVY, VOICE free, ≥ 9 GB RAM). Start:
   `nohup bash movies/src/ch00_coordinates_sphere/checks/p3c_heavy.sh > "G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_sphere/build1/k6p3c_heavy_$(date +%Y%m%d_%H%M%S).log" 2>&1 &`
 - Disk after: C: 95.5 GB, G: 408.6 GB free. No render, no commit, nothing deleted.
+
+
+## 2026-11-09 fix loop p3d after k6p3c (source only; no SSR / K6 / render / TTS / mix; no lock taken)
+k6p3c (`build1/k6p3c_heavy_*.log`): 14 072 frames, 1 hit, 1 unique fault: s27 f62319 (s27 frame 9), text-picture "latitude-longitude: crowded at
+the pole". Box file b62319: the three texts ("latitude-longitude: crowded at the pole", "cubed sphere: boxes about the same size", s26's credit)
+are at o = 1 and the only picture mask is s27's globe disc at o = 0.97.
+- **Diagnosis:** not a gate bypass. Those captions and that credit belong to **s26** (cs_sC S26, `Lbl … o={fin(f, tOther + 10)}`, gated): it is
+  the OLD scene's opaque text under the NEW scene's picture (never gated: the picture is there from the first frame). k6_overlap exempts a
+  text-picture pair in a cross-fade only when exactly one side is ≥ 0.95; on s27's frame 9 both are (1 and 0.97). Bypass scan: every text in
+  the movie goes through a gated wrapper (cs_lib TeX, Lbl/MathLbl, Keyword, Layered, CalcStack, Recall, SourceBelow); scene files import only
+  GlobeFrame, RightTick, pulse, textW, Arrow, Pt, Svg, icons and wind arrows from the house kit (no text). The one exception was s00's
+  SeriesTitle (RiseText): now wrapped in the gate (`useTextGate`) too.
+- **Fix (every scene end at once):** SceneGate gains `exit` = the scene's own length; every gated text and credit is off on the scene's LAST
+  overlap frame (exit + XF − 1, where the next scene's veil is already 0.97 and hides it). A gradual fade-out would break the exemption on the
+  middle frames (both sides < 0.95 for text-picture), so the old text stays full until frame 8 (new < 0.95: exempt) and is gone on frame 9.
+  CoordinatesSphere passes `exit: LEN(k)` for every scene but the last.
+- Static gates: **tsc 0 · at_check 541 / 0 · swap_check 329, 0 / 0 · cam_speed 0 > 90 °/s · symbol lint 0 · eq_check 24/24 · wording lint 0 ·
+  tex_escape_lint 0 · captions 715 cues, 0 rule breaks, text = script**.
+- Prepared, **not started**: `checks/p3d_heavy.sh` (tag **k6p3d**): every frame of all 35 scene starts (−15 … +30) + s27 (±15: house K6 list,
+  every 15th frame): **1 908 frames**; copies every k6p3c still / box file outside those ranges; ports 8417 / 8447 / 8477; same lock gate; the
+  missing-stills check is one Python pass (one `os.scandir` of the folder) printing "stills written: N of M" and the missing frames. Start:
+  `nohup bash movies/src/ch00_coordinates_sphere/checks/p3d_heavy.sh > "G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_sphere/build1/k6p3d_heavy_$(date +%Y%m%d_%H%M%S).log" 2>&1 &`
+- Disk: C: 95.5 GB, G: 406.4 GB free (before = after within 0.2 GB; the k6p3c run used ≈ 2 GB of G:). No render, no commit, nothing deleted.

@@ -73,13 +73,23 @@ export const Scene: React.FC<{ children: React.ReactNode; fadeIn?: boolean }> = 
 // them KeepLine, SideCallout, plab, FaceTex, ColourBar, SkipChip) fades in from XIN = XF + 8 (8 frames after the old scene has gone), and
 // every source line (SourceBelow, GSrc, TwoView's credit) from XF (the old credit holds the line until then). Pictures are not gated
 // (HOUSE_STYLE §5: the picture is there from the scene's first frame). s00 has no previous scene: no gate.
-type Gate = { text: number; src: number };
-const GateCtx = React.createContext<Gate>({ text: 0, src: 0 });
+// p3d (k6p3c f62319, s27 start): the OTHER side of the cross-fade. s26's two captions under its globes (drawn by the gated Lbl, at full
+// strength until s26's Sequence ends) lay under s27's globe, which is there from s27's first frame (pictures are never gated) and is at
+// 0.97 on s27's frame 9: an opaque old label under an almost-opaque new picture is not exempt. `exit` = the scene's own length (its last
+// frame before the overlap): the scene's text and credits are dropped on the LAST overlap frame (exit + XF − 1, where the new veil is at
+// 0.97 and hides them anyway). A gradual fade would not do: k6_overlap exempts an old/new pair only while exactly one side is >= 0.95
+// (text-picture) or one side <= 0.55 (text-text); on frames 0-8 the new scene is < 0.95, on frame 9 it is 0.97, so the old text must be
+// full until frame 8 and gone on frame 9. (The labels were not a gate
+// bypass: they belong to s26 and were gated; nothing bypasses the gate, see the p3d log.)
+type Gate = { text: number; src: number; exit: number };
+const GateCtx = React.createContext<Gate>({ text: 0, src: 0, exit: 0 });
 export const SceneGate = GateCtx.Provider;
-const useGate = (kind: keyof Gate) => {
-  const f = useCurrentFrame(), a = React.useContext(GateCtx)[kind];
-  return a <= 0 ? 1 : ramp(f, a, a + 8);
+const useGate = (kind: "text" | "src") => {
+  const f = useCurrentFrame(), g = React.useContext(GateCtx), a = g[kind];
+  return (a <= 0 ? 1 : ramp(f, a, a + 8)) * (g.exit > 0 && f >= g.exit + XF - 1 ? 0 : 1);
 };
+/** p3d: the gate for text drawn outside the wrappers below (s00's SeriesTitle / RiseText: no entry gate, but its exit on the last overlap frame) */
+export const useTextGate = () => useGate("text");
 /** the house source line with the scene-start gate (enters at XF in every scene after s00) */
 export const SourceBelow: React.FC<React.ComponentProps<typeof HSourceBelow>> = (p) => {
   const g = useGate("src");

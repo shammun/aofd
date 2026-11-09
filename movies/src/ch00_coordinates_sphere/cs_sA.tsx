@@ -18,7 +18,7 @@ import {
   AT, Arrow, BREST, Balloon, BandTint, CalcStack, Chevron, D, D2R, Earth, GB, GFULL, Grat, K, KHULNA, KeepLine, Keyword, LEN, LYB, Layered, Lbl, SE, SING, SRC_G, SRC_BM,
   SS, Scene, SideCallout, SkipChip, Svg, TeX, XC, XZ, add, arcD, chipSpan, clamp, cutAt, discOf, e2g, eastAt, facing, fin, fout, gdot, globeG, gseg, keepGone,
   keepTime, ll, merPath, splitVis, mix, parPath, plab, poly, prog, rep, spinPath, win, faceArc, faceFlat, lin,
-  RAD, Magnify, KeepPic, Recall, XF, XIN,
+  RAD, Magnify, KeepPic, Recall, XF, XIN, useTextGate,
 } from "./cs_lib";
 import { FItem, FLAT_C, FLAT_R, FACE_B, LON0, MerFlatBase, PHI, TwoView, camFace, merCut, ptOf } from "./cs_two";
 import { EQ_S04, EQ_S05, EQ_S07, EQ_S08, EQ_S11 } from "./cs_eq";
@@ -53,9 +53,10 @@ const S00: React.FC = () => {
   const GA = globeG(camA, TB);
   const c0 = GA.pw([0, 0, 0]);
   const wedge = prog(f, tWedge, tWedge + 40);
+  const gT = useTextGate();   // p3d: the series title is the one text not drawn by a gated wrapper
   return (
     <Scene fadeIn={false}>
-      <Svg>
+      <Svg o={gT}>
         {/* remake 2026-11-07 (R1/R2): the series title layout (kit_cs/SeriesTitle = Parts 1-2), no "made easy"; "Coordinates" pulses on its word */}
         <SeriesTitle f={f} concept="Coordinates" part="Part 3 · Our round Earth" sub={["latitude, longitude,", "distances and areas"]} pulseAt={tCo} />
       </Svg>
