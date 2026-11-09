@@ -83,8 +83,11 @@ const S10: React.FC = () => {
         {f >= tWind ? <g opacity={fin(f, tWind)}><AnimatedWindArrow from={p0} to={add(p0, w)} speed={IAN.sp} f={f} c={C.ink} px={9} head={30} /></g> : null}
         <circle cx={p0[0]} cy={p0[1]} r={10} fill={C.gold} stroke={C.bg} strokeWidth={3} />
         <AngleArc c={p0} r={64} a0={0} a1={a} col={C.second} o={fin(f, tX)} head />
-        <Place p={p0} t="Fort Myers Beach" o={fin(f, AT(k, 2, "Fort Myers Beach"))} dx={-30} dy={60} a="end" r={0} />
-        <g data-lc-maplabel="1"><Lbl x={300} y={560} t="Gulf of Mexico" c={C.key} s={T.floor} italic o={fin(f, AT(k, 2, "Florida"))} /></g>
+        {/* k6r8b fix (2026-11-09): the town name and "Gulf of Mexico" sat on each other and on ŷ′ (which turns down-left, out to sea)
+            from f20213 on; the name now sits below-right of the dot on the land (x̂′ goes up-left, the wind and α up-right), the sea
+            label low in the open Gulf, clear of ŷ′'s tip (≈ 400, 575) */}
+        <Place p={p0} t="Fort Myers Beach" o={fin(f, AT(k, 2, "Fort Myers Beach"))} dx={40} dy={72} a="start" r={0} />
+        <g data-lc-maplabel="1"><Lbl x={140} y={700} t="Gulf of Mexico" c={C.key} s={T.floor} italic o={fin(f, AT(k, 2, "Florida"))} /></g>
         <g data-lc-maplabel="1"><Lbl x={760} y={250} t="Florida" c={C.key} s={T.floor} o={fin(f, AT(k, 2, "Florida"))} /></g>
       </Svg>
       <TeX s={turnedNow ? H.xp : H.i} x={p0[0] + ex[0] * (U + 40)} y={p0[1] + ex[1] * (U + 40)} size={54} c={C.second} ax={0.5} o={o1} halo />
@@ -122,7 +125,7 @@ const S10: React.FC = () => {
         <TeX s={eq[0]} x={XZ} y={250} size={50} o={o2} />
         <TeX s={eq[1]} x={XZ} y={335} size={50} o={o2} />
         <TeX s={String.raw`\hat{\mathbf k}\ \text{unchanged}`} x={XZ} y={430} size={54} c={C.first} o={o2 * fin(f, AT(k, 7, "as it is"))} />
-        <Svg o={o2}><Lbl x={XZ} y={520} t="anticlockwise, seen from above" c={C.muted} s={T.floor} o={fin(f, AT(k, 7, "anticlockwise"))} /></Svg>
+        <Svg o={o2}><Lbl x={XZ} y={520} t="anticlockwise, from above" c={C.muted} s={T.floor} o={fin(f, AT(k, 7, "anticlockwise"))} /></Svg>
       </> : null}
       {/* phase 3: Part 2's two legs, read off a km map: where do they come from? */}
       <GeoMap id="s10m3" B={B3} o={o3}>
@@ -249,9 +252,10 @@ const S15: React.FC = () => {
       ]} />
       <Recall f={f} tex={String.raw`\Delta x=a\cos\varphi\,\Delta\lambda\approx74\ \text{km per }1^\circ`} name="distances" part={3} x={XC} y={700} size={46}
         appear={AT(k, 4, "As we found")} out={tN - 20} glow={HL(f, AT(k, 4, "seventy four"))} />
-      <TeX s={String.raw`\text{like }\hat{\boldsymbol\theta}\text{ round a circle}`} x={XC} y={500} size={50} c={C.key} o={win(f, tTh, tN - 20)} />
-      <TeX s={String.raw`111\ \text{km north}\ \Rightarrow\ \hat{\mathbf k}\ \text{tilts }1^\circ`} x={XC} y={500} size={50} o={win(f, tTilt, tD - 20)} />
-      <TeX s={String.raw`\hat{\mathbf i},\ \hat{\mathbf j},\ \hat{\mathbf k}\ \text{keep changing}`} x={XC} y={590} size={50} o={win(f, tKeep, tD - 20)} />
+      {/* k6r8b fix (2026-11-09): the three column lines 45 px lower (were 500 / 500 / 590), clear of "≈ 12° round the axis" at y 445 (f27505, f27696) */}
+      <TeX s={String.raw`\text{like }\hat{\boldsymbol\theta}\text{ round a circle}`} x={XC} y={545} size={50} c={C.key} o={win(f, tTh, tN - 20)} />
+      <TeX s={String.raw`111\ \text{km north}\ \Rightarrow\ \hat{\mathbf k}\ \text{tilts }1^\circ`} x={XC} y={545} size={50} o={win(f, tTilt, tD - 20)} />
+      <TeX s={String.raw`\hat{\mathbf i},\ \hat{\mathbf j},\ \hat{\mathbf k}\ \text{keep changing}`} x={XC} y={630} size={50} o={win(f, tKeep, tD - 20)} />
       <TeX s={String.raw`\dfrac{D\hat{\mathbf i}}{Dt},\quad \dfrac{D\hat{\mathbf j}}{Dt},\quad \dfrac{D\hat{\mathbf k}}{Dt}`} x={XC} y={620} size={60} o={fin(f, tD)} />
       {void tN}
     </Scene>
@@ -413,7 +417,7 @@ const S19: React.FC = () => {
         <Lbl x={XC} y={770} t="partly up, partly south" c={C.key} s={T.floor} o={win(f, tWords, tS6 - 20)} />
         <Lbl x={XC} y={262} t="step 6" c={C.muted} s={T.floor} o={fin(f, tS6)} />
         <Keyword f={f} text="tips north, and down" at={[XC, 470]} s={T.floor} appear={tTip} />
-        <Lbl x={XC} y={560} t="u = 10 m/s at Brest" c={C.key} s={T.floor} o={fin(f, tTen)} />
+        <Lbl x={XC} y={538} t="u = 10 m/s at Brest" c={C.key} s={T.floor} o={fin(f, tTen)} />
       </Svg>
       <TeX s={String.raw`\hat{\mathbf k}=\cos\varphi\,\hat{\mathbf R}+\sin\varphi\,\hat{\mathbf z}`} x={XC} y={130} size={50} o={win(f, tK, tS6 - 20)} />
       <TeX s={String.raw`\hat{\mathbf j}=-\sin\varphi\,\hat{\mathbf R}+\cos\varphi\,\hat{\mathbf z}`} x={XC} y={200} size={50} o={win(f, tJ, tS6 - 20)} />
@@ -423,7 +427,7 @@ const S19: React.FC = () => {
       <TeX s={String.raw`\cos^2\varphi+\sin^2\varphi=1`} x={XC + 40} y={595} size={46} c={C.gold} o={win(f, tOne, tS6 - 20)} />
       <TeX s={String.raw`\hat{\mathbf R}=\cos\varphi\,\hat{\mathbf k}-\sin\varphi\,\hat{\mathbf j}`} x={XC} y={690} size={54} c={C.key} o={win(f, tR, tS6 - 20)} />
       <TeX s={EQ_S19} x={XC} y={370} size={50} o={fin(f, tEq)} />
-      <CalcStack f={f} x={XC} y={590} size={44} maxLines={3} rows={[   /* labels on the left; the rate and its value stay together (house rule 2026-11-07) */
+      <CalcStack f={f} x={XC} y={578} size={44} maxLines={3} rows={[   /* labels on the left; the rate and its value stay together (house rule 2026-11-07); k6r8b SSR fix (2026-11-09): y 590 -> 578 so the three lines end at y 877.5 (were 889.5, into the caption band), the "u = 10 m/s" label above it 560 -> 538 */
         { lhs: String.raw`\text{rate}`, rhs: String.raw`\dfrac{u}{a\cos\varphi}=\dfrac{10}{4\,230\,000}`, at: AT(k, 15, "divide ten"), h: 112, glow: HL(f, AT(k, 15, "four million")) },
         { lhs: "", rhs: String.raw`\approx2.36\times10^{-6}\approx2.4\times10^{-6}\ \text{rad/s}`, at: t24, cont: true },
         { lhs: String.raw`\text{1 day}`, rhs: String.raw`2.36\times10^{-6}\times86\,400\approx0.204\ \text{rad}`, at: t12 },

@@ -291,7 +291,9 @@ const S05: React.FC = () => {
       <TeX s={H.y} x={TV.c[0] + TV.r * 0.58} y={TV.c[1] - 40} size={50} c={C.second} o={0.7 * flat} />
       <TeX s={H.R} x={mix(TV.c[0], tvP(TV, BREST[1])[0], 0.5) - 60} y={mix(TV.c[1], tvP(TV, BREST[1])[1], 0.55)} size={52} c={C.second} ax={1} o={flat * fin(f, tRh)} halo />
       <TeX s={H.i} x={A.I[0] + 24} y={A.I[1] - 30} size={56} c={C.second} o={fin(f, tI, 8)} halo />
-      <TeX s={String.raw`\lambda=-4.5^\circ`} x={TV.c[0] + 30} y={TV.c[1] + TV.r * 0.22} size={46} c={C.local} ax={0} o={flat * fin(f, tLam)} />
+      {/* k6r8b fix (2026-11-09): enters only once the globe has gone (it sat on the globe for a frame of the cross-fade, f7688) and leaves
+          before the gold dashed î-to-ŷ line comes in at tY (the line ran through its end, 34 frames from f9322) */}
+      <TeX s={String.raw`\lambda=-4.5^\circ`} x={TV.c[0] + 30} y={TV.c[1] + TV.r * 0.22} size={46} c={C.local} ax={0} o={fin(f, Math.max(tLam, tP1 + 22)) * fout(f, tY - 12)} />
       <Svg>
         <Keyword f={f} text="now east" at={[XC, 110]} appear={0} out={tP1 - 20} />
         <Keyword f={f} text="from above the North Pole" at={[XC, 210]} appear={tAbove} out={tP1 - 20} />
@@ -509,6 +511,7 @@ const S09: React.FC = () => {
   const cam = globePath([{ f: 0, ...UN, lat: 30, lon: 50 }, { f: 6, ...UN, lat: 30, lon: 50 }, { f: tKh + 20, ...Z }, { f: tZo, ...Z }, { f: tZo + 50, ...UN, lat: 35, lon: 42 },
     { f: LEN(k) + 10, ...UN, lat: 35, lon: 42 }], f);
   const zf = clamp((4.3 - cam.dist) / (4.3 - 1.55), 0, 1), G0 = discOf(cam, GFULL);
+  const zfr = Math.max(zf, clamp((G0.c[0] + G0.r - 1000) / 60, 0, 1));
   const AM = KH.amphan, kol = KH.kolkata as [number, number];
   const ca = AM.closest_at as [number, number];
   const zo = fin(f, tZo + 40);
@@ -541,7 +544,9 @@ const S09: React.FC = () => {
           <Arrow p={c0} q={k2} color={C.first} w={6} head={24} />
         </g>
       </Svg>
-      <GlobeFrame id="s09k" zoom={zf} right={zf} disc={G0} bottomAt={790} />
+      {/* k6r8b fix (2026-11-09): on the zoom back out the globe's disc still reached under the stack's left column (î_B·î_K over the
+          picture, f19528); the frame keeps its fades and the right panel until the shrinking disc ends left of x 1060 */}
+      <GlobeFrame id="s09k" zoom={zfr} right={zfr} disc={G0} bottomAt={790} />
       <SourceBelow text="Image: NASA Blue Marble NG · Natural Earth · Track: IBTrACS (NOAA NCEI), Amphan, May 2020" pic={{ x: 80, y: 40, w: 960, h: 742 }} w={960} name="s09 src"
         o={Math.max(clamp((790 - (G0.c[1] + G0.r)) / 20, 0, 1), clamp((zf - 0.5) / 0.15, 0, 1))} />
       <Svg>
@@ -551,18 +556,20 @@ const S09: React.FC = () => {
       </Svg>
       <TeX s={String.raw`22.8^\circ\text{N},\ \ 89.6^\circ\text{E}`} x={XZ} y={110} size={54} o={fin(f, tLL) * fout(f, tEast - 22)} />
       <Svg><Keyword f={f} text="even east is different" at={[XZ, 110]} s={T.floor} appear={tEast} /></Svg>
+      {/* k6r8b fix (2026-11-09): exit before entry. Each line the stack pushes out fades 10 frames BEFORE the next line slides in,
+          so it never rises through "even east is different" at y 110 (k̂_K under it at f18868) */}
       <CalcStack f={f} x={1235} y={190} size={44} maxLines={3} rows={[
-        { lhs: "", rhs: String.raw`\cos\varphi=0.922,\ \ \sin\varphi=0.388`, at: AT(k, 5, "cosine phi"), c: C.muted, glow: HL(f, AT(k, 5, "cosine phi")) },
-        { lhs: "", rhs: String.raw`\cos\lambda=0.007,\ \ \sin\lambda=1.000`, at: AT(k, 5, "cosine lambda"), c: C.muted, glow: HL(f, AT(k, 5, "cosine lambda")) },
-        { lhs: String.raw`\hat{\mathbf k}_K`, rhs: String.raw`=(0.922\times0.007,`, at: AT(k, 5, "so its up arrow") },
-        { lhs: "", rhs: String.raw`\ \ 0.922\times1.000,\ 0.388)`, at: AT(k, 5, "so its up arrow") + 12, cont: true },
-        { lhs: "", rhs: String.raw`\approx(0.006,\ 0.922,\ 0.388)`, at: AT(k, 5, "zero point zero zero six"), cont: true },
-        { lhs: String.raw`\hat{\mathbf k}_B\cdot\hat{\mathbf k}_K`, rhs: String.raw`=0.662\times0.006`, at: tDot },
-        { lhs: "", rhs: String.raw`\ \ +(-0.052)\times0.922`, at: tDot + 15, cont: true },
-        { lhs: "", rhs: String.raw`\ \ +0.748\times0.388`, at: tDot + 30, cont: true },
-        { lhs: "", rhs: String.raw`=0.004-0.048+0.290`, at: AT(k, 6, "that gives"), cont: true },
-        { lhs: "", rhs: String.raw`=0.246`, at: AT(k, 6, "zero point two four six"), cont: true },
-        { lhs: "", rhs: String.raw`\cos^{-1}0.246\approx75.8^\circ`, at: t76, glow: HL(f, AT(k, 7, "seventy five point eight")) },
+        { lhs: "", rhs: String.raw`\cos\varphi=0.922,\ \ \sin\varphi=0.388`, at: AT(k, 5, "cosine phi"), c: C.muted, glow: HL(f, AT(k, 5, "cosine phi")), out: tDot - 10 },
+        { lhs: "", rhs: String.raw`\cos\lambda=0.007,\ \ \sin\lambda=1.000`, at: AT(k, 5, "cosine lambda"), c: C.muted, glow: HL(f, AT(k, 5, "cosine lambda")), out: t76 - 10 },
+        { lhs: String.raw`\hat{\mathbf k}_K`, rhs: String.raw`=(0.922\times0.007,`, at: AT(k, 5, "so its up arrow"), out: tIk - 10 },
+        { lhs: "", rhs: String.raw`\ \ 0.922\times1.000,\ 0.388)`, at: AT(k, 5, "so its up arrow") + 12, cont: true, out: tIk - 10 },
+        { lhs: "", rhs: String.raw`\approx(0.006,\ 0.922,\ 0.388)`, at: AT(k, 5, "zero point zero zero six"), cont: true, out: tIk - 10 },
+        { lhs: String.raw`\hat{\mathbf k}_B\cdot\hat{\mathbf k}_K`, rhs: String.raw`=0.662\times0.006`, at: tDot, out: t94 - 10 },
+        { lhs: "", rhs: String.raw`\ \ +(-0.052)\times0.922`, at: tDot + 15, cont: true, out: t94 - 10 },
+        { lhs: "", rhs: String.raw`\ \ +0.748\times0.388`, at: tDot + 30, cont: true, out: t94 - 10 },
+        { lhs: "", rhs: String.raw`=0.004-0.048+0.290`, at: AT(k, 6, "that gives"), cont: true, out: t94 - 10 },
+        { lhs: "", rhs: String.raw`=0.246`, at: AT(k, 6, "zero point two four six"), cont: true, out: t94 - 10 },
+        { lhs: "", rhs: String.raw`\cos^{-1}0.246\approx75.8^\circ`, at: t76, glow: HL(f, AT(k, 7, "seventy five point eight")), out: t94 + 45 },
         { lhs: String.raw`\hat{\mathbf i}_K`, rhs: String.raw`=(-\sin89.6^\circ,\ \cos89.6^\circ,\ 0)`, at: tIk },
         { lhs: "", rhs: String.raw`=(-1.000,\ 0.007,\ 0)`, at: AT(k, 9, "minus one"), cont: true },
         { lhs: "", rhs: String.raw`\approx-\hat{\mathbf x}`, at: AT(k, 9, "almost exactly"), cont: true },

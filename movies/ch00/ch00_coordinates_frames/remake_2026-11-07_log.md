@@ -225,3 +225,31 @@ plane label above), s20 111.2 km / 6371 km (units say it), s27 f v rows.
   lock held) was stopped too. Per instruction it is not restarted on my own.
 - Disk 00:12: C: 118.7 GB free, G: 453.0 GB free.
 - s05: λ = −4.5° label moved right of the R̂ line (y c + 0.22 r), clear of R̂ (171 frames in k6r8a). All fixes need the SSR + K6 re-shoot (k6r8b) and then the r8 mix; neither is started (memory stop; see the report).
+
+## 2026-11-09 fix loop r8c (source only; after the k6r8b re-shoot FAILED)
+**k6r8b** (`build1/k6r8b_heavy_20261109_0301.log`, 03:01-03:36): SSR 2-D 7387 scene-frames / 3-D 5322, **2 errors** each (s10 "anticlockwise,
+seen from above" ends at x 1857 from scene f1949; s19 CalcStack at y 590 ends at y 889, into the caption band, from f0), so 3430 of 3556 K6
+stills (s10 after f1949 and all of s19 missing). K6: **FAIL, 381 hits** (text-text 345, text-stroke 34, text-picture 2) = **11 unique faults**
+(summary `build1/k6sum.py`, copied from the storm build):
+| Scene | Fault (frames, sampled hits) | Cause | Fix |
+|---|---|---|---|
+| s05 | λ = −4.5° over the globe (f7688, 1) | entered on the globe→top-view cross-fade | enters at tP1 + 22 (globe gone) |
+| s05 | λ = −4.5° × gold dashed line (f9322-9693, 34) | the î→ŷ dashed line (tY) runs through the label's end | label leaves at tY − 12 (exit before entry) |
+| s09 | "even east is different" × k̂_K row (f18868, 1) | CalcStack pushes the k̂_K line up through y 110 as î_K slides in | every pushed-out line gets `out` = next line − 10 (rows: trig 1 → tDot−10, trig 2 → t76−10, k̂_K → tIk−10, k̂_B·k̂_K → t94−10, cos⁻¹ 75.8° → t94+45) |
+| s09 | î_B·î_K row over the globe (f19528, 1) | on the zoom back out the disc (zf < 0.5 → circle mask) still reached x > 1105 | GlobeFrame zoom/right = max(zf, clamp((disc right − 1000)/60)): fades + right panel held until the disc ends left of x 1060 |
+| s10 | Fort Myers Beach × Gulf of Mexico × ŷ′ (f20213-21505, 105 / 92 / 92) | name end-anchored below-left of the dot, Gulf at (300, 560), ŷ′ turns down-left onto both | name below-right on the land (dx 40, dy 72, start; ends ≈ x 976 < map edge 1000), Gulf at (140, 700) in the open sea |
+| s10 SSR | "anticlockwise, seen from above" ends at x 1857 | 30 chars from XZ 1190 | "anticlockwise, from above" (viewpoint kept; ends ≈ 1746) |
+| s15 | "≈ 12° round the axis" × "like θ̂ round a circle" / "111 km north ⇒ k̂ tilts 1°" (f27505-28105, 7 / 36) | Lbl at y 445 (54 px), TeX lines at y 500 | TeX lines 500 → 545, "keep changing" 590 → 630 (Recall at 700 is gone by then; D/Dt at 620 enters after they leave) |
+| s19 SSR | CalcStack bottom 889.5 > 878 | y 590 + 112 + 62.5 + 62.5 + 62.5 | stack y 578 (bottom 877.5); "u = 10 m/s at Brest" 560 → 538 |
+| s22 | bottom-right "none" × Ω × B (f45428-45852, 9) | Ω × B label at (720, 650) and the ring's violet arrow (to y 690) inside the grid (ends y 720) | ring cy 790 → 822 (ry 34), arrows to y 748 / (840, 804), label at (885, 772) right of the ring (ends < 1060) |
+| s25 | "metric terms" × first full row (f52923-53174, 3) | label y 475, rows at 520 (dfrac) | rows 520 → 580 (+100 each, last ends ≈ 830 < 880, gone before "what to keep"); brackets y0+70 → +80 (they touched Dt), labels +10 |
+- Static gates (2026-11-09): tsc 0 · at_check 364 refs / 0 failures · swap_check 351 elements, 0 overlaps, 0 tight swaps · cam_speed 0 above 90 °/s
+  (s09 peak 75) · symbol lint --strict 0 · eq_check 18 / 0 / 0 · script_wording_lint 0 · tex_escape_lint 0. SSR not run (another heavy job
+  holds HEAVY.lock: #5c p3b). Script text unchanged (no TTS / mix needed).
+- **Re-shoot prepared, NOT started:** `checks/r8c_heavy.sh` (tag k6r8c): frame list = house K6 list (3556) + every frame of s05 s09 s10 s15 s19 s22
+  s25 ±15 = **22 917 frames** (≈ 2-3 h of stills at 3 jobs); gate RENDER2 / HEAVY / VOICE free + ≥ 9 GB RAM, takes HEAVY.lock (mkdir + owner.txt);
+  SSR 2-D + 3-D must be 0 errors (else release + exit 2, no K6); fresh bundle (old moved aside), stills into the fresh folder `stills/k6r8c`
+  (refuses a non-empty one), K6 ports 8447 / 8477 / 8507; then k6_overlap + a per-scene summary ending "N unique faults"; own log
+  `build1/k6r8c_heavy_<date>.log`. Never renders, mixes, commits or deletes. Start: `nohup bash movies/src/ch00_coordinates_frames/checks/r8c_heavy.sh > /dev/null 2>&1 &`.
+- Still open after r8c passes: the r8 mix (`r8_voice.sh mix`), then the full render.
+- Disk 2026-11-09: C: 102.6 GB free, G: 439.2 GB free.

@@ -154,15 +154,17 @@ const S22: React.FC = () => {
         <MiniTripod at={tp} U={110} o={fin(f, tChk)} w={7} head={26} />
         <Arrow p={add(tp, TRI.i, 110)} q={add(add(tp, TRI.i, 110), TRI.k, 50)} color={C.gold} w={5} head={18} o={fin(f, tNo)} dash="8 6" />
         <MiniTick at={add(tp, TRI.i, 110)} a={[-TRI.i[0], -TRI.i[1]]} b={TRI.k} o={fin(f, tLen)} s={18} />
+        {/* k6r8b fix (2026-11-09): the Ω × B ring, its arrows and label sat inside the grid (label on the bottom-right "none", f45428);
+            now all below the grid's bottom edge (y 720), the label right of the ring and left of the column (ends < x 1060) */}
         <g opacity={fin(f, tCous)}>
-          <ellipse cx={720} cy={790} rx={150} ry={40} fill="none" stroke={C.local} strokeWidth={4} />
-          <Arrow p={[720, 790]} q={[720, 690]} color={VIOLET} w={6} head={22} />
-          <Arrow p={[720, 790]} q={[840, 770]} color={C.second} w={6} head={22} />
+          <ellipse cx={720} cy={822} rx={150} ry={34} fill="none" stroke={C.local} strokeWidth={4} />
+          <Arrow p={[720, 822]} q={[720, 748]} color={VIOLET} w={6} head={22} />
+          <Arrow p={[720, 822]} q={[840, 804]} color={C.second} w={6} head={22} />
         </g>
       </Svg>
       {[H.i, H.j, H.k].map((s, r) => <TeX key={r} s={s} x={GRID.x0 - 40} y={GRID.y0 + r * GRID.ch + GRID.ch / 2} size={60} c={r === 2 ? C.first : C.second} ax={1} o={gK} />)}
       {cellT.map(([r, c, s], q) => <TeX key={q} s={s} x={gridCell(r, c)[0]} y={gridCell(r, c)[1]} size={48} c={s.includes("none") ? C.muted : C.key} ax={0.5} o={fin(f, 4 + q * 3) * gK} />)}
-      <TeX s={String.raw`\boldsymbol\Omega\times\mathbf B`} x={720} y={650} size={50} c={VIOLET} ax={0.5} o={fin(f, tCous) * gK} />
+      <TeX s={String.raw`\boldsymbol\Omega\times\mathbf B`} x={885} y={772} size={50} c={VIOLET} ax={0} o={fin(f, tCous) * gK} />
       <TurnPic o={fin(f, tKeep, 14)} />
       <Svg>
         <Keyword f={f} text="add the motions" at={[XC, 110]} appear={0} out={tDi - 20} />
@@ -292,12 +294,14 @@ const S25: React.FC = () => {
       <Svg>
         <Keyword f={f} text="the two that survive" at={[XC, 110]} appear={0} out={t4 - 20} />
         <g opacity={fin(f, tNum)}>
-          <Bracket p={[xa, y0 + 70]} q={[xb, y0 + 70]} c={C.local} off={0} />
-          <Lbl x={(xa + xb) / 2} y={y0 + 120} t="change of u" c={C.local} s={T.floor} a="middle" />
+          {/* k6r8b fix (2026-11-09): brackets 10 px lower (they touched Dt), "metric terms" 10 px lower and the three full rows 60 px lower
+              (520 -> 580): "metric terms" sat on the first full row (f52923) */}
+          <Bracket p={[xa, y0 + 80]} q={[xb, y0 + 80]} c={C.local} off={0} />
+          <Lbl x={(xa + xb) / 2} y={y0 + 130} t="change of u" c={C.local} s={T.floor} a="middle" />
         </g>
         <g opacity={fin(f, tTurn)}>
-          <Bracket p={[xb + 10, y0 + 70]} q={[xc, y0 + 70]} c={C.second} off={0} />
-          <Lbl x={(xb + xc) / 2} y={y0 + 175} t="metric terms" c={C.second} s={T.floor} a="middle" o={fin(f, tName)} />
+          <Bracket p={[xb + 10, y0 + 80]} q={[xc, y0 + 80]} c={C.second} off={0} />
+          <Lbl x={(xb + xc) / 2} y={y0 + 185} t="metric terms" c={C.second} s={T.floor} a="middle" o={fin(f, tName)} />
         </g>
         <Keyword f={f} text="what to keep" at={[XC, 820]} appear={tKeep} c={C.gold} />
       </Svg>
@@ -305,7 +309,7 @@ const S25: React.FC = () => {
       <TeX s={String.raw`=v\left(-\dfrac{u}{a}\tan\varphi\right)=-\dfrac{uv\tan\varphi}{a}`} x={XC + 60} y={245} size={50} o={win(f, t4c, tAdd - 20)} />
       <TeX s={String.raw`\text{(6)}\ w\,\dfrac{D\hat{\mathbf k}}{Dt}\cdot\hat{\mathbf i}=w\,\dfrac{u}{a}=+\dfrac{uw}{a}`} x={XC} y={370} size={50} o={win(f, t6, tAdd - 20)} />
       <TeX s={EQ_S25} x={x0} y={y0} size={S} o={fin(f, tAdd)} />
-      {full.map((s, i) => <TeX key={i} s={s} x={XC + (i ? 90 : 0)} y={520 + i * 100} size={44} c={i ? C.muted : C.key} o={fin(f, tSame + 12 * i) * fout(f, tKeep - 12)} />)}
+      {full.map((s, i) => <TeX key={i} s={s} x={XC + (i ? 90 : 0)} y={580 + i * 100} size={44} c={i ? C.muted : C.key} o={fin(f, tSame + 12 * i) * fout(f, tKeep - 12)} />)}
       {/* Part 1 lessons B4: the keep line's own picture (the arrows turn, so the same push-free wind's east number changes) */}
       <TurnPic o={fin(f, tKeep, 14)} wind />
       {void [t6c]}
