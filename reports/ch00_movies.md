@@ -10501,3 +10501,8 @@ All arithmetic recomputed from data/cf.json: correct (s04–s27). 104 words chec
 - **M1** 20 cue boundaries split spoken numbers (r7_cuefix misses numbers ending in "and"; Brest triple split at 19:47/19:49).
 - Should: gold pulse before its row is visible (s16 6371 3.7 s, s22, s21 cos φ, s28); results early (s21 globe tags + units, s25 bars 5–7 s, s07, s08, s04, s31); unvoiced/ungold inputs (s31 sin 10°, s28 rows, s34 7.1/16.3/20 °C); titles: s19 "Cyclone Amphan's track · 16–21 May 2020", s34 "2-m air temperature · September 2026 mean"; stand-alone frames (s30 row lhs, recap U_eq and "per degree", s18 rounded squares "≈"); 45 line breaks inside numbers; 3 cues < 1 s.
 - Info: Khulna–Amphan closest 79.36 km from Khulna city; cs.json stores 85.52 (rounded Khulna) with a ±20 km CHECK — store 79.36, tighten. Cosmetic: s28 orphan "×0.0043633", s21 Khulna arrow into space, U_eq "6.371×10⁶" without m.
+
+## 5b fix3 — verification review, 2026-11-09 — PASS
+5b_coordinates_storm_fix3.mp4, 62:20.3, 159.45 MB, QA 15/15. All 12 fix-3 items met on frames (s14 degree sign; 911 cues, 0 boundaries inside numbers/pairs; second legs, s30, bearings worked and checked, St Pete legs + β, s23 gold + "at that hour", ERA5 ratios 0.59/0.54/0.66, thin-angle β, s41 rows, nits); regression sweep 374 frames clean; coast axes right-handed. Frames: reports/movies/ch00_coordinates_storm/verify_fix3/.
+- Should (next re-render): s29 β arc at 7° nearly invisible on the light HRRR field, "β" on a wind glyph; s36 "β" touches a wind arrow.
+- Info: second leg line drawn with the first (row on its word); s38 fly-in source line crosses the globe ~2 s; re-voice list: Ω value, 1.852 / 3.6 factors.
