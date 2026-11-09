@@ -17,7 +17,7 @@ import {
   Scene, SideCallout, SkipChip, Svg, TeX, Thermo, VIOLET, XC, XZ, arcD, chipSpan, clamp, cutAt, discOf, fin, fout, gdot, gseg, globeG, keepGone, keepTime, ll, merPath, mix,
   parPath, plab, poly, prog, rep, spinPath, splitVis, win,
   RAD, Magnify, KeepPic,
-  Recall, HOLD, facePt, merFace,
+  Recall, HOLD, facePt, merFace, XF, XIN,
 } from "./cs_lib";
 import { ramp } from "../house";
 import { merCut } from "./cs_two";
@@ -97,7 +97,7 @@ const S26: React.FC = () => {
         </g>)}
       </Svg>
       <SourceBelow text="Image: NASA Blue Marble Next Generation · Natural Earth · ERA5 0.25° grid (Copernicus C3S)" pic={{ x: 80, y: PY, w: 1660, h: PH + 110 }} w={1660}
-        o={oP} name="s26 src" />
+        o={oP * fin(f, XF, 8)} name="s26 src" />{/* p3b: after s25's "pole" row and credit */}
       {f >= tOther ? <>
         {/* review 1 S9: "other kinds of grid" shows the problem AND an answer, both large: the latitude-longitude grid (every 10°) crowds
             together at the pole; a cubed-sphere grid (a cube's faces split 8 × 8 and puffed out onto the sphere) keeps its boxes about the
@@ -116,7 +116,7 @@ const S26: React.FC = () => {
         <SourceBelow text={SRC_G} pic={{ x: GB_LL.x, y: GB_LL.y, w: 1700, h: GB_LL.h + 60 }} w={1700} o={fin(f, tOther + 26, 12)} name="s26 globe src" />
       </> : null}
       <Svg>
-        <Keyword f={f} text="weather data" at={[XC, 770]} appear={0} out={tRe - 20} />
+        <Keyword f={f} text="weather data" at={[XC, 770]} appear={XIN} out={tRe - 20} />{/* p3b: after s25's keywords */}
         <Keyword f={f} text="reanalysis = observations + model" at={[80, 770]} appear={tRe} out={tTall - 15} />
         <Keyword f={f} text="every 0.25°" at={[1340, 770]} appear={tGrid} out={tTall - 15} />
         <Keyword f={f} text="width depends on $\cos\varphi$" at={[80, 830]} appear={tW} out={tThin - 20} s={T.floor + 4} />
@@ -361,12 +361,13 @@ const S30: React.FC = () => {
         <Lbl x={O[0] + 140} y={O[1] - 30} t="25°" c={C.local} s={T.floor} o={fin(f, tMid)} />
         <Lbl x={at(a0)[0] + 14} y={at(a0)[1] + 34} t="20°" c={C.key} s={T.floor} o={fin(f, tChk)} />
         <Lbl x={at(a1)[0] + 10} y={at(a1)[1] - 34} t="30°" c={C.key} s={T.floor} o={fin(f, tChk)} />
-        <Keyword f={f} text="a shortcut" at={[XC, 150]} appear={0} out={tSo - 20} />
+        <Keyword f={f} text="a shortcut" at={[XC, 150]} appear={XIN} out={tSo - 20} />{/* p3b: after s29's keyword */}
         <Check x={1780} y={730} s={0.8} o={fin(f, tToo)} />
       </Svg>
       <TeX s={String.raw`\Delta\varphi`} x={at(25, R + 30)[0]} y={at(25, R + 30)[1]} size={T.key} c={C.gold} ax={0} o={fin(f, tStep)} halo />
       {/* K6 k6r1: right of the orange step bar (above it, it sat on the "30°" tag and the arrow tip) */}
-      <TeX s={String.raw`\Delta(\sin\varphi)`} x={xb + 22} y={(y20 + y30) / 2} size={T.key} c={C.second} ax={0} o={fin(f, tCall)} halo />
+      {/* p3b (k6p3a f70799): under the foot of the step bar (x ≈ 854-1053, y ≈ 583-637), clear of the "20°" tag and of the rows' left sides */}
+      <TeX s={String.raw`\Delta(\sin\varphi)`} x={xb - 6} y={y20 + 62} size={T.key} c={C.second} ax={0} o={fin(f, tCall)} halo />
       <TeX s={EQ_S30} x={XC} y={160} size={T.calc} c={C.ink} o={fin(f, tSo)} />
       {/* remake 2026-11-07 (R16): Part 2's slope of sine on "But Part 2 gave us a shortcut", until the check's rows come in */}
       <Recall f={f} tex={String.raw`\dfrac{d}{d\theta}\sin\theta=\cos\theta`} name="slope of sine" part={2} x={XC} y={330} size={50} appear={SS(k, 1)} out={tTen - 12} />
@@ -697,7 +698,7 @@ const S35: React.FC = () => {
   const n = 16, NP = 15;
   // Part 1 lessons D3: each beat at full strength until ITS sentence ends (it used to start fading 10 frames early: the gaps are
   // 10-11 frames); the next beat comes in 8 frames after its sentence starts, so the 10-frame fade-out + 8-frame swap gap still fit
-  const a = (j: number) => SS(k, j) + (j ? 8 : 0), b = (j: number) => (j + 1 < NP ? SE(k, j) : LEN(k) + 20);
+  const a = (j: number) => (j ? SS(k, j) + 8 : XIN), b = (j: number) => (j + 1 < NP ? SE(k, j) : LEN(k) + 20);
   if (TM.plain.toFixed(1) !== "7.1" || TM.weighted.toFixed(1) !== "16.3") throw new Error("CHECK s35: ERA5 means changed (voice says 7.1 / 16.3)");
   if (D.deg.dx1[3].toFixed(0) !== "74") throw new Error("CHECK s35: Brest degree east (voice says about 74 km)");
   const kw: [number, string, string | null][] = [

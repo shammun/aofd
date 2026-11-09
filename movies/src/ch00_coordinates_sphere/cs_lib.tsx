@@ -455,8 +455,8 @@ export const SkipChip: React.FC<{ f: number; k: number; to: string }> = ({ f, k,
 /** The keep line's takeaway keyword (storyboard skip_blocks takeaway_keyword): at the top of the column during the "If you skipped"
  * sentences (S0-S`last`), 54 px warm white with a gold underline under its last line; it then fades out (≥ 8 frames before the
  * next text in its slot). */
-export const KeepLine: React.FC<{ f: number; k: number; lines: string[]; last?: number; x?: number; y?: number }> = ({ f, k, lines, last = 1, x = XC, y = 110 }) => {
-  const a = 0, b = SE(k, last);
+export const KeepLine: React.FC<{ f: number; k: number; lines: string[]; last?: number; x?: number; y?: number; a0?: number }> = ({ f, k, lines, last = 1, x = XC, y = 110, a0 = 0 }) => {
+  const a = a0, b = SE(k, last);   // p3b: a0 = XF + 8 where the previous scene's text sits in the same slot (exit before entry)
   const o = ramp(f, a, a + 8) * (1 - ramp(f, b, b + 10));
   if (o <= 0) return null;
   const wl = mixW(lines[lines.length - 1], T.key);
@@ -470,6 +470,9 @@ export const KeepLine: React.FC<{ f: number; k: number; lines: string[]; last?: 
     </Svg>
   );
 };
+/** p3b (k6p3a cross-fade faults): the frame from which a scene's first text may enter when the previous scene had text or a credit in
+ * the same place: the previous scene's Sequence runs XF frames into this one, so entry waits until it has gone, plus the 8-frame swap gap */
+export const XIN = XF + 8;
 /** the frame at which the keep line has gone (for the next text in the top slot: keep the 8-frame swap gap) */
 export const keepGone = (k: number, last = 1) => SE(k, last) + 10;
 

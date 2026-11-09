@@ -17,7 +17,7 @@ import {
   AT, Arrow, BREST, Balloon, BandTint, CalcStack, Chevron, D, D2R, Earth, GB, GFULL, Grat, K, KHULNA, KeepLine, Keyword, LEN, LYB, Layered, Lbl, SE, SING, SRC_G, SRC_BM,
   SS, Scene, SideCallout, SkipChip, Svg, TeX, XC, XZ, add, arcD, chipSpan, clamp, cutAt, discOf, e2g, eastAt, facing, fin, fout, gdot, globeG, gseg, keepGone,
   keepTime, ll, merPath, splitVis, mix, parPath, plab, poly, prog, rep, spinPath, win, faceArc, faceFlat, lin,
-  RAD, Magnify, KeepPic, Recall,
+  RAD, Magnify, KeepPic, Recall, XF, XIN,
 } from "./cs_lib";
 import { FItem, FLAT_C, FLAT_R, FACE_B, LON0, MerFlatBase, PHI, TwoView, camFace, merCut, ptOf } from "./cs_two";
 import { EQ_S04, EQ_S05, EQ_S07, EQ_S08, EQ_S11 } from "./cs_eq";
@@ -533,7 +533,7 @@ const S09: React.FC = () => {
             {gseg(Gg, [0, -1.1, 0], [0, 1.2, 0], C.local, 3, 0.8, "8 8")}
           </g> : null}
         </>} />
-      <GSrc />
+      <GSrc o={fin(f, XF, 8)} />{/* p3b: s08's credit (Blue Marble only) holds the line until it has gone */}
       <Svg>
         <SunGlyph x={topP[0] + 120} y={Math.max(120, topP[1] - 60)} s={0.8} o={win(f, tSun, tTurn - 10)} />
         <Keyword f={f} text="another kind of line" at={[XC, 300]} appear={tLine} out={tMer - 20} />
@@ -544,7 +544,8 @@ const S09: React.FC = () => {
         <Keyword f={f} text="round the centre" at={[XC, 420]} appear={tBig} />
         <Keyword f={f} text="centre vs axis" at={[XC, 540]} appear={tPar} />
       </Svg>
-      <KeepLine f={f} k={k} lines={["colatitude from the pole:", String.raw`$\sin\leftrightarrow\cos$`]} />
+      {/* p3b (k6p3a f14319): enters after s08's flat "1" and its credit have gone */}
+      <KeepLine f={f} k={k} a0={XIN} lines={["colatitude from the pole:", String.raw`$\sin\leftrightarrow\cos$`]} />
       {/* Part 1 lessons B4: the keep line's own picture (one triangle: φ at the centre, 90° − φ from the axis, sin φ = cos(90° − φ)) */}
       <KeepPic kind="swap" c={[1150, 760]} R={330} o={fin(f, 4, 10) * fout(f, SE(k, 1), 10)} />
       {void keepGone}

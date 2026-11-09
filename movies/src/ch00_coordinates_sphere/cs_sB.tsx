@@ -18,7 +18,7 @@ import {
   AT, Arrow, BREST, CalcStack, Chevron, D, D2R, Earth, GB, GFULL, H, K, KHULNA, KeepLine, Keyword, LEN, LYB, Layered, Lbl, PlaneIcon, SE, SING, SRC_G, SRC_BM, SS,
   Scene, SideCallout, SkipChip, Svg, TV3, TeX, VIOLET, XC, XZ, arcD, chipSpan, clamp, cutAt, discOf, e2g, eastAt, facePt, facing, faceArc, fin, fout, gdot, globeG,
   gseg, keepGone, keepTime, latFace, ll, merFace, merPath, mix, parPath, plab, poly, prog, splitVis, win, eqFace, Face, faceFlat, face3, spinPath,
-  RAD, Magnify, KeepPic, XF,
+  RAD, Magnify, KeepPic, XF, XIN,
   Recall,
 } from "./cs_lib";
 import { CAM_TOP, DiscFlatBase, FItem, FLAT_C, FLAT_R, LON0, MerFlatBase, PHI, TOP_C, TOP_R, TwoView, camFace, merCut, ptOf } from "./cs_two";
@@ -88,7 +88,8 @@ const S13: React.FC = () => {
           {gdot(Gg, 0, 0, C.second, 9, fin(f, tX))}{gdot(Gg, 0, 90, C.second, 9, fin(f, tY))}
           {/* pass 2: with the cut faces the two names sat side by side on one row (and "Bay of Bengal" ran out of the frame): Gulf of Guinea
               goes under its dot, Indian Ocean above-left of its dot on the section; "Bay of Bengal" dropped (said in the voice, least needed) */}
-          {plab(Gg, 0, 0, "Gulf of Guinea", win(f, tGG, tHat) * facing(Gg, 0, 0), -10, 70, "start", true)}
+          {/* p3b (k6p3a f24357): the two names shared one row; Gulf of Guinea leaves before Indian Ocean comes in (exit before entry) */}
+          {plab(Gg, 0, 0, "Gulf of Guinea", win(f, tGG, tIO - 18) * facing(Gg, 0, 0), -10, 70, "start", true)}
           {/* p3a (review 1 Should): on the ocean next to its dot (below-left: 0-15° S, 60-90° E is open Indian Ocean), not on the cut face */}
           {plab(Gg, 0, 90, "Indian Ocean", win(f, tIO, tHat) * facing(Gg, 0, 90), 18, 52, "end", true)}
           <g opacity={fin(f, tHat)}>
@@ -102,7 +103,7 @@ const S13: React.FC = () => {
         <RightTick at={c0} u1={u(ey)} u2={u(ez)} s={24} c={C.ink} o={fin(f, tRA + 10)} />
         <RightTick at={c0} u1={u(ex)} u2={u(ez)} s={24} c={C.ink} o={fin(f, tRA + 20)} />
         {void 0}
-        <Keyword f={f} text="an arrow in space" at={[XC, 150]} appear={0} out={tAx - 30} />
+        <Keyword f={f} text="an arrow in space" at={[XC, 150]} appear={XIN} out={tAx - 30} />{/* p3b: after s12's "graticule" */}
         <Keyword f={f} text="three axes from the centre" at={[XC, 150]} appear={tAx} />
         <path d={arcD([1640, 560], 50, 200, -60)} fill="none" stroke={VIOLET} strokeWidth={5} opacity={fin(f, tCross)} />
         <Chevron at={[1640 + 50 * Math.cos(-60 * D2R), 560 + 50 * Math.sin(60 * D2R)]} dir={[-Math.sin(60 * D2R), Math.cos(60 * D2R)]} c={VIOLET} o={fin(f, tCross)} />
@@ -126,7 +127,7 @@ const S13: React.FC = () => {
       <TeX s={H.x} x={xh[0] + 10} y={xh[1] + 34} size={48} c={C.second} ax={0.5} o={fin(f, tHat)} halo />
       <TeX s={H.y} x={yh[0] + 10} y={yh[1] + 34} size={48} c={C.second} ax={0.5} o={fin(f, tHat)} halo />
       <TeX s={H.z} x={zh[0] + 34} y={zh[1]} size={48} c={C.second} ax={0} o={fin(f, tHat)} halo />
-      <GSrc cut />
+      <GSrc cut o={fin(f, XF, 8)} />{/* p3b: after s12's credit */}
       <Svg><g data-lc-maplabel="1"><Lbl x={G.pw(pB)[0] + 24} y={G.pw(pB)[1] - 26} t="Brest" c={C.key} s={T.floor} o={fin(f, tGoal + 30)} /></g></Svg>
       {void rows}
     </Scene>
@@ -174,7 +175,7 @@ const S14: React.FC = () => {
       <TwoView f={f} cam={CAMF} cut={merCut(slide)} face={FACE_B} flatC={FLAT_C} flatR={FLAT_R} items={sideItems(t)} flatO={fin(f, flatIn, 15)}
         flatBase={(P) => <MerFlatBase P={P} />} />
       <Svg>
-        <Keyword f={f} text="Brest's position" at={[XC, 150]} appear={0} out={chipA - 20} />
+        <Keyword f={f} text="Brest's position" at={[XC, 150]} appear={XIN} out={chipA - 20} />{/* p3b: after s13's keyword */}
         <Keyword f={f} text="the side view" at={[KX3, 470]} appear={SS(k, 3)} out={tEvery - 10} />
         <Keyword f={f} text="drawn in both" at={[KX3, 470]} appear={tEvery + 8} out={t.tri - 20} />
         <Keyword f={f} text="right triangle" at={[KX3, 470]} appear={t.tri} />
@@ -507,7 +508,8 @@ const S19: React.FC = () => {
       <Svg>
         <Keyword f={f} text="another city" at={[XZ, 170]} appear={0} out={tLL - 20} o={oA} />
         {/* p3a (house rule 2026-11-08, review 2 Should): the data figure's title with the event's name and dates, while the track is shown */}
-        <Lbl x={950} y={50} t="Cyclone Amphan's track · 16–21 May 2020" c={C.ink} s={T.floor} o={fin(f, tAm) * oA} />
+        <Lbl x={XZ} y={52} t="Cyclone Amphan's track ·" c={C.ink} s={T.floor} o={fin(f, tAm) * oA} />
+        <Lbl x={XZ} y={104} t="16–21 May 2020" c={C.ink} s={T.floor} o={fin(f, tAm) * oA} />{/* p3b: in the column, right of the globe's sharp part (x ≤ 1068) */}
         {/* remake 2026-11-07: the closest approach of Amphan's centre (IBTrACS v04r01 NI, interpolated; Part 2 cs.json amphan.close.Khulna.km = 79.4) */}
         <Keyword f={f} text="Amphan's centre:" at={[XZ, 280]} appear={tAm} out={tLL - 20} s={50} />
         <Keyword f={f} text="≈ 79 km to the west" at={[XZ, 345]} appear={tKm} out={tLL - 20} s={50} />
@@ -588,10 +590,10 @@ const S20: React.FC = () => {
         }} />
       {/* the radius's name, under its middle on the face (Brest at the rim to the right, the axis to the left) */}
       <TeX s={String.raw`a\cos\varphi`} x={pMid[0]} y={pMid[1] + 46} size={48} c={C.second} ax={0.5} o={oRad * fout(f, tDist - 40)} halo />
-      <GSrc />
+      <GSrc o={fin(f, XF, 8)} />{/* p3b: after s19's credit */}
       <Svg>
         <g data-lc-maplabel="1"><Lbl x={G.pw([0, 1.3, 0])[0] + 22} y={G.pw([0, 1.3, 0])[1] + 6} t="axis" c={C.key} s={T.floor} o={win(f, AT(k, 1, "round its axis"), tHow)} /></g>
-        <Keyword f={f} text="a second meaning" at={[XC, 140]} appear={0} out={tHow - 20} />
+        <Keyword f={f} text="a second meaning" at={[XC, 140]} appear={XIN} out={tHow - 20} />{/* p3b: after s19's keyword */}
         <Keyword f={f} text="how fast is the ground moving?" at={[XC, 140]} appear={tHow} s={T.floor + 4} />
         <ClockGlyph x={1130} y={250} r={30} h={11.9} o={win(f, tT, tRes - 22)} />
         <path d="M1210 230 l8 16 l18 2 l-13 12 l3 18 l-16 -9 l-16 9 l3 -18 l-13 -12 l18 -2 z" fill={C.key} opacity={win(f, tT, tRes - 22)} />
@@ -666,7 +668,7 @@ const S21: React.FC = () => {
         </>} />
       <GSrc />
       <Svg>
-        {places.slice(1).map((p) => { const [, b] = tipOf(p.la, p.lo, p.U); const o = win(f, p.res, Math.max(p.res + 150, p.at + 260)) * facing(G, p.la, p.lo) * onDisc(b);
+        {places.slice(1).map((p) => { const [, b] = tipOf(p.la, p.lo, p.U); const o = win(f, p.res, Math.min(tPole - 18, Math.max(p.res + 150, p.at + 260))) * facing(G, p.la, p.lo) * onDisc(b);   // p3b: gone before the pole's "0"
           // K6 k6r1: the tag stays left of x 1070 (Khulna's ran into the maths column)
           const tg = `${p.name} ≈ ${Math.round(p.U)} m/s`;
           return o > 0 ? <g key={p.name} data-lc-maplabel="1"><Lbl x={Math.min(b[0] + 14, 1036 - textW(tg, T.floor))} y={b[1] - 30} t={tg} c={C.key} s={T.floor} o={o} /></g> : null; })}
@@ -704,7 +706,7 @@ const S21: React.FC = () => {
         { lhs: "", rhs: String.raw`\text{Longyearbyen: }\cos78.2^\circ\approx0.2045`, at: AT(k, 16, "seventy eight point two"), size: 44, glow: pulse(f, AT(k, 16, "zero point two") - 16, 30) },
         { lhs: "", rhs: String.raw`U=464.6\times0.2045\approx95\ \text{m/s}`, at: AT(k, 17, "So the ground there") },
       ]} />
-      <KeepLine f={f} k={k} last={2} lines={[String.raw`height $a\sin\varphi$ ·`, String.raw`from the axis $a\cos\varphi$ ·`, String.raw`ground east at $\Omega\,a\cos\varphi$`]} />
+      <KeepLine f={f} k={k} last={2} a0={XIN} lines={[String.raw`height $a\sin\varphi$ ·`, String.raw`from the axis $a\cos\varphi$ ·`, String.raw`ground east at $\Omega\,a\cos\varphi$`]} />
       {/* Part 1 lessons B4: the keep line's own picture (the slice: a sin φ, a cos φ, east ⊙ at Ω a cos φ) */}
       <KeepPic kind="slice" c={[1150, 790]} R={310} o={fin(f, 4, 10) * fout(f, SE(k, 2), 10)} />
       {void [tNum, tOm, tCP]}
@@ -756,7 +758,7 @@ const S22: React.FC = () => {
         { t: String.raw`\,\Delta\varphi`, u: { w: String.raw`\text{change in }\varphi\text{ (rad)}`, c: C.gold } }]} x={XC} y={680} size={T.calc}
         layers={[{ t: "all", o: fin(f, tEq) * fout(f, tTurn - 15) }, { t: [], u: [1, 2], o: fin(f, tEq + 25) * fout(f, tTurn - 15) }]} />
       <TeX s={EQ_S22} x={KX3} y={460} size={T.eq} c={C.ink} o={fin(f, tTurn)} />
-      <CalcStack f={f} x={XC + 50} y={600} size={44} maxLines={3} rows={[
+      <CalcStack f={f} x={XC + 50} y={565} size={44} maxLines={3} rows={[   // p3b: y 600 → 565 (the easy row reached y 885)
         { lhs: String.raw`360^\circ`, rhs: String.raw`=2\pi\ \text{rad}`, at: AT(k, 10, "or two pi radians") },   // review 1 S4 / calc audit S4: the spoken full turn
         { lhs: String.raw`1^\circ`, rhs: String.raw`=\pi/180\approx0.01745\ \text{rad}`, at: tDeg - 20, glow: pulse(f, tDeg, 30) },
         { lhs: String.raw`\Delta y`, rhs: String.raw`=6371\ \text{km}\times0.01745`, at: AT(k, 12, "six thousand three hundred"), glow: pulse(f, AT(k, 12, "six thousand three hundred") + 8, 30) },   // p3a
@@ -923,7 +925,7 @@ const S25: React.FC = () => {
           {Array.from({ length: 12 }, (_, i) => <path key={i} d={merPath(Gg, -180 + 30 * i)} fill="none" stroke={C.second} strokeWidth={i % 2 ? 4 : 2} opacity={0.8 * fin(f, tLike)} />)}
           <GoreTint G={Gg} o={0.35 * fin(f, tLike)} />
         </>} />
-      <GSrc />
+      <GSrc o={fin(f, XF, 8)} />{/* p3b: after s24's credit */}
       <Svg>
         {P4.map((p, i) => { const y = Y0 + i * DY, o = fin(f, p.res), w = p.d * KPX * prog(f, p.res, p.res + 25);
           return <g key={p.n}>
@@ -943,7 +945,7 @@ const S25: React.FC = () => {
       {P4.map((p, i) => { const [lh, rh] = cutAt(p.row, String.raw`\approx`); const end = (P4[i + 1]?.at ?? tP) - 20;
         return <Layered key={p.n} parts={[{ t: lh }, { t: String.raw`\approx` + rh }]} x={XC} y={730} size={52}
           layers={[{ t: [0], o: win(f, p.cin, end), glow: pulse(f, p.cin + 6, 30) }, { t: [1], o: win(f, p.res, end) }]} />; })}
-      <KeepLine f={f} k={k} lines={["1° north ≈ 111 km ·", String.raw`1° east = 111 km $\times\cos\varphi$`]} />
+      <KeepLine f={f} k={k} a0={XIN} lines={["1° north ≈ 111 km ·", String.raw`1° east = 111 km $\times\cos\varphi$`]} />
       {/* Part 1 lessons B4: the keep line's own picture (a degree north is the same everywhere; a degree east shrinks with cos φ) */}
       <KeepPic kind="steps" c={[1440, 580]} R={220} o={fin(f, 4, 10) * fout(f, SE(k, 1), 10)} />
       {void [tCmp]}

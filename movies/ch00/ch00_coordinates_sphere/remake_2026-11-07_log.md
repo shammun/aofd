@@ -321,3 +321,27 @@ Brief: both pass-2 reviews (`reports/ch00_movies.md` "5c pass2 — review 1/2"),
   Pass = SSR 0 errors and `k6sum` "0 unique faults"; then look at s13 (hollow: tones, edges, the held piece), s20 / s29 (face, axis, radius),
   s25 (wedge, radii on the faces), s00 (whole globe and half-Earth inside the box), the s35 icon.
 - Disk after: **C: 96.0 GB, G: 410.8 GB free** (project data 174.67 GB). No render, no commit, nothing deleted.
+
+
+## 2026-11-09 fix loop p3b after k6p3a (source only; no SSR / K6 / render / TTS / mix; no lock taken)
+k6p3a (orchestrator, `build1/k6p3a_heavy_20261109_010755.log`): SSR 2-D 10 418 frames / 3-D 7 544 frames, 0 errors; K6 20 286 frames, 328 hits,
+**23 unique faults**. Disk before: C: 95.8 GB, G: 409.5 GB free.
+
+| Fault (k6p3a) | Cause | p3b fix |
+|---|---|---|
+| s13 f24357, 210 frames: "Gulf of Guinea" × "Indian Ocean" | p3a moved Indian Ocean under its dot, on the Gulf label's row; both shown from "Indian Ocean" to "x hat" | Gulf of Guinea leaves at tIO − 18 (gone 8 frames before Indian Ocean enters) |
+| s30 f70799, 74 frames: "Δ(sin φ)" × "cos φ Δφ = 0.906 × 0.1745 ≈ 0.158" | the p3a left side of the row reached left into the tag right of the step bar | "Δ(sin φ)" moved under the foot of the bar (x ≈ 854–1053, y ≈ 583–637), clear of "20°" (x ≤ 840) and of the rows (x ≥ 1100 for y > 560) |
+| s19 f38437, 19 frames: the title on the picture | from x 950 it lay on the zoomed globe's sharp rect (x 40–1068) | two lines in the column at x 1190: "Cyclone Amphan's track ·" (y 52) / "16–21 May 2020" (y 104); "another city" starts at y 148 |
+| s21 f49310, 6 frames: "Longyearbyen ≈ 95 m/s" × "0" | the tag's window ran into the pole's "0" | the tags end by tPole − 18 |
+| s22 f52717 edge: the easy row at y 885 | the p3a split Δy row made the stack one row taller | stack y 600 → 565 |
+| scene-start faults (rel. frame 9–10, the last frame of the previous Sequence): s09 f14319, s13 f23169, s14 f25353, s20 f40974, s21 f44852, s25 f56745, s26 f59177, s30 f69533, s35 f82304 | the new scene's first text (appear 0, o 0.97 in the probe) and the old scene's opaque text in one slot; the k6_overlap cross-fade exemption needs one side < 0.95 | **exit before entry**: new `XIN = XF + 8` in cs_lib; the first keyword enters at XIN (s13 "an arrow in space", s14 "Brest's position", s20 "a second meaning", s26 "weather data", s30 "a shortcut", s35 "distance + two angles" with its mini picture); KeepLine got `a0` (s09, s21, s25 enter at XIN) |
+| credit over credit (s09, s13, s20, s25) and s26's credit × s25's "pole" | NOT identical credits: the old scene says "Image: NASA Blue Marble Next Generation", the new one "… · Natural Earth" (or the ERA5 line), so k6_overlap's same-label rule cannot apply | **held across the boundary**: the new scene's credit enters at XF (fin(f, XF, 8)), the frame the old Sequence has gone; no K6 exemption used |
+
+- Static gates (final source): **tsc 0 · at_check 541 / 0 · swap_check 329 elements, 0 overlaps, 0 swaps < 8 frames · cam_speed 0 > 90 °/s ·
+  symbol lint --strict 0 · eq_check 24/24 · script_wording_lint 0 · tex_escape_lint 0 · captions 715 cues, 0 rule breaks, text = script**.
+- Prepared, **not started**: `checks/p3b_heavy.sh` (tag **k6p3b**): every frame of s13 and s30 (±15; 4 332 frames) + for s09 s14 s19 s20 s21 s22
+  s25 s26 s35 (±15) the house K6 list, every 15th frame and every frame of the cross-fade into the scene (start −15 … +30), + every frame ±45
+  around f38437, f49310, f52717: **7 550 frames**; copies every k6p3a still / box file outside those ranges; K6 ports 8417 / 8447 / 8477
+  (`${K6PORT:-8417}`, outside the excluded 8172–8371 and 8552–8984); same lock gate (RENDER2, HEAVY, VOICE free, ≥ 9 GB RAM). Start:
+  `nohup bash movies/src/ch00_coordinates_sphere/checks/p3b_heavy.sh > "G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_sphere/build1/k6p3b_heavy_$(date +%Y%m%d_%H%M%S).log" 2>&1 &`
+- Disk after: C: 95.8 GB, G: 409.5 GB free. No render, no commit, nothing deleted.
