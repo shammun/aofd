@@ -10482,3 +10482,10 @@ All arithmetic recomputed from data/cf.json: correct (s04–s27). 104 words chec
 - **M1** = review 1 M1. **M2** 6 vector pairs split across cues (9:24, 11:59, 12:11, 12:18, 40:16, 40:27).
 - Should: 2 line breaks inside pairs (9:15, 9:29); second coast leg 2–3.4 s early (s29/s33/s36/s39); s30 "≈ 1 cm per hPa" 2.8 s early; bearing working shown only in s27 (add 360°−7° etc.); s29 map lacks legs + β; s23 data values not gold; ERA5/official ratio not worked; Ω value not voiced (re-voice later).
 - Nits: s20 "12 m/s" 1.2 s early; s13 9.81 row early and not gold; s23 1.852/3.6 not said; s41 gauge values early; 61:25 line break in a 3-number list.
+
+## 5a fix4 — verification review, 2026-11-08 — PASS
+5a_coordinates_flat_fix4.mp4, 43:33.8, 153.36 MB, QA 15/15 (K6 k6z6 4887 frames 0 hits). Frames: reports/movies/ch00_coordinates_flat/verify_fix4/.
+- M1 s25: y′ WSW out over the Gulf = x′ turned anticlockwise (right-handed); onshore arrow separate, unlabelled — PASS.
+- Raster edges s21/s25 clean; s25 chart labels clear; all 7 word-timed reveals on their words; gold on cos 30°/sin 30°/135 kt/0.1°; captions: no cue boundary inside a number or pair (633 cues); C4; regression sweep (327 frames) — PASS.
+- Should (captions only): 33:56.965 line break inside "four thousand four hundred and ninety"; 13:37.491 "two thousand nine hundred / and ninety three" (43 chars: exception).
+- Info: 20:25.645 pair split at its comma across two lines of one cue (47 chars, unavoidable); s11 θ̂ tip label tight; re-voice list unchanged ("so easy", s24 "times one, plus v times zero").
