@@ -6,7 +6,7 @@ import React from "react";
 import { useCurrentFrame } from "remotion";
 import { C, T } from "../house/kit/type";
 import { Band, Pt } from "../house/kit/draw";
-import { GlobeFrame, SourceBelow } from "../house/kit/frame";
+import { GlobeFrame } from "../house/kit/frame";   // r8d: SourceBelow comes gated from fr_lib
 import { AnimatedWindArrow, FlowParticles } from "../house/kit/wind";
 import { CurvedLink } from "../house/kit/extras";
 import { GlobeCam, LatCircle, llPath } from "./kit_fr/globe";
@@ -15,6 +15,7 @@ import {
   SpeedBar, Svg, TeX, Tripod, XC, add, boxAt, clamp, discOf, enAt, fin, fout, garrow, gdot, globeG, keepTime, linesPath, ll, mapP, mix, pieces, poly, prog, sang, svP,
   tvP, win, TopV, SliceV, ParcelDot, chipSpan,
   HL,
+  SourceBelow,
 } from "./fr_lib";
 import { V3 } from "./kit_fr/cam";
 import { AngleArc, GRID, GridBase, SliceBase, TopViewBase, circleArrows, gridCell, sliceArrows, topArrows, turned } from "./fr_dia";
@@ -57,6 +58,9 @@ const S10: React.FC = () => {
   const turnedNow = a > 1;
   const eq = cutAt(EQ_S10, String.raw`,\qquad `);
   const o1 = fout(f, t3D - 6, 16), o2 = fin(f, t3D - 6, 16) * fout(f, tLegs - 6, 16), o3 = fin(f, tLegs - 6, 16);
+  // r8d (k6r8c f21520-21526, f21882-21888): exit before entry between the phases. The pictures cross-fade (o1 / o2 / o3); phase 2's text and
+  // credit enter only after phase 1's have gone (t3D + 10), phase 3's credit only after phase 2's (tLegs + 10)
+  const o2t = fin(f, t3D + 12, 12) * fout(f, tLegs - 6, 16), o3t = fin(f, tLegs + 12, 12);
   const w: Pt = [IAN.u[0] * s, -IAN.u[1] * s];
   const al = add(p0, XP, IAN.along * s), ac = add(p0, YP, IAN.across * s);
   // phase 2: the local tripod at Fort Myers Beach on the globe, î and ĵ turning about k̂ by α (anticlockwise seen from above)
@@ -116,16 +120,22 @@ const S10: React.FC = () => {
             {garrow(Gg, b0, kq, C.first, 9, 34)}
             {gdot(Gg, IAN.fmb[0], IAN.fmb[1], C.gold, 10)}
           </>} />
-        <TeX s={a3 > 1 ? H.xp : H.i} x={tipLab(xq)[0]} y={tipLab(xq)[1]} size={56} c={C.second} ax={0.5} o={o2} halo />
-        <TeX s={a3 > 1 ? H.yp : H.j} x={tipLab(yq)[0]} y={tipLab(yq)[1]} size={56} c={C.second} ax={0.5} o={o2} halo />
-        <TeX s={H.k} x={tipLab(kq)[0]} y={tipLab(kq)[1]} size={56} c={C.first} ax={0.5} o={o2} halo />
+        {/* r8d (k6r8c f21523-21885, 190 hits each): x̂′ / ŷ′ written at the arrow tips sat on the sharp globe (3-glyph labels are not spot
+            labels). The tips keep î / ĵ (spot glyphs) until the turn starts; the turned arrows are named in the column with gold links */}
+        <TeX s={H.i} x={tipLab(xq)[0]} y={tipLab(xq)[1]} size={56} c={C.second} ax={0.5} o={o2t * fout(f, tTurn3, 8)} halo />
+        <TeX s={H.j} x={tipLab(yq)[0]} y={tipLab(yq)[1]} size={56} c={C.second} ax={0.5} o={o2t * fout(f, tTurn3, 8)} halo />
+        <TeX s={H.k} x={tipLab(kq)[0]} y={tipLab(kq)[1]} size={56} c={C.first} ax={0.5} o={o2t} halo />
         <GlobeFrame id="s10k" zoom={1} right={1} o={o2} />
-        <SourceBelow text="Image: NASA Blue Marble Next Generation · Natural Earth" pic={{ x: 80, y: 40, w: 960, h: 772 }} w={960} o={o2} name="s10 src g" />
-        <Svg o={o2}><Keyword f={f} text="in three dimensions" at={[XZ, 120]} appear={t3D + 18} /></Svg>
-        <TeX s={eq[0]} x={XZ} y={250} size={50} o={o2} />
-        <TeX s={eq[1]} x={XZ} y={335} size={50} o={o2} />
-        <TeX s={String.raw`\hat{\mathbf k}\ \text{unchanged}`} x={XZ} y={430} size={54} c={C.first} o={o2 * fin(f, AT(k, 7, "as it is"))} />
-        <Svg o={o2}><Lbl x={XZ} y={520} t="anticlockwise, from above" c={C.muted} s={T.floor} o={fin(f, AT(k, 7, "anticlockwise"))} /></Svg>
+        <SourceBelow text="Image: NASA Blue Marble Next Generation · Natural Earth" pic={{ x: 80, y: 40, w: 960, h: 772 }} w={960} o={o2t} name="s10 src g" />
+        <Svg o={o2t}><Keyword f={f} text="in three dimensions" at={[XZ, 120]} appear={t3D + 18} /></Svg>
+        <TeX s={eq[0]} x={XZ} y={250} size={50} o={o2t} />
+        <TeX s={eq[1]} x={XZ} y={335} size={50} o={o2t} />
+        <TeX s={String.raw`\hat{\mathbf k}\ \text{unchanged}`} x={XZ} y={430} size={54} c={C.first} o={o2t * fin(f, AT(k, 7, "as it is"))} />
+        <Svg o={o2t}>
+          <Lbl x={XZ} y={520} t="anticlockwise, from above" c={C.muted} s={T.floor} o={fin(f, AT(k, 7, "anticlockwise"))} />
+          <SideCallout f={f} lines="$\hat{\mathbf x}'$ along the coast" at={[XZ, 630]} appear={tTurn3 + 62} target={G.pw(xq)} s={T.floor} c={C.second} bend={40} />
+          <SideCallout f={f} lines="$\hat{\mathbf y}'$ out to sea" at={[XZ, 720]} appear={tTurn3 + 70} target={G.pw(yq)} s={T.floor} c={C.second} bend={40} />
+        </Svg>
       </> : null}
       {/* phase 3: Part 2's two legs, read off a km map: where do they come from? */}
       <GeoMap id="s10m3" B={B3} o={o3}>
@@ -145,7 +155,7 @@ const S10: React.FC = () => {
         <Lbl x={XC} y={210} t="91.5 km north · 55 km west" c={C.key} s={T.floor} o={fin(f, AT(k, 8, "ninety one"))} />
         <Keyword f={f} text="from latitude and longitude" at={[XC, 800]} s={T.floor} appear={tNow} />
       </Svg>
-      <SourceBelow text="Data: Natural Earth 10 m coastline" pic={MAPB} w={920} o={o3} name="s10 src 3" />
+      <SourceBelow text="Data: Natural Earth 10 m coastline" pic={MAPB} w={920} o={o3t} name="s10 src 3" />
     </Scene>
   );
 };

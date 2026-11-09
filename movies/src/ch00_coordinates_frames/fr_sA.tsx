@@ -7,7 +7,7 @@ import { useCurrentFrame } from "remotion";
 import { C, T } from "../house/kit/type";
 import { Pt, RightTick } from "../house/kit/draw";
 import { SeriesTitle } from "./kit_fr/SeriesTitle";
-import { GlobeFrame, SourceBelow } from "../house/kit/frame";
+import { GlobeFrame } from "../house/kit/frame";   // r8d: SourceBelow comes gated from fr_lib
 import { AnimatedWindArrow } from "../house/kit/wind";
 import { CurvedLink } from "../house/kit/extras";
 import { GlobeCam, LatCircle, globePath, llPath } from "./kit_fr/globe";
@@ -17,6 +17,7 @@ import {
   Svg, TRAPPES, TeX, Tripod, TripodTips, XC, add, arcD, boxAt, clamp, discOf, e2g, facing, fin, fout, garrow, gdot, globeG, gseg, keepTime, linesPath, ll, mix,
   pieces, plab, poly, prog, sang, svNorth, svP, svUp, tvDir, tvEast, tvP, win, TopV, SliceV, GeoImg, IMGS, chipSpan, SpeedBar,
   HL,
+  SourceBelow,
 } from "./fr_lib";
 import { AngleArc, SliceBase, TopViewBase, sliceArrows, topArrows, turned } from "./fr_dia";
 import { EQ_S03, EQ_S04, EQ_S05, EQ_S06, EQ_S08 } from "./fr_eq";

@@ -253,3 +253,29 @@ stills (s10 after f1949 and all of s19 missing). K6: **FAIL, 381 hits** (text-te
   `build1/k6r8c_heavy_<date>.log`. Never renders, mixes, commits or deletes. Start: `nohup bash movies/src/ch00_coordinates_frames/checks/r8c_heavy.sh > /dev/null 2>&1 &`.
 - Still open after r8c passes: the r8 mix (`r8_voice.sh mix`), then the full render.
 - Disk 2026-11-09: C: 102.6 GB free, G: 439.2 GB free.
+
+## 2026-11-09 fix loop r8d (source only; after k6r8c)
+**k6r8c** (`build1/k6r8c_heavy_20261109_044219.log`, lock 04:42-06:47): SSR 2-D 7387 / 3-D 5322 scene-frames, **0 errors** (the s10 / s19 r8c
+fixes hold); 22 917 of 22 917 stills; K6 **FAIL, 436 hits** (text-text 52, text-picture 384) = **28 unique faults**:
+- **17 at scene start + 9** (one cross-fade frame; s05 f6857, s06 f9706, s09 f16657, s10 f19577, s11 f22402, s15 f26209 ×2, s16 f28767, s19
+  f35060 ×2, s22 f42945, s23 f46205 ×4, s25 f50817, s26 f53621 ×3): new-scene text (keywords appearing at 0, column TeX, "moving east",
+  "ĵ ⊙ (out of the screen)") over the old scene's text / globe / credit, and new credits over old ones.
+  **Fix: ONE SceneGate** (ported from Part 3 p3c, commit 73e5576): `fr_lib` gets `XIN = XF + 8`, `SceneGate` (context) and `useGate`;
+  TeX, Layered, CalcStack, Lbl (incl. $…$ labels), Keyword, Recall (and through them Place, SideCallout, SkipChip, ColourBar, plab) fade in
+  from XIN; `SourceBelow` (now exported gated by fr_lib; fr_sA/B/C import it from there, GSrc included) from XF. `CoordinatesFrames`
+  wraps every scene after s00 in `SceneGate {text: XIN, src: XF}`. Pictures are not gated.
+- **s10 phase changes** (f21520-21526 ×6: phase-1 credit / x̂′, ŷ′ equations / "derived in Part 1: turned axes" under phase 2's credit and
+  equations at XZ; f21882-21888: phase-2 credit vs phase-3 credit): the pictures cross-fade (o1/o2/o3) but phase-2 text and credit now use
+  `o2t = fin(t3D + 12)` (phase 1's text is gone at t3D + 10) and phase 3's credit `o3t = fin(tLegs + 12)`.
+- **s10 x̂′ / ŷ′ tip labels on the sharp zoomed globe** (f21523-21885, 190 + 190; 3-glyph labels are not K6 spot labels): the tips keep î / ĵ
+  (spot glyphs) and leave as the turn starts (tTurn3); after the turn the arrows are named in the column by two SideCallouts with gold links to
+  the tips: "x̂′ along the coast" (XZ, 630, from tTurn3 + 62) and "ŷ′ out to sea" (XZ, 720, + 70), in the arrows' orange. `SideCallout`'s width
+  guard now measures $…$ maths with mixW (as Lbl does; textW counted the TeX source and would have thrown at x ≈ 1855).
+- Static gates: tsc 0 · at_check 364 / 0 · swap_check 353 elements, 0 overlaps, 0 tight swaps · cam_speed 0 · symbol lint --strict 0 ·
+  eq_check 18 / 0 / 0 · script_wording_lint 0 · tex_escape_lint 0. SSR not run (heavy work not allowed in this loop).
+- **Re-shoot prepared, NOT started:** `checks/r8d_heavy.sh` (tag k6r8d): list = every frame of every scene start −15 … +30 (26 starts) + every
+  frame of s10 ±15 = **3960 frames**; copies every k6r8c still / box file outside that list into the fresh `stills/k6r8d` (one scandir pass);
+  gate RENDER2 / HEAVY / VOICE free + ≥ 9 GB RAM, HEAVY.lock (mkdir + owner.txt); SSR 2-D + 3-D must be 0 (else release + exit 2); fresh bundle;
+  ports 8447 / 8477 / 8507; then ONE Python pass prints "stills written: N of M" (re-shoot list) + whole-movie coverage (k6r8c ∪ k6r8d lists) —
+  no per-file stat from bash; then k6_overlap and the summary ending "N unique faults". Own log `build1/k6r8d_heavy_<date>.log`. Never renders,
+  mixes, commits or deletes. Start: `nohup bash movies/src/ch00_coordinates_frames/checks/r8d_heavy.sh > /dev/null 2>&1 &`.

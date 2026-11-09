@@ -2,7 +2,7 @@ import React from "react";
 import { AbsoluteFill, Audio, Sequence, staticFile } from "remotion";
 import { C } from "../house/kit/type";
 import { BoxProbe } from "../house/kit/bbox";
-import { CUT, FPS, FR_FRAMES, LEN, XF, sc } from "./fr_lib";
+import { CUT, FPS, FR_FRAMES, LEN, SceneGate, XF, XIN, sc } from "./fr_lib";
 import { SCENES_A } from "./fr_sA";
 import { SCENES_B } from "./fr_sB";
 import { SCENES_C } from "./fr_sC";
@@ -31,7 +31,9 @@ export const CoordinatesFrames: React.FC<{ audio?: string; bbox?: boolean }> = (
     {bbox ? <BoxProbe /> : null}
     {sc.map((s, k) => {
       const S = BYID[s.id];
-      return <Sequence key={s.id} name={s.id} from={CUT[k]} durationInFrames={LEN(k) + (k < sc.length - 1 ? XF : 0)}><S /></Sequence>;
+      // r8d (2026-11-09, Part 3 p3c): every scene after s00 gates its text (XIN) and its credit (XF): exit before entry at every scene start
+      return <Sequence key={s.id} name={s.id} from={CUT[k]} durationInFrames={LEN(k) + (k < sc.length - 1 ? XF : 0)}>
+        <SceneGate value={k === 0 ? { text: 0, src: 0 } : { text: XIN, src: XF }}><S /></SceneGate></Sequence>;
     })}
     {audio ? <Audio src={staticFile(audio)} /> : null}
   </AbsoluteFill>

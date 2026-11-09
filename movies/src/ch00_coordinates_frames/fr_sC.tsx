@@ -6,7 +6,7 @@ import { useCurrentFrame } from "remotion";
 import { ramp } from "../house";
 import { C, T } from "../house/kit/type";
 import { Bracket, Pt } from "../house/kit/draw";
-import { GlobeFrame, SourceBelow } from "../house/kit/frame";
+import { GlobeFrame } from "../house/kit/frame";   // r8d: SourceBelow comes gated from fr_lib
 import { Notebook } from "../house/kit/icons";
 import { CurvedLink } from "../house/kit/extras";
 import { GlobeCam, llPath } from "./kit_fr/globe";
@@ -15,6 +15,7 @@ import {
   fout, gdot, globeG, keepTime, ll, mix, pieces, poly, prog, sang, texW, textW, win, SliceV, TopV, ParcelDot, linesPath, mapP, boxAt, chipSpan,
   SE,
   HL,
+  SourceBelow,
 } from "./fr_lib";
 import { AngleArc, GRID, GridBase, MiniTick, MiniTripod, SliceBase, TopViewBase, TRI, TurnPic, gridCell, logX, sliceArrows, topArrows } from "./fr_dia";
 import { EQ_S03, EQ_S20, EQ_S21, EQ_S22, EQ_S23, EQ_S24, EQ_S25, EQ_S26, EQ_S27, cutAt } from "./fr_eq";

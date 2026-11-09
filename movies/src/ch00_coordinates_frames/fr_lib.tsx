@@ -15,6 +15,7 @@ import { C, FONT, T } from "../house/kit/type";
 import { Arrow, Lbl as HLbl, Pt, Svg, clamp, textW } from "../house/kit/draw";
 import { Keyword as HKeyword } from "../house/kit/notes";
 import { CurvedLink } from "../house/kit/extras";
+import { SourceBelow as HSourceBelow } from "../house/kit/frame";
 import { CalcRow, CalcStack as HCalcStack, Layered as HLayered, Part, Layer, TeX as HTeX, plainOf, texHtml, KX } from "../house/kit/tex";
 import { GlobeCam, GlobeMesh, GProj, HalfEarthMesh, coastPath, globeCam, globeProj, useTex, Graticule, enAt, ll } from "./kit_fr/globe";
 import { View3D } from "./kit_fr/three3d";
@@ -26,6 +27,8 @@ type Scn = { id: string; start: number; end: number; sentences: Snt[] };
 export const sc = (timing as unknown as { scenes: Scn[]; total_frames: number }).scenes;
 export const HOLD = 75;
 export const XF = 10;
+/** r8d (2026-11-09, ported from Part 3 p3c): text of every scene after s00 enters 8 frames after the previous scene has gone */
+export const XIN = XF + 8;
 export const FR_FRAMES = (timing as unknown as { total_frames: number }).total_frames + HOLD;
 const IDS = sc.map((s) => s.id);
 export const K = (id: string) => { const k = IDS.indexOf(id); if (k < 0) throw new Error(`no scene ${id}`); return k; };
@@ -72,6 +75,27 @@ export const XMAX = 1840;                 // text must end before x 1842
 export const Scene: React.FC<{ children: React.ReactNode; fadeIn?: boolean }> = ({ children, fadeIn = true }) => {
   const f = useCurrentFrame();
   return <AbsoluteFill style={{ background: C.bg, opacity: fadeIn ? ramp(f, 0, XF) : 1 }}>{children}</AbsoluteFill>;
+};
+
+// ---------------------------------------------------------------- r8d: the scene-start gate (exit before entry, every scene start)
+// Ported from Part 3's fix loop p3c (src/ch00_coordinates_sphere/cs_lib.tsx, commit 73e5576). k6r8c (2026-11-09): during the XF-frame
+// cross-fade the previous scene's Sequence is still drawn under the new scene's fading veil, so any text of the new scene shown before
+// the old one has gone sits on the old scene's text or picture (17 of k6r8c's 28 faults were at scene start + 9). CoordinatesFrames
+// wraps every scene after s00 in SceneGate {text: XIN, src: XF}: every text primitive of this movie (TeX, Lbl incl. $…$ labels, Keyword,
+// Layered, CalcStack, Recall, and through them Place, SideCallout, SkipChip, ColourBar, plab) fades in from XIN = XF + 8, and every
+// source line (SourceBelow, GSrc) from XF (the old credit holds the line until then). Pictures are not gated (HOUSE_STYLE §5: the
+// picture is there from the scene's first frame). s00 has no previous scene: no gate.
+type Gate = { text: number; src: number };
+const GateCtx = React.createContext<Gate>({ text: 0, src: 0 });
+export const SceneGate = GateCtx.Provider;
+const useGate = (kind: keyof Gate) => {
+  const f = useCurrentFrame(), a = React.useContext(GateCtx)[kind];
+  return a <= 0 ? 1 : ramp(f, a, a + 8);
+};
+/** the house source line with the scene-start gate (enters at XF in every scene after s00) */
+export const SourceBelow: React.FC<React.ComponentProps<typeof HSourceBelow>> = (p) => {
+  const g = useGate("src");
+  return g <= 0 ? null : <HSourceBelow {...p} o={(p.o ?? 1) * g} />;
 };
 
 // ---------------------------------------------------------------- data and assets
@@ -137,14 +161,16 @@ export const pieces = (s: string, seps: string[]): string[] => {
 };
 /** house TeX with the right-edge guard (ax = 0 or 0.5 or 1 as in the house component) */
 export const TeX: React.FC<React.ComponentProps<typeof HTeX>> = (p) => {
+  const g = useGate("text");
   const w = texW(p.s, p.size ?? 68), ax = p.ax ?? 0;
   guard(p.s, p.x - ax * w, w);
-  return <HTeX {...p} />;
+  return g <= 0 ? null : <HTeX {...p} o={(p.o ?? 1) * g} />;
 };
 export const Layered: React.FC<{ parts: Part[]; layers: Layer[]; x: number; y: number; size?: number; ax?: number; ay?: number; o?: number }> = (p) => {
+  const g = useGate("text");
   const w = texW(plainOf(p.parts), p.size ?? 84), ax = p.ax ?? 0;
   guard(plainOf(p.parts), p.x - ax * w, w);
-  return <HLayered {...p} />;
+  return g <= 0 ? null : <HLayered {...p} o={(p.o ?? 1) * g} />;
 };
 const sideStr = (s: CalcRow["rhs"]): string => (typeof s === "string" ? s : "raw" in s ? s.raw[0].s : plainOf(s.parts));
 // Part 1 lessons C2 (2026-11-05): every fraction is a \dfrac (display size, >= 44 px). A row whose TeX has a \dfrac and no explicit
@@ -162,11 +188,13 @@ const stackBottomGuard = (rows: CalcRow[], y: number, size: number, maxLines: nu
   }
 };
 /** house CalcStack with the right-edge guard (row rhs starts at x) */
-export const CalcStack: React.FC<React.ComponentProps<typeof HCalcStack>> = (p) => {
+export const CalcStack: React.FC<React.ComponentProps<typeof HCalcStack>> = (p0) => {
+  const g = useGate("text");
+  const p = { ...p0, o: (p0.o ?? 1) * g };
   p.rows.forEach((r) => guard(sideStr(r.rhs), p.x, texW(sideStr(r.rhs), r.size ?? p.size ?? 68)));
   const rows = withFracH(p.rows, p.size ?? 68);
   stackBottomGuard(rows, p.y, p.size ?? 68, p.maxLines ?? 3);
-  return <HCalcStack {...p} rows={rows} />;
+  return g <= 0 ? null : <HCalcStack {...p} rows={rows} />;
 };
 // ---------------------------------------------------------------- maths inside labels (remake 2026-11-07; symbol lint C5)
 // A label's maths goes in $…$ and is drawn by KaTeX; the words stay in the house sans font. Ported verbatim from Part 3
@@ -194,16 +222,22 @@ const MathLbl: React.FC<{ x: number; y: number; t: string; c?: string; s?: numbe
   );
 };
 /** the house SVG label with the right-edge guard; $…$ parts are KaTeX */
-export const Lbl: React.FC<React.ComponentProps<typeof HLbl>> = (p) => {
+export const Lbl: React.FC<React.ComponentProps<typeof HLbl>> = (p0) => {
+  const g = useGate("text");
+  const p = { ...p0, o: (p0.o ?? 1) * g };
   const s = p.s ?? 54, m = p.t.includes("$"), w = m ? mixW(p.t, s) : textW(p.t, s), a = p.a ?? "start";
   guard(p.t, a === "start" ? p.x : a === "end" ? p.x - w : p.x - w / 2, w * 0.97);
+  if (g <= 0) return null;
   return m ? <MathLbl {...p} /> : <HLbl {...p} />;
 };
 /** the house Keyword with the right-edge guard; with $…$ maths: the same rise / fade, gold target links as CurvedLinks */
-export const Keyword: React.FC<React.ComponentProps<typeof HKeyword>> = (p) => {
+export const Keyword: React.FC<React.ComponentProps<typeof HKeyword>> = (p0) => {
+  const g = useGate("text");
+  const p = { ...p0, o: (p0.o ?? 1) * g };
   const s = p.s ?? 54, m = p.text.includes("$"), w = m ? mixW(p.text, s) : textW(p.text, s), a = p.a ?? "start";
   const x0 = a === "start" ? p.at[0] : a === "end" ? p.at[0] - w : p.at[0] - w / 2;
   guard(p.text, x0, w * 0.97);
+  if (g <= 0) return null;
   if (!m) return <HKeyword {...p} />;
   const { f, text, at, c = C.key, appear, out, o = 1, targets = [] } = p;
   const oT = ramp(f, appear, appear + 8) * (out !== undefined ? 1 - ramp(f, out, out + 10) : 1) * o;
@@ -223,7 +257,8 @@ export const Keyword: React.FC<React.ComponentProps<typeof HKeyword>> = (p) => {
  * only, under an equation drawn elsewhere). Place OUTSIDE an <Svg>. */
 export const Recall: React.FC<{ f: number; tex: string; name: string; x: number; y: number; appear: number; out?: number; size?: number; c?: string; part?: number;
   gap?: number; lab?: string; glow?: number }> = ({ f, tex, name, x, y, appear, out, size = 54, c = C.ink, part = 1, gap, lab, glow = 0 }) => {
-  const o = ramp(f, appear, appear + 10) * (out !== undefined ? 1 - ramp(f, out, out + 10) : 1);
+  const g = useGate("text");
+  const o = ramp(f, appear, appear + 10) * (out !== undefined ? 1 - ramp(f, out, out + 10) : 1) * g;
   const head = lab ?? `derived in Part ${part}:`;
   const full = `${head} ${name}`;
   const two = x + textW(full, T.floor) > 1842;
@@ -427,7 +462,7 @@ export const Place: React.FC<{ p: Pt; t?: string; o?: number; dx?: number; dy?: 
 export const SideCallout: React.FC<{ f: number; lines: string[] | string; at: Pt; appear: number; out?: number; target: Pt | null; s?: number; c?: string;
   bend?: number; ctl?: Pt }> = ({ f, lines, at, appear, out, target, s = 54, c = C.key, bend = 30, ctl }) => {
   const LL = Array.isArray(lines) ? lines : [lines];
-  LL.forEach((t) => guard(t, at[0], textW(t, s) * 0.97));
+  LL.forEach((t) => guard(t, at[0], (t.includes("$") ? mixW(t, s) : textW(t, s)) * 0.97));   // r8d: $…$ maths measured as KaTeX (as Lbl does)
   const op = ramp(f, appear, appear + 8) * (out !== undefined ? 1 - ramp(f, out, out + 10) : 1);
   if (op <= 0) return null;
   return (
