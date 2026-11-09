@@ -14,8 +14,23 @@ import { faceDisc, ll, sphereGeo } from "./globe";
 
 const D2R = Math.PI / 180;
 export type Cut = { kind: "whole" } | { kind: "mer"; lon0: number; slide: number; dir: V3 } | { kind: "lat"; lat0: number; lift: number; capO: number; polar?: boolean }
-  | { kind: "oct"; gap: number; out: number };
+  | { kind: "oct"; gap: number; out: number; lift?: V3; fade?: number }
+  | { kind: "wedge"; l0: number; l1: number; open: number };
 const FACE = "#4a3d36";   // warm dark-grey section (storyboard s04)
+// fix loop p3a (pass-2 review 1 M2/M3): flat cut faces in ONE flat colour read as a dome, not a hollow. Each cutting PLANE gets its own tone
+// of the section colour, as if lit from above-left (the equator plane lightest, the 0°/180° meridian plane middle, the 90° E/W plane
+// darkest), and every face is outlined (its two radial corner edges + its rim arc) by a thin light tube, so the eye reads planes meeting
+// at corners. Unlit tones (MeshBasic), so the Blue Marble skin keeps its true colours.
+export const FACE_TONE = { eq: "#7d6553", m0: "#57473c", m90: "#3b302a" };
+const EDGE = "#efe0c4";
+
+/** a closed outline (centre -> first rim point -> rim arc -> centre) as a thin tube of world radius r (a few px at the movie's cameras) */
+const outlineGeo = (rim: V3[], r: number) => {
+  const path = new THREE.CurvePath<THREE.Vector3>();
+  const pts = [[0, 0, 0] as V3, ...rim, [0, 0, 0] as V3].map((q) => new THREE.Vector3(...q));
+  for (let i = 0; i + 1 < pts.length; i++) path.add(new THREE.LineCurve3(pts[i], pts[i + 1]));
+  return new THREE.TubeGeometry(path, 4 * pts.length, r, 6, false);
+};
 
 /** a horizontal disc at height y (normal +Y), radius r */
 const latDisc = (y: number, r: number) => {
@@ -52,7 +67,9 @@ const polarDisc = (y: number, lat0: number) => {
 const POLAR_DIM = 0.4;   // the polar face is darkened so the overlays (axes, spokes, labels) read on it
 
 export const EarthMesh: React.FC<{ tex: THREE.Texture | null; alpha?: number; cut?: Cut; faceO?: number }> = ({ tex, alpha = 1, cut = { kind: "whole" }, faceO = 0.97 }) =>
-  cut.kind === "oct" ? <OctantEarth tex={tex} gap={cut.gap} out={cut.out} /> : <CutEarth tex={tex} alpha={alpha} cut={cut} faceO={faceO} />;
+  cut.kind === "oct" ? <OctantEarth tex={tex} gap={cut.gap} out={cut.out} lift={cut.lift} fade={cut.fade} />
+    : cut.kind === "wedge" ? <WedgeEarth tex={tex} l0={cut.l0} l1={cut.l1} open={cut.open} />
+      : <CutEarth tex={tex} alpha={alpha} cut={cut} faceO={faceO} />;
 
 // ------------------------------------------------------------------------------------------------ pass 2: the Earth in eight pieces
 // User 2026-11-07 (old 14:13): "slice the Earth along the x, y and z axes … a little hollow between them, so people understand that x, y
@@ -79,31 +96,38 @@ export const octShift = (lat: number, lon: number, gap: number): V3 => {
   const d = octDiag(L, B), p = ll(lat, lon);
   return [p[0] + d[0] * gap, p[1] + d[1] * gap, p[2] + d[2] * gap];
 };
-const OctantEarth: React.FC<{ tex: THREE.Texture | null; gap: number; out: number }> = ({ tex, gap, out }) => {
-  const geos = useMemo(() => OCT.map(({ L, B }) => ({
-    skin: sphereGeo(L, L + 90, 90, 90, 1, B, B + 90),
-    faces: [
-      quarterFan(Array.from({ length: 49 }, (_, i) => ll(B + (90 * i) / 48, L, 0.999))),
-      quarterFan(Array.from({ length: 49 }, (_, i) => ll(B + (90 * i) / 48, L + 90, 0.999))),
-      quarterFan(Array.from({ length: 49 }, (_, i) => ll(0, L + (90 * i) / 48, 0.999))),
-    ],
-  })), []);
-  const mats = useMemo(() => OCT.map(() => ({ skin: new THREE.MeshBasicMaterial({ side: THREE.FrontSide, transparent: true }),
-    face: new THREE.MeshBasicMaterial({ color: FACE, side: THREE.DoubleSide, transparent: true }) })), []);
+/** which cutting plane a face of piece (L, B) lies in: j = 0 the meridian plane at L, 1 at L + 90, 2 the equator plane */
+const planeOf = (L: number, j: number): keyof typeof FACE_TONE => (j === 2 ? "eq" : (((j === 0 ? L : L + 90) % 180) + 180) % 180 === 0 ? "m0" : "m90");
+const OctantEarth: React.FC<{ tex: THREE.Texture | null; gap: number; out: number; lift?: V3; fade?: number }> = ({ tex, gap, out, lift, fade }) => {
+  const geos = useMemo(() => OCT.map(({ L, B }) => {
+    const rims = [Array.from({ length: 49 }, (_, i) => ll(B + (90 * i) / 48, L, 0.999)), Array.from({ length: 49 }, (_, i) => ll(B + (90 * i) / 48, L + 90, 0.999)),
+      Array.from({ length: 49 }, (_, i) => ll(0, L + (90 * i) / 48, 0.999))];
+    return { skin: sphereGeo(L, L + 90, 90, 90, 1, B, B + 90), faces: rims.map((q) => quarterFan(q)),
+      edges: rims.map((q) => outlineGeo(q.filter((_, i) => i % 3 === 0 || i === 48), 0.0055)) };
+  }), []);
+  const mats = useMemo(() => OCT.map(({ L }) => ({ skin: new THREE.MeshBasicMaterial({ side: THREE.FrontSide, transparent: true }),
+    faces: [0, 1, 2].map((j) => new THREE.MeshBasicMaterial({ color: FACE_TONE[planeOf(L, j)], side: THREE.DoubleSide, transparent: true })),
+    edge: new THREE.MeshBasicMaterial({ color: EDGE, transparent: true }) })), []);
   return (
     <group>
       {OCT.map(({ L, B }, i) => {
         const lifted = L === 0 && B === 0;
-        const o = lifted ? Math.max(0, 1 - out) : 1;
+        // p3a (review 1 M2): with `lift`, the piece rises along `lift` (screen-up and aside, never towards the camera) at full strength and
+        // stays there, offset, until `fade` takes it away; without it, the pass-2 behaviour (out along its diagonal while fading)
+        const o = lifted ? (lift ? Math.max(0, 1 - (fade ?? 0)) : Math.max(0, 1 - out)) : 1;
         if (o <= 0.01) return null;
         const m = mats[i];
         if (m.skin.map !== tex) { m.skin.map = tex; m.skin.needsUpdate = true; }
-        m.skin.opacity = o; m.skin.depthWrite = o > 0.98; m.face.opacity = o; m.face.depthWrite = o > 0.98;
-        const d = octDiag(L, B), s = gap + (lifted ? 0.9 * out : 0);
+        m.skin.opacity = o; m.skin.depthWrite = o > 0.98;
+        for (const fm of m.faces) { fm.opacity = o; fm.depthWrite = o > 0.98; }
+        m.edge.opacity = o * 0.9; m.edge.depthWrite = o > 0.98;
+        const d = octDiag(L, B), s0 = gap + (lifted && !lift ? 0.9 * out : 0);
+        const pos: V3 = lifted && lift ? [d[0] * gap + lift[0] * out, d[1] * gap + lift[1] * out, d[2] * gap + lift[2] * out] : [d[0] * s0, d[1] * s0, d[2] * s0];
         return (
-          <group key={i} position={[d[0] * s, d[1] * s, d[2] * s]}>
+          <group key={i} position={pos}>
             <mesh geometry={geos[i].skin} material={m.skin} renderOrder={lifted ? 4 : 1} />
-            {geos[i].faces.map((g, j) => <mesh key={j} geometry={g} material={m.face} renderOrder={lifted ? 4 : 1} />)}
+            {geos[i].faces.map((g, j) => <mesh key={j} geometry={g} material={m.faces[j]} renderOrder={lifted ? 4 : 1} />)}
+            {gap > 0.004 ? geos[i].edges.map((g, j) => <mesh key={`e${j}`} geometry={g} material={m.edge} renderOrder={lifted ? 5 : 2} />) : null}
           </group>
         );
       })}
@@ -111,7 +135,39 @@ const OctantEarth: React.FC<{ tex: THREE.Texture | null; gap: number; out: numbe
   );
 };
 
-const CutEarth: React.FC<{ tex: THREE.Texture | null; alpha: number; cut: Exclude<Cut, { kind: "oct" }>; faceO: number }> = ({ tex, alpha, cut, faceO }) => {
+// ------------------------------------------------------------------------------------------------ p3a: the wedge cut (s25)
+// The Earth with the wedge between longitudes l0 and l1 cut out (the cross-product Part 2 quarter cut-away, narrower): two half-disc faces
+// through the polar axis meet along the axis, so the axis and the radii of the parallels lie in plain view ON the faces, while every
+// place outside the wedge stays on the Blue Marble skin. `open` 0..1: the wedge's skin fades out and the faces fade in (0 = whole Earth).
+const halfFan = (lon: number) => quarterFan(Array.from({ length: 97 }, (_, i) => ll(-90 + (180 * i) / 96, lon, 0.999)));
+const WedgeEarth: React.FC<{ tex: THREE.Texture | null; l0: number; l1: number; open: number }> = ({ tex, l0, l1, open }) => {
+  const geo = useMemo(() => ({ skin: sphereGeo(l1, l0 + 360, 270, 180), plug: sphereGeo(l0, l1, 90, 180), f0: halfFan(l0), f1: halfFan(l1),
+    e0: outlineGeo(Array.from({ length: 33 }, (_, i) => ll(-90 + (180 * i) / 32, l0, 0.999)), 0.0045),
+    e1: outlineGeo(Array.from({ length: 33 }, (_, i) => ll(-90 + (180 * i) / 32, l1, 0.999)), 0.0045) }), [l0, l1]);
+  const m = useMemo(() => ({ skin: new THREE.MeshBasicMaterial({ side: THREE.FrontSide }), plug: new THREE.MeshBasicMaterial({ side: THREE.FrontSide, transparent: true }),
+    f0: new THREE.MeshBasicMaterial({ color: FACE_TONE.m0, side: THREE.DoubleSide, transparent: true }),
+    f1: new THREE.MeshBasicMaterial({ color: FACE_TONE.m90, side: THREE.DoubleSide, transparent: true }),
+    edge: new THREE.MeshBasicMaterial({ color: EDGE, transparent: true }) }), []);
+  for (const q of [m.skin, m.plug]) if (q.map !== tex) { q.map = tex; q.needsUpdate = true; }
+  const op = Math.max(0, Math.min(1, open));
+  m.plug.opacity = 1 - op; m.plug.depthWrite = op < 0.02;
+  for (const q of [m.f0, m.f1]) { q.opacity = op; q.depthWrite = op > 0.98; }
+  m.edge.opacity = 0.85 * op;
+  return (
+    <group>
+      <mesh geometry={geo.skin} material={m.skin} renderOrder={1} />
+      {op > 0.01 ? <>
+        <mesh geometry={geo.f0} material={m.f0} renderOrder={2} />
+        <mesh geometry={geo.f1} material={m.f1} renderOrder={2} />
+        <mesh geometry={geo.e0} material={m.edge} renderOrder={3} />
+        <mesh geometry={geo.e1} material={m.edge} renderOrder={3} />
+      </> : null}
+      {op < 0.99 ? <mesh geometry={geo.plug} material={m.plug} renderOrder={4} /> : null}
+    </group>
+  );
+};
+
+const CutEarth: React.FC<{ tex: THREE.Texture | null; alpha: number; cut: Exclude<Cut, { kind: "oct" } | { kind: "wedge" }>; faceO: number }> = ({ tex, alpha, cut, faceO }) => {
   const kind = cut.kind;
   const lon0 = cut.kind === "mer" ? cut.lon0 : 0, lat0 = cut.kind === "lat" ? cut.lat0 : 0;
   const geoA = useMemo(() => (kind === "mer" ? sphereGeo(lon0, lon0 + 180, 180, 180) : kind === "lat" ? sphereGeo(-180, 180, 360, 180, 1, -90, lat0) : sphereGeo(-180, 180, 360, 180)),

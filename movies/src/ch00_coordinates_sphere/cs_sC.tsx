@@ -17,9 +17,10 @@ import {
   Scene, SideCallout, SkipChip, Svg, TeX, Thermo, VIOLET, XC, XZ, arcD, chipSpan, clamp, cutAt, discOf, fin, fout, gdot, gseg, globeG, keepGone, keepTime, ll, merPath, mix,
   parPath, plab, poly, prog, rep, spinPath, splitVis, win,
   RAD, Magnify, KeepPic,
-  Recall, HOLD,
+  Recall, HOLD, facePt, merFace,
 } from "./cs_lib";
 import { ramp } from "../house";
+import { merCut } from "./cs_two";
 import { EQ_S18, EQ_S27, EQ_S28, EQ_S29, EQ_S30, EQ_S31, EQ_S32, EQ_S33, EQ_S34 } from "./cs_eq";
 
 const E5 = D.era5, AR = D.area, BD = D.band, TM = D.t2m;
@@ -246,17 +247,21 @@ const S28: React.FC = () => {
       <TeX s={EQ_S28} x={120} y={800} size={T.calc} c={C.ink} o={fin(f, 0)} />
       {/* calc audit S10: the voice rounds the inputs (40.6 million, 0.00436); the rows use the unrounded ones (772.8 ≈ 773) */}
       <TeX s={String.raw`\text{rows unrounded (rounded: }\approx772)`} x={120} y={710} size={44} c={C.muted} o={win(f, tEq + 15, tCos - 20)} />
+      {/* p3a (review 2 Should/Cosmetic): "twice" is a square (no orphan "× 0.0043633" row); each place's cos φ is its own gold row on its word,
+          the box area on "it's about" */}
       <CalcStack f={f} x={XC} y={230} size={52} maxLines={4} rows={[
         { lhs: "", rhs: rows[0], at: tRad },
         { lhs: "", rhs: rows[1], at: AT(k, 1, "is zero point"), cont: true, glow: pulse(f, AT(k, 1, "is zero point"), 30) },
         { lhs: "", rhs: rows[2], at: tA2 },
         { lhs: "", rhs: rows[3], at: AT(k, 2, "about forty"), cont: true },
-        { lhs: "", rhs: String.raw`\Delta A_{\text{eq}}=40.59\times10^{6}\times0.0043633`, at: SS(k, 3), size: 46 },
-        { lhs: "", rhs: String.raw`\times0.0043633`, at: AT(k, 3, ", twice"), size: 46, cont: true },
+        { lhs: "", rhs: String.raw`\Delta A_{\text{eq}}=40.59\times10^{6}\times0.0043633^2`, at: SS(k, 3), size: 46 },
         { lhs: "", rhs: String.raw`\approx772.8\approx773\ \text{km}^2`, at: tEq, cont: true, glow: pulse(f, tEq, 30) },
-        { lhs: "", rhs: String.raw`\Delta A=772.8\times0.9219\approx712\ \text{km}^2`, at: tK - 20, size: 46, glow: pulse(f, AT(k, 5, "zero point nine"), 30) },
-        { lhs: "", rhs: String.raw`\Delta A=772.8\times0.6639\approx513\ \text{km}^2`, at: tB - 20, size: 46 },
-        { lhs: "", rhs: String.raw`\Delta A=772.8\times0.2045\approx158\ \text{km}^2`, at: tL - 20, size: 46 },
+        { lhs: "", rhs: String.raw`\cos22.8^\circ\approx0.9219`, at: AT(k, 5, "zero point nine"), size: 46, glow: pulse(f, AT(k, 5, "zero point nine") + 8, 30) },
+        { lhs: "", rhs: String.raw`\Delta A=772.8\times0.9219\approx712\ \text{km}^2`, at: tK, size: 46, cont: true },
+        { lhs: "", rhs: String.raw`\cos48.4^\circ\approx0.6639`, at: AT(k, 6, "Brest's cosine phi"), size: 46, glow: pulse(f, AT(k, 6, "Brest's cosine phi") + 8, 30) },
+        { lhs: "", rhs: String.raw`\Delta A=772.8\times0.6639\approx513\ \text{km}^2`, at: tB, size: 46, cont: true },
+        { lhs: "", rhs: String.raw`\cos78.2^\circ\approx0.2045`, at: AT(k, 7, "much smaller cosine phi"), size: 46, glow: pulse(f, AT(k, 7, "much smaller cosine phi") + 8, 30) },
+        { lhs: "", rhs: String.raw`\Delta A=772.8\times0.2045\approx158\ \text{km}^2`, at: tL, size: 46, cont: true },
       ]} />
     </Scene>
   );
@@ -276,19 +281,36 @@ const S29: React.FC = () => {
     return { p: [mix(s[0], t[0], un), mix(s[1], t[1], un)] as Pt, w: vis ? 1 : un }; });
 
   const parts = cutAt(EQ_S29, "=2");
+  // p3a: the half-Earth for S7-S9 (cut along 36° E: the camera at 0…−6° E sees the face 36-42° from frontal, as camFace's 40°)
+  const LC = 36, S27 = Math.sin(27.5 * D2R), C27 = Math.cos(27.5 * D2R);
+  const cutO = prog(f, tLen - 10, tLen + 30);
+  const pR = G.pw(facePt(merFace(LC), C27 / 2, S27));
   return (
     <Scene>
-      {/* pass 2 (user 2026-11-07): the axis and the strip's radius run INSIDE the Earth: 3-D rods, and the Earth turns half see-through on
-          "the length" (S7) so they show through it (they were SVG lines drawn across an opaque globe) */}
-      <Earth cam={cam} box={GB29} coast={0.45} alpha={1 - 0.45 * fin(f, tLen, 15)}
-        three={<>
-          <Axis3D L={1.25} r={0.006} color={C.local} o={fin(f, tLen)} />
-          <Rod3D a={[0, Math.sin(27.5 * D2R), 0]} b={ll(27.5, L - 60, 1.003)} px={5} color={C.second} o={fin(f, tLen)} />
-        </>}
-        over={(Gg) => <>
-          <BandTint G={Gg} a={0} b={30} c={C.first} o={0.35 * fin(f, tQ) * fout(f, tOne)} />
-          <BandTint G={Gg} a={25} b={30} c={C.gold} o={0.75 * fin(f, tOne) * (1 - un)} />
-        </>} />
+      {/* p3a (pass-2 review 1 M3, the user's "lines inside the Earth shown as inside"): no see-through Earth. On "Its length is the length of
+          the parallel" (S7) the Earth is cut open along the 36° E meridian (the cross-product Part 2 half-Earth, seen 36-42° from the face):
+          the spin axis is drawn ON the cut face, the strip's parallel (27.5° N) runs round it on the kept half, and its radius a cos φ runs
+          ON the face from the axis to the rim, so it can never be read as a line across the Atlantic. The removed half of the parallel is a
+          faint dashed construction line; its hidden back is dashed and dim. */}
+      <Earth cam={cam} box={GB29} coast={0.45} cut={merCut(cutO, LC)} cutCoast
+        three={<Axis3D L={1.25} r={0.006} color={C.local} o={fin(f, tLen)} />}
+        over={(Gg) => {
+          const P = (u: number, v: number) => Gg.pw(facePt(merFace(LC), u, v));
+          const ring = Array.from({ length: 121 }, (_, i) => ll(27.5, LC + (360 * i) / 120, 1.003));
+          const sv = splitVis(Gg, ring.filter((_, i) => i <= 60));
+          const oL = fin(f, tLen);
+          return <>
+            <BandTint G={Gg} a={0} b={30} c={C.first} o={0.35 * fin(f, tQ) * fout(f, tOne)} />
+            <BandTint G={Gg} a={25} b={30} c={C.gold} o={0.75 * fin(f, tOne) * (1 - un)} />
+            <line x1={P(0, -1)[0]} y1={P(0, -1)[1]} x2={P(0, 1)[0]} y2={P(0, 1)[1]} stroke={C.local} strokeWidth={4} opacity={cutO * oL} />
+            {sv.front.map((q, i) => <path key={i} d={poly(q)} fill="none" stroke={C.second} strokeWidth={5} opacity={oL} />)}
+            {sv.back.map((q, i) => <path key={`b${i}`} d={poly(q)} fill="none" stroke={C.second} strokeWidth={3} strokeDasharray="8 8" opacity={0.4 * oL} />)}
+            <path d={poly(ring.filter((_, i) => i >= 60).map((q) => Gg.pw(q)))} fill="none" stroke={C.muted} strokeWidth={2.5} strokeDasharray="6 10" opacity={0.55 * cutO * oL} />
+            <line x1={P(0, S27)[0]} y1={P(0, S27)[1]} x2={P(C27, S27)[0]} y2={P(C27, S27)[1]} stroke={C.second} strokeWidth={7} strokeLinecap="round" opacity={cutO * oL} />
+            <circle cx={P(0, S27)[0]} cy={P(0, S27)[1]} r={8} fill={C.gold} stroke={C.bg} strokeWidth={3} opacity={cutO * oL} />
+          </>;
+        }} />
+      <TeX s={String.raw`a\cos\varphi`} x={pR[0]} y={pR[1] + 44} size={T.floor} c={C.second} ax={0.5} o={cutO * fin(f, tLen + 15)} halo />
       <SourceBelow text={SRC_G} pic={{ x: 60, y: 28, w: 960, h: 650 }} w={960} name="globe src" o={fout(f, tUn - 10)} />
       <Svg>
         {un > 0 ? pts.slice(1).map((q, i) => <line key={i} x1={pts[i].p[0]} y1={pts[i].p[1]} x2={q.p[0]} y2={q.p[1]} stroke={C.gold} strokeWidth={8 + 14 * un} strokeLinecap="butt"
@@ -351,7 +373,7 @@ const S30: React.FC = () => {
       <CalcStack f={f} x={XC + 40} y={260} size={52} maxLines={4} rows={[
         { lhs: String.raw`\Delta\varphi`, rhs: String.raw`=10\times\dfrac{\pi}{180}\approx0.1745\ \text{rad}`, at: tTen, glow: pulse(f, AT(k, 6, "zero point one"), 30) },   // still review: the conversion's arithmetic (A1)
         { lhs: String.raw`\cos25^\circ`, rhs: String.raw`\approx0.906`, at: tMid + 30, glow: pulse(f, AT(k, 7, "zero point nine"), 30) },
-        { lhs: "", rhs: String.raw`0.906\times0.1745\approx0.158`, at: tProd - 20, ul: tToo, glow: pulse(f, AT(k, 8, "about zero point"), 30) },
+        { lhs: String.raw`\cos\varphi\,\Delta\varphi`, rhs: String.raw`=0.906\times0.1745\approx0.158`, at: tProd - 20, ul: tToo, glow: pulse(f, AT(k, 8, "about zero point"), 30) },   // p3a: a left side (stand-alone frame)
         { lhs: "", rhs: String.raw`\Delta(\sin\varphi)=\sin30^\circ-\sin20^\circ`, at: tGrow + 40, size: 46 },
         { lhs: "", rhs: String.raw`=0.5-0.342=0.158`, at: AT(k, 10, "zero point one five eight"), ul: tToo, cont: true },
       ]} />
@@ -402,13 +424,13 @@ const S31: React.FC = () => {
       <TeX s={String.raw`\varphi'\text{: latitude of each strip}`} x={XC + 104} y={830} size={T.floor} c={C.key} o={fin(f, tPrime)} />{/* k6r2: right of the integral's "sum" */}
       <TeX s={eqs[1]} x={XC} y={665} size={T.eq} c={C.ink} o={fin(f, tBand) * fout(f, SS(k, 7) - 12)} />
       <CalcStack f={f} x={XC} y={600} size={44} maxLines={4} rows={[
-        { lhs: "", rhs: String.raw`\sin10^\circ\approx0.174,\ \ \sin20^\circ\approx0.342`, at: SS(k, 7), out: SS(k, 8) - 8, c: C.muted },
+        { lhs: "", rhs: String.raw`\sin10^\circ\approx0.174,\ \ \sin20^\circ\approx0.342`, at: SS(k, 7), out: SS(k, 8) - 8, glow: pulse(f, SS(k, 7) + 8, 30) },   // p3a: inputs, gold
         { lhs: "", rhs: String.raw`0^\circ\to10^\circ:\ \ 0.174-0=0.174`, at: SS(k, 7) + 15, out: SS(k, 8) - 8 },
         { lhs: "", rhs: String.raw`10^\circ\to20^\circ:\ \ 0.342-0.174=0.168`, at: SS(k, 7) + 40, out: SS(k, 8) - 8 },
         { lhs: "", rhs: String.raw`20^\circ\to30^\circ:\ \ 0.500-0.342=0.158`, at: SS(k, 7) + 65, out: SS(k, 8) - 8 },
       ]} />
       <TeX s={String.raw`0.174+0.168+0.158`} x={XC} y={730} size={52} c={C.ink} o={win(f, SS(k, 8), tName - 22)} />
-      <TeX s={String.raw`=0.500=\sin30^\circ`} x={XC + 60} y={800} size={52} c={C.ink} o={win(f, AT(k, 8, "they add up"), tName - 22)} />
+      <TeX s={String.raw`=0.500=\sin30^\circ`} x={XC + 60} y={800} size={52} c={C.ink} o={win(f, AT(k, 8, "zero point five"), tName - 22)} glow={pulse(f, AT(k, 8, "zero point five"), 30)} />
       <Layered parts={[{ t: String.raw`\int_0^{\varphi}`, u: { w: String.raw`\text{sum}`, c: C.gold } }, { t: String.raw`\cos\varphi'` },
         { t: String.raw`\,d\varphi'`, u: { w: String.raw`\text{tiny step}`, c: C.gold } }, { t: String.raw`=\sin\varphi` }]} x={XC} y={705} size={64}
         layers={[{ t: "all", o: fin(f, tInt) }, { t: [], u: [0, 2], o: fin(f, tInt + 25) }]} />
@@ -577,6 +599,8 @@ const S34: React.FC = () => {
           <Lbl x={830} y={250} t="0 °C" c={C.key} s={T.key} o={fin(f, tN60 + 20)} />
         </g>
         <g opacity={oMap}>
+          {/* p3a (house rule 2026-11-08, review 2 Should): the data figure's title: what it shows and when */}
+          <Lbl x={MB.x} y={MB.y - 48} t="2-m air temperature · September 2026 mean" c={C.ink} s={T.floor} />
           <rect x={MB.x} y={MB.y} width={MB.w} height={MB.h} fill="none" stroke="none" />
           <image href={IMGS.t2mEE} x={MB.x} y={MB.y} width={MB.w} height={MB.h} preserveAspectRatio="none" />
           <path d={coast} fill="none" stroke={C.bg} strokeOpacity={0.7} strokeWidth={1.6} />
@@ -603,8 +627,8 @@ const S34: React.FC = () => {
         <Lbl x={XC} y={810} t="$\cos\varphi_j$: the weight of box $j$" c={C.key} s={T.floor + 4} o={win(f, tSum, tReal - 10)} />
       </Svg>
       <SourceBelow text="Data: ERA5 (Copernicus C3S) · 2-m temperature · September 2026 monthly mean · 1° grid" pic={MB} w={900} o={oMap} name="s34 src" />
-      <TeX s={String.raw`\approx7.1\ ^\circ\text{C}`} x={1594} y={360} size={54} c={C.local} o={fin(f, tP) * oMap} />
-      <TeX s={String.raw`\approx16.3\ ^\circ\text{C}`} x={1594} y={470} size={54} c={C.first} o={fin(f, tWt) * oMap} />
+      <TeX s={String.raw`\approx7.1\ ^\circ\text{C}`} x={1594} y={360} size={54} c={C.local} o={fin(f, tP) * oMap} glow={pulse(f, tP, 30)} />
+      <TeX s={String.raw`\approx16.3\ ^\circ\text{C}`} x={1594} y={470} size={54} c={C.first} o={fin(f, tWt) * oMap} glow={pulse(f, tWt, 30)} />
       <TeX s={String.raw`16.3-7.1=9.2\ ^\circ\text{C}\ \text{too cold}`} x={XC} y={760} size={50} c={C.neg} o={fin(f, AT(k, 17, "more than nine")) * oMap} />
       <CalcStack f={f} x={XC} y={230} size={50} maxLines={4} o={fout(f, tWhy - 20)} rows={[
         { lhs: "", rhs: String.raw`\text{plain: }(30+0)\div2=15\ ^\circ\text{C}`, at: tPlain },
@@ -612,7 +636,7 @@ const S34: React.FC = () => {
         { lhs: "", rhs: String.raw`\text{weighted: }(30\times1+0\times\dfrac12)`, at: tW + 30, size: 46 },
         // still review k6r2 (A1): the divisor is the sum of the weights, 1 + ½ = 1.5, and the numerator 30; then 30 ÷ 1.5 on "That's twenty"
         { lhs: "", rhs: String.raw`\div(1+\dfrac12)`, at: AT(k, 8, "and divides"), size: 46, cont: true },
-        { lhs: "", rhs: String.raw`\text{weighted}=30\div1.5=20\ ^\circ\text{C}`, at: SS(k, 9), size: 46 },
+        { lhs: "", rhs: String.raw`\text{weighted}=30\div1.5=20\ ^\circ\text{C}`, at: SS(k, 9), size: 46, glow: pulse(f, SS(k, 9) + 8, 30) },
       ]} />
       {/* k6r3: the toy rows (all worked by "That's twenty") leave before the general formula comes in on the next sentence, in their place */}
       <TeX s={EQ_S34} x={XC} y={500} size={T.eq} c={C.ink} o={fin(f, tWhy) * fout(f, tReal - 10)} />
@@ -641,7 +665,9 @@ const Mini: React.FC<{ i: number; o: number }> = ({ i, o }) => {
         <path d={`M${c[0]} ${c[1]}${arcD(c, 120, 0, 48.4).replace("M", "L")}Z`} fill={C.gold} fillOpacity={i === 2 ? 0.35 : 0.12} stroke={C.gold} strokeWidth={5} />
         {i === 3 ? <path d={`M${c[0]} ${c[1]}${arcD(c, 100, 48.4, 90).replace("M", "L")}Z`} fill={C.local} fillOpacity={0.35} stroke={C.local} strokeWidth={5} /> : null}</> : null}
       {i === 4 || i === 5 ? <><circle cx={c[0]} cy={c[1]} r={R} fill="#1d2a44" stroke={C.muted} strokeWidth={4} />
-        {i === 4 ? <ellipse cx={c[0]} cy={c[1] - R * 0.75} rx={R * 0.66} ry={40} fill="none" stroke={C.second} strokeWidth={6} /> : <ellipse cx={c[0]} cy={c[1]} rx={R * 0.45} ry={R} fill="none" stroke={C.second} strokeWidth={6} />}
+        {i === 4 ? <ellipse cx={c[0]} cy={c[1] - R * 0.75} rx={R * 0.66} ry={40} fill="none" stroke={C.second} strokeWidth={6} /> : <>{/* p3a (pass-2 review 1 M4, the user's rule): a meridian is HALF a circle, pole to pole, never continued: one half-ellipse */}
+          <path d={`M${c[0]} ${c[1] - R} A ${R * 0.45} ${R} 0 0 1 ${c[0]} ${c[1] + R}`} fill="none" stroke={C.second} strokeWidth={6} />
+          <circle cx={c[0]} cy={c[1] - R} r={8} fill={C.second} /><circle cx={c[0]} cy={c[1] + R} r={8} fill={C.second} /></>}
         <line x1={c[0]} y1={c[1] - R - 40} x2={c[0]} y2={c[1] + R + 40} stroke={C.local} strokeWidth={3} strokeDasharray="10 8" /><circle cx={c[0]} cy={i === 4 ? c[1] - R * 0.75 : c[1]} r={9} fill={i === 4 ? C.local : C.gold} /></> : null}
       {i === 6 ? <><circle cx={c[0]} cy={c[1]} r={R} fill="#4a3d36" stroke={C.muted} strokeWidth={4} /><line x1={c[0]} y1={c[1]} x2={p(0)[0]} y2={p(0)[1]} stroke={C.gold} strokeWidth={6} />
         <line x1={c[0]} y1={c[1]} x2={p(40)[0]} y2={p(40)[1]} stroke={C.key} strokeWidth={5} /><path d={arcD(c, 140, 0, 40)} fill="none" stroke={C.second} strokeWidth={8} /></> : null}
@@ -677,7 +703,7 @@ const S35: React.FC = () => {
   const kw: [number, string, string | null][] = [
     [0, "distance + two angles", null], [1, "", String.raw`a\approx6400\ \text{km}`], [2, String.raw`latitude $\varphi$`, null], [3, "", String.raw`\text{colatitude}=90^\circ-\varphi`],
     [4, "parallel: round the axis", null], [5, "meridian: round the centre", null], [6, String.raw`longitude $\lambda$: east +`, null],
-    [7, "", EQ_S18.split(String.raw`,\quad `)[2]], [8, "", String.raw`U=\Omega\,a\cos\varphi\approx464.6\ \text{m/s}`], [9, "", String.raw`\Delta y=a\,\Delta\varphi\approx111\ \text{km}`],
+    [7, "", EQ_S18.split(String.raw`,\quad `)[2]], [8, "", String.raw`U=\Omega\,a\cos\varphi`], [9, "", String.raw`\Delta y=a\,\Delta\varphi`],
     [10, "", String.raw`\Delta x=a\cos\varphi\,\Delta\lambda`], [11, "", String.raw`dA=a^2\cos\varphi\,d\varphi\,d\lambda`], [12, String.raw`share $\sin\varphi$ · weights $\cos\varphi$`, null],
     [13, "7.1 → 16.3 °C", null], [14, "Part 4: turning frames", null],
   ];
@@ -687,6 +713,9 @@ const S35: React.FC = () => {
       <Svg>{kw.filter((q) => q[1]).map(([j, t]) => <Keyword key={j} f={f} text={t} at={[XC, 430]} appear={a(j)} out={j + 1 < NP ? b(j) : undefined} />)}</Svg>
       {kw.filter((q) => q[2]).map(([j, , s]) => <TeX key={j} s={s as string} x={XC} y={430} size={j === 7 ? T.calc : 60} c={C.ink} o={fin(f, a(j)) * (j + 1 < NP ? fout(f, b(j)) : 1)} />)}
       <Svg>
+        {/* p3a (review 2 Should, stand-alone frames): the number of each rule with what it is, on its word */}
+        <Lbl x={XC} y={540} t="at the equator ≈ 464.6 m/s" c={C.key} s={T.floor} o={win(f, AT(k, 8, "about four hundred"), b(8))} />
+        <Lbl x={XC} y={540} t="≈ 111 km per degree, everywhere" c={C.key} s={T.floor} o={win(f, AT(k, 9, "about a hundred"), b(9))} />
         <Lbl x={XC} y={540} t="Brest: ≈ 74 km per degree" c={C.key} s={T.floor} o={win(f, AT(k, 10, "about seventy four") + 28, b(10))} />
         <Lbl x={XC} y={540} t="ERA5 · September 2026" c={C.key} s={T.floor} o={win(f, a(13) + 8, b(13))} />
         <Lbl x={XC} y={540} t="its own east, north, up" c={C.key} s={T.floor} o={win(f, AT(k, 14, "its own east") - 18, SS(k, 15) - 14)} />
@@ -739,4 +768,4 @@ export const SCENES_C: Record<string, React.FC> = {
   s26_grid_boxes: S26, s27_area_patch: S27, s28_box_areas: S28, s29_strip_round: S29, s30_slope_of_sine: S30, s31_adding_strips: S31, s32_band_fraction: S32,
   s33_archimedes: S33, s34_global_mean: S34, s35_recap: S35, s36_end: S36,
 };
-void [gdot, plab, splitVis, pulse, GFULL, mix];
+void [gdot, plab, splitVis, pulse, GFULL, mix, Rod3D];

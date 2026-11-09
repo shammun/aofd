@@ -42,10 +42,13 @@ const S00: React.FC = () => {
   const f = useCurrentFrame(), k = K("s00_title");
   const tMet = AT(k, 0, "to measure"), tCo = AT(k, 0, "coordinates");   // HOUSE_STYLE §3 (2026-11-06): the concept name pulses on its word
   const oA = fout(f, tMet, 12), oB = fin(f, tMet, 12);
-  const camA = globePath([{ f: 0, lat: 20, lon: LON0 - 10, dist: 3.2 }, { f: 60, lat: 12, lon: LON0 - 40, dist: 3.2 }], f);
+  // p3a (pass-2 review 1 M1): dist 3.2 / 3.0 made the globe (r ≈ 270 px) taller than the 480-px 3-D box, so it was cut flat at the top and
+  // bottom. At dist 3.9 the whole Earth is r ≈ 203 px in the box (37 px clear above and below), whole and as the half-Earth (the removed
+  // half moves 0.2 radii ≈ 41 px sideways in the 690-px-wide box)
+  const camA = globePath([{ f: 0, lat: 20, lon: LON0 - 10, dist: 3.9 }, { f: 60, lat: 12, lon: LON0 - 40, dist: 3.9 }], f);
   const slide = prog(f, 40, 95);
   const tArrow = 96, tWedge = 124;
-  const camB = globePath([{ f: tMet, lat: 56, lon: 8, dist: 3.0 }, { f: LEN(k) + 10, lat: 58, lon: 12, dist: 3.0 }], f);
+  const camB = globePath([{ f: tMet, lat: 56, lon: 8, dist: 3.9 }, { f: LEN(k) + 10, lat: 58, lon: 12, dist: 3.9 }], f);
   const GA = globeG(camA, TB);
   const c0 = GA.pw([0, 0, 0]);
   const wedge = prog(f, tWedge, tWedge + 40);
@@ -226,7 +229,9 @@ const S04: React.FC = () => {
         layers={[{ t: [1], o: fin(f, t6400) }, { t: [0], o: isA, glow: pulse(f, tA + 6, 20) }]} />
       <TeX s={part2} x={XC + 10} y={345} size={T.key} c={C.muted} o={fin(f, tExact)} />
       <TeX s={String.raw`r=a\ \ \text{on the ground}`} x={XC} y={560} size={T.calc} c={C.ink} o={fin(f, tGround)} />
-      <TeX s={String.raw`10\ \text{km}\div 6371\ \text{km}\approx 0.16\,\%`} x={XC} y={670} size={60} c={C.ink} o={fin(f, AT(k, 9, "only ten kilometres"))} />
+      {/* p3a (pass-2 review 2 Should): the division on "only ten kilometres", its result on "about a sixth of one percent" */}
+      <Layered parts={[{ t: String.raw`10\ \text{km}\div 6371\ \text{km}` }, { t: String.raw`\approx 0.16\,\%` }]} x={XC} y={670} size={60}
+        layers={[{ t: [0], o: fin(f, AT(k, 9, "only ten kilometres")) }, { t: [1], o: fin(f, AT(k, 9, "about a sixth")) }]} />
     </Scene>
   );
 };
@@ -406,7 +411,9 @@ const S07: React.FC = () => {
       </Svg>
       <TeX s={String.raw`\varphi+\text{colatitude}=90^\circ`} x={XC} y={260} size={T.calc} c={C.ink} o={fin(f, tFill + 30)} />
       <TeX s={EQ_S07} x={XC} y={370} size={T.calc} c={C.ink} o={fin(f, tEq)} />
-      <TeX s={String.raw`90^\circ-48.4^\circ=41.6^\circ`} x={XC} y={480} size={T.calc} c={C.ink} o={fin(f, tCalc)} />
+      {/* p3a (review 2 Should): "= 41.6°" on "forty one point six" */}
+      <Layered parts={[{ t: String.raw`90^\circ-48.4^\circ` }, { t: String.raw`=41.6^\circ` }]} x={XC} y={480} size={T.calc}
+        layers={[{ t: [0], o: fin(f, tCalc) }, { t: [1], o: fin(f, AT(k, 6, "forty one point six")) }]} />
     </Scene>
   );
 };
@@ -476,7 +483,9 @@ const S08: React.FC = () => {
       <TeX s={String.raw`180^\circ-90^\circ-\varphi=90^\circ-\varphi`} x={XC} y={660} size={60} c={C.ink} o={win(f, tShare, tEq - 20)} />
       <TeX s={eqs[0]} x={XC} y={650} size={60} c={C.ink} o={fin(f, tEq)} />
       <TeX s={eqs[1]} x={XC} y={735} size={60} c={C.ink} o={fin(f, AT(k, 18, "and the cosine of the colatitude"))} />
-      <TeX s={String.raw`\sin 41.6^\circ\approx 0.6639=\cos 48.4^\circ`} x={XC} y={820} size={T.floor + 6} c={C.ink} o={fin(f, tNum)} />
+      {/* p3a (review 2 Should): "≈ 0.6639" on "zero point six six three nine", "= cos 48.4°" on "and so is the cosine" */}
+      <Layered parts={[{ t: String.raw`\sin 41.6^\circ` }, { t: String.raw`\approx 0.6639` }, { t: String.raw`=\cos 48.4^\circ` }]} x={XC} y={820} size={T.floor + 6}
+        layers={[{ t: [0], o: fin(f, tNum) }, { t: [1], o: fin(f, AT(k, 19, "zero point six")) }, { t: [2], o: fin(f, AT(k, 19, "and so is")) }]} />
       {/* remake 2026-11-07 (R16): Part 1's polar lines recalled where the triangle rule is used (S8), right of the flat face */}
       <Recall f={f} tex={String.raw`x=r\cos\theta,\ \ y=r\sin\theta`} name="polar coordinates" x={1372} y={430} size={44} appear={tRule} out={SS(k, 12) - 10} />
       <SkipChip f={f} k={k} to={keepTime("s09_meridians")} />
@@ -507,10 +516,15 @@ const S09: React.FC = () => {
         over={(Gg) => <>
           <path d={merPath(Gg, -30, 90, tipLat, 1.003)} fill="none" stroke={C.second} strokeWidth={7} opacity={fin(f, tStart + 40, 4)} />
           {Array.from({ length: 11 }, (_, i) => { const m = -60 - 30 * i; const o = f < tTurn ? 0 : clamp((m + 5 - cam.lon) / 10, 0, 1);
-            return <path key={m} d={merPath(Gg, m)} fill="none" stroke={C.second} strokeWidth={4} opacity={o} />; })}
+            // p3a (review 1 Should): once the Earth is see-through (S9), each meridian's hidden back half shows dashed and dim (never solid)
+            const bk = splitVis(Gg, Array.from({ length: 61 }, (_, j) => ll(-90 + 3 * j, m, 1.003))).back;
+            return <g key={m}><path d={merPath(Gg, m)} fill="none" stroke={C.second} strokeWidth={4} opacity={o} />
+              {f >= tBig ? bk.map((q, j) => <path key={j} d={poly(q)} fill="none" stroke={C.second} strokeWidth={2.5} strokeDasharray="8 8" opacity={0.35 * o * fin(f, tBig)} />) : null}</g>; })}
           {f >= tBig ? <g opacity={fin(f, tBig)}>
-            <path d={poly([...Array.from({ length: 61 }, (_, i) => Gg.pw(ll(-90 + 3 * i, -30))), ...Array.from({ length: 61 }, (_, i) => Gg.pw(ll(90 - 3 * i, 150)))])}
-              fill="none" stroke={C.second} strokeWidth={3} strokeDasharray="10 8" opacity={0.7} />
+            {/* p3a (user's rule: a meridian is a half circle, pole to pole, never continued): the -30° meridian dashed in its colour; the
+                opposite half (150° E) that closes the circle round the centre is only a faint grey construction line */}
+            <path d={poly(Array.from({ length: 61 }, (_, i) => Gg.pw(ll(-90 + 3 * i, -30))))} fill="none" stroke={C.second} strokeWidth={3} strokeDasharray="10 8" opacity={0.7} />
+            <path d={poly(Array.from({ length: 61 }, (_, i) => Gg.pw(ll(90 - 3 * i, 150))))} fill="none" stroke={C.muted} strokeWidth={2} strokeDasharray="6 10" opacity={0.45} />
             <circle cx={Gg.pw([0, 0, 0])[0]} cy={Gg.pw([0, 0, 0])[1]} r={11} fill={C.gold} stroke={C.bg} strokeWidth={3} />
           </g> : null}
           {f >= tPar ? <g opacity={fin(f, tPar)}>

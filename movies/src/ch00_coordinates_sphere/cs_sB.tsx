@@ -32,7 +32,7 @@ const CHECK_B: [string, number, number, number][] = [
   ["coslK", KH.cosl, 0.00698, 5e-6], ["T", SP.T, 86164, 0.5], ["Om", SP.Om * 1e5, 7.29, 5e-3], ["U0", SP.U[0], 464.6, 0.05], ["US", SP.U[1], 464, 0.5], ["UK", SP.U[2], 428, 0.5],
   ["UB", SP.U[3], 308, 0.5], ["UL", SP.U[4], 95, 0.5], ["dy1", DG.dy1, 111.2, 0.05], ["dxS", DG.dx1[1], 111.2, 0.05], ["dxK", DG.dx1[2], 102.5, 0.05],
   ["dxB", DG.dx1[3], 73.8, 0.05], ["dxL", DG.dx1[4], 22.7, 0.05], ["min", DG.min_km, 1.85, 0.005], ["eqB", DG.brest_eq_km, 5382, 0.5], ["cosL", Math.cos(LYB[0] * D2R), 0.2045, 5e-5],
-  ["amphan", KH.amphan.closest_km, 78, 20],
+  ["amphan", KH.amphan.closest_km, 79, 1],   // p3a: from Khulna city (79.36 km; data builder DS16), screen "≈ 79 km"
   // fix loop 1: the new rows (Singapore 1.35° N, cos 1.35° = 0.9997; Longyearbyen 78.2° N; 1 m/s = 3.6 km/h; 2π × 6400 ≈ 40 000; 1670/900 ≈ 1.9)
   ["latS", SING[0], 1.35, 0.005], ["cosS", Math.cos(SING[0] * D2R), 0.9997, 5e-5], ["latL", LYB[0], 78.2, 0.05], ["kmh", 3600 / 1000, 3.6, 1e-12],
   ["circ", 2 * Math.PI * 6400, 40000, 300], ["jet", 1670 / 900, 1.9, 0.05], ["U36", SP.U[0] * 3.6, 1670, 5],
@@ -48,13 +48,21 @@ const S13: React.FC = () => {
   const tAx = SS(k, 2), tZ = AT(k, 3, "The z axis"), tX = AT(k, 4, "The x axis"), tGG = AT(k, 4, "Gulf of Guinea"), tY = AT(k, 5, "The y axis"), tIO = AT(k, 5, "Indian Ocean"),
     tHat = AT(k, 6, "x hat, y hat and z hat"), tRA = SS(k, 7), tCross = SS(k, 8), tTurn = SS(k, 9), tGoal = SS(k, 10), tTwo = SS(k, 11);
   // pass 2: the camera stays on the corner hollow (0-90° E, north); after "they turn with the Earth" it comes back over Brest for the goal
-  const cam = spinPath([{ f: 0, lat: 22, lon: 40, dist: 3.5 }, { f: tX - 10, lat: 20, lon: 40, dist: 3.5 }, { f: tX + 50, lat: 18, lon: 22, dist: 3.5 },
-    { f: tY - 10, lat: 18, lon: 25, dist: 3.5 }, { f: tY + 60, lat: 18, lon: 62, dist: 3.5 }, { f: tHat, lat: 24, lon: 45, dist: 3.5 },
-    { f: tTurn, lat: 24, lon: 45, dist: 3.5 }, { f: SE(k, 9), lat: 24, lon: 68, dist: 3.5 }, { f: tGoal + 50, lat: 28, lon: 25, dist: 3.5 },
-    { f: LEN(k) + 10, lat: 28, lon: 22, dist: 3.5 }], f);
+  // p3a (pass-2 review 1 M2): dist 3.5 → 4.4, the centre 85 px lower and 40 px left (pp 440, 480 of the 960 × 790 frame), so the lifted piece
+  // has room above and right of the Earth inside the frame (light geometry check: Earth x 208-792, piece x 507-1003, y 62-487)
+  const PP: Pt = [440, 480], DS = 4.4;
+  const cam = spinPath([{ f: 0, lat: 22, lon: 40, dist: DS, pp: PP }, { f: tX - 10, lat: 20, lon: 40, dist: DS, pp: PP }, { f: tX + 50, lat: 18, lon: 22, dist: DS, pp: PP },
+    { f: tY - 10, lat: 18, lon: 25, dist: DS, pp: PP }, { f: tY + 60, lat: 18, lon: 62, dist: DS, pp: PP }, { f: tHat, lat: 24, lon: 45, dist: DS, pp: PP },
+    { f: tTurn, lat: 24, lon: 45, dist: DS, pp: PP }, { f: SE(k, 9), lat: 24, lon: 68, dist: DS, pp: PP }, { f: tGoal + 50, lat: 28, lon: 25, dist: DS, pp: PP },
+    { f: LEN(k) + 10, lat: 28, lon: 22, dist: DS, pp: PP }], f);
   // pass 2 (user 2026-11-07, old 14:13): the Earth cut along the three coordinate planes into eight pieces with thin gaps, the piece between
-  // +x, +y and +z lifted out: a corner hollow at the centre where the three axes (3-D rods, hidden where a piece covers them) meet
-  const gap = 0.05 * prog(f, tAx, tAx + 40), out = prog(f, tAx + 10, tAx + 55);
+  // +x, +y and +z lifted out: a corner hollow at the centre where the three axes (3-D rods, hidden where a piece covers them) meet.
+  // p3a (review 1 M2): the faces carry one tone per cutting plane and light corner edges (kit_cs/earth.tsx); the piece no longer flies out
+  // towards the camera while fading: it rises 0.45 radii and moves 0.66 radii to the right (local east of the camera's 40° E), so the hollow
+  // and the z axis stay in view, holds there at full strength (≈ 3.5 s, through "The z axis"), then fades
+  const tStart = AT(k, 2, "all starting");
+  const gap = 0.05 * prog(f, tAx, tAx + 40), out = prog(f, tAx + 5, tAx + 45), fade = prog(f, tZ + 20, tZ + 45);
+  const LIFT: V3 = [0.66 * Math.cos(40 * D2R), 0.45, -0.66 * Math.sin(40 * D2R)];
   const pB = octShift(BREST[0], BREST[1], gap);
   const G = globeG(cam);
   const c0 = G.pw([0, 0, 0]);
@@ -65,12 +73,13 @@ const S13: React.FC = () => {
   const rows = cutAt(EQ_S13, "=");
   return (
     <Scene>
-      <Earth cam={cam} cut={{ kind: "oct", gap, out }} coast={0.4}
+      <Earth cam={cam} cut={{ kind: "oct", gap, out, lift: LIFT, fade }} coast={0.4}
         three={<>
           <Ball3D at={[0, 0, 0]} px={22} color={C.gold} o={fin(f, tAx)} />
-          <Rod3D a={[0, 0, 0]} b={[ez[0] * 1.4, ez[1] * 1.4, ez[2] * 1.4]} px={6} color={C.second} o={fin(f, tZ)} />
-          <Rod3D a={[0, 0, 0]} b={[ex[0] * 1.4, ex[1] * 1.4, ex[2] * 1.4]} px={6} color={C.second} o={fin(f, tX)} />
-          <Rod3D a={[0, 0, 0]} b={[ey[0] * 1.4, ey[1] * 1.4, ey[2] * 1.4]} px={6} color={C.second} o={fin(f, tY)} />
+          {/* p3a (review 1 M2): the three rods come in together on "all starting at the Earth's centre"; each is named on its own sentence */}
+          <Rod3D a={[0, 0, 0]} b={[ez[0] * 1.4, ez[1] * 1.4, ez[2] * 1.4]} px={6} color={C.second} o={fin(f, tStart)} />
+          <Rod3D a={[0, 0, 0]} b={[ex[0] * 1.4, ex[1] * 1.4, ex[2] * 1.4]} px={6} color={C.second} o={fin(f, tStart)} />
+          <Rod3D a={[0, 0, 0]} b={[ey[0] * 1.4, ey[1] * 1.4, ey[2] * 1.4]} px={6} color={C.second} o={fin(f, tStart)} />
           {/* the goal: the arrow from the centre to Brest, whose piece is pushed out by the gap (the arrow follows it) */}
           <Arrow3D from={[0, 0, 0]} to={pB} color={RAD} px={9} head={32} grow={prog(f, tGoal + 10, tGoal + 40)} o={fin(f, tGoal + 10)} onTop />
           <Ball3D at={pB} px={20} color={C.gold} o={fin(f, tGoal + 30)} />
@@ -80,7 +89,8 @@ const S13: React.FC = () => {
           {/* pass 2: with the cut faces the two names sat side by side on one row (and "Bay of Bengal" ran out of the frame): Gulf of Guinea
               goes under its dot, Indian Ocean above-left of its dot on the section; "Bay of Bengal" dropped (said in the voice, least needed) */}
           {plab(Gg, 0, 0, "Gulf of Guinea", win(f, tGG, tHat) * facing(Gg, 0, 0), -10, 70, "start", true)}
-          {plab(Gg, 0, 90, "Indian Ocean", win(f, tIO, tHat) * facing(Gg, 0, 90), -24, -44, "end", true)}
+          {/* p3a (review 1 Should): on the ocean next to its dot (below-left: 0-15° S, 60-90° E is open Indian Ocean), not on the cut face */}
+          {plab(Gg, 0, 90, "Indian Ocean", win(f, tIO, tHat) * facing(Gg, 0, 90), 18, 52, "end", true)}
           <g opacity={fin(f, tHat)}>
             <Arrow p={c0} q={xh} color={C.second} w={9} head={30} />
             <Arrow p={c0} q={yh} color={C.second} w={9} head={30} />
@@ -271,7 +281,7 @@ const S16: React.FC = () => {
         // k6p2c f30682/3: the cos row faded while the stack slid up for the 4th row, into "the axis" keyword and the flat half-disc's edge
         // (y 520); exit first: it is gone (out + 10) 2 frames before the slide starts at tEasy
         { lhs: String.raw`\cos48.4^\circ`, rhs: String.raw`\approx0.6639`, at: tCos, glow: pulse(f, AT(k, 2, "zero point six"), 30), out: tEasy - 12 },
-        { lhs: String.raw`a\cos\varphi`, rhs: String.raw`=6371\ \text{km}\times0.6639`, at: tRes - 30, glow: pulse(f, AT(k, 3, "six thousand three hundred") + 17, 30) },
+        { lhs: String.raw`a\cos\varphi`, rhs: String.raw`=6371\ \text{km}\times0.6639`, at: AT(k, 3, "six thousand three hundred"), glow: pulse(f, AT(k, 3, "six thousand three hundred") + 8, 30) },   // p3a: in on the input's word
         { lhs: "", rhs: String.raw`\approx4230\ \text{km}`, at: tRes, cont: true, glow: pulse(f, tRes, 30) },
         { lhs: "", rhs: String.raw`6400\times\dfrac23\approx4270`, at: tEasy, c: C.muted, out: tBoth - 15 },
       ]} />
@@ -405,10 +415,10 @@ const S18: React.FC = () => {
       <TeX s={String.raw`(4217,\ -332,\ 4764)\ \text{km}`} x={XC} y={130} size={52} c={C.ink} o={fin(f, tChk - 10) * fade1} />
       <CalcStack f={f} x={XC + 20} y={250} size={46} maxLines={3} rows={[
         { lhs: "", rhs: String.raw`a\cos\varphi=\sqrt{4217^2+332^2}`, at: tPy1 + 20, out: tParts - 20 },
-        { lhs: "", rhs: String.raw`=\sqrt{17\,783\,000+110\,000}`, at: tPy1 + 45, out: tParts - 20, cont: true },
+        { lhs: "", rhs: String.raw`\approx\sqrt{17\,783\,000+110\,000}`, at: tPy1 + 45, out: tParts - 20, cont: true },   // p3a: rounded squares (4217² = 17 783 089, 332² = 110 224)
         { lhs: "", rhs: String.raw`=\sqrt{17\,893\,000}\approx4230\ \text{km}`, at: AT(k, 7, "gives back"), out: tParts - 20, cont: true },
         { lhs: "", rhs: String.raw`a=\sqrt{4230^2+4764^2}`, at: tPy2 + 20, out: tParts - 20 },
-        { lhs: "", rhs: String.raw`=\sqrt{17\,893\,000+22\,696\,000}`, at: tPy2 + 45, out: tParts - 20, cont: true },
+        { lhs: "", rhs: String.raw`\approx\sqrt{17\,893\,000+22\,696\,000}`, at: tPy2 + 45, out: tParts - 20, cont: true },   // p3a: 4230² = 17 892 900, 4764² = 22 695 696
         { lhs: "", rhs: String.raw`=\sqrt{40\,589\,000}\approx6371\ \text{km}`, at: AT(k, 8, "gives six thousand"), out: tParts - 20, cont: true },
         { lhs: "", rhs: String.raw`\cos^2\varphi+\sin^2\varphi=1`, at: tOne, out: tParts - 20 },
       ]} />
@@ -496,6 +506,8 @@ const S19: React.FC = () => {
         extra3={() => <g opacity={fin(f, tAlong)}><Arrow p={c0t} q={pK} color={RAD} /><circle cx={pK[0]} cy={pK[1]} r={10} fill={C.gold} stroke={C.bg} strokeWidth={3} /></g>} /> : null}
       <Svg>
         <Keyword f={f} text="another city" at={[XZ, 170]} appear={0} out={tLL - 20} o={oA} />
+        {/* p3a (house rule 2026-11-08, review 2 Should): the data figure's title with the event's name and dates, while the track is shown */}
+        <Lbl x={950} y={50} t="Cyclone Amphan's track · 16–21 May 2020" c={C.ink} s={T.floor} o={fin(f, tAm) * oA} />
         {/* remake 2026-11-07: the closest approach of Amphan's centre (IBTrACS v04r01 NI, interpolated; Part 2 cs.json amphan.close.Khulna.km = 79.4) */}
         <Keyword f={f} text="Amphan's centre:" at={[XZ, 280]} appear={tAm} out={tLL - 20} s={50} />
         <Keyword f={f} text="≈ 79 km to the west" at={[XZ, 345]} appear={tKm} out={tLL - 20} s={50} />
@@ -532,38 +544,50 @@ const S20: React.FC = () => {
   // fix loop 1 (review 1 S2): the noon-to-noon rows are spoken (S9-S11, one row each); every later sentence moved +3
   const tCircle = SS(k, 1), tRad = SS(k, 2), tHow = SS(k, 3), tT = SS(k, 6), tCapT = AT(k, 7, "capital T"), tSun = SS(k, 8), tFar = SS(k, 12), tDist = AT(k, 13, "two pi times"),
     tDist2 = SS(k, 14), tSpeed = SS(k, 15), tU = SS(k, 16), tPull = SS(k, 17), tRadS = SS(k, 18), tOm = AT(k, 19, "capital Omega"), tRes = SS(k, 20), tRing = SS(k, 21);
-  const cam = spinPath([{ f: 0, lat: 28, lon: 10, dist: 3.4 }, { f: tFar, lat: 30, lon: -30, dist: 3.4 }, { f: LEN(k) + 10, lat: 30, lon: -40, dist: 3.4 }], f);
+  // p3a (pass-2 review 1 M3, the user's "lines inside the Earth shown as inside", old 24:55-25:20): no see-through Earth. From "carried round
+  // a circle" (S1) to just before the trip round the parallel (S13), the Earth is cut open along Brest's meridian (the cross-product Part 2
+  // half-Earth): the spin axis is drawn ON the cut face, the parallel's ring runs round it, and its radius a cos φ runs on the face from the
+  // axis out to Brest at the rim. The camera looks at the face from 40° west of Brest, 14° up, so Brest is never on the line of sight while
+  // a cos φ is named. The cut closes again before the trip (the whole globe, as before).
+  const lonF = LON0 - 40;
+  const cam = spinPath([{ f: 0, lat: 28, lon: 10, dist: 3.4 }, { f: tCircle + 40, lat: 14, lon: lonF, dist: 3.4 },
+    { f: tDist - 45, lat: 14, lon: lonF, dist: 3.4 }, { f: tDist, lat: 30, lon: -30, dist: 3.4 }, { f: LEN(k) + 10, lat: 30, lon: -40, dist: 3.4 }], f);
   const trip = prog(f, tDist, tDist2 + 60);
   const lonD = LON0 + 360 * trip;
   const G = globeG(cam);
-  const pc = G.pw([0, BV, 0]), pb = G.pw(ll(PHI, LON0));
   const A = cutAt(EQ_S20, String.raw`,\qquad `), A1 = cutAt(A[0], String.raw`=\Omega`);
-  // pass 2 (user 2026-11-07, old 24:55-25:20): the axis is a 3-D rod, seen outside the Earth and hidden inside it; while the radius of the
-  // parallel (from the axis out to Brest, INSIDE the Earth) is drawn, the Earth turns half see-through so both inside lines show through it
-  const glass = win(f, tCircle, tDist - 10, 15), alpha = 1 - 0.5 * glass;
+  const slide = prog(f, tCircle + 10, tCircle + 50) * (1 - prog(f, tDist - 40, tDist - 10));
+  const fp = (u: number, v: number): V3 => facePt(FACE_B, u, v);
+  const pMid = G.pw(fp(BU / 2, BV));
+  const oRad = fin(f, tRad) * Math.min(1, slide * 1.5);
   return (
     <Scene>
-      <Earth cam={cam} coast={0.45} alpha={alpha}
-        three={<>
-          <Axis3D L={1.35} r={0.007} color={C.local} />
-          <Rod3D a={[0, BV, 0]} b={ll(PHI, LON0)} px={5} color={C.second} o={fin(f, tRad) * fout(f, tDist - 10)} />
-        </>}
+      <Earth cam={cam} coast={0.45} cut={merCut(slide)} cutCoast
+        three={<Axis3D L={1.35} r={0.007} color={C.local} />}
         over={(Gg) => {
-          const ring = Array.from({ length: 121 }, (_, i) => ll(PHI, (360 * i) / 120, 1.002));
-          const sv = splitVis(Gg, ring);
+          const ring = Array.from({ length: 121 }, (_, i) => ll(PHI, LON0 + (360 * i) / 120, 1.002));
+          const kept = ring.filter((_, i) => i <= 60), gone = ring.filter((_, i) => i >= 60);
+          const sv = splitVis(Gg, slide > 0.001 ? kept : ring);
           const nT = Math.max(2, Math.round(120 * trip)), trail = Array.from({ length: nT + 1 }, (_, i) => ll(PHI, LON0 + (360 * trip * i) / nT, 1.004));
           const tv = splitVis(Gg, trail);
+          const P = (u: number, v: number) => Gg.pw(fp(u, v));
           return <>
-            {sv.front.map((s, i) => <path key={i} d={poly(s)} fill="none" stroke={C.second} strokeWidth={5} opacity={fin(f, tCircle)} />)}
-            {/* the far half of the parallel only while the Earth is see-through (it is behind the globe) */}
-            {sv.back.map((s, i) => <path key={`b${i}`} d={poly(s)} fill="none" stroke={C.second} strokeWidth={3} strokeDasharray="8 8" opacity={0.7 * glass * fin(f, tCircle)} />)}
-            {tv.front.map((s, i) => <path key={`t${i}`} d={poly(s)} fill="none" stroke={C.gold} strokeWidth={7} opacity={fin(f, tDist)} />)}
+            {/* the cut face: the spin axis on it, pole to pole (the 3-D rod continues outside) */}
+            <line x1={P(0, -1)[0]} y1={P(0, -1)[1]} x2={P(0, 1)[0]} y2={P(0, 1)[1]} stroke={C.local} strokeWidth={4} opacity={Math.min(1, slide * 1.5)} />
+            {/* the parallel's disc meets the face in a chord: the half from the axis out to Brest is the radius a cos φ (solid), the other half dashed */}
+            <line x1={P(-BU, BV)[0]} y1={P(-BU, BV)[1]} x2={P(0, BV)[0]} y2={P(0, BV)[1]} stroke={C.second} strokeWidth={3} strokeDasharray="10 8" opacity={0.7 * fin(f, tCircle) * slide} />
+            <line x1={P(0, BV)[0]} y1={P(0, BV)[1]} x2={P(BU, BV)[0]} y2={P(BU, BV)[1]} stroke={C.second} strokeWidth={7} strokeLinecap="round" opacity={oRad * fout(f, tDist - 40)} />
+            <circle cx={P(0, BV)[0]} cy={P(0, BV)[1]} r={8} fill={C.gold} stroke={C.bg} strokeWidth={3} opacity={fin(f, tCircle) * slide} />
+            {/* the parallel: on the kept half solid in front, dashed and dim behind; where the half was taken away, a faint dashed construction line */}
+            {sv.front.map((q, i) => <path key={i} d={poly(q)} fill="none" stroke={C.second} strokeWidth={5} opacity={fin(f, tCircle)} />)}
+            {sv.back.map((q, i) => <path key={`b${i}`} d={poly(q)} fill="none" stroke={C.second} strokeWidth={3} strokeDasharray="8 8" opacity={0.45 * slide * fin(f, tCircle)} />)}
+            {slide > 0.001 ? <path d={poly(gone.map((q) => Gg.pw(q)))} fill="none" stroke={C.muted} strokeWidth={2.5} strokeDasharray="6 10" opacity={0.5 * slide * fin(f, tCircle)} /> : null}
+            {tv.front.map((q, i) => <path key={`t${i}`} d={poly(q)} fill="none" stroke={C.gold} strokeWidth={7} opacity={fin(f, tDist)} />)}
             {gdot(Gg, PHI, lonD, C.gold, 12, 1)}
           </>;
         }} />
-      {/* K6 k6r1: right of the axis (the dashed axis ran through the tag at the segment's middle) */}
-      {/* k6r2: the globe turns Brest across the axis, so the tag starts right of whichever end is further right (continuous), under the parallel (k6r3: above it, the ring crossed it) */}
-      <TeX s={String.raw`a\cos\varphi`} x={Math.max(pc[0], pb[0]) + 18} y={pb[1] + 44} size={48} c={C.second} ax={0} o={fin(f, tRad) * fout(f, tDist - 10)} halo />
+      {/* the radius's name, under its middle on the face (Brest at the rim to the right, the axis to the left) */}
+      <TeX s={String.raw`a\cos\varphi`} x={pMid[0]} y={pMid[1] + 46} size={48} c={C.second} ax={0.5} o={oRad * fout(f, tDist - 40)} halo />
       <GSrc />
       <Svg>
         <g data-lc-maplabel="1"><Lbl x={G.pw([0, 1.3, 0])[0] + 22} y={G.pw([0, 1.3, 0])[1] + 6} t="axis" c={C.key} s={T.floor} o={win(f, AT(k, 1, "round its axis"), tHow)} /></g>
@@ -612,12 +636,18 @@ const S21: React.FC = () => {
   const cam = spinPath([{ f: 0, lat: 25, lon: 40, dist: 3.4 }, { f: tS - 30, lat: 20, lon: 80, dist: 3.4 }, { f: tS + 20, lat: 15, lon: 95, dist: 3.4 },
     { f: tK + 20, lat: 25, lon: 75, dist: 3.4 }, { f: tB + 20, lat: 35, lon: 10, dist: 3.4 }, { f: tL + 20, lat: 52, lon: 20, dist: 3.4 },
     { f: tPole + 30, lat: 58, lon: 30, dist: 3.4 }, { f: LEN(k) + 10, lat: 40, lon: 40, dist: 3.4 }], f);
-  const places: { la: number; lo: number; U: number; at: number; name: string }[] = [
-    { la: 0, lo: 60, U: SP.U[0], at: tEq, name: "equator" }, { la: SING[0], lo: SING[1], U: SP.U[1], at: tS, name: "Singapore" },
-    { la: KHULNA[0], lo: KHULNA[1], U: SP.U[2], at: tK, name: "Khulna" }, { la: BREST[0], lo: BREST[1], U: SP.U[3], at: tB, name: "Brest" },
-    { la: LYB[0], lo: LYB[1], U: SP.U[4], at: tL2, name: "Longyearbyen" },
+  // p3a (review 2 Should): each tag ("Singapore ≈ 464 m/s") comes in on its result's word, with its unit
+  const places: { la: number; lo: number; U: number; at: number; name: string; res: number }[] = [
+    { la: 0, lo: 60, U: SP.U[0], at: tEq, name: "equator", res: tUeq }, { la: SING[0], lo: SING[1], U: SP.U[1], at: tS, name: "Singapore", res: AT(k, 13, "moves at about") },
+    { la: KHULNA[0], lo: KHULNA[1], U: SP.U[2], at: tK, name: "Khulna", res: AT(k, 14, "so it's about") },
+    { la: BREST[0], lo: BREST[1], U: SP.U[3], at: tB, name: "Brest", res: AT(k, 15, "so it's about") },
+    { la: LYB[0], lo: LYB[1], U: SP.U[4], at: tL2, name: "Longyearbyen", res: AT(k, 17, "about ninety five") },
   ];
   const G = globeG(cam);
+  // p3a (review 2 Cosmetic): an arrow (and its tag) fades before its tip leaves the globe's disc (Khulna's ran into space as the camera
+  // turned west towards Brest)
+  const dk = discOf(cam);
+  const onDisc = (q: Pt) => clamp((dk.r - 6 - Math.hypot(q[0] - dk.c[0], q[1] - dk.c[1])) / 24, 0, 1);
   const tipOf = (la: number, lo: number, U: number): [Pt, Pt] => {
     const b = ll(la, lo, 1.004), e = eastAt(lo), p0 = G.pw(b), w = G.wpp(b) * (U / 1.5);
     return [p0, G.pw([b[0] + e[0] * w, b[1] + e[1] * w, b[2] + e[2] * w])];
@@ -628,7 +658,7 @@ const S21: React.FC = () => {
         over={(Gg) => <>
           {/* pass 2 (old 26:03): the axis is a 3-D rod, hidden inside the opaque Earth (it was an SVG line drawn across the globe) */}
           {[0, KHULNA[0], BREST[0], LYB[0]].map((la) => <path key={la} d={parPath(Gg, la)} fill="none" stroke={C.second} strokeWidth={3} opacity={0.7} />)}
-          {places.map((p) => { const [a, b] = tipOf(p.la, p.lo, p.U); const o = fin(f, p.at) * facing(Gg, p.la, p.lo);
+          {places.map((p) => { const [a, b] = tipOf(p.la, p.lo, p.U); const o = fin(f, p.at) * facing(Gg, p.la, p.lo) * onDisc(b);
             return o > 0 ? <AnimatedWindArrow key={p.name} from={a} to={b} speed={p.U / 20} f={f} c={C.first} px={8} head={28} o={o} /> : null; })}
           {[SING, KHULNA, BREST, LYB].map((p, i) => <g key={i}>{gdot(Gg, p[0], p[1], C.gold, 9, fin(f, places[i + 1].at))}</g>)}
           {gdot(Gg, 90, 0, C.key, 9, fin(f, tPole))}
@@ -636,9 +666,9 @@ const S21: React.FC = () => {
         </>} />
       <GSrc />
       <Svg>
-        {places.slice(1).map((p) => { const [, b] = tipOf(p.la, p.lo, p.U); const o = win(f, p.at + 20, p.at + 260) * facing(G, p.la, p.lo);
+        {places.slice(1).map((p) => { const [, b] = tipOf(p.la, p.lo, p.U); const o = win(f, p.res, Math.max(p.res + 150, p.at + 260)) * facing(G, p.la, p.lo) * onDisc(b);
           // K6 k6r1: the tag stays left of x 1070 (Khulna's ran into the maths column)
-          const tg = `${p.name} ≈ ${Math.round(p.U)}`;
+          const tg = `${p.name} ≈ ${Math.round(p.U)} m/s`;
           return o > 0 ? <g key={p.name} data-lc-maplabel="1"><Lbl x={Math.min(b[0] + 14, 1036 - textW(tg, T.floor))} y={b[1] - 30} t={tg} c={C.key} s={T.floor} o={o} /></g> : null; })}
         <g data-lc-maplabel="1"><Lbl x={G.p(90, 0)[0] + 20} y={G.p(90, 0)[1] + 34} t="0" c={C.key} s={T.floor} o={fin(f, tPole) * (G.vis(90, 0) ? 1 : 0)} /></g>
         <Keyword f={f} text="east, the way the Earth turns" at={[XC, 620]} appear={tEast} out={tFeel - 20} s={T.floor + 4} />
@@ -647,27 +677,31 @@ const S21: React.FC = () => {
         <g opacity={win(f, tJet, tS - 10)}><PlaneIcon p={[1140, 620]} s={1.2} /><Lbl x={1200} y={620} t="passenger jet ≈ 900 km/h" c={C.key} s={T.floor} /></g>
       </Svg>
       <TeX s={EQ_S21} x={XC} y={130} size={T.eq} c={C.ink} o={fin(f, g0 + 8)} />
-      <CalcStack f={f} x={XC - 30} y={252} size={46} maxLines={3} rows={[
-        { lhs: "T", rhs: String.raw`=23\times3600+56\times60+4`, at: tT, glow: pulse(f, tT, 30) },
+      {/* p3a (review 1 Should, review 2 Should): every row starts in the column at x 1100 (the left sides reached x ≈ 955, over the globe's
+          rim); the cos φ of Khulna and Brest is its own row, in on its word with its gold pulse; "6.371 × 10⁶ m" carries its unit */}
+      <CalcStack f={f} x={XC} y={252} size={46} maxLines={3} rows={[
+        { lhs: "", rhs: String.raw`T=23\times3600+56\times60+4`, at: tT, glow: pulse(f, tT, 30) },
         { lhs: "", rhs: String.raw`=82\,800+3\,360+4=86\,164\ \text{s}`, at: AT(k, 4, "is eighty six"), cont: true },
-        { lhs: String.raw`\Omega`, rhs: String.raw`=\dfrac{2\pi}{86\,164\ \text{s}}\approx7.292\times10^{-5}\ \text{rad/s}`, at: AT(k, 5, "two pi divided") + 17, h: 110, size: 44 },
+        { lhs: "", rhs: String.raw`\Omega=\dfrac{2\pi}{86\,164\ \text{s}}\approx7.292\times10^{-5}\ \text{rad/s}`, at: AT(k, 5, "two pi divided") + 17, h: 110, size: 44 },
         // calc audit S3: cos 0° = 1 on its words, and the U row carries the × 1
-        { lhs: String.raw`\cos0^\circ`, rhs: "=1", at: AT(k, 6, "cosine phi is one"), size: 44 },
-        { lhs: String.raw`U_{\text{eq}}`, rhs: String.raw`=7.292\times10^{-5}\times6.371\times10^{6}\times1`, at: tUeq - 40, size: 44 },
-        { lhs: "", rhs: String.raw`\approx464.6\ \text{m/s}`, at: tUeq, size: 44, cont: true, glow: pulse(f, tUeq, 30) },
+        { lhs: "", rhs: String.raw`\cos0^\circ=1`, at: AT(k, 6, "cosine phi is one"), size: 44 },
+        { lhs: "", rhs: String.raw`U_{\text{eq}}=7.292\times10^{-5}\times6.371\times10^{6}\ \text{m}`, at: tUeq - 40, size: 44 },
+        { lhs: "", rhs: String.raw`\times1\approx464.6\ \text{m/s}`, at: tUeq, size: 44, cont: true, glow: pulse(f, tUeq, 30) },
         // review 1 S3: every number of the easy check is spoken, each row on its words, at full ink (the house dims the older rows)
         { lhs: "", rhs: String.raw`\text{equator}\approx2\pi\times6400\approx40\,000\ \text{km}`, at: AT(k, 8, "about forty thousand") },
-        { lhs: "", rhs: String.raw`U_{\text{eq}}\approx40\,000\ \text{km}\div24\ \text{h}\approx1670\ \text{km/h}`, at: AT(k, 9, "is about one thousand") },
-        { lhs: String.raw`1\ \text{m/s}`, rhs: String.raw`=3600\ \text{m/h}=3.6\ \text{km/h}`, at: AT(k, 10, "we multiply by") },
+        { lhs: "", rhs: String.raw`U_{\text{eq}}\approx40\,000\ \text{km}\div24\ \text{h}\approx1670\ \text{km/h}`, at: AT(k, 9, "is about one thousand"), size: 44 },
+        { lhs: "", rhs: String.raw`1\ \text{m/s}=3600\ \text{m/h}=3.6\ \text{km/h}`, at: AT(k, 10, "we multiply by") },
         { lhs: "", rhs: String.raw`U_{\text{eq}}=464.6\ \text{m/s}\times3.6\approx1670\ \text{km/h}`, at: AT(k, 11, "is also about") },
         { lhs: "", rhs: String.raw`\text{ground}\div\text{jet}=1670\div900\approx1.9`, at: AT(k, 12, "so the ground") },
         // calc audit M3: Singapore's latitude and its cos φ are named and shown before they are used
-        { lhs: "", rhs: String.raw`\text{Singapore }1.35^\circ\text{N: }\cos\varphi\approx0.9997`, at: AT(k, 13, "one point three five"), size: 44, glow: pulse(f, AT(k, 13, "zero point nine"), 30) },
+        { lhs: "", rhs: String.raw`\text{Singapore: }\cos1.35^\circ\approx0.9997`, at: AT(k, 13, "one point three five"), size: 44, glow: pulse(f, AT(k, 13, "zero point nine"), 30) },
         { lhs: "", rhs: String.raw`U=464.6\times0.9997\approx464\ \text{m/s}`, at: AT(k, 13, "moves at about") },
-        { lhs: "", rhs: String.raw`U_{\text{Khulna}}=464.6\times0.9219\approx428\ \text{m/s}`, at: AT(k, 14, "so it's about"), glow: pulse(f, AT(k, 14, "zero point nine") + 16, 30) },
-        { lhs: "", rhs: String.raw`U_{\text{Brest}}=464.6\times0.6639\approx308\ \text{m/s}`, at: AT(k, 15, "so it's about"), glow: pulse(f, AT(k, 15, "zero point six") + 16, 30) },
+        { lhs: "", rhs: String.raw`\text{Khulna: }\cos22.8^\circ\approx0.9219`, at: AT(k, 14, "zero point nine"), size: 44, glow: pulse(f, AT(k, 14, "zero point nine") + 8, 30) },
+        { lhs: "", rhs: String.raw`U_{\text{Khulna}}=464.6\times0.9219\approx428\ \text{m/s}`, at: AT(k, 14, "so it's about"), size: 44 },
+        { lhs: "", rhs: String.raw`\text{Brest: }\cos48.4^\circ\approx0.6639`, at: AT(k, 15, "zero point six"), size: 44, glow: pulse(f, AT(k, 15, "zero point six") + 8, 30) },
+        { lhs: "", rhs: String.raw`U_{\text{Brest}}=464.6\times0.6639\approx308\ \text{m/s}`, at: AT(k, 15, "so it's about"), size: 44 },
         // calc audit M3: Longyearbyen's 78.2° N and cos 78.2° on their words; the product on "So the ground there"
-        { lhs: "", rhs: String.raw`\text{Longyearbyen }78.2^\circ\text{N: }\cos\varphi\approx0.2045`, at: AT(k, 16, "seventy eight point two"), size: 44, glow: pulse(f, AT(k, 16, "zero point two") - 16, 30) },
+        { lhs: "", rhs: String.raw`\text{Longyearbyen: }\cos78.2^\circ\approx0.2045`, at: AT(k, 16, "seventy eight point two"), size: 44, glow: pulse(f, AT(k, 16, "zero point two") - 16, 30) },
         { lhs: "", rhs: String.raw`U=464.6\times0.2045\approx95\ \text{m/s}`, at: AT(k, 17, "So the ground there") },
       ]} />
       <KeepLine f={f} k={k} last={2} lines={[String.raw`height $a\sin\varphi$ ·`, String.raw`from the axis $a\cos\varphi$ ·`, String.raw`ground east at $\Omega\,a\cos\varphi$`]} />
@@ -725,7 +759,8 @@ const S22: React.FC = () => {
       <CalcStack f={f} x={XC + 50} y={600} size={44} maxLines={3} rows={[
         { lhs: String.raw`360^\circ`, rhs: String.raw`=2\pi\ \text{rad}`, at: AT(k, 10, "or two pi radians") },   // review 1 S4 / calc audit S4: the spoken full turn
         { lhs: String.raw`1^\circ`, rhs: String.raw`=\pi/180\approx0.01745\ \text{rad}`, at: tDeg - 20, glow: pulse(f, tDeg, 30) },
-        { lhs: String.raw`\Delta y`, rhs: String.raw`=6371\ \text{km}\times0.01745\approx111.2\ \text{km}`, at: tKm - 30, glow: pulse(f, AT(k, 12, "six thousand three hundred") + 16, 30) },
+        { lhs: String.raw`\Delta y`, rhs: String.raw`=6371\ \text{km}\times0.01745`, at: AT(k, 12, "six thousand three hundred"), glow: pulse(f, AT(k, 12, "six thousand three hundred") + 8, 30) },   // p3a
+        { lhs: "", rhs: String.raw`\approx111.2\ \text{km}`, at: tKm, cont: true, glow: pulse(f, tKm, 30) },
         { lhs: "", rhs: String.raw`\Delta y\approx6400\times0.0175=112`, at: tEasy, c: C.muted },
       ]} />
 
@@ -846,34 +881,55 @@ const S25: React.FC = () => {
   const f = useCurrentFrame(), k = K("s25_degree_east");
   const g0 = keepGone(k, 1);
   const tCmp = SS(k, 2), tEach = SS(k, 3), tS = SS(k, 4), tK = SS(k, 5), tB = SS(k, 6), tL = SS(k, 7), tP = SS(k, 8), tLike = SS(k, 9), tUnlike = SS(k, 10);
-  const cam = spinPath([{ f: 0, lat: 35, lon: 40, dist: 3.4 }, { f: LEN(k) + 10, lat: 35, lon: 46, dist: 3.4 }], f);
-  const P4 = [{ la: SING[0], lo: SING[1], d: DG.dx1[1], at: tS, n: "Singapore", row: String.raw`111.2\times0.9997\approx111.2` },
-    { la: KHULNA[0], lo: KHULNA[1], d: DG.dx1[2], at: tK, n: "Khulna", row: String.raw`111.2\times0.9219\approx102.5` },
-    { la: BREST[0], lo: BREST[1], d: DG.dx1[3], at: tB, n: "Brest", row: String.raw`111.2\times0.6639\approx73.8` },
-    { la: LYB[0], lo: LYB[1], d: DG.dx1[4], at: tL, n: "Longyearbyen", row: String.raw`111.2\times0.2045\approx22.7` }];
+  // p3a (pass-2 review 1 M3, the user's "lines inside the Earth shown as inside", old 26:03): the see-through Earth is gone. While the four
+  // places are compared (S2-S8) the wedge between 20° E and 80° E is cut out (kit_cs WedgeEarth: two half-disc faces through the polar axis,
+  // the cross-product Part 2 cut-away, narrower), so the axis is the faces' shared edge and each parallel's radius a cos φ lies ON a face:
+  // Brest's and Longyearbyen's on the 20° E face (their places lie west of it), Khulna's and Singapore's on the 80° E face (east of it).
+  // Every place stays on the Blue Marble skin. Each parallel is solid in front, dashed and dim behind (review 1 Should), and a faint dashed
+  // construction line across the open wedge. The wedge closes before the orange-segment picture (S9), which needs the whole globe.
+  const W0 = 20, W1 = 80;
+  const cam = spinPath([{ f: 0, lat: 35, lon: 50, dist: 3.4 }, { f: LEN(k) + 10, lat: 35, lon: 54, dist: 3.4 }], f);
+  const open = prog(f, tCmp, tCmp + 40) * (1 - prog(f, tLike - 40, tLike - 5));
+  // p3a (review 2 Should): `cin` = the frame the cos φ input is said (gold pulse), `res` = the frame the result is said (bar, km tag, ≈ row)
+  const P4 = [{ la: SING[0], lo: SING[1], d: DG.dx1[1], at: tS, n: "Singapore", row: String.raw`111.2\times0.9997\approx111.2`, fl: W1,
+    cin: AT(k, 4, "almost exactly one"), res: AT(k, 4, "is about one hundred") },
+    { la: KHULNA[0], lo: KHULNA[1], d: DG.dx1[2], at: tK, n: "Khulna", row: String.raw`111.2\times0.9219\approx102.5`, fl: W1, cin: AT(k, 5, "zero point nine"), res: AT(k, 5, "it's about") },
+    { la: BREST[0], lo: BREST[1], d: DG.dx1[3], at: tB, n: "Brest", row: String.raw`111.2\times0.6639\approx73.8`, fl: W0, cin: tB, res: AT(k, 6, "it's about") },
+    { la: LYB[0], lo: LYB[1], d: DG.dx1[4], at: tL, n: "Longyearbyen", row: String.raw`111.2\times0.2045\approx22.7`, fl: W0, cin: AT(k, 7, "zero point two"), res: AT(k, 7, "only about") }];
   const X0 = 1380, KPX = 3.6, Y0 = 330, DY = 95;
   const eqs = cutAt(EQ_S25, String.raw`\quad`);
   return (
     <Scene>
-      <Earth cam={cam} alpha={0.55} coast={0.4} three={<Axis3D L={1.3} r={0.006} color={C.local} />}
+      <Earth cam={cam} coast={0.4} cut={{ kind: "wedge", l0: W0, l1: W1, open }} cutCoast three={<Axis3D L={1.3} r={0.006} color={C.local} />}
         over={(Gg) => <>
+          {/* the axis along the wedge's inner edge, where the two faces meet (the 3-D rod continues outside the Earth) */}
+          <line x1={Gg.pw([0, -1, 0])[0]} y1={Gg.pw([0, -1, 0])[1]} x2={Gg.pw([0, 1, 0])[0]} y2={Gg.pw([0, 1, 0])[1]} stroke={C.local} strokeWidth={4} opacity={open} />
           {P4.map((p) => { const o = 0.35 + 0.65 * fin(f, p.at); const s = Math.sin(p.la * D2R);
-            const ring = Array.from({ length: 97 }, (_, i) => Gg.pw(ll(p.la, (360 * i) / 96, 1.001)));
+            // the ring from the far face round the outside to the near face (the skin that is still there), then across the open wedge
+            const skin = Array.from({ length: 121 }, (_, i) => ll(p.la, W1 + ((360 - (W1 - W0)) * i) / 120, 1.002));
+            const gap = Array.from({ length: 21 }, (_, i) => ll(p.la, W0 + ((W1 - W0) * i) / 20, 1.002));
+            const sv = splitVis(Gg, open > 0.001 ? skin : [...skin, ...gap.slice(1)]);
+            const oR = fin(f, p.at) * open;
             return <g key={p.n} opacity={o}>
-              <path d={`${poly(ring)}Z`} fill={C.second} fillOpacity={0.1 + 0.12 * fin(f, p.at)} stroke={C.second} strokeWidth={3} />
-              {gseg(Gg, [0, s, 0], ll(p.la, p.lo, 1.001), RAD, 4, fin(f, p.at))}
+              {sv.front.map((q, i) => <path key={i} d={poly(q)} fill="none" stroke={C.second} strokeWidth={3.5} />)}
+              {sv.back.map((q, i) => <path key={`b${i}`} d={poly(q)} fill="none" stroke={C.second} strokeWidth={2.5} strokeDasharray="8 8" opacity={0.4} />)}
+              {open > 0.001 ? <path d={poly(gap.map((q) => Gg.pw(q)))} fill="none" stroke={C.muted} strokeWidth={2.5} strokeDasharray="6 10" opacity={0.55 * open} /> : null}
+              {/* the parallel's radius a cos φ, ON the cut face: from the axis out to the face's rim at this latitude */}
+              {gseg(Gg, [0, s, 0], ll(p.la, p.fl, 0.999), RAD, 5, oR)}
+              {oR > 0 ? <circle cx={Gg.pw([0, s, 0])[0]} cy={Gg.pw([0, s, 0])[1]} r={7} fill={C.gold} stroke={C.bg} strokeWidth={3} opacity={oR} /> : null}
               <path d={poly(Array.from({ length: 11 }, (_, i) => Gg.pw(ll(p.la, p.lo + 0.5 * i, 1.004))))} fill="none" stroke={C.gold} strokeWidth={10} opacity={fin(f, p.at)} />
+              {gdot(Gg, p.la, p.lo, C.gold, 8, fin(f, p.at))}
             </g>; })}
           {Array.from({ length: 12 }, (_, i) => <path key={i} d={merPath(Gg, -180 + 30 * i)} fill="none" stroke={C.second} strokeWidth={i % 2 ? 4 : 2} opacity={0.8 * fin(f, tLike)} />)}
           <GoreTint G={Gg} o={0.35 * fin(f, tLike)} />
         </>} />
       <GSrc />
       <Svg>
-        {P4.map((p, i) => { const y = Y0 + i * DY, o = fin(f, p.at), w = p.d * KPX * prog(f, p.at, p.at + 25);
+        {P4.map((p, i) => { const y = Y0 + i * DY, o = fin(f, p.res), w = p.d * KPX * prog(f, p.res, p.res + 25);
           return <g key={p.n}>
             <Lbl x={X0 - 18} y={y} t={p.n} c={C.key} s={T.floor} a="end" o={(0.5 + 0.5 * o) * fin(f, g0)} />{/* after the keep picture (Part 1 lessons B4) */}
             <rect x={X0} y={y - 16} width={Math.max(0, w)} height={32} fill={C.gold} opacity={o} rx={4} />
-            <Lbl x={X0 + 8} y={y + 44} t={`${p.d.toFixed(1)} km`} c={C.gold} s={T.floor} o={fin(f, p.at + 20)} />
+            <Lbl x={X0 + 8} y={y + 44} t={`${p.d.toFixed(1)} km`} c={C.gold} s={T.floor} o={fin(f, p.res + 10)} />
           </g>; })}
         <circle cx={X0} cy={Y0 + 4 * DY - 10} r={9} fill={C.gold} opacity={fin(f, tP)} />
         <Lbl x={X0 - 18} y={Y0 + 4 * DY - 10} t="pole" c={C.key} s={T.floor} a="end" o={fin(f, tP)} />
@@ -884,7 +940,9 @@ const S25: React.FC = () => {
       </Svg>
       <TeX s={eqs[0]} x={XC} y={170} size={60} c={C.ink} o={fin(f, Math.max(tEach, g0 + 8))} />
       <TeX s={eqs[1]} x={1600} y={240} size={50} c={C.muted} o={fin(f, Math.max(tEach, g0 + 8))} />
-      {P4.map((p, i) => <TeX key={p.n} s={p.row} x={XC} y={730} size={52} c={C.ink} o={win(f, p.at + 10, (P4[i + 1]?.at ?? tP) - 10)} />)}
+      {P4.map((p, i) => { const [lh, rh] = cutAt(p.row, String.raw`\approx`); const end = (P4[i + 1]?.at ?? tP) - 20;
+        return <Layered key={p.n} parts={[{ t: lh }, { t: String.raw`\approx` + rh }]} x={XC} y={730} size={52}
+          layers={[{ t: [0], o: win(f, p.cin, end), glow: pulse(f, p.cin + 6, 30) }, { t: [1], o: win(f, p.res, end) }]} />; })}
       <KeepLine f={f} k={k} lines={["1° north ≈ 111 km ·", String.raw`1° east = 111 km $\times\cos\varphi$`]} />
       {/* Part 1 lessons B4: the keep line's own picture (a degree north is the same everywhere; a degree east shrinks with cos φ) */}
       <KeepPic kind="steps" c={[1440, 580]} R={220} o={fin(f, 4, 10) * fout(f, SE(k, 1), 10)} />

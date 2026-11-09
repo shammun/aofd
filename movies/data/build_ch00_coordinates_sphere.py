@@ -285,10 +285,16 @@ def main() -> int:
     th = ((tt - np.datetime64("2020-05-20T00:00")) / np.timedelta64(1, "h")).astype(float)
     hf = np.arange(th[sel][0], th[sel][-1] + 1e-9, 1 / 6)
     laf, lof = np.interp(hf, th, la_), np.interp(hf, th, lo_)
-    dK = np.asarray(call(GS + "great_circle_distance", "s19", "Amphan centre (10-min linear interpolation) → Khulna (a in metres)", heavy_call=True,
-                         lat1=laf, lon1=lof, lat2=KHULNA[0], lon2=KHULNA[1])) / 1e3
+    # fix loop p3a (2026-11-08, pass-2 review 2 Info): the closest approach is measured from Khulna CITY (Natural Earth populated place
+    # 22.842 N, 89.558 E; the same point as Part 2's PLACES_BD), not from the rounded geometry point KHULNA = (22.8, 89.6) (that gave 85.5 km).
+    # The voice says "about seventy nine kilometres to its west"; Part 2 (cs.json amphan.close.Khulna.km) says 79.4.
+    KC = tuple(pl["Khulna"])
+    dK = np.asarray(call(GS + "great_circle_distance", "s19", "Amphan centre (10-min linear interpolation) → Khulna city (NE 10 m place; a in metres)", heavy_call=True,
+                         lat1=laf, lon1=lof, lat2=KC[0], lon2=KC[1])) / 1e3
     jm = int(np.argmin(dK))
-    row("DS16", "Amphan passes within about 100 km of Khulna (storyboard rule: keep 'close to where … came ashore'); data report: 78 km W", [float(dK[jm] <= 100.0), float(lof[jm] < KHULNA[1])], [1, 1], 0)
+    row("DS16", "Amphan passes within about 100 km of Khulna (storyboard rule: keep 'close to where … came ashore'); data report: 78 km W", [float(dK[jm] <= 100.0), float(lof[jm] < KC[1])], [1, 1], 0)
+    row("DS16", "Amphan's centre closest to Khulna city (22.842 N, 89.558 E) ≈ 79.36 km, to its west (screen '≈ 79 km to the west'; Part 2 79.4)",
+        [dK[jm], float(lof[jm] < KC[1])], [79.36, 1], [0.01, 0])
     V["khulna"] = {"ll": list(KHULNA), "r_km": B1.r6(rKk, 3), "rhat": B1.r6(rK, 6), "sin": sK, "cos": cK, "cosl": clK, "sinl": slK, "R_km": A_KM * cK,
                    "amphan": {"lat": B1.r6(la_[sel], 2), "lon": B1.r6(lo_[sel], 2), "time": [str(x) for x in tt[sel]], "closest_km": float(dK[jm])},
                    "places": {k: pl.get(k) for k in ("Khulna", "Kolkata", "Dhaka")}}
@@ -585,12 +591,12 @@ def main() -> int:
                       "δy = a δφ, δx = a cos φ δλ": "Vallis §2.2.2, text before (2.27)", "dA = a² cos φ dφ dλ": "from δx δy (Vallis §2.2.2)",
                       "U = Ω a cos φ": "our step (|Ω × r| of Vallis (2.36))", "global mean weights cos φ": "fluidpy.diag.climatology.global_mean"},
         "parameters": {"places": V["places"], "a_m": EARTH_RADIUS, "Omega": OMEGA,
-                       "amphan": {"sid": AMPHAN, "file": "IBTrACS.NI.v04r01.nc", "closest_km_to_khulna": float(dK[jm]), "data_report": "reports/data/ch00_coordinates_research.md §3 (78 km W)"},
+                       "amphan": {"sid": AMPHAN, "file": "IBTrACS.NI.v04r01.nc", "closest_km_to_khulna": float(dK[jm]), "closest_from": "Khulna city, Natural Earth 10 m populated places (22.842 N, 89.558 E)", "data_report": "reports/data/ch00_coordinates_research.md §3 (78 km W)"},
                        "era5_panels": {"tall_deg": PANEL_TALL_DEG, "px": list(PANEL_PX), "km_per_px": km_px, "projection": "local equirectangular scaled by cos φ (true local shape; storyboard asked LAEA: differences < 0.3 % over 1.25°)",
                                        "image": "BMNG 21 600 × 10 800 (1.85 km per pixel), bilinear"},
                        "t2m": {"file": "data/derived/ch00/era5_t2m_anom_2026-09_1deg.nc (variable t2m, K)", "weighted_C": gw, "plain_C": gp, "lut": "cmocean thermal, −60 … +40 °C"},
                        "exaggerations": ["1° steps drawn ×5 (s22, s24, s25)", "4.5° wedge ×6 inset (s11, s17)", "one-minute step ×60 inset (s23)", "balloon height ×50 (s03, s04)",
-                                         "s27 patch 5° wide (×20 an ERA5 box)", "lifted caps and slid halves (s04-s08, s11, s14-s17, s22, s24)", "interior rings decorative"],
+                                         "s27 patch 5° wide (×20 an ERA5 box)", "lifted caps and slid halves (s04-s08, s11, s14-s17, s22, s24)", "p3a: half-Earth cut along a meridian (s20 Brest, s29 36° E), wedge 20-80° E cut out (s25), octant piece lifted 0.45 up + 0.66 aside (s13)", "interior rings decorative"],
                        "time_compression": ["globe spins (s06, s09, s20, s21)", "the camera tour along the prime meridian (s10)", "the title slice (s00)"],
                        "speed_arrows": "s21: 1 px per 1.5 m/s on the globe (illustrative length)"},
         "credits": ["NASA Blue Marble Next Generation (NASA Earth Observatory).", "Made with Natural Earth.", "IBTrACS v04r01 (NOAA NCEI).",

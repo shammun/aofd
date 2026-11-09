@@ -220,16 +220,36 @@ export const globeG = (cam: GlobeCam, box: Box = GB): GProj => {
 /** The Earth: WebGL Blue Marble (whole, translucent or cut) in `box`, then SVG overlays through the same camera: graticule,
  * Natural Earth coast (only on a whole globe: a cut globe shows the face), the caller's `over(G)`; `three` = extra R3F children
  * (THREE tags only). Coast and overlays are clipped to the box. */
+/** p3a: is longitude lo inside the arc a → b (going east)? */
+export const inLon = (lo: number, a: number, b: number) => ((((lo - a) % 360) + 360) % 360) <= b - a + 1e-9;
+/** p3a: split flat [lon, lat, …] polylines into the runs whose points pass `keep` (a coastline on the kept part of a cut Earth) */
+const keepRuns = (lines: number[][], keep: (lo: number) => boolean): number[][] => {
+  const out: number[][] = [];
+  for (const ln of lines) {
+    let cur: number[] = [];
+    for (let k = 0; k < ln.length; k += 2) {
+      if (keep(ln[k])) cur.push(ln[k], ln[k + 1]);
+      else { if (cur.length >= 4) out.push(cur); cur = []; }
+    }
+    if (cur.length >= 4) out.push(cur);
+  }
+  return out;
+};
 export const Earth: React.FC<{ cam: GlobeCam; box?: Box; cut?: Cut; alpha?: number; coast?: number; borders?: number; grat?: number; gratStep?: number;
-  o?: number; over?: (G: GProj) => React.ReactNode; three?: React.ReactNode; clip?: boolean }> = ({
-  cam, box = GB, cut = { kind: "whole" }, alpha = 1, coast = 0.45, borders = 0, grat = 0, gratStep = 30, o = 1, over, three, clip = true }) => {
+  o?: number; over?: (G: GProj) => React.ReactNode; three?: React.ReactNode; clip?: boolean; cutCoast?: boolean }> = ({
+  cam, box = GB, cut = { kind: "whole" }, alpha = 1, coast = 0.45, borders = 0, grat = 0, gratStep = 30, o = 1, over, three, clip = true, cutCoast = false }) => {
   const tex = useTex(IMGS.bmng);
   const st = globeCam({ ...cam, pp: cam.pp ?? [box.w / 2, box.h / 2] }, [box.w / 2, box.h / 2]);
   const G = globeProj(st, box.w, box.h, box.x, box.y);
   if (o <= 0) return null;
   const id = `ec${box.x}_${box.y}_${box.w}_${box.h}`;
   // pass 2: a meridian cut that has not opened yet (slide 0) is still the whole Earth (its coastline is drawn, as the credit says)
-  const whole = cut.kind === "whole" || (cut.kind === "mer" && cut.slide <= 0.001);
+  const whole = cut.kind === "whole" || (cut.kind === "mer" && cut.slide <= 0.001) || (cut.kind === "wedge" && cut.open <= 0.001);
+  // p3a (s20, s25, s29): `cutCoast` keeps the Natural Earth coastline on the part of a meridian / wedge cut Earth that is still there (the
+  // removed part's coast fades with it), so the credit "Blue Marble · Natural Earth" stays true while the Earth is cut open
+  const cc = cutCoast && !whole && (cut.kind === "mer" || cut.kind === "wedge");
+  const keepFn = (lo: number) => (cut.kind === "mer" ? inLon(lo, cut.lon0, cut.lon0 + 180) : cut.kind === "wedge" ? !inLon(lo, cut.l0, cut.l1) : true);
+  const goneO = cut.kind === "mer" ? 1 - clamp(cut.slide * 4, 0, 1) : cut.kind === "wedge" ? 1 - clamp(cut.open * 4, 0, 1) : 0;
   return (
     <AbsoluteFill>
       <View3D st={st} x={box.x} y={box.y} w={box.w} h={box.h} o={tex || (globalThis as { __R3?: number }).__R3 ? o : 0} key3={st.pos} amb={1.6} dir={1.4}>
@@ -241,6 +261,8 @@ export const Earth: React.FC<{ cam: GlobeCam; box?: Box; cut?: Cut; alpha?: numb
         <g clipPath={clip ? `url(#${id})` : undefined}>
           {grat > 0 ? <Grat G={G} step={gratStep} o={grat} /> : null}
           {coast > 0 && whole ? <path d={coastPath(G, D.lines.globe110)} fill="none" stroke={C.key} strokeOpacity={coast * alpha} strokeWidth={1.6} /> : null}
+          {coast > 0 && cc ? <path d={coastPath(G, keepRuns(D.lines.globe110, keepFn))} fill="none" stroke={C.key} strokeOpacity={coast * alpha} strokeWidth={1.6} /> : null}
+          {coast > 0 && cc && goneO > 0 ? <path d={coastPath(G, keepRuns(D.lines.globe110, (lo) => !keepFn(lo)))} fill="none" stroke={C.key} strokeOpacity={coast * alpha * goneO} strokeWidth={1.6} /> : null}
           {borders > 0 && whole ? <path d={coastPath(G, D.lines.borders110)} fill="none" stroke={C.key} strokeOpacity={borders * alpha} strokeWidth={1.2} /> : null}
           {over ? over(G) : null}
         </g>

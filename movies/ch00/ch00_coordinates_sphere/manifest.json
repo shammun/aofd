@@ -53,8 +53,9 @@
   "amphan": {
    "sid": "2020136N10088",
    "file": "IBTrACS.NI.v04r01.nc",
-   "closest_km_to_khulna": 85.52134319831156,
-   "data_report": "reports/data/ch00_coordinates_research.md §3 (78 km W)"
+   "closest_km_to_khulna": 79.36561716490229,
+   "data_report": "reports/data/ch00_coordinates_research.md §3 (78 km W)",
+   "closest_from": "Khulna city, Natural Earth 10 m populated places (22.842 N, 89.558 E)"
   },
   "era5_panels": {
    "tall_deg": 1.25,
@@ -79,6 +80,7 @@
    "balloon height ×50 (s03, s04)",
    "s27 patch 5° wide (×20 an ERA5 box)",
    "lifted caps and slid halves (s04-s08, s11, s14-s17, s22, s24)",
+   "p3a: half-Earth cut along a meridian (s20 Brest, s29 36° E), wedge 20-80° E cut out (s25), octant piece lifted 0.45 up + 0.66 aside (s13)",
    "interior rings decorative"
   ],
   "time_compression": [
@@ -237,7 +239,7 @@
  },
  "render_assets": {},
  "data_files": {
-  "cs.json": "acbbf288774673033feedb80a6adc7c772aa1c85719aa7e83359b802f2c6af2f",
+  "cs.json": "9cdd5f8abee3c921f74fc7ab3d79242791cb3fb1cdd846c01d8ff36cda5a3e81",
   "img/panel_brest.jpg": "8f6d9495c0c2eece67ebc5d8717b3123672feda59ee4809f73817b92c996fb32",
   "img/panel_khulna.jpg": "0b247a68d0ab9830607ee0c25a8eff15dd1703998229e96e018b69d0a0e9e159",
   "img/panel_lyb.jpg": "1e650089f0c04494cacf04eadaa93f2cc922ad4b10750f852f350229ea89d7b0",
@@ -872,6 +874,23 @@
     1.0
    ],
    "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DS16",
+   "name": "Amphan's centre closest to Khulna city (22.842 N, 89.558 E) ≈ 79.36 km, to its west (screen '≈ 79 km to the west'; Part 2 79.4)",
+   "value": [
+    79.365617,
+    1.0
+   ],
+   "ref": [
+    79.36,
+    1.0
+   ],
+   "tol": [
+    0.01,
+    0
+   ],
    "pass": true
   },
   {
@@ -2186,5 +2205,6 @@
    },
    "output_sha256": "14e43667a974c01314109c49b3070dc2e4e40e9ed52c04e58f1fb05bd44b5b7e"
   }
- ]
+ ],
+ "p3a_patch": "2026-11-08 checks/p3_amphan_patch.py: khulna.amphan.closest_km from Khulna city (79.36 km), cs.json rehashed; the builder does the same"
 }

@@ -4441,7 +4441,7 @@
  ],
  "total_s": 2906.7,
  "total_frames": 87201,
- "cues": 712,
+ "cues": 715,
  "warnings": [],
  "self_check": {
   "expected_s": 2906.7,
@@ -5386,5 +5386,6 @@
     }
    ]
   }
- }
+ },
+ "recue_p3a_1108": "checks/p3_recue.py (2026-11-08, pass-2 review 2 M1 + Should): no cue boundary and no line break inside a spoken number ('and' beside a number word counts; the Brest triple splits only at its commas); no cue under 1 s (a first / last cue may start / end in the silence beside its sentence); audio, words and sentence times unchanged"
 }
