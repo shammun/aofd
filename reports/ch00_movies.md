@@ -10489,3 +10489,15 @@ All arithmetic recomputed from data/cf.json: correct (s04–s27). 104 words chec
 - Raster edges s21/s25 clean; s25 chart labels clear; all 7 word-timed reveals on their words; gold on cos 30°/sin 30°/135 kt/0.1°; captions: no cue boundary inside a number or pair (633 cues); C4; regression sweep (327 frames) — PASS.
 - Should (captions only): 33:56.965 line break inside "four thousand four hundred and ninety"; 13:37.491 "two thousand nine hundred / and ninety three" (43 chars: exception).
 - Info: 20:25.645 pair split at its comma across two lines of one cue (47 chars, unavoidable); s11 θ̂ tip label tight; re-voice list unchanged ("so easy", s24 "times one, plus v times zero").
+
+## 5c pass2 — review 1 (movie), 2026-11-08 — FIX
+5c_coordinates_sphere_pass2.mp4, 48:29.2, 159.15 MB, QA 15/15 (audio re-limited −2.5 dBTP). Frames: reports/movies/ch00_coordinates_sphere/review_pass2/.
+- **M1** s00 title globe clipped flat top/bottom by its 3-D box (orchestrator confirmed). **M2** s13 octant: cut faces one flat brown — hollow reads as a dome (orchestrator confirmed); shade faces, draw corner edges, hold the lifted piece, rods on "all starting at the Earth's centre". **M3** user point "lines inside the Earth": met in s21, not in s20/s25/s29 (see-through Earth only dimmed, dashed axis reads as a surface line) → cross-product Part 2 half-Earth cut through the axis with axis + radius on the cut face; Brest off the line of sight. **M4** s35 recap meridian icon is a full ellipse (user's meridian rule).
+- Should: s13 "Indian Ocean" label onto the ocean; s21 rows out of column; 3 cues < 1 s; s25 back halves of parallels dim/dashed; s09 back meridians dashed/dimmed.
+- User points: real sliced Blue Marble + true credit MET; octant hollow PARTLY; inside lines MET s21 only; 28:23/31:40 3-D where it helps MET; t2m lines MET; meridian half circle MET except recap icon.
+
+## 5c pass2 — review 2 (calc & sync), 2026-11-08 — FIX (captions)
+~130 numbers recomputed: 0 mismatches; conventions right-handed, signs right; ≈ 94/110 reveals on their word; wording + tex lints 0. Frames: calc_pass2/.
+- **M1** 20 cue boundaries split spoken numbers (r7_cuefix misses numbers ending in "and"; Brest triple split at 19:47/19:49).
+- Should: gold pulse before its row is visible (s16 6371 3.7 s, s22, s21 cos φ, s28); results early (s21 globe tags + units, s25 bars 5–7 s, s07, s08, s04, s31); unvoiced/ungold inputs (s31 sin 10°, s28 rows, s34 7.1/16.3/20 °C); titles: s19 "Cyclone Amphan's track · 16–21 May 2020", s34 "2-m air temperature · September 2026 mean"; stand-alone frames (s30 row lhs, recap U_eq and "per degree", s18 rounded squares "≈"); 45 line breaks inside numbers; 3 cues < 1 s.
+- Info: Khulna–Amphan closest 79.36 km from Khulna city; cs.json stores 85.52 (rounded Khulna) with a ±20 km CHECK — store 79.36, tighten. Cosmetic: s28 orphan "×0.0043633", s21 Khulna arrow into space, U_eq "6.371×10⁶" without m.
