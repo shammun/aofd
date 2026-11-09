@@ -1,3 +1,20 @@
+# RESUME — paused by the user 2026-11-09 09:45 (session stopped on request)
+
+**Do first:** check G: is mounted (`ls "G:/Geophysical Fluid Dynamics/aofd-data"`), no *.lock in `G:/…/scratch/movies/`, then tell the user the status below and resume steps 1→4 automatically, one heavy job at a time (a check may run beside a render only if ≥ 16 GB RAM is free; mixes never overlap). Never thin K6 coverage. Remotion ports must avoid 8172–8371 and 8552–8984.
+
+**Done (QA 15/15, on G: viewing + Drive, verification review PASS):**
+- Part 1 `5a_coordinates_flat_fix4` (Drive 1lGJ6upEyWYlhx0QcP6hVAxE3DsCOU_AV).
+- Part 2 `5b_coordinates_storm_fix3` (Drive 1fWM8lyOIsliiQKKq7jHwyFS0VxiV0mRr).
+
+**Paused mid-work:**
+1. **Part 3 (5c) render p3d** — source 2cbc928, K6 `k6p3d` CLEAN (0 faults; every scene start frame by frame). Render stopped after chunks c00–c10 of 22 (in `G:/…/ch00_coordinates_sphere/build1/render/`; c11 partial — keep the dir, do NOT move it). Resume under RENDER2.lock:
+   `mkdir RENDER2.lock` (+ owner.txt) then `K6TAG=k6p3d bash movies/src/ch00_coordinates_sphere/checks/cs_render.sh --from 11`, release the lock. If QA fails only on loudness true peak: `ffmpeg -i build1_1080.mp4 -map 0:v -map 0:a -c:v copy -af "aresample=192000,alimiter=limit=0.70:attack=1:release=50:level=false,aresample=48000" -c:a aac -b:a 128k -movflags +faststart build1_1080_tp.mp4`, copy to movies/out/ch00/ch00_coordinates_sphere/1080.mp4, re-run movie_qa (args in the chain script). Deliver as `5c_coordinates_sphere_p3d.mp4` (+ .vtt) to G: viewing and Drive `aofd movies/ch00_coordinates_sphere`, log in outputs/drive_links.md, then a verification review against reports/ch00_movies.md "5c pass2 — review 1/2" (incl. the user's 2026-11-07 points; check the scene-change text blink is not distracting). Spot stills already looked fine: title globe in frame, octant hollow shaded, s20 half-Earth, s25 wedge, recap half-disc.
+2. **Part 4 (5d) K6 `k6r8e`** — source 23c960c (12 faults of k6r8d fixed: scene-gate exit, s10 phases). Not started. Then the **r8 mix** (`r8_voice.sh mix`: needs nothing heavy and ≥ 14 GB free — ask the user to close Chrome/Creative Cloud if it waits) and the **render** (fr_run.py render/join + QA with K6TAG k6r8e). The whole sequence is scripted in `G:/…/scratch/movies/resume_20261109/chain15_5d.sh` (change its first `until grep` trigger, or just run it after step 1).
+3. **Parts 5–7 (5e/5f/5g):** remove the CANCEL files in their scratch folders and run their queues one at a time (each needs K6 → fix → render). Then #6 gradient revision, M01, the easy-way batch.
+4. **Optional caption-only fixes:** Part 1 33:56 line break inside a number; Part 2 Shoulds (s29/s36 β legibility). Re-voice list (later): Part 1 "so easy to work with", s24 "times one, plus v times zero"; Part 2 Ω value, 1.852/3.6 factors.
+
+Chain log: `G:/…/scratch/movies/chain_20261108.log`. Lessons: knowledge base STATE.md 2026-11-09 sections.
+
 # RESUME — 2026-11-04 (session resumed after a stop)
 
 **State now:** weather UF2 fix loop 2 rendered, joined (58:06, 156.7 MB, commit 4269d36), QA pass (duration/size pass with the movie's own windows), source_check 0 fails; on C: movies/out, G: viewing copy and Drive (outputs/drive_links.md). Review 3 running (reports/ch00_movies.md). #4 fix loop 3 (the last) source fixes running in a builder, no render yet; render #4 after it returns (one Remotion job at a time). Then continue the queue below (#5 → #6 → M01 → …) automatically, movie after movie (user re-confirmed 2026-11-04).
