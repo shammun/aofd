@@ -14,10 +14,11 @@ import { GlobeCam, LatCircle, globePath, llPath } from "./kit_fr/globe";
 import { V3 } from "./kit_fr/cam";
 import {
   AT, ArcHead, Arrow, BREST, Recall, BROWN, CalcStack, D, D2R, GB, GFULL, GeoMap, Globe, H, KHULNA, Keyword, K, LEN, Lbl, SE, SING, SS, Scene, SideCallout, SkipChip,
-  Svg, TRAPPES, TeX, Tripod, TripodTips, XC, add, arcD, boxAt, clamp, discOf, e2g, facing, fin, fout, garrow, gdot, globeG, gseg, keepTime, linesPath, ll, mix,
+  Svg, TRAPPES, TeX, Tripod, TripodTips, XC, add, arcD, boxAt, clamp, discOf, e2g, enAt, facing, fin, fout, garrow, gdot, globeG, gseg, keepTime, linesPath, ll, mix,
   pieces, plab, poly, prog, sang, svNorth, svP, svUp, tvDir, tvEast, tvP, win, TopV, SliceV, GeoImg, IMGS, chipSpan, SpeedBar,
   HL,
   SourceBelow, useTextGate,
+  InsetGlobe, CAM_INSET, INSET, uarrow, gtip, turned3, GArc, rhatAt, meridianPath,
 } from "./fr_lib";
 import { AngleArc, SliceBase, TopViewBase, sliceArrows, topArrows, turned } from "./fr_dia";
 import { EQ_S03, EQ_S04, EQ_S05, EQ_S06, EQ_S08 } from "./fr_eq";
@@ -45,13 +46,19 @@ const GSrc: React.FC<{ o?: number }> = ({ o = 1 }) => <SourceBelow text={SRC_G} 
 const XZ = 1190;                     // text column on the darkened panel of a zoomed globe
 const LON_FACE = BREST[1] + 180;     // the kept half of the half-Earth (east of Brest's meridian), face = Brest's meridian plane
 const CAM_FACE: GlobeCam = { lat: 8, lon: BREST[1] - 75, dist: 3.4 };
-const CAM_TOP: GlobeCam = { lat: 89.5, lon: BREST[1], dist: 3.4 };
+// build 2 (2026-11-10, user): s05 no longer sits over the pole for its 3-D half (k̂ at Brest was a dot from there). The camera sweeps
+// from the side view to an OBLIQUE view (lat 52, 55° east of Brest: the parallel a near-circle, the axis in view, k̂ at Brest 62 % of its
+// length) and holds there while the parallel, λ and the slide east are told; only on "the picture from Part 1" does it rise over the
+// pole (TOP2, farther and higher in the box) and flatten into the top-view diagram, with the oblique inset (fr_lib InsetGlobe) taking over.
+const SIDE: GlobeCam = { lat: 22, lon: BREST[1], dist: 3.4, pp: [480, 395] };
+const OBL: GlobeCam = { lat: 52, lon: BREST[1] + 55, dist: 3.2, pp: [480, 395] };
+const TOP2: GlobeCam = { lat: 89.5, lon: BREST[1], dist: 4.0, pp: [480, 328] };
 const ZOOM_BREST: GlobeCam = { lat: BREST[0], lon: BREST[1], dist: 2.4, pp: [600, 470] };
 const UN: GlobeCam = { lat: 44, lon: 6, dist: 4.3, pp: [520, 420] };
 const zoomOf = (cam: GlobeCam) => clamp((4.3 - cam.dist) / (4.3 - 2.4), 0, 1);
 /** the top-view diagram matched to the 3-D camera over the pole: centre = the projected centre of Brest's parallel */
 const topFrom3D = (): TopV => {
-  const G = globeG(CAM_TOP);
+  const G = globeG(TOP2);
   const c = G.pw([0, Math.sin(BREST[0] * D2R), 0]), b = G.p(BREST[0], BREST[1]);
   return { c, r: Math.hypot(b[0] - c[0], b[1] - c[1]) };
 };
@@ -261,29 +268,55 @@ const S05: React.FC = () => {
   const f = useCurrentFrame(), k = K("s05_i_east");
   const tAbove = AT(k, 1, "far above"), tPar = AT(k, 2, "the parallel"), tLam = AT(k, 3, "the angle lambda"), tSlide = SS(k, 4), tP1 = SS(k, 5), tRh = SS(k, 6),
     tRdef = AT(k, 7, "cosine lambda"), tPlays = SS(k, 8), tTurn = AT(k, 9, "turning r hat"), tI = SS(k, 10), tZero = SS(k, 11), tNum = SS(k, 12), tY = SS(k, 13);
-  const cam = globePath([{ f: 0, lat: 22, lon: BREST[1], dist: 3.4 }, { f: tAbove, lat: 22, lon: BREST[1], dist: 3.4 }, { f: tAbove + 75, ...CAM_TOP }, { f: LEN(k) + 10, ...CAM_TOP }], f);
-  const flat = fin(f, tP1, 20);
+  const cam = globePath([{ f: 0, ...SIDE }, { f: tAbove, ...SIDE }, { f: tAbove + 75, ...OBL }, { f: tP1 - 50, ...OBL }, { f: tP1 + 5, ...TOP2 }, { f: LEN(k) + 10, ...TOP2 }], f);
+  const flat = fin(f, tP1 + 5, 20);
   const U = 170;
+  // S4 "Brest slides anticlockwise round this circle": the parcel and its tripod slide 20° east along the parallel and back, on the
+  // 3-D globe (build 1 drew this slide on the 2-D layer while that layer was still invisible)
   const lamS = BREST[1] + 20 * Math.sin(Math.PI * clamp((f - tSlide) / 90, 0, 1));
+  const sliding = f > tSlide && f < tSlide + 90;
   const A = topArrows(TV, BREST[1], U);
   const rot = 90 * prog(f, tTurn, tTurn + 40);
   const turnTip = turned(A.p, A.Rdir, U, rot);
   const r = pieces(String.raw`\hat{\mathbf i}=(-(-0.078),\ 0.997,\ 0)=(0.078,\ 0.997,\ 0)`, ["=(0.078"]);
+  // the companion inset (build 2): Brest's k̂ (and a faint ĵ) on the oblique globe; R̂, level and straight away from the axis, appears
+  // with the diagram's R̂ and a copy of it turns about the Earth's axis into î with the diagram's quarter turn
+  const G3 = globeG(cam), Gi = globeG(CAM_INSET, INSET);
+  const bB = ll(BREST[0], BREST[1]), EB = enAt(BREST[0], BREST[1]), Rd = rhatAt(BREST[1]), LI = 0.2;
+  const td = turned3(Rd, EB.e, rot);
+  const oTurn = fin(f, tTurn) * (1 - fin(f, tI, 8)), oI = fin(f, tI, 8), oRh = fin(f, tRh);
+  const tipsO = fin(f, tLam) * fout(f, tP1 - 60) * (sliding ? 0 : 1);
   return (
     <Scene>
       <Globe cam={cam} o={1 - flat} grat={0.2}
         over={(Gg) => <>
+          {gseg(Gg, [0, 0, 0], [0, 1.3, 0], C.local, 3, 0.8 * fin(f, tPar), "10 8")}
           <LatCircle G={Gg} lat={BREST[0]} c={C.gold} w={5} o={fin(f, tPar)} />
-          {gdot(Gg, BREST[0], BREST[1], C.gold, 10, fin(f, tLam))}
+          <path d={llPath(Gg, Array.from({ length: 31 }, (_, i) => [BREST[0], BREST[1] + ((lamS - BREST[1]) * i) / 30] as [number, number]), 1.003)} fill="none" stroke={C.key} strokeWidth={6} opacity={fin(f, tSlide)} />
+          <Tripod G={Gg} la={BREST[0]} lo={lamS} L={0.18} o={fin(f, tLam)} />
+          {gdot(Gg, BREST[0], lamS, C.gold, 10, fin(f, tLam))}
         </>} />
+      <TripodTips G={G3} la={BREST[0]} lo={BREST[1]} L={0.18} size={48} o={tipsO} />
       <GlobeFrame id="s05k" zoom={0} disc={discOf(cam)} o={1 - flat} />
-      <GSrc o={1 - flat} />
+      <GSrc />
+      <InsetGlobe id="s05i" o={flat} over={(Gg) => <>
+        <LatCircle G={Gg} lat={BREST[0]} c={C.gold} w={5} o={0.95} />
+        {uarrow(Gg, bB, EB.n, LI, C.second, 0.65)}
+        {uarrow(Gg, bB, EB.u, LI * 1.15, C.first)}
+        {uarrow(Gg, bB, Rd, LI, C.second, oRh)}
+        {uarrow(Gg, bB, td, LI, C.second, oTurn)}
+        <GArc G={Gg} b={bB} d0={Rd} d1={EB.e} r={LI * 0.5} deg={rot} o={fin(f, tTurn) * fout(f, tI + 40)} />
+        {uarrow(Gg, bB, EB.e, LI, C.second, oI)}
+        {gdot(Gg, BREST[0], BREST[1], C.gold, 8)}
+      </>} />
+      <TeX s={H.k} x={gtip(Gi, bB, EB.u, LI * 1.15)[0]} y={gtip(Gi, bB, EB.u, LI * 1.15)[1]} size={48} c={C.first} ax={0.5} o={flat} halo />
+      <TeX s={H.R} x={gtip(Gi, bB, Rd, LI)[0]} y={gtip(Gi, bB, Rd, LI)[1]} size={48} c={C.second} ax={0.5} o={flat * oRh} halo />
+      <TeX s={H.i} x={gtip(Gi, bB, EB.e, LI)[0]} y={gtip(Gi, bB, EB.e, LI)[1]} size={48} c={C.second} ax={0.5} o={flat * oI} halo />
       <Svg>
         <g opacity={flat}>
           <TopViewBase V={TV} axes={0.65} />
           <Arrow p={TV.c} q={tvP(TV, BREST[1])} color={C.second} w={8} head={30} o={fin(f, tRh)} />
-          <path d={poly(Array.from({ length: 21 }, (_, i) => tvP(TV, (lamS - BREST[1]) * 0 + BREST[1] + ((lamS - BREST[1]) * i) / 20)))} fill="none" stroke={C.key} strokeWidth={0} />
-          <circle cx={tvP(TV, lamS)[0]} cy={tvP(TV, lamS)[1]} r={12} fill={C.key} stroke={C.bg} strokeWidth={4} />
+          <circle cx={A.p[0]} cy={A.p[1]} r={12} fill={C.key} stroke={C.bg} strokeWidth={4} />
           <Arrow p={A.p} q={turnTip} color={C.second} w={10} head={38} o={fin(f, tTurn) * (1 - fin(f, tI, 8))} />
           <AngleArc c={A.p} r={70} a0={sang(A.Rdir)} a1={sang(A.Rdir) + rot} o={fin(f, tTurn) * fout(f, tI + 40)} head />
           <Arrow p={A.p} q={A.I} color={C.second} w={10} head={38} o={fin(f, tI, 8)} />
@@ -296,7 +329,7 @@ const S05: React.FC = () => {
       <TeX s={H.i} x={A.I[0] + 24} y={A.I[1] - 30} size={56} c={C.second} o={fin(f, tI, 8)} halo />
       {/* k6r8b fix (2026-11-09): enters only once the globe has gone (it sat on the globe for a frame of the cross-fade, f7688) and leaves
           before the gold dashed î-to-ŷ line comes in at tY (the line ran through its end, 34 frames from f9322) */}
-      <TeX s={String.raw`\lambda=-4.5^\circ`} x={TV.c[0] + 30} y={TV.c[1] + TV.r * 0.22} size={46} c={C.local} ax={0} o={fin(f, Math.max(tLam, tP1 + 22)) * fout(f, tY - 12)} />
+      <TeX s={String.raw`\lambda=-4.5^\circ`} x={TV.c[0] + 30} y={TV.c[1] + TV.r * 0.22} size={46} c={C.local} ax={0} o={fin(f, Math.max(tLam, tP1 + 27)) * fout(f, tY - 12)} />
       <Svg>
         <Keyword f={f} text="now east" at={[XC, 110]} appear={0} out={tP1 - 20} />
         <Keyword f={f} text="from above the North Pole" at={[XC, 210]} appear={tAbove} out={tP1 - 20} />
@@ -329,6 +362,12 @@ const S06: React.FC = () => {
   const sp = Math.sin(BREST[0] * D2R), cp = Math.cos(BREST[0] * D2R);
   const legUp = add(A.p, [0, -1], U * cp), legIn = add(legUp, [-1, 0], U * sp);
   const eq = pieces(EQ_S06, [String.raw`\ -\sin\varphi\sin`]);
+  // the companion inset (build 2): Brest's meridian and k̂ on the oblique globe (î faint, known from s05); a copy of k̂ turns about
+  // the east arrow towards the pole into ĵ with the diagram's quarter turn
+  const tTk = AT(k, 7, "turn k hat");
+  const Gi = globeG(CAM_INSET, INSET), bB = ll(BREST[0], BREST[1]), EB = enAt(BREST[0], BREST[1]), LI = 0.2;
+  const td = turned3(EB.u, EB.n, rot);
+  const oTurn = fin(f, tTk) * (1 - fin(f, tJ, 8)), oJ = fin(f, tJ, 8);
   return (
     <Scene>
       <Globe cam={CAM_FACE} mesh={{ half: LON_FACE, slide, whole: 0 }} o={1 - flat}
@@ -339,7 +378,18 @@ const S06: React.FC = () => {
           {gdot(Gg, BREST[0], BREST[1], C.gold, 10)}
         </>} />
       <GlobeFrame id="s06k" zoom={0} disc={discOf(CAM_FACE)} o={1 - flat} />
-      <GSrc o={1 - flat} />
+      <GSrc />
+      <InsetGlobe id="s06i" o={flat} over={(Gg) => <>
+        <path d={meridianPath(Gg, BREST[1])} fill="none" stroke={C.gold} strokeWidth={5} opacity={0.95} />
+        {uarrow(Gg, bB, EB.e, LI, C.second, 0.65)}
+        {uarrow(Gg, bB, EB.u, LI * 1.15, C.first)}
+        {uarrow(Gg, bB, td, LI * 1.15, C.second, oTurn)}
+        <GArc G={Gg} b={bB} d0={EB.u} d1={EB.n} r={LI * 0.55} deg={rot} o={fin(f, tTk) * fout(f, tJ + 40)} />
+        {uarrow(Gg, bB, EB.n, LI, C.second, oJ)}
+        {gdot(Gg, BREST[0], BREST[1], C.gold, 8)}
+      </>} />
+      <TeX s={H.k} x={gtip(Gi, bB, EB.u, LI * 1.15)[0]} y={gtip(Gi, bB, EB.u, LI * 1.15)[1]} size={48} c={C.first} ax={0.5} o={flat} halo />
+      <TeX s={H.j} x={gtip(Gi, bB, EB.n, LI)[0]} y={gtip(Gi, bB, EB.n, LI)[1]} size={48} c={C.second} ax={0.5} o={flat * oJ} halo />
       <Svg>
         <g opacity={flat}>
           <SliceBase V={SV} />
@@ -359,8 +409,9 @@ const S06: React.FC = () => {
       <TeX s={H.z} x={SV.c[0] + 24} y={SV.c[1] - SV.r * 0.5} size={50} c={C.second} o={flat} />
       <TeX s={H.R} x={SV.c[0] + SV.r * 0.5} y={SV.c[1] + 44} size={50} c={C.second} ax={0.5} o={flat} />
       <TeX s={String.raw`\varphi=48.4^\circ`} x={SV.c[0] + 100} y={SV.c[1] - 40} size={46} c={C.gold} o={flat * fin(f, tPhi)} />
-      <TeX s={H.k} x={A.K[0] + 18} y={A.K[1] - 24} size={56} c={C.first} o={flat} halo />
-      <TeX s={H.j} x={A.J[0] - 20} y={A.J[1] - 30} size={56} c={C.second} ax={1} o={fin(f, tJ, 8)} halo />
+      {/* build 2: the tip labels sit beside the heads (above them they were cut by the frame's top edge, build 1 f10500) */}
+      <TeX s={H.k} x={A.K[0] + 34} y={A.K[1] + 56} size={56} c={C.first} o={flat} halo />
+      <TeX s={H.j} x={A.J[0] - 30} y={A.J[1] + 50} size={56} c={C.second} ax={1} o={fin(f, tJ, 8)} halo />
       <TeX s={String.raw`\text{dashed: up the axis,}`} x={XC} y={715} size={44} c={C.second} o={fin(f, tLegs + 12)} />
       <TeX s={String.raw`\text{and in towards it}`} x={XC + 40} y={770} size={44} c={C.second} o={fin(f, tLegs + 12)} />
       <Svg>

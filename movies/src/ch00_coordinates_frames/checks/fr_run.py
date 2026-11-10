@@ -8,7 +8,7 @@ usage (repo root, main venv):
   .venv/Scripts/python.exe movies/src/ch00_coordinates_frames/checks/fr_run.py stills TAG [--bundle] [--frames-file F] [--jobs 3]
   .venv/Scripts/python.exe movies/src/ch00_coordinates_frames/checks/fr_run.py render [--from 0] [--only 3,7] [--conc 2]
   .venv/Scripts/python.exe movies/src/ch00_coordinates_frames/checks/fr_run.py join [--mb 150]  # refuses unless every chunk is complete
-S = G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_frames/build1
+S = G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_frames/<build> (env FR_BUILD, default build1; build 2 of 2026-11-10 = build2)
 """
 from __future__ import annotations
 
@@ -23,11 +23,11 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[4]
 MOVIES = ROOT / "movies"
-S = Path("G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_frames/build1")
+S = Path("G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_frames") / os.environ.get("FR_BUILD", "build1")
 TIMING = MOVIES / "ch00/ch00_coordinates_frames/timing.json"
 COMP, FPS, HOLD, CHUNK = "Ch00CoordinatesFrames", 30, 75, 4000
 DENSE = {"s00_title", "s01_hook", "s03_enu", "s04_k_up", "s05_i_east", "s06_j_north", "s08_other_stations", "s09_khulna", "s10_coast_frame",
-         "s11_coast_points", "s15_arrows_turn", "s28_recap", "s29_end"}   # moves, turns, zooms, flights, swaps and the remake's changed scenes: every 0.5 s
+         "s11_coast_points", "s15_arrows_turn", "s18_i_east_a", "s20_jk_north", "s21_jk_east", "s28_recap", "s29_end"}   # build 2: + the three inset scenes with a sliding parcel   # moves, turns, zooms, flights, swaps and the remake's changed scenes: every 0.5 s
 sys.path.insert(0, str(ROOT / "tools"))
 
 
@@ -144,7 +144,7 @@ def main() -> int:
             bad.append(f"c{i:02d} has {got} frames, want {want}")
     if bad:
         sys.exit("REFUSE JOIN (partial render): " + "; ".join(bad))
-    out = S / "build1_1080.mp4"
+    out = S / f"{S.name}_1080.mp4"
     r = subprocess.run([sys.executable, str(ROOT / "tools/movie_wb/join2pass.py"), str(rd), str(S / "sound" / "narration_music_fr.wav"), str(out), "--mb", a.mb,
                         "--abr", "128k", "--alim", "0.5"], cwd=ROOT)
     return r.returncode

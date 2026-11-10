@@ -17,9 +17,9 @@ import { Keyword as HKeyword } from "../house/kit/notes";
 import { CurvedLink } from "../house/kit/extras";
 import { SourceBelow as HSourceBelow } from "../house/kit/frame";
 import { CalcRow, CalcStack as HCalcStack, Layered as HLayered, Part, Layer, TeX as HTeX, plainOf, texHtml, KX } from "../house/kit/tex";
-import { GlobeCam, GlobeMesh, GProj, HalfEarthMesh, coastPath, globeCam, globeProj, useTex, Graticule, enAt, ll } from "./kit_fr/globe";
+import { GlobeCam, GlobeMesh, GProj, HalfEarthMesh, coastPath, globeCam, globeProj, useTex, Graticule, enAt, ll, llPath } from "./kit_fr/globe";
 import { View3D } from "./kit_fr/three3d";
-import { V3 } from "./kit_fr/cam";
+import { V3, add3 } from "./kit_fr/cam";
 
 export const FPS = 30;
 type Snt = { text: string; start: number; end: number };
@@ -373,6 +373,76 @@ export const TripodTips: React.FC<{ G: GProj; la: number; lo: number; L: number;
   </>;
 };
 export { enAt, ll };
+
+// ---------------------------------------------------------------- build 2 (2026-11-10): the globe companion
+// User request (Part 4 build 2): whenever the main picture is a 2-D diagram (the top view in s05 / s18 / s21, the meridian slice in
+// s06 / s20), a small oblique 3-D globe at Brest stays beside it, so the viewer always sees how the diagram's arrows sit on the real
+// Earth (and k̂, which no top view can show). A zoomed inset in the lower-left of the picture zone, no box and no border: its four
+// edges fade to the background (house §5b: the box of a zoomed 3-D area is never visible); it publishes a K6 sharp mask (its interior
+// minus the fades) so no must-class text may sit on it; the arrow-tip glyphs (î, ĵ, k̂, R̂) are spot labels. Source line below it
+// (or the scene's own NASA line under the main globe box, which also sits below the inset).
+export const INSET = { x: 60, y: 600, w: 400, h: 218 };   // bottom 818 = the house GB box's bottom: its credit sits on the same line as every globe credit
+/** The inset camera: the regular far globe camera (dist 3.4, looking at the centre, north up) from lat 50 and 60° east of Brest, with a
+ * narrow field of view (10°: the Earth's limb shows in the lower-left corner, so k̂ visibly points out into space) and the principal
+ * point shifted so `at` sits at the box centre. From there Brest's k̂ keeps 62 % of its
+ * length on screen and the parallel is a near-circle (the Earth's axis is 77 % face-on), so both the "up" arrow and the turns about
+ * the axis read. (A camera above Brest's own meridian would look straight down k̂ and hide it.) The pp shift is a pure translation of
+ * the image, so every projected overlay stays exact. */
+export const insetCam = (lat: number, lon: number, at: [number, number], fov = 10, box = INSET, dist = 3.4): GlobeCam => {
+  const c0: GlobeCam = { lat, lon, dist, fov, pp: [box.w / 2, box.h / 2] };
+  const p = globeG(c0, box).p(at[0], at[1]);
+  return { ...c0, pp: [box.w + box.x - p[0], box.h + box.y - p[1]] };
+};
+export const CAM_INSET: GlobeCam = insetCam(50, BREST[1] + 60, BREST);
+export const InsetGlobe: React.FC<{ id: string; o: number; cam?: GlobeCam; box?: typeof INSET; over?: (G: GProj) => React.ReactNode; src?: boolean; edge?: number }> = ({
+  id, o, cam = CAM_INSET, box = INSET, over, src = false, edge = 40 }) => {
+  if (o <= 0) return null;
+  const { x, y, w, h } = box;
+  const grad = (k: string, x1: number, y1: number, x2: number, y2: number) => (
+    <linearGradient key={k} id={`${id}${k}`} x1={x1} y1={y1} x2={x2} y2={y2}><stop offset="0" stopColor={C.bg} stopOpacity={1} /><stop offset="1" stopColor={C.bg} stopOpacity={0} /></linearGradient>);
+  const mask = o >= 0.5 ? { name: id, k: "rect", r: [x + edge * 0.6, y + edge * 0.6, x + w - edge * 0.6, y + h - edge * 0.6] } : null;
+  return <>
+    <Globe cam={cam} box={box} o={o} coast={0.6} grat={0.2} gratStep={10} dim={1.35} over={over} />
+    <Svg o={o}>
+      <defs>{grad("L", 0, 0, 1, 0)}{grad("R", 1, 0, 0, 0)}{grad("T", 0, 0, 0, 1)}{grad("B", 0, 1, 0, 0)}</defs>
+      <rect x={x} y={y} width={edge} height={h} fill={`url(#${id}L)`} />
+      <rect x={x + w - edge} y={y} width={edge} height={h} fill={`url(#${id}R)`} />
+      <rect x={x} y={y} width={w} height={edge} fill={`url(#${id}T)`} />
+      <rect x={x} y={y + h - edge} width={w} height={edge} fill={`url(#${id}B)`} />
+      {mask ? <g data-k6-mask={JSON.stringify(mask)} /> : null}
+    </Svg>
+    {src ? <SourceBelow text="Image: NASA Blue Marble Next Generation · Natural Earth" pic={box} w={960} o={o} name={`${id} src`} /> : null}
+  </>;
+};
+/** a unit arrow of length L (Earth radii) at surface point b in direction d, projected (house SVG arrow) */
+export const uarrow = (G: GProj, b: V3, d: V3, L: number, c: string, o = 1, w = 8, head = 30) => garrow(G, b, add3(b, d, L), c, w, head, o);
+/** the label position just past the tip of such an arrow */
+export const gtip = (G: GProj, b: V3, d: V3, L: number, off = 30): Pt => {
+  const p0 = G.pw(b), p1 = G.pw(add3(b, d, L)), dx = p1[0] - p0[0], dy = p1[1] - p0[1], n = Math.hypot(dx, dy) || 1;
+  return [p1[0] + (dx / n) * off, p1[1] + (dy / n) * off];
+};
+/** a direction rigidly turned by `deg` from d0 towards d1 (unit, perpendicular): the 3-D twin of fr_dia's `turned` */
+export const turned3 = (d0: V3, d1: V3, deg: number): V3 => { const a = deg * D2R; return [Math.cos(a) * d0[0] + Math.sin(a) * d1[0], Math.cos(a) * d0[1] + Math.sin(a) * d1[1], Math.cos(a) * d0[2] + Math.sin(a) * d1[2]]; };
+/** the gold turn arc in 3-D (fr_dia's AngleArc on the globe): about surface point b, from direction d0 towards d1, radius r (Earth
+ * radii), swept `deg` degrees, with an open chevron at its end */
+export const GArc: React.FC<{ G: GProj; b: V3; d0: V3; d1: V3; r: number; deg: number; o?: number; col?: string }> = ({ G, b, d0, d1, r, deg, o = 1, col = C.gold }) => {
+  if (o <= 0 || deg < 2) return null;
+  const n = 24, pts: Pt[] = [];
+  for (let i = 0; i <= n; i++) pts.push(G.pw(add3(b, turned3(d0, d1, (deg * i) / n), r)));
+  const e = pts[n], q = pts[n - 1], dx = e[0] - q[0], dy = e[1] - q[1], L = Math.hypot(dx, dy) || 1, ux = dx / L, uy = dy / L, s = 16;
+  const h1: Pt = [e[0] - s * (ux * 0.87 - uy * 0.5), e[1] - s * (uy * 0.87 + ux * 0.5)], h2: Pt = [e[0] - s * (ux * 0.87 + uy * 0.5), e[1] - s * (uy * 0.87 - ux * 0.5)];
+  return (
+    <g opacity={o}>
+      <path d={poly(pts)} fill="none" stroke={col} strokeWidth={5} strokeLinecap="round" />
+      <polyline points={`${h1[0]},${h1[1]} ${e[0]},${e[1]} ${h2[0]},${h2[1]}`} fill="none" stroke={col} strokeWidth={5} strokeLinecap="round" strokeLinejoin="round" />
+    </g>
+  );
+};
+/** R̂ at (lat, lon): level, straight away from the Earth's axis (Earth axes (cos λ, sin λ, 0) → globe coordinates) */
+export const rhatAt = (lon: number): V3 => [Math.sin(lon * D2R), 0, Math.cos(lon * D2R)];
+/** a meridian (pole to pole through lon) on a projected globe */
+export const meridianPath = (G: GProj, lon: number, r = 1.002) => llPath(G, Array.from({ length: 61 }, (_, i) => [-90 + 3 * i, lon] as [number, number]), r);
+export { add3 };
 
 // ---------------------------------------------------------------- the two derivation diagrams (SVG, schematic)
 /** Top view from far above the North Pole. The camera rose along Brest's meridian, so x̂ (to 0 N 0 E) points DOWN the screen

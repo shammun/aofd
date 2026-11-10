@@ -16,6 +16,7 @@ import {
   tvP, win, TopV, SliceV, ParcelDot, chipSpan,
   HL,
   SourceBelow,
+  InsetGlobe, CAM_INSET, INSET, uarrow, gtip, rhatAt, add3,
 } from "./fr_lib";
 import { V3 } from "./kit_fr/cam";
 import { AngleArc, GRID, GridBase, SliceBase, TopViewBase, circleArrows, gridCell, sliceArrows, topArrows, turned } from "./fr_dia";
@@ -354,15 +355,31 @@ const S17: React.FC = () => {
 };
 
 // ================================================================ s18 going east turns î towards −R̂ (top view; steps 1-3)
-const TV2: TopV = { c: [520, 380], r: 300 };
+// build 2 (2026-11-10): the top view sits higher and smaller (was c (520, 380), r 300) so the companion inset fits below it; the inset
+// shows the parcel's tripod sliding east along the real parallel, with R̂ at it and, on "d i hat by d lambda", the gold nudge of î
+// towards −R̂ in three dimensions
+const TV2: TopV = { c: [620, 330], r: 250 };
 const S18: React.FC = () => {
   const f = useCurrentFrame(), k = K("s18_i_east_a");
   const tCirc = SS(k, 1), tRoles = SS(k, 2), tS1 = SS(k, 3), tRate = SS(k, 5), tS2 = SS(k, 6), tDi = SS(k, 7), tS3 = SS(k, 8), tEq = SS(k, 9), tWords = SS(k, 10);
   const lam = -20 + 15 * prog(f, tS1, tS1 + 60);
   const A = topArrows(TV2, lam, 160);
   const parts = pieces(EQ_S18, [String.raw`=\dfrac{d\hat{\mathbf i}}{d\lambda}`, String.raw`=-\hat{\mathbf R}`]);
+  const Gi = globeG(CAM_INSET, INSET), bP = ll(BREST[0], lam), EP = enAt(BREST[0], lam), Rd = rhatAt(lam), LI = 0.2;
   return (
     <Scene>
+      <InsetGlobe id="s18i" o={1} src over={(Gg) => <>
+        <LatCircle G={Gg} lat={BREST[0]} c={C.gold} w={5} o={0.95} />
+        {uarrow(Gg, bP, EP.n, LI, C.second, 0.65)}
+        {uarrow(Gg, bP, EP.u, LI * 1.15, C.first)}
+        {uarrow(Gg, bP, Rd, LI, C.second)}
+        {uarrow(Gg, bP, EP.e, LI, C.second)}
+        {garrow(Gg, add3(bP, EP.e, LI), add3(add3(bP, EP.e, LI), Rd, -LI * 0.45), C.gold, 6, 22, fin(f, tDi))}
+        {gdot(Gg, BREST[0], lam, C.key, 8)}
+      </>} />
+      <TeX s={H.k} x={gtip(Gi, bP, EP.u, LI * 1.15)[0]} y={gtip(Gi, bP, EP.u, LI * 1.15)[1]} size={48} c={C.first} ax={0.5} halo />
+      <TeX s={H.R} x={gtip(Gi, bP, Rd, LI)[0]} y={gtip(Gi, bP, Rd, LI)[1]} size={48} c={C.second} ax={0.5} halo />
+      <TeX s={H.i} x={gtip(Gi, bP, EP.e, LI)[0]} y={gtip(Gi, bP, EP.e, LI)[1]} size={48} c={C.second} ax={0.5} halo />
       <Svg>
         <TopViewBase V={TV2} axes={0.4} />
         <line x1={TV2.c[0]} y1={TV2.c[1]} x2={A.p[0]} y2={A.p[1]} stroke={C.local} strokeWidth={3} strokeDasharray="8 8" />

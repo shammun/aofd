@@ -10,13 +10,16 @@ import { GlobeFrame } from "../house/kit/frame";   // r8d: SourceBelow comes gat
 import { Notebook } from "../house/kit/icons";
 import { CurvedLink } from "../house/kit/extras";
 import { GlobeCam, llPath } from "./kit_fr/globe";
+import { V3 } from "./kit_fr/cam";
 import {
   AT, Arrow, BREST, CalcStack, HOLD, Place, Recall, sc, D, D2R, GB, Globe, H, K, KHULNA, Keyword, LEN, Lbl, SS, Scene, SideCallout, SkipChip, Svg, TeX, Tripod, VIOLET, XC, add, clamp, discOf, fin,
   fout, gdot, globeG, keepTime, ll, mix, pieces, poly, prog, sang, texW, textW, win, SliceV, TopV, ParcelDot, linesPath, mapP, boxAt, chipSpan,
   SE,
   HL,
   SourceBelow,
+  InsetGlobe, CAM_INSET, INSET, insetCam, uarrow, gtip, rhatAt, add3, enAt, meridianPath, garrow,
 } from "./fr_lib";
+import { LatCircle } from "./kit_fr/globe";
 import { AngleArc, GRID, GridBase, MiniTick, MiniTripod, SliceBase, TopViewBase, TRI, TurnPic, gridCell, logX, sliceArrows, topArrows } from "./fr_dia";
 import { EQ_S03, EQ_S20, EQ_S21, EQ_S22, EQ_S23, EQ_S24, EQ_S25, EQ_S26, EQ_S27, cutAt } from "./fr_eq";
 
@@ -33,7 +36,11 @@ const PHI = BREST[0];
 // ================================================================ s20 going north turns k̂ towards ĵ and ĵ towards −k̂ (meridian slice)
 const LON_FACE = BREST[1] + 180;
 const CAM_FACE: GlobeCam = { lat: 8, lon: BREST[1] - 75, dist: 3.4 };
-const SV3: SliceV = { c: [380, 640], r: 470 };
+// build 2 (2026-11-10): the slice sits higher and to the right (was c (380, 640), r 470) so the companion inset fits in the lower-left;
+// the inset shows the parcel's tripod sliding north along the real meridian and, on the two results, the gold nudges of k̂ towards ĵ
+// and of ĵ towards −k̂ in three dimensions. The NASA line under the main globe box stays for the whole scene: it is the inset's credit too.
+const SV3: SliceV = { c: [500, 580], r: 360 };
+const CAM_INSET_N: GlobeCam = insetCam(50, BREST[1] + 60, [BREST[0] + 7.5, BREST[1]], 10);
 const S20: React.FC = () => {
   const f = useCurrentFrame(), k = K("s20_jk_north");
   const tCirc = SS(k, 1), tKr = SS(k, 2), tJt = SS(k, 3), tRate = SS(k, 4), tRules = SS(k, 5), tK = SS(k, 6), tJ = SS(k, 7), tWords = SS(k, 8), tChk = SS(k, 9);
@@ -41,12 +48,24 @@ const S20: React.FC = () => {
   const phi = PHI + 15 * prog(f, tRules, tRules + 60);
   const A = sliceArrows(SV3, phi, 170);
   const eq = cutAt(EQ_S20, String.raw`,\qquad `);
+  const Gi = globeG(CAM_INSET_N, INSET), bP = ll(phi, BREST[1]), EP = enAt(phi, BREST[1]), LI = 0.2;
   return (
     <Scene>
       <Globe cam={CAM_FACE} mesh={{ half: LON_FACE, slide: 1 }} o={1 - flat}
         over={(Gg) => <>{gdot(Gg, BREST[0], BREST[1], C.gold, 10)}<path d={llPath(Gg, Array.from({ length: 61 }, (_, i) => [-90 + 3 * i, BREST[1]] as [number, number]), 1.003)} fill="none" stroke={C.gold} strokeWidth={5} opacity={fin(f, tCirc)} /></>} />
       <GlobeFrame id="s20k" zoom={0} disc={discOf(CAM_FACE)} o={1 - flat} />
-      <SourceBelow text={SRC_G} pic={GB} w={960} o={1 - flat} name="s20 src" />
+      <SourceBelow text={SRC_G} pic={GB} w={960} name="s20 src" />
+      <InsetGlobe id="s20i" o={flat} cam={CAM_INSET_N} over={(Gg) => <>
+        <path d={meridianPath(Gg, BREST[1])} fill="none" stroke={C.gold} strokeWidth={5} opacity={0.95} />
+        {uarrow(Gg, bP, EP.e, LI, C.second, 0.65)}
+        {uarrow(Gg, bP, EP.u, LI * 1.15, C.first)}
+        {uarrow(Gg, bP, EP.n, LI, C.second)}
+        {garrow(Gg, add3(bP, EP.u, LI * 1.15), add3(add3(bP, EP.u, LI * 1.15), EP.n, LI * 0.45), C.gold, 6, 22, fin(f, tK))}
+        {garrow(Gg, add3(bP, EP.n, LI), add3(add3(bP, EP.n, LI), EP.u, -LI * 0.45), C.gold, 6, 22, fin(f, tJ))}
+        {gdot(Gg, phi, BREST[1], C.key, 8)}
+      </>} />
+      <TeX s={H.k} x={gtip(Gi, bP, EP.u, LI * 1.15)[0]} y={gtip(Gi, bP, EP.u, LI * 1.15)[1]} size={48} c={C.first} ax={0.5} o={flat} halo />
+      <TeX s={H.j} x={gtip(Gi, bP, EP.n, LI)[0]} y={gtip(Gi, bP, EP.n, LI)[1]} size={48} c={C.second} ax={0.5} o={flat} halo />
       <Svg>
         <g opacity={Math.max(0.25, flat)}>
           <SliceBase V={SV3} axes={0.5} quarter />
@@ -79,23 +98,41 @@ const S20: React.FC = () => {
 };
 
 // ================================================================ s21 going east also tilts ĵ and k̂ (top view + slice side by side)
-const TVs: TopV = { c: [280, 420], r: 190 };
+// build 2 (2026-11-10): the small top view sits higher (was c (280, 420), r 190, arrows 120) so the companion inset fits below it; the
+// inset shows the parcel's tripod sliding east along the real parallel with R̂ at it, and the gold nudges (R̂ towards î, then k̂ towards
+// î and ĵ towards −î) in three dimensions as each result is said
+const TVs: TopV = { c: [280, 280], r: 150 };
 const SVs: SliceV = { c: [600, 640], r: 330 };
 const S21: React.FC = () => {
   const f = useCurrentFrame(), k = K("s21_jk_east");
   const tBuilt = SS(k, 1), tFix = SS(k, 2), tZ = SS(k, 3), tOnly = SS(k, 4), tPlays = SS(k, 5), tDR = SS(k, 6), tDk = SS(k, 7), tCanc = SS(k, 8), tDj = SS(k, 9), tTan = SS(k, 10), tWords = SS(k, 11);
   const lam = -20 + 18 * prog(f, tPlays, tPlays + 60);
-  const T_ = topArrows(TVs, lam, 120), S_ = sliceArrows(SVs, PHI, 130);
+  const T_ = topArrows(TVs, lam, 100), S_ = sliceArrows(SVs, PHI, 130);
   const eq = cutAt(EQ_S21, String.raw`,\qquad `);
   const dk = f < tCanc ? String.raw`\dfrac{D\hat{\mathbf k}}{Dt}=\cos\varphi\ \hat{\mathbf i}\,\dfrac{u}{a\cos\varphi}=\hat{\mathbf i}\,\dfrac{u}{a}`
     : String.raw`\dfrac{D\hat{\mathbf k}}{Dt}=\cancel{\cos\varphi}\ \hat{\mathbf i}\,\dfrac{u}{a\cancel{\cos\varphi}}=\hat{\mathbf i}\,\dfrac{u}{a}`;
+  const Gi = globeG(CAM_INSET, INSET), bP = ll(PHI, lam), EP = enAt(PHI, lam), Rd = rhatAt(lam), LI = 0.2;
   return (
     <Scene>
+      <InsetGlobe id="s21i" o={1} src over={(Gg) => <>
+        <LatCircle G={Gg} lat={PHI} c={C.gold} w={5} o={0.95} />
+        {uarrow(Gg, bP, EP.e, LI, C.second, 0.65)}
+        {uarrow(Gg, bP, EP.u, LI * 1.15, C.first)}
+        {uarrow(Gg, bP, EP.n, LI, C.second)}
+        {uarrow(Gg, bP, Rd, LI, C.second)}
+        {garrow(Gg, add3(bP, Rd, LI), add3(add3(bP, Rd, LI), EP.e, LI * 0.4), C.gold, 6, 22, fin(f, tDR))}
+        {garrow(Gg, add3(bP, EP.u, LI * 1.15), add3(add3(bP, EP.u, LI * 1.15), EP.e, LI * 0.4), C.gold, 6, 22, fin(f, tDk))}
+        {garrow(Gg, add3(bP, EP.n, LI), add3(add3(bP, EP.n, LI), EP.e, -LI * 0.4), C.gold, 6, 22, fin(f, tDj))}
+        {gdot(Gg, PHI, lam, C.key, 8)}
+      </>} />
+      <TeX s={H.k} x={gtip(Gi, bP, EP.u, LI * 1.15)[0]} y={gtip(Gi, bP, EP.u, LI * 1.15)[1]} size={48} c={C.first} ax={0.5} halo />
+      <TeX s={H.j} x={gtip(Gi, bP, EP.n, LI)[0]} y={gtip(Gi, bP, EP.n, LI)[1]} size={48} c={C.second} ax={0.5} halo />
+      <TeX s={H.R} x={gtip(Gi, bP, Rd, LI)[0]} y={gtip(Gi, bP, Rd, LI)[1]} size={48} c={C.second} ax={0.5} halo />
       <Svg>
         <TopViewBase V={TVs} axes={0.3} />
         <Arrow p={T_.p} q={T_.R} color={C.second} w={8} head={30} />
         <Arrow p={T_.p} q={T_.I} color={C.second} w={8} head={30} o={0.6} />
-        <Arrow p={T_.R} q={add(T_.R, T_.Edir, 60)} color={C.gold} w={6} head={22} o={fin(f, tPlays)} />
+        <Arrow p={T_.R} q={add(T_.R, T_.Edir, 50)} color={C.gold} w={6} head={22} o={fin(f, tPlays)} />
         <ParcelDot p={T_.p} r={10} />
         <SliceBase V={SVs} axes={0} quarter />
         <Arrow p={S_.p} q={S_.K} color={C.first} w={8} head={30} />
