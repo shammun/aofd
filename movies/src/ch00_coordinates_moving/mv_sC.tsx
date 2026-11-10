@@ -119,7 +119,7 @@ const S14: React.FC = () => {
         <Barometer x={x0} y={95} r={34} hPa={pProf(-sh)} />
         <circle cx={p0[0]} cy={p0[1]} r={10} fill={C.gold} stroke={C.bg} strokeWidth={3} />
         <line x1={tg0[0]} y1={tg0[1]} x2={tg1[0]} y2={tg1[1]} stroke={C.gold} strokeWidth={6} opacity={fin(f, AT(k, 13, "how fast the pressure rises"))} />
-        <Lbl x={tg1[0] + 16} y={tg1[1] - 28} t="slope" c={C.gold} s={T.floor} o={fin(f, AT(k, 13, "how fast the pressure rises"))} />
+        {/* slope label removed: the tangent line shows the gradient visually; label overlapped sliding C.local curve at sh>11km */}
         <Rider x={rp[0]} y={rp[1] - 12} s={0.8} o={fin(f, t3)} />
         <Arrow p={[rp[0] + 30, rp[1] - 90]} q={[rp[0] + 150, rp[1] - 90]} color={C.second} w={8} head={28} o={fin(f, t3)} />
         <Keyword f={f} text="how are the two rates linked?" at={[XC, 120]} appear={0} out={t3 - 18} s={T.floor} />
@@ -140,8 +140,8 @@ const S14: React.FC = () => {
       {/* remake 2026-11-07 (R16; series audit §3a): the traveller's rate from the derivatives movie (S4), grad p from the cross product movie (S5) */}
       <Recall f={f} tex={String.raw`\dfrac{dT}{dt}=\dfrac{\partial T}{\partial t}+\text{speed}\times\text{slope}`} name="the traveller's rate"
         lab="from the derivatives movie:" x={XC} y={470} size={46} appear={AT(k, 4, "derivatives movie")} out={t8 - 12} />
-      <Layered parts={parts} x={XC} y={620} size={60} layers={[{ t: "all", o: fin(f, t9) }, { t: [], u: [0], o: fin(f, t11) }, { t: [], u: [2], o: fin(f, t12) }, { t: [], u: [3], o: fin(f, t15) }]} />
-      <TeX s={String.raw`\dfrac{\cancel{\text{km}}}{\text{h}}\times\dfrac{\text{hPa}}{\cancel{\text{km}}}=\dfrac{\text{hPa}}{\text{h}}`} x={XC} y={800} size={48} o={win(f, t14, t16 - 18)} />
+      <Layered parts={parts} x={960} y={620} size={64} layers={[{ t: "all", o: fin(f, t9) }, { t: [], u: [0], o: fin(f, t11) }, { t: [], u: [2], o: fin(f, t12) }, { t: [], u: [3], o: fin(f, t15) }]} />
+      <TeX s={String.raw`\dfrac{\cancel{\text{km}}}{\text{h}}\times\dfrac{\text{hPa}}{\cancel{\text{km}}}=\dfrac{\text{hPa}}{\text{h}}`} x={960} y={830} size={42} o={win(f, t14, t16 - 18)} />
     </Scene>
   );
 };
