@@ -163,7 +163,7 @@ const S03: React.FC = () => {
           <ClockGlyph x={300} y={TY + 100} r={26} h={clockH} />
           <ClockGlyph x={xb + TW - 50} y={TY - 62} r={26} h={clockH} />
         </g>
-        <Keyword f={f} text="the simplest moving frame" at={[XC, 120]} appear={0} out={t1 - 18} s={T.floor} />
+        <Keyword f={f} text="the simplest moving frame" at={[XC, 300]} appear={0} out={t1 - 18} s={T.floor} />
         <Keyword f={f} text="why do the speeds add?" at={[XC, 400]} appear={t4} out={t6 - 18} s={T.floor} />
         <Keyword f={f} text="$x$: from the station" at={[XC, 400]} appear={t6} s={T.floor} c={C.local} />
       </Svg>
@@ -175,7 +175,7 @@ const S03: React.FC = () => {
       <TeX s={String.raw`t`} x={345} y={TY + 100} size={48} c={C.local} ax={0} o={fin(f, t11)} halo />
       <TeX s={String.raw`t'`} x={xb + TW - 90} y={TY - 62} size={48} c={C.second} ax={1} o={fin(f, t11)} halo />
       {/* Must 12: the walker's tag and every calc in the column x ≥ 1100 */}
-      <TeX s={String.raw`U=20\ \text{m/s}`} x={XC} y={120} size={56} c={C.second} o={fin(f, t1)} />
+      <TeX s={String.raw`U=20\ \text{m/s}`} x={XC} y={120} size={56} c={C.second} o={fin(f, 0)} />
       <TeX s={String.raw`u'=1.5\ \text{m/s}`} x={XC} y={200} size={56} c={C.first} o={fin(f, AT(k, 2, "one and a half"))} />
       <CalcStack f={f} x={XC} y={250} size={56} rows={[{ rhs: String.raw`20+1.5=21.5\ \text{m/s}`, at: AT(k, 3, "twenty one and a half") }]} />
       <TeX s={eq3[0]} x={XC} y={640} size={64} o={fin(f, AT(k, 10, "x equals"))} />
