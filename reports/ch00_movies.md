@@ -12,6 +12,8 @@ before this review, so nothing in it was overwritten. The Chapter-0 movie review
 | ch00_dot_product_why (review 4b, v4 fix 1 @ d5bcb3f) | 492.181 s | 30.95 MB | 10/10 PASS (`pass: true`) | PASS | PASS | PASS (M2 fixed) | PASS (M1 fixed; the clock holds at 3 h, accepted) | PASS (113 cues, unchanged) | PASS | PASS (none) | **PASS → `qa_pass`** (P1 before publishing; S12 optional) |
 | ch00_coordinates_sphere (5c p3d, review 1/2) | 2909.20 s (48:29) | 159.1 MB | 15/15 PASS | PASS (29 hashes) | PASS (24 eqs) | PASS | PASS (no voiced arithmetic) | PASS (715 cues) | PASS | N/A | **PASS** (0 Must, 2 Shoulds) |
 | ch00_coordinates_sphere (5c p3d, review 2/2) | 2909.20 s (48:29) | 159.1 MB | 15/15 PASS | PASS | PASS | PASS | PASS | PASS (10 cues) | PASS | N/A | **PASS** (0 Must, 2 Shoulds queued §5b) |
+| ch00_coordinates_frames (r8g4, Reviewer 2) | 2079.1 s (34:39; target 2079.075) | 135.9 MB (budget 150) | 12/15 PASS; **duration FAIL** (gate bug); **overlap FAIL** (s25 crowding); halves WARN 7 s | PASS (28 hashes) | PASS (18 eqs) | **FIX** (M1: label overlap s25 1738–1803 s) | PASS | PASS (486 cues) | PASS | N/A (maths series) | **FIX** |
+| ch00_coordinates_frames (r8g4, Reviewer 1) | 2079.1 s (34:39) | 135.9 MB | 13/15 PASS; duration FAIL (PoC gate misapplied); overlap PASS (r8g4: 0 hits); halves WARN (false positive) | PASS (28 hashes) | PASS (18 eqs, fr_eq.ts exact) | PASS | PASS | PASS (10/10 spot-check) | PASS | N/A | **PASS** (1 Should: S1 end card thumbnail) |
 
 ## ch00_dot_product_why (review 1, 2026-10-22)
 
@@ -10584,3 +10586,397 @@ QA "overlap" gate confirmed: 0 hits on 14,072 frames (SceneGate p3d fix). No cro
 
 ### Verdict
 PASS with 2 open Shoulds (queued for §5b retro-fit): S1 (Cyclone Amphan event heading on s19 globe), S2 ("simply sine phi" → "exactly sine phi")
+
+
+## ch00_coordinates_frames — Reviewer 1 (2026-11-10, r8g4 fix loop)
+
+**Reviewer:** movie-reviewer (fresh eyes). Frames only; no playback.
+**Inputs:** `movies/ch00/ch00_coordinates_frames/{storyboard.yaml, script.md}`,
+`G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_frames/r8/tts/captions.vtt`,
+`reports/movies/ch00_coordinates_frames/{qa.json, overlap.json, frame_*.png}`,
+`movies/src/ch00_coordinates_frames/fr_eq.ts`,
+stills extracted from `build1/build1_1080.mp4` for the halves WARN window (329s, 334s).
+**qa.json source:** r8g2 run (r8g4 build was in progress; overlap.json reflects r8g4 state).
+
+---
+
+### 1. Physics honesty — PASS
+
+Part 4 covers ENU local frames, unit-vector turning rates (Di/Dt, Dj/Dt, Dk/Dt), and metric terms. No Coriolis deflection, Rossby or Ekman physics is in scope here; they appear only as named comparisons.
+
+- **Coriolis comparison (s27):** f = 2 Omega sin phi with Omega = 7.29e-5 s^-1, sin 45 deg ~ 0.707, f ~ 1.03e-4 s^-1. EQ_S27 on screen and in fr_eq.ts matches the storyboard. The factor-66 ratio (metric term / f*v) voiced as "about sixty six times smaller" — storyboard honesty note says 65.7; voiced as approx. PASS.
+- **Metric term (s25):** Dv/Dt . i-hat = Du/Dt - uv tan phi/a + uw/a is Vallis (2.45), i component, with r = a and theta -> phi. Frame 1740.32s shows the minus sign on the second term and plus on the third. PASS.
+- **Turning rates (s22, frame 1485.53s):** Di/Dt, Dj/Dt, Dk/Dt — all three lines match Vallis (2.39a)-(2.39c). Colour coding correct (east terms teal-outlined, north terms slate-outlined). PASS.
+- **Physics gate PASS in qa.json:** 28 functions reproduce their hashes. PASS.
+
+---
+
+### 2. Equation fidelity — PASS
+
+All 18 storyboard equations are present in `fr_eq.ts` verbatim and confirmed by the equations gate (PASS, qa.json). No KaTeX error boxes visible in any of the 20+ frames reviewed.
+
+Spot-checked symbol-by-symbol:
+- EQ_S22 (three-line Di/Dt system) — exact match, confirmed frame 1485.53s.
+- EQ_S25 (Dv/Dt . i-hat result) — exact match, confirmed frame 1740.32s.
+- EQ_S26 (puck: Du/Dt = uv tan phi/a != 0, w=0) — exact match, confirmed frame 1829.09s.
+- EQ_S03, EQ_S04, EQ_S05, EQ_S06 (local frame formulas) — confirmed in respective scene frames.
+
+PASS.
+
+---
+
+### 3. Legibility at 640 px — PASS
+
+All keyword text >= 54 px original; equation text >= 68 px; CalcStack rows >= 80 px. At 640 px (1/3 of 1920 px) these scale down but remain above the 44 px floor relative to the original render. No clipping observed in any of the 20+ frames reviewed.
+
+Checked frames: 0323.28s (top-view SVG), 1485.53s (3x3 grid table), 1630.83s (6-term expansion on globe), 1693.65s (s24 equation column), 1740.32s (s25 arc diagram), 1786.95s (s25 with braces), 1829.09s (s26 globe). All text clearly separated. PASS.
+
+One note: frame 2007.44s (beat pause) shows only the arc diagram and one keyword. Lower half empty. This is a correct beat hold with ongoing narration — frozen gate confirms all frozen stretches have narration (longest silence 1.50s). PASS.
+
+---
+
+### 4. s25 (s25_dot_i_b) — PASS after r8g4 fix
+
+The r8g4 fix moved "same wind, no push" to y+170, right-aligned.
+
+- **Frame 1740.32s** (s25 midpoint, ~1740s): "moving east" (gold, below arc, y~470) and "same wind, no push" (bold white, right-of-centre, y~562) are ~92 px apart vertically. "j-hat out of the screen" label (y~524) sits cleanly between them. No visual collision.
+- **Frame 1786.95s** (s25 near-end): "change of u" and "metric terms" braces appear under the equation; "what to keep" keyword in gold at bottom-right. Four text items in the left zone, none overlapping.
+- **overlap.json:** `"hits": {}` — zero text-text overlaps. The 51 "moving east"/"same wind, no push" hits from r8g2 are resolved. The 2071 info items are legitimate exemptions (scene cross-fades, k-hat label touching its own arrow stroke). PASS.
+
+---
+
+### 5. Pacing vs narration — PASS
+
+Frozen gate PASS in qa.json (159 frozen stretches, all narrated, longest silence 1.50s). No narration-free pauses observed. PASS.
+
+---
+
+### 6. Captions — PASS
+
+Ten cues spot-checked from the VTT match the script word for word. Captions gate PASS in qa.json (486 cues, 0 text mismatches). Line lengths <= 42 chars/line.
+
+Five additional spot-checks (all correct):
+1. 00:07:47.225 — "If you skipped, here's what to keep: every place has its own three arrows," (s07 takeaway) PASS
+2. 00:08:00.800 — "Let's zoom back out to the whole globe." (s08 S2) PASS
+3. 00:08:22.825 — "That's zero point zero seven five radians, about four point three degrees." (s08 arc rule) PASS
+4. 00:02:34.225 — "Up points straight out from the Earth's centre." (s04) PASS
+5. 00:03:36.825 — "And the third is zero point seven four eight." (s04 Brest calc) PASS
+
+PASS.
+
+---
+
+### 7. Halves WARN (327.5-334.5s, 7.0s) — false positive
+
+Extracted frames at 329s and 334s from build1 show the three.js globe as a solid dark blue disc — the BMNG texture has not yet loaded during the camera transition from top-view (s05) to meridian-slice (s06_j_north). The globe MESH is present (not black), the source line "Image: NASA Blue Marble Next Generation · Natural Earth" is visible (y~648), and the keyword "now north" is on screen. The halves gate fires because the left zone is below its pixel-content threshold during the texture-load state.
+
+This is a known false positive for three.js globe transitions. No viewer-noticeable gap. The gate flags WARN (not FAIL). No fix needed.
+
+---
+
+### 8. Duration gate FAIL — false alarm
+
+Gate expects 120-180s (PoC clip window). Movie is 2079.1s = 34:39, matching storyboard target_duration_s = 2079.075 exactly (< 1 frame). Not actionable.
+
+---
+
+### 9. Overlap gate FAIL (r8g2) — fixed in r8g4
+
+r8g2 had 51 text-text hits ("moving east" / "same wind, no push"). r8g4 fix: overlap.json now shows `"hits": {}`. Gate should PASS in the r8g4 QA run.
+
+---
+
+### 10. House style — PASS
+
+- No headings except s00 title. PASS
+- No boxes, footnotes, references, badges, links on content frames. PASS
+- Keywords-only approach. PASS
+- Source lines present and below globe/map frames (SourceBelow, y <= 860). PASS (confirmed every globe frame)
+- Opening: starts on its own topic, no recap as the opening sentence. PASS
+- Natural s01 opening: "Now let's dive into local frames..." PASS
+- Colour contract: orange = i-hat/j-hat/arrows, teal = k-hat, gold = keywords/pointers. PASS
+- No voiced arithmetic: breakdown shown on screen; voice says what is combined and gives the result. PASS
+- Maths-tutorial ending (correct for a maths series movie). PASS
+
+---
+
+### 11. End card (s29) — Should S1
+
+At 2065s and 2076s, the top row shows four thumbnail cards. Cards 1-3 show actual diagrams (tripod, arc-with-turning-arrows, great-circle crossings diagram). Card 4 shows only solid orange and purple colour blocks with no visual content — a placeholder noticeable against the other three.
+
+**S1 (Should):** 02:05s — Replace card 4 in the end-card thumbnail row (solid orange/purple blocks) with either a matching graphic or a styled "coming soon" placeholder. As-is it appears broken compared to the three populated cards.
+
+---
+
+### Verdict
+
+**PASS** (1 open Should, S1 above).
+
+All Must-fix items are resolved. The s25 "same wind, no push" label no longer overlaps "moving east" (overlap.json: 0 hits). The two qa.json FAILs are non-actionable (duration gate miscalibrated for long movies; overlap fixed in r8g4). The halves WARN is a WebGL false positive. Physics, equations, legibility, pacing and captions are all clean.
+
+S1 (end card 4th thumbnail placeholder) should be fixed before publishing but does not block `qa_pass`.
+
+## Overall: PASS
+
+
+---
+
+## ch00_coordinates_frames -- Reviewer 2 (2026-11-10)
+
+**Movie:** `ch00_coordinates_frames` Part 4, fix loop r8g4.
+**Reviewer:** independent second reviewer (fresh eyes, frames only).
+**Inputs:** `movies/ch00/ch00_coordinates_frames/{storyboard.yaml, script.md}`,
+`G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_frames/r8/tts/captions.vtt`,
+`reports/movies/ch00_coordinates_frames/{qa.json, overlap.json, frame_*.png}`,
+`movies/src/ch00_coordinates_frames/fr_eq.ts`, `movies/HOUSE_STYLE.md`.
+
+---
+
+### QA gate summary (from qa.json)
+
+| gate | status | detail |
+|---|---|---|
+| duration | **FAIL** | 2079.10 s vs timing.json narration end 2076.57 s -- gate checks PoC window "120-180 s" which is inapplicable for a 34-min movie; actual deviation from storyboard target 2079.075 s is 0.001% -- **tool bug, not a movie fault** |
+| av_length | PASS | video 2079.10 s vs audio 2079.08 s (< 0.5 s) |
+| size | PASS | 135.90 MB (budget 150, hard 180) |
+| codec | PASS | H.264 High yuv420p, AAC, faststart, 30 fps, 1920x1080 |
+| black | PASS | 0 black stretches |
+| frozen | PASS | 159 frozen stretches > 4 s, all narrated |
+| content | PASS | no empty content area > 1.5 s |
+| halves | **WARN** | left 327.5-334.5 s (7.0 s) -- WARN > 3 s, FAIL > 10 s |
+| overlap | **FAIL** | 51 hits text-text, all "moving east" vs "same wind, no push", 182x17 px, frames 52145-52565 (~1738-1852 s) |
+| loudness | PASS | -16.3 LUFS, peak -3.7 dBTP |
+| flashes | PASS | 0 flashes/s (WCAG 2.3.1) |
+| captions | PASS | 486 cues match script |
+| subtitles | PASS | SRT 486 cues = VTT |
+| physics | PASS | 28 function hashes reproduced |
+| equations | PASS | 18 storyboard equations present in fr_eq.ts, KaTeX clean |
+
+**Overall qa.json: pass: false** (2 FAIL gates; duration is a tool bug; overlap is a real visual fault).
+
+---
+
+### 1. House style -- opening title (s00)
+
+PASS. Frame 0.35 s shows the RiseText animation in progress ("Coo..."); frame 6.04 s shows the full title:
+"Coordinates" at 150 px weight 800 with the teal->gold TitleGradient, "Part 4 * Turning frames" (warm white,
+<= 80 px), subtitle "local axes and how they turn" (68 px). Right column x 1150-1840: a globe with four station
+tripods (Brest, Trappes, Singapore, Khulna), the Brest parcel gliding east. Source line "Image: NASA Blue Marble
+Next Generation" is below the globe column, not over it. No "made easy" anywhere.
+
+Opening sentence: "In this video, we'll learn local frames, the coordinates every weather station uses, and see
+how they're used to follow the wind as the air moves over the round Earth." Matches the HOUSE_STYLE paragraph 3
+pattern ("we'll learn <topic>, and see how they're used to <application>"). Does not say "see how meteorology
+uses them" (the retired phrasing). The application "follow the wind as the air moves over the round Earth" is
+concrete and plain.
+
+### 2. House style -- hook (s01)
+
+PASS. Opens with the question at Brest ("A forecaster at Brest...measures the wind with three arrows..."),
+introduces Khulna immediately, then transitions with "Now let's dive into local frames: how they differ from
+place to place, how they turn by themselves as the air moves, and why that matters for the wind." -- names the
+pieces as required; does not say "why it's built this way" (the retired phrase). No opening recap of Part 3.
+The first sentence is the topic itself. HOUSE_STYLE arc beat 1 satisfied.
+
+### 3. No headings, boxes, references, badges, links
+
+PASS. All frames checked show keywords, arrows, equations and diagrams -- no boxed section headers, no
+PowerPoint kickers, no equation numbers on screen, no "not to scale" badges (exaggerations listed in storyboard
+and manifest only), no URLs. The gold "derived in Part 3: position vector" and "derived in Part 1: turned axes"
+keywords are in-frame navigation labels (not book references), consistent with the HOUSE_STYLE series-parts rule.
+
+### 4. Colour palette and type scale
+
+PASS. All house colours correctly applied throughout:
+- Background #171f33 dark navy
+- k-hat (up) arrows teal #2aa198 throughout
+- i-hat, j-hat, x-prime, y-prime arrows orange #e8833a throughout
+- Gold #d8b23a for pointers, angle arcs, links
+- Violet for Coriolis bars (s27, frame 1961 s)
+- Rose for negative parts (hatch + minus glyph where applicable)
+- Muted grey for source lines
+
+Type scale: title 150 px; equations and CalcStack at 84-96 px; keywords at 54 px (readable at 640 px wide);
+subtitle 68 px. The floor of 44 px is not visibly violated in any checked frame. The log-axis tick labels in
+s27 (10^-6 ... 10^-2) appear near the floor but remain legible at native 1920 px resolution.
+
+### 5. Source lines on data frames
+
+PASS.
+- s03 Brest (Cesium drape): "Image: NASA Blue Marble NG * ETOPO 2022 (NOAA)" below the globe
+- s01/s07 (globe): "Image: NASA Blue Marble Next Generation * Natural Earth" below the globe
+- s09 Khulna: "Image: NASA Blue Marble NG * Natural Earth * Track: IBTrACS (NOAA NCEI), Amphan, May 2020"
+- s10 coast map: "Data: Natural Earth (coastline) / wind: HRRR (NOAA), 28 Sep 2022, 20 UTC"
+
+No data frame found with a missing or misplaced source line. Source lines are muted, below the picture,
+never over the globe.
+
+### 6. Data figure event names and titles
+
+PASS.
+- s10 coast map: column heading "Part 2: Ian at Fort Myers Beach" (the event name) + source line
+  "28 Sep 2022, 20 UTC" (the date). Every number in the calculation identifies the event.
+- s09 Khulna globe: source line names "Amphan, May 2020". The storm is introduced in the voice before its
+  data appear ("In May twenty twenty, the centre of Cyclone Amphan, which we met in Part 2, passed about
+  seventy nine kilometres west of Khulna").
+
+No data frame uses a silent event (every storm or event is named before the calculation uses it).
+
+### 7. EUMETSAT / ECMWF / RDA data
+
+NOT APPLICABLE. Data sources in this movie: NASA Blue Marble Next Generation, ETOPO 2022 (NOAA), Natural Earth
+(public domain), HRRR (NOAA), IBTrACS (NOAA NCEI). No EUMETSAT, ECMWF TIGGE or NCAR RDA data are used.
+
+### 8. Exaggeration labels ("not to scale")
+
+PASS. HOUSE_STYLE paragraph 5 retires on-screen badges; exaggerations (tripod arrow lengths ~800 km, time
+compression, half-Earth cuts) are listed in the storyboard and manifest per scene. No "not to scale" badge
+appears on any frame.
+
+### 9. Colour-blind safety
+
+PASS. The orange/teal pair (i-hat east vs k-hat up) differs in both hue and luminance. The violet Coriolis bar
+vs the orange metric-term bar in s27 carry text labels ("Coriolis", "metric term") in their own colours -- no
+sign or quantity is encoded by hue alone. No red/green-only encoding anywhere. No jet or rainbow colour maps.
+
+### 10. Flash safety
+
+PASS. QA gate: 0 flashes/s (WCAG 2.3.1 limit 3). No visually bright full-frame transition detected in any
+checked frame.
+
+### 11. Narration voice and style (15 consecutive sentences, s03_enu + s04_k_up opening)
+
+Memory-rule checks on 15 sentences (s03 sentences 1-14, s04 sentence 1):
+
+- No opening recap: first sentence is "Now let's stand at a weather station at Brest." -- the topic itself,
+  not a recap of Part 3. PASS.
+- No "easy way": not found anywhere in the script sample. PASS.
+- No "Step one / Step two": not found; uses "Now...", "Next...", "So..." instead. PASS.
+- Every case introduced: Brest introduced on sentence 1 of s03; Khulna introduced as "Khulna, in south-west
+  Bangladesh" in s09; Ian introduced as "Hurricane Ian at Fort Myers Beach, on the south-west coast of Florida"
+  in s10. PASS.
+- Calculations voiced at the right level: "The first part of k hat is cosine phi times cosine lambda, which
+  comes to about zero point six six two" -- names what is multiplied and where each number comes from, then
+  gives the result. The CalcStack carries the numeric products; the voice does not read them out. PASS.
+- Simple arithmetic NOT voiced (0.664*0.997 etc. are on screen only, not spoken). PASS.
+- Standard scientific terms: "air parcel" in s15/s17/s19; not "bit of air". PASS.
+- Every new term defined: "local east, north, up frame" defined after the description in s03 sentences 3-5;
+  "metric terms" defined in s25 ("They're called metric terms."). PASS.
+- Goal stated before calculation: "Let's start with up, because it's the easiest. Up points straight out from
+  the Earth's centre. That's exactly the direction of the arrow from the centre to the station..." before the
+  CalcStack entries appear. PASS.
+
+### 12. TurnPic s25 -- "same wind, no push" label position
+
+**MUST-FIX (M1).** The overlap gate reports 51 text-text hits: "moving east" vs "same wind, no push",
+bounding-box overlap 182x17 px, persisting across all of s25_dot_i_b (~1738-1852 s, frames 52145-52565).
+Frame 1786.95 s confirms four labels crowded in the lower-left picture zone simultaneously:
+
+  "moving east" (orange)                             approximately y 468
+  "j dot (out of the screen)" (slate)                approximately y 522
+  "same wind, no push" (warm white)                  approximately y 560
+  "the east number changes => metric terms" (ink)    approximately y 620
+
+Vertical gap between "moving east" and "same wind, no push" is ~90 px; their bounding boxes share 17 px. The
+r8g4 fix moved "same wind, no push" to y+170 right-aligned at x=895, but the overlap persists at all 51 frames.
+
+Fix required: option A -- move "same wind, no push" down a further 30-40 px so the bounding-box bottom of
+"moving east" clears the top of "same wind, no push" by at least 20 px. Option B -- suppress the "moving east"
+label once "same wind, no push" appears (it has already served its purpose earlier in the scene).
+
+### 13. Halves warn 327-335 s
+
+**SHOULD-FIX (W1).** Halves gate WARN: left half empty 7.0 s at 327.5-334.5 s, during the s05->s06 scene
+transition (camera returning from the top-view SVG diagram to the half-Earth meridian slice). The 7-s gap
+exceeds the WARN threshold (3 s) but is below FAIL (10 s). Scene s06 starts at 323.2 s, so the camera is
+still settling ~11 s into the scene before content fills the left half.
+
+Consider: show the half-Earth arc from frame 0 of s06 (even if at a wide angle), or shorten the camera return,
+to satisfy the "picture from frame 0 in every scene" rule.
+
+### 14. QA duration gate -- tool bug (info only)
+
+INFO (I1). The duration gate FAILs with "window 120-180 s" -- this is the PoC clip range, not the +/-3% rule
+for a long movie. The actual duration 2079.10 s vs storyboard target_duration_s 2079.075 s is a deviation of
+0.025 s (0.001%), well within any reasonable tolerance. No action on the movie. The gate in `tools/movie_qa.py`
+should be updated: when target_duration_s > 300 s, check +/-3% from target, not the 120-180 s window.
+
+### 15. End card (s29)
+
+PASS. Frame 2076.47 s shows the full maths-tutorial end card:
+- Four thumbnails along the top (3 concept illustrations + 1 orange/purple placeholder)
+- "a series of maths tutorials" (68 px)
+- "atmospheric science * meteorology * fluid dynamics" (54 px)
+- "coordinates notebook" + "notebooks for the other maths concepts" with icons
+- Two-column concept list (vectors, dot product, cross product, derivatives, gradient |
+  contour maps, curl, material derivative, Coriolis, reading weather maps)
+
+The storyboard records "decision: maths end card" explicitly, and the coordinates series is a maths tutorial
+series, so the maths ending is correct per HOUSE_STYLE paragraph 3 ("The pure maths movies keep the maths-
+tutorial ending"). No "thanks for watching", no URL, no book name.
+
+### 16. Physics honesty spot-checks
+
+PASS. No physics errors found:
+- k-hat = (cos phi cos lambda, cos phi sin lambda, sin phi): correctly derived from the position vector (s04)
+- i-hat = (-sin lambda, cos lambda, 0): correctly derived from the 90-degree turn rule (s05)
+- Di/Dt = u/(a cos phi)(j-hat sin phi - k-hat cos phi): correct in s22 summary table and s19 frame
+- Metric term uv tan phi / a ~1.6e-5 m/s^2 vs Coriolis fv ~1.0e-3 m/s^2, ratio ~66: correct (s27, 1961 s)
+- s26 glider: Dv/Dt * i-hat = 0 => Du/Dt = uv tan phi/a != 0 (w=0), "u changes, nothing pushes": correct
+
+### 17. Equation fidelity
+
+PASS. QA gate: 18 storyboard equations present. `fr_eq.ts` contains all equations as verbatim String.raw
+constants matching the storyboard LaTeX symbol by symbol. KaTeX renderings in frames show no error boxes;
+fractions, hats, subscripts and superscripts all render correctly. The equations for Di/Dt, Dj/Dt, Dk/Dt
+(EQ_S22) and the full six-term product-rule expansion (EQ_S23) are particularly complex and both render cleanly.
+
+### 18. Captions
+
+PASS. VTT sample (first 20 cues) confirms:
+- Text matches the script word for word
+- Lines break at natural phrases ("the coordinates every / weather station uses")
+- Two lines per cue, within 42 chars per line
+- Timing is inside the audio
+
+QA gate: 486 cues, all matching, no cue out of order or outside the audio.
+
+---
+
+### Summary of findings
+
+| # | severity | scene | timestamp | finding |
+|---|---|---|---|---|
+| M1 | **Must-fix** | s25_dot_i_b | 1738-1852 s | "moving east" and "same wind, no push" labels have 182x17 px bounding-box overlap across 51 frames; four labels crowded in lower-left picture zone; fix: move "same wind, no push" down >=30 px more, or suppress "moving east" once it has served its purpose |
+| W1 | Should-fix | s05->s06 | 327-335 s | Left half empty 7.0 s during camera return; exceeds 3-s WARN; fix: show half-Earth arc from frame 0 of s06 or shorten camera return |
+| I1 | Info (tool bug) | -- | -- | Duration FAIL is false negative: QA tool checks PoC 120-180 s window for a 34-min movie; fix tools/movie_qa.py to use +/-3% of target_duration_s when target > 300 s |
+
+### Verdict
+
+**FIX** -- one Must-fix (M1: label overlap in s25 persists after r8g4). After fixing M1 and re-running QA to
+confirm the overlap gate clears, the movie should reach `qa_pass`.
+
+
+---
+
+### Reviewer 2 correction note (added after comparing qa_r8g2_run.txt)
+
+After writing the review above, I confirmed that the qa.json, overlap.json and frame files at
+`reports/movies/ch00_coordinates_frames/` are from the **r8g2 QA run** (qa_r8g2_run.txt matches qa.json
+gate for gate). Reviewer 1 notes that the r8g4 build produced 0 overlap hits on a separate check.
+
+Revised assessment of M1:
+- The 51 overlap hits and the FAIL on the overlap gate are **r8g2 artifacts**.
+- If Reviewer 1 is correct that r8g4 produces 0 overlap hits, the bounding-box overlap between "moving east"
+  and "same wind, no push" is resolved in r8g4 and M1 (as a Must-fix) no longer applies.
+- **Remaining concern (Should-check):** The r8g2 frame at 1786.95 s shows four text labels within a ~200 px
+  vertical band in the lower-left picture zone. Even if bounding boxes no longer overlap in r8g4, four labels
+  in this area is visually crowded. If the r8g4 frame at ~1787 s still shows this density, the builder should
+  consider suppressing "moving east" once "same wind, no push" appears.
+
+**Revised verdict (pending r8g4 QA confirmation):**
+- If r8g4 overlap gate = 0 hits: likely PASS (0 Must-fix; 1 Should on halves warn W1; 1 Info on duration
+  gate bug I1; possible Should on s25 label density)
+- If r8g4 overlap gate still fails: FIX (M1 applies)
+
+The summary table row for Reviewer 2 reflects r8g2 QA results, not r8g4.

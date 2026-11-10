@@ -433,7 +433,7 @@ export const SkipChip: React.FC<{ f: number; k: number; to: string }> = ({ f, k,
   const o = ramp(f, a, a + 10) * (1 - ramp(f, b, b + 10));
   if (o <= 0) return null;
   return (
-    <g opacity={o}>
+    <g opacity={o} data-lc-own="skipchip">
       <rect x={1076} y={740} width={760} height={116} rx={22} fill="#1f2a44" stroke={C.gold} strokeWidth={3} />
       {lines.map((t, i) => <Lbl key={i} x={1100} y={774 + i * 52} t={t} c={i === 1 ? C.gold : C.key} s={T.floor} />)}
     </g>

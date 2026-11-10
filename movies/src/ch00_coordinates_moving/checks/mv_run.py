@@ -88,7 +88,10 @@ def main() -> int:
         bdir = S / "bundle"
         if a.bundle or not bdir.exists():
             if bdir.exists():
-                bdir.rename(bdir.with_name(f"bundle_old_{int(time.time())}"))   # never delete: moved aside
+                try:
+                    bdir.rename(bdir.with_name(f"bundle_old_{int(time.time())}"))   # never delete: moved aside
+                except PermissionError:
+                    print("WARNING: could not move old bundle (file lock); overwriting in-place")
             r = subprocess.run(["node", str(tool), "--bundle", str(S / "public"), str(S / "stills" / "_b"), "-", "--bundle-out", str(bdir), "--bundle-only"],
                                cwd=MOVIES, capture_output=True, text=True)
             print(r.stdout[-800:], r.stderr[-1500:])

@@ -142,10 +142,10 @@ export const Arrow3D: React.FC<{ from: V3; to: V3; color: string; px?: number; h
 };
 
 /** A flat filled polygon (convex quad or triangle fan) in 3-D, e.g. the violet parallelogram at 18 %. */
-export const Quad3D: React.FC<{ pts: V3[]; color: string; o?: number; side?: THREE.Side }> = ({ pts, color, o = 0.18, side = THREE.DoubleSide }) => {
+export const Quad3D: React.FC<{ pts: V3[]; color: string; o?: number; side?: THREE.Side; own?: string }> = ({ pts, color, o = 0.18, side = THREE.DoubleSide, own }) => {
   const { pr } = useView3D();
   const id = useId();
-  if (PROBE.on) { if (o > 0) probe3(id, { k: "quad3d", c: color, w: 0, o, closed: true, pts: pts.map((v) => pr.p(v)) }); else probeOff(id); }
+  if (PROBE.on) { if (o > 0) probe3(id, { k: "quad3d", c: color, w: 0, o, closed: true, pts: pts.map((v) => pr.p(v)), own }); else probeOff(id); }
   const geo = useMemo(() => new THREE.BufferGeometry(), []);
   const mat = useMemo(() => new THREE.MeshBasicMaterial({ color, transparent: true, side, depthWrite: false }), [color, side]);
   mat.opacity = o;

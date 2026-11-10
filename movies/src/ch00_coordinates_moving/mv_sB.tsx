@@ -84,7 +84,7 @@ const S08: React.FC = () => {
         <Keyword f={f} text="towards 71°: east-north-east" at={[XC, 180]} appear={tBrg} s={T.floor} c={C.second} />
         <SpeedBar x={XC} y={770} />
       </Svg>
-      <CalcStack f={f} x={XC} y={250} size={44} maxLines={3} o={fout(f, t5 - 12)} rows={[
+      <CalcStack f={f} x={XC} y={210} size={44} maxLines={3} o={fout(f, t5 - 12)} rows={[
         { rhs: String.raw`00\ \text{h}:\ 49.667^\circ\text{N},\ 5.717^\circ\text{W}`, at: t4, c: C.muted },
         { rhs: String.raw`06\ \text{h}:\ 50.516^\circ\text{N},\ 1.505^\circ\text{W}`, at: t4 + 15, c: C.muted, cont: true },
         { rhs: String.raw`\Delta y=6371\times0.849\times0.01745`, at: t4 + 35 },
@@ -95,7 +95,7 @@ const S08: React.FC = () => {
         { rhs: String.raw`=0.07350\ \text{rad}`, at: t4 + 100, c: C.muted, cont: true },
         { rhs: String.raw`\Delta x=6371\times\cos50.09^\circ\times0.07350`, at: t4 + 115 },
         { rhs: String.raw`\approx300.4\ \text{km}`, at: t4 + 135, cont: true },
-        { rhs: String.raw`\tan\beta=300.4\div94.4\approx3.18`, at: tBrg - 20 },
+        { rhs: String.raw`\tan\beta=300.4\div94.4\approx3.18`, at: tBrg },
         { rhs: String.raw`\Rightarrow\beta\approx72.6^\circ\ \text{on average}`, at: tBrg - 5, cont: true },
         { rhs: String.raw`\text{at the start: }71^\circ`, at: tBrg + 10, c: C.muted, cont: true },
         { rhs: String.raw`\sqrt{94.4^2+300.4^2}\approx315\ \text{km}`, at: tSp - 50 },
@@ -361,7 +361,7 @@ const S12: React.FC = () => {
         <Keyword f={f} text="a house: the ground wind" at={[XC, 150]} appear={t9} s={T.floor} />
       </Svg>
       {/* remake 2026-11-07 (R16): Part 1's ring average, N = 72 points every 5° (as here) */}
-      <Recall f={f} tex={String.raw`\bar u_\theta=\dfrac{1}{N}\sum_{i=1}^{N}u_{\theta,i},\ \ N=72`} name="ring averages" x={XC} y={300} size={46}
+      <Recall f={f} tex={String.raw`\bar u_\theta=\dfrac{1}{N}\sum_{i=1}^{N}u_{\theta,i},\ \ N=72`} name="ring averages" x={XC} y={300} size={46} gap={100}
         appear={AT(k, 2, "ring average")} out={t4 - 18} />
       <SourceBelow text={SRC_CIA3} pic={RPIC} w={880} o={oR} name="s12 src a" />
       <CiaMap f={f} h={6} o={oM} id="cia12">

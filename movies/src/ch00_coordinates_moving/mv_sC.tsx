@@ -113,21 +113,21 @@ const S14: React.FC = () => {
   return (
     <Scene>
       <Svg>
-        <Axes A={A14} xt={[-300, -150, 0, 150, 300]} yt={yt14} xl="km along the storm's path" yl="pressure (hPa)" />
+        <Axes A={A14} xt={[-150, 0, 150, 300]} yt={yt14} xl="km along the storm's path" yl="pressure (hPa)" />
         <line x1={x0} y1={A14.y} x2={x0} y2={A14.y + A14.h} stroke={C.local} strokeWidth={3} strokeDasharray="10 8" />
         <path d={curveD(A14, X, X.map((x) => pProf(x - sh)))} fill="none" stroke={C.local} strokeWidth={6} />
         <Barometer x={x0} y={95} r={34} hPa={pProf(-sh)} />
         <circle cx={p0[0]} cy={p0[1]} r={10} fill={C.gold} stroke={C.bg} strokeWidth={3} />
         <line x1={tg0[0]} y1={tg0[1]} x2={tg1[0]} y2={tg1[1]} stroke={C.gold} strokeWidth={6} opacity={fin(f, AT(k, 13, "how fast the pressure rises"))} />
-        <Lbl x={tg1[0] + 16} y={tg1[1] - 10} t="slope" c={C.gold} s={T.floor} o={fin(f, AT(k, 13, "how fast the pressure rises"))} />
+        <Lbl x={tg1[0] + 16} y={tg1[1] - 28} t="slope" c={C.gold} s={T.floor} o={fin(f, AT(k, 13, "how fast the pressure rises"))} />
         <Rider x={rp[0]} y={rp[1] - 12} s={0.8} o={fin(f, t3)} />
         <Arrow p={[rp[0] + 30, rp[1] - 90]} q={[rp[0] + 150, rp[1] - 90]} color={C.second} w={8} head={28} o={fin(f, t3)} />
         <Keyword f={f} text="how are the two rates linked?" at={[XC, 120]} appear={0} out={t3 - 18} s={T.floor} />
         <Keyword f={f} text="1. the rider: a traveller at U" at={[XC, 120]} appear={t3} out={t5 - 18} s={T.floor} c={C.second} />
         <Keyword f={f} text="3. move it across the =" at={[XC, 425]} appear={t8} out={t16 - 18} s={T.floor} c={C.gold} />
         <Keyword f={f} text="$\nabla p$ · cross product movie" at={[XC, 690]} appear={AT(k, 5, "where grad p")} out={t8 - 18} s={T.floor} c={C.gold} />
-        <Keyword f={f} text="speed $\times$ slope along $\mathbf U$" at={[XC, 715]} appear={t13} out={t16 - 18} s={T.floor} c={C.first} />
-        <Keyword f={f} text="what to keep" at={[XC, 715]} appear={t16} c={C.gold} />
+        <Keyword f={f} text="speed $\times$ slope along $\mathbf U$" at={[XC, 755]} appear={t13} out={t16 - 18} s={T.floor} c={C.first} />
+        <Keyword f={f} text="what to keep" at={[XC, 755]} appear={t16} c={C.gold} />
         <SkipChip f={f} k={k} to={keepTime("s14_tau_derive")} />
         <CurvedLink f={f} from={[XC + 520, 290]} to={[XC + 560, 455]} start={t8 + 10} end={t10} bend={-80} />
       </Svg>
@@ -140,7 +140,7 @@ const S14: React.FC = () => {
       {/* remake 2026-11-07 (R16; series audit §3a): the traveller's rate from the derivatives movie (S4), grad p from the cross product movie (S5) */}
       <Recall f={f} tex={String.raw`\dfrac{dT}{dt}=\dfrac{\partial T}{\partial t}+\text{speed}\times\text{slope}`} name="the traveller's rate"
         lab="from the derivatives movie:" x={XC} y={470} size={46} appear={AT(k, 4, "derivatives movie")} out={t8 - 12} />
-      <Layered parts={parts} x={XC} y={560} size={72} layers={[{ t: "all", o: fin(f, t9) }, { t: [], u: [0], o: fin(f, t11) }, { t: [], u: [2], o: fin(f, t12) }, { t: [], u: [3], o: fin(f, t15) }]} />
+      <Layered parts={parts} x={XC} y={620} size={60} layers={[{ t: "all", o: fin(f, t9) }, { t: [], u: [0], o: fin(f, t11) }, { t: [], u: [2], o: fin(f, t12) }, { t: [], u: [3], o: fin(f, t15) }]} />
       <TeX s={String.raw`\dfrac{\cancel{\text{km}}}{\text{h}}\times\dfrac{\text{hPa}}{\cancel{\text{km}}}=\dfrac{\text{hPa}}{\text{h}}`} x={XC} y={800} size={48} o={win(f, t14, t16 - 18)} />
     </Scene>
   );
@@ -180,7 +180,7 @@ const S15: React.FC = () => {
         <Axes A={A15} xt={[-1, 0, 1]} yt={[956, 960, 964]} xf={(v) => `${["23", "00", "01"][v + 1]} UTC`} yl="hPa" />
         <path d={pts.filter(([, , a]) => f >= a).map(([x, p], i) => `${i ? "L" : "M"}${G(x, p)[0].toFixed(1)} ${G(x, p)[1].toFixed(1)}`).join("")} fill="none" stroke={C.neg} strokeWidth={6} />
         {pts.map(([x, p, a], i) => <circle key={i} cx={G(x, p)[0]} cy={G(x, p)[1]} r={9} fill={C.neg} stroke={C.bg} strokeWidth={3} opacity={fin(f, a)} />)}
-        <Lbl x={G(-1, PL.p3[0])[0] + 20} y={G(-1, PL.p3[0])[1] - 6} t="964.1" c={C.neg} s={T.floor} o={fin(f, tP23)} />
+        <Lbl x={G(-1, PL.p3[0])[0] + 120} y={G(-1, PL.p3[0])[1] - 6} t="964.1" c={C.neg} s={T.floor} o={fin(f, tP23)} />
         <Lbl x={G(1, PL.p3[2])[0] + 20} y={G(1, PL.p3[2])[1] - 6} t="956.5" c={C.neg} s={T.floor} o={fin(f, tP01)} />
         <line x1={G(-1, PL.p3[0])[0]} y1={G(-1, PL.p3[0])[1]} x2={G(1, PL.p3[2])[0]} y2={G(1, PL.p3[2])[1]} stroke={C.gold} strokeWidth={4} strokeDasharray="10 8" opacity={fin(f, t2)} />
         <PBar x={XC} y={90} />

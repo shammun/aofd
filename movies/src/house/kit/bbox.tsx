@@ -247,7 +247,7 @@ const measureShapes = (frame: number): Shape[] => {
     } else if (s.k === "rod3d") {
       if (s.w >= 3 && !(s.c.toLowerCase() === "#9aa6bd" && s.w <= 4.5)) out.push({ k: "stroke", c: s.c, w: r1(s.w), o: s.o, pts: s.pts.map((p) => p.map(r1)), closed: false, g: id, tag: "rod3d" });
     } else if (s.o >= 0.3) {
-      out.push({ k: "fill", c: s.c, w: 0, o: s.o, pts: s.pts.map((p) => p.map(r1)), closed: true, g: id, tag: s.k });
+      out.push({ k: "fill", c: s.c, w: 0, o: s.o, pts: s.pts.map((p) => p.map(r1)), closed: true, g: id, tag: s.k, own: s.own });
     }
   });
   return out;

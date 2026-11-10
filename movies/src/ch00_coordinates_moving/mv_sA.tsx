@@ -249,11 +249,11 @@ const S05: React.FC = () => {
         <Walker x={350} y={WALK_Y} s={0.9} />
         <Person x={880} y={TY + 80} s={0.9} />
         <Lbl x={350} y={WALK_Y - 140} t="1.5 → 2.0 m/s" c={C.first} s={T.floor} a="middle" o={win(f, AT(k, 11, "one and a half to two"), t12 - 18)} />
-        <Lbl x={980} y={TY + 140} t="21.5 → 22.0 m/s" c={C.local} s={T.floor} a="end" o={win(f, AT(k, 11, "twenty one and a half to twenty two"), t12 - 18)} />
+        <Lbl x={980} y={TY + 280} t="21.5 → 22.0 m/s" c={C.local} s={T.floor} a="end" o={win(f, AT(k, 11, "twenty one and a half to twenty two"), t12 - 18)} />
         {/* the ball: straight down for the rider (left), a curve for the person beside the track (right); the same 9.8 m/s² arrow */}
         <g opacity={fin(f, t12)}>
-          <Lbl x={300} y={575} t="on the train" c={C.second} s={T.floor} a="middle" />
-          <Lbl x={770} y={575} t="from the ground" c={C.local} s={T.floor} a="middle" />
+          <Lbl x={300} y={550} t="on the train" c={C.second} s={T.floor} a="middle" />
+          <Lbl x={200} y={610} t="from the ground" c={C.local} s={T.floor} a="start" />
           {[0.35, 0.7, 1.0].filter((q) => q <= drop + 1e-9).map((q) => <circle key={q} cx={300} cy={yb(q * 1.4)} r={10} fill={C.key} opacity={0.5} />)}
           <circle cx={300} cy={yb(ft)} r={15} fill={C.key} stroke={C.bg} strokeWidth={3} />
           <Arrow p={[340, yb(ft) - 20]} q={[340, yb(ft) + 70]} color={BROWN} w={8} head={26} />
@@ -279,7 +279,7 @@ const S05: React.FC = () => {
         { rhs: String.raw`\Rightarrow\ \Delta u=\Delta U+\Delta u'`, at: t5 },
         { rhs: String.raw`\dfrac{\Delta u}{\Delta t}=\dfrac{\Delta U}{\Delta t}+\dfrac{\Delta u'}{\Delta t}`, at: t6, h: 120 },
       ]} />
-      <Layered parts={parts} x={XC} y={545} size={64} o={fout(f, t14 - 12)} layers={[{ t: [0, 1, 2], o: fin(f, t8) }, { t: [], x: [1], u: [1], o: fin(f, AT(k, 9, "is zero")) },
+      <Layered parts={parts} x={XC} y={545} size={64} ax={0.5} o={fout(f, t14 - 12)} layers={[{ t: [0, 1, 2], o: fin(f, t8) }, { t: [], x: [1], u: [1], o: fin(f, AT(k, 9, "is zero")) },
         { t: [3], o: fin(f, AT(k, 10, "So d u by d t equals")) }]} />
       <TeX s={String.raw`+0.5\ \text{m/s in 1 s}`} x={XC} y={690} size={52} c={C.gold} o={win(f, AT(k, 11, "in the same second"), t12 - 18)} />
     </Scene>
@@ -314,7 +314,7 @@ const S06: React.FC = () => {
   return (
     <Scene>
       <View3D st={st} x={V3BOX.x} y={V3BOX.y} w={V3BOX.w} h={V3BOX.h}>
-        <Quad3D pts={[[-5, -2.4, 0], [5, -2.4, 0], [5, 2.4, 0], [-5, 2.4, 0]]} color="#2a3550" o={0.55} />
+        <Quad3D pts={[[-5, -2.4, 0], [5, -2.4, 0], [5, 2.4, 0], [-5, 2.4, 0]]} color="#2a3550" o={0.4} own="s06grnd" />
         {[-4, -2, 0, 2, 4].map((x) => <Rod3D key={`x${x}`} a={[x, -2.4, 0.01]} b={[x, 2.4, 0.01]} color={C.grid} px={2} />)}
         {[-2, 0, 2].map((y) => <Rod3D key={`y${y}`} a={[-5, y, 0.01]} b={[5, y, 0.01]} color={C.grid} px={2} />)}
         {F6.map((q, i) => <Quad3D key={i} pts={q.map((j) => P8[j])} color={C.first} o={0.16} />)}
@@ -329,12 +329,12 @@ const S06: React.FC = () => {
         <Keyword f={f} text="air parcel" at={[XC, 110]} appear={0} out={Math.min(t2, AT(k, 1, "derivatives movie")) - 18} targets={[pc]} />
         {/* remake 2026-11-07 (R16): the recalled equation's source, under its underbraces, until "put u in place of T" */}
         <Lbl x={XC} y={312} t="from the derivatives movie" c={C.gold} s={T.floor} o={win(f, AT(k, 1, "derivatives movie"), AT(k, 5, "put u in place of T") - 12)} />
-        <Lbl x={pr.p([0.6, 1.6, 0])[0] + 20} y={pr.p([0.6, 1.6, 0])[1] + 30} t="fixed place" c={C.local} s={T.floor} o={win(f, t3, t9 - 18)} />
+        <g data-lc-own="s06grnd"><Lbl x={pr.p([0.6, 1.6, 0])[0] + 20} y={pr.p([0.6, 1.6, 0])[1] + 30} t="fixed place" c={C.local} s={T.floor} o={win(f, t3, t9 - 18)} /></g>
         <Keyword f={f} text="T → u" at={[XC, 360]} appear={AT(k, 5, "put u in place of T")} out={t9 - 18} c={C.gold} />
         <Keyword f={f} text="the same for v and w" at={[XC, 560]} appear={t7} out={t9 - 18} s={T.floor} />
         <Keyword f={f} text="acceleration = local + advection" at={[XC, 630]} appear={t8 + 10} out={t9 - 18} s={T.floor} c={C.gold} />
-        <Lbl x={450} y={610} t="someone on the ground" c={C.local} s={T.floor} a="middle" o={fin(f, t10)} />
-        <Lbl x={1380} y={610} t="a rider, moving at U" c={C.second} s={T.floor} a="middle" o={fin(f, t11)} />
+        <g data-lc-own="s06grnd"><Lbl x={450} y={590} t="someone on the ground" c={C.local} s={T.floor} a="middle" o={fin(f, t10)} /></g>
+        <Lbl x={1380} y={590} t="a rider, moving at U" c={C.second} s={T.floor} a="middle" o={fin(f, t11)} />
         <Keyword f={f} text="the same acceleration" at={[XC, 140]} appear={t12} out={t13 - 18} c={C.gold} />
         <Keyword f={f} text="but each piece can differ" at={[XC, 140]} appear={t13} c={C.key} />
         <Keyword f={f} text="let's see it with numbers" at={[XC, 230]} appear={t14} s={T.floor} />
@@ -371,7 +371,7 @@ const S07: React.FC = () => {
   return (
     <Scene>
       <Svg>
-        <Axes A={GA} xt={[-100, 0, 100, 200, 300]} yt={[0, 5, 10, 15]} xl="km east" yl="wind (m/s)" />
+        <Axes A={GA} xt={[-100, 0, 100, 200, 300]} yt={[5, 10, 15]} xl="km east" yl="wind (m/s)" />
         <path d={curveD(GA, ghost.X, ghost.Y)} fill="none" stroke={C.local} strokeWidth={4} strokeDasharray="12 8" opacity={win(f, t9 + 10, t13 - 18)} />
         <path d={curveD(GA, now.X, now.Y)} fill="none" stroke={C.first} strokeWidth={7} />
         <circle cx={p0[0]} cy={p0[1]} r={11} fill={C.gold} stroke={C.bg} strokeWidth={3} opacity={fin(f, t2)} />
@@ -398,12 +398,12 @@ const S07: React.FC = () => {
         <SideCallout f={f} lines="0.111 m/s per km" at={[XC + 40, 110]} appear={AT(k, 2, "zero point one one one")} target={[tg1[0] + 8, tg1[1]]} s={T.floor} c={C.gold} bend={20} />
         <SideCallout f={f} lines="13.54 m/s" at={[XC + 40, 190]} appear={AT(k, 2, "thirteen point five four")} target={[p0[0] + 16, p0[1] + 4]} s={T.floor} c={C.first} bend={-20} />
         <Keyword f={f} text="a sliding gust pattern" at={[XC, 600]} appear={0} out={t2 - 18} s={T.floor} />
-        <Keyword f={f} text="1. ride with the pattern" at={[XC, 600]} appear={t3} out={t8 - 18} s={T.floor} c={C.second} />
-        <Keyword f={f} text="2. stand on the ground" at={[XC, 600]} appear={t8} out={t13 - 18} s={T.floor} c={C.local} />
-        <Keyword f={f} text="pieces differ, the sum doesn't" at={[XC, 600]} appear={t13} out={t14 - 18} s={T.floor} c={C.gold} />
-        <Keyword f={f} text="steady, straight frames only" at={[XC, 600]} appear={t14} out={t15 - 18} s={T.floor} />
-        <Keyword f={f} text="turning frames add Coriolis" at={[XC, 600]} appear={t15} out={t16 - 18} s={T.floor} />
-        <Keyword f={f} text="later: the material derivative" at={[XC, 600]} appear={t16} s={T.floor} />
+        <Keyword f={f} text="1. ride with the pattern" at={[XC, 668]} appear={t3} out={t8 - 18} s={T.floor} c={C.second} />
+        <Keyword f={f} text="2. stand on the ground" at={[XC, 580]} appear={t8} out={t13 - 18} s={T.floor} c={C.local} />
+        <Keyword f={f} text="pieces differ, the sum doesn't" at={[XC, 560]} appear={t13} out={t14 - 18} s={T.floor} c={C.gold} />
+        <Keyword f={f} text="steady, straight frames only" at={[XC, 560]} appear={t14} out={t15 - 18} s={T.floor} />
+        <Keyword f={f} text="turning frames add Coriolis" at={[XC, 560]} appear={t15} out={t16 - 18} s={T.floor} />
+        <Keyword f={f} text="later: the material derivative" at={[XC, 560]} appear={t16} s={T.floor} />
         {/* one hour at the fixed place (anemometer, slate dashed) and following the parcel (teal) */}
         <g opacity={fin(f, t9 + 10)}>
           <Axes A={TG} xt={[0, 1]} yt={[8, 12, 16]} xf={(v) => `${v} h`} />{/* lint-ok: "h" is the unit hours on the time axis, not a variable */}
