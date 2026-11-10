@@ -48,7 +48,7 @@ const S20: React.FC = () => {
       <GlobeFrame id="s20k" zoom={0} disc={discOf(CAM_FACE)} o={1 - flat} />
       <SourceBelow text={SRC_G} pic={GB} w={960} o={1 - flat} name="s20 src" />
       <Svg>
-        <g opacity={flat}>
+        <g opacity={Math.max(0.25, flat)}>
           <SliceBase V={SV3} axes={0.5} quarter />
           <line x1={SV3.c[0]} y1={SV3.c[1]} x2={A.p[0]} y2={A.p[1]} stroke={C.local} strokeWidth={3} strokeDasharray="8 8" />
           <Arrow p={A.p} q={A.K} color={C.first} w={10} head={38} />
@@ -311,8 +311,8 @@ const S25: React.FC = () => {
       <TeX s={String.raw`\text{(6)}\ w\,\dfrac{D\hat{\mathbf k}}{Dt}\cdot\hat{\mathbf i}=w\,\dfrac{u}{a}=+\dfrac{uw}{a}`} x={XC} y={370} size={50} o={win(f, t6, tAdd - 20)} />
       <TeX s={EQ_S25} x={x0} y={y0} size={S} o={fin(f, tAdd)} />
       {full.map((s, i) => <TeX key={i} s={s} x={XC + (i ? 90 : 0)} y={580 + i * 100} size={44} c={i ? C.muted : C.key} o={fin(f, tSame + 12 * i) * fout(f, tKeep - 12)} />)}
-      {/* Part 1 lessons B4: the keep line's own picture (the arrows turn, so the same push-free wind's east number changes) */}
-      <TurnPic o={fin(f, tKeep, 14)} wind />
+      {/* Part 1 lessons B4: TurnPic from tAdd so the left half has content while the full equation row is on screen */}
+      <TurnPic o={fin(f, tAdd, 14)} wind />
       {void [t6c]}
     </Scene>
   );
@@ -515,6 +515,7 @@ const S28: React.FC = () => {
       <TeX s={EQ_S03} x={XC} y={420} size={58} o={b(0)} />
       <TeX s={EQ_S25} x={XC} y={360} size={52} o={b(5)} />
       <TeX s={String.raw`\dfrac{D\hat{\mathbf i}}{Dt}`} x={cB[0] - 60} y={cB[1] + 220} size={52} c={C.key} ax={0.5} o={b(4)} />
+      <TurnPic o={b(5)} wind />
       {[0, 1].map(() => null)}
     </Scene>
   );
