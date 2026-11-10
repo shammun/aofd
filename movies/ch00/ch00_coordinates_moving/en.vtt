@@ -1,0 +1,1224 @@
+WEBVTT
+
+00:00:00.300 --> 00:00:03.035
+In this video, we'll learn moving frames,
+
+00:00:03.035 --> 00:00:06.638
+coordinates that travel along
+with a train or a storm,
+
+00:00:06.638 --> 00:00:10.173
+and see how they're used
+to find a storm's own winds,
+
+00:00:10.173 --> 00:00:12.775
+and what a barometer sees as it passes.
+
+00:00:13.575 --> 00:00:18.375
+Imagine riding along with a storm
+as it crosses the English Channel.
+
+00:00:18.725 --> 00:00:23.800
+Would its winds look the same to you as
+they do to someone standing on the shore?
+
+00:00:24.150 --> 00:00:27.575
+This is the fifth of seven
+parts on coordinates.
+
+00:00:27.925 --> 00:00:31.335
+Now let's dive into moving
+frames: what changes,
+
+00:00:31.335 --> 00:00:35.100
+and what stays the same, when
+the frame itself moves.
+
+00:00:35.450 --> 00:00:38.018
+Then we'll ride along with a real storm,
+
+00:00:38.018 --> 00:00:41.550
+and see what a barometer
+on the coast saw as it passed.
+
+00:00:42.350 --> 00:00:45.500
+Let's start with the simplest
+moving frame.
+
+00:00:45.850 --> 00:00:49.237
+Imagine you're on a train
+gliding along a straight
+
+00:00:49.237 --> 00:00:52.150
+track at a steady twenty
+metres per second.
+
+00:00:52.500 --> 00:00:56.450
+You walk towards the front at one
+and a half metres per second.
+
+00:00:56.800 --> 00:01:00.201
+Someone standing beside
+the track sees your speed and
+
+00:01:00.201 --> 00:01:04.950
+the train's speed added together:
+twenty one and a half metres per second.
+
+00:01:06.450 --> 00:01:08.425
+Why do the speeds add?
+
+00:01:08.775 --> 00:01:11.675
+Let's measure positions along the track.
+
+00:01:12.025 --> 00:01:16.575
+The person beside the track uses x,
+measured from the station.
+
+00:01:16.925 --> 00:01:20.700
+You use x prime, measured
+from the back of the train.
+
+00:01:21.050 --> 00:01:24.756
+The back of the train passed
+the station at time zero,
+
+00:01:24.756 --> 00:01:28.325
+and it moves at capital U, twenty
+metres per second.
+
+00:01:28.675 --> 00:01:34.400
+So after a time t, the back of the train
+is capital U times t from the station.
+
+00:01:35.900 --> 00:01:38.606
+Your distance from the station is that,
+
+00:01:38.606 --> 00:01:44.225
+plus your distance from the back of the
+train: x equals x prime plus capital U t.
+
+00:01:44.575 --> 00:01:48.825
+And both clocks show the same
+time: t prime equals t.
+
+00:01:49.625 --> 00:01:53.384
+Next come two short derivations:
+why speeds add,
+
+00:01:53.384 --> 00:01:56.125
+and why accelerations don't change.
+
+00:01:56.475 --> 00:01:59.050
+They're for those who like every step.
+
+00:01:59.400 --> 00:02:02.082
+If not, skip ahead to the time on screen:
+
+00:02:02.082 --> 00:02:06.400
+you don't need them for the intuition
+of weather, climate or maps.
+
+00:02:06.750 --> 00:02:09.775
+Now let's get the speeds
+from the positions.
+
+00:02:10.125 --> 00:02:15.836
+In a short time, delta t, your place
+on the train changes by delta x prime,
+
+00:02:15.836 --> 00:02:20.100
+and the back of the train
+moves on by capital U delta t.
+
+00:02:20.450 --> 00:02:24.891
+So the change seen from the station
+is the sum of the two:
+
+00:02:24.891 --> 00:02:28.950
+delta x equals
+delta x prime, plus capital U delta t.
+
+00:02:30.450 --> 00:02:33.125
+Next, we divide by delta t.
+
+00:02:33.475 --> 00:02:38.725
+Delta x over delta t is the speed
+seen from the ground, small u.
+
+00:02:39.075 --> 00:02:44.675
+Delta x prime over delta t is the speed
+seen on the train, u prime.
+
+00:02:45.025 --> 00:02:48.200
+So u equals u prime plus capital U.
+
+00:02:49.700 --> 00:02:54.925
+With our numbers, your walking speed plus
+the train's speed gives twenty one and
+
+00:02:54.925 --> 00:02:56.950
+a half metres per second again.
+
+00:02:58.450 --> 00:03:01.238
+Switching between two frames like this,
+
+00:03:01.238 --> 00:03:04.383
+moving at a steady
+velocity without turning,
+
+00:03:04.383 --> 00:03:08.600
+is called a Galilean transformation,
+after Galileo Galilei.
+
+00:03:08.950 --> 00:03:12.958
+In three dimensions,
+the same holds for each part:
+
+00:03:12.958 --> 00:03:16.725
+bold v equals bold
+capital U plus bold v prime.
+
+00:03:17.525 --> 00:03:19.675
+Here's the beautiful part.
+
+00:03:20.025 --> 00:03:22.525
+What happens to accelerations?
+
+00:03:22.875 --> 00:03:26.500
+Let's follow the same
+steps, one move at a time.
+
+00:03:26.850 --> 00:03:31.750
+First, at every moment, u equals
+capital U plus u prime.
+
+00:03:32.100 --> 00:03:38.100
+Next, a short time later, each of them has
+changed a little, and the sum still holds.
+
+00:03:38.450 --> 00:03:42.706
+So delta u equals delta
+capital U plus delta u prime:
+
+00:03:42.706 --> 00:03:46.400
+the change of a sum
+is the sum of the changes.
+
+00:03:47.900 --> 00:03:50.450
+Then we divide by delta t.
+
+00:03:50.800 --> 00:03:54.925
+Now let delta t shrink, as
+in the derivatives movie.
+
+00:03:55.275 --> 00:04:01.925
+That gives d u by d t equals d capital
+U by d t, plus d u prime by d t.
+
+00:04:03.425 --> 00:04:09.325
+Finally, the train's speed never changes,
+so d capital U by d t is zero.
+
+00:04:09.675 --> 00:04:13.209
+So d u by d t equals d u prime by d t:
+
+00:04:13.209 --> 00:04:17.300
+the acceleration
+is the same in both frames.
+
+00:04:18.800 --> 00:04:21.299
+For example, if you speed up from one and
+
+00:04:21.299 --> 00:04:24.104
+a half to two metres
+per second in one second,
+
+00:04:24.104 --> 00:04:27.701
+the person beside the track
+sees you go from twenty one and
+
+00:04:27.701 --> 00:04:30.200
+a half to twenty two, in the same second.
+
+00:04:31.700 --> 00:04:33.715
+Drop a ball on a smooth train,
+
+00:04:33.715 --> 00:04:38.953
+and it speeds up downwards by nine point
+eight metres per second every second,
+
+00:04:38.953 --> 00:04:41.975
+for you, and for the person
+beside the track.
+
+00:04:42.325 --> 00:04:46.889
+And since Newton's law says force
+equals mass times acceleration,
+
+00:04:46.889 --> 00:04:50.400
+the same forces explain
+the motion in both frames.
+
+00:04:50.750 --> 00:04:56.255
+If you skipped, here's what to keep: in a
+frame moving steadily in a straight line,
+
+00:04:56.255 --> 00:04:58.841
+speeds change by the frame's own speed,
+
+00:04:58.841 --> 00:05:02.025
+but accelerations,
+and so forces, stay the same.
+
+00:05:02.825 --> 00:05:05.536
+In a fluid, we follow an air parcel:
+
+00:05:05.536 --> 00:05:09.075
+a small volume of air
+that moves with the wind.
+
+00:05:09.425 --> 00:05:11.082
+In the derivatives movie,
+
+00:05:11.082 --> 00:05:15.125
+we found the rate that an air
+parcel's own thermometer reads.
+
+00:05:15.475 --> 00:05:21.409
+Capital D T by D t equals partial
+capital T by partial small t,
+
+00:05:21.409 --> 00:05:23.575
+plus bold v dot grad T.
+
+00:05:23.925 --> 00:05:27.450
+The first part is the change
+at one fixed place.
+
+00:05:27.800 --> 00:05:29.376
+The second is advection:
+
+00:05:29.376 --> 00:05:34.300
+the change from being carried to places
+where the temperature is different.
+
+00:05:34.650 --> 00:05:39.935
+The eastward wind, u, is just another
+number the parcel carries along,
+
+00:05:39.935 --> 00:05:42.200
+so we can put u in place of T.
+
+00:05:42.550 --> 00:05:49.375
+Capital D u by D t equals partial u by
+partial t, plus bold v dot grad u.
+
+00:05:49.725 --> 00:05:52.750
+The same goes for v and for w.
+
+00:05:54.250 --> 00:05:59.350
+So the air parcel's acceleration
+is a local change at a fixed place,
+
+00:05:59.350 --> 00:06:00.475
+plus advection.
+
+00:06:00.825 --> 00:06:04.450
+Now here's the train's lesson,
+written for a fluid.
+
+00:06:04.800 --> 00:06:10.150
+On the left is the parcel's acceleration,
+worked out by someone on the ground.
+
+00:06:10.500 --> 00:06:13.768
+On the right is the same
+parcel's acceleration,
+
+00:06:13.768 --> 00:06:18.217
+worked out by someone riding
+in a frame that moves at capital U,
+
+00:06:18.217 --> 00:06:20.025
+with primes on everything.
+
+00:06:20.375 --> 00:06:25.175
+They're equal, because the acceleration
+is the same in both frames.
+
+00:06:25.525 --> 00:06:28.375
+But each piece on its own
+can be different.
+
+00:06:28.725 --> 00:06:30.825
+Let's see that with numbers.
+
+00:06:31.625 --> 00:06:34.810
+Picture a pattern
+of stronger and weaker winds,
+
+00:06:34.810 --> 00:06:39.350
+two hundred kilometres from one
+gust to the next, all blowing east.
+
+00:06:39.700 --> 00:06:43.937
+The whole pattern slides east
+at a steady ten metres per second,
+
+00:06:43.937 --> 00:06:45.725
+without changing its shape.
+
+00:06:46.075 --> 00:06:47.115
+Take one moment,
+
+00:06:47.115 --> 00:06:51.793
+at a place where the wind is thirteen
+point five four metres per second,
+
+00:06:51.793 --> 00:06:55.301
+and is getting stronger
+towards the east by zero point
+
+00:06:55.301 --> 00:06:58.550
+one one one metres per second
+for every kilometre.
+
+00:07:00.050 --> 00:07:05.125
+First, ride with the pattern,
+at capital U, ten metres per second.
+
+00:07:05.475 --> 00:07:10.025
+To you, the pattern is frozen, so
+the local change is zero.
+
+00:07:10.375 --> 00:07:11.438
+Relative to you,
+
+00:07:11.438 --> 00:07:16.686
+the air at that place moves east at the
+wind's speed minus the pattern's speed:
+
+00:07:16.686 --> 00:07:22.200
+three point five four metres per second,
+or twelve point seven kilometres per hour.
+
+00:07:22.550 --> 00:07:24.764
+It's carried into stronger wind,
+
+00:07:24.764 --> 00:07:28.845
+so the advection is that
+speed times the slope of the wind,
+
+00:07:28.845 --> 00:07:32.650
+zero point one one one metres
+per second per kilometre.
+
+00:07:33.000 --> 00:07:37.300
+That's plus one point four
+metres per second, every hour.
+
+00:07:38.800 --> 00:07:44.625
+Now stand on the ground, beside an
+anemometer, a wind meter that never moves.
+
+00:07:44.975 --> 00:07:48.951
+The pattern slides past at thirty
+six kilometres per hour,
+
+00:07:48.951 --> 00:07:51.625
+bringing the weaker wind from the west.
+
+00:07:51.975 --> 00:07:57.908
+So the anemometer sees a local change of
+minus the pattern's speed times the slope:
+
+00:07:57.908 --> 00:08:01.625
+minus four point zero metres
+per second, every hour.
+
+00:08:03.125 --> 00:08:05.805
+The advection now uses the full wind,
+
+00:08:05.805 --> 00:08:08.992
+forty eight point seven
+kilometres per hour,
+
+00:08:08.992 --> 00:08:12.975
+times the same slope, which
+gives plus five point four.
+
+00:08:14.475 --> 00:08:16.342
+Adding the local change and
+
+00:08:16.342 --> 00:08:20.975
+the advection gives plus
+one point four, the same as for the rider.
+
+00:08:22.475 --> 00:08:25.377
+So each piece depends on who measures it,
+
+00:08:25.377 --> 00:08:29.200
+but their sum, the air
+parcel's acceleration, doesn't.
+
+00:08:29.550 --> 00:08:33.625
+That only works for a frame moving
+steadily in a straight line.
+
+00:08:33.975 --> 00:08:38.595
+A frame that turns, like the spinning
+Earth, adds the Coriolis and
+
+00:08:38.595 --> 00:08:42.725
+centrifugal effects, as we saw
+in the cross product movies.
+
+00:08:43.075 --> 00:08:47.750
+We'll build all of this fully in a later
+movie: The material derivative.
+
+00:08:48.550 --> 00:08:50.750
+Now a real moving storm.
+
+00:08:51.100 --> 00:08:54.007
+Storm Ciarán crossed
+the English Channel in the
+
+00:08:54.007 --> 00:08:56.913
+night from the first
+to the second of November,
+
+00:08:56.913 --> 00:08:58.150
+twenty twenty three.
+
+00:08:58.500 --> 00:09:01.404
+To follow it, we find its lowest pressure,
+
+00:09:01.404 --> 00:09:07.075
+then look for the lowest pressure close
+by an hour later, and so on, hour by hour.
+
+00:09:07.425 --> 00:09:12.643
+At midnight, universal time, its centre
+was just off the tip of Cornwall,
+
+00:09:12.643 --> 00:09:16.575
+at nine hundred and fifty
+four and a half hectopascals.
+
+00:09:18.075 --> 00:09:20.749
+Between midnight and six in the morning,
+
+00:09:20.749 --> 00:09:24.627
+the centre moved towards a bearing
+of seventy one degrees,
+
+00:09:24.627 --> 00:09:29.975
+east-north-east, at about fourteen point
+six metres per second, roughly fifteen.
+
+00:09:31.475 --> 00:09:35.911
+From Part 1, the maths angle
+is ninety degrees minus the bearing,
+
+00:09:35.911 --> 00:09:37.480
+and an arrow's east and
+
+00:09:37.480 --> 00:09:42.325
+north parts are its length times the
+cosine and the sine of that angle.
+
+00:09:42.675 --> 00:09:47.934
+So the storm's east part is its speed
+times the sine of seventy one degrees,
+
+00:09:47.934 --> 00:09:51.325
+and its north part
+is its speed times the cosine.
+
+00:09:51.675 --> 00:09:55.563
+Sine seventy one degrees is about
+zero point nine four six,
+
+00:09:55.563 --> 00:09:59.649
+and cosine seventy one degrees
+about zero point three two six,
+
+00:09:59.649 --> 00:10:03.932
+so the east part is about
+thirteen point eight metres per second,
+
+00:10:03.932 --> 00:10:06.700
+and the north part about four point eight.
+
+00:10:08.200 --> 00:10:11.514
+We'll call this storm
+velocity bold capital U:
+
+00:10:11.514 --> 00:10:13.891
+thirteen point eight times i hat,
+
+00:10:13.891 --> 00:10:16.269
+the local east arrow from Part 4,
+
+00:10:16.269 --> 00:10:20.375
+plus four point eight
+times j hat, the local north arrow.
+
+00:10:21.175 --> 00:10:25.709
+Let's look at the winds on a ring two
+hundred kilometres from the centre,
+
+00:10:25.709 --> 00:10:27.200
+at three in the morning.
+
+00:10:27.550 --> 00:10:32.127
+As in Part 1, we split each wind
+into its part round the ring and
+
+00:10:32.127 --> 00:10:36.000
+its part in or out, with the
+formulas we derived there.
+
+00:10:36.350 --> 00:10:37.744
+Seen from the ground,
+
+00:10:37.744 --> 00:10:40.731
+the round part averaged
+about eighteen metres
+
+00:10:40.731 --> 00:10:43.387
+per second on the storm's southern side,
+
+00:10:43.387 --> 00:10:46.175
+but only about seven on its northern side.
+
+00:10:47.675 --> 00:10:49.725
+Why so lopsided?
+
+00:10:50.075 --> 00:10:55.600
+The storm spins anticlockwise as seen
+from above, as northern storms do.
+
+00:10:55.950 --> 00:10:59.669
+On its southern side, the spin
+blows towards the east,
+
+00:10:59.669 --> 00:11:02.975
+the same way the storm
+moves, so the two add up.
+
+00:11:03.325 --> 00:11:07.234
+On its northern side, the spin
+blows towards the west,
+
+00:11:07.234 --> 00:11:10.275
+against the motion, so they partly cancel.
+
+00:11:11.075 --> 00:11:13.726
+Now let's ask what the wind looks like to
+
+00:11:13.726 --> 00:11:16.636
+someone riding along
+with the storm's centre,
+
+00:11:16.636 --> 00:11:17.800
+at bold capital U.
+
+00:11:18.150 --> 00:11:20.778
+That's called the storm-relative wind,
+
+00:11:20.778 --> 00:11:23.752
+and we met it briefly
+in the vectors movie,
+
+00:11:23.752 --> 00:11:26.450
+as the wind minus the storm's velocity.
+
+00:11:26.800 --> 00:11:28.612
+From the Galilean rule,
+
+00:11:28.612 --> 00:11:34.125
+the ground wind is bold capital U plus
+the rider's wind, bold v prime.
+
+00:11:34.475 --> 00:11:39.175
+So the rider's wind is the ground
+wind minus bold capital U.
+
+00:11:40.675 --> 00:11:43.544
+Taking an arrow away is the same as adding
+
+00:11:43.544 --> 00:11:46.550
+that arrow turned
+to point the opposite way.
+
+00:11:46.900 --> 00:11:50.175
+Take a point in the middle
+of the southern side.
+
+00:11:50.525 --> 00:11:55.725
+There, the ground wind is thirteen point
+five east and eight point four north.
+
+00:11:56.075 --> 00:11:59.253
+Take away the storm's
+velocity, part by part,
+
+00:11:59.253 --> 00:12:02.856
+and the rider feels
+minus zero point three east and
+
+00:12:02.856 --> 00:12:07.800
+three point seven north: a gentle
+three point seven metres per second.
+
+00:12:09.300 --> 00:12:12.675
+Now a point in the middle
+of the northern side.
+
+00:12:13.025 --> 00:12:18.575
+The ground wind is minus four point two
+east and minus five point three north.
+
+00:12:18.925 --> 00:12:21.322
+Take away the same storm velocity,
+
+00:12:21.322 --> 00:12:25.130
+and the rider feels
+minus eighteen point zero east and
+
+00:12:25.130 --> 00:12:29.925
+minus ten point one north: about
+twenty point six metres per second.
+
+00:12:31.425 --> 00:12:35.400
+So for the rider, the northern
+side is the windy one.
+
+00:12:36.200 --> 00:12:40.575
+Let's do the same with the round
+parts, averaged over each side.
+
+00:12:40.925 --> 00:12:45.703
+On the southern side, the storm's
+motion runs the same way as the spin,
+
+00:12:45.703 --> 00:12:49.875
+so it adds about thirteen metres
+per second to the round part.
+
+00:12:50.225 --> 00:12:55.325
+Riding with the storm, the round part
+there drops from eighteen to about five.
+
+00:12:56.825 --> 00:13:00.666
+On the northern side, the motion
+runs against the spin,
+
+00:13:00.666 --> 00:13:02.900
+so it takes away about thirteen.
+
+00:13:03.250 --> 00:13:08.500
+Riding with the storm, the round part
+there grows from seven to about twenty.
+
+00:13:10.000 --> 00:13:13.316
+So the motion explains
+why people on the ground
+
+00:13:13.316 --> 00:13:16.350
+felt the southern side
+as the stronger one.
+
+00:13:16.700 --> 00:13:20.382
+The rider sees the storm's
+own shape, and at that hour,
+
+00:13:20.382 --> 00:13:24.600
+on this ring, its own winds were
+stronger on its northern side.
+
+00:13:24.950 --> 00:13:29.646
+Forecasters use storm-relative winds
+to see a storm's own structure,
+
+00:13:29.646 --> 00:13:34.550
+and they matter for thunderstorms
+too, in a later movie: Severe storms.
+
+00:13:35.350 --> 00:13:38.075
+So what changes, and what doesn't?
+
+00:13:38.425 --> 00:13:42.500
+The wind at each point changes
+by the storm's velocity.
+
+00:13:42.850 --> 00:13:47.152
+But the ring average of the round
+part, which we built in Part 1,
+
+00:13:47.152 --> 00:13:50.527
+is about fourteen metres
+per second in both frames:
+
+00:13:50.527 --> 00:13:55.425
+fourteen point one from the ground, and
+thirteen point eight riding along.
+
+00:13:56.925 --> 00:14:02.025
+And the average inflow is about six
+metres per second in both frames.
+
+00:14:03.525 --> 00:14:05.525
+That's no accident.
+
+00:14:05.875 --> 00:14:09.618
+A steady, uniform wind blows
+as much round one side of
+
+00:14:09.618 --> 00:14:12.584
+a circle as it blows back round the other,
+
+00:14:12.584 --> 00:14:17.175
+so it adds nothing to the average
+spin, or to the average inflow.
+
+00:14:17.525 --> 00:14:20.850
+On a flat map, it adds exactly zero.
+
+00:14:21.200 --> 00:14:25.123
+On the round Earth, the meridians
+close in towards the pole,
+
+00:14:25.123 --> 00:14:28.850
+and that leaves the small
+difference of zero point three.
+
+00:14:30.350 --> 00:14:35.525
+The spin belongs to the storm, and the
+motion belongs to the whole pattern.
+
+00:14:35.875 --> 00:14:40.025
+For a house on the coast, though, the
+ground wind is what counts.
+
+00:14:40.375 --> 00:14:45.448
+That night, the weather station at Brest
+measured a gust of eighty four knots,
+
+00:14:45.448 --> 00:14:48.700
+about a hundred and fifty
+six kilometres per hour.
+
+00:14:49.500 --> 00:14:54.000
+The moving frame also explains
+what a fixed barometer sees.
+
+00:14:54.350 --> 00:14:57.575
+Let's take Plymouth,
+on England's south coast.
+
+00:14:57.925 --> 00:15:00.898
+Picture the pressure
+pattern as a frozen map,
+
+00:15:00.898 --> 00:15:03.475
+sliding east-north-east with the storm.
+
+00:15:03.825 --> 00:15:08.897
+A barometer that never moves sees
+the pressure fall as the low comes closer,
+
+00:15:08.897 --> 00:15:12.100
+even if the storm itself
+isn't deepening at all.
+
+00:15:12.450 --> 00:15:15.447
+So the barometer's
+reading mixes two things:
+
+00:15:15.447 --> 00:15:18.375
+the storm arriving,
+and the storm changing.
+
+00:15:18.725 --> 00:15:22.025
+To pull them apart, we need two observers.
+
+00:15:22.375 --> 00:15:25.225
+The first is the fixed barometer.
+
+00:15:25.575 --> 00:15:28.353
+Its rate is partial p by partial t:
+
+00:15:28.353 --> 00:15:32.400
+the change of pressure
+in time, at one fixed place.
+
+00:15:32.750 --> 00:15:36.100
+Here p is the pressure, and t is the time.
+
+00:15:37.600 --> 00:15:42.825
+The second is a rider, moving with the
+pressure pattern at bold capital U.
+
+00:15:43.175 --> 00:15:47.198
+The rider's position,
+measured in the moving pattern,
+
+00:15:47.198 --> 00:15:51.600
+is x prime, which is x minus
+capital U t, as on the train.
+
+00:15:51.950 --> 00:15:55.875
+And the rider's clock reads
+tau, the Greek letter t.
+
+00:15:56.225 --> 00:15:59.865
+Tau is the same time as t, but
+we give it a new name,
+
+00:15:59.865 --> 00:16:03.025
+because it marks a different
+thing held fixed.
+
+00:16:03.375 --> 00:16:07.872
+Partial p by partial tau is the change
+of pressure in time while
+
+00:16:07.872 --> 00:16:11.175
+x prime is held fixed:
+riding with the pattern.
+
+00:16:12.675 --> 00:16:17.400
+If the pattern really were frozen, the
+rider would see no change at all.
+
+00:16:17.750 --> 00:16:21.934
+So partial p by partial tau
+is the storm itself changing:
+
+00:16:21.934 --> 00:16:25.825
+negative when it deepens,
+and positive when it fills.
+
+00:16:26.625 --> 00:16:28.775
+How are the two rates linked?
+
+00:16:29.125 --> 00:16:31.325
+The next three steps show it.
+
+00:16:31.675 --> 00:16:34.306
+They're for anyone who
+wants every step and
+
+00:16:34.306 --> 00:16:36.937
+aren't needed for the
+intuition of weather,
+
+00:16:36.937 --> 00:16:37.916
+climate or maps,
+
+00:16:37.916 --> 00:16:42.750
+so skip ahead to the time on screen if
+you'd rather go straight to the numbers.
+
+00:16:43.100 --> 00:16:47.725
+First, the rider is a traveller,
+moving at bold capital U.
+
+00:16:48.075 --> 00:16:52.195
+In the derivatives movie, we
+found the rate a traveller feels:
+
+00:16:52.195 --> 00:16:54.055
+the change at a fixed place,
+
+00:16:54.055 --> 00:16:58.175
+plus the traveller's speed times
+the slope, in each direction.
+
+00:16:58.525 --> 00:17:04.620
+With the dot product, that's partial p by
+partial t, plus bold capital U dot grad p,
+
+00:17:04.620 --> 00:17:07.812
+where grad p, as in the cross
+product movie,
+
+00:17:07.812 --> 00:17:11.150
+points the way the pressure
+increases fastest.
+
+00:17:12.650 --> 00:17:17.675
+Next, for this traveller,
+that rate is partial p by partial tau.
+
+00:17:18.025 --> 00:17:23.173
+So partial p by partial tau
+equals partial p by partial t,
+
+00:17:23.173 --> 00:17:25.925
+plus bold capital U dot grad p.
+
+00:17:27.425 --> 00:17:31.825
+Then we move bold capital U dot
+grad p to the other side.
+
+00:17:32.175 --> 00:17:37.059
+Partial p by partial t equals
+partial p by partial tau,
+
+00:17:37.059 --> 00:17:39.900
+minus bold capital U dot grad p.
+
+00:17:41.400 --> 00:17:43.575
+Now let's read each term.
+
+00:17:43.925 --> 00:17:46.925
+On the left is the barometer's rate.
+
+00:17:47.275 --> 00:17:50.750
+The first term on the right
+is the storm changing.
+
+00:17:51.100 --> 00:17:54.881
+And bold capital U dot
+grad p is the storm's speed,
+
+00:17:54.881 --> 00:17:59.625
+times how fast the pressure rises
+along its direction of motion.
+
+00:17:59.975 --> 00:18:04.239
+Kilometres per hour, times
+hectopascals per kilometre,
+
+00:18:04.239 --> 00:18:06.450
+gives hectopascals per hour.
+
+00:18:06.800 --> 00:18:11.925
+With its minus sign, it's the change
+caused by the pattern sliding past.
+
+00:18:13.425 --> 00:18:15.943
+If you skipped, here's what to keep:
+
+00:18:15.943 --> 00:18:21.400
+what the barometer sees is the storm
+changing, minus the pattern sliding past.
+
+00:18:22.200 --> 00:18:25.350
+Now the numbers at Plymouth,
+around midnight.
+
+00:18:25.700 --> 00:18:29.556
+At eleven in the evening,
+the pressure was nine hundred and
+
+00:18:29.556 --> 00:18:31.777
+sixty four point one hectopascals,
+
+00:18:31.777 --> 00:18:36.025
+and at one in the morning,
+nine hundred and fifty six point five.
+
+00:18:36.375 --> 00:18:41.846
+So, at midnight, the barometer's rate is
+the later reading minus the earlier one,
+
+00:18:41.846 --> 00:18:44.413
+divided by the two hours between them:
+
+00:18:44.413 --> 00:18:47.925
+about minus three point eight
+hectopascals per hour.
+
+00:18:49.425 --> 00:18:52.550
+Plymouth was ahead
+of the low, about a hundred and
+
+00:18:52.550 --> 00:18:55.175
+twenty three kilometres to its north-east.
+
+00:18:55.525 --> 00:18:59.368
+There, the pressure rose
+along the storm's direction by
+
+00:18:59.368 --> 00:19:03.350
+about zero point zero six one
+hectopascals per kilometre.
+
+00:19:04.850 --> 00:19:08.575
+The storm moved at fourteen
+point six metres per second,
+
+00:19:08.575 --> 00:19:11.900
+which is fifty two and a half
+kilometres per hour.
+
+00:19:12.250 --> 00:19:17.456
+So bold capital U dot grad p is
+the storm's speed times that slope:
+
+00:19:17.456 --> 00:19:20.875
+about three point two
+hectopascals per hour.
+
+00:19:22.375 --> 00:19:26.790
+Then the storm's own change,
+partial p by partial tau,
+
+00:19:26.790 --> 00:19:31.450
+is partial p by partial t plus bold
+capital U dot grad p.
+
+00:19:31.800 --> 00:19:33.990
+Adding the barometer's rate and
+
+00:19:33.990 --> 00:19:39.075
+the sliding term gives about minus
+zero point six hectopascals per hour.
+
+00:19:40.575 --> 00:19:41.611
+So, at Plymouth,
+
+00:19:41.611 --> 00:19:45.364
+the barometer's fall
+of three point eight hectopascals per
+
+00:19:45.364 --> 00:19:48.989
+hour splits into zero point six
+from the storm changing,
+
+00:19:48.989 --> 00:19:52.225
+and three point two
+from the pattern sliding past.
+
+00:19:53.725 --> 00:19:57.675
+Most of what the barometer
+saw was the storm arriving.
+
+00:19:58.025 --> 00:20:01.025
+Is the minus zero point six believable?
+
+00:20:01.375 --> 00:20:03.025
+Here's a check.
+
+00:20:03.375 --> 00:20:04.931
+Between eleven and one,
+
+00:20:04.931 --> 00:20:10.071
+the lowest pressure at the storm's
+tracked centre fell from nine hundred and
+
+00:20:10.071 --> 00:20:15.280
+fifty four point nine to nine hundred
+and fifty four point zero hectopascals:
+
+00:20:15.280 --> 00:20:19.000
+about minus half a hectopascal
+per hour, the same size.
+
+00:20:20.500 --> 00:20:25.250
+This is the same idea as advection
+in the dot product movie.
+
+00:20:25.600 --> 00:20:28.914
+Forecasters draw maps
+of these pressure changes,
+
+00:20:28.914 --> 00:20:33.125
+and we'll read them in a later
+movie: Reading maps over time.
+
+00:20:33.925 --> 00:20:34.705
+To sum up,
+
+00:20:34.705 --> 00:20:41.019
+a frame moving steadily in a straight line
+shifts positions by capital U times t,
+
+00:20:41.019 --> 00:20:45.775
+and velocities by capital U:
+u equals u prime plus capital U.
+
+00:20:46.125 --> 00:20:48.902
+But it leaves accelerations unchanged,
+
+00:20:48.902 --> 00:20:52.775
+so the same forces explain
+the motion in both frames.
+
+00:20:53.125 --> 00:20:58.350
+For an air parcel, the acceleration
+is the local change plus advection.
+
+00:20:58.700 --> 00:21:02.750
+Each piece depends on who measures
+it, but their sum doesn't.
+
+00:21:03.100 --> 00:21:08.225
+Storm Ciarán moved east-north-east
+at about fifteen metres per second.
+
+00:21:08.575 --> 00:21:13.667
+Taking that motion away from every
+wind gives the storm-relative wind:
+
+00:21:13.667 --> 00:21:16.650
+what a rider moving with the storm feels.
+
+00:21:17.000 --> 00:21:19.383
+It changed the wind at every point,
+
+00:21:19.383 --> 00:21:24.150
+but left the storm's average spin
+of about fourteen metres per second.
+
+00:21:24.500 --> 00:21:30.275
+A fixed barometer's rate is the storm
+changing, minus the pattern sliding past.
+
+00:21:30.625 --> 00:21:31.474
+At Plymouth,
+
+00:21:31.474 --> 00:21:37.275
+the fall of three point eight hectopascals
+per hour was mostly the storm arriving.
+
+00:21:37.625 --> 00:21:42.715
+In Part 6, we'll find the shortest way
+between two places on the round Earth:
+
+00:21:42.715 --> 00:21:47.475
+the great circle, and the rhumb line
+that sailors steered for centuries.
+
+00:21:47.825 --> 00:21:53.725
+The great circle explains why flights from
+Europe to California pass over Greenland.
+
+00:21:54.525 --> 00:21:58.683
+This video is one of a series
+of related maths tutorials,
+
+00:21:58.683 --> 00:22:00.725
+so watch out for the others.
+
+00:22:01.075 --> 00:22:05.472
+They're made for students
+of atmospheric science, meteorology and
+
+00:22:05.472 --> 00:22:09.125
+fluid dynamics, and anyone
+else who needs these ideas.
+
+00:22:09.475 --> 00:22:14.303
+The notebook for coordinates, and the
+notebooks for the other maths concepts,
+
+00:22:14.303 --> 00:22:17.125
+are on the website that
+goes with this video.

@@ -28,7 +28,7 @@ const t0 = Date.now();
 const r = m.runAll(step);
 console.error = origErr;
 console.log(`${three ? "with 3-D children: " : ""}${r.n} scene-frames rendered in ${((Date.now() - t0) / 1000).toFixed(0)} s; ${r.errs.length} error(s); NaN frames ${r.nan}`
-  + (three ? `; React warnings about 3-D tags suppressed: ${warn}` : ""));
+  + (three ? `; React warnings about 3-D tags suppressed: ${warn}; THREE-tag guard on ${r.r3} 3-D frames` : ""));
 for (const e of r.errs.slice(0, 60)) console.log("ERR " + e);
 fs.writeFileSync(path.join(OUT, "assets_used.json"), JSON.stringify(r.assets, null, 1));
 let missing = [];

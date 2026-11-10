@@ -24,6 +24,7 @@ in 5d and 5e, and 5e's silent repeat of 1a's storm-relative wind) are added in �
   "first taught" sits at or before "first used" with matching positions.
   - Result on the plan as written: **180 rows, 180 distinct IDs; 0 forward prerequisites, 0 unknown, 0 §5 violations,
     0 position mismatches, 0 §4 violations.**
+- The original `deps_v6.py` was found afterwards in an old session scratchpad (`/tmp/claude/…/scratchpad/deps_v6.py`, not in the repo). Re-run on 2026-11-07, it gives the same result: 180 rows, 180 distinct IDs, positions contiguous; prerequisites 0 pointing later, 0 unknown; 18 terms, 0 taught after pos 44 or after first need; 137 concepts, 0 taught after first use, 0 position mismatches.
 - So **the plan is internally consistent.** The problems below come from checking the plan against **what the made
   movies actually say** (the spoken lines of every script, extracted scene by scene) and against the house rules added
   on 2026-11-06/07, which the plan predates.
@@ -366,8 +367,7 @@ F25 90 are all before 91; F26 at 92 needs U09, U07, M13, M21, all earlier; F39 a
 15. §1a/§9 data accounts: the per-account first-need table (§4c). Update the memory `remind-data-accounts` (deadline pos
     66, or 78 if F22 is pinned to MODIS/VIIRS).
 16. §10: append the §3a rows.
-17. Commit a real `movies/ch00/deps_v6.py`. The re-implementation used for this audit is described in "Method" above; it
-    lives only in the session scratchpad.
+17. Commit `deps_v6.py` into `movies/ch00/` (the original sits only in an old `/tmp` scratchpad; see "Method").
 
 **Priority 4: later-stage scopes (when their storyboards are written)**
 

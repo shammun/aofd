@@ -106,92 +106,92 @@
    "scene": "s00_title"
   },
   {
-   "time": "0:14",
-   "t_s": 14.646,
+   "time": "0:13",
+   "t_s": 13.575,
    "title": "Riding with a storm: the question",
    "scene": "s01_hook"
   },
   {
-   "time": "0:44",
-   "t_s": 44.263,
+   "time": "0:42",
+   "t_s": 42.35,
    "title": "A frame that moves: the train",
    "scene": "s03_train"
   },
   {
-   "time": "1:52",
-   "t_s": 112.514,
+   "time": "1:49",
+   "t_s": 109.625,
    "title": "Every step: why speeds add",
    "scene": "s04_velocities_add"
   },
   {
-   "time": "3:20",
-   "t_s": 200.585,
+   "time": "3:17",
+   "t_s": 197.525,
    "title": "Every step: accelerations stay the same",
    "scene": "s05_accel_same"
   },
   {
-   "time": "5:03",
-   "t_s": 303.157,
+   "time": "5:02",
+   "t_s": 302.825,
    "title": "An air parcel's acceleration in two frames",
    "scene": "s06_parcel_accel"
   },
   {
    "time": "6:31",
-   "t_s": 391.957,
+   "t_s": 391.625,
    "title": "A sliding gust pattern, in numbers",
    "scene": "s07_sliding_pattern"
   },
   {
-   "time": "8:52",
-   "t_s": 532.079,
+   "time": "8:48",
+   "t_s": 528.55,
    "title": "Storm Ciarán",
    "scene": "s08_ciaran"
   },
   {
-   "time": "10:27",
-   "t_s": 627.199,
+   "time": "10:21",
+   "t_s": 621.175,
    "title": "Why the winds were lopsided",
    "scene": "s09_lopsided"
   },
   {
-   "time": "11:17",
-   "t_s": 677.276,
+   "time": "11:11",
+   "t_s": 671.075,
    "title": "Storm-relative winds",
    "scene": "s10_storm_relative"
   },
   {
-   "time": "13:42",
-   "t_s": 822.202,
+   "time": "13:35",
+   "t_s": 815.35,
    "title": "What does not change",
    "scene": "s12_invariant"
   },
   {
-   "time": "14:57",
-   "t_s": 897.466,
+   "time": "14:49",
+   "t_s": 889.5,
    "title": "What a fixed barometer sees",
    "scene": "s13_tau"
   },
   {
-   "time": "16:34",
-   "t_s": 994.591,
+   "time": "16:26",
+   "t_s": 986.625,
    "title": "Every step: linking the barometer and the rider",
    "scene": "s14_tau_derive"
   },
   {
-   "time": "18:30",
-   "t_s": 1110.845,
+   "time": "18:22",
+   "t_s": 1102.2,
    "title": "Plymouth, in numbers",
    "scene": "s15_plymouth"
   },
   {
-   "time": "20:44",
-   "t_s": 1244.252,
+   "time": "20:33",
+   "t_s": 1233.925,
    "title": "Recap",
    "scene": "s17_recap"
   },
   {
-   "time": "22:05",
-   "t_s": 1325.785,
+   "time": "21:54",
+   "t_s": 1314.525,
    "title": "End",
    "scene": "s18_end"
   }
@@ -201,22 +201,22 @@
    "block": "A",
    "chip_scene": "s04_velocities_add",
    "chip_sentence": 2,
-   "chip_at_s": 122.289,
-   "skip_to": "4:51",
-   "skip_to_s": 291.082,
+   "chip_at_s": 119.4,
+   "skip_to": "4:50",
+   "skip_to_s": 290.75,
    "keep_line": "If you skipped, here's what to keep: in a frame moving steadily in a straight line, speeds change by the frame's own speed, but accelerations, and so forces, stay the same."
   },
   {
    "block": "B",
    "chip_scene": "s14_tau_derive",
    "chip_sentence": 2,
-   "chip_at_s": 999.641,
-   "skip_to": "18:22",
-   "skip_to_s": 1102.07,
+   "chip_at_s": 991.675,
+   "skip_to": "18:13",
+   "skip_to_s": 1093.425,
    "keep_line": "If you skipped, here's what to keep: what the barometer sees is the storm changing, minus the pattern sliding past."
   }
  ],
- "timing_provisional": true,
+ "timing_provisional": false,
  "inputs_sha256": {
   "G:\\Geophysical Fluid Dynamics\\aofd-data\\derived\\ch00\\era5_ciaran_2023_sfc.nc": "9ed602b9a8f5e563b47f65f9c3275e46caad8e4ea0c05f6f611d0c4e6c1fa439",
   "data/derived/ch00/rwm_isd_brest_2023-11-01T12_2023-11-02T09.json": "b405b20c6bdb21631c77f66a95171dadd63c3e06563ddcf8a1afd7aa9c76dde7",

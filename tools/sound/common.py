@@ -107,7 +107,7 @@ def bp(x: np.ndarray, lo: float, hi: float, order: int = 2, axis: int = 0) -> np
 # ---------------------------------------------------------------------------------------------- envelopes
 def fade(x: np.ndarray, fade_in: float, fade_out: float) -> np.ndarray:
     """Equal-power (sin²) fade in and out, in seconds, applied in place-safe copy."""
-    y = np.array(x, dtype=np.float64, copy=True)
+    y = np.array(x, dtype=np.float32, copy=True)
     n = len(y)
     a, b = min(n, int(fade_in * SR)), min(n, int(fade_out * SR))
     if a > 0:
@@ -153,7 +153,7 @@ def reverb(x: np.ndarray, rng: np.random.Generator, seconds: float = 3.5, decay:
     t = np.arange(n) / SR
     sos = signal.butter(2, tone_hz, "low", fs=SR, output="sos")
     common = signal.sosfilt(sos, rng.standard_normal(n))
-    out = np.empty((len(x), 2), dtype=np.float64)
+    out = np.empty((len(x), 2), dtype=np.float32)
     pd = int(predelay * SR)
     for ch in range(2):
         own = signal.sosfilt(sos, rng.standard_normal(n))

@@ -251,7 +251,8 @@ const S18: React.FC = () => {
         <Keyword f={f} text="two right triangles" at={[1080, 520]} s={T.floor} appear={AT(k, 2, "right triangle")} out={tAll - 18} />
       </Svg>
       <TeX s={String.raw`a\sin\varphi`} x={A[0] + RS + 12} y={(pB[1] + foot[1]) / 2} size={48} c={C.second} o={fin(f, tZ)} />
-      <TeX s={String.raw`a\cos\varphi`} x={A[0] - 46} y={A[1] + 50} size={52} c={C.second} o={fin(f, tR)} />
+      {/* fix loop 1 K6: right of the axis (the vertical axis line ran through "a cos"), under its own leg, clear of the 4230-km link end */}
+      <TeX s={String.raw`a\cos\varphi`} x={A[0] + 18} y={A[1] + 64} size={52} c={C.second} o={fin(f, tR)} />
       <TeX s={String.raw`a\cos\varphi\cos\lambda`} x={B[0]} y={B[1] + RS + 60} size={48} ax={0.5} c={C.second} o={fin(f, tSplit) * fout(f, tN1 - 12)} />
       <TeX s={String.raw`a\cos\varphi\sin\lambda`} x={B[0] + RS + 14} y={q[1]} size={48} c={C.second} o={fin(f, tSplit + 10) * fout(f, tAll + 36)} />
       {lines.map((ln, i) => <TeX key={i} s={ln} x={1100} y={180 + i * 100} size={64} o={fin(f, tAll + i * 25)} />)}
@@ -292,7 +293,7 @@ const S19: React.FC = () => {
               their points turn towards the limb (they stacked at the limb over Siberia while the globe turned to Asia) */}
           {wlab(G, ll(89.5, 0), "0", C.key, fin(f, tP), 22, 12, "start", T.key)}
           {f >= tB - 20 ? <>{dot(G, BREST[0], BREST[1], C.gold, 10, fin(f, tB - 20))}{plab(G, ll(BREST[0], BREST[1]), "Brest", C.key, fin(f, tB - 6) * facing(G, BREST[0], BREST[1]), -24, 40, "end")}</> : null}
-          {f >= tL - 20 ? <>{dot(G, LYB[0], LYB[1], C.gold, 10, fin(f, tL - 20))}{plab(G, ll(LYB[0], LYB[1]), "Svalbard", C.key, fin(f, tL - 6) * facing(G, LYB[0], LYB[1]), -22, 40, "end")}</> : null}
+          {f >= tL - 20 ? <>{dot(G, LYB[0], LYB[1], C.gold, 10, fin(f, tL - 20))}{plab(G, ll(LYB[0], LYB[1]), "Svalbard", C.key, fin(f, tL - 6) * fout(f, tP - 10) * facing(G, LYB[0], LYB[1]), -22, 40, "end")}</> : null}
         </>} />
       <GlobeFrame id="s19k" zoom={0} disc={G0} />
       <GSrc />

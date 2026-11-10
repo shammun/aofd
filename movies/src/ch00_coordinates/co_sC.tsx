@@ -559,7 +559,8 @@ const S40: React.FC = () => {
   const sc_: Pt = [S[0] + ec[0] * CO.acS * s, S[1] + ec[1] * CO.acS * s];
   const G = D.gauges;
   // fix loop 1 (Must 15): the chart 80 px lower and 70 px shorter, so the wind-speed colour bar fits above it
-  const A: Ax = { x: 1330, y: 230, w: 440, h: 200, xr: [0, 36], yr: [-2, 2.5] };
+  // fix loop 1 K6: top 20 px lower (the chart title sat 12 px under the colour bar's ticks), bottom unchanged
+  const A: Ax = { x: 1330, y: 250, w: 440, h: 180, xr: [0, 36], yr: [-2, 2.5] };
   return (
     <Scene>
       <CoastMap B={B}>

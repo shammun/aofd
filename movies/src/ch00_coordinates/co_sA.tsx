@@ -1,7 +1,8 @@
 // ch00_coordinates scenes s00-s14b: the title, the plane (Cartesian, polar, radians, turning unit vectors, wind components),
 // Hurricane Ian in polar coordinates (HRRR 18 UTC), the centripetal surprise, the cylinder and the ERA5 radial-wind stack.
 // Every number on screen is read from data/co.json (CHECK rows at the bottom of each block); this file only places and times.
-import React, { useMemo } from "react";
+import React, { useLayoutEffect, useMemo } from "react";
+import { useThree } from "@react-three/fiber";
 import { useCurrentFrame } from "remotion";
 import * as THREE from "three";
 import { PoleThermometer } from "../house";
@@ -748,14 +749,26 @@ const Bead3D: React.FC<{ f: number; a: V3; b: V3; speed: number; o?: number }> =
 };
 
 // ================================================================ s14 cylindrical coordinates (true aspect, illustrative arrows)
-const TexQuad: React.FC<{ href: string; x0: number; x1: number; y0: number; y1: number; z?: number; o?: number }> = ({ href, x0, x1, y0, y1, z = 0, o = 1 }) => {
+/** `crop` (0-1]: show only the central fraction of the image, at its true size (quad and UVs shrunk together; scale kept) */
+const TexQuad: React.FC<{ href: string; x0: number; x1: number; y0: number; y1: number; z?: number; o?: number; crop?: number }> = ({ href, x0, x1, y0, y1, z = 0, o = 1, crop = 1 }) => {
   const tex = useTex(href);
   // fix loop 1 (Must 1): unlit and NOT tone-mapped, so the (sRGB) image keeps its true contrast
   const mat = useMemo(() => new THREE.MeshBasicMaterial({ transparent: true, side: THREE.DoubleSide, depthWrite: false, toneMapped: false }), []);
   if (mat.map !== tex) { mat.map = tex; mat.needsUpdate = true; }
   mat.opacity = o;
+  // fix loop 1 K6 (Must 1, root cause): Remotion's ThreeCanvas draws the GL frame only when the FRAME changes; a texture that
+  // arrives after that draw (a fresh tab: still renders, the first frame of every render chunk) never reached the canvas. Draw
+  // again when the texture lands (layout effect: before useTex's continueRender releases the frame).
+  const advance = useThree((s) => s.advance);
+  useLayoutEffect(() => { if (tex && o > 0) advance(performance.now()); }, [tex, o > 0, advance]); // eslint-disable-line react-hooks/exhaustive-deps
+  const geo = useMemo(() => {
+    const g = new THREE.PlaneGeometry((x1 - x0) * crop, (y1 - y0) * crop);
+    const uv = g.attributes.uv as THREE.BufferAttribute, m = (1 - crop) / 2;
+    for (let i = 0; i < uv.count; i++) uv.setXY(i, m + uv.getX(i) * crop, m + uv.getY(i) * crop);
+    return g;
+  }, [x0, x1, y0, y1, crop]);
   if (!tex || o <= 0) return null;
-  return <mesh position={[(x0 + x1) / 2, (y0 + y1) / 2, z]} material={mat} renderOrder={1}><planeGeometry args={[x1 - x0, y1 - y0]} /></mesh>;
+  return <mesh position={[(x0 + x1) / 2, (y0 + y1) / 2, z]} material={mat} renderOrder={1} geometry={geo} />;
 };
 const S14: React.FC = () => {
   const f = useCurrentFrame(), k = K("s14_cylinder");
@@ -781,7 +794,9 @@ const S14: React.FC = () => {
   return (
     <Scene>
       <HView3D st={st} x={20} y={20} w={1080} h={800}>
-        <TexQuad href={IMGS.goesEye} x0={fx0} x1={fx1} y0={fy0} y1={fy1} o={1} />
+        {/* fix loop 1 K6: now that the plate draws, the full 133-km crop filled the panel (cut at its left edge) and drowned the
+            cream cylinder: the central 62 % only (≈ 82 km across, true scale) at 0.6, so the cylinder and the white arrows read on it */}
+        <TexQuad href={IMGS.goesEye} x0={fx0} x1={fx1} y0={fy0} y1={fy1} o={0.6} crop={0.62} />
         {/* fix loop 1 (Must 1): thicker cylinder edges (rims 6 px, sides 3 px) */}
         {circ(R, 0).slice(1).map((q, i) => <HRod3D key={`b${i}`} a={circ(R, 0)[i]} b={q} px={6} color={C.key} o={0.95} />)}
         {circ(R, H).slice(1).map((q, i) => <HRod3D key={`t${i}`} a={circ(R, H)[i]} b={q} px={6} color={C.key} o={0.95} />)}
@@ -816,9 +831,10 @@ const S14: React.FC = () => {
       </Svg>
       <TeX s={EQ_S14} x={1160} y={420} size={64} o={fin(f, tThree)} />
       {/* fix loop 1 (Must 2): the component tags in KaTeX (they read "u_r", "u_θ" with literal underscores) */}
-      <TeX s="u_r" x={P3([R + 1.2, 0, H * 0.6])[0] + 12} y={P3([R + 1.2, 0, H * 0.6])[1]} size={52} c={C.neg} o={fin(f, tThree) * fout(f, tZh - 12)} />
-      <TeX s={String.raw`u_\theta`} x={P3([R, 1.4, H * 0.6])[0] + 12} y={P3([R, 1.4, H * 0.6])[1]} size={52} c={C.first} o={fin(f, tThree) * fout(f, tZh - 12)} />
-      <TeX s="w" x={P3([R, 0, H * 0.6 + 1.0])[0] + 12} y={P3([R, 0, H * 0.6 + 1.0])[1]} size={52} c={C.local} o={fin(f, tThree) * fout(f, tZh - 12)} />
+      {/* fix loop 1 K6: dark halo on the three tags (they sit on the now-visible GOES plate; "w" was white on white) */}
+      <TeX s="u_r" x={P3([R + 1.2, 0, H * 0.6])[0] + 12} y={P3([R + 1.2, 0, H * 0.6])[1]} size={52} c={C.neg} o={fin(f, tThree) * fout(f, tZh - 12)} halo haloW={0.07} />
+      <TeX s={String.raw`u_\theta`} x={P3([R, 1.4, H * 0.6])[0] + 12} y={P3([R, 1.4, H * 0.6])[1]} size={52} c={C.first} o={fin(f, tThree) * fout(f, tZh - 12)} halo haloW={0.07} />
+      <TeX s="w" x={P3([R, 0, H * 0.6 + 1.0])[0] + 12} y={P3([R, 0, H * 0.6 + 1.0])[1]} size={52} c={C.local} o={fin(f, tThree) * fout(f, tZh - 12)} halo haloW={0.07} />
       {/* fix loop 1 (Should 2): hat-theta in KaTeX (the combining hat sat beside the θ) */}
       <TeX s={String.raw`\hat{\mathbf r},\ \hat{\boldsymbol\theta}\ \text{turn}`} x={1160} y={700} size={52} c={C.second} o={fin(f, tOnly)} />
       <SourceBelow text="Image: GOES-16 (NOAA), contrast enhanced · Ian, 28 Sep 2022, 18:01 UTC" pic={{ x: 80, y: 40, w: 1000, h: 780 }} w={1000} name="s14 src" />

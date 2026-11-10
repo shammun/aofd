@@ -128,7 +128,7 @@ def render_cue(c: dict) -> tuple[np.ndarray, dict]:
         if str(s.get("licence", "")).strip() not in ALLOWED_SAMPLE_LICENCES:
             raise SystemExit(f"sample {s.get('path')}: licence {s.get('licence')!r} not allowed "
                              f"(allowed: {sorted(ALLOWED_SAMPLE_LICENCES)})")
-        x = read_wav(Path(s["path"])).astype(np.float64)
+        x = read_wav(Path(s["path"])).astype(np.float32)
         n = int(c["duration"] * SR)
         if len(x) < n:                                      # loop with a 0.5-s crossfade
             xf = int(0.5 * SR)
@@ -141,7 +141,7 @@ def render_cue(c: dict) -> tuple[np.ndarray, dict]:
                "file": Path(s["path"]).name}
     else:
         kw = dict(c.get("params") or {})
-        x = sfx.render(c["effect"], c["duration"], c.get("intensity"), int(c.get("seed", 0)), **kw).astype(np.float64)
+        x = sfx.render(c["effect"], c["duration"], c.get("intensity"), int(c.get("seed", 0)), **kw).astype(np.float32)
         x = x[: int(c["duration"] * SR)]
         src = {"source": "tools/sound/sfx.py (procedural synthesis, our own code)", "licence": "CC0-1.0"}
     x = fade(x, float(c.get("fade_in", 0.05)), float(c.get("fade_out", 0.3)))
@@ -166,7 +166,7 @@ def build(narration: Path, cue_path: Path, out_dir: Path, timing_path: Path | No
     if problems:
         raise SystemExit("cue sheet rejected:\n  " + "\n  ".join(problems))
 
-    v = read_wav(narration).astype(np.float64)
+    v = read_wav(narration).astype(np.float32)
     n = len(v) + int(float(mus["tail_s"]) * SR)
     end_s = n / SR
     for c in cues:
@@ -178,7 +178,7 @@ def build(narration: Path, cue_path: Path, out_dir: Path, timing_path: Path | No
     mask = music.speech_mask(v)
 
     # music bed at bed_lufs on its own, ducked under speech
-    m = styles.compose(str(mus["style"]), end_s, int(mus["seed"])).astype(np.float64)[:n]
+    m = styles.compose(str(mus["style"]), end_s, int(mus["seed"])).astype(np.float32)[:n]
     m = np.pad(m, ((0, n - len(m)), (0, 0)))
     m *= 10 ** ((float(mus["bed_lufs"]) - integrated_lufs(m)) / 20)
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -187,7 +187,7 @@ def build(narration: Path, cue_path: Path, out_dir: Path, timing_path: Path | No
 
     # the final gain the loudness normaliser will apply (≈ voice + bed), so effect levels are set for the final mix
     g_final_db = target - integrated_lufs(v + m_duck)
-    fx = np.zeros((n, 2))
+    fx = np.zeros((n, 2), dtype=np.float32)
     used = []
     sfx_gain = (10 ** (-sfx_duck * mask / 20))[:, None]
     for c in cues:
@@ -223,7 +223,7 @@ def build(narration: Path, cue_path: Path, out_dir: Path, timing_path: Path | No
     write_wav(raw, v + m_duck + fx)
     stats = music.loudnorm(raw, out_dir / "narration_music.wav", target, tp)
     raw.unlink()
-    final = read_wav(out_dir / "narration_music.wav").astype(np.float64)
+    final = read_wav(out_dir / "narration_music.wav").astype(np.float32)
     meas = {"integrated_lufs": round(integrated_lufs(final), 2), "true_peak_dbtp": round(true_peak_dbtp(final), 2)}
     try:
         sys.path.insert(0, str(TOOLS))

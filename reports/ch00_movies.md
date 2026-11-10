@@ -10,6 +10,8 @@ before this review, so nothing in it was overwritten. The Chapter-0 movie review
 | ch00_dot_product_why (review 3, v2 @ 3787a8b) | 367.253 s (target 367.225; user window 6:00–6:10) | 25.38 MB (override budget 60) | 10/10 PASS (`pass: true`) | **FIX** (M1: s17 says the map stays put, s18–s20 move it) | PASS | PASS (S2, S4 small overlaps) | PASS | PASS (S5 orphan words) | PASS | PASS (but S1: captions cover badges) | **FIX** (one Must, one re-render) |
 | ch00_dot_product_why (review 4, v4 @ d029eba) | 492.181 s (target 492.15; user accepted 8:12) | 30.85 MB (override budget 60) | 10/10 PASS (`pass: true`) | PASS (advection sign, upwind 12.82/12.64/12.46 °C all right) | PASS | **FIX** (M2: s11 label overlap) | **FIX** (M1: s19 clock vs spoken readings) | PASS (113 cues, ≤ 15.7 cps, no collisions) | PASS | PASS (none, per user G2) | **FIX** (two visual-only Musts; P1 before publishing) |
 | ch00_dot_product_why (review 4b, v4 fix 1 @ d5bcb3f) | 492.181 s | 30.95 MB | 10/10 PASS (`pass: true`) | PASS | PASS | PASS (M2 fixed) | PASS (M1 fixed; the clock holds at 3 h, accepted) | PASS (113 cues, unchanged) | PASS | PASS (none) | **PASS → `qa_pass`** (P1 before publishing; S12 optional) |
+| ch00_coordinates_sphere (5c p3d, review 1/2) | 2909.20 s (48:29) | 159.1 MB | 15/15 PASS | PASS (29 hashes) | PASS (24 eqs) | PASS | PASS (no voiced arithmetic) | PASS (715 cues) | PASS | N/A | **PASS** (0 Must, 2 Shoulds) |
+| ch00_coordinates_sphere (5c p3d, review 2/2) | 2909.20 s (48:29) | 159.1 MB | 15/15 PASS | PASS | PASS | PASS | PASS | PASS (10 cues) | PASS | N/A | **PASS** (0 Must, 2 Shoulds queued §5b) |
 
 ## ch00_dot_product_why (review 1, 2026-10-22)
 
@@ -10506,3 +10508,79 @@ All arithmetic recomputed from data/cf.json: correct (s04–s27). 104 words chec
 5b_coordinates_storm_fix3.mp4, 62:20.3, 159.45 MB, QA 15/15. All 12 fix-3 items met on frames (s14 degree sign; 911 cues, 0 boundaries inside numbers/pairs; second legs, s30, bearings worked and checked, St Pete legs + β, s23 gold + "at that hour", ERA5 ratios 0.59/0.54/0.66, thin-angle β, s41 rows, nits); regression sweep 374 frames clean; coast axes right-handed. Frames: reports/movies/ch00_coordinates_storm/verify_fix3/.
 - Should (next re-render): s29 β arc at 7° nearly invisible on the light HRRR field, "β" on a wind glyph; s36 "β" touches a wind arrow.
 - Info: second leg line drawn with the first (row on its word); s38 fly-in source line crosses the globe ~2 s; re-voice list: Ω value, 1.852 / 3.6 factors.
+
+## ch00_coordinates_sphere — 5c p3d — review 1/2 (2026-11-09)
+
+Reviewer: movie-reviewer. Inputs: `movies/ch00/ch00_coordinates_sphere/{storyboard.yaml, script.md, en.vtt, manifest.json}`, `reports/movies/ch00_coordinates_sphere/qa.json`. Text sources only (coordinator instruction). Build: p3d (r7 TTS splice, 405 reused + 44 new clips; SceneGate fix 4th iteration).
+
+### QA gates
+15/15 PASS (`pass: true`): duration 2909.20 s (narration end 2906.70 s), size 159.1 MB, codec H.264 High yuv420p AAC faststart 30fps 1920×1080, black 0 stretches, frozen 195 narrated stretches (longest silence 1.50 s), content, halves, overlap 14072 frames 0 hits (SceneGate fix confirmed), loudness −16.4 LUFS −2.5 dBTP, flashes 0/s, captions 715 cues match script, subtitles SRT=VTT, physics 29 hashes, equations 24 storyboard equations present.
+
+### Must-fix
+None.
+
+### Should-fix
+- **S1** 22:08–23:47 (s19_khulna): IBTrACS Amphan track shown on the globe without an on-screen event heading. HOUSE_STYLE §6 requires "a heading with the event name and date" for event data. Narration says "In May twenty twenty, the centre of Cyclone Amphan, from Part 2, passed about seventy nine kilometres to its west" but no visual heading "Cyclone Amphan · May 2020" is on screen. Storyboard layout specifies "Track source line below the globe" but no event heading field. Add "Cyclone Amphan · May 2020" near the track. Carried from pass2 review 2.
+- **S2** 41:35–42:48 (s32_band_fraction): "So the share of the northern hemisphere between the equator and latitude phi is **simply** sine phi." — "simply" echoes "obviously"/"clearly" (HOUSE_STYLE §4: "Never 'clearly' or 'obviously'"; teaching-style adds "simply"). Change to "is exactly" or "equals". One TTS re-splice.
+
+### Verified good
+- SceneGate p3d fix: 0 overlap hits across 14072 frames (up from 28 hits in k6r8c and 12 in k6p3b). Text-bleed at scene boundaries eliminated. ✓
+- Opening title: "In this video, we'll learn coordinates on our round Earth, and see how they're used to measure distances and areas on weather grids." — matches HOUSE_STYLE §3 s00 pattern; no "made easy"; subtitle "latitude, longitude, distances and areas". ✓
+- No opening recap: s02_part2_recap cut; earlier results recalled at point of use ("derived in Part 1", "as in Part 2", "Part 2 gave us a shortcut" — 9 recall points). ✓
+- Voiced arithmetic: all 44 r7 TTS clips replaced old "X times Y which is Z" sentences (e.g., old: "So z is six thousand three hundred and seventy one times zero point seven four seven eight, which is about four thousand seven hundred and sixty four kilometres"; new: "Multiplying the two, z is about four thousand seven hundred and sixty four kilometres"). Script confirmed clean — voice names inputs and gives results, never reads individual products or sums. ✓
+- No "Step one/two" in narration; uses "First,", "Next,", "Now,", "one step at a time". ✓
+- Maths-skip guidance: 4 optional blocks (K1 7:57, K2 24:54, K3 31:31, K4 43:39), each with on-screen skip chip and landing "If you skipped, here's what to keep" sentence; skip-to times match storyboard. ✓
+- Physics: Earth-as-sphere convention stated ("very nearly a ball" s03); sidereal day T = 23 h 56 min 4 s = 86164 s, Ω = 2π/T ≈ 7.292×10⁻⁵ rad/s, U = Ω a cos φ; five place ground speeds (equator 465, Singapore 464, Khulna 428, Brest 308, Longyearbyen 95 m/s); dA = a² cos φ dφ dλ; band area 2πa² sin φ; Archimedes' result; ERA5 weighted mean 16.3 °C vs plain 7.1 °C; 29 physics function hashes all reproduce. ✓
+- ERA5 data figure (s34): title "2-m air temperature · September 2026 mean"; source line "Data: ERA5 (Copernicus C3S) · 2-m temperature · September 2026 monthly mean · 1° grid"; perceptual colour bar "2-m air temperature °C" (range −60 to 40; not jet/rainbow). ✓
+- Blue Marble source lines present on globe scenes: "Image: NASA Blue Marble Next Generation · Natural Earth" below globe. ✓
+- Calculations: each one opened with goal statement; inputs named before computation (e.g., "The sine of forty eight point four degrees is zero point seven four seven eight"); results named with symbols ("z is about four thousand seven hundred and sixty four kilometres"). ✓
+- End card: maths-tutorial ending word for word ("a series of related maths tutorials … atmospheric science, meteorology and fluid dynamics … the notebook for coordinates"); no "thanks for watching"; no URLs; 2.5-s silent hold. ✓
+- No headings except s00 title; keywords + symbols only; no boxes, cards, equation labels (vallis_eq for QA only), "not to scale" badges, links. ✓
+- Colour-blind safe palette (perceptual temperature map); 0 flashes/s (WCAG 2.3.1). ✓
+- Captions: 10 cues spot-checked (s00 0:00, s01 0:11, s03 0:37, s11 11:21, s12 12:52, s13 13:46, s21 25:17, s23 29:50, s24 30:25, s24 30:52) — all match script text exactly; ≤ 42 chars/line. ✓
+
+## ch00_coordinates_sphere — 5c p3d — review 2/2 (2026-11-09)
+
+Reviewer: movie-reviewer, fresh-eyes confirmation pass. Text sources only: `movies/ch00/ch00_coordinates_sphere/{storyboard.yaml, script.md, en.vtt}`, `reports/movies/ch00_coordinates_sphere/qa.json`, `movies/HOUSE_STYLE.md`. No image files read.
+
+**Verdict**: PASS
+
+### Must fix
+(none)
+
+### Should fix
+- **S1** 22:08–23:47 (s19_khulna): no on-screen event heading "Cyclone Amphan · May 2020" while the IBTrACS track is shown. HOUSE_STYLE §6 requires a heading with the event name and date on every event data frame. The narration says "In May twenty twenty, the centre of Cyclone Amphan, from Part 2, passed about seventy nine kilometres to its west" (VTT 00:21:18.250), but no visual heading persists on the globe. Carry forward from review 1/2. Queued for §5b retro-fit.
+- **S2** 41:35–42:48 (s32_band_fraction): "latitude phi is simply sine phi." confirmed in VTT at 00:41:38.894. "simply" reads as "obviously/clearly" (HOUSE_STYLE §4: "Never 'clearly' or 'obviously'"; teaching-style §1d: same). Change to "is exactly sine phi" or "equals sine phi". One TTS re-splice. Carry forward from review 1/2. Queued for §5b retro-fit.
+
+### VTT spot-check — 10 new cues (different scenes from review 1/2)
+All 10 match script text exactly; all within ≤ 42 chars/line and ≤ 17 cps.
+
+| # | Scene | VTT timestamp | Caption text | chars/line | cps |
+|---|---|---|---|---|---|
+| 1 | s10 | 00:08:58.350 | "One meridian is chosen / as the starting line." | 25 / 23 | 10.0 |
+| 2 | s10 | 00:09:09.600 | "It's called the prime meridian." | 32 | 13.9 |
+| 3 | s14 | 00:14:04.800 | "The next few minutes build / Brest's position, and then" | 25 / 24 | 12.1 |
+| 4 | s15 | 00:15:22.200 | "What's Brest's height / above the equator plane?" | 21 / 25 | 15.3 |
+| 5 | s17 | 00:17:40.200 | "Now for the top view." | 22 | 11.0 |
+| 6 | s20 | 00:22:45.500 | "That distance from the axis / has a second meaning." | 25 / 21 | 12.6 |
+| 7 | s22 | 00:27:51.475 | "Now let's measure distances / on the ground, step by step." | 26 / 29 | 14.0 |
+| 8 | s25 | 00:31:34.225 | "A degree of latitude is always / about a hundred and eleven kilometres," | 31 / 37 | 14.6 |
+| 9 | s27 | 00:34:37.000 | "Distances give us areas." | 25 | 9.6 |
+| 10 | s30 | 00:38:37.450 | "Adding up lots of cosines / like this looks hard." | 25 / 23 | 11.5 |
+
+### Scene-change text blink
+QA "overlap" gate confirmed: 0 hits on 14,072 frames (SceneGate p3d fix). No cross-fade boundary shows text from two scenes simultaneously. Counts as a full resolution of the p3c/r8c issue (28 hits → 12 hits → 0 hits). ✓
+
+### Additional fresh-eyes checks
+- Skip-block landing cues match storyboard times exactly: K1 00:07:57.000 (chip 7:57) ✓; K2 00:24:54.750 (chip 24:54) ✓; K3 00:31:31.200 (chip 31:31) ✓; K4 00:43:39.625 (chip 43:39) ✓.
+- Ending (s36): wording matches HOUSE_STYLE §3 maths-tutorial template word for word. Last cue ends at 00:48:26.400, within the 2906.70 s narration end (2.5-s silent hold follows). ✓
+- Physics cross-check: sin(90°−48.4°) = cos 48.4° ≈ 0.6639 ✓; 1° north = π/180 × 6371 ≈ 111.2 km ✓; cos 25° × 0.1745 = 0.158 = sin 30° − sin 20° ✓; Ω = 7.292×10⁻⁵ rad/s stated in VTT at 00:25:29.738 ✓.
+- "d capital A" spoken correctly (VTT 00:35:59.775 and 00:36:07.450). ✓
+- s32 "simply sine phi" still present, not fixed. S2 carries forward. ✓ (confirmed unchanged)
+- No "not to scale" badges (storyboard `scale_badges: false`; exaggerations listed in manifest only). ✓
+- No equation numbers, book names, footnotes, URLs, or references on screen. ✓
+- Maths-tutorial ending (not weather/climate ending): correct for a maths series movie. ✓
+- Colour-blind safe palette; 0 flashes/s (WCAG 2.3.1). ✓
+
+### Verdict
+PASS with 2 open Shoulds (queued for §5b retro-fit): S1 (Cyclone Amphan event heading on s19 globe), S2 ("simply sine phi" → "exactly sine phi")

@@ -12,30 +12,30 @@ below uses `###` headings so that `tools/tts.py` does not read it as a scene.
 
 **Title card:** Coordinates / Part 5 · Moving frames / storm-relative winds (series layout; no 'made easy').
 
-**Scene list** (timing PROVISIONAL (mv_r7_splice.py --provisional: re-used clips measured, new sentences estimated)):
+**Scene list** (timing FINAL (spliced TTS)):
 
 | # | Scene | Length (s) | Sentences |
 |---|---|---|---|
-| 0 | s00_title | 14.3 | 1 |
-| 1 | s01_hook | 29.6 | 5 |
-| 2 | s03_train | 68.3 | 12 |
-| 3 | s04_velocities_add | 88.1 | 13 |
-| 4 | s05_accel_same | 102.6 | 15 |
+| 0 | s00_title | 13.3 | 1 |
+| 1 | s01_hook | 28.8 | 5 |
+| 2 | s03_train | 67.3 | 12 |
+| 3 | s04_velocities_add | 87.9 | 13 |
+| 4 | s05_accel_same | 105.3 | 15 |
 | 5 | s06_parcel_accel | 88.8 | 15 |
-| 6 | s07_sliding_pattern | 140.1 | 17 |
-| 7 | s08_ciaran | 95.1 | 9 |
-| 8 | s09_lopsided | 50.1 | 7 |
-| 9 | s10_storm_relative | 85.8 | 12 |
+| 6 | s07_sliding_pattern | 136.9 | 17 |
+| 7 | s08_ciaran | 92.6 | 9 |
+| 8 | s09_lopsided | 49.9 | 7 |
+| 9 | s10_storm_relative | 85.1 | 12 |
 | 10 | s11_round_parts | 59.1 | 8 |
-| 11 | s12_invariant | 75.3 | 11 |
+| 11 | s12_invariant | 74.1 | 11 |
 | 12 | s13_tau | 97.1 | 16 |
-| 13 | s14_tau_derive | 116.3 | 17 |
-| 14 | s15_plymouth | 78.7 | 9 |
-| 15 | s16_meaning | 54.7 | 7 |
-| 16 | s17_recap | 81.5 | 11 |
+| 13 | s14_tau_derive | 115.6 | 17 |
+| 14 | s15_plymouth | 78.4 | 9 |
+| 15 | s16_meaning | 53.3 | 7 |
+| 16 | s17_recap | 80.6 | 11 |
 | 17 | s18_end | 22.9 | 3 |
 
-**Length:** 1348.69 s narration + 2.5-s hold = 1351.19 s; 3210 words, 142.5 wpm overall.
+**Length:** 1337.42 s narration + 2.5-s hold = 1339.92 s; 3210 words, 143.7 wpm overall.
 
 **Changes:** s02_part4_recap cut (no opening recap); recalls at the point of use (s06 derivatives movie, s08 Part 1 bearings + Part 4 local arrows, s09 Part 1 u_r / u_θ, s10 vectors movie, s12 Part 1 ring averages, s14 derivatives movie + cross product movie); no spoken 'Step …'; no voiced arithmetic; s08 trig inputs said and highlighted; two-sentence teaser to Part 6; picture and music fade together.
 
