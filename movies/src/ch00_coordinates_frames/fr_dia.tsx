@@ -108,7 +108,7 @@ export const TurnPic: React.FC<{ o: number; wind?: boolean; c?: Pt; R?: number }
           <circle cx={p[0]} cy={p[1]} r={5} fill={C.second} />
         </g>; })}
       <Lbl x={at(90, R - 70)[0]} y={at(90, R - 70)[1] + 50} t="moving east" c={C.gold} s={T.floor} a="middle" />
-      {wind ? <Lbl x={at(66)[0] + 30} y={at(66)[1] + 70} t="same wind, no push" c={C.key} s={T.floor} /> : null}
+      {wind ? <Lbl x={at(66)[0] + 30} y={at(66)[1] + 170} t="same wind, no push" c={C.key} s={T.floor} a="end" /> : null}
     </Svg>
     <TeX s={H.k} x={add(at(90), [0, -1], L + 30)[0]} y={add(at(90), [0, -1], L + 30)[1]} size={50} c={C.first} ax={0.5} o={o} halo />
     <TeX s={H.i} x={add(at(90), [1, 0], L + 40)[0]} y={at(90)[1]} size={50} c={C.second} ax={0.5} o={o} halo />
