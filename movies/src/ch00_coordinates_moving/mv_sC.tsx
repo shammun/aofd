@@ -141,7 +141,7 @@ const S14: React.FC = () => {
       <Recall f={f} tex={String.raw`\dfrac{dT}{dt}=\dfrac{\partial T}{\partial t}+\text{speed}\times\text{slope}`} name="the traveller's rate"
         lab="from the derivatives movie:" x={XC} y={470} size={46} appear={AT(k, 4, "derivatives movie")} out={t8 - 12} />
       <Layered parts={parts} x={960} y={620} size={64} layers={[{ t: "all", o: fin(f, t9) }, { t: [], u: [0], o: fin(f, t11) }, { t: [], u: [2], o: fin(f, t12) }, { t: [], u: [3], o: fin(f, t15) }]} />
-      <TeX s={String.raw`\dfrac{\cancel{\text{km}}}{\text{h}}\times\dfrac{\text{hPa}}{\cancel{\text{km}}}=\dfrac{\text{hPa}}{\text{h}}`} x={960} y={830} size={42} o={win(f, t14, t16 - 18)} />
+      <TeX s={String.raw`\tfrac{\cancel{\text{km}}}{\text{h}}\times\tfrac{\text{hPa}}{\cancel{\text{km}}}=\tfrac{\text{hPa}}{\text{h}}`} x={960} y={820} size={48} o={win(f, t14, t16 - 18)} />
     </Scene>
   );
 };
