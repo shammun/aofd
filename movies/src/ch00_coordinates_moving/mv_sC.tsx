@@ -239,7 +239,7 @@ const S16: React.FC = () => {
         <Keyword f={f} text="same idea: advection" at={[XC, 650]} appear={t5} s={T.floor} />
         <Keyword f={f} text="later: reading maps over time" at={[XC, 730]} appear={t6} s={T.floor} />
       </Svg>
-      <TeX s={EQ_S16} x={XC} y={180} size={56} o={fin(f, AT(k, 0, "splits into"))} />
+      <TeX s={EQ_S16} x={XC} y={180} size={56} o={fin(f, 0)} />
       <TeX s={String.raw`\dfrac{954.0-954.9}{2\ \text{h}}\approx-0.5\ \text{hPa/h}`} x={XC} y={515} size={48} o={fin(f, AT(k, 4, "fell from"))} />
       <SourceBelow text="Data: ERA5 (Copernicus C3S) · 2 Nov 2023 · Plymouth and the tracked centre" pic={{ x: 80, y: 40, w: 920, h: 720 }} w={920} name="s16 src" />
     </Scene>

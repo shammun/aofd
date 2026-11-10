@@ -77,7 +77,7 @@ const S00: React.FC = () => {
           {Array.from({ length: 4 }, (_, i) => <line key={i} x1={xb + i * 90} y1={sy + 38} x2={xb + i * 90} y2={sy + 62} stroke={C.second} strokeWidth={3} />)}
         </g>
       </Svg>
-      <GeoMap id="s00m" B={TMAP} o={oB} frame={0.6} over={(P) => <Barometer x={P(PLY[0], PLY[1])[0]} y={P(PLY[0], PLY[1])[1] - 40} r={30} hPa={pP} />}>
+      <GeoMap id="s00m" B={TMAP} o={oB} frame={0} over={(P) => <Barometer x={P(PLY[0], PLY[1])[0]} y={P(PLY[0], PLY[1])[1] - 40} r={30} hPa={pP} />}>
         {(P) => <>
           <path d={linesPath(P, CI.coast)} fill="none" stroke={C.key} strokeOpacity={0.8} strokeWidth={2} />
           <path d={isoD(P, CI.frames[Math.round(h)].iso)} fill="none" stroke={C.key} strokeWidth={2.4} opacity={0.9} />
@@ -175,7 +175,7 @@ const S03: React.FC = () => {
       <TeX s={String.raw`t`} x={345} y={TY + 100} size={48} c={C.local} ax={0} o={fin(f, t11)} halo />
       <TeX s={String.raw`t'`} x={xb + TW - 90} y={TY - 62} size={48} c={C.second} ax={1} o={fin(f, t11)} halo />
       {/* Must 12: the walker's tag and every calc in the column x ≥ 1100 */}
-      <TeX s={String.raw`U=20\ \text{m/s}`} x={XC} y={120} size={56} c={C.second} o={fin(f, AT(k, 1, "twenty metres"))} />
+      <TeX s={String.raw`U=20\ \text{m/s}`} x={XC} y={120} size={56} c={C.second} o={fin(f, t1)} />
       <TeX s={String.raw`u'=1.5\ \text{m/s}`} x={XC} y={200} size={56} c={C.first} o={fin(f, AT(k, 2, "one and a half"))} />
       <CalcStack f={f} x={XC} y={250} size={56} rows={[{ rhs: String.raw`20+1.5=21.5\ \text{m/s}`, at: AT(k, 3, "twenty one and a half") }]} />
       <TeX s={eq3[0]} x={XC} y={640} size={64} o={fin(f, AT(k, 10, "x equals"))} />

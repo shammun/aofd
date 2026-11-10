@@ -28,7 +28,7 @@ export const SeriesTitle: React.FC<{ f: number; concept: string; part: string; s
         <RiseText f={f} t={concept} x={x} y={y1} s={150} at={4} fill={`url(#${id})`} />
       </g>
       <RiseText f={f} t={part} x={x + 4} y={y2} s={s2} at={18} fill={C.key} />
-      {sub.map((t, i) => <RiseText key={t} f={f} t={t} x={x + 6} y={y3 + i * 90} s={68} at={30 + 6 * i} fill={C.key} />)}
+      {sub.map((t, i) => <RiseText key={t} f={f} t={t} x={x + 6} y={y3 + i * 90} s={68} at={30 + 6 * i} fill={C.first} />)}
     </>
   );
 };
