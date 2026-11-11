@@ -486,6 +486,9 @@ const S14: React.FC = () => {
         <Lbl x={VM14.cx} y={150} t="Mercator" c={C.muted} s={T.floor} a="middle" b={false} />
         <Lbl x={VE14.cx} y={170} t="Equal Earth" c={C.muted} s={T.floor} a="middle" b={false} o={eeO} />
         <Keyword f={f} text="for climate maps: sizes matter" at={[80, 80]} appear={0} out={t2 - 18} />
+        {/* build1 QA fix (halves FAIL 1130.5–1143.0 s): the empty Equal Earth outline carries the question the voice asks until the map arrives */}
+        <Lbl x={VE14.cx} y={VE14.cy - 14} t="how much of the Earth" c={C.key} s={T.key} a="middle" o={fin(f, 6, 14) * fout(f, t2 - 18, 14)} />
+        <Lbl x={VE14.cx} y={VE14.cy + 56} t="was warmer than usual?" c={C.key} s={T.key} a="middle" o={fin(f, 6, 14) * fout(f, t2 - 18, 14)} />
         <Keyword f={f} text="equal-area: Equal Earth, 2018" at={[80, 80]} appear={t2} out={t4 - 18} />
         <Keyword f={f} text="September 2026, drawn both ways" at={[80, 80]} appear={t4} out={t6 - 18} />
         <Keyword f={f} text="anomaly = difference from the usual" at={[80, 80]} appear={t6} out={t7 - 18} />
