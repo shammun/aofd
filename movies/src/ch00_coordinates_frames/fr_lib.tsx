@@ -394,14 +394,25 @@ export const insetCam = (lat: number, lon: number, at: [number, number], fov = 1
   return { ...c0, pp: [box.w + box.x - p[0], box.h + box.y - p[1]] };
 };
 export const CAM_INSET: GlobeCam = insetCam(50, BREST[1] + 60, BREST);
-export const InsetGlobe: React.FC<{ id: string; o: number; cam?: GlobeCam; box?: typeof INSET; over?: (G: GProj) => React.ReactNode; src?: boolean; edge?: number }> = ({
-  id, o, cam = CAM_INSET, box = INSET, over, src = false, edge = 40 }) => {
+/** r2fix (build 2 review, s03): `back` > 0 paints a feathered background-coloured backing (30 px past the box, 22-px blur) UNDER the
+ * inset, for an inset that sits on a full-bleed picture (the zoomed map of s03): the canvas is transparent, so without it the map would
+ * show through the space round the Earth's limb and the edge fades would end in a hard rectangle. K6 skips bg-coloured fills. */
+export const InsetGlobe: React.FC<{ id: string; o: number; cam?: GlobeCam; box?: typeof INSET; over?: (G: GProj) => React.ReactNode; src?: boolean; edge?: number; back?: number }> = ({
+  id, o, cam = CAM_INSET, box = INSET, over, src = false, edge = 40, back = 0 }) => {
   if (o <= 0) return null;
   const { x, y, w, h } = box;
   const grad = (k: string, x1: number, y1: number, x2: number, y2: number) => (
     <linearGradient key={k} id={`${id}${k}`} x1={x1} y1={y1} x2={x2} y2={y2}><stop offset="0" stopColor={C.bg} stopOpacity={1} /><stop offset="1" stopColor={C.bg} stopOpacity={0} /></linearGradient>);
   const mask = o >= 0.5 ? { name: id, k: "rect", r: [x + edge * 0.6, y + edge * 0.6, x + w - edge * 0.6, y + h - edge * 0.6] } : null;
   return <>
+    {back > 0 ? <Svg o={o}>
+      <defs>
+        <filter id={`${id}bf`} x="-30%" y="-50%" width="160%" height="200%"><feGaussianBlur stdDeviation="22" /></filter>
+        {/* the feather must not spill below the box: the source line sits there (it dimmed "· Natural Earth" in the first r2fix stills) */}
+        <clipPath id={`${id}bc`}><rect x={x - 90} y={y - 90} width={w + 180} height={h + 90} /></clipPath>
+      </defs>
+      <g clipPath={`url(#${id}bc)`}><rect x={x - 30} y={y - 30} width={w + 60} height={h + 60} fill={C.bg} fillOpacity={back} filter={`url(#${id}bf)`} /></g>
+    </Svg> : null}
     <Globe cam={cam} box={box} o={o} coast={0.6} grat={0.2} gratStep={10} dim={1.35} over={over} />
     <Svg o={o}>
       <defs>{grad("L", 0, 0, 1, 0)}{grad("R", 1, 0, 0, 0)}{grad("T", 0, 0, 0, 1)}{grad("B", 0, 1, 0, 0)}</defs>

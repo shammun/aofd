@@ -18,7 +18,7 @@ import {
   pieces, plab, poly, prog, sang, svNorth, svP, svUp, tvDir, tvEast, tvP, win, TopV, SliceV, GeoImg, IMGS, chipSpan, SpeedBar,
   HL,
   SourceBelow, useTextGate,
-  InsetGlobe, CAM_INSET, INSET, uarrow, gtip, turned3, GArc, rhatAt, meridianPath, latCircleAllPath,
+  InsetGlobe, CAM_INSET, INSET, insetCam, uarrow, gtip, turned3, GArc, rhatAt, meridianPath, latCircleAllPath,
 } from "./fr_lib";
 import { AngleArc, SliceBase, TopViewBase, sliceArrows, topArrows, turned } from "./fr_dia";
 import { EQ_S03, EQ_S04, EQ_S05, EQ_S06, EQ_S08 } from "./fr_eq";
@@ -58,6 +58,13 @@ const TOP2: GlobeCam = { lat: 89.5, lon: BREST[1], dist: 4.0, pp: [480, 328] };
 const ZOOM_BREST: GlobeCam = { lat: BREST[0], lon: BREST[1], dist: 2.4, pp: [600, 470] };
 const UN: GlobeCam = { lat: 44, lon: 6, dist: 4.3, pp: [520, 420] };
 const zoomOf = (cam: GlobeCam) => clamp((4.3 - cam.dist) / (4.3 - 2.4), 0, 1);
+// r2fix (build 2 review 2, user at ~1:53): ZOOM_BREST looks almost straight down Brest's k̂, so on the map k̂ is a stub between î and ĵ.
+// The oblique companion inset of s05/s06 (fr_lib InsetGlobe: lat 50, 60° east of Brest, dist 3.4, fov 10, Brest at the box centre; k̂ keeps
+// 62 % of its length) sits in the lower-right of the picture zone from s03's first frame (a locator while Brest is introduced), with a
+// feathered dark backing on the full-bleed map; î, ĵ, k̂ and the gravity arrow enter in it on their words, as on the map. The box ends at
+// y 812 = the map's picture box bottom (the NASA line below serves both); "Brittany" moves up to clear its top.
+const INSET3 = { x: 660, y: 600, w: 400, h: 212 };
+const CAM3: GlobeCam = insetCam(50, BREST[1] + 60, BREST, 10, INSET3);
 /** the top-view diagram matched to the 3-D camera over the pole: centre = the projected centre of Brest's parallel */
 const topFrom3D = (): TopV => {
   const G = globeG(TOP2);
@@ -170,6 +177,11 @@ const S03: React.FC = () => {
   const G = globeG(cam, GFULL);
   const gr = add(G.p(BREST[0], BREST[1]), [0, 0], 0);
   const up = ll(BREST[0], BREST[1], 1 - L * 0.9);
+  // the companion inset (r2fix): the same arrows at full length on the oblique globe, entering on the same words
+  const Gi = globeG(CAM3, INSET3), bB = ll(BREST[0], BREST[1]), EB = enAt(BREST[0], BREST[1]), LI = 0.2;
+  const oI = fin(f, tI, 16), oJ = fin(f, tJ, 16), oK = fin(f, tK, 16), oG = fin(f, tGr);
+  const down: V3 = [-EB.u[0], -EB.u[1], -EB.u[2]];
+  const tipI = gtip(Gi, bB, EB.e, LI, 44), tipJ = gtip(Gi, bB, EB.n, LI, 44), tipK = gtip(Gi, bB, EB.u, LI * 1.15, 44);
   return (
     <Scene>
       <Globe cam={cam} box={GFULL} coast={0.6}
@@ -188,12 +200,22 @@ const S03: React.FC = () => {
             </>; })()}
           {gdot(Gg, BREST[0], BREST[1], C.gold, 10, fin(f, tBr))}
           {plab(Gg, BREST[0], BREST[1], "Brest", fin(f, tBr), -24, 0, "end")}
-          {plab(Gg, BREST[0], BREST[1], "Brittany", fin(f, tBri), 70, 120)}
+          {plab(Gg, BREST[0], BREST[1], "Brittany", fin(f, tBri), 70, 80)}
           {plab(Gg, BREST[0], BREST[1], "Atlantic Ocean", fin(f, tAtl), -60, 170, "end", true)}
         </>} />
       <TripodTips G={G} la={BREST[0]} lo={BREST[1]} L={L} size={58} o={fin(f, tK)} />
       <GlobeFrame id="s03k" zoom={1} right={1} />
       <SourceBelow text={SRC_G} pic={{ x: 80, y: 40, w: 960, h: 772 }} w={960} name="s03 src" />
+      <InsetGlobe id="s03i" o={1} cam={CAM3} box={INSET3} back={1} over={(Gg) => <>
+        {uarrow(Gg, bB, down, LI * 0.9, BROWN, oG, 7, 26)}
+        {uarrow(Gg, bB, EB.e, LI, C.second, oI)}
+        {uarrow(Gg, bB, EB.n, LI, C.second, oJ)}
+        {uarrow(Gg, bB, EB.u, LI * 1.15, C.first, oK)}
+        {gdot(Gg, BREST[0], BREST[1], C.gold, 8, fin(f, tBr))}
+      </>} />
+      <TeX s={H.i} x={tipI[0]} y={tipI[1]} size={48} c={C.second} ax={0.5} o={oI} halo />
+      <TeX s={H.j} x={tipJ[0]} y={tipJ[1]} size={48} c={C.second} ax={0.5} o={oJ} halo />
+      <TeX s={H.k} x={tipK[0]} y={tipK[1]} size={48} c={C.first} ax={0.5} o={oK} halo />
       <Svg>
         <Keyword f={f} text="a weather station at Brest" at={[XZ, 120]} s={T.floor} appear={0} out={tFr - 20} />
         <Keyword f={f} text="local east · north · up" at={[XZ, 120]} appear={tFr} />
