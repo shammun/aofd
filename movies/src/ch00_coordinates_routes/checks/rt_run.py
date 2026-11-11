@@ -118,7 +118,8 @@ def main() -> int:
         if not (S / "bundle" / "public" / "narration_music_rt.wav").exists():
             sys.exit("bundle/public/narration_music_rt.wav missing: copy the mix into the bundle's public folder first")
         rd.mkdir(parents=True, exist_ok=True)
-        ns = argparse.Namespace(scratch=S, comp=COMP, frames=n_fr, audio=None, props=None, chunk=CHUNK, concurrency=a.conc, port0=5600, stall=240.0, out=None)
+        # r1fix 2026-11-10: the port base follows env RTPORT (default 5600) — Remotion refuses a port with TIME_WAIT sockets left by an earlier run
+        ns = argparse.Namespace(scratch=S, comp=COMP, frames=n_fr, audio=None, props=None, chunk=CHUNK, concurrency=a.conc, port0=int(os.environ.get("RTPORT", "5600")), stall=240.0, out=None)
         todo = [int(x) for x in a.only.split(",")] if a.only else range(a.start, n)
         print(f"{n_fr} frames, {n} chunks", flush=True)
         t0 = time.time()

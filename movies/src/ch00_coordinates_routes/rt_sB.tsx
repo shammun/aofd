@@ -114,7 +114,8 @@ const S07: React.FC = () => {
   const ic: Pt = [1250, 330], ir = 100;
   return (
     <Scene>
-      <Globe cam={cam} grat={0.15 * (1 - flat)} coast={0.4 * (1 - flat)} meshO={1 - 0.88 * flat}
+      {/* r1fix 2026-11-10 (review 1 S3): the texture is gone once the sheet is face-on (a geometry diagram, not a map: South America showed through) */}
+      <Globe cam={cam} grat={0.15 * (1 - flat)} coast={0.4 * (1 - flat)} meshO={1 - flat}
         over={(G) => { const pl = Array.from({ length: 73 }, (_, i) => G.pw(planePt((i * 5) * D2R)));
           return <>
             <path d={poly(pl) + "Z"} fill={C.key} fillOpacity={0.22} stroke={C.gold} strokeWidth={3} opacity={1 - flat} />
@@ -140,6 +141,12 @@ const S07: React.FC = () => {
           <path d={arcD(ic, 30, 0, 60)} fill="none" stroke={C.gold} strokeWidth={3} />
         </g>
         <Keyword f={f} text="how long?" at={[XC, 110]} appear={0} out={tRule - 18} />
+        {/* r1fix 2026-11-10 (review 1 M5): the column names each piece on its word while the disc is built (it showed only "how long?" for 30 s) */}
+        <Keyword f={f} text="a flat circle, radius $a$" at={[XC, 200]} s={T.floor} appear={tFlat} out={tRule - 18} />
+        <Keyword f={f} text="$\hat{\mathbf r}_1$: centre → London" at={[XC, 280]} s={T.floor} appear={tA1} out={tRule - 18} c={C.ink} />
+        <Keyword f={f} text="$\hat{\mathbf r}_2$: centre → Los Angeles" at={[XC, 350]} s={T.floor} appear={tA2} out={tRule - 18} c={C.second} />
+        <Keyword f={f} text="$\sigma$: the angle at the centre" at={[XC, 430]} s={T.floor} appear={tSig} out={tRule - 18} c={C.gold} />
+        <Keyword f={f} text="$d$: the arc between the tips" at={[XC, 510]} s={T.floor} appear={tArc} out={tRule - 18} c={C.gold} />
         {/* remake 2026-11-07 (R16): the recall keyword of the series ("derived in Part K: <name>") */}
         <Lbl x={XC} y={190} t="derived in Part 1: arc length" c={C.gold} s={T.floor} o={fin(f, tRule)} />
         <Keyword f={f} text="know $\sigma$ → know the distance" at={[XC, 830]} s={T.floor} appear={tKnow} />
@@ -168,14 +175,15 @@ const AX: Pt = [760, 360], AXS = 190;
 const ax3 = (v: number[]): Pt => [AX[0] + AXS * (-0.55 * v[0] + v[1]), AX[1] + AXS * (0.45 * v[0] - v[2])];
 const S08: React.FC = () => {
   const f = useCurrentFrame(), k = K("s08_position_arrows");
-  const [, chipEnd] = chipSpan(k);
+  const [chipA, chipEnd] = chipSpan(k);
   const tR = SS(k, 3), tF = SS(k, 4), tLon = SS(k, 5), tC1 = AT(k, 6, "The cosine"), tP1 = AT(k, 7, "zero point six two two"), tS = SS(k, 8), tP2 = AT(k, 8, "about minus"),
     tP3 = AT(k, 9, "zero point seven eight three"), tLA = SS(k, 10), tC2 = SS(k, 11), tQ1 = AT(k, 12, "about minus"), tQ2 = AT(k, 13, "about minus"), tQ3 = AT(k, 14, "is zero point five");
   const [v1, v2] = cutAt(EQ_S08, String.raw`,\qquad `);
   const p1 = pieces(v1, ["0.622,", String.raw`\ -0.001,`, String.raw`\ 0.783)`]), p2 = pieces(v2, ["-0.392,", String.raw`\ -0.730,`, String.raw`\ 0.560)`]);
   // Part 1 lessons D1: London's position arrow r̂₁ is ink (was teal; teal = the round/tangential part)
   const parts1: Part[] = p1.map((t) => ({ t, c: C.ink })), parts2: Part[] = p2.map((t, i) => ({ t, c: i ? C.ink : C.second }));
-  const L = (ts: number[], parts: Part[]) => [{ t: [0], o: 1 }, ...ts.map((a, i) => ({ t: [i + 1], o: fin(f, a) }))].map((x) => ({ ...x, t: x.t as number[] })) ;
+  // r1fix 2026-11-10 (review 1 S4): the "r̂ ≈ (" bracket appears with its first part, not 12 s before it
+  const L = (ts: number[], parts: Part[]) => [{ t: [0], o: fin(f, ts[0] - 8) }, ...ts.map((a, i) => ({ t: [i + 1], o: fin(f, a) }))].map((x) => ({ ...x, t: x.t as number[] })) ;
   const r2f = pieces(EQ_S02, [String.raw`\ \cos\varphi\sin`]);
   const o1 = ax3(RO.r1), o2 = ax3(RO.r2);
   const outL = tLA - 18;
@@ -183,28 +191,30 @@ const S08: React.FC = () => {
     <Scene>
       <Svg>
         <Disc V={D8} sw={0.7} />
-        {/* Part 3's fixed axes (x̂ to 0° N 0° E, ŷ to 0° N 90° E, ẑ to the North Pole), oblique view, with r̂₁ and r̂₂ */}
-        <g opacity={fin(f, tF)}>
+        {/* Part 3's fixed axes (x̂ to 0° N 0° E, ŷ to 0° N 90° E, ẑ to the North Pole), oblique view, with r̂₁ and r̂₂.
+            r1fix 2026-11-10 (review 1 M5): the tripod, the r̂ formula and the "r̂₁: London, r̂₂: Los Angeles" row are there from the
+            first frame (80 % of the frame was empty for 32 s); the keyword moves to the top and leaves before the skip chip */}
+        <g>
           <Arrow p={AX} q={ax3([1.15, 0, 0])} color={C.muted} w={5} head={20} />
           <Arrow p={AX} q={ax3([0, 1.1, 0])} color={C.muted} w={5} head={20} />
           <Arrow p={AX} q={ax3([0, 0, 1.15])} color={C.muted} w={5} head={20} />
           <Arrow p={AX} q={o1} color={C.ink} w={8} head={28} o={fin(f, tP3)} />
           <Arrow p={AX} q={o2} color={C.second} w={8} head={28} o={fin(f, tQ3)} />
         </g>
-        <Keyword f={f} text="$\sigma$, step by step" at={[XC, 250]} appear={0} out={tR - 18} />
+        <Keyword f={f} text="$\sigma$, step by step" at={[XC, 110]} appear={0} out={chipA - 18} />
         <SkipChip f={f} k={k} to={skipTo("s11_route_shape")} />
       </Svg>
       <TeX s={H.r1} x={tipAt(D8, D8.a1, 34)[0]} y={tipAt(D8, D8.a1, 34)[1]} size={48} c={C.ink} ax={0.5} halo />
       <TeX s={H.r2} x={tipAt(D8, D8.a2, 34)[0]} y={tipAt(D8, D8.a2, 34)[1]} size={48} c={C.second} ax={0.5} halo />
-      <TeX s={String.raw`\hat{\mathbf x}`} x={ax3([1.3, 0, 0])[0]} y={ax3([1.3, 0, 0])[1]} size={46} c={C.muted} ax={0.5} o={fin(f, tF)} />
-      <TeX s={String.raw`\hat{\mathbf y}`} x={ax3([0, 1.25, 0])[0]} y={ax3([0, 1.25, 0])[1]} size={46} c={C.muted} ax={0.5} o={fin(f, tF)} />
-      <TeX s={String.raw`\hat{\mathbf z}`} x={ax3([0, 0, 1.3])[0]} y={ax3([0, 0, 1.3])[1]} size={46} c={C.muted} ax={0.5} o={fin(f, tF)} />
+      <TeX s={String.raw`\hat{\mathbf x}`} x={ax3([1.3, 0, 0])[0]} y={ax3([1.3, 0, 0])[1]} size={46} c={C.muted} ax={0.5} />
+      <TeX s={String.raw`\hat{\mathbf y}`} x={ax3([0, 1.25, 0])[0]} y={ax3([0, 1.25, 0])[1]} size={46} c={C.muted} ax={0.5} />
+      <TeX s={String.raw`\hat{\mathbf z}`} x={ax3([0, 0, 1.3])[0]} y={ax3([0, 0, 1.3])[1]} size={46} c={C.muted} ax={0.5} />
       <Layered parts={parts1} layers={L([tP1, tP2, tP3], parts1)} x={100} y={640} size={54} o={fin(f, tLon)} />
       <Layered parts={parts2} layers={L([tQ1, tQ2, tQ3], parts2)} x={100} y={745} size={54} o={fin(f, tLA)} />
       {/* column: what we need, the formula, then each city's inputs and its three parts */}
-      <TeX s={String.raw`\hat{\mathbf r}_1:\ \text{London},\quad \hat{\mathbf r}_2:\ \text{Los Angeles}`} x={XC} y={250} size={46} o={fin(f, tR)} />
-      <TeX s={r2f[0]} x={XC} y={335} size={46} o={fin(f, tF)} />
-      <TeX s={r2f[1]} x={XC + 110} y={395} size={46} o={fin(f, tF)} />
+      <TeX s={String.raw`\hat{\mathbf r}_1:\ \text{London},\quad \hat{\mathbf r}_2:\ \text{Los Angeles}`} x={XC} y={250} size={46} />
+      <TeX s={r2f[0]} x={XC} y={335} size={46} />
+      <TeX s={r2f[1]} x={XC + 110} y={395} size={46} />
       {/* remake 2026-11-07 (R16): the position arrow recalled from Part 3 (the old opening recap carried it) */}
       <Recall f={f} tex="" name="position vector" part={3} x={XC} y={450} appear={AT(k, 4, "From Part 3")} out={tLon - 10} />
       <TeX s={String.raw`\text{London: }\varphi=51.51^\circ,\ \lambda=-0.13^\circ`} x={XC} y={495} size={46} c={C.ink} o={win(f, tLon, outL)} />
@@ -230,7 +240,7 @@ const S08: React.FC = () => {
         { h: 56, rhs: String.raw`\approx-0.730`, at: tQ2, cont: true },
         { h: 56, lhs: String.raw`\text{3rd}`, rhs: String.raw`=\sin 34.05^\circ\approx0.560`, at: SS(k, 14), glow: HL(f, tQ3) },
       ]} />
-      {void [chipEnd, tQ1, tQ2]}
+      {void [chipEnd, tQ1, tQ2, tR, tF]}
     </Scene>
   );
 };
@@ -246,24 +256,30 @@ const S09: React.FC = () => {
     tPr = [AT(k, 4, "London's first part") + 24, AT(k, 4, "then the second parts") + 20, AT(k, 4, "then the third") + 20], tSum = AT(k, 4, "add the three products"),
     tCos = AT(k, 5, "about zero point"), tWhich = SS(k, 6), tInv = AT(k, 7, "inverse cosine"), tSig = AT(k, 7, "about seventy eight"),
     tQ = AT(k, 8, "quarter of the way round");
-  const V = D9, xs = [1330, 1520, 1710], y1 = 255, y2 = 345;
+  // r1fix 2026-11-10 (review 1 M6): the three number columns 200 px apart, the gold pair-bracket 94 px right of each column's centre
+  // (the widest number, "−0.730" at 52 px, ends 79 px right of it; the next column's number starts 141 px right): no stroke through a digit
+  const V = D9, xs = [1300, 1500, 1700], y1 = 255, y2 = 345;
   const u1: Pt = [Math.cos(V.a1 * D2R), -Math.sin(V.a1 * D2R)];
   const tip2 = dP(V, V.a2), foot = add(V.c, u1, V.R * RO.dot);
-  const sigP = dP(V, mid(V), V.R * 0.36);
+  // r1fix (review 1 M6): σ at 0.5 R on the mid-ray, clear of the 0.3 R arc and 48 px from the dashed drop line (was 0.36 R: on both)
+  const sigP = dP(V, mid(V), V.R * 0.5);
   return (
     <Scene>
       <Svg>
-        {/* the shadow of r̂₂ (length 1) on r̂₁: a 20-px band in the caster's colour, cos σ long */}
+        {/* the dashed drop line from r̂₂'s tip to its foot on r̂₁ */}
         <line x1={tip2[0]} y1={tip2[1]} x2={foot[0]} y2={foot[1]} stroke={C.second} strokeWidth={3} strokeDasharray="8 7" opacity={fin(f, tSh)} />
-        <line x1={V.c[0]} y1={V.c[1]} x2={foot[0]} y2={foot[1]} stroke={C.second} strokeWidth={20} strokeOpacity={0.55} opacity={fin(f, tSh)} />
         <Disc V={V} sig={prog(f, tInv, tInv + 30)} />
+        {/* r1fix 2026-11-10 (review 1 S1): the shadow of r̂₂ (length 1) on r̂₁, a 20-px band in the caster's colour, cos σ ≈ 0.195 long, drawn
+            OVER the disc (under it, r̂₁'s shaft and the centre dot hid all 49 px of it) */}
+        <line x1={V.c[0]} y1={V.c[1]} x2={foot[0]} y2={foot[1]} stroke={C.second} strokeWidth={20} strokeOpacity={0.75} strokeLinecap="butt" opacity={fin(f, tSh)} />
         <path d={`M ${V.c[0]} ${V.c[1]} L ${dP(V, V.a1, V.R * 0.55)[0]} ${dP(V, V.a1, V.R * 0.55)[1]} ` + arcD(V.c, V.R * 0.55, V.a1, V.a1 + SGN * 90).replace(/^M/, "L") + " Z"}
           fill={SLATE} fillOpacity={0.18} stroke={SLATE} strokeWidth={3} opacity={fin(f, tQ)} />
         {xs.map((x, i) => <g key={i} opacity={fin(f, tM[i])}>
-          <path d={`M ${x + 66} ${y1 - 8} L ${x + 80} ${y1 - 8} L ${x + 80} ${y2 + 8} L ${x + 66} ${y2 + 8}`} fill="none" stroke={C.gold} strokeWidth={5} strokeLinejoin="round" />
+          <path d={`M ${x + 94} ${y1 - 8} L ${x + 106} ${y1 - 8} L ${x + 106} ${y2 + 8} L ${x + 94} ${y2 + 8}`} fill="none" stroke={C.gold} strokeWidth={5} strokeLinejoin="round" />
         </g>)}
         <Keyword f={f} text="rule from the dot product movie" at={[XC, 165]} s={T.floor} appear={0} out={tRule - 18} />
-        <CurvedLink f={f} from={[1086, 815]} to={[sigP[0] + 20, sigP[1] + 10]} start={tInv + 40} bend={-80} />
+        {/* r1fix (review 1 M6): the link's head stops 40 px right of the σ label (it landed on the letter) */}
+        <CurvedLink f={f} from={[1086, 815]} to={[sigP[0] + 44, sigP[1] + 6]} start={tInv + 40} bend={-80} />
         <OptionalTag f={f} from={-20} />
       </Svg>
       <TeX s={H.r1} x={tipAt(V, V.a1)[0]} y={tipAt(V, V.a1)[1]} size={54} c={C.ink} ax={0.5} halo />

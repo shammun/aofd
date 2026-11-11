@@ -25,6 +25,8 @@ const CHECK_C: [string, number, number, number][] = [
   ["brg0", RO.brg0, 312, 0.5], ["brg1", RO.brg1, 214, 0.5], ["vx", RO.vx[0], 62.4, 0.05], ["sig79", RO.sig_deg, 79, 0.5], ["d", RO.d_km, 8755, 0.5],
   ["rhb", RH.brg, 258.5, 0.05], ["rhkm", RH.km, 9733, 0.5], ["ratio", 9733 / 8755, 1.11, 0.005], ["extra", RH.extra, 978, 0.6], ["hour", 978 / 900, 1.1, 0.015],
   ["blg", BL.gc_km, 1138, 0.5], ["blx", BL.extra_m, 150, 2], ["pct", 100 * (RH.ratio - 1), 11, 0.5], ["sig", RO.sig_deg, 78.7, 0.05], ["chg", RO.brg0 - RO.brg1, 100, 2.5],
+  // r1fix 2026-11-10 (review 1 M4): the s13 row's two lengths to the hundredth of a km, and their difference in km
+  ["blg2", BL.gc_km, 1138.12, 0.005], ["blr2", BL.rh_km, 1138.27, 0.005], ["bld", (BL.rh_km - BL.gc_km), 0.15, 0.005],
 ];
 CHECK_C.forEach(([n, v, r, tol]) => { if (!(Math.abs(v - r) <= tol)) throw new Error(`CHECK ${n}: data ${v} vs screen ${r}`); });
 const GSrc: React.FC<{ o?: number }> = ({ o = 1 }) => <SourceBelow text={SRC_G} pic={GB} w={960} o={o} name="globe src" />;
@@ -60,18 +62,19 @@ const S11: React.FC = () => {
   // heading strip (in the column after the chart has gone): 11 samples of the heading along the route (every tenth)
   const SX = 1130, SW = 660, SY = 300;
   const sx = (i: number) => SX + (i / 10) * SW;
+  // r1fix 2026-11-10 (review 1 M1): the keep-line picture is the face-on disc of s07/s10 (σ IS the angle at the Earth's centre between r̂₁
+  // and r̂₂), as an inset in the column. The old surface wedge (two chords meeting at the projected centre) opened ~170° on screen yet read 79°.
+  const D11 = scaleDisc(DISC, [1470, 600], 180), m11 = (D11.a1 + D11.a2) / 2;
   return (
     <Scene>
-      <Globe cam={cam} grat={0.16} meshO={1 - 0.5 * see}
-        over={(Gg) => { const c0 = Gg.pw([0, 0, 0]), P = along(Gg, GC, fly); return <>
-          <line x1={c0[0]} y1={c0[1]} x2={pL[0]} y2={pL[1]} stroke={C.ink} strokeWidth={4} opacity={see} />
-          <line x1={c0[0]} y1={c0[1]} x2={pA[0]} y2={pA[1]} stroke={C.second} strokeWidth={4} opacity={see} />
-          <circle cx={c0[0]} cy={c0[1]} r={8} fill={C.key} opacity={see} />
+      <Globe cam={cam} grat={0.16}
+        over={(Gg) => { const P = along(Gg, GC, fly); return <>
           <Route G={Gg} pts={GC} c={C.gold} w={8} />
           {gdot(Gg, LON[0], LON[1], C.key, 10)}{gdot(Gg, LAX[0], LAX[1], C.key, 10)}
           {gdot(Gg, RO.vx[0], RO.vx[1], C.gold, 10, fin(f, tVx))}
           {plab(Gg, LON[0], LON[1], "London", 1, -18, -36, "end")}
-          {plab(Gg, LAX[0], LAX[1], "Los Angeles", 1, 16, 42)}
+          {/* r1fix (review 1 M6): "Los Angeles" below the city (s11-s13 alike, so the cuts do not jump), off s12's rhumb line and its angle mark */}
+          {plab(Gg, LAX[0], LAX[1], "Los Angeles", 1, 0, 136)}
           {/* build1 2026-11-10 (K6 text-text): 62.4° N under the route (was over London's label), Greenland on its ice sheet's north */}
           {plab(Gg, RO.vx[0], RO.vx[1], "62.4° N", fin(f, tVx), 0, 48, "middle")}
           {plab(Gg, 77, -42, "Greenland", fin(f, tGl), 0, 0, "middle", true)}
@@ -81,13 +84,11 @@ const S11: React.FC = () => {
       <GlobeFrame id="s11k" zoom={0} disc={discOf(cam)} />
       <GSrc />
       <Svg>
-        {(() => { const c0 = G.pw([0, 0, 0]); return <g data-lc-maplabel="1" opacity={win(f, tKeep + 20, tWhere - 34)}>
-          {/* Part 1 lessons B2: the angle at the centre is drawn as an arc between the two position lines, not only labelled */}
-          {(() => { let a0 = sang([pL[0] - c0[0], pL[1] - c0[1]]), a1 = sang([pA[0] - c0[0], pA[1] - c0[1]]); if (a1 - a0 > 180) a1 -= 360; if (a0 - a1 > 180) a1 += 360;
-            return <path d={arcD(c0, 64, a0, a1)} fill="none" stroke={C.gold} strokeWidth={5} />; })()}
-          <Lbl x={c0[0] + 24} y={c0[1] + 44} t="≈ 79°" c={C.gold} s={T.floor} a="start" />
-          <Lbl x={G.p(GC[90][0], GC[90][1])[0]} y={G.p(GC[90][0], GC[90][1])[1] - 40} t="≈ 8755 km" c={C.gold} s={T.floor} a="middle" /></g>; })()}
-        <Compass c={[pL[0] + 90, pL[1] + 120]} r={58} brg={RO.brg0} o={fin(f, tB0) * fout(f, tWhy)} label={false} />
+        {/* the face-on disc (same geometry as s07/s10: centre, r̂₁, r̂₂ projected through the face-on camera), σ arc and the route arc */}
+        <Disc V={D11} o={see} sig={1} route={1} sw={0.75} />
+        <Lbl x={D11.c[0]} y={D11.c[1] + D11.R + 58} t="seen from the Earth's centre" c={C.muted} s={T.floor} a="middle" o={see} />
+        {/* r1fix 2026-11-10 (review 1 S7): the London dial sits 20 px outside the globe's limb (it straddled the limb, over the image) */}
+        <Compass c={[pL[0] + 200, pL[1] + 110]} r={58} brg={RO.brg0} o={fin(f, tB0) * fout(f, tWhy)} label={false} />
         <Compass c={[pA[0] - 60, pA[1] - 150]} r={58} brg={RO.brg1} o={fin(f, tB1) * fout(f, tWhy)} label={false} />
         <Keyword f={f} text="if you skipped, keep this:" at={[XC, 110]} appear={0} out={tWhere - 18} c={C.gold} />
         <Keyword f={f} text="≈ 79° apart (at the centre)" at={[XC, 210]} s={T.floor} appear={AT(k, 1, "seventy nine")} out={tWhere - 18} />
@@ -110,30 +111,35 @@ const S11: React.FC = () => {
         <Keyword f={f} text="over Greenland and Canada" at={[XC, 820]} s={T.floor} appear={tWhy} />
         {/* build1 2026-11-10 (continuity plan 5f s11): the compass bearing (from north, clockwise) recalled from Part 1 where 312° is formed */}
         <Lbl x={XC} y={800} t="derived in Part 1: bearings" c={C.gold} s={T.floor} o={win(f, tTurn + 30, SS(k, 6) - 10)} />
+        {/* r1fix 2026-11-10 (review 1 M2): the vertex and the arrival are results on their words (their unvoiced working — n̂, n_z, back-azimuth — is gone) */}
+        <Keyword f={f} text="highest point ≈ 62.4° N" at={[XC, 540]} s={T.floor} appear={tVx} c={C.gold} />
+        <Keyword f={f} text="arrives at ≈ 214° (south-west)" at={[XC, 620]} s={T.floor} appear={tB1} c={C.gold} />
       </Svg>
+      {/* the inset's labels: r̂₁ (ink), r̂₂ (orange) at the tips, σ inside the arc, d on the route arc (as s07) */}
+      <TeX s={H.r1} x={dP(D11, D11.a1, D11.R + 44)[0]} y={dP(D11, D11.a1, D11.R + 44)[1]} size={48} c={C.ink} ax={0.5} o={see} halo />
+      <TeX s={H.r2} x={dP(D11, D11.a2, D11.R + 44)[0]} y={dP(D11, D11.a2, D11.R + 44)[1]} size={48} c={C.second} ax={0.5} o={see} halo />
+      <TeX s={String.raw`\sigma`} x={dP(D11, m11, D11.R * 0.5)[0]} y={dP(D11, m11, D11.R * 0.5)[1]} size={52} c={C.gold} ax={0.5} o={see} halo />
+      <TeX s={String.raw`d`} x={dP(D11, m11, D11.R + 40)[0]} y={dP(D11, m11, D11.R + 40)[1]} size={52} c={C.gold} ax={0.5} o={see} halo />
       <SourceBelow text="Map: Natural Earth (Mercator)" pic={MBf} w={600} o={mapO} name="s11 src map" />
-      {/* audit F1: the three route numbers from Part 4's local arrows and the cross product. Remake 2026-11-07: the heading rows are cued
-          on the new S5 (what is combined is said; the products stay on screen), Part 4 recalled above the stack, each answer glows */}
+      {/* audit F1: the heading from Part 4's local arrows. Remake 2026-11-07: the rows are cued on S5 (what is combined is said; the products
+          stay on screen), Part 4 recalled above the stack, the answer glows. r1fix 2026-11-10 (review 1 M2): only the VOICED heading rows
+          remain (14 rows rolled past at 2 s each with one sentence of voice); the arrows are named east / north and β is said to be the
+          angle west of north, so each number on screen is labelled; the stack leaves as the vertex sentence starts */}
       <Recall f={f} tex="" name="local east and north" part={4} x={XC} y={410} appear={AT(k, 5, "from Part 4")} out={SS(k, 6) - 10} />
-      <CalcStack f={f} x={XC} y={540} size={44} maxLines={2} o={fout(f, tChg - 18)} rows={[
-        { rhs: String.raw`\hat{\mathbf i}_1=(0.002,\ 1.000,\ 0)`, at: tEN, c: C.muted, h: 56 },
-        { rhs: String.raw`\hat{\mathbf j}_1=(-0.783,\ 0.002,\ 0.622)`, at: tEN + 12, c: C.muted, cont: true, h: 56 },
+      <CalcStack f={f} x={XC} y={540} size={44} maxLines={2} o={fout(f, SS(k, 6) + 4)} rows={[
+        { rhs: String.raw`\text{east }\hat{\mathbf i}_1=(0.002,\,1.000,\,0)`, at: tEN, c: C.muted, h: 56 },
+        { rhs: String.raw`\text{north }\hat{\mathbf j}_1=(-0.783,\,0.002,\,0.622)`, at: tEN + 12, c: C.muted, cont: true, h: 56 },
         { rhs: String.raw`e=\hat{\mathbf r}_2\cdot\hat{\mathbf i}_1,\ \ n=\hat{\mathbf r}_2\cdot\hat{\mathbf j}_1`, at: tMeas, c: C.muted, h: 56 },
-        { rhs: String.raw`e=-0.001-0.730=-0.731`, at: tAlong, h: 56 },
-        { rhs: String.raw`n=0.307-0.001+0.348`, at: tAlong + 20, h: 56 },
-        { rhs: String.raw`=0.654`, at: tAlong + 35, cont: true, h: 56 },
-        { rhs: String.raw`\tan\beta=0.731\div0.654\approx1.12\Rightarrow48^\circ`, at: tTurn, h: 56 },
+        { rhs: String.raw`e=-0.001-0.730`, at: tAlong, h: 56 },
+        { rhs: String.raw`=-0.731\ \text{(west)}`, at: tAlong + 14, cont: true, h: 56 },
+        { rhs: String.raw`n=0.307-0.001+0.348`, at: tAlong + 28, h: 56 },
+        { rhs: String.raw`=0.654\ \text{(north)}`, at: tAlong + 42, cont: true, h: 56 },
+        { rhs: String.raw`\beta\text{: the angle west of north}`, at: tTurn, c: C.muted, h: 56 },
+        { rhs: String.raw`\tan\beta=0.731\div0.654\approx1.12`, at: tTurn + 12, h: 56 },
+        { rhs: String.raw`\Rightarrow\beta\approx48^\circ`, at: tTurn + 22, cont: true, h: 56 },
         { rhs: String.raw`360^\circ-48^\circ=312^\circ\ \text{(north-west)}`, at: tTurn + 30, c: C.gold, cont: true, h: 56, glow: HL(f, tTurn + 30) },
-        { rhs: String.raw`\text{axis }\hat{\mathbf n}=\hat{\mathbf r}_1\times\hat{\mathbf r}_2\div\sin\sigma`, at: SS(k, 6), c: C.muted, h: 56 },
-        { rhs: String.raw`n_z=(-0.454-0.000)\div0.981`, at: SS(k, 6) + 20, h: 56 },
-        { rhs: String.raw`\approx-0.463`, at: SS(k, 6) + 35, cont: true, h: 56 },
-        { rhs: String.raw`\text{highest point: }90^\circ\text{ from }\hat{\mathbf n}`, at: SS(k, 6) + 50, c: C.muted, h: 56 },
-        { rhs: String.raw`\cos\varphi_{\max}=|n_z|=0.463\Rightarrow62.4^\circ\text{N}`, at: tVx - 10, c: C.gold, cont: true, h: 56, glow: HL(f, tVx) },
-        { rhs: String.raw`\text{at LA: east }0.549,\ \text{north }0.813`, at: SS(k, 7), c: C.muted, h: 56 },
-        { rhs: String.raw`\tan=0.549\div0.813\approx0.675\Rightarrow34^\circ`, at: SS(k, 7) + 30, cont: true, h: 56 },
-        { rhs: String.raw`34^\circ+180^\circ=214^\circ\ \text{(south-west)}`, at: tB1, c: C.gold, cont: true, h: 56, glow: HL(f, tB1) },
       ]} />
-      {void [tCan, tHow]}
+      {void [tCan, tHow, tChg, m11]}
     </Scene>
   );
 };
@@ -159,18 +165,22 @@ const S12: React.FC = () => {
           {marks.map((i, q) => { const M = angleMark(Gg, RHP, i); return M.vis ? <path key={q} d={M.d} fill="none" stroke={C.gold} strokeWidth={5} opacity={fin(f, tSame + 8 * q)} /> : null; })}
           {gdot(Gg, LON[0], LON[1], C.key, 10)}{gdot(Gg, LAX[0], LAX[1], C.key, 10)}
           {plab(Gg, LON[0], LON[1], "London", 1, -18, -36, "end")}
-          {plab(Gg, LAX[0], LAX[1], "Los Angeles", 1, 16, 42)}
+          {/* r1fix 2026-11-10 (review 1 M6): below the city, off the slate rhumb line and the first gold angle mark */}
+          {plab(Gg, LAX[0], LAX[1], "Los Angeles", 1, 0, 136)}
         </>} />
       <GlobeFrame id="s12k" zoom={0} disc={discOf(cam)} />
       <GSrc />
       <Svg>
-        <Compass c={[pL[0] + 90, pL[1] + 120]} r={58} brg={RH.brg} col={SLATE} o={fin(f, tB)} label={false} />
+        {/* r1fix 2026-11-10 (review 1 S7): the dial 20 px outside the limb, as s11 */}
+        <Compass c={[pL[0] + 200, pL[1] + 110]} r={58} brg={RH.brg} col={SLATE} o={fin(f, tB)} label={false} />
         <Keyword f={f} text="sailors' route" at={[XC, 110]} appear={0} out={tRh - 18} />
         <Keyword f={f} text="rhumb line" at={[XC, 110]} appear={tRh} c={SLATE} />
         <Lbl x={XC} y={185} t="same bearing all the way" c={C.key} s={T.floor} o={fin(f, tSame)} />
         <Lbl x={XC} y={255} t="≈ 258.5°: a little south of west" c={SLATE} s={T.floor} o={fin(f, tB)} />
         <Lbl x={XC} y={325} t="rhumb ≈ 9733 km" c={SLATE} s={T.floor} o={fin(f, tLen)} />
         <Lbl x={XC + 420} y={325} t="vs 8755 km" c={C.gold} s={T.floor} o={fin(f, tLen + 20)} />
+        {/* r1fix (review 1 M3): the results stand alone (the unvoiced ψ working is Part 7's); one more voiced line fills the gap before "how much longer?" */}
+        <Lbl x={XC} y={395} t="stays south of the great circle" c={SLATE} s={T.floor} o={win(f, tS, tHow - 20)} />
         <Keyword f={f} text="how much longer?" at={[XC, 400]} s={T.floor} appear={tHow} out={tR - 18} />
         <g opacity={fin(f, tSp)}>
           <circle cx={ic[0]} cy={ic[1]} r={iR} fill="#1f2c48" stroke={C.grid} strokeWidth={3} />
@@ -186,21 +196,9 @@ const S12: React.FC = () => {
         { lhs: String.raw`978\ \text{km}\div900\ \text{km/h}`, rhs: String.raw`\approx1.1\ \text{h}`, at: tHr },
       ]} />
       <TeX s={String.raw`+11\,\%`} x={XC} y={660} size={60} c={C.gold} o={fin(f, tPct)} glow={HL(f, tPct)} />
-      <CalcStack f={f} x={XC} y={400} size={44} maxLines={3} o={fout(f, tHow - 12)} rows={[
-        { rhs: String.raw`\psi=\ln\tan(45^\circ+\varphi/2)\ \text{(Part 7)}`, at: tSame, c: C.muted, h: 58 },
-        { rhs: String.raw`\psi_{\text{London}}=\ln\tan70.755^\circ=1.0523`, at: tSame + 30, h: 58 },
-        { rhs: String.raw`\psi_{\text{LA}}=\ln\tan62.025^\circ=0.6327`, at: tSame + 55, cont: true, h: 58 },
-        { rhs: String.raw`\Delta\psi=0.6327-1.0523=-0.4196`, at: SS(k, 2), h: 58 },
-        { rhs: String.raw`\Delta\lambda=-118.11^\circ=-2.0614\ \text{rad}`, at: SS(k, 2) + 20, cont: true, h: 58 },
-        // Part 1 lessons C3: α is kept for the axis turn (Parts 1, 4); a bearing-triangle angle is β, as in s11 and Part 5
-        { rhs: String.raw`\tan\beta=2.0614\div0.4196\approx4.913`, at: SS(k, 2) + 45, h: 58 },
-        { rhs: String.raw`\beta\approx78.49^\circ\text{ west of south}`, at: SS(k, 2) + 65, cont: true, h: 58 },
-        { rhs: String.raw`180^\circ+78.49^\circ\approx258.5^\circ`, at: tB, c: SLATE, cont: true, h: 58 },
-        { rhs: String.raw`\Delta\varphi=-17.46^\circ=-0.30473\ \text{rad}`, at: SS(k, 3), c: C.muted, h: 58 },
-        { rhs: String.raw`s=6371\times0.30473\div\cos78.49^\circ`, at: SS(k, 3) + 25, h: 58 },
-        { rhs: String.raw`=1941.4\div0.19947\approx9733\ \text{km}`, at: tLen, c: SLATE, cont: true, h: 58 },
-      ]} />
-      {void tS}
+      {/* r1fix 2026-11-10 (review 1 M3): the ψ = ln tan(45° + φ/2) working (eleven rows, never voiced, ψ undefined, "(Part 7)" pointing
+          ahead) is dropped; Part 7 teaches ψ. The bearing and the length stay as results on their words (the Lbls above). */}
+      {void [tS, SS]}
     </Scene>
   );
 };
@@ -228,24 +226,28 @@ const S13: React.FC = () => {
     <Scene>
       <Globe cam={cam} grat={0.16}
         over={(G) => { const P = along(G, GC, fly); return <>
-          <Route G={G} pts={GC} c={C.gold} w={8} />
+          {/* r1fix 2026-11-10 (review 1 S2): the London–LA route dims to 25 % while the camera is at Brest–Lisbon (it looked like a branch
+              starting at Brest) and the Brest–Lisbon pair leaves with its labels when the camera turns back */}
+          <Route G={G} pts={GC} c={C.gold} w={8} o={1 - 0.75 * win(f, tR2 + 40, tR3 + 60, 30)} />
           <Route G={G} pts={RHP} c={SLATE} w={6} o={0.75 * fout(f, tR2 - 10)} />
-          <Route G={G} pts={blR} c={SLATE} w={8} o={fin(f, tBL)} />
-          <Route G={G} pts={blG} c={C.gold} w={4} o={fin(f, tBL)} />
+          <Route G={G} pts={blR} c={SLATE} w={8} o={win(f, tBL, tR3 + 40)} />
+          <Route G={G} pts={blG} c={C.gold} w={4} o={win(f, tBL, tR3 + 40)} />
           {legs.map((L, i) => <Route key={i} G={G} pts={L} c={SLATE} w={6} o={fin(f, tLegs + 10 * i)} />)}
           {(LG.pts[0] as number[]).map((la, i) => gdot(G, la, LG.pts[1][i], C.key, 7, fin(f, tLegs)))}
           {gdot(G, LON[0], LON[1], C.key, 10)}{gdot(G, LAX[0], LAX[1], C.key, 10)}
-          {gdot(G, BREST[0], BREST[1], C.key, 9, fin(f, tR2 + 60))}{gdot(G, LIS[0], LIS[1], C.key, 9, fin(f, tR2 + 60))}
+          {gdot(G, BREST[0], BREST[1], C.key, 9, win(f, tR2 + 60, tR3 + 40))}{gdot(G, LIS[0], LIS[1], C.key, 9, win(f, tR2 + 60, tR3 + 40))}
           {plab(G, BREST[0], BREST[1], "Brest", win(f, tBL, tR3 + 40), 18, -30)}
           {plab(G, LIS[0], LIS[1], "Lisbon", win(f, tBL, tR3 + 40), 18, 34)}
           {plab(G, LON[0], LON[1], "London", fout(f, tR2) + fin(f, tR3 + 100), -18, -36, "end")}
-          {plab(G, LAX[0], LAX[1], "Los Angeles", fout(f, tR2) + fin(f, tR3 + 100), 16, 42)}
+          {plab(G, LAX[0], LAX[1], "Los Angeles", fout(f, tR2) + fin(f, tR3 + 100), 0, 136)}
           {fly > 0 && P.vis ? <PlaneIcon p={P.p} a={P.a} s={0.7} o={fout(f, tR2 - 20)} /> : null}
         </>; }} />
       <GlobeFrame id="s13k" zoom={0} disc={discOf(cam)} />
       <GSrc />
       <Svg>
         <Keyword f={f} text="why the longer route?" at={[XC, 110]} appear={0} out={t3 - 18} />
+        {/* r1fix 2026-11-10 (review 1 S5): the question is not alone for 5 s */}
+        <Keyword f={f} text="rhumb line: +11 %, +978 km" at={[XC, 200]} s={T.floor} appear={AT(k, 0, "longer route")} out={tR1 - 18} c={SLATE} />
         <Keyword f={f} text="three reasons" at={[XC, 110]} appear={t3} out={tR1 - 18} />
         <Keyword f={f} text="1 · steering" at={[XC, 110]} s={T.floor} appear={tR1} o={1 - 0.4 * fin(f, tR2)} />
         <Keyword f={f} text="2 · short trips" at={[XC, 180]} s={T.floor} appear={tR2} o={1 - 0.4 * fin(f, tR3)} />
@@ -258,10 +260,10 @@ const S13: React.FC = () => {
         <TableIcon c={[1250, 700]} o={r1o * fin(f, tCalc)} />
         <Lbl x={1360} y={700} t="a lot of calculation" c={C.key} s={T.floor} o={r1o * fin(f, tCalc)} />
         {/* reason 2 */}
-        <Lbl x={XC} y={380} t="Brest → Lisbon ≈ 1138 km" c={C.key} s={T.floor} o={r2o * fin(f, tBL)} />
-        <Magnifier c={[1260, 750]} r={44} o={r2o * fin(f, tBLx)} />
-        <Lbl x={1360} y={750} t="rhumb: + ≈ 150 m" c={SLATE} s={T.floor} o={r2o * fin(f, tBLx)} />
-        <Lbl x={XC} y={820} t="(the length rule, more digits)" c={C.muted} s={T.floor} o={r2o * fin(f, tBLx + 20)} />
+        <Lbl x={XC} y={380} t="Brest → Lisbon" c={C.key} s={T.floor} o={r2o * fin(f, tBL)} />
+        {/* r1fix 2026-11-10 (review 1 M4): the magnifier sits left of its text (its handle crossed the old grey line) */}
+        <Magnifier c={[1150, 740]} r={40} o={r2o * fin(f, tBLx)} />
+        <Lbl x={1250} y={750} t="only ≈ 150 m longer" c={SLATE} s={T.floor} o={r2o * fin(f, tBLx)} />
         {/* reason 3: the Mercator chart, a ruler along the straight rhumb line and the 258.5° reading */}
         <MercMap id="s13" B={MB13} E={ME13} o={r3o * fin(f, tMerc)}
           inside={(P) => <path d={flatPath(P, D.mc.rh)} fill="none" stroke={SLATE} strokeWidth={6} />}
@@ -278,12 +280,12 @@ const S13: React.FC = () => {
         <Keyword f={f} text="why straight: Part 7" at={[XC, 840]} s={T.floor} appear={tP7} c={C.gold} />
       </Svg>
       <SourceBelow text="Map: Natural Earth (Mercator)" pic={MBf} w={700} o={r3o * fin(f, tMerc)} name="s13 src map" />
-      <CalcStack f={f} x={XC} y={430} size={44} maxLines={2} o={r2o} rows={[
-        { rhs: String.raw`\Delta y=9.67^\circ\times111.2\approx1075\ \text{km}`, at: tBL + 10 },
-        { rhs: String.raw`\Delta x=4.65^\circ\times111.2\times\cos43.56^\circ`, at: tBL + 45 },
-        { rhs: String.raw`\approx375\ \text{km}`, at: tBL + 60, cont: true },
-        { rhs: String.raw`\sqrt{1075^2+375^2}\approx1139\ \text{km}`, at: tBL + 80 },
-        { rhs: String.raw`\text{(great circle: }1138\text{)}`, at: tBL + 100, c: C.muted, cont: true },
+      {/* r1fix 2026-11-10 (review 1 M4): the storyboard row — the two lengths (the s07 rule and the rhumb length, more digits) and their
+          difference; the unvoiced flat estimate (√(1075² + 375²) ≈ 1139 km) is gone: beside "+150 m" it read as a 1-km difference */}
+      <CalcStack f={f} x={XC} y={450} size={44} maxLines={3} o={r2o} rows={[
+        { rhs: String.raw`\text{great circle}\approx1138.12\ \text{km}`, at: tBL + 10, c: C.gold, h: 58 },
+        { rhs: String.raw`\text{rhumb line}\approx1138.27\ \text{km}`, at: AT(k, 7, "the rhumb line is"), c: SLATE, h: 58 },
+        { rhs: String.raw`\text{difference}\approx0.15\ \text{km}=150\ \text{m}`, at: tBLx, c: SLATE, h: 58, glow: HL(f, tBLx) },
       ]} />
       {void [dim, tLegs]}
     </Scene>
@@ -396,4 +398,4 @@ const S15: React.FC = () => {
 };
 
 export const SCENES_C: Record<string, React.FC> = { s11_route_shape: S11, s12_rhumb: S12, s13_why_rhumb: S13, s14_recap: S14, s15_end: S15 };
-void [CurvedLink, add, clamp, mix, dP, SGN, LEN, Disc, PlaneIcon];
+void [CurvedLink, add, clamp, mix, dP, SGN, LEN, Disc, PlaneIcon, sang];

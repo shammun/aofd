@@ -185,6 +185,8 @@ const S03: React.FC = () => {
         {["Part 1", "Part 2", "Part 3"].map((t, i) => <Lbl key={t} x={xs[i]} y={565} t={t} c={C.gold} s={T.floor} a="middle" o={fin(f, 8 + 10 * i) * fout(f, tF3 - 20)} />)}
         <Keyword f={f} text="1° east ≈ 111 km (equator)" at={[1270, 520]} s={T.floor} appear={tDeg} c={C.first} />
         <Keyword f={f} text="1° east ≈ 23 km (78° N)" at={[1270, 645]} s={T.floor} appear={tDeg + 20} c={C.first} />
+        {/* r1fix 2026-11-10 (review 1 S5): the bottom half is not empty before "curvilinear" arrives */}
+        <Keyword f={f} text="three coordinate systems, side by side" at={[90, 640]} appear={0} out={tCv - 18} />
         <Keyword f={f} text="curvilinear: lines that can curve" at={[90, 640]} appear={tCv} />
         <Keyword f={f} text="three features" at={[1300, 650]} s={T.floor} appear={t3} out={tDeg - 18} />
         <Keyword f={f} text="1 · curved lines" at={[90, 760]} s={T.floor} appear={tF1} />
@@ -192,8 +194,8 @@ const S03: React.FC = () => {
         <Keyword f={f} text="3 · a step is not a distance" at={[1080, 760]} s={T.floor} appear={tF3} c={C.gold} />
         <Keyword f={f} text="it needs a name" at={[1080, 830]} s={T.floor} appear={tName} />
       </Svg>
-      <TeX s={String.raw`6371\times0.01745\approx111\ \text{km}`} x={1270} y={580} size={44} c={C.muted} o={fin(f, tDeg + 10)} />
-      <TeX s={String.raw`111.2\times\cos78.2^\circ\approx23\ \text{km}`} x={1270} y={700} size={44} c={C.muted} o={fin(f, tDeg + 30)} />
+      {/* r1fix 2026-11-10 (review 1 S6): the unvoiced grey working rows (they used the cosine scale factor before s04 explains it) are gone;
+          the two results stay as the teal keywords above */}
       <TeX s={H.r} x={xs[0] - 175} y={y0 - 160} size={46} c={C.second} o={fin(f, tF2)} />
       <TeX s={H.th} x={xs[0] - 175} y={y0 - 95} size={46} c={C.second} o={fin(f, tF2)} />
     </Scene>
@@ -241,7 +243,9 @@ const S04: React.FC = () => {
           <Route G={Gg} pts={eStep} c={C.first} w={12} o={fin(f, tE + 10)} />
           {gdot(Gg, BREST[0], BREST[1], C.gold, 10, fin(f, tN))}
           <circle cx={c0[0]} cy={c0[1]} r={8} fill={C.key} opacity={fin(f, tN)} />
-          {plab(Gg, BREST[0], BREST[1], "Brest", fin(f, tBr), -22, 34, "end")}
+          {/* r1fix 2026-11-10 (review 1 M6): the name sits straight below the dot, clear of the dashed radius a (down-left), the dashed parallel
+              and the gold Δy link (its chord from the column to the step sweeps everything below-RIGHT of Brest: K6 r1fix hit at 869, 354) */}
+          {plab(Gg, BREST[0], BREST[1], "Brest", fin(f, tBr), 0, 130, "start")}
         </>} />
       <GlobeFrame id="s04k" zoom={0} disc={discOf(CAM4)} o={glo} />
       <GSrc o={glo} />
@@ -254,6 +258,8 @@ const S04: React.FC = () => {
         <Keyword f={f} text="how far for a small step?" at={[XC, 110]} appear={0} out={tSF - 18} />
         <Keyword f={f} text="scale factor = metres per unit" at={[XC, 110]} s={T.floor} appear={tSF} c={C.gold} />
         <Keyword f={f} text="$r\times$ the step" at={[XC, 360]} s={T.floor} appear={tMult} out={tTh - 18} />
+        {/* r1fix 2026-11-10 (review 1 S5): one more line while the ring is explained (the column had 1-2 lines for 20 s) */}
+        <Keyword f={f} text="walk = radius $\times$ angle" at={[XC, 440]} s={T.floor} appear={tRing + 20} out={tTh - 18} c={C.first} />
         <Keyword f={f} text="at Brest" at={[XC + 520, yIn - 20]} s={T.floor} appear={tBr} />
         <Keyword f={f} text="radius of the parallel: $a\cos\varphi$" at={[XC, 430]} s={T.floor} c={C.gold} appear={tPar} out={tBr - 22} />
         <Keyword f={f} text="same 1° step: 111.2 km or 73.8 km" at={[XC, 830]} s={T.floor} appear={tSame} />
@@ -320,9 +326,15 @@ const S05: React.FC = () => {
           </>; }} />
       <GlobeFrame id="s05k" zoom={0} disc={discOf(cam)} />
       <GSrc />
-      {(() => { const G = globeG(cam), q = G.pw(c60); return <Svg><g data-lc-maplabel="1"><Lbl x={q[0] + 20} y={q[1] - 34} t="centre on the axis" c={C.key} s={T.floor} o={fin(f, tNot + 20)} /></g></Svg>; })()}
+      {/* r1fix 2026-11-10 (review 1 M6): the label sits to the RIGHT of the 60° N ring (off its slate rim and the gold meridian), two lines
+          between the globe's limb and the column; placed from the ring's rightmost point */}
+      {(() => { const G = globeG(cam), rr = G.p(60, cam.lon + 90); return <Svg><g data-lc-maplabel="1">
+        <Lbl x={rr[0] + 34} y={rr[1] - 26} t="centre" c={C.key} s={T.floor} o={fin(f, tNot + 20)} />
+        <Lbl x={rr[0] + 34} y={rr[1] + 22} t="on the axis" c={C.key} s={T.floor} o={fin(f, tNot + 20)} /></g></Svg>; })()}
       <Svg>
         <Keyword f={f} text="the shortest way?" at={[XC, 110]} appear={0} />
+        {/* r1fix 2026-11-10 (review 1 S5): the column is not a lone question for 8 s */}
+        <Keyword f={f} text="every airline asks" at={[XC, 200]} s={T.floor} appear={AT(k, 0, "every airline")} out={tFuel - 20} c={C.muted} />
         <Keyword f={f} text="distance · fuel · time" at={[XC, 200]} s={T.floor} appear={tFuel} />
         <g opacity={fin(f, tFlat)}>
           <rect x={XC} y={260} width={420} height={150} fill="#22304a" stroke={C.grid} strokeWidth={3} />
