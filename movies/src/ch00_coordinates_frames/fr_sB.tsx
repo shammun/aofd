@@ -16,7 +16,7 @@ import {
   tvP, win, TopV, SliceV, ParcelDot, chipSpan,
   HL,
   SourceBelow,
-  InsetGlobe, CAM_INSET, INSET, uarrow, gtip, rhatAt, add3,
+  InsetGlobe, CAM_INSET, INSET, uarrow, gtip, gtip2, rhatAt, add3,
 } from "./fr_lib";
 import { V3 } from "./kit_fr/cam";
 import { AngleArc, GRID, GridBase, SliceBase, TopViewBase, circleArrows, gridCell, sliceArrows, topArrows, turned } from "./fr_dia";
@@ -187,7 +187,9 @@ const S11: React.FC = () => {
         <Place p={Bp} t="Englewood" o={fin(f, tV)} dx={-24} dy={-30} a="end" />
         <g data-lc-maplabel="1">
           <Lbl x={A[0] - 24} y={A[1] + 20} t="26.10° N, 81.80° W" c={C.key} s={T.floor} a="end" o={fin(f, tN + 20)} />
-          <Lbl x={Bp[0] - 24} y={Bp[1] + 20} t="26.92° N, 82.35° W" c={C.key} s={T.floor} a="end" o={fin(f, tV + 20)} />
+          {/* r1fix (review 1 build 2, S10): Englewood's reading on two lines (one line ran left through the map's border and the frame edge) */}
+          <Lbl x={Bp[0] - 24} y={Bp[1] + 20} t="26.92° N," c={C.key} s={T.floor} a="end" o={fin(f, tV + 20)} />
+          <Lbl x={Bp[0] - 24} y={Bp[1] + 68} t="82.35° W" c={C.key} s={T.floor} a="end" o={fin(f, tV + 20)} />
         </g>
         <SideCallout f={f} lines="west leg: 55 km" at={[XC, 740]} appear={tWest + 20} out={gone} target={[mix(Cn[0], Bp[0], 0.5), Cn[1] - 8]} s={T.floor} bend={60} />
         <SideCallout f={f} lines="north leg: 91.5 km" at={[XC, 825]} appear={tNorth + 20} out={gone} target={[A[0] + 10, mix(A[1], Cn[1], 0.5)]} s={T.floor} bend={40} />
@@ -377,9 +379,12 @@ const S18: React.FC = () => {
         {garrow(Gg, add3(bP, EP.e, LI), add3(add3(bP, EP.e, LI), Rd, -LI * 0.45), C.gold, 6, 22, fin(f, tDi))}
         {gdot(Gg, BREST[0], lam, C.key, 8)}
       </>} />
-      <TeX s={H.k} x={gtip(Gi, bP, EP.u, LI * 1.15)[0]} y={gtip(Gi, bP, EP.u, LI * 1.15)[1]} size={48} c={C.first} ax={0.5} halo />
-      <TeX s={H.R} x={gtip(Gi, bP, Rd, LI)[0]} y={gtip(Gi, bP, Rd, LI)[1]} size={48} c={C.second} ax={0.5} halo />
-      <TeX s={H.i} x={gtip(Gi, bP, EP.e, LI)[0]} y={gtip(Gi, bP, EP.e, LI)[1]} size={48} c={C.second} ax={0.5} halo />
+      {/* r1fix (review 1 build 2, S3): tip labels 44 px past the heads; î's pushed away from its gold nudge (towards −R̂) so neither touches it */}
+      <TeX s={H.k} x={gtip(Gi, bP, EP.u, LI * 1.15, 44)[0]} y={gtip(Gi, bP, EP.u, LI * 1.15, 44)[1]} size={48} c={C.first} ax={0.5} halo />
+      <TeX s={H.R} x={gtip(Gi, bP, Rd, LI, 44)[0]} y={gtip(Gi, bP, Rd, LI, 44)[1]} size={48} c={C.second} ax={0.5} halo />
+      {/* î's tip is the lowest point of the inset: past it (or pushed down by the nudge rule) the glyph sat on the source line (k6 r1fix);
+          it goes RIGHT of the tip, level with it, 12 px clear of the gold nudge's head (which leaves the tip up-right, towards −R̂) */}
+      <TeX s={H.i} x={Gi.pw(add3(bP, EP.e, LI))[0] + 58} y={Gi.pw(add3(bP, EP.e, LI))[1] - 2} size={48} c={C.second} ax={0.5} halo />
       <Svg>
         <TopViewBase V={TV2} axes={0.4} />
         <line x1={TV2.c[0]} y1={TV2.c[1]} x2={A.p[0]} y2={A.p[1]} stroke={C.local} strokeWidth={3} strokeDasharray="8 8" />

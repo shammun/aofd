@@ -18,7 +18,7 @@ import {
   pieces, plab, poly, prog, sang, svNorth, svP, svUp, tvDir, tvEast, tvP, win, TopV, SliceV, GeoImg, IMGS, chipSpan, SpeedBar,
   HL,
   SourceBelow, useTextGate,
-  InsetGlobe, CAM_INSET, INSET, uarrow, gtip, turned3, GArc, rhatAt, meridianPath,
+  InsetGlobe, CAM_INSET, INSET, uarrow, gtip, turned3, GArc, rhatAt, meridianPath, latCircleAllPath,
 } from "./fr_lib";
 import { AngleArc, SliceBase, TopViewBase, sliceArrows, topArrows, turned } from "./fr_dia";
 import { EQ_S03, EQ_S04, EQ_S05, EQ_S06, EQ_S08 } from "./fr_eq";
@@ -51,7 +51,9 @@ const CAM_FACE: GlobeCam = { lat: 8, lon: BREST[1] - 75, dist: 3.4 };
 // length) and holds there while the parallel, λ and the slide east are told; only on "the picture from Part 1" does it rise over the
 // pole (TOP2, farther and higher in the box) and flatten into the top-view diagram, with the oblique inset (fr_lib InsetGlobe) taking over.
 const SIDE: GlobeCam = { lat: 22, lon: BREST[1], dist: 3.4, pp: [480, 395] };
-const OBL: GlobeCam = { lat: 52, lon: BREST[1] + 55, dist: 3.2, pp: [480, 395] };
+// r1fix (review 1 build 2, M2): dist 3.2 put the disc (radius 412 px) past the 790-px box, cut flat top and bottom; 3.6 → radius 362 px,
+// 33 px inside the box top and bottom. The sweep SIDE → OBL (51°) over 75 frames eased peaks near 40°/s.
+const OBL: GlobeCam = { lat: 52, lon: BREST[1] + 55, dist: 3.6, pp: [480, 395] };
 const TOP2: GlobeCam = { lat: 89.5, lon: BREST[1], dist: 4.0, pp: [480, 328] };
 const ZOOM_BREST: GlobeCam = { lat: BREST[0], lon: BREST[1], dist: 2.4, pp: [600, 470] };
 const UN: GlobeCam = { lat: 44, lon: 6, dist: 4.3, pp: [520, 420] };
@@ -72,16 +74,18 @@ const SV: SliceV = sliceFrom3D();
 // ================================================================ s00 title (remake 2026-11-07: series title layout, no "made easy" (R1);
 // Part A: four stations with their own tripods on a turning globe; Part B (on "meteorology"): from above the North Pole, a parcel moving east
 // along Brest's parallel, its east arrow swinging round with it (faint copies left behind) — the movie's second idea, frames that turn)
-const TB = { x: 1150, y: 150, w: 690, h: 480 };
+// r1fix (review 1 build 2, S8): the title globe was cut flat top and bottom (dist 3.0 in a 480-px box: disc radius 269 > 240) and the
+// limb tripods' arrows left the box. Box 600 px tall, camera at dist 3.9: disc radius 252 px, 48 px of margin for the arrows at the limb.
+const TB = { x: 1150, y: 110, w: 690, h: 600 };
 const S00: React.FC = () => {
   const f = useCurrentFrame(), k = K("s00_title");
   const tMet = AT(k, 0, "they're used"), tCo = AT(k, 0, "coordinates");   // Part B on "they're used" (opening rule 2026-11-07)
   const oA = fout(f, tMet, 12), oB = fin(f, tMet, 12);
   const gT = useTextGate();
-  const cam = globePath([{ f: 0, lat: 30, lon: 50, dist: 3.0 }, { f: 400, lat: 32, lon: 44, dist: 3.0 }], f);
+  const cam = globePath([{ f: 0, lat: 30, lon: 50, dist: 3.9 }, { f: 400, lat: 32, lon: 44, dist: 3.9 }], f);
   const lonP = BREST[1] + 26 * prog(f, 16, tMet);
   const lonB = BREST[1] + 70 * prog(f, tMet + 10, LEN(k) - 10);
-  const camB: GlobeCam = { lat: 89.5, lon: BREST[1] + 20, dist: 3.0 };
+  const camB: GlobeCam = { lat: 89.5, lon: BREST[1] + 20, dist: 3.9 };
   const iTip = (G: ReturnType<typeof globeG>, lo: number, L = 0.3): Pt => { const e = [Math.cos(lo * D2R), 0, -Math.sin(lo * D2R)], b = ll(BREST[0], lo);
     return G.pw([b[0] + e[0] * L, b[1] + e[1] * L, b[2] + e[2] * L]); };
   const ghosts = [0, 1, 2, 3].map((q) => BREST[1] + 70 * prog(f - 24 * (q + 1), tMet + 10, LEN(k) - 10)).filter((lo) => lo > BREST[1] + 1);
@@ -128,7 +132,8 @@ const S01: React.FC = () => {
           <Tripod G={Gg} la={KHULNA[0]} lo={KHULNA[1]} L={0.2} o={fin(f, tKh)} />
           <Tripod G={Gg} la={BREST[0]} lo={lonP} L={0.2} o={fin(f, tMove)} />
           {plab(Gg, BREST[0], BREST[1], "Brest", 1, -22, 30, "end")}
-          {plab(Gg, KHULNA[0], KHULNA[1], "Khulna", fin(f, tKh), 18, 40)}
+          {/* r1fix (M4): below-left of the dot like "Brest" (to the right it ran past the box edge: "Khuln") */}
+          {plab(Gg, KHULNA[0], KHULNA[1], "Khulna", fin(f, tKh), -22, 44, "end")}
         </>} />
       <TripodTips G={G} la={BREST[0]} lo={BREST[1]} L={0.2} size={48} o={fout(f, tMove - 20)} />
       <GlobeFrame id="s01k" zoom={0} disc={discOf(cam)} />
@@ -138,17 +143,18 @@ const S01: React.FC = () => {
         <Keyword f={f} text="local frames" at={[XC, 380]} appear={tLF} />
         <Keyword f={f} text="different at every place" at={[XC, 500]} appear={tPlace} />
         <Keyword f={f} text="turning as you move" at={[XC, 620]} appear={tBy} />
-        {/* minis (remake 2026-11-07): two tripods pointing different ways (no coast: the coast frame is Part 2's); a tripod sliding along a parallel */}
+        {/* minis (remake 2026-11-07): two tripods pointing different ways (no coast: the coast frame is Part 2's); a tripod sliding along a parallel.
+            r1fix (S9): in the free strip between the globe's disc (ends x ≈ 925) and the column (x 1100): at the right end they touched "place" */}
         <g opacity={fin(f, tPlace)}>
-          {[[1700, 540, 0], [1790, 520, 38]].map(([x, y, a]) => <g key={x}>
+          {[[955, 520, 0], [1035, 500, 38]].map(([x, y, a]) => <g key={x}>
             <Arrow p={[x, y]} q={[x + 40 * Math.cos(a * D2R), y + 40 * Math.sin(a * D2R)]} color={C.second} w={5} head={14} />
             <Arrow p={[x, y]} q={[x + 40 * Math.sin(a * D2R), y - 40 * Math.cos(a * D2R)]} color={C.first} w={5} head={14} /></g>)}
         </g>
         <g opacity={fin(f, tBy)}>
-          <path d="M 1660 660 Q 1740 610 1820 660" fill="none" stroke={C.gold} strokeWidth={4} />
-          {[0, 1].map((q) => { const x = 1690 + q * 100, y = q ? 655 : 645, a = q ? -25 : 25;
-            return <g key={q}><Arrow p={[x, y]} q={[x + 44 * Math.cos(a * D2R), y + 44 * Math.sin(a * D2R)]} color={C.second} w={5} head={14} />
-              <Arrow p={[x, y]} q={[x + 40 * Math.sin(a * D2R), y - 40 * Math.cos(a * D2R)]} color={C.first} w={5} head={14} /></g>; })}
+          <path d="M 945 660 Q 1010 615 1075 660" fill="none" stroke={C.gold} strokeWidth={4} />
+          {[0, 1].map((q) => { const x = 965 + q * 70, y = q ? 655 : 645, a = q ? -25 : 25;
+            return <g key={q}><Arrow p={[x, y]} q={[x + 40 * Math.cos(a * D2R), y + 40 * Math.sin(a * D2R)]} color={C.second} w={5} head={14} />
+              <Arrow p={[x, y]} q={[x + 36 * Math.sin(a * D2R), y - 36 * Math.cos(a * D2R)]} color={C.first} w={5} head={14} /></g>; })}
         </g>
       </Svg>
     </Scene>
@@ -212,10 +218,14 @@ const S04: React.FC = () => {
   const tAx = AT(k, 3, "x hat points"), tAy = AT(k, 3, "y hat to"), tAz = AT(k, 3, "z hat to"), tUp = SS(k, 4), tOut = SS(k, 5), tPos = SS(k, 6), tK = SS(k, 7),
     tPhi = AT(k, 7, "where phi"), tNum = SS(k, 8), [, chipEnd] = chipSpan(k);
   const G = globeG(CAM_FACE);
-  const rb = ll(BREST[0], BREST[1]), kTip = ll(BREST[0], BREST[1], 1.38);
-  const ax = (v: number[], L = 1.3): V3 => { const g = e2g(v); return [g[0] * L, g[1] * L, g[2] * L]; };
+  // r1fix (review 1 build 2, M3): the Earth axes at 1.3 radii and k̂'s tip at 1.38 left the globe box (ẑ off the top with no head, x̂ cut at
+  // x 1020, the k̂ label cut by the frame top). The axes now end at 0.92 radii, inside the face disc; k̂ reaches 1.25; every label sits
+  // BESIDE its tip (right of it, slightly below), at least 24 px inside the box on every side.
+  const rb = ll(BREST[0], BREST[1]), kTip = ll(BREST[0], BREST[1], 1.25), kMid = ll(BREST[0], BREST[1], 1.125);
+  const ax = (v: number[], L = 0.92): V3 => { const g = e2g(v); return [g[0] * L, g[1] * L, g[2] * L]; };
   const eq = pieces(EQ_S04, [String.raw`\ \cos\varphi\sin`]);
-  const kp = G.pw(kTip);
+  const kp = G.pw(kTip), km = G.pw(kMid), xT = G.pw(ax([1, 0, 0])), yT = G.pw(ax([0, 1, 0])), zT = G.pw(ax([0, 0, 1]));
+  const oAxL = fout(f, AT(k, 9, "forty eight") - 12);
   return (
     <Scene>
       <Globe cam={CAM_FACE} mesh={{ half: LON_FACE, slide: 1 }}
@@ -229,16 +239,16 @@ const S04: React.FC = () => {
           {gdot(Gg, BREST[0], BREST[1], C.gold, 10)}
           <circle cx={Gg.pw([0, 0, 0])[0]} cy={Gg.pw([0, 0, 0])[1]} r={9} fill={C.local} />
         </>} />
-      <TeX s={H.k} x={kp[0] + 30} y={kp[1] - 10} size={58} c={C.first} o={fin(f, tOut)} halo />
-      <TeX s={H.x} x={G.pw(ax([1, 0, 0], 1.45))[0]} y={G.pw(ax([1, 0, 0], 1.45))[1]} size={50} c={C.second} ax={0.5} o={0.85 * fin(f, tAx) * fout(f, AT(k, 9, "forty eight") - 12)} halo />
-      <TeX s={H.y} x={G.pw(ax([0, 1, 0], 1.45))[0]} y={G.pw(ax([0, 1, 0], 1.45))[1]} size={50} c={C.second} ax={0.5} o={0.85 * fin(f, tAy) * fout(f, AT(k, 9, "forty eight") - 12)} halo />
-      <TeX s={H.z} x={G.pw(ax([0, 0, 1], 1.4))[0] + 34} y={G.pw(ax([0, 0, 1], 1.4))[1]} size={50} c={C.second} ax={0.5} o={0.85 * fin(f, tAz) * fout(f, AT(k, 9, "forty eight") - 12)} halo />
+      <TeX s={H.k} x={kp[0] + 30} y={kp[1] + 26} size={58} c={C.first} o={fin(f, tOut)} halo />
+      <TeX s={H.x} x={xT[0] + 36} y={xT[1] + 6} size={50} c={C.second} o={0.85 * fin(f, tAx) * oAxL} halo />
+      <TeX s={H.y} x={yT[0] + 56} y={yT[1] - 26} size={50} c={C.second} ax={0.5} o={0.85 * fin(f, tAy) * oAxL} halo />
+      <TeX s={H.z} x={zT[0] + 38} y={zT[1] + 22} size={50} c={C.second} o={0.85 * fin(f, tAz) * oAxL} halo />
       <GlobeFrame id="s04k" zoom={0} disc={discOf(CAM_FACE)} />
       <GSrc />
       <Svg>
         <Keyword f={f} text="three arrows as numbers" at={[XC, 110]} appear={0} out={tAx - 20} />
         <Keyword f={f} text="up first: the easiest" at={[XC, 110]} appear={tUp} out={tK - 20} />
-        <SideCallout f={f} lines="same direction" at={[XC, 230]} appear={tPos + 30} out={tK - 20} target={[kp[0] + 4, kp[1] + 50]} c={C.gold} s={T.floor} />
+        <SideCallout f={f} lines="same direction" at={[XC, 230]} appear={tPos + 30} out={tK - 20} target={[km[0] + 10, km[1]]} c={C.gold} s={T.floor} />
         <SkipChip f={f} k={k} to={keepTime("s07_enu_checks")} />
       </Svg>
       {/* remake 2026-11-07 (R16): Part 3's Earth axes and position arrow recalled at their point of use (the cut s02 carried them) */}
@@ -286,12 +296,21 @@ const S05: React.FC = () => {
   const td = turned3(Rd, EB.e, rot);
   const oTurn = fin(f, tTurn) * (1 - fin(f, tI, 8)), oI = fin(f, tI, 8), oRh = fin(f, tRh);
   const tipsO = fin(f, tLam) * fout(f, tP1 - 60) * (sliding ? 0 : 1);
+  // r1fix (S2): λ on its words, in the oblique phase: Brest's meridian (gold) and the Greenwich meridian (dashed, the x axis's plane) on
+  // the globe, "λ = −4.5°" in the column with a gold link to the thin wedge between them; all leave with the keywords before the rise to TOP2
+  const oLam = fin(f, tLam) * fout(f, tP1 - 20);
+  // (k6 r1fix: a gold link from the column to the wedge crossed the Earth-axis line; the wedge carries a λ spot glyph instead)
+  const wedge = G3.p(14, BREST[1]);
   return (
     <Scene>
       <Globe cam={cam} o={1 - flat} grat={0.2}
         over={(Gg) => <>
           {gseg(Gg, [0, 0, 0], [0, 1.3, 0], C.local, 3, 0.8 * fin(f, tPar), "10 8")}
+          {/* r1fix (M2): the hidden part of the parallel as a faint dashed line (it goes round the back), the visible part solid on top */}
+          <path d={latCircleAllPath(Gg, BREST[0])} fill="none" stroke={C.gold} strokeWidth={3} strokeDasharray="8 10" opacity={0.35 * fin(f, tPar)} />
           <LatCircle G={Gg} lat={BREST[0]} c={C.gold} w={5} o={fin(f, tPar)} />
+          <path d={llPath(Gg, Array.from({ length: 34 }, (_, i) => [-9 + 3 * i, 0] as [number, number]), 1.003)} fill="none" stroke={C.gold} strokeWidth={3} strokeDasharray="10 8" opacity={0.8 * oLam} />
+          <path d={llPath(Gg, Array.from({ length: 34 }, (_, i) => [-9 + 3 * i, BREST[1]] as [number, number]), 1.003)} fill="none" stroke={C.gold} strokeWidth={4} opacity={oLam} />
           <path d={llPath(Gg, Array.from({ length: 31 }, (_, i) => [BREST[0], BREST[1] + ((lamS - BREST[1]) * i) / 30] as [number, number]), 1.003)} fill="none" stroke={C.key} strokeWidth={6} opacity={fin(f, tSlide)} />
           <Tripod G={Gg} la={BREST[0]} lo={lamS} L={0.18} o={fin(f, tLam)} />
           {gdot(Gg, BREST[0], lamS, C.gold, 10, fin(f, tLam))}
@@ -299,9 +318,11 @@ const S05: React.FC = () => {
       <TripodTips G={G3} la={BREST[0]} lo={BREST[1]} L={0.18} size={48} o={tipsO} />
       <GlobeFrame id="s05k" zoom={0} disc={discOf(cam)} o={1 - flat} />
       <GSrc />
+      <TeX s={String.raw`\lambda=-4.5^\circ`} x={XC} y={320} size={50} c={C.local} o={oLam} />
+      <TeX s={String.raw`\lambda`} x={wedge[0] - 26} y={wedge[1]} size={44} c={C.gold} ax={1} o={oLam * (1 - flat)} halo />
       <InsetGlobe id="s05i" o={flat} over={(Gg) => <>
         <LatCircle G={Gg} lat={BREST[0]} c={C.gold} w={5} o={0.95} />
-        {uarrow(Gg, bB, EB.n, LI, C.second, 0.65)}
+        {uarrow(Gg, bB, EB.n, LI, C.second, 0.7)}
         {uarrow(Gg, bB, EB.u, LI * 1.15, C.first)}
         {uarrow(Gg, bB, Rd, LI, C.second, oRh)}
         {uarrow(Gg, bB, td, LI, C.second, oTurn)}
@@ -309,9 +330,11 @@ const S05: React.FC = () => {
         {uarrow(Gg, bB, EB.e, LI, C.second, oI)}
         {gdot(Gg, BREST[0], BREST[1], C.gold, 8)}
       </>} />
-      <TeX s={H.k} x={gtip(Gi, bB, EB.u, LI * 1.15)[0]} y={gtip(Gi, bB, EB.u, LI * 1.15)[1]} size={48} c={C.first} ax={0.5} o={flat} halo />
-      <TeX s={H.R} x={gtip(Gi, bB, Rd, LI)[0]} y={gtip(Gi, bB, Rd, LI)[1]} size={48} c={C.second} ax={0.5} o={flat * oRh} halo />
-      <TeX s={H.i} x={gtip(Gi, bB, EB.e, LI)[0]} y={gtip(Gi, bB, EB.e, LI)[1]} size={48} c={C.second} ax={0.5} o={flat * oI} halo />
+      {/* r1fix (S1, S3): ĵ labelled too; every inset tip label 44 px past its head (30 px put the glyphs on the heads) */}
+      <TeX s={H.k} x={gtip(Gi, bB, EB.u, LI * 1.15, 44)[0]} y={gtip(Gi, bB, EB.u, LI * 1.15, 44)[1]} size={48} c={C.first} ax={0.5} o={flat} halo />
+      <TeX s={H.j} x={gtip(Gi, bB, EB.n, LI, 44)[0]} y={gtip(Gi, bB, EB.n, LI, 44)[1]} size={48} c={C.second} ax={0.5} o={flat * 0.8} halo />
+      <TeX s={H.R} x={gtip(Gi, bB, Rd, LI, 44)[0]} y={gtip(Gi, bB, Rd, LI, 44)[1]} size={48} c={C.second} ax={0.5} o={flat * oRh} halo />
+      <TeX s={H.i} x={gtip(Gi, bB, EB.e, LI, 44)[0]} y={gtip(Gi, bB, EB.e, LI, 44)[1]} size={48} c={C.second} ax={0.5} o={flat * oI} halo />
       <Svg>
         <g opacity={flat}>
           <TopViewBase V={TV} axes={0.65} />
@@ -355,7 +378,12 @@ const S06: React.FC = () => {
   const tSl = AT(k, 1, "slice the Earth"), tDirs = SS(k, 2), tPhi = SS(k, 3), tK = SS(k, 4), tN = SS(k, 5), tPlays = SS(k, 6), tTurn = SS(k, 7), tJ = SS(k, 8),
     tR = SS(k, 9), tJf = SS(k, 10), tNum = SS(k, 11), tLegs = SS(k, 12);
   const slide = prog(f, tSl, tSl + 40);
-  const flat = fin(f, tPhi, 20);
+  // r1fix (review 1 build 2, M1): the whole textured Earth from frame 0 (the east half's texture wrap is fixed in kit_fr/globe.tsx); on
+  // "slice the Earth" the east half slides open and the flat face becomes the slice diagram at once (flat from the slide's last 10 frames;
+  // the navy face disc stood featureless for 9 s). R̂ and ẑ (arrows and labels) enter on their words (tDirs), k̂, the dashed radius and φ on
+  // theirs (tPhi); only Brest's dot and the meridian half circle are there from the slide.
+  const flat = fin(f, tSl + 30, 20);
+  const oDirs = fin(f, tDirs), oPhi = fin(f, tPhi);
   const U = 160, A = sliceArrows(SV, BREST[0], U);
   const rot = 90 * prog(f, AT(k, 7, "turn k hat"), AT(k, 7, "turn k hat") + 40);
   const tip = turned(A.p, A.Kdir, U, rot);
@@ -372,9 +400,7 @@ const S06: React.FC = () => {
     <Scene>
       <Globe cam={CAM_FACE} mesh={{ half: LON_FACE, slide, whole: 0 }} o={1 - flat}
         over={(Gg) => <>
-          {gseg(Gg, [0, -1.15, 0], [0, 1.25, 0], C.local, 3, fin(f, tDirs), "10 8")}
-          {garrow(Gg, [0, 0, 0], [0, 0.55, 0], C.second, 7, 26, fin(f, tDirs))}
-          {garrow(Gg, [0, 0, 0], ll(0, BREST[1], 0.55), C.second, 7, 26, fin(f, tDirs))}
+          {gseg(Gg, [0, -1.15, 0], [0, 1.25, 0], C.local, 3, fin(f, tSl), "10 8")}
           {gdot(Gg, BREST[0], BREST[1], C.gold, 10)}
         </>} />
       <GlobeFrame id="s06k" zoom={0} disc={discOf(CAM_FACE)} o={1 - flat} />
@@ -388,14 +414,14 @@ const S06: React.FC = () => {
         {uarrow(Gg, bB, EB.n, LI, C.second, oJ)}
         {gdot(Gg, BREST[0], BREST[1], C.gold, 8)}
       </>} />
-      <TeX s={H.k} x={gtip(Gi, bB, EB.u, LI * 1.15)[0]} y={gtip(Gi, bB, EB.u, LI * 1.15)[1]} size={48} c={C.first} ax={0.5} o={flat} halo />
-      <TeX s={H.j} x={gtip(Gi, bB, EB.n, LI)[0]} y={gtip(Gi, bB, EB.n, LI)[1]} size={48} c={C.second} ax={0.5} o={flat * oJ} halo />
+      <TeX s={H.k} x={gtip(Gi, bB, EB.u, LI * 1.15, 44)[0]} y={gtip(Gi, bB, EB.u, LI * 1.15, 44)[1]} size={48} c={C.first} ax={0.5} o={flat} halo />
+      <TeX s={H.j} x={gtip(Gi, bB, EB.n, LI, 44)[0]} y={gtip(Gi, bB, EB.n, LI, 44)[1]} size={48} c={C.second} ax={0.5} o={flat * oJ} halo />
       <Svg>
         <g opacity={flat}>
-          <SliceBase V={SV} />
-          <AngleArc c={SV.c} r={90} a0={0} a1={BREST[0]} />
-          <line x1={SV.c[0]} y1={SV.c[1]} x2={A.p[0]} y2={A.p[1]} stroke={C.local} strokeWidth={3} strokeDasharray="8 8" />
-          <Arrow p={A.p} q={A.K} color={C.first} w={10} head={38} />
+          <SliceBase V={SV} axes={oDirs} />
+          <AngleArc c={SV.c} r={90} a0={0} a1={BREST[0]} o={oPhi} />
+          <line x1={SV.c[0]} y1={SV.c[1]} x2={A.p[0]} y2={A.p[1]} stroke={C.local} strokeWidth={3} strokeDasharray="8 8" opacity={oPhi} />
+          <Arrow p={A.p} q={A.K} color={C.first} w={10} head={38} o={oPhi} />
           <circle cx={A.p[0]} cy={A.p[1]} r={11} fill={C.gold} stroke={C.bg} strokeWidth={4} />
           <Arrow p={A.p} q={tip} color={C.second} w={10} head={38} o={fin(f, AT(k, 7, "turn k hat")) * (1 - fin(f, tJ, 8))} />
           <AngleArc c={A.p} r={64} a0={sang(A.Kdir)} a1={sang(A.Kdir) + rot} o={fin(f, AT(k, 7, "turn k hat")) * fout(f, tJ + 40)} head />
@@ -406,14 +432,17 @@ const S06: React.FC = () => {
           </g>
         </g>
       </Svg>
-      <TeX s={H.z} x={SV.c[0] + 24} y={SV.c[1] - SV.r * 0.5} size={50} c={C.second} o={flat} />
-      <TeX s={H.R} x={SV.c[0] + SV.r * 0.5} y={SV.c[1] + 44} size={50} c={C.second} ax={0.5} o={flat} />
-      <TeX s={String.raw`\varphi=48.4^\circ`} x={SV.c[0] + 100} y={SV.c[1] - 40} size={46} c={C.gold} o={flat * fin(f, tPhi)} />
+      <TeX s={H.z} x={SV.c[0] + 24} y={SV.c[1] - SV.r * 0.5} size={50} c={C.second} o={flat * oDirs} />
+      <TeX s={H.R} x={SV.c[0] + SV.r * 0.5} y={SV.c[1] + 44} size={50} c={C.second} ax={0.5} o={flat * oDirs} />
+      <TeX s={String.raw`\varphi=48.4^\circ`} x={SV.c[0] + 100} y={SV.c[1] - 40} size={46} c={C.gold} o={flat * oPhi} />
       {/* build 2: the tip labels sit beside the heads (above them they were cut by the frame's top edge, build 1 f10500) */}
-      <TeX s={H.k} x={A.K[0] + 34} y={A.K[1] + 56} size={56} c={C.first} o={flat} halo />
+      <TeX s={H.k} x={A.K[0] + 34} y={A.K[1] + 56} size={56} c={C.first} o={flat * oPhi} halo />
       <TeX s={H.j} x={A.J[0] - 30} y={A.J[1] + 50} size={56} c={C.second} ax={1} o={fin(f, tJ, 8)} halo />
-      <TeX s={String.raw`\text{dashed: up the axis,}`} x={XC} y={715} size={44} c={C.second} o={fin(f, tLegs + 12)} />
-      <TeX s={String.raw`\text{and in towards it}`} x={XC + 40} y={770} size={44} c={C.second} o={fin(f, tLegs + 12)} />
+      {/* r1fix (S7): the note in the house sans (it was KaTeX serif) */}
+      <Svg>
+        <Lbl x={XC} y={715} t="dashed: up the axis," c={C.second} s={T.floor} o={fin(f, tLegs + 12)} />
+        <Lbl x={XC + 40} y={770} t="and in towards it" c={C.second} s={T.floor} o={fin(f, tLegs + 12)} />
+      </Svg>
       <Svg>
         <Keyword f={f} text="now north" at={[XC, 110]} appear={0} out={tK - 20} />
         <Keyword f={f} text="north = the way $\varphi$ grows" at={[XC, 210]} appear={tN} out={tPlays - 20} />
@@ -428,7 +457,8 @@ const S06: React.FC = () => {
       <TeX s={eq[1]} x={XC + 140} y={655} size={50} o={fin(f, tJf)} />
       <TeX s={String.raw`\hat{\mathbf j}=(-0.7478\times0.9969,`} x={XC} y={715} size={44} o={fin(f, SS(k, 11)) * fout(f, tLegs - 10)} />
       <TeX s={String.raw`-0.7478\times(-0.0785),\ 0.6639)`} x={XC + 40} y={770} size={44} o={fin(f, SS(k, 11) + 15) * fout(f, tLegs - 10)} />
-      <TeX s={String.raw`\approx(-0.745,\ 0.059,\ 0.664)`} x={XC + 100} y={825} size={46} o={fin(f, AT(k, 11, "that's minus"))} />
+      {/* r1fix (S7): the result carries its symbol (the orange note stood between it and the ĵ line above) */}
+      <TeX s={String.raw`\hat{\mathbf j}\approx(-0.745,\ 0.059,\ 0.664)`} x={XC + 60} y={825} size={46} o={fin(f, AT(k, 11, "that's minus"))} />
     </Scene>
   );
 };

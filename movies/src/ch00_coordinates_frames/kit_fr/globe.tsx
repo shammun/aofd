@@ -31,6 +31,9 @@ export const useTex = (url: string | null): THREE.Texture | null => {
     if (!p) {
       p = new Promise<THREE.Texture>((res, rej) => new THREE.TextureLoader().load(url, (t) => {
         t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8; t.generateMipmaps = true; t.minFilter = THREE.LinearMipmapLinearFilter;
+        // r1fix (review 1 build 2, M1): the HalfEarthMesh east half spans lon0 … lon0 + 180 with u = (lon + 180) / 360 > 1; with the
+        // default clamp wrapping every u > 1 sampled the texture's last column (a black sphere with horizontal blue streaks, s06 323-327 s)
+        t.wrapS = THREE.RepeatWrapping;
         texCache.set(url, t); res(t);
       }, undefined, (e) => rej(e)));
       texWait.set(url, p);

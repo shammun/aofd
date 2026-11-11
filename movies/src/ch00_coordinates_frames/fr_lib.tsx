@@ -421,6 +421,22 @@ export const gtip = (G: GProj, b: V3, d: V3, L: number, off = 30): Pt => {
   const p0 = G.pw(b), p1 = G.pw(add3(b, d, L)), dx = p1[0] - p0[0], dy = p1[1] - p0[1], n = Math.hypot(dx, dy) || 1;
   return [p1[0] + (dx / n) * off, p1[1] + (dy / n) * off];
 };
+/** r1fix (review 1 build 2, S3): the label position past the tip of an arrow that carries a gold nudge (a short arrow from the tip in
+ * direction `nd`): `off` px past the tip along the arrow and `side` px away from the nudge's screen direction, so neither the head nor
+ * the nudge touches the glyph */
+export const gtip2 = (G: GProj, b: V3, d: V3, L: number, nd: V3, off = 44, side = 34): Pt => {
+  const p0 = G.pw(b), p1 = G.pw(add3(b, d, L)), q = G.pw(add3(add3(b, d, L), nd, L * 0.4));
+  const dx = p1[0] - p0[0], dy = p1[1] - p0[1], n = Math.hypot(dx, dy) || 1;
+  const nx = q[0] - p1[0], ny = q[1] - p1[1], m = Math.hypot(nx, ny) || 1;
+  return [p1[0] + (dx / n) * off - (nx / m) * side, p1[1] + (dy / n) * off - (ny / m) * side];
+};
+/** r1fix (M2): a parallel drawn WITHOUT horizon culling (the part behind the Earth too), for a faint dashed "goes round the back" line
+ * under the solid visible LatCircle */
+export const latCircleAllPath = (G: GProj, lat: number, r = 1.002): string => {
+  let d = "";
+  for (let lo = -180; lo <= 180; lo += 2) { const [x, y] = G.p(lat, lo, r); d += `${lo === -180 ? "M" : "L"}${x.toFixed(1)} ${y.toFixed(1)}`; }
+  return d;
+};
 /** a direction rigidly turned by `deg` from d0 towards d1 (unit, perpendicular): the 3-D twin of fr_dia's `turned` */
 export const turned3 = (d0: V3, d1: V3, deg: number): V3 => { const a = deg * D2R; return [Math.cos(a) * d0[0] + Math.sin(a) * d1[0], Math.cos(a) * d0[1] + Math.sin(a) * d1[1], Math.cos(a) * d0[2] + Math.sin(a) * d1[2]]; };
 /** the gold turn arc in 3-D (fr_dia's AngleArc on the globe): about surface point b, from direction d0 towards d1, radius r (Earth

@@ -13,11 +13,11 @@ import { GlobeCam, llPath } from "./kit_fr/globe";
 import { V3 } from "./kit_fr/cam";
 import {
   AT, Arrow, BREST, CalcStack, HOLD, Place, Recall, sc, D, D2R, GB, Globe, H, K, KHULNA, Keyword, LEN, Lbl, SS, Scene, SideCallout, SkipChip, Svg, TeX, Tripod, VIOLET, XC, add, clamp, discOf, fin,
-  fout, gdot, globeG, keepTime, ll, mix, pieces, poly, prog, sang, texW, textW, win, SliceV, TopV, ParcelDot, linesPath, mapP, boxAt, chipSpan,
+  fout, gdot, globeG, keepTime, ll, mix, pieces, poly, prog, sang, texW, textW, win, SliceV, TopV, ParcelDot, linesPath, mapP, boxAt, chipSpan, GeoMap,
   SE,
   HL,
   SourceBelow,
-  InsetGlobe, CAM_INSET, INSET, insetCam, uarrow, gtip, rhatAt, add3, enAt, meridianPath, garrow,
+  InsetGlobe, CAM_INSET, INSET, insetCam, uarrow, gtip, gtip2, rhatAt, add3, enAt, meridianPath, garrow,
 } from "./fr_lib";
 import { LatCircle } from "./kit_fr/globe";
 import { AngleArc, GRID, GridBase, MiniTick, MiniTripod, SliceBase, TopViewBase, TRI, TurnPic, gridCell, logX, sliceArrows, topArrows } from "./fr_dia";
@@ -109,9 +109,11 @@ const S21: React.FC = () => {
   const lam = -20 + 18 * prog(f, tPlays, tPlays + 60);
   const T_ = topArrows(TVs, lam, 100), S_ = sliceArrows(SVs, PHI, 130);
   const eq = cutAt(EQ_S21, String.raw`,\qquad `);
+  // r1fix (review 1 build 2, S5): a thin space keeps "a cos φ" apart under the \cancel (it printed "acos φ", which reads as arccos)
   const dk = f < tCanc ? String.raw`\dfrac{D\hat{\mathbf k}}{Dt}=\cos\varphi\ \hat{\mathbf i}\,\dfrac{u}{a\cos\varphi}=\hat{\mathbf i}\,\dfrac{u}{a}`
-    : String.raw`\dfrac{D\hat{\mathbf k}}{Dt}=\cancel{\cos\varphi}\ \hat{\mathbf i}\,\dfrac{u}{a\cancel{\cos\varphi}}=\hat{\mathbf i}\,\dfrac{u}{a}`;
+    : String.raw`\dfrac{D\hat{\mathbf k}}{Dt}=\cancel{\cos\varphi}\ \hat{\mathbf i}\,\dfrac{u}{a\,\cancel{\cos\varphi}}=\hat{\mathbf i}\,\dfrac{u}{a}`;
   const Gi = globeG(CAM_INSET, INSET), bP = ll(PHI, lam), EP = enAt(PHI, lam), Rd = rhatAt(lam), LI = 0.2;
+  const mE: V3 = [-EP.e[0], -EP.e[1], -EP.e[2]];
   return (
     <Scene>
       <InsetGlobe id="s21i" o={1} src over={(Gg) => <>
@@ -125,14 +127,16 @@ const S21: React.FC = () => {
         {garrow(Gg, add3(bP, EP.n, LI), add3(add3(bP, EP.n, LI), EP.e, -LI * 0.4), C.gold, 6, 22, fin(f, tDj))}
         {gdot(Gg, PHI, lam, C.key, 8)}
       </>} />
-      <TeX s={H.k} x={gtip(Gi, bP, EP.u, LI * 1.15)[0]} y={gtip(Gi, bP, EP.u, LI * 1.15)[1]} size={48} c={C.first} ax={0.5} halo />
-      <TeX s={H.j} x={gtip(Gi, bP, EP.n, LI)[0]} y={gtip(Gi, bP, EP.n, LI)[1]} size={48} c={C.second} ax={0.5} halo />
-      <TeX s={H.R} x={gtip(Gi, bP, Rd, LI)[0]} y={gtip(Gi, bP, Rd, LI)[1]} size={48} c={C.second} ax={0.5} halo />
+      {/* r1fix (S3): the inset tip labels 44 px past the heads and pushed away from their gold nudges (R̂, k̂ nudge east; ĵ nudges west) */}
+      <TeX s={H.k} x={gtip2(Gi, bP, EP.u, LI * 1.15, EP.e)[0]} y={gtip2(Gi, bP, EP.u, LI * 1.15, EP.e)[1]} size={48} c={C.first} ax={0.5} halo />
+      <TeX s={H.j} x={gtip2(Gi, bP, EP.n, LI, mE)[0]} y={gtip2(Gi, bP, EP.n, LI, mE)[1]} size={48} c={C.second} ax={0.5} halo />
+      <TeX s={H.R} x={gtip2(Gi, bP, Rd, LI, EP.e)[0]} y={gtip2(Gi, bP, Rd, LI, EP.e)[1]} size={48} c={C.second} ax={0.5} halo />
       <Svg>
         <TopViewBase V={TVs} axes={0.3} />
         <Arrow p={T_.p} q={T_.R} color={C.second} w={8} head={30} />
         <Arrow p={T_.p} q={T_.I} color={C.second} w={8} head={30} o={0.6} />
-        <Arrow p={T_.R} q={add(T_.R, T_.Edir, 50)} color={C.gold} w={6} head={22} o={fin(f, tPlays)} />
+        {/* r1fix (S6): the gold turn of R̂ 70 px long, on the side away from the R̂ label (it was a 50-px stub under the label) */}
+        <Arrow p={T_.R} q={add(T_.R, T_.Edir, 70)} color={C.gold} w={6} head={24} o={fin(f, tPlays)} />
         <ParcelDot p={T_.p} r={10} />
         <SliceBase V={SVs} axes={0} quarter />
         <Arrow p={S_.p} q={S_.K} color={C.first} w={8} head={30} />
@@ -140,11 +144,12 @@ const S21: React.FC = () => {
         <Arrow p={SVs.c} q={[SVs.c[0], SVs.c[1] - 150]} color={C.second} w={7} head={26} />
         <Arrow p={SVs.c} q={[SVs.c[0] + 150, SVs.c[1]]} color={C.second} w={7} head={26} />
         <ParcelDot p={S_.p} r={10} />
-        <Lbl x={SVs.c[0] + 24} y={SVs.c[1] - 200} t="never turns" c={C.local} s={T.floor} o={fin(f, tZ)} />
+        {/* r1fix (S4): the tag under the ẑ label, left of the axis (inside the quarter it ended on the gold arc and read as the arc's label) */}
+        <Lbl x={SVs.c[0] + 24} y={SVs.c[1] - 108} t="never turns" c={C.local} s={T.floor} o={fin(f, tZ)} />
       </Svg>
-      <TeX s={H.R} x={T_.R[0] + 14} y={T_.R[1] + 26} size={50} c={C.second} halo />
+      <TeX s={H.R} x={T_.R[0] - 14} y={T_.R[1] + 30} size={50} c={C.second} ax={1} halo />
       <TeX s={H.i} x={T_.I[0] + 14} y={T_.I[1] - 10} size={50} c={C.second} o={0.7} halo />
-      <TeX s={H.z} x={SVs.c[0] - 24} y={SVs.c[1] - 160} size={50} c={C.second} ax={1} />
+      <TeX s={H.z} x={SVs.c[0] + 24} y={SVs.c[1] - 160} size={50} c={C.second} />
       <TeX s={H.R} x={SVs.c[0] + 150} y={SVs.c[1] + 40} size={50} c={C.second} ax={0.5} />
       <TeX s={H.k} x={S_.K[0] + 16} y={S_.K[1] - 16} size={50} c={C.first} halo />
       <TeX s={H.j} x={S_.J[0] - 16} y={S_.J[1] - 24} size={50} c={C.second} ax={1} halo />
@@ -482,6 +487,11 @@ const S28: React.FC = () => {
   const slide = Math.min(Math.max(0, f - SS(k, 7)) * 2.2, 300);   // the storm ring stays in the picture half (K6)
   return (
     <Scene>
+      {/* r1fix (review 1 build 2, M5): the coast in s11's framed GeoMap (overflow hidden, clipped to the box): drawn bare it ran past the
+          source line, through the caption band and off the frame */}
+      <GeoMap id="s28m" B={MB} o={b(3)}>
+        {(Pm) => <path d={linesPath(Pm, CO.lines)} fill="none" stroke={C.key} strokeOpacity={0.9} strokeWidth={2.4} />}
+      </GeoMap>
       <Svg>
         <g opacity={b(0)}><MiniTripod at={cB} U={200} /></g>
         <g opacity={b(1)}>
@@ -501,7 +511,6 @@ const S28: React.FC = () => {
         </g>
         {/* remake 2026-11-07 (continuity_plan §3 5d S4): the coast points' latitudes and longitudes -> the two legs behind Part 2's 329° */}
         <g opacity={b(3)}>
-          <path d={linesPath(P, CO.lines)} fill="none" stroke={C.key} strokeWidth={2.4} />
           <line x1={pA[0]} y1={pA[1]} x2={pB[0]} y2={pB[1]} stroke={C.gold} strokeWidth={5} strokeDasharray="14 10" />
           <Arrow p={pA} q={pC} color={C.second} w={9} head={30} />
           <Arrow p={pC} q={pB} color={C.second} w={9} head={30} />
