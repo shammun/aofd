@@ -46,7 +46,8 @@ const S11: React.FC = () => {
   const f = useCurrentFrame(), k = K("s11_route_shape");
   // remake 2026-11-07: the new S5 says where the heading comes from (Part 4's east and north arrows); the F1 rows are cued on its words
   const tKeep = SS(k, 1), tWhere = SS(k, 2), tWSW = AT(k, 3, "west-south-west"), tB0 = AT(k, 4, "three hundred and twelve degrees"), tHow = SS(k, 5),
-    tEN = AT(k, 5, "own east and north arrows"), tMeas = AT(k, 5, "how much of"), tAlong = AT(k, 5, "along each one"), tTurn = AT(k, 5, "turn that into"),
+    tEN = AT(k, 5, "east and north arrows"), tNorth = AT(k, 5, "north arrows"), tMeas = AT(k, 5, "how much of"), tAlong = AT(k, 5, "along each one"),
+    tTurn = AT(k, 5, "turn that into"), tBrg = AT(k, 5, "compass bearing"),
     tVx = AT(k, 6, "sixty two point four degrees north"), tGl = AT(k, 6, "Greenland"), tCan = AT(k, 7, "northern Canada"), tB1 = AT(k, 7, "two hundred and fourteen degrees"),
     tChg = AT(k, 8, "almost a hundred degrees"), tWhy = SS(k, 9);
   const cam = globePath([{ f: 0, ...CAM_ROUTE }, { f: LEN(k) + 10, ...CAM_ROUTE, lon: -62 }], f);
@@ -78,7 +79,8 @@ const S11: React.FC = () => {
           {/* build1 2026-11-10 (K6 text-text): 62.4° N under the route (was over London's label), Greenland on its ice sheet's north */}
           {plab(Gg, RO.vx[0], RO.vx[1], "62.4° N", fin(f, tVx), 0, 48, "middle")}
           {plab(Gg, 77, -42, "Greenland", fin(f, tGl), 0, 0, "middle", true)}
-          {plab(Gg, 58, -100, "Canada", fin(f, tCan), 0, 0, "middle", true)}
+          {/* r2fix 2026-11-11 (review 2 N2): "Canada" 16 px higher, clear of the gold route (it ran along the bottom of "…ada") */}
+          {plab(Gg, 58, -100, "Canada", fin(f, tCan), 0, -16, "middle", true)}
           {fly > 0 && P.vis ? <PlaneIcon p={P.p} a={P.a} s={0.7} o={fout(f, SE(k, 8) + 20)} /> : null}
         </>; }} />
       <GlobeFrame id="s11k" zoom={0} disc={discOf(cam)} />
@@ -108,12 +110,18 @@ const S11: React.FC = () => {
           <Lbl x={SX} y={SY + 50} t="312°" c={C.key} s={T.floor} a="start" />
           <Lbl x={SX + SW} y={SY + 50} t="214°" c={C.key} s={T.floor} a="end" />
         </g>
-        <Keyword f={f} text="over Greenland and Canada" at={[XC, 820]} s={T.floor} appear={tWhy} />
-        {/* build1 2026-11-10 (continuity plan 5f s11): the compass bearing (from north, clockwise) recalled from Part 1 where 312° is formed */}
-        <Lbl x={XC} y={800} t="derived in Part 1: bearings" c={C.gold} s={T.floor} o={win(f, tTurn + 30, SS(k, 6) - 10)} />
+        {/* r2fix 2026-11-11 (review 2 N1): the three answers stack at the foot of the column and stay to the end of the scene; the last
+            line sits between the heading strip (y 192-350, from tChg) and the answers */}
+        <Keyword f={f} text="over Greenland and Canada" at={[XC, 450]} s={T.floor} appear={tWhy} />
+        {/* build1 2026-11-10 (continuity plan 5f s11): the compass bearing (from north, clockwise) recalled from Part 1 where 312° is formed.
+            r2fix (review 2 N1): it takes the Part 4 recall's slot above the stack once the β rows start, and stays until the strip arrives (≈ 24 s) */}
+        <Lbl x={XC} y={172} t="derived in Part 1: bearings" c={C.gold} s={T.floor} o={win(f, tTurn + 30, tChg - 18)} />
+        {/* r2fix 2026-11-11 (review 2 N1): the departure bearing is a gold keyword on its word ("three hundred and twelve", S4), held to the
+            end of the scene, above the two later answers */}
+        <Keyword f={f} text="leaves at ≈ 312° (north-west)" at={[XC, 672]} s={T.floor} appear={tB0} c={C.gold} />
         {/* r1fix 2026-11-10 (review 1 M2): the vertex and the arrival are results on their words (their unvoiced working — n̂, n_z, back-azimuth — is gone) */}
-        <Keyword f={f} text="highest point ≈ 62.4° N" at={[XC, 540]} s={T.floor} appear={tVx} c={C.gold} />
-        <Keyword f={f} text="arrives at ≈ 214° (south-west)" at={[XC, 620]} s={T.floor} appear={tB1} c={C.gold} />
+        <Keyword f={f} text="highest point ≈ 62.4° N" at={[XC, 740]} s={T.floor} appear={tVx} c={C.gold} />
+        <Keyword f={f} text="arrives at ≈ 214° (south-west)" at={[XC, 808]} s={T.floor} appear={tB1} c={C.gold} />
       </Svg>
       {/* the inset's labels: r̂₁ (ink), r̂₂ (orange) at the tips, σ inside the arc, d on the route arc (as s07) */}
       <TeX s={H.r1} x={dP(D11, D11.a1, D11.R + 44)[0]} y={dP(D11, D11.a1, D11.R + 44)[1]} size={48} c={C.ink} ax={0.5} o={see} halo />
@@ -125,21 +133,29 @@ const S11: React.FC = () => {
           stay on screen), Part 4 recalled above the stack, the answer glows. r1fix 2026-11-10 (review 1 M2): only the VOICED heading rows
           remain (14 rows rolled past at 2 s each with one sentence of voice); the arrows are named east / north and β is said to be the
           angle west of north, so each number on screen is labelled; the stack leaves as the vertex sentence starts */}
-      <Recall f={f} tex="" name="local east and north" part={4} x={XC} y={410} appear={AT(k, 5, "from Part 4")} out={SS(k, 6) - 10} />
-      <CalcStack f={f} x={XC} y={540} size={44} maxLines={2} o={fout(f, SS(k, 6) + 4)} rows={[
-        { rhs: String.raw`\text{east }\hat{\mathbf i}_1=(0.002,\,1.000,\,0)`, at: tEN, c: C.muted, h: 56 },
-        { rhs: String.raw`\text{north }\hat{\mathbf j}_1=(-0.783,\,0.002,\,0.622)`, at: tEN + 12, c: C.muted, cont: true, h: 56 },
-        { rhs: String.raw`e=\hat{\mathbf r}_2\cdot\hat{\mathbf i}_1,\ \ n=\hat{\mathbf r}_2\cdot\hat{\mathbf j}_1`, at: tMeas, c: C.muted, h: 56 },
-        { rhs: String.raw`e=-0.001-0.730`, at: tAlong, h: 56 },
-        { rhs: String.raw`=-0.731\ \text{(west)}`, at: tAlong + 14, cont: true, h: 56 },
-        { rhs: String.raw`n=0.307-0.001+0.348`, at: tAlong + 28, h: 56 },
-        { rhs: String.raw`=0.654\ \text{(north)}`, at: tAlong + 42, cont: true, h: 56 },
-        { rhs: String.raw`\beta\text{: the angle west of north}`, at: tTurn, c: C.muted, h: 56 },
-        { rhs: String.raw`\tan\beta=0.731\div0.654\approx1.12`, at: tTurn + 12, h: 56 },
-        { rhs: String.raw`\Rightarrow\beta\approx48^\circ`, at: tTurn + 22, cont: true, h: 56 },
-        { rhs: String.raw`360^\circ-48^\circ=312^\circ\ \text{(north-west)}`, at: tTurn + 30, c: C.gold, cont: true, h: 56, glow: HL(f, tTurn + 30) },
+      {/* r2fix 2026-11-11 (review 2 N1): the Part 4 recall sits above the stack and hands its slot to the Part 1 recall when the β rows start
+          ("east and north": the full "local east and north" is 835 px at the 44-px floor, wider than the 742-px column, so Recall wrapped it
+          to two lines and the second line printed over the first stack row — seen in the r2fix_look still f20700) */}
+      <Recall f={f} tex="" name="east and north" part={4} x={XC} y={172} appear={AT(k, 5, "from Part 4")} out={tTurn + 18} />
+      {/* r2fix 2026-11-11 (review 2 N1): a STATIC stack of three logical lines (the arrows · the two shadows · the bearing), 8 rows in all,
+          each group revealed on its words in S5 (east/north arrows 998/1014, "how much of" 1106, "along each one" 1189/1205, "turn that
+          into" 1231, "compass bearing" 1256/1278) and complete by 1278 < S5's end 1301; maxLines = 3 lines so nothing slides out, and the
+          whole stack holds until the heading strip arrives (tChg − 18 = 1969): every row stays ≥ 23 s (was 1 row/s with 2 lines showing).
+          Rows: the three rows with hats (î₁, ĵ₁, r̂₂) have taller glyph boxes and touched the next row at 52 px (K6 text-text, 2-3 px, on
+          the r2fix_look stills), so they are 58 px; the five plain rows 52 px: 3 × 58 + 5 × 52 = 434 → y 200-634, above the 312° keyword
+          at 672. The "(west)" / "(north)" tails do not fit the column beside the full sums (texW guard); e and n are named on the
+          definition row and β is "the angle west of north". */}
+      <CalcStack f={f} x={XC} y={200} size={44} maxLines={3} o={fout(f, tChg - 18)} rows={[
+        { rhs: String.raw`\text{east }\hat{\mathbf i}_1=(0.002,\,1.000,\,0)`, at: tEN, c: C.muted, h: 58 },
+        { rhs: String.raw`\text{north }\hat{\mathbf j}_1=(-0.783,\,0.002,\,0.622)`, at: tNorth, c: C.muted, cont: true, h: 58 },
+        { rhs: String.raw`e=\hat{\mathbf r}_2\cdot\hat{\mathbf i}_1,\ \ n=\hat{\mathbf r}_2\cdot\hat{\mathbf j}_1`, at: tMeas, c: C.muted, h: 58 },
+        { rhs: String.raw`e=-0.001-0.730=-0.731`, at: tAlong, cont: true, h: 52 },
+        { rhs: String.raw`n=0.307-0.001+0.348=0.654`, at: tAlong + 16, cont: true, h: 52 },
+        { rhs: String.raw`\beta\text{: the angle west of north}`, at: tTurn, c: C.muted, h: 52 },
+        { rhs: String.raw`\tan\beta=0.731\div0.654\approx1.12`, at: tBrg, cont: true, h: 52 },
+        { rhs: String.raw`\beta\approx48^\circ\ \Rightarrow\ 360^\circ-48^\circ=312^\circ`, at: tBrg + 22, c: C.gold, cont: true, h: 52, glow: HL(f, tBrg + 22) },
       ]} />
-      {void [tCan, tHow, tChg, m11]}
+      {void [tCan, tHow, m11]}
     </Scene>
   );
 };

@@ -123,7 +123,8 @@ const S07: React.FC = () => {
             {gdot(G, LON[0], LON[1], C.key, 9, 1 - flat)}{gdot(G, LAX[0], LAX[1], C.key, 9, 1 - flat)}
           </>; }} />
       <GlobeFrame id="s07k" zoom={0} disc={discOf(cam)} />
-      <GSrc />
+      {/* r2fix 2026-11-11 (review 2 N3): the NASA source line fades out with the texture (no Blue Marble image under the plain disc) */}
+      <GSrc o={1 - flat} />
       <Svg>
         <Disc V={V} o={flat} a1o={fin(f, tA1)} a2o={fin(f, tA2)} sig={prog(f, tSig, tSig + 30)} route={prog(f, tArc, tArc + 40)} />
         <line x1={V.c[0]} y1={V.c[1]} x2={dP(V, aR)[0]} y2={dP(V, aR)[1]} stroke={C.key} strokeWidth={4} strokeDasharray="10 8" opacity={flat} />
