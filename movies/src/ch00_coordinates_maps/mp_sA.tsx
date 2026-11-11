@@ -418,7 +418,9 @@ const S07: React.FC = () => {
   const g = prog(f, t4, t4 + 40), m = prog(f, t11, t11 + 90);
   const v = mixPV(mixPV(V7a, V7b, g), V7c, m);
   const P = (la: number, lo: number) => mapPt(v, "pc", la, lo, "mc", m);
-  const strips = [{ la: BREST[0], kk: D.k.k[0], at: t5, tag: "$\times$ 1.5" }, { la: 60, kk: D.k.k[1], at: t6, tag: "$\times$ 2" }, { la: LYB[0], kk: D.k.k[2], at: t7, tag: "$\times$ 4.9" }];
+  // build1 review 1 M1: plain JS strings turn "\t" into a TAB ("imes 1.5" on screen) — String.raw keeps the KaTeX backslash
+  const strips = [{ la: BREST[0], kk: D.k.k[0], at: t5, tag: String.raw`$\times$ 1.5` }, { la: 60, kk: D.k.k[1], at: t6, tag: String.raw`$\times$ 2` },
+    { la: LYB[0], kk: D.k.k[2], at: t7, tag: String.raw`$\times$ 4.9` }];
   const box = (() => { const a = mapBox(v, "pc"), b = mapBox(v, "mc", 80); return { x: a.x, w: a.w, y: mix(a.y, b.y, m), h: mix(a.h, b.h, m) }; })();
   const stretchO = (at: number) => win(f, at, t8, 10) * (1 - m);
   // the Brest circle: plate-carrée oval → Mercator circle, drawn about the plate-carrée centre

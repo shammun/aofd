@@ -97,11 +97,13 @@ const S16: React.FC = () => {
 };
 /** ring labels on the 48° screen ray (upper right of the pole), clear of the tour's place labels */
 const ringLbl = (la: number): Pt => { const r = rhoPS(la) * VP.s, a = 48 * D2R; return [VP.cx + r * Math.cos(a), VP.cy - r * Math.sin(a)]; };
-const RingLabels: React.FC<{ o: number }> = ({ o }) => o <= 0 ? null :
-  <g data-lc-maplabel="1" opacity={o}>{RINGS.map((la) => { const q = ringLbl(la); return <Lbl key={la} x={q[0]} y={q[1]} t={`${la}°`} c={C.key} s={T.floor} a="middle" />; })}</g>;
+/** `oOf` dims single ring labels (review 1 M3: 75/60/45 fade to 30 % while "Los Angeles" is placed on the 30° ring) */
+const RingLabels: React.FC<{ o: number; oOf?: (la: number) => number }> = ({ o, oOf }) => o <= 0 ? null :
+  <g data-lc-maplabel="1" opacity={o}>{RINGS.map((la) => { const q = ringLbl(la); return <Lbl key={la} x={q[0]} y={q[1]} t={`${la}°`} c={C.key} s={T.floor} a="middle" o={oOf ? oOf(la) : 1} />; })}</g>;
 
 // ================================================================ s17 the place tour (ring first, then spoke)
-type PlaceLbl = { key: string; at: Pt; a: "start" | "end"; italic?: boolean };
+type PlaceLbl = { key: string; at: Pt; a: "start" | "end"; italic?: boolean; lines?: string[] };   // lines: the name split, last line at `at`
+const LINE_GAP = 50;
 /** label spots chosen by hand on the 1920 × 1080 frame (polar map centre 540, 430; 270 px per Earth radius), each joined to its
  * dot by a short leader; no two labels share a 44-px band where they overlap in x (checked below) */
 const PLBL: PlaceLbl[] = [
@@ -109,11 +111,15 @@ const PLBL: PlaceLbl[] = [
   // build1 K6: Longyearbyen and Barents Sea hung over the disc's right edge and Hudson Bay over its left edge (and under "90° W"):
   // the first two now sit wholly outside the map on the right (below "90° E"), Hudson Bay to the right of its dot
   { key: "scandinavia", at: [640, 566], a: "start" }, { key: "longyearbyen", at: [900, 538], a: "start" }, { key: "barents", at: [900, 478], a: "start", italic: true },
-  { key: "siberia", at: [690, 384], a: "start" }, { key: "bering", at: [530, 224], a: "end", italic: true }, { key: "alaska", at: [425, 278], a: "end" },
-  { key: "canada", at: [350, 398], a: "end" }, { key: "hudson", at: [430, 446], a: "start", italic: true }, { key: "la", at: [322, 332], a: "start" },
+  // build1 review 1 M3: "Los Angeles" read as ≈ 60–70° N (its label ran into the map between "Alaska" and the "60°" ring label). It now sits
+  // wholly OUTSIDE the map (left of the raster's box x ≥ 187 and of the disc, radius 353 px about 540, 430) at its dot's own height (304, 303),
+  // two lines ending at x 180 with a short horizontal leader; "Alaska" moved off the dot (the dot sat under its "A") and "Bering Strait" right
+  { key: "siberia", at: [690, 384], a: "start" }, { key: "bering", at: [560, 224], a: "end", italic: true }, { key: "alaska", at: [500, 300], a: "end" },
+  { key: "canada", at: [350, 398], a: "end" }, { key: "hudson", at: [430, 446], a: "start", italic: true }, { key: "la", at: [180, 303], a: "end", lines: ["Los", "Angeles"] },
 ];
 (() => {  // labels: no overlap with each other or with the ring labels
-  const box = (p: PlaceLbl) => { const w = textW(PL[p.key].name, T.floor); const x0 = p.a === "start" ? p.at[0] : p.at[0] - w; return [x0, p.at[1] - 22, x0 + w, p.at[1] + 22]; };
+  const box = (p: PlaceLbl) => { const ls = p.lines ?? [PL[p.key].name]; const w = Math.max(...ls.map((t) => textW(t, T.floor))); const x0 = p.a === "start" ? p.at[0] : p.at[0] - w;
+    return [x0, p.at[1] - LINE_GAP * (ls.length - 1) - 22, x0 + w, p.at[1] + 22]; };
   const rl = RINGS.map((la) => { const q = ringLbl(la); return [q[0] - 36, q[1] - 22, q[0] + 36, q[1] + 22]; });
   const all = [...PLBL.map(box), ...rl];
   for (let i = 0; i < all.length; i++) for (let j = i + 1; j < all.length; j++) {
@@ -124,12 +130,11 @@ const PLBL: PlaceLbl[] = [
 const PlaceMark: React.FC<{ p: PlaceLbl; o: number }> = ({ p, o }) => {
   if (o <= 0) return null;
   const P = PL[p.key], q = mapPt(VP, "ps", P.ll[0], P.ll[1]);
-  const w = textW(P.name, T.floor), lx = p.a === "start" ? p.at[0] - 6 : p.at[0] + 6;
-  void w;
+  const lx = p.a === "start" ? p.at[0] - 6 : p.at[0] + 6, ls = p.lines ?? [P.name];
   return <g opacity={o} data-lc-maplabel="1">
     <line x1={q[0]} y1={q[1]} x2={lx} y2={p.at[1]} stroke={C.key} strokeWidth={2} opacity={0.7} />
     <circle cx={q[0]} cy={q[1]} r={9} fill={P.kind === "sea" ? C.first : C.gold} stroke={C.bg} strokeWidth={3} />
-    <Lbl x={p.at[0]} y={p.at[1]} t={P.name} c={C.key} s={T.floor} a={p.a} italic={p.italic} />
+    {ls.map((t, i) => <Lbl key={i} x={p.at[0]} y={p.at[1] - LINE_GAP * (ls.length - 1 - i)} t={t} c={C.key} s={T.floor} a={p.a} italic={p.italic} />)}
   </g>;
 };
 /** the tour's timing (frames in s17), also used by s18 for the labels that stay */
@@ -163,7 +168,7 @@ const S17: React.FC = () => {
         children={() => <path d={(D.gl_ps as number[][]).map((L) => llD(VP, "ps", L, undefined, 0, 89.9, true)).join("")} fill="none" stroke={C.first} strokeWidth={4}
           opacity={win(f, TT.greenland, t5 + 30, 14)} />} />
       <Svg>
-        <RingLabels o={1} />
+        <RingLabels o={1} oOf={(la) => (la === 30 ? 1 : mix(1, 0.3, fin(f, TT.la, 20)))} />
         <SpokeLabels o={[1, 1, 1, 1]} />
         {PLBL.map((p) => <PlaceMark key={p.key} p={p} o={fin(f, TT[p.key])} />)}
         <Keyword f={f} text="a short tour" at={[XC, 160]} appear={0} out={t1 - 18} />

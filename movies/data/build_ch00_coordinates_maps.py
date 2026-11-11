@@ -355,9 +355,23 @@ def main() -> int:
                 x, y = MP.forward("laea", q[:, 1], q[:, 0], a=1.0, lat_0=lat0, lon_0=lon0)
                 out.append(np.round(np.stack([x, y], -1), 5).ravel().tolist())
         return out
+    def dissolve(parts, keep_n):
+        """The parts dissolved into one outline per land mass (shapely unary_union of the admin-0 polygons: the shared borders
+        vanish), the keep_n largest polygons as (n, 2) lon/lat exterior rings (build1 review 1, M2: Africa drawn as one shape)."""
+        from shapely.geometry import Polygon
+        from shapely.ops import unary_union
+        u = unary_union([Polygon(p).buffer(0) for p in parts if len(p) >= 4])
+        polys = sorted(list(u.geoms) if hasattr(u, "geoms") else [u], key=lambda g: -g.area)[:keep_n]
+        return [np.asarray(g.exterior.coords, dtype=float) for g in polys]
+    af_union = dissolve(aparts, 2)                                  # the mainland and Madagascar
+    Aaf_u = sum(abs(SPH.polygon_area(p[:, 1], p[:, 0])) for p in af_union) / 1e12
+    row("DC34", "Africa dissolved outline (mainland + Madagascar, unary_union of NE 10 m admin-0) within 1.5 % of the parts' area", Aaf_u / Aaf, 1.0, 0.015)
     V["areas"] = {"gl_Mkm2": Agl, "af_Mkm2": Aaf, "areal": list(np.asarray(SFa.areal)), "gl": outline_ll(gparts, 1, 0.3), "af": outline_ll(aparts, 8, 0.3),
-                  "gl_true": outline_laea(gparts, 1, 72.0, -40.0), "af_true": outline_laea(aparts, 8, 2.0, 18.0)}
+                  "gl_true": outline_laea(gparts, 1, 72.0, -40.0), "af_true": outline_laea(aparts, 8, 2.0, 18.0),
+                  "af_union": outline_ll(af_union, 2, 0.3), "af_union_true": outline_laea(af_union, 2, 2.0, 18.0), "af_union_Mkm2": Aaf_u}
     recorded(GM + "forward", "s13", "true-size outlines (laea about each centre; equal-area)", {"name": "laea", "centres": [[72, -40], [2, 18]], "a": 1.0}, "outlines")
+    recorded(GS + "polygon_area", "s13", "Africa dissolved outline (shapely unary_union of the NE 10 m admin-0 parts; mainland + Madagascar)",
+             {"source": "ne_10m_admin_0_countries", "keep": 2}, B1.r6([Aaf_u], 4))
 
     # ================================================================ s14 Equal Earth (DC35)
     rs2 = np.random.default_rng(3)

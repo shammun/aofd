@@ -12,7 +12,7 @@ import { Part } from "../house/kit/tex";
 import { GlobeCam } from "./kit_mp/globe";
 import {
   AT, Arrow, CalcStack, ColourBar, D, D2R, Globe, HL, IMGS, K, Keyword, Layered, Lbl, OptTag, ProjMap, PV, RasterImg, Recall, SRC_BM, SRC_T2M, SS, Scene,
-  SkipChip, Svg, TIS, TeX, XC, fin, fout, gLine, gdot, keepTime, llD, mapBox, mapPt, mix, poly, prog, psi, tissotD, win, eeOutline,
+  SkipChip, Svg, TIS, TeX, XC, fin, fout, gLine, gdot, keepTime, llD, mapBox, mapPt, mix, poly, prog, psi, tissotD, win, eeOutline, coastD,
 } from "./mp_lib";
 import { EQ_S08, EQ_S09, EQ_S10, EQ_S11, EQ_S12, EQ_S13, cutAt } from "./mp_eq";
 
@@ -417,16 +417,19 @@ const S13: React.FC = () => {
         <Lbl x={A[0] + 50 * u} y={A[1] + 110} t="10 000 km²" c={C.first} s={T.key} a="middle" o={fin(f, t3)} />
         <Lbl x={Bp[0] + 190} y={A[1] + 140} t="40 000 km²: 4 times" c={C.gold} s={T.key} a="middle" o={fin(f, AT(k, 5, "four times"))} />
       </Svg>
+      {/* build1 review 1 M2: Africa as ONE dissolved outline (areas.af_union: shapely unary_union of the NE admin-0 parts, mainland + Madagascar),
+          on the map and at true size; the gold "≈ 14×" beside the true-size pair on "fourteen times" */}
       <ProjMap id="s13m" v={V13} name="mc" img={IMGS.mc} imgO={0.8} coast={0.45} o={mapO}>
-        {() => <>{(AR.gl as number[][]).map((L, i) => <g key={`g${i}`}>{out(L, C.first, 1 - 0.6 * lift)}</g>)}{(AR.af as number[][]).map((L, i) => <g key={`a${i}`}>{out(L, C.second, 1 - 0.6 * lift)}</g>)}</>}
+        {() => <>{(AR.gl as number[][]).map((L, i) => <g key={`g${i}`}>{out(L, C.first, 1 - 0.6 * lift)}</g>)}{(AR.af_union as number[][]).map((L, i) => <g key={`a${i}`}>{out(L, C.second, 1 - 0.6 * lift)}</g>)}</>}
       </ProjMap>
       <Svg>
         <g opacity={fin(f, t9) * 1}>
           <path d={(AR.gl_true as number[][]).map((L) => trueD(L, [1270, 620], 260)).join("")} fill={C.first} fillOpacity={0.45} stroke={C.first} strokeWidth={3} />
-          <path d={(AR.af_true as number[][]).map((L) => trueD(L, [1600, 600], 260)).join("")} fill={C.second} fillOpacity={0.45} stroke={C.second} strokeWidth={3} />
+          <path d={(AR.af_union_true as number[][]).map((L) => trueD(L, [1600, 600], 260)).join("")} fill={C.second} fillOpacity={0.45} stroke={C.second} strokeWidth={3} />
         </g>
         <Lbl x={1270} y={720} t="2.17 million km²" c={C.first} s={T.floor} a="middle" o={fin(f, AT(k, 9, "two point one seven"))} />
         <Lbl x={1600} y={810} t="30.4 million km²" c={C.second} s={T.floor} a="middle" o={fin(f, AT(k, 9, "thirty point four"))} />
+        <Lbl x={1376} y={600} t="≈ 14×" c={C.gold} s={T.key} a="middle" o={fin(f, AT(k, 10, "fourteen times"))} />
         <Lbl x={1270} y={530} t="Greenland" c={C.key} s={T.floor} a="middle" o={fin(f, t9)} />
         <Lbl x={1600} y={380} t="Africa" c={C.key} s={T.floor} a="middle" o={fin(f, t9)} />
         <Keyword f={f} text="conformal has a price" at={[XC, 110]} appear={0} out={t1 - 18} />
@@ -456,6 +459,11 @@ const S14: React.FC = () => {
     t11 = SS(k, 11), t12 = SS(k, 12), t13 = SS(k, 13), t14 = SS(k, 14);
   const eeO = fin(f, t2, 20), anO = fin(f, t4, 20);
   const hiM = pulse(f, t7 + 10, 50), hiE = pulse(f, t8 + 10, 50);
+  // build1 review 1 M4: the "far north" band (north of the Arctic Circle, 66.5° N) stays at 60 % while its sentences play, pulses on its
+  // words, and is labelled; the anomaly rasters get Natural Earth coastlines on top (the ProjMap coast sits under the raster)
+  const bandM = Math.max(hiM, 0.6 * win(f, t7 + 10, t9 - 10, 12)), bandE = Math.max(hiE, 0.6 * win(f, t8 + 10, t9 - 10, 12));
+  const arcM = mapPt(VM14, "mc", 66.5, 0), arcE = mapPt(VE14, "ee", 66.5, -180);
+  const ARC = "Arctic Circle · 66.5° N";
   const band = (v: PV, name: "mc" | "ee", la0: number, la1: number) => { const pts: Pt[] = [];
     for (let lo = -180; lo <= 180; lo += 5) pts.push(mapPt(v, name, la0, Math.min(lo, 179.999)));
     for (let lo = 180; lo >= -180; lo -= 5) pts.push(mapPt(v, name, la1, Math.min(lo, 179.999)));
@@ -466,7 +474,9 @@ const S14: React.FC = () => {
       <ProjMap id="s14m" v={VM14} name="mc" img={IMGS.mc} imgO={1 - anO} coast={0.5}>
         {() => <>
           <RasterImg v={VM14} name="mc" href={IMGS.t2m_mc} o={anO} />
-          <path d={band(VM14, "mc", 66.5, 80)} fill="none" stroke={C.gold} strokeWidth={6} opacity={hiM} />
+          <path d={coastD(VM14, "mc", undefined, 0, 82)} fill="none" stroke={C.key} strokeOpacity={0.5 * anO} strokeWidth={1.8} />
+          <path d={band(VM14, "mc", 66.5, 80)} fill="none" stroke={C.gold} strokeWidth={6} opacity={bandM} />
+          <Lbl x={VM14.cx} y={arcM[1] - 30} t={ARC} c={C.gold} s={T.floor} a="middle" o={bandM} />
           <path d={tissotD(VM14, "mc", TIS.n60e30)} fill={C.gold} fillOpacity={0.35} stroke={C.gold} strokeWidth={4} opacity={fin(f, t10)} />
         </>}
       </ProjMap>
@@ -474,11 +484,13 @@ const S14: React.FC = () => {
         {() => <>
           <RasterImg v={VE14} name="ee" href={IMGS.ee} o={eeO * (1 - anO)} />
           <RasterImg v={VE14} name="ee" href={IMGS.t2m_ee} o={anO} />
+          <path d={coastD(VE14, "ee")} fill="none" stroke={C.key} strokeOpacity={0.5 * anO} strokeWidth={1.8} />
           <g opacity={fin(f, t3) * fout(f, t4, 14)}>
             {(D.areas.gl as number[][]).map((L, i) => <path key={`g${i}`} d={llD(VE14, "ee", L, undefined, 0, 89.9, true)} fill="none" stroke={C.first} strokeWidth={4} />)}
-            {(D.areas.af as number[][]).map((L, i) => <path key={`a${i}`} d={llD(VE14, "ee", L, undefined, 0, 89.9, true)} fill="none" stroke={C.second} strokeWidth={3} />)}
+            {(D.areas.af_union as number[][]).map((L, i) => <path key={`a${i}`} d={llD(VE14, "ee", L, undefined, 0, 89.9, true)} fill="none" stroke={C.second} strokeWidth={3} />)}
           </g>
-          <path d={band(VE14, "ee", 66.5, 90)} fill="none" stroke={C.gold} strokeWidth={6} opacity={hiE} />
+          <path d={band(VE14, "ee", 66.5, 90)} fill="none" stroke={C.gold} strokeWidth={6} opacity={bandE} />
+          <Lbl x={arcE[0] + 60} y={arcE[1] + 34} t={ARC} c={C.gold} s={T.floor} o={bandE} />
           <path d={tissotD(VE14, "ee", TIS.n60e30)} fill={C.gold} fillOpacity={0.35} stroke={C.gold} strokeWidth={4} opacity={fin(f, t10)} />
         </>}
       </ProjMap>

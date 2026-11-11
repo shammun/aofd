@@ -340,9 +340,20 @@
   "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\NE-10m-admin\\ne_10m_coastline.zip": "bfa04cdbcbef07ef90dfca1dabb48062eca29900a113df0f389303e255484017",
   "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\NE-50m-land\\ne_50m_land.zip": "0b8e670cf80dce9cbebe2a193bc44ba5602758c22e1fa603980553646d7ff162"
  },
- "render_assets": {},
+ "render_assets": {
+  "mp_bm_ee.png": "e3139faa08768b2e3820243e9f5aa5ac4297364526e99794a79ca64732e6b2e1",
+  "mp_bm_mc.jpg": "a09bce48e555859ebcbb248b38ad8004901fa89dec0aa67516996aa32e87c47d",
+  "mp_bm_pc.jpg": "079377a8a629f71d3cd307b11c92c4b96da7e4c963d71421de4eba48d1b1e6fc",
+  "mp_bm_ps.jpg": "236411da56568439ba06814181fcf531805ed09b742f00bc077a2f696f1b8023",
+  "mp_bmng.jpg": "39e1e08c0edeffca2ee04b030e689733b494eed018e4f5c357b4b982e5c130d8",
+  "mp_brest_crop.jpg": "8f86241b2784d0e25f380784b3cb4d54aec1846c847142a9ad0b30a4485f9c95",
+  "mp_t2m_ee.png": "9f1ab95dac14fa0bde36508c6c949ea62bf1df98f3abfadae465484012da3383",
+  "mp_t2m_mc.png": "0266c832ed1da950e5d863dca38d541df344603fa9b6b87e9c4891a866f7e25a",
+  "mp_trails.bin": "8ae187bd1a388c7b318592a2dfaaa2f1ca53f84959a72ef75ac9b5a83d595a5f",
+  "mp_z10_ps.png": "582aa7117a9031ab9f7abd739fa74b9f720686461d02f9926e432aec2bd19342"
+ },
  "data_files": {
-  "mp.json": "a8a38115e96f966e510c195e955feb8322546c40410bd052f68ed5259292cbfa",
+  "mp.json": "4cf032bec2e5195fd3bb135d35d9d6e1beb7aed91b2b01c335da33568a717d4d",
   "img/bm_ee.png": "e3139faa08768b2e3820243e9f5aa5ac4297364526e99794a79ca64732e6b2e1",
   "img/bm_mc.jpg": "a09bce48e555859ebcbb248b38ad8004901fa89dec0aa67516996aa32e87c47d",
   "img/bm_pc.jpg": "079377a8a629f71d3cd307b11c92c4b96da7e4c963d71421de4eba48d1b1e6fc",
@@ -1676,6 +1687,18 @@
    "pass": true
   },
   {
+   "id": "DC34",
+   "name": "Africa dissolved outline (mainland + Madagascar, unary_union of NE 10 m admin-0) within 1.5 % of the parts' area",
+   "value": [
+    0.999415
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.015,
+   "pass": true
+  },
+  {
    "id": "DC35",
    "name": "Equal Earth areal = 1 at 400 random points",
    "value": [
@@ -2610,6 +2633,20 @@
    },
    "sha256": null,
    "recorded": "outlines"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.polygon_area",
+   "scene": "s13",
+   "data": "data/mp.json",
+   "eq": "Africa dissolved outline (shapely unary_union of the NE 10 m admin-0 parts; mainland + Madagascar)",
+   "params": {
+    "source": "ne_10m_admin_0_countries",
+    "keep": 2
+   },
+   "sha256": null,
+   "recorded": [
+    29.9694
+   ]
   },
   {
    "fn": "fluidpy.geo.mapproj.forward",
