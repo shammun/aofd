@@ -32,6 +32,8 @@ export const useTex = (url: string | null): THREE.Texture | null => {
     if (!p) {
       p = new Promise<THREE.Texture>((res, rej) => new THREE.TextureLoader().load(url, (t) => {
         t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8; t.generateMipmaps = true; t.minFilter = THREE.LinearMipmapLinearFilter;
+        // partial-sphere UV fix: lon ranges that cross ±180 produce u > 1; RepeatWrapping avoids the last-column streak
+        t.wrapS = THREE.RepeatWrapping;
         texCache.set(url, t); res(t);
       }, undefined, (e) => rej(e)));
       texWait.set(url, p);
