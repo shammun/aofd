@@ -91,7 +91,7 @@ const S16: React.FC = () => {
         <Keyword f={f} text="polar stereographic" at={[XC, 620]} appear={AT(k, 13, "polar stereographic")} c={C.gold} />
         <Lbl x={XC} y={690} t="true to scale at 60° N" c={C.key} s={T.floor} o={fin(f, AT(k, 13, "true to scale"))} />
       </Svg>
-      <SourceBelow text={SRC_PS} pic={VPIC} w={760} name="s16 src" />
+      <SourceBelow text={SRC_PS} pic={VPIC} x={40} w={1060} gap={54} name="s16 src" />{/* build1 K6: under the 0° label, one line */}
     </Scene>
   );
 };
@@ -106,9 +106,11 @@ type PlaceLbl = { key: string; at: Pt; a: "start" | "end"; italic?: boolean };
  * dot by a short leader; no two labels share a 44-px band where they overlap in x (checked below) */
 const PLBL: PlaceLbl[] = [
   { key: "brest", at: [550, 662], a: "start" }, { key: "iceland", at: [440, 582], a: "end" }, { key: "greenland", at: [425, 506], a: "end" },
-  { key: "scandinavia", at: [640, 566], a: "start" }, { key: "longyearbyen", at: [640, 506], a: "start" }, { key: "barents", at: [660, 446], a: "start", italic: true },
+  // build1 K6: Longyearbyen and Barents Sea hung over the disc's right edge and Hudson Bay over its left edge (and under "90° W"):
+  // the first two now sit wholly outside the map on the right (below "90° E"), Hudson Bay to the right of its dot
+  { key: "scandinavia", at: [640, 566], a: "start" }, { key: "longyearbyen", at: [900, 538], a: "start" }, { key: "barents", at: [900, 478], a: "start", italic: true },
   { key: "siberia", at: [690, 384], a: "start" }, { key: "bering", at: [530, 224], a: "end", italic: true }, { key: "alaska", at: [425, 278], a: "end" },
-  { key: "canada", at: [350, 398], a: "end" }, { key: "hudson", at: [380, 448], a: "end", italic: true }, { key: "la", at: [322, 332], a: "start" },
+  { key: "canada", at: [350, 398], a: "end" }, { key: "hudson", at: [430, 446], a: "start", italic: true }, { key: "la", at: [322, 332], a: "start" },
 ];
 (() => {  // labels: no overlap with each other or with the ring labels
   const box = (p: PlaceLbl) => { const w = textW(PL[p.key].name, T.floor); const x0 = p.a === "start" ? p.at[0] : p.at[0] - w; return [x0, p.at[1] - 22, x0 + w, p.at[1] + 22]; };
@@ -172,7 +174,7 @@ const S17: React.FC = () => {
         </g>)}
         <Lbl x={XC + 520} y={390} t="?" c={C.gold} s={T.calc} o={win(f, AT(k, 11, "thirty four") + 30, t12)} />
       </Svg>
-      <SourceBelow text={SRC_PS} pic={VPIC} w={760} name="s17 src" />
+      <SourceBelow text={SRC_PS} pic={VPIC} x={40} w={1060} gap={54} name="s17 src" />{/* build1 K6: under the 0° label, one line */}
     </Scene>
   );
 };
@@ -199,7 +201,7 @@ const S18: React.FC = () => {
   const f = useCurrentFrame(), k = K("s18_vortex");
   const t1 = SS(k, 1), t2 = SS(k, 2), t3 = SS(k, 3), tShow = AT(k, 3, "this map shows it"), t4 = SS(k, 4), t5 = SS(k, 5), t6 = SS(k, 6), t7 = SS(k, 7), t8 = SS(k, 8),
     t9 = SS(k, 9), t10 = SS(k, 10), t11 = SS(k, 11);
-  const lblO = mix(1, 0.4, fin(f, t5, 30)) * fout(f, t5 + 30, 60);
+  const lblO = mix(1, 0.4, fin(f, tShow, 30)) * fout(f, t4 - 20, 20);   // build1 K6: gone before the contour labels and "lines every 400 m"
   const cz = mapPt(VP, "ps", VX.c[0], VX.c[1]), z30 = mapPt(VP, "ps", 30, 0);
   const bright = (la: number) => (f >= t10 ? (la >= 55 && la <= 66 ? 1.5 : 0.6) : 1);
   return (
@@ -230,7 +232,7 @@ const S18: React.FC = () => {
       </Svg>
       <TeX s={String.raw`10\ \text{hPa}\div1013\ \text{hPa}\approx0.01`} x={XC} y={250} size={50} c={C.key} o={win(f, AT(k, 2, "a hundredth"), t3 - 18)} />
       <TeX s={String.raw`79\ \text{m/s}\times3.6\approx284\ \text{km/h}`} x={XC} y={750} size={58} c={C.key} o={fin(f, AT(k, 10, "nearly eighty")) * fout(f, t11 - 10)} />
-      <SourceBelow text={SRC_VX} pic={VPIC} w={760} name="s18 src" />
+      <SourceBelow text={SRC_VX} pic={VPIC} x={40} w={1060} gap={54} name="s18 src" />{/* build1 K6: under the 0° label, one line */}
     </Scene>
   );
 };
@@ -285,7 +287,7 @@ const S19: React.FC = () => {
       {/* remake 2026-11-07 (R16): local east / north arrows (Part 4) and the polar unit vectors (Part 1) at their point of use (gone before the bars) */}
       <Recall f={f} tex="" name="east, north" part={4} x={XC} y={480} appear={AT(k, 1, "as in Part 4")} out={t9 - 18} />
       <Recall f={f} tex={String.raw`\hat{\boldsymbol\theta},\ \hat{\mathbf r}`} name="polar unit vectors" part={1} x={XC} y={560} appear={AT(k, 2, "theta hat")} out={t9 - 18} />
-      <SourceBelow text={SRC_VX} pic={VPIC} w={760} name="s19 src" />
+      <SourceBelow text={SRC_VX} pic={VPIC} x={40} w={1060} gap={54} name="s19 src" />{/* build1 K6: under the 0° label, one line */}
     </Scene>
   );
 };
@@ -321,7 +323,7 @@ const S20: React.FC = () => {
         {arrows.map((A, i) => <AnimatedWindArrow key={i} from={A.q} to={[A.q[0] + A.tg[0] * 70, A.q[1] + A.tg[1] * 70]} speed={WH.U} f={f} c={C.ink} px={7} head={26} o={fin(f, t2) * fout(f, t7, 20) + 0.35 * fin(f, t7)} />)}
         <circle cx={C20[0]} cy={C20[1]} r={9} fill={C.key} />
         <line x1={C20[0]} y1={C20[1]} x2={C20[0] + R20} y2={C20[1]} stroke={C.muted} strokeWidth={3} strokeDasharray="10 8" opacity={win(f, t2, t5)} />
-        <Lbl x={C20[0] + R20 / 2} y={C20[1] + 32} t="1000 km" c={C.muted} s={T.floor} a="middle" o={win(f, AT(k, 2, "a thousand"), t5)} />
+        <Lbl x={C20[0] + R20 / 2} y={C20[1] - 30} t="1000 km" c={C.muted} s={T.floor} a="middle" o={win(f, AT(k, 2, "a thousand"), t5)} />
         {/* the origin and the moved origin */}
         <circle cx={C20[0]} cy={C20[1]} r={16} fill="none" stroke={C.gold} strokeWidth={5} opacity={fin(f, t3) * mix(1, 0.35, sh)} />
         <circle cx={O[0]} cy={O[1]} r={12} fill={C.gold} opacity={fin(f, t5)} />
@@ -365,9 +367,9 @@ const S20: React.FC = () => {
       <TeX s={String.raw`P`} x={P[0] + 20} y={P[1] - 40} size={52} c={C.key} o={fin(f, t6)} />
       <TeX s={H.r} x={P[0] + rh[0] * 150} y={P[1] + rh[1] * 150} size={52} c={C.second} ax={0.5} o={fin(f, t10)} />
       <TeX s={H.th} x={P[0] + th[0] * 150} y={P[1] + th[1] * 150 - 10} size={52} c={C.second} ax={0.5} o={fin(f, t13)} />
-      <CalcStack f={f} x={XC} y={310} size={54} maxLines={3} o={fout(f, t15 - 10, 12)} rows={[
+      <CalcStack f={f} x={XC} y={310} size={54} maxLines={2} o={fout(f, t15 - 10, 12)} rows={[
         { rhs: String.raw`\sqrt{500^2+1000^2}\approx1118\ \text{km}`, at: AT(k, 9, "about one thousand") },
-        { rhs: String.raw`\hat{\mathbf r}=\left(\dfrac{500}{1118},\ \dfrac{1000}{1118}\right)`, at: AT(k, 10, "divide each leg"), h: 96 },
+        { rhs: String.raw`\hat{\mathbf r}=\left(\dfrac{500}{1118},\ \dfrac{1000}{1118}\right)`, at: AT(k, 10, "divide each leg"), h: 132 },
         { rhs: String.raw`\approx(0.447,\ 0.894)`, at: AT(k, 10, "zero point four"), cont: true },
         { rhs: String.raw`u_r=(-10)(0.447)+(0)(0.894)`, at: AT(k, 11, "we multiply u"), c: C.neg, size: 48 },
         { rhs: String.raw`\approx-4.5`, at: AT(k, 11, "about minus four"), c: C.neg, cont: true },
@@ -412,7 +414,7 @@ const S21: React.FC = () => {
         <RingLabels o={0.5} />
         <Keyword f={f} text="back to the vortex" at={[XC, 250]} appear={0} out={t2 - 18} />
         <SideCallout f={f} lines={["centre ≈ 72.9° N, 44.3° E", "≈ 1900 km from the pole"]} at={[XC + 14, 250]} appear={t2} out={t3 - 18} target={[cz[0] + 22, cz[1]]} c={C.gold} s={T.floor} bend={20} />
-        <HeightBar x={XC + 20} y={150} o={1 - win(f, t5 + 10, t5 + 75, 10)} w={440} />
+        <HeightBar x={XC + 20} y={120} o={1 - win(f, t5 + 10, t5 + 75, 10)} w={440} />{/* build1 K6: 150 -> 120, ticks clear of the y 250 row */}
         <g opacity={fin(f, t3 + 30)}>
           <Lbl x={XC} y={250} t="ticks: round ·" c={C.first} s={T.floor} />
           <Lbl x={XC + textW("ticks: round · ", T.floor)} y={250} t="in" c={C.neg} s={T.floor} />
@@ -433,9 +435,9 @@ const S21: React.FC = () => {
       <TeX s={String.raw`(90^\circ-72.9^\circ)\times111.2\approx1900\ \text{km}`} x={XC} y={360} size={46} c={C.gold} o={win(f, AT(k, 2, "about one thousand"), t3 - 18)} />
       <TeX s={String.raw`\text{ratio}=33\div17.5\approx1.9`} x={XC} y={475} size={54} c={C.gold} o={fin(f, AT(k, 4, "one point nine"))} />
       {/* remake 2026-11-07 (R16): the ring split and the ring average are Part 1's (S3); gone before the second ring's rows (y 540-) */}
-      <Recall f={f} tex={String.raw`\bar u=\dfrac{1}{N}\sum_{i=1}^{N}u_i`} name="ring averages" part={1} x={XC} y={580} size={46} appear={AT(k, 3, "as in Part 1")} out={t5 - 12} />
+      <Recall f={f} tex={String.raw`\bar u=\dfrac{1}{N}\sum_{i=1}^{N}u_i`} name="ring averages" part={1} x={XC} y={580} size={46} gap={96} appear={AT(k, 3, "as in Part 1")} out={t5 - 12} />
       <TeX s={String.raw`\text{ratio}=20\div47\approx0.4`} x={XC} y={695} size={54} c={C.gold} o={fin(f, AT(k, 6, "zero point four"))} />
-      <SourceBelow text={SRC_VX} pic={VPIC} w={760} name="s21 src" />
+      <SourceBelow text={SRC_VX} pic={VPIC} x={40} w={1060} gap={54} name="s21 src" />{/* build1 K6: under the 0° label, one line */}
     </Scene>
   );
 };
@@ -466,7 +468,7 @@ const S22: React.FC = () => {
           {[BREST[0], 60, 78.22].map((la) => <line key={la} x1={VR1.cx - Math.PI * VR1.s} y1={mapPt(VR1, "pc", la, 0)[1]} x2={VR1.cx + Math.PI * VR1.s} y2={mapPt(VR1, "pc", la, 0)[1]}
             stroke={C.gold} strokeWidth={5} opacity={0.8} />)}
           <path d={(D.coast as number[][]).map((L) => llD(VR1, "pc", L)).join("")} fill="none" stroke={C.key} strokeOpacity={0.6} strokeWidth={1.5} />
-          <g data-lc-maplabel="1"><Lbl x={VR1.cx - Math.PI * VR1.s + 20} y={mapPt(VR1, "pc", BREST[0], 0)[1] - 30} t="$\times$ 1.5 at Brest" c={C.gold} s={T.floor}
+          <g data-lc-maplabel="1"><Lbl x={VR1.cx - Math.PI * VR1.s + 20} y={mapPt(VR1, "pc", BREST[0], 0)[1] + 34} t="$\times$ 1.5 at Brest" c={C.gold} s={T.floor}
             o={fin(f, AT(k, 1, "one and a half"))} /></g>
         </g>
         <g opacity={b(2)}>
@@ -505,8 +507,8 @@ const S22: React.FC = () => {
         <Lbl x={XC} y={805} t="east is round, north is in" c={C.key} s={T.floor} o={io(6)} />
         <Keyword f={f} text="next: The gradient" at={[300, 790]} appear={AT(k, 8, "the gradient")} c={C.gold} />
       </Svg>
-      <TeX s={String.raw`x=a\,\lambda,\quad y=a\,\varphi`} x={XC} y={200} size={58} o={io(1)} />
-      <TeX s={String.raw`k=\dfrac{1}{\cos\varphi}`} x={XC + 480} y={200} size={58} o={io(1)} />
+      {/* build1 look: one row with a clear gap (the separate k TeX read as "y = a φ k = …") */}
+      <TeX s={String.raw`x=a\,\lambda,\ \ y=a\,\varphi,\quad k=\dfrac{1}{\cos\varphi}`} x={XC} y={200} size={54} o={io(1)} />
       <TeX s={EQ_S22} x={XC} y={500} size={60} o={io(4)} />
       <TeX s={String.raw`\text{area stretch}=\dfrac{1}{\cos^2\varphi}`} x={XC} y={640} size={56} o={io(5)} />
       <TeX s={String.raw`u_\theta=u,\qquad u_r=-v`} x={XC} y={738} size={52} c={C.gold} o={io(6)} />

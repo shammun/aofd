@@ -30,6 +30,10 @@ def cues() -> list[tuple[str, int, str]]:
     for f in ("mp_sA.tsx", "mp_sB.tsx", "mp_sC.tsx"):
         src = (SRC / f).read_text(encoding="utf-8")
         for blk in re.split(r"\nconst S\d\d", src)[1:]:
+            # build1 2026-11-10: the s17 tour helper `tourTimes(k)` sits at the end of S16's block but is called with s17's k
+            if "\nconst tourTimes" in blk:
+                blk, tour = blk.split("\nconst tourTimes", 1)
+                out += [("s17_where_is_what", int(a), b) for a, b in re.findall(r'AT\(k,\s*(\d+),\s*"([^"]+)"\)', tour)]
             m = re.search(r'K\("(s\d\d\w*)"\)', blk)
             if m:
                 out += [(m.group(1), int(a), b) for a, b in re.findall(r'AT\(k,\s*(\d+),\s*"([^"]+)"\)', blk)]

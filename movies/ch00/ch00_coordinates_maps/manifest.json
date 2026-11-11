@@ -218,92 +218,92 @@
    "scene": "s00_title"
   },
   {
-   "time": "0:45",
-   "t_s": 45.728,
+   "time": "0:42",
+   "t_s": 42.725,
    "title": "Flattening the Earth",
    "scene": "s03_flattening"
   },
   {
-   "time": "1:18",
-   "t_s": 78.978,
+   "time": "1:15",
+   "t_s": 75.975,
    "title": "Every step: the flat square map and its stretch (optional maths)",
    "scene": "s04_plate_carree"
   },
   {
-   "time": "5:39",
-   "t_s": 339.812,
+   "time": "5:38",
+   "t_s": 338.65,
    "title": "Scale factors on weather grids",
    "scene": "s06_gradient_preview"
   },
   {
-   "time": "7:23",
-   "t_s": 443.491,
+   "time": "7:21",
+   "t_s": 441.85,
    "title": "Mercator's idea",
    "scene": "s07_mercator_idea"
   },
   {
-   "time": "8:48",
-   "t_s": 528.691,
+   "time": "8:47",
+   "t_s": 527.05,
    "title": "Every step: Mercator's formula (optional maths)",
    "scene": "s08_mercator_dy"
   },
   {
-   "time": "15:49",
-   "t_s": 949.184,
+   "time": "15:47",
+   "t_s": 947.3,
    "title": "Why the rhumb line is straight",
    "scene": "s12_rhumb_straight"
   },
   {
-   "time": "17:27",
-   "t_s": 1047.335,
+   "time": "17:25",
+   "t_s": 1045.175,
    "title": "The price: areas",
    "scene": "s13_area_stretch"
   },
   {
-   "time": "18:51",
-   "t_s": 1131.915,
+   "time": "18:50",
+   "t_s": 1130.275,
    "title": "Equal-area maps: pick the map for the job",
    "scene": "s14_equal_earth"
   },
   {
-   "time": "20:24",
-   "t_s": 1224.09,
+   "time": "20:22",
+   "t_s": 1222.45,
    "title": "Why so many coordinate systems",
    "scene": "s15_why_many"
   },
   {
-   "time": "21:28",
-   "t_s": 1288.265,
+   "time": "21:26",
+   "t_s": 1286.625,
    "title": "The view from the pole",
    "scene": "s16_globe_to_pole"
   },
   {
-   "time": "22:48",
-   "t_s": 1368.34,
+   "time": "22:46",
+   "t_s": 1366.7,
    "title": "A tour of the polar map",
    "scene": "s17_where_is_what"
   },
   {
-   "time": "24:32",
-   "t_s": 1472.785,
+   "time": "24:30",
+   "t_s": 1470.575,
    "title": "The stratospheric polar vortex",
    "scene": "s18_vortex"
   },
   {
-   "time": "26:00",
-   "t_s": 1560.572,
+   "time": "25:58",
+   "t_s": 1558.35,
    "title": "East is round, north is in",
    "scene": "s19_vortex_components"
   },
   {
-   "time": "27:17",
-   "t_s": 1637.051,
+   "time": "27:15",
+   "t_s": 1635.426,
    "title": "Choosing the origin",
    "scene": "s20_origin_wheel"
   },
   {
-   "time": "30:46",
-   "t_s": 1846.934,
+   "time": "30:43",
+   "t_s": 1843.576,
    "title": "To sum up",
    "scene": "s22_recap"
   }
@@ -313,9 +313,9 @@
    "block": "A",
    "chip_scene": "s04_plate_carree",
    "chip_sentence": 2,
-   "chip_at_s": 87.778,
-   "skip_to": "5:39",
-   "skip_to_s": 339.812,
+   "chip_at_s": 84.775,
+   "skip_to": "5:38",
+   "skip_to_s": 338.65,
    "keep_scene": "s06_gradient_preview",
    "keep_line": "If you skipped, here's what to keep."
   },
@@ -323,14 +323,14 @@
    "block": "B",
    "chip_scene": "s08_mercator_dy",
    "chip_sentence": 2,
-   "chip_at_s": 544.216,
-   "skip_to": "15:49",
-   "skip_to_s": 949.184,
+   "chip_at_s": 542.575,
+   "skip_to": "15:47",
+   "skip_to_s": 947.3,
    "keep_scene": "s12_rhumb_straight",
    "keep_line": "If you skipped, here's what to keep."
   }
  ],
- "timing_provisional": true,
+ "timing_provisional": false,
  "inputs_sha256": {
   "data/derived/ch00/ncep_r1_10hPa_20251101_20260317.nc": "d2173163f964d9f71aa0104d63fcfb187047f32dbbd576ab9be59375f5569247",
   "data/derived/ch00/era5_t2m_anom_2026-09_1deg.nc": "c5335076dfdf761c47fa71e8ec1129cb08a8047a3a907c662104328ee2d18824",

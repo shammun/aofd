@@ -468,7 +468,7 @@ export const SkipChip: React.FC<{ f: number; k: number; to: string; tagTo?: numb
   if (textW(lines[0], T.floor) > CHIP.x1 - CHIP.x0 - 40) throw new Error("skip chip text wider than the chip");
   const oC = ramp(f, a, a + 10) * (1 - ramp(f, b, b + 10));
   return <>
-    {oC > 0 ? <g opacity={oC}>
+    {oC > 0 ? <g opacity={oC} data-lc-own="skipchip">
       <rect x={CHIP.x0} y={CHIP.y0} width={CHIP.x1 - CHIP.x0} height={CHIP.y1 - CHIP.y0} rx={20} fill="#1f2a44" stroke={C.gold} strokeWidth={3} />
       {lines.map((t, i) => <Lbl key={i} x={CHIP.x0 + 22} y={CHIP.y0 + 34 + i * 50} t={t} c={i === 1 ? C.gold : C.key} s={T.floor} />)}
     </g> : null}
@@ -486,7 +486,7 @@ export const OptionalTag: React.FC<{ f: number; from: number; to?: number }> = (
   if (o <= 0) return null;
   guard("optional maths", TAG.x0 + 18, textW("optional maths", T.floor));
   return (
-    <g opacity={o}>
+    <g opacity={o} data-lc-own="optionaltag">
       <rect x={TAG.x0} y={TAG.y0} width={TAG.x1 - TAG.x0} height={TAG.y1 - TAG.y0} rx={16} fill="#1f2a44" stroke={C.gold} strokeWidth={2.5} />
       <Lbl x={TAG.x0 + 18} y={(TAG.y0 + TAG.y1) / 2} t="optional maths" c={C.key} s={T.floor} />
     </g>

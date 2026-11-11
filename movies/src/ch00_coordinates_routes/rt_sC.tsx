@@ -72,8 +72,9 @@ const S11: React.FC = () => {
           {gdot(Gg, RO.vx[0], RO.vx[1], C.gold, 10, fin(f, tVx))}
           {plab(Gg, LON[0], LON[1], "London", 1, -18, -36, "end")}
           {plab(Gg, LAX[0], LAX[1], "Los Angeles", 1, 16, 42)}
-          {plab(Gg, RO.vx[0], RO.vx[1], "62.4° N", fin(f, tVx), 18, -30)}
-          {plab(Gg, 72, -40, "Greenland", fin(f, tGl), 0, 0, "middle", true)}
+          {/* build1 2026-11-10 (K6 text-text): 62.4° N under the route (was over London's label), Greenland on its ice sheet's north */}
+          {plab(Gg, RO.vx[0], RO.vx[1], "62.4° N", fin(f, tVx), 0, 48, "middle")}
+          {plab(Gg, 77, -42, "Greenland", fin(f, tGl), 0, 0, "middle", true)}
           {plab(Gg, 58, -100, "Canada", fin(f, tCan), 0, 0, "middle", true)}
           {fly > 0 && P.vis ? <PlaneIcon p={P.p} a={P.a} s={0.7} o={fout(f, SE(k, 8) + 20)} /> : null}
         </>; }} />
@@ -84,7 +85,7 @@ const S11: React.FC = () => {
           {/* Part 1 lessons B2: the angle at the centre is drawn as an arc between the two position lines, not only labelled */}
           {(() => { let a0 = sang([pL[0] - c0[0], pL[1] - c0[1]]), a1 = sang([pA[0] - c0[0], pA[1] - c0[1]]); if (a1 - a0 > 180) a1 -= 360; if (a0 - a1 > 180) a1 += 360;
             return <path d={arcD(c0, 64, a0, a1)} fill="none" stroke={C.gold} strokeWidth={5} />; })()}
-          <Lbl x={c0[0] - 20} y={c0[1] + 44} t="≈ 79°" c={C.gold} s={T.floor} a="end" />
+          <Lbl x={c0[0] + 24} y={c0[1] + 44} t="≈ 79°" c={C.gold} s={T.floor} a="start" />
           <Lbl x={G.p(GC[90][0], GC[90][1])[0]} y={G.p(GC[90][0], GC[90][1])[1] - 40} t="≈ 8755 km" c={C.gold} s={T.floor} a="middle" /></g>; })()}
         <Compass c={[pL[0] + 90, pL[1] + 120]} r={58} brg={RO.brg0} o={fin(f, tB0) * fout(f, tWhy)} label={false} />
         <Compass c={[pA[0] - 60, pA[1] - 150]} r={58} brg={RO.brg1} o={fin(f, tB1) * fout(f, tWhy)} label={false} />
@@ -107,6 +108,8 @@ const S11: React.FC = () => {
           <Lbl x={SX + SW} y={SY + 50} t="214°" c={C.key} s={T.floor} a="end" />
         </g>
         <Keyword f={f} text="over Greenland and Canada" at={[XC, 820]} s={T.floor} appear={tWhy} />
+        {/* build1 2026-11-10 (continuity plan 5f s11): the compass bearing (from north, clockwise) recalled from Part 1 where 312° is formed */}
+        <Lbl x={XC} y={800} t="derived in Part 1: bearings" c={C.gold} s={T.floor} o={win(f, tTurn + 30, SS(k, 6) - 10)} />
       </Svg>
       <SourceBelow text="Map: Natural Earth (Mercator)" pic={MBf} w={600} o={mapO} name="s11 src map" />
       {/* audit F1: the three route numbers from Part 4's local arrows and the cross product. Remake 2026-11-07: the heading rows are cued

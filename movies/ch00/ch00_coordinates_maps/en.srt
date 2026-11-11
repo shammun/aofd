@@ -1,0 +1,2286 @@
+1
+00:00:00,300 --> 00:00:05,028
+In this video, we'll learn how coordinates
+flatten our round Earth into maps,
+
+2
+00:00:05,028 --> 00:00:07,853
+and see how they're used
+to draw weather maps,
+
+3
+00:00:07,853 --> 00:00:10,800
+and to read the winds
+high above the North Pole.
+
+4
+00:00:11,600 --> 00:00:15,538
+Why does Greenland look as big
+as Africa on so many maps,
+
+5
+00:00:15,538 --> 00:00:19,475
+and how do forecasters draw
+the whole Arctic on one page?
+
+6
+00:00:19,825 --> 00:00:23,275
+This is the last of seven
+parts on coordinates.
+
+7
+00:00:23,625 --> 00:00:26,206
+Now let's dive into the maps themselves:
+
+8
+00:00:26,206 --> 00:00:30,206
+the flat square map that weather
+data come on, Mercator's map,
+
+9
+00:00:30,206 --> 00:00:32,787
+where the rhumb line comes out straight,
+
+10
+00:00:32,787 --> 00:00:37,175
+and maps that keep areas true, with
+exactly what each one stretches.
+
+11
+00:00:37,525 --> 00:00:41,925
+Then let's read a weather map
+drawn from above the North Pole.
+
+12
+00:00:42,725 --> 00:00:46,500
+Every map starts by flattening
+the Earth onto a page.
+
+13
+00:00:46,850 --> 00:00:51,775
+And here's the catch: you can't flatten
+a sphere without stretching or tearing it.
+
+14
+00:00:52,125 --> 00:00:54,325
+Try it with an orange peel.
+
+15
+00:00:54,675 --> 00:00:57,493
+Cut it into slices from pole to pole,
+
+16
+00:00:57,493 --> 00:01:01,225
+and lay them flat, and gaps
+open up between them.
+
+17
+00:01:01,575 --> 00:01:05,225
+Close the gaps by stretching,
+and the shapes change.
+
+18
+00:01:05,575 --> 00:01:09,850
+Every flat map of the Earth
+makes a choice about what to stretch.
+
+19
+00:01:10,200 --> 00:01:15,175
+Let's build the simplest map, and work
+out exactly how much it stretches.
+
+20
+00:01:15,975 --> 00:01:21,025
+Next, we'll build the simplest map
+step by step, with every number.
+
+21
+00:01:21,375 --> 00:01:24,425
+That's for anyone who enjoys every step.
+
+22
+00:01:24,775 --> 00:01:30,652
+For the intuition behind weather, climate
+science or GIS, you only need the result,
+
+23
+00:01:30,652 --> 00:01:34,900
+so if it feels like a lot, skip
+ahead to the time on screen.
+
+24
+00:01:35,250 --> 00:01:39,475
+We'll build it from the lines
+on the globe whose lengths we know.
+
+25
+00:01:39,825 --> 00:01:41,875
+First, the equator.
+
+26
+00:01:42,225 --> 00:01:46,325
+Cut it, and unroll it
+into a straight line across the page.
+
+27
+00:01:46,675 --> 00:01:49,864
+Its length is two
+pi times the Earth's radius,
+
+28
+00:01:49,864 --> 00:01:53,053
+which, as in Part 3, we
+write as the letter a,
+
+29
+00:01:53,053 --> 00:01:57,212
+about six thousand three hundred
+and seventy one kilometres,
+
+30
+00:01:57,212 --> 00:02:01,025
+so the equator is about forty
+thousand kilometres long.
+
+31
+00:02:01,375 --> 00:02:04,153
+A place at longitude lambda, in radians,
+
+32
+00:02:04,153 --> 00:02:09,500
+is the Earth's radius times lambda along
+the equator from the prime meridian.
+
+33
+00:02:09,850 --> 00:02:13,500
+That's the arc rule, which
+we found in Part 1.
+
+34
+00:02:13,850 --> 00:02:17,850
+So we set x equal to the Earth's
+radius times lambda.
+
+35
+00:02:19,350 --> 00:02:21,375
+Second, the meridians.
+
+36
+00:02:21,725 --> 00:02:24,695
+Each one runs
+from the equator to the pole,
+
+37
+00:02:24,695 --> 00:02:30,013
+and a place at latitude phi is the Earth's
+radius times phi from the equator,
+
+38
+00:02:30,013 --> 00:02:31,325
+along its meridian.
+
+39
+00:02:31,675 --> 00:02:35,575
+That's the distance
+north, which we found in Part 3.
+
+40
+00:02:35,925 --> 00:02:40,239
+So we draw every meridian
+as a straight line going up the page,
+
+41
+00:02:40,239 --> 00:02:43,525
+and set y equal to the Earth's
+radius times phi.
+
+42
+00:02:45,025 --> 00:02:46,111
+Let's try Brest,
+
+43
+00:02:46,111 --> 00:02:50,525
+the port city at the western tip
+of France that we met in Part 3,
+
+44
+00:02:50,525 --> 00:02:55,550
+at forty eight point four degrees
+north, and four and a half degrees west.
+
+45
+00:02:55,900 --> 00:02:59,691
+In radians, that's
+zero point eight four four seven,
+
+46
+00:02:59,691 --> 00:03:02,825
+and minus
+zero point zero seven eight five.
+
+47
+00:03:03,175 --> 00:03:06,000
+So x, the Earth's radius times lambda,
+
+48
+00:03:06,000 --> 00:03:11,575
+comes to about minus five hundred
+kilometres: just west of the middle line.
+
+49
+00:03:13,075 --> 00:03:15,578
+And y, the Earth's radius times phi,
+
+50
+00:03:15,578 --> 00:03:20,375
+comes to about five thousand three
+hundred and eighty two kilometres.
+
+51
+00:03:21,875 --> 00:03:27,800
+That's exactly how far Brest is from the
+equator, walking north along its meridian.
+
+52
+00:03:28,150 --> 00:03:33,450
+So along the equator, and along every
+meridian, this map is true to scale.
+
+53
+00:03:33,800 --> 00:03:37,252
+It's called the plate
+carrée, French for flat square,
+
+54
+00:03:37,252 --> 00:03:40,900
+and most weather data come
+on exactly this kind of grid.
+
+55
+00:03:41,700 --> 00:03:45,450
+Now look at a circle of latitude,
+called a parallel.
+
+56
+00:03:45,800 --> 00:03:50,937
+On this map, every parallel is drawn
+as a straight line across the page,
+
+57
+00:03:50,937 --> 00:03:52,578
+as long as the equator:
+
+58
+00:03:52,578 --> 00:03:58,000
+two pi times the Earth's radius, about
+forty thousand and thirty kilometres.
+
+59
+00:03:58,350 --> 00:04:02,900
+But on the globe, the parallel
+through Brest is a smaller circle.
+
+60
+00:04:03,250 --> 00:04:08,603
+As we saw in Part 3, its radius
+is the Earth's radius times cosine phi,
+
+61
+00:04:08,603 --> 00:04:12,675
+about four thousand two
+hundred and thirty kilometres.
+
+62
+00:04:13,025 --> 00:04:16,152
+So its true length, two
+pi times that radius,
+
+63
+00:04:16,152 --> 00:04:20,600
+is about twenty six thousand five
+hundred and eighty kilometres.
+
+64
+00:04:22,100 --> 00:04:26,037
+The map draws twenty six
+thousand five hundred and eighty
+
+65
+00:04:26,037 --> 00:04:28,800
+kilometres as forty thousand and thirty.
+
+66
+00:04:29,150 --> 00:04:32,239
+So east-west distances
+at Brest are stretched:
+
+67
+00:04:32,239 --> 00:04:37,075
+dividing the drawn length by the true
+length gives about one point five.
+
+68
+00:04:38,575 --> 00:04:40,850
+Let's write that with symbols.
+
+69
+00:04:41,200 --> 00:04:45,476
+The stretch, called k, is two
+pi times the Earth's radius,
+
+70
+00:04:45,476 --> 00:04:49,900
+divided by two pi times the Earth's
+radius times cosine phi.
+
+71
+00:04:50,250 --> 00:04:55,825
+The two pi and the radius
+cancel, so k equals one over cosine phi.
+
+72
+00:04:57,325 --> 00:05:01,663
+At Brest, the cosine of phi
+is zero point six six four,
+
+73
+00:05:01,663 --> 00:05:03,950
+so k is about one point five.
+
+74
+00:05:04,300 --> 00:05:09,775
+At sixty degrees north, the cosine
+is zero point five, so k is two.
+
+75
+00:05:10,125 --> 00:05:15,410
+And at Longyearbyen, the Arctic town
+on Svalbard that we met in Part 3,
+
+76
+00:05:15,410 --> 00:05:18,462
+at seventy eight point two degrees north,
+
+77
+00:05:18,462 --> 00:05:23,300
+the cosine is only zero point two
+zero four, so k is almost five.
+
+78
+00:05:24,800 --> 00:05:28,100
+North-south distances
+aren't stretched at all.
+
+79
+00:05:28,450 --> 00:05:32,333
+So a small circle near Brest
+is drawn as an oval, one and
+
+80
+00:05:32,333 --> 00:05:37,850
+a half times wider than it is tall, and
+near the poles, shapes are squashed flat.
+
+81
+00:05:38,650 --> 00:05:41,325
+If you skipped, here's what to keep.
+
+82
+00:05:41,675 --> 00:05:46,400
+The simplest map uses longitude
+and latitude as x and y.
+
+83
+00:05:46,750 --> 00:05:50,473
+It's true along the equator
+and along every meridian,
+
+84
+00:05:50,473 --> 00:05:54,688
+but it stretches east-west
+distances by one over cosine phi:
+
+85
+00:05:54,688 --> 00:05:57,216
+about one and a half times at Brest,
+
+86
+00:05:57,216 --> 00:06:01,150
+two at sixty degrees
+north, and almost five at Svalbard.
+
+87
+00:06:01,500 --> 00:06:04,636
+In Part 6, we called
+the distance walked for
+
+88
+00:06:04,636 --> 00:06:07,844
+each radian of a coordinate
+its scale factor:
+
+89
+00:06:07,844 --> 00:06:13,475
+the Earth's radius for latitude, and the
+radius times cosine phi for longitude.
+
+90
+00:06:13,825 --> 00:06:16,958
+Scale factors like this
+matter for weather data,
+
+91
+00:06:16,958 --> 00:06:20,875
+because most weather data come
+on exactly this kind of grid.
+
+92
+00:06:21,225 --> 00:06:25,943
+Suppose two grid points near Brest
+are one degree of longitude apart,
+
+93
+00:06:25,943 --> 00:06:30,250
+and the temperature differs by one
+degree Celsius between them.
+
+94
+00:06:30,600 --> 00:06:34,300
+The slope we want is per kilometre,
+not per degree.
+
+95
+00:06:34,650 --> 00:06:39,864
+So we divide by the true distance east,
+seventy three point eight kilometres,
+
+96
+00:06:39,864 --> 00:06:42,098
+as we found in Part 3, not by the
+
+97
+00:06:42,098 --> 00:06:46,025
+hundred and eleven point two
+kilometres of a degree north.
+
+98
+00:06:46,375 --> 00:06:50,525
+That's about one point four
+degrees per hundred kilometres.
+
+99
+00:06:52,025 --> 00:06:57,950
+In symbols, the eastward slope is one
+over the Earth's radius times cosine phi,
+
+100
+00:06:57,950 --> 00:07:00,350
+times the change with longitude.
+
+101
+00:07:00,700 --> 00:07:05,250
+Together with the northward slope, it
+makes the gradient on the sphere.
+
+102
+00:07:05,600 --> 00:07:10,250
+We'll build it step by step in the next
+movie in this series: The gradient.
+
+103
+00:07:10,600 --> 00:07:14,982
+Weather models also use a curvilinear
+coordinate in the vertical,
+
+104
+00:07:14,982 --> 00:07:18,758
+pressure instead of height, which
+has its own movie too:
+
+105
+00:07:18,758 --> 00:07:21,050
+Pressure as a vertical coordinate.
+
+106
+00:07:21,850 --> 00:07:23,382
+In fifteen sixty nine,
+
+107
+00:07:23,382 --> 00:07:26,794
+the map maker Gerardus
+Mercator had a clever idea
+
+108
+00:07:26,794 --> 00:07:30,275
+to fix the squashed shapes
+of the flat square map.
+
+109
+00:07:30,625 --> 00:07:32,825
+Think of stretching a photo.
+
+110
+00:07:33,175 --> 00:07:37,250
+If you stretch it only sideways,
+faces look too wide.
+
+111
+00:07:37,600 --> 00:07:41,441
+But if you also stretch it up
+and down by the same amount,
+
+112
+00:07:41,441 --> 00:07:43,825
+faces look right again, just bigger.
+
+113
+00:07:44,175 --> 00:07:48,750
+Mercator did this to the map, one
+strip of latitude at a time.
+
+114
+00:07:49,100 --> 00:07:52,831
+Near Brest, east-west
+is stretched by one point five,
+
+115
+00:07:52,831 --> 00:07:57,125
+so he stretched north-south near
+Brest by one point five too.
+
+116
+00:07:57,475 --> 00:08:00,825
+Near sixty degrees north, both by two.
+
+117
+00:08:01,175 --> 00:08:04,350
+Near Svalbard, both by almost five.
+
+118
+00:08:05,850 --> 00:08:08,775
+Now watch a small circle from the globe.
+
+119
+00:08:09,125 --> 00:08:13,150
+On the flat square map, it
+becomes an oval, too wide.
+
+120
+00:08:13,500 --> 00:08:16,802
+Stretch its strip
+north-south by the same factor,
+
+121
+00:08:16,802 --> 00:08:19,700
+and it becomes a circle
+again, only bigger.
+
+122
+00:08:20,050 --> 00:08:24,758
+Unlike a photo, though, each strip
+of latitude needs its own stretch,
+
+123
+00:08:24,758 --> 00:08:28,375
+so the map grows taller
+and taller towards the poles.
+
+124
+00:08:28,725 --> 00:08:33,611
+Because small shapes stay the right
+shape, small angles stay true as well:
+
+125
+00:08:33,611 --> 00:08:34,799
+the angle at which
+
+126
+00:08:34,799 --> 00:08:39,025
+a road crosses a meridian on the map
+is the angle on the ground.
+
+127
+00:08:39,375 --> 00:08:41,667
+Maps like this are called conformal,
+
+128
+00:08:41,667 --> 00:08:46,250
+which means that they keep shapes
+and angles right in every small patch.
+
+129
+00:08:47,050 --> 00:08:52,900
+Now let's turn Mercator's idea into a
+formula, with every step and every number.
+
+130
+00:08:53,250 --> 00:08:57,485
+This part is for learners who want
+to see how the formula is built;
+
+131
+00:08:57,485 --> 00:09:02,225
+you don't need it for the intuition
+behind weather, climate science or GIS.
+
+132
+00:09:02,575 --> 00:09:06,775
+If it feels like too much, skip
+ahead to the time on screen.
+
+133
+00:09:07,125 --> 00:09:11,100
+Take a small step north
+on the globe, by delta phi.
+
+134
+00:09:11,450 --> 00:09:16,525
+From Part 3, its true length
+is the Earth's radius times delta phi.
+
+135
+00:09:16,875 --> 00:09:20,489
+On the flat square
+map, it's drawn just that long,
+
+136
+00:09:20,489 --> 00:09:24,825
+while east-west is drawn
+one over cosine phi times too long.
+
+137
+00:09:25,175 --> 00:09:26,545
+To keep the shapes,
+
+138
+00:09:26,545 --> 00:09:31,375
+Mercator draws the north step
+one over cosine phi times longer too.
+
+139
+00:09:31,725 --> 00:09:37,260
+So on his map, the step is drawn
+as the Earth's radius times delta phi,
+
+140
+00:09:37,260 --> 00:09:38,975
+divided by cosine phi.
+
+141
+00:09:40,475 --> 00:09:42,425
+Let's put in numbers.
+
+142
+00:09:42,775 --> 00:09:44,332
+One degree north is a
+
+143
+00:09:44,332 --> 00:09:49,225
+hundred and eleven point two
+kilometres on the ground, everywhere.
+
+144
+00:09:49,575 --> 00:09:53,450
+At Brest, where the stretch
+is one point five zero six,
+
+145
+00:09:53,450 --> 00:09:58,875
+Mercator draws it about a hundred and
+sixty seven point four kilometres long.
+
+146
+00:10:00,375 --> 00:10:03,875
+At sixty degrees north, he
+draws it twice as long,
+
+147
+00:10:03,875 --> 00:10:07,725
+about two hundred and twenty
+two point four kilometres.
+
+148
+00:10:09,225 --> 00:10:14,200
+When the step is tiny, we
+write d instead of delta, as in Part 3.
+
+149
+00:10:14,550 --> 00:10:20,325
+So d y equals the Earth's
+radius times d phi, divided by cosine phi.
+
+150
+00:10:20,675 --> 00:10:24,644
+This says how fast the map's
+height grows as we go north:
+
+151
+00:10:24,644 --> 00:10:29,100
+slowly near the equator,
+and faster and faster towards the pole.
+
+152
+00:10:29,900 --> 00:10:33,550
+So how high up the map
+is a place at latitude phi?
+
+153
+00:10:33,900 --> 00:10:38,300
+It's the sum of all the drawn
+steps, from the equator up to phi.
+
+154
+00:10:38,650 --> 00:10:41,825
+Let's add them up, ten degrees at a time.
+
+155
+00:10:42,175 --> 00:10:46,750
+Ten degrees
+is zero point one seven four five radians.
+
+156
+00:10:47,100 --> 00:10:50,925
+For each step, we use the stretch
+in the middle of the step.
+
+157
+00:10:51,275 --> 00:10:55,211
+From zero to ten degrees,
+the middle is five degrees,
+
+158
+00:10:55,211 --> 00:10:58,925
+where one over cosine
+is one point zero zero four.
+
+159
+00:10:59,275 --> 00:11:03,967
+So the first drawn step, ten degrees
+in radians times that stretch,
+
+160
+00:11:03,967 --> 00:11:07,258
+is about zero point one seven five
+Earth radii,
+
+161
+00:11:07,258 --> 00:11:11,250
+or about one thousand one
+hundred and sixteen kilometres.
+
+162
+00:11:12,750 --> 00:11:16,720
+From ten to twenty degrees,
+the middle is fifteen degrees,
+
+163
+00:11:16,720 --> 00:11:22,400
+the stretch is one point zero three five,
+and the step is zero point one eight one.
+
+164
+00:11:22,750 --> 00:11:26,225
+The running total
+is zero point three five six.
+
+165
+00:11:27,725 --> 00:11:32,644
+From twenty to thirty degrees,
+the stretch is one point one zero three,
+
+166
+00:11:32,644 --> 00:11:38,325
+the step is zero point one nine three, and
+the total is zero point five four nine.
+
+167
+00:11:39,825 --> 00:11:41,550
+Let's speed up.
+
+168
+00:11:41,900 --> 00:11:46,084
+The total reaches about
+one point zero one at fifty degrees,
+
+169
+00:11:46,084 --> 00:11:48,107
+one point three one at sixty,
+
+170
+00:11:48,107 --> 00:11:52,500
+one point seven three at seventy,
+and two point four at eighty.
+
+171
+00:11:54,000 --> 00:11:58,600
+Look at the steps: they grow as we
+go north, because the stretch grows.
+
+172
+00:11:58,950 --> 00:12:01,691
+The last ten degrees,
+from eighty to ninety,
+
+173
+00:12:01,691 --> 00:12:06,550
+add at least two more on their own, and
+we'll see soon that they add far more.
+
+174
+00:12:06,900 --> 00:12:10,824
+Navigators really did it this
+way: in fifteen ninety nine,
+
+175
+00:12:10,824 --> 00:12:13,463
+the English mathematician Edward Wright
+
+176
+00:12:13,463 --> 00:12:16,642
+published a table
+made by adding up such steps,
+
+177
+00:12:16,642 --> 00:12:18,875
+one minute of latitude at a time.
+
+178
+00:12:19,675 --> 00:12:24,901
+Adding up tiny steps like this
+is the integration we met in Part 3,
+
+179
+00:12:24,901 --> 00:12:27,475
+and this sum has an exact answer.
+
+180
+00:12:27,825 --> 00:12:32,975
+To write it, we need one new
+tool, the natural logarithm, written l n.
+
+181
+00:12:33,325 --> 00:12:36,750
+The number e is about
+two point seven one eight.
+
+182
+00:12:37,100 --> 00:12:41,071
+The natural logarithm
+of a number answers one question:
+
+183
+00:12:41,071 --> 00:12:43,525
+e to what power gives this number?
+
+184
+00:12:43,875 --> 00:12:48,625
+So l n of one is zero,
+because e to the power zero is one.
+
+185
+00:12:48,975 --> 00:12:51,150
+And l n of e is one.
+
+186
+00:12:52,650 --> 00:12:56,770
+Here's the answer to our sum:
+y equals the Earth's radius,
+
+187
+00:12:56,770 --> 00:12:59,967
+times the natural
+logarithm of the tangent of
+
+188
+00:12:59,967 --> 00:13:02,950
+forty five degrees plus half the latitude.
+
+189
+00:13:03,300 --> 00:13:06,595
+Forty five degrees
+is pi over four radians,
+
+190
+00:13:06,595 --> 00:13:10,350
+so on screen it's pi over four
+plus phi over two.
+
+191
+00:13:10,700 --> 00:13:13,275
+Let's test it against our table.
+
+192
+00:13:13,625 --> 00:13:14,881
+At sixty degrees,
+
+193
+00:13:14,881 --> 00:13:20,350
+adding half the latitude to forty five
+degrees gives seventy five degrees.
+
+194
+00:13:20,700 --> 00:13:23,738
+Its tangent
+is three point seven three two,
+
+195
+00:13:23,738 --> 00:13:27,200
+and the l n of that
+is one point three one seven.
+
+196
+00:13:28,700 --> 00:13:33,225
+Our ten-degree sum gave
+one point three one three, very close.
+
+197
+00:13:33,575 --> 00:13:38,178
+With one-degree steps, the sum
+gives one point three one seven,
+
+198
+00:13:38,178 --> 00:13:40,150
+the same to three decimals.
+
+199
+00:13:41,650 --> 00:13:44,678
+At Brest, forty five degrees plus half its
+
+200
+00:13:44,678 --> 00:13:47,850
+latitude gives sixty
+nine point two degrees.
+
+201
+00:13:48,200 --> 00:13:51,448
+Its tangent
+is two point six three two five,
+
+202
+00:13:51,448 --> 00:13:54,475
+and its l n is zero point nine six eight.
+
+203
+00:13:54,825 --> 00:13:56,307
+So on a Mercator map,
+
+204
+00:13:56,307 --> 00:14:01,033
+Brest sits zero point nine six eight
+Earth radii above the equator,
+
+205
+00:14:01,033 --> 00:14:05,125
+about six thousand one hundred
+and sixty seven kilometres.
+
+206
+00:14:06,625 --> 00:14:11,375
+On the flat square map, it was five
+thousand three hundred and eighty two.
+
+207
+00:14:12,175 --> 00:14:17,275
+How can we be sure the formula is right
+everywhere, not just at a few points?
+
+208
+00:14:17,625 --> 00:14:23,600
+Its slope must match the drawn step: one
+over cosine phi for each radian of phi.
+
+209
+00:14:23,950 --> 00:14:26,944
+Let's check its slope
+at sixty degrees with the
+
+210
+00:14:26,944 --> 00:14:29,875
+centred difference
+from the derivatives movie.
+
+211
+00:14:30,225 --> 00:14:35,350
+At sixty one degrees, the formula
+gives one point three five two four.
+
+212
+00:14:35,700 --> 00:14:40,000
+At fifty nine degrees, it gives
+one point two eight two six.
+
+213
+00:14:41,500 --> 00:14:44,743
+The difference
+is zero point zero six nine eight,
+
+214
+00:14:44,743 --> 00:14:47,457
+and the two points are two degrees apart,
+
+215
+00:14:47,457 --> 00:14:50,700
+which is zero point zero
+three four nine radians.
+
+216
+00:14:51,050 --> 00:14:55,775
+Dividing the difference by that step
+gives about two point zero zero.
+
+217
+00:14:57,275 --> 00:15:01,900
+And one over the cosine
+of sixty degrees is exactly two.
+
+218
+00:15:02,250 --> 00:15:05,725
+So the formula's slope
+is the stretch we wanted.
+
+219
+00:15:06,075 --> 00:15:07,850
+Two more checks.
+
+220
+00:15:08,200 --> 00:15:12,488
+At the equator, the tangent
+of forty five degrees is one,
+
+221
+00:15:12,488 --> 00:15:16,550
+and l n of one is zero, so y is
+zero, as it should be.
+
+222
+00:15:18,050 --> 00:15:21,642
+And at the pole, the angle
+becomes ninety degrees,
+
+223
+00:15:21,642 --> 00:15:25,450
+where the tangent has no end:
+it grows without limit.
+
+224
+00:15:25,800 --> 00:15:28,775
+So the pole is infinitely far up the map.
+
+225
+00:15:29,125 --> 00:15:34,106
+At eighty five degrees, y is already
+three point one three Earth radii,
+
+226
+00:15:34,106 --> 00:15:38,175
+about nineteen thousand nine
+hundred and fifty kilometres.
+
+227
+00:15:39,675 --> 00:15:43,880
+That's why Mercator maps are
+always cut off before the poles,
+
+228
+00:15:43,880 --> 00:15:46,500
+usually somewhere past eighty degrees.
+
+229
+00:15:47,300 --> 00:15:49,975
+If you skipped, here's what to keep.
+
+230
+00:15:50,325 --> 00:15:56,018
+Mercator stretches north-south by the same
+amount as east-west, one over cosine phi,
+
+231
+00:15:56,018 --> 00:15:59,611
+so his map grows taller
+and taller towards the poles,
+
+232
+00:15:59,611 --> 00:16:02,525
+and it can never show
+the poles themselves.
+
+233
+00:16:02,875 --> 00:16:06,875
+Now we can see why a rhumb line
+is straight on a Mercator map.
+
+234
+00:16:07,225 --> 00:16:11,900
+A rhumb line, as we saw
+in Part 6, keeps one compass bearing.
+
+235
+00:16:12,250 --> 00:16:14,750
+Zoom into any short piece of it.
+
+236
+00:16:15,100 --> 00:16:17,837
+On the globe, it's a tiny slanted step:
+
+237
+00:16:17,837 --> 00:16:20,925
+some distance west, and some
+distance south.
+
+238
+00:16:21,275 --> 00:16:25,350
+Keeping the same bearing means
+the same slant everywhere.
+
+239
+00:16:25,700 --> 00:16:29,142
+For Part 6's rhumb line
+from London to Los Angeles,
+
+240
+00:16:29,142 --> 00:16:31,438
+at two hundred and fifty eight and
+
+241
+00:16:31,438 --> 00:16:32,450
+a half degrees,
+
+242
+00:16:32,450 --> 00:16:37,850
+every piece goes about four point nine
+kilometres west for each kilometre south.
+
+243
+00:16:39,350 --> 00:16:41,850
+Now draw it on the Mercator map.
+
+244
+00:16:42,200 --> 00:16:46,077
+At each latitude, Mercator
+stretches the west part and
+
+245
+00:16:46,077 --> 00:16:50,025
+the south part by the same
+amount, one over cosine phi.
+
+246
+00:16:50,375 --> 00:16:55,175
+Stretching both parts by the same
+amount leaves their ratio unchanged.
+
+247
+00:16:55,525 --> 00:16:59,626
+So on the map, every piece
+of the route has the same slant,
+
+248
+00:16:59,626 --> 00:17:02,475
+four point nine across for each one down.
+
+249
+00:17:02,825 --> 00:17:06,475
+A line whose slant never
+changes is a straight line.
+
+250
+00:17:07,975 --> 00:17:10,845
+The great circle keeps
+changing its bearing,
+
+251
+00:17:10,845 --> 00:17:14,825
+so on this map it comes out curved,
+bulging towards the pole.
+
+252
+00:17:15,175 --> 00:17:19,964
+The two routes swap looks: on the
+globe, the great circle looks straight and
+
+253
+00:17:19,964 --> 00:17:24,375
+the rhumb line curves, and on Mercator's
+map it's the other way round.
+
+254
+00:17:25,175 --> 00:17:28,475
+But keeping shapes has a price: sizes.
+
+255
+00:17:28,825 --> 00:17:31,075
+How much is an area stretched?
+
+256
+00:17:31,425 --> 00:17:35,252
+Take a small square on the globe
+at sixty degrees north,
+
+257
+00:17:35,252 --> 00:17:37,575
+a hundred kilometres on each side.
+
+258
+00:17:37,925 --> 00:17:41,500
+Its area is ten thousand
+square kilometres.
+
+259
+00:17:41,850 --> 00:17:47,275
+On a Mercator map, its width is stretched
+by two, and its height by two as well.
+
+260
+00:17:47,625 --> 00:17:52,003
+So it's drawn two hundred kilometres
+wide and two hundred tall,
+
+261
+00:17:52,003 --> 00:17:56,450
+an area of forty thousand square
+kilometres: four times too big.
+
+262
+00:17:57,950 --> 00:18:02,450
+In general, the width
+is stretched by k and the height by k,
+
+263
+00:18:02,450 --> 00:18:05,300
+so the area is stretched by k times k,
+
+264
+00:18:05,300 --> 00:18:08,975
+k squared, which
+is one over cosine phi, squared.
+
+265
+00:18:09,325 --> 00:18:14,930
+At Svalbard, k is about four point nine,
+and squaring it gives about twenty four,
+
+266
+00:18:14,930 --> 00:18:18,875
+so areas there are drawn about
+twenty four times too big.
+
+267
+00:18:20,375 --> 00:18:25,675
+That's why, on a Mercator map,
+Greenland looks about as big as Africa.
+
+268
+00:18:26,025 --> 00:18:31,561
+In truth, Greenland covers about two
+point one seven million square kilometres,
+
+269
+00:18:31,561 --> 00:18:34,575
+and Africa about
+thirty point four million.
+
+270
+00:18:34,925 --> 00:18:39,276
+Dividing Africa's area by Greenland's
+gives about fourteen,
+
+271
+00:18:39,276 --> 00:18:42,300
+so Africa is about fourteen times bigger.
+
+272
+00:18:43,800 --> 00:18:49,475
+The Mercator map is great for directions
+and shapes, and poor for comparing sizes.
+
+273
+00:18:50,275 --> 00:18:53,775
+For climate maps, sizes often matter more.
+
+274
+00:18:54,125 --> 00:18:58,929
+If we want to know how much of the Earth
+was warmer than usual last month,
+
+275
+00:18:58,929 --> 00:19:02,500
+a map that inflates the polar
+regions would mislead us.
+
+276
+00:19:02,850 --> 00:19:06,328
+So climate scientists
+often use equal-area maps,
+
+277
+00:19:06,328 --> 00:19:09,950
+such as the Equal Earth
+map, from twenty eighteen.
+
+278
+00:19:10,300 --> 00:19:14,360
+On it, every patch keeps its true
+share of the Earth's area,
+
+279
+00:19:14,360 --> 00:19:18,825
+so Greenland shows at its real
+size, about a fourteenth of Africa.
+
+280
+00:19:19,175 --> 00:19:23,675
+Here's the same temperature map
+for September twenty twenty six,
+
+281
+00:19:23,675 --> 00:19:24,800
+drawn both ways.
+
+282
+00:19:25,150 --> 00:19:30,709
+The colours show how much warmer or colder
+each place was than its usual September,
+
+283
+00:19:30,709 --> 00:19:34,325
+the average from nineteen
+ninety one to twenty twenty.
+
+284
+00:19:34,675 --> 00:19:38,350
+That difference from the usual
+is called an anomaly.
+
+285
+00:19:38,700 --> 00:19:42,200
+On the Mercator map, the far
+north looks huge.
+
+286
+00:19:42,550 --> 00:19:46,350
+On the Equal Earth map, it
+shrinks to its true size.
+
+287
+00:19:46,700 --> 00:19:48,725
+The price now is shape.
+
+288
+00:19:49,075 --> 00:19:53,570
+Towards the poles, shapes get skewed:
+at sixty degrees north and
+
+289
+00:19:53,570 --> 00:19:58,275
+thirty degrees east, angles can be
+off by about thirty one degrees.
+
+290
+00:19:59,775 --> 00:20:04,225
+No flat map can keep both areas
+and shapes right everywhere.
+
+291
+00:20:04,575 --> 00:20:07,725
+So the rule is: pick the map for the job.
+
+292
+00:20:08,075 --> 00:20:11,196
+Use conformal maps
+for winds and directions,
+
+293
+00:20:11,196 --> 00:20:14,175
+and equal-area maps for comparing amounts.
+
+294
+00:20:14,525 --> 00:20:17,040
+Which maps forecasters use, and why,
+
+295
+00:20:17,040 --> 00:20:21,650
+has its own movie later in this
+series: How weather maps are made.
+
+296
+00:20:22,450 --> 00:20:26,075
+So why are there so many
+coordinate systems and maps?
+
+297
+00:20:26,425 --> 00:20:28,600
+There are three good reasons.
+
+298
+00:20:28,950 --> 00:20:30,775
+The first is shape.
+
+299
+00:20:31,125 --> 00:20:36,150
+When the coordinates match the shape
+of the problem, the numbers become simple.
+
+300
+00:20:36,500 --> 00:20:40,700
+A ring round a hurricane's eye
+is just r equals a constant,
+
+301
+00:20:40,700 --> 00:20:44,116
+the Earth's surface
+is just r equals its radius,
+
+302
+00:20:44,116 --> 00:20:47,675
+and a great circle route
+is just one angle, sigma.
+
+303
+00:20:48,025 --> 00:20:50,275
+The second is measurement.
+
+304
+00:20:50,625 --> 00:20:54,525
+We use the coordinates that
+our instruments and data use.
+
+305
+00:20:54,875 --> 00:20:59,478
+A radar sees distance and direction,
+a weather station feels east,
+
+306
+00:20:59,478 --> 00:21:04,500
+north and up, and weather data come
+on a grid of latitude and longitude.
+
+307
+00:21:04,850 --> 00:21:06,775
+The third is meaning.
+
+308
+00:21:07,125 --> 00:21:12,344
+The right coordinates split a vector
+into the parts that physics cares about:
+
+309
+00:21:12,344 --> 00:21:16,954
+spin and inflow round a storm, along
+and across a coast, or round and
+
+310
+00:21:16,954 --> 00:21:20,275
+in for a whirl round
+the pole, as we'll see next.
+
+311
+00:21:20,625 --> 00:21:25,825
+Maps follow the same rule: we choose the
+one that keeps what our question needs.
+
+312
+00:21:26,625 --> 00:21:31,975
+There's one more map that every forecaster
+knows: the view from above a pole.
+
+313
+00:21:32,325 --> 00:21:34,575
+Let's get there from the globe.
+
+314
+00:21:34,925 --> 00:21:37,125
+Here's the Earth, turning.
+
+315
+00:21:37,475 --> 00:21:41,700
+Now let's rise up above the North
+Pole, and look straight down.
+
+316
+00:21:42,050 --> 00:21:46,424
+From up here, the circles of latitude
+become rings round the pole,
+
+317
+00:21:46,424 --> 00:21:50,400
+and the meridians become
+spokes, like the spokes of a wheel.
+
+318
+00:21:50,750 --> 00:21:53,500
+Now let's flatten this view into a map.
+
+319
+00:21:53,850 --> 00:21:56,275
+The North Pole sits in the middle.
+
+320
+00:21:56,625 --> 00:22:00,202
+The rings are the latitudes:
+seventy five, sixty,
+
+321
+00:22:00,202 --> 00:22:03,925
+forty five and thirty
+degrees north, going outward.
+
+322
+00:22:04,275 --> 00:22:06,625
+The spokes are the longitudes.
+
+323
+00:22:06,975 --> 00:22:11,325
+Zero degrees, the prime meridian
+through Greenwich, points down.
+
+324
+00:22:11,675 --> 00:22:14,059
+Ninety degrees east points right, a
+
+325
+00:22:14,059 --> 00:22:19,100
+hundred and eighty degrees points
+up, and ninety degrees west points left.
+
+326
+00:22:20,600 --> 00:22:23,906
+So going east means going
+round anticlockwise,
+
+327
+00:22:23,906 --> 00:22:26,350
+as seen from above the North Pole.
+
+328
+00:22:26,700 --> 00:22:28,708
+This is polar coordinates again:
+
+329
+00:22:28,708 --> 00:22:32,913
+the distance from the middle grows
+with the distance from the pole,
+
+330
+00:22:32,913 --> 00:22:35,925
+and the angle round
+the middle is the longitude.
+
+331
+00:22:36,275 --> 00:22:39,438
+This kind of map is called
+polar stereographic,
+
+332
+00:22:39,438 --> 00:22:43,410
+and this one is drawn true
+to scale at sixty degrees north,
+
+333
+00:22:43,410 --> 00:22:45,900
+like many weather charts of the pole.
+
+334
+00:22:46,700 --> 00:22:49,061
+If you've never seen a map like this,
+
+335
+00:22:49,061 --> 00:22:53,400
+it can be hard to tell where things
+are, so let's take a short tour.
+
+336
+00:22:53,750 --> 00:22:56,336
+To find any place, first find its ring,
+
+337
+00:22:56,336 --> 00:23:00,050
+for the latitude, and then
+its spoke, for the longitude.
+
+338
+00:23:00,400 --> 00:23:04,394
+Near the bottom, at forty
+eight point four degrees north and
+
+339
+00:23:04,394 --> 00:23:06,325
+four and a half degrees west,
+
+340
+00:23:06,325 --> 00:23:11,650
+is Brest: just past the forty five degree
+ring, a little left of the zero spoke.
+
+341
+00:23:12,000 --> 00:23:16,239
+Closer to the pole, past
+the sixty degree ring, is Iceland,
+
+342
+00:23:16,239 --> 00:23:20,550
+at about sixty five degrees
+north and nineteen degrees west.
+
+343
+00:23:20,900 --> 00:23:23,869
+To its left is Greenland, the big island,
+
+344
+00:23:23,869 --> 00:23:27,925
+around seventy two degrees
+north and forty degrees west.
+
+345
+00:23:28,275 --> 00:23:31,625
+To the right of the zero
+spoke is Scandinavia.
+
+346
+00:23:31,975 --> 00:23:35,972
+Further in, at seventy
+eight point two degrees north and
+
+347
+00:23:35,972 --> 00:23:40,325
+fifteen point six degrees
+east, is Longyearbyen, on Svalbard.
+
+348
+00:23:40,675 --> 00:23:44,445
+Between Scandinavia and the pole
+lies the Barents Sea,
+
+349
+00:23:44,445 --> 00:23:48,425
+around seventy five degrees
+north and forty degrees east.
+
+350
+00:23:48,775 --> 00:23:53,775
+To the right, along the ninety
+degrees east spoke, stretches Siberia.
+
+351
+00:23:54,125 --> 00:23:58,782
+At the top, near a hundred and eighty
+degrees, is the Bering Strait,
+
+352
+00:23:58,782 --> 00:24:02,890
+with Alaska to its left, around
+sixty five degrees north and
+
+353
+00:24:02,890 --> 00:24:05,150
+a hundred and fifty degrees west.
+
+354
+00:24:05,500 --> 00:24:09,455
+And on the left, along ninety
+degrees west, is Canada,
+
+355
+00:24:09,455 --> 00:24:12,750
+with Hudson Bay at about
+sixty degrees north.
+
+356
+00:24:14,250 --> 00:24:16,648
+One last test: where's Los Angeles,
+
+357
+00:24:16,648 --> 00:24:21,375
+at thirty four degrees north
+and a hundred and eighteen degrees west?
+
+358
+00:24:21,725 --> 00:24:25,859
+Just inside the thirty degree ring,
+between the ninety west and
+
+359
+00:24:25,859 --> 00:24:29,075
+the hundred and eighty
+spokes, on the upper left.
+
+360
+00:24:30,575 --> 00:24:33,375
+Now let's put real weather on this map.
+
+361
+00:24:33,725 --> 00:24:36,525
+The air pressure falls as we go up.
+
+362
+00:24:36,875 --> 00:24:39,951
+About thirty kilometres
+up, in the stratosphere,
+
+363
+00:24:39,951 --> 00:24:43,155
+the layer above the one
+where our weather happens,
+
+364
+00:24:43,155 --> 00:24:48,025
+it's only ten hectopascals, about
+a hundredth of the pressure at the ground.
+
+365
+00:24:48,375 --> 00:24:50,988
+The height where the pressure is exactly
+
+366
+00:24:50,988 --> 00:24:53,797
+ten hectopascals isn't
+the same everywhere,
+
+367
+00:24:53,797 --> 00:24:58,500
+and this map shows it on the twenty
+first of January, twenty twenty six.
+
+368
+00:24:58,850 --> 00:25:00,783
+The colours show that height,
+
+369
+00:25:00,783 --> 00:25:05,650
+and the lines join places where
+it's the same, every four hundred metres.
+
+370
+00:25:06,000 --> 00:25:10,600
+We'll fade the place labels now, so
+that the weather is easy to see.
+
+371
+00:25:10,950 --> 00:25:15,104
+The surface is lowest, about
+twenty eight point six kilometres,
+
+372
+00:25:15,104 --> 00:25:19,192
+over the Barents Sea, at about
+seventy three degrees north and
+
+373
+00:25:19,192 --> 00:25:20,775
+forty four degrees east.
+
+374
+00:25:21,125 --> 00:25:23,137
+And it's higher further south:
+
+375
+00:25:23,137 --> 00:25:28,100
+about thirty point seven kilometres
+on average along thirty degrees north.
+
+376
+00:25:29,600 --> 00:25:31,725
+Now let's let the air move.
+
+377
+00:25:32,075 --> 00:25:34,970
+The winds blow nearly along these lines,
+
+378
+00:25:34,970 --> 00:25:38,300
+round and round
+the Arctic, from west to east.
+
+379
+00:25:38,650 --> 00:25:44,218
+The fastest, nearly eighty metres per
+second, about two hundred and eighty four
+
+380
+00:25:44,218 --> 00:25:48,800
+kilometres per hour, blow over Siberia,
+near sixty degrees north.
+
+381
+00:25:50,300 --> 00:25:54,577
+This great winter whirl of cold
+air, high above the Arctic,
+
+382
+00:25:54,577 --> 00:25:57,550
+is called the stratospheric polar vortex.
+
+383
+00:25:58,350 --> 00:26:02,625
+Let's describe these winds
+in the map's polar coordinates.
+
+384
+00:26:02,975 --> 00:26:08,325
+Pick any point, and draw its local
+east and north arrows, as in Part 4.
+
+385
+00:26:08,675 --> 00:26:13,811
+The east arrow points round the middle,
+anticlockwise as seen from above:
+
+386
+00:26:13,811 --> 00:26:17,400
+it's exactly the theta hat
+of Part 1 at that point.
+
+387
+00:26:17,750 --> 00:26:21,526
+The north arrow points straight
+at the middle, towards the pole.
+
+388
+00:26:21,876 --> 00:26:25,576
+That's the opposite
+of r hat, which points outward.
+
+389
+00:26:25,926 --> 00:26:28,751
+So the north arrow is minus r hat.
+
+390
+00:26:30,251 --> 00:26:35,029
+That means the eastward wind u is
+the tangential wind round the pole,
+
+391
+00:26:35,029 --> 00:26:39,600
+and the northward wind v is the radial
+wind with its sign flipped,
+
+392
+00:26:39,600 --> 00:26:42,301
+because blowing north means blowing in.
+
+393
+00:26:42,651 --> 00:26:47,526
+So u sub theta
+equals u, and u sub r equals minus v.
+
+394
+00:26:47,876 --> 00:26:50,825
+Westerly winds, the winds from the west,
+
+395
+00:26:50,825 --> 00:26:55,101
+go round anticlockwise,
+as seen from above the North Pole.
+
+396
+00:26:55,451 --> 00:27:00,227
+So the polar vortex spins the same
+way as the hurricane in Part 1,
+
+397
+00:27:00,227 --> 00:27:03,917
+but it's far wider:
+thousands of kilometres across,
+
+398
+00:27:03,917 --> 00:27:05,726
+instead of a few hundred.
+
+399
+00:27:06,076 --> 00:27:10,841
+And unlike a hurricane, it isn't
+fed by a warm sea: it forms because
+
+400
+00:27:10,841 --> 00:27:14,626
+the polar stratosphere cools
+in the long winter night.
+
+401
+00:27:15,426 --> 00:27:20,626
+There's one more choice hidden in polar
+coordinates: where to put the origin.
+
+402
+00:27:20,976 --> 00:27:25,101
+Let's see why it matters
+with a simple flat example first.
+
+403
+00:27:25,451 --> 00:27:30,130
+Picture a ring of air, a thousand
+kilometres from its own centre,
+
+404
+00:27:30,130 --> 00:27:33,801
+going round anticlockwise
+at ten metres per second.
+
+405
+00:27:34,151 --> 00:27:39,626
+With the origin at its centre, every air
+parcel on the ring moves purely round.
+
+406
+00:27:39,976 --> 00:27:45,451
+The tangential wind is ten, and the radial
+wind is zero, all the way round.
+
+407
+00:27:45,801 --> 00:27:51,401
+Now keep the same air, but move the origin
+five hundred kilometres to the west.
+
+408
+00:27:51,751 --> 00:27:55,226
+Look at the top of the ring, due
+north of the centre.
+
+409
+00:27:55,576 --> 00:28:00,626
+There, the wind blows due west:
+u is minus ten, and v is zero.
+
+410
+00:28:00,976 --> 00:28:05,836
+Seen from the new origin, this point
+is five hundred kilometres east and
+
+411
+00:28:05,836 --> 00:28:07,726
+a thousand kilometres north.
+
+412
+00:28:08,076 --> 00:28:12,544
+Its distance comes from Pythagoras:
+we square the two legs, add them,
+
+413
+00:28:12,544 --> 00:28:14,162
+and take the square root,
+
+414
+00:28:14,162 --> 00:28:18,501
+which gives about one thousand one
+hundred and eighteen kilometres.
+
+415
+00:28:18,851 --> 00:28:22,618
+To get its r hat, we divide
+each leg by that distance,
+
+416
+00:28:22,618 --> 00:28:27,501
+which gives zero point four four seven
+and zero point eight nine four.
+
+417
+00:28:29,001 --> 00:28:34,282
+As in Part 1, the radial wind
+is the dot product of the wind with r hat:
+
+418
+00:28:34,282 --> 00:28:38,390
+we multiply u by r hat's first
+part and v by its second,
+
+419
+00:28:38,390 --> 00:28:42,351
+and add them, which gives
+about minus four and a half.
+
+420
+00:28:42,701 --> 00:28:45,376
+It looks as if the air is flowing in.
+
+421
+00:28:46,876 --> 00:28:49,446
+The tangential wind uses theta hat,
+
+422
+00:28:49,446 --> 00:28:53,926
+minus zero point eight nine
+four, zero point four four seven.
+
+423
+00:28:54,276 --> 00:28:58,851
+Doing the same with theta hat's two
+parts gives about eight point nine.
+
+424
+00:29:00,351 --> 00:29:05,476
+Same air, same wind, but the new
+origin splits it differently.
+
+425
+00:29:05,826 --> 00:29:08,477
+Nothing is flowing in at all: the in and
+
+426
+00:29:08,477 --> 00:29:11,726
+out part comes only
+from where we put the origin.
+
+427
+00:29:12,526 --> 00:29:14,701
+Now back to the vortex.
+
+428
+00:29:15,051 --> 00:29:17,676
+Its own centre isn't at the pole.
+
+429
+00:29:18,026 --> 00:29:21,453
+It's at about seventy
+two point nine degrees north and
+
+430
+00:29:21,453 --> 00:29:23,737
+forty four point three degrees east,
+
+431
+00:29:23,737 --> 00:29:28,751
+over the Barents Sea, about one thousand
+nine hundred kilometres from the pole.
+
+432
+00:29:29,101 --> 00:29:32,892
+Let's draw a ring two thousand
+kilometres from the pole,
+
+433
+00:29:32,892 --> 00:29:36,479
+split the wind at each point on it
+into its round and
+
+434
+00:29:36,479 --> 00:29:39,525
+in and out parts
+with the pole as the origin,
+
+435
+00:29:39,525 --> 00:29:42,301
+and average round the ring, as in Part 1.
+
+436
+00:29:42,651 --> 00:29:45,928
+The round part averages
+only about seventeen and
+
+437
+00:29:45,928 --> 00:29:48,658
+a half metres per second, and the in and
+
+438
+00:29:48,658 --> 00:29:51,458
+out part is typically about thirty three,
+
+439
+00:29:51,458 --> 00:29:55,076
+almost twice as big:
+a ratio of about one point nine.
+
+440
+00:29:56,576 --> 00:30:02,426
+Now draw a ring two thousand kilometres
+from the vortex's own centre instead.
+
+441
+00:30:02,776 --> 00:30:07,953
+The round part averages about forty
+seven metres per second, and the in and
+
+442
+00:30:07,953 --> 00:30:10,369
+out part is typically about twenty,
+
+443
+00:30:10,369 --> 00:30:13,751
+less than half: a ratio
+of about zero point four.
+
+444
+00:30:15,251 --> 00:30:18,990
+So about its own
+centre, the vortex is mostly spin,
+
+445
+00:30:18,990 --> 00:30:21,776
+just like the hurricane round its eye.
+
+446
+00:30:22,126 --> 00:30:25,842
+Choosing the origin is part
+of choosing good coordinates:
+
+447
+00:30:25,842 --> 00:30:28,776
+put it at the centre
+of the thing that turns.
+
+448
+00:30:29,126 --> 00:30:31,823
+When the polar vortex weakens or splits,
+
+449
+00:30:31,823 --> 00:30:35,801
+cold air can spill south into
+the places where people live.
+
+450
+00:30:36,151 --> 00:30:39,905
+That story has its own
+movies later in this series:
+
+451
+00:30:39,905 --> 00:30:42,776
+Waves on the jet, and The polar vortex.
+
+452
+00:30:43,576 --> 00:30:47,501
+To sum up, flattening the Earth
+always stretches something.
+
+453
+00:30:47,851 --> 00:30:52,673
+The flat square map, with x equal
+to the Earth's radius times lambda,
+
+454
+00:30:52,673 --> 00:30:55,190
+and y equal to the radius times phi,
+
+455
+00:30:55,190 --> 00:30:58,265
+is true along the equator
+and the meridians,
+
+456
+00:30:58,265 --> 00:31:01,760
+but it stretches
+east-west by one over cosine phi:
+
+457
+00:31:01,760 --> 00:31:04,276
+about one and a half times at Brest.
+
+458
+00:31:04,626 --> 00:31:09,551
+Scale factors like this matter whenever
+we measure slopes on a weather grid,
+
+459
+00:31:09,551 --> 00:31:14,476
+where one degree east at Brest is only
+seventy three point eight kilometres.
+
+460
+00:31:14,826 --> 00:31:18,120
+Mercator stretches
+north-south by the same amount,
+
+461
+00:31:18,120 --> 00:31:22,601
+so small shapes and angles stay
+right, and rhumb lines are straight.
+
+462
+00:31:22,951 --> 00:31:26,629
+His map's height is the Earth's
+radius times l n of the
+
+463
+00:31:26,629 --> 00:31:30,173
+tangent of forty five degrees
+plus half the latitude,
+
+464
+00:31:30,173 --> 00:31:31,645
+which puts Brest about
+
+465
+00:31:31,645 --> 00:31:36,326
+six thousand one hundred and sixty
+seven kilometres above the equator.
+
+466
+00:31:36,676 --> 00:31:39,470
+But areas grow by one over cosine phi,
+
+467
+00:31:39,470 --> 00:31:42,778
+squared, about twenty
+four times at Svalbard,
+
+468
+00:31:42,778 --> 00:31:46,601
+so equal-area maps are
+better for comparing amounts.
+
+469
+00:31:46,951 --> 00:31:52,751
+Seen from above the North Pole, a map
+is polar coordinates again: east is round,
+
+470
+00:31:52,751 --> 00:31:57,826
+north is in, and the polar vortex
+is mostly spin about its own centre.
+
+471
+00:31:58,176 --> 00:32:01,842
+With that, our seven parts
+on coordinates are complete,
+
+472
+00:32:01,842 --> 00:32:05,976
+from arrows on a flat map
+to winds over the whole round Earth.
+
+473
+00:32:06,326 --> 00:32:10,503
+Next in this series comes the gradient:
+how fast, and in which
+
+474
+00:32:10,503 --> 00:32:14,276
+direction, temperature
+or pressure changes across a map.
+
+475
+00:32:14,626 --> 00:32:17,935
+It's where the one over
+the Earth's radius times
+
+476
+00:32:17,935 --> 00:32:21,176
+cosine phi that we met
+here does its real work.
+
+477
+00:32:21,976 --> 00:32:26,133
+This video is one of a series
+of related maths tutorials,
+
+478
+00:32:26,133 --> 00:32:28,176
+so watch out for the others.
+
+479
+00:32:28,526 --> 00:32:32,923
+They're made for students
+of atmospheric science, meteorology and
+
+480
+00:32:32,923 --> 00:32:36,576
+fluid dynamics, and anyone
+else who needs these ideas.
+
+481
+00:32:36,926 --> 00:32:41,754
+The notebook for coordinates, and the
+notebooks for the other maths concepts,
+
+482
+00:32:41,754 --> 00:32:44,576
+are on the website that
+goes with this video.

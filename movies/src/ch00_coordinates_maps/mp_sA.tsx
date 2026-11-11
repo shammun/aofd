@@ -64,8 +64,8 @@ const S00: React.FC = () => {
         </g>
       </Svg>
       <PolarMap f={f} v={vB} o={oB} trails={1} trailFr={f + 120} rings={0.35} spokes={0.3} dimBase={0.35} id="s00p" />
-      <SourceBelow text={SRC_IMG} pic={TB} w={710} o={oA} name="s00 src a" />
-      <SourceBelow text="Image: NASA Blue Marble NG · Data: NCEP/NCAR Reanalysis 1 · 21 Jan 2026 · 10 hPa" pic={TB} w={710} o={oB} name="s00 src b" />
+      <SourceBelow text={SRC_IMG} pic={TB} w={710} o={fout(f, tPole - 8, 8)} name="s00 src a" />
+      <SourceBelow text="Image: NASA Blue Marble NG · Data: NCEP/NCAR Reanalysis 1 · 21 Jan 2026 · 10 hPa" pic={TB} w={710} o={fin(f, tPole + 2, 8)} name="s00 src b" />
     </Scene>
   );
 };
@@ -107,14 +107,14 @@ const S01: React.FC = () => {
       <PolarMap f={f} v={VP01} dimBase={mix(0.45, 0.12, fin(f, tArc, 15))} rings={0.35} spokes={0.3} trails={fin(f, tPole, 20)} trailFr={f + 60} id="s01p" />
       <Svg>
         <g opacity={fin(f, tSeven)}>
-          {Array.from({ length: 7 }, (_, i) => <PartThumb key={i} i={i} x={120 + i * 165} y={712} o={i === 6 ? 1 : 0.35} lit={i === 6} />)}
+          {Array.from({ length: 7 }, (_, i) => <PartThumb key={i} i={i} x={120 + i * 165} y={748} o={i === 6 ? 1 : 0.35} lit={i === 6} />)}
         </g>
-        <Keyword f={f} text="maps" at={[1290, 760]} appear={tSeven + 10} c={C.gold} />
+        <Keyword f={f} text="maps" at={[1290, 796]} appear={tSeven + 10} c={C.gold} />
       </Svg>
       <SourceBelow text={SRC_BM} pic={mapBox(V01, "mc", 80)} w={741} name="s01 src m" />
-      <SourceBelow text="Image: NASA Blue Marble NG · Data: NCEP/NCAR R1 · 21 Jan 2026" pic={{ x: VP01.cx - 290, y: VP01.cy - 290, w: 580, h: 580 }} w={580} gap={12}
+      <SourceBelow text="Image: NASA Blue Marble NG · Data: NCEP/NCAR R1 · 21 Jan 2026" pic={{ x: VP01.cx - 290, y: VP01.cy - 290, w: 580, h: 580 }} w={580}
         o={fin(f, tPole, 20)} name="s01 src p2" />
-      <SourceBelow text={SRC_BM} pic={{ x: VP01.cx - 290, y: VP01.cy - 290, w: 580, h: 580 }} w={580} gap={12} o={fout(f, tPole - 12, 12)} name="s01 src p" />
+      <SourceBelow text={SRC_BM} pic={{ x: VP01.cx - 290, y: VP01.cy - 290, w: 580, h: 580 }} w={580} o={fout(f, tPole - 12, 12)} name="s01 src p" />
     </Scene>
   );
 };
@@ -154,7 +154,7 @@ const S03: React.FC = () => {
 // ================================================================ s04 the plate carrée: x = a λ, y = a φ (maths block A starts)
 const G4 = { x: 70, y: 15, w: 440, h: 370 };
 const CAM4: GlobeCam = { lat: 22, lon: -25, dist: 3.6 };
-const V4: PV = { cx: 540, cy: 625, s: 132 };
+const V4: PV = { cx: 540, cy: 616, s: 132 };   // build1 K6: 625 -> 616 (source line gap 16 and above y 880)
 const VZ4: PV = { cx: 600, cy: 800, s: 420 };
 const B4 = mapBox(V4, "pc");
 const PageFrame: React.FC<{ id: string; v: PV; o?: number; img?: number; children?: (p: (lat: number, lon: number) => Pt) => React.ReactNode }> = ({ id, v, o = 1, img = 0, children }) =>
@@ -216,8 +216,8 @@ const S04: React.FC = () => {
         {/* remake 2026-11-07 (R16): the arc rule (Part 1), the letter a and the distance north (Part 3) are Recall items below */}
         <SkipChip f={f} k={k} to={keepTime("s06_gradient_preview")} />
         <CurvedLink f={f} from={[XC - 14, 230]} to={[pLam[0], pLam[1] - 14]} start={t9 + 8} end={t10} bend={60} />
-        <SideCallout f={f} lines="≈ −500 km" at={[XC + 20, 700]} appear={t16 + 40} out={t19} target={[(p0[0] + pX[0]) / 2, p0[1] + 10]} c={C.second} bend={-40} />
-        <SideCallout f={f} lines="≈ 5382 km" at={[XC + 20, 620]} appear={t17 + 40} out={t19} target={[pB[0] + 10, (pX[1] + pB[1]) / 2]} c={C.first} bend={20} />
+        <SideCallout f={f} lines="≈ −500 km" at={[XC + 20, 750]} appear={t16 + 40} out={t19} target={[(p0[0] + pX[0]) / 2, p0[1] + 10]} c={C.second} bend={-40} />
+        <SideCallout f={f} lines="≈ 5382 km" at={[XC + 20, 665]} appear={t17 + 40} out={t19} target={[pB[0] + 10, (pX[1] + pB[1]) / 2]} c={C.first} bend={20} />
         <Keyword f={f} text="true along the equator" at={[XC, 680]} s={T.floor} appear={t19 + 60} />
         <Lbl x={XC} y={740} t="and along every meridian" c={C.key} s={T.floor} o={fin(f, t19 + 68)} />
         <Keyword f={f} text="plate carrée = flat square" at={[XC, 810]} appear={AT(k, 20, "plate carrée")} c={C.gold} />
@@ -237,7 +237,7 @@ const S04: React.FC = () => {
         { lhs: String.raw`y`, rhs: String.raw`=6371\times0.8447`, at: t17, c: C.first },
         { rhs: String.raw`\approx5382\ \text{km}`, at: AT(k, 17, "about five"), c: C.first, cont: true },
       ]} />
-      <SourceBelow text={SRC_IMG} pic={B4} w={830} gap={12} name="s04 src" />
+      <SourceBelow text={SRC_IMG} pic={B4} w={830} name="s04 src" />
     </Scene>
   );
 };
@@ -301,8 +301,8 @@ const S05: React.FC = () => {
       <Svg>
         <OptTag f={f} />
         <Keyword f={f} text="a parallel" at={[XC, 200]} appear={0} out={tLong - 18} />
-        <SideCallout f={f} lines="40 030 km" at={[XC + 14, 200]} appear={tLong} out={t8 - 20} target={[pRight[0] - 8, pRight[1] - 10]} c={C.first} bend={30} />
-        <SideCallout f={f} lines="$a\cos\varphi\approx$ 4230 km" at={[XC + 14, 290]} appear={t3 + 20} out={t8 - 20} target={radMid} c={C.gold} bend={-30} />
+        <SideCallout f={f} lines="40 030 km" at={[XC + 14, 290]} appear={tLong} out={t8 - 20} target={[pRight[0] - 8, pRight[1] - 10]} c={C.first} bend={30} />
+        <SideCallout f={f} lines="$a\cos\varphi\approx$ 4230 km" at={[XC + 14, 200]} appear={t3 + 20} out={t8 - 20} target={radMid} c={C.gold} bend={-30} />
         <SideCallout f={f} lines="≈ 4.9" at={[XC + 14, 570]} appear={t12 + 20} out={t14} target={band(LYB[0])} c={C.gold} bend={20} />
         <SideCallout f={f} lines="= 2" at={[XC + 14, 650]} appear={t11 + 20} out={t14} target={band(60)} c={C.gold} bend={20} />
         <SideCallout f={f} lines="≈ 1.5" at={[XC + 14, 730]} appear={t10 + 20} out={t14} target={band(BREST[0])} c={C.gold} bend={20} />
@@ -322,7 +322,7 @@ const S05: React.FC = () => {
       <TeX s={String.raw`1/0.5`} x={XC + 160} y={650} size={48} c={C.muted} o={win(f, AT(k, 11, "zero point five") - 8, t14)} glow={HL(f, AT(k, 11, "zero point five"))} />
       <TeX s={String.raw`1/0.204`} x={XC + 190} y={570} size={48} c={C.muted} o={win(f, AT(k, 12, "zero point two") - 8, t14)} glow={HL(f, AT(k, 12, "zero point two"))} />
       <Recall f={f} tex="" name="radius of a parallel" part={3} x={XC} y={610} appear={AT(k, 3, "As we saw in Part 3")} out={t8 - 20} />
-      <SourceBelow text={SRC_IMG} pic={B4} w={830} gap={12} name="s05 src" />
+      <SourceBelow text={SRC_IMG} pic={B4} w={830} name="s05 src" />
     </Scene>
   );
 };
@@ -354,11 +354,15 @@ const S06: React.FC = () => {
         {(P) => <>{[[BREST[0], 1.5], [60, 2], [LYB[0], 4.9]].map(([la]) => <line key={la} x1={P(la, -180)[0]} y1={P(la, 0)[1]} x2={P(la, 180)[0]} y2={P(la, 0)[1]}
           stroke={C.gold} strokeWidth={7} opacity={0.85 * fin(f, AT(k, 2, "one and a half"))} />)}</>}
       </ProjMap>
+      {/* build1 K6: the crop in an overflow-hidden HTML panel (as ProjMap), so its probed box is the panel, not the whole raster */}
+      {o2 > 0 ? <div style={{ position: "absolute", left: B6.x, top: B6.y, width: B6.w, height: B6.h, overflow: "hidden", opacity: o2, background: "#1d2a44" }}>
+        <svg width={B6.w} height={B6.h} style={{ position: "absolute", left: 0, top: 0 }}>
+          <image href={IMGS.crop} x={ia[0] - B6.x} y={ia[1] - B6.y} width={ib[0] - ia[0]} height={ib[1] - ia[1]} preserveAspectRatio="none" opacity={0.85} />
+        </svg>
+      </div> : null}
       {o2 > 0 ? <Svg o={o2}>
         <defs><clipPath id="s06g"><rect x={B6.x} y={B6.y} width={B6.w} height={B6.h} /></clipPath></defs>
         <g clipPath="url(#s06g)">
-          <rect x={B6.x} y={B6.y} width={B6.w} height={B6.h} fill="#1d2a44" />
-          <image href={IMGS.crop} x={ia[0]} y={ia[1]} width={ib[0] - ia[0]} height={ib[1] - ia[1]} preserveAspectRatio="none" opacity={0.85} />
           <path d={(D.brest_coast as number[][]).map((L) => { let d = ""; for (let i = 0; i < L.length; i += 2) { const q = P6(L[i + 1], L[i]); d += `${i ? "L" : "M"}${q[0].toFixed(1)} ${q[1].toFixed(1)}`; } return d; }).join("")}
             fill="none" stroke={C.key} strokeOpacity={0.8} strokeWidth={2} />
           {Array.from({ length: 14 }, (_, i) => -11 + i).map((lo) => <line key={lo} x1={P6(0, lo)[0]} y1={B6.y} x2={P6(0, lo)[0]} y2={B6.y + B6.h} stroke={C.local} strokeWidth={2} opacity={0.45} />)}
@@ -393,9 +397,10 @@ const S06: React.FC = () => {
       <Recall f={f} tex={EQ_S02} name="scale factors" part={6} x={XC} y={420} size={60} appear={AT(k, 3, "In Part 6")} out={t4 - 10} />
       <Recall f={f} tex={String.raw`\Delta x=a\cos\varphi\,\Delta\lambda\approx73.8\ \text{km}`} name="distances" part={3} x={XC} y={420} size={52}
         appear={AT(k, 7, "as we found in Part 3")} out={t8 - 12} glow={HL(f, AT(k, 7, "seventy three"))} />
-      <TeX s={String.raw`\dfrac{1\ ^\circ\text{C}}{73.8\ \text{km}}\approx 1.4\ ^\circ\text{C per }100\ \text{km}`} x={XC} y={250} size={52} o={fin(f, t7)} />
-      <Layered parts={p1} x={XC} y={400} size={66} layers={[{ t: "all", o: fin(f, t8) }, { t: [], u: [1], o: fin(f, AT(k, 9, "one over the Earth")) }]} />
-      <Layered parts={p2} x={XC} y={575} size={66} layers={[{ t: "all", o: fin(f, t9) }, { t: [], u: [1], o: fin(f, t9 + 20) }]} />
+      <TeX s={String.raw`\dfrac{1\ ^\circ\text{C}}{73.8\ \text{km}}\approx 1.4\ ^\circ\text{C per }100\ \text{km}`} x={XC} y={200} size={52} o={fin(f, t7)} />
+      {/* build1 K6: 1 °C row 250 -> 200, lines 400 / 575 at 66 -> 385 / 615 at 60 (the brace labels cleared the next line) */}
+      <Layered parts={p1} x={XC} y={385} size={63} layers={[{ t: "all", o: fin(f, t8) }, { t: [], u: [1], o: fin(f, AT(k, 9, "one over the Earth")) }]} />
+      <Layered parts={p2} x={XC} y={620} size={63} layers={[{ t: "all", o: fin(f, t9) }, { t: [], u: [1], o: fin(f, t9 + 20) }]} />
       <SourceBelow text={SRC_BM} pic={mapBox(V6, "pc")} w={880} o={o1} name="s06 src a" />
       <SourceBelow text="Image: NASA Blue Marble NG · coast: Natural Earth · grid: illustrative" pic={B6} w={920} o={o2} name="s06 src b" />
     </Scene>
@@ -463,7 +468,7 @@ const S07: React.FC = () => {
         <Lbl x={XC} y={715} t="shapes and angles right" c={C.key} s={T.floor} o={fin(f, AT(k, 13, "keep shapes") + 8)} />
         <Lbl x={XC} y={770} t="in every small patch" c={C.key} s={T.floor} o={fin(f, AT(k, 13, "keep shapes") + 16)} />
       </Svg>
-      <SourceBelow text={SRC_BM} pic={{ x: 100, y: 108, w: 880, h: 684 }} w={880} gap={12} name="s07 src" />
+      <SourceBelow text={SRC_BM} pic={{ x: 100, y: 108, w: 880, h: 684 }} w={880} name="s07 src" />
     </Scene>
   );
 };

@@ -184,7 +184,7 @@ const S03: React.FC = () => {
         {/* remake 2026-11-07 (R16): the part each system comes from, under its name */}
         {["Part 1", "Part 2", "Part 3"].map((t, i) => <Lbl key={t} x={xs[i]} y={565} t={t} c={C.gold} s={T.floor} a="middle" o={fin(f, 8 + 10 * i) * fout(f, tF3 - 20)} />)}
         <Keyword f={f} text="1° east ≈ 111 km (equator)" at={[1270, 520]} s={T.floor} appear={tDeg} c={C.first} />
-        <Keyword f={f} text="1° east ≈ 23 km (78° N)" at={[1270, 585]} s={T.floor} appear={tDeg + 20} c={C.first} />
+        <Keyword f={f} text="1° east ≈ 23 km (78° N)" at={[1270, 645]} s={T.floor} appear={tDeg + 20} c={C.first} />
         <Keyword f={f} text="curvilinear: lines that can curve" at={[90, 640]} appear={tCv} />
         <Keyword f={f} text="three features" at={[1300, 650]} s={T.floor} appear={t3} out={tDeg - 18} />
         <Keyword f={f} text="1 · curved lines" at={[90, 760]} s={T.floor} appear={tF1} />
@@ -192,8 +192,8 @@ const S03: React.FC = () => {
         <Keyword f={f} text="3 · a step is not a distance" at={[1080, 760]} s={T.floor} appear={tF3} c={C.gold} />
         <Keyword f={f} text="it needs a name" at={[1080, 830]} s={T.floor} appear={tName} />
       </Svg>
-      <TeX s={String.raw`6371\times0.01745\approx111\ \text{km}`} x={1270} y={630} size={44} c={C.muted} o={fin(f, tDeg + 10)} />
-      <TeX s={String.raw`111.2\times\cos78.2^\circ\approx23\ \text{km}`} x={1270} y={690} size={44} c={C.muted} o={fin(f, tDeg + 30)} />
+      <TeX s={String.raw`6371\times0.01745\approx111\ \text{km}`} x={1270} y={580} size={44} c={C.muted} o={fin(f, tDeg + 10)} />
+      <TeX s={String.raw`111.2\times\cos78.2^\circ\approx23\ \text{km}`} x={1270} y={700} size={44} c={C.muted} o={fin(f, tDeg + 30)} />
       <TeX s={H.r} x={xs[0] - 175} y={y0 - 160} size={46} c={C.second} o={fin(f, tF2)} />
       <TeX s={H.th} x={xs[0] - 175} y={y0 - 95} size={46} c={C.second} o={fin(f, tF2)} />
     </Scene>
@@ -230,7 +230,8 @@ const S04: React.FC = () => {
       <TeX s={String.raw`r`} x={c1[0] + R / 2} y={c1[1] + 34} size={56} c={C.key} ax={0.5} o={ring} />
       <TeX s={String.raw`\Delta\theta`} x={c1[0] + 92} y={c1[1] - 44} size={48} c={C.gold} o={ring * fin(f, tRing)} />
       <TeX s={String.raw`r\,\Delta\theta`} x={c1[0] + R + 30} y={c1[1] - 70} size={56} c={C.first} o={ring * fin(f, tRing + 20)} />
-      <Globe cam={CAM4} o={glo} meshO={0.55} grat={0.2} coast={0.35}
+      {/* build1 2026-11-10 (K6): no graticule here: its thin grey lines are guide lines the gold links may not cross (link-axis) */}
+      <Globe cam={CAM4} o={glo} meshO={0.55} grat={0} coast={0.35}
         over={(Gg) => <>
           {gseg(Gg, [0, -1.2, 0], [0, 1.25, 0], C.muted, 3, 1, "10 8")}
           {gseg(Gg, [0, 0, 0], ll(BREST[0], BREST[1]), C.key, 4, fin(f, tN), "10 7")}
@@ -245,17 +246,20 @@ const S04: React.FC = () => {
       <GlobeFrame id="s04k" zoom={0} disc={discOf(CAM4)} o={glo} />
       <GSrc o={glo} />
       <TeX s={String.raw`a`} x={mix(c0[0], br[0], 0.5) - 26} y={mix(c0[1], br[1], 0.5) + 10} size={50} c={C.key} ax={1} o={fin(f, tN)} halo />
-      <TeX s={String.raw`a\,\Delta\varphi`} x={mN[0] - 24} y={mN[1]} size={50} c={C.first} ax={1} o={fin(f, tN + 10)} halo />
-      <TeX s={String.raw`a\cos\varphi`} x={mix(axisPt[0], br[0], 0.3)} y={mix(axisPt[1], br[1], 0.3) - 34} size={48} c={C.gold} ax={0.5} o={fin(f, tPar)} halo />
-      <TeX s={String.raw`a\cos\varphi\,\Delta\lambda`} x={mE[0] + 56} y={mE[1] - 66} size={48} c={C.first} ax={0.5} o={fin(f, tE + 10)} halo />
+      {/* build1 2026-11-10 (K6 text-picture / text-stroke): the steps carry the short names Δy, Δx (spot labels, clear of the strokes),
+          defined beside them by the Part 3 recall "Δy = a Δφ, Δx = a cos φ Δλ"; the parallel's radius a cos φ is named in the column */}
+      <TeX s={String.raw`\Delta y`} x={br[0] - 140} y={br[1] - 130} size={50} c={C.first} ax={0.5} o={fin(f, tN + 10)} halo />
+      <TeX s={String.raw`\Delta x`} x={br[0] + 110} y={br[1]} size={50} c={C.first} ax={0.5} o={fin(f, tE + 10)} halo />
       <Svg>
         <Keyword f={f} text="how far for a small step?" at={[XC, 110]} appear={0} out={tSF - 18} />
         <Keyword f={f} text="scale factor = metres per unit" at={[XC, 110]} s={T.floor} appear={tSF} c={C.gold} />
         <Keyword f={f} text="$r\times$ the step" at={[XC, 360]} s={T.floor} appear={tMult} out={tTh - 18} />
         <Keyword f={f} text="at Brest" at={[XC + 520, yIn - 20]} s={T.floor} appear={tBr} />
+        <Keyword f={f} text="radius of the parallel: $a\cos\varphi$" at={[XC, 430]} s={T.floor} c={C.gold} appear={tPar} out={tBr - 22} />
         <Keyword f={f} text="same 1° step: 111.2 km or 73.8 km" at={[XC, 830]} s={T.floor} appear={tSame} />
         <CurvedLink f={f} from={[XC - 14, 620]} to={[nT[0] + 14, nT[1] + 4]} start={tDy + 40} bend={40} end={tCos - 10} />
-        <CurvedLink f={f} from={[XC - 14, 682]} to={[mE[0] + 8, mE[1] + 12]} start={tDx + 40} bend={-40} />
+        {/* build1 2026-11-10 (K6): the link ends just right of the step's name Δx (it crossed the label while drawing) and leaves before the cut (it lay over s05's graticule) */}
+        <CurvedLink f={f} from={[XC - 14, 682]} to={[br[0] + 150, br[1] + 8]} start={tDx + 40} bend={-40} end={LEN(k) - 30} />
       </Svg>
       {/* the row tags (θ:, φ:, λ:) in KaTeX (symbol lint C5, remake 2026-11-07) */}
       <TeX s={String.raw`\theta:`} x={XC} y={200} size={44} c={C.muted} o={fin(f, tTh)} />

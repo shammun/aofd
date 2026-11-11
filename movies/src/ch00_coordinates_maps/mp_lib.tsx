@@ -87,7 +87,7 @@ export const lutCss = (lut: string[], t: number) => lut[Math.max(0, Math.min(lut
 /** hats in KaTeX (never a combining hat in a text label) */
 export const H = { r: String.raw`\hat{\mathbf r}`, th: String.raw`\hat{\boldsymbol\theta}`, i: String.raw`\mathbf i`, j: String.raw`\mathbf j` };
 export const SRC_BM = "Image: NASA Blue Marble NG · Natural Earth";
-export const SRC_VX = "Data: NCEP/NCAR Reanalysis 1 (NOAA PSL) · 21 Jan 2026 · 10 hPa · Image: NASA Blue Marble NG";
+export const SRC_VX = "Data: NCEP/NCAR R1 · 21 Jan 2026 · 10 hPa · Image: NASA Blue Marble NG";   // build1 K6: one line from x 40 (s00 names Reanalysis 1 in full)
 export const SRC_T2M = "Data: ERA5 (Copernicus C3S) · Sep 2026 vs 1991–2020";
 
 // ---------------------------------------------------------------- KaTeX width guard (text ends before x 1842)
@@ -414,7 +414,7 @@ export const PolarMap: React.FC<{ f: number; v?: PV; o?: number; base?: number; 
 export const SpokeLabels: React.FC<{ v?: PV; o: [number, number, number, number] }> = ({ v = VP, o }) => {
   const R = R_PS * v.s;
   return <g>
-    <Lbl x={v.cx} y={v.cy + R + 34} t="0°" c={C.key} s={T.floor} a="middle" o={o[0]} />
+    <Lbl x={v.cx} y={v.cy + R + 28} t="0°" c={C.key} s={T.floor} a="middle" o={o[0]} />
     <Lbl x={v.cx + R + 16} y={v.cy} t="90° E" c={C.key} s={T.floor} o={o[1]} />
     <Lbl x={v.cx} y={v.cy - R - 30} t="180°" c={C.key} s={T.floor} a="middle" o={o[2]} />
     <Lbl x={v.cx - R - 16} y={v.cy} t="90° W" c={C.key} s={T.floor} a="end" o={o[3]} />
@@ -442,7 +442,8 @@ export const Globe: React.FC<{ cam: GlobeCam; box?: { x: number; y: number; w: n
       <Svg o={o}>
         <defs><clipPath id={id}><rect x={box.x} y={box.y} width={box.w} height={box.h} /></clipPath></defs>
         <g clipPath={`url(#${id})`}>
-          {grat > 0 ? <Graticule G={G} step={30} o={grat} /> : null}
+          {/* build1 K6: the globe's faint graticule is a picture detail, not a graph axis (house §6 "links never cross ticks"): exempt */}
+          {grat > 0 ? <g data-lc-ok="globe-graticule"><Graticule G={G} step={30} o={grat} /></g> : null}
           {coast > 0 ? <path d={coastPath(G, (D.coast as number[][]).map((L) => { const o2: number[] = []; for (let i = 0; i < L.length; i += 2) o2.push(L[i + 1], L[i]); return o2; }))}
             fill="none" stroke={C.key} strokeOpacity={coast} strokeWidth={1.6} /> : null}
           {over ? over(G) : null}
@@ -557,7 +558,7 @@ export const SkipChip: React.FC<{ f: number; k: number; to: string }> = ({ f, k,
   guard(t, 1060, textW(t, T.floor));
   const o = ramp(f, a, a + 10) * (1 - ramp(f, b, b + 10));
   return <>
-    {o > 0 ? <g opacity={o}>
+    {o > 0 ? <g opacity={o} data-lc-own="skipchip">
       <rect x={1046} y={46} width={796} height={68} rx={16} fill="#1f2a44" stroke={C.gold} strokeWidth={3} />
       <Lbl x={1060} y={80} t={t} c={C.key} s={T.floor} />
     </g> : null}

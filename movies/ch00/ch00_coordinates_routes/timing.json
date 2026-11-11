@@ -3,7 +3,13 @@
  "speed": 1.0,
  "fps": 30,
  "sample_rate": 24000,
- "provisional": "remake 2026-11-07 static phase: re-used clip lengths from the dry runs, new sentences estimated at 14.64 chars/s (rt_r7_splice.py --provisional); the final splice replaces it",
+ "gaps": {
+  "sentence": 0.35,
+  "beat": 1.5,
+  "scene": 0.8,
+  "lead": 0.3,
+  "tail": 0.3
+ },
  "scenes": [
   {
    "id": "s00_title",
@@ -11,1224 +17,9231 @@
    "sentences": [
     {
      "text": "In this video, we'll learn about routes across our round Earth and the coordinates behind them, and see how they're used to plan the shortest flights.",
+     "audio_text": null,
      "start": 0.3,
-     "end": 10.5454,
-     "dur": 10.2454,
+     "end": 8.9,
+     "dur": 8.6,
      "start_frame": 9,
-     "end_frame": 316,
-     "estimated": true
+     "end_frame": 267,
+     "words": [
+      [
+       0.7,
+       "In"
+      ],
+      [
+       0.8,
+       "this"
+      ],
+      [
+       1.025,
+       "video"
+      ],
+      [
+       1.675,
+       ","
+      ],
+      [
+       1.825,
+       "we'll"
+      ],
+      [
+       1.975,
+       "learn"
+      ],
+      [
+       2.212,
+       "about"
+      ],
+      [
+       2.487,
+       "routes"
+      ],
+      [
+       2.85,
+       "across"
+      ],
+      [
+       3.212,
+       "our"
+      ],
+      [
+       3.35,
+       "round"
+      ],
+      [
+       3.725,
+       "Earth"
+      ],
+      [
+       4.1,
+       "and"
+      ],
+      [
+       4.213,
+       "the"
+      ],
+      [
+       4.3,
+       "coordinates"
+      ],
+      [
+       4.825,
+       "behind"
+      ],
+      [
+       5.263,
+       "them"
+      ],
+      [
+       5.825,
+       ","
+      ],
+      [
+       5.925,
+       "and"
+      ],
+      [
+       6.05,
+       "see"
+      ],
+      [
+       6.225,
+       "how"
+      ],
+      [
+       6.4,
+       "they're"
+      ],
+      [
+       6.6,
+       "used"
+      ],
+      [
+       6.837,
+       "to"
+      ],
+      [
+       6.925,
+       "plan"
+      ],
+      [
+       7.237,
+       "the"
+      ],
+      [
+       7.375,
+       "shortest"
+      ],
+      [
+       7.862,
+       "flights"
+      ],
+      [
+       8.65,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     }
    ],
-   "end": 11.3454,
+   "end": 9.7,
    "start_frame": 9,
-   "end_frame": 340
+   "end_frame": 291
   },
   {
    "id": "s01_hook",
-   "start": 11.3454,
+   "start": 9.7,
    "sentences": [
     {
      "text": "What's the shortest way from London to Los Angeles, and why doesn't a plane fly the way a flat map seems to point?",
-     "start": 11.3454,
-     "end": 19.0954,
+     "audio_text": null,
+     "start": 9.7,
+     "end": 17.45,
      "dur": 7.75,
-     "start_frame": 340,
-     "end_frame": 573
+     "start_frame": 291,
+     "end_frame": 524,
+     "words": [
+      [
+       10.075,
+       "What's"
+      ],
+      [
+       10.325,
+       "the"
+      ],
+      [
+       10.475,
+       "shortest"
+      ],
+      [
+       10.95,
+       "way"
+      ],
+      [
+       11.15,
+       "from"
+      ],
+      [
+       11.35,
+       "London"
+      ],
+      [
+       12.05,
+       "to"
+      ],
+      [
+       12.2,
+       "Los"
+      ],
+      [
+       12.562,
+       "Angeles"
+      ],
+      [
+       13.4,
+       ","
+      ],
+      [
+       13.5,
+       "and"
+      ],
+      [
+       13.625,
+       "why"
+      ],
+      [
+       13.8,
+       "doesn't"
+      ],
+      [
+       14.062,
+       "a"
+      ],
+      [
+       14.137,
+       "plane"
+      ],
+      [
+       14.562,
+       "fly"
+      ],
+      [
+       14.85,
+       "the"
+      ],
+      [
+       14.975,
+       "way"
+      ],
+      [
+       15.275,
+       "a"
+      ],
+      [
+       15.4,
+       "flat"
+      ],
+      [
+       15.75,
+       "map"
+      ],
+      [
+       16.075,
+       "seems"
+      ],
+      [
+       16.35,
+       "to"
+      ],
+      [
+       16.45,
+       "point"
+      ],
+      [
+       17.175,
+       "?"
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "This is the sixth of seven parts on coordinates.",
-     "start": 19.4454,
-     "end": 22.8204,
+     "audio_text": null,
+     "start": 17.8,
+     "end": 21.175,
      "dur": 3.375,
-     "start_frame": 583,
-     "end_frame": 685
+     "start_frame": 534,
+     "end_frame": 635,
+     "words": [
+      [
+       18.175,
+       "This"
+      ],
+      [
+       18.35,
+       "is"
+      ],
+      [
+       18.488,
+       "the"
+      ],
+      [
+       18.613,
+       "sixth"
+      ],
+      [
+       18.95,
+       "of"
+      ],
+      [
+       19.088,
+       "seven"
+      ],
+      [
+       19.45,
+       "parts"
+      ],
+      [
+       19.762,
+       "on"
+      ],
+      [
+       19.875,
+       "coordinates"
+      ],
+      [
+       20.925,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "Now let's dive into the pieces we need: scale factors, which turn a change in latitude or longitude into kilometres, and the great circle, the shortest route over our round Earth.",
-     "start": 23.1704,
-     "end": 35.3967,
-     "dur": 12.2262,
-     "start_frame": 695,
-     "end_frame": 1062,
-     "estimated": true
+     "audio_text": null,
+     "start": 21.525,
+     "end": 33.6,
+     "dur": 12.075,
+     "start_frame": 646,
+     "end_frame": 1008
     },
     {
      "text": "Then let's meet the route that sailors used for centuries, and see why they liked it.",
-     "start": 35.7467,
-     "end": 41.2467,
+     "audio_text": null,
+     "start": 33.95,
+     "end": 39.45,
      "dur": 5.5,
-     "start_frame": 1072,
-     "end_frame": 1237
+     "start_frame": 1019,
+     "end_frame": 1184,
+     "words": [
+      [
+       34.35,
+       "Then"
+      ],
+      [
+       34.638,
+       "let's"
+      ],
+      [
+       34.925,
+       "meet"
+      ],
+      [
+       35.125,
+       "the"
+      ],
+      [
+       35.263,
+       "route"
+      ],
+      [
+       35.575,
+       "that"
+      ],
+      [
+       35.788,
+       "sailors"
+      ],
+      [
+       36.25,
+       "used"
+      ],
+      [
+       36.525,
+       "for"
+      ],
+      [
+       36.688,
+       "centuries"
+      ],
+      [
+       37.575,
+       ","
+      ],
+      [
+       37.675,
+       "and"
+      ],
+      [
+       37.812,
+       "see"
+      ],
+      [
+       38.025,
+       "why"
+      ],
+      [
+       38.2,
+       "they"
+      ],
+      [
+       38.35,
+       "liked"
+      ],
+      [
+       38.688,
+       "it"
+      ],
+      [
+       39.175,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     }
    ],
-   "end": 42.0467,
-   "start_frame": 340,
-   "end_frame": 1261
+   "end": 40.25,
+   "start_frame": 291,
+   "end_frame": 1208
   },
   {
    "id": "s03_curvilinear",
-   "start": 42.0467,
+   "start": 40.25,
    "sentences": [
     {
      "text": "Let's start by putting our coordinate systems side by side: polar coordinates on a flat map, cylindrical coordinates round a hurricane, and latitude and longitude on the Earth.",
-     "start": 42.0467,
-     "end": 53.7717,
+     "audio_text": null,
+     "start": 40.25,
+     "end": 51.975,
      "dur": 11.725,
-     "start_frame": 1261,
-     "end_frame": 1613
+     "start_frame": 1208,
+     "end_frame": 1559
     },
     {
      "text": "They're all called curvilinear coordinates, which means coordinates whose lines can curve.",
-     "start": 54.1217,
-     "end": 59.9467,
+     "audio_text": null,
+     "start": 52.325,
+     "end": 58.15,
      "dur": 5.825,
-     "start_frame": 1624,
-     "end_frame": 1798
+     "start_frame": 1570,
+     "end_frame": 1745,
+     "words": [
+      [
+       52.675,
+       "They're"
+      ],
+      [
+       52.8,
+       "all"
+      ],
+      [
+       53.0,
+       "called"
+      ],
+      [
+       53.337,
+       "curvilinear"
+      ],
+      [
+       54.038,
+       "coordinates"
+      ],
+      [
+       55.0,
+       ","
+      ],
+      [
+       55.1,
+       "which"
+      ],
+      [
+       55.3,
+       "means"
+      ],
+      [
+       55.612,
+       "coordinates"
+      ],
+      [
+       56.212,
+       "whose"
+      ],
+      [
+       56.413,
+       "lines"
+      ],
+      [
+       56.875,
+       "can"
+      ],
+      [
+       57.062,
+       "curve"
+      ],
+      [
+       57.85,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "They share three features.",
-     "start": 60.2967,
-     "end": 62.4217,
+     "audio_text": null,
+     "start": 58.5,
+     "end": 60.625,
      "dur": 2.125,
-     "start_frame": 1809,
-     "end_frame": 1873
+     "start_frame": 1755,
+     "end_frame": 1819
     },
     {
      "text": "First, the coordinate lines are curves: the rings round a radar, the circles of latitude, and the meridians.",
-     "start": 62.7717,
-     "end": 70.3717,
+     "audio_text": null,
+     "start": 60.975,
+     "end": 68.575,
      "dur": 7.6,
-     "start_frame": 1883,
-     "end_frame": 2111
+     "start_frame": 1829,
+     "end_frame": 2057,
+     "words": [
+      [
+       61.35,
+       "First"
+      ],
+      [
+       61.725,
+       ","
+      ],
+      [
+       61.775,
+       "the"
+      ],
+      [
+       61.875,
+       "coordinate"
+      ],
+      [
+       62.45,
+       "lines"
+      ],
+      [
+       62.812,
+       "are"
+      ],
+      [
+       62.925,
+       "curves"
+      ],
+      [
+       63.825,
+       ":"
+      ],
+      [
+       63.962,
+       "the"
+      ],
+      [
+       64.1,
+       "rings"
+      ],
+      [
+       64.5,
+       "round"
+      ],
+      [
+       64.763,
+       "a"
+      ],
+      [
+       64.862,
+       "radar"
+      ],
+      [
+       65.525,
+       ","
+      ],
+      [
+       65.625,
+       "the"
+      ],
+      [
+       65.763,
+       "circles"
+      ],
+      [
+       66.213,
+       "of"
+      ],
+      [
+       66.325,
+       "latitude"
+      ],
+      [
+       67.025,
+       ","
+      ],
+      [
+       67.1,
+       "and"
+      ],
+      [
+       67.213,
+       "the"
+      ],
+      [
+       67.288,
+       "meridians"
+      ],
+      [
+       68.3,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "Second, the unit vectors change from place to place: r hat and theta hat turn as we go round, and so do the east and north arrows on the globe.",
-     "start": 70.7217,
-     "end": 80.6217,
+     "audio_text": null,
+     "start": 68.925,
+     "end": 78.825,
      "dur": 9.9,
-     "start_frame": 2122,
-     "end_frame": 2419
+     "start_frame": 2068,
+     "end_frame": 2365,
+     "words": [
+      [
+       69.3,
+       "Second"
+      ],
+      [
+       69.775,
+       ","
+      ],
+      [
+       69.85,
+       "the"
+      ],
+      [
+       69.962,
+       "unit"
+      ],
+      [
+       70.225,
+       "vectors"
+      ],
+      [
+       70.688,
+       "change"
+      ],
+      [
+       71.075,
+       "from"
+      ],
+      [
+       71.275,
+       "place"
+      ],
+      [
+       71.625,
+       "to"
+      ],
+      [
+       71.725,
+       "place"
+      ],
+      [
+       72.5,
+       ":"
+      ],
+      [
+       72.662,
+       "r"
+      ],
+      [
+       72.938,
+       "hat"
+      ],
+      [
+       73.3,
+       "and"
+      ],
+      [
+       73.438,
+       "theta"
+      ],
+      [
+       73.75,
+       "hat"
+      ],
+      [
+       74.013,
+       "turn"
+      ],
+      [
+       74.4,
+       "as"
+      ],
+      [
+       74.525,
+       "we"
+      ],
+      [
+       74.675,
+       "go"
+      ],
+      [
+       74.85,
+       "round"
+      ],
+      [
+       75.575,
+       ","
+      ],
+      [
+       75.675,
+       "and"
+      ],
+      [
+       75.8,
+       "so"
+      ],
+      [
+       75.975,
+       "do"
+      ],
+      [
+       76.112,
+       "the"
+      ],
+      [
+       76.263,
+       "east"
+      ],
+      [
+       76.65,
+       "and"
+      ],
+      [
+       76.775,
+       "north"
+      ],
+      [
+       77.075,
+       "arrows"
+      ],
+      [
+       77.525,
+       "on"
+      ],
+      [
+       77.638,
+       "the"
+      ],
+      [
+       77.725,
+       "globe"
+      ],
+      [
+       78.525,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "Third, a change in a coordinate isn't a distance by itself.",
-     "start": 80.9717,
-     "end": 85.5217,
+     "audio_text": null,
+     "start": 79.175,
+     "end": 83.725,
      "dur": 4.55,
-     "start_frame": 2429,
-     "end_frame": 2566
+     "start_frame": 2375,
+     "end_frame": 2512
     },
     {
      "text": "Turning by one degree can mean a short walk or a long one, depending on where you are.",
-     "start": 85.8717,
-     "end": 91.4967,
+     "audio_text": null,
+     "start": 84.075,
+     "end": 89.7,
      "dur": 5.625,
-     "start_frame": 2576,
-     "end_frame": 2745
+     "start_frame": 2522,
+     "end_frame": 2691,
+     "words": [
+      [
+       84.425,
+       "Turning"
+      ],
+      [
+       84.8,
+       "by"
+      ],
+      [
+       84.987,
+       "one"
+      ],
+      [
+       85.2,
+       "degree"
+      ],
+      [
+       85.675,
+       "can"
+      ],
+      [
+       85.788,
+       "mean"
+      ],
+      [
+       85.913,
+       "a"
+      ],
+      [
+       86.038,
+       "short"
+      ],
+      [
+       86.388,
+       "walk"
+      ],
+      [
+       86.775,
+       "or"
+      ],
+      [
+       86.875,
+       "a"
+      ],
+      [
+       86.975,
+       "long"
+      ],
+      [
+       87.3,
+       "one"
+      ],
+      [
+       87.75,
+       ","
+      ],
+      [
+       87.85,
+       "depending"
+      ],
+      [
+       88.312,
+       "on"
+      ],
+      [
+       88.45,
+       "where"
+      ],
+      [
+       88.65,
+       "you"
+      ],
+      [
+       88.812,
+       "are"
+      ],
+      [
+       89.425,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "That third feature needs a name, so let's look at it closely.",
-     "start": 91.8467,
-     "end": 95.9967,
+     "audio_text": null,
+     "start": 90.05,
+     "end": 94.2,
      "dur": 4.15,
-     "start_frame": 2755,
-     "end_frame": 2880
+     "start_frame": 2702,
+     "end_frame": 2826
     }
    ],
-   "end": 96.7967,
-   "start_frame": 1261,
-   "end_frame": 2904
+   "end": 95.0,
+   "start_frame": 1208,
+   "end_frame": 2850
   },
   {
    "id": "s04_scale_factors",
-   "start": 96.7967,
+   "start": 95.0,
    "sentences": [
     {
      "text": "How far do we walk when one coordinate changes by a small step?",
-     "start": 96.7967,
-     "end": 101.2717,
+     "audio_text": null,
+     "start": 95.0,
+     "end": 99.475,
      "dur": 4.475,
-     "start_frame": 2904,
-     "end_frame": 3038
+     "start_frame": 2850,
+     "end_frame": 2984
     },
     {
      "text": "In Part 1, we found the arc rule: on a ring of radius r, turning by a small angle delta theta walks r times delta theta.",
-     "start": 101.6217,
-     "end": 109.818,
-     "dur": 8.1964,
-     "start_frame": 3049,
-     "end_frame": 3295,
-     "estimated": true
+     "audio_text": null,
+     "start": 99.825,
+     "end": 109.35,
+     "dur": 9.525,
+     "start_frame": 2995,
+     "end_frame": 3280,
+     "words": [
+      [
+       100.2,
+       "In"
+      ],
+      [
+       100.3,
+       "Part"
+      ],
+      [
+       100.6,
+       "1"
+      ],
+      [
+       101.15,
+       ","
+      ],
+      [
+       101.275,
+       "we"
+      ],
+      [
+       101.438,
+       "found"
+      ],
+      [
+       101.713,
+       "the"
+      ],
+      [
+       101.825,
+       "arc"
+      ],
+      [
+       102.075,
+       "rule"
+      ],
+      [
+       102.825,
+       ":"
+      ],
+      [
+       102.95,
+       "on"
+      ],
+      [
+       103.1,
+       "a"
+      ],
+      [
+       103.213,
+       "ring"
+      ],
+      [
+       103.475,
+       "of"
+      ],
+      [
+       103.638,
+       "radius"
+      ],
+      [
+       104.213,
+       "r"
+      ],
+      [
+       104.725,
+       ","
+      ],
+      [
+       104.825,
+       "turning"
+      ],
+      [
+       105.1,
+       "by"
+      ],
+      [
+       105.25,
+       "a"
+      ],
+      [
+       105.375,
+       "small"
+      ],
+      [
+       105.862,
+       "angle"
+      ],
+      [
+       106.25,
+       "delta"
+      ],
+      [
+       106.662,
+       "theta"
+      ],
+      [
+       107.037,
+       "walks"
+      ],
+      [
+       107.412,
+       "r"
+      ],
+      [
+       107.65,
+       "times"
+      ],
+      [
+       108.025,
+       "delta"
+      ],
+      [
+       108.35,
+       "theta"
+      ],
+      [
+       109.075,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "So for theta, the distance walked is r times the step.",
-     "start": 110.168,
-     "end": 114.243,
+     "audio_text": null,
+     "start": 109.7,
+     "end": 113.775,
      "dur": 4.075,
-     "start_frame": 3305,
-     "end_frame": 3427
+     "start_frame": 3291,
+     "end_frame": 3413
     },
     {
      "text": "That multiplier, the metres walked per unit of the coordinate, is called a scale factor.",
-     "start": 114.593,
-     "end": 120.793,
+     "audio_text": null,
+     "start": 114.125,
+     "end": 120.325,
      "dur": 6.2,
-     "start_frame": 3438,
-     "end_frame": 3624
+     "start_frame": 3424,
+     "end_frame": 3610,
+     "words": [
+      [
+       114.5,
+       "That"
+      ],
+      [
+       114.763,
+       "multiplier"
+      ],
+      [
+       115.775,
+       ","
+      ],
+      [
+       115.9,
+       "the"
+      ],
+      [
+       116.0,
+       "metres"
+      ],
+      [
+       116.388,
+       "walked"
+      ],
+      [
+       116.725,
+       "per"
+      ],
+      [
+       116.938,
+       "unit"
+      ],
+      [
+       117.237,
+       "of"
+      ],
+      [
+       117.312,
+       "the"
+      ],
+      [
+       117.4,
+       "coordinate"
+      ],
+      [
+       118.25,
+       ","
+      ],
+      [
+       118.35,
+       "is"
+      ],
+      [
+       118.5,
+       "called"
+      ],
+      [
+       118.763,
+       "a"
+      ],
+      [
+       118.838,
+       "scale"
+      ],
+      [
+       119.2,
+       "factor"
+      ],
+      [
+       120.025,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "For theta, the scale factor is r.",
-     "start": 121.143,
-     "end": 124.093,
+     "audio_text": null,
+     "start": 120.675,
+     "end": 123.625,
      "dur": 2.95,
-     "start_frame": 3634,
-     "end_frame": 3723
+     "start_frame": 3620,
+     "end_frame": 3709
     },
     {
      "text": "On the Earth, as we found in Part 3, stepping north by a small change in latitude, delta phi, walks the Earth's radius times delta phi.",
-     "start": 124.443,
-     "end": 133.6639,
-     "dur": 9.2209,
-     "start_frame": 3733,
-     "end_frame": 4010,
-     "estimated": true
+     "audio_text": null,
+     "start": 123.975,
+     "end": 134.075,
+     "dur": 10.1,
+     "start_frame": 3719,
+     "end_frame": 4022,
+     "words": [
+      [
+       124.325,
+       "On"
+      ],
+      [
+       124.438,
+       "the"
+      ],
+      [
+       124.575,
+       "Earth"
+      ],
+      [
+       125.075,
+       ","
+      ],
+      [
+       125.188,
+       "as"
+      ],
+      [
+       125.325,
+       "we"
+      ],
+      [
+       125.487,
+       "found"
+      ],
+      [
+       125.862,
+       "in"
+      ],
+      [
+       125.95,
+       "Part"
+      ],
+      [
+       126.262,
+       "3"
+      ],
+      [
+       126.85,
+       ","
+      ],
+      [
+       127.012,
+       "stepping"
+      ],
+      [
+       127.4,
+       "north"
+      ],
+      [
+       127.7,
+       "by"
+      ],
+      [
+       127.85,
+       "a"
+      ],
+      [
+       127.962,
+       "small"
+      ],
+      [
+       128.362,
+       "change"
+      ],
+      [
+       128.787,
+       "in"
+      ],
+      [
+       128.9,
+       "latitude"
+      ],
+      [
+       129.625,
+       ","
+      ],
+      [
+       129.7,
+       "delta"
+      ],
+      [
+       130.062,
+       "phi"
+      ],
+      [
+       130.65,
+       ","
+      ],
+      [
+       130.812,
+       "walks"
+      ],
+      [
+       131.15,
+       "the"
+      ],
+      [
+       131.3,
+       "Earth's"
+      ],
+      [
+       131.712,
+       "radius"
+      ],
+      [
+       132.262,
+       "times"
+      ],
+      [
+       132.725,
+       "delta"
+      ],
+      [
+       133.087,
+       "phi"
+      ],
+      [
+       133.8,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "So the scale factor of latitude is the Earth's radius, which we write as the letter a, about six thousand three hundred and seventy one kilometres.",
-     "start": 134.0139,
-     "end": 144.0545,
-     "dur": 10.0405,
-     "start_frame": 4020,
-     "end_frame": 4322,
-     "estimated": true
+     "audio_text": null,
+     "start": 134.425,
+     "end": 144.025,
+     "dur": 9.6,
+     "start_frame": 4033,
+     "end_frame": 4321,
+     "words": [
+      [
+       134.8,
+       "So"
+      ],
+      [
+       134.975,
+       "the"
+      ],
+      [
+       135.075,
+       "scale"
+      ],
+      [
+       135.438,
+       "factor"
+      ],
+      [
+       135.838,
+       "of"
+      ],
+      [
+       135.95,
+       "latitude"
+      ],
+      [
+       136.575,
+       "is"
+      ],
+      [
+       136.713,
+       "the"
+      ],
+      [
+       136.863,
+       "Earth's"
+      ],
+      [
+       137.263,
+       "radius"
+      ],
+      [
+       138.15,
+       ","
+      ],
+      [
+       138.25,
+       "which"
+      ],
+      [
+       138.45,
+       "we"
+      ],
+      [
+       138.613,
+       "write"
+      ],
+      [
+       138.925,
+       "as"
+      ],
+      [
+       139.075,
+       "the"
+      ],
+      [
+       139.2,
+       "letter"
+      ],
+      [
+       139.538,
+       "a"
+      ],
+      [
+       140.125,
+       ","
+      ],
+      [
+       140.25,
+       "about"
+      ],
+      [
+       140.562,
+       "six"
+      ],
+      [
+       140.85,
+       "thousand"
+      ],
+      [
+       141.238,
+       "three"
+      ],
+      [
+       141.475,
+       "hundred"
+      ],
+      [
+       141.95,
+       "and"
+      ],
+      [
+       142.088,
+       "seventy"
+      ],
+      [
+       142.475,
+       "one"
+      ],
+      [
+       142.7,
+       "kilometres"
+      ],
+      [
+       143.75,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "Stepping east by a small change in longitude, delta lambda, walks round a parallel, a circle whose radius is the Earth's radius times cosine phi.",
-     "start": 144.4045,
-     "end": 154.3084,
-     "dur": 9.9039,
-     "start_frame": 4332,
-     "end_frame": 4629,
-     "estimated": true
+     "audio_text": null,
+     "start": 144.375,
+     "end": 154.9,
+     "dur": 10.525,
+     "start_frame": 4331,
+     "end_frame": 4647,
+     "words": [
+      [
+       144.725,
+       "Stepping"
+      ],
+      [
+       145.075,
+       "east"
+      ],
+      [
+       145.375,
+       "by"
+      ],
+      [
+       145.55,
+       "a"
+      ],
+      [
+       145.662,
+       "small"
+      ],
+      [
+       146.062,
+       "change"
+      ],
+      [
+       146.488,
+       "in"
+      ],
+      [
+       146.6,
+       "longitude"
+      ],
+      [
+       147.425,
+       ","
+      ],
+      [
+       147.525,
+       "delta"
+      ],
+      [
+       147.875,
+       "lambda"
+      ],
+      [
+       148.55,
+       ","
+      ],
+      [
+       148.713,
+       "walks"
+      ],
+      [
+       149.075,
+       "round"
+      ],
+      [
+       149.338,
+       "a"
+      ],
+      [
+       149.4,
+       "parallel"
+      ],
+      [
+       150.25,
+       ","
+      ],
+      [
+       150.387,
+       "a"
+      ],
+      [
+       150.512,
+       "circle"
+      ],
+      [
+       150.925,
+       "whose"
+      ],
+      [
+       151.137,
+       "radius"
+      ],
+      [
+       151.7,
+       "is"
+      ],
+      [
+       151.812,
+       "the"
+      ],
+      [
+       151.95,
+       "Earth's"
+      ],
+      [
+       152.363,
+       "radius"
+      ],
+      [
+       152.887,
+       "times"
+      ],
+      [
+       153.338,
+       "cosine"
+      ],
+      [
+       153.938,
+       "phi"
+      ],
+      [
+       154.65,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "So the scale factor of longitude is the Earth's radius times cosine phi.",
-     "start": 154.6584,
-     "end": 160.2334,
+     "audio_text": null,
+     "start": 155.25,
+     "end": 160.825,
      "dur": 5.575,
-     "start_frame": 4640,
-     "end_frame": 4807
+     "start_frame": 4657,
+     "end_frame": 4825
     },
     {
      "text": "Let's put numbers on it at Brest, at forty eight point four degrees north.",
-     "start": 160.5834,
-     "end": 165.3584,
+     "audio_text": null,
+     "start": 161.175,
+     "end": 165.95,
      "dur": 4.775,
-     "start_frame": 4818,
-     "end_frame": 4961
+     "start_frame": 4835,
+     "end_frame": 4978
     },
     {
      "text": "One degree is zero point zero one seven four five radians.",
-     "start": 165.7084,
-     "end": 170.4834,
+     "audio_text": null,
+     "start": 166.3,
+     "end": 171.075,
      "dur": 4.775,
-     "start_frame": 4971,
-     "end_frame": 5115
+     "start_frame": 4989,
+     "end_frame": 5132,
+     "words": [
+      [
+       166.7,
+       "One"
+      ],
+      [
+       166.925,
+       "degree"
+      ],
+      [
+       167.537,
+       "is"
+      ],
+      [
+       167.675,
+       "zero"
+      ],
+      [
+       167.975,
+       "point"
+      ],
+      [
+       168.25,
+       "zero"
+      ],
+      [
+       168.662,
+       "one"
+      ],
+      [
+       168.912,
+       "seven"
+      ],
+      [
+       169.287,
+       "four"
+      ],
+      [
+       169.537,
+       "five"
+      ],
+      [
+       169.9,
+       "radians"
+      ],
+      [
+       170.8,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "So one degree north walks the Earth's radius times that, about a hundred and eleven point two kilometres.",
-     "start": 170.8334,
-     "end": 178.0052,
-     "dur": 7.1718,
-     "start_frame": 5125,
-     "end_frame": 5340,
+     "audio_text": null,
+     "start": 171.425,
+     "end": 178.575,
+     "dur": 7.15,
+     "start_frame": 5143,
+     "end_frame": 5357,
      "beat": true,
-     "estimated": true
+     "words": [
+      [
+       171.8,
+       "So"
+      ],
+      [
+       171.988,
+       "one"
+      ],
+      [
+       172.225,
+       "degree"
+      ],
+      [
+       172.525,
+       "north"
+      ],
+      [
+       172.938,
+       "walks"
+      ],
+      [
+       173.263,
+       "the"
+      ],
+      [
+       173.375,
+       "Earth's"
+      ],
+      [
+       173.787,
+       "radius"
+      ],
+      [
+       174.275,
+       "times"
+      ],
+      [
+       174.725,
+       "that"
+      ],
+      [
+       175.275,
+       ","
+      ],
+      [
+       175.4,
+       "about"
+      ],
+      [
+       175.613,
+       "a"
+      ],
+      [
+       175.688,
+       "hundred"
+      ],
+      [
+       176.225,
+       "and"
+      ],
+      [
+       176.338,
+       "eleven"
+      ],
+      [
+       176.75,
+       "point"
+      ],
+      [
+       177.037,
+       "two"
+      ],
+      [
+       177.25,
+       "kilometres"
+      ],
+      [
+       178.3,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "The cosine of forty eight point four degrees is zero point six six four.",
-     "start": 179.5052,
-     "end": 184.7552,
+     "audio_text": null,
+     "start": 180.075,
+     "end": 185.325,
      "dur": 5.25,
-     "start_frame": 5385,
-     "end_frame": 5543
+     "start_frame": 5402,
+     "end_frame": 5560,
+     "words": [
+      [
+       180.425,
+       "The"
+      ],
+      [
+       180.5,
+       "cosine"
+      ],
+      [
+       181.025,
+       "of"
+      ],
+      [
+       181.162,
+       "forty"
+      ],
+      [
+       181.5,
+       "eight"
+      ],
+      [
+       181.75,
+       "point"
+      ],
+      [
+       181.975,
+       "four"
+      ],
+      [
+       182.162,
+       "degrees"
+      ],
+      [
+       183.0,
+       "is"
+      ],
+      [
+       183.188,
+       "zero"
+      ],
+      [
+       183.55,
+       "point"
+      ],
+      [
+       183.837,
+       "six"
+      ],
+      [
+       184.075,
+       "six"
+      ],
+      [
+       184.337,
+       "four"
+      ],
+      [
+       185.05,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "So one degree east walks those hundred and eleven point two kilometres times the cosine, only about seventy three point eight kilometres.",
-     "start": 185.1052,
-     "end": 194.4627,
-     "dur": 9.3575,
-     "start_frame": 5553,
-     "end_frame": 5834,
+     "audio_text": null,
+     "start": 185.675,
+     "end": 194.975,
+     "dur": 9.3,
+     "start_frame": 5570,
+     "end_frame": 5849,
      "beat": true,
-     "estimated": true
+     "words": [
+      [
+       186.05,
+       "So"
+      ],
+      [
+       186.238,
+       "one"
+      ],
+      [
+       186.475,
+       "degree"
+      ],
+      [
+       186.888,
+       "east"
+      ],
+      [
+       187.225,
+       "walks"
+      ],
+      [
+       187.575,
+       "those"
+      ],
+      [
+       187.825,
+       "hundred"
+      ],
+      [
+       188.6,
+       "and"
+      ],
+      [
+       188.738,
+       "eleven"
+      ],
+      [
+       189.15,
+       "point"
+      ],
+      [
+       189.438,
+       "two"
+      ],
+      [
+       189.738,
+       "kilometres"
+      ],
+      [
+       190.425,
+       "times"
+      ],
+      [
+       190.787,
+       "the"
+      ],
+      [
+       190.875,
+       "cosine"
+      ],
+      [
+       191.725,
+       ","
+      ],
+      [
+       191.863,
+       "only"
+      ],
+      [
+       192.175,
+       "about"
+      ],
+      [
+       192.5,
+       "seventy"
+      ],
+      [
+       192.912,
+       "three"
+      ],
+      [
+       193.15,
+       "point"
+      ],
+      [
+       193.425,
+       "eight"
+      ],
+      [
+       193.675,
+       "kilometres"
+      ],
+      [
+       194.7,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "The same one-degree step gives two different distances, and the scale factors keep track of that.",
-     "start": 195.9627,
-     "end": 202.5377,
+     "audio_text": null,
+     "start": 196.475,
+     "end": 203.05,
      "dur": 6.575,
-     "start_frame": 5879,
-     "end_frame": 6076
+     "start_frame": 5894,
+     "end_frame": 6091
     }
    ],
-   "end": 203.3377,
-   "start_frame": 2904,
-   "end_frame": 6100
+   "end": 203.85,
+   "start_frame": 2850,
+   "end_frame": 6116
   },
   {
    "id": "s05_shortest_way",
-   "start": 203.3377,
+   "start": 203.85,
    "sentences": [
     {
      "text": "Now let's put coordinates to work on a question every airline asks: what's the shortest way between two places?",
-     "start": 203.3377,
-     "end": 210.8877,
+     "audio_text": null,
+     "start": 203.85,
+     "end": 211.4,
      "dur": 7.55,
-     "start_frame": 6100,
-     "end_frame": 6327
+     "start_frame": 6115,
+     "end_frame": 6342
     },
     {
      "text": "It matters, because a shorter route burns less fuel and takes less time.",
-     "start": 211.2377,
-     "end": 216.2877,
+     "audio_text": null,
+     "start": 211.75,
+     "end": 216.8,
      "dur": 5.05,
-     "start_frame": 6337,
-     "end_frame": 6489
+     "start_frame": 6352,
+     "end_frame": 6504,
+     "words": [
+      [
+       212.1,
+       "It"
+      ],
+      [
+       212.25,
+       "matters"
+      ],
+      [
+       212.95,
+       ","
+      ],
+      [
+       213.05,
+       "because"
+      ],
+      [
+       213.312,
+       "a"
+      ],
+      [
+       213.425,
+       "shorter"
+      ],
+      [
+       213.825,
+       "route"
+      ],
+      [
+       214.1,
+       "burns"
+      ],
+      [
+       214.45,
+       "less"
+      ],
+      [
+       214.713,
+       "fuel"
+      ],
+      [
+       215.125,
+       "and"
+      ],
+      [
+       215.25,
+       "takes"
+      ],
+      [
+       215.55,
+       "less"
+      ],
+      [
+       215.775,
+       "time"
+      ],
+      [
+       216.525,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "On a flat sheet of paper, the shortest way is a straight line.",
-     "start": 216.6377,
-     "end": 220.9627,
+     "audio_text": null,
+     "start": 217.15,
+     "end": 221.475,
      "dur": 4.325,
-     "start_frame": 6499,
-     "end_frame": 6629
+     "start_frame": 6514,
+     "end_frame": 6644,
+     "words": [
+      [
+       217.5,
+       "On"
+      ],
+      [
+       217.613,
+       "a"
+      ],
+      [
+       217.688,
+       "flat"
+      ],
+      [
+       218.037,
+       "sheet"
+      ],
+      [
+       218.213,
+       "of"
+      ],
+      [
+       218.3,
+       "paper"
+      ],
+      [
+       218.925,
+       ","
+      ],
+      [
+       219.025,
+       "the"
+      ],
+      [
+       219.175,
+       "shortest"
+      ],
+      [
+       219.65,
+       "way"
+      ],
+      [
+       219.925,
+       "is"
+      ],
+      [
+       220.037,
+       "a"
+      ],
+      [
+       220.113,
+       "straight"
+      ],
+      [
+       220.45,
+       "line"
+      ],
+      [
+       221.2,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "But a plane can't tunnel through the Earth, so it has to follow the curved surface.",
-     "start": 221.3127,
-     "end": 226.7627,
+     "audio_text": null,
+     "start": 221.825,
+     "end": 227.275,
      "dur": 5.45,
-     "start_frame": 6639,
-     "end_frame": 6803
+     "start_frame": 6655,
+     "end_frame": 6818
     },
     {
      "text": "On a sphere, the shortest way follows a great circle.",
-     "start": 227.1127,
-     "end": 231.0127,
+     "audio_text": null,
+     "start": 227.625,
+     "end": 231.525,
      "dur": 3.9,
-     "start_frame": 6813,
-     "end_frame": 6930
+     "start_frame": 6829,
+     "end_frame": 6946,
+     "words": [
+      [
+       228.0,
+       "On"
+      ],
+      [
+       228.113,
+       "a"
+      ],
+      [
+       228.225,
+       "sphere"
+      ],
+      [
+       228.85,
+       ","
+      ],
+      [
+       228.975,
+       "the"
+      ],
+      [
+       229.113,
+       "shortest"
+      ],
+      [
+       229.55,
+       "way"
+      ],
+      [
+       229.75,
+       "follows"
+      ],
+      [
+       230.062,
+       "a"
+      ],
+      [
+       230.125,
+       "great"
+      ],
+      [
+       230.438,
+       "circle"
+      ],
+      [
+       231.25,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "A great circle is any circle on the sphere whose centre is the centre of the Earth.",
-     "start": 231.3627,
-     "end": 236.8877,
+     "audio_text": null,
+     "start": 231.875,
+     "end": 237.4,
      "dur": 5.525,
-     "start_frame": 6941,
-     "end_frame": 7107
+     "start_frame": 6956,
+     "end_frame": 7122
     },
     {
      "text": "The equator is one, and so is every meridian, together with its partner on the other side of the globe.",
-     "start": 237.2377,
-     "end": 244.0627,
+     "audio_text": null,
+     "start": 237.75,
+     "end": 244.575,
      "dur": 6.825,
-     "start_frame": 7117,
-     "end_frame": 7322
+     "start_frame": 7132,
+     "end_frame": 7337,
+     "words": [
+      [
+       238.1,
+       "The"
+      ],
+      [
+       238.225,
+       "equator"
+      ],
+      [
+       238.7,
+       "is"
+      ],
+      [
+       238.863,
+       "one"
+      ],
+      [
+       239.475,
+       ","
+      ],
+      [
+       239.575,
+       "and"
+      ],
+      [
+       239.713,
+       "so"
+      ],
+      [
+       240.012,
+       "is"
+      ],
+      [
+       240.188,
+       "every"
+      ],
+      [
+       240.525,
+       "meridian"
+      ],
+      [
+       241.225,
+       ","
+      ],
+      [
+       241.3,
+       "together"
+      ],
+      [
+       241.775,
+       "with"
+      ],
+      [
+       241.912,
+       "its"
+      ],
+      [
+       242.075,
+       "partner"
+      ],
+      [
+       242.512,
+       "on"
+      ],
+      [
+       242.612,
+       "the"
+      ],
+      [
+       242.725,
+       "other"
+      ],
+      [
+       243.037,
+       "side"
+      ],
+      [
+       243.312,
+       "of"
+      ],
+      [
+       243.387,
+       "the"
+      ],
+      [
+       243.475,
+       "globe"
+      ],
+      [
+       244.275,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "The other circles of latitude are not great circles: their centres sit on the Earth's axis, above or below the Earth's centre, so they're smaller.",
-     "start": 244.4127,
-     "end": 253.8127,
+     "audio_text": null,
+     "start": 244.925,
+     "end": 254.325,
      "dur": 9.4,
-     "start_frame": 7332,
-     "end_frame": 7614
+     "start_frame": 7348,
+     "end_frame": 7630,
+     "words": [
+      [
+       245.275,
+       "The"
+      ],
+      [
+       245.4,
+       "other"
+      ],
+      [
+       245.713,
+       "circles"
+      ],
+      [
+       246.088,
+       "of"
+      ],
+      [
+       246.2,
+       "latitude"
+      ],
+      [
+       246.825,
+       "are"
+      ],
+      [
+       246.925,
+       "not"
+      ],
+      [
+       247.15,
+       "great"
+      ],
+      [
+       247.438,
+       "circles"
+      ],
+      [
+       248.325,
+       ":"
+      ],
+      [
+       248.463,
+       "their"
+      ],
+      [
+       248.688,
+       "centres"
+      ],
+      [
+       249.137,
+       "sit"
+      ],
+      [
+       249.312,
+       "on"
+      ],
+      [
+       249.412,
+       "the"
+      ],
+      [
+       249.525,
+       "Earth's"
+      ],
+      [
+       249.85,
+       "axis"
+      ],
+      [
+       250.55,
+       ","
+      ],
+      [
+       250.662,
+       "above"
+      ],
+      [
+       251.175,
+       "or"
+      ],
+      [
+       251.3,
+       "below"
+      ],
+      [
+       251.612,
+       "the"
+      ],
+      [
+       251.75,
+       "Earth's"
+      ],
+      [
+       252.062,
+       "centre"
+      ],
+      [
+       252.65,
+       ","
+      ],
+      [
+       252.75,
+       "so"
+      ],
+      [
+       252.912,
+       "they're"
+      ],
+      [
+       253.125,
+       "smaller"
+      ],
+      [
+       254.05,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     }
    ],
-   "end": 254.6127,
-   "start_frame": 6100,
-   "end_frame": 7638
+   "end": 255.125,
+   "start_frame": 6116,
+   "end_frame": 7654
   },
   {
    "id": "s06_great_circle",
-   "start": 254.6127,
+   "start": 255.125,
    "sentences": [
     {
      "text": "Let's find the great circle through London and Los Angeles.",
-     "start": 254.6127,
-     "end": 258.7127,
+     "audio_text": null,
+     "start": 255.125,
+     "end": 259.225,
      "dur": 4.1,
-     "start_frame": 7638,
-     "end_frame": 7761
+     "start_frame": 7654,
+     "end_frame": 7777
     },
     {
      "text": "London is at fifty one and a half degrees north, almost on the prime meridian.",
-     "start": 259.0627,
-     "end": 264.5377,
+     "audio_text": null,
+     "start": 259.575,
+     "end": 265.05,
      "dur": 5.475,
-     "start_frame": 7772,
-     "end_frame": 7936
+     "start_frame": 7787,
+     "end_frame": 7952,
+     "words": [
+      [
+       260.0,
+       "London"
+      ],
+      [
+       260.488,
+       "is"
+      ],
+      [
+       260.65,
+       "at"
+      ],
+      [
+       260.812,
+       "fifty"
+      ],
+      [
+       261.125,
+       "one"
+      ],
+      [
+       261.288,
+       "and"
+      ],
+      [
+       261.387,
+       "a"
+      ],
+      [
+       261.45,
+       "half"
+      ],
+      [
+       261.725,
+       "degrees"
+      ],
+      [
+       262.1,
+       "north"
+      ],
+      [
+       262.725,
+       ","
+      ],
+      [
+       262.863,
+       "almost"
+      ],
+      [
+       263.312,
+       "on"
+      ],
+      [
+       263.413,
+       "the"
+      ],
+      [
+       263.5,
+       "prime"
+      ],
+      [
+       263.875,
+       "meridian"
+      ],
+      [
+       264.775,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "Los Angeles is at thirty four degrees north, and a hundred and eighteen degrees west.",
-     "start": 264.8877,
-     "end": 270.7377,
+     "audio_text": null,
+     "start": 265.4,
+     "end": 271.25,
      "dur": 5.85,
-     "start_frame": 7947,
-     "end_frame": 8122
+     "start_frame": 7962,
+     "end_frame": 8138,
+     "words": [
+      [
+       265.825,
+       "Los"
+      ],
+      [
+       266.15,
+       "Angeles"
+      ],
+      [
+       266.625,
+       "is"
+      ],
+      [
+       266.775,
+       "at"
+      ],
+      [
+       266.938,
+       "thirty"
+      ],
+      [
+       267.262,
+       "four"
+      ],
+      [
+       267.475,
+       "degrees"
+      ],
+      [
+       267.85,
+       "north"
+      ],
+      [
+       268.5,
+       ","
+      ],
+      [
+       268.6,
+       "and"
+      ],
+      [
+       268.712,
+       "a"
+      ],
+      [
+       268.787,
+       "hundred"
+      ],
+      [
+       269.225,
+       "and"
+      ],
+      [
+       269.35,
+       "eighteen"
+      ],
+      [
+       269.825,
+       "degrees"
+      ],
+      [
+       270.225,
+       "west"
+      ],
+      [
+       270.975,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "Picture a flat sheet slicing through the globe, so that it passes through London, through Los Angeles, and through the Earth's centre.",
-     "start": 271.0877,
-     "end": 279.1127,
+     "audio_text": null,
+     "start": 271.6,
+     "end": 279.625,
      "dur": 8.025,
-     "start_frame": 8133,
-     "end_frame": 8373
+     "start_frame": 8148,
+     "end_frame": 8389,
+     "words": [
+      [
+       271.925,
+       "Picture"
+      ],
+      [
+       272.263,
+       "a"
+      ],
+      [
+       272.363,
+       "flat"
+      ],
+      [
+       272.713,
+       "sheet"
+      ],
+      [
+       273.038,
+       "slicing"
+      ],
+      [
+       273.525,
+       "through"
+      ],
+      [
+       273.713,
+       "the"
+      ],
+      [
+       273.8,
+       "globe"
+      ],
+      [
+       274.55,
+       ","
+      ],
+      [
+       274.675,
+       "so"
+      ],
+      [
+       274.812,
+       "that"
+      ],
+      [
+       274.913,
+       "it"
+      ],
+      [
+       275.0,
+       "passes"
+      ],
+      [
+       275.475,
+       "through"
+      ],
+      [
+       275.675,
+       "London"
+      ],
+      [
+       276.35,
+       ","
+      ],
+      [
+       276.488,
+       "through"
+      ],
+      [
+       276.725,
+       "Los"
+      ],
+      [
+       277.088,
+       "Angeles"
+      ],
+      [
+       277.675,
+       ","
+      ],
+      [
+       277.725,
+       "and"
+      ],
+      [
+       277.863,
+       "through"
+      ],
+      [
+       278.062,
+       "the"
+      ],
+      [
+       278.2,
+       "Earth's"
+      ],
+      [
+       278.512,
+       "centre"
+      ],
+      [
+       279.325,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "Three points that aren't in a line fix exactly one flat sheet, just as three legs steady a stool.",
-     "start": 279.4627,
-     "end": 286.1877,
+     "audio_text": null,
+     "start": 279.975,
+     "end": 286.7,
      "dur": 6.725,
-     "start_frame": 8384,
-     "end_frame": 8586
+     "start_frame": 8399,
+     "end_frame": 8601,
+     "words": [
+      [
+       280.35,
+       "Three"
+      ],
+      [
+       280.55,
+       "points"
+      ],
+      [
+       280.975,
+       "that"
+      ],
+      [
+       281.125,
+       "aren't"
+      ],
+      [
+       281.375,
+       "in"
+      ],
+      [
+       281.463,
+       "a"
+      ],
+      [
+       281.55,
+       "line"
+      ],
+      [
+       281.887,
+       "fix"
+      ],
+      [
+       282.175,
+       "exactly"
+      ],
+      [
+       282.762,
+       "one"
+      ],
+      [
+       283.012,
+       "flat"
+      ],
+      [
+       283.337,
+       "sheet"
+      ],
+      [
+       283.95,
+       ","
+      ],
+      [
+       284.087,
+       "just"
+      ],
+      [
+       284.35,
+       "as"
+      ],
+      [
+       284.538,
+       "three"
+      ],
+      [
+       284.775,
+       "legs"
+      ],
+      [
+       285.137,
+       "steady"
+      ],
+      [
+       285.475,
+       "a"
+      ],
+      [
+       285.587,
+       "stool"
+      ],
+      [
+       286.425,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "Where the sheet cuts the Earth's surface, it traces a great circle, and the part between the two cities is the great circle route.",
-     "start": 286.5377,
-     "end": 294.5627,
+     "audio_text": null,
+     "start": 287.05,
+     "end": 295.075,
      "dur": 8.025,
-     "start_frame": 8596,
-     "end_frame": 8837
+     "start_frame": 8612,
+     "end_frame": 8852,
+     "words": [
+      [
+       287.4,
+       "Where"
+      ],
+      [
+       287.512,
+       "the"
+      ],
+      [
+       287.663,
+       "sheet"
+      ],
+      [
+       288.012,
+       "cuts"
+      ],
+      [
+       288.325,
+       "the"
+      ],
+      [
+       288.45,
+       "Earth's"
+      ],
+      [
+       288.788,
+       "surface"
+      ],
+      [
+       289.575,
+       ","
+      ],
+      [
+       289.688,
+       "it"
+      ],
+      [
+       289.825,
+       "traces"
+      ],
+      [
+       290.275,
+       "a"
+      ],
+      [
+       290.35,
+       "great"
+      ],
+      [
+       290.688,
+       "circle"
+      ],
+      [
+       291.5,
+       ","
+      ],
+      [
+       291.6,
+       "and"
+      ],
+      [
+       291.712,
+       "the"
+      ],
+      [
+       291.8,
+       "part"
+      ],
+      [
+       292.1,
+       "between"
+      ],
+      [
+       292.438,
+       "the"
+      ],
+      [
+       292.538,
+       "two"
+      ],
+      [
+       292.762,
+       "cities"
+      ],
+      [
+       293.175,
+       "is"
+      ],
+      [
+       293.325,
+       "the"
+      ],
+      [
+       293.438,
+       "great"
+      ],
+      [
+       293.812,
+       "circle"
+      ],
+      [
+       294.15,
+       "route"
+      ],
+      [
+       294.8,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "Why is it the shortest?",
-     "start": 294.9127,
-     "end": 296.9127,
+     "audio_text": null,
+     "start": 295.425,
+     "end": 297.425,
      "dur": 2.0,
-     "start_frame": 8847,
-     "end_frame": 8907
+     "start_frame": 8863,
+     "end_frame": 8923
     },
     {
      "text": "Think of all the circles on the globe that pass through both cities.",
-     "start": 297.2627,
-     "end": 301.5627,
+     "audio_text": null,
+     "start": 297.775,
+     "end": 302.075,
      "dur": 4.3,
-     "start_frame": 8918,
-     "end_frame": 9047
+     "start_frame": 8933,
+     "end_frame": 9062,
+     "words": [
+      [
+       298.15,
+       "Think"
+      ],
+      [
+       298.312,
+       "of"
+      ],
+      [
+       298.4,
+       "all"
+      ],
+      [
+       298.587,
+       "the"
+      ],
+      [
+       298.712,
+       "circles"
+      ],
+      [
+       299.212,
+       "on"
+      ],
+      [
+       299.312,
+       "the"
+      ],
+      [
+       299.4,
+       "globe"
+      ],
+      [
+       299.962,
+       "that"
+      ],
+      [
+       300.125,
+       "pass"
+      ],
+      [
+       300.475,
+       "through"
+      ],
+      [
+       300.675,
+       "both"
+      ],
+      [
+       300.988,
+       "cities"
+      ],
+      [
+       301.8,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "The great circle is the biggest of them, so between the two cities it bends the least.",
-     "start": 301.9127,
-     "end": 307.3627,
+     "audio_text": null,
+     "start": 302.425,
+     "end": 307.875,
      "dur": 5.45,
-     "start_frame": 9057,
-     "end_frame": 9221
+     "start_frame": 9073,
+     "end_frame": 9236,
+     "words": [
+      [
+       302.775,
+       "The"
+      ],
+      [
+       302.85,
+       "great"
+      ],
+      [
+       303.188,
+       "circle"
+      ],
+      [
+       303.65,
+       "is"
+      ],
+      [
+       303.8,
+       "the"
+      ],
+      [
+       303.938,
+       "biggest"
+      ],
+      [
+       304.338,
+       "of"
+      ],
+      [
+       304.425,
+       "them"
+      ],
+      [
+       304.925,
+       ","
+      ],
+      [
+       305.025,
+       "so"
+      ],
+      [
+       305.2,
+       "between"
+      ],
+      [
+       305.562,
+       "the"
+      ],
+      [
+       305.663,
+       "two"
+      ],
+      [
+       305.887,
+       "cities"
+      ],
+      [
+       306.275,
+       "it"
+      ],
+      [
+       306.375,
+       "bends"
+      ],
+      [
+       306.725,
+       "the"
+      ],
+      [
+       306.85,
+       "least"
+      ],
+      [
+       307.6,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "A string pulled tight between the two cities on a desk globe lies right along it.",
-     "start": 307.7127,
-     "end": 313.1627,
+     "audio_text": null,
+     "start": 308.225,
+     "end": 313.675,
      "dur": 5.45,
-     "start_frame": 9231,
-     "end_frame": 9395
+     "start_frame": 9247,
+     "end_frame": 9410,
+     "words": [
+      [
+       308.6,
+       "A"
+      ],
+      [
+       308.688,
+       "string"
+      ],
+      [
+       309.1,
+       "pulled"
+      ],
+      [
+       309.413,
+       "tight"
+      ],
+      [
+       309.75,
+       "between"
+      ],
+      [
+       310.038,
+       "the"
+      ],
+      [
+       310.138,
+       "two"
+      ],
+      [
+       310.363,
+       "cities"
+      ],
+      [
+       310.763,
+       "on"
+      ],
+      [
+       310.863,
+       "a"
+      ],
+      [
+       310.938,
+       "desk"
+      ],
+      [
+       311.338,
+       "globe"
+      ],
+      [
+       311.95,
+       "lies"
+      ],
+      [
+       312.312,
+       "right"
+      ],
+      [
+       312.575,
+       "along"
+      ],
+      [
+       312.9,
+       "it"
+      ],
+      [
+       313.4,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "And the puck from Part 4, gliding over a smooth Earth with nothing pushing it, was moving along exactly such a great circle.",
-     "start": 313.5127,
-     "end": 321.9823,
-     "dur": 8.4696,
-     "start_frame": 9405,
-     "end_frame": 9659,
-     "estimated": true
+     "audio_text": null,
+     "start": 314.025,
+     "end": 322.4,
+     "dur": 8.375,
+     "start_frame": 9421,
+     "end_frame": 9672,
+     "words": [
+      [
+       314.375,
+       "And"
+      ],
+      [
+       314.512,
+       "the"
+      ],
+      [
+       314.612,
+       "puck"
+      ],
+      [
+       314.9,
+       "from"
+      ],
+      [
+       315.1,
+       "Part"
+      ],
+      [
+       315.412,
+       "4"
+      ],
+      [
+       316.0,
+       ","
+      ],
+      [
+       316.137,
+       "gliding"
+      ],
+      [
+       316.537,
+       "over"
+      ],
+      [
+       316.775,
+       "a"
+      ],
+      [
+       316.9,
+       "smooth"
+      ],
+      [
+       317.35,
+       "Earth"
+      ],
+      [
+       317.662,
+       "with"
+      ],
+      [
+       317.825,
+       "nothing"
+      ],
+      [
+       318.175,
+       "pushing"
+      ],
+      [
+       318.575,
+       "it"
+      ],
+      [
+       319.025,
+       ","
+      ],
+      [
+       319.125,
+       "was"
+      ],
+      [
+       319.337,
+       "moving"
+      ],
+      [
+       319.675,
+       "along"
+      ],
+      [
+       320.075,
+       "exactly"
+      ],
+      [
+       320.712,
+       "such"
+      ],
+      [
+       320.938,
+       "a"
+      ],
+      [
+       321.0,
+       "great"
+      ],
+      [
+       321.287,
+       "circle"
+      ],
+      [
+       322.125,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     }
    ],
-   "end": 322.7823,
-   "start_frame": 7638,
-   "end_frame": 9683
+   "end": 323.2,
+   "start_frame": 7654,
+   "end_frame": 9696
   },
   {
    "id": "s07_sigma",
-   "start": 322.7823,
+   "start": 323.2,
    "sentences": [
     {
      "text": "How long is this route?",
-     "start": 322.7823,
-     "end": 324.7573,
+     "audio_text": null,
+     "start": 323.2,
+     "end": 325.175,
      "dur": 1.975,
-     "start_frame": 9683,
-     "end_frame": 9743
+     "start_frame": 9696,
+     "end_frame": 9755
     },
     {
      "text": "Let's turn the globe, so that we look straight at the slicing sheet.",
-     "start": 325.1073,
-     "end": 329.2573,
+     "audio_text": null,
+     "start": 325.525,
+     "end": 329.675,
      "dur": 4.15,
-     "start_frame": 9753,
-     "end_frame": 9878
+     "start_frame": 9766,
+     "end_frame": 9890
     },
     {
      "text": "Now it's just a flat circle, with the Earth's centre in the middle, and its radius is the Earth's radius.",
-     "start": 329.6073,
-     "end": 336.3823,
+     "audio_text": null,
+     "start": 330.025,
+     "end": 336.8,
      "dur": 6.775,
-     "start_frame": 9888,
-     "end_frame": 10091
+     "start_frame": 9901,
+     "end_frame": 10104
     },
     {
      "text": "Draw one arrow from the centre to London, and another one to Los Angeles.",
-     "start": 336.7323,
-     "end": 341.9323,
+     "audio_text": null,
+     "start": 337.15,
+     "end": 342.35,
      "dur": 5.2,
-     "start_frame": 10102,
-     "end_frame": 10258
+     "start_frame": 10115,
+     "end_frame": 10271,
+     "words": [
+      [
+       337.525,
+       "Draw"
+      ],
+      [
+       337.812,
+       "one"
+      ],
+      [
+       338.075,
+       "arrow"
+      ],
+      [
+       338.45,
+       "from"
+      ],
+      [
+       338.587,
+       "the"
+      ],
+      [
+       338.688,
+       "centre"
+      ],
+      [
+       339.075,
+       "to"
+      ],
+      [
+       339.2,
+       "London"
+      ],
+      [
+       339.9,
+       ","
+      ],
+      [
+       340.0,
+       "and"
+      ],
+      [
+       340.113,
+       "another"
+      ],
+      [
+       340.45,
+       "one"
+      ],
+      [
+       340.675,
+       "to"
+      ],
+      [
+       340.8,
+       "Los"
+      ],
+      [
+       341.163,
+       "Angeles"
+      ],
+      [
+       342.075,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "The angle between these two arrows, at the Earth's centre, is called sigma.",
-     "start": 342.2823,
-     "end": 347.2573,
+     "audio_text": null,
+     "start": 342.7,
+     "end": 347.675,
      "dur": 4.975,
-     "start_frame": 10268,
-     "end_frame": 10418
+     "start_frame": 10281,
+     "end_frame": 10430,
+     "words": [
+      [
+       343.05,
+       "The"
+      ],
+      [
+       343.188,
+       "angle"
+      ],
+      [
+       343.55,
+       "between"
+      ],
+      [
+       343.863,
+       "these"
+      ],
+      [
+       344.087,
+       "two"
+      ],
+      [
+       344.3,
+       "arrows"
+      ],
+      [
+       344.85,
+       ","
+      ],
+      [
+       344.925,
+       "at"
+      ],
+      [
+       345.012,
+       "the"
+      ],
+      [
+       345.125,
+       "Earth's"
+      ],
+      [
+       345.4,
+       "centre"
+      ],
+      [
+       346.025,
+       ","
+      ],
+      [
+       346.125,
+       "is"
+      ],
+      [
+       346.275,
+       "called"
+      ],
+      [
+       346.6,
+       "sigma"
+      ],
+      [
+       347.375,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "The route is the arc of the circle between the two arrow tips.",
-     "start": 347.6073,
-     "end": 351.9823,
+     "audio_text": null,
+     "start": 348.025,
+     "end": 352.4,
      "dur": 4.375,
-     "start_frame": 10428,
-     "end_frame": 10559
+     "start_frame": 10441,
+     "end_frame": 10572,
+     "words": [
+      [
+       348.4,
+       "The"
+      ],
+      [
+       348.512,
+       "route"
+      ],
+      [
+       349.112,
+       "is"
+      ],
+      [
+       349.262,
+       "the"
+      ],
+      [
+       349.412,
+       "arc"
+      ],
+      [
+       349.637,
+       "of"
+      ],
+      [
+       349.712,
+       "the"
+      ],
+      [
+       349.837,
+       "circle"
+      ],
+      [
+       350.375,
+       "between"
+      ],
+      [
+       350.688,
+       "the"
+      ],
+      [
+       350.787,
+       "two"
+      ],
+      [
+       351.037,
+       "arrow"
+      ],
+      [
+       351.387,
+       "tips"
+      ],
+      [
+       352.125,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "And that's exactly the picture of the arc rule from Part 1: the distance along a circle is the radius times the angle.",
-     "start": 352.3323,
-     "end": 360.6823,
+     "audio_text": null,
+     "start": 352.75,
+     "end": 361.1,
      "dur": 8.35,
-     "start_frame": 10570,
-     "end_frame": 10820
+     "start_frame": 10583,
+     "end_frame": 10833,
+     "words": [
+      [
+       353.1,
+       "And"
+      ],
+      [
+       353.238,
+       "that's"
+      ],
+      [
+       353.5,
+       "exactly"
+      ],
+      [
+       354.1,
+       "the"
+      ],
+      [
+       354.212,
+       "picture"
+      ],
+      [
+       354.637,
+       "of"
+      ],
+      [
+       354.712,
+       "the"
+      ],
+      [
+       354.863,
+       "arc"
+      ],
+      [
+       355.125,
+       "rule"
+      ],
+      [
+       355.475,
+       "from"
+      ],
+      [
+       355.675,
+       "Part"
+      ],
+      [
+       355.975,
+       "1"
+      ],
+      [
+       356.675,
+       ":"
+      ],
+      [
+       356.825,
+       "the"
+      ],
+      [
+       356.95,
+       "distance"
+      ],
+      [
+       357.475,
+       "along"
+      ],
+      [
+       357.762,
+       "a"
+      ],
+      [
+       357.863,
+       "circle"
+      ],
+      [
+       358.6,
+       "is"
+      ],
+      [
+       358.775,
+       "the"
+      ],
+      [
+       358.913,
+       "radius"
+      ],
+      [
+       359.488,
+       "times"
+      ],
+      [
+       359.9,
+       "the"
+      ],
+      [
+       360.062,
+       "angle"
+      ],
+      [
+       360.825,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "So the distance d equals the Earth's radius times sigma, with sigma in radians.",
-     "start": 361.0323,
-     "end": 366.8073,
+     "audio_text": null,
+     "start": 361.45,
+     "end": 367.225,
      "dur": 5.775,
-     "start_frame": 10831,
-     "end_frame": 11004,
-     "beat": true
+     "start_frame": 10844,
+     "end_frame": 11017,
+     "beat": true,
+     "words": [
+      [
+       361.825,
+       "So"
+      ],
+      [
+       361.912,
+       "the"
+      ],
+      [
+       362.0,
+       "distance"
+      ],
+      [
+       362.425,
+       "d"
+      ],
+      [
+       362.675,
+       "equals"
+      ],
+      [
+       363.012,
+       "the"
+      ],
+      [
+       363.125,
+       "Earth's"
+      ],
+      [
+       363.512,
+       "radius"
+      ],
+      [
+       363.975,
+       "times"
+      ],
+      [
+       364.35,
+       "sigma"
+      ],
+      [
+       365.025,
+       ","
+      ],
+      [
+       365.175,
+       "with"
+      ],
+      [
+       365.4,
+       "sigma"
+      ],
+      [
+       365.85,
+       "in"
+      ],
+      [
+       366.0,
+       "radians"
+      ],
+      [
+       366.95,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "Here's a way to feel it.",
-     "start": 368.3073,
-     "end": 370.2573,
+     "audio_text": null,
+     "start": 368.725,
+     "end": 370.675,
      "dur": 1.95,
-     "start_frame": 11049,
-     "end_frame": 11108
+     "start_frame": 11062,
+     "end_frame": 11120
     },
     {
      "text": "Every degree of sigma is one degree of a great circle, about a hundred and eleven point two kilometres on the ground, just like a degree of latitude along a meridian.",
-     "start": 370.6073,
-     "end": 381.3323,
+     "audio_text": null,
+     "start": 371.025,
+     "end": 381.75,
      "dur": 10.725,
-     "start_frame": 11118,
-     "end_frame": 11440
+     "start_frame": 11131,
+     "end_frame": 11453,
+     "words": [
+      [
+       371.4,
+       "Every"
+      ],
+      [
+       371.7,
+       "degree"
+      ],
+      [
+       372.012,
+       "of"
+      ],
+      [
+       372.137,
+       "sigma"
+      ],
+      [
+       372.637,
+       "is"
+      ],
+      [
+       372.812,
+       "one"
+      ],
+      [
+       373.075,
+       "degree"
+      ],
+      [
+       373.5,
+       "of"
+      ],
+      [
+       373.587,
+       "a"
+      ],
+      [
+       373.662,
+       "great"
+      ],
+      [
+       374.012,
+       "circle"
+      ],
+      [
+       374.775,
+       ","
+      ],
+      [
+       374.912,
+       "about"
+      ],
+      [
+       375.137,
+       "a"
+      ],
+      [
+       375.238,
+       "hundred"
+      ],
+      [
+       375.775,
+       "and"
+      ],
+      [
+       375.9,
+       "eleven"
+      ],
+      [
+       376.325,
+       "point"
+      ],
+      [
+       376.613,
+       "two"
+      ],
+      [
+       376.825,
+       "kilometres"
+      ],
+      [
+       377.438,
+       "on"
+      ],
+      [
+       377.537,
+       "the"
+      ],
+      [
+       377.625,
+       "ground"
+      ],
+      [
+       378.425,
+       ","
+      ],
+      [
+       378.562,
+       "just"
+      ],
+      [
+       378.812,
+       "like"
+      ],
+      [
+       378.962,
+       "a"
+      ],
+      [
+       379.025,
+       "degree"
+      ],
+      [
+       379.375,
+       "of"
+      ],
+      [
+       379.538,
+       "latitude"
+      ],
+      [
+       380.2,
+       "along"
+      ],
+      [
+       380.538,
+       "a"
+      ],
+      [
+       380.6,
+       "meridian"
+      ],
+      [
+       381.5,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "So once we know sigma, we know the distance.",
-     "start": 381.6823,
-     "end": 384.9073,
+     "audio_text": null,
+     "start": 382.1,
+     "end": 385.325,
      "dur": 3.225,
-     "start_frame": 11450,
-     "end_frame": 11547
+     "start_frame": 11463,
+     "end_frame": 11560
     }
    ],
-   "end": 385.7073,
-   "start_frame": 9683,
-   "end_frame": 11571
+   "end": 386.125,
+   "start_frame": 9696,
+   "end_frame": 11584
   },
   {
    "id": "s08_position_arrows",
-   "start": 385.7073,
+   "start": 386.125,
    "sentences": [
     {
      "text": "The next few minutes work out sigma step by step, with every number.",
-     "start": 385.7073,
-     "end": 390.5323,
+     "audio_text": null,
+     "start": 386.125,
+     "end": 390.95,
      "dur": 4.825,
-     "start_frame": 11571,
-     "end_frame": 11716
+     "start_frame": 11584,
+     "end_frame": 11729
     },
     {
      "text": "They're here for anyone who enjoys seeing every step, but you don't need them for the intuition behind weather, climate science or GIS.",
-     "start": 390.8823,
-     "end": 399.5823,
+     "audio_text": null,
+     "start": 391.3,
+     "end": 400.0,
      "dur": 8.7,
-     "start_frame": 11726,
-     "end_frame": 11987
+     "start_frame": 11739,
+     "end_frame": 12000
     },
     {
      "text": "If it feels like a lot, skip ahead to the time on screen, and you won't miss the big idea.",
-     "start": 399.9323,
-     "end": 406.0073,
+     "audio_text": null,
+     "start": 400.35,
+     "end": 406.425,
      "dur": 6.075,
-     "start_frame": 11998,
-     "end_frame": 12180
+     "start_frame": 12011,
+     "end_frame": 12193
     },
     {
      "text": "To find sigma, we need the two position arrows of length one, r hat one for London and r hat two for Los Angeles.",
-     "start": 406.3573,
-     "end": 414.7073,
+     "audio_text": null,
+     "start": 406.775,
+     "end": 415.125,
      "dur": 8.35,
-     "start_frame": 12191,
-     "end_frame": 12441
+     "start_frame": 12203,
+     "end_frame": 12454
     },
     {
      "text": "From Part 3, each one is cosine phi cosine lambda, cosine phi sine lambda, sine phi.",
-     "start": 415.0573,
-     "end": 421.7573,
+     "audio_text": null,
+     "start": 415.475,
+     "end": 422.175,
      "dur": 6.7,
-     "start_frame": 12452,
-     "end_frame": 12653
+     "start_frame": 12464,
+     "end_frame": 12665,
+     "words": [
+      [
+       415.825,
+       "From"
+      ],
+      [
+       415.975,
+       "Part"
+      ],
+      [
+       416.25,
+       "3"
+      ],
+      [
+       416.7,
+       ","
+      ],
+      [
+       416.825,
+       "each"
+      ],
+      [
+       417.038,
+       "one"
+      ],
+      [
+       417.163,
+       "is"
+      ],
+      [
+       417.3,
+       "cosine"
+      ],
+      [
+       417.788,
+       "phi"
+      ],
+      [
+       418.05,
+       "cosine"
+      ],
+      [
+       418.5,
+       "lambda"
+      ],
+      [
+       419.125,
+       ","
+      ],
+      [
+       419.275,
+       "cosine"
+      ],
+      [
+       419.738,
+       "phi"
+      ],
+      [
+       420.038,
+       "sine"
+      ],
+      [
+       420.325,
+       "lambda"
+      ],
+      [
+       420.8,
+       ","
+      ],
+      [
+       420.913,
+       "sine"
+      ],
+      [
+       421.238,
+       "phi"
+      ],
+      [
+       421.9,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "London is at fifty one point five one degrees north, and zero point one three degrees west, so its lambda is minus zero point one three degrees.",
-     "start": 422.1073,
-     "end": 432.5073,
+     "audio_text": null,
+     "start": 422.525,
+     "end": 432.925,
      "dur": 10.4,
-     "start_frame": 12663,
-     "end_frame": 12975
+     "start_frame": 12676,
+     "end_frame": 12988
     },
     {
      "text": "The cosine of fifty one point five one degrees is zero point six two two, and the cosine of minus zero point one three degrees is almost exactly one.",
-     "start": 432.8573,
-     "end": 444.1323,
+     "audio_text": null,
+     "start": 433.275,
+     "end": 444.55,
      "dur": 11.275,
-     "start_frame": 12986,
-     "end_frame": 13324
+     "start_frame": 12998,
+     "end_frame": 13337,
+     "words": [
+      [
+       433.625,
+       "The"
+      ],
+      [
+       433.7,
+       "cosine"
+      ],
+      [
+       434.175,
+       "of"
+      ],
+      [
+       434.312,
+       "fifty"
+      ],
+      [
+       434.662,
+       "one"
+      ],
+      [
+       435.012,
+       "point"
+      ],
+      [
+       435.363,
+       "five"
+      ],
+      [
+       435.725,
+       "one"
+      ],
+      [
+       435.95,
+       "degrees"
+      ],
+      [
+       436.787,
+       "is"
+      ],
+      [
+       436.962,
+       "zero"
+      ],
+      [
+       437.363,
+       "point"
+      ],
+      [
+       437.688,
+       "six"
+      ],
+      [
+       437.962,
+       "two"
+      ],
+      [
+       438.225,
+       "two"
+      ],
+      [
+       438.875,
+       ","
+      ],
+      [
+       439.075,
+       "and"
+      ],
+      [
+       439.188,
+       "the"
+      ],
+      [
+       439.275,
+       "cosine"
+      ],
+      [
+       439.8,
+       "of"
+      ],
+      [
+       439.938,
+       "minus"
+      ],
+      [
+       440.45,
+       "zero"
+      ],
+      [
+       440.887,
+       "point"
+      ],
+      [
+       441.175,
+       "one"
+      ],
+      [
+       441.413,
+       "three"
+      ],
+      [
+       441.65,
+       "degrees"
+      ],
+      [
+       442.337,
+       "is"
+      ],
+      [
+       442.512,
+       "almost"
+      ],
+      [
+       442.975,
+       "exactly"
+      ],
+      [
+       443.55,
+       "one"
+      ],
+      [
+       444.275,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "So the first part is zero point six two two.",
-     "start": 444.4823,
-     "end": 447.8073,
+     "audio_text": null,
+     "start": 444.9,
+     "end": 448.225,
      "dur": 3.325,
-     "start_frame": 13334,
-     "end_frame": 13434,
-     "beat": true
+     "start_frame": 13347,
+     "end_frame": 13447,
+     "beat": true,
+     "words": [
+      [
+       445.275,
+       "So"
+      ],
+      [
+       445.363,
+       "the"
+      ],
+      [
+       445.45,
+       "first"
+      ],
+      [
+       445.725,
+       "part"
+      ],
+      [
+       446.062,
+       "is"
+      ],
+      [
+       446.212,
+       "zero"
+      ],
+      [
+       446.55,
+       "point"
+      ],
+      [
+       446.8,
+       "six"
+      ],
+      [
+       447.05,
+       "two"
+      ],
+      [
+       447.288,
+       "two"
+      ],
+      [
+       447.875,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "The sine of minus zero point one three degrees is minus zero point zero zero two three, so the second part, cosine phi times sine lambda, is about minus zero point zero zero one.",
-     "start": 449.3073,
-     "end": 461.4652,
-     "dur": 12.1579,
-     "start_frame": 13479,
-     "end_frame": 13844,
+     "audio_text": null,
+     "start": 449.725,
+     "end": 462.875,
+     "dur": 13.15,
+     "start_frame": 13492,
+     "end_frame": 13886,
      "beat": true,
-     "estimated": true
+     "words": [
+      [
+       450.075,
+       "The"
+      ],
+      [
+       450.188,
+       "sine"
+      ],
+      [
+       450.488,
+       "of"
+      ],
+      [
+       450.613,
+       "minus"
+      ],
+      [
+       451.013,
+       "zero"
+      ],
+      [
+       451.4,
+       "point"
+      ],
+      [
+       451.675,
+       "one"
+      ],
+      [
+       451.913,
+       "three"
+      ],
+      [
+       452.15,
+       "degrees"
+      ],
+      [
+       452.863,
+       "is"
+      ],
+      [
+       453.038,
+       "minus"
+      ],
+      [
+       453.438,
+       "zero"
+      ],
+      [
+       453.825,
+       "point"
+      ],
+      [
+       454.137,
+       "zero"
+      ],
+      [
+       454.538,
+       "zero"
+      ],
+      [
+       454.963,
+       "two"
+      ],
+      [
+       455.213,
+       "three"
+      ],
+      [
+       455.875,
+       ","
+      ],
+      [
+       456.062,
+       "so"
+      ],
+      [
+       456.213,
+       "the"
+      ],
+      [
+       456.312,
+       "second"
+      ],
+      [
+       456.65,
+       "part"
+      ],
+      [
+       457.175,
+       ","
+      ],
+      [
+       457.312,
+       "cosine"
+      ],
+      [
+       457.875,
+       "phi"
+      ],
+      [
+       458.213,
+       "times"
+      ],
+      [
+       458.588,
+       "sine"
+      ],
+      [
+       458.875,
+       "lambda"
+      ],
+      [
+       459.525,
+       ","
+      ],
+      [
+       459.663,
+       "is"
+      ],
+      [
+       459.788,
+       "about"
+      ],
+      [
+       460.012,
+       "minus"
+      ],
+      [
+       460.413,
+       "zero"
+      ],
+      [
+       460.812,
+       "point"
+      ],
+      [
+       461.137,
+       "zero"
+      ],
+      [
+       461.512,
+       "zero"
+      ],
+      [
+       461.887,
+       "one"
+      ],
+      [
+       462.625,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "The third part is the sine of fifty one point five one degrees, zero point seven eight three.",
-     "start": 462.9652,
-     "end": 469.4652,
+     "audio_text": null,
+     "start": 464.375,
+     "end": 470.875,
      "dur": 6.5,
-     "start_frame": 13889,
-     "end_frame": 14084,
-     "beat": true
+     "start_frame": 13931,
+     "end_frame": 14126,
+     "beat": true,
+     "words": [
+      [
+       464.725,
+       "The"
+      ],
+      [
+       464.837,
+       "third"
+      ],
+      [
+       465.125,
+       "part"
+      ],
+      [
+       465.425,
+       "is"
+      ],
+      [
+       465.562,
+       "the"
+      ],
+      [
+       465.688,
+       "sine"
+      ],
+      [
+       466.05,
+       "of"
+      ],
+      [
+       466.188,
+       "fifty"
+      ],
+      [
+       466.5,
+       "one"
+      ],
+      [
+       466.725,
+       "point"
+      ],
+      [
+       467.062,
+       "five"
+      ],
+      [
+       467.425,
+       "one"
+      ],
+      [
+       467.675,
+       "degrees"
+      ],
+      [
+       468.5,
+       ","
+      ],
+      [
+       468.65,
+       "zero"
+      ],
+      [
+       469.025,
+       "point"
+      ],
+      [
+       469.337,
+       "seven"
+      ],
+      [
+       469.65,
+       "eight"
+      ],
+      [
+       469.863,
+       "three"
+      ],
+      [
+       470.575,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "Los Angeles is at thirty four point zero five degrees north, and a hundred and eighteen point two four degrees west, so its lambda is minus a hundred and eighteen point two four degrees.",
-     "start": 470.9652,
-     "end": 483.3902,
+     "audio_text": null,
+     "start": 472.375,
+     "end": 484.8,
      "dur": 12.425,
-     "start_frame": 14129,
-     "end_frame": 14502
+     "start_frame": 14171,
+     "end_frame": 14544
     },
     {
      "text": "Its cosine phi is zero point eight two nine, its cosine lambda is minus zero point four seven three, and its sine lambda is minus zero point eight eight one.",
-     "start": 483.7402,
-     "end": 494.9402,
+     "audio_text": null,
+     "start": 485.15,
+     "end": 496.35,
      "dur": 11.2,
-     "start_frame": 14512,
-     "end_frame": 14848
+     "start_frame": 14555,
+     "end_frame": 14891,
+     "words": [
+      [
+       485.5,
+       "Its"
+      ],
+      [
+       485.725,
+       "cosine"
+      ],
+      [
+       486.237,
+       "phi"
+      ],
+      [
+       486.6,
+       "is"
+      ],
+      [
+       486.762,
+       "zero"
+      ],
+      [
+       487.125,
+       "point"
+      ],
+      [
+       487.4,
+       "eight"
+      ],
+      [
+       487.662,
+       "two"
+      ],
+      [
+       487.875,
+       "nine"
+      ],
+      [
+       488.55,
+       ","
+      ],
+      [
+       488.688,
+       "its"
+      ],
+      [
+       488.9,
+       "cosine"
+      ],
+      [
+       489.4,
+       "lambda"
+      ],
+      [
+       489.75,
+       "is"
+      ],
+      [
+       489.913,
+       "minus"
+      ],
+      [
+       490.425,
+       "zero"
+      ],
+      [
+       490.825,
+       "point"
+      ],
+      [
+       491.113,
+       "four"
+      ],
+      [
+       491.363,
+       "seven"
+      ],
+      [
+       491.738,
+       "three"
+      ],
+      [
+       492.45,
+       ","
+      ],
+      [
+       492.575,
+       "and"
+      ],
+      [
+       492.688,
+       "its"
+      ],
+      [
+       492.838,
+       "sine"
+      ],
+      [
+       493.175,
+       "lambda"
+      ],
+      [
+       493.525,
+       "is"
+      ],
+      [
+       493.688,
+       "minus"
+      ],
+      [
+       494.188,
+       "zero"
+      ],
+      [
+       494.575,
+       "point"
+      ],
+      [
+       494.85,
+       "eight"
+      ],
+      [
+       495.1,
+       "eight"
+      ],
+      [
+       495.338,
+       "one"
+      ],
+      [
+       496.075,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "So its first part, cosine phi times cosine lambda, is about minus zero point three nine two.",
-     "start": 495.2902,
-     "end": 501.5741,
-     "dur": 6.2839,
-     "start_frame": 14859,
-     "end_frame": 15047,
+     "audio_text": null,
+     "start": 496.7,
+     "end": 503.45,
+     "dur": 6.75,
+     "start_frame": 14901,
+     "end_frame": 15104,
      "beat": true,
-     "estimated": true
+     "words": [
+      [
+       497.075,
+       "So"
+      ],
+      [
+       497.212,
+       "its"
+      ],
+      [
+       497.375,
+       "first"
+      ],
+      [
+       497.65,
+       "part"
+      ],
+      [
+       498.15,
+       ","
+      ],
+      [
+       498.275,
+       "cosine"
+      ],
+      [
+       498.762,
+       "phi"
+      ],
+      [
+       499.05,
+       "times"
+      ],
+      [
+       499.425,
+       "cosine"
+      ],
+      [
+       499.875,
+       "lambda"
+      ],
+      [
+       500.525,
+       ","
+      ],
+      [
+       500.688,
+       "is"
+      ],
+      [
+       500.812,
+       "about"
+      ],
+      [
+       501.025,
+       "minus"
+      ],
+      [
+       501.363,
+       "zero"
+      ],
+      [
+       501.725,
+       "point"
+      ],
+      [
+       502.0,
+       "three"
+      ],
+      [
+       502.225,
+       "nine"
+      ],
+      [
+       502.537,
+       "two"
+      ],
+      [
+       503.15,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "Its second part, cosine phi times sine lambda, is about minus zero point seven three zero.",
-     "start": 503.0741,
-     "end": 509.2213,
-     "dur": 6.1473,
-     "start_frame": 15092,
-     "end_frame": 15277,
+     "audio_text": null,
+     "start": 504.95,
+     "end": 511.75,
+     "dur": 6.8,
+     "start_frame": 15149,
+     "end_frame": 15353,
      "beat": true,
-     "estimated": true
+     "words": [
+      [
+       505.275,
+       "Its"
+      ],
+      [
+       505.475,
+       "second"
+      ],
+      [
+       505.8,
+       "part"
+      ],
+      [
+       506.3,
+       ","
+      ],
+      [
+       506.425,
+       "cosine"
+      ],
+      [
+       506.912,
+       "phi"
+      ],
+      [
+       507.2,
+       "times"
+      ],
+      [
+       507.562,
+       "sine"
+      ],
+      [
+       507.85,
+       "lambda"
+      ],
+      [
+       508.5,
+       ","
+      ],
+      [
+       508.663,
+       "is"
+      ],
+      [
+       508.788,
+       "about"
+      ],
+      [
+       509.025,
+       "minus"
+      ],
+      [
+       509.413,
+       "zero"
+      ],
+      [
+       509.775,
+       "point"
+      ],
+      [
+       510.087,
+       "seven"
+      ],
+      [
+       510.45,
+       "three"
+      ],
+      [
+       510.675,
+       "zero"
+      ],
+      [
+       511.45,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "And its third part, the sine of thirty four point zero five degrees, is zero point five six zero.",
-     "start": 510.7213,
-     "end": 517.9213,
+     "audio_text": null,
+     "start": 513.25,
+     "end": 520.45,
      "dur": 7.2,
-     "start_frame": 15322,
-     "end_frame": 15538,
-     "beat": true
+     "start_frame": 15398,
+     "end_frame": 15614,
+     "beat": true,
+     "words": [
+      [
+       513.6,
+       "And"
+      ],
+      [
+       513.737,
+       "its"
+      ],
+      [
+       513.925,
+       "third"
+      ],
+      [
+       514.2,
+       "part"
+      ],
+      [
+       514.725,
+       ","
+      ],
+      [
+       514.825,
+       "the"
+      ],
+      [
+       514.962,
+       "sine"
+      ],
+      [
+       515.263,
+       "of"
+      ],
+      [
+       515.388,
+       "thirty"
+      ],
+      [
+       515.712,
+       "four"
+      ],
+      [
+       516.0,
+       "point"
+      ],
+      [
+       516.288,
+       "zero"
+      ],
+      [
+       516.663,
+       "five"
+      ],
+      [
+       516.975,
+       "degrees"
+      ],
+      [
+       517.775,
+       ","
+      ],
+      [
+       517.888,
+       "is"
+      ],
+      [
+       518.062,
+       "zero"
+      ],
+      [
+       518.45,
+       "point"
+      ],
+      [
+       518.788,
+       "five"
+      ],
+      [
+       519.163,
+       "six"
+      ],
+      [
+       519.4,
+       "zero"
+      ],
+      [
+       520.15,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     }
    ],
-   "end": 519.4213,
-   "start_frame": 11571,
-   "end_frame": 15583
+   "end": 521.95,
+   "start_frame": 11584,
+   "end_frame": 15659
   },
   {
    "id": "s09_cos_sigma",
-   "start": 519.4213,
+   "start": 521.95,
    "sentences": [
     {
      "text": "Now let's use the rule from the dot product movie.",
-     "start": 519.4213,
-     "end": 523.0463,
+     "audio_text": null,
+     "start": 521.95,
+     "end": 525.575,
      "dur": 3.625,
-     "start_frame": 15583,
-     "end_frame": 15691
+     "start_frame": 15659,
+     "end_frame": 15767
     },
     {
      "text": "The dot product of two arrows is the product of their lengths, times the cosine of the angle between them.",
-     "start": 523.3963,
-     "end": 530.3713,
+     "audio_text": null,
+     "start": 525.925,
+     "end": 532.9,
      "dur": 6.975,
-     "start_frame": 15702,
-     "end_frame": 15911
+     "start_frame": 15778,
+     "end_frame": 15987
     },
     {
      "text": "Our two arrows both have length one, so their dot product is just the cosine of sigma.",
-     "start": 530.7213,
-     "end": 536.6713,
+     "audio_text": null,
+     "start": 533.25,
+     "end": 539.2,
      "dur": 5.95,
-     "start_frame": 15922,
-     "end_frame": 16100
+     "start_frame": 15998,
+     "end_frame": 16176
     },
     {
      "text": "That's the shadow picture again: the shadow of one arrow of length one on the other.",
-     "start": 537.0213,
-     "end": 542.4463,
+     "audio_text": null,
+     "start": 539.55,
+     "end": 544.975,
      "dur": 5.425,
-     "start_frame": 16111,
-     "end_frame": 16273
+     "start_frame": 16187,
+     "end_frame": 16349
     },
     {
      "text": "To take the dot product, we multiply London's first part by Los Angeles' first part, then the second parts, and then the third parts, and add the three products.",
-     "start": 542.7963,
-     "end": 553.7931,
-     "dur": 10.9968,
-     "start_frame": 16284,
-     "end_frame": 16614,
-     "estimated": true
+     "audio_text": null,
+     "start": 545.325,
+     "end": 555.8,
+     "dur": 10.475,
+     "start_frame": 16360,
+     "end_frame": 16674,
+     "words": [
+      [
+       545.675,
+       "To"
+      ],
+      [
+       545.775,
+       "take"
+      ],
+      [
+       546.025,
+       "the"
+      ],
+      [
+       546.125,
+       "dot"
+      ],
+      [
+       546.4,
+       "product"
+      ],
+      [
+       547.125,
+       ","
+      ],
+      [
+       547.225,
+       "we"
+      ],
+      [
+       547.388,
+       "multiply"
+      ],
+      [
+       548.038,
+       "London's"
+      ],
+      [
+       548.562,
+       "first"
+      ],
+      [
+       548.925,
+       "part"
+      ],
+      [
+       549.225,
+       "by"
+      ],
+      [
+       549.438,
+       "Los"
+      ],
+      [
+       549.837,
+       "Angeles'"
+      ],
+      [
+       550.312,
+       "first"
+      ],
+      [
+       550.675,
+       "part"
+      ],
+      [
+       551.275,
+       ","
+      ],
+      [
+       551.375,
+       "then"
+      ],
+      [
+       551.513,
+       "the"
+      ],
+      [
+       551.612,
+       "second"
+      ],
+      [
+       551.975,
+       "parts"
+      ],
+      [
+       552.7,
+       ","
+      ],
+      [
+       552.8,
+       "and"
+      ],
+      [
+       552.913,
+       "then"
+      ],
+      [
+       553.038,
+       "the"
+      ],
+      [
+       553.137,
+       "third"
+      ],
+      [
+       553.45,
+       "parts"
+      ],
+      [
+       553.85,
+       ","
+      ],
+      [
+       553.9,
+       "and"
+      ],
+      [
+       554.062,
+       "add"
+      ],
+      [
+       554.288,
+       "the"
+      ],
+      [
+       554.387,
+       "three"
+      ],
+      [
+       554.625,
+       "products"
+      ],
+      [
+       555.55,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "That gives about zero point one nine five, so the cosine of sigma is zero point one nine five.",
-     "start": 554.1431,
-     "end": 560.5636,
-     "dur": 6.4205,
-     "start_frame": 16624,
-     "end_frame": 16817,
+     "audio_text": null,
+     "start": 556.15,
+     "end": 562.875,
+     "dur": 6.725,
+     "start_frame": 16685,
+     "end_frame": 16886,
      "beat": true,
-     "estimated": true
+     "words": [
+      [
+       556.525,
+       "That"
+      ],
+      [
+       556.75,
+       "gives"
+      ],
+      [
+       556.987,
+       "about"
+      ],
+      [
+       557.262,
+       "zero"
+      ],
+      [
+       557.675,
+       "point"
+      ],
+      [
+       557.938,
+       "one"
+      ],
+      [
+       558.075,
+       "nine"
+      ],
+      [
+       558.337,
+       "five"
+      ],
+      [
+       559.075,
+       ","
+      ],
+      [
+       559.2,
+       "so"
+      ],
+      [
+       559.312,
+       "the"
+      ],
+      [
+       559.4,
+       "cosine"
+      ],
+      [
+       559.837,
+       "of"
+      ],
+      [
+       559.962,
+       "sigma"
+      ],
+      [
+       560.462,
+       "is"
+      ],
+      [
+       560.65,
+       "zero"
+      ],
+      [
+       561.087,
+       "point"
+      ],
+      [
+       561.375,
+       "one"
+      ],
+      [
+       561.575,
+       "nine"
+      ],
+      [
+       561.837,
+       "five"
+      ],
+      [
+       562.575,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "Which angle has a cosine of zero point one nine five?",
-     "start": 562.0636,
-     "end": 566.1386,
+     "audio_text": null,
+     "start": 564.375,
+     "end": 568.45,
      "dur": 4.075,
-     "start_frame": 16862,
-     "end_frame": 16984
+     "start_frame": 16931,
+     "end_frame": 17054
     },
     {
      "text": "A calculator's inverse cosine says about seventy eight point seven degrees.",
-     "start": 566.4886,
-     "end": 571.8636,
+     "audio_text": null,
+     "start": 568.8,
+     "end": 574.175,
      "dur": 5.375,
-     "start_frame": 16995,
-     "end_frame": 17156,
-     "beat": true
+     "start_frame": 17064,
+     "end_frame": 17225,
+     "beat": true,
+     "words": [
+      [
+       569.175,
+       "A"
+      ],
+      [
+       569.25,
+       "calculator's"
+      ],
+      [
+       569.987,
+       "inverse"
+      ],
+      [
+       570.4,
+       "cosine"
+      ],
+      [
+       571.275,
+       "says"
+      ],
+      [
+       571.512,
+       "about"
+      ],
+      [
+       571.787,
+       "seventy"
+      ],
+      [
+       572.15,
+       "eight"
+      ],
+      [
+       572.375,
+       "point"
+      ],
+      [
+       572.688,
+       "seven"
+      ],
+      [
+       573.025,
+       "degrees"
+      ],
+      [
+       573.9,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "A cosine just below zero point two means an angle a little less than ninety degrees, so London and Los Angeles are almost a quarter of the way round the Earth from each other.",
-     "start": 573.3636,
-     "end": 584.8386,
+     "audio_text": null,
+     "start": 575.675,
+     "end": 587.15,
      "dur": 11.475,
-     "start_frame": 17201,
-     "end_frame": 17545
+     "start_frame": 17270,
+     "end_frame": 17615,
+     "words": [
+      [
+       576.025,
+       "A"
+      ],
+      [
+       576.112,
+       "cosine"
+      ],
+      [
+       576.737,
+       "just"
+      ],
+      [
+       577.025,
+       "below"
+      ],
+      [
+       577.387,
+       "zero"
+      ],
+      [
+       577.787,
+       "point"
+      ],
+      [
+       578.15,
+       "two"
+      ],
+      [
+       578.787,
+       "means"
+      ],
+      [
+       579.087,
+       "an"
+      ],
+      [
+       579.212,
+       "angle"
+      ],
+      [
+       579.6,
+       "a"
+      ],
+      [
+       579.675,
+       "little"
+      ],
+      [
+       579.925,
+       "less"
+      ],
+      [
+       580.2,
+       "than"
+      ],
+      [
+       580.387,
+       "ninety"
+      ],
+      [
+       580.775,
+       "degrees"
+      ],
+      [
+       581.725,
+       ","
+      ],
+      [
+       581.862,
+       "so"
+      ],
+      [
+       582.05,
+       "London"
+      ],
+      [
+       582.425,
+       "and"
+      ],
+      [
+       582.55,
+       "Los"
+      ],
+      [
+       582.987,
+       "Angeles"
+      ],
+      [
+       583.575,
+       "are"
+      ],
+      [
+       583.737,
+       "almost"
+      ],
+      [
+       584.137,
+       "a"
+      ],
+      [
+       584.2,
+       "quarter"
+      ],
+      [
+       584.637,
+       "of"
+      ],
+      [
+       584.712,
+       "the"
+      ],
+      [
+       584.812,
+       "way"
+      ],
+      [
+       585.163,
+       "round"
+      ],
+      [
+       585.438,
+       "the"
+      ],
+      [
+       585.55,
+       "Earth"
+      ],
+      [
+       585.85,
+       "from"
+      ],
+      [
+       586.012,
+       "each"
+      ],
+      [
+       586.212,
+       "other"
+      ],
+      [
+       586.875,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     }
    ],
-   "end": 585.6386,
-   "start_frame": 15583,
-   "end_frame": 17569
+   "end": 587.95,
+   "start_frame": 15659,
+   "end_frame": 17638
   },
   {
    "id": "s10_distance",
-   "start": 585.6386,
+   "start": 587.95,
    "sentences": [
     {
      "text": "The arc rule needs sigma in radians.",
-     "start": 585.6386,
-     "end": 588.5636,
+     "audio_text": null,
+     "start": 587.95,
+     "end": 590.875,
      "dur": 2.925,
-     "start_frame": 17569,
-     "end_frame": 17657
+     "start_frame": 17639,
+     "end_frame": 17726
     },
     {
      "text": "One degree is pi over a hundred and eighty radians, about zero point zero one seven four five.",
-     "start": 588.9136,
-     "end": 595.9886,
+     "audio_text": null,
+     "start": 591.225,
+     "end": 598.3,
      "dur": 7.075,
-     "start_frame": 17667,
-     "end_frame": 17880
+     "start_frame": 17737,
+     "end_frame": 17949,
+     "words": [
+      [
+       591.65,
+       "One"
+      ],
+      [
+       591.875,
+       "degree"
+      ],
+      [
+       592.25,
+       "is"
+      ],
+      [
+       592.413,
+       "pi"
+      ],
+      [
+       592.85,
+       "over"
+      ],
+      [
+       593.062,
+       "a"
+      ],
+      [
+       593.125,
+       "hundred"
+      ],
+      [
+       593.6,
+       "and"
+      ],
+      [
+       593.737,
+       "eighty"
+      ],
+      [
+       594.025,
+       "radians"
+      ],
+      [
+       594.9,
+       ","
+      ],
+      [
+       595.025,
+       "about"
+      ],
+      [
+       595.337,
+       "zero"
+      ],
+      [
+       595.675,
+       "point"
+      ],
+      [
+       595.962,
+       "zero"
+      ],
+      [
+       596.362,
+       "one"
+      ],
+      [
+       596.612,
+       "seven"
+      ],
+      [
+       596.987,
+       "four"
+      ],
+      [
+       597.237,
+       "five"
+      ],
+      [
+       598.0,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "So sigma, seventy eight point seven three eight degrees to be exact, is about one point three seven four two radians.",
-     "start": 596.3386,
-     "end": 604.33,
-     "dur": 7.9914,
-     "start_frame": 17890,
-     "end_frame": 18130,
+     "audio_text": null,
+     "start": 598.65,
+     "end": 606.925,
+     "dur": 8.275,
+     "start_frame": 17960,
+     "end_frame": 18208,
      "beat": true,
-     "estimated": true
+     "words": [
+      [
+       599.025,
+       "So"
+      ],
+      [
+       599.25,
+       "sigma"
+      ],
+      [
+       599.925,
+       ","
+      ],
+      [
+       600.087,
+       "seventy"
+      ],
+      [
+       600.5,
+       "eight"
+      ],
+      [
+       600.75,
+       "point"
+      ],
+      [
+       601.062,
+       "seven"
+      ],
+      [
+       601.438,
+       "three"
+      ],
+      [
+       601.675,
+       "eight"
+      ],
+      [
+       601.925,
+       "degrees"
+      ],
+      [
+       602.4,
+       "to"
+      ],
+      [
+       602.487,
+       "be"
+      ],
+      [
+       602.625,
+       "exact"
+      ],
+      [
+       603.5,
+       ","
+      ],
+      [
+       603.6,
+       "is"
+      ],
+      [
+       603.712,
+       "about"
+      ],
+      [
+       603.962,
+       "one"
+      ],
+      [
+       604.25,
+       "point"
+      ],
+      [
+       604.537,
+       "three"
+      ],
+      [
+       604.787,
+       "seven"
+      ],
+      [
+       605.162,
+       "four"
+      ],
+      [
+       605.438,
+       "two"
+      ],
+      [
+       605.712,
+       "radians"
+      ],
+      [
+       606.65,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "Now the distance is the Earth's radius, six thousand three hundred and seventy one kilometres, times sigma in radians.",
-     "start": 605.83,
-     "end": 613.8898,
-     "dur": 8.0597,
-     "start_frame": 18175,
-     "end_frame": 18417,
-     "estimated": true
+     "audio_text": null,
+     "start": 608.425,
+     "end": 616.675,
+     "dur": 8.25,
+     "start_frame": 18253,
+     "end_frame": 18500,
+     "words": [
+      [
+       608.825,
+       "Now"
+      ],
+      [
+       609.025,
+       "the"
+      ],
+      [
+       609.125,
+       "distance"
+      ],
+      [
+       609.6,
+       "is"
+      ],
+      [
+       609.737,
+       "the"
+      ],
+      [
+       609.887,
+       "Earth's"
+      ],
+      [
+       610.312,
+       "radius"
+      ],
+      [
+       611.225,
+       ","
+      ],
+      [
+       611.362,
+       "six"
+      ],
+      [
+       611.65,
+       "thousand"
+      ],
+      [
+       612.0,
+       "three"
+      ],
+      [
+       612.225,
+       "hundred"
+      ],
+      [
+       612.65,
+       "and"
+      ],
+      [
+       612.787,
+       "seventy"
+      ],
+      [
+       613.175,
+       "one"
+      ],
+      [
+       613.4,
+       "kilometres"
+      ],
+      [
+       614.3,
+       ","
+      ],
+      [
+       614.412,
+       "times"
+      ],
+      [
+       614.862,
+       "sigma"
+      ],
+      [
+       615.325,
+       "in"
+      ],
+      [
+       615.475,
+       "radians"
+      ],
+      [
+       616.4,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "That's about eight thousand seven hundred and fifty five kilometres.",
-     "start": 614.2398,
-     "end": 618.9898,
+     "audio_text": null,
+     "start": 617.025,
+     "end": 621.775,
      "dur": 4.75,
-     "start_frame": 18427,
-     "end_frame": 18570,
-     "beat": true
+     "start_frame": 18511,
+     "end_frame": 18653,
+     "beat": true,
+     "words": [
+      [
+       617.4,
+       "That's"
+      ],
+      [
+       617.663,
+       "about"
+      ],
+      [
+       618.012,
+       "eight"
+      ],
+      [
+       618.275,
+       "thousand"
+      ],
+      [
+       618.625,
+       "seven"
+      ],
+      [
+       618.9,
+       "hundred"
+      ],
+      [
+       619.6,
+       "and"
+      ],
+      [
+       619.762,
+       "fifty"
+      ],
+      [
+       620.087,
+       "five"
+      ],
+      [
+       620.45,
+       "kilometres"
+      ],
+      [
+       621.5,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "Let's check it the quick way: every degree of sigma is about a hundred and eleven point two kilometres, so seventy eight point seven four degrees make about eight thousand seven hundred and fifty six kilometres, the same to within the rounding.",
-     "start": 620.4898,
-     "end": 637.1557,
-     "dur": 16.6659,
-     "start_frame": 18615,
-     "end_frame": 19115,
+     "audio_text": null,
+     "start": 623.275,
+     "end": 637.925,
+     "dur": 14.65,
+     "start_frame": 18698,
+     "end_frame": 19138,
      "beat": true,
-     "estimated": true
+     "words": [
+      [
+       623.65,
+       "Let's"
+      ],
+      [
+       623.913,
+       "check"
+      ],
+      [
+       624.137,
+       "it"
+      ],
+      [
+       624.212,
+       "the"
+      ],
+      [
+       624.3,
+       "quick"
+      ],
+      [
+       624.575,
+       "way"
+      ],
+      [
+       625.2,
+       ":"
+      ],
+      [
+       625.387,
+       "every"
+      ],
+      [
+       625.725,
+       "degree"
+      ],
+      [
+       626.05,
+       "of"
+      ],
+      [
+       626.188,
+       "sigma"
+      ],
+      [
+       626.625,
+       "is"
+      ],
+      [
+       626.737,
+       "about"
+      ],
+      [
+       626.938,
+       "a"
+      ],
+      [
+       627.038,
+       "hundred"
+      ],
+      [
+       627.637,
+       "and"
+      ],
+      [
+       627.775,
+       "eleven"
+      ],
+      [
+       628.2,
+       "point"
+      ],
+      [
+       628.512,
+       "two"
+      ],
+      [
+       628.725,
+       "kilometres"
+      ],
+      [
+       629.725,
+       ","
+      ],
+      [
+       629.837,
+       "so"
+      ],
+      [
+       630.05,
+       "seventy"
+      ],
+      [
+       630.475,
+       "eight"
+      ],
+      [
+       630.725,
+       "point"
+      ],
+      [
+       631.037,
+       "seven"
+      ],
+      [
+       631.412,
+       "four"
+      ],
+      [
+       631.675,
+       "degrees"
+      ],
+      [
+       632.2,
+       "make"
+      ],
+      [
+       632.387,
+       "about"
+      ],
+      [
+       632.688,
+       "eight"
+      ],
+      [
+       632.95,
+       "thousand"
+      ],
+      [
+       633.312,
+       "seven"
+      ],
+      [
+       633.65,
+       "hundred"
+      ],
+      [
+       634.025,
+       "and"
+      ],
+      [
+       634.162,
+       "fifty"
+      ],
+      [
+       634.487,
+       "six"
+      ],
+      [
+       634.775,
+       "kilometres"
+      ],
+      [
+       635.725,
+       ","
+      ],
+      [
+       635.825,
+       "the"
+      ],
+      [
+       635.962,
+       "same"
+      ],
+      [
+       636.325,
+       "to"
+      ],
+      [
+       636.412,
+       "within"
+      ],
+      [
+       636.712,
+       "the"
+      ],
+      [
+       636.8,
+       "rounding"
+      ],
+      [
+       637.675,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "At a cruising speed of about nine hundred kilometres per hour, that's nearly ten hours in the air, before any help or hindrance from the winds.",
-     "start": 638.6557,
-     "end": 647.8557,
+     "audio_text": null,
+     "start": 639.425,
+     "end": 648.625,
      "dur": 9.2,
-     "start_frame": 19160,
-     "end_frame": 19436
+     "start_frame": 19183,
+     "end_frame": 19459,
+     "words": [
+      [
+       639.775,
+       "At"
+      ],
+      [
+       639.887,
+       "a"
+      ],
+      [
+       639.962,
+       "cruising"
+      ],
+      [
+       640.438,
+       "speed"
+      ],
+      [
+       640.787,
+       "of"
+      ],
+      [
+       640.862,
+       "about"
+      ],
+      [
+       641.137,
+       "nine"
+      ],
+      [
+       641.45,
+       "hundred"
+      ],
+      [
+       641.775,
+       "kilometres"
+      ],
+      [
+       642.425,
+       "per"
+      ],
+      [
+       642.637,
+       "hour"
+      ],
+      [
+       643.3,
+       ","
+      ],
+      [
+       643.425,
+       "that's"
+      ],
+      [
+       643.7,
+       "nearly"
+      ],
+      [
+       644.1,
+       "ten"
+      ],
+      [
+       644.462,
+       "hours"
+      ],
+      [
+       644.887,
+       "in"
+      ],
+      [
+       644.962,
+       "the"
+      ],
+      [
+       645.1,
+       "air"
+      ],
+      [
+       645.625,
+       ","
+      ],
+      [
+       645.725,
+       "before"
+      ],
+      [
+       646.075,
+       "any"
+      ],
+      [
+       646.337,
+       "help"
+      ],
+      [
+       646.7,
+       "or"
+      ],
+      [
+       646.85,
+       "hindrance"
+      ],
+      [
+       647.3,
+       "from"
+      ],
+      [
+       647.462,
+       "the"
+      ],
+      [
+       647.55,
+       "winds"
+      ],
+      [
+       648.35,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     }
    ],
-   "end": 648.6557,
-   "start_frame": 17569,
-   "end_frame": 19460
+   "end": 649.425,
+   "start_frame": 17638,
+   "end_frame": 19483
   },
   {
    "id": "s11_route_shape",
-   "start": 648.6557,
+   "start": 649.425,
    "sentences": [
     {
      "text": "If you skipped, here's what to keep.",
-     "start": 648.6557,
-     "end": 651.3307,
+     "audio_text": null,
+     "start": 649.425,
+     "end": 652.1,
      "dur": 2.675,
-     "start_frame": 19460,
-     "end_frame": 19540
+     "start_frame": 19483,
+     "end_frame": 19563
     },
     {
      "text": "Seen from the Earth's centre, London and Los Angeles are about seventy nine degrees apart, so the great circle route between them is about eight thousand seven hundred and fifty five kilometres long.",
-     "start": 651.6807,
-     "end": 664.1557,
+     "audio_text": null,
+     "start": 652.45,
+     "end": 664.925,
      "dur": 12.475,
-     "start_frame": 19550,
-     "end_frame": 19925
+     "start_frame": 19574,
+     "end_frame": 19948,
+     "words": [
+      [
+       652.85,
+       "Seen"
+      ],
+      [
+       653.175,
+       "from"
+      ],
+      [
+       653.312,
+       "the"
+      ],
+      [
+       653.425,
+       "Earth's"
+      ],
+      [
+       653.738,
+       "centre"
+      ],
+      [
+       654.4,
+       ","
+      ],
+      [
+       654.538,
+       "London"
+      ],
+      [
+       654.975,
+       "and"
+      ],
+      [
+       655.1,
+       "Los"
+      ],
+      [
+       655.475,
+       "Angeles"
+      ],
+      [
+       656.038,
+       "are"
+      ],
+      [
+       656.138,
+       "about"
+      ],
+      [
+       656.475,
+       "seventy"
+      ],
+      [
+       656.875,
+       "nine"
+      ],
+      [
+       657.175,
+       "degrees"
+      ],
+      [
+       657.55,
+       "apart"
+      ],
+      [
+       658.325,
+       ","
+      ],
+      [
+       658.462,
+       "so"
+      ],
+      [
+       658.65,
+       "the"
+      ],
+      [
+       658.763,
+       "great"
+      ],
+      [
+       659.112,
+       "circle"
+      ],
+      [
+       659.45,
+       "route"
+      ],
+      [
+       659.675,
+       "between"
+      ],
+      [
+       660.075,
+       "them"
+      ],
+      [
+       660.438,
+       "is"
+      ],
+      [
+       660.562,
+       "about"
+      ],
+      [
+       660.887,
+       "eight"
+      ],
+      [
+       661.15,
+       "thousand"
+      ],
+      [
+       661.538,
+       "seven"
+      ],
+      [
+       661.875,
+       "hundred"
+      ],
+      [
+       662.512,
+       "and"
+      ],
+      [
+       662.663,
+       "fifty"
+      ],
+      [
+       662.987,
+       "five"
+      ],
+      [
+       663.35,
+       "kilometres"
+      ],
+      [
+       663.95,
+       "long"
+      ],
+      [
+       664.675,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "Where does this route go?",
-     "start": 664.5057,
-     "end": 666.4807,
+     "audio_text": null,
+     "start": 665.275,
+     "end": 667.25,
      "dur": 1.975,
-     "start_frame": 19935,
-     "end_frame": 19994
+     "start_frame": 19958,
+     "end_frame": 20018
     },
     {
      "text": "On most flat maps, Los Angeles looks to the west-south-west of London.",
-     "start": 666.8307,
-     "end": 671.9807,
+     "audio_text": null,
+     "start": 667.6,
+     "end": 672.75,
      "dur": 5.15,
-     "start_frame": 20005,
-     "end_frame": 20159
+     "start_frame": 20028,
+     "end_frame": 20183,
+     "words": [
+      [
+       667.975,
+       "On"
+      ],
+      [
+       668.125,
+       "most"
+      ],
+      [
+       668.413,
+       "flat"
+      ],
+      [
+       668.75,
+       "maps"
+      ],
+      [
+       669.425,
+       ","
+      ],
+      [
+       669.562,
+       "Los"
+      ],
+      [
+       669.913,
+       "Angeles"
+      ],
+      [
+       670.4,
+       "looks"
+      ],
+      [
+       670.65,
+       "to"
+      ],
+      [
+       670.737,
+       "the"
+      ],
+      [
+       670.825,
+       "west-south-west"
+      ],
+      [
+       671.612,
+       "of"
+      ],
+      [
+       671.7,
+       "London"
+      ],
+      [
+       672.475,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "But the great circle leaves London heading north-west, at a compass bearing of about three hundred and twelve degrees.",
-     "start": 672.3307,
-     "end": 679.4307,
+     "audio_text": null,
+     "start": 673.1,
+     "end": 680.2,
      "dur": 7.1,
-     "start_frame": 20170,
-     "end_frame": 20383
+     "start_frame": 20193,
+     "end_frame": 20406,
+     "words": [
+      [
+       673.425,
+       "But"
+      ],
+      [
+       673.538,
+       "the"
+      ],
+      [
+       673.625,
+       "great"
+      ],
+      [
+       673.988,
+       "circle"
+      ],
+      [
+       674.5,
+       "leaves"
+      ],
+      [
+       674.825,
+       "London"
+      ],
+      [
+       675.2,
+       "heading"
+      ],
+      [
+       675.5,
+       "north-west"
+      ],
+      [
+       676.45,
+       ","
+      ],
+      [
+       676.562,
+       "at"
+      ],
+      [
+       676.663,
+       "a"
+      ],
+      [
+       676.738,
+       "compass"
+      ],
+      [
+       677.213,
+       "bearing"
+      ],
+      [
+       677.638,
+       "of"
+      ],
+      [
+       677.713,
+       "about"
+      ],
+      [
+       677.988,
+       "three"
+      ],
+      [
+       678.25,
+       "hundred"
+      ],
+      [
+       678.588,
+       "and"
+      ],
+      [
+       678.7,
+       "twelve"
+      ],
+      [
+       679.025,
+       "degrees"
+      ],
+      [
+       679.925,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "That heading comes from London's own east and north arrows, from Part 4: we measure how much of Los Angeles' position arrow points along each one, and turn that into a compass bearing.",
-     "start": 679.7807,
-     "end": 692.3484,
-     "dur": 12.5677,
-     "start_frame": 20393,
-     "end_frame": 20770,
-     "estimated": true
+     "audio_text": null,
+     "start": 680.55,
+     "end": 692.8,
+     "dur": 12.25,
+     "start_frame": 20417,
+     "end_frame": 20784,
+     "words": [
+      [
+       680.9,
+       "That"
+      ],
+      [
+       681.05,
+       "heading"
+      ],
+      [
+       681.425,
+       "comes"
+      ],
+      [
+       681.725,
+       "from"
+      ],
+      [
+       681.925,
+       "London's"
+      ],
+      [
+       682.425,
+       "own"
+      ],
+      [
+       682.688,
+       "east"
+      ],
+      [
+       683.1,
+       "and"
+      ],
+      [
+       683.225,
+       "north"
+      ],
+      [
+       683.525,
+       "arrows"
+      ],
+      [
+       684.275,
+       ","
+      ],
+      [
+       684.375,
+       "from"
+      ],
+      [
+       684.55,
+       "Part"
+      ],
+      [
+       684.862,
+       "4"
+      ],
+      [
+       685.6,
+       ":"
+      ],
+      [
+       685.787,
+       "we"
+      ],
+      [
+       685.95,
+       "measure"
+      ],
+      [
+       686.287,
+       "how"
+      ],
+      [
+       686.5,
+       "much"
+      ],
+      [
+       686.712,
+       "of"
+      ],
+      [
+       686.837,
+       "Los"
+      ],
+      [
+       687.287,
+       "Angeles'"
+      ],
+      [
+       687.75,
+       "position"
+      ],
+      [
+       688.287,
+       "arrow"
+      ],
+      [
+       688.637,
+       "points"
+      ],
+      [
+       689.05,
+       "along"
+      ],
+      [
+       689.4,
+       "each"
+      ],
+      [
+       689.675,
+       "one"
+      ],
+      [
+       690.225,
+       ","
+      ],
+      [
+       690.325,
+       "and"
+      ],
+      [
+       690.45,
+       "turn"
+      ],
+      [
+       690.725,
+       "that"
+      ],
+      [
+       690.938,
+       "into"
+      ],
+      [
+       691.2,
+       "a"
+      ],
+      [
+       691.3,
+       "compass"
+      ],
+      [
+       691.725,
+       "bearing"
+      ],
+      [
+       692.55,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "It climbs to its highest latitude, about sixty two point four degrees north, near the south-west coast of Greenland.",
-     "start": 692.6984,
-     "end": 700.5734,
+     "audio_text": null,
+     "start": 693.15,
+     "end": 701.025,
      "dur": 7.875,
-     "start_frame": 20781,
-     "end_frame": 21017
+     "start_frame": 20795,
+     "end_frame": 21031,
+     "words": [
+      [
+       693.5,
+       "It"
+      ],
+      [
+       693.625,
+       "climbs"
+      ],
+      [
+       694.075,
+       "to"
+      ],
+      [
+       694.225,
+       "its"
+      ],
+      [
+       694.438,
+       "highest"
+      ],
+      [
+       694.9,
+       "latitude"
+      ],
+      [
+       695.8,
+       ","
+      ],
+      [
+       695.925,
+       "about"
+      ],
+      [
+       696.237,
+       "sixty"
+      ],
+      [
+       696.637,
+       "two"
+      ],
+      [
+       696.85,
+       "point"
+      ],
+      [
+       697.163,
+       "four"
+      ],
+      [
+       697.375,
+       "degrees"
+      ],
+      [
+       697.75,
+       "north"
+      ],
+      [
+       698.375,
+       ","
+      ],
+      [
+       698.5,
+       "near"
+      ],
+      [
+       698.688,
+       "the"
+      ],
+      [
+       698.812,
+       "south-west"
+      ],
+      [
+       699.413,
+       "coast"
+      ],
+      [
+       699.737,
+       "of"
+      ],
+      [
+       699.825,
+       "Greenland"
+      ],
+      [
+       700.75,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "Then it turns south over northern Canada, and arrives at Los Angeles heading south-west, at a bearing of about two hundred and fourteen degrees.",
-     "start": 700.9234,
-     "end": 710.4234,
+     "audio_text": null,
+     "start": 701.375,
+     "end": 710.875,
      "dur": 9.5,
-     "start_frame": 21028,
-     "end_frame": 21313,
-     "beat": true
+     "start_frame": 21041,
+     "end_frame": 21326,
+     "beat": true,
+     "words": [
+      [
+       701.75,
+       "Then"
+      ],
+      [
+       701.95,
+       "it"
+      ],
+      [
+       702.05,
+       "turns"
+      ],
+      [
+       702.388,
+       "south"
+      ],
+      [
+       702.75,
+       "over"
+      ],
+      [
+       703.013,
+       "northern"
+      ],
+      [
+       703.45,
+       "Canada"
+      ],
+      [
+       704.2,
+       ","
+      ],
+      [
+       704.325,
+       "and"
+      ],
+      [
+       704.45,
+       "arrives"
+      ],
+      [
+       704.975,
+       "at"
+      ],
+      [
+       705.138,
+       "Los"
+      ],
+      [
+       705.587,
+       "Angeles"
+      ],
+      [
+       706.1,
+       "heading"
+      ],
+      [
+       706.413,
+       "south-west"
+      ],
+      [
+       707.375,
+       ","
+      ],
+      [
+       707.513,
+       "at"
+      ],
+      [
+       707.612,
+       "a"
+      ],
+      [
+       707.688,
+       "bearing"
+      ],
+      [
+       708.112,
+       "of"
+      ],
+      [
+       708.188,
+       "about"
+      ],
+      [
+       708.487,
+       "two"
+      ],
+      [
+       708.725,
+       "hundred"
+      ],
+      [
+       709.062,
+       "and"
+      ],
+      [
+       709.188,
+       "fourteen"
+      ],
+      [
+       709.7,
+       "degrees"
+      ],
+      [
+       710.625,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "So along the way, the compass heading changes by almost a hundred degrees.",
-     "start": 711.9234,
-     "end": 717.2734,
+     "audio_text": null,
+     "start": 712.375,
+     "end": 717.725,
      "dur": 5.35,
-     "start_frame": 21358,
-     "end_frame": 21518
+     "start_frame": 21371,
+     "end_frame": 21532,
+     "words": [
+      [
+       712.775,
+       "So"
+      ],
+      [
+       712.95,
+       "along"
+      ],
+      [
+       713.263,
+       "the"
+      ],
+      [
+       713.35,
+       "way"
+      ],
+      [
+       713.95,
+       ","
+      ],
+      [
+       714.1,
+       "the"
+      ],
+      [
+       714.2,
+       "compass"
+      ],
+      [
+       714.6,
+       "heading"
+      ],
+      [
+       714.962,
+       "changes"
+      ],
+      [
+       715.475,
+       "by"
+      ],
+      [
+       715.663,
+       "almost"
+      ],
+      [
+       716.062,
+       "a"
+      ],
+      [
+       716.125,
+       "hundred"
+      ],
+      [
+       716.525,
+       "degrees"
+      ],
+      [
+       717.45,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "That's why flights from Europe to California pass over Greenland and Canada.",
-     "start": 717.6234,
-     "end": 723.0234,
+     "audio_text": null,
+     "start": 718.075,
+     "end": 723.475,
      "dur": 5.4,
-     "start_frame": 21529,
-     "end_frame": 21691
+     "start_frame": 21542,
+     "end_frame": 21704
     }
    ],
-   "end": 723.8234,
-   "start_frame": 19460,
-   "end_frame": 21715
+   "end": 724.275,
+   "start_frame": 19483,
+   "end_frame": 21728
   },
   {
    "id": "s12_rhumb",
-   "start": 723.8234,
+   "start": 724.275,
    "sentences": [
     {
      "text": "Sailors used a different route for centuries.",
-     "start": 723.8234,
-     "end": 727.0734,
+     "audio_text": null,
+     "start": 724.275,
+     "end": 727.525,
      "dur": 3.25,
-     "start_frame": 21715,
-     "end_frame": 21812
+     "start_frame": 21728,
+     "end_frame": 21826
     },
     {
      "text": "It's called the rhumb line: a route that keeps the same compass bearing all the way, so it crosses every meridian at the same angle.",
-     "start": 727.4234,
-     "end": 735.8484,
+     "audio_text": null,
+     "start": 727.875,
+     "end": 736.3,
      "dur": 8.425,
-     "start_frame": 21823,
-     "end_frame": 22075
+     "start_frame": 21836,
+     "end_frame": 22089,
+     "words": [
+      [
+       728.2,
+       "It's"
+      ],
+      [
+       728.425,
+       "called"
+      ],
+      [
+       728.688,
+       "the"
+      ],
+      [
+       728.812,
+       "rhumb"
+      ],
+      [
+       729.075,
+       "line"
+      ],
+      [
+       729.8,
+       ":"
+      ],
+      [
+       729.938,
+       "a"
+      ],
+      [
+       730.062,
+       "route"
+      ],
+      [
+       730.375,
+       "that"
+      ],
+      [
+       730.525,
+       "keeps"
+      ],
+      [
+       730.825,
+       "the"
+      ],
+      [
+       730.962,
+       "same"
+      ],
+      [
+       731.3,
+       "compass"
+      ],
+      [
+       731.812,
+       "bearing"
+      ],
+      [
+       732.2,
+       "all"
+      ],
+      [
+       732.387,
+       "the"
+      ],
+      [
+       732.475,
+       "way"
+      ],
+      [
+       733.025,
+       ","
+      ],
+      [
+       733.15,
+       "so"
+      ],
+      [
+       733.288,
+       "it"
+      ],
+      [
+       733.375,
+       "crosses"
+      ],
+      [
+       733.862,
+       "every"
+      ],
+      [
+       734.2,
+       "meridian"
+      ],
+      [
+       734.75,
+       "at"
+      ],
+      [
+       734.837,
+       "the"
+      ],
+      [
+       734.938,
+       "same"
+      ],
+      [
+       735.275,
+       "angle"
+      ],
+      [
+       736.025,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "From London to Los Angeles, the rhumb line holds a bearing of about two hundred and fifty eight and a half degrees, a little south of due west.",
-     "start": 736.1984,
-     "end": 745.2484,
+     "audio_text": null,
+     "start": 736.65,
+     "end": 745.7,
      "dur": 9.05,
-     "start_frame": 22086,
-     "end_frame": 22357
+     "start_frame": 22100,
+     "end_frame": 22371,
+     "words": [
+      [
+       737.0,
+       "From"
+      ],
+      [
+       737.2,
+       "London"
+      ],
+      [
+       737.712,
+       "to"
+      ],
+      [
+       737.85,
+       "Los"
+      ],
+      [
+       738.225,
+       "Angeles"
+      ],
+      [
+       739.0,
+       ","
+      ],
+      [
+       739.1,
+       "the"
+      ],
+      [
+       739.237,
+       "rhumb"
+      ],
+      [
+       739.5,
+       "line"
+      ],
+      [
+       739.85,
+       "holds"
+      ],
+      [
+       740.138,
+       "a"
+      ],
+      [
+       740.237,
+       "bearing"
+      ],
+      [
+       740.7,
+       "of"
+      ],
+      [
+       740.788,
+       "about"
+      ],
+      [
+       741.112,
+       "two"
+      ],
+      [
+       741.35,
+       "hundred"
+      ],
+      [
+       741.688,
+       "and"
+      ],
+      [
+       741.812,
+       "fifty"
+      ],
+      [
+       742.175,
+       "eight"
+      ],
+      [
+       742.388,
+       "and"
+      ],
+      [
+       742.488,
+       "a"
+      ],
+      [
+       742.55,
+       "half"
+      ],
+      [
+       742.8,
+       "degrees"
+      ],
+      [
+       743.625,
+       ","
+      ],
+      [
+       743.75,
+       "a"
+      ],
+      [
+       743.85,
+       "little"
+      ],
+      [
+       744.113,
+       "south"
+      ],
+      [
+       744.413,
+       "of"
+      ],
+      [
+       744.5,
+       "due"
+      ],
+      [
+       744.675,
+       "west"
+      ],
+      [
+       745.425,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "It stays further south than the great circle, and it's about nine thousand seven hundred and thirty three kilometres long.",
-     "start": 745.5984,
-     "end": 753.4734,
+     "audio_text": null,
+     "start": 746.05,
+     "end": 753.925,
      "dur": 7.875,
-     "start_frame": 22368,
-     "end_frame": 22604,
-     "beat": true
+     "start_frame": 22382,
+     "end_frame": 22618,
+     "beat": true,
+     "words": [
+      [
+       746.4,
+       "It"
+      ],
+      [
+       746.575,
+       "stays"
+      ],
+      [
+       746.987,
+       "further"
+      ],
+      [
+       747.35,
+       "south"
+      ],
+      [
+       747.775,
+       "than"
+      ],
+      [
+       747.887,
+       "the"
+      ],
+      [
+       747.975,
+       "great"
+      ],
+      [
+       748.312,
+       "circle"
+      ],
+      [
+       749.075,
+       ","
+      ],
+      [
+       749.175,
+       "and"
+      ],
+      [
+       749.287,
+       "it's"
+      ],
+      [
+       749.387,
+       "about"
+      ],
+      [
+       749.712,
+       "nine"
+      ],
+      [
+       750.025,
+       "thousand"
+      ],
+      [
+       750.387,
+       "seven"
+      ],
+      [
+       750.725,
+       "hundred"
+      ],
+      [
+       751.425,
+       "and"
+      ],
+      [
+       751.625,
+       "thirty"
+      ],
+      [
+       752.037,
+       "three"
+      ],
+      [
+       752.275,
+       "kilometres"
+      ],
+      [
+       752.925,
+       "long"
+      ],
+      [
+       753.65,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "How much longer is that?",
-     "start": 754.9734,
-     "end": 756.9984,
+     "audio_text": null,
+     "start": 755.425,
+     "end": 757.45,
      "dur": 2.025,
-     "start_frame": 22649,
-     "end_frame": 22710
+     "start_frame": 22663,
+     "end_frame": 22724
     },
     {
      "text": "Dividing the rhumb line's length by the great circle's gives about one point one one, so the rhumb line is about eleven percent longer.",
-     "start": 757.3484,
-     "end": 766.5693,
-     "dur": 9.2209,
-     "start_frame": 22720,
-     "end_frame": 22997,
+     "audio_text": null,
+     "start": 757.8,
+     "end": 766.75,
+     "dur": 8.95,
+     "start_frame": 22734,
+     "end_frame": 23003,
      "beat": true,
-     "estimated": true
+     "words": [
+      [
+       758.175,
+       "Dividing"
+      ],
+      [
+       758.725,
+       "the"
+      ],
+      [
+       758.862,
+       "rhumb"
+      ],
+      [
+       759.125,
+       "line's"
+      ],
+      [
+       759.537,
+       "length"
+      ],
+      [
+       760.112,
+       "by"
+      ],
+      [
+       760.288,
+       "the"
+      ],
+      [
+       760.375,
+       "great"
+      ],
+      [
+       760.688,
+       "circle's"
+      ],
+      [
+       761.337,
+       "gives"
+      ],
+      [
+       761.587,
+       "about"
+      ],
+      [
+       761.887,
+       "one"
+      ],
+      [
+       762.237,
+       "point"
+      ],
+      [
+       762.525,
+       "one"
+      ],
+      [
+       762.762,
+       "one"
+      ],
+      [
+       763.475,
+       ","
+      ],
+      [
+       763.637,
+       "so"
+      ],
+      [
+       763.788,
+       "the"
+      ],
+      [
+       763.913,
+       "rhumb"
+      ],
+      [
+       764.175,
+       "line"
+      ],
+      [
+       764.525,
+       "is"
+      ],
+      [
+       764.638,
+       "about"
+      ],
+      [
+       764.9,
+       "eleven"
+      ],
+      [
+       765.325,
+       "percent"
+      ],
+      [
+       765.725,
+       "longer"
+      ],
+      [
+       766.475,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "The extra is about nine hundred and seventy eight kilometres, more than an hour of flying at nine hundred kilometres per hour.",
-     "start": 768.0693,
-     "end": 776.2193,
+     "audio_text": null,
+     "start": 768.25,
+     "end": 776.4,
      "dur": 8.15,
-     "start_frame": 23042,
-     "end_frame": 23287,
-     "beat": true
+     "start_frame": 23048,
+     "end_frame": 23292,
+     "beat": true,
+     "words": [
+      [
+       768.6,
+       "The"
+      ],
+      [
+       768.737,
+       "extra"
+      ],
+      [
+       769.288,
+       "is"
+      ],
+      [
+       769.425,
+       "about"
+      ],
+      [
+       769.763,
+       "nine"
+      ],
+      [
+       770.075,
+       "hundred"
+      ],
+      [
+       770.525,
+       "and"
+      ],
+      [
+       770.663,
+       "seventy"
+      ],
+      [
+       771.05,
+       "eight"
+      ],
+      [
+       771.275,
+       "kilometres"
+      ],
+      [
+       772.25,
+       ","
+      ],
+      [
+       772.388,
+       "more"
+      ],
+      [
+       772.625,
+       "than"
+      ],
+      [
+       772.737,
+       "an"
+      ],
+      [
+       772.862,
+       "hour"
+      ],
+      [
+       773.188,
+       "of"
+      ],
+      [
+       773.312,
+       "flying"
+      ],
+      [
+       773.8,
+       "at"
+      ],
+      [
+       773.913,
+       "nine"
+      ],
+      [
+       774.225,
+       "hundred"
+      ],
+      [
+       774.525,
+       "kilometres"
+      ],
+      [
+       775.175,
+       "per"
+      ],
+      [
+       775.387,
+       "hour"
+      ],
+      [
+       776.125,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "And if you kept following a rhumb line, it would spiral round and round towards a pole.",
-     "start": 777.7193,
-     "end": 783.1943,
+     "audio_text": null,
+     "start": 777.9,
+     "end": 783.375,
      "dur": 5.475,
-     "start_frame": 23332,
-     "end_frame": 23496
+     "start_frame": 23337,
+     "end_frame": 23501,
+     "words": [
+      [
+       778.25,
+       "And"
+      ],
+      [
+       778.362,
+       "if"
+      ],
+      [
+       778.438,
+       "you"
+      ],
+      [
+       778.525,
+       "kept"
+      ],
+      [
+       778.825,
+       "following"
+      ],
+      [
+       779.275,
+       "a"
+      ],
+      [
+       779.387,
+       "rhumb"
+      ],
+      [
+       779.65,
+       "line"
+      ],
+      [
+       780.275,
+       ","
+      ],
+      [
+       780.375,
+       "it"
+      ],
+      [
+       780.462,
+       "would"
+      ],
+      [
+       780.612,
+       "spiral"
+      ],
+      [
+       781.05,
+       "round"
+      ],
+      [
+       781.475,
+       "and"
+      ],
+      [
+       781.6,
+       "round"
+      ],
+      [
+       782.0,
+       "towards"
+      ],
+      [
+       782.312,
+       "a"
+      ],
+      [
+       782.375,
+       "pole"
+      ],
+      [
+       783.1,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     }
    ],
-   "end": 783.9943,
-   "start_frame": 21715,
-   "end_frame": 23520
+   "end": 784.175,
+   "start_frame": 21728,
+   "end_frame": 23525
   },
   {
    "id": "s13_why_rhumb",
-   "start": 783.9943,
+   "start": 784.175,
    "sentences": [
     {
      "text": "So why would anyone choose the longer route?",
-     "start": 783.9943,
-     "end": 786.9943,
+     "audio_text": null,
+     "start": 784.175,
+     "end": 787.175,
      "dur": 3.0,
-     "start_frame": 23520,
-     "end_frame": 23610
+     "start_frame": 23525,
+     "end_frame": 23615
     },
     {
      "text": "There are three reasons.",
-     "start": 787.3443,
-     "end": 789.2693,
+     "audio_text": null,
+     "start": 787.525,
+     "end": 789.45,
      "dur": 1.925,
-     "start_frame": 23620,
-     "end_frame": 23678
+     "start_frame": 23626,
+     "end_frame": 23684
     },
     {
      "text": "The first is steering.",
-     "start": 789.6193,
-     "end": 791.4693,
+     "audio_text": null,
+     "start": 789.8,
+     "end": 791.65,
      "dur": 1.85,
-     "start_frame": 23689,
-     "end_frame": 23744
+     "start_frame": 23694,
+     "end_frame": 23750
     },
     {
      "text": "A rhumb line needs one compass setting for the whole trip: set two hundred and fifty eight and a half degrees, and hold it.",
-     "start": 791.8193,
-     "end": 799.4443,
+     "audio_text": null,
+     "start": 792.0,
+     "end": 799.625,
      "dur": 7.625,
-     "start_frame": 23755,
-     "end_frame": 23983
+     "start_frame": 23760,
+     "end_frame": 23989,
+     "words": [
+      [
+       792.375,
+       "A"
+      ],
+      [
+       792.462,
+       "rhumb"
+      ],
+      [
+       792.725,
+       "line"
+      ],
+      [
+       793.125,
+       "needs"
+      ],
+      [
+       793.438,
+       "one"
+      ],
+      [
+       793.7,
+       "compass"
+      ],
+      [
+       794.125,
+       "setting"
+      ],
+      [
+       794.475,
+       "for"
+      ],
+      [
+       794.587,
+       "the"
+      ],
+      [
+       794.675,
+       "whole"
+      ],
+      [
+       794.938,
+       "trip"
+      ],
+      [
+       795.6,
+       ":"
+      ],
+      [
+       795.75,
+       "set"
+      ],
+      [
+       796.038,
+       "two"
+      ],
+      [
+       796.25,
+       "hundred"
+      ],
+      [
+       796.587,
+       "and"
+      ],
+      [
+       796.712,
+       "fifty"
+      ],
+      [
+       797.025,
+       "eight"
+      ],
+      [
+       797.212,
+       "and"
+      ],
+      [
+       797.312,
+       "a"
+      ],
+      [
+       797.375,
+       "half"
+      ],
+      [
+       797.625,
+       "degrees"
+      ],
+      [
+       798.375,
+       ","
+      ],
+      [
+       798.475,
+       "and"
+      ],
+      [
+       798.6,
+       "hold"
+      ],
+      [
+       798.875,
+       "it"
+      ],
+      [
+       799.35,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "The great circle needs a new heading all the time, from three hundred and twelve degrees at London to two hundred and fourteen at Los Angeles.",
-     "start": 799.7943,
-     "end": 809.0443,
+     "audio_text": null,
+     "start": 799.975,
+     "end": 809.225,
      "dur": 9.25,
-     "start_frame": 23994,
-     "end_frame": 24271
+     "start_frame": 23999,
+     "end_frame": 24277
     },
     {
      "text": "Before satellites and computers, a ship's navigator with a compass could steer a rhumb line easily, but a great circle only with a lot of calculation.",
-     "start": 809.3943,
-     "end": 819.3193,
+     "audio_text": null,
+     "start": 809.575,
+     "end": 819.5,
      "dur": 9.925,
-     "start_frame": 24282,
-     "end_frame": 24580
+     "start_frame": 24287,
+     "end_frame": 24585,
+     "words": [
+      [
+       809.925,
+       "Before"
+      ],
+      [
+       810.263,
+       "satellites"
+      ],
+      [
+       810.812,
+       "and"
+      ],
+      [
+       810.925,
+       "computers"
+      ],
+      [
+       811.825,
+       ","
+      ],
+      [
+       811.938,
+       "a"
+      ],
+      [
+       812.088,
+       "ship's"
+      ],
+      [
+       812.425,
+       "navigator"
+      ],
+      [
+       813.038,
+       "with"
+      ],
+      [
+       813.163,
+       "a"
+      ],
+      [
+       813.225,
+       "compass"
+      ],
+      [
+       813.8,
+       "could"
+      ],
+      [
+       814.013,
+       "steer"
+      ],
+      [
+       814.325,
+       "a"
+      ],
+      [
+       814.438,
+       "rhumb"
+      ],
+      [
+       814.7,
+       "line"
+      ],
+      [
+       815.062,
+       "easily"
+      ],
+      [
+       815.925,
+       ","
+      ],
+      [
+       816.05,
+       "but"
+      ],
+      [
+       816.188,
+       "a"
+      ],
+      [
+       816.263,
+       "great"
+      ],
+      [
+       816.638,
+       "circle"
+      ],
+      [
+       817.163,
+       "only"
+      ],
+      [
+       817.5,
+       "with"
+      ],
+      [
+       817.638,
+       "a"
+      ],
+      [
+       817.737,
+       "lot"
+      ],
+      [
+       817.962,
+       "of"
+      ],
+      [
+       818.05,
+       "calculation"
+      ],
+      [
+       819.225,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "The second reason is that, on short trips, the extra distance is tiny.",
-     "start": 819.6693,
-     "end": 825.0943,
+     "audio_text": null,
+     "start": 819.85,
+     "end": 825.275,
      "dur": 5.425,
-     "start_frame": 24590,
-     "end_frame": 24753
+     "start_frame": 24596,
+     "end_frame": 24758
     },
     {
      "text": "From Brest to Lisbon, about one thousand one hundred and thirty eight kilometres, the rhumb line is only about a hundred and fifty metres longer.",
-     "start": 825.4443,
-     "end": 834.8693,
+     "audio_text": null,
+     "start": 825.625,
+     "end": 835.05,
      "dur": 9.425,
-     "start_frame": 24763,
-     "end_frame": 25046,
-     "beat": true
+     "start_frame": 24769,
+     "end_frame": 25052,
+     "beat": true,
+     "words": [
+      [
+       825.975,
+       "From"
+      ],
+      [
+       826.163,
+       "Brest"
+      ],
+      [
+       826.688,
+       "to"
+      ],
+      [
+       826.837,
+       "Lisbon"
+      ],
+      [
+       827.55,
+       ","
+      ],
+      [
+       827.65,
+       "about"
+      ],
+      [
+       827.962,
+       "one"
+      ],
+      [
+       828.2,
+       "thousand"
+      ],
+      [
+       828.55,
+       "one"
+      ],
+      [
+       828.775,
+       "hundred"
+      ],
+      [
+       829.25,
+       "and"
+      ],
+      [
+       829.4,
+       "thirty"
+      ],
+      [
+       829.8,
+       "eight"
+      ],
+      [
+       830.025,
+       "kilometres"
+      ],
+      [
+       831.05,
+       ","
+      ],
+      [
+       831.15,
+       "the"
+      ],
+      [
+       831.288,
+       "rhumb"
+      ],
+      [
+       831.55,
+       "line"
+      ],
+      [
+       831.9,
+       "is"
+      ],
+      [
+       832.05,
+       "only"
+      ],
+      [
+       832.35,
+       "about"
+      ],
+      [
+       832.562,
+       "a"
+      ],
+      [
+       832.637,
+       "hundred"
+      ],
+      [
+       833.125,
+       "and"
+      ],
+      [
+       833.262,
+       "fifty"
+      ],
+      [
+       833.625,
+       "metres"
+      ],
+      [
+       834.0,
+       "longer"
+      ],
+      [
+       834.775,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "The third reason is a map.",
-     "start": 836.3693,
-     "end": 838.5943,
+     "audio_text": null,
+     "start": 836.55,
+     "end": 838.775,
      "dur": 2.225,
-     "start_frame": 25091,
-     "end_frame": 25158
+     "start_frame": 25097,
+     "end_frame": 25163
     },
     {
      "text": "On the most famous flat map, the Mercator map, a rhumb line is a straight line.",
-     "start": 838.9443,
-     "end": 844.5693,
+     "audio_text": null,
+     "start": 839.125,
+     "end": 844.75,
      "dur": 5.625,
-     "start_frame": 25168,
-     "end_frame": 25337
+     "start_frame": 25174,
+     "end_frame": 25343,
+     "words": [
+      [
+       839.475,
+       "On"
+      ],
+      [
+       839.587,
+       "the"
+      ],
+      [
+       839.663,
+       "most"
+      ],
+      [
+       839.938,
+       "famous"
+      ],
+      [
+       840.4,
+       "flat"
+      ],
+      [
+       840.675,
+       "map"
+      ],
+      [
+       841.175,
+       ","
+      ],
+      [
+       841.275,
+       "the"
+      ],
+      [
+       841.362,
+       "Mercator"
+      ],
+      [
+       841.775,
+       "map"
+      ],
+      [
+       842.325,
+       ","
+      ],
+      [
+       842.462,
+       "a"
+      ],
+      [
+       842.587,
+       "rhumb"
+      ],
+      [
+       842.85,
+       "line"
+      ],
+      [
+       843.2,
+       "is"
+      ],
+      [
+       843.312,
+       "a"
+      ],
+      [
+       843.388,
+       "straight"
+      ],
+      [
+       843.725,
+       "line"
+      ],
+      [
+       844.475,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "So a navigator could draw the route with a ruler, read off its angle, and steer by it.",
-     "start": 844.9193,
-     "end": 850.7443,
+     "audio_text": null,
+     "start": 845.1,
+     "end": 850.925,
      "dur": 5.825,
-     "start_frame": 25348,
-     "end_frame": 25522
+     "start_frame": 25353,
+     "end_frame": 25528,
+     "words": [
+      [
+       845.475,
+       "So"
+      ],
+      [
+       845.625,
+       "a"
+      ],
+      [
+       845.7,
+       "navigator"
+      ],
+      [
+       846.325,
+       "could"
+      ],
+      [
+       846.45,
+       "draw"
+      ],
+      [
+       846.725,
+       "the"
+      ],
+      [
+       846.862,
+       "route"
+      ],
+      [
+       847.138,
+       "with"
+      ],
+      [
+       847.263,
+       "a"
+      ],
+      [
+       847.362,
+       "ruler"
+      ],
+      [
+       848.05,
+       ","
+      ],
+      [
+       848.188,
+       "read"
+      ],
+      [
+       848.425,
+       "off"
+      ],
+      [
+       848.612,
+       "its"
+      ],
+      [
+       848.75,
+       "angle"
+      ],
+      [
+       849.35,
+       ","
+      ],
+      [
+       849.45,
+       "and"
+      ],
+      [
+       849.6,
+       "steer"
+      ],
+      [
+       849.925,
+       "by"
+      ],
+      [
+       850.137,
+       "it"
+      ],
+      [
+       850.65,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "That's why long voyages were often split into a few rhumb-line legs that follow the great circle closely: each leg is easy to steer, and the whole route is nearly the shortest.",
-     "start": 851.0943,
-     "end": 862.5693,
+     "audio_text": null,
+     "start": 851.275,
+     "end": 862.75,
      "dur": 11.475,
-     "start_frame": 25533,
-     "end_frame": 25877
+     "start_frame": 25538,
+     "end_frame": 25883,
+     "words": [
+      [
+       851.625,
+       "That's"
+      ],
+      [
+       851.875,
+       "why"
+      ],
+      [
+       852.062,
+       "long"
+      ],
+      [
+       852.425,
+       "voyages"
+      ],
+      [
+       852.975,
+       "were"
+      ],
+      [
+       853.137,
+       "often"
+      ],
+      [
+       853.538,
+       "split"
+      ],
+      [
+       853.862,
+       "into"
+      ],
+      [
+       854.1,
+       "a"
+      ],
+      [
+       854.212,
+       "few"
+      ],
+      [
+       854.487,
+       "rhumb-line"
+      ],
+      [
+       855.0,
+       "legs"
+      ],
+      [
+       855.587,
+       "that"
+      ],
+      [
+       855.812,
+       "follow"
+      ],
+      [
+       856.175,
+       "the"
+      ],
+      [
+       856.288,
+       "great"
+      ],
+      [
+       856.637,
+       "circle"
+      ],
+      [
+       857.025,
+       "closely"
+      ],
+      [
+       857.95,
+       ":"
+      ],
+      [
+       858.112,
+       "each"
+      ],
+      [
+       858.425,
+       "leg"
+      ],
+      [
+       858.7,
+       "is"
+      ],
+      [
+       858.862,
+       "easy"
+      ],
+      [
+       859.2,
+       "to"
+      ],
+      [
+       859.337,
+       "steer"
+      ],
+      [
+       860.025,
+       ","
+      ],
+      [
+       860.125,
+       "and"
+      ],
+      [
+       860.237,
+       "the"
+      ],
+      [
+       860.337,
+       "whole"
+      ],
+      [
+       860.638,
+       "route"
+      ],
+      [
+       860.95,
+       "is"
+      ],
+      [
+       861.112,
+       "nearly"
+      ],
+      [
+       861.475,
+       "the"
+      ],
+      [
+       861.612,
+       "shortest"
+      ],
+      [
+       862.475,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     }
    ],
-   "end": 863.3693,
-   "start_frame": 23520,
-   "end_frame": 25901
+   "end": 863.55,
+   "start_frame": 23525,
+   "end_frame": 25906
   },
   {
    "id": "s14_recap",
-   "start": 863.3693,
+   "start": 863.55,
    "sentences": [
     {
      "text": "To sum up, curvilinear coordinates have curved lines, unit vectors that turn, and scale factors that turn a change of coordinate into a distance.",
-     "start": 863.3693,
-     "end": 873.3193,
+     "audio_text": null,
+     "start": 863.55,
+     "end": 873.5,
      "dur": 9.95,
-     "start_frame": 25901,
-     "end_frame": 26200
+     "start_frame": 25907,
+     "end_frame": 26205
     },
     {
      "text": "On the Earth, the scale factor of latitude is the Earth's radius, and of longitude, the radius times cosine phi.",
-     "start": 873.6693,
-     "end": 881.8443,
+     "audio_text": null,
+     "start": 873.85,
+     "end": 882.025,
      "dur": 8.175,
-     "start_frame": 26210,
-     "end_frame": 26455
+     "start_frame": 26216,
+     "end_frame": 26461
     },
     {
      "text": "The shortest way between two places follows a great circle, whose centre is the Earth's centre.",
-     "start": 882.1943,
-     "end": 888.4193,
+     "audio_text": null,
+     "start": 882.375,
+     "end": 888.6,
      "dur": 6.225,
-     "start_frame": 26466,
-     "end_frame": 26653
+     "start_frame": 26471,
+     "end_frame": 26658
     },
     {
      "text": "Its length is the Earth's radius times sigma, the angle at the centre, and the cosine of sigma is the dot product of the two position arrows.",
-     "start": 888.7693,
-     "end": 898.4193,
+     "audio_text": null,
+     "start": 888.95,
+     "end": 898.6,
      "dur": 9.65,
-     "start_frame": 26663,
-     "end_frame": 26953
+     "start_frame": 26669,
+     "end_frame": 26958
     },
     {
      "text": "From London to Los Angeles, that's about seventy eight point seven degrees, or about eight thousand seven hundred and fifty five kilometres.",
-     "start": 898.7693,
-     "end": 908.1443,
+     "audio_text": null,
+     "start": 898.95,
+     "end": 908.325,
      "dur": 9.375,
-     "start_frame": 26963,
-     "end_frame": 27244
+     "start_frame": 26969,
+     "end_frame": 27250
     },
     {
      "text": "Along the great circle, the compass heading changes all the way, from three hundred and twelve degrees to two hundred and fourteen.",
-     "start": 908.4943,
-     "end": 916.6193,
+     "audio_text": null,
+     "start": 908.675,
+     "end": 916.8,
      "dur": 8.125,
-     "start_frame": 27255,
-     "end_frame": 27499
+     "start_frame": 27260,
+     "end_frame": 27504
     },
     {
      "text": "A rhumb line keeps one compass bearing, so it's easy to steer, but here it's about eleven percent longer.",
-     "start": 916.9693,
-     "end": 924.0193,
+     "audio_text": null,
+     "start": 917.15,
+     "end": 924.2,
      "dur": 7.05,
-     "start_frame": 27509,
-     "end_frame": 27721
+     "start_frame": 27515,
+     "end_frame": 27726
     },
     {
      "text": "In Part 7, we'll flatten the Earth onto maps, and work out exactly what each map stretches.",
-     "start": 924.3693,
-     "end": 930.5849,
-     "dur": 6.2156,
-     "start_frame": 27731,
-     "end_frame": 27918,
-     "estimated": true
+     "audio_text": null,
+     "start": 924.55,
+     "end": 931.125,
+     "dur": 6.575,
+     "start_frame": 27737,
+     "end_frame": 27934
     },
     {
      "text": "That explains why the rhumb line comes out straight on the most famous map of all, and why weather data on a grid need care near the poles.",
-     "start": 930.9349,
-     "end": 940.429,
-     "dur": 9.4941,
-     "start_frame": 27928,
-     "end_frame": 28213,
-     "estimated": true
+     "audio_text": null,
+     "start": 931.475,
+     "end": 940.0,
+     "dur": 8.525,
+     "start_frame": 27944,
+     "end_frame": 28200,
+     "words": [
+      [
+       931.85,
+       "That"
+      ],
+      [
+       931.988,
+       "explains"
+      ],
+      [
+       932.65,
+       "why"
+      ],
+      [
+       932.825,
+       "the"
+      ],
+      [
+       932.962,
+       "rhumb"
+      ],
+      [
+       933.225,
+       "line"
+      ],
+      [
+       933.575,
+       "comes"
+      ],
+      [
+       933.837,
+       "out"
+      ],
+      [
+       934.062,
+       "straight"
+      ],
+      [
+       934.462,
+       "on"
+      ],
+      [
+       934.562,
+       "the"
+      ],
+      [
+       934.65,
+       "most"
+      ],
+      [
+       934.938,
+       "famous"
+      ],
+      [
+       935.425,
+       "map"
+      ],
+      [
+       935.663,
+       "of"
+      ],
+      [
+       935.75,
+       "all"
+      ],
+      [
+       936.375,
+       ","
+      ],
+      [
+       936.475,
+       "and"
+      ],
+      [
+       936.6,
+       "why"
+      ],
+      [
+       936.8,
+       "weather"
+      ],
+      [
+       937.112,
+       "data"
+      ],
+      [
+       937.475,
+       "on"
+      ],
+      [
+       937.587,
+       "a"
+      ],
+      [
+       937.688,
+       "grid"
+      ],
+      [
+       937.975,
+       "need"
+      ],
+      [
+       938.263,
+       "care"
+      ],
+      [
+       938.6,
+       "near"
+      ],
+      [
+       938.788,
+       "the"
+      ],
+      [
+       938.875,
+       "poles"
+      ],
+      [
+       939.725,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     }
    ],
-   "end": 941.229,
-   "start_frame": 25901,
-   "end_frame": 28237
+   "end": 940.8,
+   "start_frame": 25906,
+   "end_frame": 28224
   },
   {
    "id": "s15_end",
-   "start": 941.229,
+   "start": 940.8,
    "sentences": [
     {
      "text": "This video is one of a series of related maths tutorials, so watch out for the others.",
-     "start": 941.229,
-     "end": 947.429,
+     "audio_text": null,
+     "start": 940.8,
+     "end": 947.0,
      "dur": 6.2,
-     "start_frame": 28237,
-     "end_frame": 28423
+     "start_frame": 28224,
+     "end_frame": 28410
     },
     {
      "text": "They're made for students of atmospheric science, meteorology and fluid dynamics, and anyone else who needs these ideas.",
-     "start": 947.779,
-     "end": 955.829,
+     "audio_text": null,
+     "start": 947.35,
+     "end": 955.4,
      "dur": 8.05,
-     "start_frame": 28433,
-     "end_frame": 28675
+     "start_frame": 28421,
+     "end_frame": 28662,
+     "words": [
+      [
+       947.7,
+       "They're"
+      ],
+      [
+       947.875,
+       "made"
+      ],
+      [
+       948.125,
+       "for"
+      ],
+      [
+       948.288,
+       "students"
+      ],
+      [
+       948.712,
+       "of"
+      ],
+      [
+       948.837,
+       "atmospheric"
+      ],
+      [
+       949.562,
+       "science"
+      ],
+      [
+       950.275,
+       ","
+      ],
+      [
+       950.413,
+       "meteorology"
+      ],
+      [
+       951.25,
+       "and"
+      ],
+      [
+       951.4,
+       "fluid"
+      ],
+      [
+       951.75,
+       "dynamics"
+      ],
+      [
+       952.675,
+       ","
+      ],
+      [
+       952.775,
+       "and"
+      ],
+      [
+       952.9,
+       "anyone"
+      ],
+      [
+       953.225,
+       "else"
+      ],
+      [
+       953.525,
+       "who"
+      ],
+      [
+       953.675,
+       "needs"
+      ],
+      [
+       954.0,
+       "these"
+      ],
+      [
+       954.237,
+       "ideas"
+      ],
+      [
+       955.15,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     },
     {
      "text": "The notebook for coordinates, and the notebooks for the other maths concepts, are on the website that goes with this video.",
-     "start": 956.179,
-     "end": 963.829,
+     "audio_text": null,
+     "start": 955.75,
+     "end": 963.4,
      "dur": 7.65,
-     "start_frame": 28685,
-     "end_frame": 28915
+     "start_frame": 28673,
+     "end_frame": 28902,
+     "words": [
+      [
+       956.1,
+       "The"
+      ],
+      [
+       956.175,
+       "notebook"
+      ],
+      [
+       956.6,
+       "for"
+      ],
+      [
+       956.737,
+       "coordinates"
+      ],
+      [
+       957.7,
+       ","
+      ],
+      [
+       957.8,
+       "and"
+      ],
+      [
+       957.913,
+       "the"
+      ],
+      [
+       958.0,
+       "notebooks"
+      ],
+      [
+       958.55,
+       "for"
+      ],
+      [
+       958.663,
+       "the"
+      ],
+      [
+       958.8,
+       "other"
+      ],
+      [
+       959.075,
+       "maths"
+      ],
+      [
+       959.45,
+       "concepts"
+      ],
+      [
+       960.425,
+       ","
+      ],
+      [
+       960.562,
+       "are"
+      ],
+      [
+       960.7,
+       "on"
+      ],
+      [
+       960.862,
+       "the"
+      ],
+      [
+       960.95,
+       "website"
+      ],
+      [
+       961.45,
+       "that"
+      ],
+      [
+       961.625,
+       "goes"
+      ],
+      [
+       962.0,
+       "with"
+      ],
+      [
+       962.15,
+       "this"
+      ],
+      [
+       962.325,
+       "video"
+      ],
+      [
+       963.125,
+       "."
+      ]
+     ],
+     "words_scale": 1.0
     }
    ],
-   "end": 964.129,
-   "start_frame": 28237,
-   "end_frame": 28924
+   "end": 963.7,
+   "start_frame": 28224,
+   "end_frame": 28911
   }
  ],
- "total_s": 964.129,
- "total_frames": 28924
+ "total_s": 963.7,
+ "total_frames": 28911,
+ "cues": 240,
+ "warnings": [],
+ "self_check": {
+  "expected_s": 963.7,
+  "audio_s": 963.7,
+  "diff_ms": -0.0,
+  "len_ok": true,
+  "cues_ok": true,
+  "spliced_r7": {
+   "method": "sentence matching against the measured dry runs (dryrun2/dryrun1/mini_s02); new clips BS.1770-4 loudness-matched to the nearest re-used clips + look-ahead limiter (-1.5 dBTP)",
+   "corr_resynth": {
+    "dryrun2": 0.985
+   },
+   "reused": 110,
+   "new": 21,
+   "replaced": [
+    {
+     "scene": "s00_title",
+     "sentence": 0,
+     "text": "In this video, we'll learn about routes across our round Earth and the coordinates behind them, and see how they're used to plan the shortest flights.",
+     "audio_text": null,
+     "neighbours_lufs": [
+      -16.63,
+      -16.82
+     ],
+     "target_lufs": -16.72,
+     "raw_lufs": -24.32,
+     "gain_db": 7.95,
+     "limiter_gr_db": -2.18,
+     "final_lufs": -16.75,
+     "true_peak_dbtp": -1.8,
+     "dur_s": 8.6,
+     "beat": false
+    },
+    {
+     "scene": "s01_hook",
+     "sentence": 2,
+     "text": "Now let's dive into the pieces we need: scale factors, which turn a change in latitude or longitude into kilometres, and the great circle, the shortest route over our round Earth.",
+     "audio_text": null,
+     "neighbours_lufs": [
+      -16.82,
+      -16.63,
+      -16.38,
+      -15.86
+     ],
+     "target_lufs": -16.41,
+     "raw_lufs": -24.21,
+     "gain_db": 7.95,
+     "limiter_gr_db": -1.74,
+     "final_lufs": -16.41,
+     "true_peak_dbtp": -1.98,
+     "dur_s": 12.075,
+     "beat": false
+    },
+    {
+     "scene": "s04_scale_factors",
+     "sentence": 1,
+     "text": "In Part 1, we found the arc rule: on a ring of radius r, turning by a small angle delta theta walks r times delta theta.",
+     "audio_text": null,
+     "neighbours_lufs": [
+      -16.83,
+      -16.39,
+      -16.76,
+      -15.47
+     ],
+     "target_lufs": -16.33,
+     "raw_lufs": -24.41,
+     "gain_db": 8.26,
+     "limiter_gr_db": -2.24,
+     "final_lufs": -16.33,
+     "true_peak_dbtp": -1.92,
+     "dur_s": 9.525,
+     "beat": false
+    },
+    {
+     "scene": "s04_scale_factors",
+     "sentence": 5,
+     "text": "On the Earth, as we found in Part 3, stepping north by a small change in latitude, delta phi, walks the Earth's radius times delta phi.",
+     "audio_text": null,
+     "neighbours_lufs": [
+      -16.85,
+      -15.47,
+      -16.63,
+      -16.32
+     ],
+     "target_lufs": -16.29,
+     "raw_lufs": -24.09,
+     "gain_db": 8.32,
+     "limiter_gr_db": -4.65,
+     "final_lufs": -16.32,
+     "true_peak_dbtp": -1.89,
+     "dur_s": 10.1,
+     "beat": false
+    },
+    {
+     "scene": "s04_scale_factors",
+     "sentence": 6,
+     "text": "So the scale factor of latitude is the Earth's radius, which we write as the letter a, about six thousand three hundred and seventy one kilometres.",
+     "audio_text": null,
+     "neighbours_lufs": [
+      -16.85,
+      -15.47,
+      -16.63,
+      -16.32
+     ],
+     "target_lufs": -16.29,
+     "raw_lufs": -25.09,
+     "gain_db": 9.26,
+     "limiter_gr_db": -5.65,
+     "final_lufs": -16.3,
+     "true_peak_dbtp": -1.88,
+     "dur_s": 9.6,
+     "beat": false
+    },
+    {
+     "scene": "s04_scale_factors",
+     "sentence": 7,
+     "text": "Stepping east by a small change in longitude, delta lambda, walks round a parallel, a circle whose radius is the Earth's radius times cosine phi.",
+     "audio_text": null,
+     "neighbours_lufs": [
+      -16.85,
+      -15.47,
+      -16.63,
+      -16.32
+     ],
+     "target_lufs": -16.29,
+     "raw_lufs": -24.37,
+     "gain_db": 8.67,
+     "limiter_gr_db": -6.18,
+     "final_lufs": -16.3,
+     "true_peak_dbtp": -2.0,
+     "dur_s": 10.525,
+     "beat": false
+    },
+    {
+     "scene": "s04_scale_factors",
+     "sentence": 11,
+     "text": "So one degree north walks the Earth's radius times that, about a hundred and eleven point two kilometres.",
+     "audio_text": null,
+     "neighbours_lufs": [
+      -17.21,
+      -16.32,
+      -16.84,
+      -15.89
+     ],
+     "target_lufs": -16.54,
+     "raw_lufs": -25.25,
+     "gain_db": 9.14,
+     "limiter_gr_db": -4.91,
+     "final_lufs": -16.55,
+     "true_peak_dbtp": -2.02,
+     "dur_s": 7.15,
+     "beat": true
+    },
+    {
+     "scene": "s04_scale_factors",
+     "sentence": 13,
+     "text": "So one degree east walks those hundred and eleven point two kilometres times the cosine, only about seventy three point eight kilometres.",
+     "audio_text": null,
+     "neighbours_lufs": [
+      -16.84,
+      -17.21,
+      -15.89,
+      -16.2
+     ],
+     "target_lufs": -16.5,
+     "raw_lufs": -24.59,
+     "gain_db": 8.67,
+     "limiter_gr_db": -5.82,
+     "final_lufs": -16.52,
+     "true_peak_dbtp": -1.7,
+     "dur_s": 9.3,
+     "beat": true
+    },
+    {
+     "scene": "s06_great_circle",
+     "sentence": 10,
+     "text": "And the puck from Part 4, gliding over a smooth Earth with nothing pushing it, was moving along exactly such a great circle.",
+     "audio_text": null,
+     "neighbours_lufs": [
+      -16.68,
+      -16.04,
+      -15.18,
+      -15.45
+     ],
+     "target_lufs": -15.8,
+     "raw_lufs": -24.04,
+     "gain_db": 8.68,
+     "limiter_gr_db": -4.4,
+     "final_lufs": -15.82,
+     "true_peak_dbtp": -1.91,
+     "dur_s": 8.375,
+     "beat": false
+    },
+    {
+     "scene": "s08_position_arrows",
+     "sentence": 8,
+     "text": "The sine of minus zero point one three degrees is minus zero point zero zero two three, so the second part, cosine phi times sine lambda, is about minus zero point zero zero one.",
+     "audio_text": null,
+     "neighbours_lufs": [
+      -16.65,
+      -15.98,
+      -16.07,
+      -15.83
+     ],
+     "target_lufs": -16.12,
+     "raw_lufs": -24.21,
+     "gain_db": 8.63,
+     "limiter_gr_db": -4.51,
+     "final_lufs": -16.14,
+     "true_peak_dbtp": -1.79,
+     "dur_s": 13.15,
+     "beat": true
+    },
+    {
+     "scene": "s08_position_arrows",
+     "sentence": 12,
+     "text": "So its first part, cosine phi times cosine lambda, is about minus zero point three nine two.",
+     "audio_text": null,
+     "neighbours_lufs": [
+      -15.83,
+      -15.83,
+      -15.96,
+      -16.43
+     ],
+     "target_lufs": -16.01,
+     "raw_lufs": -24.33,
+     "gain_db": 9.11,
+     "limiter_gr_db": -5.24,
+     "final_lufs": -16.03,
+     "true_peak_dbtp": -1.94,
+     "dur_s": 6.75,
+     "beat": true
+    },
+    {
+     "scene": "s08_position_arrows",
+     "sentence": 13,
+     "text": "Its second part, cosine phi times sine lambda, is about minus zero point seven three zero.",
+     "audio_text": null,
+     "neighbours_lufs": [
+      -15.83,
+      -15.83,
+      -15.96,
+      -16.43
+     ],
+     "target_lufs": -16.01,
+     "raw_lufs": -24.5,
+     "gain_db": 9.28,
+     "limiter_gr_db": -4.78,
+     "final_lufs": -16.12,
+     "true_peak_dbtp": -1.81,
+     "dur_s": 6.8,
+     "beat": true
+    },
+    {
+     "scene": "s09_cos_sigma",
+     "sentence": 4,
+     "text": "To take the dot product, we multiply London's first part by Los Angeles' first part, then the second parts, and then the third parts, and add the three products.",
+     "audio_text": null,
+     "neighbours_lufs": [
+      -15.99,
+      -16.25,
+      -16.78,
+      -16.16
+     ],
+     "target_lufs": -16.29,
+     "raw_lufs": -23.78,
+     "gain_db": 7.84,
+     "limiter_gr_db": -5.09,
+     "final_lufs": -16.29,
+     "true_peak_dbtp": -1.93,
+     "dur_s": 10.475,
+     "beat": false
+    },
+    {
+     "scene": "s09_cos_sigma",
+     "sentence": 5,
+     "text": "That gives about zero point one nine five, so the cosine of sigma is zero point one nine five.",
+     "audio_text": null,
+     "neighbours_lufs": [
+      -15.99,
+      -16.25,
+      -16.78,
+      -16.16
+     ],
+     "target_lufs": -16.29,
+     "raw_lufs": -25.14,
+     "gain_db": 9.37,
+     "limiter_gr_db": -4.5,
+     "final_lufs": -16.39,
+     "true_peak_dbtp": -1.81,
+     "dur_s": 6.725,
+     "beat": true
+    },
+    {
+     "scene": "s10_distance",
+     "sentence": 2,
+     "text": "So sigma, seventy eight point seven three eight degrees to be exact, is about one point three seven four two radians.",
+     "audio_text": null,
+     "neighbours_lufs": [
+      -16.78,
+      -18.11,
+      -16.81,
+      -15.93
+     ],
+     "target_lufs": -16.84,
+     "raw_lufs": -24.82,
+     "gain_db": 8.69,
+     "limiter_gr_db": -5.56,
+     "final_lufs": -16.87,
+     "true_peak_dbtp": -1.82,
+     "dur_s": 8.275,
+     "beat": true
+    },
+    {
+     "scene": "s10_distance",
+     "sentence": 3,
+     "text": "Now the distance is the Earth's radius, six thousand three hundred and seventy one kilometres, times sigma in radians.",
+     "audio_text": null,
+     "neighbours_lufs": [
+      -16.78,
+      -18.11,
+      -16.81,
+      -15.93
+     ],
+     "target_lufs": -16.84,
+     "raw_lufs": -24.79,
+     "gain_db": 8.03,
+     "limiter_gr_db": -1.08,
+     "final_lufs": -16.84,
+     "true_peak_dbtp": -1.98,
+     "dur_s": 8.25,
+     "beat": false
+    },
+    {
+     "scene": "s10_distance",
+     "sentence": 5,
+     "text": "Let's check it the quick way: every degree of sigma is about a hundred and eleven point two kilometres, so seventy eight point seven four degrees make about eight thousand seven hundred and fifty six kilometres, the same to within the rounding.",
+     "audio_text": null,
+     "neighbours_lufs": [
+      -16.81,
+      -16.78,
+      -15.93,
+      -15.71
+     ],
+     "target_lufs": -16.28,
+     "raw_lufs": -24.69,
+     "gain_db": 8.62,
+     "limiter_gr_db": -4.59,
+     "final_lufs": -16.28,
+     "true_peak_dbtp": -1.74,
+     "dur_s": 14.65,
+     "beat": true
+    },
+    {
+     "scene": "s11_route_shape",
+     "sentence": 5,
+     "text": "That heading comes from London's own east and north arrows, from Part 4: we measure how much of Los Angeles' position arrow points along each one, and turn that into a compass bearing.",
+     "audio_text": null,
+     "neighbours_lufs": [
+      -16.85,
+      -16.02,
+      -15.77,
+      -16.16
+     ],
+     "target_lufs": -16.18,
+     "raw_lufs": -24.51,
+     "gain_db": 8.44,
+     "limiter_gr_db": -2.86,
+     "final_lufs": -16.18,
+     "true_peak_dbtp": -1.62,
+     "dur_s": 12.25,
+     "beat": false
+    },
+    {
+     "scene": "s12_rhumb",
+     "sentence": 5,
+     "text": "Dividing the rhumb line's length by the great circle's gives about one point one one, so the rhumb line is about eleven percent longer.",
+     "audio_text": null,
+     "neighbours_lufs": [
+      -15.33,
+      -16.01,
+      -16.32,
+      -16.32
+     ],
+     "target_lufs": -15.97,
+     "raw_lufs": -25.04,
+     "gain_db": 9.85,
+     "limiter_gr_db": -6.54,
+     "final_lufs": -16.01,
+     "true_peak_dbtp": -1.77,
+     "dur_s": 8.95,
+     "beat": true
+    },
+    {
+     "scene": "s14_recap",
+     "sentence": 7,
+     "text": "In Part 7, we'll flatten the Earth onto maps, and work out exactly what each map stretches.",
+     "audio_text": null,
+     "neighbours_lufs": [
+      -16.06,
+      -16.16,
+      -16.58,
+      -15.97
+     ],
+     "target_lufs": -16.19,
+     "raw_lufs": -24.46,
+     "gain_db": 9.31,
+     "limiter_gr_db": -4.7,
+     "final_lufs": -16.28,
+     "true_peak_dbtp": -1.99,
+     "dur_s": 6.575,
+     "beat": false
+    },
+    {
+     "scene": "s14_recap",
+     "sentence": 8,
+     "text": "That explains why the rhumb line comes out straight on the most famous map of all, and why weather data on a grid need care near the poles.",
+     "audio_text": null,
+     "neighbours_lufs": [
+      -16.06,
+      -16.16,
+      -16.58,
+      -15.97
+     ],
+     "target_lufs": -16.19,
+     "raw_lufs": -25.07,
+     "gain_db": 9.24,
+     "limiter_gr_db": -3.32,
+     "final_lufs": -16.19,
+     "true_peak_dbtp": -1.72,
+     "dur_s": 8.525,
+     "beat": false
+    }
+   ]
+  }
+ },
+ "warnings_acknowledged": [
+  "s00_title s1: 17.4 chars/s > 17.0",
+  "151 chars spoken in 8.6 s: sentence-average 17.6 cps, cannot be re-cued inside the sentence; movie_qa reports cps as WARN; audio unchanged (build1, 2026-11-10)"
+ ],
+ "words": "rt_words.py: Kokoro token start times per cued sentence (scaled to the clip); rt_lib.AT uses them",
+ "recue": "final_timing.py --recue (remake 2026-11-07): short cues merged within their sentence only; audio and words unchanged"
 }

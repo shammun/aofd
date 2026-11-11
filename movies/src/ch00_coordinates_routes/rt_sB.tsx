@@ -208,25 +208,27 @@ const S08: React.FC = () => {
       {/* remake 2026-11-07 (R16): the position arrow recalled from Part 3 (the old opening recap carried it) */}
       <Recall f={f} tex="" name="position vector" part={3} x={XC} y={450} appear={AT(k, 4, "From Part 3")} out={tLon - 10} />
       <TeX s={String.raw`\text{London: }\varphi=51.51^\circ,\ \lambda=-0.13^\circ`} x={XC} y={495} size={46} c={C.ink} o={win(f, tLon, outL)} />
+      {/* build1 2026-11-10 (K6): rows 56 px (a new last line, before the slide, stayed above the caption band y 880); both stacks start at y 680 (was 575): the line that slides out passes the city rows above at < 0.2 opacity */}
       {/* show it, don't voice it (2026-11-07): the products are on screen; the trig values (inputs) glow on their words */}
-      <CalcStack f={f} x={1230} y={575} size={44} maxLines={2} o={fout(f, outL)} rows={[
-        { lhs: String.raw`\text{1st}`, rhs: String.raw`=\cos 51.51^\circ\times\cos(-0.13^\circ)`, at: tC1 },
-        { rhs: String.raw`=0.622\times1.000\approx0.622`, at: AT(k, 6, "is zero point six two two"), cont: true, glow: HL(f, AT(k, 6, "is zero point six two two")) },
-        { lhs: String.raw`\sin(-0.13^\circ)`, rhs: String.raw`=-0.0023`, at: tS, glow: HL(f, AT(k, 8, "is minus zero point zero zero two three")) },
-        { lhs: String.raw`\text{2nd}`, rhs: String.raw`=0.622\times(-0.0023)`, at: AT(k, 8, "so the second part") },
-        { rhs: String.raw`\approx-0.001`, at: tP2, cont: true },
-        { lhs: String.raw`\text{3rd}`, rhs: String.raw`=\sin 51.51^\circ\approx0.783`, at: SS(k, 9), glow: HL(f, tP3) },
+      <CalcStack f={f} x={1230} y={660} size={44} maxLines={2} o={fout(f, outL)} rows={[
+        { h: 56, lhs: String.raw`\text{1st}`, rhs: String.raw`=\cos 51.51^\circ\times\cos(-0.13^\circ)`, at: tC1 },
+        { h: 56, rhs: String.raw`=0.622\times1.000\approx0.622`, at: AT(k, 6, "is zero point six two two"), cont: true, glow: HL(f, AT(k, 6, "is zero point six two two")) },
+        { h: 56, lhs: String.raw`\sin(-0.13^\circ)`, rhs: String.raw`=-0.0023`, at: tS, glow: HL(f, AT(k, 8, "is minus zero point zero zero two three")) },
+        { h: 56, lhs: String.raw`\text{2nd}`, rhs: String.raw`=0.622\times(-0.0023)`, at: AT(k, 8, "so the second part") },
+        { h: 56, rhs: String.raw`\approx-0.001`, at: tP2, cont: true },
+        { h: 56, lhs: String.raw`\text{3rd}`, rhs: String.raw`=\sin 51.51^\circ\approx0.783`, at: SS(k, 9), glow: HL(f, tP3) },
       ]} />
       <TeX s={String.raw`\text{Los Angeles: }\varphi=34.05^\circ,`} x={XC} y={470} size={46} c={C.second} o={fin(f, tLA)} />
-      <TeX s={String.raw`\lambda=-118.24^\circ`} x={XC + 330} y={525} size={46} c={C.second} o={fin(f, tLA)} />
-      <CalcStack f={f} x={1230} y={575} size={44} maxLines={2} rows={[
-        { lhs: String.raw`\cos\varphi`, rhs: String.raw`=0.829,\ \ \cos\lambda=-0.473`, at: tC2, glow: HL(f, AT(k, 11, "zero point eight two nine")) },
-        { lhs: String.raw`\sin\lambda`, rhs: String.raw`=-0.881`, at: AT(k, 11, "its sine lambda"), cont: true, glow: HL(f, AT(k, 11, "minus zero point eight eight one")) },
-        { lhs: String.raw`\text{1st}`, rhs: String.raw`=0.829\times(-0.473)`, at: SS(k, 12) },
-        { rhs: String.raw`\approx-0.392`, at: tQ1, cont: true },
-        { lhs: String.raw`\text{2nd}`, rhs: String.raw`=0.829\times(-0.881)`, at: SS(k, 13) },
-        { rhs: String.raw`\approx-0.730`, at: tQ2, cont: true },
-        { lhs: String.raw`\text{3rd}`, rhs: String.raw`=\sin 34.05^\circ\approx0.560`, at: SS(k, 14), glow: HL(f, tQ3) },
+      {/* build1 2026-11-10 (K6): λ leaves before the 3rd part (sin 34.05° carries its own input), so the 2-row line sliding out never meets it */}
+      <TeX s={String.raw`\lambda=-118.24^\circ`} x={XC + 330} y={525} size={46} c={C.second} o={win(f, tLA, SS(k, 14) - 12)} />
+      <CalcStack f={f} x={1230} y={625} size={44} maxLines={2} rows={[
+        { h: 56, lhs: String.raw`\cos\varphi`, rhs: String.raw`=0.829,\ \ \cos\lambda=-0.473`, at: tC2, glow: HL(f, AT(k, 11, "zero point eight two nine")) },
+        { h: 56, lhs: String.raw`\sin\lambda`, rhs: String.raw`=-0.881`, at: AT(k, 11, "its sine lambda"), glow: HL(f, AT(k, 11, "minus zero point eight eight one")) },
+        { h: 56, lhs: String.raw`\text{1st}`, rhs: String.raw`=0.829\times(-0.473)`, at: SS(k, 12) },
+        { h: 56, rhs: String.raw`\approx-0.392`, at: tQ1, cont: true },
+        { h: 56, lhs: String.raw`\text{2nd}`, rhs: String.raw`=0.829\times(-0.881)`, at: SS(k, 13) },
+        { h: 56, rhs: String.raw`\approx-0.730`, at: tQ2, cont: true },
+        { h: 56, lhs: String.raw`\text{3rd}`, rhs: String.raw`=\sin 34.05^\circ\approx0.560`, at: SS(k, 14), glow: HL(f, tQ3) },
       ]} />
       {void [chipEnd, tQ1, tQ2]}
     </Scene>

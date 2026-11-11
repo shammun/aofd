@@ -84,50 +84,50 @@
    "scene": "s00_title"
   },
   {
-   "time": "0:42",
-   "t_s": 42.047,
+   "time": "0:40",
+   "t_s": 40.25,
    "title": "Curvilinear coordinates and scale factors",
    "scene": "s03_curvilinear"
   },
   {
    "time": "3:23",
-   "t_s": 203.338,
+   "t_s": 203.85,
    "title": "The shortest way: great circles",
    "scene": "s05_shortest_way"
   },
   {
-   "time": "5:22",
-   "t_s": 322.782,
+   "time": "5:23",
+   "t_s": 323.2,
    "title": "The angle sigma and d = a sigma",
    "scene": "s07_sigma"
   },
   {
-   "time": "6:25",
-   "t_s": 385.707,
+   "time": "6:26",
+   "t_s": 386.125,
    "title": "Every step: working out sigma (optional maths)",
    "scene": "s08_position_arrows"
   },
   {
-   "time": "10:48",
-   "t_s": 648.656,
+   "time": "10:49",
+   "t_s": 649.425,
    "title": "Where the route goes",
    "scene": "s11_route_shape"
   },
   {
-   "time": "12:03",
-   "t_s": 723.823,
+   "time": "12:04",
+   "t_s": 724.275,
    "title": "The rhumb line",
    "scene": "s12_rhumb"
   },
   {
-   "time": "13:03",
-   "t_s": 783.994,
+   "time": "13:04",
+   "t_s": 784.175,
    "title": "Why sailors liked the rhumb line",
    "scene": "s13_why_rhumb"
   },
   {
    "time": "14:23",
-   "t_s": 863.369,
+   "t_s": 863.55,
    "title": "To sum up",
    "scene": "s14_recap"
   }
@@ -142,14 +142,14 @@
     "s10_distance"
    ],
    "chip_sentence": 2,
-   "chip_at_s": 399.932,
+   "chip_at_s": 400.35,
    "skip_to_scene": "s11_route_shape",
-   "skip_to": "10:48",
-   "skip_to_s": 648.656,
+   "skip_to": "10:49",
+   "skip_to_s": 649.425,
    "keep_line": "If you skipped, here's what to keep."
   }
  ],
- "timing_provisional": true,
+ "timing_provisional": false,
  "inputs_sha256": {
   "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\NE-50m-land\\ne_50m_land.zip": "0b8e670cf80dce9cbebe2a193bc44ba5602758c22e1fa603980553646d7ff162",
   "movies/ch00/ch00_cross_product_why/data/real/ne_lines_110m.json": "90b928269bf4c23edf6a91a194f64fc81a0be04d5a5bd60735d10457645748c3",
